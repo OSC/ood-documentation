@@ -36,14 +36,14 @@ Enable the RHSCL repository. Note that you may also need to enable the Optional
 channel and attach a subscription providing access to RHSCL to be able to use
 the repository.
 
-.. code:: sh
+.. code-block:: sh
 
    sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
    # => Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
 Install dependencies:
 
-.. code:: sh
+.. code-block:: sh
 
    sudo yum install -y httpd24 nginx16 rh-passenger40 rh-ruby22 rh-ruby22-rubygem-rake rh-ruby22-rubygem-bundler rh-ruby22-ruby-devel nodejs010 git19
 
@@ -51,7 +51,7 @@ Update Apache Environment to include ``rh-ruby22``. This is necessary for the
 user mapping script written in Ruby. Do this by editing
 ``/opt/rh/httpd24/service-environment``:
 
-.. code:: diff
+.. code-block:: diff
 
    -HTTPD24_HTTPD_SCLS_ENABLED="httpd24"
    +HTTPD24_HTTPD_SCLS_ENABLED="httpd24 rh-ruby22"
@@ -59,7 +59,7 @@ user mapping script written in Ruby. Do this by editing
 Finally, make a source directory that will contain the checked out and built
 OOD infrastructure components and apps:
 
-.. code:: sh
+.. code-block:: sh
 
    mkdir -p ~/ood/src
 
@@ -70,7 +70,7 @@ Modify System Security
 
 #. Open port 80 and 443 through IP Tables i.e.
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo iptables -I INPUT -p tcp -m multiport --dports 80 -m comment --comment "00080 *:80" -j ACCEPT
       sudo iptables -I INPUT -p tcp -m multiport --dports 443 -m comment --comment "00443 *:443" -j ACCEPT
@@ -81,7 +81,7 @@ Generate Apache Config
 
 #. Clone and check out the latest tag:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/ood-portal-generator.git
@@ -92,7 +92,7 @@ Generate Apache Config
    defaults if not provided) and renders an Apache config from a template.
    Generate a default one now:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- rake
       # => mkdir -p build
@@ -100,7 +100,7 @@ Generate Apache Config
 
 #. Copy this to the default installation location:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
       # => cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
@@ -111,7 +111,7 @@ Generate Apache Config
    your system (the password need not be the same as their current system
    password):
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd ${SUDO_USER}
       #=> New password:
@@ -139,7 +139,7 @@ project.
 
 #. Clone and check out the latest tag:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/mod_ood_proxy.git
@@ -148,7 +148,7 @@ project.
 
 #. Install it to its global location:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
       # => mkdir -p /opt/ood/mod_ood_proxy
@@ -163,7 +163,7 @@ by ``root`` or a user with ``sudoers`` privileges.
 
 #. Clone and check out the latest tag:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/nginx_stage.git
@@ -172,7 +172,7 @@ by ``root`` or a user with ``sudoers`` privileges.
 
 #. Install it to its global location:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
       # => /opt/ood/nginx_stage
@@ -198,14 +198,14 @@ by ``root`` or a user with ``sudoers`` privileges.
 
    and then copy this to ``/etc/sudoers.d/10_ood``:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo cp ~/ood/src/sudoers_ood /etc/sudoers.d/10_ood
       sudo chmod 440 /etc/sudoers.d/10_ood
 
    Our ``/etc/sudoers`` file includes files in ``/etc/sudoers.d``:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo tail -n 2 /etc/sudoers
       ## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)
@@ -214,7 +214,7 @@ by ``root`` or a user with ``sudoers`` privileges.
 #. Schedule a cron job that automatically cleans up inactive user PUNs. To do
    this, generate the file ``/etc/cron.d/ood`` with the following contents:
 
-   .. code:: sh
+   .. code-block:: sh
 
       #!/bin/bash
 
@@ -232,7 +232,7 @@ This is done with the simple tool: `ood\_auth\_map
 
 #. Clone and check out the latest tag:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/ood_auth_map.git
@@ -241,7 +241,7 @@ This is done with the simple tool: `ood\_auth\_map
 
 #. Install it to its global location:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
       # => mkdir -p /opt/ood/ood_auth_map/bin
@@ -265,7 +265,7 @@ connection config files. These config files are required for:
 
 #. Create default directory for config files:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /etc/ood/config/clusters.d
 
@@ -275,7 +275,7 @@ connection config files. These config files are required for:
 Here is the minimal YAML config required to specify a host that can be accessed
 via Shell Access app. The filename is ``oakley.yml``:
 
-.. code:: yaml
+.. code-block:: yaml
 
    ---
    v1:
@@ -301,7 +301,7 @@ via Shell Access app. The filename is ``oakley.yml``:
 For Active Jobs and My Jobs to work, a cluster configuration must specify a
 ``resource_mgr`` to use.
 
-.. code:: yaml
+.. code-block:: yaml
 
    ---
    v1:
@@ -329,7 +329,7 @@ information about jobs they manage will associate job metadata with this key.
 Start Apache
 ------------
 
-.. code:: sh
+.. code-block:: sh
 
    sudo service httpd24-httpd start
    # => Starting httpd:                                            [  OK  ]
@@ -358,13 +358,13 @@ Rails app that serves as a gateway for all the other Open OnDemand apps.
 
 #. Start in the build directory for system web applications:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/sys
 
 #. Clone and checkout the latest version of the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 -- git clone https://github.com/OSC/ood-dashboard.git dashboard
       cd dashboard
@@ -372,7 +372,7 @@ Rails app that serves as a gateway for all the other Open OnDemand apps.
 
 #. Build the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
       scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
@@ -380,7 +380,7 @@ Rails app that serves as a gateway for all the other Open OnDemand apps.
 
 #. Copy the built app to the deployment directory:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /var/www/ood/apps/sys
       sudo cp -r . /var/www/ood/apps/sys/dashboard
@@ -393,13 +393,13 @@ providing a web-based terminal.
 
 #. Start in the build directory for system web applications:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/sys
 
 #. Clone and checkout the latest version of the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 -- git clone https://github.com/OSC/ood-shell.git shell
       cd shell
@@ -407,7 +407,7 @@ providing a web-based terminal.
 
 #. Build the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 nodejs010 -- npm install
 
@@ -417,13 +417,13 @@ providing a web-based terminal.
       can be changed by creating a ``.env`` file in the build/deployment directory
       with the contents:
 
-      .. code:: sh
+      .. code-block:: sh
 
          DEFAULT_SSHHOST='oakley.osc.edu'
 
 #. Copy the built app to the deployment directory:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /var/www/ood/apps/sys
       sudo cp -r . /var/www/ood/apps/sys/shell
@@ -437,13 +437,13 @@ editing, renaming and copying.
 
 #. Start in the build directory for system web applications:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/sys
 
 #. Clone and checkout the latest version of the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 -- git clone https://github.com/OSC/ood-fileexplorer.git files
       cd files
@@ -451,13 +451,13 @@ editing, renaming and copying.
 
 #. Build the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 nodejs010 -- npm install
 
 #. Copy the built app to the deployment directory:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /var/www/ood/apps/sys
       sudo cp -r . /var/www/ood/apps/sys/files
@@ -472,13 +472,13 @@ the remote machine to edit and save.
 
 #. Start in the build directory for system web applications:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/sys
 
 #. Clone and checkout the latest version of the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 -- git clone https://github.com/OSC/ood-fileeditor.git file-editor
       cd file-editor
@@ -486,7 +486,7 @@ the remote machine to edit and save.
 
 #. Build the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
       scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
@@ -494,7 +494,7 @@ the remote machine to edit and save.
 
 #. Copy the built app to the deployment directory:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /var/www/ood/apps/sys
       sudo cp -r . /var/www/ood/apps/sys/file-editor
@@ -508,13 +508,13 @@ held on the clusters.
 
 #. Start in the build directory for system web applications:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/sys
 
 #. Clone and checkout the latest version of the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 -- git clone https://github.com/OSC/ood-activejobs.git activejobs
       cd activejobs
@@ -522,7 +522,7 @@ held on the clusters.
 
 #. Build the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
       scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
@@ -530,7 +530,7 @@ held on the clusters.
 
 #. Copy the built app to the deployment directory:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /var/www/ood/apps/sys
       sudo cp -r . /var/www/ood/apps/sys/activejobs
@@ -543,13 +543,13 @@ Rails app for creating and managing batch job jobs from templates.
 
 #. Start in the build directory for system web applications:
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/sys
 
 #. Clone and checkout the latest version of the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable git19 -- git clone https://github.com/OSC/ood-myjobs.git myjobs
       cd myjobs
@@ -557,7 +557,7 @@ Rails app for creating and managing batch job jobs from templates.
 
 #. Build the app:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
       scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
@@ -565,7 +565,7 @@ Rails app for creating and managing batch job jobs from templates.
 
 #. Copy the built app to the deployment directory:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo mkdir -p /var/www/ood/apps/sys
       sudo cp -r . /var/www/ood/apps/sys/myjobs
@@ -587,7 +587,7 @@ Requirements:
 
 In this example the certificates are located at:
 
-.. code:: sh
+.. code-block:: sh
 
    # Public certificate
    /etc/pki/tls/certs/webdev05.hpc.osc.edu.crt
@@ -600,20 +600,20 @@ In this example the certificates are located at:
 
 #. Install the necessary Apache module to use SSL:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo yum install httpd24-mod_ssl.x86_64
 
 #. Update the Apache config with this server name and paths to the SSL
    certificates.
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/ood-portal-generator
 
 #. Create or edit the ``config.yml`` as such:
 
-   .. code:: yaml
+   .. code-block:: yaml
 
       ---
 
@@ -630,19 +630,19 @@ In this example the certificates are located at:
 
 #. Re-build the Apache config:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- rake
 
 #. Copy it over to the default location:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
 
 #. Restart the Apache server:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo service httpd24-httpd restart
 
@@ -668,19 +668,19 @@ Requirements:
 
 #. Install the necessary Apache module to use LDAP:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo yum install httpd24-mod_ldap.x86_64
 
 #. Update the Apache config with LDAP Basic Authentication support.
 
-   .. code:: sh
+   .. code-block:: sh
 
       cd ~/ood/src/ood-portal-generator
 
 #. Create or edit the ``config.yml`` as such:
 
-   .. code:: yaml
+   .. code-block:: yaml
 
       ---
 
@@ -701,19 +701,19 @@ Requirements:
 
 #. Re-build the Apache config:
 
-   .. code:: sh
+   .. code-block:: sh
 
       scl enable rh-ruby22 -- rake
 
 #. Copy it over to the default location:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
 
 #. Restart the Apache server:
 
-   .. code:: sh
+   .. code-block:: sh
 
       sudo service httpd24-httpd restart
 

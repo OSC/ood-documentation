@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Open OnDemand Documentation 0.0.1 documentation" href="index.html"/>
         <link rel="next" title="2. Infrastructure" href="infrastructure.html"/>
         <link rel="prev" title="Welcome to Open OnDemand’s documentation!" href="index.html"/> 
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -81,7 +87,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#software-requirements">1.1. Software Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#modify-system-security">1.2. Modify System Security</a></li>
@@ -118,8 +127,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Open OnDemand Documentation</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Open OnDemand Documentation</a>
+        
       </nav>
 
 
@@ -128,23 +139,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>1. Installation</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Installation</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/installation.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -184,24 +212,24 @@ sudo access but is not root.</p>
 <p>Enable the RHSCL repository. Note that you may also need to enable the Optional
 channel and attach a subscription providing access to RHSCL to be able to use
 the repository.</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">subscription</span><span class="o">-</span><span class="n">manager</span> <span class="n">repos</span> <span class="o">--</span><span class="n">enable</span><span class="o">=</span><span class="n">rhel</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">rhscl</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">rpms</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-6-rpms
 <span class="c1"># =&gt; Repository &#39;rhel-server-rhscl-6-rpms&#39; is enabled for this system.</span>
 </pre></div>
 </div>
 <p>Install dependencies:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">httpd24</span> <span class="n">nginx16</span> <span class="n">rh</span><span class="o">-</span><span class="n">passenger40</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span><span class="o">-</span><span class="n">rubygem</span><span class="o">-</span><span class="n">rake</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span><span class="o">-</span><span class="n">rubygem</span><span class="o">-</span><span class="n">bundler</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span><span class="o">-</span><span class="n">ruby</span><span class="o">-</span><span class="n">devel</span> <span class="n">nodejs010</span> <span class="n">git19</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo yum install -y httpd24 nginx16 rh-passenger40 rh-ruby22 rh-ruby22-rubygem-rake rh-ruby22-rubygem-bundler rh-ruby22-ruby-devel nodejs010 git19
 </pre></div>
 </div>
 <p>Update Apache Environment to include <code class="docutils literal"><span class="pre">rh-ruby22</span></code>. This is necessary for the
 user mapping script written in Ruby. Do this by editing
 <code class="docutils literal"><span class="pre">/opt/rh/httpd24/service-environment</span></code>:</p>
-<div class="code diff highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">HTTPD24_HTTPD_SCLS_ENABLED</span><span class="o">=</span><span class="s2">&quot;httpd24&quot;</span>
-<span class="o">+</span><span class="n">HTTPD24_HTTPD_SCLS_ENABLED</span><span class="o">=</span><span class="s2">&quot;httpd24 rh-ruby22&quot;</span>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gd">-HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24&quot;</span>
+<span class="gi">+HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 rh-ruby22&quot;</span>
 </pre></div>
 </div>
 <p>Finally, make a source directory that will contain the checked out and built
 OOD infrastructure components and apps:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>mkdir -p ~/ood/src
 </pre></div>
 </div>
 </div>
@@ -211,9 +239,9 @@ OOD infrastructure components and apps:</p>
 <li><p class="first">Disable SELinux (not documented here)</p>
 </li>
 <li><p class="first">Open port 80 and 443 through IP Tables i.e.</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">iptables</span> <span class="o">-</span><span class="n">I</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">-</span><span class="n">m</span> <span class="n">multiport</span> <span class="o">--</span><span class="n">dports</span> <span class="mi">80</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">&quot;00080 *:80&quot;</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
-<span class="n">sudo</span> <span class="n">iptables</span> <span class="o">-</span><span class="n">I</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">-</span><span class="n">m</span> <span class="n">multiport</span> <span class="o">--</span><span class="n">dports</span> <span class="mi">443</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">&quot;00443 *:443&quot;</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">save</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">80</span> -m comment --comment <span class="s2">&quot;00080 *:80&quot;</span> -j ACCEPT
+sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">443</span> -m comment --comment <span class="s2">&quot;00443 *:443&quot;</span> -j ACCEPT
+sudo /etc/init.d/iptables save
 </pre></div>
 </div>
 </li>
@@ -223,24 +251,24 @@ OOD infrastructure components and apps:</p>
 <h2>1.3. Generate Apache Config<a class="headerlink" href="#generate-apache-config" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Clone and check out the latest tag:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">generator</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">ood</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">generator</span><span class="o">/</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">v0</span><span class="o">.</span><span class="mf">3.1</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
+scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-portal-generator.git
+<span class="nb">cd</span> ood-portal-generator/
+scl <span class="nb">enable</span> git19 -- git checkout v0.3.1
 </pre></div>
 </div>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">ood-portal-generator</span></code> is a script that takes a <code class="docutils literal"><span class="pre">config.yml</span></code> (or uses
 defaults if not provided) and renders an Apache config from a template.
 Generate a default one now:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
 <span class="c1"># =&gt; mkdir -p build</span>
 <span class="c1"># =&gt; rendering templates/ood-portal.conf.erb =&gt; build/ood-portal.conf</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy this to the default installation location:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 <span class="c1"># =&gt; cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span>
 </pre></div>
 </div>
@@ -250,10 +278,10 @@ installation complete. Then we will add another authentication mechanism.
 Start by generating an <code class="docutils literal"><span class="pre">.htpasswd</span></code> file with a user that <strong>exists</strong> on
 your system (the password need not be the same as their current system
 password):</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span>sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd ${SUDO_USER}
-#=&gt; New password:
-#=&gt; Re-type new password:
-#=&gt; Adding password for user ${SUDO_USER}
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd <span class="si">${</span><span class="nv">SUDO_USER</span><span class="si">}</span>
+<span class="c1">#=&gt; New password:</span>
+<span class="c1">#=&gt; Re-type new password:</span>
+<span class="c1">#=&gt; Adding password for user ${SUDO_USER}</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -278,15 +306,15 @@ It is given by the <a class="reference external" href="https://github.com/OSC/mo
 project.</p>
 <ol class="arabic">
 <li><p class="first">Clone and check out the latest tag:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">mod_ood_proxy</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">mod_ood_proxy</span><span class="o">/</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">v0</span><span class="o">.</span><span class="mf">2.0</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
+scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/mod_ood_proxy.git
+<span class="nb">cd</span> mod_ood_proxy/
+scl <span class="nb">enable</span> git19 -- git checkout v0.2.0
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install it to its global location:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 <span class="c1"># =&gt; mkdir -p /opt/ood/mod_ood_proxy</span>
 <span class="c1"># =&gt; ...</span>
 </pre></div>
@@ -300,15 +328,15 @@ project.</p>
 by <code class="docutils literal"><span class="pre">root</span></code> or a user with <code class="docutils literal"><span class="pre">sudoers</span></code> privileges.</p>
 <ol class="arabic">
 <li><p class="first">Clone and check out the latest tag:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">nginx_stage</span><span class="o">/</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">v0</span><span class="o">.</span><span class="mf">2.1</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
+scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/nginx_stage.git
+<span class="nb">cd</span> nginx_stage/
+scl <span class="nb">enable</span> git19 -- git checkout v0.2.1
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install it to its global location:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 <span class="c1"># =&gt; /opt/ood/nginx_stage</span>
 </pre></div>
 </div>
@@ -330,12 +358,12 @@ apache ALL=(ALL) NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage
 </pre></div>
 </div>
 <p>and then copy this to <code class="docutils literal"><span class="pre">/etc/sudoers.d/10_ood</span></code>:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cp</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sudoers_ood</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sudoers</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">10</span><span class="n">_ood</span>
-<span class="n">sudo</span> <span class="n">chmod</span> <span class="mi">440</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sudoers</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">10</span><span class="n">_ood</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo cp ~/ood/src/sudoers_ood /etc/sudoers.d/10_ood
+sudo chmod <span class="m">440</span> /etc/sudoers.d/10_ood
 </pre></div>
 </div>
 <p>Our <code class="docutils literal"><span class="pre">/etc/sudoers</span></code> file includes files in <code class="docutils literal"><span class="pre">/etc/sudoers.d</span></code>:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">tail</span> <span class="o">-</span><span class="n">n</span> <span class="mi">2</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sudoers</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo tail -n <span class="m">2</span> /etc/sudoers
 <span class="c1">## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)</span>
 <span class="c1">#includedir /etc/sudoers.d</span>
 </pre></div>
@@ -343,10 +371,10 @@ apache ALL=(ALL) NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage
 </li>
 <li><p class="first">Schedule a cron job that automatically cleans up inactive user PUNs. To do
 this, generate the file <code class="docutils literal"><span class="pre">/etc/cron.d/ood</span></code> with the following contents:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-<span class="n">PATH</span><span class="o">=/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span>
-<span class="mi">0</span> <span class="o">*/</span><span class="mi">2</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="n">root</span> <span class="p">[</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx_stage</span>  <span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx_stage</span> <span class="n">nginx_clean</span> <span class="mi">1</span><span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<span class="nv">PATH</span><span class="o">=</span>/sbin:/bin:/usr/sbin:/usr/bin
+<span class="m">0</span> */2 * * * root <span class="o">[</span> -f /opt/ood/nginx_stage/sbin/nginx_stage  <span class="o">]</span> <span class="o">&amp;&amp;</span> /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean <span class="m">1</span>&gt;/dev/null
 </pre></div>
 </div>
 <p>This will clean up inactive PUNs every two hours.</p>
@@ -359,15 +387,15 @@ this, generate the file <code class="docutils literal"><span class="pre">/etc/cr
 This is done with the simple tool: <a class="reference external" href="https://github.com/OSC/ood_auth_map">ood_auth_map</a>.</p>
 <ol class="arabic">
 <li><p class="first">Clone and check out the latest tag:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood_auth_map</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">ood_auth_map</span><span class="o">/</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">v0</span><span class="o">.</span><span class="mf">0.3</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
+scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood_auth_map.git
+<span class="nb">cd</span> ood_auth_map/
+scl <span class="nb">enable</span> git19 -- git checkout v0.0.3
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install it to its global location:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 <span class="c1"># =&gt; mkdir -p /opt/ood/ood_auth_map/bin</span>
 <span class="c1"># =&gt; ...</span>
 </pre></div>
@@ -390,7 +418,7 @@ running on</li>
 </ul>
 <ol class="arabic">
 <li><p class="first">Create default directory for config files:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/ood/config/clusters.d
 </pre></div>
 </div>
 </li>
@@ -400,17 +428,17 @@ file is a YAML file and must have the <code class="docutils literal"><span class
 </ol>
 <p>Here is the minimal YAML config required to specify a host that can be accessed
 via Shell Access app. The filename is <code class="docutils literal"><span class="pre">oakley.yml</span></code>:</p>
-<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
-<span class="n">v1</span><span class="p">:</span>
-  <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Oakley&quot;</span>
-  <span class="n">cluster</span><span class="p">:</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;OodCluster::Cluster&quot;</span>
-    <span class="n">data</span><span class="p">:</span>
-      <span class="n">servers</span><span class="p">:</span>
-        <span class="n">login</span><span class="p">:</span>
-          <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;OodCluster::Servers::Ssh&quot;</span>
-          <span class="n">data</span><span class="p">:</span>
-            <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;oakely.osc.edu&quot;</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v1</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Oakley&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Cluster&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">servers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Ssh&quot;</span>
+          <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;oakely.osc.edu&quot;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -426,24 +454,24 @@ via Shell Access app. The filename is <code class="docutils literal"><span class
 </ul>
 <p>For Active Jobs and My Jobs to work, a cluster configuration must specify a
 <code class="docutils literal"><span class="pre">resource_mgr</span></code> to use.</p>
-<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
-<span class="n">v1</span><span class="p">:</span>
-  <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Oakley&quot;</span>
-  <span class="n">cluster</span><span class="p">:</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;OodCluster::Cluster&quot;</span>
-    <span class="n">data</span><span class="p">:</span>
-      <span class="n">servers</span><span class="p">:</span>
-        <span class="n">login</span><span class="p">:</span>
-          <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;OodCluster::Servers::Ssh&quot;</span>
-          <span class="n">data</span><span class="p">:</span>
-            <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;oakely.osc.edu&quot;</span>
-        <span class="n">resource_mgr</span><span class="p">:</span>
-          <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;OodCluster::Servers::Torque&quot;</span>
-          <span class="n">data</span><span class="p">:</span>
-            <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;oak-batch.osc.edu&quot;</span>
-            <span class="n">lib</span><span class="p">:</span> <span class="s2">&quot;/opt/torque/lib64&quot;</span>
-            <span class="nb">bin</span><span class="p">:</span> <span class="s2">&quot;/opt/torque/bin&quot;</span>
-            <span class="n">version</span><span class="p">:</span> <span class="s2">&quot;6.0.1&quot;</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v1</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Oakley&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Cluster&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">servers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Ssh&quot;</span>
+          <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;oakely.osc.edu&quot;</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource_mgr</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Torque&quot;</span>
+          <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;oak-batch.osc.edu&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
 </pre></div>
 </div>
 <p>The name of the file becomes the key for this host. So <code class="docutils literal"><span class="pre">oakley.yml</span></code> cluster
@@ -452,7 +480,7 @@ information about jobs they manage will associate job metadata with this key.</p
 </div>
 <div class="section" id="start-apache">
 <h2>1.8. Start Apache<a class="headerlink" href="#start-apache" title="Permalink to this headline">¶</a></h2>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">httpd24</span><span class="o">-</span><span class="n">httpd</span> <span class="n">start</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo service httpd24-httpd start
 <span class="c1"># =&gt; Starting httpd:                                            [  OK  ]</span>
 </pre></div>
 </div>
@@ -474,27 +502,27 @@ applications.</p>
 Rails app that serves as a gateway for all the other Open OnDemand apps.</p>
 <ol class="arabic">
 <li><p class="first">Start in the build directory for system web applications:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sys</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
 </pre></div>
 </div>
 </li>
 <li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">dashboard</span><span class="o">.</span><span class="n">git</span> <span class="n">dashboard</span>
-<span class="n">cd</span> <span class="n">dashboard</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">tags</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mf">9.0</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-dashboard.git dashboard
+<span class="nb">cd</span> dashboard
+scl <span class="nb">enable</span> git19 -- git checkout tags/v1.9.0
 </pre></div>
 </div>
 </li>
 <li><p class="first">Build the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">assets</span><span class="p">:</span><span class="n">precompile</span> <span class="n">RAILS_ENV</span><span class="o">=</span><span class="n">production</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">tmp</span><span class="p">:</span><span class="n">clear</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r . /var/www/ood/apps/sys/dashboard
 </pre></div>
 </div>
 </li>
@@ -506,19 +534,19 @@ Rails app that serves as a gateway for all the other Open OnDemand apps.</p>
 providing a web-based terminal.</p>
 <ol class="arabic">
 <li><p class="first">Start in the build directory for system web applications:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sys</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
 </pre></div>
 </div>
 </li>
 <li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">shell</span><span class="o">.</span><span class="n">git</span> <span class="n">shell</span>
-<span class="n">cd</span> <span class="n">shell</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">tags</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mf">1.2</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-shell.git shell
+<span class="nb">cd</span> shell
+scl <span class="nb">enable</span> git19 -- git checkout tags/v1.1.2
 </pre></div>
 </div>
 </li>
 <li><p class="first">Build the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="n">npm</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 nodejs010 -- npm install
 </pre></div>
 </div>
 <div class="admonition note">
@@ -526,14 +554,14 @@ providing a web-based terminal.</p>
 <p>The Shell App will attempt to <code class="docutils literal"><span class="pre">ssh</span></code> to the <code class="docutils literal"><span class="pre">localhost</span></code> by default. This
 can be changed by creating a <code class="docutils literal"><span class="pre">.env</span></code> file in the build/deployment directory
 with the contents:</p>
-<div class="code sh last highlight-default"><div class="highlight"><pre><span></span><span class="n">DEFAULT_SSHHOST</span><span class="o">=</span><span class="s1">&#39;oakley.osc.edu&#39;</span>
+<div class="last highlight-sh"><div class="highlight"><pre><span></span><span class="nv">DEFAULT_SSHHOST</span><span class="o">=</span><span class="s1">&#39;oakley.osc.edu&#39;</span>
 </pre></div>
 </div>
 </div>
 </li>
 <li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">shell</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r . /var/www/ood/apps/sys/shell
 </pre></div>
 </div>
 </li>
@@ -546,25 +574,25 @@ app that provides a web-based file explorer for file uploads, downloads,
 editing, renaming and copying.</p>
 <ol class="arabic">
 <li><p class="first">Start in the build directory for system web applications:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sys</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
 </pre></div>
 </div>
 </li>
 <li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">fileexplorer</span><span class="o">.</span><span class="n">git</span> <span class="n">files</span>
-<span class="n">cd</span> <span class="n">files</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">tags</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mf">3.1</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-fileexplorer.git files
+<span class="nb">cd</span> files
+scl <span class="nb">enable</span> git19 -- git checkout tags/v1.3.1
 </pre></div>
 </div>
 </li>
 <li><p class="first">Build the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="n">npm</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 nodejs010 -- npm install
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">files</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r . /var/www/ood/apps/sys/files
 </pre></div>
 </div>
 </li>
@@ -577,27 +605,27 @@ Ruby on Rails app that provides a web-based file editor for opening files on
 the remote machine to edit and save.</p>
 <ol class="arabic">
 <li><p class="first">Start in the build directory for system web applications:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sys</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
 </pre></div>
 </div>
 </li>
 <li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">fileeditor</span><span class="o">.</span><span class="n">git</span> <span class="n">file</span><span class="o">-</span><span class="n">editor</span>
-<span class="n">cd</span> <span class="n">file</span><span class="o">-</span><span class="n">editor</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">tags</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mf">2.3</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-fileeditor.git file-editor
+<span class="nb">cd</span> file-editor
+scl <span class="nb">enable</span> git19 -- git checkout tags/v1.2.3
 </pre></div>
 </div>
 </li>
 <li><p class="first">Build the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">assets</span><span class="p">:</span><span class="n">precompile</span> <span class="n">RAILS_ENV</span><span class="o">=</span><span class="n">production</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">tmp</span><span class="p">:</span><span class="n">clear</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">file</span><span class="o">-</span><span class="n">editor</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r . /var/www/ood/apps/sys/file-editor
 </pre></div>
 </div>
 </li>
@@ -610,27 +638,27 @@ Ruby on Rails app that displays the current status of jobs running, queued, and
 held on the clusters.</p>
 <ol class="arabic">
 <li><p class="first">Start in the build directory for system web applications:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sys</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
 </pre></div>
 </div>
 </li>
 <li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">activejobs</span><span class="o">.</span><span class="n">git</span> <span class="n">activejobs</span>
-<span class="n">cd</span> <span class="n">activejobs</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">tags</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mf">3.1</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-activejobs.git activejobs
+<span class="nb">cd</span> activejobs
+scl <span class="nb">enable</span> git19 -- git checkout tags/v1.3.1
 </pre></div>
 </div>
 </li>
 <li><p class="first">Build the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">assets</span><span class="p">:</span><span class="n">precompile</span> <span class="n">RAILS_ENV</span><span class="o">=</span><span class="n">production</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">tmp</span><span class="p">:</span><span class="n">clear</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">activejobs</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r . /var/www/ood/apps/sys/activejobs
 </pre></div>
 </div>
 </li>
@@ -642,27 +670,27 @@ held on the clusters.</p>
 Rails app for creating and managing batch job jobs from templates.</p>
 <ol class="arabic">
 <li><p class="first">Start in the build directory for system web applications:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">sys</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
 </pre></div>
 </div>
 </li>
 <li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">myjobs</span><span class="o">.</span><span class="n">git</span> <span class="n">myjobs</span>
-<span class="n">cd</span> <span class="n">myjobs</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">git19</span> <span class="o">--</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">tags</span><span class="o">/</span><span class="n">v2</span><span class="o">.</span><span class="mf">1.2</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-myjobs.git myjobs
+<span class="nb">cd</span> myjobs
+scl <span class="nb">enable</span> git19 -- git checkout tags/v2.1.2
 </pre></div>
 </div>
 </li>
 <li><p class="first">Build the app:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">assets</span><span class="p">:</span><span class="n">precompile</span> <span class="n">RAILS_ENV</span><span class="o">=</span><span class="n">production</span>
-<span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="n">nodejs010</span> <span class="o">--</span> <span class="nb">bin</span><span class="o">/</span><span class="n">rake</span> <span class="n">tmp</span><span class="p">:</span><span class="n">clear</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
+scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">myjobs</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r . /var/www/ood/apps/sys/myjobs
 </pre></div>
 </div>
 </li>
@@ -681,36 +709,36 @@ user&#8217;s browser and the Open OnDemand portal.</p>
 <li>signed SSL certificates with possible intermediate certificates</li>
 </ul>
 <p>In this example the certificates are located at:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Public certificate</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">webdev05</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">crt</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Public certificate</span>
+/etc/pki/tls/certs/webdev05.hpc.osc.edu.crt
 
 <span class="c1"># Private key</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">webdev05</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">key</span>
+/etc/pki/tls/private/webdev05.hpc.osc.edu.key
 
 <span class="c1"># Intermediate certificate</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">webdev05</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span><span class="o">-</span><span class="n">interm</span><span class="o">.</span><span class="n">crt</span>
+/etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt
 </pre></div>
 </div>
 <ol class="arabic">
 <li><p class="first">Install the necessary Apache module to use SSL:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd24</span><span class="o">-</span><span class="n">mod_ssl</span><span class="o">.</span><span class="n">x86_64</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo yum install httpd24-mod_ssl.x86_64
 </pre></div>
 </div>
 </li>
 <li><p class="first">Update the Apache config with this server name and paths to the SSL
 certificates.</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">generator</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/ood-portal-generator
 </pre></div>
 </div>
 </li>
 <li><p class="first">Create or edit the <code class="docutils literal"><span class="pre">config.yml</span></code> as such:</p>
-<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nn">---</span>
 
-<span class="n">servername</span><span class="p">:</span> <span class="n">webdev05</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span>
-<span class="n">ssl</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s1">&#39;SSLCertificateFile &quot;/etc/pki/tls/certs/webdev05.hpc.osc.edu.crt&quot;&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;SSLCertificateKeyFile &quot;/etc/pki/tls/private/webdev05.hpc.osc.edu.key&quot;&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;SSLCertificateChainFile &quot;/etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt&quot;&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">webdev05.hpc.osc.edu</span>
+<span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/webdev05.hpc.osc.edu.crt&quot;&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/private/webdev05.hpc.osc.edu.key&quot;&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateChainFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt&quot;&#39;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -720,17 +748,17 @@ certificates.</p>
 </div>
 </li>
 <li><p class="first">Re-build the Apache config:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy it over to the default location:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 </li>
 <li><p class="first">Restart the Apache server:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">httpd24</span><span class="o">-</span><span class="n">httpd</span> <span class="n">restart</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo service httpd24-httpd restart
 </pre></div>
 </div>
 </li>
@@ -753,27 +781,27 @@ password. It also removes the need for the sys admin to keep updating the
 </ul>
 <ol class="arabic">
 <li><p class="first">Install the necessary Apache module to use LDAP:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd24</span><span class="o">-</span><span class="n">mod_ldap</span><span class="o">.</span><span class="n">x86_64</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo yum install httpd24-mod_ldap.x86_64
 </pre></div>
 </div>
 </li>
 <li><p class="first">Update the Apache config with LDAP Basic Authentication support.</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ood</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">generator</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/ood-portal-generator
 </pre></div>
 </div>
 </li>
 <li><p class="first">Create or edit the <code class="docutils literal"><span class="pre">config.yml</span></code> as such:</p>
-<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nn">---</span>
 
-<span class="n">auth</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s1">&#39;AuthType Basic&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;AuthName &quot;private&quot;&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;AuthBasicProvider ldap&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;AuthLDAPURL &quot;ldaps://cts06.osc.edu:636/ou=People,ou=hpc,o=osc?uid&quot; SSL&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;AuthLDAPGroupAttribute memberUid&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;AuthLDAPGroupAttributeIsDN off&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;RequestHeader unset Authorization&#39;</span>
-  <span class="o">-</span> <span class="s1">&#39;Require valid-user&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Basic&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthName</span><span class="nv"> </span><span class="s">&quot;private&quot;&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthBasicProvider</span><span class="nv"> </span><span class="s">ldap&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPURL</span><span class="nv"> </span><span class="s">&quot;ldaps://cts06.osc.edu:636/ou=People,ou=hpc,o=osc?uid&quot;</span><span class="nv"> </span><span class="s">SSL&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPGroupAttribute</span><span class="nv"> </span><span class="s">memberUid&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPGroupAttributeIsDN</span><span class="nv"> </span><span class="s">off&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -783,17 +811,17 @@ password. It also removes the need for the sys admin to keep updating the
 </div>
 </li>
 <li><p class="first">Re-build the Apache config:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy it over to the default location:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">rh</span><span class="o">-</span><span class="n">ruby22</span> <span class="o">--</span> <span class="n">rake</span> <span class="n">install</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 </li>
 <li><p class="first">Restart the Apache server:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">httpd24</span><span class="o">-</span><span class="n">httpd</span> <span class="n">restart</span>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo service httpd24-httpd restart
 </pre></div>
 </div>
 </li>
@@ -806,15 +834,18 @@ local username and password.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="infrastructure.html" class="btn btn-neutral float-right" title="2. Infrastructure" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="infrastructure.html" class="btn btn-neutral float-right" title="2. Infrastructure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to Open OnDemand’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Open OnDemand’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -848,7 +879,8 @@ local username and password.</p>
             VERSION:'0.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
