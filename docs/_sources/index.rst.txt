@@ -6,21 +6,21 @@
 Welcome to Open OnDemand's documentation!
 =========================================
 
-Contents:
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   about
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
+   :caption: Getting Started
 
    installation
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Components
+
    infrastructure
    applications
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
