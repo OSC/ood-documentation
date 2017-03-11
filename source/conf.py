@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Open OnDemand Documentation documentation build configuration file, created by
+# Open OnDemand documentation build configuration file, created by
 # sphinx-quickstart on Fri Mar 10 17:38:37 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -50,7 +50,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Open OnDemand Documentation'
+project = u'Open OnDemand'
 copyright = u'2017, Ohio Supercomputer Center'
 author = u'Ohio Supercomputer Center'
 
@@ -136,7 +136,7 @@ html_theme = 'sphinx_rtd_theme'
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'Open OnDemand Documentation v0.0.1'
+# html_title = u'Open OnDemand v0.0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -236,7 +236,7 @@ html_static_path = ['_static']
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'OpenOnDemandDocumentationdoc'
+htmlhelp_basename = 'OpenOnDemanddoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -262,7 +262,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'OpenOnDemandDocumentation.tex', u'Open OnDemand Documentation Documentation',
+    (master_doc, 'OpenOnDemand.tex', u'Open OnDemand Documentation',
      u'Ohio Supercomputer Center', 'manual'),
 ]
 
@@ -304,7 +304,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'openondemanddocumentation', u'Open OnDemand Documentation Documentation',
+    (master_doc, 'openondemand', u'Open OnDemand Documentation',
      [author], 1)
 ]
 
@@ -319,8 +319,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'OpenOnDemandDocumentation', u'Open OnDemand Documentation Documentation',
-     author, 'OpenOnDemandDocumentation', 'One line description of project.',
+    (master_doc, 'OpenOnDemand', u'Open OnDemand Documentation',
+     author, 'OpenOnDemand', 'One line description of project.',
      'Miscellaneous'),
 ]
 
