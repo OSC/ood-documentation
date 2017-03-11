@@ -73,6 +73,7 @@ a web-based terminal.
 
       .. code-block:: sh
 
+         # ./.env
          DEFAULT_SSHHOST='oakley.osc.edu'
 
 #. Copy the built app to the deployment directory:

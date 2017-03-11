@@ -18,7 +18,7 @@ which has
 .. toctree::
    :maxdepth: 2
    :numbered:
-   :caption: Quick Start
+   :caption: Quick Start Guide
 
    installation/software-requirements
    installation/modify-system-security
