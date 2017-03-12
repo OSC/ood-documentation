@@ -14,32 +14,11 @@ listening on a `Unix domain socket
 permissions are used to restrict access to this Unix domain socket such that
 only the proxy daemon can communicate with the PUN.
 
-ood-portal-generator
---------------------
+.. toctree::
+   :maxdepth: 2
+   :caption: Components
 
-`View on GitHub <https://github.com/OSC/ood-portal-generator>`__
-
-Generates an Open OnDemand portal configuration file for an Apache server that
-defines the proxy interface.
-
-mod_ood_proxy
--------------
-
-`View on GitHub <https://github.com/OSC/mod_ood_proxy>`__
-
-An Apache ``httpd`` module implementing the Open OnDemand proxy API.
-
-ood_auth_map
-------------
-
-`View on GitHub <https://github.com/OSC/ood_auth_map>`__
-
-The user mapping script that maps the authenticated username to the
-system-level username.
-
-nginx_stage
------------
-
-`View on GitHub <https://github.com/OSC/nginx_stage>`__
-
-Stages and controls the per-user NGINX (PUN) instances.
+   infrastructure/ood-portal-generator
+   infrastructure/mod-ood-proxy
+   infrastructure/ood-auth-map
+   infrastructure/nginx-stage

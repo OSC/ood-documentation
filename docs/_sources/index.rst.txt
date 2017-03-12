@@ -24,3 +24,10 @@ Welcome to Open OnDemand's documentation!
 
    infrastructure
    applications
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Resources
+
+   user-documentation
+   faq
