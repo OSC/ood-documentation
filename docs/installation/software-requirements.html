@@ -192,17 +192,17 @@
 <h1>1. Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h1>
 <p>We will use RedHat Software Collections to satisfy these requirements:</p>
 <ul class="simple">
-<li>Apache HTTP Server 2.4</li>
-<li>NGINX 1.6</li>
-<li>Phusion Passenger 4.0</li>
-<li>Ruby 2.2 with rake, bundler, and ability to build gem native
-extensions</li>
-<li>Node.js 0.10</li>
-<li>Git 1.9</li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/httpd24/">Apache HTTP Server 2.4</a></li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/nginx16/">NGINX 1.6</a></li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/rh-passenger40/">Phusion Passenger 4.0</a></li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/rh-ruby22/">Ruby 2.2</a>
+with <strong class="command">rake</strong>, <strong class="command">bundler</strong>, and development files</li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/nodejs010/">Node.js 0.10</a></li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/git19/">Git 1.9</a></li>
 </ul>
-<p>In this tutorial scl (RedHat Software Collections) packages happen to be
-installed at <code class="docutils literal"><span class="pre">/opt/rh</span></code>. This tutorial is also done from an account that has
-sudo access but is not root.</p>
+<p>In this tutorial RHSCL (RedHat Software Collections) packages are installed
+under <code class="docutils literal"><span class="pre">/opt/rh</span></code>. This tutorial is also done from an account that has
+<strong class="command">sudo</strong> access but is not root.</p>
 <p>Enable the RHSCL repository. Note that you may also need to enable the Optional
 channel and attach a subscription providing access to RHSCL to be able to use
 the repository.</p>
@@ -211,12 +211,21 @@ the repository.</p>
 </pre></div>
 </div>
 <p>Install dependencies:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo yum install -y httpd24 nginx16 rh-passenger40 rh-ruby22 rh-ruby22-rubygem-rake rh-ruby22-rubygem-bundler rh-ruby22-ruby-devel nodejs010 git19
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo yum install -y <span class="se">\</span>
+  httpd24 <span class="se">\</span>
+  nginx16 <span class="se">\</span>
+  rh-passenger40 <span class="se">\</span>
+  rh-ruby22 <span class="se">\</span>
+  rh-ruby22-rubygem-rake <span class="se">\</span>
+  rh-ruby22-rubygem-bundler <span class="se">\</span>
+  rh-ruby22-ruby-devel <span class="se">\</span>
+  nodejs010 <span class="se">\</span>
+  git19
 </pre></div>
 </div>
-<p>Update Apache Environment to include <code class="docutils literal"><span class="pre">rh-ruby22</span></code>. This is necessary for the
+<p>Update the Apache Environment to include Ruby 2.2. This is necessary for the
 user mapping script written in Ruby. Do this by editing
-<code class="docutils literal"><span class="pre">/opt/rh/httpd24/service-environment</span></code>:</p>
+<code class="docutils literal"><span class="pre">/opt/rh/httpd24/service-environment</span></code> as such:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gd">-HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24&quot;</span>
 <span class="gi">+HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 rh-ruby22&quot;</span>
 </pre></div>

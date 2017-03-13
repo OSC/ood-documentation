@@ -5,15 +5,12 @@ This installation tutorial starts with a web host ``webdev05.hpc.osc.edu``
 which has
 
 - the users are mirrored with the other machines (LDAP+NSS)
-- the home directory shared file system is mounted and accessible by
-  users
-- TORQUE client libraries installed and the ``trqauthd`` process
-  started
+- the home directory shared file system is mounted and accessible by users
+- TORQUE client libraries installed and the :command:`trqauthd` process started
 - signed SSL certificates with corresponding intermediate certificate
-- Software Collections package/repo, ``lsof``, and ``sudo`` are
+- Software Collections package/repo, :command:`lsof`, and :command:`sudo` are
   installed
-- the host has been added as a submit host to the respective batch
-  servers
+- the host has been added as a submit host to the respective batch servers
 
 .. toctree::
    :maxdepth: 2
