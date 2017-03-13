@@ -193,9 +193,14 @@
 <ol class="arabic">
 <li><p class="first">Disable SELinux (not documented here)</p>
 </li>
-<li><p class="first">Open port 80 and 443 through IP Tables i.e.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">80</span> -m comment --comment <span class="s2">&quot;00080 *:80&quot;</span> -j ACCEPT
-sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">443</span> -m comment --comment <span class="s2">&quot;00443 *:443&quot;</span> -j ACCEPT
+<li><p class="first">Open ports 80 and 443 in <strong class="command">iptables</strong>:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Open port 80</span>
+sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">80</span> -j ACCEPT
+
+<span class="c1"># Open port 443</span>
+sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">443</span> -j ACCEPT
+
+<span class="c1"># Save changes</span>
 sudo /etc/init.d/iptables save
 </pre></div>
 </div>

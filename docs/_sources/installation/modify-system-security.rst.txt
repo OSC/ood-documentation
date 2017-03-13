@@ -3,10 +3,15 @@ Modify System Security
 
 #. Disable SELinux (not documented here)
 
-#. Open port 80 and 443 through IP Tables i.e.
+#. Open ports 80 and 443 in :command:`iptables`:
 
    .. code-block:: sh
 
-      sudo iptables -I INPUT -p tcp -m multiport --dports 80 -m comment --comment "00080 *:80" -j ACCEPT
-      sudo iptables -I INPUT -p tcp -m multiport --dports 443 -m comment --comment "00443 *:443" -j ACCEPT
+      # Open port 80
+      sudo iptables -I INPUT -p tcp -m multiport --dports 80 -j ACCEPT
+
+      # Open port 443
+      sudo iptables -I INPUT -p tcp -m multiport --dports 443 -j ACCEPT
+
+      # Save changes
       sudo /etc/init.d/iptables save
