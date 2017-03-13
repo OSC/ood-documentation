@@ -22,7 +22,7 @@ that serves as a gateway for all the other Open OnDemand apps.
 
       scl enable git19 -- git clone https://github.com/OSC/ood-dashboard.git dashboard
       cd dashboard
-      scl enable git19 -- git checkout tags/v1.9.0
+      scl enable git19 -- git checkout tags/v1.10.0
 
 #. Build the app:
 
