@@ -2,8 +2,7 @@ Install User Mapping Script
 ===========================
 
 You will need to map the Apache authenticated user to the local system user.
-This is done with the simple tool: `ood\_auth\_map
-<https://github.com/OSC/ood_auth_map>`__.
+This is done with the :ref:`ood-auth-map` tool.
 
 #. Clone and check out the latest tag:
 

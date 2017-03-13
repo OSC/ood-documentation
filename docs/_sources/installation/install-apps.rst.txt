@@ -7,8 +7,8 @@ applications.
 Dashboard App
 -------------
 
-The `Dashboard <https://github.com/OSC/ood-dashboard>`_ is a Ruby on Rails app
-that serves as a gateway for all the other Open OnDemand apps.
+The :ref:`dashboard` is a Ruby on Rails app that serves as a gateway for all
+the other Open OnDemand apps.
 
 #. Start in the build directory for system web applications:
 
@@ -42,8 +42,7 @@ that serves as a gateway for all the other Open OnDemand apps.
 Shell App
 ---------
 
-The `Shell App <https://github.com/OSC/ood-shell>`_ is a Node.js app providing
-a web-based terminal.
+The :ref:`shell` is a Node.js app providing a web-based terminal.
 
 #. Start in the build directory for system web applications:
 
@@ -86,9 +85,8 @@ a web-based terminal.
 Files App
 ---------
 
-The `Files App <https://github.com/OSC/ood-fileexplorer>`_ is a Node.js app
-that provides a web-based file explorer for file uploads, downloads, editing,
-renaming and copying.
+The :ref:`files` is a Node.js app that provides a web-based file explorer for
+file uploads, downloads, editing, renaming and copying.
 
 #. Start in the build directory for system web applications:
 
@@ -121,9 +119,8 @@ renaming and copying.
 File Editor App
 ---------------
 
-The `File Editor App <https://github.com/OSC/ood-fileeditor>`_ is a Ruby on
-Rails app that provides a web-based file editor for opening files on the remote
-machine to edit and save.
+The :ref:`editor` is a Ruby on Rails app that provides a web-based file editor
+for opening files on the remote machine to edit and save.
 
 #. Start in the build directory for system web applications:
 
@@ -157,9 +154,8 @@ machine to edit and save.
 Active Jobs App
 ---------------
 
-The `Active Jobs App <https://github.com/OSC/ood-activejobs>`_ is a Ruby on
-Rails app that displays the current status of jobs running, queued, and held on
-the clusters.
+The :ref:`active-jobs` is a Ruby on Rails app that displays the current status
+of jobs running, queued, and held on the clusters.
 
 #. Start in the build directory for system web applications:
 
@@ -193,8 +189,8 @@ the clusters.
 My Jobs App
 -----------
 
-The `My Jobs App <https://github.com/OSC/ood-myjobs>`_ is a Ruby on Rails app
-for creating and managing batch job jobs from templates.
+The :ref:`my-jobs` is a Ruby on Rails app for creating and managing batch job
+jobs from templates.
 
 #. Start in the build directory for system web applications:
 

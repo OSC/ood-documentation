@@ -1,7 +1,7 @@
 Generate Apache Config
 ======================
 
-#. Clone and check out the latest tag:
+#. Clone and check out the latest tag of :ref:`ood-portal-generator`:
 
    .. code-block:: sh
 
@@ -10,8 +10,8 @@ Generate Apache Config
       cd ood-portal-generator/
       scl enable git19 -- git checkout v0.3.1
 
-#. ``ood-portal-generator`` is a script that takes a ``config.yml`` (or uses
-   defaults if not provided) and renders an Apache config from a template.
+#. :ref:`ood-portal-generator` is a script that takes a ``config.yml`` (or
+   uses defaults if not provided) and renders an Apache config from a template.
    Generate a default one now:
 
    .. code-block:: sh
@@ -47,7 +47,8 @@ Generate Apache Config
 
 .. note::
 
-   The Apache config references the location of ``mod_ood_proxy``,
-   ``nginx_stage``, and ``ood_auth_map``. Be sure to update these locations if
-   you change the ``PREFIX`` for any installation of the corresponding package
-   in the ``config.yml`` prior to generating the Apache config.
+   The Apache config references the location of :ref:`mod-ood-proxy`,
+   :ref:`nginx-stage`, and :ref:`ood-auth-map`. Be sure to update these
+   locations if you change the ``PREFIX`` for any installation of the
+   corresponding package in the ``config.yml`` prior to generating the Apache
+   config.

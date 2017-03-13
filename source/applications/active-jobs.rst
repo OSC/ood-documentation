@@ -1,3 +1,5 @@
+.. _active-jobs:
+
 Active Jobs App
 ===============
 

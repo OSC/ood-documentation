@@ -1,3 +1,5 @@
+.. _my-jobs:
+
 My Jobs App
 ===========
 

@@ -1,9 +1,8 @@
 Install the PUN Utility
 =======================
 
-The PUNs are manipulated and maintained by the `nginx\_stage
-<https://github.com/OSC/nginx_stage>`__ utility. This tool is meant to by run
-by ``root`` or a user with ``sudoers`` privileges.
+The PUNs are manipulated and maintained by the :ref:`nginx-stage` utility. This
+tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
 
 #. Clone and check out the latest tag:
 
@@ -21,7 +20,7 @@ by ``root`` or a user with ``sudoers`` privileges.
       sudo scl enable rh-ruby22 -- rake install
       # => /opt/ood/nginx_stage
 
-   This creates the ``nginx_stage`` config
+   This creates the :ref:`nginx-stage` config
    ``/opt/ood/nginx_stage/config/nginx_stage.yml`` and the ruby binstub/wrapper
    script ``/opt/ood/nginx_stage/bin/ood_ruby``.
 
@@ -40,12 +39,12 @@ by ``root`` or a user with ``sudoers`` privileges.
       Defaults:apache     !requiretty, !authenticate
       apache ALL=(ALL) NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage
 
-   and then copy this to ``/etc/sudoers.d/10_ood``:
+   and then copy this to ``/etc/sudoers.d/ood``:
 
    .. code-block:: sh
 
-      sudo cp ~/ood/src/sudoers_ood /etc/sudoers.d/10_ood
-      sudo chmod 440 /etc/sudoers.d/10_ood
+      sudo cp ~/ood/src/sudoers_ood /etc/sudoers.d/ood
+      sudo chmod 440 /etc/sudoers.d/ood
 
    Our ``/etc/sudoers`` file includes files in ``/etc/sudoers.d``:
 

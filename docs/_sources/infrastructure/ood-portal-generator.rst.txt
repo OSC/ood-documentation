@@ -1,3 +1,5 @@
+.. _ood-portal-generator:
+
 ood-portal-generator
 ====================
 

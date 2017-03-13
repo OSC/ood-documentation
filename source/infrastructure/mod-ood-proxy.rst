@@ -1,3 +1,5 @@
+.. _mod-ood-proxy:
+
 mod_ood_proxy
 =============
 

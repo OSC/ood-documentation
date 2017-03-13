@@ -2,8 +2,7 @@ Install Proxy Module for Apache
 ===============================
 
 An Apache module written in Lua is the primary component for the proxy logic.
-It is given by the `mod\_ood\_proxy <https://github.com/OSC/mod_ood_proxy>`__
-project.
+It is given by the :ref:`mod-ood-proxy` project.
 
 #. Clone and check out the latest tag:
 

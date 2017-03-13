@@ -1,3 +1,5 @@
+.. _ood-auth-map:
+
 ood_auth_map
 ============
 

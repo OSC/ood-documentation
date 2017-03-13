@@ -1,3 +1,5 @@
+.. _files:
+
 Files App
 =========
 
