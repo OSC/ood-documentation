@@ -20,7 +20,8 @@ features.
 Usage
 -----
 
-This app is deployed on the OnDemand Server under the following path on the local file system::
+This app is deployed on the OnDemand Server under the following path on the
+local file system::
 
   /var/www/ood/apps/sys/file-editor
 
