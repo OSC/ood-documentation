@@ -106,7 +106,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../applications.html">Applications</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dashboard.html">Dashboard App</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Shell App</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Shell App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-works">How it Works</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="files.html">Files App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editor.html">File Editor App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="active-jobs.html">Active Jobs App</a></li>
@@ -185,7 +188,63 @@
             
   <div class="section" id="shell-app">
 <h1>Shell App<a class="headerlink" href="#shell-app" title="Permalink to this headline">¶</a></h1>
-<p>See <a class="reference external" href="https://github.com/OSC/ood-shell">https://github.com/OSC/ood-shell</a> for more information.</p>
+<p><a class="reference external" href="https://github.com/OSC/ood-shell">View on Github</a></p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/shell-app.png" src="../_images/shell-app.png" />
+<p class="caption"><span class="caption-text">Example of the Shell App connected to a compute node with <code class="docutils literal"><span class="pre">htop</span></code> running.</span></p>
+</div>
+<p>This Open OnDemand application provides a web-based terminal that connects the
+user through an SSH session to either the local machine or any other machine
+allowed within the internal network. Typically this will connect the user to a
+login node. This application uses <a class="reference external" href="https://nodejs.org/en/">Node.js</a> for its exceptional support of
+websockets providing a responsive user-experience as well as its event-driven
+framework allowing for multiple sessions simultaneously.</p>
+<p>The terminal client is an xterm-compatible terminal emulator written entirely
+in JavaScript. The Shell App uses the Google client <a class="reference external" href="https://chromium.googlesource.com/apps/libapps/+/master/hterm">hterm</a> for this. It
+performs reasonably well across most modern browsers on various operating
+systems. It is currently used by the developers of Open OnDemand quite a bit.</p>
+<p>This app is typically deployed on the OnDemand Server under the following path:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">shell</span>
+</pre></div>
+</div>
+<p>and can be accessed with the following browser request:</p>
+<dl class="get">
+<dt id="get--pun-sys-shell-(host)-(path)">
+<code class="descname">GET </code><code class="descname">/pun/sys/shell/</code><span class="sig-paren">(</span><em>host</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--pun-sys-shell-(host)-(path)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts SSH session on <code class="docutils literal"><span class="pre">host</span></code> machine with current working directory
+<code class="docutils literal"><span class="pre">path</span></code>.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/shell/default</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.hpc.edu</span>
+</pre></div>
+</div>
+<p>Starts SSH session on the default host (specified by system administrator
+when app was first installed) in the user&#8217;s home directory.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/shell/node01.hpc.edu/home/user/path/to/work</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.hpc.edu</span>
+</pre></div>
+</div>
+<p>Starts SSH session on host <code class="docutils literal"><span class="pre">node01.hpc.edu</span></code> and changes working directory
+to <code class="docutils literal"><span class="pre">/home/user/path/to/work</span></code>.</p>
+</dd></dl>
+
+<div class="section" id="how-it-works">
+<h2>How it Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>A brief explanation on how the Shell App works on your local HPC network.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/shell-diagram.png" src="../_images/shell-diagram.png" />
+<p class="caption"><span class="caption-text">Diagram detailing how the Shell App interacts with HPC infrastructure.</span></p>
+</div>
+<p>The figure above details how the Shell App works on a local HPC system. The
+user&#8217;s PUN running on the OnDemand Server launches the Node.js Shell App
+through <a class="reference external" href="https://www.phusionpassenger.com/">Passenger</a> as the user. The Shell App then forks off an <code class="docutils literal"><span class="pre">ssh</span></code> process
+that then connects to a server specified by the administrator (typically a
+login node). The <code class="docutils literal"><span class="pre">stdin</span></code>, <code class="docutils literal"><span class="pre">stdout</span></code>, and <code class="docutils literal"><span class="pre">stderr</span></code> streams are all piped
+through the websocket connection. When the user drops the websocket connection
+(e.g., leaves the page, refreshes browser, drops connection) the <code class="docutils literal"><span class="pre">ssh</span></code>
+process is terminated.</p>
+</div>
 </div>
 
 
