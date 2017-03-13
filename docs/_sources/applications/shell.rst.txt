@@ -58,7 +58,10 @@ and can be accessed with the following browser request:
 How it Works
 ------------
 
-A brief explanation on how the Shell App works on your local HPC network.
+Requirements needed for the Shell App to work on your local HPC network:
+
+- OnDemand Server
+- An SSH Server running on the host machine that the Shell App connects to
 
 .. figure:: ../images/shell-diagram.png
    :align: center
