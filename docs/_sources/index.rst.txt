@@ -17,6 +17,7 @@ Welcome to Open OnDemand's documentation!
    :caption: Getting Started
 
    installation
+   basics
 
 .. toctree::
    :maxdepth: 2
