@@ -26,7 +26,7 @@ This app is typically deployed on the OnDemand Server under the following path::
 
 and can be accessed with the following browser request:
 
-.. http:get:: /pun/sys/shell/(host)/(path)
+.. http:get:: /pun/sys/shell/ssh/(host)/(path)
 
    Starts SSH session on ``host`` machine with current working directory
    ``path``.
@@ -35,7 +35,7 @@ and can be accessed with the following browser request:
 
    .. code-block:: http
 
-      GET /pun/sys/shell/default HTTP/1.1
+      GET /pun/sys/shell/ssh/default HTTP/1.1
       Host: ondemand.hpc.edu
 
    Starts SSH session on the default host (specified by system administrator
@@ -45,7 +45,7 @@ and can be accessed with the following browser request:
 
    .. code-block:: http
 
-      GET /pun/sys/shell/node01.hpc.edu/home/user/path/to/work HTTP/1.1
+      GET /pun/sys/shell/ssh/node01.hpc.edu/home/user/path/to/work HTTP/1.1
       Host: ondemand.hpc.edu
 
    Starts SSH session on host ``node01.hpc.edu`` and changes working directory
