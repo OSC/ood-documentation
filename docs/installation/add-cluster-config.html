@@ -210,10 +210,11 @@ file is a YAML file and must have the <code class="docutils literal"><span class
 </li>
 </ol>
 <p>Here is the minimal YAML config required to specify a host that can be accessed
-via Shell Access app. The filename is <code class="docutils literal"><span class="pre">oakley.yml</span></code>:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nn">---</span>
+via Shell Access app. The filename is <code class="docutils literal"><span class="pre">owens.yml</span></code>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens.yml</span>
+<span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">v1</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Oakley&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Cluster&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
@@ -221,13 +222,11 @@ via Shell Access app. The filename is <code class="docutils literal"><span class
         <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
           <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Ssh&quot;</span>
           <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;oakely.osc.edu&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>a cluster contains one ore more servers, with server names <code class="docutils literal"><span class="pre">login</span></code>,
-<code class="docutils literal"><span class="pre">resource_mgr</span></code> and <code class="docutils literal"><span class="pre">scheduler</span></code></li>
-<li>special server keywords are:<ul>
+<li>a cluster contains one ore more servers, with special server keywords:<ul>
 <li><code class="docutils literal"><span class="pre">login</span></code></li>
 <li><code class="docutils literal"><span class="pre">resource_mgr</span></code></li>
 <li><code class="docutils literal"><span class="pre">scheduler</span></code></li>
@@ -237,9 +236,10 @@ via Shell Access app. The filename is <code class="docutils literal"><span class
 </ul>
 <p>For Active Jobs and My Jobs to work, a cluster configuration must specify a
 <code class="docutils literal"><span class="pre">resource_mgr</span></code> to use.</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens.yml</span>
+<span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">v1</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Oakley&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Cluster&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
@@ -247,18 +247,18 @@ via Shell Access app. The filename is <code class="docutils literal"><span class
         <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
           <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Ssh&quot;</span>
           <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;oakely.osc.edu&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
         <span class="l l-Scalar l-Scalar-Plain">resource_mgr</span><span class="p p-Indicator">:</span>
           <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Torque&quot;</span>
           <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;oak-batch.osc.edu&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
             <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
             <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
             <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
 </pre></div>
 </div>
-<p>The name of the file becomes the key for this host. So <code class="docutils literal"><span class="pre">oakley.yml</span></code> cluster
-config will have a key <code class="docutils literal"><span class="pre">oakley</span></code>. My Jobs and other OOD apps that cache
+<p>The name of the file becomes the key for this host. So <code class="docutils literal"><span class="pre">owens.yml</span></code> cluster
+config will have a key <code class="docutils literal"><span class="pre">owens</span></code>. My Jobs and other OOD apps that cache
 information about jobs they manage will associate job metadata with this key.</p>
 </div>
 

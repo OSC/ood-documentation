@@ -20,13 +20,14 @@ connection config files. These config files are required for:
    file is a YAML file and must have the ``.yml`` suffix.
 
 Here is the minimal YAML config required to specify a host that can be accessed
-via Shell Access app. The filename is ``oakley.yml``:
+via Shell Access app. The filename is ``owens.yml``:
 
 .. code-block:: yaml
 
+   # /etc/ood/config/clusters.d/owens.yml
    ---
    v1:
-     title: "Oakley"
+     title: "Owens"
      cluster:
        type: "OodCluster::Cluster"
        data:
@@ -34,11 +35,9 @@ via Shell Access app. The filename is ``oakley.yml``:
            login:
              type: "OodCluster::Servers::Ssh"
              data:
-               host: "oakely.osc.edu"
+               host: "owens.osc.edu"
 
-- a cluster contains one ore more servers, with server names ``login``,
-  ``resource_mgr`` and ``scheduler``
-- special server keywords are:
+- a cluster contains one ore more servers, with special server keywords:
 
   - ``login``
   - ``resource_mgr``
@@ -50,9 +49,10 @@ For Active Jobs and My Jobs to work, a cluster configuration must specify a
 
 .. code-block:: yaml
 
+   # /etc/ood/config/clusters.d/owens.yml
    ---
    v1:
-     title: "Oakley"
+     title: "Owens"
      cluster:
        type: "OodCluster::Cluster"
        data:
@@ -60,15 +60,15 @@ For Active Jobs and My Jobs to work, a cluster configuration must specify a
            login:
              type: "OodCluster::Servers::Ssh"
              data:
-               host: "oakely.osc.edu"
+               host: "owens.osc.edu"
            resource_mgr:
              type: "OodCluster::Servers::Torque"
              data:
-               host: "oak-batch.osc.edu"
+               host: "owens-batch.ten.osc.edu"
                lib: "/opt/torque/lib64"
                bin: "/opt/torque/bin"
                version: "6.0.1"
 
-The name of the file becomes the key for this host. So ``oakley.yml`` cluster
-config will have a key ``oakley``. My Jobs and other OOD apps that cache
+The name of the file becomes the key for this host. So ``owens.yml`` cluster
+config will have a key ``owens``. My Jobs and other OOD apps that cache
 information about jobs they manage will associate job metadata with this key.
