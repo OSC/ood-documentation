@@ -231,6 +231,25 @@ user mapping script written in Ruby. Do this by editing
 <span class="gi">+HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 rh-ruby22&quot;</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If using <strong>RHEL 7</strong> you will need to override the <strong class="program">systemd</strong>
+configuration for Apache:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo systemctl edit httpd24-httpd
+</pre></div>
+</div>
+<p>and then add the following to ovverride the default settings:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">KillSignal</span><span class="o">=</span>SIGTERM
+<span class="nv">KillMode</span><span class="o">=</span>process
+<span class="nv">PrivateTmp</span><span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>Finally, save your changes and run:</p>
+<div class="last highlight-sh"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
+</pre></div>
+</div>
+</div>
 <p>Finally, make a source directory that will contain the checked out and built
 OOD infrastructure components and apps:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>mkdir -p ~/ood/src

@@ -51,6 +51,30 @@ user mapping script written in Ruby. Do this by editing
    -HTTPD24_HTTPD_SCLS_ENABLED="httpd24"
    +HTTPD24_HTTPD_SCLS_ENABLED="httpd24 rh-ruby22"
 
+.. warning::
+
+   If using **RHEL 7** you will need to override the :program:`systemd`
+   configuration for Apache:
+
+   .. code-block:: sh
+
+      sudo systemctl edit httpd24-httpd
+
+   and then add the following to ovverride the default settings:
+
+   .. code-block:: sh
+
+      [Service]
+      KillSignal=SIGTERM
+      KillMode=process
+      PrivateTmp=false
+
+   Finally, save your changes and run:
+
+   .. code-block:: sh
+
+      sudo systemctl daemon-reload
+
 Finally, make a source directory that will contain the checked out and built
 OOD infrastructure components and apps:
 
