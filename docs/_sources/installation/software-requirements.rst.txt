@@ -27,6 +27,14 @@ the repository.
    sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
    # => Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
+.. warning::
+
+   If using **RHEL 7** you will need to replace the above command with:
+
+   .. code-block:: sh
+
+      sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
+
 Install dependencies:
 
 .. code-block:: sh
@@ -53,7 +61,7 @@ user mapping script written in Ruby. Do this by editing
 
 .. warning::
 
-   If using **RHEL 7** you will need to override the :program:`systemd`
+   If using **RHEL 7** you will also need to override the :program:`systemd`
    configuration for Apache:
 
    .. code-block:: sh

@@ -4,6 +4,10 @@ Install Applications
 Now we will go through installing each of the Open OnDemand system web
 applications.
 
+.. code-block:: sh
+
+   mkdir ~/ood/src/sys
+
 Dashboard App
 -------------
 
@@ -210,7 +214,7 @@ jobs from templates.
 
    .. code-block:: sh
 
-      scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
+      scl enable rh-ruby22 git19 -- bin/bundle install --path vendor/bundle
       scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
       scl enable rh-ruby22 nodejs010 -- bin/rake tmp:clear
 
