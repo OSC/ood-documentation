@@ -6,6 +6,8 @@ the `Ohio Supercomputer Center's <osc_>`_ original OnDemand portal. The goal of
 Open OnDemand is to provide an easy way for system administrators to provide
 web access to their HPC resouces.
 
+----
+
 .. [1] David E. Hudak, Douglas Johnson, Jeremy Nicklas, Eric Franz, Brian
        McMichael, and Basil Gohar. 2016. Open OnDemand: Transforming
        Computational Science Through Omnidisciplinary Software
