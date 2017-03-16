@@ -50,8 +50,8 @@ Configuration
 
 Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by
-including a file called `config.yml` with your configuration settings in the
-root directory before calling `rake`.
+including a file called ``config.yml`` with your configuration settings in the
+root directory before running :program:`rake`.
 
 This project includes a good starting configuration file that you can use:
 
@@ -73,8 +73,8 @@ following options:
    # config.yml
 
    analytics:
-     url: http://www.google-analytics.com/collect
      id: UA-79331310-4
+     url: "http://www.google-analytics.com/collect"
 
 This will collect various metrics and submit them to OSC's Google Analytics
 account.
@@ -106,8 +106,8 @@ such:
 
    servername: ondemand.my-center.edu
    ssl:
-     - SSLCertificateFile "/path/to/public.crt"
-     - SSLCertificateKeyFile "/path/to/private.key"
+     - "SSLCertificateFile \"/path/to/public.crt\""
+     - "SSLCertificateKeyFile \"/path/to/private.key\""
 
 Each array item is treated as a line in the Apache configuration file. You can
 add more Apache `SSL directives`_ as separate array items.
@@ -126,11 +126,11 @@ looking up users in plain text password files.
 .. code-block:: yaml
 
    auth:
-     - AuthType Basic
-     - AuthName "private"
-     - AuthUserFile "/opt/rh/httpd24/root/etc/httpd/.htpasswd"
-     - RequestHeader unset Authorization
-     - Require valid-user
+     - "AuthType Basic"
+     - "AuthName \"private\""
+     - "AuthUserFile \"/opt/rh/httpd24/root/etc/httpd/.htpasswd\""
+     - "RequestHeader unset Authorization"
+     - "Require valid-user"
 
 Where the ``RequestHeader`` setting is used to strip private session
 information from being sent to the backend web servers.
@@ -164,12 +164,12 @@ such:
 .. code-block:: yaml
 
    auth:
-     - AuthType Basic
-     - AuthName "private"
-     - AuthBasicProvider ldap
-     - AuthLDAPURL "ldaps://ldap.my-center.edu:636/ou=People,ou=hpc"
-     - RequestHeader unset Authorization
-     - Require valid-user
+     - "AuthType Basic"
+     - "AuthName \"private\""
+     - "AuthBasicProvider ldap"
+     - "AuthLDAPURL \"ldaps://ldap.my-center.edu:636/ou=People,ou=hpc\""
+     - "RequestHeader unset Authorization"
+     - "Require valid-user"
 
 Where the ``RequestHeader`` setting is used to strip private session
 information from being sent to the backend web servers.
@@ -214,19 +214,20 @@ such:
 
 .. code-block:: yaml
 
-   # Capture system user name from authenticated user name
-   user_map_cmd: /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex='^(\w+)@my-center.edu'
-
    # Use Shibboleth authentication
    auth:
-     - AuthType shibboleth
-     - ShibRequestSetting requireSession 1
-     - RequestHeader edit* Cookie "(^_shibsession_[^;]*(;\s*)?|;\s*_shibsession_[^;]*)" ""
-     - RequestHeader unset Cookie "expr=-z %{req:Cookie}"
-     - Require valid-user
+     - "AuthType shibboleth"
+     - "ShibRequestSetting requireSession 1"
+     - "RequestHeader edit* Cookie \"(^_shibsession_[^;]*(;\\s*)?|;\\s*_shibsession_[^;]*)\" \"\""
+     - "RequestHeader unset Cookie \"expr=-z %{req:Cookie}\""
+     - "Require valid-user"
 
    # Use Shibboleth logou
    logout_redirect: /Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout
+
+   # Capture system user name from authenticated user name
+   user_map_cmd: "/opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex='^(\\w+)@my-center.edu'"
+
 
 Where:
 
@@ -333,14 +334,10 @@ such:
 
 .. code-block:: yaml
 
-   # Use a grid-mapfile for mapping authenticated user name to the system user
-   # name
-   user_map_cmd: /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile
-
    # Use OpenID Connect for authentication
    auth:
-     - AuthType openid-connect
-     - Require valid-user
+     - "AuthType openid-connect"
+     - "Require valid-user"
 
    # OpenID Connect options
    oidc_uri: /oidc
@@ -358,6 +355,10 @@ such:
 
    # Use OpenID Connect logout
    logout_redirect: /oidc?logout=https%3A%2F%2Fondemand.my-center.edu
+
+   # Use a grid-mapfile for mapping authenticated user name to the system user
+   # name
+   user_map_cmd: /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile
 
 Where the ``logout_redirect`` contains the URL that the user is redirected to
 after they are logged out of their session.

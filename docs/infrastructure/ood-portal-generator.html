@@ -229,8 +229,8 @@ OnDemand portal needs, you will run:</p>
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by
-including a file called <cite>config.yml</cite> with your configuration settings in the
-root directory before calling <cite>rake</cite>.</p>
+including a file called <code class="docutils literal"><span class="pre">config.yml</span></code> with your configuration settings in the
+root directory before running <strong class="program">rake</strong>.</p>
 <p>This project includes a good starting configuration file that you can use:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>cp config.default.yml config.yml
 </pre></div>
@@ -244,8 +244,8 @@ following options:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># config.yml</span>
 
 <span class="l l-Scalar l-Scalar-Plain">analytics</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://www.google-analytics.com/collect</span>
   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">UA-79331310-4</span>
+  <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;http://www.google-analytics.com/collect&quot;</span>
 </pre></div>
 </div>
 <p>This will collect various metrics and submit them to OSC&#8217;s Google Analytics
@@ -272,8 +272,8 @@ OnDemand portal.</p>
 such:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand.my-center.edu</span>
 <span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SSLCertificateFile &quot;/path/to/public.crt&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SSLCertificateKeyFile &quot;/path/to/private.key&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;SSLCertificateFile</span><span class="nv"> </span><span class="s">\&quot;/path/to/public.crt\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">\&quot;/path/to/private.key\&quot;&quot;</span>
 </pre></div>
 </div>
 <p>Each array item is treated as a line in the Apache configuration file. You can
@@ -286,11 +286,11 @@ add more Apache <a class="reference external" href="https://httpd.apache.org/doc
 configuration file to use HTTP Basic authentication to restrict access by
 looking up users in plain text password files.</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthType Basic</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthName &quot;private&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthUserFile &quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">RequestHeader unset Authorization</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Require valid-user</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthUserFile</span><span class="nv"> </span><span class="s">\&quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
 </pre></div>
 </div>
 <p>Where the <code class="docutils literal"><span class="pre">RequestHeader</span></code> setting is used to strip private session
@@ -317,12 +317,12 @@ user, but the passwords need not match.</p>
 <p>Then you can modify your <strong class="program">ood-portal-generator</strong> configuration file as
 such:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthType Basic</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthName &quot;private&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthBasicProvider ldap</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthLDAPURL &quot;ldaps://ldap.my-center.edu:636/ou=People,ou=hpc&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">RequestHeader unset Authorization</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Require valid-user</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthBasicProvider</span><span class="nv"> </span><span class="s">ldap&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthLDAPURL</span><span class="nv"> </span><span class="s">\&quot;ldaps://ldap.my-center.edu:636/ou=People,ou=hpc\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
 </pre></div>
 </div>
 <p>Where the <code class="docutils literal"><span class="pre">RequestHeader</span></code> setting is used to strip private session
@@ -358,19 +358,19 @@ when setting up the Shibboleth module for Apache above.</p>
 </div>
 <p>Then you can modify your <strong class="program">ood-portal-generator</strong> configuration file as
 such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># Capture system user name from authenticated user name</span>
-<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex=&#39;^(\w+)@my-center.edu&#39;</span>
-
-<span class="c1"># Use Shibboleth authentication</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># Use Shibboleth authentication</span>
 <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthType shibboleth</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ShibRequestSetting requireSession 1</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">RequestHeader edit* Cookie &quot;(^_shibsession_[^;]*(;\s*)?|;\s*_shibsession_[^;]*)&quot; &quot;&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">RequestHeader unset Cookie &quot;expr=-z %{req:Cookie}&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Require valid-user</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">shibboleth&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;ShibRequestSetting</span><span class="nv"> </span><span class="s">requireSession</span><span class="nv"> </span><span class="s">1&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">edit*</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;(^_shibsession_[^;]*(;\\s*)?|;\\s*_shibsession_[^;]*)\&quot;</span><span class="nv"> </span><span class="s">\&quot;\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;expr=-z</span><span class="nv"> </span><span class="s">%{req:Cookie}\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
 
 <span class="c1"># Use Shibboleth logou</span>
 <span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout</span>
+
+<span class="c1"># Capture system user name from authenticated user name</span>
+<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@my-center.edu&#39;&quot;</span>
 </pre></div>
 </div>
 <p>Where:</p>
@@ -467,14 +467,10 @@ files:</p>
 the back and lets continue.</p>
 <p>Now we can modify your <strong class="program">ood-portal-generator</strong> configuration file as
 such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># Use a grid-mapfile for mapping authenticated user name to the system user</span>
-<span class="c1"># name</span>
-<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile</span>
-
-<span class="c1"># Use OpenID Connect for authentication</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># Use OpenID Connect for authentication</span>
 <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AuthType openid-connect</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Require valid-user</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
 
 <span class="c1"># OpenID Connect options</span>
 <span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/oidc</span>
@@ -492,6 +488,10 @@ such:</p>
 
 <span class="c1"># Use OpenID Connect logout</span>
 <span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/oidc?logout=https%3A%2F%2Fondemand.my-center.edu</span>
+
+<span class="c1"># Use a grid-mapfile for mapping authenticated user name to the system user</span>
+<span class="c1"># name</span>
+<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile</span>
 </pre></div>
 </div>
 <p>Where the <code class="docutils literal"><span class="pre">logout_redirect</span></code> contains the URL that the user is redirected to
