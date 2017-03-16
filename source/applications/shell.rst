@@ -5,7 +5,7 @@ Shell App
 
 `View on Github <https://github.com/OSC/ood-shell>`__
 
-.. figure:: ../images/shell-app.png
+.. figure:: /images/shell-app.png
    :align: center
 
    Example of the Shell App connected to a compute node with ``htop`` running.
@@ -65,7 +65,7 @@ Requirements needed for the Shell App to work on your local HPC network:
 - OnDemand Server
 - An SSH Server running on the host machine that the Shell App connects to
 
-.. figure:: ../images/shell-diagram.png
+.. figure:: /images/shell-diagram.png
    :align: center
 
    Diagram detailing how the Shell App interacts with HPC infrastructure.

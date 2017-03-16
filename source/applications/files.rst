@@ -5,7 +5,7 @@ Files App
 
 `View on GitHub <https://github.com/OSC/ood-fileexplorer>`__
 
-.. figure:: ../images/files-app.png
+.. figure:: /images/files-app.png
    :align: center
 
    Example of the Files App viewing the contents of a directory.
@@ -54,7 +54,7 @@ Requirements needed for the Files App to work on your local HPC network:
 - OnDemand Server
 - Shared File System
 
-.. figure:: ../images/files-diagram.png
+.. figure:: /images/files-diagram.png
    :align: center
 
    Diagram detailing how the Files App interacts with the HPC infrastructure.
@@ -78,5 +78,5 @@ System`_ core library for interacting with the local and shared file systems.
 .. _node.js: https://nodejs.org/en/
 .. _cloudcommander: http://cloudcmd.io/
 .. _passenger: https://www.phusionpassenger.com/
-.. _`node.js file system`: https://nodejs.org/docs/latest-v0.10.x/api/fs.html
+.. _node.js file system: https://nodejs.org/docs/latest-v0.10.x/api/fs.html
 .. _nginx: https://nginx.org/en/

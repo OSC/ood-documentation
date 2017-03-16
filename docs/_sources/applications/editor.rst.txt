@@ -5,7 +5,7 @@ File Editor App
 
 `View on GitHub <https://github.com/OSC/ood-fileeditor>`__
 
-.. figure:: ../images/editor-app.png
+.. figure:: /images/editor-app.png
    :align: center
 
    Example of the File Editor App viewing the contents of a file.
@@ -52,7 +52,7 @@ Requirements needed for the File Editor App to work on your local HPC network:
 - OnDemand Server
 - Shared File System
 
-.. figure:: ../images/editor-diagram.png
+.. figure:: /images/editor-diagram.png
    :align: center
 
    Diagram detailing how the File Editor App interacts with the HPC
@@ -64,6 +64,6 @@ Editor app through Passenger_ as the user. The File Editor app then interacts
 with the local and shared file systems for reading and writing the file
 contents.
 
-.. _`ruby on rails`: http://rubyonrails.org/
-.. _`ace editor`: https://ace.c9.io/
+.. _ruby on rails: http://rubyonrails.org/
+.. _ace editor: https://ace.c9.io/
 .. _passenger: https://www.phusionpassenger.com/

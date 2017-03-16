@@ -5,7 +5,7 @@ My Jobs App
 
 `View on GitHub <https://github.com/OSC/ood-myjobs>`__
 
-.. figure:: ../images/my-jobs-app.png
+.. figure:: /images/my-jobs-app.png
    :align: center
 
    Example of the My Jobs App displaying jobs generated from templates.
@@ -97,7 +97,7 @@ Requirements needed for the My Jobs App to work on your local HPC network:
 - Resource Manager Server (e.g., Torque/PBS Batch Server)
 - Shared File System
 
-.. figure:: ../images/my-jobs-diagram.png
+.. figure:: /images/my-jobs-diagram.png
    :align: center
 
    Diagram detailing how the My Jobs App interacts with the HPC infrastructure.
@@ -118,5 +118,5 @@ For job submission the My Jobs app will communicate the job submission and its
 arguments to the Resource Manager Server again through either a library call or
 fork'ing a binary (e.g., ``qsub``) and parsing the output for the job id.
 
-.. _`ruby on rails`: http://rubyonrails.org/
+.. _ruby on rails: http://rubyonrails.org/
 .. _passenger: https://www.phusionpassenger.com/

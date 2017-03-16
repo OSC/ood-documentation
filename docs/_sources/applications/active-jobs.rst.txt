@@ -5,7 +5,7 @@ Active Jobs App
 
 `View on GitHub <https://github.com/OSC/ood-activejobs>`__
 
-.. figure:: ../images/active-jobs-app.png
+.. figure:: /images/active-jobs-app.png
    :align: center
 
    Example of the Active Jobs App displaying all jobs submitted to the
@@ -43,7 +43,7 @@ Requirements needed for the Active Jobs App to work on your local HPC network:
 - OnDemand Server
 - Resource Manager Server (e.g., Torque/PBS Batch Server)
 
-.. figure:: ../images/active-jobs-diagram.png
+.. figure:: /images/active-jobs-diagram.png
    :align: center
 
    Diagram detailing how the Active Jobs App interacts with the HPC
@@ -55,5 +55,5 @@ Jobs app through Passenger_ as the user. The Active Jobs app then retrieves a
 list of available jobs from the resource manager server through either a
 library call or forking a binary such as ``qstat`` and parsing the output.
 
-.. _`ruby on rails`: http://rubyonrails.org/
+.. _ruby on rails: http://rubyonrails.org/
 .. _passenger: https://www.phusionpassenger.com/
