@@ -1,3 +1,5 @@
+.. _install-mapping-script:
+
 Install User Mapping Script
 ===========================
 

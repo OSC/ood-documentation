@@ -1,3 +1,5 @@
+.. _install-proxy-module:
+
 Install Proxy Module for Apache
 ===============================
 

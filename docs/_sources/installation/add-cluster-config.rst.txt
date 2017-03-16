@@ -1,3 +1,5 @@
+.. _add-cluster-config:
+
 Add Cluster Configuration Files
 ===============================
 

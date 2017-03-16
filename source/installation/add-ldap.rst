@@ -1,3 +1,5 @@
+.. _add-ldap:
+
 Add LDAP Support
 ================
 

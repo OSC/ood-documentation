@@ -1,3 +1,5 @@
+.. _add-ssl:
+
 Add SSL Support
 ===============
 

@@ -1,3 +1,5 @@
+.. _modify-system-security:
+
 Modify System Security
 ======================
 

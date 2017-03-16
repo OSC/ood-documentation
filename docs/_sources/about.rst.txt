@@ -1,3 +1,5 @@
+.. _about:
+
 What is Open OnDemand
 =====================
 

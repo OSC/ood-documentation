@@ -1,3 +1,5 @@
+.. _generate-apache-config:
+
 Generate Apache Config
 ======================
 
