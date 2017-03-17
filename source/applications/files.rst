@@ -54,13 +54,14 @@ Requirements needed for the Files App to work on your local HPC network:
 - OnDemand Server
 - Shared File System
 
+.. _files-diagram:
 .. figure:: /images/files-diagram.png
    :align: center
 
    Diagram detailing how the Files App interacts with the HPC infrastructure.
 
-The figure above details how the Files App works on a local HPC system. The
-user's PUN running on the OnDemand Server launches the Node.js Files App
+:numref:`files-diagram` details how the Files App works on a local HPC system.
+The user's PUN running on the OnDemand Server launches the Node.js Files App
 through Passenger_ as the user. The Files App then utilizes the `Node.js File
 System`_ core library for interacting with the local and shared file systems.
 

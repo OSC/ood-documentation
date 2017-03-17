@@ -37,15 +37,16 @@ Requirements needed for the Dashboard App to work on your local HPC network:
 - OnDemand Server
 - Shared File System
 
+.. _dashboard-diagram:
 .. figure:: /images/dashboard-diagram.png
    :align: center
 
    Diagram detailing how the Dashboard App interacts with the HPC
    infrastructure.
 
-The figure above details how the Dashboard App works on the local HPC system.
-The user's PUN running the OnDemand Server launches the Ruby on Rails Dashboard
-app through Passenger_ as the user.
+:numref:`dashboard-diagram` details how the Dashboard App works on the local
+HPC system. The user's PUN running the OnDemand Server launches the Ruby on
+Rails Dashboard app through Passenger_ as the user.
 
 The Dashboard app scans the deployment locations on the local and shared file
 systems for other Open OnDemand web applications. In particular it looks for a

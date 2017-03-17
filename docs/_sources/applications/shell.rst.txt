@@ -65,13 +65,14 @@ Requirements needed for the Shell App to work on your local HPC network:
 - OnDemand Server
 - An SSH Server running on the host machine that the Shell App connects to
 
+.. _shell-diagram:
 .. figure:: /images/shell-diagram.png
    :align: center
 
    Diagram detailing how the Shell App interacts with HPC infrastructure.
 
-The figure above details how the Shell App works on a local HPC system. The
-user's PUN running on the OnDemand Server launches the Node.js Shell App
+:numref:`shell-diagram` details how the Shell App works on a local HPC system.
+The user's PUN running on the OnDemand Server launches the Node.js Shell App
 through Passenger_ as the user. The Shell App then forks off an ``ssh`` process
 that then connects to a server specified by the administrator (typically a
 login node). The ``stdin``, ``stdout``, and ``stderr`` streams are all piped

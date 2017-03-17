@@ -52,17 +52,18 @@ Requirements needed for the File Editor App to work on your local HPC network:
 - OnDemand Server
 - Shared File System
 
+.. _editor-diagram:
 .. figure:: /images/editor-diagram.png
    :align: center
 
    Diagram detailing how the File Editor App interacts with the HPC
    infrastructure.
 
-The figure above details how the File Editor App works on a local HPC system.
-The user's PUN running on the OnDemand Server launches the Ruby on Rails File
-Editor app through Passenger_ as the user. The File Editor app then interacts
-with the local and shared file systems for reading and writing the file
-contents.
+:numref:`editor-diagram` details how the File Editor App works on a local HPC
+system. The user's PUN running on the OnDemand Server launches the Ruby on
+Rails File Editor app through Passenger_ as the user. The File Editor app then
+interacts with the local and shared file systems for reading and writing the
+file contents.
 
 .. _ruby on rails: http://rubyonrails.org/
 .. _ace editor: https://ace.c9.io/

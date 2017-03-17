@@ -97,18 +97,19 @@ Requirements needed for the My Jobs App to work on your local HPC network:
 - Resource Manager Server (e.g., Torque/PBS Batch Server)
 - Shared File System
 
+.. _my-jobs-diagram:
 .. figure:: /images/my-jobs-diagram.png
    :align: center
 
    Diagram detailing how the My Jobs App interacts with the HPC infrastructure.
 
-The figure above details how the My Jobs App works on a local HPC system. The
-user's PUN running on the OnDemand Server launches the Ruby on Rails My Jobs
-app through Passenger_ as the user. The My Jobs app reads from a database all
-the previous recorded jobs. It then queries the Resource Manager Server using
-either a library call or fork'ing a binary (e.g., ``qstat``) and parsing the
-output for the status of all the remaining jobs, followed by generating a table
-of information that is displayed to the user.
+:numref:`my-jobs-diagram` details how the My Jobs App works on a local HPC
+system. The user's PUN running on the OnDemand Server launches the Ruby on
+Rails My Jobs app through Passenger_ as the user. The My Jobs app reads from a
+database all the previous recorded jobs. It then queries the Resource Manager
+Server using either a library call or fork'ing a binary (e.g., ``qstat``) and
+parsing the output for the status of all the remaining jobs, followed by
+generating a table of information that is displayed to the user.
 
 For the currently selected job it will access the Shared File System to display
 information about the contents of the job directory (e.g., input and output

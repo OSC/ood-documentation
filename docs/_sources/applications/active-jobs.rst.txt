@@ -43,17 +43,19 @@ Requirements needed for the Active Jobs App to work on your local HPC network:
 - OnDemand Server
 - Resource Manager Server (e.g., Torque/PBS Batch Server)
 
+.. _active-jobs-diagram:
 .. figure:: /images/active-jobs-diagram.png
    :align: center
 
    Diagram detailing how the Active Jobs App interacts with the HPC
    infrastructure.
 
-The figure above details how the Active Jobs App works on a local HPC system.
-The user's PUN running on the OnDemand Server launches the Ruby on Rails Active
-Jobs app through Passenger_ as the user. The Active Jobs app then retrieves a
-list of available jobs from the resource manager server through either a
-library call or forking a binary such as ``qstat`` and parsing the output.
+:numref:`active-jobs-diagram` details how the Active Jobs App works on a local
+HPC system. The user's PUN running on the OnDemand Server launches the Ruby on
+Rails Active Jobs app through Passenger_ as the user. The Active Jobs app then
+retrieves a list of available jobs from the resource manager server through
+either a library call or forking a binary such as ``qstat`` and parsing the
+output.
 
 .. _ruby on rails: http://rubyonrails.org/
 .. _passenger: https://www.phusionpassenger.com/

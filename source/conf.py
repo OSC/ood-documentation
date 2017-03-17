@@ -340,3 +340,7 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #
 # texinfo_no_detailmenu = False
+
+# If true, figures, tables and code-blocks are automatically numbered if they
+# have a caption. At same time, the numref role is enabled.
+numfig = True
