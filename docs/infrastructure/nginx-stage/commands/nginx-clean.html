@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NGINX &mdash; Open OnDemand 0.0.1 documentation</title>
+  <title>NGINX_CLEAN &mdash; Open OnDemand 0.0.1 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="Open OnDemand 0.0.1 documentation" href="../../../index.html"/>
         <link rel="up" title="Usage" href="../usage.html"/>
-        <link rel="next" title="NGINX_SHOW" href="nginx-show.html"/>
-        <link rel="prev" title="APP_CLEAN" href="app-clean.html"/> 
+        <link rel="next" title="Applications" href="../../../applications.html"/>
+        <link rel="prev" title="NGINX_LIST" href="nginx-list.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -115,10 +115,10 @@
 <li class="toctree-l4"><a class="reference internal" href="app-reset.html">APP_RESET</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app-list.html">APP_LIST</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app-clean.html">APP_CLEAN</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">NGINX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx.html">NGINX</a></li>
 <li class="toctree-l4"><a class="reference internal" href="nginx-show.html">NGINX_SHOW</a></li>
 <li class="toctree-l4"><a class="reference internal" href="nginx-list.html">NGINX_LIST</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-clean.html">NGINX_CLEAN</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">NGINX_CLEAN</a></li>
 </ul>
 </li>
 </ul>
@@ -181,13 +181,13 @@
         
           <li><a href="../usage.html">Usage</a> &raquo;</li>
         
-      <li>NGINX</li>
+      <li>NGINX_CLEAN</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/infrastructure/nginx-stage/commands/nginx.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/infrastructure/nginx-stage/commands/nginx-clean.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -200,56 +200,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nginx">
-<h1>NGINX<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
-<p>This command will start an NGINX process as the user as well as
-control this process.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage nginx <span class="o">[</span>OPTIONS<span class="o">]</span>
+  <div class="section" id="nginx-clean">
+<h1>NGINX_CLEAN<a class="headerlink" href="#nginx-clean" title="Permalink to this headline">¶</a></h1>
+<p>This command will kill all per-user NGINX (PUN) processes that do not have
+active connections.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
-</div>
-<div class="section" id="required-options">
-<h2>Required Options<a class="headerlink" href="#required-options" title="Permalink to this headline">¶</a></h2>
-<dl class="option">
-<dt id="cmdoption-nginx-stage-nginx-u">
-<code class="descname">-u</code><code class="descclassname"> &lt;user&gt;</code><code class="descclassname">, </code><code class="descname">--user</code><code class="descclassname"> &lt;user&gt;</code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-u" title="Permalink to this definition">¶</a></dt>
-<dd><p>The user of the per-user NGINX process.</p>
-</dd></dl>
-
 </div>
 <div class="section" id="general-options">
 <h2>General Options<a class="headerlink" href="#general-options" title="Permalink to this headline">¶</a></h2>
 <dl class="option">
-<dt id="cmdoption-nginx-stage-nginx-s">
-<code class="descname">-s</code><code class="descclassname"> &lt;signal&gt;</code><code class="descclassname">, </code><code class="descname">--signal</code><code class="descclassname"> &lt;signal&gt;</code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-s" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send the given signal to the per-user NGINX process.</p>
+<dt id="cmdoption-nginx-stage-nginx-clean-f">
+<code class="descname">-f</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--force</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-clean-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force clean <strong>all</strong> of the per-user NGINX processes including ones with
+active connections.</p>
 </dd></dl>
 
 <dl class="option">
-<dt id="cmdoption-nginx-stage-nginx-n">
-<code class="descname">-N</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--skip-nginx</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-n" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-nginx-stage-nginx-clean-n">
+<code class="descname">-N</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--skip-nginx</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-clean-n" title="Permalink to this definition">¶</a></dt>
 <dd><p>Skip the execution of the per-user NGINX process.</p>
 </dd></dl>
 
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Under a default installation, the possible signals are
-<code class="docutils literal"><span class="pre">stop/quit/reopen/reload</span></code>.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If no signal is specified, then it will attempt to start the user&#8217;s per-user
-NGINX process.</p>
-</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>To stop Bob&#8217;s NGINX process:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage nginx --user <span class="s1">&#39;bob&#39;</span> --signal <span class="s1">&#39;stop&#39;</span>
+<p>To kill all PUN processes with no active connections:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean
 </pre></div>
 </div>
-<p>This sends a <code class="docutils literal"><span class="pre">stop</span></code> signal to Bob&#8217;s per-user NGINX process.</p>
-<p>If you run <a class="reference internal" href="#cmdoption-nginx-stage-nginx-n"><code class="xref std std-option docutils literal"><span class="pre">nginx_stage</span> <span class="pre">nginx</span> <span class="pre">--skip-nginx</span></code></a>, it will
-<strong>only</strong> display the system command that would have been called.</p>
+<p>This also displays the users who had their PUN processes killed.</p>
+<p>To kill <strong>all</strong> PUN processes irrespective of the number of active connections:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean --force
+</pre></div>
+</div>
+<p>To <strong>only</strong> display the users with PUN processes that have no active
+connections:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean --skip-nginx
+</pre></div>
+</div>
+<p>This will not kill the PUN processes.</p>
 </div>
 </div>
 
@@ -263,10 +253,10 @@ NGINX process.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="nginx-show.html" class="btn btn-neutral float-right" title="NGINX_SHOW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../../applications.html" class="btn btn-neutral float-right" title="Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="app-clean.html" class="btn btn-neutral" title="APP_CLEAN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="nginx-list.html" class="btn btn-neutral" title="NGINX_LIST" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

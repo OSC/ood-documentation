@@ -10,8 +10,8 @@ control this process.
 
 .. program:: nginx_stage nginx
 
-Require Options
----------------
+Required Options
+----------------
 
 .. option:: -u <user>, --user <user>
 
@@ -32,6 +32,11 @@ General Options
 
    Under a default installation, the possible signals are
    ``stop/quit/reopen/reload``.
+
+.. note::
+
+   If no signal is specified, then it will attempt to start the user's per-user
+   NGINX process.
 
 Examples
 --------

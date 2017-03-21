@@ -28,3 +28,6 @@ At any point you can display a quick reference of the capabilities offered by
    commands/app-list
    commands/app-clean
    commands/nginx
+   commands/nginx-show
+   commands/nginx-list
+   commands/nginx-clean
