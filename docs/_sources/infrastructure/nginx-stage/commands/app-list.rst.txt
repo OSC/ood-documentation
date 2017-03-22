@@ -1,3 +1,5 @@
+.. _nginx-stage-app-list:
+
 APP_LIST
 ========
 

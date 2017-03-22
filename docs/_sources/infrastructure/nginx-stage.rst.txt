@@ -23,6 +23,7 @@ requirements.
    :caption: Documentation
 
    nginx-stage/usage
+   nginx-stage/configuration
 
 .. _ruby: https://www.ruby-lang.org/en/
 .. _nginx: https://www.nginx.com/

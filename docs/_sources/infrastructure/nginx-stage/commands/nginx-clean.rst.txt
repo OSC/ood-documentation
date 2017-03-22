@@ -1,3 +1,5 @@
+.. _nginx-stage-nginx-clean:
+
 NGINX_CLEAN
 ===========
 

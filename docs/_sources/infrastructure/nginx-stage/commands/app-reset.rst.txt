@@ -1,3 +1,5 @@
+.. _nginx-stage-app-reset:
+
 APP_RESET
 =========
 

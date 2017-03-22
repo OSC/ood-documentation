@@ -1,3 +1,5 @@
+.. _nginx-stage-app-clean:
+
 APP_CLEAN
 =========
 

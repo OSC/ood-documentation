@@ -1,3 +1,5 @@
+.. _nginx-stage-pun:
+
 PUN
 ===
 
