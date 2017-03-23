@@ -155,7 +155,7 @@ Configuration Options
 
         passenger_ruby: "/opt/rh/rh-ruby22/root/usr/bin/ruby"
 
-.. describe:: passenger_nodejs (String)
+.. describe:: passenger_nodejs (String, null)
 
    the path to the Node.js binary that Passenger uses for web apps
 
@@ -173,7 +173,7 @@ Configuration Options
 
         passenger_nodejs: "/opt/rh/nodejs010/root/usr/bin/node"
 
-.. describe:: passenger_python (String)
+.. describe:: passenger_python (String, null)
 
    the path to the Python binary that Passenger uses for web apps
 

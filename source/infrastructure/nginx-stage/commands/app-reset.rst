@@ -1,7 +1,7 @@
 .. _nginx-stage-app-reset:
 
-APP_RESET
-=========
+nginx_stage app_reset
+=====================
 
 This command will update all the deployed application NGINX
 configuration files using the current template.

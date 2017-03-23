@@ -1,7 +1,7 @@
 .. _nginx-stage-app:
 
-APP
-===
+nginx_stage app
+===============
 
 This command will generate a web application NGINX configuration file
 and subsequently restart the NGINX process as the user.
@@ -60,3 +60,27 @@ To generate **only** the app config:
 
 This will return the path to the app config and will not restart the
 NGINX process.
+
+Default Installation
+....................
+
+:numref:`app-mapping-table` details the mapping between the requested URL path
+to the app root directory for in the NGINX app config under a default
+installation.
+
+.. _app-mapping-table:
+.. list-table:: Mapping of apps for a default installation
+   :header-rows: 1
+
+   * - App type
+     - URL path
+     - File system path
+   * - dev
+     - :file:`/dev/{app_name}/\*`
+     - :file:`~{user}/ondemand/dev/{app_name}`
+   * - usr
+     - :file:`/usr/{app_owner}/{app_name}/\*`
+     - :file:`/var/ww/ood/apps/usr/{app_owner}/gateway/{app_name}`
+   * - sys
+     - :file:`/sys/{app_name}/\*`
+     - :file:`/var/www/ood/apps/sys/{app_name}`

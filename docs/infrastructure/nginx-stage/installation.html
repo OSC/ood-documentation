@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage &mdash; Open OnDemand 0.0.1 documentation</title>
+  <title>Installation &mdash; Open OnDemand 0.0.1 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="Open OnDemand 0.0.1 documentation" href="../../index.html"/>
         <link rel="up" title="nginx_stage" href="../nginx-stage.html"/>
-        <link rel="next" title="nginx_stage pun" href="commands/pun.html"/>
-        <link rel="prev" title="Installation" href="installation.html"/> 
+        <link rel="next" title="Usage" href="usage.html"/>
+        <link rel="prev" title="nginx_stage" href="../nginx-stage.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -109,19 +109,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../mod-ood-proxy.html">mod_ood_proxy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ood-auth-map.html">ood_auth_map</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../nginx-stage.html">nginx_stage</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="commands/pun.html">nginx_stage pun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/app.html">nginx_stage app</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/app-reset.html">nginx_stage app_reset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/app-list.html">nginx_stage app_list</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/app-clean.html">nginx_stage app_clean</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/nginx.html">nginx_stage nginx</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/nginx-show.html">nginx_stage nginx_show</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/nginx-list.html">nginx_stage nginx_list</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commands/nginx-clean.html">nginx_stage nginx_clean</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="configuration.html">Configuration</a></li>
 </ul>
 </li>
@@ -181,13 +170,13 @@
         
           <li><a href="../nginx-stage.html">nginx_stage</a> &raquo;</li>
         
-      <li>Usage</li>
+      <li>Installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/infrastructure/nginx-stage/usage.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/infrastructure/nginx-stage/installation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -200,72 +189,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="usage">
-<span id="nginx-stage-usage"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>The <strong class="program">nginx_stage</strong> is meant to be run as a privileged process so that
-it can fork and kill processes owned by other users, as well as read and write
-to <code class="docutils literal"><span class="pre">root</span></code> owned files and directories. It is therefore recommended to run it
-under a <strong class="program">sudo</strong> environment.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">All options to <strong class="program">nginx_stage</strong> can be specified as URL-encoded
-strings to avoid having to escape special characters in the shell.</p>
-</div>
-<p>At any point you can display a quick reference of the capabilities offered by
-<strong class="program">nginx_stage</strong> with:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>nginx_stage <span class="o">[</span>COMMAND<span class="o">]</span> --help
+  <div class="section" id="installation">
+<span id="nginx-stage-installation"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic">
+<li><p class="first">Download the latest stable release and unpack it:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Set latest release as of writing this</span>
+<span class="nv">LATEST</span><span class="o">=</span><span class="s2">&quot;0-2-stable&quot;</span>
+
+<span class="c1"># Download latest release</span>
+wget --content-disposition https://github.com/OSC/nginx_stage/archive/<span class="si">${</span><span class="nv">LATEST</span><span class="si">}</span>.tar.gz
+
+<span class="c1"># Unpack this archive</span>
+tar xzvf nginx_stage-<span class="si">${</span><span class="nv">LATEST</span><span class="si">}</span>.tar.gz
+
+<span class="c1"># Change working directory</span>
+<span class="nb">cd</span> nginx_stage-<span class="si">${</span><span class="nv">LATEST</span><span class="si">}</span>
 </pre></div>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Commands</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="commands/pun.html">nginx_stage pun</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/pun.html#required-options">Required Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/pun.html#general-options">General Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/pun.html#examples">Examples</a></li>
-</ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="commands/app.html">nginx_stage app</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/app.html#required-options">Required Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/app.html#general-options">General Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/app.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/app-reset.html">nginx_stage app_reset</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/app-reset.html#general-options">General Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/app-reset.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/app-list.html">nginx_stage app_list</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/app-list.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/app-clean.html">nginx_stage app_clean</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/app-clean.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/nginx.html">nginx_stage nginx</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx.html#required-options">Required Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx.html#general-options">General Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/nginx-show.html">nginx_stage nginx_show</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx-show.html#required-options">Required Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx-show.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/nginx-list.html">nginx_stage nginx_list</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx-list.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="commands/nginx-clean.html">nginx_stage nginx_clean</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx-clean.html#general-options">General Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commands/nginx-clean.html#examples">Examples</a></li>
-</ul>
-</li>
-</ul>
+<li><p class="first">Install this package in default <code class="docutils literal"><span class="pre">PREFIX=/opt/ood/nginx_stage</span></code> location:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
+</pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The location of the installation can be changed by altering the
+<code class="docutils literal"><span class="pre">PREFIX</span></code> environment variable:</p>
+<div class="last highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install <span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/nginx_stage&quot;</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first">Configure the <strong class="program">nginx_stage</strong> installation by modifying:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>You can read <a class="reference internal" href="configuration.html#nginx-stage-configuration"><span class="std std-ref">Configuration</span></a> for details on configuration
+options.</p>
+</li>
+<li><p class="first">Confirm that the Apache proxy is running as the user <code class="docutils literal"><span class="pre">apache</span></code>. By default
+<strong class="program">nginx_stage</strong> will only give permissions to the <code class="docutils literal"><span class="pre">apache</span></code> user to
+access the NGINX Unix domain socket files.</p>
+</li>
+<li><p class="first">Give the Apache proxy user <code class="docutils literal"><span class="pre">apache</span></code> elevated privileges when running
+<strong class="program">nginx_stage</strong> by adding a <strong class="program">sudo</strong> entry as:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># /etc/sudoers.d/ood</span>
+
+Defaults:apache     !requiretty, !authenticate
+apache <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage
+</pre></div>
+</div>
+</li>
+</ol>
 </div>
 
 
@@ -278,10 +253,10 @@ strings to avoid having to escape special characters in the shell.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="commands/pun.html" class="btn btn-neutral float-right" title="nginx_stage pun" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../nginx-stage.html" class="btn btn-neutral" title="nginx_stage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

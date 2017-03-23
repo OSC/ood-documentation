@@ -1,7 +1,7 @@
 .. _nginx-stage-app-clean:
 
-APP_CLEAN
-=========
+nginx_stage app_clean
+=====================
 
 This command will remove any deployed web application NGINX
 configuration files for applications that don't exist anymore on the

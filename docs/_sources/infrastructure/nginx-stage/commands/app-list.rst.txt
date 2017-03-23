@@ -1,7 +1,7 @@
 .. _nginx-stage-app-list:
 
-APP_LIST
-========
+nginx_stage app_list
+====================
 
 This command lists all the deployed web application NGINX
 configuration files.

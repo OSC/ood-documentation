@@ -22,6 +22,7 @@ requirements.
    :maxdepth: 2
    :caption: Documentation
 
+   nginx-stage/installation
    nginx-stage/usage
    nginx-stage/configuration
 

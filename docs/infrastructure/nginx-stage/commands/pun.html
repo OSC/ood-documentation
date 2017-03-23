@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PUN &mdash; Open OnDemand 0.0.1 documentation</title>
+  <title>nginx_stage pun &mdash; Open OnDemand 0.0.1 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="Open OnDemand 0.0.1 documentation" href="../../../index.html"/>
         <link rel="up" title="Usage" href="../usage.html"/>
-        <link rel="next" title="APP" href="app.html"/>
+        <link rel="next" title="nginx_stage app" href="app.html"/>
         <link rel="prev" title="Usage" href="../usage.html"/> 
 
   
@@ -109,16 +109,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../../mod-ood-proxy.html">mod_ood_proxy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ood-auth-map.html">ood_auth_map</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../nginx-stage.html">nginx_stage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">PUN</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app.html">APP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app-reset.html">APP_RESET</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app-list.html">APP_LIST</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app-clean.html">APP_CLEAN</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx.html">NGINX</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-show.html">NGINX_SHOW</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-list.html">NGINX_LIST</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-clean.html">NGINX_CLEAN</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">nginx_stage pun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app.html">nginx_stage app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app-reset.html">nginx_stage app_reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app-list.html">nginx_stage app_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app-clean.html">nginx_stage app_clean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx.html">nginx_stage nginx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx-show.html">nginx_stage nginx_show</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx-list.html">nginx_stage nginx_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx-clean.html">nginx_stage nginx_clean</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../configuration.html">Configuration</a></li>
@@ -182,7 +183,7 @@
         
           <li><a href="../usage.html">Usage</a> &raquo;</li>
         
-      <li>PUN</li>
+      <li>nginx_stage pun</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -201,8 +202,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pun">
-<span id="nginx-stage-pun"></span><h1>PUN<a class="headerlink" href="#pun" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="nginx-stage-pun">
+<span id="id1"></span><h1>nginx_stage pun<a class="headerlink" href="#nginx-stage-pun" title="Permalink to this headline">¶</a></h1>
 <p>This command will generate a per-user NGINX (PUN) configuration file for the
 given user and subsequently launch the NGINX process as the user.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage pun <span class="o">[</span>OPTIONS<span class="o">]</span>
@@ -253,6 +254,43 @@ respective NGINX configuration file.</p>
 </div>
 <p>This will return the path to the generated PUN configuration file and will not
 run the NGINX process. In addition it won&#8217;t add a redirect URL.</p>
+<div class="section" id="default-installation">
+<h3>Default Installation<a class="headerlink" href="#default-installation" title="Permalink to this headline">¶</a></h3>
+<p>The directory structure that is created when a per-user NGINX process is staged
+and launched under a default installation appears as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/var                                    # drwxr-xr-x root   root
+├── lib                                 # drwxr-xr-x root   root
+│   └── nginx                           # drwxr-xr-x root   root
+│       ├── config                      # drwxr-xr-x root   root
+│       │   ├── apps                    # drwxr-xr-x root   root
+│       │   │   ├── dev                 # drwxr-xr-x root   root
+│       │   │   │   └── &lt;user&gt;          # drwxr-xr-x root   root
+│       │   │   │       └── &lt;app&gt;.conf  # -rw-r--r-- root   root
+│       │   │   └── usr                 # drwxr-xr-x root   root
+│       │   │       └── &lt;user&gt;          # drwxr-xr-x root   root
+│       │   │           └── &lt;app&gt;.conf  # -rw-r--r-- root   root
+│       │   └── puns                    # -rw-r--r-- root   root
+│       │       └── &lt;user&gt;.conf         # -rw-r--r-- root   root
+│       └── tmp                         # drwxr-xr-x root   root
+│           └── &lt;user&gt;                  # drwxr-xr-x root   root
+│               ├── client_body         # drwx------ USER   root
+│               ├── fastcgi_temp        # drwx------ USER   root
+│               ├── proxy_temp          # drwx------ USER   root
+│               ├── scgi_temp           # drwx------ USER   root
+│               └── uwsgi_temp          # drwx------ USER   root
+├── log                                 # drwxr-xr-x root   root
+│   └── nginx                           # drwxr-xr-x root   root
+│       └── &lt;user&gt;                      # drwxr-xr-x root   root
+│           ├── access.log              # -rw-r--r-- root   root
+│           └── error.log               # -rw-r--r-- root   root
+└── run                                 # drwxr-xr-x root   root
+    └── nginx                           # drwxr-xr-x root   root
+        └── &lt;user&gt;                      # drwx------ apache root
+            ├── passenger.pid           # -rw-r--r-- root   root
+            └── passenger.sock          # srw-rw-rw- root   root
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -266,7 +304,7 @@ run the NGINX process. In addition it won&#8217;t add a redirect URL.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="app.html" class="btn btn-neutral float-right" title="APP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="app.html" class="btn btn-neutral float-right" title="nginx_stage app" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../usage.html" class="btn btn-neutral" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

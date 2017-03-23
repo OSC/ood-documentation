@@ -1,7 +1,7 @@
 .. _nginx-stage-nginx-clean:
 
-NGINX_CLEAN
-===========
+nginx_stage nginx_clean
+=======================
 
 This command will kill all per-user NGINX (PUN) processes that do not have
 active connections.

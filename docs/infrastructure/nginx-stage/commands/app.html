@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>APP &mdash; Open OnDemand 0.0.1 documentation</title>
+  <title>nginx_stage app &mdash; Open OnDemand 0.0.1 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="Open OnDemand 0.0.1 documentation" href="../../../index.html"/>
         <link rel="up" title="Usage" href="../usage.html"/>
-        <link rel="next" title="APP_RESET" href="app-reset.html"/>
-        <link rel="prev" title="PUN" href="pun.html"/> 
+        <link rel="next" title="nginx_stage app_reset" href="app-reset.html"/>
+        <link rel="prev" title="nginx_stage pun" href="pun.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -109,16 +109,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../../mod-ood-proxy.html">mod_ood_proxy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ood-auth-map.html">ood_auth_map</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../nginx-stage.html">nginx_stage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="pun.html">PUN</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">APP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app-reset.html">APP_RESET</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app-list.html">APP_LIST</a></li>
-<li class="toctree-l4"><a class="reference internal" href="app-clean.html">APP_CLEAN</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx.html">NGINX</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-show.html">NGINX_SHOW</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-list.html">NGINX_LIST</a></li>
-<li class="toctree-l4"><a class="reference internal" href="nginx-clean.html">NGINX_CLEAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pun.html">nginx_stage pun</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">nginx_stage app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app-reset.html">nginx_stage app_reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app-list.html">nginx_stage app_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app-clean.html">nginx_stage app_clean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx.html">nginx_stage nginx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx-show.html">nginx_stage nginx_show</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx-list.html">nginx_stage nginx_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nginx-clean.html">nginx_stage nginx_clean</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../configuration.html">Configuration</a></li>
@@ -182,7 +183,7 @@
         
           <li><a href="../usage.html">Usage</a> &raquo;</li>
         
-      <li>APP</li>
+      <li>nginx_stage app</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -201,8 +202,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="app">
-<span id="nginx-stage-app"></span><h1>APP<a class="headerlink" href="#app" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="nginx-stage-app">
+<span id="id1"></span><h1>nginx_stage app<a class="headerlink" href="#nginx-stage-app" title="Permalink to this headline">¶</a></h1>
 <p>This command will generate a web application NGINX configuration file
 and subsequently restart the NGINX process as the user.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>sudo nginx_stage app <span class="o">[</span>OPTIONS<span class="o">]</span>
@@ -259,6 +260,40 @@ request should be proxied to the per-user NGINX server (e.g., <code class="docut
 </div>
 <p>This will return the path to the app config and will not restart the
 NGINX process.</p>
+<div class="section" id="default-installation">
+<h3>Default Installation<a class="headerlink" href="#default-installation" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#app-mapping-table"><span class="std std-numref">Table 1</span></a> details the mapping between the requested URL path
+to the app root directory for in the NGINX app config under a default
+installation.</p>
+<table border="1" class="docutils" id="id2">
+<span id="app-mapping-table"></span><caption><span class="caption-number">Table 1 </span><span class="caption-text">Mapping of apps for a default installation</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">App type</th>
+<th class="head">URL path</th>
+<th class="head">File system path</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>dev</td>
+<td><code class="file docutils literal"><span class="pre">/dev/</span><em><span class="pre">app_name</span></em><span class="pre">/*</span></code></td>
+<td><code class="file docutils literal"><span class="pre">~</span><em><span class="pre">user</span></em><span class="pre">/ondemand/dev/</span><em><span class="pre">app_name</span></em></code></td>
+</tr>
+<tr class="row-odd"><td>usr</td>
+<td><code class="file docutils literal"><span class="pre">/usr/</span><em><span class="pre">app_owner</span></em><span class="pre">/</span><em><span class="pre">app_name</span></em><span class="pre">/*</span></code></td>
+<td><code class="file docutils literal"><span class="pre">/var/ww/ood/apps/usr/</span><em><span class="pre">app_owner</span></em><span class="pre">/gateway/</span><em><span class="pre">app_name</span></em></code></td>
+</tr>
+<tr class="row-even"><td>sys</td>
+<td><code class="file docutils literal"><span class="pre">/sys/</span><em><span class="pre">app_name</span></em><span class="pre">/*</span></code></td>
+<td><code class="file docutils literal"><span class="pre">/var/www/ood/apps/sys/</span><em><span class="pre">app_name</span></em></code></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -272,10 +307,10 @@ NGINX process.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="app-reset.html" class="btn btn-neutral float-right" title="APP_RESET" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="app-reset.html" class="btn btn-neutral float-right" title="nginx_stage app_reset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pun.html" class="btn btn-neutral" title="PUN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pun.html" class="btn btn-neutral" title="nginx_stage pun" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
