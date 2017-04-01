@@ -14,6 +14,14 @@ Requirements:
   (``webdev05.hpc.osc.edu``)
 - signed SSL certificates with possible intermediate certificates
 
+.. note::
+
+   You may use `Let's Encrypt`_ to obtain a free SSL certificate. You can read
+   more about it in their `Getting Started`_ documentation.
+
+.. _let's encrypt: https://letsencrypt.org/
+.. _getting started: https://letsencrypt.org/getting-started/
+
 In this example the certificates are located at:
 
 .. code-block:: sh
