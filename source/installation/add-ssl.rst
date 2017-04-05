@@ -41,14 +41,16 @@ In this example the certificates are located at:
 
       sudo yum install httpd24-mod_ssl.x86_64
 
-#. Update the Apache config with this server name and paths to the SSL
-   certificates.
+#. Update the Apache config with the server name and paths to the SSL
+   certificates. This requires modifying the configuration file for the
+   :ref:`ood-portal-generator`.
 
    .. code-block:: sh
 
       cd ~/ood/src/ood-portal-generator
 
-#. Create or edit the ``config.yml`` as such:
+#. :ref:`ood-portal-generator-configuration` is handled by editing the
+   ``config.yml`` as such:
 
    .. code-block:: yaml
 
