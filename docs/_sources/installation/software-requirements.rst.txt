@@ -42,6 +42,7 @@ Install dependencies:
 .. code-block:: sh
 
    sudo yum install -y \
+     sqlite-devel \
      httpd24 \
      nginx16 \
      rh-passenger40 \
