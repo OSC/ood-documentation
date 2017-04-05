@@ -45,7 +45,7 @@ Requirements needed for the Dashboard App to work on your local HPC network:
    infrastructure.
 
 :numref:`dashboard-diagram` details how the Dashboard App works on the local
-HPC system. The user's PUN running the OnDemand Server launches the Ruby on
+HPC system. The user's PUN running on the OnDemand Server launches the Ruby on
 Rails Dashboard app through Passenger_ as the user.
 
 The Dashboard app scans the deployment locations on the local and shared file
