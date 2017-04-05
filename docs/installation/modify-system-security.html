@@ -192,18 +192,18 @@
   <div class="section" id="modify-system-security">
 <span id="id1"></span><h1>2. Modify System Security<a class="headerlink" href="#modify-system-security" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic">
-<li><p class="first">Disable SELinux (not documented here)</p>
+<li><p class="first">Disable SELinux.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can read more about modifying SELinux at
+<a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">https://wiki.centos.org/HowTos/SELinux</a></p>
+</div>
 </li>
-<li><p class="first">Open ports 80 and 443 in <strong class="command">iptables</strong>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Open port 80</span>
-sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">80</span> -j ACCEPT
-
-<span class="c1"># Open port 443</span>
-sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">443</span> -j ACCEPT
-
-<span class="c1"># Save changes</span>
-sudo /etc/init.d/iptables save
-</pre></div>
+<li><p class="first">Open ports 80 and 443 in the firewall.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can read more about modifying the firewall rules with
+<strong class="command">iptables</strong> at <a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">https://wiki.centos.org/HowTos/Network/IPTables</a></p>
 </div>
 </li>
 </ol>

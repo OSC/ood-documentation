@@ -3,17 +3,18 @@
 Modify System Security
 ======================
 
-#. Disable SELinux (not documented here)
+#. Disable SELinux.
 
-#. Open ports 80 and 443 in :command:`iptables`:
+   .. note::
 
-   .. code-block:: sh
+      You can read more about modifying SELinux at
+      `https://wiki.centos.org/HowTos/SELinux
+      <https://wiki.centos.org/HowTos/SELinux>`__
 
-      # Open port 80
-      sudo iptables -I INPUT -p tcp -m multiport --dports 80 -j ACCEPT
+#. Open ports 80 and 443 in the firewall.
 
-      # Open port 443
-      sudo iptables -I INPUT -p tcp -m multiport --dports 443 -j ACCEPT
+   .. note::
 
-      # Save changes
-      sudo /etc/init.d/iptables save
+      You can read more about modifying the firewall rules with
+      :command:`iptables` at `https://wiki.centos.org/HowTos/Network/IPTables
+      <https://wiki.centos.org/HowTos/Network/IPTables>`__
