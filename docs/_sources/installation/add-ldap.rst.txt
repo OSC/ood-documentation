@@ -64,6 +64,14 @@ Requirements:
 
       sudo service httpd24-httpd restart
 
+   .. warning::
+
+      If using **RHEL 7** you will need to replace the above command with:
+
+      .. code-block:: sh
+
+         sudo systemctl restart httpd24-httpd
+
 Close your browser so that you are properly logged out. Then open your browser
 again and access the portal. You should now be able to authenticate with your
 local username and password.

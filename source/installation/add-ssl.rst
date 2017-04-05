@@ -83,6 +83,14 @@ In this example the certificates are located at:
 
       sudo service httpd24-httpd restart
 
+   .. warning::
+
+      If using **RHEL 7** you will need to replace the above command with:
+
+      .. code-block:: sh
+
+         sudo systemctl restart httpd24-httpd
+
 When you visit the portal in your browser now it should redirect any http
 traffic to the proper https protocol.
 
