@@ -20,75 +20,81 @@ In this tutorial RHSCL (RedHat Software Collections) packages are installed
 under ``/opt/rh``. This tutorial is also done from an account that has
 :command:`sudo` access but is not root.
 
-Enable the RHSCL repository. Note that you may also need to enable the Optional
-channel and attach a subscription providing access to RHSCL to be able to use
-the repository.
-
-.. code-block:: sh
-
-   sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
-   # => Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
-
-.. warning::
-
-   If using **RHEL 7** you will need to replace the above command with:
+#. Enable the RHSCL repository. Note that you may also need to enable the
+   Optional channel and attach a subscription providing access to RHSCL to be
+   able to use the repository.
 
    .. code-block:: sh
 
-      sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
+      sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
+      # => Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
-Install dependencies:
+   .. warning::
 
-.. code-block:: sh
+      If using **RHEL 7** you will need to replace the above command with:
 
-   sudo yum install -y \
-     sqlite-devel \
-     httpd24 \
-     nginx16 \
-     rh-passenger40 \
-     rh-ruby22 \
-     rh-ruby22-rubygem-rake \
-     rh-ruby22-rubygem-bundler \
-     rh-ruby22-ruby-devel \
-     nodejs010 \
-     git19
+      .. code-block:: sh
 
-Update the Apache Environment to include Ruby 2.2. This is necessary for the
-user mapping script written in Ruby. Do this by editing
-``/opt/rh/httpd24/service-environment`` as such:
+         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
 
-.. code-block:: diff
-
-   -HTTPD24_HTTPD_SCLS_ENABLED="httpd24"
-   +HTTPD24_HTTPD_SCLS_ENABLED="httpd24 rh-ruby22"
-
-.. warning::
-
-   If using **RHEL 7** you will also need to override the :program:`systemd`
-   configuration for Apache:
+#. Install dependencies:
 
    .. code-block:: sh
 
-      sudo systemctl edit httpd24-httpd
+      sudo yum install -y \
+        sqlite-devel \
+        httpd24 \
+        nginx16 \
+        rh-passenger40 \
+        rh-ruby22 \
+        rh-ruby22-rubygem-rake \
+        rh-ruby22-rubygem-bundler \
+        rh-ruby22-ruby-devel \
+        nodejs010 \
+        git19
 
-   and then add the following to ovverride the default settings:
+#. Update the Apache Environment to include Ruby 2.2. This is necessary for the
+   user mapping script written in Ruby.
+
+   Edit ``/opt/rh/httpd24/service-environment`` and replace the following line:
 
    .. code-block:: sh
 
-      [Service]
-      KillSignal=SIGTERM
-      KillMode=process
-      PrivateTmp=false
+      HTTPD24_HTTPD_SCLS_ENABLED="httpd24"
 
-   Finally, save your changes and run:
+   with
 
    .. code-block:: sh
 
-      sudo systemctl daemon-reload
+      HTTPD24_HTTPD_SCLS_ENABLED="httpd24 rh-ruby22"
 
-Finally, make a source directory that will contain the checked out and built
-OOD infrastructure components and apps:
+   .. warning::
 
-.. code-block:: sh
+      If using **RHEL 7** you will also need to override the :program:`systemd`
+      configuration for Apache:
 
-   mkdir -p ~/ood/src
+      .. code-block:: sh
+
+         sudo systemctl edit httpd24-httpd
+
+      and then add the following to ovverride the default settings:
+
+      .. code-block:: sh
+
+         [Service]
+         KillSignal=SIGTERM
+         KillMode=process
+         PrivateTmp=false
+
+      Finally, save your changes and run:
+
+      .. code-block:: sh
+
+         sudo systemctl daemon-reload
+
+#. Finally, make a source directory that will contain the checked out and built
+   OOD infrastructure components and apps:
+
+   .. code-block:: sh
+
+      mkdir -p ~/ood/src

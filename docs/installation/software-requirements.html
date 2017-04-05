@@ -204,9 +204,10 @@ with <strong class="command">rake</strong>, <strong class="command">bundler</str
 <p>In this tutorial RHSCL (RedHat Software Collections) packages are installed
 under <code class="docutils literal"><span class="pre">/opt/rh</span></code>. This tutorial is also done from an account that has
 <strong class="command">sudo</strong> access but is not root.</p>
-<p>Enable the RHSCL repository. Note that you may also need to enable the Optional
-channel and attach a subscription providing access to RHSCL to be able to use
-the repository.</p>
+<ol class="arabic">
+<li><p class="first">Enable the RHSCL repository. Note that you may also need to enable the
+Optional channel and attach a subscription providing access to RHSCL to be
+able to use the repository.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-6-rpms
 <span class="c1"># =&gt; Repository &#39;rhel-server-rhscl-6-rpms&#39; is enabled for this system.</span>
 </pre></div>
@@ -218,7 +219,8 @@ the repository.</p>
 </pre></div>
 </div>
 </div>
-<p>Install dependencies:</p>
+</li>
+<li><p class="first">Install dependencies:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>sudo yum install -y <span class="se">\</span>
   sqlite-devel <span class="se">\</span>
   httpd24 <span class="se">\</span>
@@ -232,11 +234,15 @@ the repository.</p>
   git19
 </pre></div>
 </div>
-<p>Update the Apache Environment to include Ruby 2.2. This is necessary for the
-user mapping script written in Ruby. Do this by editing
-<code class="docutils literal"><span class="pre">/opt/rh/httpd24/service-environment</span></code> as such:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gd">-HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24&quot;</span>
-<span class="gi">+HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 rh-ruby22&quot;</span>
+</li>
+<li><p class="first">Update the Apache Environment to include Ruby 2.2. This is necessary for the
+user mapping script written in Ruby.</p>
+<p>Edit <code class="docutils literal"><span class="pre">/opt/rh/httpd24/service-environment</span></code> and replace the following line:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nv">HTTPD24_HTTPD_SCLS_ENABLED</span><span class="o">=</span><span class="s2">&quot;httpd24&quot;</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nv">HTTPD24_HTTPD_SCLS_ENABLED</span><span class="o">=</span><span class="s2">&quot;httpd24 rh-ruby22&quot;</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -258,11 +264,14 @@ configuration for Apache:</p>
 </pre></div>
 </div>
 </div>
-<p>Finally, make a source directory that will contain the checked out and built
+</li>
+<li><p class="first">Finally, make a source directory that will contain the checked out and built
 OOD infrastructure components and apps:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>mkdir -p ~/ood/src
 </pre></div>
 </div>
+</li>
+</ol>
 </div>
 
 
