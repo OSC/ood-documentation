@@ -18,7 +18,8 @@ tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
    .. code-block:: sh
 
       sudo scl enable rh-ruby22 -- rake install
-      # => /opt/ood/nginx_stage
+      # => mkdir -p /opt/ood/nginx_stage
+      # => cp ...
 
    This creates the :ref:`nginx-stage` config
    ``/opt/ood/nginx_stage/config/nginx_stage.yml`` and the ruby binstub/wrapper

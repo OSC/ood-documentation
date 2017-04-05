@@ -21,7 +21,7 @@ This is done with the :ref:`ood-auth-map` tool.
 
       sudo scl enable rh-ruby22 -- rake install
       # => mkdir -p /opt/ood/ood_auth_map/bin
-      # => ...
+      # => cp ...
 
 The principle behind this script is that you call it with a URL encoded
 ``REMOTE_USER`` user name as the only argument, and it will return the mapping
