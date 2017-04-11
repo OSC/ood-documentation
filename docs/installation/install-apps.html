@@ -108,15 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="install-mapping-script.html">6. Install User Mapping Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-cluster-config.html">7. Add Cluster Configuration Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="start-apache.html">8. Start Apache</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Install Applications</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dashboard-app">9.1. Dashboard App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#shell-app">9.2. Shell App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#files-app">9.3. Files App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#file-editor-app">9.4. File Editor App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#active-jobs-app">9.5. Active Jobs App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#my-jobs-app">9.6. My Jobs App</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Install Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ssl.html">10. Add SSL Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ldap.html">11. Add LDAP Support</a></li>
 </ul>
@@ -199,208 +191,46 @@
             
   <div class="section" id="install-applications">
 <span id="install-apps"></span><h1>9. Install Applications<a class="headerlink" href="#install-applications" title="Permalink to this headline">¶</a></h1>
-<p>Now we will go through installing each of the Open OnDemand system web
-applications.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>mkdir ~/ood/src/sys
-</pre></div>
-</div>
-<div class="section" id="dashboard-app">
-<h2>9.1. Dashboard App<a class="headerlink" href="#dashboard-app" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> is a Ruby on Rails app that serves as a gateway for all
-the other Open OnDemand apps.</p>
+<p>Now we will go through installing all of the Open OnDemand system web
+applications:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a></li>
+<li><a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a></li>
+<li><a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a></li>
+<li><a class="reference internal" href="../applications/editor.html#editor"><span class="std std-ref">File Editor App</span></a></li>
+<li><a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a></li>
+<li><a class="reference internal" href="../applications/my-jobs.html#my-jobs"><span class="std std-ref">My Jobs App</span></a></li>
+</ul>
+<p>This is greatly simplified by the <a class="reference external" href="https://github.com/OSC/ood-apps-installer">ood-apps-installer</a> utility.</p>
 <ol class="arabic">
-<li><p class="first">Start in the build directory for system web applications:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
+<li><p class="first">Clone and check out the latest tag for the <a class="reference external" href="https://github.com/OSC/ood-apps-installer">ood-apps-installer</a> utility:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
+scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-apps-installer.git apps
+<span class="nb">cd</span> apps/
+scl <span class="nb">enable</span> git19 -- git checkout v0.0.1
 </pre></div>
 </div>
 </li>
-<li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-dashboard.git dashboard
-<span class="nb">cd</span> dashboard
-scl <span class="nb">enable</span> git19 -- git checkout tags/v1.10.0
+<li><p class="first">Begin building the apps (may take ~15 min):</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 nodejs010 git19 -- rake
 </pre></div>
 </div>
 </li>
-<li><p class="first">Build the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
+<li><p class="first">After a <strong>successful</strong> build, you will want to add a default SSH host that
+the <a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> will log into. It is recommended to choose one of your
+publicly accessible login nodes.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;DEFAULT_SSHHOST=login.my_center.edu&quot;</span> &gt; build/shell/.env
 </pre></div>
 </div>
+<p>where you replace <code class="docutils literal"><span class="pre">login.my_center.edu</span></code> with your public login host.</p>
 </li>
-<li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
-sudo cp -r . /var/www/ood/apps/sys/dashboard
+<li><p class="first">Finally, we install the apps to their system location at
+<code class="docutils literal"><span class="pre">/var/www/ood/apps/sys</span></code> with:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="shell-app">
-<h2>9.2. Shell App<a class="headerlink" href="#shell-app" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> is a Node.js app providing a web-based terminal.</p>
-<ol class="arabic">
-<li><p class="first">Start in the build directory for system web applications:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
-</pre></div>
-</div>
-</li>
-<li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-shell.git shell
-<span class="nb">cd</span> shell
-scl <span class="nb">enable</span> git19 -- git checkout tags/v1.1.2
-</pre></div>
-</div>
-</li>
-<li><p class="first">Build the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 nodejs010 -- npm install
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The Shell App will attempt to <code class="docutils literal"><span class="pre">ssh</span></code> to the <code class="docutils literal"><span class="pre">localhost</span></code> by default. This
-can be changed by creating a <code class="docutils literal"><span class="pre">.env</span></code> file in the build/deployment directory
-with the contents:</p>
-<div class="last highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># ./.env</span>
-<span class="nv">DEFAULT_SSHHOST</span><span class="o">=</span><span class="s1">&#39;oakley.osc.edu&#39;</span>
-</pre></div>
-</div>
-</div>
-</li>
-<li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
-sudo cp -r . /var/www/ood/apps/sys/shell
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-<div class="section" id="files-app">
-<h2>9.3. Files App<a class="headerlink" href="#files-app" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a> is a Node.js app that provides a web-based file explorer for
-file uploads, downloads, editing, renaming and copying.</p>
-<ol class="arabic">
-<li><p class="first">Start in the build directory for system web applications:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
-</pre></div>
-</div>
-</li>
-<li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-fileexplorer.git files
-<span class="nb">cd</span> files
-scl <span class="nb">enable</span> git19 -- git checkout tags/v1.3.1
-</pre></div>
-</div>
-</li>
-<li><p class="first">Build the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 nodejs010 -- npm install
-</pre></div>
-</div>
-</li>
-<li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
-sudo cp -r . /var/www/ood/apps/sys/files
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-<div class="section" id="file-editor-app">
-<h2>9.4. File Editor App<a class="headerlink" href="#file-editor-app" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../applications/editor.html#editor"><span class="std std-ref">File Editor App</span></a> is a Ruby on Rails app that provides a web-based file editor
-for opening files on the remote machine to edit and save.</p>
-<ol class="arabic">
-<li><p class="first">Start in the build directory for system web applications:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
-</pre></div>
-</div>
-</li>
-<li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-fileeditor.git file-editor
-<span class="nb">cd</span> file-editor
-scl <span class="nb">enable</span> git19 -- git checkout tags/v1.2.3
-</pre></div>
-</div>
-</li>
-<li><p class="first">Build the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
-</pre></div>
-</div>
-</li>
-<li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
-sudo cp -r . /var/www/ood/apps/sys/file-editor
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-<div class="section" id="active-jobs-app">
-<h2>9.5. Active Jobs App<a class="headerlink" href="#active-jobs-app" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a> is a Ruby on Rails app that displays the current status
-of jobs running, queued, and held on the clusters.</p>
-<ol class="arabic">
-<li><p class="first">Start in the build directory for system web applications:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
-</pre></div>
-</div>
-</li>
-<li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-activejobs.git activejobs
-<span class="nb">cd</span> activejobs
-scl <span class="nb">enable</span> git19 -- git checkout tags/v1.3.1
-</pre></div>
-</div>
-</li>
-<li><p class="first">Build the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- bin/bundle install --path vendor/bundle
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
-</pre></div>
-</div>
-</li>
-<li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
-sudo cp -r . /var/www/ood/apps/sys/activejobs
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-<div class="section" id="my-jobs-app">
-<h2>9.6. My Jobs App<a class="headerlink" href="#my-jobs-app" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../applications/my-jobs.html#my-jobs"><span class="std std-ref">My Jobs App</span></a> is a Ruby on Rails app for creating and managing batch job
-jobs from templates.</p>
-<ol class="arabic">
-<li><p class="first">Start in the build directory for system web applications:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/sys
-</pre></div>
-</div>
-</li>
-<li><p class="first">Clone and checkout the latest version of the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/ood-myjobs.git myjobs
-<span class="nb">cd</span> myjobs
-scl <span class="nb">enable</span> git19 -- git checkout tags/v2.1.2
-</pre></div>
-</div>
-</li>
-<li><p class="first">Build the app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 git19 -- bin/bundle install --path vendor/bundle
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake assets:precompile <span class="nv">RAILS_ENV</span><span class="o">=</span>production
-scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake tmp:clear
-</pre></div>
-</div>
-</li>
-<li><p class="first">Copy the built app to the deployment directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
-sudo cp -r . /var/www/ood/apps/sys/myjobs
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
 </div>
 
 

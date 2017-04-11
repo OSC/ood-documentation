@@ -3,226 +3,48 @@
 Install Applications
 ====================
 
-Now we will go through installing each of the Open OnDemand system web
-applications.
+Now we will go through installing all of the Open OnDemand system web
+applications:
 
-.. code-block:: sh
+- :ref:`dashboard`
+- :ref:`shell`
+- :ref:`files`
+- :ref:`editor`
+- :ref:`active-jobs`
+- :ref:`my-jobs`
 
-   mkdir ~/ood/src/sys
+This is greatly simplified by the ood-apps-installer_ utility.
 
-Dashboard App
--------------
-
-The :ref:`dashboard` is a Ruby on Rails app that serves as a gateway for all
-the other Open OnDemand apps.
-
-#. Start in the build directory for system web applications:
-
-   .. code-block:: sh
-
-      cd ~/ood/src/sys
-
-#. Clone and checkout the latest version of the app:
+#. Clone and check out the latest tag for the ood-apps-installer_ utility:
 
    .. code-block:: sh
 
-      scl enable git19 -- git clone https://github.com/OSC/ood-dashboard.git dashboard
-      cd dashboard
-      scl enable git19 -- git checkout tags/v1.10.0
+      cd ~/ood/src
+      scl enable git19 -- git clone https://github.com/OSC/ood-apps-installer.git apps
+      cd apps/
+      scl enable git19 -- git checkout v0.0.1
 
-#. Build the app:
-
-   .. code-block:: sh
-
-      scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
-      scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
-      scl enable rh-ruby22 nodejs010 -- bin/rake tmp:clear
-
-#. Copy the built app to the deployment directory:
+#. Begin building the apps (may take ~15 min):
 
    .. code-block:: sh
 
-      sudo mkdir -p /var/www/ood/apps/sys
-      sudo cp -r . /var/www/ood/apps/sys/dashboard
+      scl enable rh-ruby22 nodejs010 git19 -- rake
 
-Shell App
----------
-
-The :ref:`shell` is a Node.js app providing a web-based terminal.
-
-#. Start in the build directory for system web applications:
+#. After a **successful** build, you will want to add a default SSH host that
+   the :ref:`shell` will log into. It is recommended to choose one of your
+   publicly accessible login nodes.
 
    .. code-block:: sh
 
-      cd ~/ood/src/sys
+      echo "DEFAULT_SSHHOST=login.my_center.edu" > build/shell/.env
 
-#. Clone and checkout the latest version of the app:
+   where you replace ``login.my_center.edu`` with your public login host.
 
-   .. code-block:: sh
-
-      scl enable git19 -- git clone https://github.com/OSC/ood-shell.git shell
-      cd shell
-      scl enable git19 -- git checkout tags/v1.1.2
-
-#. Build the app:
+#. Finally, we install the apps to their system location at
+   ``/var/www/ood/apps/sys`` with:
 
    .. code-block:: sh
 
-      scl enable git19 nodejs010 -- npm install
+      sudo scl enable rh-ruby22 -- rake install
 
-   .. note::
-
-      The Shell App will attempt to ``ssh`` to the ``localhost`` by default. This
-      can be changed by creating a ``.env`` file in the build/deployment directory
-      with the contents:
-
-      .. code-block:: sh
-
-         # ./.env
-         DEFAULT_SSHHOST='oakley.osc.edu'
-
-#. Copy the built app to the deployment directory:
-
-   .. code-block:: sh
-
-      sudo mkdir -p /var/www/ood/apps/sys
-      sudo cp -r . /var/www/ood/apps/sys/shell
-
-Files App
----------
-
-The :ref:`files` is a Node.js app that provides a web-based file explorer for
-file uploads, downloads, editing, renaming and copying.
-
-#. Start in the build directory for system web applications:
-
-   .. code-block:: sh
-
-      cd ~/ood/src/sys
-
-#. Clone and checkout the latest version of the app:
-
-   .. code-block:: sh
-
-      scl enable git19 -- git clone https://github.com/OSC/ood-fileexplorer.git files
-      cd files
-      scl enable git19 -- git checkout tags/v1.3.1
-
-#. Build the app:
-
-   .. code-block:: sh
-
-      scl enable git19 nodejs010 -- npm install
-
-#. Copy the built app to the deployment directory:
-
-   .. code-block:: sh
-
-      sudo mkdir -p /var/www/ood/apps/sys
-      sudo cp -r . /var/www/ood/apps/sys/files
-
-
-File Editor App
----------------
-
-The :ref:`editor` is a Ruby on Rails app that provides a web-based file editor
-for opening files on the remote machine to edit and save.
-
-#. Start in the build directory for system web applications:
-
-   .. code-block:: sh
-
-      cd ~/ood/src/sys
-
-#. Clone and checkout the latest version of the app:
-
-   .. code-block:: sh
-
-      scl enable git19 -- git clone https://github.com/OSC/ood-fileeditor.git file-editor
-      cd file-editor
-      scl enable git19 -- git checkout tags/v1.2.3
-
-#. Build the app:
-
-   .. code-block:: sh
-
-      scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
-      scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
-      scl enable rh-ruby22 nodejs010 -- bin/rake tmp:clear
-
-#. Copy the built app to the deployment directory:
-
-   .. code-block:: sh
-
-      sudo mkdir -p /var/www/ood/apps/sys
-      sudo cp -r . /var/www/ood/apps/sys/file-editor
-
-Active Jobs App
----------------
-
-The :ref:`active-jobs` is a Ruby on Rails app that displays the current status
-of jobs running, queued, and held on the clusters.
-
-#. Start in the build directory for system web applications:
-
-   .. code-block:: sh
-
-      cd ~/ood/src/sys
-
-#. Clone and checkout the latest version of the app:
-
-   .. code-block:: sh
-
-      scl enable git19 -- git clone https://github.com/OSC/ood-activejobs.git activejobs
-      cd activejobs
-      scl enable git19 -- git checkout tags/v1.3.1
-
-#. Build the app:
-
-   .. code-block:: sh
-
-      scl enable rh-ruby22 -- bin/bundle install --path vendor/bundle
-      scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
-      scl enable rh-ruby22 nodejs010 -- bin/rake tmp:clear
-
-#. Copy the built app to the deployment directory:
-
-   .. code-block:: sh
-
-      sudo mkdir -p /var/www/ood/apps/sys
-      sudo cp -r . /var/www/ood/apps/sys/activejobs
-
-My Jobs App
------------
-
-The :ref:`my-jobs` is a Ruby on Rails app for creating and managing batch job
-jobs from templates.
-
-#. Start in the build directory for system web applications:
-
-   .. code-block:: sh
-
-      cd ~/ood/src/sys
-
-#. Clone and checkout the latest version of the app:
-
-   .. code-block:: sh
-
-      scl enable git19 -- git clone https://github.com/OSC/ood-myjobs.git myjobs
-      cd myjobs
-      scl enable git19 -- git checkout tags/v2.1.2
-
-#. Build the app:
-
-   .. code-block:: sh
-
-      scl enable rh-ruby22 git19 -- bin/bundle install --path vendor/bundle
-      scl enable rh-ruby22 nodejs010 -- bin/rake assets:precompile RAILS_ENV=production
-      scl enable rh-ruby22 nodejs010 -- bin/rake tmp:clear
-
-#. Copy the built app to the deployment directory:
-
-   .. code-block:: sh
-
-      sudo mkdir -p /var/www/ood/apps/sys
-      sudo cp -r . /var/www/ood/apps/sys/myjobs
+.. _ood-apps-installer: https://github.com/OSC/ood-apps-installer
