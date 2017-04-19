@@ -8,7 +8,9 @@ which has
 
 - the users are mirrored with the other machines (LDAP+NSS)
 - the home directory shared file system is mounted and accessible by users
-- TORQUE client libraries installed and the :command:`trqauthd` process started
+- Torque, Slurm, or LSF client libraries installed and access provided to
+  submit, status, and delete batch jobs to the various clusters from this host
+  machine
 - signed SSL certificates with corresponding intermediate certificate
 - Software Collections package/repo, :command:`lsof`, and :command:`sudo` are
   installed
