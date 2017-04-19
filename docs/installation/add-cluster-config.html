@@ -106,7 +106,16 @@
 <li class="toctree-l2"><a class="reference internal" href="install-proxy-module.html">4. Install Proxy Module for Apache</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install-pun-utility.html">5. Install the PUN Utility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install-mapping-script.html">6. Install User Mapping Script</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">7. Add Cluster Configuration Files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7. Add Cluster Configuration Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-configs">7.1. Example Configs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#minimal-configuration">7.1.1. Minimal Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque-pbs">7.1.2. Torque/PBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slurm">7.1.3. Slurm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lsf">7.1.4. LSF</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="start-apache.html">8. Start Apache</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install-apps.html">9. Install Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ssl.html">10. Add SSL Support</a></li>
@@ -191,13 +200,18 @@
             
   <div class="section" id="add-cluster-configuration-files">
 <span id="add-cluster-config"></span><h1>7. Add Cluster Configuration Files<a class="headerlink" href="#add-cluster-configuration-files" title="Permalink to this headline">¶</a></h1>
-<p><strong>(Optional step)</strong></p>
-<p>The Dashboard, File Explorer, and Shell Access can work without cluster
-connection config files. These config files are required for:</p>
+<p><strong>(Optional, but recommended)</strong></p>
+<p>The following apps do not require a cluster configuration file:</p>
 <ul class="simple">
-<li>enable Shell Access to multiple named hosts outside of the local host OOD is
-running on</li>
-<li>use Active Jobs, My Jobs, or any other app that works with batch jobs</li>
+<li><a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a></li>
+<li><a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a></li>
+<li><a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> (but only launched from within the Files App)</li>
+</ul>
+<p>The following apps require a cluster configuration file:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> (connect to a cluster login node from the Dashboard App)</li>
+<li><a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a> (view a list of active jobs for the various clusters)</li>
+<li><a class="reference internal" href="../applications/my-jobs.html#my-jobs"><span class="std std-ref">My Jobs App</span></a> (submit jobs to various clusters)</li>
 </ul>
 <ol class="arabic">
 <li><p class="first">Create default directory for config files:</p>
@@ -205,61 +219,119 @@ running on</li>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add one config file for each host you want to provide access to. Each config
-file is a YAML file and must have the <code class="docutils literal"><span class="pre">.yml</span></code> suffix.</p>
+<li><p class="first">Add a cluster configuration file for each HPC cluster you want to provide
+access to. These are YAML files and must have the <code class="docutils literal"><span class="pre">.yml</span></code> file extension
+(e.g., <code class="docutils literal"><span class="pre">cluster1.yml</span></code>, <code class="docutils literal"><span class="pre">cluster2.yml</span></code>, ...)</p>
 </li>
 </ol>
-<p>Here is the minimal YAML config required to specify a host that can be accessed
-via Shell Access app. The filename is <code class="docutils literal"><span class="pre">owens.yml</span></code>:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens.yml</span>
+<div class="section" id="example-configs">
+<h2>7.1. Example Configs<a class="headerlink" href="#example-configs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="minimal-configuration">
+<h3>7.1.1. Minimal Configuration<a class="headerlink" href="#minimal-configuration" title="Permalink to this headline">¶</a></h3>
+<p>A YAML cluster configuration file for an HPC cluster with only a login node but
+no resource manager looks like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v1</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Cluster&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">servers</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Ssh&quot;</span>
-          <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+ <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster</span><span class="nv"> </span><span class="s">1&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1.my_center.edu&quot;</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>a cluster contains one ore more servers, with special server keywords:<ul>
-<li><code class="docutils literal"><span class="pre">login</span></code></li>
-<li><code class="docutils literal"><span class="pre">resource_mgr</span></code></li>
-<li><code class="docutils literal"><span class="pre">scheduler</span></code></li>
-<li><code class="docutils literal"><span class="pre">ganglia</span></code></li>
-</ul>
-</li>
-</ul>
-<p>For Active Jobs and My Jobs to work, a cluster configuration must specify a
-<code class="docutils literal"><span class="pre">resource_mgr</span></code> to use.</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens.yml</span>
+<p>Where <code class="docutils literal"><span class="pre">host</span></code> is the SSH server host for the given cluster.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a> and the <a class="reference internal" href="../applications/my-jobs.html#my-jobs"><span class="std std-ref">My Jobs App</span></a> won&#8217;t be able to list or
+submit jobs without a resource manager.</p>
+</div>
+</div>
+<div class="section" id="torque-pbs">
+<h3>7.1.2. Torque/PBS<a class="headerlink" href="#torque-pbs" title="Permalink to this headline">¶</a></h3>
+<p>A YAML cluster configuration file for a Torque/PBS resource manager on an HPC
+cluster looks like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v1</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Cluster&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">servers</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Ssh&quot;</span>
-          <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
-        <span class="l l-Scalar l-Scalar-Plain">resource_mgr</span><span class="p p-Indicator">:</span>
-          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;OodCluster::Servers::Torque&quot;</span>
-          <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
-            <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
-            <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
-            <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
-            <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+ <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster</span><span class="nv"> </span><span class="s">1&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1.my_center.edu&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;torque&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1-batch.my_center.edu&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/torque/lib&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/torque/bin&quot;</span>
 </pre></div>
 </div>
-<p>The name of the file becomes the key for this host. So <code class="docutils literal"><span class="pre">owens.yml</span></code> cluster
-config will have a key <code class="docutils literal"><span class="pre">owens</span></code>. My Jobs and other OOD apps that cache
-information about jobs they manage will associate job metadata with this key.</p>
+<p>Where the <code class="docutils literal"><span class="pre">adapter</span></code> is set to <code class="docutils literal"><span class="pre">torque</span></code> for the job feature in the cluster
+configuration file.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The corresponding cluster&#8217;s batch server will need to be configured with the
+Open OnDemand server as a valid <code class="docutils literal"><span class="pre">submit_host</span></code> to allow the <a class="reference internal" href="../applications/my-jobs.html#my-jobs"><span class="std std-ref">My Jobs App</span></a>
+to submit jobs to it.</p>
+</div>
+</div>
+<div class="section" id="slurm">
+<h3>7.1.3. Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h3>
+<p>A YAML cluster configuration file for a Slurm resource manager on an HPC
+cluster looks like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+ <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster</span><span class="nv"> </span><span class="s">1&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1.my_center.edu&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;slurm&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm/bin&quot;</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">adapter</span></code> is set to <code class="docutils literal"><span class="pre">slurm</span></code> for the job feature in the cluster
+configuration file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you do not have a multi-cluster Slurm setup you can remove the <code class="docutils literal"><span class="pre">cluster:</span>
+<span class="pre">&quot;cluster1&quot;</span></code> line from the above configuration file.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The Open OnDemand server will need the appropriate MUNGE keys (see <a class="reference external" href="https://slurm.schedmd.com/quickstart_admin.html">Slurm
+Quick Start Administrator Guide</a>) for the various clusters to be able to
+status and submit batch jobs.</p>
+</div>
+</div>
+<div class="section" id="lsf">
+<h3>7.1.4. LSF<a class="headerlink" href="#lsf" title="Permalink to this headline">¶</a></h3>
+<p>A YAML cluster configuration file for an LSF resource manager on an HPC cluster
+looks like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+ <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster</span><span class="nv"> </span><span class="s">1&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1.my_center.edu&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;lsf&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">bindir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/bin&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">libdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/lib&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">envdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/conf&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">serverdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/etc&quot;</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">adapter</span></code> is set to <code class="docutils literal"><span class="pre">lsf</span></code> for the job feature in the cluster
+configuration file.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Verified for only LSF 8.3 and support for LSF MultiCluster is not yet
+implemented.</p>
+</div>
+</div>
+</div>
 </div>
 
 
