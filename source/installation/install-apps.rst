@@ -22,7 +22,7 @@ This is greatly simplified by the ood-apps-installer_ utility.
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/ood-apps-installer.git apps
       cd apps/
-      scl enable git19 -- git checkout v0.0.1
+      scl enable git19 -- git checkout v0.1.0
 
 #. Begin building the apps (may take ~15 min):
 
