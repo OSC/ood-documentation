@@ -16,7 +16,7 @@ To get started you will need at a minimum the following prerequisites:
   - mod_proxy_
   - mod_proxy_connect_
   - mod_proxy_wstunnel_
-  - your choice of mod_auth_*
+  - your choice of :program:`mod_auth_*`
 
 - The Ruby_ language version 2.2 or newer for installation
 

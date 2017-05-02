@@ -22,5 +22,5 @@ Build the Apache configuration file and install it.
 .. note::
 
    Please contact us if you'd like access to your center's Google Analytics
-   data. This will require us to generate a new ``id`` for the configuration
-   above.
+   data. This will require us to generate a new Property ID for your center
+   that we can then share with you.
