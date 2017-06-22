@@ -41,10 +41,10 @@ no resource manager looks like:
    # /etc/ood/config/clusters.d/cluster1.yml
    ---
    v2:
-    metadata:
-      title: "Cluster 1"
-    login:
-      host: "cluster1.my_center.edu"
+     metadata:
+       title: "Cluster 1"
+     login:
+       host: "cluster1.my_center.edu"
 
 Where ``host`` is the SSH server host for the given cluster.
 
@@ -64,15 +64,15 @@ cluster looks like:
    # /etc/ood/config/clusters.d/cluster1.yml
    ---
    v2:
-    metadata:
-      title: "Cluster 1"
-    login:
-      host: "cluster1.my_center.edu"
-    job:
-      adapter: "torque"
-      host: "cluster1-batch.my_center.edu"
-      lib: "/path/to/torque/lib"
-      bin: "/path/to/torque/bin"
+     metadata:
+       title: "Cluster 1"
+     login:
+       host: "cluster1.my_center.edu"
+     job:
+       adapter: "torque"
+       host: "cluster1-batch.my_center.edu"
+       lib: "/path/to/torque/lib"
+       bin: "/path/to/torque/bin"
 
 Where the ``adapter`` is set to ``torque`` for the job feature in the cluster
 configuration file.
@@ -94,14 +94,14 @@ cluster looks like:
    # /etc/ood/config/clusters.d/cluster1.yml
    ---
    v2:
-    metadata:
-      title: "Cluster 1"
-    login:
-      host: "cluster1.my_center.edu"
-    job:
-      adapter: "slurm"
-      cluster: "cluster1"
-      bin: "/path/to/slurm/bin"
+     metadata:
+       title: "Cluster 1"
+     login:
+       host: "cluster1.my_center.edu"
+     job:
+       adapter: "slurm"
+       cluster: "cluster1"
+       bin: "/path/to/slurm/bin"
 
 Where the ``adapter`` is set to ``slurm`` for the job feature in the cluster
 configuration file.
@@ -130,16 +130,16 @@ looks like:
    # /etc/ood/config/clusters.d/cluster1.yml
    ---
    v2:
-    metadata:
-      title: "Cluster 1"
-    login:
-      host: "cluster1.my_center.edu"
-    job:
-      adapter: "lsf"
-      bindir: "/path/to/lsf/bin"
-      libdir: "/path/to/lsf/lib"
-      envdir: "/path/to/lsf/conf"
-      serverdir: "/path/to/lsf/etc"
+     metadata:
+       title: "Cluster 1"
+     login:
+       host: "cluster1.my_center.edu"
+     job:
+       adapter: "lsf"
+       bindir: "/path/to/lsf/bin"
+       libdir: "/path/to/lsf/lib"
+       envdir: "/path/to/lsf/conf"
+       serverdir: "/path/to/lsf/etc"
 
 Where the ``adapter`` is set to ``lsf`` for the job feature in the cluster
 configuration file.
