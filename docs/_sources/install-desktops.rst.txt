@@ -17,5 +17,6 @@ connect to a running session through their browser using the `noVNC`_ client.
    install-desktops/modify-cluster-configuration
    install-desktops/enable-reverse-proxy
    install-desktops/install-desktop-app
+   install-desktops/customize-desktop-app
 
 .. _novnc: http://novnc.com/info.html

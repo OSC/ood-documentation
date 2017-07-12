@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Install Desktop App &mdash; Open OnDemand 0.0.1 documentation</title>
+  <title>5. Customize Desktop App &mdash; Open OnDemand 0.0.1 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Open OnDemand 0.0.1 documentation" href="../index.html"/>
         <link rel="up" title="Install Desktops" href="../install-desktops.html"/>
-        <link rel="next" title="5. Customize Desktop App" href="customize-desktop-app.html"/>
-        <link rel="prev" title="3. Enable Reverse Proxy" href="enable-reverse-proxy.html"/> 
+        <link rel="next" title="5.1. Modify Form Attributes" href="customize-desktop-app/modify-form-attributes.html"/>
+        <link rel="prev" title="4. Install Desktop App" href="install-desktop-app.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -104,8 +104,12 @@
 <li class="toctree-l2"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-cluster-configuration.html">2. Modify Cluster Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enable-reverse-proxy.html">3. Enable Reverse Proxy</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Install Desktop App</a></li>
-<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app.html">5. Customize Desktop App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-desktop-app.html">4. Install Desktop App</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Customize Desktop App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html">5.1. Modify Form Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="customize-desktop-app/custom-job-submission.html">5.2. Custom Job Submission</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a></li>
@@ -165,13 +169,13 @@
         
           <li><a href="../install-desktops.html">Install Desktops</a> &raquo;</li>
         
-      <li>4. Install Desktop App</li>
+      <li>5. Customize Desktop App</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/install-desktops/install-desktop-app.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/install-desktops/customize-desktop-app.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -184,73 +188,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install-desktop-app">
-<span id="install-desktops-install-desktop-app"></span><h1>4. Install Desktop App<a class="headerlink" href="#install-desktop-app" title="Permalink to this headline">¶</a></h1>
-<p>No we will go through installing the provided <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a> app as well as
-configuring it work at your center.</p>
-<ol class="arabic">
-<li><p class="first">We will build this app in our previous working directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
-</pre></div>
+  <div class="section" id="customize-desktop-app">
+<span id="install-desktops-customize-desktop-app"></span><h1>5. Customize Desktop App<a class="headerlink" href="#customize-desktop-app" title="Permalink to this headline">¶</a></h1>
+<p>In some cases the defaults used to submit a batch job may not work on your
+given cluster or you may just want to remove some form options presented to the
+user and fill in hard-coded values. All of these cases and more can easily be
+customized in the following files:</p>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">bc_desktop/local/</span><em><span class="pre">cluster_desktop</span></em><span class="pre">.yml</span></code></dt>
+<dd>describes a given desktop app along with form attributes presented to the
+user</dd>
+<dt><code class="file docutils literal"><span class="pre">bc_desktop/local/submit/</span><em><span class="pre">custom_submit</span></em><span class="pre">.yml.erb</span></code></dt>
+<dd>describes how the batch job should be submitted to your cluster (needs to be
+specified in a <code class="file docutils literal"><span class="pre">bc_desktop/local/</span><em><span class="pre">cluster_desktop</span></em><span class="pre">.yml</span></code> configuration
+file)</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">.erb</span></code> file extension will cause the YAML configuration file to be
+processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows
+you to embed Ruby code into the YAML configuration file for flow control,
+variable subsitution, and more.</p>
 </div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html">5.1. Modify Form Attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html#change-to-gnome-desktop">5.1.1. Change to Gnome Desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html#remove-form-field">5.1.2. Remove Form Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html#hard-code-a-form-field">5.1.3. Hard-code a Form Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html#change-a-label">5.1.4. Change a Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html#add-help-message-to-field">5.1.5. Add Help Message to Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/modify-form-attributes.html#change-field-default-value">5.1.6. Change Field Default Value</a></li>
+</ul>
 </li>
-<li><p class="first">We start by cloning and checking out the latest tag for the <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a>
-app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/bc_desktop.git
-<span class="nb">cd</span> bc_desktop/
-scl <span class="nb">enable</span> git19 -- git checkout v0.1.1
-</pre></div>
-</div>
+<li class="toctree-l1"><a class="reference internal" href="customize-desktop-app/custom-job-submission.html">5.2. Custom Job Submission</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/custom-job-submission.html#slurm">5.2.1. Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/custom-job-submission.html#torque">5.2.2. Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/custom-job-submission.html#lsf">5.2.3. LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app/custom-job-submission.html#pbs-professional">5.2.4. PBS Professional</a></li>
+</ul>
 </li>
-<li><p class="first">We now must configure desktop apps for each cluster you want this to run
-under in the following directory <code class="docutils literal"><span class="pre">local/</span></code></p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Make the `local/` directory if it doesn&#39;t already exist</span>
-mkdir <span class="nb">local</span>
-
-<span class="c1"># Change our working directory to `local/`</span>
-<span class="nb">cd</span> <span class="nb">local</span>
-</pre></div>
+</ul>
 </div>
-</li>
-<li><p class="first">For each cluster we want to launch desktop on we will need a corresponding
-YAML configuration file (e.g., <code class="docutils literal"><span class="pre">cluster1.yml</span></code>, <code class="docutils literal"><span class="pre">cluster2.yml</span></code>, …) that
-looks like:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/cluster1.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>        <span class="c1"># must correspond to a cluster config</span>
-</pre></div>
-</div>
-<p>where the <code class="docutils literal"><span class="pre">cluster</span></code> attribute must match a valid cluster configuration
-file.</p>
-<div class="admonition danger">
-<p class="first admonition-title">Danger</p>
-<p>Please do not modify any of the code above the <code class="docutils literal"><span class="pre">local/</span></code> path as it may
-put the Git repo in a bad state.</p>
-<p class="last">We recommend you version all the changes you make in the <code class="docutils literal"><span class="pre">local/</span></code>
-directory you use for the <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a> app so that you don’t lose any of
-it.</p>
-</div>
-</li>
-<li><p class="first">Navigate to your OnDemand site, in particular the Dashboard App, and you
-should see in the top dropdown menu “Interactive Apps” =&gt; “Desktops”.</p>
-<p>After choosing Desktops from the menu, you should be presented with a form
-to submit a Desktop to the given cluster.</p>
-<p>Submit a desktop and wait for it to run. If you see a Desktop start Running
-but then quickly disappear you can debug it by viewing the logs in:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">ondemand</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">bc_desktop</span><span class="o">/&lt;</span><span class="n">cluster</span><span class="o">&gt;/</span><span class="n">output</span><span class="o">/&lt;</span><span class="n">uuid</span><span class="o">&gt;/</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal"><span class="pre">uuid</span></code> is a randomly generated id for a single desktop session. You
-might want to find the latest one by looking at the timestamps.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The form may fail to submit due to the defaults we chose for a given
-resource manager: Torque, Slurm, LSF, PBS Pro… Please continue to the
-next section to learn how to customize batch job submission.</p>
-</div>
-</li>
-</ol>
 </div>
 
 
@@ -263,10 +243,10 @@ next section to learn how to customize batch job submission.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="customize-desktop-app.html" class="btn btn-neutral float-right" title="5. Customize Desktop App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="customize-desktop-app/modify-form-attributes.html" class="btn btn-neutral float-right" title="5.1. Modify Form Attributes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="enable-reverse-proxy.html" class="btn btn-neutral" title="3. Enable Reverse Proxy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install-desktop-app.html" class="btn btn-neutral" title="4. Install Desktop App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
