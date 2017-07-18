@@ -71,13 +71,17 @@ under ``/opt/rh``. This tutorial is also done from an account that has
    .. warning::
 
       If using **RHEL 7** you will also need to override the :program:`systemd`
-      configuration for Apache:
+      configuration for Apache. You can modify it directly by either calling:
 
       .. code-block:: sh
 
          sudo systemctl edit httpd24-httpd
 
-      and then add the following to ovverride the default settings:
+      or by creating and modifying the file below with your favorite editor::
+
+        /etc/systemd/system/httpd24-httpd.service.d/override.conf
+
+      You will then add the following to ovverride the default settings:
 
       .. code-block:: sh
 
