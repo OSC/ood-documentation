@@ -248,11 +248,15 @@ user mapping script written in Ruby.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>If using <strong>RHEL 7</strong> you will also need to override the <strong class="program">systemd</strong>
-configuration for Apache:</p>
+configuration for Apache. You can modify it directly by either calling:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>sudo systemctl edit httpd24-httpd
 </pre></div>
 </div>
-<p>and then add the following to ovverride the default settings:</p>
+<p>or by creating and modifying the file below with your favorite editor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">httpd24</span><span class="o">-</span><span class="n">httpd</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">override</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>You will then add the following to ovverride the default settings:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">[</span>Service<span class="o">]</span>
 <span class="nv">KillSignal</span><span class="o">=</span>SIGTERM
 <span class="nv">KillMode</span><span class="o">=</span>process
