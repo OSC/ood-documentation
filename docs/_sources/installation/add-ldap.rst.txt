@@ -11,7 +11,7 @@ password. It also removes the need for the sys admin to keep updating the
 
 Requirements:
 
-- an LDAP server preferably with SSL support (``cts06.osc.edu:636``)
+- an LDAP server preferably with SSL support (``openldap1.infra.osc.edu:636``)
 
 #. Install the necessary Apache module to use LDAP:
 
@@ -38,7 +38,7 @@ Requirements:
         - 'AuthType Basic'
         - 'AuthName "private"'
         - 'AuthBasicProvider ldap'
-        - 'AuthLDAPURL "ldaps://cts06.osc.edu:636/ou=People,ou=hpc,o=osc?uid" SSL'
+        - 'AuthLDAPURL "ldaps://openldap1.infra.osc.edu:636/ou=People,ou=hpc,o=osc?uid" SSL'
         - 'AuthLDAPGroupAttribute memberUid'
         - 'AuthLDAPGroupAttributeIsDN off'
         - 'RequestHeader unset Authorization'

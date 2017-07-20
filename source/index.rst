@@ -18,7 +18,6 @@ Welcome to Open OnDemand's documentation!
 
    installation
    install-desktops
-   basics
 
 .. toctree::
    :maxdepth: 2
@@ -32,4 +31,3 @@ Welcome to Open OnDemand's documentation!
    :caption: Resources
 
    user-documentation
-   faq
