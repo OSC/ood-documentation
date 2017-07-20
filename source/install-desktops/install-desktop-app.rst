@@ -55,11 +55,19 @@ configuring it work at your center.
       directory you use for the `bc_desktop`_ app so that you don't lose any of
       it.
 
-#. Navigate to your OnDemand site, in particular the Dashboard App, and you
-   should see in the top dropdown menu "Interactive Apps" => "Desktops".
+#. Install the Desktop App to its system location at ``/var/www/ood/apps/sys``
+   with:
 
-   After choosing Desktops from the menu, you should be presented with a form
-   to submit a Desktop to the given cluster.
+   .. code-block:: sh
+
+      sudo rsync -rlptv --delete --quiet ~/ood/src/bc_desktop/ /var/www/ood/apps/sys/bc_desktop
+
+#. Navigate to your OnDemand site, in particular the Dashboard App, and you
+   should see in the top dropdown menu "Interactive Apps" => "Cluster1
+   Desktop".
+
+   After choosing "Cluster1 Desktop" from the menu, you should be presented
+   with a form to submit a Desktop to the given cluster.
 
    Submit a desktop and wait for it to run. If you see a Desktop start Running
    but then quickly disappear you can debug it by viewing the logs in::
