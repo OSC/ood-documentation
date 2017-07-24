@@ -1,3 +1,3 @@
 # OOD Documentation
 
-Go to https://osc.github.io/ood-documentation/
+Go to https://osc.github.io/ood-documentation/master/
