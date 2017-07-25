@@ -187,17 +187,31 @@
 <p>No we will go through installing the provided <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a> app as well as
 configuring it work at your center.</p>
 <ol class="arabic">
-<li><p class="first">We will build this app in our previous working directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
+<li><p class="first">We will build this app in our previous web applications setup directory
+(discussed in <a class="reference internal" href="../installation/install-apps.html#install-apps"><span class="std std-ref">Install Applications</span></a>):</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src/apps/
 </pre></div>
 </div>
 </li>
-<li><p class="first">We start by cloning and checking out the latest tag for the <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a>
-app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/bc_desktop.git
-<span class="nb">cd</span> bc_desktop/
-scl <span class="nb">enable</span> git19 -- git checkout v0.1.1
+<li><p class="first">By default this app is not built and installed with all the other required
+OOD apps. You will need to build this app explicitly with:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 nodejs010 git19 -- rake build:bc_desktop
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The Desktop App is an <strong>optional</strong> app and will not be built and
+installed when you call:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 nodejs010 git19 -- rake
+sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
+</pre></div>
+</div>
+<p>Instead you need to explicitly build and install it to prevent you from
+installing an app that is not properly configured for your users:</p>
+<div class="last highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 nodejs010 git19 -- rake build:bc_desktop
+sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:bc_desktop
+</pre></div>
+</div>
 </div>
 </li>
 <li><p class="first">We now must configure desktop apps for each cluster you want this to run
@@ -232,7 +246,7 @@ it.</p>
 </li>
 <li><p class="first">Install the Desktop App to its system location at <code class="docutils literal"><span class="pre">/var/www/ood/apps/sys</span></code>
 with:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo rsync -rlptv --delete --quiet ~/ood/src/bc_desktop/ /var/www/ood/apps/sys/bc_desktop
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:bc_desktop
 </pre></div>
 </div>
 </li>
