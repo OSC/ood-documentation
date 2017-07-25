@@ -40,6 +40,15 @@ This is greatly simplified by the ood-apps-installer_ utility.
 
    where you replace ``login.my_center.edu`` with your public login host.
 
+   .. tip::
+
+      You can skip this step entirely if you built the apps with this
+      environment variable defined during the build:
+
+      .. code-block:: sh
+
+         scl enable rh-ruby22 nodejs010 git19 -- rake DEFAULT_SSHHOST="login.my_center.edu"
+
 #. Finally, we install the apps to their system location at
    ``/var/www/ood/apps/sys`` with:
 
