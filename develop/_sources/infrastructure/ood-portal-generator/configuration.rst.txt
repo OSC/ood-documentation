@@ -351,6 +351,8 @@ corresponding authentication mechanism. If either of these properties are
        - :ref:`add-shibboleth-authentication`
        - :ref:`add-cilogon-authentication`
 
+.. _ood-portal-generator-configuration-configure-reverse-proxy:
+
 Configure Reverse Proxy
 -----------------------
 
