@@ -32,3 +32,4 @@ Welcome to Open OnDemand's documentation!
    :caption: Resources
 
    user-documentation
+   faq
