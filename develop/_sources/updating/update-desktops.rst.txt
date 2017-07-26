@@ -43,7 +43,7 @@ Instructions to update
 
       cd ~/ood/src/apps
       scl enable git19 -- git fetch
-      scl enable git19 -- git checkout v0.3.0
+      scl enable git19 -- git checkout v1.0.0
 
 #. Confirm that your center's local configuration files under
    ``build/bc_desktop/local/`` exist.
