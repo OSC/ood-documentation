@@ -5,10 +5,19 @@ GITHUB_REPO="ood-documentation"
 NAME="Travis Builder"
 EMAIL="oscwiag@gmail.com"
 
-if [[ ${TRAVIS_BRANCH} == "master" ]] || \
-   [[ ${TRAVIS_BRANCH} == "develop" ]] || \
-   [[ ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$ ]]
+# Use proper branch name
+if [[ ${TRAVIS_PULL_REQUEST} == "false" ]] ; then
+  BRANCH="${TRAVIS_BRANCH}"
+else
+  BRANCH="${TRAVIS_PULL_REQUEST_BRANCH}"
+fi
+
+if [[ ${BRANCH} == "master" ]] || \
+   [[ ${BRANCH} == "develop" ]] || \
+   [[ ${BRANCH} =~ ^release-[0-9]+\.[0-9]+$ ]]
 then
+  echo "Publishing documentation for the branch: ${BRANCH}"
+
   # Update git configuration
   git config user.name "${NAME}"
   git config user.email "${EMAIL}"
@@ -19,8 +28,8 @@ then
   cd gh-pages
 
   # Clean up old build and copy in the new built html
-  rm -fr "${TRAVIS_BRANCH}"
-  cp -R ../${GITHUB_REPO}/build/html "${TRAVIS_BRANCH}"
+  rm -fr "${BRANCH}"
+  cp -R ../${GITHUB_REPO}/build/html "${BRANCH}"
 
   # Add and commit changes
   git add -A .
@@ -28,5 +37,5 @@ then
   # -q is very important, otherwise you leak your GITHUB_TOKEN
   git push -q -f origin gh-pages
 else
-  echo "Not publishing documentation for this branch ${TRAVIS_BRANCH}"
+  echo "Not publishing documentation for the branch: ${BRANCH}"
 fi
