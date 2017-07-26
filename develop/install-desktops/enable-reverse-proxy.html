@@ -205,6 +205,30 @@ return a string that matches the above regular expression</p>
 n0001.ten.osc.edu
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If the <strong class="command">hostname</strong> command gives you a value that cannot be used
+to connect to the compute node from the OnDemand host, then you can
+override it in the cluster config with a Bash command that will work,
+e.g.:</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="c1"># ...</span>
+  <span class="c1"># ... other configuration options ...</span>
+  <span class="c1"># ...</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+      <span class="c1"># ...</span>
+      <span class="c1"># set_host: &quot;host=$(hostname)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$1}&#39;)&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+      <span class="c1"># ...</span>
+      <span class="c1"># set_host: &quot;host=$(hostname)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$1}&#39;)&quot;</span>
+</pre></div>
+</div>
+</div>
 </li>
 </ul>
 <ol class="arabic">
