@@ -22,6 +22,31 @@ Requirements:
      $ hostname
      n0001.ten.osc.edu
 
+  .. note::
+
+     If the :command:`hostname` command gives you a value that cannot be used
+     to connect to the compute node from the OnDemand host, then you can
+     override it in the cluster config with a Bash command that will work,
+     e.g.:
+
+     .. code-block:: yaml
+
+        # /etc/ood/config/clusters.d/cluster1.yml
+        ---
+        v2:
+          # ...
+          # ... other configuration options ...
+          # ...
+          batch_connect:
+            basic:
+              # ...
+              # set_host: "host=$(hostname)"
+              set_host: "host=$(hostname -A | awk '{print $1}')"
+            vnc:
+              # ...
+              # set_host: "host=$(hostname)"
+              set_host: "host=$(hostname -A | awk '{print $1}')"
+
 #. We will update the Apache configuration file by adding ``Location``
    directives that will be used for the reverse proxy. This requires modifying
    the configuration file for the :ref:`ood-portal-generator`.
