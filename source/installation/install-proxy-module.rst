@@ -13,7 +13,7 @@ It is given by the :ref:`mod-ood-proxy` project.
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/mod_ood_proxy.git
       cd mod_ood_proxy/
-      scl enable git19 -- git checkout v0.3.0
+      scl enable git19 -- git checkout v0.3.1
 
 #. Install it to its global location:
 

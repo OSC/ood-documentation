@@ -1,3 +1,5 @@
+.. _install-pun-utility:
+
 Install the PUN Utility
 =======================
 
