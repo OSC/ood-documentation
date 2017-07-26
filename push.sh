@@ -9,10 +9,13 @@ EMAIL="oscwiag@gmail.com"
 # update (this stops it from publishing twice, and limits it to developers who
 # have write access to the repo).
 
-if [[ ${TRAVIS_PULL_REQUEST} == "false" ]] && \
-   [[ ${TRAVIS_BRANCH} == "master" ]] || \
-   [[ ${TRAVIS_BRANCH} == "develop" ]] || \
-   [[ ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$ ]]
+if [[ \
+      ${TRAVIS_PULL_REQUEST} == "false" && \
+      ( ${TRAVIS_BRANCH} == "master"  || \
+        ${TRAVIS_BRANCH} == "develop" || \
+        ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$
+      ) \
+   ]]
 then
   echo "Publishing documentation for the branch: ${TRAVIS_BRANCH}"
 
