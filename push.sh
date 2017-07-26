@@ -16,6 +16,8 @@ if [[ ${BRANCH} == "master" ]] || \
    [[ ${BRANCH} == "develop" ]] || \
    [[ ${BRANCH} =~ ^release-[0-9]+\.[0-9]+$ ]]
 then
+  echo "Publishing documentation for the branch: ${BRANCH}"
+
   # Update git configuration
   git config user.name "${NAME}"
   git config user.email "${EMAIL}"
@@ -35,5 +37,5 @@ then
   # -q is very important, otherwise you leak your GITHUB_TOKEN
   git push -q -f origin gh-pages
 else
-  echo "Not publishing documentation for this branch ${BRANCH}"
+  echo "Not publishing documentation for the branch: ${BRANCH}"
 fi
