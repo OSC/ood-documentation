@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Enable Reverse Proxy &mdash; Open OnDemand 0.0.1 documentation</title>
+  <title>3. Enable Reverse Proxy &mdash; Open OnDemand develop documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand 0.0.1 documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand develop documentation" href="../index.html"/>
         <link rel="up" title="Install Desktops" href="../install-desktops.html"/>
         <link rel="next" title="4. Install Desktop App" href="install-desktop-app.html"/>
         <link rel="prev" title="2. Modify Cluster Configuration" href="modify-cluster-configuration.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                0.0.1
+                develop
               </div>
             
           
@@ -111,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="customize-desktop-app.html">5. Customize Desktop App</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -203,6 +204,30 @@ return a string that matches the above regular expression</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>$ hostname
 n0001.ten.osc.edu
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If the <strong class="command">hostname</strong> command gives you a value that cannot be used
+to connect to the compute node from the OnDemand host, then you can
+override it in the cluster config with a Bash command that will work,
+e.g.:</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="c1"># ...</span>
+  <span class="c1"># ... other configuration options ...</span>
+  <span class="c1"># ...</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+      <span class="c1"># ...</span>
+      <span class="c1"># set_host: &quot;host=$(hostname)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$1}&#39;)&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+      <span class="c1"># ...</span>
+      <span class="c1"># set_host: &quot;host=$(hostname)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$1}&#39;)&quot;</span>
+</pre></div>
+</div>
 </div>
 </li>
 </ul>
@@ -348,7 +373,7 @@ that as an exercise to the reader.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.0.1',
+            VERSION:'develop',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

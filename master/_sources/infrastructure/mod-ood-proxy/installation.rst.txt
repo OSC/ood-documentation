@@ -8,10 +8,10 @@ Installation
    .. code-block:: sh
 
       # Set latest release as of writing this
-      LATEST="0-2-stable"
+      LATEST="0.3.0"
 
       # Download latest release
-      wget --content-disposition https://github.com/OSC/mod_ood_proxy/archive/${LATEST}.tar.gz
+      wget --content-disposition https://github.com/OSC/mod_ood_proxy/archive/v${LATEST}.tar.gz
 
       # Unpack this archive
       tar xzvf mod_ood_proxy-${LATEST}.tar.gz

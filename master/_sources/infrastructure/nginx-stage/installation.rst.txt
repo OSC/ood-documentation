@@ -8,10 +8,10 @@ Installation
    .. code-block:: sh
 
       # Set latest release as of writing this
-      LATEST="0-2-stable"
+      LATEST="0.2.1"
 
       # Download latest release
-      wget --content-disposition https://github.com/OSC/nginx_stage/archive/${LATEST}.tar.gz
+      wget --content-disposition https://github.com/OSC/nginx_stage/archive/v${LATEST}.tar.gz
 
       # Unpack this archive
       tar xzvf nginx_stage-${LATEST}.tar.gz

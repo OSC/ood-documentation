@@ -6,20 +6,37 @@ Install Desktop App
 No we will go through installing the provided `bc_desktop`_ app as well as
 configuring it work at your center.
 
-#. We will build this app in our previous working directory:
+#. We will build this app in our previous web applications setup directory
+   (discussed in :ref:`install-apps`):
 
    .. code-block:: sh
 
-      cd ~/ood/src
+      cd ~/ood/src/apps/
 
-#. We start by cloning and checking out the latest tag for the `bc_desktop`_
-   app:
+#. By default this app is not built and installed with all the other required
+   OOD apps. You will need to build this app explicitly with:
 
    .. code-block:: sh
 
-      scl enable git19 -- git clone https://github.com/OSC/bc_desktop.git
-      cd bc_desktop/
-      scl enable git19 -- git checkout v0.1.1
+      scl enable rh-ruby22 nodejs010 git19 -- rake build:bc_desktop
+
+   .. note::
+
+      The Desktop App is an **optional** app and will not be built and
+      installed when you call:
+
+      .. code-block:: sh
+
+         scl enable rh-ruby22 nodejs010 git19 -- rake
+         sudo scl enable rh-ruby22 -- rake install
+
+      Instead you need to explicitly build and install it to prevent you from
+      installing an app that is not properly configured for your users:
+
+      .. code-block:: sh
+
+         scl enable rh-ruby22 nodejs010 git19 -- rake build:bc_desktop
+         sudo scl enable rh-ruby22 -- rake install:bc_desktop
 
 #. We now must configure desktop apps for each cluster you want this to run
    under in the following directory ``local/``
@@ -60,7 +77,7 @@ configuring it work at your center.
 
    .. code-block:: sh
 
-      sudo rsync -rlptv --delete --quiet ~/ood/src/bc_desktop/ /var/www/ood/apps/sys/bc_desktop
+      sudo scl enable rh-ruby22 -- rake install:bc_desktop
 
 #. Navigate to your OnDemand site, in particular the Dashboard App, and you
    should see in the top dropdown menu "Interactive Apps" => "Cluster1
