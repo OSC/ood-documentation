@@ -5,10 +5,20 @@ GITHUB_REPO="ood-documentation"
 NAME="Travis Builder"
 EMAIL="oscwiag@gmail.com"
 
-if [[ ${TRAVIS_BRANCH} == "master" ]] || \
-   [[ ${TRAVIS_BRANCH} == "develop" ]] || \
-   [[ ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$ ]]
+# Do not publish if it is a pull request update, but publish if it is a branch
+# update (this stops it from publishing twice, and limits it to developers who
+# have write access to the repo).
+
+if [[ \
+      ${TRAVIS_PULL_REQUEST} == "false" && \
+      ( ${TRAVIS_BRANCH} == "master"  || \
+        ${TRAVIS_BRANCH} == "develop" || \
+        ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$
+      ) \
+   ]]
 then
+  echo "Publishing documentation for the branch: ${TRAVIS_BRANCH}"
+
   # Update git configuration
   git config user.name "${NAME}"
   git config user.email "${EMAIL}"
@@ -28,5 +38,5 @@ then
   # -q is very important, otherwise you leak your GITHUB_TOKEN
   git push -q -f origin gh-pages
 else
-  echo "Not publishing documentation for this branch ${TRAVIS_BRANCH}"
+  echo "Not publishing documentation for commit: ${TRAVIS_COMMIT}."
 fi
