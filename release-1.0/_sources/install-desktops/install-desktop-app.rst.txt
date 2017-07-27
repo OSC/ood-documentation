@@ -3,8 +3,7 @@
 Install Desktop App
 ===================
 
-No we will go through installing the provided `bc_desktop`_ app as well as
-configuring it work at your center.
+Now we will install the provided `bc_desktop`_ app as well as configure it work at your center.
 
 #. We will build this app in our previous web applications setup directory
    (discussed in :ref:`install-apps`):
@@ -38,7 +37,7 @@ configuring it work at your center.
          scl enable rh-ruby22 nodejs010 git19 -- rake build:bc_desktop
          sudo scl enable rh-ruby22 -- rake install:bc_desktop
 
-#. We now must configure desktop apps for each cluster you want this to run
+#. We now must configure Desktop apps for each cluster you want this to run
    under in the following directory ``local/``
 
    .. code-block:: sh
@@ -49,8 +48,8 @@ configuring it work at your center.
       # Change our working directory to `local/`
       cd local
 
-#. For each cluster we want to launch desktop on we will need a corresponding
-   YAML configuration file (e.g., ``cluster1.yml``, ``cluster2.yml``, ...) that
+#. For each cluster we want to launch a Desktop session on we will need a corresponding
+   form configuration file in YAML format (e.g., ``cluster1.yml``, ``cluster2.yml``, ...) that
    looks like:
 
    .. code-block:: yaml
@@ -84,14 +83,14 @@ configuring it work at your center.
    Desktop".
 
    After choosing "Cluster1 Desktop" from the menu, you should be presented
-   with a form to submit a Desktop to the given cluster.
+   with a form to submit a Desktop session to the given cluster.
 
-   Submit a desktop and wait for it to run. If you see a Desktop start Running
+   Submit a Desktop session and wait for it to run. If you see a Desktop session start Running
    but then quickly disappear you can debug it by viewing the logs in::
 
      ~/ondemand/data/sys/dashboard/batch_connect/sys/bc_desktop/<cluster>/output/<uuid>/
 
-   where ``uuid`` is a randomly generated id for a single desktop session. You
+   where ``uuid`` is a randomly generated id for a single Desktop session. You
    might want to find the latest one by looking at the timestamps.
 
    .. warning::
