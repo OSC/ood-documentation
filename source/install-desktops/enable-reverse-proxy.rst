@@ -4,11 +4,26 @@ Enable Reverse Proxy
 ====================
 
 The reverse proxy will proxy a request to any specified host and port through
-IP sockets. This is different than what is used for proxying to per-user NGINX
-processes through Unix domain sockets. This can be used to connect to Jupyter
-notebook servers, RStudio servers, VNC servers, and more... This is disabled by
-default as it can be a security risk if not properly setup using a good
-``host_regex``.
+IP sockets. This can be used to connect to Jupyter notebook servers, RStudio
+servers, VNC servers, and more... This is disabled by default as it can be a
+security risk if not properly setup using a good ``host_regex``.
+
+After enabling, two new routes will be available: ``/node`` and ``/rnode``.
+
+- When making a GET request to ``/node/myhost/5432/foo/bar.html`` the request
+  will be proxied to the server running on host "myhost" and port "5432" and a
+  GET request will be made to this server in the form: ``/node/myhost/5432/foo/bar.html``.
+  Thus the challenge with configuring the server is that the server must be
+  started with a base URI of the sub-URI ``/node/myhost/5432`` and properly
+  prepend this base URI to any asset links and redirect URLs. Jupyter or RStudio
+  are examples of servers that use this.
+- When making a GET request to ``/rnode/myhost/5432/foo/bar.html`` the request
+  will be proxied to the server running on host "myhost" and port "5432" and a
+  GET request will be made to this server in the form: ``/foo/bar.html``. This
+  means the server will not need to be started at a sub-URI. However, this also
+  means that any redirects or links to other assets in the response must be
+  relative to the root, limiting the complexity of the server. noVNC is an
+  example of a server that uses this.
 
 Requirements:
 
@@ -46,6 +61,9 @@ Requirements:
               # ...
               # set_host: "host=$(hostname)"
               set_host: "host=$(hostname -A | awk '{print $1}')"
+
+
+Steps to enable reverse proxy:
 
 #. We will update the Apache configuration file by adding ``Location``
    directives that will be used for the reverse proxy. This requires modifying
@@ -144,6 +162,3 @@ browser.
 
       As we don't have the simple server return anything to the browser, you
       can ignore any errors or warnings you see in your browser.
-
-      You can get fancier using a Python ``SimpleHTTPServer``, but we leave
-      that as an exercise to the reader.

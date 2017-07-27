@@ -3,8 +3,7 @@
 Install Applications
 ====================
 
-Now we will go through installing all of the Open OnDemand system web
-applications:
+Now we will install all of the Open OnDemand system web applications:
 
 - :ref:`dashboard`
 - :ref:`shell`
