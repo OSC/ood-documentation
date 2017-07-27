@@ -3,8 +3,8 @@
 Updating
 ========
 
-This tutorial assumes you have already walked through :ref:`installation`
-previously and have a fully working Open Ondemand Portal. The purpose of this
+This tutorial assumes you have already walked through the :ref:`installation`
+previously and have a fully working Open OnDemand Portal. The purpose of this
 tutorial is to guide you on how to update the various Open OnDemand components.
 
 .. toctree::
