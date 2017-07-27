@@ -6,8 +6,7 @@ Modify Form Attributes
 In some cases you may want to modify a form attribute. Some examples:
 
 - Use a Gnome desktop instead of Mate desktop.
-- Remove the "Queue" form field as your cluster will handle the queue
-  dynamically.
+- Remove the "Queue" form field as your scheduler will auto route to the correct queue.
 - Hard-code the "Number of nodes" to just 1, so that users can't launch
   desktops with multiple nodes.
 - Change the label for the form field "Account" to "Project".
