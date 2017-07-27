@@ -9,17 +9,19 @@ user and fill in hard-coded values. All of these cases and more can easily be
 customized in the following files:
 
 :file:`bc_desktop/local/{cluster_desktop}.yml`
-  form config file that describes a given Desktop app along with form attributes presented to the
-  user. Replace ``{cluster_desktop}`` with whatever name you desire, as the
-  previous section used ``cluster1.yml``, ``cluster2.yml`` etc. as examples. For
-  each form config file underneath ``bc_desktop/local/``, a separate desktop app
-  will be presented as an option to the user.
+  Form configuration file that describes a given Desktop app along with form
+  attributes presented to the user. Replace ``cluster_desktop`` with a
+  representable name, in the previous section we used ``cluster1.yml`` and
+  ``cluster2.yml`` to describe the desktops for the various clusters. For each
+  form configuration file underneath ``bc_desktop/local/``, a separate desktop
+  app will be presented as an option to the user.
 
 :file:`bc_desktop/local/submit/{custom_submit}.yml.erb`
-  describes how the batch job should be submitted to your cluster. Replace ``{custom_submit}`` with whatever name you desire. The name of
-  this file needs to be specified in the :file:`bc_desktop/local/{cluster_desktop}.yml` form configuration
-  file, so when a user submits the the form, the specified submit config is used
-  to set the arguments.
+  Describes how the batch job should be submitted to your cluster. Replace
+  ``custom_submit`` with a descriptive name. Be sure that the name of this file
+  is specified in the :file:`bc_desktop/local/{cluster_desktop}.yml` form
+  configuration file, so that when a user submits the form, the specified
+  submission configuration is used when submitting the batch job.
 
 .. note::
 

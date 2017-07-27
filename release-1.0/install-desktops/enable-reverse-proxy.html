@@ -104,7 +104,9 @@
 <li class="toctree-l2"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-cluster-configuration.html">2. Modify Cluster Configuration</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">3. Enable Reverse Proxy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#verify-it-works">3.1. Verify it Works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">3.1. Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#steps-to-enable-in-apache">3.2. Steps to Enable in Apache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verify-it-works">3.3. Verify it Works</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="install-desktop-app.html">4. Install Desktop App</a></li>
@@ -188,28 +190,14 @@
             
   <div class="section" id="enable-reverse-proxy">
 <span id="install-desktops-enable-reverse-proxy"></span><h1>3. Enable Reverse Proxy<a class="headerlink" href="#enable-reverse-proxy" title="Permalink to this headline">¶</a></h1>
-<p>The reverse proxy will proxy a request to any specified host and port through
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_proxy">reverse proxy</a> will proxy a request to any specified host and port through
 IP sockets. This can be used to connect to Jupyter notebook servers, RStudio
 servers, VNC servers, and more… This is disabled by default as it can be a
 security risk if not properly setup using a good <code class="docutils literal"><span class="pre">host_regex</span></code>.</p>
-<p>After enabling, two new routes will be available: <code class="docutils literal"><span class="pre">/node</span></code> and <code class="docutils literal"><span class="pre">/rnode</span></code>.</p>
-<ul class="simple">
-<li>When making a GET request to <code class="docutils literal"><span class="pre">/node/myhost/5432/foo/bar.html</span></code> the request
-will be proxied to the server running on host “myhost” and port “5432” and a
-GET request will be made to this server in the form: <code class="docutils literal"><span class="pre">/node/myhost/5432/foo/bar.html</span></code>.
-Thus the challenge with configuring the server is that the server must be
-started with a base URI of the sub-URI <code class="docutils literal"><span class="pre">/node/myhost/5432</span></code> and properly
-prepend this base URI to any asset links and redirect URLs. Jupyter or RStudio
-are examples of servers that use this.</li>
-<li>When making a GET request to <code class="docutils literal"><span class="pre">/rnode/myhost/5432/foo/bar.html</span></code> the request
-will be proxied to the server running on host “myhost” and port “5432” and a
-GET request will be made to this server in the form: <code class="docutils literal"><span class="pre">/foo/bar.html</span></code>. This
-means the server will not need to be started at a sub-URI. However, this also
-means that any redirects or links to other assets in the response must be
-relative to the root, limiting the complexity of the server. noVNC is an
-example of a server that uses this.</li>
-</ul>
-<p>Requirements:</p>
+<p>You can read more about how this works in Open OnDemand under
+<a class="reference internal" href="../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-configuration-configure-reverse-proxy"><span class="std std-ref">Configure Reverse Proxy</span></a>.</p>
+<div class="section" id="requirements">
+<h2>3.1. Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">a regular expression that best describes all the hosts that you would want a
 user to connect to through the proxy (e.g., <code class="docutils literal"><span class="pre">[\w.-]+\.osc\.edu</span></code>)</p>
@@ -246,7 +234,9 @@ e.g.:</p>
 </div>
 </li>
 </ul>
-<p>Steps to enable reverse proxy:</p>
+</div>
+<div class="section" id="steps-to-enable-in-apache">
+<h2>3.2. Steps to Enable in Apache<a class="headerlink" href="#steps-to-enable-in-apache" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">We will update the Apache configuration file by adding <code class="docutils literal"><span class="pre">Location</span></code>
 directives that will be used for the reverse proxy. This requires modifying
@@ -299,8 +289,9 @@ expression, we will need to escape the blackslashes, so <code class="docutils li
 </div>
 </li>
 </ol>
+</div>
 <div class="section" id="verify-it-works">
-<h2>3.1. Verify it Works<a class="headerlink" href="#verify-it-works" title="Permalink to this headline">¶</a></h2>
+<h2>3.3. Verify it Works<a class="headerlink" href="#verify-it-works" title="Permalink to this headline">¶</a></h2>
 <p>We can test that the reverse proxy is now functional by starting up a simple
 server on a compute node and connecting to it through the proxy with our
 browser.</p>

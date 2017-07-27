@@ -70,7 +70,7 @@ above options.
 
 .. warning::
 
-   Caution must be taken if you decide to ovverride the ``form`` configuration
+   Caution must be taken if you decide to override the ``form`` configuration
    option. As this is an array, you can't simply prepend or append, you will
    need to completely redefine it with your included modifications.
 
@@ -196,7 +196,7 @@ modified with the following edits to your custom YAML configuration file:
 The key here is that we are defining a hash for the ``bc_account`` attribute
 instead of hard-coding it to a specific value. This means we will only override
 the equivalent option for this attribute (for the above example we are
-ovverriding the ``label`` option for the ``bc_account`` attribute).
+overriding the ``label`` option for the ``bc_account`` attribute).
 
 Now when you refresh the form in your browser, you should now see an input
 field with the label "Project".
@@ -239,7 +239,7 @@ configuration file:
 The key here is that we are defining a hash for the ``bc_account`` attribute
 instead of hard-coding it to a specific value. This means we will only override
 the equivalent option for this attribute (for the above example we are
-ovverriding the ``help`` option for the ``bc_account`` attribute).
+overriding the ``help`` option for the ``bc_account`` attribute).
 
 Now when you refresh the form in your browser, you should see the help message
 below the "Account" form input field.
@@ -276,7 +276,7 @@ configuration file:
 
 The key here is that we are defining a hash for the ``bc_num_hours`` attribute
 instead of hard-coding it to a number. This means we want to override the
-equivalent option for this attribute (for the above example we are ovverriding
+equivalent option for this attribute (for the above example we are overriding
 the ``value`` option for the ``bc_num_hours`` attribute).
 
 Now when you refresh the desktop form in your browser, you should see a default
