@@ -8,10 +8,10 @@ Installation
    .. code-block:: sh
 
       # Set latest release as of writing this
-      LATEST="0-0-stable"
+      LATEST="0.0.3"
 
       # Download latest release
-      wget --content-disposition https://github.com/OSC/ood_auth_map/archive/${LATEST}.tar.gz
+      wget --content-disposition https://github.com/OSC/ood_auth_map/archive/v${LATEST}.tar.gz
 
       # Unpack this archive
       tar xzvf ood_auth_map-${LATEST}.tar.gz
