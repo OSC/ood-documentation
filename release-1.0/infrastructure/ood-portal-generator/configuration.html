@@ -588,21 +588,39 @@ notebook servers, RStudio servers, VNC servers, and more… This is disabled by
 default as it can be security risk if not properly setup using a good
 <code class="docutils literal"><span class="pre">host_regex</span></code>.</p>
 <p>A URL request to the <code class="docutils literal"><span class="pre">node_uri</span></code> will reverse proxy to the given <code class="docutils literal"><span class="pre">host</span></code> and
-<code class="docutils literal"><span class="pre">port</span></code> using the <strong>full</strong> URI path:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>http://www.example.com/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...
-<span class="c1">#=&gt; http://&lt;host&gt;:&lt;port&gt;/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span>
+<code class="docutils literal"><span class="pre">port</span></code> using the <strong>full</strong> URI path. So a request to the frontend Apache
+proxy that looks like:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.example.edu</span>
+</pre></div>
+</div>
+<p>will be reverse proxied to the backend server with the following request
+format:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">&lt;host&gt;:&lt;port&gt;</span>
 </pre></div>
 </div>
 <p>A URL request to the <code class="docutils literal"><span class="pre">rnode_uri</span></code> will reverse proxy to the given <code class="docutils literal"><span class="pre">host</span></code> and
-<code class="docutils literal"><span class="pre">port</span></code> using the <strong>relative</strong> URI path:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>http://www.example.com/&lt;rnode_uri&gt;/&lt;host&gt;/&lt;port&gt;/...
-<span class="c1">#=&gt; http://&lt;host&gt;:&lt;port&gt;/...</span>
+<code class="docutils literal"><span class="pre">port</span></code> using the <strong>relative</strong> URI path. So a request to the frontend Apache
+proxy that looks like:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;rnode_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.example.edu</span>
 </pre></div>
 </div>
-<p>Web server apps will have a preference for the format of the URI request they
-receive, and this provides two such options. In the case of <code class="docutils literal"><span class="pre">node_uri</span></code> the
-developer may have to program the web server to accept requests with a sub-URI
-that matches <code class="docutils literal"><span class="pre">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;</span></code>.</p>
+<p>will be reverse proxied to the backend server with the following request
+format:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">&lt;host&gt;:&lt;port&gt;</span>
+</pre></div>
+</div>
+<p>Notice that we strip off the portion of the URI request path that is used to
+determine the backend web server.</p>
+<p>Both formats are provided to better support the varying capabilities for the
+multitude of web application servers. For the case of using <code class="docutils literal"><span class="pre">node_uri</span></code> the
+developer will need to modify the web server to accommodate requests with a
+sub-URI that follows the dynamic formatting of <code class="docutils literal"><span class="pre">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;</span></code>.
+For the case of using <code class="docutils literal"><span class="pre">rnode_uri</span></code> the developer needs to confirm that all
+assets and links supplied by the web server are relative and not absolute.</p>
 <dl class="describe">
 <dt>
 <code class="descname">host_regex (String)</code></dt>
