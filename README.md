@@ -6,6 +6,7 @@ Or select your version:
 
 - [Development](https://osc.github.io/ood-documentation/develop/)
 - [Latest Stable](https://osc.github.io/ood-documentation/master/)
+- [1.0](https://osc.github.io/ood-documentation/release-1.0/)
 
 ## Development
 
