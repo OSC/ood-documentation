@@ -130,13 +130,13 @@ configuration file with the following format:
 
    This is typically set within an Apache ``LocationMatch`` container using the
    regular express named group ``host``. This corresponds to the host address
-   that the user's traffix is proxied to.
+   that the user's traffic is proxied to.
 
 .. envvar:: MATCH_PORT
 
    This is typically set within an Apache ``LocationMatch`` container using the
    regular express named group ``port``. This corresponds to the port number
-   that the user's traffix is proxied to.
+   that the user's traffic is proxied to.
 
 .. envvar:: MATCH_URI
 
