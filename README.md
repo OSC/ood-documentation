@@ -10,11 +10,11 @@ Or select your version:
 ## Development
 
 Currently all builds are generated using the
-[docker-sphinx](https://github.com/nickjer/docker-sphinx) Docker image. They
-are built using the following command from the root of this repo:
+[docker-sphinx](https://github.com/OSC/docker-sphinx/) Docker image. They are
+built using the following command from the root of this repo:
 
 ```bash
-docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" nickjer/docker-sphinx make html
+docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
 ```
 
 ## Contributing

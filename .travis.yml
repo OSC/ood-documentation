@@ -2,9 +2,9 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker pull nickjer/docker-sphinx
+  - docker pull ohiosupercomputer/docker-sphinx
 script:
-  - docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" nickjer/docker-sphinx make html
+  - docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
 after_success:
   - ./push.sh
 notifications:
