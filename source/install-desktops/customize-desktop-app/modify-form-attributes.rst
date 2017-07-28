@@ -38,7 +38,7 @@ default form definition located at :file:`bc_desktop/form.yml`:
    description: |
      This app will launch an interactive desktop on one or more compute nodes. You
      will have full access to the resources these nodes provide. This is analogous
-     to an interctive batch job.
+     to an interactive batch job.
    attributes:
      desktop: "mate"
      bc_vnc_idle: 0
@@ -286,6 +286,6 @@ value of ``8`` in the "Number of hours" form field.
 
    There is a possibility you may see a number other than ``8`` in the above
    example. That is because the Interactive Apps tool built into the Dashboard
-   **remembers** your last succesful app launch for a corresponding app. So
+   **remembers** your last successful app launch for a corresponding app. So
    when you go back to the form page for that given app, it will auto-fill in
    the form with your previous values.

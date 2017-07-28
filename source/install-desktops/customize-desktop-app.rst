@@ -28,7 +28,7 @@ customized in the following files:
    The ``.erb`` file extension will cause the YAML configuration file to be
    processed using the `eRuby (Embedded Ruby)`_ templating system. This allows
    you to embed Ruby code into the YAML configuration file for flow control,
-   variable subsitution, and more.
+   variable substitution, and more.
 
 .. toctree::
    :maxdepth: 2
