@@ -40,7 +40,7 @@ such:
      - "RequestHeader unset Cookie \"expr=-z %{req:Cookie}\""
      - "Require valid-user"
 
-   # Use Shibboleth logou
+   # Use Shibboleth logout
    logout_redirect: /Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout
 
    # Capture system user name from authenticated user name

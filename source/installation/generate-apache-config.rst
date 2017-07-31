@@ -10,7 +10,7 @@ Generate Apache Config
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/ood-portal-generator.git
       cd ood-portal-generator/
-      scl enable git19 -- git checkout v0.3.1
+      scl enable git19 -- git checkout v0.4.0
 
 #. :ref:`ood-portal-generator` is a script that takes a ``config.yml`` (or
    uses defaults if not provided) and renders an Apache config from a template.

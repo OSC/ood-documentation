@@ -6,7 +6,7 @@ What is Open OnDemand
 The Open OnDemand Project [1]_ is an NSF-funded [2]_ open-source HPC portal based on
 the `Ohio Supercomputer Center's <osc_>`_ original OnDemand portal. The goal of
 Open OnDemand is to provide an easy way for system administrators to provide
-web access to their HPC resouces.
+web access to their HPC resources.
 
 ----
 
