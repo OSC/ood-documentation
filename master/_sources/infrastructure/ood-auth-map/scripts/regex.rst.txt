@@ -4,7 +4,7 @@ ood_auth_map.regex
 ==================
 
 This script parses the authenticated username using a regular expression
-parttern to capture the local system username. The default regular expression
+pattern to capture the local system username. The default regular expression
 if none is provided is to just *echo* back the supplied authenticated username.
 If no local system username is captured by the regular expression, then a blank
 string is returned.

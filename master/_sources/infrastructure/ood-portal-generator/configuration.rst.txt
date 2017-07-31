@@ -351,6 +351,8 @@ corresponding authentication mechanism. If either of these properties are
        - :ref:`add-shibboleth-authentication`
        - :ref:`add-cilogon-authentication`
 
+.. _ood-portal-generator-configuration-configure-reverse-proxy:
+
 Configure Reverse Proxy
 -----------------------
 
@@ -362,25 +364,48 @@ default as it can be security risk if not properly setup using a good
 ``host_regex``.
 
 A URL request to the ``node_uri`` will reverse proxy to the given ``host`` and
-``port`` using the **full** URI path:
+``port`` using the **full** URI path. So a request to the frontend Apache
+proxy that looks like:
 
-.. code-block:: sh
+.. code-block:: http
 
-   http://www.example.com/<node_uri>/<host>/<port>/...
-   #=> http://<host>:<port>/<node_uri>/<host>/<port>/...
+   GET /<node_uri>/<host>/<port>/... HTTP/1.1
+   Host: ondemand.example.edu
+
+will be reverse proxied to the backend server with the following request
+format:
+
+.. code-block:: http
+
+   GET /<node_uri>/<host>/<port>/... HTTP/1.1
+   Host: <host>:<port>
 
 A URL request to the ``rnode_uri`` will reverse proxy to the given ``host`` and
-``port`` using the **relative** URI path:
+``port`` using the **relative** URI path. So a request to the frontend Apache
+proxy that looks like:
 
-.. code-block:: sh
+.. code-block:: http
 
-   http://www.example.com/<rnode_uri>/<host>/<port>/...
-   #=> http://<host>:<port>/...
+   GET /<rnode_uri>/<host>/<port>/... HTTP/1.1
+   Host: ondemand.example.edu
 
-Web server apps will have a preference for the format of the URI request they
-receive, and this provides two such options. In the case of ``node_uri`` the
-developer may have to program the web server to accept requests with a sub-URI
-that matches ``/<node_uri>/<host>/<port>``.
+will be reverse proxied to the backend server with the following request
+format:
+
+.. code-block:: http
+
+   GET /... HTTP/1.1
+   Host: <host>:<port>
+
+Notice that we strip off the portion of the URI request path that is used to
+determine the backend web server.
+
+Both formats are provided to better support the varying capabilities for the
+multitude of web application servers. For the case of using ``node_uri`` the
+developer will need to modify the web server to accommodate requests with a
+sub-URI that follows the dynamic formatting of ``/<node_uri>/<host>/<port>``.
+For the case of using ``rnode_uri`` the developer needs to confirm that all
+assets and links supplied by the web server are relative and not absolute.
 
 .. describe:: host_regex (String)
 

@@ -3,8 +3,7 @@
 Install Applications
 ====================
 
-Now we will go through installing all of the Open OnDemand system web
-applications:
+Now we will install all of the Open OnDemand system web applications:
 
 - :ref:`dashboard`
 - :ref:`shell`
@@ -22,7 +21,7 @@ This is greatly simplified by the ood-apps-installer_ utility.
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/ood-apps-installer.git apps
       cd apps/
-      scl enable git19 -- git checkout v0.2.0
+      scl enable git19 -- git checkout v1.0.0
 
 #. Begin building the apps (may take ~15 min):
 
@@ -39,6 +38,15 @@ This is greatly simplified by the ood-apps-installer_ utility.
       echo "DEFAULT_SSHHOST=login.my_center.edu" > build/shell/.env
 
    where you replace ``login.my_center.edu`` with your public login host.
+
+   .. tip::
+
+      You can skip this step entirely if you built the apps with this
+      environment variable defined during the build:
+
+      .. code-block:: sh
+
+         scl enable rh-ruby22 nodejs010 git19 -- rake DEFAULT_SSHHOST="login.my_center.edu"
 
 #. Finally, we install the apps to their system location at
    ``/var/www/ood/apps/sys`` with:
