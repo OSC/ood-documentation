@@ -63,7 +63,7 @@ Instructions to update
      In fact you should **save** the locally installed Apache config in case
      anything goes wrong.
 
-#. Copy this built Apache confif to the default installation location:
+#. Copy this built Apache config to the default installation location:
 
    .. code-block:: sh
 

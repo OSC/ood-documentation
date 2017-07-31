@@ -32,3 +32,9 @@ Welcome to Open OnDemand's documentation!
    :caption: Resources
 
    user-documentation
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Release Notes
+
+   release-notes/v1.0-release-notes

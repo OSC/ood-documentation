@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5.1. Modify Form Attributes &mdash; Open OnDemand develop documentation</title>
+  <title>5.1. Modify Form Attributes &mdash; Open OnDemand 1.0.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand develop documentation" href="../../index.html"/>
+    <link rel="top" title="Open OnDemand 1.0.0 documentation" href="../../index.html"/>
         <link rel="up" title="5. Customize Desktop App" href="../customize-desktop-app.html"/>
         <link rel="next" title="5.2. Custom Job Submission" href="custom-job-submission.html"/>
         <link rel="prev" title="5. Customize Desktop App" href="../customize-desktop-app.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                develop
+                1.0
               </div>
             
           
@@ -130,6 +130,10 @@
 <p class="caption"><span class="caption-text">Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
 
             
@@ -202,8 +206,7 @@
 <p>In some cases you may want to modify a form attribute. Some examples:</p>
 <ul class="simple">
 <li>Use a Gnome desktop instead of Mate desktop.</li>
-<li>Remove the “Queue” form field as your cluster will handle the queue
-dynamically.</li>
+<li>Remove the “Queue” form field as your scheduler will auto route to the correct queue.</li>
 <li>Hard-code the “Number of nodes” to just 1, so that users can’t launch
 desktops with multiple nodes.</li>
 <li>Change the label for the form field “Account” to “Project”.</li>
@@ -230,7 +233,7 @@ default form definition located at <code class="file docutils literal"><span cla
 <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
   <span class="no">This app will launch an interactive desktop on one or more compute nodes. You</span>
   <span class="no">will have full access to the resources these nodes provide. This is analogous</span>
-  <span class="no">to an interctive batch job.</span>
+  <span class="no">to an interactive batch job.</span>
 <span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">desktop</span><span class="p p-Indicator">:</span> <span class="s">&quot;mate&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">bc_vnc_idle</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
@@ -261,7 +264,7 @@ well as the order they appear in the form.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Caution must be taken if you decide to ovverride the <code class="docutils literal"><span class="pre">form</span></code> configuration
+<p class="last">Caution must be taken if you decide to override the <code class="docutils literal"><span class="pre">form</span></code> configuration
 option. As this is an array, you can’t simply prepend or append, you will
 need to completely redefine it with your included modifications.</p>
 </div>
@@ -371,7 +374,7 @@ modified with the following edits to your custom YAML configuration file:</p>
 <p>The key here is that we are defining a hash for the <code class="docutils literal"><span class="pre">bc_account</span></code> attribute
 instead of hard-coding it to a specific value. This means we will only override
 the equivalent option for this attribute (for the above example we are
-ovverriding the <code class="docutils literal"><span class="pre">label</span></code> option for the <code class="docutils literal"><span class="pre">bc_account</span></code> attribute).</p>
+overriding the <code class="docutils literal"><span class="pre">label</span></code> option for the <code class="docutils literal"><span class="pre">bc_account</span></code> attribute).</p>
 <p>Now when you refresh the form in your browser, you should now see an input
 field with the label “Project”.</p>
 <div class="admonition warning">
@@ -408,7 +411,7 @@ configuration file:</p>
 <p>The key here is that we are defining a hash for the <code class="docutils literal"><span class="pre">bc_account</span></code> attribute
 instead of hard-coding it to a specific value. This means we will only override
 the equivalent option for this attribute (for the above example we are
-ovverriding the <code class="docutils literal"><span class="pre">help</span></code> option for the <code class="docutils literal"><span class="pre">bc_account</span></code> attribute).</p>
+overriding the <code class="docutils literal"><span class="pre">help</span></code> option for the <code class="docutils literal"><span class="pre">bc_account</span></code> attribute).</p>
 <p>Now when you refresh the form in your browser, you should see the help message
 below the “Account” form input field.</p>
 <div class="admonition note">
@@ -438,7 +441,7 @@ configuration file:</p>
 </div>
 <p>The key here is that we are defining a hash for the <code class="docutils literal"><span class="pre">bc_num_hours</span></code> attribute
 instead of hard-coding it to a number. This means we want to override the
-equivalent option for this attribute (for the above example we are ovverriding
+equivalent option for this attribute (for the above example we are overriding
 the <code class="docutils literal"><span class="pre">value</span></code> option for the <code class="docutils literal"><span class="pre">bc_num_hours</span></code> attribute).</p>
 <p>Now when you refresh the desktop form in your browser, you should see a default
 value of <code class="docutils literal"><span class="pre">8</span></code> in the “Number of hours” form field.</p>
@@ -446,7 +449,7 @@ value of <code class="docutils literal"><span class="pre">8</span></code> in the
 <p class="first admonition-title">Note</p>
 <p class="last">There is a possibility you may see a number other than <code class="docutils literal"><span class="pre">8</span></code> in the above
 example. That is because the Interactive Apps tool built into the Dashboard
-<strong>remembers</strong> your last succesful app launch for a corresponding app. So
+<strong>remembers</strong> your last successful app launch for a corresponding app. So
 when you go back to the form page for that given app, it will auto-fill in
 the form with your previous values.</p>
 </div>
@@ -497,7 +500,7 @@ the form with your previous values.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'develop',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

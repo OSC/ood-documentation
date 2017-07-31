@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. Customize Desktop App &mdash; Open OnDemand develop documentation</title>
+  <title>5. Customize Desktop App &mdash; Open OnDemand 1.0.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand develop documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand 1.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Install Desktops" href="../install-desktops.html"/>
         <link rel="next" title="5.1. Modify Form Attributes" href="customize-desktop-app/modify-form-attributes.html"/>
         <link rel="prev" title="4. Install Desktop App" href="install-desktop-app.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                develop
+                1.0
               </div>
             
           
@@ -122,6 +122,10 @@
 <p class="caption"><span class="caption-text">Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
 
             
@@ -195,19 +199,25 @@ user and fill in hard-coded values. All of these cases and more can easily be
 customized in the following files:</p>
 <dl class="docutils">
 <dt><code class="file docutils literal"><span class="pre">bc_desktop/local/</span><em><span class="pre">cluster_desktop</span></em><span class="pre">.yml</span></code></dt>
-<dd>describes a given desktop app along with form attributes presented to the
-user</dd>
+<dd>Form configuration file that describes a given Desktop app along with form
+attributes presented to the user. Replace <code class="docutils literal"><span class="pre">cluster_desktop</span></code> with a
+representable name, in the previous section we used <code class="docutils literal"><span class="pre">cluster1.yml</span></code> and
+<code class="docutils literal"><span class="pre">cluster2.yml</span></code> to describe the desktops for the various clusters. For each
+form configuration file underneath <code class="docutils literal"><span class="pre">bc_desktop/local/</span></code>, a separate desktop
+app will be presented as an option to the user.</dd>
 <dt><code class="file docutils literal"><span class="pre">bc_desktop/local/submit/</span><em><span class="pre">custom_submit</span></em><span class="pre">.yml.erb</span></code></dt>
-<dd>describes how the batch job should be submitted to your cluster (needs to be
-specified in a <code class="file docutils literal"><span class="pre">bc_desktop/local/</span><em><span class="pre">cluster_desktop</span></em><span class="pre">.yml</span></code> configuration
-file)</dd>
+<dd>Describes how the batch job should be submitted to your cluster. Replace
+<code class="docutils literal"><span class="pre">custom_submit</span></code> with a descriptive name. Be sure that the name of this file
+is specified in the <code class="file docutils literal"><span class="pre">bc_desktop/local/</span><em><span class="pre">cluster_desktop</span></em><span class="pre">.yml</span></code> form
+configuration file, so that when a user submits the form, the specified
+submission configuration is used when submitting the batch job.</dd>
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The <code class="docutils literal"><span class="pre">.erb</span></code> file extension will cause the YAML configuration file to be
 processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows
 you to embed Ruby code into the YAML configuration file for flow control,
-variable subsitution, and more.</p>
+variable substitution, and more.</p>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Documentation</span></p>
@@ -276,7 +286,7 @@ variable subsitution, and more.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'develop',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

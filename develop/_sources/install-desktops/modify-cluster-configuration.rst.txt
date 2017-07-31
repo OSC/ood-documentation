@@ -5,7 +5,9 @@ Modify Cluster Configuration
 
 If you haven't already done so, you will need to first have a corresponding
 cluster configuration file for the cluster you intend to launch desktops on. It
-is recommended you follow the directions on :ref:`add-cluster-config`.
+is recommended you follow the directions on :ref:`add-cluster-config`. In order
+to submit interactive Desktop jobs your cluster must be properly configured to
+submit jobs, which means the config will have a ``job:`` section.
 
 Modify the cluster configuration file with the necessary information so that
 a batch script generated from an interactive app can find the installed

@@ -6,8 +6,7 @@ Modify Form Attributes
 In some cases you may want to modify a form attribute. Some examples:
 
 - Use a Gnome desktop instead of Mate desktop.
-- Remove the "Queue" form field as your cluster will handle the queue
-  dynamically.
+- Remove the "Queue" form field as your scheduler will auto route to the correct queue.
 - Hard-code the "Number of nodes" to just 1, so that users can't launch
   desktops with multiple nodes.
 - Change the label for the form field "Account" to "Project".
@@ -39,7 +38,7 @@ default form definition located at :file:`bc_desktop/form.yml`:
    description: |
      This app will launch an interactive desktop on one or more compute nodes. You
      will have full access to the resources these nodes provide. This is analogous
-     to an interctive batch job.
+     to an interactive batch job.
    attributes:
      desktop: "mate"
      bc_vnc_idle: 0
@@ -71,7 +70,7 @@ above options.
 
 .. warning::
 
-   Caution must be taken if you decide to ovverride the ``form`` configuration
+   Caution must be taken if you decide to override the ``form`` configuration
    option. As this is an array, you can't simply prepend or append, you will
    need to completely redefine it with your included modifications.
 
@@ -197,7 +196,7 @@ modified with the following edits to your custom YAML configuration file:
 The key here is that we are defining a hash for the ``bc_account`` attribute
 instead of hard-coding it to a specific value. This means we will only override
 the equivalent option for this attribute (for the above example we are
-ovverriding the ``label`` option for the ``bc_account`` attribute).
+overriding the ``label`` option for the ``bc_account`` attribute).
 
 Now when you refresh the form in your browser, you should now see an input
 field with the label "Project".
@@ -240,7 +239,7 @@ configuration file:
 The key here is that we are defining a hash for the ``bc_account`` attribute
 instead of hard-coding it to a specific value. This means we will only override
 the equivalent option for this attribute (for the above example we are
-ovverriding the ``help`` option for the ``bc_account`` attribute).
+overriding the ``help`` option for the ``bc_account`` attribute).
 
 Now when you refresh the form in your browser, you should see the help message
 below the "Account" form input field.
@@ -277,7 +276,7 @@ configuration file:
 
 The key here is that we are defining a hash for the ``bc_num_hours`` attribute
 instead of hard-coding it to a number. This means we want to override the
-equivalent option for this attribute (for the above example we are ovverriding
+equivalent option for this attribute (for the above example we are overriding
 the ``value`` option for the ``bc_num_hours`` attribute).
 
 Now when you refresh the desktop form in your browser, you should see a default
@@ -287,6 +286,6 @@ value of ``8`` in the "Number of hours" form field.
 
    There is a possibility you may see a number other than ``8`` in the above
    example. That is because the Interactive Apps tool built into the Dashboard
-   **remembers** your last succesful app launch for a corresponding app. So
+   **remembers** your last successful app launch for a corresponding app. So
    when you go back to the form page for that given app, it will auto-fill in
    the form with your previous values.

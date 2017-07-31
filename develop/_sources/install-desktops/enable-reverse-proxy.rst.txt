@@ -3,14 +3,16 @@
 Enable Reverse Proxy
 ====================
 
-The reverse proxy will proxy a request to any specified host and port through
-IP sockets. This is different than what is used for proxying to per-user NGINX
-processes through Unix domain sockets. This can be used to connect to Jupyter
-notebook servers, RStudio servers, VNC servers, and more... This is disabled by
-default as it can be a security risk if not properly setup using a good
-``host_regex``.
+The `reverse proxy`_ will proxy a request to any specified host and port through
+IP sockets. This can be used to connect to Jupyter notebook servers, RStudio
+servers, VNC servers, and more... This is disabled by default as it can be a
+security risk if not properly setup using a good ``host_regex``.
 
-Requirements:
+You can read more about how this works in Open OnDemand under
+:ref:`ood-portal-generator-configuration-configure-reverse-proxy`.
+
+Requirements
+------------
 
 - a regular expression that best describes all the hosts that you would want a
   user to connect to through the proxy (e.g., ``[\w.-]+\.osc\.edu``)
@@ -46,6 +48,9 @@ Requirements:
               # ...
               # set_host: "host=$(hostname)"
               set_host: "host=$(hostname -A | awk '{print $1}')"
+
+Steps to Enable in Apache
+-------------------------
 
 #. We will update the Apache configuration file by adding ``Location``
    directives that will be used for the reverse proxy. This requires modifying
@@ -145,5 +150,4 @@ browser.
       As we don't have the simple server return anything to the browser, you
       can ignore any errors or warnings you see in your browser.
 
-      You can get fancier using a Python ``SimpleHTTPServer``, but we leave
-      that as an exercise to the reader.
+.. _reverse proxy: https://en.wikipedia.org/wiki/Reverse_proxy

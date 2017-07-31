@@ -81,7 +81,7 @@ under ``/opt/rh``. This tutorial is also done from an account that has
 
         /etc/systemd/system/httpd24-httpd.service.d/override.conf
 
-      You will then add the following to ovverride the default settings:
+      You will then add the following to override the default settings:
 
       .. code-block:: sh
 
