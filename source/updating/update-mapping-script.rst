@@ -17,8 +17,8 @@ following command:
 
 .. code-block:: sh
 
-   /opt/ood/ood_auth_map/bin/ood_auth_map -v
-   #=> ood_auth_map v0.0.3
+   /opt/ood/ood_auth_map/bin/ood_auth_map.regex -v
+   #=> ood_auth_map, version 0.0.3
 
 where the version number should be given at the end of the line. If the version
 numbers match then you can skip this update.
