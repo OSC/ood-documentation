@@ -38,19 +38,19 @@ Now we will install the provided `bc_desktop`_ app as well as configure it work 
          sudo scl enable rh-ruby22 -- rake install:bc_desktop
 
 #. We now must configure Desktop apps for each cluster you want this to run
-   under in the following directory ``local/``
+   under in the following directory ``build/bc_desktop/local/``
 
    .. code-block:: sh
 
       # Make the `local/` directory if it doesn't already exist
-      mkdir local
+      mkdir build/bc_desktop/local
 
       # Change our working directory to `local/`
-      cd local
+      cd build/bc_desktop/local
 
-#. For each cluster we want to launch a Desktop session on we will need a corresponding
-   form configuration file in YAML format (e.g., ``cluster1.yml``, ``cluster2.yml``, ...) that
-   looks like:
+#. For each cluster we want to launch a Desktop session on we will need a
+   corresponding form configuration file in YAML format (e.g.,
+   ``cluster1.yml``, ``cluster2.yml``, ...) that looks like:
 
    .. code-block:: yaml
 
@@ -64,18 +64,23 @@ Now we will install the provided `bc_desktop`_ app as well as configure it work 
 
    .. danger::
 
-      Please do not modify any of the code above the ``local/`` path as it may
-      put the Git repo in a bad state.
+      Please do not modify any of the code underneath the ``bc_desktop/`` path
+      other than in ``bc_desktop/local/`` as it may put the Git repo in a bad
+      state.
 
-      We recommend you version all the changes you make in the ``local/``
-      directory you use for the `bc_desktop`_ app so that you don't lose any of
-      it.
+      We recommend you version all the changes you make in the
+      ``bc_desktop/local/`` directory you use for the `bc_desktop`_ app so that
+      you don't lose any of your modifications.
 
 #. Install the Desktop App to its system location at ``/var/www/ood/apps/sys``
    with:
 
    .. code-block:: sh
 
+      # Go back into the apps root directory
+      cd ~/ood/src/apps/
+
+      # Install the `bc_desktop` app to its system location
       sudo scl enable rh-ruby22 -- rake install:bc_desktop
 
 #. Navigate to your OnDemand site, in particular the Dashboard App, and you

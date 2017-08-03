@@ -4,7 +4,7 @@ Software Requirements
 =====================
 
 The interactive Desktop app requires the following software to be installed on
-the nodes that the batch job is meant to run on, **not** the OnDemand node.
+the nodes that the batch job is meant to run on, **NOT** the OnDemand node.
 
 One of the following desktops:
 
@@ -15,6 +15,12 @@ For VNC server support:
 
 - `TurboVNC`_ 2.1+
 - `websockify`_ 0.8.0+
+
+.. warning::
+
+   Do **NOT** install the above software on the **OnDemand node**. The above
+   software requirements are **ONLY** for the **compute nodes** you intend on
+   launching Desktops on within batch jobs.
 
 .. _gnome: https://www.gnome.org/
 .. _mate desktop: https://mate-desktop.org/

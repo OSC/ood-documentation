@@ -219,18 +219,18 @@ sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:bc_desktop
 </div>
 </li>
 <li><p class="first">We now must configure Desktop apps for each cluster you want this to run
-under in the following directory <code class="docutils literal"><span class="pre">local/</span></code></p>
+under in the following directory <code class="docutils literal"><span class="pre">build/bc_desktop/local/</span></code></p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Make the `local/` directory if it doesn&#39;t already exist</span>
-mkdir <span class="nb">local</span>
+mkdir build/bc_desktop/local
 
 <span class="c1"># Change our working directory to `local/`</span>
-<span class="nb">cd</span> <span class="nb">local</span>
+<span class="nb">cd</span> build/bc_desktop/local
 </pre></div>
 </div>
 </li>
-<li><p class="first">For each cluster we want to launch a Desktop session on we will need a corresponding
-form configuration file in YAML format (e.g., <code class="docutils literal"><span class="pre">cluster1.yml</span></code>, <code class="docutils literal"><span class="pre">cluster2.yml</span></code>, …) that
-looks like:</p>
+<li><p class="first">For each cluster we want to launch a Desktop session on we will need a
+corresponding form configuration file in YAML format (e.g.,
+<code class="docutils literal"><span class="pre">cluster1.yml</span></code>, <code class="docutils literal"><span class="pre">cluster2.yml</span></code>, …) that looks like:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/cluster1.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
@@ -241,16 +241,21 @@ looks like:</p>
 file.</p>
 <div class="admonition danger">
 <p class="first admonition-title">Danger</p>
-<p>Please do not modify any of the code above the <code class="docutils literal"><span class="pre">local/</span></code> path as it may
-put the Git repo in a bad state.</p>
-<p class="last">We recommend you version all the changes you make in the <code class="docutils literal"><span class="pre">local/</span></code>
-directory you use for the <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a> app so that you don’t lose any of
-it.</p>
+<p>Please do not modify any of the code underneath the <code class="docutils literal"><span class="pre">bc_desktop/</span></code> path
+other than in <code class="docutils literal"><span class="pre">bc_desktop/local/</span></code> as it may put the Git repo in a bad
+state.</p>
+<p class="last">We recommend you version all the changes you make in the
+<code class="docutils literal"><span class="pre">bc_desktop/local/</span></code> directory you use for the <a class="reference external" href="https://github.com/OSC/bc_desktop/">bc_desktop</a> app so that
+you don’t lose any of your modifications.</p>
 </div>
 </li>
 <li><p class="first">Install the Desktop App to its system location at <code class="docutils literal"><span class="pre">/var/www/ood/apps/sys</span></code>
 with:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:bc_desktop
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Go back into the apps root directory</span>
+<span class="nb">cd</span> ~/ood/src/apps/
+
+<span class="c1"># Install the `bc_desktop` app to its system location</span>
+sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:bc_desktop
 </pre></div>
 </div>
 </li>

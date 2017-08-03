@@ -77,11 +77,40 @@ Steps to Enable in Apache
    You can read more about these options under
    :ref:`ood-portal-generator-configuration-configure-reverse-proxy`.
 
+   .. tip::
+
+      What if my site foregos the FQDN in the host names for compute nodes, and
+      we have compute names that give their hosts as:
+
+      - ``ab001`` ... ``ab100`` (for the AB cluster)
+      - ``pn001`` ... ``pn500`` (for the PN cluster)
+      - ``xy001`` ... ``xy125`` (for the XY cluster)
+
+      You could then use the following regular expression in your configuration
+      file:
+
+      .. code-block:: yaml
+
+         host_regex: "(ab|pn|xy)\\d+"
+         node_uri: "/node"
+         rnode_uri: "/rnode"
+
    .. warning::
 
       Since we use double quotes in the YAML file to wrap the regular
       expression, we will need to escape the blackslashes, so ``\w`` becomes
       ``\\w``. If you use single quotes, you will not need to escape them.
+
+   .. danger::
+
+      Failing to add an appropriate regular expression to the Reverse Proxy
+      opens you up to possible phishing attacks. As a malicious party could
+      send links to unsuspecting users as::
+
+        https://ondemand.center.edu/rnode/phishing.site.com/80/...
+
+      And users will implicitly trust the link since it points to the trusting
+      domain of ``ondemand.center.edu``.
 
 #. Re-build the Apache config:
 
