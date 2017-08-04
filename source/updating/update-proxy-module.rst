@@ -10,7 +10,7 @@ you can update it with the following directions.
 Do I need to update?
 --------------------
 
-Latest version: ``v0.3.1``
+Latest version: ``v{{ mod_ood_proxy_version }}``
 
 You can compare this to the locally installed :ref:`mod-ood-proxy` with the
 following command:
@@ -18,7 +18,7 @@ following command:
 .. code-block:: sh
 
    grep 'VERSION' /opt/ood/mod_ood_proxy/lib/ood/version.lua
-   #=>   VERSION = '0.3.1'
+   #=>   VERSION = '{{ mod_ood_proxy_version }}'
 
 where the version number should be given at the end of the line. If the version
 numbers match then you can skip this update.
@@ -32,7 +32,7 @@ Instructions to update
 
       cd ~/ood/src/mod_ood_proxy
       scl enable git19 -- git fetch
-      scl enable git19 -- git checkout v0.3.0
+      scl enable git19 -- git checkout v{{ mod_ood_proxy_version }}
 
 #. Install it to its global location:
 
