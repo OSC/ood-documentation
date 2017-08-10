@@ -13,7 +13,7 @@ This is done with the :ref:`ood-auth-map` tool.
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/ood_auth_map.git
       cd ood_auth_map/
-      scl enable git19 -- git checkout v0.0.3
+      scl enable git19 -- git checkout v{{ ood_auth_map_version }}
 
 #. Install it to its global location:
 

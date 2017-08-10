@@ -344,3 +344,37 @@ texinfo_documents = [
 # If true, figures, tables and code-blocks are automatically numbered if they
 # have a caption. At same time, the numref role is enabled.
 numfig = True
+
+# -- Custom configuration -------------------------------------------------
+
+from jinja2 import Environment, StrictUndefined
+
+# Use Jinja to parse RST files first
+def rstjinja(app, docname, source):
+    """
+    Render our pages as a jinja template for fancy templating goodness.
+    """
+    jinja_env = Environment(undefined=StrictUndefined)
+    src = source[0]
+    rendered = jinja_env.from_string(src).render(doc_context)
+    source[0] = rendered
+
+def setup(app):
+    app.connect('source-read', rstjinja)
+
+# Context used for jinja template
+doc_context = {
+    # OOD component versions
+    'ood_portal_generator_version':  '0.4.0',
+    'mod_ood_proxy_version':         '0.3.1',
+    'ood_auth_map_version':          '0.0.3',
+    'nginx_stage_version':           '0.2.1',
+    'ood_apps_installer_version':    '1.0.0',
+    'dashboard_version':             '1.15.2',
+    'shell_version':                 '1.2.3',
+    'files_version':                 '1.3.5',
+    'file_editor_version':           '1.3.1',
+    'active_jobs_version':           '1.5.0',
+    'my_jobs_version':               '2.5.0',
+    'desktops_version':              '0.1.1',
+}

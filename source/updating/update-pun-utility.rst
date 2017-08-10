@@ -10,7 +10,7 @@ the following directions.
 Do I need to update?
 --------------------
 
-Latest version: ``v0.2.1``
+Latest version: ``v{{ nginx_stage_version }}``
 
 You can compare this to the locally installed :ref:`nginx-stage` with the
 following command:
@@ -18,7 +18,7 @@ following command:
 .. code-block:: sh
 
    /opt/ood/nginx_stage/sbin/nginx_stage -v
-   #=> nginx_stage, version 0.2.1
+   #=> nginx_stage, version {{ nginx_stage_version }}
 
 where the version number should be given at the end of the line. If the version
 numbers match then you can skip this update.
@@ -32,7 +32,7 @@ Instructions to update
 
       cd ~/ood/src/nginx_stage
       scl enable git19 -- git fetch
-      scl enable git19 -- git checkout v0.2.1
+      scl enable git19 -- git checkout v{{ nginx_stage_version }}
 
 #. Install it to its global location:
 

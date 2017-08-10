@@ -11,7 +11,7 @@ with the following directions.
 Do I need to update?
 --------------------
 
-Latest version: ``v0.4.0``
+Latest version: ``v{{ ood_portal_generator_version }}``
 
 You can compare this to the OOD Portal Apache configuration file you have
 installed locally with the following command:
@@ -19,7 +19,7 @@ installed locally with the following command:
 .. code-block:: sh
 
    grep 'Generated using template' /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
-   #=> # Generated using template v0.4.0
+   #=> # Generated using template v{{ ood_portal_generator_version }}
 
 where the version number should be given at the end of the line. If the version
 numbers match then you can skip this update.
@@ -34,7 +34,7 @@ Instructions to update
 
       cd ~/ood/src/ood-portal-generator
       scl enable git19 -- git fetch
-      scl enable git19 -- git checkout v0.4.0
+      scl enable git19 -- git checkout v{{ ood_portal_generator_version }}
 
 #. Confirm your original configuration file is in this root directory and you
    are happy with the configuration:
