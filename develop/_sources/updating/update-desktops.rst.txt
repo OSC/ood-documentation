@@ -10,7 +10,7 @@ following directions.
 Do I need to update?
 --------------------
 
-Latest version: ``v0.1.1``
+Latest version: ``v{{ desktops_version }}``
 
 You can compare this to the locally installed `bc_desktop`_ with the following
 command:
@@ -19,7 +19,7 @@ command:
 
    grep '##' /var/www/ood/apps/sys/bc_desktop/CHANGELOG.md
    #=> ## [Unreleased]
-   #=> ## [0.1.1] - 2017-07-12
+   #=> ## [{{ desktops_version }}] - YYYY-MM-DD
    #=> ### Changed
    #=> ...
 
@@ -43,7 +43,7 @@ Instructions to update
 
       cd ~/ood/src/apps
       scl enable git19 -- git fetch
-      scl enable git19 -- git checkout v1.0.0
+      scl enable git19 -- git checkout v{{ ood_apps_installer_version }}
 
 #. Confirm that your center's local configuration files under
    ``build/bc_desktop/local/`` exist.

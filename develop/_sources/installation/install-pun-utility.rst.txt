@@ -13,7 +13,7 @@ tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
       cd ~/ood/src
       scl enable git19 -- git clone https://github.com/OSC/nginx_stage.git
       cd nginx_stage/
-      scl enable git19 -- git checkout v0.2.1
+      scl enable git19 -- git checkout v{{ nginx_stage_version }}
 
 #. Install it to its global location:
 
