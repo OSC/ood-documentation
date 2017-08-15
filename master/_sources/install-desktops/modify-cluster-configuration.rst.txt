@@ -22,20 +22,27 @@ copies of TurboVNC and websockify:
      # ... other configuration options ...
      # ...
      batch_connect:
+       basic:
+         script_wrapper: |
+           module restore
+           %s
        vnc:
          script_wrapper: |
+           module restore
            module load turbovnc/2.1.0
            export WEBSOCKIFY_CMD="/usr/local/websockify/run"
            %s
 
-where we introduced the configuration option ``batch_connect`` which allows us
+where we introduced the configuration option ``batch_connect`` that allows us
 to add global settings for both a ``basic`` interactive web server as well as a
 ``vnc`` interactive web server.
 
-In the above case we modify the global setting ``script_wrapper`` just for
-``vnc`` sessions. This allows us to supply Bash code that wraps around the body
-of the template script (specified by ``%s``). So we prepend to the body of the
-script the required environment needed by the script to launch websockify and
+In the above case we modify the global setting ``script_wrapper`` for both
+``basic`` and ``vnc`` sessions. This allows us to supply Bash code that wraps
+around the body of the template script (specified by ``%s``). First, we restore
+the module environment to remove any conflicting modules that may have been
+loaded by the user's ``.bashrc`` or ``.bash_profile`` files. Then we specify
+the required environment needed by the ``vnc`` script to launch websockify and
 TurboVNC.
 
 .. note::
@@ -46,6 +53,7 @@ TurboVNC.
    .. code-block:: yaml
 
       script_wrapper: |
+        module restore
         module load turbovnc/2.1.0
         export WEBSOCKIFY_CMD="/usr/local/websockify/run"
         %s
@@ -53,3 +61,9 @@ TurboVNC.
    with a block that adds the full path to the TurboVNC binaries into the
    ``PATH`` environment variable as well as the corresponding websockify
    launcher into the ``WEBSOCKIFY_CMD`` environment variable.
+
+.. warning::
+
+   Do not forget to include the ``%s`` in the ``script_wrapper`` configuration
+   option. Otherwise the actual Bash code that launches the corresponding web
+   servers will never be interpolated into the main batch script and run.
