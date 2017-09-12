@@ -22,6 +22,12 @@ Welcome to Open OnDemand's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :caption: Tutorials
+
+   add-jupyter
+
+.. toctree::
+   :maxdepth: 2
    :caption: Components
 
    infrastructure
