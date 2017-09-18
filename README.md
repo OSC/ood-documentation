@@ -18,6 +18,25 @@ built using the following command from the root of this repo:
 docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
 ```
 
+If you don't want to use Docker, you can also use pipenv. Directions on setting
+up your environment assume Homebrew is installed and python 2.7 is installed.
+Take the following steps:
+
+```bash
+pip install -g pipenv
+brew install plantuml
+brew install graphviz
+
+# then in the documentation root directory:
+WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install
+```
+
+When building the html to test, run this command:
+
+```bash
+WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make html
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
