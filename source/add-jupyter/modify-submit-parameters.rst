@@ -114,6 +114,8 @@ where we define the :command:`sbatch` parameters as an array under ``script`` an
 
 .. note::
 
+   The ``native`` attribute is an array of command line arguments.
+
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and
    return a valid number.
@@ -137,6 +139,8 @@ For Torque, you can choose processors-per-node with:
          nodes: "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ppn=28"
 
 .. note::
+
+   The ``native`` attribute is an array of command line arguments that get passed at the command line.
 
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and

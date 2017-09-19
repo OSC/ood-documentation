@@ -4,7 +4,7 @@ Customize Attributes
 ====================
 
 Now we will customize the app to work on a given cluster. Be sure that you
-walked through :ref:`add-jupyter-software-requirements` for the given cluster
+walk through :ref:`add-jupyter-software-requirements` for the given cluster
 ahead of time.
 
 Modify Form File
@@ -29,7 +29,7 @@ The main responsibility of the ``form.yml`` file is for defining the attributes
 
    where we replace ``my_cluster`` with a valid cluster that corresponds to a
    cluster configuration file located under
-   :file:`/etc/ood/config/clusters.d/{cluster}.yml`.
+   :file:`/etc/ood/config/clusters.d/{my_cluster}.yml`.
 
 #. We will also edit the module(s) that is(are) required to be loaded within
    our batch job to get a Jupyter Notebook Server running:
@@ -78,11 +78,8 @@ The main responsibility of the ``form.yml`` file is for defining the attributes
 
    .. code-block:: sh
 
-      # Stage the modified file
-      git add form.yml
-
-      # Commit your changes
-      git commit -m 'updated form with cluster attributes'
+      # Stage the modified file and commit your changes
+      git commit form.yml -m 'updated form with cluster attributes'
 
 Verify it Works
 ---------------
