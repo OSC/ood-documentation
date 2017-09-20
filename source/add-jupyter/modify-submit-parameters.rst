@@ -10,9 +10,9 @@ explains how to modify the submission parameters.
 Modify Submit File
 ------------------
 
-The main responsibility of the ``submit.yml.erb`` file is for modifying the
-underlying batch script that is generated from an internal template and its
-submission parameters.
+The main responsibility of the ``submit.yml.erb`` file located in the root of
+the app is for modifying the underlying batch script that is generated from an
+internal template and its submission parameters.
 
 .. note::
 

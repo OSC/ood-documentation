@@ -10,8 +10,9 @@ time.
 Modify Form File
 ----------------
 
-The main responsibility of the ``form.yml`` file is for defining the attributes
-(their values or HTML form elements) used when generating the batch script.
+The main responsibility of the ``form.yml`` file located in the root of the app
+is for defining the attributes (their values or HTML form elements) used when
+generating the batch script.
 
 #. We will begin by adding a cluster for the Jupyter app to use. You do this by
    editing the ``form.yml`` in your favorite editor as such:
