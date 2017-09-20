@@ -3,9 +3,9 @@
 Tutorial: Creating a status app
 ===============================
 
-We will make a copy of a status app that displays the user's running Passenger
-processes on the OnDemand host to display the user's quota information in a
-table.
+We will make a copy of a status app that displays the running Passenger
+processes on the OnDemand host. We will use this as a starting point to
+create a new status app that displays quota information in a table.
 
 The app we will be copying is: https://github.com/OSC/ood-example-ps. Running
 this app looks like:
