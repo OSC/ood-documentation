@@ -87,11 +87,8 @@ is resource manager dependent. Some examples are given below.
 
    .. code-block:: sh
 
-      # Stage the modified file
-      git add submit.yml.erb
-
-      # Commit your changes
-      git commit -m 'updated batch job options'
+      # Stage and commit your changes
+      git commit submit.yml.erb -m 'updated batch job options'
 
 .. _add-jupyter-modify-submit-parameters-slurm:
 
