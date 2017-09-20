@@ -29,7 +29,7 @@ Dashboard.
 Overview of app
 ---------------
 
-#. The app uses the custom branded Bootstrap 3 that My Jobs ande ActiveJobs apps
+#. The app uses the custom branded Bootstrap 3 that My Jobs and Active Jobs apps
    use.
 #. The navbar contains a link back to the dashboard.
 #. On a request, the app runs a shell command, parses the output, and displays
@@ -216,7 +216,7 @@ Resulting test method:
 Update command.rb
 .................
 
-Run test by running `rake` command and you'l see it fail:
+Run test by running `rake` command and you will see it fail:
 
 .. code:: sh
 
