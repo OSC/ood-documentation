@@ -19,26 +19,6 @@ After this tutorial the resulting app will be:
 This assumes you have followed the directions to :ref:`enabling-development-mode` on the
 Dashboard.
 
-
-Clone and setup
----------------
-
-#. Login to Open OnDemand, click "Develop" dropdown menu and click the "My Sandbox Apps (Development)" option.
-#. Click "New Product" and "Clone Existing App".
-#. Fill out the form:
-
-   #. Directory name: quota
-   #. Git remote: https://github.com/OSC/ood-example-ps
-   #. Check "Create new Git Project from this?"
-   #. Click Submit
-
-#. Launch the app by clicking the large blue Launch button. In a new browser
-   window/tab you will see the output of a ps command filtered using grep.
-
-#. Switch browser tab/windows back to the dashboard Details view of the app and
-   click "Files" button on the right to open the app's directory in the File
-   Explorer.
-
 Overview of app
 ---------------
 
@@ -123,21 +103,202 @@ Files and their purpose
    * - test/minitest_helper.rb
      - contains setup code common between all tests
 
+Clone and setup
+---------------
+
+#. Login to Open OnDemand, click "Develop" dropdown menu and click the "My Sandbox Apps (Development)" option.
+#. Click "New Product" and "Clone Existing App".
+#. Fill out the form:
+
+   #. Directory name: quota
+   #. Git remote: https://github.com/OSC/ood-example-ps
+   #. Check "Create new Git Project from this?"
+   #. Click Submit
+
+#. Launch the app by clicking the large blue Launch button. In a new browser
+   window/tab you will see the output of a ps command filtered using grep.
+
+#. Switch browser tab/windows back to the dashboard Details view of the app and
+   click "Files" button on the right to open the app's directory in the File
+   Explorer.
 
 
 Edit to run and parse quota
 ---------------------------
 
-Update test
-...........
+The app runs and parses this command:
+
+.. code:: sh
+
+   ps aux | grep '[A]pp'
+
+We will change it to run and parse this command:
+
+.. code:: sh
+
+   quota -spw
+
+Update test/test_command.rb
+...........................
+
+Run the command to get example data. Copy and paste the output into the test, and
+update the assertions to expect an array of "quotas" instead of "processes"
+with appropriate attributes.
+
+Diff:
+
+.. code:: diff
+
+      def test_command_output_parsing
+        output = <<-EOF
+    -
+    -efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/awesim/dev/ood-exampl
+    -
+    +Disk quotas for user efranz (uid 10851):
+    +     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
+    +10.11.200.32:/PZS0562/  99616M    500G    500G       0    933k   1000k   1000k       0
+    EOF
+    -    processes = Command.new.parse(output)
+    +    quotas = Command.new.parse(output)
+
+    -    assert_equal 1, processes.count
+    +    assert_equal 1, quotas.count, "number of structs parsed should equal 1"
+
+    -    p = processes.first
+    +    q = quotas.first
+
+    -    assert_equal "efranz", p.user
+    -    assert_equal "462148", p.vsz
+    -    assert_equal "28128", p.rss
+    -    assert_equal "0:00", p.time
+    -    assert_equal "Passenger RackApp: /users/PZS0562/efranz/awesim/dev/ood-example-ps", p.command
+    +    assert_equal "10.11.200.32:/PZS0562/", q.filesystem, "expected filesystem value not correct"
+    +    assert_equal "99616M", q.blocks, "expected blocks value not correct"
+    +    assert_equal "500G", q.blocks_limit, "expected blocks_limit value not correct"
+    +    assert_equal "933k", q.files, "expected files value not correct"
+    +    assert_equal "0", q.files_grace, "expected files_grace value not correct"
+      end
 
 
+Resulting test method:
+
+.. code:: ruby
+
+    class TestCommand < Minitest::Test
+
+      def test_command_output_parsing
+        output = <<-EOF
+    Disk quotas for user efranz (uid 10851):
+        Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
+    10.11.200.32:/PZS0562/  99616M    500G    500G       0    933k   1000k   1000k       0
+    EOF
+        quotas = Command.new.parse(output)
+
+        assert_equal 1, quotas.count, "number of structs parsed should equal 1"
+
+        q = quotas.first
+
+        assert_equal "10.11.200.32:/PZS0562/", q.filesystem, "expected filesystem value not correct"
+        assert_equal "99616M", q.blocks, "expected blocks value not correct"
+        assert_equal "500G", q.blocks_limit, "expected blocks_limit value not correct"
+        assert_equal "933k", q.files, "expected files value not correct"
+        assert_equal "0", q.files_grace, "expected files_grace value not correct"
+      end
+    end
 
 Update command.rb
 .................
 
+Run test by running `rake` command and you'l see it fail:
+
+.. code:: sh
+
+    $ rake
+    Run options: --seed 58990
+
+    # Running:
+
+    F
+
+    Finished in 0.000943s, 1060.4569 runs/s, 1060.4569 assertions/s.
+
+      1) Failure:
+    TestCommand#test_command_output_parsing [/users/PZS0562/efranz/awesim/dev/ood-example-ps/test/test_command.rb:14]:
+    number of structs parsed should equal 1.
+    Expected: 1
+      Actual: 3
+
+    1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
+    rake aborted!
+    Command failed with status (1)
+
+    Tasks: TOP => default => test
+    (See full trace by running task with --trace)
+
+Fix the command we are using and the parsing and struct definition till the unit test passes.
+
+Diff:
+
+.. code:: diff
+
+    class Command
+      def to_s
+    -    "ps aux | grep '[A]pp'"
+    +    "quota -spw"
+      end
+
+    -  AppProcess = Struct.new(:user, :pid, :pct_cpu, :pct_mem, :vsz, :rss, :tty, :stat, :start, :time, :command)
+    +  Quota = Struct.new(:filesystem, :blocks, :blocks_quota, :blocks_limit, :blocks_grace, :files, :files_quota, :files_limit, :fil
+
+      # Parse a string output from the `ps aux` command and return an array of
+      # AppProcess objects, one per process
+      def parse(output)
+        lines = output.strip.split("\n")
+    -    lines.map do |line|
+    -      AppProcess.new(*(line.split(" ", 11)))
+    +    lines.drop(2).map do |line|
+    +      Quota.new(*(line.split))
+        end
+      end
+
+Final:
+
+.. code:: ruby
+
+    class Command
+      def to_s
+        "quota -spw"
+      end
+
+      Quota = Struct.new(:filesystem, :blocks, :blocks_quota, :blocks_limit, :blocks_grace, :files, :files_quota, :files_limit, :files_grace)
+
+      # Parse a string output from the `ps aux` command and return an array of
+      # AppProcess objects, one per process
+      def parse(output)
+        lines = output.strip.split("\n")
+        lines.drop(2).map do |line|
+          Quota.new(*(line.split))
+        end
+      end
+
+Now when we run the test they pass:
+
+.. code:: sh
+
+    $ rake
+    Run options: --seed 60317
+
+    # Running:
+
+    .
+
+    Finished in 0.000966s, 1035.1494 runs/s, 6210.8963 assertions/s.
+
+    1 runs, 6 assertions, 0 failures, 0 errors, 0 skips
+
 Update app.rb and view/index.html
 .................................
+
 
 
 Brand App
