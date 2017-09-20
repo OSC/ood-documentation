@@ -3,10 +3,14 @@
 Enabling App Development
 ========================
 
-Enable App Development in the Dashboard two ways:
+
+1. Enable App Development Mode in Dashboard
+-------------------------------------------
+
+Enable App Development Mode in the Dashboard in two ways:
 
 A. Enable for every user using environment variable
----------------------------------------------------------
+...................................................
 
 In the root of the dashboard app, add these contents to a file ``.env.local``:
 
@@ -21,7 +25,7 @@ appear.
 
 
 B. Enable for specific users using custom initializer
-------------------------------------------------------------------------------------------------------------------
+.....................................................
 
 Create a custom initializer file in the Dashboard app: ``config/initializers/ood.rb``
 
@@ -55,3 +59,22 @@ file:
 
   Configuration.app_development_enabled = Process.groups.include?(5014)
 
+
+2. Specify Development Shell Host
+---------------------------------
+
+When developing apps, you will eventually need to access the shell. It may be
+necessary to have shell access to a host that has the same SCL packages that
+OnDemand provides.
+
+The developer app detail views provide a convenient "Shell" button to open a
+Shell with the starting directory to be the directory of the application.
+
+If the host with these SCL packages is different from the default host for the
+OOD shell app, you can specify this host by setting ``OOD_DEV_SSH_HOST``
+environment variable.
+
+For example, at OSC we have provisioned a development host at apps-test.awesim.org
+that developers can ssh to, which has a version of OnDemand running and
+therefore has all the SCL packages installed. That host is ``apps-test.awesim.org``
+so we set in the ``.env.local`` file ``OOD_DEV_SSH_HOST="apps-test.awesim.org"``.
