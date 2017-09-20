@@ -10,11 +10,18 @@ table.
 The app we will be copying is: https://github.com/OSC/ood-example-ps. Running
 this app looks like:
 
-**add screenshot**
+.. figure:: /images/app-dev-tutorial-ps-to-quota-1.png
+   :align: center
+
+   What app looks like after cloning and launching.
+
 
 After this tutorial the resulting app will be:
 
-**add screenshot**
+.. figure:: /images/app-dev-tutorial-ps-to-quota-2.png
+   :align: center
+
+   What app looks like after modifying in this tutorial.
 
 This assumes you have followed the directions to :ref:`enabling-development-mode` on the
 Dashboard.
@@ -305,7 +312,7 @@ Update app.rb:
 
     helpers do
       def title
-    -    "My Passenger App Processes"
+    -    "Passenger App Processes"
     +    "Quota"
       end
     end
@@ -357,11 +364,11 @@ These changes should not require an app restart. Go to the launched app and relo
 Brand App
 ---------
 
-The app is looking good, but the details page still shows the app title "My Passenger App Processes". To change this and the icon, edit the manifest.yml:
+The app is looking good, but the details page still shows the app title "Passenger App Processes". To change this and the icon, edit the manifest.yml:
 
 .. code:: diff
 
-    -name: My Passenger App Processes
+    -name: Passenger App Processes
     -description: Display your running Passenger app proceseses in a table
     +name: Quota
     +description: Display quotas
@@ -412,7 +419,10 @@ Steps:
 
 #. Reload the dashboard.
 
-**screenshot**
+.. figure:: /images/app-dev-tutorial-ps-to-quota-published.png
+   :align: center
+
+   Every user can now launch the Quota from the Files menu.
 
 .. warning::
 
