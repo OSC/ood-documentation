@@ -93,6 +93,8 @@ is resource manager dependent. Some examples are given below.
       # Commit your changes
       git commit -m 'updated batch job options'
 
+.. _add-jupyter-modify-submit-parameters-slurm:
+
 Slurm
 `````
 
@@ -114,11 +116,16 @@ where we define the :command:`sbatch` parameters as an array under ``script`` an
 
 .. note::
 
-   The ``native`` attribute is an array of command line arguments.
+   The ``native`` attribute is an array of command line arguments. So the above
+   example is equivalent to appending to :command:`sbatch`:
+
+   .. code-block:: sh
+
+      sbatch ... -N <bc_num_slots> -C c12
 
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and
-   return a valid number.
+   return a valid number (since it wouldn't make sense to return ``0``).
 
 Torque
 ``````
@@ -140,17 +147,19 @@ For Torque, you can choose processors-per-node with:
 
 .. note::
 
-   The ``native`` attribute is an array of command line arguments that get passed at the command line.
+   See http://www.rubydoc.info/gems/pbs/PBS%2FBatch:submit_script for more
+   information on possible values for the ``native`` attribute.
 
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and
-   return a valid number.
+   return a valid number (since it wouldn't make sense to return ``0``).
 
 Other
 `````
 
-For most of our adapters (aside from Torque) the ``native`` attribute is an
-array of command line arguments similar to Slurm above.
+For most of our other adapters (aside from Torque) the ``native`` attribute is
+an array of command line arguments formatted similarly to the
+:ref:`add-jupyter-modify-submit-parameters-slurm` example above.
 
 Verify it Works
 ---------------
