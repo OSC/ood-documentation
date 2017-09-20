@@ -3,6 +3,9 @@
 Tutorial: Creating a status app
 ===============================
 
+Overview of app
+---------------
+
 We will make a copy of a status app that displays the running Passenger
 processes on the OnDemand host. We will use this as a starting point to
 create a new status app that displays quota information in a table.
@@ -15,7 +18,6 @@ this app looks like:
 
    What app looks like after cloning and launching.
 
-
 After this tutorial the resulting app will be:
 
 .. figure:: /images/app-dev-tutorial-ps-to-quota-2.png
@@ -25,9 +27,6 @@ After this tutorial the resulting app will be:
 
 This assumes you have followed the directions to :ref:`enabling-development-mode` on the
 Dashboard.
-
-Overview of app
----------------
 
 #. The app uses the custom branded Bootstrap 3 that My Jobs and Active Jobs apps
    use.
