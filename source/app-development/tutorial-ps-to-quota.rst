@@ -152,7 +152,7 @@ Diff:
       def test_command_output_parsing
         output = <<-EOF
     -
-    -efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/awesim/dev/ood-exampl
+    -efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota
     -
     +Disk quotas for user efranz (uid 10851):
     +     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
@@ -171,7 +171,7 @@ Diff:
     -    assert_equal "462148", p.vsz
     -    assert_equal "28128", p.rss
     -    assert_equal "0:00", p.time
-    -    assert_equal "Passenger RackApp: /users/PZS0562/efranz/awesim/dev/ood-example-ps", p.command
+    -    assert_equal "Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota", p.command
     +    assert_equal "10.11.200.32:/PZS0562/", q.filesystem, "expected filesystem value not correct"
     +    assert_equal "99616M", q.blocks, "expected blocks value not correct"
     +    assert_equal "500G", q.blocks_limit, "expected blocks_limit value not correct"
@@ -223,7 +223,7 @@ Run test by running `rake` command and you'l see it fail:
     Finished in 0.000943s, 1060.4569 runs/s, 1060.4569 assertions/s.
 
       1) Failure:
-    TestCommand#test_command_output_parsing [/users/PZS0562/efranz/awesim/dev/ood-example-ps/test/test_command.rb:14]:
+    TestCommand#test_command_output_parsing [/users/PZS0562/efranz/ondemand/dev/quota/test/test_command.rb:14]:
     number of structs parsed should equal 1.
     Expected: 1
       Actual: 3
@@ -299,25 +299,122 @@ Now when we run the test they pass:
 Update app.rb and view/index.html
 .................................
 
+Update app.rb:
 
+.. code:: diff
+
+    helpers do
+      def title
+    -    "My Passenger App Processes"
+    +    "Quota"
+      end
+    end
+
+    # Define a route at the root '/' of the app.
+    get '/' do
+      @command = Command.new
+    -  @processes, @error = @command.exec
+    +  @quotas, @error = @command.exec
+
+      # Render the view
+      erb :index
+    end
+
+
+In view/index.html, replace the table with this:
+
+.. code:: erb
+
+    <table class="table table-bordered">
+      <tr>
+        <th>Filesystem</th>
+        <th>Blocks</th>
+        <th>Blocks Quota</th>
+        <th>Blocks Limit</th>
+        <th>Blocks Grace</th>
+        <th>Files</th>
+        <th>Files Quota</th>
+        <th>Files Limit</th>
+        <th>Files Grace</th>
+      </tr>
+      <% @quotas.each do |quota| %>
+      <tr>
+        <td><%= quota.filesystem %></td>
+        <td><%= quota.blocks %></td>
+        <td><%= quota.blocks_quota %></td>
+        <td><%= quota.blocks_limit %></td>
+        <td><%= quota.blocks_grace %></td>
+        <td><%= quota.files %></td>
+        <td><%= quota.files_quota %></td>
+        <td><%= quota.files_limit %></td>
+        <td><%= quota.files_grace %></td>
+      </tr>
+      <% end %>
+    </table>
+
+These changes should not require an app restart. Go to the launched app and reload the page to see the changes.
 
 Brand App
 ---------
 
-Update manifest.yml
-...................
+The app is looking good, but the details page still shows the app title "My Passenger App Processes". To change this and the icon, edit the manifest.yml:
 
-icon, name, category, description by editing file
+.. code:: diff
 
-link to font-awesome icons (4.7.0)
+    -name: My Passenger App Processes
+    -description: Display your running Passenger app proceseses in a table
+    +name: Quota
+    +description: Display quotas
+    +icon: fa://hdd-o
 
-Update app.rb
-.............
-
-title in app
+* The icon follows format of ``fa://{FONTAWESOMENAME}`` where you replace ``{FONTAWESOMENAME}`` with an icon from http://fontawesome.io/icons/.
+  In this case we are using ``fa-hdd-o`` which we write in the manifest as ``fa://hdd-o``: http://fontawesome.io/icon/hdd-o/
 
 Publish App
 -----------
 
-ensure category matches a header that is configured to display as a menu
+Publishing an app requires two steps:
+
+#. Updating the manifest.yml to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.
+#. Having an administrator checkout a copy of the production version to a directory under /var/www/ood/apps/sys
+
+
+Steps:
+
+#. Add category to manifest so app appears in Files menu:
+
+    .. code:: diff
+
+        name: Quota
+        description: Display quotas
+        icon: fa://hdd-o
+        +category: Files
+        +subcategory: Utilities
+
+#. Version these changes. Click Shell button on app details view, and then commit the changes:
+
+    .. code:: sh
+
+       git add .
+       git commit -m "update manifest for production"
+
+       # if there is an external remote associated with this, push to that
+       git push origin master
+
+#. As the admin, sudo copy or clone this repo to production
+
+    .. code:: sh
+
+       # as sudo on OnDemand host:
+       cd /var/www/ood/apps/sys
+       git clone /users/PZS0562/efranz/ondemand/dev/quota
+
+
+#. Reload the dashboard.
+
+**screenshot**
+
+.. warning::
+
+   Accessing this new app for the first time will cause your NGINX server to restart, killing all websocket connections, which means resetting your active Shell sessions.
 
