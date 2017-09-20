@@ -241,9 +241,31 @@ Run test by running `rake` command and you will see it fail:
     Tasks: TOP => default => test
     (See full trace by running task with --trace)
 
-Fix the command we are using and the parsing and struct definition till the unit test passes.
+.. warning::
 
-Diff:
+   To run commands like rake through the shell you need to make sure you are on
+   a host that has the correct version of Ruby installed. For OnDemand that likely
+   means using Software Collections with the same packages used to install OnDemand.
+
+   With SCL, running rake with rh-ruby22 pacakge looks like:
+
+   ``scl enable rh-ruby22 -- rake``
+
+   With SCL, running git commands using git19 looks like:
+
+   ``scl enable git19 -- git commit -m "initial commit"``
+
+   You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
+   For example, in my .bash_profile I have:
+
+   .. code:: sh
+
+      if [[ ${HOSTNAME%%.*} == webtest04*  ]]
+      then
+        scl enable rh-ruby22 nodejs010 git19 v8314 python27 -- bash
+      fi
+
+Change the command we are using, fix the command output parsing, and fix the struct definition so the unit test passes.
 
 .. code:: diff
 
@@ -267,7 +289,7 @@ Diff:
         end
       end
 
-Final:
+After the changes part of the command.rb will look like this:
 
 .. code:: ruby
 
