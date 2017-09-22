@@ -7,7 +7,7 @@ Assuming we already have a sandbox Interactive App deployed under::
 
   ${HOME}/ondemand/dev/my_app
 
-The following HTTP request
+Navigating with the following HTTP request
 
 .. code-block:: http
 
@@ -41,11 +41,6 @@ Configuration
 
           /etc/ood/config/clusters.d
 
-.. describe:: attributes (Hash)
-
-     the object defining the hard-coded value or HTML form element used for the
-     various custom attributes
-
 .. describe:: form (Array<String>)
 
      a list of **all** the attributes that will be used as the context for
@@ -55,6 +50,258 @@ Configuration
 
         The attributes that appear as HTML form elements will appear to the
         user in the order they are listed in this configuration option.
+
+.. describe:: attributes (Hash)
+
+     the object defining the hard-coded value or HTML form element used for the
+     various custom attributes
+
+Attributes
+----------
+
+TODO
+
+Pre-defined Attributes
+``````````````````````
+
+TODO
+
+Customizing Attributes
+``````````````````````
+
+For each defined attribute in the ``form:`` configuration option, you can
+modify/override any component the HTML form element for it in the
+``attributes:`` configuration option, e.g.:
+
+.. code-block:: yaml
+
+   attributes:
+     my_custom_attribute:
+       label: "My custom label"
+       ...
+
+The available configuration options that can be modified for a given attribute
+are:
+
+.. describe:: widget (String, null)
+
+     the type of HTML form element to use for input
+
+     - ``text_field``
+     - ``text_area``
+     - ``number_field`` - can use ``min``, ``max``, ``step``
+     - ``check_box``
+     - ``select`` - can use ``options``
+     - ``hidden_field``
+     - ``resolution_field`` (used for specifying resolution dimensions
+       necessary for VNC)
+
+     Some other fields that have varying support across different browsers
+     include: ``range_field``, ``date_field``, ``search_field``,
+     ``email_field``, ``telephone_field``, ``url_field``, ``password_field``.
+
+     Default
+       Accepts any text
+
+       .. code-block:: yaml
+
+          widget: "text_field"
+
+     Example
+       Accepts only numbers
+
+       .. code-block:: yaml
+
+          widget: "number_field"
+
+.. describe:: value (String, null)
+
+     the default value used for the input field
+
+     Default
+       None
+
+       .. code-block:: yaml
+
+          value: ""
+
+     Example
+       Set default value of 5
+
+       .. code-block:: yaml
+
+          value: "5"
+
+     .. warning::
+
+        Values get cached so that users do not need to repeat previous session
+        submissions. So this default value will only appear for the user if
+        they have no cached value.
+
+.. describe:: label (String, null)
+
+     the label displayed above the input field
+
+     Default
+       Uses the name of the attribute
+
+     Example
+       Better describe the attribute
+
+       .. code-block:: yaml
+
+          label: "Number of nodes"
+
+.. describe:: required (Boolean, null)
+
+     whether this field must be filled out before submitting the form
+
+     Default
+       Not required by default
+
+       .. code-block:: yaml
+
+          required: false
+
+     Example
+       Make field required
+
+       .. code-block:: yaml
+
+          required: true
+
+.. describe:: help (String, null)
+
+     help text that appears below the field (can be written in Markdown_)
+
+     Default
+       No help text appears below input field
+
+       .. code-block:: yaml
+
+          help: null
+
+     Example
+       Leave a long descriptive help message using Markdown_
+
+       .. code-block:: yaml
+
+          help: |
+            Please fill in this field with **one** of the following
+            options:
+
+            - `red`
+            - `blue`
+            - `green`
+
+.. describe:: pattern (String, null)
+
+     a regular expression that the control's value is checked against (only
+     applies to widgets: ``text_field``, ``search_field``, ``telephone_field``,
+     ``url_field``, ``email_field``, ``password_field``)
+
+     Default
+       No pattern
+
+       .. code-block:: yaml
+
+          pattern: null
+
+     Example
+       Only accept three letter country codes
+
+       .. code-block:: yaml
+
+          pattern: "[A-Za-z]{3}"
+
+.. describe:: min (Integer, null)
+
+     specifies minimum value for this item, which must not be greater than its
+     maximum value (only applies to widget: ``number_field``)
+
+     Default
+       No minimum value
+
+       .. code-block:: yaml
+
+          min: null
+
+     Example
+       Set minimum value of 5
+
+       .. code-block:: yaml
+
+          min: 5
+
+.. describe:: max (Integer, null)
+
+     specifies maximum value for this item, which must not be less than its
+     minimum value (only applies to widget: ``number_field``)
+
+     Default
+       No maximum value
+
+       .. code-block:: yaml
+
+          min: null
+
+     Example
+       Set maximum value of 15
+
+       .. code-block:: yaml
+
+          min: 15
+
+.. describe:: step (Integer, null)
+
+     works with ``min`` and ``max`` options to limit the increments at which a
+     value can be set, it can be the string ``"any"`` or positive floating
+     point number (only works with widget: ``number_field``)
+
+     Default
+       No step size
+
+       .. code-block:: yaml
+
+          step: null
+
+     Example
+       Only accept integer values
+
+       .. code-block:: yaml
+
+          step: 1
+
+.. describe:: options (Array<Array<String>>, null)
+
+     a list of options for the ``select`` widget
+
+     Default
+       No options are supplied
+
+       .. code-block:: yaml
+
+          options: []
+
+     Example
+       Provide a list of cars
+
+       .. code-block:: yaml
+
+          options:
+            - ["Volvo", "volvo"]
+            - ["Ford", "ford"]
+            - ["Toyota", "toyota"]
+
+     .. note::
+
+        Typically the options are given as a list of pairs. The first string in
+        the pair is the option text and the second string in the pair is the
+        option value.
+
+        The user will see a list of options "Volvo", "Ford", and "Toyota" to
+        choose from in the HTML form, but the backend will process a value of
+        either "volvo", "ford", or "toyota" depending on what the user chose.
 
 Examples
 --------
@@ -151,4 +398,20 @@ The following configuration file
    form:
      - my_module_version
    attributes:
-     my_module_version: TODO
+     my_module_version:
+       widget: "number_field"
+       label: "Module version #"
+       required: true
+       help: "Please input a version number between 1-10"
+       min: 1
+       max: 11
+       step: 1
+
+does two things:
+
+- it defines a context attribute called ``my_module_version`` in the ``form:``
+  configuration option
+- it then describes the HTML form element to use for the ``my_module_version``
+  attribute
+
+.. _markdown: https://en.wikipedia.org/wiki/Markdown

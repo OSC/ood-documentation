@@ -3,10 +3,11 @@
 Development
 ===========
 
-Stuff...
+Stuff goes here...
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Components
 
    development/form
+   development/template
