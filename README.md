@@ -10,6 +10,15 @@ Or select your version:
 
 ## Development
 
+There are two ways to build the documentation.
+
+1. Use the Docker image that is used to build them in production using Travis.
+2. Use pipenv to install local dependencies. `pipenv` has become the [recommended
+   package to use by python.org for dependency
+   management](https://packaging.python.org/new-tutorials/installing-and-using-packages/)
+
+#### Docker
+
 Currently all builds are generated using the
 [docker-sphinx](https://github.com/OSC/docker-sphinx/) Docker image. They are
 built using the following command from the root of this repo:
@@ -18,23 +27,52 @@ built using the following command from the root of this repo:
 docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
 ```
 
-If you don't want to use Docker, you can also use pipenv. Directions on setting
-up your environment assume Homebrew is installed and python 2.7 is installed.
-Take the following steps:
+Or use the rake task added:
 
 ```bash
-pip install -g pipenv
-brew install plantuml
-brew install graphviz
-
-# then in the documentation root directory:
-WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install
+rake docker:build
 ```
 
-When building the html to test, run this command:
+#### pipenv
+
+If you don't want to use Docker, you can also use pipenv.
+
+1. Ensure plantuml and graphviz are installed:
+
+   ```bash
+   # on OS X
+   brew install plantuml
+   brew install graphviz
+   ```
+
+2. Install pipenv and use it to install dependencies in same directory:
+
+   ```bash
+   brew install plantuml
+   brew install graphviz
+   pip install -g pipenv
+
+   # then in the documentation root directory:
+   WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install
+
+   # or using handy rake task:
+   rake pipenv:install
+   ```
+
+When building the docs, run this command:
 
 ```bash
 WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make html
+```
+
+or use the rake task:
+
+```bash
+rake pipenv:build
+
+# or
+
+rake build
 ```
 
 ## Contributing
