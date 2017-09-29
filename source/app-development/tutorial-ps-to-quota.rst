@@ -116,8 +116,8 @@ Clone and setup
 #. Click "New Product" and "Clone Existing App".
 #. Fill out the form:
 
-   #. Directory name: quota
-   #. Git remote: https://github.com/OSC/ood-example-ps
+   #. Directory name: ``quota``
+   #. Git remote: ``https://github.com/OSC/ood-example-ps``
    #. Check "Create new Git Project from this?"
    #. Click Submit
 
