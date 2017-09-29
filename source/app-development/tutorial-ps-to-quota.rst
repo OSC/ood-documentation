@@ -400,7 +400,8 @@ The app is looking good, but the details page still shows the app title "Passeng
     +icon: fa://hdd-o
 
 * The icon follows format of ``fa://{FONTAWESOMENAME}`` where you replace ``{FONTAWESOMENAME}`` with an icon from http://fontawesome.io/icons/.
-  In this case we are using ``fa-hdd-o`` which we write in the manifest as ``fa://hdd-o``: http://fontawesome.io/icon/hdd-o/
+  In this case we are using ``fa-hdd-o`` which we write in the manifest as ``fa://hdd-o``.
+  You can see details on this icon at http://fontawesome.io/icon/hdd-o/
 
 Publish App
 -----------
@@ -451,5 +452,6 @@ Steps:
 
 .. warning::
 
-   Accessing this new app for the first time will cause your NGINX server to restart, killing all websocket connections, which means resetting your active Shell sessions.
+   Accessing this new app for the first time will cause your NGINX server to restart,
+   killing all websocket connections, which means resetting your active web-based OnDemand Shell sessions.
 
