@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.2. Custom Job Submission &mdash; Open OnDemand 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="5. Customize Desktop App" href="../customize-desktop-app.html"/>
+        <link rel="next" title="Updating" href="../../updating.html"/>
+        <link rel="prev" title="5.1. Modify Form Attributes" href="modify-form-attributes.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modify-cluster-configuration.html">2. Modify Cluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../enable-reverse-proxy.html">3. Enable Reverse Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install-desktop-app.html">4. Install Desktop App</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../customize-desktop-app.html">5. Customize Desktop App</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="modify-form-attributes.html">5.1. Modify Form Attributes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5.2. Custom Job Submission</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slurm">5.2.1. Slurm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque">5.2.2. Torque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lsf">5.2.3. LSF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pbs-professional">5.2.4. PBS Professional</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../add-jupyter.html">Add Jupyter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../install-desktops.html">Install Desktops</a> &raquo;</li>
+        
+          <li><a href="../customize-desktop-app.html">5. Customize Desktop App</a> &raquo;</li>
+        
+      <li>5.2. Custom Job Submission</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/install-desktops/customize-desktop-app/custom-job-submission.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="custom-job-submission">
+<span id="install-desktops-customize-desktop-app-custom-job-submission"></span><h1>5.2. Custom Job Submission<a class="headerlink" href="#custom-job-submission" title="Permalink to this headline">¶</a></h1>
+<p>To customize job submission we will need to first edit our custom desktop app
+YAML file as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/cluster1.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
+
+<span class="c1"># Add the below option that points to our custom job submission</span>
+<span class="c1"># configuration file</span>
+<span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
+</pre></div>
+</div>
+<p>Notice we included the configuration option <code class="docutils literal"><span class="pre">submit</span></code> that points to our
+custom job submission YAML configuration file. This can be an absolute file
+path or a relative file path with respect to the <code class="docutils literal"><span class="pre">local/</span></code> directory.</p>
+<p>We can now create and modify a job submission configuration file at:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bc_desktop</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="n">my_submit</span><span class="o">.</span><span class="n">yml</span><span class="o">.</span><span class="n">erb</span>
+</pre></div>
+</div>
+<p>Since it has the extension <code class="docutils literal"><span class="pre">.erb</span></code> we can take advantage of the Ruby language
+to make the configuration file dynamic. In particular, you will now have access
+to the user-submitted form arguments defined as:</p>
+<dl class="docutils">
+<dt>bc_num_hours</dt>
+<dd><p class="first"><em>Default:</em> <code class="docutils literal"><span class="pre">&quot;1&quot;</span></code></p>
+<p class="last">A Ruby <code class="docutils literal"><span class="pre">String</span></code> containing the number of hours a user requested for the
+Desktop batch job to run.</p>
+</dd>
+<dt>bc_num_slots</dt>
+<dd><p class="first"><em>Default:</em> <code class="docutils literal"><span class="pre">&quot;1&quot;</span></code></p>
+<p class="last">A Ruby <code class="docutils literal"><span class="pre">String</span></code> containing either the number of nodes or processors
+(depending on the type of resource manager the cluster uses) a user
+requested.</p>
+</dd>
+<dt>bc_account</dt>
+<dd><p class="first"><em>Default:</em> <code class="docutils literal"><span class="pre">&quot;&quot;</span></code></p>
+<p class="last">A Ruby <code class="docutils literal"><span class="pre">String</span></code> that holds the account the user supplied to charge the job
+against.</p>
+</dd>
+<dt>bc_queue</dt>
+<dd><p class="first"><em>Default:</em> <code class="docutils literal"><span class="pre">&quot;&quot;</span></code></p>
+<p class="last">A Ruby <code class="docutils literal"><span class="pre">String</span></code> that holds the queue the user requested for the job to run
+on.</p>
+</dd>
+<dt>bc_email_on_started</dt>
+<dd><p class="first"><em>Default:</em> <code class="docutils literal"><span class="pre">&quot;0&quot;</span></code></p>
+<p class="last">A Ruby <code class="docutils literal"><span class="pre">String</span></code> that can either be <code class="docutils literal"><span class="pre">&quot;0&quot;</span></code> (do not send the user an email
+when the job starts) or <code class="docutils literal"><span class="pre">&quot;1&quot;</span></code> (send an email to the user when the job
+starts).</p>
+</dd>
+<dt>node_type</dt>
+<dd><p class="first"><em>Default:</em> <code class="docutils literal"><span class="pre">&quot;&quot;</span></code></p>
+<p class="last">A Ruby <code class="docutils literal"><span class="pre">String</span></code> that can be used for more advanced job submission. This is
+an advanced option that is disabled by default and does nothing if you do
+enable it, unless you add it to a custom job submission configuration file.</p>
+</dd>
+</dl>
+<p>Some examples on how to submit jobs using the above form attributes are given
+in the following sections for the given resource manager.</p>
+<div class="section" id="slurm">
+<h2>5.2.1. Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h2>
+<p>For most cases of Slurm you will want to modify how the <code class="docutils literal"><span class="pre">bc_num_slots</span></code>
+(number of nodes) is submitted to the batch server.</p>
+<p>This can be handled in your custom job submission configuration file as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/submit/my_submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-N&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots</span><span class="nv"> </span><span class="s">%&gt;&quot;</span> <span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal"><span class="pre">script</span></code> configuration option.
+In particular since there is no option to modify number of nodes, we need to
+directly interact with the <code class="docutils literal"><span class="pre">native</span></code> command line arguments. This is specified
+as an array of <strong class="command">sbatch</strong> arguments.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
+using the <code class="docutils literal"><span class="pre">native</span></code> fallback.</p>
+</div>
+</div>
+<div class="section" id="torque">
+<h2>5.2.2. Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h2>
+<p>For most cases of Torque you will want to modify how the <code class="docutils literal"><span class="pre">bc_num_slots</span></code>
+(number of nodes) is submitted to the batch server.</p>
+<p>This can be handled in your custom job submission configuration file as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/submit/my_submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">nodes</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots</span><span class="nv"> </span><span class="s">%&gt;:ppn=28&quot;</span>  <span class="c1"># assumes cluster has 28 procs per node</span>
+</pre></div>
+</div>
+<p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal"><span class="pre">script</span></code> configuration option.
+In particular since there is no option to modify number of nodes, we need to
+directly interact with the <code class="docutils literal"><span class="pre">native</span></code> command line arguments.</p>
+<p>For more information on the available options for the <code class="docutils literal"><span class="pre">native</span></code> attribute
+when using Torque please see the <a class="reference external" href="http://www.rubydoc.info/gems/pbs/PBS/Batch#submit_script-instance_method">pbs-ruby documentation</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
+using the <code class="docutils literal"><span class="pre">native</span></code> fallback.</p>
+</div>
+</div>
+<div class="section" id="lsf">
+<h2>5.2.3. LSF<a class="headerlink" href="#lsf" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+<div class="section" id="pbs-professional">
+<h2>5.2.4. PBS Professional<a class="headerlink" href="#pbs-professional" title="Permalink to this headline">¶</a></h2>
+<p>For most cases of Slurm you will want to modify how the <code class="docutils literal"><span class="pre">bc_num_slots</span></code>
+(number of CPUs on a single node) is submitted to the batch server.</p>
+<p>This can be handled in your custom job submission configuration file as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/submit/my_submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots</span><span class="nv"> </span><span class="s">%&gt;&quot;</span> <span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal"><span class="pre">script</span></code> configuration option.
+In particular since there is no option to modify number of nodes/cpus, we need
+to directly interact with the <code class="docutils literal"><span class="pre">native</span></code> command line arguments. This is
+specified as an array of <strong class="command">qsub</strong> arguments.</p>
+<p>If you would like to mimic how Torque handles <code class="docutils literal"><span class="pre">bc_num_slots</span></code> (number of
+<strong>nodes</strong>), then we will first need to change the form label of
+<code class="docutils literal"><span class="pre">bc_num_slots</span></code> that the user sees in the form. This can be done by modifying
+our Desktop app local YAML configuration file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
+
+<span class="c1"># Add the below option that allows us to modify attributes</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
+</pre></div>
+</div>
+<p>Now when we go to the Desktop app form in our browser it will have the new
+label “Number of nodes” instead of “Number of CPUs on a single node”.</p>
+<p>Next we will need to handle how we submit the <code class="docutils literal"><span class="pre">bc_num_slots</span></code> since it means
+something different now. So now modify the job submission configuration file as
+such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/submit/my_submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span> <span class="p p-Indicator">]</span> <span class="c1"># assumes 28 procs per node</span>
+</pre></div>
+</div>
+<p>You can also append <code class="docutils literal"><span class="pre">mem=...gb</span></code> to the <code class="docutils literal"><span class="pre">select=...</span></code> statement if you’d
+like.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
+using the <code class="docutils literal"><span class="pre">native</span></code> fallback.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../updating.html" class="btn btn-neutral float-right" title="Updating" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modify-form-attributes.html" class="btn btn-neutral" title="5.1. Modify Form Attributes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
