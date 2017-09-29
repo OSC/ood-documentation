@@ -15,7 +15,7 @@ The following apps require a cluster configuration file:
 
 - :ref:`shell` (connect to a cluster login node from the Dashboard App)
 - :ref:`active-jobs` (view a list of active jobs for the various clusters)
-- :ref:`my-jobs` (submit jobs to various clusters)
+- :ref:`job-composer` (submit jobs to various clusters)
 
 #. Create default directory for config files:
 
@@ -50,7 +50,7 @@ Where ``host`` is the SSH server host for the given cluster.
 
 .. note::
 
-   The :ref:`active-jobs` and the :ref:`my-jobs` won't be able to list or
+   The :ref:`active-jobs` and the :ref:`job-composer` won't be able to list or
    submit jobs without a resource manager.
 
 Torque/PBS
@@ -80,8 +80,8 @@ configuration file.
 .. warning::
 
    The corresponding cluster's batch server will need to be configured with the
-   Open OnDemand server as a valid ``submit_host`` to allow the :ref:`my-jobs`
-   to submit jobs to it.
+   Open OnDemand server as a valid ``submit_host`` to allow the
+   :ref:`job-composer` to submit jobs to it.
 
 Slurm
 .....

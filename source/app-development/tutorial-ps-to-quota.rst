@@ -28,7 +28,7 @@ After this tutorial the resulting app will be:
 This assumes you have followed the directions to :ref:`enabling-development-mode` on the
 Dashboard.
 
-#. The app uses the custom branded Bootstrap 3 that My Jobs and Active Jobs apps
+#. The app uses the custom branded Bootstrap 3 that Job Composer and Active Jobs apps
    use.
 #. The navbar contains a link back to the dashboard.
 #. On a request, the app runs a shell command, parses the output, and displays
