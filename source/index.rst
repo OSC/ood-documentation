@@ -18,6 +18,7 @@ Welcome to Open OnDemand's documentation!
 
    installation
    install-desktops
+   install-ihpc-apps
    updating
 
 .. toctree::
