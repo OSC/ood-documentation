@@ -265,6 +265,10 @@ Run test by running `rake` command and you will see it fail:
         scl enable rh-ruby22 nodejs010 git19 v8314 python27 -- bash
       fi
 
+   This means when I login to the host webtest04.osc.edu the SCL packages will be enabled
+   in a new bash session. If you did the same you would replace ``webtest04`` with the hostname
+   of your development node.
+
 Change the command we are using, fix the command output parsing, and fix the struct definition so the unit test passes.
 
 .. code-block:: diff
