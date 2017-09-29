@@ -134,13 +134,13 @@ Edit to run and parse quota
 
 The app runs and parses this command:
 
-.. code:: sh
+.. code-block:: sh
 
    ps aux | grep '[A]pp'
 
 We will change it to run and parse this command:
 
-.. code:: sh
+.. code-block:: sh
 
    quota -spw
 
@@ -153,7 +153,7 @@ with appropriate attributes.
 
 Diff:
 
-.. code:: diff
+.. code-block:: diff
 
       def test_command_output_parsing
         output = <<-EOF
@@ -188,7 +188,7 @@ Diff:
 
 Resulting test method:
 
-.. code:: ruby
+.. code-block:: ruby
 
     class TestCommand < Minitest::Test
 
@@ -217,7 +217,7 @@ Update command.rb
 
 Run test by running `rake` command and you will see it fail:
 
-.. code:: sh
+.. code-block:: sh
 
     $ rake
     Run options: --seed 58990
@@ -258,7 +258,7 @@ Run test by running `rake` command and you will see it fail:
    You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
    For example, in my .bash_profile I have:
 
-   .. code:: sh
+   .. code-block:: sh
 
       if [[ ${HOSTNAME%%.*} == webtest04*  ]]
       then
@@ -267,7 +267,7 @@ Run test by running `rake` command and you will see it fail:
 
 Change the command we are using, fix the command output parsing, and fix the struct definition so the unit test passes.
 
-.. code:: diff
+.. code-block:: diff
 
     class Command
       def to_s
@@ -291,7 +291,7 @@ Change the command we are using, fix the command output parsing, and fix the str
 
 After the changes part of the command.rb will look like this:
 
-.. code:: ruby
+.. code-block:: ruby
 
     class Command
       def to_s
@@ -311,7 +311,7 @@ After the changes part of the command.rb will look like this:
 
 Now when we run the test they pass:
 
-.. code:: sh
+.. code-block:: sh
 
     $ rake
     Run options: --seed 60317
@@ -329,7 +329,7 @@ Update app.rb and view/index.html
 
 Update app.rb:
 
-.. code:: diff
+.. code-block:: diff
 
     helpers do
       def title
@@ -351,7 +351,7 @@ Update app.rb:
 
 In view/index.html, replace the table with this:
 
-.. code:: erb
+.. code-block:: erb
 
     <table class="table table-bordered">
       <tr>
@@ -387,7 +387,7 @@ Brand App
 
 The app is looking good, but the details page still shows the app title "Passenger App Processes". To change this and the icon, edit the manifest.yml:
 
-.. code:: diff
+.. code-block:: diff
 
     -name: Passenger App Processes
     -description: Display your running Passenger app proceseses in a table
@@ -411,7 +411,7 @@ Steps:
 
 #. Add category to manifest so app appears in Files menu:
 
-    .. code:: diff
+    .. code-block:: diff
 
         name: Quota
         description: Display quotas
@@ -421,7 +421,7 @@ Steps:
 
 #. Version these changes. Click Shell button on app details view, and then commit the changes:
 
-    .. code:: sh
+    .. code-block:: sh
 
        git add .
        git commit -m "update manifest for production"
@@ -431,7 +431,7 @@ Steps:
 
 #. As the admin, sudo copy or clone this repo to production
 
-    .. code:: sh
+    .. code-block:: sh
 
        # as sudo on OnDemand host:
        cd /var/www/ood/apps/sys
