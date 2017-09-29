@@ -10,7 +10,7 @@ Now we will install all of the Open OnDemand system web applications:
 - :ref:`files`
 - :ref:`editor`
 - :ref:`active-jobs`
-- :ref:`my-jobs`
+- :ref:`job-composer`
 
 This is greatly simplified by the ood-apps-installer_ utility.
 
