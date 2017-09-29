@@ -1,7 +1,7 @@
 .. _add-jupyter:
 
-Add Jupyter
-===========
+Tutorial: Add Jupyter
+======================
 
 This tutorial will walk you through creating an interactive Jupyter app that
 your users will use to launch a `Jupyter Notebook Server`_ within a batch job
