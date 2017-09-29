@@ -38,6 +38,8 @@ Welcome to Open OnDemand's documentation!
    :caption: Resources
 
    user-documentation
+   app-development
+
 
 .. toctree::
    :maxdepth: 2
