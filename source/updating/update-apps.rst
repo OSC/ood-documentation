@@ -56,7 +56,7 @@ Instructions to update
 
       cd ~/ood/src/apps
       scl enable git19 -- git fetch
-      scl enable git19 -- git checkout v1.0.0
+      scl enable git19 -- git checkout v{{ ood_apps_installer_version }}
 
 #. Confirm that the local configuration files for the various apps exist under
    the appropriate app build directory as :file:`build/{app_dir}/...`.
