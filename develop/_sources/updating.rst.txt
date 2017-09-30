@@ -12,9 +12,6 @@ tutorial is to guide you on how to update the various Open OnDemand components.
    :numbered:
    :caption: Updating Guide
 
-   updating/update-apache-config
-   updating/update-proxy-module
-   updating/update-pun-utility
-   updating/update-mapping-script
+   updating/update-infrastructure
    updating/update-apps
    updating/update-desktops

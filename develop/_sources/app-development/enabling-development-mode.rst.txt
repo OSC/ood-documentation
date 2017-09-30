@@ -20,7 +20,7 @@ In the root of the dashboard app, add these contents to a file ``.env.local``:
   OOD_APP_DEVELOPMENT=1
 
 If this env var is present, ``Configuration.app_development_enabled`` will be
-in the Dashboard app will be set to true, and the Develop dropdown will
+set to true, and the Develop dropdown will
 appear.
 
 

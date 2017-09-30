@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial: Creating a status app &mdash; Open OnDemand 1.0.0 documentation</title>
+  <title>Tutorial: Creating a status app &mdash; Open OnDemand 1.1.0 documentation</title>
   
 
   
@@ -37,9 +37,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand 1.0.0 documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../index.html"/>
         <link rel="up" title="App Development" href="../app-development.html"/>
-        <link rel="next" title="v1.0 Release Notes" href="../release-notes/v1.0-release-notes.html"/>
+        <link rel="next" title="Tutorial: Add Jupyter" href="../add-jupyter.html"/>
         <link rel="prev" title="Enabling App Development" href="enabling-development-mode.html"/> 
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                1.0
+                1.1
               </div>
             
           
@@ -101,11 +101,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../updating.html">Updating</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../add-jupyter.html">Add Jupyter</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -134,11 +131,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#publish-app">Publish App</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
 
@@ -226,7 +225,7 @@ this app looks like:</p>
 <p>This assumes you have followed the directions to <a class="reference internal" href="enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> on the
 Dashboard.</p>
 <ol class="arabic simple">
-<li>The app uses the custom branded Bootstrap 3 that My Jobs and Active Jobs apps
+<li>The app uses the custom branded Bootstrap 3 that Job Composer and Active Jobs apps
 use.</li>
 <li>The navbar contains a link back to the dashboard.</li>
 <li>On a request, the app runs a shell command, parses the output, and displays
@@ -258,7 +257,7 @@ of Sinatra reloader extension</li>
 <div class="section" id="files-and-their-purpose">
 <h3>Files and their purpose<a class="headerlink" href="#files-and-their-purpose" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils" id="id3">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Main files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Main files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -289,13 +288,13 @@ called <a class="reference external" href="https://github.com/jeremyevans/erub:/
 which auto-escapes output of ERB tags by default (for security)</td>
 </tr>
 <tr class="row-odd"><td>views/layout.html</td>
-<td>the rendered HTML from views/index.html is insterted into this layout,
+<td>the rendered HTML from views/index.html is inserted into this layout,
 where css and javascript files are included</td>
 </tr>
 </tbody>
 </table>
 <table border="1" class="docutils" id="id4">
-<caption><span class="caption-number">Table 3 </span><span class="caption-text">Other files</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Other files</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -456,7 +455,7 @@ Tasks: <span class="nv">TOP</span> <span class="o">=</span>&gt; <span class="nv"
 <p>To run commands like rake through the shell you need to make sure you are on
 a host that has the correct version of Ruby installed. For OnDemand that likely
 means using Software Collections with the same packages used to install OnDemand.</p>
-<p>With SCL, running rake with rh-ruby22 pacakge looks like:</p>
+<p>With SCL, running rake with rh-ruby22 package looks like:</p>
 <p><code class="docutils literal"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">rh-ruby22</span> <span class="pre">--</span> <span class="pre">rake</span></code></p>
 <p>With SCL, running git commands using git19 looks like:</p>
 <p><code class="docutils literal"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">git19</span> <span class="pre">--</span> <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;initial</span> <span class="pre">commit&quot;</span></code></p>
@@ -583,7 +582,7 @@ end
 <h2>Brand App<a class="headerlink" href="#brand-app" title="Permalink to this headline">¶</a></h2>
 <p>The app is looking good, but the details page still shows the app title “Passenger App Processes”. To change this and the icon, edit the manifest.yml:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gd">-name: Passenger App Processes</span>
-<span class="gd">-description: Display your running Passenger app proceseses in a table</span>
+<span class="gd">-description: Display your running Passenger app processes in a table</span>
 <span class="gi">+name: Quota</span>
 <span class="gi">+description: Display quotas</span>
 <span class="gi">+icon: fa://hdd-o</span>
@@ -660,7 +659,7 @@ killing all websocket connections, which means resetting your active web-based O
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../release-notes/v1.0-release-notes.html" class="btn btn-neutral float-right" title="v1.0 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../add-jupyter.html" class="btn btn-neutral float-right" title="Tutorial: Add Jupyter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="enabling-development-mode.html" class="btn btn-neutral" title="Enabling App Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -694,7 +693,7 @@ killing all websocket connections, which means resetting your active web-based O
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.0.0',
+            VERSION:'1.1.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
