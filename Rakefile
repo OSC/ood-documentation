@@ -10,6 +10,10 @@ namespace :pipenv do
     exec 'WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make html'
   end
 
+  task :clean do
+    exec 'WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make clean'
+  end
+
   desc "Install pipenv dependencies"
   task :install do
     exec 'WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install'
@@ -26,3 +30,4 @@ end
 
 desc "Build docs using pipenv (shortcut)"
 task :build => ["pipenv:build"]
+task :clean => ["pipenv:clean"]
