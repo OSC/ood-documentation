@@ -151,25 +151,3 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
    **TODO**: how do we automate these steps?
 
 
-#. Create a new Keycloak API session
-
-   .. code-block:: sh
-
-      yum install java-1.8.0-openjdk-devel
-
-      sudo -u keycloak ./bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin --password keycloakpass
-
-   Use the same user and password you setup earlier. This stores a session file
-   in the keycloak user's home directory and on repeated execution of
-   ./bin/kcadm.sh commands uses this session info. The kcadm.sh script is a
-   wrapper around the Keycloak API which is why you can only use it when the
-   server is running.
-
-   Verify that your session was completed by fetching information about the
-   realms:
-
-   .. code-block:: sh
-
-      sudo -u keycloak ./bin/kcadm.sh get realms
-
-   **Be sure to use a good password - using mkpasswd or pwgen or similar.**
