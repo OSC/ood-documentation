@@ -48,14 +48,30 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
 
    **Be sure to use a good password - using mkpasswd or pwgen or similar.**
 
-#. **TODO**
+#. Modify ``standalone/configuration/standalone.xml``:
 
-   Use config.cli file [2] to modify standalone.xml configuration -
-   /opt/keycloak-3.0.0.Final/bin/jboss-cli.sh --file=config.cli
+   Simplest is to run these three commands:
 
-   I need to get a copy of the file I used. Mention this just modifies
-   standalone.xml, which can be hand-modified as well.
+   .. code-block:: sh
 
+      ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
+      ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
+      ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
+
+   You can also manually edit the XML file: **TODO**
+
+   Or you can use a config.cli file that contains these commands. We have
+   provided an example file to make use of in this gist, with blocks commented
+   out so you can wget the file, edit as appropriate, and run via:
+
+   .. code-block:: sh
+
+      ./bin/jboss-cli.sh --file=config.cli
+
+   **TODO: add gist with file**
+
+   **This step you would change certain things if using MySQL or another
+   database instead of the built in H2 database for Keycloak. If you need to add a truststore, uncomment this block.**
 
 #. Create keycloak.service to start and stop the server:
 
@@ -89,12 +105,19 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
 #. Define apache config to proxy keycloak requests
 
    We will stick Apache in front of Keycloak. In this tutorial Keycloak is
-   installed on the same node as OnDemand, so we can use the same Apache conf
+   installed on the same node as OnDemand, and we use the same Apache conf
    files, and thus reuse the same SSL certificates.
 
    **TODO**: show proxying 8080 to 8443
 
    **TODO**: show open up iptables
+
+   We can use the same host because Keycloak properly scopes all cookies it sets to the
+   realm. For example, if I have a realm called osc, then the Keycloak login
+   page will be at https://idp.osc.edu/auth/realms/osc/protocol/openid-connect/auth
+   and cookies set during authentication will be set with the path ``/auth/realms/osc``,
+   including ``KEYCLOAK_SESSION``, ``KEYCLOAK_STATE_CHECKER``,
+   ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
 
 #. Now you should be able to access https://your.ondemand.install.edu:8080/. In
    my case it was https://webdev07.hpc.osc.edu:8080/auth/
