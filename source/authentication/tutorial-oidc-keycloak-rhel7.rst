@@ -19,7 +19,7 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
       sudo wget https://downloads.jboss.org/keycloak/3.2.1.Final/keycloak-3.2.1.Final.tar.gz
       sudo tar xzf keycloak-3.2.1.Final.tar.gz
 
-#. Add keycloak user
+#. Add keycloak user, chown and chmod Keycloak files
 
    .. code-block:: sh
 
@@ -30,6 +30,7 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
       # this makes a home directory, which is needed when running API calls as
       # keycloak user
       sudo chown keycloak: -R keycloak-3.2.1.Final
+      sudo -u chmod 700 keycloak-3.2.1.Final
 
 
 #. Install JDK 1.8.0
