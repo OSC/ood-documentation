@@ -28,6 +28,11 @@ namespace :docker do
   end
 end
 
+desc "Open built documentation in browser"
+task :open do
+  exec '(command -v xdg-open >/dev/null 2>&1 && xdg-open build/html/index.html) || open build/html/index.html'
+end
+
 desc "Build docs using pipenv (shortcut)"
 task :build => ["pipenv:build"]
 task :clean => ["pipenv:clean"]
