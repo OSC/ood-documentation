@@ -11,6 +11,9 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
 
 **login to webdev07 and do these steps**
 
+Install configure, and launch Keycloak IDP server behind Apache
+---------------------------------------------------------------
+
 #. Download and unpack new version of keycloak
 
    .. code-block:: sh
@@ -142,6 +145,9 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
    **TODO**: after completing directions, lets create a diagram of the end
    result (Apache is doing what? etc.)
 
+Use Keycloak Admin Web UI to configure LDAP and add OnDemand OIDC Client
+------------------------------------------------------------------------
+
 #. Using the Web Admin UI, configure LDAP
 
    #. Log into https://webdev07.hpc.osc.edu:8443
@@ -206,6 +212,9 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
       #. Select the "Installation" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
       #. Select Format Option: Keycloak OIDC JSON
       #. The "secret" string will be in the credentials section. Copy that for future use (and keep it secure).
+
+Configure OnDemand Apache as OIDC Client for Keycloak IDP
+---------------------------------------------------------
 
 #. Update OnDemand Apache to authenticate with KeyCloak
 
