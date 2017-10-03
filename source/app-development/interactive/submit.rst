@@ -3,13 +3,15 @@
 Job Submission
 ==============
 
+The configuration file ``submit.yml.erb`` controls the content of the batch
+script as well as the submission arguments used when submitting the batch job.
+It is located in the root of the application directory.
+
 Assuming we already have a sandbox Interactive App deployed under::
 
   ${HOME}/ondemand/dev/my_app
 
-The configuration file ``submit.yml.erb`` that describes the content of the
-batch script as well as submission arguments is located in the root of this
-application directory. For our example::
+The ``submit.yml.erb`` configuration file can be found at::
 
   ${HOME}/ondemand/dev/my_app/submit.yml.erb
 
@@ -20,6 +22,9 @@ substitution, and more.
 
 Configuration
 -------------
+
+The two possible configuration options that can be used in the
+``submit.yml.erb`` file are given as:
 
 .. describe:: batch_connect (Hash)
 
@@ -51,6 +56,9 @@ Configuration
         script:
           accounting_id: "PZS0001"
           queue_name: "parallel"
+
+Each of these configuration options take a set of their own configuration
+options described below.
 
 Configure Batch Connect
 ```````````````````````
