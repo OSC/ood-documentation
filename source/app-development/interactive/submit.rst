@@ -1,4 +1,4 @@
-.. _interactive-development-submit:
+.. _app-development-interactive-submit:
 
 Job Submission
 ==============
@@ -24,7 +24,7 @@ Configuration
 .. describe:: batch_connect (Hash)
 
    the configuration describing the batch script content (see
-   `OodCore::BatchConnect::Template`_)
+   `OodCore::BatchConnect::Template`_ for valid configuration options)
 
    Example
      Use the default basic web server template
@@ -39,7 +39,7 @@ Configuration
 .. describe:: script (Hash)
 
    the configuration describing the job submission parameters for the batch
-   script (see `OodCore::Job::Script`_)
+   script (see `OodCore::Job::Script`_ for valid configuration options)
 
    Example
      Set the job's charged account and queue
@@ -56,7 +56,7 @@ Configure Batch Connect
 ```````````````````````
 
 All batch scripts are generated from either the ``basic`` template or the
-``vnc`` template specified with the given configuration option:
+``vnc`` template specified with the following configuration option:
 
 .. describe:: template (String)
 
@@ -89,13 +89,14 @@ Configure Script
 ````````````````
 
 The ``script`` configuration option defines the batch job submission parameters
-(e.g., number of nodes, wall time, queue). The list of all possible options can
-be found under the code documentation for `OodCore::Job::Script`_.
+(e.g., number of nodes, wall time, queue, ...). The list of all possible
+options can be found under the code documentation for `OodCore::Job::Script`_.
 
 It is recommended to refrain from using the ``native`` option to best keep your
 Interactive App as portable as possible. Although we understand this may not be
 possible for all job submission parameters (e.g., number of nodes, memory, GPU)
-it is best to use the primary option if it does exist.
+it would be best to use the respective option corresponding to the submission
+parameter if it is available.
 
 For example, if I want to specify the charged account for the job, it is
 recommended I use:
@@ -125,7 +126,7 @@ but now this app may not work at a center with a different resource manager.
    manager specific. For all supported resource managers (e.g., Slurm, LSF,
    PBSPro, ...) other than Torque, the ``native`` option is specified as an
    array of command line arguments that are fed to the resource manager's batch
-   submission tool (e.g., :command:`sbatch`, :command:`qsub`, :command:`bsqub`,
+   submission tool (e.g., :command:`sbatch`, :command:`qsub`, :command:`bsub`,
    ...)
 
    So for Slurm, the following configuration will submit a job to 5 nodes with
@@ -143,7 +144,8 @@ Examples
 
 The simplest example consists of submitting a batch script built from the basic
 web server template using all the default options for the cluster's batch job
-submission tool (e.g., :command:`sbatch`, :command:`qsub`, :command:`bsub`).
+submission tool (e.g., :command:`sbatch`, :command:`qsub`, :command:`bsub`,
+...).
 
 .. code-block:: yaml
 
@@ -168,8 +170,8 @@ Change Executable for Main Script
 `````````````````````````````````
 
 When the batch script is rendered from the template, one of the possible
-configuration options is the executable called for the main script it forks off
-into the background. This can be configured with:
+configuration options is specifying the executable command called for the main
+script it forks off into the background. This can be configured with:
 
 .. code-block:: yaml
 
@@ -204,7 +206,7 @@ Dynamically Set Submission Parameters
 
 Feel free to take advantage of the `eRuby (Embedded Ruby)`_ templating system
 in the ``submit.yml.erb`` file. You have access to all the
-:ref:`interactive-development-form` attributes.
+:ref:`app-development-interactive-form` attributes.
 
 For example, if you had a form attribute called ``number_of_hours`` that you
 had the user fill out. You can add this to the submission parameters as such:
@@ -227,9 +229,9 @@ Strings`_. So we need to:
    before performing arithmetic operations on it.
 #. Finally we convert hours to seconds.
 
-Another scenario would be if the user specified the queue directly with our
-form attribute called ``my_queue``. We can then add the queue conditionally to
-the submission parameters as such:
+Another scenario would be if the user specified the queue directly with a
+custom form attribute called ``my_queue``. We can then add this user-supplied
+queue conditionally to the submission parameters as such:
 
 .. code-block:: yaml
 
@@ -245,15 +247,15 @@ the submission parameters as such:
      email_on_started: true
 
 In this case, ``queue_name`` will only be added to the submission parameters if
-the user supplied a non-blank value.
+the user supplied a non-blank value to the form attribute ``my_queue``.
 
 .. note::
 
    Most of the common form attributes that manipulate the job submission
    parameters are provided for you as
-   :ref:`interactive-development-form-pre-defined-attributes`. These attributes
-   fill-in the ``script`` configuration options internally, so you do not have
-   to.
+   :ref:`app-development-interactive-form-pre-defined-attributes`. These
+   special attributes fill-in the ``script`` configuration options internally,
+   so you do not have to.
 
    For example, if you used the pre-defined form attribute ``bc_queue``, you do
    not need to specify ``queue_name:`` in the ``submit.yml.erb``.

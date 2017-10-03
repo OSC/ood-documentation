@@ -1,4 +1,4 @@
-.. _interactive-development-form:
+.. _app-development-interactive-form:
 
 User Form
 =========
@@ -63,10 +63,10 @@ Attributes are *variables* whose values can be set either by the user from
 within an HTML form or hard-coded to a specific value in the form
 configuration. These attributes and their corresponding values are then made
 available to the Interactive App through its intermediate steps:
-:ref:`interactive-development-template` and
-:ref:`interactive-development-submit`.
+:ref:`app-development-interactive-template` and
+:ref:`app-development-interactive-submit`.
 
-.. _interactive-development-form-pre-defined-attributes:
+.. _app-development-interactive-form-pre-defined-attributes:
 
 Pre-defined Attributes
 ``````````````````````

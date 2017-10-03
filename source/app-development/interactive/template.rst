@@ -1,4 +1,4 @@
-.. _interactive-development-template:
+.. _app-development-interactive-template:
 
 Render Template
 ===============
@@ -79,7 +79,7 @@ Context
 ```````
 
 The ``context`` object is an object that holds **all the attributes** defined
-by the :ref:`interactive-development-form`.
+by the :ref:`app-development-interactive-form`.
 
 .. warning::
 

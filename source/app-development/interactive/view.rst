@@ -1,4 +1,4 @@
-.. _interactive-development-view:
+.. _app-development-interactive-view:
 
 Connection View
 ===============

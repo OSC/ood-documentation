@@ -1,11 +1,11 @@
-.. _add-jupyter-customize-attributes:
+.. _app-development-add-jupyter-customize-attributes:
 
 Customize Attributes
 ====================
 
 Now we will customize the app to work on a given cluster. Be sure that you walk
-through :ref:`add-jupyter-software-requirements` for the given cluster ahead of
-time.
+through :ref:`app-development-add-jupyter-software-requirements` for the given
+cluster ahead of time.
 
 Modify Form File
 ----------------
