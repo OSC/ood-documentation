@@ -142,12 +142,82 @@ etc. it doesn't make sense to add all the changes to the Apache config now.
    **TODO**: after completing directions, lets create a diagram of the end
    result (Apache is doing what? etc.)
 
-   **TODO**: one problem with this approach is that cookies are shared across
-   all ports of a given host. That means that any cookies Keycloak sets is going
-   to be sent in requests to OnDemand, and we might not be filtering these
-   cookies out. In that case, we would need to expand our tutorial to use a
-   separate host for KeyCloak completely.
+#. Using the Web Admin UI, configure LDAP
 
-   **TODO**: how do we automate these steps?
+   #. Log into https://webdev07.hpc.osc.edu:8443
+   #. Ensure appropriate non-master realm selected in upper left corner
+   #. Choose User Federation
+   #. Select "ldap" for provider
 
+      #. Import Users set to OFF
+      #. Edit Mode set to READ_ONLY
+      #. Vendor set to other – for OpenLDAP
+      #. User Object Classes set to posixAccount – OSC specific and odd
+      #. Connection URL: ldaps://openldap1.infra.osc.edu:636 ldaps://openldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1
+      #. User DN: ou=People,ou=hpc,o=osc
+      #. Auth Type: simple – OSC specific as we allow anonymous binds
+      #. Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs
+   #. Save
+
+#. Using the Web Admin UI, add OIDC client template
+
+   #. Choose Client Templates
+   #. Click Create (upper right corner)
+
+      #. Name: osc-clients
+      #. Protocol: openid-connect
+
+      #. Click Save
+      #. Mappers tab
+      #. Click Add Builtin
+      #. Check box the following: username, email, given name, family name, full name
+      #. Click Add Selected
+      #. Click Scope tab
+      #. Set Full Scope Allowed to ON
+
+   #. Verify Mappers >> username has "Token Claim Name" with value ``preferred_username``.
+      This means that when the user logs to OnDemand, the ``preferred_username`` claim will
+      contain the username of the user. We will use this when deciding what system user to map
+      a request to.
+
+#. Using the Web Admin UI, add OnDemand as a client
+
+   #. Choose Clients, then click Create in top right corner
+
+      #. Client ID: webdev07.hpc.osc.edu
+      #. Client Protocol: openid-connect
+      #. Client Template: osc-clients
+      #. Save (leave Root URL blank)
+
+   #. Then edit Settings for the newly created client:
+
+      #. Access Type: confidential
+      #. Direct Access Grants Enabled: off
+      #. Valid Redirect URIs: Press the ``+`` button to the right of the URI field so you can insert two URLs:
+
+         #. ``https://webdev07.hpc.osc.edu/oidc``
+         #. ``https://webdev07.hpc.osc.edu``
+
+      #. Web Origins: ``https://webdev07.hpc.osc.edu``
+      #. Scroll to bottom and click "Save"
+
+   #. Finally, get the client secret to use with OnDemand installation:
+
+      #. Select the "Installation" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
+      #. Select Format Option: Keycloak OIDC JSON
+      #. The "secret" string will be in the credentials section. Copy that for future use (and keep it secure).
+
+#. Update OnDemand Apache to authenticate with KeyCloak
+
+   #. Install mod_auth_openidc in OnDemand Apache
+
+      #. **TODO**
+
+   #. Re-generate main config using ood-portal-generator
+
+      #. **TODO**
+
+   #. Add Keycloak config to OnDemand Apache for mod_auth_openidc
+
+      #. **TODO**
 
