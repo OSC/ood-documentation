@@ -15,5 +15,5 @@ are accessible by all users.
    applications/files
    applications/editor
    applications/active-jobs
-   applications/my-jobs
+   applications/job-composer
    applications/interactive

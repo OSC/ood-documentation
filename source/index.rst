@@ -18,13 +18,8 @@ Welcome to Open OnDemand's documentation!
 
    installation
    install-desktops
+   install-ihpc-apps
    updating
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Tutorials
-
-   add-jupyter
 
 .. toctree::
    :maxdepth: 2
@@ -38,9 +33,12 @@ Welcome to Open OnDemand's documentation!
    :caption: Resources
 
    user-documentation
+   app-development
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Release Notes
 
+   release-notes/v1.1-release-notes
    release-notes/v1.0-release-notes
