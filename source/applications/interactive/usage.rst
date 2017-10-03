@@ -21,13 +21,24 @@ through the following URLs:
    this view displays the HTML form for launching the corresponding Interactive
    App session
 
-   **Example request**:
+   **Example**:
 
-   Display the HTML form for the production ``my_app`` Interactive App
+   Display the HTML form for the **production** Interactive App in the
+   ``my_app`` directory
 
    .. code-block:: http
 
       GET /pun/sys/dashboard/batch_connect/sys/my_app/session_contexts/new HTTP/1.1
+      Host: ondemand.my_center.edu
+
+   **Example**:
+
+   Display the HTML form for my development **sandbox** Interactive App in the
+   ``my_app`` directory
+
+   .. code-block:: http
+
+      GET /pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new HTTP/1.1
       Host: ondemand.my_center.edu
 
    :param app_type: Type of Interactive App (``sys`` or ``dev``)

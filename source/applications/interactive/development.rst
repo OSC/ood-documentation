@@ -11,3 +11,5 @@ Stuff goes here...
 
    development/form
    development/template
+   development/submit
+   development/view

@@ -59,18 +59,93 @@ Configuration
 Attributes
 ----------
 
-TODO
+Attributes are *variables* whose values can be set either by the user from
+within an HTML form or hard-coded to a specific value in the form
+configuration. These attributes and their corresponding values are then made
+available to the Interactive App through its intermediate steps:
+:ref:`interactive-development-template` and
+:ref:`interactive-development-submit`.
+
+.. _interactive-development-form-pre-defined-attributes:
 
 Pre-defined Attributes
 ``````````````````````
 
-TODO
+The Dashboard that supports these plugins provides the plugins with some useful
+pre-defined attributes that can be included in the ``form:`` configuration list
+with very little or no modification on the part of the developer.
+
+So a very simple ``form.yml`` that requests the user input a queue followed by
+an account to submit the batch job (interactive session) to, and then
+subsequently submits the job to that queue without any customization on the
+part of the app developer can look like:
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/my_app/form.yml
+   ---
+   cluster: "owens"
+   form:
+     - bc_queue
+     - bc_account
+
+The most commonly used pre-defined attributes are given as:
+
+bc_account
+  This adds a ``text_field`` to the HTML form that will be used as the charged
+  account for the submitted job.
+
+  This attribute gets directly set on `OodCore::Job::Script#accounting_id`_.
+
+bc_queue
+  This adds a ``text_field`` to the HTML form that will supply the name of the
+  queue that the batch job is submitted to.
+
+  This attribute gets directly set on `OodCore::Job::Script#queue_name`_.
+
+bc_num_hours
+  This adds a ``number_field`` to the HTML form that describes the maximum
+  amount of hours the submitted batch job may run.
+
+  This attribute gets converted to seconds and then set on
+  `OodCore::Job::Script#wall_time`_.
+
+bc_num_slots
+  This adds a ``number_field`` to the HTML form that describes the number of
+  processors, CPUs on a single node, or nodes that the submitted job may use
+  (depends on the resource manager used, e.g., Torque, Slurm, ...).
+
+  This attribute manipulates the brittle `OodCore::Job::Script#native`_ field
+  with a value that depends on the given resource manager for the cluster.
+
+  .. warning::
+
+     This pre-defined attribute is very resource manager specific, and is the
+     most brittle of all the other pre-defined attributes. May require
+     customization (see
+     :ref:`interactive-development-form-customizing-attributes`) to work at
+     your center.
+
+bc_email_on_started
+  This adds a ``check_box`` to the HTML form that determines whether the user
+  should be notified by email when the batch job starts.
+
+  This attribute sets value of `OodCore::Job::Script#email_on_started`_
+  depending on whether the user checked the box or not.
+
+.. _`oodcore::job::script#accounting_id`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id
+.. _`oodcore::job::script#queue_name`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name
+.. _`oodcore::job::script#wall_time`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:wall_time
+.. _`oodcore::job::script#email_on_started`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:email_on_started
+.. _`oodcore::job::script#native`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:native
+
+.. _interactive-development-form-customizing-attributes:
 
 Customizing Attributes
 ``````````````````````
 
 For each defined attribute in the ``form:`` configuration option, you can
-modify/override any component the HTML form element for it in the
+modify/override any component that makes up the HTML form element in the
 ``attributes:`` configuration option, e.g.:
 
 .. code-block:: yaml
@@ -256,7 +331,7 @@ are:
 
      works with ``min`` and ``max`` options to limit the increments at which a
      value can be set, it can be the string ``"any"`` or positive floating
-     point number (only works with widget: ``number_field``)
+     point number (only applies to widget: ``number_field``)
 
      Default
        No step size
