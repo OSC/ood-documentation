@@ -218,9 +218,63 @@ Configure OnDemand Apache as OIDC Client for Keycloak IDP
 
 #. Update OnDemand Apache to authenticate with KeyCloak
 
-   #. Install mod_auth_openidc in OnDemand Apache
+   #. Install mod_auth_openidc in OnDemand Apache.
 
-      #. **TODO**
+      Install from source:
+
+      #. Install dependencies for building mod_auth_openidc
+
+         .. code-block:: sh
+
+            yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
+
+      #. Install cjose
+
+         .. code-block:: sh
+
+            wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
+            tar xzf cjose-0.5.1.tar.gz
+            cd cjose-0.5.1
+            ./configure
+            make
+            sudo make install
+
+      #. Install mod_auth_openidc
+
+         .. code-block:: sh
+
+            wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
+            tar xzf mod_auth_openidc-2.3.2.tar.gz
+            cd mod_auth_openidc-2.3.2.tar.gz
+
+            export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
+            export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
+            export APXS2=/opt/rh/httpd24/root/usr/bin/apxs
+            export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+            ./autogen.sh
+            ./configure --prefix=/opt/rh/httpd24/root/usr --exec-prefix=/opt/rh/httpd24/root/usr --bindir=/opt/rh/httpd24/root/usr/bin --sbindir=/opt/rh/httpd24/root/usr/sbin --sysconfdir=/opt/rh/httpd24/root/etc --datadir=/opt/rh/httpd24/root/usr/share --includedir=/opt/rh/httpd24/root/usr/include --libdir=/opt/rh/httpd24/root/usr/lib64 --libexecdir=/opt/rh/httpd24/root/usr/libexec --localstatedir=/opt/rh/httpd24/root/var --sharedstatedir=/opt/rh/httpd24/root/var/lib --mandir=/opt/rh/httpd24/root/usr/share/man --infodir=/opt/rh/httpd24/root/usr/share/info --without-hiredis
+            make
+            sudo make install
+
+      #. Add file ``/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf`` with contents:
+
+         .. code-block:: none
+
+            LoadModule auth_openidc_module modules/mod_auth_openidc.so
+
+
+
+      .. note::
+         https://github.com/pingidentity/mod_auth_openidc does provide rpms for
+         both cjose and mod_auth_openidc. However, we have yet to verify this works with
+         the SCL Apache package we use.
+
+         `Release v2.3.2 Downloads <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2>`_
+         at bottom of the page includes an rpm for RHEL7, that is presumably built
+         against httpd24, so that might work. The RHEL6 rpm will not, however, as it is built against httpd22.
+         You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
+         (see `Downloads for v2.3.0 <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.0>`_).
+
 
    #. Re-generate main config using ood-portal-generator
 
