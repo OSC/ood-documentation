@@ -3,16 +3,20 @@
 Render Template
 ===============
 
+The ``template/`` directory contains the template used for constructing the
+Interactive App's batch job. It is located in the root of the application
+directory.
+
 Assuming we already have a sandbox Interactive App deployed under::
 
   ${HOME}/ondemand/dev/my_app
 
-The Interactive App's template is given by the ``template/`` directory located
-in the root of the app directory. For our example::
+The ``template/`` directory can be found at::
 
   ${HOME}/ondemand/dev/my_app/template/
 
-When an Interactive App session is first "Launched" this template is:
+When an Interactive App session is first "Launched" by the user, the
+``template/`` directory is:
 
 #. Copied to the user's home directory under an appropriately namespaced data
    root directory::
@@ -83,7 +87,7 @@ by the :ref:`app-development-interactive-form`.
 
 .. warning::
 
-   All attributes in the ``context`` object return a Ruby `String`_. So
+   All attributes in the ``context`` object return a `Ruby String`_. So
    conversions are necessary if you intend on operating on an attribute.
 
    For example, if you want to perform arithmetic on the ``bc_num_hours``
@@ -97,7 +101,7 @@ by the :ref:`app-development-interactive-form`.
    before performing arithmetic.
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
-.. _string: https://ruby-doc.org/core-2.2.3/String.html
+.. _ruby string: https://ruby-doc.org/core-2.2.3/String.html
 
 Template Files
 --------------
@@ -107,19 +111,31 @@ named scripts that it finds under the ``template/`` directory. These scripts
 can be used to build the environment, launch the web server process, and/or
 clean up the workspace when the process exits.
 
-The common workflow for an Interactive Session's batch script is described as:
+.. _app-development-interactive-template-diagram:
+.. uml::
+   :align: center
+   :caption: Activity diagram for basic Interactive App batch script.
+
+   skinparam defaultTextAlignment center
+   :source ""template/before.sh"";
+   fork
+     :source ""template/after.sh"";
+     :generate connection
+     information file;
+   fork again
+     :exec ""template/script.sh"";
+   end fork
+   :source ""template/clean.sh"";
+
+:numref:`app-development-interactive-template-diagram` details the common
+workflow for a basic Interactive App's batch script. The logic follows as:
 
 #. Source in the ``template/before.sh`` script if it exists.
-
-#. Fork off the ``template/script.sh`` into the background (must block until
-   session is done).
-
+#. Fork off the ``template/script.sh`` into the background (**must block until
+   session is done**).
 #. Source in the ``template/after.sh`` script if it exists.
-
 #. Generate the connection information file for the user.
-
-#. Wait for the ``template/script.sh`` script process to complete.
-
+#. Wait for the ``template/script.sh`` process to complete.
 #. Source in the ``template/clean.sh`` script if it exists.
 
 Before Hook

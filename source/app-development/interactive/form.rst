@@ -3,11 +3,24 @@
 User Form
 =========
 
+The configuration file ``form.yml`` is responsible for:
+
+- defining all the attributes used throughout the various ERB files (defined as
+  the session context) that make up the Interactive App
+- setting the HTML form input or hard-coded value of each attribute
+- designating a cluster to submit the batch job to
+
+It is located in the root of the application directory.
+
 Assuming we already have a sandbox Interactive App deployed under::
 
   ${HOME}/ondemand/dev/my_app
 
-Navigating with the following HTTP request
+The ``form.yml`` configuration file can be found at::
+
+  ${HOME}/ondemand/dev/my_app/form.yml
+
+Then in the browser, navigating with the following HTTP request
 
 .. code-block:: http
 
@@ -16,11 +29,6 @@ Navigating with the following HTTP request
 
 displays the HTML form used to gather the user-defined attributes for building
 and launching the ``my_app`` Interactive App session.
-
-This HTML form is constructed from the ``form.yml`` file located in the root of
-the respective sandbox Interactive App directory. For our example::
-
-   ${HOME}/ondemand/dev/my_app/form.yml
 
 .. tip::
 

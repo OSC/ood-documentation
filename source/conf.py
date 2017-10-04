@@ -33,6 +33,7 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinxcontrib.httpdomain',
     'sphinxcontrib.github_ribbon',
+    'sphinxcontrib.plantuml',
 ]
 
 # Add repo for GitHub ribbon
