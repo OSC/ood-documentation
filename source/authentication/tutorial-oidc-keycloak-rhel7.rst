@@ -3,24 +3,27 @@
 Tutorial: OpenID Connect via KeyCloak on RHEL7
 ==============================================
 
-**TODO: rethink Installation: 11. Add LDAP Support section** - if you are adding
-another authentication mechanism like OIDC with Keycloak or OIDC with CAS or
-etc. it doesn't make sense to add all the changes to the Apache config now.
-
-**TODO: alter for generic (remove ref to webdev07)**
-
-**login to webdev07 and do these steps**
 
 Install configure, and launch Keycloak IDP server behind Apache
 ---------------------------------------------------------------
 
-#. Download and unpack new version of keycloak
+Login to the host where you will install Keycloak. In this tutorial, we are
+installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
+
+#. Download and unpack Keycloak 3.1.0 (from http://www.keycloak.org/archive/downloads-3.1.0.html)
 
    .. code-block:: sh
 
       cd /opt
-      sudo wget https://downloads.jboss.org/keycloak/3.2.1.Final/keycloak-3.2.1.Final.tar.gz
-      sudo tar xzf keycloak-3.2.1.Final.tar.gz
+      sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
+      sudo tar xzf keycloak-3.1.0.Final.tar.gz
+
+   .. warning::
+
+      This tutorial has only been verified to work with Keycloak 3.0.0 and 3.1.0.
+      We experienced code token errors when using Keycloak 3.2.0 and 3.2.1. However,
+      Keycloak 3.3.0RC2 appeared to work. Once Keycloak 3.3.0 is released, we will
+      update this tutorial to use 3.3.0.
 
 #. Add keycloak user, chown and chmod Keycloak files
 
@@ -32,8 +35,8 @@ Install configure, and launch Keycloak IDP server behind Apache
       # sudo install -d -o keycloak -g keycloak /var/lib/keycloak
       # this makes a home directory, which is needed when running API calls as
       # keycloak user
-      sudo chown keycloak: -R keycloak-3.2.1.Final
-      sudo -u chmod 700 keycloak-3.2.1.Final
+      sudo chown keycloak: -R keycloak-3.1.0.Final
+      sudo chmod 700 keycloak-3.1.0.Final
 
 
 #. Install JDK 1.8.0
@@ -43,7 +46,7 @@ Install configure, and launch Keycloak IDP server behind Apache
       yum install java-1.8.0-openjdk-devel
 
 
-#. Added 'admin' to '/opt/keycloak-3.2.1.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user
+#. Added 'admin' to '/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user
 
    .. code-block:: sh
 
@@ -57,9 +60,9 @@ Install configure, and launch Keycloak IDP server behind Apache
 
    .. code-block:: sh
 
-      ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
-      ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
-      ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
+      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
+      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
+      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
 
    You can also manually edit the XML file: **TODO**
 
@@ -69,12 +72,15 @@ Install configure, and launch Keycloak IDP server behind Apache
 
    .. code-block:: sh
 
-      ./bin/jboss-cli.sh --file=config.cli
+      sudo -u keycloak ./bin/jboss-cli.sh --file=config.cli
 
    **TODO: add gist with file**
 
-   **This step you would change certain things if using MySQL or another
-   database instead of the built in H2 database for Keycloak. If you need to add a truststore, uncomment this block.**
+   .. warning::
+
+      This step you would change certain things if using MySQL or another
+      database instead of the built in H2 database for Keycloak. If you
+      need to add a truststore, uncomment this block.
 
 #. Create keycloak.service to start and stop the server:
 
@@ -86,7 +92,21 @@ Install configure, and launch Keycloak IDP server behind Apache
 
    .. code-block:: text
 
-      TODO: ADD THIS FILE CONTENT
+      [Unit]
+      Description=Jboss Application Server
+      After=network.target
+
+      [Service]
+      Type=idle
+      User=keycloak
+      Group=keycloak
+      ExecStart=/opt/keycloak-3.1.0.Final/bin/standalone.sh -b 0.0.0.0
+      TimeoutStartSec=600
+      TimeoutStopSec=600
+
+      [Install]
+      WantedBy=multi-user.target
+
 
    Then start keycloak:
 
@@ -108,51 +128,55 @@ Install configure, and launch Keycloak IDP server behind Apache
 #. Define apache config to proxy keycloak requests
 
    We will stick Apache in front of Keycloak. In this tutorial Keycloak is
-   installed on the same node as OnDemand, and we use the same Apache conf
-   files, and thus reuse the same SSL certificates.
+   installed on the same node as OnDemand, and we use the same Apache instance
+   to serve both OnDemand and Keycloak with the same host, so we can reuse the
+   same SSL certificates. You may want to run Keycloak on a separate host, however.
 
-   **TODO**: show proxying 8080 to 8443
+   Add ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf``, making changes
+   for the appropriate SSL certificate locations. Notice we are proxying
+   https://webdev07.hpc.osc.edu:8443 to http://localhost:8080 which is the default
+   port the Keycloak webserver runs as.
 
-   **TODO**: show open up iptables
+   .. literalinclude:: example-keycloak-apache.conf
 
-   We can use the same host because Keycloak properly scopes all cookies it sets to the
-   realm. For example, if I have a realm called ondemand, then the Keycloak login
-   page will be at https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth
-   and cookies set during authentication will be set with the path ``/auth/realms/ondemand``,
-   including ``KEYCLOAK_SESSION``, ``KEYCLOAK_STATE_CHECKER``,
-   ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
+   You may need to modify iptables to open up access to Keycloak the same way
+   that you did so with port 80 and 443 for OnDemand:
 
-#. Now you should be able to access https://your.ondemand.install.edu:8080/. In
-   my case it was https://webdev07.hpc.osc.edu:8080/auth/
+   .. code-block:: sh
 
-   The rest of the setup can now go two ways. You can either login as the admin
-   user and use the Web UI, or you can use the command line API. In both cases
-   we will be:
+      sudo iptables -I INPUT -p tcp -m multiport --dports 8443 -m comment --comment "08443 *:8443" -j ACCEPT
 
-   #. addding a new realm
-   #. client template for OIDC (do we need this?)
-   #. add ldap config
-   #. add ldap mapper config (delete some too via web ui)
-   #. add client(s) i.e. ondemand install
+   .. note::
 
-   Then after those steps are complete we will finish with updating OnDemand to
-   use KeyCloak for authentication:
+      We can use the same host because Keycloak properly scopes all cookies it sets to the
+      realm. For example, if I have a realm called "ondemand", then the Keycloak login
+      page will be at https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth
+      and cookies set during authentication will be set with the path ``/auth/realms/ondemand``,
+      including ``KEYCLOAK_SESSION``, ``KEYCLOAK_STATE_CHECKER``,
+      ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
 
-   #. install mod_auth_openidc
-   #. regenerate ondemand apache config using oidc + add oidc apache conf file
-   #. update mapping script to use the right OIDC claim
+#. Now you should be able to access Keycloak: https://webdev07.hpc.osc.edu:8443
 
-   **TODO**: after completing directions, lets create a diagram of the end
-   result (Apache is doing what? etc.)
 
 Use Keycloak Admin Web UI to configure LDAP and add OnDemand OIDC Client
 ------------------------------------------------------------------------
 
+#. Using the Web Admin UI, add a new realm
+
+   #. Log into https://webdev07.hpc.osc.edu:8443 as the admin user
+   #. Hover over "Master" on left and click "Add Realm"
+   #. Type in name "ondemand" and click "Save". The new realm is loaded.
+   #. Click Login tab, then adjust parameters:
+
+      #. Remember Me: ON
+      #. Login with email: OFF
+
+   #. Click Save.
+
+
 #. Using the Web Admin UI, configure LDAP
 
-   #. Log into https://webdev07.hpc.osc.edu:8443
-   #. Ensure appropriate non-master realm selected in upper left corner
-   #. Choose User Federation
+   #. Choose User Federation on the left (verify ondemand realm is current realm)
    #. Select "ldap" for provider
 
       #. Import Users set to OFF
@@ -264,6 +288,7 @@ These directions are for installing from source.
 
 
 .. note::
+
    https://github.com/pingidentity/mod_auth_openidc does provide rpms for
    both cjose and mod_auth_openidc. However, we have yet to verify this works with
    the SCL Apache package we use.
