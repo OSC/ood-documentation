@@ -3,6 +3,12 @@
 Tutorial: OpenID Connect via KeyCloak on RHEL7
 ==============================================
 
+.. warning::
+
+   This tutorial has only been verified to work with Keycloak 3.0.0 and 3.1.0.
+   We experienced code token errors when using Keycloak 3.2.0 and 3.2.1. However,
+   Keycloak 3.3.0RC2 appeared to work. Once Keycloak 3.3.0 is released, we will
+   update this tutorial to use 3.3.0.
 
 Install configure, and launch Keycloak IDP server behind Apache
 ---------------------------------------------------------------
@@ -18,12 +24,6 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
       sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
       sudo tar xzf keycloak-3.1.0.Final.tar.gz
 
-   .. warning::
-
-      This tutorial has only been verified to work with Keycloak 3.0.0 and 3.1.0.
-      We experienced code token errors when using Keycloak 3.2.0 and 3.2.1. However,
-      Keycloak 3.3.0RC2 appeared to work. Once Keycloak 3.3.0 is released, we will
-      update this tutorial to use 3.3.0.
 
 #. Add keycloak user, chown and chmod Keycloak files
 
@@ -54,7 +54,7 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
    **Be sure to use a good password - using mkpasswd or pwgen or similar.**
 
-#. Modify ``standalone/configuration/standalone.xml``:
+#. Modify ``standalone/configuration/standalone.xml`` to enable proxying to Keycloak:
 
    Simplest is to run these three commands:
 
@@ -64,8 +64,6 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
 
-   You can also manually edit the XML file: **TODO**
-
    Or you can use a config.cli file that contains these commands. We have
    provided an example file to make use of in this gist, with blocks commented
    out so you can wget the file, edit as appropriate, and run via:
@@ -74,13 +72,9 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
       sudo -u keycloak ./bin/jboss-cli.sh --file=config.cli
 
-   **TODO: add gist with file**
+   Where the config.cli looks like:
 
-   .. warning::
-
-      This step you would change certain things if using MySQL or another
-      database instead of the built in H2 database for Keycloak. If you
-      need to add a truststore, uncomment this block.
+   .. literalinclude:: example-keycloak-jboss-config.cli
 
 #. Create keycloak.service to start and stop the server:
 
