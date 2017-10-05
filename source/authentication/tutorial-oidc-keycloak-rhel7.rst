@@ -116,9 +116,9 @@ Install configure, and launch Keycloak IDP server behind Apache
    **TODO**: show open up iptables
 
    We can use the same host because Keycloak properly scopes all cookies it sets to the
-   realm. For example, if I have a realm called osc, then the Keycloak login
-   page will be at https://idp.osc.edu/auth/realms/osc/protocol/openid-connect/auth
-   and cookies set during authentication will be set with the path ``/auth/realms/osc``,
+   realm. For example, if I have a realm called ondemand, then the Keycloak login
+   page will be at https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth
+   and cookies set during authentication will be set with the path ``/auth/realms/ondemand``,
    including ``KEYCLOAK_SESSION``, ``KEYCLOAK_STATE_CHECKER``,
    ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
 
@@ -170,7 +170,7 @@ Use Keycloak Admin Web UI to configure LDAP and add OnDemand OIDC Client
    #. Choose Client Templates
    #. Click Create (upper right corner)
 
-      #. Name: osc-clients
+      #. Name: ondemand-clients
       #. Protocol: openid-connect
 
       #. Click Save
@@ -192,7 +192,7 @@ Use Keycloak Admin Web UI to configure LDAP and add OnDemand OIDC Client
 
       #. Client ID: webdev07.hpc.osc.edu
       #. Client Protocol: openid-connect
-      #. Client Template: osc-clients
+      #. Client Template: ondemand-clients
       #. Save (leave Root URL blank)
 
    #. Then edit Settings for the newly created client:
@@ -213,74 +213,192 @@ Use Keycloak Admin Web UI to configure LDAP and add OnDemand OIDC Client
       #. Select Format Option: Keycloak OIDC JSON
       #. The "secret" string will be in the credentials section. Copy that for future use (and keep it secure).
 
-Configure OnDemand Apache as OIDC Client for Keycloak IDP
----------------------------------------------------------
+Configure OnDemand Apache as OIDC Client for Keycloak
+-----------------------------------------------------
 
-#. Update OnDemand Apache to authenticate with KeyCloak
+Install mod_auth_openidc in OnDemand's Apache
+.............................................
 
-   #. Install mod_auth_openidc in OnDemand Apache.
+These directions are for installing from source.
 
-      Install from source:
+#. Install dependencies for building mod_auth_openidc
 
-      #. Install dependencies for building mod_auth_openidc
+   .. code-block:: sh
 
-         .. code-block:: sh
+      yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
 
-            yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
+#. Install cjose
 
-      #. Install cjose
+   .. code-block:: sh
 
-         .. code-block:: sh
+      wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
+      tar xzf cjose-0.5.1.tar.gz
+      cd cjose-0.5.1
+      ./configure
+      make
+      sudo make install
 
-            wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
-            tar xzf cjose-0.5.1.tar.gz
-            cd cjose-0.5.1
-            ./configure
-            make
-            sudo make install
+#. Install mod_auth_openidc
 
-      #. Install mod_auth_openidc
+   .. code-block:: sh
 
-         .. code-block:: sh
+      wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
+      tar xzf mod_auth_openidc-2.3.2.tar.gz
+      cd mod_auth_openidc-2.3.2.tar.gz
 
-            wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
-            tar xzf mod_auth_openidc-2.3.2.tar.gz
-            cd mod_auth_openidc-2.3.2.tar.gz
+      export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
+      export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
+      export APXS2=/opt/rh/httpd24/root/usr/bin/apxs
+      export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+      ./autogen.sh
+      ./configure --prefix=/opt/rh/httpd24/root/usr --exec-prefix=/opt/rh/httpd24/root/usr --bindir=/opt/rh/httpd24/root/usr/bin --sbindir=/opt/rh/httpd24/root/usr/sbin --sysconfdir=/opt/rh/httpd24/root/etc --datadir=/opt/rh/httpd24/root/usr/share --includedir=/opt/rh/httpd24/root/usr/include --libdir=/opt/rh/httpd24/root/usr/lib64 --libexecdir=/opt/rh/httpd24/root/usr/libexec --localstatedir=/opt/rh/httpd24/root/var --sharedstatedir=/opt/rh/httpd24/root/var/lib --mandir=/opt/rh/httpd24/root/usr/share/man --infodir=/opt/rh/httpd24/root/usr/share/info --without-hiredis
+      make
+      sudo make install
 
-            export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
-            export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
-            export APXS2=/opt/rh/httpd24/root/usr/bin/apxs
-            export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-            ./autogen.sh
-            ./configure --prefix=/opt/rh/httpd24/root/usr --exec-prefix=/opt/rh/httpd24/root/usr --bindir=/opt/rh/httpd24/root/usr/bin --sbindir=/opt/rh/httpd24/root/usr/sbin --sysconfdir=/opt/rh/httpd24/root/etc --datadir=/opt/rh/httpd24/root/usr/share --includedir=/opt/rh/httpd24/root/usr/include --libdir=/opt/rh/httpd24/root/usr/lib64 --libexecdir=/opt/rh/httpd24/root/usr/libexec --localstatedir=/opt/rh/httpd24/root/var --sharedstatedir=/opt/rh/httpd24/root/var/lib --mandir=/opt/rh/httpd24/root/usr/share/man --infodir=/opt/rh/httpd24/root/usr/share/info --without-hiredis
-            make
-            sudo make install
+#. Add file ``/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf`` with contents:
 
-      #. Add file ``/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf`` with contents:
+   .. code-block:: none
 
-         .. code-block:: none
-
-            LoadModule auth_openidc_module modules/mod_auth_openidc.so
-
+      LoadModule auth_openidc_module modules/mod_auth_openidc.so
 
 
-      .. note::
-         https://github.com/pingidentity/mod_auth_openidc does provide rpms for
-         both cjose and mod_auth_openidc. However, we have yet to verify this works with
-         the SCL Apache package we use.
 
-         `Release v2.3.2 Downloads <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2>`_
-         at bottom of the page includes an rpm for RHEL7, that is presumably built
-         against httpd24, so that might work. The RHEL6 rpm will not, however, as it is built against httpd22.
-         You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
-         (see `Downloads for v2.3.0 <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.0>`_).
+.. note::
+   https://github.com/pingidentity/mod_auth_openidc does provide rpms for
+   both cjose and mod_auth_openidc. However, we have yet to verify this works with
+   the SCL Apache package we use.
+
+   `Release v2.3.2 Downloads <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2>`_
+   at bottom of the page includes an rpm for RHEL7, that is presumably built
+   against httpd24, so that might work. The RHEL6 rpm will not, however, as it is built against httpd22.
+   You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
+   (see `Downloads for v2.3.0 <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.0>`_).
 
 
-   #. Re-generate main config using ood-portal-generator
+Re-generate main config using ood-portal-generator
+..................................................
 
-      #. **TODO**
+#. In the ood-portal-generator's config.yml file, add these lines:
 
-   #. Add Keycloak config to OnDemand Apache for mod_auth_openidc
+   .. code-block:: yaml
 
-      #. **TODO**
+      # List of Apache authentication directives
+      # NB: Be sure the appropriate Apache module is installed for this
+      # Default: (see below, uses basic auth with an htpasswd file)
+      auth:
+        - 'AuthType openid-connect'
+        - 'Require valid-user'
 
+      # Redirect user to the following URI when accessing logout URI
+      # Example:
+      #     logout_redirect: '/oidc?logout=https%3A%2F%2Fwww.example.com'
+      # Default: '/pun/sys/dashboard/logout' (the Dashboard app provides a simple
+      # HTML page explaining logout to the user)
+      logout_redirect: '/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu'
+
+      # Sub-uri used by mod_auth_openidc for authentication
+      # Example:
+      #     oidc_uri: '/oidc'
+      # Default: null (disable OpenID Connect support)
+      oidc_uri: '/oidc'
+
+   Notice that we are
+
+    * changing the Authentication directives for openid-connect
+    * specifying /oidc to be the sub-uri used by mod_auth_openidc
+    * specifying that /logout should redirect to this /oidc sub-uri to handle logout
+      and specifying after logout, the user should be redirected back to OnDemand
+      (which in this tutorial's case is ``https%3A%2F%2Fwebdev07.hpc.osc.edu``,
+      the query param escaped format of https://webdev07.hpc.osc.edu)
+
+#. Using this modified config, regenerate the Apache config, and then install it:
+
+   .. code-block:: sh
+
+      scl enable rh-ruby22 -- rake
+      scl enable rh-ruby22 -- rake install
+
+
+   The effect of this change in the Apache config (in case you want to apply the changes manually) are:
+
+   #. Change the authentication directives for all of the Locations that require authentication i.e.:
+
+      .. code-block:: diff
+
+           <Location "/nginx">
+         -    AuthType basic
+         -    AuthName "Private"
+         -    AuthBasicProvider ldap
+         -    AuthLDAPURL "ldaps://openldap1.infra.osc.edu:636 openldap2.infra.osc.edu:636 openldap3.infra.osc.edu:636 openldap4.infra.osc.edu
+         -    AuthLDAPGroupAttribute memberUid
+         -    AuthLDAPGroupAttributeIsDN off
+         +    AuthType openid-connect
+               Require valid-user
+         -    RequestHeader unset Authorization
+
+             LuaHookFixups nginx.lua nginx_handler
+           </Location>
+
+   #. Update the ``Redirect "logout"`` directive
+
+      .. code-block:: diff
+
+         -  Redirect "/logout" "/pun/sys/dashboard/logout"
+         -
+         +  Redirect "/logout" "/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu"
+
+   #. Add the ``<Location "/oidc">`` directive
+
+      .. code-block:: none
+
+         # OpenID Connect redirect URI:
+         #
+         #     http://localhost:80/oidc
+         #     #=> handled by mod_auth_openidc
+         #
+         <Location "/oidc">
+           AuthType openid-connect
+           Require valid-user
+         </Location>
+
+
+
+Add Keycloak config to OnDemand Apache for mod_auth_openidc
+...........................................................
+
+Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:
+
+  .. code-block:: none
+
+     OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
+     OIDCClientID        "webdev07.hpc.osc.edu"
+     OIDCClientSecret    "1111111-1111-1111-1111-111111111111"
+     OIDCRedirectURI      https://webdev07.hpc.osc.edu/oidc
+     OIDCCryptoPassphrase "3897531ad98e4d56ed3b795ebc486d93365fda663fcc3b37e75791b8e950f5296369bc104c74609c611538dd4ab0cc000593f160e6a144b8e9e58bf2adf97018"
+
+     # Keep sessions alive for 8 hours
+     OIDCSessionInactivityTimeout 28800
+     OIDCSessionMaxDuration 28800
+
+     # Set REMOTE_USER
+     OIDCRemoteUserClaim preferred_username
+
+     # Don't pass claims to backend servers
+     OIDCPassClaimsAs environment
+
+     # Strip out session cookies before passing to backend
+     OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1
+
+  #. OIDCClientID is set to the client id specified when installing the client in Keycloak admin interface
+  #. OIDCClientSecret is set to the client secret specified from the Install tab of the client in Keycloak admin interface
+  #. Generate a random password for OIDCCryptoPassphrase. I used ``openssl rand -hex 64``
+  #. Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak
+
+Then restart OnDemand's Apache. OnDemand should now be authenticating using KeyCloak.
+
+.. note::
+
+   We prevent OIDC_CLAIM headers from being passed through to the PUN
+   by specifying in this file to pass claims as environment, instead of
+   as HTTP headers, since Apache won't pass any environment off to the
+   PUN when proxying requests, but would pass HTTP headers.
