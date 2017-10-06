@@ -21,3 +21,4 @@ Tutorial: OpenID Connect via KeyCloak on RHEL7
    tutorial-oidc-keycloak-rhel7/install-keycloak
    tutorial-oidc-keycloak-rhel7/configure-keycloak-webui
    tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc
+   tutorial-oidc-keycloak-rhel7/add-custom-theme
