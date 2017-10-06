@@ -344,13 +344,13 @@ scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </div>
 <div class="section" id="add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc">
 <h2>3.3. Add Keycloak config to OnDemand Apache for mod_auth_openidc<a class="headerlink" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
-<p>Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
-<blockquote>
-<div><div class="highlight-none"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
+<ol class="arabic">
+<li><p class="first">Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
 OIDCClientID        &quot;webdev07.hpc.osc.edu&quot;
 OIDCClientSecret    &quot;1111111-1111-1111-1111-111111111111&quot;
 OIDCRedirectURI      https://webdev07.hpc.osc.edu/oidc
-OIDCCryptoPassphrase &quot;3897531ad98e4d56ed3b795ebc486d93365fda663fcc3b37e75791b8e950f5296369bc104c74609c611538dd4ab0cc000593f160e6a144b8e9e58bf2adf97018&quot;
+OIDCCryptoPassphrase &quot;4444444444444444444444444444444444444444&quot;
 
 # Keep sessions alive for 8 hours
 OIDCSessionInactivityTimeout 28800
@@ -367,13 +367,21 @@ OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_au
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li>OIDCClientID is set to the client id specified when installing the client in Keycloak admin interface</li>
-<li>OIDCClientSecret is set to the client secret specified from the Install tab of the client in Keycloak admin interface</li>
-<li>Generate a random password for OIDCCryptoPassphrase. I used <code class="docutils literal"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">64</span></code></li>
-<li>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak</li>
+<li>OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface</li>
+<li>OIDCClientSecret: replace <code class="docutils literal"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Install tab of the client in Keycloak admin interface</li>
+<li>OIDCCryptoPassphrase: replace <code class="docutils literal"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">20</span></code>.</li>
+<li>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.</li>
 </ol>
-</div></blockquote>
-<p>Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
+</li>
+<li><p class="first">Change permission on file to be readable by apache and no one else:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
+</li>
+</ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">We prevent OIDC_CLAIM headers from being passed through to the PUN
