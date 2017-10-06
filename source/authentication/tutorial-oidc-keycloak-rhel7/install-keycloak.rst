@@ -42,6 +42,7 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
    .. code-block:: sh
 
+      cd keycloak-3.1.0.Final
       sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password keycloakpass --realm master
 
    **Be sure to use a good password - using mkpasswd or pwgen or similar.**
