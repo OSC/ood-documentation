@@ -73,11 +73,7 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
    .. code-block:: sh
 
-      sudo vim /etc/systemd/system/keycloak.service
-
-   The contents of this file look like:
-
-   .. code-block:: text
+      sudo cat > /etc/systemd/system/keycloak.service <<EOF
 
       [Unit]
       Description=Jboss Application Server
@@ -93,6 +89,7 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
       [Install]
       WantedBy=multi-user.target
+      EOF
 
 
    Then start keycloak:
