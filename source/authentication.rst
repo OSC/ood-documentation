@@ -1,6 +1,6 @@
 .. _authentication:
 
-Configure Authentication
+Authentication
 ========================
 
 Below are tutorials and directions on configuring OnDemand with different types
