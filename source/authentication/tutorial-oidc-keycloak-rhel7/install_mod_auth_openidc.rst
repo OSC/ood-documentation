@@ -1,10 +1,14 @@
 .. _authentication-tutorial-oidc-keycloak-rhel7-install-mod_auth_openidc:
 
-Configure OnDemand Apache as OIDC Client for Keycloak
-=====================================================
+Configure OnDemand to authenticate with Keycloak
+================================================
 
-Install mod_auth_openidc in OnDemand's Apache
------------------------------------------------------------
+OnDemand's Apache needs to use mod_auth_openidc to be able to act as an OpenID
+Connect client to Keycloak. We will install mod_auth_openidc and modify
+OnDemand's Apache configs to enable authentication via Keycloak.
+
+Install mod_auth_openidc
+------------------------
 
 These directions are for installing from source.
 

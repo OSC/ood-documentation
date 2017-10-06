@@ -1,81 +1,89 @@
 .. _authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui:
 
-Use Keycloak Admin Web UI to configure LDAP and add OnDemand OIDC Client
-============================================================================
+Use Admin Web UI to setup Keycloak with LDAP and OnDemand Client
+================================================================
 
-#. Using the Web Admin UI, add a new realm
+We will now use Keycloak's admin Web UI to setup LDAP and add OnDemand as an
+OIDC client that will authenticate with Keycloak.
 
-   #. Log into https://webdev07.hpc.osc.edu:8443 as the admin user
-   #. Hover over "Master" on left and click "Add Realm"
-   #. Type in name "ondemand" and click "Save". The new realm is loaded.
-   #. Click Login tab, then adjust parameters:
+Add a new realm
+------------------------------------------
 
-      #. Remember Me: ON
-      #. Login with email: OFF
+#. Log into https://webdev07.hpc.osc.edu:8443 as the admin user
+#. Hover over "Master" on left and click "Add Realm"
+#. Type in name "ondemand" and click "Save". The new realm is loaded.
+#. Click Login tab, then adjust parameters:
 
-   #. Click Save.
+   #. Remember Me: ON
+   #. Login with email: OFF
+
+#. Click Save.
 
 
-#. Using the Web Admin UI, configure LDAP
+Configure LDAP
+------------------------------------------
 
-   #. Choose User Federation on the left (verify ondemand realm is current realm)
-   #. Select "ldap" for provider
+#. Choose User Federation on the left (verify ondemand realm is current realm)
+#. Select "ldap" for provider
 
-      #. Import Users set to OFF
-      #. Edit Mode set to READ_ONLY
-      #. Vendor set to other – for OpenLDAP
-      #. User Object Classes set to posixAccount – OSC specific and odd
-      #. Connection URL: ldaps://openldap1.infra.osc.edu:636 ldaps://openldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1
-      #. User DN: ou=People,ou=hpc,o=osc
-      #. Auth Type: simple – OSC specific as we allow anonymous binds
-      #. Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs
-   #. Save
+   #. Import Users set to OFF
+   #. Edit Mode set to READ_ONLY
+   #. Vendor set to other – for OpenLDAP
+   #. User Object Classes set to posixAccount – OSC specific and odd
+   #. Connection URL: ldaps://openldap1.infra.osc.edu:636 ldaps://openldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1
+   #. User DN: ou=People,ou=hpc,o=osc
+   #. Auth Type: simple – OSC specific as we allow anonymous binds
+   #. Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs
 
-#. Using the Web Admin UI, add OIDC client template
+#. Save
 
-   #. Choose Client Templates
-   #. Click Create (upper right corner)
+Add OIDC client template
+--------------------------------------------------
 
-      #. Name: ondemand-clients
-      #. Protocol: openid-connect
+#. Choose Client Templates
+#. Click Create (upper right corner)
 
-      #. Click Save
-      #. Mappers tab
-      #. Click Add Builtin
-      #. Check box the following: username, email, given name, family name, full name
-      #. Click Add Selected
-      #. Click Scope tab
-      #. Set Full Scope Allowed to ON
+   #. Name: ondemand-clients
+   #. Protocol: openid-connect
 
-   #. Verify Mappers >> username has "Token Claim Name" with value ``preferred_username``.
-      This means that when the user logs to OnDemand, the ``preferred_username`` claim will
-      contain the username of the user. We will use this when deciding what system user to map
-      a request to.
+   #. Click Save
+   #. Mappers tab
+   #. Click Add Builtin
+   #. Check box the following: username, email, given name, family name, full name
+   #. Click Add Selected
+   #. Click Scope tab
+   #. Set Full Scope Allowed to ON
 
-#. Using the Web Admin UI, add OnDemand as a client
+#. Verify Mappers >> username has "Token Claim Name" with value ``preferred_username``.
+   This means that when the user logs to OnDemand, the ``preferred_username`` claim will
+   contain the username of the user. We will use this when deciding what system user to map
+   a request to.
 
-   #. Choose Clients, then click Create in top right corner
+Add OnDemand as a client
+--------------------------------------------------
 
-      #. Client ID: webdev07.hpc.osc.edu
-      #. Client Protocol: openid-connect
-      #. Client Template: ondemand-clients
-      #. Save (leave Root URL blank)
+#. Choose Clients, then click Create in top right corner
 
-   #. Then edit Settings for the newly created client:
+   #. Client ID: webdev07.hpc.osc.edu
+   #. Client Protocol: openid-connect
+   #. Client Template: ondemand-clients
+   #. Save (leave Root URL blank)
 
-      #. Access Type: confidential
-      #. Direct Access Grants Enabled: off
-      #. Valid Redirect URIs: Press the ``+`` button to the right of the URI field so you can insert two URLs:
+#. Then edit Settings for the newly created client:
 
-         #. ``https://webdev07.hpc.osc.edu/oidc``
-         #. ``https://webdev07.hpc.osc.edu``
+   #. Access Type: confidential
+   #. Direct Access Grants Enabled: off
+   #. Valid Redirect URIs: Press the ``+`` button to the right of the URI field so you can insert two URLs:
 
-      #. Web Origins: ``https://webdev07.hpc.osc.edu``
-      #. Scroll to bottom and click "Save"
+      #. ``https://webdev07.hpc.osc.edu/oidc``
+      #. ``https://webdev07.hpc.osc.edu``
 
-   #. Finally, get the client secret to use with OnDemand installation:
+   #. Web Origins: ``https://webdev07.hpc.osc.edu``
+   #. Scroll to bottom and click "Save"
 
-      #. Select the "Installation" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
-      #. Select Format Option: Keycloak OIDC JSON
-      #. The "secret" string will be in the credentials section. Copy that for future use (and keep it secure).
+#. Finally, get the client secret to use with OnDemand installation:
+
+   #. Select the "Installation" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
+   #. Select Format Option: Keycloak OIDC JSON
+   #. The "secret" string will be in the credentials section. Copy that for future use in this tutorial (and keep it secure).
 
