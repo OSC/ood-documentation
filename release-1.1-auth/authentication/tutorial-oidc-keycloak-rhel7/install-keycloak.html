@@ -226,7 +226,8 @@ sudo chmod <span class="m">700</span> keycloak-3.1.0.Final
 </div>
 </li>
 <li><p class="first">Added ‘admin’ to ‘/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password keycloakpass --realm master
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-3.1.0.Final
+sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password keycloakpass --realm master
 </pre></div>
 </div>
 <p><strong>Be sure to use a good password - using mkpasswd or pwgen or similar.</strong></p>
@@ -273,24 +274,23 @@ out so you can wget the file, edit as appropriate, and run via:</p>
 </div>
 </li>
 <li><p class="first">Create keycloak.service to start and stop the server:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo vim /etc/systemd/system/keycloak.service
-</pre></div>
-</div>
-<p>The contents of this file look like:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>[Unit]
-Description=Jboss Application Server
-After=network.target
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo cat &gt; /etc/systemd/system/keycloak.service <span class="s">&lt;&lt;EOF</span>
 
-[Service]
-Type=idle
-User=keycloak
-Group=keycloak
-ExecStart=/opt/keycloak-3.1.0.Final/bin/standalone.sh -b 0.0.0.0
-TimeoutStartSec=600
-TimeoutStopSec=600
+<span class="s">[Unit]</span>
+<span class="s">Description=Jboss Application Server</span>
+<span class="s">After=network.target</span>
 
-[Install]
-WantedBy=multi-user.target
+<span class="s">[Service]</span>
+<span class="s">Type=idle</span>
+<span class="s">User=keycloak</span>
+<span class="s">Group=keycloak</span>
+<span class="s">ExecStart=/opt/keycloak-3.1.0.Final/bin/standalone.sh -b 0.0.0.0</span>
+<span class="s">TimeoutStartSec=600</span>
+<span class="s">TimeoutStopSec=600</span>
+
+<span class="s">[Install]</span>
+<span class="s">WantedBy=multi-user.target</span>
+<span class="s">EOF</span>
 </pre></div>
 </div>
 <p>Then start keycloak:</p>
