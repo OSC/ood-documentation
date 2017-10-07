@@ -195,11 +195,34 @@
             
   <div class="section" id="tutorial-openid-connect-via-keycloak-on-rhel7">
 <span id="authentication-tutorial-oidc-keycloak-rhel7"></span><h1>Tutorial: OpenID Connect via KeyCloak on RHEL7<a class="headerlink" href="#tutorial-openid-connect-via-keycloak-on-rhel7" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial shows installing Keycloak as an OpenID Connect Identity Provider and configuring OnDemand as an OpenID Client to authenticate with this provider.</p>
+<p>Using <a class="reference external" href="https://webdev07.hpc.osc.edu">https://webdev07.hpc.osc.edu</a> as the example host with OnDemand installed, at the end of the tutorial:</p>
+<ol class="arabic simple">
+<li>Keycloak is running and accessible at <a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a></li>
+<li>In both cases Apache is handling requests. Apache proxies requests for <a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a> to the Keycloak server running on the default port of 8080.</li>
+<li>Attempting to access OnDemand at <a class="reference external" href="https://webdev07.hpc.osc.edu">https://webdev07.hpc.osc.edu</a> redirects the user to <a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a> to first authenticate.</li>
+</ol>
+<p>At OSC in production we do two things differently from this tutorial:</p>
+<ol class="arabic simple">
+<li>we keep Keycloak on a separate host from OnDemand</li>
+<li>we configure Keycloak to use MySQL for Keycloak’s database instead of the default H2 file database</li>
+</ol>
+<p>These steps have been omitted from the tutorial. For most cases for OnDemand,
+the default H2 database is probably sufficient. Also by installing Keycloak on
+the same host as OnDemand, we don’t need to provision separate SSL certificates
+and host, which simplifies the tutorial.</p>
+<p>If your site is interested in either of these things and needs assistence,
+please let us know by starting the discussion on the
+<a class="reference external" href="https://lists.osu.edu/mailman/listinfo/ood-users">mailing list</a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
+<p class="last">In production we recommend installing Keycloak on a separate host from OnDemand.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p class="last">This tutorial has only been verified to work with Keycloak 3.0.0 and 3.1.0.
 We experienced code token errors when using Keycloak 3.2.0 and 3.2.1. However,
-Keycloak 3.3.0RC2 appeared to work. Once Keycloak 3.3.0 is released, we will
+Keycloak 3.3.0RC2 works without error. Once Keycloak 3.3.0 is released, we will
 update this tutorial to use 3.3.0.</p>
 </div>
 <div class="toctree-wrapper compound">
