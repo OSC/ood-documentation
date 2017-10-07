@@ -1,7 +1,7 @@
 .. _authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui:
 
-Use Admin Web UI to setup Keycloak with LDAP and OnDemand Client
-================================================================
+Configure Keycloak via Admin Web UI
+====================================
 
 We will now use Keycloak's admin Web UI to setup LDAP and add OnDemand as an
 OIDC client that will authenticate with Keycloak.
