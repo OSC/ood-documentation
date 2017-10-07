@@ -37,6 +37,13 @@ Configure LDAP
 
 #. Save
 
+.. warning::
+
+   These LDAP settings are what we set for OSC. Your configuration may vary from
+   this. If you run into any problems, please let us know so that once a
+   solution is reached we can document those problem areas here. Contact us on
+   the OOD Mailing List at https://lists.osu.edu/mailman/listinfo/ood-users.
+
 Add OIDC client template
 --------------------------------------------------
 
