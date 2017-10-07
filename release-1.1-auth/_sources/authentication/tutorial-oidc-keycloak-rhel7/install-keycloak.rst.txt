@@ -3,7 +3,7 @@
 Install Keycloak
 ================
 
-We will install, configure, and launch Keycloak IDP server behind Apache.
+We will install and launch Keycloak IDP server behind Apache.
 
 Login to the host where you will install Keycloak. In this tutorial, we are
 installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
