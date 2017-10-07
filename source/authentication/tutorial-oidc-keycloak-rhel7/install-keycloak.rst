@@ -134,6 +134,12 @@ Place Apache in front of Keycloak
 
 #. Define apache config to proxy keycloak requests
 
+   .. note::
+
+      This is the only step in the tutorial that differs significantly based on
+      whether you install Keycloak on a separate host from OnDemand or on the
+      same host. See below for example differences.
+
    We will stick Apache in front of Keycloak. In this tutorial Keycloak is
    installed on the same node as OnDemand, and we use the same Apache instance
    to serve both OnDemand and Keycloak with the same host, so we can reuse the
@@ -163,3 +169,22 @@ Place Apache in front of Keycloak
       ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
 
 #. Now you should be able to access Keycloak: https://webdev07.hpc.osc.edu:8443
+
+Differences if installing Keycloak on separate host
+---------------------------------------------------
+
+When installing Keycloak on a separate host, the difference between this
+tutorial would be:
+
+#. throughout the rest of the tutorial replace "https://webdev07.hpc.osc.edu:8443" with the keycloak host
+#. use a different Apache config, listening instead on 443 instead of 8443 and
+   proxying that to Keycloak
+#. possibly use Apache 2.4 default distribution instead of software collections,
+   meaning that configuration would be at /etc/httpd/conf.d/ instead of
+   /opt/rh/httpd24/root/etc/httpd/conf.d/ and starting the
+   service is likely ``sudo systemctl start httpd`` instead of ``sudo systemctl start httpd24-httpd``
+
+For example, if Keycloak were installed on a separate host idp.hpc.edu then the
+Apache config might look like:
+
+.. literalinclude:: example-keycloak-apache-separate-host.conf
