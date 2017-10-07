@@ -12,6 +12,10 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
    In production we recommend installing Keycloak on a separate host from OnDemand.
 
+
+Initial Installation Steps
+--------------------------
+
 #. Download and unpack Keycloak 3.1.0 (from http://www.keycloak.org/archive/downloads-3.1.0.html)
 
    .. code-block:: sh
@@ -82,6 +86,9 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
    .. literalinclude:: example-keycloak-jboss-config.cli
 
+Start Keycloak Server
+-------------------------
+
 #. Create keycloak.service to start and stop the server:
 
    .. code-block:: sh
@@ -121,6 +128,9 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
       Sep 25 16:19:49 webdev07.hpc.osc.edu standalone.sh[111998]: 16:19:49,644 INFO  [org.wildfly.extension.undertow] (MSC service thread ...0:8080)
       Hint: Some lines were ellipsized, use -l to show in full.
 
+
+Place Apache in front of Keycloak
+---------------------------------
 
 #. Define apache config to proxy keycloak requests
 
