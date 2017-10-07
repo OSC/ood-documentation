@@ -17,7 +17,7 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
       sudo tar xzf keycloak-3.1.0.Final.tar.gz
 
 
-#. Add keycloak user, chown and chmod Keycloak files
+#. Add keycloak user and change ownership of files
 
    .. code-block:: sh
 
@@ -28,7 +28,14 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
       # this makes a home directory, which is needed when running API calls as
       # keycloak user
       sudo chown keycloak: -R keycloak-3.1.0.Final
-      sudo chmod 700 keycloak-3.1.0.Final
+
+#. Restrict access to keycloak-3.1.0.Final/standalone, which will contain
+   sensitive data for the Keycloak server
+
+   .. code-block:: sh
+
+      cd keycloak-3.1.0.Final
+      sudo -u keycloak chmod 700 standalone
 
 
 #. Install JDK 1.8.0
@@ -42,10 +49,12 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 
    .. code-block:: sh
 
-      cd keycloak-3.1.0.Final
-      sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password keycloakpass --realm master
+      # cd /opt/keycloak-3.1.0.Final if you are not already there
 
-   **Be sure to use a good password - using mkpasswd or pwgen or similar.**
+      openssl rand -hex 20 # generate a password to use for admin user
+      sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
+
+   **Replace KEYCLOAKPASS with a good password and save password for later use**
 
 #. Modify ``standalone/configuration/standalone.xml`` to enable proxying to Keycloak:
 

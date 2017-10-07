@@ -208,7 +208,7 @@ sudo tar xzf keycloak-3.1.0.Final.tar.gz
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add keycloak user, chown and chmod Keycloak files</p>
+<li><p class="first">Add keycloak user and change ownership of files</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>sudo groupadd -r keycloak
 sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 <span class="c1"># if -m doesn&#39;t work, do this:</span>
@@ -216,7 +216,13 @@ sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 <span class="c1"># this makes a home directory, which is needed when running API calls as</span>
 <span class="c1"># keycloak user</span>
 sudo chown keycloak: -R keycloak-3.1.0.Final
-sudo chmod <span class="m">700</span> keycloak-3.1.0.Final
+</pre></div>
+</div>
+</li>
+<li><p class="first">Restrict access to keycloak-3.1.0.Final/standalone, which will contain
+sensitive data for the Keycloak server</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-3.1.0.Final
+sudo -u keycloak chmod <span class="m">700</span> standalone
 </pre></div>
 </div>
 </li>
@@ -226,11 +232,13 @@ sudo chmod <span class="m">700</span> keycloak-3.1.0.Final
 </div>
 </li>
 <li><p class="first">Added ‘admin’ to ‘/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-3.1.0.Final
-sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password keycloakpass --realm master
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># cd /opt/keycloak-3.1.0.Final if you are not already there</span>
+
+openssl rand -hex <span class="m">20</span> <span class="c1"># generate a password to use for admin user</span>
+sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
 </pre></div>
 </div>
-<p><strong>Be sure to use a good password - using mkpasswd or pwgen or similar.</strong></p>
+<p><strong>Replace KEYCLOAKPASS with a good password and save password for later use</strong></p>
 </li>
 <li><p class="first">Modify <code class="docutils literal"><span class="pre">standalone/configuration/standalone.xml</span></code> to enable proxying to Keycloak:</p>
 <p>Simplest is to run these three commands:</p>

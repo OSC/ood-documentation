@@ -227,7 +227,7 @@ sudo make install
 <li><p class="first">Install mod_auth_openidc</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
 tar xzf mod_auth_openidc-2.3.2.tar.gz
-<span class="nb">cd</span> mod_auth_openidc-2.3.2.tar.gz
+<span class="nb">cd</span> mod_auth_openidc-2.3.2
 
 <span class="nb">export</span> <span class="nv">MODULES_DIR</span><span class="o">=</span>/opt/rh/httpd24/root/usr/lib64/httpd/modules
 <span class="nb">export</span> <span class="nv">APXS2_OPTS</span><span class="o">=</span><span class="s2">&quot;-S LIBEXECDIR=</span><span class="si">${</span><span class="nv">MODULES_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -251,11 +251,15 @@ sudo make install
 <p><a class="reference external" href="https://github.com/pingidentity/mod_auth_openidc">https://github.com/pingidentity/mod_auth_openidc</a> does provide rpms for
 both cjose and mod_auth_openidc. However, we have yet to verify this works with
 the SCL Apache package we use.</p>
-<p class="last"><a class="reference external" href="https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2">Release v2.3.2 Downloads</a>
+<p><a class="reference external" href="https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2">Release v2.3.2 Downloads</a>
 at bottom of the page includes an rpm for RHEL7, that is presumably built
-against httpd24, so that might work. The RHEL6 rpm will not, however, as it is built against httpd22.
+against Apache 2.4, so that might work.
+The RHEL6 rpm will not, however, as it is built against Apache 2.2
 You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
 (see <a class="reference external" href="https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.0">Downloads for v2.3.0</a>).</p>
+<p class="last">Both of these rpms actually install the modules to a different locations than
+the SCL package, so if you use the rpm, you will need to copy the files to
+the appropriate location in the SCL Apache.</p>
 </div>
 </div>
 <div class="section" id="re-generate-main-config-using-ood-portal-generator">
@@ -381,8 +385,27 @@ sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth
 </div>
 </li>
 <li><p class="first">Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># stop both</span>
+sudo systemctl stop keycloak
+sudo systemctl stop httpd24-httpd
+
+<span class="c1"># start Apache FIRST, then start Keycloak</span>
+sudo systemctl start httpd24-httpd
+sudo systemctl start keycloak
+</pre></div>
+</div>
 </li>
 </ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If when starting Apache you see this error:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Job for httpd24-httpd.service failed because the control process exited
+with error code. See &quot;systemctl status httpd24-httpd.service&quot; and
+&quot;journalctl -xe&quot; for details.
+</pre></div>
+</div>
+<p class="last">You may need to first stop Keycloak, then start Apache, then start Keycloak.</p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">We prevent OIDC_CLAIM headers from being passed through to the PUN
