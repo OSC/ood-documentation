@@ -35,7 +35,7 @@ These directions are for installing from source.
 
       wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
       tar xzf mod_auth_openidc-2.3.2.tar.gz
-      cd mod_auth_openidc-2.3.2.tar.gz
+      cd mod_auth_openidc-2.3.2
 
       export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
       export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
@@ -62,9 +62,14 @@ These directions are for installing from source.
 
    `Release v2.3.2 Downloads <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2>`_
    at bottom of the page includes an rpm for RHEL7, that is presumably built
-   against httpd24, so that might work. The RHEL6 rpm will not, however, as it is built against httpd22.
+   against Apache 2.4, so that might work.
+   The RHEL6 rpm will not, however, as it is built against Apache 2.2
    You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
    (see `Downloads for v2.3.0 <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.0>`_).
+
+   Both of these rpms actually install the modules to a different locations than
+   the SCL package, so if you use the rpm, you will need to copy the files to
+   the appropriate location in the SCL Apache.
 
 
 
@@ -193,6 +198,29 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
       sudo chmod 640 /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
 
 #. Then restart OnDemand's Apache. OnDemand should now be authenticating using KeyCloak.
+
+   .. code-block:: sh
+
+      # stop both
+      sudo systemctl stop keycloak
+      sudo systemctl stop httpd24-httpd
+
+      # start Apache FIRST, then start Keycloak
+      sudo systemctl start httpd24-httpd
+      sudo systemctl start keycloak
+
+.. warning::
+
+   If when starting Apache you see this error:
+
+   .. code-block:: none
+
+      Job for httpd24-httpd.service failed because the control process exited
+      with error code. See "systemctl status httpd24-httpd.service" and
+      "journalctl -xe" for details.
+
+   You may need to first stop Keycloak, then start Apache, then start Keycloak.
+
 
 .. note::
 
