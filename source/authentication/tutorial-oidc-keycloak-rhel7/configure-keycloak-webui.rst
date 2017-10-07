@@ -85,7 +85,6 @@ Add OnDemand as a client
       #. ``https://webdev07.hpc.osc.edu/oidc``
       #. ``https://webdev07.hpc.osc.edu``
 
-   #. Web Origins: ``https://webdev07.hpc.osc.edu``
    #. Scroll to bottom and click "Save"
 
 #. Finally, get the client secret to use with OnDemand installation:
