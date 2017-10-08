@@ -49,8 +49,6 @@ If you don't want to use Docker, you can also use pipenv.
 2. Install pipenv and use it to install dependencies in same directory:
 
    ```bash
-   brew install plantuml
-   brew install graphviz
    pip install -g pipenv
 
    # then in the documentation root directory:
