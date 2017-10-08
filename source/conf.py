@@ -32,12 +32,8 @@
 extensions = [
     'sphinx.ext.githubpages',
     'sphinxcontrib.httpdomain',
-    'sphinxcontrib.github_ribbon',
     'sphinxcontrib.plantuml',
 ]
-
-# Add repo for GitHub ribbon
-github_ribbon_repo = 'OSC/ood-documentation'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -135,6 +131,18 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 # html_theme_options = {}
+
+# Context sets variables is used to render the templates
+# See sphinx_rtd_theme/breadcrumbs.html
+#
+# thank you http://docs.readthedocs.io/en/latest/vcs.html#github
+html_context = {
+    'display_github': True,
+    'github_user': 'OSC',
+    'github_repo': 'ood-documentation',
+    'github_version': 'develop',
+    'conf_py_path': '/source/'
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = []
