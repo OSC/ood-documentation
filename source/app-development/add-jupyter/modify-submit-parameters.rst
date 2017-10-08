@@ -1,4 +1,4 @@
-.. _add-jupyter-modify-submit-parameters:
+.. _app-development-add-jupyter-modify-submit-parameters:
 
 Modify Submit Parameters
 ========================
@@ -90,7 +90,7 @@ is resource manager dependent. Some examples are given below.
       # Stage and commit your changes
       git commit submit.yml.erb -m 'updated batch job options'
 
-.. _add-jupyter-modify-submit-parameters-slurm:
+.. _app-development-add-jupyter-modify-submit-parameters-slurm:
 
 Slurm
 `````
@@ -156,7 +156,8 @@ Other
 
 For most of our other adapters (aside from Torque) the ``native`` attribute is
 an array of command line arguments formatted similarly to the
-:ref:`add-jupyter-modify-submit-parameters-slurm` example above.
+:ref:`app-development-add-jupyter-modify-submit-parameters-slurm` example
+above.
 
 Verify it Works
 ---------------

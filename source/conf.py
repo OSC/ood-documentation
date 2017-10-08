@@ -32,7 +32,12 @@
 extensions = [
     'sphinx.ext.githubpages',
     'sphinxcontrib.httpdomain',
+    'sphinxcontrib.github_ribbon',
+    'sphinxcontrib.plantuml',
 ]
+
+# Add repo for GitHub ribbon
+github_ribbon_repo = 'OSC/ood-documentation'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

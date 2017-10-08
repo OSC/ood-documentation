@@ -1,4 +1,4 @@
-.. _add-jupyter:
+.. _app-development-add-jupyter:
 
 Tutorial: Add Jupyter
 ======================

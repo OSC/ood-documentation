@@ -3,8 +3,9 @@
 Install Other Interactive Apps
 ==============================
 
-For Jupyter, we provide a tutorial for copying a generic Jupyter batch connect template and
-modifying it to work at your center. See :ref:`add-jupyter` to install Jupyter.
+For Jupyter, we provide a tutorial for copying a generic Jupyter batch connect
+template and modifying it to work at your center. See
+:ref:`app-development-add-jupyter` to install Jupyter.
 
 .. list-table:: Generic Interactive App Templates
    :header-rows: 1
