@@ -1,0 +1,24 @@
+embed-server
+
+/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)
+/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)
+/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)
+
+# uncomment if using truststore, replacing erb tags <%= %> with correct values
+# truststore needed if ldap servers are not using trusted certificates (i.e. self signed certificates)
+#
+#if (outcome != success) of /subsystem=keycloak-server/spi=truststore:read-resource
+#/subsystem=keycloak-server/spi=truststore/:add
+#/subsystem=keycloak-server/spi=truststore/provider=file/:add(enabled=true)
+#end-if
+#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=file,value=<%= scope['keycloak::install_base'] %>/standalone/configuration/truststore.jks)
+#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=password,value=<%= scope['keycloak::truststore_password'] %>)
+#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=hostname-verification-policy,value=<%= scope['keycloak::truststore_hostname_verification_policy'] %>)
+#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=disabled,value=false)
+
+# uncomment if doing theme development, so you don't need to restart Keycloak
+# with every theme modification
+#
+#/subsystem=keycloak-server/theme=defaults/:write-attribute(name=staticMaxAge, value=-1)
+#/subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheThemes, value=false)
+#/subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheTemplates, value=false)
