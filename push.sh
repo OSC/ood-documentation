@@ -13,7 +13,6 @@ if [[ \
       ${TRAVIS_PULL_REQUEST} == "false" && \
       ( ${TRAVIS_BRANCH} == "master"  || \
         ${TRAVIS_BRANCH} == "develop" || \
-        ${TRAVIS_BRANCH} == "release-1.1-auth" || \
         ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$
       ) \
    ]]
