@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Job Submission &mdash; Open OnDemand 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Interactive Apps (Plugins)" href="../interactive.html"/>
+        <link rel="next" title="Connection View" href="view.html"/>
+        <link rel="prev" title="Render Template" href="template.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps (Plugins)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Job Submission</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../app-development.html">App Development</a> &raquo;</li>
+        
+          <li><a href="../interactive.html">Interactive Apps (Plugins)</a> &raquo;</li>
+        
+      <li>Job Submission</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/app-development/interactive/submit.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <a href="https://github.com/OSC/ood-documentation"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a><div class="section" id="job-submission">
+<span id="app-development-interactive-submit"></span><h1>Job Submission<a class="headerlink" href="#job-submission" title="Permalink to this headline">¶</a></h1>
+<p>The configuration file <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> controls the content of the batch
+script as well as the submission arguments used when submitting the batch job.
+It is located in the root of the application directory.</p>
+<p>Assuming we already have a sandbox Interactive App deployed under:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> configuration file can be found at:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app/submit.yml.erb
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.erb</span></code> file extension will cause the YAML configuration file to be
+processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows you
+to embed Ruby code into the YAML configuration file for flow control, variable
+substitution, and more.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The two possible configuration options that can be used in the
+<code class="docutils literal"><span class="pre">submit.yml.erb</span></code> file are given as:</p>
+<dl class="describe">
+<dt>
+<code class="descname">batch_connect (Hash)</code></dt>
+<dd><p>the configuration describing the batch script content (see
+<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template">OodCore::BatchConnect::Template</a> for valid configuration options)</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">Use the default basic web server template</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">script (Hash)</code></dt>
+<dd><p>the configuration describing the job submission parameters for the batch
+script (see <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> for valid configuration options)</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">Set the job’s charged account and queue</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;PZS0001&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="s">&quot;parallel&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Each of these configuration options take a set of their own configuration
+options described below.</p>
+<div class="section" id="configure-batch-connect">
+<h3>Configure Batch Connect<a class="headerlink" href="#configure-batch-connect" title="Permalink to this headline">¶</a></h3>
+<p>All batch scripts are generated from either the <code class="docutils literal"><span class="pre">basic</span></code> template or the
+<code class="docutils literal"><span class="pre">vnc</span></code> template specified with the following configuration option:</p>
+<dl class="describe">
+<dt>
+<code class="descname">template (String)</code></dt>
+<dd><p>the template used for rendering the batch script (<code class="docutils literal"><span class="pre">&quot;basic&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;vnc&quot;</span></code>)</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><code class="docutils literal"><span class="pre">&quot;basic&quot;</span></code></dd>
+<dt>Example</dt>
+<dd><p class="first">Render a batch script for a VNC Interactive Application</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Aside from the above configuration option, a list of all possible configuration
+options for <code class="docutils literal"><span class="pre">batch_connect</span></code> can be found under the code documentation for
+<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template">OodCore::BatchConnect::Template</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The configuration <code class="docutils literal"><span class="pre">template:</span> <span class="pre">&quot;vnc&quot;</span></code> comes with more <code class="docutils literal"><span class="pre">batch_connect</span></code>
+configuration options which can be found under the code documentation for
+<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Templates/VNC">OodCore::BatchConnect::Templates::VNC</a>.</p>
+</div>
+</div>
+<div class="section" id="configure-script">
+<h3>Configure Script<a class="headerlink" href="#configure-script" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">script</span></code> configuration option defines the batch job submission parameters
+(e.g., number of nodes, wall time, queue, …). The list of all possible
+options can be found under the code documentation for <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a>.</p>
+<p>It is recommended to refrain from using the <code class="docutils literal"><span class="pre">native</span></code> option to best keep your
+Interactive App as portable as possible. Although we understand this may not be
+possible for all job submission parameters (e.g., number of nodes, memory, GPU)
+it would be best to use the respective option corresponding to the submission
+parameter if it is available.</p>
+<p>For example, if I want to specify the charged account for the job, it is
+recommended I use:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;PZS0001&quot;</span>
+</pre></div>
+</div>
+<p>as this is resource manager agnostic. But this can also be added for a Slurm
+resource manager as:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;-A&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;PZS0001&quot;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>but now this app may not work at a center with a different resource manager.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Care must be taken when using the <code class="docutils literal"><span class="pre">native</span></code> option as this is resource
+manager specific. For all supported resource managers (e.g., Slurm, LSF,
+PBSPro, …) other than Torque, the <code class="docutils literal"><span class="pre">native</span></code> option is specified as an
+array of command line arguments that are fed to the resource manager’s batch
+submission tool (e.g., <strong class="command">sbatch</strong>, <strong class="command">qsub</strong>, <strong class="command">bsub</strong>,
+…)</p>
+<p>So for Slurm, the following configuration will submit a job to 5 nodes with
+feature <code class="docutils literal"><span class="pre">c12</span></code>:</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;-N&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;5&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-C&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;c12&quot;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The simplest example consists of submitting a batch script built from the basic
+web server template using all the default options for the cluster’s batch job
+submission tool (e.g., <strong class="command">sbatch</strong>, <strong class="command">qsub</strong>, <strong class="command">bsub</strong>,
+…).</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="vnc-server">
+<h3>VNC Server<a class="headerlink" href="#vnc-server" title="Permalink to this headline">¶</a></h3>
+<p>To submit a batch script built from the VNC server template:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="change-executable-for-main-script">
+<h3>Change Executable for Main Script<a class="headerlink" href="#change-executable-for-main-script" title="Permalink to this headline">¶</a></h3>
+<p>When the batch script is rendered from the template, one of the possible
+configuration options is specifying the executable command called for the main
+script it forks off into the background. This can be configured with:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">script_file</span><span class="p p-Indicator">:</span> <span class="s">&quot;./my_custom_script.sh&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specify-job-submission-parameters">
+<h3>Specify Job Submission Parameters<a class="headerlink" href="#specify-job-submission-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Cherry-picking some possible options from <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> gives a batch
+job built from the basic web server template submitted with the following
+parameters:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3600</span>
+  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="s">&quot;debug&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">email_on_started</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="l l-Scalar l-Scalar-Plain">job_environment</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">LICENSE_FILE</span><span class="p p-Indicator">:</span> <span class="s">&quot;1234@license.center.edu&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamically-set-submission-parameters">
+<h3>Dynamically Set Submission Parameters<a class="headerlink" href="#dynamically-set-submission-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Feel free to take advantage of the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system
+in the <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> file. You have access to all the
+<a class="reference internal" href="form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a> attributes.</p>
+<p>For example, if you had a form attribute called <code class="docutils literal"><span class="pre">number_of_hours</span></code> that you
+had the user fill out. You can add this to the submission parameters as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= (number_of_hours.blank? ? 1</span> <span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">number_of_hours.to_i) * 3600 %&gt;</span>
+</pre></div>
+</div>
+<p>We have to be careful here, because all form attributes are returned as <a class="reference external" href="https://ruby-doc.org/core-2.2.3/String.html">Ruby
+Strings</a>. So we need to:</p>
+<ol class="arabic simple">
+<li>First determine if the user filled in the attribute (check if it is
+<code class="docutils literal"><span class="pre">#blank?</span></code>).</li>
+<li>If they did, then we need to convert the string to an integer (<code class="docutils literal"><span class="pre">#to_i</span></code>)
+before performing arithmetic operations on it.</li>
+<li>Finally we convert hours to seconds.</li>
+</ol>
+<p>Another scenario would be if the user specified the queue directly with a
+custom form attribute called <code class="docutils literal"><span class="pre">my_queue</span></code>. We can then add this user-supplied
+queue conditionally to the submission parameters as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3600</span>
+  <span class="l l-Scalar l-Scalar-Plain">&lt;%- unless my_queue.blank? -%&gt;</span>
+  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= my_queue %&gt;</span>
+  <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
+  <span class="l l-Scalar l-Scalar-Plain">email_on_started</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>In this case, <code class="docutils literal"><span class="pre">queue_name</span></code> will only be added to the submission parameters if
+the user supplied a non-blank value to the form attribute <code class="docutils literal"><span class="pre">my_queue</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Most of the common form attributes that manipulate the job submission
+parameters are provided for you as
+<a class="reference internal" href="form.html#app-development-interactive-form-pre-defined-attributes"><span class="std std-ref">Pre-defined Attributes</span></a>. These
+special attributes fill-in the <code class="docutils literal"><span class="pre">script</span></code> configuration options internally,
+so you do not have to.</p>
+<p class="last">For example, if you used the pre-defined form attribute <code class="docutils literal"><span class="pre">bc_queue</span></code>, you do
+not need to specify <code class="docutils literal"><span class="pre">queue_name:</span></code> in the <code class="docutils literal"><span class="pre">submit.yml.erb</span></code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="view.html" class="btn btn-neutral float-right" title="Connection View" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="template.html" class="btn btn-neutral" title="Render Template" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

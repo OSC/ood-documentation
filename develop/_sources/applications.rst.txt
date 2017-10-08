@@ -16,3 +16,4 @@ are accessible by all users.
    applications/editor
    applications/active-jobs
    applications/job-composer
+   applications/interactive
