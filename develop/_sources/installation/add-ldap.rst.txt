@@ -5,6 +5,12 @@ Add LDAP Support
 
 **(Optional, but recommended)**
 
+.. warning::
+
+   This page explains how to add LDAP support to basic auth in Open OnDemand.
+   Basic auth should only be used for evaluation purposes. For a more robust
+   authentication solution, see :ref:`authentication`.
+
 LDAP support allows for your users to log in using their local username and
 password. It also removes the need for the sys admin to keep updating the
 ``.htpasswd`` file.
