@@ -21,7 +21,6 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 import os
-import subprocess
 
 # -- General configuration ------------------------------------------------
 
@@ -143,7 +142,7 @@ html_context = {
     'display_github': True,
     'github_user': 'OSC',
     'github_repo': 'ood-documentation',
-    'github_version': os.environ.get('TRAVIS_BRANCH', subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip()),
+    'github_version': os.environ.get('TRAVIS_BRANCH', 'develop'),
     'conf_py_path': '/source/'
 }
 
