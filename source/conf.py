@@ -20,6 +20,9 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import os
+import subprocess
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -140,7 +143,7 @@ html_context = {
     'display_github': True,
     'github_user': 'OSC',
     'github_repo': 'ood-documentation',
-    'github_version': 'develop',
+    'github_version': os.environ.get('TRAVIS_BRANCH', subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip()),
     'conf_py_path': '/source/'
 }
 
