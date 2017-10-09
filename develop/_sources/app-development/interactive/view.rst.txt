@@ -129,7 +129,7 @@ can do:
    </a>
 
 All stylization is handled through the HTML `class global attribute`_ using
-pre-defined Bootstrap and Font Awesome classes.
+predefined Bootstrap and Font Awesome classes.
 
 .. _app-development-interactive-view-examples:
 

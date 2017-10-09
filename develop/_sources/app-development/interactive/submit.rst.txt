@@ -261,11 +261,11 @@ the user supplied a non-blank value to the form attribute ``my_queue``.
 
    Most of the common form attributes that manipulate the job submission
    parameters are provided for you as
-   :ref:`app-development-interactive-form-pre-defined-attributes`. These
+   :ref:`app-development-interactive-form-predefined-attributes`. These
    special attributes fill-in the ``script`` configuration options internally,
    so you do not have to.
 
-   For example, if you used the pre-defined form attribute ``bc_queue``, you do
+   For example, if you used the predefined form attribute ``bc_queue``, you do
    not need to specify ``queue_name:`` in the ``submit.yml.erb``.
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby

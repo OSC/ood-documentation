@@ -243,7 +243,7 @@ may look like:
    #!/bin/bash -l
 
    # Restore the module environment to avoid conflicts with user-specified
-   # intialization files
+   # initialization files
    module restore
 
    # Load the Python module
