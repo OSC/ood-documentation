@@ -74,13 +74,13 @@ available to the Interactive App through its intermediate steps:
 :ref:`app-development-interactive-template` and
 :ref:`app-development-interactive-submit`.
 
-.. _app-development-interactive-form-pre-defined-attributes:
+.. _app-development-interactive-form-predefined-attributes:
 
-Pre-defined Attributes
+Predefined Attributes
 ``````````````````````
 
 The Dashboard that supports these plugins provides the plugins with some useful
-pre-defined attributes that can be included in the ``form:`` configuration list
+predefined attributes that can be included in the ``form:`` configuration list
 with very little or no modification on the part of the developer.
 
 So a very simple ``form.yml`` that requests the user input a queue followed by
@@ -97,7 +97,7 @@ part of the app developer can look like:
      - bc_queue
      - bc_account
 
-The most commonly used pre-defined attributes are given as:
+The most commonly used predefined attributes are given as:
 
 bc_account
   This adds a ``text_field`` to the HTML form that will be used as the charged
@@ -128,8 +128,8 @@ bc_num_slots
 
   .. warning::
 
-     This pre-defined attribute is very resource manager specific, and is the
-     most brittle of all the other pre-defined attributes. May require
+     This predefined attribute is very resource manager specific, and is the
+     most brittle of all the other predefined attributes. May require
      customization (see
      :ref:`interactive-development-form-customizing-attributes`) to work at
      your center.
