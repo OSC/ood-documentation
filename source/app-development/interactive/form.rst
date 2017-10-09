@@ -40,7 +40,7 @@ Configuration
 
 .. describe:: cluster (String)
 
-     the cluster id that the Interative App session is submitted to
+     the cluster id that the Interactive App session is submitted to
 
      .. warning::
 
