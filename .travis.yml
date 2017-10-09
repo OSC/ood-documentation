@@ -4,7 +4,7 @@ services:
 before_install:
   - docker pull ohiosupercomputer/docker-sphinx
 script:
-  - docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
+  - docker run -e "TRAVIS_BRANCH" --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
 after_success:
   - ./push.sh
 notifications:
