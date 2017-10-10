@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Render Template &mdash; Open OnDemand 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Interactive Apps (Plugins)" href="../interactive.html"/>
+        <link rel="next" title="Job Submission" href="submit.html"/>
+        <link rel="prev" title="User Form" href="form.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps (Plugins)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Render Template</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#erb-objects">ERB Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template-files">Template Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../app-development.html">App Development</a> &raquo;</li>
+        
+          <li><a href="../interactive.html">Interactive Apps (Plugins)</a> &raquo;</li>
+        
+      <li>Render Template</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.1/source/app-development/interactive/template.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="render-template">
+<span id="app-development-interactive-template"></span><h1>Render Template<a class="headerlink" href="#render-template" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">template/</span></code> directory contains the template used for constructing the
+Interactive App’s batch job. It is located in the root of the application
+directory.</p>
+<p>Assuming we already have a sandbox Interactive App deployed under:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">template/</span></code> directory can be found at:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app/template/
+</pre></div>
+</div>
+<p>When an Interactive App session is first “Launched” by the user, the
+<code class="docutils literal"><span class="pre">template/</span></code> directory is:</p>
+<ol class="arabic">
+<li><p class="first">Copied to the user’s home directory under an appropriately namespaced data
+root directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/data/sys/dashboard/batch_connect/dev/my_app/output/&lt;session_id&gt;/
+</pre></div>
+</div>
+<p>where the <code class="docutils literal"><span class="pre">session_id</span></code> is a unique id generated by the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>
+when a user first launches a session.</p>
+</li>
+<li><p class="first">All <code class="docutils literal"><span class="pre">*.erb</span></code> files in this new directory are rendered using <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby
+(Embedded Ruby)</a> with access to the objects: <code class="docutils literal"><span class="pre">session</span></code> and <code class="docutils literal"><span class="pre">context</span></code>.</p>
+</li>
+<li><p class="first">All <code class="docutils literal"><span class="pre">*.erb</span></code> files are renamed with the <code class="docutils literal"><span class="pre">erb</span></code> extension stripped from the
+file name.</p>
+</li>
+</ol>
+<div class="section" id="erb-objects">
+<h2>ERB Objects<a class="headerlink" href="#erb-objects" title="Permalink to this headline">¶</a></h2>
+<p>In your ERB template files you will have access to not only the Ruby standard
+library but also to the two useful objects: <code class="docutils literal"><span class="pre">session</span></code> and <code class="docutils literal"><span class="pre">context</span></code>.</p>
+<div class="section" id="session">
+<h3>Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">session</span></code> object describes the current Interactive App session. A few of
+the helpful methods it provides are given below:</p>
+<dl class="describe">
+<dt>
+<code class="descname">id (String)</code></dt>
+<dd><p>the unique id generated by the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> when the session was created</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">Display session id</p>
+<div class="last highlight-erb"><div class="highlight"><pre><span></span><span class="x">Current session running is </span><span class="cp">&lt;%=</span> <span class="n">session</span><span class="o">.</span><span class="n">id</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">staged_root (Pathname)</code></dt>
+<dd><p>the directory where the session template is staged and initially run in</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">Point to an image asset file that is staged by your template</p>
+<div class="last highlight-erb"><div class="highlight"><pre><span></span><span class="x">icon: </span><span class="cp">&lt;%=</span> <span class="n">session</span><span class="o">.</span><span class="n">staged_root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="s2">&quot;icon.png&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">cluster_id (String)</code></dt>
+<dd><p>the cluster id used to submit this session to</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">Determine if Owens cluster</p>
+<div class="last highlight-erb"><div class="highlight"><pre><span></span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">cluster_id</span> <span class="o">==</span> <span class="s2">&quot;owens&quot;</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  ./run_owens_script.sh</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="context">
+<h3>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">context</span></code> object is an object that holds <strong>all the attributes</strong> defined
+by the <a class="reference internal" href="form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>All attributes in the <code class="docutils literal"><span class="pre">context</span></code> object return a <a class="reference external" href="https://ruby-doc.org/core-2.2.3/String.html">Ruby String</a>. So
+conversions are necessary if you intend on operating on an attribute.</p>
+<p>For example, if you want to perform arithmetic on the <code class="docutils literal"><span class="pre">bc_num_hours</span></code>
+attribute that a user filled out in the Interactive App form:</p>
+<div class="highlight-erb"><div class="highlight"><pre><span></span><span class="x">export SECONDS=</span><span class="cp">&lt;%=</span> <span class="n">context</span><span class="o">.</span><span class="n">bc_num_hours</span><span class="o">.</span><span class="n">to_i</span> <span class="o">*</span> <span class="mi">3600</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p class="last">Note, that we used <code class="docutils literal"><span class="pre">#to_i</span></code> on the string to convert it to an integer
+before performing arithmetic.</p>
+</div>
+</div>
+</div>
+<div class="section" id="template-files">
+<h2>Template Files<a class="headerlink" href="#template-files" title="Permalink to this headline">¶</a></h2>
+<p>A running batch job for an interactive session will source and/or fork aptly
+named scripts that it finds under the <code class="docutils literal"><span class="pre">template/</span></code> directory. These scripts
+can be used to build the environment, launch the web server process, and/or
+clean up the workspace when the process exits.</p>
+<div class="figure align-center" id="id1">
+<span id="app-development-interactive-template-diagram"></span><p class="plantuml">
+<img src="../../_images/plantuml-de1f21f64e5443b3ebf1a6b50cc224a068a4239b.png" alt="skinparam defaultTextAlignment center
+:source &quot;&quot;template/before.sh&quot;&quot;;
+fork
+  :source &quot;&quot;template/after.sh&quot;&quot;;
+  :generate connection
+  information file;
+fork again
+  :exec &quot;&quot;template/script.sh&quot;&quot;;
+end fork
+:source &quot;&quot;template/clean.sh&quot;&quot;;" />
+</p>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Activity diagram for basic Interactive App batch script.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#app-development-interactive-template-diagram"><span class="std std-numref">Fig. 14</span></a> details the common
+workflow for a basic Interactive App’s batch script. The logic follows as:</p>
+<ol class="arabic simple">
+<li>Source in the <code class="docutils literal"><span class="pre">template/before.sh</span></code> script if it exists.</li>
+<li>Fork off the <code class="docutils literal"><span class="pre">template/script.sh</span></code> into the background (<strong>must block until
+session is done</strong>).</li>
+<li>Source in the <code class="docutils literal"><span class="pre">template/after.sh</span></code> script if it exists.</li>
+<li>Generate the connection information file for the user.</li>
+<li>Wait for the <code class="docutils literal"><span class="pre">template/script.sh</span></code> process to complete.</li>
+<li>Source in the <code class="docutils literal"><span class="pre">template/clean.sh</span></code> script if it exists.</li>
+</ol>
+<div class="section" id="before-hook">
+<h3>Before Hook<a class="headerlink" href="#before-hook" title="Permalink to this headline">¶</a></h3>
+<p><em>Optional</em></p>
+<p>The batch script will source the file <code class="docutils literal"><span class="pre">template/before.sh</span></code> as early as
+possible if it exists. This file <strong>must be</strong> a Bash script. It can be used for
+but not limited to:</p>
+<ul class="simple">
+<li>populate the <code class="docutils literal"><span class="pre">port</span></code> and <code class="docutils literal"><span class="pre">password</span></code> environment variables needed for the
+web server and for connecting back to it</li>
+<li>generate host-specific configuration files</li>
+<li>generate secure password files</li>
+</ul>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">If you are creating a VNC Interactive Application, then <strong>DO NOT</strong> set the
+<code class="docutils literal"><span class="pre">port</span></code> and <code class="docutils literal"><span class="pre">password</span></code> environment variables. There is already internal
+logic in place that handles this for you.</p>
+</div>
+<p>There exists some helpful Bash functions that can be used in this sourced
+script:</p>
+<dl class="describe">
+<dt>
+<code class="descname">find_port [MIN_PORT] [MAX_PORT]</code></dt>
+<dd><p>Finds an available port within the specified range [MIN_PORT..MAX_PORT].</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd>[2000..65535]</dd>
+<dt>Example</dt>
+<dd><p class="first">Find a random port that is available within the default range</p>
+<div class="last highlight-shell"><div class="highlight"><pre><span></span><span class="nv">port</span><span class="o">=</span><span class="k">$(</span>find_port<span class="k">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">create_passwd [SIZE]</code></dt>
+<dd><p>Generates random alphanumeric password of length SIZE.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd>32</dd>
+<dt>Example</dt>
+<dd><p class="first">Generate a random password 16 characters long</p>
+<div class="last highlight-shell"><div class="highlight"><pre><span></span><span class="nv">password</span><span class="o">=</span><span class="k">$(</span>create_passwd <span class="m">16</span><span class="k">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<p>An example before hook <code class="docutils literal"><span class="pre">template/before.sh</span></code> that defines a port and password
+file that can later be used in the script that launches the web server may look
+like:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="c1"># Find available port to run web server on</span>
+<span class="nb">export</span> <span class="nv">port</span><span class="o">=</span><span class="k">$(</span>find_port<span class="k">)</span>
+
+<span class="c1"># Define a password and password file used for authentication</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>create_passwd <span class="m">12</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">export</span> <span class="nv">PASSWORD_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/passwd&quot;</span>
+
+<span class="c1"># Create password file used by web server</span>
+<span class="o">(</span><span class="nb">umask</span> <span class="m">077</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">password</span><span class="si">}</span><span class="s2">&quot;</span> &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PASSWORD_FILE</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If your web server is supplied with a password file or a configuration file
+that holds the password, be sure to set the permissions so only the user has
+read access to the file.</p>
+</div>
+</div>
+<div class="section" id="main-script">
+<h3>Main Script<a class="headerlink" href="#main-script" title="Permalink to this headline">¶</a></h3>
+<p><em>Required</em></p>
+<p>The batch script will fork the executable <code class="docutils literal"><span class="pre">template/script.sh</span></code> into the
+background. This file <strong>MUST</strong> exist in your template directory with executable
+permission. This is where you launch the blocking web server process.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The main script is forked into the background in the batch script and then
+waited on. The batch script will exit when this background process also
+exits. So be careful of web servers that are daemonized.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you are creating a VNC Interactive Application, then you <strong>DO NOT</strong> need
+to start the VNC server process. There is already internal logic in place
+that handles this for you.</p>
+<p class="last">You <strong>WILL</strong> need to launch the GUI application in the main script that you
+intend to load within the VNC server.</p>
+</div>
+<p>An example <code class="docutils literal"><span class="pre">template/script.sh</span></code> that launches a simple static HTTP web server
+may look like:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1"># Restore the module environment to avoid conflicts with user-specified</span>
+<span class="c1"># initialization files</span>
+module restore
+
+<span class="c1"># Load the Python module</span>
+module load python
+
+<span class="c1"># Launch the simple HTTP web server</span>
+python -m SimpleHTTPServer <span class="s2">&quot;</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">The above example does not use authentication with a password as it is a
+simple static HTTP web server. But it is highly recommended that
+authentication be enabled for any web server you launch. Otherwise, nothing
+stops a malicious system user from SSH tunneling to your live web server and
+abusing the web server.</p>
+</div>
+</div>
+<div class="section" id="after-hook">
+<h3>After Hook<a class="headerlink" href="#after-hook" title="Permalink to this headline">¶</a></h3>
+<p><em>Optional</em></p>
+<p>The batch script will source the file <code class="docutils literal"><span class="pre">template/after.sh</span></code> right after forking
+off the main script into the background but before the connection information
+file is generated. This file <strong>must be</strong> a Bash script. It can be used for but
+not limited to:</p>
+<ul class="simple">
+<li>populate the <code class="docutils literal"><span class="pre">port</span></code> and <code class="docutils literal"><span class="pre">password</span></code> environment variables needed for the
+for connecting back to the web server</li>
+<li>parsing any output files generated by web server</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">In some cases you are unable to get the port of the launched web server
+until after the fact. This would be a good place to parse the web server log
+and grab the port to set it.</p>
+</div>
+<p>In most cases the <code class="docutils literal"><span class="pre">template/after.sh</span></code> will not be used.</p>
+</div>
+<div class="section" id="cleanup-hook">
+<h3>Cleanup Hook<a class="headerlink" href="#cleanup-hook" title="Permalink to this headline">¶</a></h3>
+<p><em>Optional</em></p>
+<p>The batch script will source the file <code class="docutils literal"><span class="pre">template/clean.sh</span></code> after the
+background process for the main script exits. This file <strong>must be</strong> a Bash
+script. It can be used for but not limited to:</p>
+<ul class="simple">
+<li>cleaning up any temporary files that aren’t needed</li>
+<li>killing any misbehaving leftover processes</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the batch script hits the maximum requested wall time, then this will not
+run. If this is an issue you are experiencing you may want to look into
+setting the <code class="docutils literal"><span class="pre">timeout</span></code> option under the <code class="docutils literal"><span class="pre">batch_connect</span></code> configuration
+feature in your <code class="docutils literal"><span class="pre">submit.yml.erb</span></code>.</p>
+</div>
+<p>In most cases the <code class="docutils literal"><span class="pre">template/clean.sh</span></code> will not be used.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="submit.html" class="btn btn-neutral float-right" title="Job Submission" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="form.html" class="btn btn-neutral" title="User Form" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

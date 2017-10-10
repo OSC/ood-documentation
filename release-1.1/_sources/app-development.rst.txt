@@ -16,5 +16,6 @@ apps that can be replaced by custom Passenger apps. Or you can create your own.
    :caption: App Development Guide
 
    app-development/enabling-development-mode
+   app-development/interactive
    app-development/tutorial-ps-to-quota
-   add-jupyter
+   app-development/add-jupyter
