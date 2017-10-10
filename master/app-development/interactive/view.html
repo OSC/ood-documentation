@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Connection View &mdash; Open OnDemand 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Interactive Apps (Plugins)" href="../interactive.html"/>
+        <link rel="next" title="Tutorial: Creating a status app" href="../tutorial-ps-to-quota.html"/>
+        <link rel="prev" title="Job Submission" href="submit.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps (Plugins)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Connection View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#session-information">Session Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reverse-proxy">Reverse Proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stylizing">Stylizing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../app-development.html">App Development</a> &raquo;</li>
+        
+          <li><a href="../interactive.html">Interactive Apps (Plugins)</a> &raquo;</li>
+        
+      <li>Connection View</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/master/source/app-development/interactive/view.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="connection-view">
+<span id="app-development-interactive-view"></span><h1>Connection View<a class="headerlink" href="#connection-view" title="Permalink to this headline">¶</a></h1>
+<p>The HTML template file <code class="docutils literal"><span class="pre">view.html.erb</span></code> is responsible for providing the user
+with a small web interface that makes connecting to the backend web server
+running on the compute node for a given interactive session as simple as
+possible. It is located in the root of the application directory.</p>
+<p>Assuming we already have a sandbox Interactive App deployed under:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">view.html.erb</span></code> configuration file can be found at:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app/view.html.erb
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.erb</span></code> file extension will cause the HTML file to be processed using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows you to embed Ruby code
+into the HTML file for flow control, variable substitution, and more.</p>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">If developing a VNC Interactive App, <strong>DO NOT</strong> include the
+<code class="docutils literal"><span class="pre">view.html.erb</span></code> file. The Dashboard has internal logic in place for
+displaying connection information of VNC sessions to the user.</p>
+</div>
+<div class="section" id="session-information">
+<h2>Session Information<a class="headerlink" href="#session-information" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>running</strong> interactive session will generate a connection information file
+in the working directory of the corresponding batch job. This information is
+then made available to the HTML template <code class="docutils literal"><span class="pre">view.html.erb</span></code> when it is rendered.
+The possible connection information attributes are:</p>
+<dl class="docutils">
+<dt>host</dt>
+<dd>the hostname of the compute node that the interactive session is running on</dd>
+<dt>port</dt>
+<dd>the port number that the running web server is listening on</dd>
+<dt>password</dt>
+<dd>the password that the web server expects when authenticating the user</dd>
+</dl>
+<p>Typically these attributes are used to construct links or forms within the
+<code class="docutils literal"><span class="pre">view.html.erb</span></code> file. See the various
+<a class="reference internal" href="#app-development-interactive-view-examples"><span class="std std-ref">Examples</span></a> below.</p>
+</div>
+<div class="section" id="reverse-proxy">
+<h2>Reverse Proxy<a class="headerlink" href="#reverse-proxy" title="Permalink to this headline">¶</a></h2>
+<p>A detailed introduction to the reverse proxy can be found in
+<a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-configuration-configure-reverse-proxy"><span class="std std-ref">Configure Reverse Proxy</span></a>. Under a
+default installation the following URL paths will be enabled:</p>
+<dl class="get">
+<dt id="get--node-(host)-(port)(path)">
+<code class="descname">GET </code><code class="descname">/node/</code><span class="sig-paren">(</span><em>host</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><code class="descname"></code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--node-(host)-(port)(path)" title="Permalink to this definition">¶</a></dt>
+<dd><p>reverse proxies the request to the given <code class="docutils literal"><span class="pre">host</span></code> and <code class="docutils literal"><span class="pre">port</span></code> using the
+<strong>full and untouched</strong> URL request path</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">By visiting the hypothetical link below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">node</span><span class="o">/</span><span class="n">node01</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="mi">8080</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>the following URL request:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">node</span><span class="o">/</span><span class="n">node01</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="mi">8080</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p class="last">is sent to the web server running on host <code class="docutils literal"><span class="pre">node01.my_center.edu</span></code> and
+port <code class="docutils literal"><span class="pre">8080</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--rnode-(host)-(port)(path)">
+<code class="descname">GET </code><code class="descname">/rnode/</code><span class="sig-paren">(</span><em>host</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><code class="descname"></code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--rnode-(host)-(port)(path)" title="Permalink to this definition">¶</a></dt>
+<dd><p>reverse proxies the request to the given <code class="docutils literal"><span class="pre">host</span></code> and <code class="docutils literal"><span class="pre">port</span></code> using
+<strong>ONLY</strong> the <code class="docutils literal"><span class="pre">path</span></code> portion of the URL request path</p>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">By visiting the hypothetical link below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">rnode</span><span class="o">/</span><span class="n">node02</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="mi">5000</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>the following URL request:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p class="last">is sent to the web server running on host <code class="docutils literal"><span class="pre">node02.my_center.edu</span></code> and
+port <code class="docutils literal"><span class="pre">5000</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In order to leverage the reverse proxy that comes with Open OnDemand the
+system administrator must have it enabled as outlined under
+<a class="reference internal" href="../../install-desktops/enable-reverse-proxy.html#install-desktops-enable-reverse-proxy"><span class="std std-ref">Enable Reverse Proxy</span></a>. It only needs to be enabled
+once and then all developers can take advantage of it within their
+applications.</p>
+</div>
+<p>Typically generating links with <code class="docutils literal"><span class="pre">/node</span></code> is preferred if the web server can be
+configured with a sub-URI. For instance, the <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook server</a> can be
+<a class="reference external" href="http://jupyter-notebook.readthedocs.io/en/stable/config.html">configured</a> with a sub-URI using the <code class="docutils literal"><span class="pre">NotebookApp.base_url</span></code> option:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;/node/node01.my_center.edu/8080/&#39;</span>
+</pre></div>
+</div>
+<p>Some web servers that are known to work with <code class="docutils literal"><span class="pre">/node</span></code>:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook server</a></li>
+</ul>
+<p>Links can be generated with <code class="docutils literal"><span class="pre">/rnode</span></code> if the web server relies <strong>ONLY</strong> on
+relative links and does not use any absolute links. Some web servers that are
+known to work with <code class="docutils literal"><span class="pre">/rnode</span></code> are:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.comsol.com/comsol-server">COMSOL Server</a></li>
+<li><a class="reference external" href="https://www.rstudio.com/products/rstudio-server/">RStudio Server</a></li>
+</ul>
+</div>
+<div class="section" id="stylizing">
+<h2>Stylizing<a class="headerlink" href="#stylizing" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">view.html.erb</span></code> HTML template has access to <a class="reference external" href="https://getbootstrap.com/docs/3.3/">Bootstrap 3</a> and <a class="reference external" href="http://fontawesome.io/">Font
+Awesome</a> allowing any stylistic pizzazz to be added to it.</p>
+<p>For example, to make a link that appears as a button with an icon in it, you
+can do:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fa fa-eye&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span> Connect to My App
+<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>All stylization is handled through the HTML <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class">class global attribute</a> using
+predefined Bootstrap and Font Awesome classes.</p>
+</div>
+<div class="section" id="examples">
+<span id="app-development-interactive-view-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The simplest example of a <code class="docutils literal"><span class="pre">view.html.erb</span></code> consists of just a plain link to
+the backend running web server using the Open OnDemand reverse proxy:</p>
+<div class="highlight-html+erb"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/node/</span><span class="cp">&lt;%=</span> <span class="n">host</span> <span class="cp">%&gt;</span><span class="s">/</span><span class="cp">&lt;%=</span> <span class="n">port</span> <span class="cp">%&gt;</span><span class="s">/&quot;</span><span class="p">&gt;</span>Click me!<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">host</span></code> and <code class="docutils literal"><span class="pre">port</span></code> are rendered using the interactive session’s
+connection information.</p>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">It is not safe to submit <code class="docutils literal"><span class="pre">password</span></code> in a <code class="docutils literal"><span class="pre">GET</span></code> request as this can
+appear in logs. It is recommended to use a <code class="docutils literal"><span class="pre">POST</span></code> request if available,
+see below.</p>
+</div>
+<div class="section" id="post-password">
+<h3>POST Password<a class="headerlink" href="#post-password" title="Permalink to this headline">¶</a></h3>
+<p>For some Interactive Apps you may want a single click solution that not only
+connects the user to the backend web server but also logs them in with the
+generated session password. This may be possible depending on the web server
+you use.</p>
+<p>For the case of a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook server</a> we can create a button that
+submits a form with the <code class="docutils literal"><span class="pre">password</span></code> included in it to the Jupyter server’s
+login page.</p>
+<div class="highlight-html+erb"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/node/</span><span class="cp">&lt;%=</span> <span class="n">host</span> <span class="cp">%&gt;</span><span class="s">/</span><span class="cp">&lt;%=</span> <span class="n">port</span> <span class="cp">%&gt;</span><span class="s">/login&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">&lt;%=</span> <span class="n">password</span> <span class="cp">%&gt;</span><span class="s">&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fa fa-eye&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span> Connect to Jupyter
+  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>In this example, the password is stored in a hidden input field that the user
+doesn’t see and it gets communicated to the Jupyter server in the <code class="docutils literal"><span class="pre">POST</span></code>
+request.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tutorial-ps-to-quota.html" class="btn btn-neutral float-right" title="Tutorial: Creating a status app" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="submit.html" class="btn btn-neutral" title="Job Submission" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

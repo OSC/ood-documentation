@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial: Add Jupyter &mdash; Open OnDemand 1.1.0 documentation</title>
+  <title>Authentication &mdash; Open OnDemand 1.1.0 documentation</title>
   
 
   
@@ -38,9 +38,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Open OnDemand 1.1.0 documentation" href="index.html"/>
-        <link rel="up" title="App Development" href="app-development.html"/>
-        <link rel="next" title="1. Software Requirements" href="add-jupyter/software-requirements.html"/>
-        <link rel="prev" title="Tutorial: Creating a status app" href="app-development/tutorial-ps-to-quota.html"/> 
+        <link rel="next" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" href="authentication/tutorial-oidc-keycloak-rhel7.html"/>
+        <link rel="prev" title="Install Other Interactive Apps" href="install-ihpc-apps.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -98,10 +97,14 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">What is Open OnDemand</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install-desktops.html">Install Desktops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
@@ -110,21 +113,9 @@
 <li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Resources</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="user-documentation.html">User Documentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="app-development.html">App Development</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="app-development/enabling-development-mode.html">Enabling App Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app-development/tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorial: Add Jupyter</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/copy-app.html">2. Copy Jupyter App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/customize-attributes.html">3. Customize Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/deploy.html">5. Deploy Jupyter App</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="app-development.html">App Development</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
@@ -174,15 +165,15 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="app-development.html">App Development</a> &raquo;</li>
-        
-      <li>Tutorial: Add Jupyter</li>
+      <li>Authentication</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/add-jupyter.rst.txt" rel="nofollow"> View page source</a>
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/master/source/authentication.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -195,33 +186,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="tutorial-add-jupyter">
-<span id="add-jupyter"></span><h1>Tutorial: Add Jupyter<a class="headerlink" href="#tutorial-add-jupyter" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial will walk you through creating an interactive Jupyter app that
-your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> within a batch job
-on a compute node. The user will then be able to connect to the running server
-through their browser and take advantage of the resources provided within the
-batch job.</p>
+  <div class="section" id="authentication">
+<span id="id1"></span><h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
+<p>Below are tutorials and directions on configuring OnDemand with different types
+of authentication.</p>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Quick Start Guide</span></p>
+<p class="caption"><span class="caption-text">Authentication Options</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/copy-app.html">2. Copy Jupyter App</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/copy-app.html#steps-to-copy">2.1. Steps to Copy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/copy-app.html#verify-it-works">2.2. Verify it Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1. Install Keycloak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">2. Configure Keycloak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">4. Add Custom Theme</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/customize-attributes.html">3. Customize Attributes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/customize-attributes.html#modify-form-file">3.1. Modify Form File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/customize-attributes.html#verify-it-works">3.2. Verify it Works</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html">4. Modify Submit Parameters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#modify-submit-file">4.1. Modify Submit File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#verify-it-works">4.2. Verify it Works</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/deploy.html">5. Deploy Jupyter App</a></li>
 </ul>
 </div>
 </div>
@@ -236,10 +214,10 @@ batch job.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="add-jupyter/software-requirements.html" class="btn btn-neutral float-right" title="1. Software Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="authentication/tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral float-right" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="app-development/tutorial-ps-to-quota.html" class="btn btn-neutral" title="Tutorial: Creating a status app" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install-ihpc-apps.html" class="btn btn-neutral" title="Install Other Interactive Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
