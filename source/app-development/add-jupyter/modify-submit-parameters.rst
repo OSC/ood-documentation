@@ -151,6 +151,85 @@ For Torque, you can choose processors-per-node with:
    returned from web form for "Number of nodes". We check if it is blank and
    return a valid number (since it wouldn't make sense to return ``0``).
 
+PBS Professional
+````````````````
+
+For most cases of PBS Professional you will want to modify how the
+``bc_num_slots`` (number of CPUs on a single node) is submitted to the batch
+server.
+
+This can be specified as such:
+
+.. code-block:: yaml
+
+   # submit.yml.erb
+   ---
+
+   batch_connect
+     template: "basic"
+
+   script:
+     native: [ "-l", "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>" ]
+
+where we define the :command:`qsub` parameters as an array under ``script`` and
+``native``.
+
+If you would like to mimic how Torque handles ``bc_num_slots`` (number of
+**nodes**), then we will first need to change the form label of
+``bc_num_slots`` that the user sees in the form. This can be done by adding to
+the form configuration file the following option:
+
+.. code-block:: yaml
+
+   # form.yml
+   ---
+
+   ...
+   attributes:
+
+     ...
+
+     bc_num_slots:
+       label: "Number of nodes"
+
+   ...
+
+Now when we go to the Jupyter app form in our browser it will have the new
+label "Number of nodes" instead of "Number of CPUs on a single node".
+
+Next we will need to handle how we submit the ``bc_num_slots`` since it means
+something different now. So we modify the job submission configuration file as
+such:
+
+.. code-block:: yaml
+
+   # submit.yml.erb
+   ---
+
+   batch_connect
+     template: "basic"
+
+   script:
+     native: [ "-l", "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28" ]
+
+where you replace ``ncpus=28`` with the correct number for your cluster.
+
+You can also append ``mem=...gb`` to the ``select=...`` statement if you'd
+like.
+
+.. note::
+
+   The ``native`` attribute is an array of command line arguments. So the above
+   example is equivalent to appending to :command:`qsub`:
+
+   .. code-block:: sh
+
+      qsub ... -l select=<bc_num_slots>:ncpus=28
+
+   The ``bc_num_slots`` shown above located within the ERB syntax is the value
+   returned from web form for "Number of nodes". We check if it is blank and
+   return a valid number (since it wouldn't make sense to return ``0``).
+
 Other
 `````
 
