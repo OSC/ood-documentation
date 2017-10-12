@@ -133,8 +133,9 @@ TODO
 PBS Professional
 ----------------
 
-For most cases of Slurm you will want to modify how the ``bc_num_slots``
-(number of CPUs on a single node) is submitted to the batch server.
+For most cases of PBS Professional you will want to modify how the
+``bc_num_slots`` (number of CPUs on a single node) is submitted to the batch
+server.
 
 This can be handled in your custom job submission configuration file as such:
 
