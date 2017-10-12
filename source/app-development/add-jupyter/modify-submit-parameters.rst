@@ -63,6 +63,7 @@ http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initiali
 But in most cases you will want to change the actual job submission parameters (e.g., node type). These are defined under the ``script`` option as:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -98,6 +99,7 @@ Slurm
 For Slurm, you can choose the features on a requested node with:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -130,6 +132,7 @@ Torque
 For Torque, you can choose processors-per-node with:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -161,6 +164,7 @@ server.
 This can be specified as such:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -177,22 +181,31 @@ where we define the :command:`qsub` parameters as an array under ``script`` and
 If you would like to mimic how Torque handles ``bc_num_slots`` (number of
 **nodes**), then we will first need to change the form label of
 ``bc_num_slots`` that the user sees in the form. This can be done by adding to
-the form configuration file the following option:
+the form configuration file the highlighted lines:
 
 .. code-block:: yaml
+   :emphasize-lines: 9-10
 
    # form.yml
    ---
+   cluster: "cluster1"
 
-   ...
    attributes:
-
-     ...
-
+     modules: "python"
+     conda_extensions: "1"
+     extra_jupyter_args: ""
      bc_num_slots:
        label: "Number of nodes"
 
-   ...
+   form:
+     - modules
+     - conda_extensions
+     - extra_jupyter_args
+     - bc_num_hours
+     - bc_num_slots
+     - bc_account
+     - bc_queue
+     - bc_email_on_started
 
 Now when we go to the Jupyter app form in our browser it will have the new
 label "Number of nodes" instead of "Number of CPUs on a single node".
@@ -202,6 +215,7 @@ something different now. So we modify the job submission configuration file as
 such:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
