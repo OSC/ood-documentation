@@ -3,7 +3,7 @@
 Copy Jupyter App
 ================
 
-We will hit the ground running by first copying over a pre-built example Jupyter app.
+We will begin by first copying over a pre-built example Jupyter app.
 
 .. warning::
 
