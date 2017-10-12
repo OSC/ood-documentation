@@ -63,6 +63,7 @@ http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initiali
 But in most cases you will want to change the actual job submission parameters (e.g., node type). These are defined under the ``script`` option as:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -98,6 +99,7 @@ Slurm
 For Slurm, you can choose the features on a requested node with:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -130,6 +132,7 @@ Torque
 For Torque, you can choose processors-per-node with:
 
 .. code-block:: yaml
+   :emphasize-lines: 7-
 
    # submit.yml.erb
    ---
@@ -146,6 +149,96 @@ For Torque, you can choose processors-per-node with:
 
    See http://www.rubydoc.info/gems/pbs/PBS%2FBatch:submit_script for more
    information on possible values for the ``native`` attribute.
+
+   The ``bc_num_slots`` shown above located within the ERB syntax is the value
+   returned from web form for "Number of nodes". We check if it is blank and
+   return a valid number (since it wouldn't make sense to return ``0``).
+
+PBS Professional
+````````````````
+
+For most cases of PBS Professional you will want to modify how the
+``bc_num_slots`` (number of CPUs on a single node) is submitted to the batch
+server.
+
+This can be specified as such:
+
+.. code-block:: yaml
+   :emphasize-lines: 7-
+
+   # submit.yml.erb
+   ---
+
+   batch_connect
+     template: "basic"
+
+   script:
+     native: [ "-l", "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>" ]
+
+where we define the :command:`qsub` parameters as an array under ``script`` and
+``native``.
+
+If you would like to mimic how Torque handles ``bc_num_slots`` (number of
+**nodes**), then we will first need to change the form label of
+``bc_num_slots`` that the user sees in the form. This can be done by adding to
+the form configuration file the highlighted lines:
+
+.. code-block:: yaml
+   :emphasize-lines: 9-10
+
+   # form.yml
+   ---
+   cluster: "cluster1"
+
+   attributes:
+     modules: "python"
+     conda_extensions: "1"
+     extra_jupyter_args: ""
+     bc_num_slots:
+       label: "Number of nodes"
+
+   form:
+     - modules
+     - conda_extensions
+     - extra_jupyter_args
+     - bc_num_hours
+     - bc_num_slots
+     - bc_account
+     - bc_queue
+     - bc_email_on_started
+
+Now when we go to the Jupyter app form in our browser it will have the new
+label "Number of nodes" instead of "Number of CPUs on a single node".
+
+Next we will need to handle how we submit the ``bc_num_slots`` since it means
+something different now. So we modify the job submission configuration file as
+such:
+
+.. code-block:: yaml
+   :emphasize-lines: 7-
+
+   # submit.yml.erb
+   ---
+
+   batch_connect
+     template: "basic"
+
+   script:
+     native: [ "-l", "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28" ]
+
+where you replace ``ncpus=28`` with the correct number for your cluster.
+
+You can also append ``mem=...gb`` to the ``select=...`` statement if you'd
+like.
+
+.. note::
+
+   The ``native`` attribute is an array of command line arguments. So the above
+   example is equivalent to appending to :command:`qsub`:
+
+   .. code-block:: sh
+
+      qsub ... -l select=<bc_num_slots>:ncpus=28
 
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and
