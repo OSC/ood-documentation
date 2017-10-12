@@ -207,7 +207,17 @@
             
   <div class="section" id="copy-jupyter-app">
 <span id="app-development-add-jupyter-copy-app"></span><h1>2. Copy Jupyter App<a class="headerlink" href="#copy-jupyter-app" title="Permalink to this headline">¶</a></h1>
-<p>We will begin by copying a pre-built Jupyter app to hit the ground running.</p>
+<p>We will hit the ground running by first copying over a pre-built example Jupyter app.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This example Jupyter app will not work out of the box and requires each
+center to develop and maintain it themselves. The goal of this tutorial is
+to:</p>
+<ul class="last simple">
+<li>get a working Jupyter app running at your center</li>
+<li>introduce you to app development and make you an Interactive App developer</li>
+</ul>
+</div>
 <div class="section" id="steps-to-copy">
 <h2>2.1. Steps to Copy<a class="headerlink" href="#steps-to-copy" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
@@ -218,6 +228,51 @@ mkdir -p ~/ondemand/dev
 <span class="c1"># Change our working directory</span>
 <span class="nb">cd</span> ~/ondemand/dev
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Open OnDemand looks for apps in <em>special</em> directories on the file system.
+Two types of apps in particular are <strong>system</strong> apps and <strong>sandbox</strong> apps.</p>
+<dl class="last docutils">
+<dt>system apps</dt>
+<dd><p class="first">These are apps that all users have access to and appear in the
+Dashboard dropdown menus. They are installed on the local disk with
+very permissive file permissions.</p>
+<p>Located on the file system under:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This system app can be accessed by navigating in your browser to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If this is a system Interactive App (Dashboard plugin), then it can be
+accessed by navigating to:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">sys</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
+</pre></div>
+</div>
+</dd>
+<dt>sandbox apps</dt>
+<dd><p class="first">These are apps that <strong>only</strong> the owner of the app can access
+irrespective of file permissions. Typically you develop apps in your
+sandbox before moving them to the production system location.</p>
+<p>Located on the file system under:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/&lt;app_directory&gt;
+</pre></div>
+</div>
+<p>Can be accessed by navigating in your browser to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">dev</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that we just replaced <code class="docutils literal"><span class="pre">sys</span></code> with <code class="docutils literal"><span class="pre">dev</span></code> in the URL when going
+from system app to sandbox app.</p>
+<p>If this is a sandbox Interactive App (Dashboard plugin), then it can be
+accessed by navigating to:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">dev</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </div>
 </li>
 <li><p class="first">Download our example Jupyter app using <a class="reference external" href="https://git-scm.com/">git</a>:</p>
@@ -234,6 +289,10 @@ mkdir -p ~/ondemand/dev
 <div class="highlight-sh"><div class="highlight"><pre><span></span>rm -fr .git
 </pre></div>
 </div>
+</li>
+<li><p class="first">Unlike system apps you do <strong>not</strong> need to install this app to another
+directory. As it is already in the <em>special</em> sandbox directory the app is
+already accessible from your browser.</p>
 </li>
 </ol>
 <div class="admonition note">
@@ -258,6 +317,18 @@ server in your browser:</p>
 <div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/dashboard/batch_connect/dev/jupyter_app/session_contexts/new</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.my_center.edu</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>By default all browsers send <code class="docutils literal"><span class="pre">GET</span></code> requests when navigating to a URL. The
+above block can be accessed simply by navigating to the following URL in
+your browser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">jupyter_app</span><span class="o">/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
+</pre></div>
+</div>
+<p>Where you replace <code class="docutils literal"><span class="pre">ondemand.my_center.edu</span></code> with your domain.</p>
+<p class="last"><em>Keep this link handy as you will want to access it everytime you make
+changes to the app code to test your changes.</em></p>
 </div>
 <p>Notice that we have <code class="docutils literal"><span class="pre">dev/jupyter_app</span></code> in the above URL. This tells the
 Dashboard app (which is responsible for launching these Batch Connect plugins)
