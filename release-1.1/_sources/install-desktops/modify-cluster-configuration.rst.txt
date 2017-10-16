@@ -24,12 +24,12 @@ copies of TurboVNC and websockify:
      batch_connect:
        basic:
          script_wrapper: |
-           module restore
+           module purge
            %s
        vnc:
          script_wrapper: |
-           module restore
-           module load turbovnc/2.1.0
+           module purge
+           export PATH="/usr/local/turbovnc/bin:$PATH"
            export WEBSOCKIFY_CMD="/usr/local/websockify/run"
            %s
 
@@ -39,7 +39,7 @@ to add global settings for both a ``basic`` interactive web server as well as a
 
 In the above case we modify the global setting ``script_wrapper`` for both
 ``basic`` and ``vnc`` sessions. This allows us to supply Bash code that wraps
-around the body of the template script (specified by ``%s``). First, we restore
+around the body of the template script (specified by ``%s``). First, we purge
 the module environment to remove any conflicting modules that may have been
 loaded by the user's ``.bashrc`` or ``.bash_profile`` files. Then we specify
 the required environment needed by the ``vnc`` script to launch websockify and
@@ -53,8 +53,8 @@ TurboVNC.
    .. code-block:: yaml
 
       script_wrapper: |
-        module restore
-        module load turbovnc/2.1.0
+        module purge
+        export PATH="/usr/local/turbovnc/bin:$PATH"
         export WEBSOCKIFY_CMD="/usr/local/websockify/run"
         %s
 
