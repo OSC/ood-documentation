@@ -212,12 +212,12 @@ copies of TurboVNC and websockify:</p>
   <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
       <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">module restore</span>
+        <span class="no">module purge</span>
         <span class="no">%s</span>
     <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
       <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">module restore</span>
-        <span class="no">module load turbovnc/2.1.0</span>
+        <span class="no">module purge</span>
+        <span class="no">export PATH=&quot;/usr/local/turbovnc/bin:$PATH&quot;</span>
         <span class="no">export WEBSOCKIFY_CMD=&quot;/usr/local/websockify/run&quot;</span>
         <span class="no">%s</span>
 </pre></div>
@@ -227,7 +227,7 @@ to add global settings for both a <code class="docutils literal"><span class="pr
 <code class="docutils literal"><span class="pre">vnc</span></code> interactive web server.</p>
 <p>In the above case we modify the global setting <code class="docutils literal"><span class="pre">script_wrapper</span></code> for both
 <code class="docutils literal"><span class="pre">basic</span></code> and <code class="docutils literal"><span class="pre">vnc</span></code> sessions. This allows us to supply Bash code that wraps
-around the body of the template script (specified by <code class="docutils literal"><span class="pre">%s</span></code>). First, we restore
+around the body of the template script (specified by <code class="docutils literal"><span class="pre">%s</span></code>). First, we purge
 the module environment to remove any conflicting modules that may have been
 loaded by the user’s <code class="docutils literal"><span class="pre">.bashrc</span></code> or <code class="docutils literal"><span class="pre">.bash_profile</span></code> files. Then we specify
 the required environment needed by the <code class="docutils literal"><span class="pre">vnc</span></code> script to launch websockify and
@@ -237,8 +237,8 @@ TurboVNC.</p>
 <p>You will most likely need to replace the block of code below in your cluster
 configuration file:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-  <span class="no">module restore</span>
-  <span class="no">module load turbovnc/2.1.0</span>
+  <span class="no">module purge</span>
+  <span class="no">export PATH=&quot;/usr/local/turbovnc/bin:$PATH&quot;</span>
   <span class="no">export WEBSOCKIFY_CMD=&quot;/usr/local/websockify/run&quot;</span>
   <span class="no">%s</span>
 </pre></div>

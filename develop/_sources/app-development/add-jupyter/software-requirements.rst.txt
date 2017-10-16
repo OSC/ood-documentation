@@ -21,7 +21,7 @@ node:
 
   .. code-block:: shell
 
-     module restore
+     module purge
      module load python/3
 
 .. warning::

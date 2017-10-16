@@ -242,9 +242,9 @@ may look like:
 
    #!/bin/bash -l
 
-   # Restore the module environment to avoid conflicts with user-specified
+   # Purge the module environment to avoid conflicts with user-specified
    # initialization files
-   module restore
+   module purge
 
    # Load the Python module
    module load python
