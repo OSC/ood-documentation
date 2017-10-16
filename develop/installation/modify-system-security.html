@@ -202,18 +202,24 @@
   <div class="section" id="modify-system-security">
 <span id="id1"></span><h1>2. Modify System Security<a class="headerlink" href="#modify-system-security" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic">
-<li><p class="first">Disable SELinux.</p>
+<li><p class="first">Disable <a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">SELinux</a> on the Open OnDemand host you intend on running the web
+server on.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can read more about modifying SELinux at
-<a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">https://wiki.centos.org/HowTos/SELinux</a></p>
+<p class="last">If SELinux is not disabled on the web server host machine this can lead
+to permission errors when running the web applications. SELinux may also
+need to be disabled on the web server if you want to take advantage of
+certain software in your web applications such as being able to access a
+Lustre file system.</p>
 </div>
 </li>
-<li><p class="first">Open ports 80 and 443 in the firewall.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can read more about modifying the firewall rules with
-<strong class="command">iptables</strong> at <a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">https://wiki.centos.org/HowTos/Network/IPTables</a></p>
+<li><p class="first">Open ports 80 (http) and 443 (https) in the firewall, typically done with
+<a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">iptables</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If using <strong>RHEL 7</strong> you will need to either use the newer <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_firewalls">firewalld</a>
+daemon and modify the firewall settings or disable it and install
+<a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">iptables</a>.</p>
 </div>
 </li>
 </ol>
