@@ -383,7 +383,7 @@ doc_context = {
     'ood_portal_generator_version':  '0.4.0',
     'mod_ood_proxy_version':         '0.3.1',
     'ood_auth_map_version':          '0.0.3',
-    'nginx_stage_version':           '0.2.1',
+    'nginx_stage_version':           '0.3.0',
     'ood_apps_installer_version':    '1.1.0',
     'dashboard_version':             '1.17.0',
     'shell_version':                 '1.2.3',
