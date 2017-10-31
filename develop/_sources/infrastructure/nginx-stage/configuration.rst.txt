@@ -528,6 +528,24 @@ Configuration Options
       Modifying this configuration option can lead to unintended consequences
       for web apps such as issues with serving their assets.
 
+.. describe:: user_regex (String)
+
+   regular expression used to validate a given user name
+
+   Default
+     Username can consist of any characters typically found in an email address
+
+     .. code-block:: yaml
+
+        user_regex: '[\w@\.\-]+'
+
+   Example
+     Restrict user name to just alphanumeric characters
+
+     .. code-block:: yaml
+
+        user_regex: '\w+'
+
 .. describe:: min_uid (Integer)
 
    the minimum user id required to start a per-user NGINX process as
