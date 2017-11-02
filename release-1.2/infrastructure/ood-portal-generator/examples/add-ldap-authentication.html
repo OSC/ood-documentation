@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Add LDAP Authentication &mdash; Open OnDemand 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Examples" href="../examples.html"/>
+        <link rel="next" title="Add Shibboleth Authentication" href="add-shibboleth-authentication.html"/>
+        <link rel="prev" title="Default Authentication" href="default-authentication.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../infrastructure.html">Infrastructure</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../ood-portal-generator.html">ood-portal-generator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="add-google-analytics.html">Add Google Analytics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-ssl-support.html">Add SSL Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="default-authentication.html">Default Authentication</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Add LDAP Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-shibboleth-authentication.html">Add Shibboleth Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-cilogon-authentication.html">Add CILogon Authentication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../mod-ood-proxy.html">mod_ood_proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ood-auth-map.html">ood_auth_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nginx-stage.html">nginx_stage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../infrastructure.html">Infrastructure</a> &raquo;</li>
+        
+          <li><a href="../../ood-portal-generator.html">ood-portal-generator</a> &raquo;</li>
+        
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+        
+      <li>Add LDAP Authentication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/infrastructure/ood-portal-generator/examples/add-ldap-authentication.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="add-ldap-authentication">
+<span id="id1"></span><h1>Add LDAP Authentication<a class="headerlink" href="#add-ldap-authentication" title="Permalink to this headline">¶</a></h1>
+<p>The following prerequisites need to be satisfied:</p>
+<ul class="simple">
+<li>An LDAP server, e.g., <code class="docutils literal"><span class="pre">ldap.my-center.edu</span></code></li>
+<li>NSS configured on the OnDemand Server to look up users via LDAP</li>
+<li>The <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html">mod_authnz_ldap</a> Apache module installed</li>
+</ul>
+<p>Then you can modify your <strong class="program">ood-portal-generator</strong> configuration file as
+such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthBasicProvider</span><span class="nv"> </span><span class="s">ldap&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthLDAPURL</span><span class="nv"> </span><span class="s">\&quot;ldaps://ldap.my-center.edu:636/ou=People,ou=hpc\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">RequestHeader</span></code> setting is used to strip private session
+information from being sent to the backend web servers.</p>
+<p>Each array item is treated as a line in the Apache configuration file. You can
+add more Apache <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html">LDAP directives</a> as separate array items.</p>
+<p>Build the Apache configuration file and install it.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="add-shibboleth-authentication.html" class="btn btn-neutral float-right" title="Add Shibboleth Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="default-authentication.html" class="btn btn-neutral" title="Default Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

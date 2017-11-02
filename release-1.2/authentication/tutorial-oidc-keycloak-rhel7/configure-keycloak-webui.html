@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Configure Keycloak &mdash; Open OnDemand 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/>
+        <link rel="next" title="3. Configure OnDemand to authenticate with Keycloak" href="install_mod_auth_openidc.html"/>
+        <link rel="prev" title="1. Install Keycloak" href="install-keycloak.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="install-keycloak.html">1. Install Keycloak</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Configure Keycloak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#add-a-new-realm">2.1. Add a new realm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-ldap">2.2. Configure LDAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-oidc-client-template">2.3. Add OIDC client template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-ondemand-as-a-client">2.4. Add OnDemand as a client</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../authentication.html">Authentication</a> &raquo;</li>
+        
+          <li><a href="../tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
+        
+      <li>2. Configure Keycloak</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configure-keycloak">
+<span id="authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui"></span><h1>2. Configure Keycloak<a class="headerlink" href="#configure-keycloak" title="Permalink to this headline">¶</a></h1>
+<p>We will now use Keycloak’s admin Web UI to setup LDAP and add OnDemand as an
+OIDC client that will authenticate with Keycloak.</p>
+<div class="section" id="add-a-new-realm">
+<h2>2.1. Add a new realm<a class="headerlink" href="#add-a-new-realm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Log into <a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a> as the admin user</li>
+<li>Hover over “Master” on left and click “Add Realm”</li>
+<li>Type in name “ondemand” and click “Save”. The new realm is loaded.</li>
+<li>Click Login tab, then adjust parameters:<ol class="arabic">
+<li>Remember Me: ON</li>
+<li>Login with email: OFF</li>
+</ol>
+</li>
+<li>Click Save.</li>
+</ol>
+</div>
+<div class="section" id="configure-ldap">
+<h2>2.2. Configure LDAP<a class="headerlink" href="#configure-ldap" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Choose User Federation on the left (verify ondemand realm is current realm)</li>
+<li>Select “ldap” for provider<ol class="arabic">
+<li>Import Users set to OFF</li>
+<li>Edit Mode set to READ_ONLY</li>
+<li>Vendor set to other – for OpenLDAP</li>
+<li>User Object Classes set to posixAccount – OSC specific and odd</li>
+<li>Connection URL: ldaps://openldap1.infra.osc.edu:636 ldaps://openldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1</li>
+<li>User DN: ou=People,ou=hpc,o=osc</li>
+<li>Auth Type: simple – OSC specific as we allow anonymous binds</li>
+<li>Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs</li>
+</ol>
+</li>
+<li>Save</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These LDAP settings are what we set for OSC. Your configuration may vary from
+this. If you run into any problems, please let us know so that once a
+solution is reached we can document those problem areas here. Contact us on
+the OOD Mailing List at <a class="reference external" href="https://lists.osu.edu/mailman/listinfo/ood-users">https://lists.osu.edu/mailman/listinfo/ood-users</a>.</p>
+</div>
+</div>
+<div class="section" id="add-oidc-client-template">
+<h2>2.3. Add OIDC client template<a class="headerlink" href="#add-oidc-client-template" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Choose Client Templates</li>
+<li>Click Create (upper right corner)<ol class="arabic">
+<li>Name: ondemand-clients</li>
+<li>Protocol: openid-connect</li>
+<li>Click Save</li>
+<li>Mappers tab</li>
+<li>Click Add Builtin</li>
+<li>Check box the following: username, email, given name, family name, full name</li>
+<li>Click Add Selected</li>
+<li>Click Scope tab</li>
+<li>Set Full Scope Allowed to ON</li>
+</ol>
+</li>
+<li>Verify Mappers &gt;&gt; username has “Token Claim Name” with value <code class="docutils literal"><span class="pre">preferred_username</span></code>.
+This means that when the user logs to OnDemand, the <code class="docutils literal"><span class="pre">preferred_username</span></code> claim will
+contain the username of the user. We will use this when deciding what system user to map
+a request to.</li>
+</ol>
+</div>
+<div class="section" id="add-ondemand-as-a-client">
+<h2>2.4. Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Choose Clients, then click Create in top right corner<ol class="arabic">
+<li>Client ID: webdev07.hpc.osc.edu</li>
+<li>Client Protocol: openid-connect</li>
+<li>Client Template: ondemand-clients</li>
+<li>Save (leave Root URL blank)</li>
+</ol>
+</li>
+<li>Then edit Settings for the newly created client:<ol class="arabic">
+<li>Access Type: confidential</li>
+<li>Direct Access Grants Enabled: off</li>
+<li>Valid Redirect URIs: Press the <code class="docutils literal"><span class="pre">+</span></code> button to the right of the URI field so you can insert two URLs:<ol class="arabic">
+<li><code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu/oidc</span></code></li>
+<li><code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu</span></code></li>
+</ol>
+</li>
+<li>Scroll to bottom and click “Save”</li>
+</ol>
+</li>
+<li>Finally, get the client secret to use with OnDemand installation:<ol class="arabic">
+<li>Select the “Installation” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; webdev07.hpc.osc.edu”</li>
+<li>Select Format Option: Keycloak OIDC JSON</li>
+<li>The “secret” string will be in the credentials section. Copy that for future use in this tutorial (and keep it secure).</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install_mod_auth_openidc.html" class="btn btn-neutral float-right" title="3. Configure OnDemand to authenticate with Keycloak" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-keycloak.html" class="btn btn-neutral" title="1. Install Keycloak" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

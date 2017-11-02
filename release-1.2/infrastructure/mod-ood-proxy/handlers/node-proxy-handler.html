@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>node_proxy_handler &mdash; Open OnDemand 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Usage" href="../usage.html"/>
+        <link rel="next" title="analytics_handler" href="analytics-handler.html"/>
+        <link rel="prev" title="pun_proxy_handler" href="pun-proxy-handler.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../infrastructure.html">Infrastructure</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ood-portal-generator.html">ood-portal-generator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../mod-ood-proxy.html">mod_ood_proxy</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nginx-handler.html">nginx_handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pun-proxy-handler.html">pun_proxy_handler</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">node_proxy_handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analytics-handler.html">analytics_handler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ood-auth-map.html">ood_auth_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nginx-stage.html">nginx_stage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../infrastructure.html">Infrastructure</a> &raquo;</li>
+        
+          <li><a href="../../mod-ood-proxy.html">mod_ood_proxy</a> &raquo;</li>
+        
+          <li><a href="../usage.html">Usage</a> &raquo;</li>
+        
+      <li>node_proxy_handler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/infrastructure/mod-ood-proxy/handlers/node-proxy-handler.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="node-proxy-handler">
+<span id="id1"></span><h1>node_proxy_handler<a class="headerlink" href="#node-proxy-handler" title="Permalink to this headline">¶</a></h1>
+<p>This handler proxies an authenticated user’s traffic to a backend node running
+a web server through an IP socket. A typical request follows the following
+format:</p>
+<dl class="get">
+<dt id="get-(base_uri)-(host)-(port)-...">
+<code class="descname">GET </code><code class="descname"></code><span class="sig-paren">(</span><em>base_uri</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em>host</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><code class="descname">/...</code><a class="headerlink" href="#get-(base_uri)-(host)-(port)-..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Proxies traffic to the web server running on <code class="docutils literal"><span class="pre">host</span></code> and <code class="docutils literal"><span class="pre">port</span></code>.</p>
+</dd></dl>
+
+<p>The actual URI request path can be altered depending on how you define this
+handler in the Apache configuration file. There are two possibilities:</p>
+<ol class="arabic">
+<li><p class="first">To proxy the full URI request path to the web server you would define a
+<code class="docutils literal"><span class="pre">LocationMatch</span></code> container in the Apache configuration file as such:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;LocationMatch ^/node/(?&lt;host&gt;[^]+)/(?&lt;port&gt;\d+)&gt;
+  ...
+
+  LuaHookFixups node_proxy.lua node_proxy_handler
+&lt;/LocationMatch&gt;
+</pre></div>
+</div>
+<p>This will take the following request:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/node/host001.hpc.edu/5000/index.html</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.hpc.edu</span>
+</pre></div>
+</div>
+<p>and generate a request to the backend web server as:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/node/host001.hpc.edu/5000/index.html</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">host001.hpc.edu</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The backend web server must be dynamically configured to handle requests
+with the host and port in the URI request path. It will never receive
+requests at the root URI (e.g., <code class="docutils literal"><span class="pre">/index.html</span></code>)</p>
+</div>
+</li>
+<li><p class="first">To proxy <strong>only</strong> the relevant portion of the URI request path to the web
+server you would define a <code class="docutils literal"><span class="pre">LocationMatch</span></code> container in the Apache
+configuration file as such:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">LocationMatch</span> <span class="s2">&quot;^/rnode/(?&lt;host&gt;[^]+)/(?&lt;port&gt;\d+)(?&lt;uri&gt;/.*|)&quot;</span><span class="o">&gt;</span>
+  <span class="o">...</span>
+
+  <span class="n">LuaHookFixups</span> <span class="n">node_proxy</span><span class="o">.</span><span class="n">lua</span> <span class="n">node_proxy_handler</span>
+<span class="o">&lt;/</span><span class="n">LocationMatch</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note the inclusion of the regular expression named group <code class="docutils literal"><span class="pre">uri</span></code>. This is
+what is sent in the URI request path to the backend web server. So a request
+to:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/rnode/host001.hpc.edu/5000/index.html</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.hpc.edu</span>
+</pre></div>
+</div>
+<p>will generate a request to the backend web server as:</p>
+<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/index.html</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">host001.hpc.edu</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The backend web server must be configured so that all assets and links
+must be relative links. An absolute link to <code class="docutils literal"><span class="pre">/assets/stylesheet.css</span></code>
+will break because the frontend proxy cannot handle this request.</p>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>For added security it is <strong>recommended</strong> that you replace the above <code class="docutils literal"><span class="pre">host</span></code>
+regular expression named group with a more secure regular expression. For
+example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">LocationMatch</span> <span class="s2">&quot;^/node/(?&lt;host&gt;[\w.-]+\.hpc\.edu)/(?&lt;port&gt;\d+)&quot;</span><span class="o">&gt;</span>
+  <span class="o">...</span>
+
+  <span class="n">LuaHookFixups</span> <span class="n">node_proxy</span><span class="o">.</span><span class="n">lua</span> <span class="n">node_proxy_handler</span>
+<span class="o">&lt;/</span><span class="n">LocationMatch</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p class="last">This will only allow proxying to backend web servers within your internal
+network.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configuration is handled by setting CGI environment variables within the Apache
+configuration file with the following format:</p>
+<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> ARG_FOR_LUA <span class="s2">&quot;value of argument&quot;</span>
+</pre></div>
+</div>
+<dl class="envvar">
+<dt id="envvar-OOD_USER_MAP_CMD">
+<code class="descname">OOD_USER_MAP_CMD</code><a class="headerlink" href="#envvar-OOD_USER_MAP_CMD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absolute path to the script that maps the authenticated user name to the
+local user name. See <a class="reference internal" href="../../ood-auth-map.html#ood-auth-map"><span class="std std-ref">ood_auth_map</span></a>.</p>
+</dd></dl>
+
+<dl class="envvar">
+<dt id="envvar-OOD_USER_ENV">
+<code class="descname">OOD_USER_ENV</code><a class="headerlink" href="#envvar-OOD_USER_ENV" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Optional</em></p>
+<p>Points to the CGI environment variable that stores the authenticated user
+name if different than <code class="docutils literal"><span class="pre">REMOTE_USER</span></code>.</p>
+</dd></dl>
+
+<dl class="envvar">
+<dt id="envvar-OOD_MAP_FAIL_URI">
+<code class="descname">OOD_MAP_FAIL_URI</code><a class="headerlink" href="#envvar-OOD_MAP_FAIL_URI" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Optional</em></p>
+<p>URL the user redirected to if we fail to map the authenticated user name to
+a local user name. If not specified then return an error message to the
+user.</p>
+</dd></dl>
+
+<dl class="envvar">
+<dt id="envvar-MATCH_HOST">
+<code class="descname">MATCH_HOST</code><a class="headerlink" href="#envvar-MATCH_HOST" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is typically set within an Apache <code class="docutils literal"><span class="pre">LocationMatch</span></code> container using the
+regular express named group <code class="docutils literal"><span class="pre">host</span></code>. This corresponds to the host address
+that the user’s traffic is proxied to.</p>
+</dd></dl>
+
+<dl class="envvar">
+<dt id="envvar-MATCH_PORT">
+<code class="descname">MATCH_PORT</code><a class="headerlink" href="#envvar-MATCH_PORT" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is typically set within an Apache <code class="docutils literal"><span class="pre">LocationMatch</span></code> container using the
+regular express named group <code class="docutils literal"><span class="pre">port</span></code>. This corresponds to the port number
+that the user’s traffic is proxied to.</p>
+</dd></dl>
+
+<dl class="envvar">
+<dt id="envvar-MATCH_URI">
+<code class="descname">MATCH_URI</code><a class="headerlink" href="#envvar-MATCH_URI" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Optional</em></p>
+<p>This is typically set within an Apache <code class="docutils literal"><span class="pre">LocationMatch</span></code> container using the
+regular express named group <code class="docutils literal"><span class="pre">uri</span></code>. This is the URI request path passed to
+the backend web server. If this is not specified then the full original URI
+request path is passed instead.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="analytics-handler.html" class="btn btn-neutral float-right" title="analytics_handler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pun-proxy-handler.html" class="btn btn-neutral" title="pun_proxy_handler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
