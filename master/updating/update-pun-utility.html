@@ -236,24 +236,16 @@ scl <span class="nb">enable</span> git19 -- git checkout v0.2.1
 <span class="c1"># =&gt; cp ...</span>
 </pre></div>
 </div>
-<div class="admonition danger">
-<p class="first admonition-title">Danger</p>
-<p>Previous versions kept the <a class="reference internal" href="../infrastructure/nginx-stage.html#nginx-stage"><span class="std std-ref">nginx_stage</span></a> YAML configuration file
-underneath the installation path:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This will not override your previous configuration file located at:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
-<p>This is not ideal, so for <strong>ALL</strong> future versions the YAML configuration
-will need to be moved to:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+<p>as well as the ruby binstub/wrapper script located at:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ood_ruby</span>
 </pre></div>
 </div>
-<p>If you have a custom configuration file you will <strong>NEED</strong> to move this:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mv /opt/ood/nginx_stage/config/nginx_stage.yml /etc/ood/config/nginx_stage.yml
-</pre></div>
-</div>
-<p class="last">This is a one-time operation and will not need to be performed again
-after this.</p>
 </div>
 </li>
 <li><p class="first">Clean up app configuration files that point to nonexistant apps:</p>
