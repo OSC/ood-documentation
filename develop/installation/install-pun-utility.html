@@ -263,6 +263,18 @@ this, generate the file <code class="docutils literal"><span class="pre">/etc/cr
 </div>
 <p>This will clean up inactive PUNs every two hours.</p>
 </li>
+<li><p class="first">Stage the NGINX configuration files for the system web applications:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/lib/nginx/config/apps/sys
+sudo touch /var/lib/nginx/config/apps/sys/dashboard.conf
+sudo touch /var/lib/nginx/config/apps/sys/shell.conf
+sudo touch /var/lib/nginx/config/apps/sys/files.conf
+sudo touch /var/lib/nginx/config/apps/sys/file-editor.conf
+sudo touch /var/lib/nginx/config/apps/sys/activejobs.conf
+sudo touch /var/lib/nginx/config/apps/sys/myjobs.conf
+sudo /opt/ood/nginx_stage/sbin/nginx_stage app_reset --sub-uri<span class="o">=</span>/pun
+</pre></div>
+</div>
+</li>
 </ol>
 </div>
 
