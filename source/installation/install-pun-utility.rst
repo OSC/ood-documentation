@@ -74,3 +74,16 @@ tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
       0 */2 * * * root [ -f /opt/ood/nginx_stage/sbin/nginx_stage  ] && /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean 1>/dev/null
 
    This will clean up inactive PUNs every two hours.
+
+#. Stage the NGINX configuration files for the system web applications:
+
+   .. code-block:: sh
+
+      sudo mkdir -p /var/lib/nginx/config/apps/sys
+      sudo touch /var/lib/nginx/config/apps/sys/dashboard.conf
+      sudo touch /var/lib/nginx/config/apps/sys/shell.conf
+      sudo touch /var/lib/nginx/config/apps/sys/files.conf
+      sudo touch /var/lib/nginx/config/apps/sys/file-editor.conf
+      sudo touch /var/lib/nginx/config/apps/sys/activejobs.conf
+      sudo touch /var/lib/nginx/config/apps/sys/myjobs.conf
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage app_reset --sub-uri=/pun
