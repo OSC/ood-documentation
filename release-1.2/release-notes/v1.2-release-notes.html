@@ -116,7 +116,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">v1.2 Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">v1.2 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-1">Upgrading from v1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
@@ -186,7 +191,115 @@
             
   <div class="section" id="v1-2-release-notes">
 <span id="id1"></span><h1>v1.2 Release Notes<a class="headerlink" href="#v1-2-release-notes" title="Permalink to this headline">¶</a></h1>
-<p>Highlights in 1.2:</p>
+<p>Some highlights of this release:</p>
+<ul class="simple">
+<li>Taking a step towards global configuration by moving the configuration file
+for <a class="reference internal" href="../infrastructure/nginx-stage.html#nginx-stage"><span class="std std-ref">nginx_stage</span></a> to <code class="docutils literal"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> (we intend on
+migrating all configuration to <code class="docutils literal"><span class="pre">/etc/ood/config</span></code> in the future).</li>
+<li>The developer interface in the Dashboard is dynamically enabled when the
+developer creates the sandbox directory <code class="docutils literal"><span class="pre">~/ondemand/dev</span></code> under their home
+directory.</li>
+<li>To make Interactive App development debugging easier the full command used
+when submitting a batch job is now logged under
+<code class="docutils literal"><span class="pre">/var/log/nginx/&lt;user&gt;/error.log</span></code> on the corresponding OnDemand node.</li>
+</ul>
+<div class="section" id="upgrading-from-v1-1">
+<h2>Upgrading from v1.1<a class="headerlink" href="#upgrading-from-v1-1" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If updating from a version other than v1.1 it is recommended you walkthrough
+the full <a class="reference internal" href="../updating.html#updating"><span class="std std-ref">Updating</span></a> instructions.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">You will first need to <a class="reference internal" href="../updating/update-pun-utility.html#update-pun-utility"><span class="std std-ref">Update the PUN Utility</span></a>.</p>
+</li>
+<li><p class="first">Confirm that you copied your custom <a class="reference internal" href="../infrastructure/nginx-stage.html#nginx-stage"><span class="std std-ref">nginx_stage</span></a> YAML configuration
+from:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>to the new global location:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Finally you will need to walkthrough <a class="reference internal" href="../updating/update-apps.html#update-apps"><span class="std std-ref">Update Applications</span></a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="infrastructure">
+<h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this headline">¶</a></h2>
+<span id="v1-2-infrastructure-versions"></span><table border="1" class="colwidths-auto docutils" id="id2">
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Infrastructure Component Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head stub">Component</th>
+<th class="head">Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-portal-generator">ood-portal-generator</a></th>
+<td><a class="reference external" href="https://github.com/OSC/ood-portal-generator/blob/v0.4.0/CHANGELOG.md">0.4.0</a></td>
+</tr>
+<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/mod_ood_proxy">mod_ood_proxy</a></th>
+<td><a class="reference external" href="https://github.com/OSC/mod_ood_proxy/blob/v0.3.1/CHANGELOG.md">0.3.1</a></td>
+</tr>
+<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood_auth_map">ood_auth_map</a></th>
+<td><a class="reference external" href="https://github.com/OSC/ood_auth_map/blob/v0.0.3/CHANGELOG.md">0.0.3</a></td>
+</tr>
+<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/nginx_stage">nginx_stage</a></th>
+<td>0.2.1 → <a class="reference external" href="https://github.com/OSC/nginx_stage/blob/v0.3.0/CHANGELOG.md">0.3.0</a>
+(<a class="reference external" href="https://github.com/OSC/nginx_stage/compare/v0.2.1...v0.3.0">diff</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#v1-2-infrastructure-versions"><span class="std std-numref">Table 6</span></a> lists the versions as well as the
+previous version it was updated from for each component that make up the
+infrastructure for this release.</p>
+</div>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<span id="v1-2-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id3">
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head stub">App</th>
+<th class="head">Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-dashboard">Dashboard App</a></th>
+<td>1.17.0 → <a class="reference external" href="://github.com/OSC/ood-dashboard/blob/v1.18.0/CHANGELOG.md">1.18.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.17.0...v1.18.0">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-shell">Shell App</a></th>
+<td>1.2.3 → <a class="reference external" href="https://github.com/OSC/ood-shell/blob/v1.2.4/CHANGELOG.md">1.2.4</a>
+(<a class="reference external" href="https://github.com/OSC/ood-shell/compare/v1.2.3...v1.2.4">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-fileexplorer">Files App</a></th>
+<td>1.3.5 → <a class="reference external" href="https://github.com/OSC/ood-fileexplorer/blob/v1.3.6/CHANGELOG.md">1.3.6</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileexplorer/compare/v1.3.5...v1.3.6">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-fileeditor">File Editor App</a></th>
+<td><a class="reference external" href="https://github.com/OSC/ood-fileeditor/blob/v1.3.1/CHANGELOG.md">1.3.1</a></td>
+</tr>
+<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-activejobs">Active Jobs App</a></th>
+<td>1.5.1 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.5.2/CHANGELOG.md">1.5.2</a>
+(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.5.1...v1.5.2">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-myjobs">Job Composer App</a></th>
+<td>2.6.0 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.6.1/CHANGELOG.md">2.6.1</a>
+(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.6.0...v2.6.1">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/bc_desktop">Desktops App</a></th>
+<td>0.1.1 → <a class="reference external" href="https://github.com/OSC/bc_desktop/blob/v0.1.2/CHANGELOG.md">0.1.2</a>
+(<a class="reference external" href="https://github.com/OSC/bc_desktop/compare/v0.1.1...v0.1.2">diff</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#v1-2-app-versions"><span class="std std-numref">Table 7</span></a> lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.</p>
+<p>All of the above apps are installed and maintained by version 1.2.0 of the
+<a class="reference external" href="https://github.com/OSC/ood-apps-installer">ood-apps-installer</a> utility.</p>
+</div>
 </div>
 
 
