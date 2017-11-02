@@ -34,12 +34,23 @@ Installation
 
          sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/nginx_stage"
 
-#. Configure the :program:`nginx_stage` installation by modifying::
+#. Configure the :program:`nginx_stage` installation by modifying the YAML
+   configuration file located at::
 
-     /opt/ood/nginx_stage/config/nginx_stage.yml
+     /etc/ood/config/nginx_stage.yml
+
+   On a fresh installation you may need to create this file or copy the default
+   file from::
+
+     /opt/ood/nginx_stage/share/nginx_stage_example.yml
 
    You can read :ref:`nginx-stage-configuration` for details on configuration
    options.
+
+   .. note::
+
+      In most cases it isn't necessary to modify the configuration file as the
+      defaults were chosen to work best with most centers.
 
 #. Confirm that the Apache proxy is running as the user ``apache``. By default
    :program:`nginx_stage` will only give permissions to the ``apache`` user to

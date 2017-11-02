@@ -42,15 +42,26 @@ Instructions to update
       # => mkdir -p /opt/ood/nginx_stage
       # => cp ...
 
-   .. note::
+   .. danger::
 
-      This will not override your previous configuration file located at::
+      Previous versions kept the :ref:`nginx-stage` YAML configuration file
+      underneath the installation path::
 
         /opt/ood/nginx_stage/config/nginx_stage.yml
 
-      as well as the ruby binstub/wrapper script located at::
+      This is not ideal, so for **ALL** future versions the YAML configuration
+      will need to be moved to::
 
-        /opt/ood/nginx_stage/bin/ood_ruby
+        /etc/ood/config/nginx_stage.yml
+
+      If you have a custom configuration file you will **NEED** to move this:
+
+      .. code-block:: sh
+
+         sudo mv /opt/ood/nginx_stage/config/nginx_stage.yml /etc/ood/config/nginx_stage.yml
+
+      This is a one-time operation and will not need to be performed again
+      after this.
 
 #. Clean up app configuration files that point to nonexistant apps:
 
