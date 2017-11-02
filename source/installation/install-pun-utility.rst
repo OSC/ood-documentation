@@ -23,9 +23,15 @@ tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
       # => mkdir -p /opt/ood/nginx_stage
       # => cp ...
 
-   This creates the :ref:`nginx-stage` config
-   ``/opt/ood/nginx_stage/config/nginx_stage.yml`` and the ruby binstub/wrapper
-   script ``/opt/ood/nginx_stage/bin/ood_ruby``.
+   Although the defaults for this tool are great, we also know there is no such
+   thing as a "one size fits all". For this we allow you to configure how the
+   :ref:`nginx-stage` tool behaves by creating and modifying a YAML
+   configuration file under::
+
+     /etc/ood/config/nginx_stage.yml
+
+   You can read :ref:`nginx-stage-configuration` for details on the available
+   configuration options.
 
    .. note::
 
