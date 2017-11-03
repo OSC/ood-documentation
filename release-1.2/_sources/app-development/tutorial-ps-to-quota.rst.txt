@@ -78,8 +78,8 @@ Files and their purpose
    * - test/test_command.rb
      - a unit test of the parsing code
    * - views/index.html
-     - the main section of the html page template using an implementation of `ERB <https://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.htm://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.html>`__
-       called `erubi <https://github.com/jeremyevans/erub://github.com/jeremyevans/erubi>`__
+     - the main section of the html page template using an implementation of `ERB <https://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.html>`__
+       called `erubi <https://github.com/jeremyevans/erubi>`__
        which auto-escapes output of ERB tags by default (for security)
    * - views/layout.html
      - the rendered HTML from views/index.html is inserted into this layout,

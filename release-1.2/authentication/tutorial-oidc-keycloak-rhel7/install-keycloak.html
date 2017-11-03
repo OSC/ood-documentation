@@ -354,7 +354,7 @@ to serve both OnDemand and Keycloak with the same host, so we can reuse the
 same SSL certificates. You may want to run Keycloak on a separate host, however.</p>
 <p>Add <code class="docutils literal"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf</span></code>, making changes
 for the appropriate SSL certificate locations. Notice we are proxying
-<a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a> to <a class="reference external" href="http://localhost:8080">http://localhost:8080</a> which is the default
+<code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> to <code class="docutils literal"><span class="pre">http://localhost:8080</span></code> which is the default
 port the Keycloak webserver runs as.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Listen</span> <span class="mi">8443</span>
 <span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">8443</span><span class="o">&gt;</span>
@@ -390,13 +390,13 @@ that you did so with port 80 and 443 for OnDemand:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">We can use the same host because Keycloak properly scopes all cookies it sets to the
 realm. For example, if I have a realm called “ondemand”, then the Keycloak login
-page will be at <a class="reference external" href="https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth">https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</a>
+page will be at <code class="docutils literal"><span class="pre">https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</span></code>
 and cookies set during authentication will be set with the path <code class="docutils literal"><span class="pre">/auth/realms/ondemand</span></code>,
 including <code class="docutils literal"><span class="pre">KEYCLOAK_SESSION</span></code>, <code class="docutils literal"><span class="pre">KEYCLOAK_STATE_CHECKER</span></code>,
 <code class="docutils literal"><span class="pre">KEYCLOAK_IDENTITY</span></code>, and <code class="docutils literal"><span class="pre">KC_RESTART</span></code>.</p>
 </div>
 </li>
-<li><p class="first">Now you should be able to access Keycloak: <a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a></p>
+<li><p class="first">Now you should be able to access Keycloak: <code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code></p>
 </li>
 </ol>
 </div>
@@ -405,7 +405,7 @@ including <code class="docutils literal"><span class="pre">KEYCLOAK_SESSION</spa
 <p>When installing Keycloak on a separate host, the difference between this
 tutorial would be:</p>
 <ol class="arabic simple">
-<li>throughout the rest of the tutorial replace “<a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a>” with the keycloak host</li>
+<li>throughout the rest of the tutorial replace <code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> with the keycloak host</li>
 <li>use a different Apache config, listening instead on 443 instead of 8443 and
 proxying that to Keycloak</li>
 <li>possibly use Apache 2.4 default distribution instead of software collections,
