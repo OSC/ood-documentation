@@ -107,7 +107,7 @@ Re-generate main config using ood-portal-generator
     * specifying that /logout should redirect to this /oidc sub-uri to handle logout
       and specifying after logout, the user should be redirected back to OnDemand
       (which in this tutorial's case is ``https%3A%2F%2Fwebdev07.hpc.osc.edu``,
-      the query param escaped format of https://webdev07.hpc.osc.edu)
+      the query param escaped format of ``https://webdev07.hpc.osc.edu``)
 
 #. Using this modified config, regenerate the Apache config, and then install it:
 

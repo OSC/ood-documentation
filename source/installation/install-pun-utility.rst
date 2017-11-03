@@ -23,9 +23,15 @@ tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
       # => mkdir -p /opt/ood/nginx_stage
       # => cp ...
 
-   This creates the :ref:`nginx-stage` config
-   ``/opt/ood/nginx_stage/config/nginx_stage.yml`` and the ruby binstub/wrapper
-   script ``/opt/ood/nginx_stage/bin/ood_ruby``.
+   Although the defaults for this tool are great, we also know there is no such
+   thing as a "one size fits all". For this we allow you to configure how the
+   :ref:`nginx-stage` tool behaves by creating and modifying a YAML
+   configuration file under::
+
+     /etc/ood/config/nginx_stage.yml
+
+   You can read :ref:`nginx-stage-configuration` for details on the available
+   configuration options.
 
    .. note::
 
@@ -68,3 +74,16 @@ tool is meant to by run by ``root`` or a user with ``sudoers`` privileges.
       0 */2 * * * root [ -f /opt/ood/nginx_stage/sbin/nginx_stage  ] && /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean 1>/dev/null
 
    This will clean up inactive PUNs every two hours.
+
+#. Stage the NGINX configuration files for the system web applications:
+
+   .. code-block:: sh
+
+      sudo mkdir -p /var/lib/nginx/config/apps/sys
+      sudo touch /var/lib/nginx/config/apps/sys/dashboard.conf
+      sudo touch /var/lib/nginx/config/apps/sys/shell.conf
+      sudo touch /var/lib/nginx/config/apps/sys/files.conf
+      sudo touch /var/lib/nginx/config/apps/sys/file-editor.conf
+      sudo touch /var/lib/nginx/config/apps/sys/activejobs.conf
+      sudo touch /var/lib/nginx/config/apps/sys/myjobs.conf
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage app_reset --sub-uri=/pun
