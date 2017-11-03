@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Install Keycloak &mdash; Open OnDemand 1.1.0 documentation</title>
+  <title>1. Install Keycloak &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -37,10 +37,10 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../index.html"/>
-        <link rel="up" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/>
+    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
+        <link rel="up" title="OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/>
         <link rel="next" title="2. Configure Keycloak" href="configure-keycloak-webui.html"/>
-        <link rel="prev" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/> 
+        <link rel="prev" title="OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                1.1
+                1.2
               </div>
             
           
@@ -103,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">1. Install Keycloak</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#initial-installation-steps">1.1. Initial Installation Steps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#start-keycloak-server">1.2. Start Keycloak Server</a></li>
@@ -132,6 +132,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
@@ -180,7 +181,7 @@
         
           <li><a href="../../authentication.html">Authentication</a> &raquo;</li>
         
-          <li><a href="../tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
+          <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
         
       <li>1. Install Keycloak</li>
     
@@ -353,7 +354,7 @@ to serve both OnDemand and Keycloak with the same host, so we can reuse the
 same SSL certificates. You may want to run Keycloak on a separate host, however.</p>
 <p>Add <code class="docutils literal"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf</span></code>, making changes
 for the appropriate SSL certificate locations. Notice we are proxying
-<a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a> to <a class="reference external" href="http://localhost:8080">http://localhost:8080</a> which is the default
+<code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> to <code class="docutils literal"><span class="pre">http://localhost:8080</span></code> which is the default
 port the Keycloak webserver runs as.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Listen</span> <span class="mi">8443</span>
 <span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">8443</span><span class="o">&gt;</span>
@@ -389,13 +390,13 @@ that you did so with port 80 and 443 for OnDemand:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">We can use the same host because Keycloak properly scopes all cookies it sets to the
 realm. For example, if I have a realm called “ondemand”, then the Keycloak login
-page will be at <a class="reference external" href="https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth">https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</a>
+page will be at <code class="docutils literal"><span class="pre">https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</span></code>
 and cookies set during authentication will be set with the path <code class="docutils literal"><span class="pre">/auth/realms/ondemand</span></code>,
 including <code class="docutils literal"><span class="pre">KEYCLOAK_SESSION</span></code>, <code class="docutils literal"><span class="pre">KEYCLOAK_STATE_CHECKER</span></code>,
 <code class="docutils literal"><span class="pre">KEYCLOAK_IDENTITY</span></code>, and <code class="docutils literal"><span class="pre">KC_RESTART</span></code>.</p>
 </div>
 </li>
-<li><p class="first">Now you should be able to access Keycloak: <a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a></p>
+<li><p class="first">Now you should be able to access Keycloak: <code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code></p>
 </li>
 </ol>
 </div>
@@ -404,7 +405,7 @@ including <code class="docutils literal"><span class="pre">KEYCLOAK_SESSION</spa
 <p>When installing Keycloak on a separate host, the difference between this
 tutorial would be:</p>
 <ol class="arabic simple">
-<li>throughout the rest of the tutorial replace “<a class="reference external" href="https://webdev07.hpc.osc.edu:8443">https://webdev07.hpc.osc.edu:8443</a>” with the keycloak host</li>
+<li>throughout the rest of the tutorial replace <code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> with the keycloak host</li>
 <li>use a different Apache config, listening instead on 443 instead of 8443 and
 proxying that to Keycloak</li>
 <li>possibly use Apache 2.4 default distribution instead of software collections,
@@ -456,7 +457,7 @@ Apache config might look like:</p>
         <a href="configure-keycloak-webui.html" class="btn btn-neutral float-right" title="2. Configure Keycloak" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral" title="OpenID Connect via KeyCloak on RHEL7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -487,7 +488,7 @@ Apache config might look like:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.1.0',
+            VERSION:'1.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

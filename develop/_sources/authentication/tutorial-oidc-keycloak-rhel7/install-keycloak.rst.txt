@@ -147,7 +147,7 @@ Place Apache in front of Keycloak
 
    Add ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf``, making changes
    for the appropriate SSL certificate locations. Notice we are proxying
-   https://webdev07.hpc.osc.edu:8443 to http://localhost:8080 which is the default
+   ``https://webdev07.hpc.osc.edu:8443`` to ``http://localhost:8080`` which is the default
    port the Keycloak webserver runs as.
 
    .. literalinclude:: example-keycloak-apache.conf
@@ -163,12 +163,12 @@ Place Apache in front of Keycloak
 
       We can use the same host because Keycloak properly scopes all cookies it sets to the
       realm. For example, if I have a realm called "ondemand", then the Keycloak login
-      page will be at https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth
+      page will be at ``https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth``
       and cookies set during authentication will be set with the path ``/auth/realms/ondemand``,
       including ``KEYCLOAK_SESSION``, ``KEYCLOAK_STATE_CHECKER``,
       ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
 
-#. Now you should be able to access Keycloak: https://webdev07.hpc.osc.edu:8443
+#. Now you should be able to access Keycloak: ``https://webdev07.hpc.osc.edu:8443``
 
 Differences if installing Keycloak on separate host
 ---------------------------------------------------
@@ -176,7 +176,7 @@ Differences if installing Keycloak on separate host
 When installing Keycloak on a separate host, the difference between this
 tutorial would be:
 
-#. throughout the rest of the tutorial replace "https://webdev07.hpc.osc.edu:8443" with the keycloak host
+#. throughout the rest of the tutorial replace ``https://webdev07.hpc.osc.edu:8443`` with the keycloak host
 #. use a different Apache config, listening instead on 443 instead of 8443 and
    proxying that to Keycloak
 #. possibly use Apache 2.4 default distribution instead of software collections,
