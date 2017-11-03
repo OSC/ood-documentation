@@ -362,6 +362,9 @@ numfig = True
 
 # -- Custom configuration -------------------------------------------------
 
+# Ignore anchors when checking links (fixes the dynamic anchors in GitHub)
+linkcheck_anchors = False
+
 from jinja2 import Environment, StrictUndefined
 
 # Use Jinja to parse RST files first

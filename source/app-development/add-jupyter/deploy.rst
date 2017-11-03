@@ -24,6 +24,6 @@ deploy it as a System App.
       sudo cp -r jupyter_app /var/www/ood/apps/sys/.
 
 #. In your browser navigate to the OnDemand URL and confirm you see the new app
-   in the "Interactive Apps" dropdown on the Dashboard:
+   in the "Interactive Apps" dropdown on the Dashboard::
 
-   https://ondemand.my_center.edu/
+     https://ondemand.my_center.edu/

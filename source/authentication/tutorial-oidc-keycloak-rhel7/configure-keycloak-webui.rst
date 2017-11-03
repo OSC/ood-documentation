@@ -9,7 +9,7 @@ OIDC client that will authenticate with Keycloak.
 Add a new realm
 ------------------------------------------
 
-#. Log into https://webdev07.hpc.osc.edu:8443 as the admin user
+#. Log into ``https://webdev07.hpc.osc.edu:8443`` as the admin user
 #. Hover over "Master" on left and click "Add Realm"
 #. Type in name "ondemand" and click "Save". The new realm is loaded.
 #. Click Login tab, then adjust parameters:
