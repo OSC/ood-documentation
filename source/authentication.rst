@@ -21,7 +21,7 @@ before moving forward:
 - Any Apache authentication module specific configuration directives (e.g.,
   ``OIDCCLientID``, ``CASLoginURL``, ...) should reside outside of the
   ``ood-portal.conf`` configuration file. The Apache configuration files are
-  loaded in alphabetical order, so placing these module specific configuration
+  loaded in lexical order, so placing these module specific configuration
   directives in the file:
 
   .. code-block:: text
