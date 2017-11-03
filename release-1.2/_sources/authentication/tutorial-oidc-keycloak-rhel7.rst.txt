@@ -1,7 +1,7 @@
 .. _authentication-tutorial-oidc-keycloak-rhel7:
 
-Tutorial: OpenID Connect via KeyCloak on RHEL7
-==============================================
+OpenID Connect via KeyCloak on RHEL7
+====================================
 
 This tutorial shows installing Keycloak as an OpenID Connect Identity Provider and configuring OnDemand as an OpenID Client to authenticate with this provider.
 

@@ -38,7 +38,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Open OnDemand 1.1.0 documentation" href="index.html"/>
-        <link rel="next" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" href="authentication/tutorial-oidc-keycloak-rhel7.html"/>
+        <link rel="next" title="OpenID Connect via KeyCloak on RHEL7" href="authentication/tutorial-oidc-keycloak-rhel7.html"/>
         <link rel="prev" title="Install Other Interactive Apps" href="install-ihpc-apps.html"/> 
 
   
@@ -102,7 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="install-desktops.html">Install Desktops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Authentication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="updating.html">Updating</a></li>
@@ -189,12 +189,103 @@
             
   <div class="section" id="authentication">
 <span id="id1"></span><h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
-<p>Below are tutorials and directions on configuring OnDemand with different types
-of authentication.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Authentication Options</span></p>
+<p>Open OnDemand supports any authentication mechanism that works with an Apache
+HTTP Server. Although some important issues should be taken into consideration
+before moving forward:</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">Tutorial: OpenID Connect via KeyCloak on RHEL7</a><ul>
+<li><p class="first">Open OnDemand uses <a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/httpd24/">Apache HTTP Server 2.4</a> provided by Software
+Collections. This means that any Apache authentication module
+(<code class="docutils literal"><span class="pre">mod_auth_*</span></code>) used will need to be compiled against the <code class="docutils literal"><span class="pre">apxs</span></code> and
+<code class="docutils literal"><span class="pre">apr</span></code> tools that reside under:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/opt/rh/httpd24/root/usr/bin
+</pre></div>
+</div>
+<p>and not the versions that come with the default system version of Apache HTTP
+Server.</p>
+</li>
+<li><p class="first">Any Apache authentication module specific configuration directives (e.g.,
+<code class="docutils literal"><span class="pre">OIDCCLientID</span></code>, <code class="docutils literal"><span class="pre">CASLoginURL</span></code>, …) should reside outside of the
+<code class="docutils literal"><span class="pre">ood-portal.conf</span></code> configuration file. The Apache configuration files are
+loaded in alphabetical order, so placing these module specific configuration
+directives in the file:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/opt/rh/httpd24/root/etc/httpd/conf.d/auth-config.conf
+</pre></div>
+</div>
+<p>will cause your authentication configuration directives to be loaded before
+<code class="docutils literal"><span class="pre">ood-portal.conf</span></code>. If there are any secrets inside this file you can ensure
+privacy by adding restrictive file permissions:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Do not directly edit the <code class="docutils literal"><span class="pre">ood-portal.conf</span></code> to include this authentication
+module within your Open OnDemand portal. Anytime you need to edit the
+<code class="docutils literal"><span class="pre">ood-portal.conf</span></code> you should use the <a class="reference internal" href="infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> and its
+corresponding <code class="docutils literal"><span class="pre">config.yml</span></code>. For example, to add support for an
+authentication module with <code class="docutils literal"><span class="pre">AuthType</span></code> of <code class="docutils literal"><span class="pre">my-auth</span></code>, you would modify the
+<code class="docutils literal"><span class="pre">config.yml</span></code> as such:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /path/to/ood-portal-generator/config.yml</span>
+<span class="nn">---</span>
+<span class="c1"># ...</span>
+<span class="c1"># Your other custom configuration options...</span>
+<span class="c1"># ...</span>
+
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">my-auth&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
+</pre></div>
+</div>
+<p>You would then build the new <code class="docutils literal"><span class="pre">ood-portal.conf</span></code> from this configuration file
+with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> scl <span class="nb">enable</span> rh-ruby22 -- rake
+<span class="go">Rendering templates/ood-portal.conf.erb =&gt; build/ood-portal.conf</span>
+</pre></div>
+</div>
+<p>This will build <code class="docutils literal"><span class="pre">ood-portal.conf</span></code> in the <code class="docutils literal"><span class="pre">build/</span></code> directory. Open that
+file and confirm everything is accurate, then install it in the global
+location:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
+<span class="go">cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span>
+</pre></div>
+</div>
+<p>Finally you will restart your Apache HTTP Server for the changes to take
+effect.</p>
+</li>
+<li><p class="first">You will need to sanitize any session-specific request headers that may be
+passed to the backend web servers that a user is proxied to. For most Apache
+authentication modules there are module-specific directives that can be
+enabled to wipe session information from being passed as headers (e.g.,
+<code class="docutils literal"><span class="pre">OIDCStripCookies</span> <span class="pre">...</span></code>). In other cases you may have to use regular
+expressions to search for the session cookies and remove them manually.</p>
+<p>For example, Shibboleth does not have a directive to strip session
+information from the cookies, so we accomplish this with the following
+options in our <a class="reference internal" href="infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> configuration file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /path/to/ood-portal-generator/config.yml</span>
+<span class="nn">---</span>
+<span class="c1"># ...</span>
+<span class="c1"># Your other custom configuration options...</span>
+<span class="c1"># ...</span>
+
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">shibboleth&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;ShibRequestSetting</span><span class="nv"> </span><span class="s">requireSession</span><span class="nv"> </span><span class="s">1&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;RequestHeader</span><span class="nv"> </span><span class="s">edit*</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">&quot;(^_shibsession_[^;]*(;\s*)?|;\s*_shibsession_[^;]*)&quot;</span><span class="nv"> </span><span class="s">&quot;&quot;&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">&quot;expr=-z</span><span class="nv"> </span><span class="s">%{req:Cookie}&quot;&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
+</pre></div>
+</div>
+<p>where we use a regular expression to replace any <code class="docutils literal"><span class="pre">shibsession</span></code> cookies with
+empty strings and delete the cookie header if it becomes empty.</p>
+</li>
+</ul>
+<p>Below you can find helpful walkthroughs for a few of the authentication modules
+we managed to get working with Open OnDemand. Feel free to send us a
+walkthrough for a specific authentication module that you got working with your
+Open OnDemand installation if you’d like to contribute.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Example Walkthroughs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1. Install Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">2. Configure Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
@@ -215,7 +306,7 @@ of authentication.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="authentication/tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral float-right" title="Tutorial: OpenID Connect via KeyCloak on RHEL7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="authentication/tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral float-right" title="OpenID Connect via KeyCloak on RHEL7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="install-ihpc-apps.html" class="btn btn-neutral" title="Install Other Interactive Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
