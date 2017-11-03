@@ -5,14 +5,17 @@ Configuration
 
 Many of the options in the per-user NGINX staging and configuration can be
 configured within :program:`nginx_stage`. In a default installation this
-configuration file is located at::
+YAML configuration file is located at::
 
-  /opt/ood/nginx_stage/config/nginx_stage.yml
+  /etc/ood/config/nginx_stage.yml
 
-On a fresh installation a default configuration file is copied here with
-details on each of the possible options explained. In most cases it is
-recommended that you don't edit this file as the chosen defaults should work
-out of the box for most scenarios.
+On a fresh installation you may need to create this file or copy the default
+file from::
+
+  /opt/ood/nginx_stage/share/nginx_stage_example.yml
+
+In most cases it is recommended that you don't edit this file as the chosen
+defaults should work out of the box for most scenarios.
 
 .. warning::
 
@@ -527,6 +530,24 @@ Configuration Options
 
       Modifying this configuration option can lead to unintended consequences
       for web apps such as issues with serving their assets.
+
+.. describe:: user_regex (String)
+
+   regular expression used to validate a given user name
+
+   Default
+     Username can consist of any characters typically found in an email address
+
+     .. code-block:: yaml
+
+        user_regex: '[\w@\.\-]+'
+
+   Example
+     Restrict user name to just alphanumeric characters
+
+     .. code-block:: yaml
+
+        user_regex: '\w+'
 
 .. describe:: min_uid (Integer)
 

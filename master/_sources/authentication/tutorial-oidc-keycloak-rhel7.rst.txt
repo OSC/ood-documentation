@@ -1,15 +1,15 @@
 .. _authentication-tutorial-oidc-keycloak-rhel7:
 
-Tutorial: OpenID Connect via KeyCloak on RHEL7
-==============================================
+OpenID Connect via KeyCloak on RHEL7
+====================================
 
 This tutorial shows installing Keycloak as an OpenID Connect Identity Provider and configuring OnDemand as an OpenID Client to authenticate with this provider.
 
-Using https://webdev07.hpc.osc.edu as the example host with OnDemand installed, at the end of the tutorial:
+Using ``https://webdev07.hpc.osc.edu`` as the example host with OnDemand installed, at the end of the tutorial:
 
-#. Keycloak is running and accessible at https://webdev07.hpc.osc.edu:8443
-#. In both cases Apache is handling requests. Apache proxies requests for https://webdev07.hpc.osc.edu:8443 to the Keycloak server running on the default port of 8080.
-#. Attempting to access OnDemand at https://webdev07.hpc.osc.edu redirects the user to https://webdev07.hpc.osc.edu:8443 to first authenticate.
+#. Keycloak is running and accessible at ``https://webdev07.hpc.osc.edu:8443``
+#. In both cases Apache is handling requests. Apache proxies requests for ``https://webdev07.hpc.osc.edu:8443`` to the Keycloak server running on the default port of 8080.
+#. Attempting to access OnDemand at ``https://webdev07.hpc.osc.edu`` redirects the user to ``https://webdev07.hpc.osc.edu:8443`` to first authenticate.
 
 At OSC in production we do two things differently from this tutorial:
 

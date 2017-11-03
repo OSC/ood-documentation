@@ -41,5 +41,6 @@ Welcome to Open OnDemand's documentation!
    :maxdepth: 2
    :caption: Release Notes
 
+   release-notes/v1.2-release-notes
    release-notes/v1.1-release-notes
    release-notes/v1.0-release-notes

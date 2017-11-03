@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. Install the PUN Utility &mdash; Open OnDemand 1.1.0 documentation</title>
+  <title>5. Install the PUN Utility &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Installation" href="../installation.html"/>
         <link rel="next" title="6. Install User Mapping Script" href="install-mapping-script.html"/>
         <link rel="prev" title="4. Install Proxy Module for Apache" href="install-proxy-module.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                1.1
+                1.2
               </div>
             
           
@@ -130,6 +130,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
@@ -208,7 +209,7 @@ tool is meant to by run by <code class="docutils literal"><span class="pre">root
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ood/src
 scl <span class="nb">enable</span> git19 -- git clone https://github.com/OSC/nginx_stage.git
 <span class="nb">cd</span> nginx_stage/
-scl <span class="nb">enable</span> git19 -- git checkout v0.2.1
+scl <span class="nb">enable</span> git19 -- git checkout v0.3.0
 </pre></div>
 </div>
 </li>
@@ -218,9 +219,15 @@ scl <span class="nb">enable</span> git19 -- git checkout v0.2.1
 <span class="c1"># =&gt; cp ...</span>
 </pre></div>
 </div>
-<p>This creates the <a class="reference internal" href="../infrastructure/nginx-stage.html#nginx-stage"><span class="std std-ref">nginx_stage</span></a> config
-<code class="docutils literal"><span class="pre">/opt/ood/nginx_stage/config/nginx_stage.yml</span></code> and the ruby binstub/wrapper
-script <code class="docutils literal"><span class="pre">/opt/ood/nginx_stage/bin/ood_ruby</span></code>.</p>
+<p>Although the defaults for this tool are great, we also know there is no such
+thing as a “one size fits all”. For this we allow you to configure how the
+<a class="reference internal" href="../infrastructure/nginx-stage.html#nginx-stage"><span class="std std-ref">nginx_stage</span></a> tool behaves by creating and modifying a YAML
+configuration file under:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>You can read <a class="reference internal" href="../infrastructure/nginx-stage/configuration.html#nginx-stage-configuration"><span class="std std-ref">Configuration</span></a> for details on the available
+configuration options.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you run an older Linux OS that creates user accounts starting at id
@@ -256,6 +263,18 @@ this, generate the file <code class="docutils literal"><span class="pre">/etc/cr
 </pre></div>
 </div>
 <p>This will clean up inactive PUNs every two hours.</p>
+</li>
+<li><p class="first">Stage the NGINX configuration files for the system web applications:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo mkdir -p /var/lib/nginx/config/apps/sys
+sudo touch /var/lib/nginx/config/apps/sys/dashboard.conf
+sudo touch /var/lib/nginx/config/apps/sys/shell.conf
+sudo touch /var/lib/nginx/config/apps/sys/files.conf
+sudo touch /var/lib/nginx/config/apps/sys/file-editor.conf
+sudo touch /var/lib/nginx/config/apps/sys/activejobs.conf
+sudo touch /var/lib/nginx/config/apps/sys/myjobs.conf
+sudo /opt/ood/nginx_stage/sbin/nginx_stage app_reset --sub-uri<span class="o">=</span>/pun
+</pre></div>
+</div>
 </li>
 </ol>
 </div>
@@ -304,7 +323,7 @@ this, generate the file <code class="docutils literal"><span class="pre">/etc/cr
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

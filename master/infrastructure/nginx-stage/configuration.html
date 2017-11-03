@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration &mdash; Open OnDemand 1.1.0 documentation</title>
+  <title>Configuration &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.1.0 documentation" href="../../index.html"/>
+    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="nginx_stage" href="../nginx-stage.html"/>
         <link rel="next" title="Applications" href="../../applications.html"/>
         <link rel="prev" title="nginx_stage nginx_clean" href="commands/nginx-clean.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                1.1
+                1.2
               </div>
             
           
@@ -131,6 +131,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
@@ -206,14 +207,17 @@
 <span id="nginx-stage-configuration"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
 <p>Many of the options in the per-user NGINX staging and configuration can be
 configured within <strong class="program">nginx_stage</strong>. In a default installation this
-configuration file is located at:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+YAML configuration file is located at:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
-<p>On a fresh installation a default configuration file is copied here with
-details on each of the possible options explained. In most cases it is
-recommended that you don’t edit this file as the chosen defaults should work
-out of the box for most scenarios.</p>
+<p>On a fresh installation you may need to create this file or copy the default
+file from:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx_stage_example</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>In most cases it is recommended that you don’t edit this file as the chosen
+defaults should work out of the box for most scenarios.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Modifying application specific configuration options or URI options can have
@@ -783,6 +787,26 @@ for web apps such as issues with serving their assets.</p>
 
 <dl class="describe">
 <dt>
+<code class="descname">user_regex (String)</code></dt>
+<dd><p>regular expression used to validate a given user name</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Username can consist of any characters typically found in an email address</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_regex</span><span class="p p-Indicator">:</span> <span class="s">&#39;[\w@\.\-]+&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Restrict user name to just alphanumeric characters</p>
+<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_regex</span><span class="p p-Indicator">:</span> <span class="s">&#39;\w+&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
 <code class="descname">min_uid (Integer)</code></dt>
 <dd><p>the minimum user id required to start a per-user NGINX process as</p>
 <dl class="docutils">
@@ -874,7 +898,7 @@ starting and stopping the NGINX process.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.1.0',
+            VERSION:'1.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
