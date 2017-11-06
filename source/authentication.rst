@@ -3,7 +3,7 @@
 Authentication
 ==============
 
-Open OnDemand supports any authentication mechanism that works with an Apache
+Open OnDemand supports most authentication mechanisms that works with an Apache
 HTTP Server. The Overview below explains the basic steps to take when setting up
 Authentication. We also provide a tutorial installing Keycloak as an OpenID
 Connect provider and then using that for authentication with OnDemand.
