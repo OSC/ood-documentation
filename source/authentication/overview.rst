@@ -1,21 +1,20 @@
 .. _authentication-overview:
 
 Overview
-=========
+========
 
-Configuring OnDemand with a new authentication method requires
-two Apache configuration steps:
+Configuring Open OnDemand to work with an Apache authentication module can be
+broken down into two procedures:
 
-1. Configure Apache to use desired authentication method
-2. Configure to map authenticated user to system user
+- Install and configure the Apache authentication module
+- Setup the mapping of the remote user to the local user
 
-Below is an overview of each step. Tutorials we offer for setting up authentication will
-cover these steps as well as any and 
+These are discussed in more detail in the following sections.
 
 .. toctree::
    :maxdepth: 2
    :numbered:
-   :caption: Steps to setup authentication
+   :caption: Setup Authentication Module
 
    overview/configure-authentication
    overview/map-user

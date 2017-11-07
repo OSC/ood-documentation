@@ -3,15 +3,19 @@
 Authentication
 ==============
 
-Open OnDemand supports most authentication mechanisms that works with an Apache
-HTTP Server. The Overview below explains the basic steps to take when setting up
-Authentication. We also provide a tutorial installing Keycloak as an OpenID
-Connect provider and then using that for authentication with OnDemand.
+Open OnDemand supports most authentication modules that work with Apache HTTP
+Server version 2.4. The following :ref:`authentication-overview` section
+provides an introduction to setting up these generic authentication modules
+with an Open OnDemand installation. Tutorials will also be provided with the
+focus on setting up some of the more common authentication modules (e.g.,
+OpenID Connect with KeyCloak).
 
-If you are using an authentication module that is not represented here,
-please consider letting us know how you set it up so we can add walkthrough here.
-Or fork this documentation repo and create a pull request off of the develop
-branch with your walkthrough.
+.. note::
+
+   If you managed to install an Apache authentication module at your center
+   that currently does not have a tutorial listed below we would greatly
+   appreciate it if you could take the time to contribute a detailed
+   walkthrough.
 
 .. toctree::
    :maxdepth: 2

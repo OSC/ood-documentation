@@ -1,40 +1,75 @@
 .. _authentication-overview-map-user:
 
+Setup User Mapping
+==================
 
-Configure Apache to map authenticated user to system user
-================================================================
+Every HTTP request sent to the OnDemand portal triggers a call to the
+:ref:`ood-auth-map` script to map the remote authenticated user name to the
+local system user name. Mapping to the local system user not only restricts
+access of OnDemand to local users but it is also required by the OnDemand proxy
+to traffic the HTTP data to the user's corresponding per-user NGINX (PUN)
+server.
 
-Default mapping works for most use cases
-----------------------------------------
+The :ref:`ood-portal-generator` and its corresponding ``config.yml`` are used
+to configure both the system command that performs the mapping
+(:ref:`user_map_cmd <ood-portal-generator-user-map-cmd>`) and the argument fed
+to the system command (:ref:`user_env <ood-portal-generator-user-env>`). By
+default these configuration options are defined as:
 
-In OnDemand, Apache is configured to use a mapping :ref:`ood-auth-map` that is
-executed on each request to determine which system user the authenticated user
-is associated with, so that the request will be proxied to the correct system
-user's processes.
+.. code-block:: yaml
 
-The way this typically works:
+   # /path/to/ood-portal-generator/config.yml
+   ---
 
-1. Apache is configured to specify command to execute the mapping script by
-   setting this to the environment variable ``OOD_USER_MAP_CMD``
-2. The mod_ood_proxy Apache module executes this command on each request, passing the env var
-   ``REMOTE_USER`` as an argument. The executed command outputs the mapped system user.
-3. The request is then proxied to the system user's per user NGINX process.
+   user_map_cmd: '/opt/ood/ood_auth_map/bin/ood_auth_map.regex'
+   user_env: 'REMOTE_USER'
 
-Since most Apache authentication modules set ``REMOTE_USER`` with the
-authenticated user, and often this user is the system user, the default mapping
-functionality between authenticated user and system user should be sufficient.
+which uses :ref:`ood-auth-map` for the mapping command and ``REMOTE_USER``
+(this variable holds the name of the authenticated user by the web server) as
+its command line argument.
 
-Customizing mapping
--------------------
+This is equivalent to calling from the command line:
 
-See :ref:`ood-auth-map` for an overview on how these mapping scripts work. The
-default mapping script just echo's back the ``REMOTE_USER`` so that is used
-as the system user.
+.. code-block:: console
 
-If you need to configure the mapping script to use a regex on the ``REMOTE_USER``,
-or have the mapping script inspect a different env var
-besides ``REMOTE_USER``, or need to use a custom mapping script, look at
-configuration options for the :ref:`ood-portal-generator`, including customizing
-the ``user_map_cmd`` and ``user_env`` configuration options, which result in the
-generated Apache config setting ``OOD_USER_MAP_CMD`` and ``OOD_USER_ENV`` vars
-that the mod_ood_proxy module uses.
+   $ /opt/ood/ood_auth_map/bin/ood_auth_map.regex "$REMOTE_USER"
+
+which just echos back the value of ``REMOTE_USER``.
+
+.. note::
+
+   The default user mapping employed by an OnDemand portal **directly** maps
+   the remote authenticated user name to the local user name. So the Apache
+   authentication module used is expected to set the correct local user name in
+   ``REMOTE_USER``.
+
+Custom Mapping
+--------------
+
+As mentioned previously the :ref:`ood-portal-generator` configuration options
+of interest are:
+
+- :ref:`user_map_cmd <ood-portal-generator-user-map-cmd>`
+- :ref:`user_env <ood-portal-generator-user-env>`
+
+It is recommended you read the discussion on :ref:`ood-auth-map` before
+modifying these values.
+
+After modifying the ``config.yml`` with the mapping you want you would then
+build the new ``ood-portal.conf`` from this configuration file with:
+
+.. code-block:: console
+
+   $ scl enable rh-ruby22 -- rake
+   Rendering templates/ood-portal.conf.erb => build/ood-portal.conf
+
+This will build ``ood-portal.conf`` in the ``build/`` directory. Open that file
+and confirm everything is accurate, then install it in the global location:
+
+.. code-block:: console
+
+   $ sudo scl enable rh-ruby22 -- rake install
+   cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
+
+Finally you will need to restart your Apache HTTP Server for the changes to
+take effect.
