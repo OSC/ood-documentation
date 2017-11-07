@@ -15,10 +15,10 @@ Latest version: ``v{{ ood_auth_map_version }}``
 You can compare this to the locally installed :ref:`ood-auth-map` with the
 following command:
 
-.. code-block:: sh
+.. code-block:: console
 
-   /opt/ood/ood_auth_map/bin/ood_auth_map.regex -v
-   #=> ood_auth_map, version {{ ood_auth_map_version }}
+   $ scl enable rh-ruby22 -- /opt/ood/ood_auth_map/bin/ood_auth_map.regex -v
+   ood_auth_map, version {{ ood_auth_map_version }}
 
 where the version number should be given at the end of the line. If the version
 numbers match then you can skip this update.
@@ -36,11 +36,11 @@ Instructions to update
 
 #. Install it to its global location:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo scl enable rh-ruby22 -- rake install
-      # => mkdir -p /opt/ood/ood_auth_map/bin
-      # => cp ...
+      $ sudo scl enable rh-ruby22 -- rake install
+      mkdir -p /opt/ood/ood_auth_map/bin
+      ...
 
 .. note::
 
