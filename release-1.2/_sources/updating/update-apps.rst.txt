@@ -40,12 +40,12 @@ Instructions to update
 
       The various OOD apps can support custom configuration files at:
 
-      - ``.env.local`` (Dashboard, ActiveJobs, MyJobs)
-      - ``config/initializers/ood.rb`` (Dashboard)
-      - ``config/initializers/filter.rb`` (ActiveJobs)
-      - ``templates/`` (MyJobs)
-      - ``.env`` (Shell)
-      - ``local/`` (Desktops)
+      - ``{dashboard,activejobs,myjobs,file-editor}/.env.local``
+      - ``{shell,files}/.env``
+      - ``dashboard/config/initializers/ood.rb``
+      - ``activejobs/config/initializers/filter.rb``
+      - ``myjobs/templates/``
+      - ``bc_desktop/local/``
 
       If these exist for your installation please version these at your center
       and back them up.
