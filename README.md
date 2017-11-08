@@ -82,5 +82,6 @@ https://github.com/OSC/ood-documentation.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT
-License](http://opensource.org/licenses/MIT).
+* Documentation, website content, and logo is licensed under
+  [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
+* Code is licensed under MIT (see LICENSE.txt)
