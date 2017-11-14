@@ -9,6 +9,12 @@ on a compute node. The user will then be able to connect to the running server
 through their browser and take advantage of the resources provided within the
 batch job.
 
+.. danger::
+
+   Confirm that you have walked through the
+   :ref:`app-development-interactive-setup` instructions for :ref:`interactive`
+   before continuing on.
+
 .. toctree::
    :maxdepth: 2
    :numbered:

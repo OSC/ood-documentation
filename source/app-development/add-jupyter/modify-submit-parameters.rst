@@ -58,7 +58,7 @@ http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initiali
      /etc/ood/config/clusters.d/cluster.yml
 
    There is further discussion on this under
-   :ref:`install-desktops-modify-cluster-configuration`.
+   :ref:`app-development-interactive-setup-modify-cluster-configuration`.
 
 But in most cases you will want to change the actual job submission parameters (e.g., node type). These are defined under the ``script`` option as:
 
