@@ -3,7 +3,8 @@
 Install Desktop App
 ===================
 
-Now we will install the provided `bc_desktop`_ app as well as configure it work at your center.
+Now we will install the provided `bc_desktop`_ app as well as configure it work
+at your center.
 
 #. We will build this app in our previous web applications setup directory
    (discussed in :ref:`install-apps`):
@@ -90,8 +91,9 @@ Now we will install the provided `bc_desktop`_ app as well as configure it work 
    After choosing "Cluster1 Desktop" from the menu, you should be presented
    with a form to submit a Desktop session to the given cluster.
 
-   Submit a Desktop session and wait for it to run. If you see a Desktop session start Running
-   but then quickly disappear you can debug it by viewing the logs in::
+   Submit a Desktop session and wait for it to run. If you see a Desktop
+   session start Running but then quickly disappear you can debug it by viewing
+   the logs in::
 
      ~/ondemand/data/sys/dashboard/batch_connect/sys/bc_desktop/<cluster>/output/<uuid>/
 

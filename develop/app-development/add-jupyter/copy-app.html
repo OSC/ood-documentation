@@ -119,11 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Copy Jupyter App</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#steps-to-copy">2.1. Steps to Copy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#verify-it-works">2.2. Verify it Works</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Copy Jupyter App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="customize-attributes.html">3. Customize Attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deploy.html">5. Deploy Jupyter App</a></li>
@@ -219,15 +215,10 @@ to:</p>
 <li>introduce you to app development and make you an Interactive App developer</li>
 </ul>
 </div>
-<div class="section" id="steps-to-copy">
-<h2>2.1. Steps to Copy<a class="headerlink" href="#steps-to-copy" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">We do all of our app development in our Open OnDemand sandbox directory:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Create the sandbox directory if it doesn&#39;t already exist</span>
 mkdir -p ~/ondemand/dev
-
-<span class="c1"># Change our working directory</span>
-<span class="nb">cd</span> ~/ondemand/dev
 </pre></div>
 </div>
 <div class="admonition note">
@@ -276,30 +267,70 @@ accessed by navigating to:</p>
 </dl>
 </div>
 </li>
-<li><p class="first">Download our example Jupyter app using <a class="reference external" href="https://git-scm.com/">git</a>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>git clone https://github.com/OSC/bc_example_jupyter.git jupyter_app
+<li><p class="first">After creating the sandbox directory navigate in your browser to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span>
 </pre></div>
 </div>
+<p>you should now see a <em>Develop</em> dropdown menu option in the top right of the
+<a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p>
 </li>
-<li><p class="first">Change our working directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> jupyter_app
-</pre></div>
-</div>
+<li><p class="first">Open up the <em>Develop</em> menu dropdown and click the link <em>My Sandbox Apps
+(Development)</em>.</p>
 </li>
-<li><p class="first">Wipe the previous <a class="reference external" href="https://git-scm.com/">git</a> history so we have a fresh app:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>rm -fr .git
-</pre></div>
-</div>
+<li><p class="first">You will navigate to a page that lists all of your sandbox apps (all the
+apps in your sandbox directory). For now click <em>New App</em> in the top left
+of the page.</p>
 </li>
-<li><p class="first">Unlike system apps you do <strong>not</strong> need to install this app to another
-directory. As it is already in the <em>special</em> sandbox directory the app is
-already accessible from your browser.</p>
+<li><p class="first">Currently there is only one option for building new apps and that is to
+“Clone an existing app”. Click the button <em>Clone Existing App</em>.</p>
+</li>
+<li><p class="first">Now we are presented with a form that describes how we will clone the app.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Directory name</dt>
+<dd><p class="first last">this is the directory that the app will be cloned to in our sandbox
+directory (must be unique)</p>
+</dd>
+<dt>Git remote</dt>
+<dd><p class="first last">this is the link to the git repo that is cloned</p>
+</dd>
+<dt>Create a new Git Project from this?</dt>
+<dd><p class="first last">whether we want to create a new app from this git repo</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>For now fill in the form with the following values:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Directory name</dt>
+<dd><p class="first last"><code class="docutils literal"><span class="pre">jupyter</span></code></p>
+</dd>
+<dt>Git remote</dt>
+<dd><p class="first last"><code class="docutils literal"><span class="pre">https://github.com/OSC/bc_example_jupyter.git</span></code></p>
+</dd>
+<dt>Create a new Git Project from this?</dt>
+<dd><p class="first last">check this!</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Then click <em>Submit</em>.</p>
+</li>
+<li><p class="first">You should now see a details view of the Jupyter app you just created. If
+you click <em>Launch Jupyter Notebook</em> it should open a new tab with the
+following warning:</p>
+<blockquote>
+<div><p>This app requires a cluster that does not exist.</p>
+</div></blockquote>
+<p>If you see this warning message then continue on.</p>
 </li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>It is recommended you version your new app using <a class="reference external" href="https://git-scm.com/">git</a>.</p>
-<div class="last highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Create a local repository</span>
+<div class="last highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Go to the app directory</span>
+<span class="nb">cd</span> ~/ondemand/dev/jupyter
+
+<span class="c1"># Create a local repository</span>
 git init
 
 <span class="c1"># Stage all the files under app</span>
@@ -308,38 +339,6 @@ git add --all
 <span class="c1"># Make your first commit</span>
 git commit -m <span class="s1">&#39;my first commit&#39;</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="verify-it-works">
-<h2>2.2. Verify it Works<a class="headerlink" href="#verify-it-works" title="Permalink to this headline">¶</a></h2>
-<p>You can now test that this app is <em>functional</em> by visiting your local OnDemand
-server in your browser:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/dashboard/batch_connect/dev/jupyter_app/session_contexts/new</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.my_center.edu</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>By default all browsers send <code class="docutils literal"><span class="pre">GET</span></code> requests when navigating to a URL. The
-above block can be accessed simply by navigating to the following URL in
-your browser:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">jupyter_app</span><span class="o">/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
-</pre></div>
-</div>
-<p>Where you replace <code class="docutils literal"><span class="pre">ondemand.my_center.edu</span></code> with your domain.</p>
-<p class="last"><em>Keep this link handy as you will want to access it everytime you make
-changes to the app code to test your changes.</em></p>
-</div>
-<p>Notice that we have <code class="docutils literal"><span class="pre">dev/jupyter_app</span></code> in the above URL. This tells the
-Dashboard app (which is responsible for launching these Batch Connect plugins)
-to search for the app in a directory called <code class="docutils literal"><span class="pre">jupyter_app</span></code> in your OnDemand
-sandbox directory.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The app will probably display a warning about requiring a cluster. This is
-perfectly fine. Continue on to the next section to learn about customizing
-the app.</p>
 </div>
 </div>
 </div>

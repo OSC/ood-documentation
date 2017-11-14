@@ -4,7 +4,8 @@ Interactive Apps (Plugins)
 ==========================
 
 :ref:`interactive` can be developed and deployed using the same tools that are
-currently provided for all Open OnDemand applications.
+currently provided for all Open OnDemand applications but requires further
+:ref:`app-development-interactive-setup`.
 
 An Interactive App is a :ref:`dashboard` plugin that follows a custom
 file/directory structure and API that can be described by the four stages:
@@ -30,6 +31,7 @@ Each of these files/directories are described below in their respective stage.
    :maxdepth: 3
    :caption: Stages of an Interactive App
 
+   interactive/setup
    interactive/form
    interactive/template
    interactive/submit
