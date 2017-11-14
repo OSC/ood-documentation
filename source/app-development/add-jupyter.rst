@@ -17,7 +17,7 @@ batch job.
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
+   :numbered: 1
    :caption: Quick Start Guide
 
    add-jupyter/software-requirements
