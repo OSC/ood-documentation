@@ -24,7 +24,7 @@ The simplest ``submit.yml.erb`` will look like:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
 
 Which only describes which internal template to use when generating the batch
@@ -35,7 +35,7 @@ script. From here we can add more options to the batch script, such as:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
      set_host: "host=$(hostname -A | awk '{print $2}')"
 
@@ -64,7 +64,7 @@ But in most cases you will want to change the actual job submission parameters
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      ...
@@ -98,7 +98,7 @@ For Slurm, you can choose the features on a requested node with:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      native: [ "-N", "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>", "-C", "c12" ]
@@ -113,7 +113,7 @@ Arrays can also be written in YAML as:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      native:
@@ -148,7 +148,7 @@ For Torque, you can choose processors-per-node with:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      native:
@@ -178,7 +178,7 @@ This can be specified as such:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      native: [ "-l", "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>" ]
@@ -193,7 +193,7 @@ Arrays can also be written in YAML as:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      native:
@@ -240,7 +240,7 @@ such:
 
    # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-   batch_connect
+   batch_connect:
      template: "basic"
    script:
      native: [ "-l", "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28" ]

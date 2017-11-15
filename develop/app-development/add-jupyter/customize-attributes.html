@@ -216,18 +216,18 @@ editing the <code class="docutils literal"><span class="pre">form.yml</span></co
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
 <span class="nn">---</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-</span><span class="l l-Scalar l-Scalar-Plain">attribute</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">module</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
+</span><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
 </pre></div>
 </div>
@@ -240,25 +240,25 @@ our batch job to get a Jupyter Notebook Server running:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">attribute</span><span class="p p-Indicator">:</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">module</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
 </span>  <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
 </pre></div>
 </div>
 <p>where we replace <code class="docutils literal"><span class="pre">python</span></code> with a list of required modules for our given
 cluster.</p>
 <p>This will be called within the batch script as:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>module load &lt;module&gt;
+<div class="highlight-sh"><div class="highlight"><pre><span></span>module load &lt;modules&gt;
 </pre></div>
 </div>
 </li>
@@ -267,18 +267,18 @@ modules then we must disable it:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">attribute</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">module</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
 <span class="hll">  <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;0&quot;</span>
 </span>  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
 </pre></div>
 </div>

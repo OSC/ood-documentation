@@ -226,7 +226,7 @@ variable substitution, and more.</p>
 <p>The simplest <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> will look like:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 </pre></div>
 </div>
@@ -234,7 +234,7 @@ variable substitution, and more.</p>
 script. From here we can add more options to the batch script, such as:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll">  <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$2}&#39;)&quot;</span>
 </span></pre></div>
@@ -257,7 +257,7 @@ corresponding cluster configuration file under:</p>
 (e.g., node type). These are defined under the <code class="docutils literal"><span class="pre">script</span></code> option as:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">...</span>
@@ -281,7 +281,7 @@ git commit submit.yml.erb -m <span class="s1">&#39;updated batch job options&#39
 <p>For Slurm, you can choose the features on a requested node with:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-N&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-C&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;c12&quot;</span> <span class="p p-Indicator">]</span>
@@ -292,7 +292,7 @@ and <code class="docutils literal"><span class="pre">native</span></code>.</p>
 <p>Arrays can also be written in YAML as:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
@@ -321,7 +321,7 @@ return a valid number (since it wouldn’t make sense to return <code class="doc
 <p>For Torque, you can choose processors-per-node with:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
@@ -346,7 +346,7 @@ server.</p>
 <p>This can be specified as such:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span> <span class="p p-Indicator">]</span>
@@ -357,7 +357,7 @@ server.</p>
 <p>Arrays can also be written in YAML as:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
@@ -397,7 +397,7 @@ something different now. So we modify the job submission configuration file as
 such:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span> <span class="p p-Indicator">]</span>

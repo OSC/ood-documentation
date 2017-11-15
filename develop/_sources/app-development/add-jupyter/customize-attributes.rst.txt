@@ -20,18 +20,18 @@ generating the batch script.
       # ~/ondemand/dev/jupyter/form.yml
       ---
       cluster: "my_cluster"
-      attribute:
-        module: "python"
+      attributes:
+        modules: "python"
         conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
         - conda_extensions
         - extra_jupyter_args
-        - bc_num_hours
-        - bc_num_slots
         - bc_account
         - bc_queue
+        - bc_num_hours
+        - bc_num_slots
         - bc_email_on_started
 
    where we replace ``my_cluster`` with a valid cluster that corresponds to a
@@ -47,18 +47,18 @@ generating the batch script.
       # ~/ondemand/dev/jupyter/form.yml
       ---
       cluster: "my_cluster"
-      attribute:
-        module: "python"
+      attributes:
+        modules: "python"
         conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
         - conda_extensions
         - extra_jupyter_args
-        - bc_num_hours
-        - bc_num_slots
         - bc_account
         - bc_queue
+        - bc_num_hours
+        - bc_num_slots
         - bc_email_on_started
 
    where we replace ``python`` with a list of required modules for our given
@@ -68,7 +68,7 @@ generating the batch script.
 
    .. code-block:: sh
 
-      module load <module>
+      module load <modules>
 
 #. If you do **NOT** have the Conda extensions installed for the above Python
    modules then we must disable it:
@@ -79,18 +79,18 @@ generating the batch script.
       # ~/ondemand/dev/jupyter/form.yml
       ---
       cluster: "my_cluster"
-      attribute:
-        module: "python"
+      attributes:
+        modules: "python"
         conda_extensions: "0"
         extra_jupyter_args: ""
       form:
         - modules
         - conda_extensions
         - extra_jupyter_args
-        - bc_num_hours
-        - bc_num_slots
         - bc_account
         - bc_queue
+        - bc_num_hours
+        - bc_num_slots
         - bc_email_on_started
 
    They are enabled by default in this file.
