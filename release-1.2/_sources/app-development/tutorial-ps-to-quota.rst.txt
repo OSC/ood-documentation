@@ -33,8 +33,8 @@ Dashboard.
 #. The navbar contains a link back to the dashboard.
 #. On a request, the app runs a shell command, parses the output, and displays
    the result in a table.
-#. It is built in Ruby using the `Sinatra framework <http://www.sinatrarb.com/>`__, a lightweight web framework
-   similar to `Python's Flask <http://flask.pocoo.org/>`__ and `Node.js's Express <https://expressjs.com/>`__
+#. It is built in Ruby using the `Sinatra framework <https://github.com/sinatra/sinatra>`__, a lightweight web framework
+   similar to `Python's Flask <https://github.com/pallets/flask>`__ and `Node.js's Express <https://github.com/expressjs/express>`__
 
 
 Benefits

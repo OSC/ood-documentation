@@ -90,9 +90,9 @@ default installation the following URL paths will be enabled:
 
    In order to leverage the reverse proxy that comes with Open OnDemand the
    system administrator must have it enabled as outlined under
-   :ref:`install-desktops-enable-reverse-proxy`. It only needs to be enabled
-   once and then all developers can take advantage of it within their
-   applications.
+   :ref:`app-development-interactive-setup-enable-reverse-proxy`. It only needs
+   to be enabled once and then all developers can take advantage of it within
+   their applications.
 
 Typically generating links with ``/node`` is preferred if the web server can be
 configured with a sub-URI. For instance, the `Jupyter Notebook server`_ can be

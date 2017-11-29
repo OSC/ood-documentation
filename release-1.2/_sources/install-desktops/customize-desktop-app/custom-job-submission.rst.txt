@@ -7,19 +7,18 @@ To customize job submission we will need to first edit our custom desktop app
 YAML file as such:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that points to our custom job submission
-   # configuration file
    submit: "submit/my_submit.yml.erb"
 
 Notice we included the configuration option ``submit`` that points to our
 custom job submission YAML configuration file. This can be an absolute file
-path or a relative file path with respect to the ``local/`` directory.
+path or a relative file path with respect to the ``bc_desktop/local/``
+directory.
 
 We can now create and modify a job submission configuration file at::
 
@@ -125,11 +124,6 @@ when using Torque please see the `pbs-ruby documentation`_.
    It is recommended you use the corresponding `batch script options`_ before
    using the ``native`` fallback.
 
-LSF
----
-
-TODO
-
 PBS Professional
 ----------------
 
@@ -157,17 +151,16 @@ If you would like to mimic how Torque handles ``bc_num_slots`` (number of
 our Desktop app local YAML configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-7
 
    # bc_desktop/local/cluster.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-   submit: "submit/my_submit.yml.erb"
-
-   # Add the below option that allows us to modify attributes
    attributes:
      bc_num_slots:
        label: "Number of nodes"
+   submit: "submit/my_submit.yml.erb"
 
 Now when we go to the Desktop app form in our browser it will have the new
 label "Number of nodes" instead of "Number of CPUs on a single node".

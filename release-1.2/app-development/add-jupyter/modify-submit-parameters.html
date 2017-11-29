@@ -122,8 +122,10 @@
 <li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Jupyter App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="customize-attributes.html">3. Customize Attributes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">4. Modify Submit Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#modify-submit-file">4.1. Modify Submit File</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#verify-it-works">4.2. Verify it Works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slurm">Slurm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque">Torque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pbs-professional">PBS Professional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-resource-manager">Other Resource Manager</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="deploy.html">5. Deploy Jupyter App</a></li>
@@ -211,8 +213,6 @@
 <p>In some cases the Jupyter app batch job fails to submit to the given cluster or
 you are not happy with the default chosen submission parameters. This section
 explains how to modify the submission parameters.</p>
-<div class="section" id="modify-submit-file">
-<h2>4.1. Modify Submit File<a class="headerlink" href="#modify-submit-file" title="Permalink to this headline">¶</a></h2>
 <p>The main responsibility of the <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> file located in the root of
 the app is for modifying the underlying batch script that is generated from an
 internal template and its submission parameters.</p>
@@ -224,25 +224,23 @@ you to embed Ruby code into the YAML configuration file for flow control,
 variable substitution, and more.</p>
 </div>
 <p>The simplest <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> will look like:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 </pre></div>
 </div>
 <p>Which only describes which internal template to use when generating the batch
 script. From here we can add more options to the batch script, such as:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$2}&#39;)&quot;</span>
-</pre></div>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$2}&#39;)&quot;</span>
+</span></pre></div>
 </div>
-<p>where we override the Bash script used to determine the host name of the
-compute node from within a running batch job.</p>
+<p>where we override the <strong class="command">bash</strong> script used to determine the host name of
+the compute node from within a running batch job.</p>
 <p>You can learn more about possible <code class="docutils literal"><span class="pre">batch_connect</span></code> options here:</p>
 <p><a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initialize">http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initialize</a></p>
 <div class="admonition warning">
@@ -253,15 +251,14 @@ corresponding cluster configuration file under:</p>
 </pre></div>
 </div>
 <p class="last">There is further discussion on this under
-<a class="reference internal" href="../../install-desktops/modify-cluster-configuration.html#install-desktops-modify-cluster-configuration"><span class="std std-ref">Modify Cluster Configuration</span></a>.</p>
+<a class="reference internal" href="../interactive/setup/modify-cluster-configuration.html#app-development-interactive-setup-modify-cluster-configuration"><span class="std std-ref">Modify Cluster Configuration</span></a>.</p>
 </div>
-<p>But in most cases you will want to change the actual job submission parameters (e.g., node type). These are defined under the <code class="docutils literal"><span class="pre">script</span></code> option as:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<p>But in most cases you will want to change the actual job submission parameters
+(e.g., node type). These are defined under the <code class="docutils literal"><span class="pre">script</span></code> option as:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">...</span>
 </span></pre></div>
@@ -280,20 +277,33 @@ git commit submit.yml.erb -m <span class="s1">&#39;updated batch job options&#39
 </div>
 </div>
 <div class="section" id="slurm">
-<span id="app-development-add-jupyter-modify-submit-parameters-slurm"></span><h3>4.1.1. Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h3>
+<span id="app-development-add-jupyter-modify-submit-parameters-slurm"></span><h2>Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h2>
 <p>For Slurm, you can choose the features on a requested node with:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-N&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-C&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;c12&quot;</span> <span class="p p-Indicator">]</span>
 </span></pre></div>
 </div>
-<p>where we define the <strong class="command">sbatch</strong> parameters as an array under <code class="docutils literal"><span class="pre">script</span></code> and
-<code class="docutils literal"><span class="pre">native</span></code>.</p>
+<p>where we define the <strong class="command">sbatch</strong> parameters as an array under <code class="docutils literal"><span class="pre">script</span></code>
+and <code class="docutils literal"><span class="pre">native</span></code>.</p>
+<p>Arrays can also be written in YAML as:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-N&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-C&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;c12&quot;</span>
+</span></pre></div>
+</div>
+<p>Depending on how complicated the array gets you may prefer the more expanded
+format.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The <code class="docutils literal"><span class="pre">native</span></code> attribute is an array of command line arguments. So the above
@@ -307,14 +317,12 @@ return a valid number (since it wouldn’t make sense to return <code class="doc
 </div>
 </div>
 <div class="section" id="torque">
-<h3>4.1.2. Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h3>
+<h2>Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h2>
 <p>For Torque, you can choose processors-per-node with:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
@@ -331,39 +339,46 @@ return a valid number (since it wouldn’t make sense to return <code class="doc
 </div>
 </div>
 <div class="section" id="pbs-professional">
-<h3>4.1.3. PBS Professional<a class="headerlink" href="#pbs-professional" title="Permalink to this headline">¶</a></h3>
+<h2>PBS Professional<a class="headerlink" href="#pbs-professional" title="Permalink to this headline">¶</a></h2>
 <p>For most cases of PBS Professional you will want to modify how the
 <code class="docutils literal"><span class="pre">bc_num_slots</span></code> (number of CPUs on a single node) is submitted to the batch
 server.</p>
 <p>This can be specified as such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span> <span class="p p-Indicator">]</span>
 </span></pre></div>
 </div>
 <p>where we define the <strong class="command">qsub</strong> parameters as an array under <code class="docutils literal"><span class="pre">script</span></code> and
 <code class="docutils literal"><span class="pre">native</span></code>.</p>
+<p>Arrays can also be written in YAML as:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+</span></pre></div>
+</div>
 <p>If you would like to mimic how Torque handles <code class="docutils literal"><span class="pre">bc_num_slots</span></code> (number of
 <strong>nodes</strong>), then we will first need to change the form label of
 <code class="docutils literal"><span class="pre">bc_num_slots</span></code> that the user sees in the form. This can be done by adding to
 the form configuration file the highlighted lines:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># form.yml</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
-
 <span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="hll">  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
-</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
+</span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
@@ -374,24 +389,22 @@ the form configuration file the highlighted lines:</p>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
 </pre></div>
 </div>
-<p>Now when we go to the Jupyter app form in our browser it will have the new
-label “Number of nodes” instead of “Number of CPUs on a single node”.</p>
+<p>Now when we click <em>Launch Jupyter Notebook</em> from the app details view, the form
+in the browser will have the new label “Number of nodes” instead of “Number of
+CPUs on a single node”.</p>
 <p>Next we will need to handle how we submit the <code class="docutils literal"><span class="pre">bc_num_slots</span></code> since it means
 something different now. So we modify the job submission configuration file as
 such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
-
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span> <span class="p p-Indicator">]</span>
 </span></pre></div>
 </div>
-<p>where you replace <code class="docutils literal"><span class="pre">ncpus=28</span></code> with the correct number for your cluster.</p>
-<p>You can also append <code class="docutils literal"><span class="pre">mem=...gb</span></code> to the <code class="docutils literal"><span class="pre">select=...</span></code> statement if you’d
-like.</p>
+<p>where we replace <code class="docutils literal"><span class="pre">ncpus=28</span></code> with the correct number for your cluster. You can
+also append <code class="docutils literal"><span class="pre">mem=...gb</span></code> to the <code class="docutils literal"><span class="pre">select=...</span></code> statement if you’d like.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The <code class="docutils literal"><span class="pre">native</span></code> attribute is an array of command line arguments. So the above
@@ -404,28 +417,12 @@ returned from web form for “Number of nodes”. We check if it is blank and
 return a valid number (since it wouldn’t make sense to return <code class="docutils literal"><span class="pre">0</span></code>).</p>
 </div>
 </div>
-<div class="section" id="other">
-<h3>4.1.4. Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="other-resource-manager">
+<h2>Other Resource Manager<a class="headerlink" href="#other-resource-manager" title="Permalink to this headline">¶</a></h2>
 <p>For most of our other adapters (aside from Torque) the <code class="docutils literal"><span class="pre">native</span></code> attribute is
 an array of command line arguments formatted similarly to the
 <a class="reference internal" href="#app-development-add-jupyter-modify-submit-parameters-slurm"><span class="std std-ref">Slurm</span></a> example
 above.</p>
-</div>
-</div>
-<div class="section" id="verify-it-works">
-<h2>4.2. Verify it Works<a class="headerlink" href="#verify-it-works" title="Permalink to this headline">¶</a></h2>
-<p>You can now test the app again by visiting your local OnDemand server in your
-browser:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/dashboard/batch_connect/dev/jupyter_app/session_contexts/new</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.my_center.edu</span>
-</pre></div>
-</div>
-<p>Fill in the form and launch the Jupyter batch job. Click the “Session ID” link
-for the launched session and confirm your changes are made under:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">job_script_content.sh</span></code> (if modified <code class="docutils literal"><span class="pre">batch_connect</span></code>)</li>
-<li><code class="docutils literal"><span class="pre">job_script_options.json</span></code> (if modified <code class="docutils literal"><span class="pre">script</span></code>)</li>
-</ul>
 </div>
 </div>
 

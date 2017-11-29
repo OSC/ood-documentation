@@ -20,15 +20,13 @@ The ``form.yml`` configuration file can be found at::
 
   ${HOME}/ondemand/dev/my_app/form.yml
 
-Then in the browser, navigating with the following HTTP request
+Then in the browser, navigate to the :ref:`dashboard` and choose in the top
+right menu: *Develop* → *My Sandbox Apps (Development)*. Finally click *Launch
+My App* from the list of sandbox apps.
 
-.. code-block:: http
 
-   GET /pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new HTTP/1.1
-   Host: ondemand.my_center.edu
-
-displays the HTML form used to gather the user-defined attributes for building
-and launching the ``my_app`` Interactive App session.
+You should now see the HTML form used to gather the user-defined attributes for
+building and launching the ``my_app`` Interactive App session.
 
 .. tip::
 
@@ -402,16 +400,9 @@ cluster configuration file::
 
   /etc/ood/config/clusters.d/owens.yml
 
-After modifying the ``form.yml`` you can navigate in your browser to the
-following URL
-
-.. code-block:: http
-
-   GET /pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new HTTP/1.1
-   Host: ondemand.my_center.edu
-
-and be presented with **ONLY** a Launch button, since we didn't define
-``form:`` or ``attributes:``.
+After modifying the ``form.yml`` click *Launch My App* from the Dashboard
+sandbox app list and you should be presented with **ONLY** a Launch button,
+since we didn't define ``form:`` or ``attributes:``.
 
 User-defined Attributes
 ```````````````````````
@@ -428,18 +419,11 @@ The following configuration file
 
 defines a session context attribute called ``my_module_version``.
 
-After modifying the ``form.yml`` you can navigate your browser to the following
-URL
-
-.. code-block:: http
-
-   GET /pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new HTTP/1.1
-   Host: ondemand.my_center.edu
-
-and you will see an empty text box with the label "My Module Version". The user
-can input any value here and launch the Interactive App session. This value
-will be made available to the batch job script and submission parameters that
-are discussed in a later section.
+After modifying the ``form.yml`` click *Launch My App* from the Dashboard
+sandbox app list and you will see an empty text box with the label "My Module
+Version". The user can input any value here and launch the Interactive App
+session. This value will be made available to the batch job script and
+submission parameters that are discussed in a later section.
 
 Hard-coded Attributes
 `````````````````````

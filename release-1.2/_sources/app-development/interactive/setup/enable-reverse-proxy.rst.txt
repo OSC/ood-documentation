@@ -1,4 +1,4 @@
-.. _install-desktops-enable-reverse-proxy:
+.. _app-development-interactive-setup-enable-reverse-proxy:
 
 Enable Reverse Proxy
 ====================
@@ -19,7 +19,7 @@ Requirements
 - confirm that if you run the command ``hostname`` from a compute node it will
   return a string that matches the above regular expression
 
-  .. code-block:: sh
+  .. code-block:: console
 
      $ hostname
      n0001.ten.osc.edu
@@ -28,25 +28,34 @@ Requirements
 
      If the :command:`hostname` command gives you a value that cannot be used
      to connect to the compute node from the OnDemand host, then you can
-     override it in the cluster config with a Bash command that will work,
-     e.g.:
+     override it in the cluster config with a :command:`bash` command that will
+     work, e.g.:
 
      .. code-block:: yaml
+        :emphasize-lines: 16,23
 
         # /etc/ood/config/clusters.d/cluster1.yml
         ---
         v2:
-          # ...
-          # ... other configuration options ...
-          # ...
+          metadata:
+            title: "Cluster 1"
+          login:
+            host: "cluster1.my_center.edu"
+          job:
+            adapter: "..."
+            ...
           batch_connect:
             basic:
-              # ...
-              # set_host: "host=$(hostname)"
+              script_wrapper: |
+                module purge
+                %s
               set_host: "host=$(hostname -A | awk '{print $1}')"
             vnc:
-              # ...
-              # set_host: "host=$(hostname)"
+              script_wrapper: |
+                module purge
+                export PATH="/usr/local/turbovnc/bin:$PATH"
+                export WEBSOCKIFY_CMD="/usr/local/websockify/run"
+                %s
               set_host: "host=$(hostname -A | awk '{print $1}')"
 
 Steps to Enable in Apache
@@ -64,15 +73,28 @@ Steps to Enable in Apache
    ``config.yml`` as such:
 
    .. code-block:: yaml
+      :emphasize-lines: 18-
 
+      # ~/ood/src/ood-portal-generator/config.yml
       ---
-      # ...
-      # ... any other configuration options you had from before ...
-      # ...
+      servername: webdev05.hpc.osc.edu
+      ssl:
+        - 'SSLCertificateFile "/etc/pki/tls/certs/webdev05.hpc.osc.edu.crt"'
+        - 'SSLCertificateKeyFile "/etc/pki/tls/private/webdev05.hpc.osc.edu.key"'
+        - 'SSLCertificateChainFile "/etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt"'
+      auth:
+        - 'AuthType Basic'
+        - 'AuthName "private"'
+        - 'AuthBasicProvider ldap'
+        - 'AuthLDAPURL "ldaps://openldap1.infra.osc.edu:636/ou=People,ou=hpc,o=osc?uid" SSL'
+        - 'AuthLDAPGroupAttribute memberUid'
+        - 'AuthLDAPGroupAttributeIsDN off'
+        - 'RequestHeader unset Authorization'
+        - 'Require valid-user'
 
-      host_regex: "[\\w.-]+\\.osc\\.edu"
-      node_uri: "/node"
-      rnode_uri: "/rnode"
+      host_regex: '[\w.-]+\.osc\.edu'
+      node_uri: '/node'
+      rnode_uri: '/rnode'
 
    You can read more about these options under
    :ref:`ood-portal-generator-configuration-configure-reverse-proxy`.
@@ -91,15 +113,15 @@ Steps to Enable in Apache
 
       .. code-block:: yaml
 
-         host_regex: "(ab|pn|xy)\\d+"
-         node_uri: "/node"
-         rnode_uri: "/rnode"
+         host_regex: '(ab|pn|xy)\d+'
+         node_uri: '/node'
+         rnode_uri: '/rnode'
 
    .. warning::
 
-      Since we use double quotes in the YAML file to wrap the regular
-      expression, we will need to escape the blackslashes, so ``\w`` becomes
-      ``\\w``. If you use single quotes, you will not need to escape them.
+      Do not add start (``^``, ``A``) or end (``$``, ``Z``) of string/line
+      anchors as this regular expression will be inserted into another regular
+      expression.
 
    .. danger::
 
@@ -114,29 +136,32 @@ Steps to Enable in Apache
 
 #. Re-build the Apache config:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      scl enable rh-ruby22 -- rake
+      $ scl enable rh-ruby22 -- rake
+      mkdir -p build
+      rendering templates/ood-portal.conf.erb => build/ood-portal.conf
 
 #. Copy it over to the default location:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo scl enable rh-ruby22 -- rake install
+      $ sudo scl enable rh-ruby22 -- rake install
+      cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
 
 #. Restart the Apache server:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo service httpd24-httpd restart
+      $ sudo service httpd24-httpd restart
 
    .. warning::
 
       If using **RHEL 7** you will need to replace the above command with:
 
-      .. code-block:: sh
+      .. code-block:: console
 
-         sudo systemctl restart httpd24-httpd
+         $ sudo systemctl restart httpd24-httpd
 
 Verify it Works
 ---------------
@@ -147,32 +172,35 @@ browser.
 
 #. SSH to any compute node that matches the regular expression above:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      ssh n0001.ten.osc.edu
+      $ ssh n0001.ten.osc.edu
 
 #. Start up a very simple listening server on a high number port:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      nc -l 5432
+      $ nc -l 5432
 
 #. In your browser navigate to this server using the Apache reverse proxy with
    the following URL format::
 
-     http://ondemand.domain.edu/node/<host>/<port>/...
+     http://ondemand.my_center.edu/node/<host>/<port>/...
 
    So for our simplified case lets use::
 
-     http://ondemand.domain.edu/node/n0001.ten.osc.edu/5432/
+     http://ondemand.my_center.edu/node/n0001.ten.osc.edu/5432/
 
 #. Go back to your SSH session and verify that it received the browser
-   request::
+   request:
 
-     GET /node/n0691.ten.osc.edu/5432/ HTTP/1.1
-     Host: n0691.ten.osc.edu:5432
-     Upgrade-Insecure-Requests: 1
-     ...
+   .. code-block:: console
+
+      $ nc -l 5432
+      GET /node/n0691.ten.osc.edu/5432/ HTTP/1.1
+      Host: n0691.ten.osc.edu:5432
+      Upgrade-Insecure-Requests: 1
+      ...
 
    .. note::
 

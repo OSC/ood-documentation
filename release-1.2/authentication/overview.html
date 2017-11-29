@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Software Requirements &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Overview &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -38,9 +38,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../index.html"/>
-        <link rel="up" title="Install Desktops" href="../install-desktops.html"/>
-        <link rel="next" title="2. Install Desktop App" href="install-desktop-app.html"/>
-        <link rel="prev" title="Install Desktops" href="../install-desktops.html"/> 
+        <link rel="up" title="Authentication" href="../authentication.html"/>
+        <link rel="next" title="1. Configure Apache Authentication" href="overview/configure-authentication.html"/>
+        <link rel="prev" title="Authentication" href="../authentication.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -100,14 +100,17 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../install-desktops.html">Install Desktops</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Software Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-desktop-app.html">2. Install Desktop App</a></li>
-<li class="toctree-l2"><a class="reference internal" href="customize-desktop-app.html">3. Customize Desktop App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview/configure-authentication.html">1. Configure Apache Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview/map-user.html">2. Setup User Mapping</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
@@ -169,16 +172,16 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../install-desktops.html">Install Desktops</a> &raquo;</li>
+          <li><a href="../authentication.html">Authentication</a> &raquo;</li>
         
-      <li>1. Software Requirements</li>
+      <li>Overview</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/install-desktops/software-requirements.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/authentication/overview.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -192,20 +195,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="software-requirements">
-<span id="install-desktops-software-requirements"></span><h1>1. Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h1>
-<p>The interactive Desktop app requires a Desktop Environment be installed on the
-nodes that the batch job is meant to run on, <strong>NOT</strong> the OnDemand node.</p>
-<p>The following desktops are currently supported:</p>
+  <div class="section" id="overview">
+<span id="authentication-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>Configuring Open OnDemand to work with an Apache authentication module can be
+broken down into two procedures:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.gnome.org/">Gnome</a> 2 (currently we do not support Gnome 3)</li>
-<li><a class="reference external" href="https://mate-desktop.org/">Mate Desktop</a> 1+</li>
+<li>Install and configure the Apache authentication module</li>
+<li>Setup the mapping of the remote user to the local user</li>
 </ul>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Do <strong>NOT</strong> install the Desktop Environment on the <strong>OnDemand node</strong>. The
-above Desktop Environments are <strong>ONLY</strong> for the <strong>compute nodes</strong> you intend
-on launching Desktops on within batch jobs.</p>
+<p>These are discussed in more detail in the following sections.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Setup Authentication Module</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview/configure-authentication.html">1. Configure Apache Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#compile-authentication-module">1.1. Compile Authentication Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#configure-authentication-module">1.2. Configure Authentication Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#add-to-ondemand-portal">1.3. Add to OnDemand Portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#sanitize-session-information">1.4. Sanitize Session Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview/map-user.html">2. Setup User Mapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview/map-user.html#custom-mapping">2.1. Custom Mapping</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -219,10 +232,10 @@ on launching Desktops on within batch jobs.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="install-desktop-app.html" class="btn btn-neutral float-right" title="2. Install Desktop App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="overview/configure-authentication.html" class="btn btn-neutral float-right" title="1. Configure Apache Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../install-desktops.html" class="btn btn-neutral" title="Install Desktops" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../authentication.html" class="btn btn-neutral" title="Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

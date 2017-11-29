@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Modify Cluster Configuration &mdash; Open OnDemand 1.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Setup" href="../setup.html"/>
+        <link rel="next" title="3. Enable Reverse Proxy" href="enable-reverse-proxy.html"/>
+        <link rel="prev" title="1. Software Requirements" href="software-requirements.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Open OnDemand
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../interactive.html">Interactive Apps (Plugins)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../setup.html">Setup</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">2. Modify Cluster Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enable-reverse-proxy.html">3. Enable Reverse Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../form.html">User Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../template.html">Render Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submit.html">Job Submission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../view.html">Connection View</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../add-jupyter.html">Tutorial: Add Jupyter</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../app-development.html">App Development</a> &raquo;</li>
+        
+          <li><a href="../../interactive.html">Interactive Apps (Plugins)</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Setup</a> &raquo;</li>
+        
+      <li>2. Modify Cluster Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/app-development/interactive/setup/modify-cluster-configuration.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="modify-cluster-configuration">
+<span id="app-development-interactive-setup-modify-cluster-configuration"></span><h1>2. Modify Cluster Configuration<a class="headerlink" href="#modify-cluster-configuration" title="Permalink to this headline">¶</a></h1>
+<p>If you haven’t already done so, you will need to first have a corresponding
+cluster configuration file for the cluster you intend to submit
+<a class="reference internal" href="../../../applications/interactive.html#interactive"><span class="std std-ref">Interactive Apps (Plugins)</span></a> batch jobs to. It is recommended you follow the directions
+on <a class="reference internal" href="../../../installation/add-cluster-config.html#add-cluster-config"><span class="std std-ref">Add Cluster Configuration Files</span></a>.</p>
+<p>Modify the cluster configuration file with the necessary information so that
+a batch script generated from an interactive app can find the installed
+copies of <a class="reference external" href="http://www.turbovnc.org/">TurboVNC</a> and <a class="reference external" href="https://github.com/novnc/websockify">websockify</a>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/cluster1.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster</span><span class="nv"> </span><span class="s">1&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1.my_center.edu&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;...&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+</span><span class="hll">        <span class="no">module purge</span>
+</span><span class="hll">        <span class="no">%s</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+</span><span class="hll">        <span class="no">module purge</span>
+</span><span class="hll">        <span class="no">export PATH=&quot;/usr/local/turbovnc/bin:$PATH&quot;</span>
+</span><span class="hll">        <span class="no">export WEBSOCKIFY_CMD=&quot;/usr/local/websockify/run&quot;</span>
+</span><span class="hll">        <span class="no">%s</span>
+</span></pre></div>
+</div>
+<p>where we introduced the configuration option <code class="docutils literal"><span class="pre">batch_connect</span></code> that allows us
+to add global settings for both a <code class="docutils literal"><span class="pre">basic</span></code> interactive web server as well as a
+<code class="docutils literal"><span class="pre">vnc</span></code> interactive web server.</p>
+<p>In the above case we modify the global setting <code class="docutils literal"><span class="pre">script_wrapper</span></code> for both
+<code class="docutils literal"><span class="pre">basic</span></code> and <code class="docutils literal"><span class="pre">vnc</span></code> sessions. This allows us to supply <strong class="command">bash</strong> code
+that wraps around the body of the template script (specified by <code class="docutils literal"><span class="pre">%s</span></code>). First,
+we purge the module environment to remove any conflicting modules that may have
+been loaded by the user’s <code class="docutils literal"><span class="pre">.bashrc</span></code> or <code class="docutils literal"><span class="pre">.bash_profile</span></code> files. Then we
+specify the required environment needed by the <code class="docutils literal"><span class="pre">vnc</span></code> script to launch
+<a class="reference external" href="http://www.turbovnc.org/">TurboVNC</a> and <a class="reference external" href="https://github.com/novnc/websockify">websockify</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You will most likely need to replace the block of code below in your cluster
+configuration file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+  <span class="no">module purge</span>
+  <span class="no">export PATH=&quot;/usr/local/turbovnc/bin:$PATH&quot;</span>
+  <span class="no">export WEBSOCKIFY_CMD=&quot;/usr/local/websockify/run&quot;</span>
+  <span class="no">%s</span>
+</pre></div>
+</div>
+<p class="last">with a block that adds the full path to the TurboVNC binaries into the
+<code class="docutils literal"><span class="pre">PATH</span></code> environment variable as well as the corresponding websockify
+launcher into the <code class="docutils literal"><span class="pre">WEBSOCKIFY_CMD</span></code> environment variable.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not forget to include the <code class="docutils literal"><span class="pre">%s</span></code> in the <code class="docutils literal"><span class="pre">script_wrapper</span></code> configuration
+option. Otherwise the actual <strong class="command">bash</strong> code that launches the
+corresponding web servers will never be interpolated into the main batch
+script and run.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="enable-reverse-proxy.html" class="btn btn-neutral float-right" title="3. Enable Reverse Proxy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="software-requirements.html" class="btn btn-neutral" title="1. Software Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.2.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

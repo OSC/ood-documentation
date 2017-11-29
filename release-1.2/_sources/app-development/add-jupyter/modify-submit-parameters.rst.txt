@@ -7,9 +7,6 @@ In some cases the Jupyter app batch job fails to submit to the given cluster or
 you are not happy with the default chosen submission parameters. This section
 explains how to modify the submission parameters.
 
-Modify Submit File
-------------------
-
 The main responsibility of the ``submit.yml.erb`` file located in the root of
 the app is for modifying the underlying batch script that is generated from an
 internal template and its submission parameters.
@@ -25,26 +22,25 @@ The simplest ``submit.yml.erb`` will look like:
 
 .. code-block:: yaml
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
 
 Which only describes which internal template to use when generating the batch
 script. From here we can add more options to the batch script, such as:
 
 .. code-block:: yaml
+   :emphasize-lines: 5
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
      set_host: "host=$(hostname -A | awk '{print $2}')"
 
-where we override the Bash script used to determine the host name of the
-compute node from within a running batch job.
+where we override the :command:`bash` script used to determine the host name of
+the compute node from within a running batch job.
 
 You can learn more about possible ``batch_connect`` options here:
 
@@ -58,19 +54,18 @@ http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initiali
      /etc/ood/config/clusters.d/cluster.yml
 
    There is further discussion on this under
-   :ref:`install-desktops-modify-cluster-configuration`.
+   :ref:`app-development-interactive-setup-modify-cluster-configuration`.
 
-But in most cases you will want to change the actual job submission parameters (e.g., node type). These are defined under the ``script`` option as:
+But in most cases you will want to change the actual job submission parameters
+(e.g., node type). These are defined under the ``script`` option as:
 
 .. code-block:: yaml
-   :emphasize-lines: 7-
+   :emphasize-lines: 5-
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
-
    script:
      ...
 
@@ -94,24 +89,41 @@ is resource manager dependent. Some examples are given below.
 .. _app-development-add-jupyter-modify-submit-parameters-slurm:
 
 Slurm
-`````
+-----
 
 For Slurm, you can choose the features on a requested node with:
 
 .. code-block:: yaml
-   :emphasize-lines: 7-
+   :emphasize-lines: 5-
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
-
    script:
      native: [ "-N", "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>", "-C", "c12" ]
 
-where we define the :command:`sbatch` parameters as an array under ``script`` and
-``native``.
+where we define the :command:`sbatch` parameters as an array under ``script``
+and ``native``.
+
+Arrays can also be written in YAML as:
+
+.. code-block:: yaml
+   :emphasize-lines: 5-
+
+   # ~/ondemand/dev/jupyter/submit.yml.erb
+   ---
+   batch_connect:
+     template: "basic"
+   script:
+     native:
+       - "-N"
+       - "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
+       - "-C"
+       - "c12"
+
+Depending on how complicated the array gets you may prefer the more expanded
+format.
 
 .. note::
 
@@ -127,19 +139,17 @@ where we define the :command:`sbatch` parameters as an array under ``script`` an
    return a valid number (since it wouldn't make sense to return ``0``).
 
 Torque
-``````
+------
 
 For Torque, you can choose processors-per-node with:
 
 .. code-block:: yaml
-   :emphasize-lines: 7-
+   :emphasize-lines: 5-
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
-
    script:
      native:
        resources:
@@ -155,7 +165,7 @@ For Torque, you can choose processors-per-node with:
    return a valid number (since it wouldn't make sense to return ``0``).
 
 PBS Professional
-````````````````
+----------------
 
 For most cases of PBS Professional you will want to modify how the
 ``bc_num_slots`` (number of CPUs on a single node) is submitted to the batch
@@ -164,19 +174,31 @@ server.
 This can be specified as such:
 
 .. code-block:: yaml
-   :emphasize-lines: 7-
+   :emphasize-lines: 5-
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
-
    script:
      native: [ "-l", "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>" ]
 
 where we define the :command:`qsub` parameters as an array under ``script`` and
 ``native``.
+
+Arrays can also be written in YAML as:
+
+.. code-block:: yaml
+   :emphasize-lines: 5-
+
+   # ~/ondemand/dev/jupyter/submit.yml.erb
+   ---
+   batch_connect:
+     template: "basic"
+   script:
+     native:
+       - "-l"
+       - "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
 
 If you would like to mimic how Torque handles ``bc_num_slots`` (number of
 **nodes**), then we will first need to change the form label of
@@ -184,19 +206,17 @@ If you would like to mimic how Torque handles ``bc_num_slots`` (number of
 the form configuration file the highlighted lines:
 
 .. code-block:: yaml
-   :emphasize-lines: 9-10
+   :emphasize-lines: 8-9
 
-   # form.yml
+   # ~/ondemand/dev/jupyter/form.yml
    ---
    cluster: "cluster1"
-
    attributes:
      modules: "python"
      conda_extensions: "1"
      extra_jupyter_args: ""
      bc_num_slots:
        label: "Number of nodes"
-
    form:
      - modules
      - conda_extensions
@@ -207,29 +227,26 @@ the form configuration file the highlighted lines:
      - bc_queue
      - bc_email_on_started
 
-Now when we go to the Jupyter app form in our browser it will have the new
-label "Number of nodes" instead of "Number of CPUs on a single node".
+Now when we click *Launch Jupyter Notebook* from the app details view, the form
+in the browser will have the new label "Number of nodes" instead of "Number of
+CPUs on a single node".
 
 Next we will need to handle how we submit the ``bc_num_slots`` since it means
 something different now. So we modify the job submission configuration file as
 such:
 
 .. code-block:: yaml
-   :emphasize-lines: 7-
+   :emphasize-lines: 5-
 
-   # submit.yml.erb
+   # ~/ondemand/dev/jupyter/submit.yml.erb
    ---
-
-   batch_connect
+   batch_connect:
      template: "basic"
-
    script:
      native: [ "-l", "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28" ]
 
-where you replace ``ncpus=28`` with the correct number for your cluster.
-
-You can also append ``mem=...gb`` to the ``select=...`` statement if you'd
-like.
+where we replace ``ncpus=28`` with the correct number for your cluster. You can
+also append ``mem=...gb`` to the ``select=...`` statement if you'd like.
 
 .. note::
 
@@ -244,30 +261,13 @@ like.
    returned from web form for "Number of nodes". We check if it is blank and
    return a valid number (since it wouldn't make sense to return ``0``).
 
-Other
-`````
+Other Resource Manager
+----------------------
 
 For most of our other adapters (aside from Torque) the ``native`` attribute is
 an array of command line arguments formatted similarly to the
 :ref:`app-development-add-jupyter-modify-submit-parameters-slurm` example
 above.
-
-Verify it Works
----------------
-
-You can now test the app again by visiting your local OnDemand server in your
-browser:
-
-.. code-block:: http
-
-   GET /pun/sys/dashboard/batch_connect/dev/jupyter_app/session_contexts/new HTTP/1.1
-   Host: ondemand.my_center.edu
-
-Fill in the form and launch the Jupyter batch job. Click the "Session ID" link
-for the launched session and confirm your changes are made under:
-
-- ``job_script_content.sh`` (if modified ``batch_connect``)
-- ``job_script_options.json`` (if modified ``script``)
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
 .. _git: https://git-scm.com/

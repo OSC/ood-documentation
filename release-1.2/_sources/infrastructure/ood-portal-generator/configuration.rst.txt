@@ -146,6 +146,7 @@ Configure General Options
 
           lua_log_level: "info"
 
+.. _ood-portal-generator-user-map-cmd:
 .. describe:: user_map_cmd (String)
 
      the system command used to map authenticated user name to a system user
@@ -165,6 +166,26 @@ Configure General Options
        .. code-block:: yaml
 
           user_map_cmd: "/opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex='^(\\w+)@example.com'"
+
+.. _ood-portal-generator-user-env:
+.. describe:: user_env (String, null)
+
+     the CGI environment variable that holds the authenticated user name used
+     as the argument for the user mapping command
+
+     Default
+       Use ``REMOTE_USER`` if not defined
+
+       .. code-block:: yaml
+
+          user_env: null
+
+     Example
+       Use a custom environment variable instead
+
+       .. code-block:: yaml
+
+          user_env: "OIDC_CLAIM_preferred_username"
 
 .. describe:: map_fail_uri (String, null)
 
