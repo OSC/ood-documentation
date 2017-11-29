@@ -6,14 +6,16 @@ Modify Form Attributes
 In some cases you may want to modify a form attribute. Some examples:
 
 - Use a Gnome desktop instead of Mate desktop.
-- Remove the "Queue" form field as your scheduler will auto route to the correct queue.
+- Remove the "Queue" form field as your scheduler will auto route to the
+  correct queue.
 - Hard-code the "Number of nodes" to just 1, so that users can't launch
   desktops with multiple nodes.
 - Change the label for the form field "Account" to "Project".
 - Add help text to a given form field.
 - Change default value for a form field.
 
-All modifications can be done in your custom desktop app YAML file as such:
+All modifications are done in a custom YAML configuration file that defines a
+given cluster's desktop app:
 
 .. code-block:: yaml
 
@@ -22,12 +24,6 @@ All modifications can be done in your custom desktop app YAML file as such:
    title: "Cluster1 Desktop"
    cluster: "cluster1"
 
-   # Add the below option that allows us to modify form attributes
-   attributes:
-     # ...
-     # modifications go here
-     # ...
-
 Before we begin modifying form attributes. Let us first take a look at the
 default form definition located at :file:`bc_desktop/form.yml`:
 
@@ -35,10 +31,6 @@ default form definition located at :file:`bc_desktop/form.yml`:
 
    # bc_desktop/form.yml
    ---
-   description: |
-     This app will launch an interactive desktop on one or more compute nodes. You
-     will have full access to the resources these nodes provide. This is analogous
-     to an interactive batch job.
    attributes:
      desktop: "mate"
      bc_vnc_idle: 0
@@ -56,19 +48,17 @@ default form definition located at :file:`bc_desktop/form.yml`:
      - bc_vnc_resolution
      - bc_email_on_started
 
-The ``description``, ``attributes``, and ``form`` configuration options can be
-all overridden in our local YAML configuration file. But typically you will
-only modify ``description`` and/or the ``attributes`` options.
+The ``attributes`` and ``form`` configuration options can all be overridden in
+our local YAML configuration file. But typically you will only modify the
+``attributes`` options.
 
 In the following sections you will find common examples on how to override the
 above options.
 
-.. note::
+.. warning::
 
    The ``form`` configuration option defines all the available attributes as
    well as the order they appear in the form.
-
-.. warning::
 
    Caution must be taken if you decide to override the ``form`` configuration
    option. As this is an array, you can't simply prepend or append, you will
@@ -82,13 +72,12 @@ The default installation has the ``desktop`` attribute hard-coded to the value
 the following edits to your custom YAML configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that allows us to modify form attributes
    attributes:
      desktop: "gnome"
 
@@ -109,13 +98,12 @@ from the Desktop form you can make the following edits to your custom YAML
 configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that allows us to modify form attributes
    attributes:
      bc_queue: null
 
@@ -144,13 +132,12 @@ under the attribute ``bc_num_slots``, you can make the following edits to your
 custom YAML configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that allows us to modify form attributes
    attributes:
      bc_num_slots: 1
 
@@ -164,7 +151,7 @@ return ``"1"``.
    If you have any
    :ref:`install-desktops-customize-desktop-app-custom-job-submission`
    configuration files that use this attribute, care must be taken when
-   handling the attribute as it will always come back as a Ruby string.
+   handling the attribute as it will always come back as a `Ruby String`_.
 
    So if you hard-coded an attribute to the integer ``1`` it will come back as
    the string ``"1"`` and if you perform any arithmetic operations on this
@@ -182,13 +169,12 @@ by the ``bc_account`` attribute to instead display "Project". This can be
 modified with the following edits to your custom YAML configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that allows us to modify form attributes
    attributes:
      bc_account:
        label: "Project"
@@ -225,13 +211,12 @@ For example, if you would like to add a help message to the attribute
 configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that allows us to modify form attributes
    attributes:
      bc_account:
        help: "You can leave this blank if **not** in multiple projects."
@@ -249,8 +234,6 @@ below the "Account" form input field.
    Help messages can be written in Markdown_ format, but it is best not to get
    carried away in the size of the help message.
 
-.. _markdown: https://en.wikipedia.org/wiki/Markdown
-
 Change Field Default Value
 --------------------------
 
@@ -263,13 +246,12 @@ change it then you can make the following edits in your custom YAML
 configuration file:
 
 .. code-block:: yaml
+   :emphasize-lines: 5-
 
    # bc_desktop/local/cluster1.yml
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
-
-   # Add the below option that allows us to modify form attributes
    attributes:
      bc_num_hours:
        value: 8
@@ -289,3 +271,6 @@ value of ``8`` in the "Number of hours" form field.
    **remembers** your last successful app launch for a corresponding app. So
    when you go back to the form page for that given app, it will auto-fill in
    the form with your previous values.
+
+.. _ruby string: https://ruby-doc.org/core-2.2.0/String.html
+.. _markdown: https://en.wikipedia.org/wiki/Markdown

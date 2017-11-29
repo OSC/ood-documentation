@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5.2. Custom Job Submission &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>3.2. Custom Job Submission &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -38,9 +38,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
-        <link rel="up" title="5. Customize Desktop App" href="../customize-desktop-app.html"/>
+        <link rel="up" title="3. Customize Desktop App" href="../customize-desktop-app.html"/>
         <link rel="next" title="Install Other Interactive Apps" href="../../install-ihpc-apps.html"/>
-        <link rel="prev" title="5.1. Modify Form Attributes" href="modify-form-attributes.html"/> 
+        <link rel="prev" title="3.1. Modify Form Attributes" href="modify-form-attributes.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -102,16 +102,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../modify-cluster-configuration.html">2. Modify Cluster Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../enable-reverse-proxy.html">3. Enable Reverse Proxy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install-desktop-app.html">4. Install Desktop App</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../customize-desktop-app.html">5. Customize Desktop App</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="modify-form-attributes.html">5.1. Modify Form Attributes</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">5.2. Custom Job Submission</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#slurm">5.2.1. Slurm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#torque">5.2.2. Torque</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#lsf">5.2.3. LSF</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pbs-professional">5.2.4. PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install-desktop-app.html">2. Install Desktop App</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../customize-desktop-app.html">3. Customize Desktop App</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="modify-form-attributes.html">3.1. Modify Form Attributes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3.2. Custom Job Submission</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slurm">3.2.1. Slurm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque">3.2.2. Torque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pbs-professional">3.2.3. PBS Professional</a></li>
 </ul>
 </li>
 </ul>
@@ -183,9 +180,9 @@
         
           <li><a href="../../install-desktops.html">Install Desktops</a> &raquo;</li>
         
-          <li><a href="../customize-desktop-app.html">5. Customize Desktop App</a> &raquo;</li>
+          <li><a href="../customize-desktop-app.html">3. Customize Desktop App</a> &raquo;</li>
         
-      <li>5.2. Custom Job Submission</li>
+      <li>3.2. Custom Job Submission</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -207,22 +204,20 @@
            <div itemprop="articleBody">
             
   <div class="section" id="custom-job-submission">
-<span id="install-desktops-customize-desktop-app-custom-job-submission"></span><h1>5.2. Custom Job Submission<a class="headerlink" href="#custom-job-submission" title="Permalink to this headline">¶</a></h1>
+<span id="install-desktops-customize-desktop-app-custom-job-submission"></span><h1>3.2. Custom Job Submission<a class="headerlink" href="#custom-job-submission" title="Permalink to this headline">¶</a></h1>
 <p>To customize job submission we will need to first edit our custom desktop app
 YAML file as such:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># bc_desktop/local/cluster1.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
-
-<span class="c1"># Add the below option that points to our custom job submission</span>
-<span class="c1"># configuration file</span>
-<span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
-</pre></div>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
+</span></pre></div>
 </div>
 <p>Notice we included the configuration option <code class="docutils literal"><span class="pre">submit</span></code> that points to our
 custom job submission YAML configuration file. This can be an absolute file
-path or a relative file path with respect to the <code class="docutils literal"><span class="pre">local/</span></code> directory.</p>
+path or a relative file path with respect to the <code class="docutils literal"><span class="pre">bc_desktop/local/</span></code>
+directory.</p>
 <p>We can now create and modify a job submission configuration file at:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bc_desktop</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="n">my_submit</span><span class="o">.</span><span class="n">yml</span><span class="o">.</span><span class="n">erb</span>
 </pre></div>
@@ -268,7 +263,7 @@ enable it, unless you add it to a custom job submission configuration file.</p>
 <p>Some examples on how to submit jobs using the above form attributes are given
 in the following sections for the given resource manager.</p>
 <div class="section" id="slurm">
-<h2>5.2.1. Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.1. Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h2>
 <p>For most cases of Slurm you will want to modify how the <code class="docutils literal"><span class="pre">bc_num_slots</span></code>
 (number of nodes) is submitted to the batch server.</p>
 <p>This can be handled in your custom job submission configuration file as such:</p>
@@ -289,7 +284,7 @@ using the <code class="docutils literal"><span class="pre">native</span></code> 
 </div>
 </div>
 <div class="section" id="torque">
-<h2>5.2.2. Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.2. Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h2>
 <p>For most cases of Torque you will want to modify how the <code class="docutils literal"><span class="pre">bc_num_slots</span></code>
 (number of nodes) is submitted to the batch server.</p>
 <p>This can be handled in your custom job submission configuration file as such:</p>
@@ -312,12 +307,8 @@ when using Torque please see the <a class="reference external" href="http://www.
 using the <code class="docutils literal"><span class="pre">native</span></code> fallback.</p>
 </div>
 </div>
-<div class="section" id="lsf">
-<h2>5.2.3. LSF<a class="headerlink" href="#lsf" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
-</div>
 <div class="section" id="pbs-professional">
-<h2>5.2.4. PBS Professional<a class="headerlink" href="#pbs-professional" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.3. PBS Professional<a class="headerlink" href="#pbs-professional" title="Permalink to this headline">¶</a></h2>
 <p>For most cases of PBS Professional you will want to modify how the
 <code class="docutils literal"><span class="pre">bc_num_slots</span></code> (number of CPUs on a single node) is submitted to the batch
 server.</p>
@@ -340,12 +331,10 @@ our Desktop app local YAML configuration file:</p>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
-
-<span class="c1"># Add the below option that allows us to modify attributes</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
+</span><span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
 </pre></div>
 </div>
 <p>Now when we go to the Desktop app form in our browser it will have the new
@@ -382,7 +371,7 @@ using the <code class="docutils literal"><span class="pre">native</span></code> 
         <a href="../../install-ihpc-apps.html" class="btn btn-neutral float-right" title="Install Other Interactive Apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="modify-form-attributes.html" class="btn btn-neutral" title="5.1. Modify Form Attributes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modify-form-attributes.html" class="btn btn-neutral" title="3.1. Modify Form Attributes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

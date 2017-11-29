@@ -14,18 +14,12 @@ We will begin by first copying over a pre-built example Jupyter app.
    - get a working Jupyter app running at your center
    - introduce you to app development and make you an Interactive App developer
 
-Steps to Copy
--------------
-
 #. We do all of our app development in our Open OnDemand sandbox directory:
 
    .. code-block:: sh
 
       # Create the sandbox directory if it doesn't already exist
       mkdir -p ~/ondemand/dev
-
-      # Change our working directory
-      cd ~/ondemand/dev
 
    .. note::
 
@@ -71,33 +65,60 @@ Steps to Copy
 
           https://ondemand.my_center.edu/pun/sys/dashboard/batch_connect/dev/<app_directory>/session_contexts/new
 
-#. Download our example Jupyter app using `git`_:
+#. After creating the sandbox directory navigate in your browser to::
 
-   .. code-block:: sh
+     https://ondemand.my_center.edu/
 
-      git clone https://github.com/OSC/bc_example_jupyter.git jupyter_app
+   you should now see a *Develop* dropdown menu option in the top right of the
+   :ref:`dashboard`.
 
-#. Change our working directory:
+#. Open up the *Develop* menu dropdown and click the link *My Sandbox Apps
+   (Development)*.
 
-   .. code-block:: sh
+#. You will navigate to a page that lists all of your sandbox apps (all the
+   apps in your sandbox directory). For now click *New App* in the top left
+   of the page.
 
-      cd jupyter_app
+#. Currently there is only one option for building new apps and that is to
+   "Clone an existing app". Click the button *Clone Existing App*.
 
-#. Wipe the previous `git`_ history so we have a fresh app:
+#. Now we are presented with a form that describes how we will clone the app.
 
-   .. code-block:: sh
+     Directory name
+       this is the directory that the app will be cloned to in our sandbox
+       directory (must be unique)
+     Git remote
+       this is the link to the git repo that is cloned
+     Create a new Git Project from this?
+       whether we want to create a new app from this git repo
 
-      rm -fr .git
+   For now fill in the form with the following values:
 
-#. Unlike system apps you do **not** need to install this app to another
-   directory. As it is already in the *special* sandbox directory the app is
-   already accessible from your browser.
+     Directory name
+       ``jupyter``
+     Git remote
+       ``https://github.com/OSC/bc_example_jupyter.git``
+     Create a new Git Project from this?
+       check this!
+
+   Then click *Submit*.
+
+#. You should now see a details view of the Jupyter app you just created. If
+   you click *Launch Jupyter Notebook* it should open a new tab with the
+   following warning:
+
+     This app requires a cluster that does not exist.
+
+   If you see this warning message then continue on.
 
 .. note::
 
    It is recommended you version your new app using `git`_.
 
    .. code-block:: sh
+
+      # Go to the app directory
+      cd ~/ondemand/dev/jupyter
 
       # Create a local repository
       git init
@@ -107,40 +128,5 @@ Steps to Copy
 
       # Make your first commit
       git commit -m 'my first commit'
-
-Verify it Works
----------------
-
-You can now test that this app is *functional* by visiting your local OnDemand
-server in your browser:
-
-.. code-block:: http
-
-   GET /pun/sys/dashboard/batch_connect/dev/jupyter_app/session_contexts/new HTTP/1.1
-   Host: ondemand.my_center.edu
-
-.. note::
-
-   By default all browsers send ``GET`` requests when navigating to a URL. The
-   above block can be accessed simply by navigating to the following URL in
-   your browser::
-
-     https://ondemand.my_center.edu/pun/sys/dashboard/batch_connect/dev/jupyter_app/session_contexts/new
-
-   Where you replace ``ondemand.my_center.edu`` with your domain.
-
-   *Keep this link handy as you will want to access it everytime you make
-   changes to the app code to test your changes.*
-
-Notice that we have ``dev/jupyter_app`` in the above URL. This tells the
-Dashboard app (which is responsible for launching these Batch Connect plugins)
-to search for the app in a directory called ``jupyter_app`` in your OnDemand
-sandbox directory.
-
-.. warning::
-
-   The app will probably display a warning about requiring a cluster. This is
-   perfectly fine. Continue on to the next section to learn about customizing
-   the app.
 
 .. _git: https://git-scm.com/

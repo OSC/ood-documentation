@@ -1,26 +1,30 @@
-.. _install-desktops-modify-cluster-configuration:
+.. _app-development-interactive-setup-modify-cluster-configuration:
 
 Modify Cluster Configuration
 ============================
 
 If you haven't already done so, you will need to first have a corresponding
-cluster configuration file for the cluster you intend to launch desktops on. It
-is recommended you follow the directions on :ref:`add-cluster-config`. In order
-to submit interactive Desktop jobs your cluster must be properly configured to
-submit jobs, which means the config will have a ``job:`` section.
+cluster configuration file for the cluster you intend to submit
+:ref:`interactive` batch jobs to. It is recommended you follow the directions
+on :ref:`add-cluster-config`.
 
 Modify the cluster configuration file with the necessary information so that
 a batch script generated from an interactive app can find the installed
-copies of TurboVNC and websockify:
+copies of `TurboVNC`_ and `websockify`_:
 
 .. code-block:: yaml
+   :emphasize-lines: 11-
 
    # /etc/ood/config/clusters.d/cluster1.yml
    ---
    v2:
-     # ...
-     # ... other configuration options ...
-     # ...
+     metadata:
+       title: "Cluster 1"
+     login:
+       host: "cluster1.my_center.edu"
+     job:
+       adapter: "..."
+       ...
      batch_connect:
        basic:
          script_wrapper: |
@@ -38,12 +42,12 @@ to add global settings for both a ``basic`` interactive web server as well as a
 ``vnc`` interactive web server.
 
 In the above case we modify the global setting ``script_wrapper`` for both
-``basic`` and ``vnc`` sessions. This allows us to supply Bash code that wraps
-around the body of the template script (specified by ``%s``). First, we purge
-the module environment to remove any conflicting modules that may have been
-loaded by the user's ``.bashrc`` or ``.bash_profile`` files. Then we specify
-the required environment needed by the ``vnc`` script to launch websockify and
-TurboVNC.
+``basic`` and ``vnc`` sessions. This allows us to supply :command:`bash` code
+that wraps around the body of the template script (specified by ``%s``). First,
+we purge the module environment to remove any conflicting modules that may have
+been loaded by the user's ``.bashrc`` or ``.bash_profile`` files. Then we
+specify the required environment needed by the ``vnc`` script to launch
+`TurboVNC`_ and `websockify`_.
 
 .. note::
 
@@ -65,5 +69,9 @@ TurboVNC.
 .. warning::
 
    Do not forget to include the ``%s`` in the ``script_wrapper`` configuration
-   option. Otherwise the actual Bash code that launches the corresponding web
-   servers will never be interpolated into the main batch script and run.
+   option. Otherwise the actual :command:`bash` code that launches the
+   corresponding web servers will never be interpolated into the main batch
+   script and run.
+
+.. _turbovnc: http://www.turbovnc.org/
+.. _websockify: https://github.com/novnc/websockify

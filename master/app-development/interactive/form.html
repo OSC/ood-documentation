@@ -40,7 +40,7 @@
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Interactive Apps (Plugins)" href="../interactive.html"/>
         <link rel="next" title="Render Template" href="template.html"/>
-        <link rel="prev" title="Interactive Apps (Plugins)" href="../interactive.html"/> 
+        <link rel="prev" title="3. Enable Reverse Proxy" href="setup/enable-reverse-proxy.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -116,6 +116,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps (Plugins)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">User Form</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes</a></li>
@@ -224,13 +225,11 @@ the session context) that make up the Interactive App</li>
 <div class="highlight-default"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app/form.yml
 </pre></div>
 </div>
-<p>Then in the browser, navigating with the following HTTP request</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.my_center.edu</span>
-</pre></div>
-</div>
-<p>displays the HTML form used to gather the user-defined attributes for building
-and launching the <code class="docutils literal"><span class="pre">my_app</span></code> Interactive App session.</p>
+<p>Then in the browser, navigate to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> and choose in the top
+right menu: <em>Develop</em> → <em>My Sandbox Apps (Development)</em>. Finally click <em>Launch
+My App</em> from the list of sandbox apps.</p>
+<p>You should now see the HTML form used to gather the user-defined attributes for
+building and launching the <code class="docutils literal"><span class="pre">my_app</span></code> Interactive App session.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">You can include dynamically generated content in the form by renaming the
@@ -605,14 +604,9 @@ cluster configuration file:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">owens</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
-<p>After modifying the <code class="docutils literal"><span class="pre">form.yml</span></code> you can navigate in your browser to the
-following URL</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.my_center.edu</span>
-</pre></div>
-</div>
-<p>and be presented with <strong>ONLY</strong> a Launch button, since we didn’t define
-<code class="docutils literal"><span class="pre">form:</span></code> or <code class="docutils literal"><span class="pre">attributes:</span></code>.</p>
+<p>After modifying the <code class="docutils literal"><span class="pre">form.yml</span></code> click <em>Launch My App</em> from the Dashboard
+sandbox app list and you should be presented with <strong>ONLY</strong> a Launch button,
+since we didn’t define <code class="docutils literal"><span class="pre">form:</span></code> or <code class="docutils literal"><span class="pre">attributes:</span></code>.</p>
 <div class="section" id="user-defined-attributes">
 <h3>User-defined Attributes<a class="headerlink" href="#user-defined-attributes" title="Permalink to this headline">¶</a></h3>
 <p>The following configuration file</p>
@@ -624,16 +618,11 @@ following URL</p>
 </pre></div>
 </div>
 <p>defines a session context attribute called <code class="docutils literal"><span class="pre">my_module_version</span></code>.</p>
-<p>After modifying the <code class="docutils literal"><span class="pre">form.yml</span></code> you can navigate your browser to the following
-URL</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/pun/sys/dashboard/batch_connect/dev/my_app/session_contexts/new</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.my_center.edu</span>
-</pre></div>
-</div>
-<p>and you will see an empty text box with the label “My Module Version”. The user
-can input any value here and launch the Interactive App session. This value
-will be made available to the batch job script and submission parameters that
-are discussed in a later section.</p>
+<p>After modifying the <code class="docutils literal"><span class="pre">form.yml</span></code> click <em>Launch My App</em> from the Dashboard
+sandbox app list and you will see an empty text box with the label “My Module
+Version”. The user can input any value here and launch the Interactive App
+session. This value will be made available to the batch job script and
+submission parameters that are discussed in a later section.</p>
 </div>
 <div class="section" id="hard-coded-attributes">
 <h3>Hard-coded Attributes<a class="headerlink" href="#hard-coded-attributes" title="Permalink to this headline">¶</a></h3>
@@ -702,7 +691,7 @@ attribute</li>
         <a href="template.html" class="btn btn-neutral float-right" title="Render Template" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../interactive.html" class="btn btn-neutral" title="Interactive Apps (Plugins)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="setup/enable-reverse-proxy.html" class="btn btn-neutral" title="3. Enable Reverse Proxy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
