@@ -17,7 +17,7 @@ for users to connect to web applications running as their local system account.
    * - mod_ood_proxy
      - https://github.com/OSC/mod_ood_proxy
    * - ood_auth_map
-     - https://github.com/OSC/ood_auth_map
+     - https://github.com/OSC/ood_auth_map
    * - nginx_stage
      - https://github.com/OSC/nginx_stage
 
