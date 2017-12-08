@@ -32,6 +32,6 @@ node:
 
 .. _jupyter notebook: http://jupyter.readthedocs.io/en/latest/
 .. _openssl: https://www.openssl.org/
-.. _anaconda: https://www.continuum.io/anaconda-overview
-.. _jupyter notebook extensions: https://docs.continuum.io/anaconda/user-guide/tasks/use-jupyter-notebook-extensions
+.. _anaconda: https://www.anaconda.com/distribution/
+.. _jupyter notebook extensions: https://docs.anaconda.com/anaconda/user-guide/tasks/use-jupyter-notebook-extensions
 .. _lmod: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
