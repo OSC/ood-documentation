@@ -22,7 +22,7 @@ These directions are for installing from source.
 
    .. code-block:: sh
 
-      wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
+      wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
       tar xzf cjose-0.5.1.tar.gz
       cd cjose-0.5.1
       ./configure
@@ -33,7 +33,7 @@ These directions are for installing from source.
 
    .. code-block:: sh
 
-      wget https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
+      wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
       tar xzf mod_auth_openidc-2.3.2.tar.gz
       cd mod_auth_openidc-2.3.2
 
@@ -56,16 +56,16 @@ These directions are for installing from source.
 
 .. note::
 
-   https://github.com/pingidentity/mod_auth_openidc does provide rpms for
+   https://github.com/zmartzone/mod_auth_openidc does provide rpms for
    both cjose and mod_auth_openidc. However, we have yet to verify this works with
    the SCL Apache package we use.
 
-   `Release v2.3.2 Downloads <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.2>`_
+   `Release v2.3.2 Downloads <https://github.com/zmartzone/mod_auth_openidc/releases/tag/v2.3.2>`_
    at bottom of the page includes an rpm for RHEL7, that is presumably built
    against Apache 2.4, so that might work.
    The RHEL6 rpm will not, however, as it is built against Apache 2.2
    You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
-   (see `Downloads for v2.3.0 <https://github.com/pingidentity/mod_auth_openidc/releases/tag/v2.3.0>`_).
+   (see `Downloads for v2.3.0 <https://github.com/zmartzone/mod_auth_openidc/releases/tag/v2.3.0>`_).
 
    Both of these rpms actually install the modules to a different locations than
    the SCL package, so if you use the rpm, you will need to copy the files to
