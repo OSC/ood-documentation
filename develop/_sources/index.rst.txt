@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Open OnDemand's documentation!
-=========================================
+Open OnDemand
+=============
+
+`Website`_ | `Mailing list`_ | `GitHub`_
 
 .. toctree::
    :maxdepth: 2
@@ -44,3 +46,7 @@ Welcome to Open OnDemand's documentation!
    release-notes/v1.2-release-notes
    release-notes/v1.1-release-notes
    release-notes/v1.0-release-notes
+
+.. _website: https://osc.github.io/Open-OnDemand/
+.. _mailing list: https://lists.osu.edu/mailman/listinfo/ood-users
+.. _github: https://github.com/OSC/Open-OnDemand
