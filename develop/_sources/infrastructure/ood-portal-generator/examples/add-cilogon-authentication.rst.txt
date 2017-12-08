@@ -124,7 +124,7 @@ Build the Apache configuration file and install it. Fingers crossed it all
 works.
 
 .. _cilogon: http://www.cilogon.org/
-.. _mod_auth_openidc: https://github.com/pingidentity/mod_auth_openidc
+.. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
 .. _ood_auth_discovery: https://github.com/OSC/ood_auth_discovery/
 .. _ood_auth_registration: https://github.com/OSC/ood_auth_registration/
 .. _ood_auth_mapdn: https://github.com/OSC/ood_auth_mapdn/
