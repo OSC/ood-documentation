@@ -17,7 +17,7 @@ There are two ways to build the documentation.
 1. Use the Docker image that is used to build them in production using Travis.
 2. Use pipenv to install local dependencies. `pipenv` has become the [recommended
    package to use by python.org for dependency
-   management](https://packaging.python.org/new-tutorials/installing-and-using-packages/)
+   management](https://packaging.python.org/tutorials/managing-dependencies/)
 
 #### Docker
 
