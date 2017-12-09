@@ -73,5 +73,5 @@ specify the required environment needed by the ``vnc`` script to launch
    corresponding web servers will never be interpolated into the main batch
    script and run.
 
-.. _turbovnc: http://www.turbovnc.org/
+.. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify

@@ -7,9 +7,21 @@ Enabling App Development
 1. Enable App Development Mode in Dashboard
 -------------------------------------------
 
-Enable App Development Mode in the Dashboard in two ways:
+Enable App Development Mode in the Dashboard in three ways:
 
-A. Enable for every user using environment variable
+A. Enable your own account by creating the sandbox directory 
+............................................................
+
+Each user can by default enable app development by creating the directory that holds the sandbox apps. In a Shell session, create the dev directory in your home directory:
+
+.. code-block:: sh
+
+   mkdir -p ~/ondemand/dev
+
+Then reload OnDemand dashboard to see the Develop dropdown appear. Note: this will work only if the administrator has not configured the dashboard to enable or disable app development in the dashboard.
+
+
+B. Enable for every user using environment variable
 ...................................................
 
 In the root of the dashboard app, add these contents to a file ``.env.local``:
@@ -24,7 +36,7 @@ set to true, and the Develop dropdown will
 appear.
 
 
-B. Enable for specific users using custom initializer
+C. Enable for specific users using custom initializer
 .....................................................
 
 Create a custom initializer file in the Dashboard app: ``config/initializers/ood.rb``
