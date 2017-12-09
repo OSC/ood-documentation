@@ -19,5 +19,5 @@ For VNC server support:
    software requirements are **ONLY** for the **compute nodes** you intend on
    launching Desktops on within batch jobs.
 
-.. _turbovnc: http://www.turbovnc.org/
+.. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify

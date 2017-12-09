@@ -631,7 +631,7 @@ on mod_auth_openidc_.
 
           oidc_discover_root: "/var/www/ood/discover"
 
-.. _mod_auth_openidc: https://github.com/pingidentity/mod_auth_openidc
+.. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
 
 Configure User Registration
 ---------------------------
