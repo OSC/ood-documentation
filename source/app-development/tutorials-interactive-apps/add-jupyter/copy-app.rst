@@ -1,4 +1,4 @@
-.. _app-development-add-jupyter-copy-app:
+.. _app-development-tutorials-interactive-apps-add-jupyter-copy-app:
 
 Copy Jupyter App
 ================

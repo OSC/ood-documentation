@@ -1,7 +1,7 @@
-.. _app-development-add-jupyter:
+.. _app-development-tutorials-interactive-apps-add-jupyter:
 
-Tutorial: Add Jupyter
-======================
+Add a Jupyter App
+=================
 
 This tutorial will walk you through creating an interactive Jupyter app that
 your users will use to launch a `Jupyter Notebook Server`_ within a batch job

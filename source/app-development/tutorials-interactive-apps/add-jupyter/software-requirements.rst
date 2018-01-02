@@ -1,4 +1,4 @@
-.. _app-development-add-jupyter-software-requirements:
+.. _app-development-tutorials-interactive-apps-add-jupyter-software-requirements:
 
 Software Requirements
 =====================
