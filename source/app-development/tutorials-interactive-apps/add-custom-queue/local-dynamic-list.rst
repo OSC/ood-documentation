@@ -78,7 +78,7 @@ options read from a forked off command line call.
 
       # ~/ondemand/dev/jupyter/form.yml.erb
       <%-
-        cmd = "/path/to/sacctmgr -nP list QOS format=name"
+        cmd = "/path/to/sinfo -ho %R"
         begin
           output, status = Open3.capture2e(cmd)
           if status.success?
