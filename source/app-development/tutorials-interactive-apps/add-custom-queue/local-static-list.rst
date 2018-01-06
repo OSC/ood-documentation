@@ -24,42 +24,38 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
    Interactive Apps under the
    :ref:`interactive-development-form-customizing-attributes` section.
 
-#. We first start with the default ``form.yml`` for the Jupyter Interactive
-   App:
+#. Starting with the the default ``form.yml`` for the Jupyter Interactive
+   App, replace the bc_queue field with a custom queue field that is configured
+   as a drop-down of queues/partitions. The code diff is:
 
-   .. code-block:: yaml
+   .. code-block:: diff
 
-      # ~/ondemand/dev/jupyter/form.yml
-      ---
-      cluster: "my_cluster"
-      attributes:
-        modules: "python"
-        conda_extensions: "1"
-        extra_jupyter_args: ""
-      form:
-        - modules
-        - conda_extensions
-        - extra_jupyter_args
-        - bc_account
-        - bc_queue
-        - bc_num_hours
-        - bc_num_slots
-        - bc_email_on_started
+        # ~/ondemand/dev/jupyter/form.yml
+        ---
+        cluster: "my_cluster"
+        attributes:
+          modules: "python"
+          conda_extensions: "1"
+          extra_jupyter_args: ""
+      +   custom_queue:
+      +     label: Queue
+      +     help: Please select a queue from the drop-down.
+      +     widget: select
+      +     options:
+      +       - [ "Queue 1", "queue1" ]
+      +       - [ "Queue 2", "queue2" ]
+        form:
+          - modules
+          - conda_extensions
+          - extra_jupyter_args
+          - bc_account
+      -   - bc_queue
+      +   - custom_queue
+          - bc_num_hours
+          - bc_num_slots
+          - bc_email_on_started
 
-#. We remove the following line from this file:
-
-   .. code-block:: yaml
-      :emphasize-lines: 2
-
-      - bc_account
-      - bc_queue
-      - bc_num_hours
-
-   Now when we refresh the web page for our sandbox Jupyter App we won't see
-   the "Queue" form element anymore.
-
-#. We now add in our custom drop-down attribute with a defined list of
-   queues/partitions:
+  And the resulting yaml is:
 
    .. code-block:: yaml
       :emphasize-lines: 8-14,20
@@ -76,8 +72,8 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
           help: Please select a queue from the drop-down.
           widget: select
           options:
-            - [ "queue1", "queue1" ]
-            - [ "queue2", "queue2" ]
+            - [ "Queue 1", "queue1" ]
+            - [ "Queue 2", "queue2" ]
       form:
         - modules
         - conda_extensions
@@ -89,7 +85,7 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
         - bc_email_on_started
 
    Now when we refresh the web page for our sandbox Jupyter App we will see a
-   "Queue" form element with a drop-down that lists "queue1" and "queue2".
+   "Queue" form element with a drop-down that lists "Queue 1" and "Queue 2".
    Underneath this will be our custom help message defined above.
 
    .. note::
