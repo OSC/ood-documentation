@@ -17,5 +17,5 @@ apps that can be replaced by custom Passenger apps. Or you can create your own.
 
    app-development/enabling-development-mode
    app-development/interactive
-   app-development/tutorial-ps-to-quota
-   app-development/add-jupyter
+   app-development/tutorials-passenger-apps
+   app-development/tutorials-interactive-apps

@@ -1,7 +1,7 @@
-.. _tutorial-ps-to-quota:
+.. _app-development-tutorials-passenger-apps-ps-to-quota:
 
-Tutorial: Creating a status app
-===============================
+Creating a status app
+=====================
 
 Overview of app
 ---------------
