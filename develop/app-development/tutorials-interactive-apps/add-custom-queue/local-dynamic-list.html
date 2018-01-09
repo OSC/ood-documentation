@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Use a Local Dynamic List &mdash; Open OnDemand 1.2.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Add Custom Qeueus/Partitions" href="../add-custom-queue.html"/>
+        <link rel="next" title="v1.2 Release Notes" href="../../../release-notes/v1.2-release-notes.html"/>
+        <link rel="prev" title="Use a Global Static List" href="global-static-list.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">What is Open OnDemand</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interactive.html">Interactive Apps (Plugins)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../add-custom-queue.html">Add Custom Qeueus/Partitions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="local-static-list.html">Use a Local Static List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="global-static-list.html">Use a Global Static List</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Use a Local Dynamic List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../app-development.html">App Development</a> &raquo;</li>
+        
+          <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
+        
+          <li><a href="../add-custom-queue.html">Add Custom Qeueus/Partitions</a> &raquo;</li>
+        
+      <li>Use a Local Dynamic List</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/app-development/tutorials-interactive-apps/add-custom-queue/local-dynamic-list.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-a-local-dynamic-list">
+<span id="app-development-tutorials-interactive-apps-add-custom-queue-local-dynamic-list"></span><h1>Use a Local Dynamic List<a class="headerlink" href="#use-a-local-dynamic-list" title="Permalink to this headline">¶</a></h1>
+<p>This customization is not for the faint of heart as it requires a fair bit of
+<a class="reference external" href="https://www.ruby-lang.org/en/">Ruby</a> knowledge. We will be dynamically generating the queue/partition list
+from the command line whenever a user visits the Interactive App’s form
+submission page. This is accomplished by:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-custom-queue-local-dynamic-list-add-custom-attribute"><span class="std std-ref">Add Custom Attribute to Form</span></a></li>
+<li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-custom-queue-local-dynamic-list-handle-custom-attribute"><span class="std std-ref">Handle Custom Attribute in Job Submission</span></a></li>
+</ol>
+<div class="section" id="add-custom-attribute-to-form">
+<span id="app-development-tutorials-interactive-apps-add-custom-queue-local-dynamic-list-add-custom-attribute"></span><h2>Add Custom Attribute to Form<a class="headerlink" href="#add-custom-attribute-to-form" title="Permalink to this headline">¶</a></h2>
+<p>We want to <strong>replace</strong> the <code class="docutils literal"><span class="pre">bc_queue</span></code> form attribute with a custom HTML
+<code class="docutils literal"><span class="pre">&lt;select&gt;</span></code> element (a drop-down list of options) built up of queue/partition
+options read from a forked off command line call.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can read more about customizing attributes in the <code class="docutils literal"><span class="pre">form.yml</span></code> file for
+Interactive Apps under the
+<a class="reference internal" href="../../interactive/form.html#interactive-development-form-customizing-attributes"><span class="std std-ref">Customizing Attributes</span></a> section.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">First we rename the <code class="docutils literal"><span class="pre">form.yml</span></code> for the Jupyter Interactive App to
+<code class="docutils literal"><span class="pre">form.yml.erb</span></code>:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
+</pre></div>
+</div>
+<p>This will cause the YAML file to be processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (embedded
+Ruby)</a> templating system, which allows us to embed <a class="reference external" href="https://www.ruby-lang.org/en/">Ruby</a> code into the YAML
+configuration file for flow control, variable substitution, and more.</p>
+</li>
+<li><p class="first">Next we remove the <code class="docutils literal"><span class="pre">bc_queue</span></code> field from our <code class="docutils literal"><span class="pre">form.yml</span></code> for the Jupyter
+Interactive App by removing the following line from this file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">We remove the following line from this file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
+<span class="hll"><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
+</span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+</pre></div>
+</div>
+<p>Now when we refresh the web page for our sandbox Jupyter App we won’t see
+the “Queue” form element anymore.</p>
+</li>
+<li><p class="first">We now add in our custom drop-down attribute with a dynamically generated
+list of queues/partitions (using Slurm as the example):</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml.erb</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">&lt;%-</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">cmd = &quot;/path/to/sinfo -ho %R&quot;</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">begin</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">output, status = Open3.capture2e(cmd)</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">if status.success?</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">queues = out.split(&quot;\n&quot;).map(&amp;:strip).reject(&amp;:blank?).sort</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">else</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">raise output</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">end</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">rescue =&gt; e</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">queues = []</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">error = e.message.strip</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">end</span>
+</span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">-%&gt;</span>
+</span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">custom_queue</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Queue</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+</span><span class="hll">      <span class="no">Please select a queue from the drop-down.</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">&lt;%- if error -%&gt;</span>
+</span><span class="hll">
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">&lt;span class=&quot;text-danger&quot;&gt;Error when parsing queues:&lt;/span&gt;</span>
+</span><span class="hll">
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">```</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">&lt;%= error.gsub(&quot;\n&quot;, &quot;\n      &quot;) %&gt;</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">```</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">&lt;%- if queues.blank? -%&gt;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">text_field</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">&lt;%- else -%&gt;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">&lt;%- queues.each do |q| -%&gt;</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">- [ &quot;&lt;%= q %&gt;&quot;, &quot;&lt;%= q %&gt;&quot; ]</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
+</span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
+<span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">custom_queue</span>
+</span>  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+</pre></div>
+</div>
+<p>At the top we have an <em>execution tag</em> that:</p>
+<ul class="simple">
+<li>forks off the <code class="docutils literal"><span class="pre">cmd</span></code> call and records the <code class="docutils literal"><span class="pre">output</span></code> and <code class="docutils literal"><span class="pre">status</span></code> (we
+run this inside the <code class="docutils literal"><span class="pre">begin</span> <span class="pre">...</span> <span class="pre">rescue</span> <span class="pre">...</span> <span class="pre">end</span></code> block in case something
+bad happens when calling the <code class="docutils literal"><span class="pre">cmd</span></code>)</li>
+<li>we split up the lines of the <code class="docutils literal"><span class="pre">output</span></code> into an array and throw away any
+empty lines before saving this into the local variable <code class="docutils literal"><span class="pre">queues</span></code></li>
+<li>if calling <code class="docutils literal"><span class="pre">cmd</span></code> causes an error we store an empty <code class="docutils literal"><span class="pre">queues</span></code> list and
+record the error message</li>
+</ul>
+<p>Later in the YAML file we have a few more <em>execution tags</em> that:</p>
+<ul class="simple">
+<li>appends to the help text an error message if one exists (we have to indent
+the error message if it has newlines to follow YAML formatting)</li>
+<li>if there are no <code class="docutils literal"><span class="pre">queues</span></code> (maybe something bad happened) use a
+<code class="docutils literal"><span class="pre">text_field</span></code> so the user can manually input the queue/partition they
+want</li>
+<li>otherwise loop through the list of <code class="docutils literal"><span class="pre">queues</span></code> and output a YAML list of
+pairs (see the note below)</li>
+</ul>
+<p>Now when we refresh the web page for our sandbox Jupyter App we will see a
+“Queue” form element with a drop-down that lists the formatted output from
+the <code class="docutils literal"><span class="pre">cmd</span></code> we defined. Underneath this will be our custom help message
+defined above.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>An attribute with the field <code class="docutils literal"><span class="pre">widget:</span> <span class="pre">select</span></code> expects an <code class="docutils literal"><span class="pre">options:</span></code>
+field with an array of pairs. The first string in the pair is the option
+text and the second string in the pair is the option value.</p>
+<p>For example:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;Volvo&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;volvo&quot;</span> <span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;Ford&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;ford&quot;</span> <span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;Toyota&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;toyota&quot;</span> <span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p class="last">The user will see a list of options: “Volvo”, “Ford”, and “Toyota” to
+choose from in the HTML form, but the backend will process a value of
+either “volvo”, “ford”, or “toyota” depending on what the user chose.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="handle-custom-attribute-in-job-submission">
+<span id="app-development-tutorials-interactive-apps-add-custom-queue-local-dynamic-list-handle-custom-attribute"></span><h2>Handle Custom Attribute in Job Submission<a class="headerlink" href="#handle-custom-attribute-in-job-submission" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our custom form attribute called <code class="docutils literal"><span class="pre">custom_queue</span></code>, we need to
+tell our app how to handle it when submitting the job. As of right now our app
+has no idea what to do with this value when the user clicks “Launch” after
+filling out the form.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can read more about customizing submission arguments in the
+<code class="docutils literal"><span class="pre">submit.yml.erb</span></code> file for Interactive Apps under the
+<a class="reference internal" href="../../interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> section.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">We first start with the default <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> for the Jupyter
+Interactive App:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">We now create a <code class="docutils literal"><span class="pre">script:</span></code> section if it doesn’t already exist and handle
+the value of the <code class="docutils literal"><span class="pre">custom_queue</span></code> attribute submitted by the user:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= custom_queue.blank? ? &quot;null&quot;</span> <span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">custom_queue.strip %&gt;</span>
+</span></pre></div>
+</div>
+<p>As we allow the user to input the value for <code class="docutils literal"><span class="pre">custom_queue</span></code> we need to be
+careful when handling it:</p>
+<ul class="simple">
+<li>if it is blank we set it to the YAML value <code class="docutils literal"><span class="pre">null</span></code>, which won’t set a
+queue when submitting the job (you can replace this with a default queue
+for all users if you prefer)</li>
+<li>otherwise we set the queue to the user defined string with leading and
+trailing whitespace removed</li>
+</ul>
+<p>We also take advantage of the generic <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script#queue_name-instance_method">OodCore::Job::Script#queue_name</a> method to supply a queue/partition that is resource manager
+(e.g., Slurm, Torque, …) agnostic.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For the queue/partition we do not need to use the <code class="docutils literal"><span class="pre">native:</span></code> field which
+<strong>must be</strong> customized for the specific resource manager you are
+leveraging.</p>
+<p class="last">You can find a list of generic fields that are resource manager agnostic
+under the <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> documentation.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../release-notes/v1.2-release-notes.html" class="btn btn-neutral float-right" title="v1.2 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="global-static-list.html" class="btn btn-neutral" title="Use a Global Static List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Ohio Supercomputer Center.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.2.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
