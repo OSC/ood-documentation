@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. Deploy Jupyter App &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Add a Jupyter App &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -42,9 +42,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
-        <link rel="up" title="Tutorial: Add Jupyter" href="../add-jupyter.html"/>
-        <link rel="next" title="v1.2 Release Notes" href="../../release-notes/v1.2-release-notes.html"/>
-        <link rel="prev" title="4. Modify Submit Parameters" href="modify-submit-parameters.html"/> 
+        <link rel="up" title="Tutorials: Interactive Apps" href="../tutorials-interactive-apps.html"/>
+        <link rel="next" title="1. Software Requirements" href="add-jupyter/software-requirements.html"/>
+        <link rel="prev" title="Tutorials: Interactive Apps" href="../tutorials-interactive-apps.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -123,13 +123,17 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interactive.html">Interactive Apps (Plugins)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Jupyter App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="customize-attributes.html">3. Customize Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">5. Deploy Jupyter App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Add a Jupyter App</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="add-jupyter/software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-jupyter/copy-app.html">2. Copy Jupyter App</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-jupyter/customize-attributes.html">3. Customize Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-jupyter/deploy.html">5. Deploy Jupyter App</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="add-custom-queue.html">Add Custom Qeueus/Partitions</a></li>
 </ul>
 </li>
 </ul>
@@ -186,16 +190,16 @@
         
           <li><a href="../../app-development.html">App Development</a> &raquo;</li>
         
-          <li><a href="../add-jupyter.html">Tutorial: Add Jupyter</a> &raquo;</li>
+          <li><a href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-      <li>5. Deploy Jupyter App</li>
+      <li>Add a Jupyter App</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/app-development/add-jupyter/deploy.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/app-development/tutorials-interactive-apps/add-jupyter.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -209,33 +213,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="deploy-jupyter-app">
-<span id="app-development-add-jupyter-deploy"></span><h1>5. Deploy Jupyter App<a class="headerlink" href="#deploy-jupyter-app" title="Permalink to this headline">¶</a></h1>
-<p>After you’ve confirmed you are happy with all of your app changes you can
-deploy it as a System App.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The following steps <strong>MUST</strong> be done from the OnDemand host and not another
-machine.</p>
+  <div class="section" id="add-a-jupyter-app">
+<span id="app-development-tutorials-interactive-apps-add-jupyter"></span><h1>Add a Jupyter App<a class="headerlink" href="#add-a-jupyter-app" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will walk you through creating an interactive Jupyter app that
+your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> within a batch job
+on a compute node. The user will then be able to connect to the running server
+through their browser and take advantage of the resources provided within the
+batch job.</p>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">Confirm that you have walked through the
+<a class="reference internal" href="../interactive/setup.html#app-development-interactive-setup"><span class="std std-ref">Setup</span></a> instructions for <a class="reference internal" href="../../applications/interactive.html#interactive"><span class="std std-ref">Interactive Apps (Plugins)</span></a>
+before continuing on.</p>
 </div>
-<ol class="arabic">
-<li><p class="first">Go to your OnDemand sandbox directory:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ondemand/dev
-</pre></div>
-</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Quick Start Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="add-jupyter/software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-jupyter/copy-app.html">2. Copy Jupyter App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-jupyter/customize-attributes.html">3. Customize Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html">4. Modify Submit Parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#slurm">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#torque">Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#pbs-professional">PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#other-resource-manager">Other Resource Manager</a></li>
+</ul>
 </li>
-<li><p class="first">Copy the app to the system deployment location as <strong>root</strong>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo cp -r jupyter /var/www/ood/apps/sys/.
-</pre></div>
+<li class="toctree-l1"><a class="reference internal" href="add-jupyter/deploy.html">5. Deploy Jupyter App</a></li>
+</ul>
 </div>
-</li>
-<li><p class="first">In your browser navigate to the OnDemand URL and confirm you see the new app
-in the <em>Interactive Apps</em> dropdown on the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span>
-</pre></div>
-</div>
-</li>
-</ol>
 </div>
 
 
@@ -248,10 +254,10 @@ in the <em>Interactive Apps</em> dropdown on the <a class="reference internal" h
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../release-notes/v1.2-release-notes.html" class="btn btn-neutral float-right" title="v1.2 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="add-jupyter/software-requirements.html" class="btn btn-neutral float-right" title="1. Software Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="modify-submit-parameters.html" class="btn btn-neutral" title="4. Modify Submit Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tutorials-interactive-apps.html" class="btn btn-neutral" title="Tutorials: Interactive Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

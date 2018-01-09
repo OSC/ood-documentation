@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Software Requirements &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Add Custom Qeueus/Partitions &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -42,9 +42,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
-        <link rel="up" title="Tutorial: Add Jupyter" href="../add-jupyter.html"/>
-        <link rel="next" title="2. Copy Jupyter App" href="copy-app.html"/>
-        <link rel="prev" title="Tutorial: Add Jupyter" href="../add-jupyter.html"/> 
+        <link rel="up" title="Tutorials: Interactive Apps" href="../tutorials-interactive-apps.html"/>
+        <link rel="next" title="Use a Local Static List" href="add-custom-queue/local-static-list.html"/>
+        <link rel="prev" title="5. Deploy Jupyter App" href="add-jupyter/deploy.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -123,13 +123,15 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interactive.html">Interactive Apps (Plugins)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial-ps-to-quota.html">Tutorial: Creating a status app</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../add-jupyter.html">Tutorial: Add Jupyter</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Jupyter App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="customize-attributes.html">3. Customize Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploy.html">5. Deploy Jupyter App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="add-jupyter.html">Add a Jupyter App</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Add Custom Qeueus/Partitions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="add-custom-queue/local-static-list.html">Use a Local Static List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-custom-queue/global-static-list.html">Use a Global Static List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-custom-queue/local-dynamic-list.html">Use a Local Dynamic List</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -186,16 +188,16 @@
         
           <li><a href="../../app-development.html">App Development</a> &raquo;</li>
         
-          <li><a href="../add-jupyter.html">Tutorial: Add Jupyter</a> &raquo;</li>
+          <li><a href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-      <li>1. Software Requirements</li>
+      <li>Add Custom Qeueus/Partitions</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/app-development/add-jupyter/software-requirements.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.2/source/app-development/tutorials-interactive-apps/add-custom-queue.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -209,35 +211,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="software-requirements">
-<span id="app-development-add-jupyter-software-requirements"></span><h1>1. Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h1>
-<p>The Jupyter app requires the following software to be installed on the
-<strong>compute</strong> nodes that that batch job is meant to run on, <strong>NOT</strong> the OnDemand
-node:</p>
-<ul class="simple">
-<li><a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook</a> 4.2.3+ (earlier versions are untested by may work for
-you)</li>
-<li><a class="reference external" href="https://www.openssl.org/">OpenSSL</a> 1.0.1+ (used to hash the Jupyter Notebook server password)</li>
-</ul>
-<p><strong>Optional</strong> (but recommended) software:</p>
-<ul>
-<li><p class="first"><a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda</a> 4.3.13+ and its <a class="reference external" href="https://docs.anaconda.com/anaconda/user-guide/tasks/use-jupyter-notebook-extensions">Jupyter Notebook extensions</a> that allow the
-users to define custom environment-based kernels from within the Jupyter
-notebook dashboard</p>
-</li>
-<li><p class="first"><a class="reference external" href="https://www.tacc.utexas.edu/research-development/tacc-projects/lmod">Lmod</a> 6.0.1+ or any other CLI tool used to load appropriate environments
-within the batch job before launching the Jupyter Notebook Server, e.g.,</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>module purge
-module load python/3
-</pre></div>
-</div>
-</li>
-</ul>
+  <div class="section" id="add-custom-qeueus-partitions">
+<span id="app-development-tutorials-interactive-apps-add-custom-queue"></span><h1>Add Custom Qeueus/Partitions<a class="headerlink" href="#add-custom-qeueus-partitions" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will walk you through <strong>replacing</strong> the <code class="docutils literal"><span class="pre">bc_queue</span></code> form
+attribute in your Interactive App with a custom HTML <code class="docutils literal"><span class="pre">&lt;select&gt;</span></code> element (a
+drop-down list of options) that allows the user to choose from a list of
+queues/partitions to submit their batch job to.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do <strong>NOT</strong> install the above software on the <strong>OnDemand node</strong>. The above
-software requirements are <strong>ONLY</strong> for the <strong>compute nodes</strong> you intend on
-launching the Jupyter Notebook Server on within batch jobs.</p>
+<p class="last">This tutorial will assume that you have walked through and setup a working
+instance of the Jupyter Interactive App following the directions outlined
+under <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a>.</p>
+</div>
+<p>As there are multiple solutions to add custom queues/partitions to your
+Interactive Apps, we document a few such solutions that range in complexity as
+well as possible access restrictions that a developer may have.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Possible Solutions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="add-custom-queue/local-static-list.html">Use a Local Static List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-custom-queue/global-static-list.html">Use a Global Static List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-custom-queue/local-dynamic-list.html">Use a Local Dynamic List</a></li>
+</ul>
 </div>
 </div>
 
@@ -251,10 +246,10 @@ launching the Jupyter Notebook Server on within batch jobs.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="copy-app.html" class="btn btn-neutral float-right" title="2. Copy Jupyter App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="add-custom-queue/local-static-list.html" class="btn btn-neutral float-right" title="Use a Local Static List" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../add-jupyter.html" class="btn btn-neutral" title="Tutorial: Add Jupyter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="add-jupyter/deploy.html" class="btn btn-neutral" title="5. Deploy Jupyter App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
