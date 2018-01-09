@@ -46,7 +46,8 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
         - bc_num_slots
         - bc_email_on_started
 
-#. We remove the following line from this file:
+#. Next we remove the ``bc_queue`` field from our ``form.yml`` for the Jupyter
+   Interactive App by removing the following line from this file:
 
    .. code-block:: yaml
       :emphasize-lines: 2
@@ -76,8 +77,8 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
           help: Please select a queue from the drop-down.
           widget: select
           options:
-            - [ "queue1", "queue1" ]
-            - [ "queue2", "queue2" ]
+            - [ "Queue 1", "queue1" ]
+            - [ "Queue 2", "queue2" ]
       form:
         - modules
         - conda_extensions
@@ -151,9 +152,9 @@ filling out the form.
       script:
         queue_name: <%= custom_queue %>
 
-   Where we take advantage of the generic `OodCore::Job::Script#queue_name <queue_name>`_
-   method to supply a queue/partition that is resource manager (e.g., Slurm,
-   Torque, ...) agnostic.
+   Where we take advantage of the generic `OodCore::Job::Script#queue_name
+   <queue_name_>`_ method to supply a queue/partition that is resource manager
+   (e.g., Slurm, Torque, ...) agnostic.
 
    .. note::
 
@@ -162,7 +163,7 @@ filling out the form.
       leveraging.
 
       You can find a list of generic fields that are resource manager agnostic
-      under the `OodCore::Job::Script <script>`_ documentation.
+      under the `OodCore::Job::Script <script_>`_ documentation.
 
 .. _queue_name: http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script#queue_name-instance_method
 .. _script: http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script

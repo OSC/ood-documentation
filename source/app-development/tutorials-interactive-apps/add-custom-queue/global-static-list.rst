@@ -80,7 +80,8 @@ options read from the corresponding cluster configuration file.
    Ruby)`_ templating system, which allows us to embed Ruby_ code into the YAML
    configuration file for flow control, variable substitution, and more.
 
-#. Next we start with the default ``form.yml`` for the Jupyter Interactive App:
+#. Next we remove the ``bc_queue`` field from our ``form.yml`` for the Jupyter
+   Interactive App by removing the following line from this file:
 
    .. code-block:: yaml
 
@@ -165,9 +166,9 @@ options read from the corresponding cluster configuration file.
 
       in the ``form.yml.erb`` file above.
 
-   Later in the YAML file we have another *expression tag* that loops through
-   this list of queues/partitions in the local variable ``queues``. It will
-   output a YAML list of pairs (see the note below).
+   Later in the YAML file we have another *execution tag* that loops through
+   this list of queues/partitions in the local variable ``queues``. It uses a
+   pair of *expression tags* to output a YAML pair list (see the note below).
 
    Now when we refresh the web page for our sandbox Jupyter App we will see a
    "Queue" form element with a drop-down that lists "queue1" and "queue2".
@@ -232,9 +233,9 @@ filling out the form.
       script:
         queue_name: <%= custom_queue %>
 
-   Where we take advantage of the generic `OodCore::Job::Script#queue_name <queue_name>`_
-   method to supply a queue/partition that is resource manager (e.g., Slurm,
-   Torque, ...) agnostic.
+   Where we take advantage of the generic `OodCore::Job::Script#queue_name
+   <queue_name_>`_ method to supply a queue/partition that is resource manager
+   (e.g., Slurm, Torque, ...) agnostic.
 
    .. note::
 
@@ -243,7 +244,7 @@ filling out the form.
       leveraging.
 
       You can find a list of generic fields that are resource manager agnostic
-      under the `OodCore::Job::Script <script>`_ documentation.
+      under the `OodCore::Job::Script <script_>`_ documentation.
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
 .. _ruby: https://www.ruby-lang.org/en/

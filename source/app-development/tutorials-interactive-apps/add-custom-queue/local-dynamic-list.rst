@@ -37,7 +37,8 @@ options read from a forked off command line call.
    Ruby)`_ templating system, which allows us to embed Ruby_ code into the YAML
    configuration file for flow control, variable substitution, and more.
 
-#. Next we start with the default ``form.yml`` for the Jupyter Interactive App:
+#. Next we remove the ``bc_queue`` field from our ``form.yml`` for the Jupyter
+   Interactive App by removing the following line from this file:
 
    .. code-block:: yaml
 
@@ -138,7 +139,7 @@ options read from a forked off command line call.
    - if calling ``cmd`` causes an error we store an empty ``queues`` list and
      record the error message
 
-   Later in the YAML file we have a couple more *expression tags* that:
+   Later in the YAML file we have a few more *execution tags* that:
 
    - appends to the help text an error message if one exists (we have to indent
      the error message if it has newlines to follow YAML formatting)
@@ -222,7 +223,7 @@ filling out the form.
      trailing whitespace removed
 
    We also take advantage of the generic `OodCore::Job::Script#queue_name
-   <queue_name>`_ method to supply a queue/partition that is resource manager
+   <queue_name_>`_ method to supply a queue/partition that is resource manager
    (e.g., Slurm, Torque, ...) agnostic.
 
    .. note::
@@ -232,7 +233,7 @@ filling out the form.
       leveraging.
 
       You can find a list of generic fields that are resource manager agnostic
-      under the `OodCore::Job::Script <script>`_ documentation.
+      under the `OodCore::Job::Script <script_>`_ documentation.
 
 .. _ruby: https://www.ruby-lang.org/en/
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
