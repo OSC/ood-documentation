@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Software Requirements &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>5. Deploy Jupyter App &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -42,9 +42,9 @@
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../../index.html"/>
-        <link rel="up" title="Setup" href="../setup.html"/>
-        <link rel="next" title="2. Modify Cluster Configuration" href="modify-cluster-configuration.html"/>
-        <link rel="prev" title="Setup" href="../setup.html"/> 
+        <link rel="up" title="Add a Jupyter App" href="../add-jupyter.html"/>
+        <link rel="next" title="Add Custom Qeueus/Partitions" href="../add-custom-queue.html"/>
+        <link rel="prev" title="4. Modify Submit Parameters" href="modify-submit-parameters.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -122,21 +122,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../user-documentation.html">User Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../enabling-development-mode.html">Enabling App Development</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../interactive.html">Interactive Apps (Plugins)</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../setup.html">Setup</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">1. Software Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modify-cluster-configuration.html">2. Modify Cluster Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="enable-reverse-proxy.html">3. Enable Reverse Proxy</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../form.html">User Form</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../template.html">Render Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../submit.html">Job Submission</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../view.html">Connection View</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../interactive.html">Interactive Apps (Plugins)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copy-app.html">2. Copy Jupyter App</a></li>
+<li class="toctree-l4"><a class="reference internal" href="customize-attributes.html">3. Customize Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">5. Deploy Jupyter App</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../add-custom-queue.html">Add Custom Qeueus/Partitions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -191,18 +190,18 @@
         
           <li><a href="../../../app-development.html">App Development</a> &raquo;</li>
         
-          <li><a href="../../interactive.html">Interactive Apps (Plugins)</a> &raquo;</li>
+          <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-          <li><a href="../setup.html">Setup</a> &raquo;</li>
+          <li><a href="../add-jupyter.html">Add a Jupyter App</a> &raquo;</li>
         
-      <li>1. Software Requirements</li>
+      <li>5. Deploy Jupyter App</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/master/source/app-development/interactive/setup/software-requirements.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/master/source/app-development/tutorials-interactive-apps/add-jupyter/deploy.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -216,23 +215,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="software-requirements">
-<span id="app-development-interactive-setup-software-requirements"></span><h1>1. Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h1>
-<p>A class of <a class="reference internal" href="../../../applications/interactive.html#interactive"><span class="std std-ref">Interactive Apps (Plugins)</span></a> will need a VNC server on the compute node
-(e.g., the Desktop app). This requires the following software to be installed
-on the nodes that the batch job submitted by the Interactive App is meant to
-run on, <strong>NOT</strong> the OnDemand node.</p>
-<p>For VNC server support:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://turbovnc.org/">TurboVNC</a> 2.1+</li>
-<li><a class="reference external" href="https://github.com/novnc/websockify">websockify</a> 0.8.0+</li>
-</ul>
+  <div class="section" id="deploy-jupyter-app">
+<span id="app-development-tutorials-interactive-apps-add-jupyter-deploy"></span><h1>5. Deploy Jupyter App<a class="headerlink" href="#deploy-jupyter-app" title="Permalink to this headline">¶</a></h1>
+<p>After you’ve confirmed you are happy with all of your app changes you can
+deploy it as a System App.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do <strong>NOT</strong> install the above software on the <strong>OnDemand node</strong>. The above
-software requirements are <strong>ONLY</strong> for the <strong>compute nodes</strong> you intend on
-launching Desktops on within batch jobs.</p>
+<p class="last">The following steps <strong>MUST</strong> be done from the OnDemand host and not another
+machine.</p>
 </div>
+<ol class="arabic">
+<li><p class="first">Go to your OnDemand sandbox directory:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ondemand/dev
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the app to the system deployment location as <strong>root</strong>:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo cp -r jupyter /var/www/ood/apps/sys/.
+</pre></div>
+</div>
+</li>
+<li><p class="first">In your browser navigate to the OnDemand URL and confirm you see the new app
+in the <em>Interactive Apps</em> dropdown on the <a class="reference internal" href="../../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span>
+</pre></div>
+</div>
+</li>
+</ol>
 </div>
 
 
@@ -245,10 +254,10 @@ launching Desktops on within batch jobs.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="modify-cluster-configuration.html" class="btn btn-neutral float-right" title="2. Modify Cluster Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../add-custom-queue.html" class="btn btn-neutral float-right" title="Add Custom Qeueus/Partitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../setup.html" class="btn btn-neutral" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modify-submit-parameters.html" class="btn btn-neutral" title="4. Modify Submit Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

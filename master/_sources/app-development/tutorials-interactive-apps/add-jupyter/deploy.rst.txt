@@ -1,4 +1,4 @@
-.. _app-development-add-jupyter-deploy:
+.. _app-development-tutorials-interactive-apps-add-jupyter-deploy:
 
 Deploy Jupyter App
 ==================
