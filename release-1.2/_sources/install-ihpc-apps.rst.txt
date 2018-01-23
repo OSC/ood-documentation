@@ -35,6 +35,8 @@ templates.
      - https://github.com/OSC/bc_osc_matlab
    * - Jupyter
      - https://github.com/OSC/bc_osc_jupyter
+   * - Jupyter + Spark
+     - https://github.com/OSC/bc_osc_jupyter_spark
    * - Paraview
      - https://github.com/OSC/bc_osc_paraview
    * - RStudio Server
