@@ -32,6 +32,9 @@ such:
 
 .. code-block:: yaml
 
+   # /etc/ood/config/ood_portal.yml
+   ---
+
    # Use Shibboleth authentication
    auth:
      - "AuthType shibboleth"

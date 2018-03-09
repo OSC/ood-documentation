@@ -4,15 +4,14 @@ Configuration
 =============
 
 Relying on the default build is fine for a demo deployment, but it is not
-recommended for a production environment. Options can be configured by
-including a file called ``config.yml`` with your configuration settings in the
-root directory before running :program:`rake`.
+recommended for a production environment. Options can be configured by default
+under the file :file:`/etc/ood/config/ood_portal.yml`.
 
 This project includes a good starting configuration file that you can use:
 
 .. code-block:: sh
 
-   cp config.default.yml config.yml
+   sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
 
 All the default options are listed in this configuration file. Feel free to
 read it through before continuing on.
@@ -133,18 +132,18 @@ Configure General Options
      the verbosity of the Lua module in the logs
 
      Default
-       Use default log level of ``warn``
+       Use default log level of ``info``
 
        .. code-block:: yaml
 
           lua_log_level: null
 
      Example
-       Increase verbosity
+       Decrease verbosity
 
        .. code-block:: yaml
 
-          lua_log_level: "info"
+          lua_log_level: "warn"
 
 .. _ood-portal-generator-user-map-cmd:
 .. describe:: user_map_cmd (String)

@@ -8,7 +8,8 @@ following options:
 
 .. code-block:: yaml
 
-   # config.yml
+   # /etc/ood/config/ood_portal.yml
+   ---
 
    analytics:
      id: UA-79331310-4

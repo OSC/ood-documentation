@@ -91,6 +91,9 @@ such:
 
 .. code-block:: yaml
 
+   # /etc/ood/config/ood_portal.yml
+   ---
+
    # Use OpenID Connect for authentication
    auth:
      - "AuthType openid-connect"

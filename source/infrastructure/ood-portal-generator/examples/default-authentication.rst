@@ -9,6 +9,9 @@ looking up users in plain text password files.
 
 .. code-block:: yaml
 
+   # /etc/ood/config/ood_portal.yml
+   ---
+
    auth:
      - "AuthType Basic"
      - "AuthName \"private\""
