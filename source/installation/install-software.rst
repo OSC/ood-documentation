@@ -48,7 +48,7 @@ software requirements:
 
    .. code-block:: console
 
-      $ sudo yum install https://yum.osc.edu/ondemand/latest/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
+      $ sudo yum install https://yum.osc.edu/ondemand/{{ ondemand-version }}/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
 
 #. Install OnDemand and all of its dependencies:
 
