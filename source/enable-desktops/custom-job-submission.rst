@@ -1,28 +1,54 @@
-.. _install-desktops-customize-desktop-app-custom-job-submission:
+.. _enable-desktops-custom-job-submission:
 
 Custom Job Submission
 =====================
 
+The :ref:`app-development-interactive-submit` configuration file describes how
+the batch job should be submitted to your cluster. The location of this file
+**must** be specified in the respective
+:file:`/etc/ood/config/apps/bc_desktop/{my_cluster}.yml` form configuration
+file, so that when a user submits the form, the specified submission
+configuration is used when submitting the batch job.
+
 To customize job submission we will need to first edit our custom desktop app
-YAML file as such:
+:ref:`app-development-interactive-form` YAML file as such:
 
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    submit: "submit/my_submit.yml.erb"
 
 Notice we included the configuration option ``submit`` that points to our
-custom job submission YAML configuration file. This can be an absolute file
-path or a relative file path with respect to the ``bc_desktop/local/``
-directory.
+custom :ref:`app-development-interactive-submit` YAML configuration file. This
+can be an absolute file path or a relative file path with respect to the
+:file:`/etc/ood/config/apps/bc_desktop/` directory.
 
-We can now create and modify a job submission configuration file at::
+.. note::
 
-  bc_desktop/local/submit/my_submit.yml.erb
+   The ``*.erb`` file extension will cause the YAML configuration file to be
+   processed using the `eRuby (Embedded Ruby)`_ templating system. This allows
+   you to embed Ruby code into the YAML configuration file for flow control,
+   variable substitution, and more.
+
+.. danger::
+
+   Do not put the :ref:`app-development-interactive-submit` configuration file
+   directly underneath :file:`/etc/ood/config/apps/bc_desktop` or it will think
+   this an Interactive Desktop app. Instead we typically create the directory
+   :file:`submit/` underneath and put our
+   :ref:`app-development-interactive-submit` configuration files underneath
+   that.
+
+.. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
+
+We can now create and modify the :ref:`app-development-interactive-submit`
+configuration file at::
+
+  /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb
 
 Since it has the extension ``.erb`` we can take advantage of the Ruby language
 to make the configuration file dynamic. In particular, you will now have access
@@ -80,10 +106,12 @@ This can be handled in your custom job submission configuration file as such:
 
 .. code-block:: yaml
 
-   # bc_desktop/local/submit/my_submit.yml.erb
+   # /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb
    ---
    script:
-     native: [ "-N", "<%= bc_num_slots %>" ]
+     native:
+       - "-N"
+       - "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
 
 All `batch script options`_ are underneath the ``script`` configuration option.
 In particular since there is no option to modify number of nodes, we need to
@@ -105,12 +133,12 @@ This can be handled in your custom job submission configuration file as such:
 
 .. code-block:: yaml
 
-   # bc_desktop/local/submit/my_submit.yml.erb
+   # /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb
    ---
    script:
      native:
        resources:
-         nodes: "<%= bc_num_slots %>:ppn=28"  # assumes cluster has 28 procs per node
+         nodes: "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ppn=28"
 
 All `batch script options`_ are underneath the ``script`` configuration option.
 In particular since there is no option to modify number of nodes, we need to
@@ -135,10 +163,12 @@ This can be handled in your custom job submission configuration file as such:
 
 .. code-block:: yaml
 
-   # bc_desktop/local/submit/my_submit.yml.erb
+   # /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb
    ---
    script:
-     native: [ "-l", "select=1:ncpus=<%= bc_num_slots %>" ]
+     native:
+       - "-l"
+       - "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
 
 All `batch script options`_ are underneath the ``script`` configuration option.
 In particular since there is no option to modify number of nodes/cpus, we need
@@ -153,7 +183,7 @@ our Desktop app local YAML configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-7
 
-   # bc_desktop/local/cluster.yml
+   # /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb
    ---
    title: "Cluster1 Desktop"
    cluster: "cluster1"
@@ -171,10 +201,12 @@ such:
 
 .. code-block:: yaml
 
-   # bc_desktop/local/submit/my_submit.yml.erb
+   # /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb
    ---
    script:
-     native: [ "-l", "select=<%= bc_num_slots %>:ncpus=28" ] # assumes 28 procs per node
+     native:
+       - "-l"
+       - "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28"
 
 You can also append ``mem=...gb`` to the ``select=...`` statement if you'd
 like.

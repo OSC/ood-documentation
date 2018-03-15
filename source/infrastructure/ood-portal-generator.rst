@@ -13,8 +13,7 @@ following prerequisites:
 
 - The Ruby_ language version 1.9 or newer
 
-Please see :ref:`software-requirements` on how to install the above
-requirements.
+Please see :ref:`install-software` on how to install the above requirements.
 
 .. toctree::
    :maxdepth: 2

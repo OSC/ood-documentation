@@ -1,0 +1,224 @@
+.. _v1.3-release-notes:
+
+v1.3 Release Notes
+==================
+
+Some highlights of this release:
+
+- ...
+- A multitude of bugfixes...
+
+Upgrading from v1.2
+-------------------
+
+.. warning::
+
+   As always please update the *development* or *test* instances of OnDemand
+   installed at your center first before you modify the *production* instance.
+
+.. note::
+
+   The steps outlined below will only need to be done once when upgrading from
+   versions <= 1.2 to 1.3. Future updates will be handled through the RPM going
+   forward.
+
+#. This RPM installation will want to overwrite any local configuration or
+   modifications you may have made in earlier versions of OnDemand, so we will
+   first start by making backups of OnDemand and our apps:
+
+   .. code-block:: console
+
+      $ sudo mv /opt/ood /opt/ood.bak
+      $ sudo mv /var/www/ood/apps/sys /var/www/ood/apps/sys.bak
+
+#. We have moved all configuration to be located underneath
+   :file:`/etc/ood/config`. This includes the YAML configuration file used to
+   generate the Apache configuration file, the YAML configuration file used to
+   generate the per-user NGINX (PUN) configuration files, and any
+   configuration/customization files used for the individual OnDemand core
+   apps.
+
+   So you will want to copy over the configuration files ahead of time for best
+   results:
+
+   .. code-block:: console
+
+      $ # Copy over the YAML configuration file used to generate the Apache configuration file
+      $ sudo cp $HOME/ood/src/ood-portal-generator/config.yml /etc/ood/config/ood_portal.yml
+
+   .. warning::
+
+      This assumes you were using the :ref:`ood-portal-generator` to generate
+      the Apache configuration file under
+      :file:`/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`. If you
+      haven't been doing this before then now is a good time to start. Feel
+      free to contact us if you have trouble with this.
+
+   .. code-block:: console
+
+      $ # Copy over our app configuration (if they exist)
+      $ mkdir -p /etc/ood/config/apps
+      $ [[ -e "/var/www/ood/apps/sys.bak/dashboard/.env.local" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/dashboard \
+          && sudo cp /var/www/ood/apps/sys.bak/dashboard/.env.local /etc/ood/config/apps/dashboard/env
+      $ [[ -e "/var/www/ood/apps/sys.bak/activejobs/.env.local" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/activejobs \
+          && sudo cp /var/www/ood/apps/sys.bak/activejobs/.env.local /etc/ood/config/apps/activejobs/env
+      $ [[ -e "/var/www/ood/apps/sys.bak/myjobs/.env.local" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/myjobs \
+          && sudo cp /var/www/ood/apps/sys.bak/myjobs/.env.local /etc/ood/config/apps/myjobs/env
+      $ [[ -e "/var/www/ood/apps/sys.bak/file-editor/.env.local" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/file-editor \
+          && sudo cp /var/www/ood/apps/sys.bak/file-editor/.env.local /etc/ood/config/apps/file-editor/env
+      $ [[ -e "/var/www/ood/apps/sys.bak/shell/.env.local" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/shell \
+          && sudo cp /var/www/ood/apps/sys.bak/shell/.env /etc/ood/config/apps/shell/env
+      $ [[ -e "/var/www/ood/apps/sys.bak/files/.env.local" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/files \
+          && sudo cp /var/www/ood/apps/sys.bak/files/.env /etc/ood/config/apps/files/env
+
+      $ # Copy over any custom initializers you may have created (if they exist)
+      $ [[ -e "/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/dashboard/initializers \
+          && sudo cp /var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb /etc/ood/config/apps/dashboard/initializers/ood.rb
+      $ [[ -e "/var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/activejobs/initializers \
+          && sudo cp /var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb /etc/ood/config/apps/activejobs/initializers/filter.rb
+
+      $ # Copy over your Job Composer templates (if they exist)
+      $ [[ -e "/var/www/ood/apps/sys.bak/myjobs/templates" ]] \
+          && sudo mkdir -p /etc/ood/config/apps/myjobs \
+          && sudo cp -r /var/www/ood/apps/sys.bak/myjobs/templates /etc/ood/config/apps/myjobs/.
+
+      $ # Copy over your local Interactive Desktop apps (if they exist)
+      $ [[ -e "/var/www/ood/apps/sys.bak/bc_desktop/local" ]] \
+          && sudo cp -r /var/www/ood/apps/sys.bak/bc_desktop/local /etc/ood/config/apps/bc_desktop
+
+   If all went well, you should have a directory structure that looks *similar*
+   to:
+
+   .. code-block:: console
+
+      $ tree /etc/ood/config
+      /etc/ood/config
+      ├── apps
+      │   ├── activejobs
+      │   │   └── ...
+      │   ├── bc_desktop
+      │   │   └── ...
+      │   ├── dashboard
+      │   │   └── ...
+      │   ├── files
+      │   │   └── ...
+      │   ├── myjobs
+      │   │   └── ...
+      │   └── shell
+      │       └── ...
+      ├── clusters.d
+      │   ├── my_cluster.yml
+      │   └── ...
+      ├── nginx_stage.yml
+      └── ood_portal.yml
+
+#. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
+
+   .. code-block:: console
+
+      $ sudo yum install https://yum.osc.edu/ondemand/latest/ondemand-release-web-1.3-1.el7.noarch.rpm
+
+#. Install OnDemand and all of its dependencies:
+
+   .. code-block:: console
+
+      $ sudo yum install ondemand
+
+#. Copy back any custom apps (e.g., Jupyter, RStudio, ...) you installed
+   previously from our backup directory:
+
+   .. code-block:: console
+
+      $ sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
+
+#. The installation will install all software and web apps. It will also
+   generate a new Apache configuration file and restart Apache. So if all went
+   well you should be able to access the OnDemand portal in your browser
+   successfully.
+
+Infrastructure
+--------------
+
+.. _v1.3-infrastructure-versions:
+.. list-table:: Infrastructure Component Versions
+   :widths: auto
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Component
+     - Version
+   * - `ood-portal-generator`_
+     - 0.4.0 → `0.7.1 <https://github.com/OSC/ood-portal-generator/blob/v0.7.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-portal-generator/compare/v0.4.0...v0.7.1>`__)
+   * - `mod_ood_proxy`_
+     - 0.3.1 → `0.4.0 <https://github.com/OSC/mod_ood_proxy/blob/v0.4.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/mod_ood_proxy/compare/v0.3.1...v0.4.0>`__)
+   * - `ood_auth_map`_
+     - `0.0.3 <https://github.com/OSC/ood_auth_map/blob/v0.0.3/CHANGELOG.md>`__
+   * - `nginx_stage`_
+     - 0.3.0 → `0.4.0 <https://github.com/OSC/nginx_stage/blob/v0.4.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/nginx_stage/compare/v0.3.0...v0.4.0>`__)
+
+:numref:`v1.3-infrastructure-versions` lists the versions as well as the
+previous version it was updated from for each component that make up the
+infrastructure for this release.
+
+Applications
+------------
+
+.. _v1.3-app-versions:
+.. list-table:: Application Versions
+   :widths: auto
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - App
+     - Version
+   * - `Dashboard App`_
+     - 1.18.0 → `1.23.0 <https://github.com/OSC/ood-dashboard/blob/v1.23.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-dashboard/compare/v1.18.0...v1.23.0>`__)
+   * - `Shell App`_
+     - 1.2.4 → `1.3.1 <https://github.com/OSC/ood-shell/blob/v1.3.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-shell/compare/v1.2.4...v1.3.1>`__)
+   * - `Files App`_
+     - 1.3.6 → `1.4.1 <https://github.com/OSC/ood-fileexplorer/blob/v1.4.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileexplorer/compare/v1.3.6...v1.4.1>`__)
+   * - `File Editor App`_
+     - 1.3.1 → `1.3.3 <https://github.com/OSC/ood-fileeditor/blob/v1.3.3/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileeditor/compare/v1.3.1...v1.3.3>`__)
+   * - `Active Jobs App`_
+     - 1.5.2 → `1.6.1 <https://github.com/OSC/ood-activejobs/blob/v1.6.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-activejobs/compare/v1.5.2...v1.6.1>`__)
+   * - `Job Composer App`_
+     - 2.6.1 → `2.8.2 <https://github.com/OSC/ood-myjobs/blob/v2.8.2/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-myjobs/compare/v2.6.1...v2.8.2>`__)
+   * - `Desktops App`_
+     - `0.1.2 <https://github.com/OSC/bc_desktop/blob/v0.1.2/CHANGELOG.md>`__
+
+:numref:`v1.3-app-versions` lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.
+
+All of the above apps are installed and maintained by version 1.2.0 of the
+`ood-apps-installer`_ utility.
+
+.. _ood-portal-generator: https://github.com/OSC/ood-portal-generator
+.. _mod_ood_proxy: https://github.com/OSC/mod_ood_proxy
+.. _ood_auth_map: https://github.com/OSC/ood_auth_map
+.. _nginx_stage: https://github.com/OSC/nginx_stage
+.. _Dashboard App: https://github.com/OSC/ood-dashboard
+.. _Shell App: https://github.com/OSC/ood-shell
+.. _Files App: https://github.com/OSC/ood-fileexplorer
+.. _File Editor App: https://github.com/OSC/ood-fileeditor
+.. _Active Jobs App: https://github.com/OSC/ood-activejobs
+.. _Job Composer App: https://github.com/OSC/ood-myjobs
+.. _Desktops App: https://github.com/OSC/bc_desktop
+.. _ood-apps-installer: https://github.com/OSC/ood-apps-installer
+.. _ohio supercomputer center: https://www.osc.edu/
