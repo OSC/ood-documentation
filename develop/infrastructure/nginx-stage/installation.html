@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
@@ -135,6 +134,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -211,8 +211,8 @@
 <span id="nginx-stage-installation"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic">
 <li><p class="first">Download the latest stable release and unpack it:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Set latest release as of writing this</span>
-<span class="nv">LATEST</span><span class="o">=</span><span class="s2">&quot;0.3.0&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set latest release as of writing this</span>
+<span class="nv">LATEST</span><span class="o">=</span><span class="s2">&quot;0.4.0&quot;</span>
 
 <span class="c1"># Download latest release</span>
 wget --content-disposition https://github.com/OSC/nginx_stage/archive/v<span class="si">${</span><span class="nv">LATEST</span><span class="si">}</span>.tar.gz
@@ -225,27 +225,27 @@ tar xzvf nginx_stage-<span class="si">${</span><span class="nv">LATEST</span><sp
 </pre></div>
 </div>
 </li>
-<li><p class="first">Install this package in default <code class="docutils literal"><span class="pre">PREFIX=/opt/ood/nginx_stage</span></code> location:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
+<li><p class="first">Install this package in default <code class="docutils literal notranslate"><span class="pre">PREFIX=/opt/ood/nginx_stage</span></code> location:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The location of the installation can be changed by altering the
-<code class="docutils literal"><span class="pre">PREFIX</span></code> environment variable:</p>
-<div class="last highlight-sh"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install <span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/nginx_stage&quot;</span>
+<code class="docutils literal notranslate"><span class="pre">PREFIX</span></code> environment variable:</p>
+<div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install <span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/nginx_stage&quot;</span>
 </pre></div>
 </div>
 </div>
 </li>
 <li><p class="first">Configure the <strong class="program">nginx_stage</strong> installation by modifying the YAML
 configuration file located at:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
 <p>On a fresh installation you may need to create this file or copy the default
 file from:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx_stage_example</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx_stage_example</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
 <p>You can read <a class="reference internal" href="configuration.html#nginx-stage-configuration"><span class="std std-ref">Configuration</span></a> for details on configuration
@@ -256,13 +256,13 @@ options.</p>
 defaults were chosen to work best with most centers.</p>
 </div>
 </li>
-<li><p class="first">Confirm that the Apache proxy is running as the user <code class="docutils literal"><span class="pre">apache</span></code>. By default
-<strong class="program">nginx_stage</strong> will only give permissions to the <code class="docutils literal"><span class="pre">apache</span></code> user to
+<li><p class="first">Confirm that the Apache proxy is running as the user <code class="docutils literal notranslate"><span class="pre">apache</span></code>. By default
+<strong class="program">nginx_stage</strong> will only give permissions to the <code class="docutils literal notranslate"><span class="pre">apache</span></code> user to
 access the NGINX Unix domain socket files.</p>
 </li>
-<li><p class="first">Give the Apache proxy user <code class="docutils literal"><span class="pre">apache</span></code> elevated privileges when running
+<li><p class="first">Give the Apache proxy user <code class="docutils literal notranslate"><span class="pre">apache</span></code> elevated privileges when running
 <strong class="program">nginx_stage</strong> by adding a <strong class="program">sudo</strong> entry as:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># /etc/sudoers.d/ood</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/sudoers.d/ood</span>
 
 Defaults:apache     !requiretty, !authenticate
 apache <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage

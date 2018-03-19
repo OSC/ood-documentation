@@ -107,7 +107,7 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview.html">Overview</a></li>
@@ -125,7 +125,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -139,6 +138,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -221,12 +221,12 @@ OnDemand’s Apache configs to enable authentication via Keycloak.</p>
 <p>These directions are for installing from source.</p>
 <ol class="arabic">
 <li><p class="first">Install dependencies for building mod_auth_openidc</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install cjose</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
 tar xzf cjose-0.5.1.tar.gz
 <span class="nb">cd</span> cjose-0.5.1
 ./configure
@@ -236,7 +236,7 @@ sudo make install
 </div>
 </li>
 <li><p class="first">Install mod_auth_openidc</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
 tar xzf mod_auth_openidc-2.3.2.tar.gz
 <span class="nb">cd</span> mod_auth_openidc-2.3.2
 
@@ -251,8 +251,8 @@ sudo make install
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add file <code class="docutils literal"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf</span></code> with contents:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>LoadModule auth_openidc_module modules/mod_auth_openidc.so
+<li><p class="first">Add file <code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf</span></code> with contents:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>LoadModule auth_openidc_module modules/mod_auth_openidc.so
 </pre></div>
 </div>
 </li>
@@ -276,8 +276,11 @@ the appropriate location in the SCL Apache.</p>
 <div class="section" id="re-generate-main-config-using-ood-portal-generator">
 <h2>3.2. Re-generate main config using ood-portal-generator<a class="headerlink" href="#re-generate-main-config-using-ood-portal-generator" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">In the ood-portal-generator’s config.yml file, add these lines:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># List of Apache authentication directives</span>
+<li><p class="first">Edit the YAML configuration file for the <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> located
+under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+<span class="c1"># List of Apache authentication directives</span>
 <span class="c1"># NB: Be sure the appropriate Apache module is installed for this</span>
 <span class="c1"># Default: (see below, uses basic auth with an htpasswd file)</span>
 <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
@@ -305,20 +308,19 @@ the appropriate location in the SCL Apache.</p>
 <li>specifying /oidc to be the sub-uri used by mod_auth_openidc</li>
 <li>specifying that /logout should redirect to this /oidc sub-uri to handle logout
 and specifying after logout, the user should be redirected back to OnDemand
-(which in this tutorial’s case is <code class="docutils literal"><span class="pre">https%3A%2F%2Fwebdev07.hpc.osc.edu</span></code>,
-the query param escaped format of <code class="docutils literal"><span class="pre">https://webdev07.hpc.osc.edu</span></code>)</li>
+(which in this tutorial’s case is <code class="docutils literal notranslate"><span class="pre">https%3A%2F%2Fwebdev07.hpc.osc.edu</span></code>,
+the query param escaped format of <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code>)</li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Using this modified config, regenerate the Apache config, and then install it:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
-scl <span class="nb">enable</span> rh-ruby22 -- rake install
+<li><p class="first">Then build and install the new Apache configuration file with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 <p>The effect of this change in the Apache config (in case you want to apply the changes manually) are:</p>
 <ol class="arabic">
 <li><p class="first">Change the authentication directives for all of the Locations that require authentication i.e.:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>  &lt;Location &quot;/nginx&quot;&gt;
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>  &lt;Location &quot;/nginx&quot;&gt;
 <span class="gd">-    AuthType basic</span>
 <span class="gd">-    AuthName &quot;Private&quot;</span>
 <span class="gd">-    AuthBasicProvider ldap</span>
@@ -334,15 +336,15 @@ scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update the <code class="docutils literal"><span class="pre">Redirect</span> <span class="pre">&quot;logout&quot;</span></code> directive</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gd">-  Redirect &quot;/logout&quot; &quot;/pun/sys/dashboard/logout&quot;</span>
+<li><p class="first">Update the <code class="docutils literal notranslate"><span class="pre">Redirect</span> <span class="pre">&quot;logout&quot;</span></code> directive</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-  Redirect &quot;/logout&quot; &quot;/pun/sys/dashboard/logout&quot;</span>
 <span class="gd">-</span>
 <span class="gi">+  Redirect &quot;/logout&quot; &quot;/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add the <code class="docutils literal"><span class="pre">&lt;Location</span> <span class="pre">&quot;/oidc&quot;&gt;</span></code> directive</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span># OpenID Connect redirect URI:
+<li><p class="first">Add the <code class="docutils literal notranslate"><span class="pre">&lt;Location</span> <span class="pre">&quot;/oidc&quot;&gt;</span></code> directive</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># OpenID Connect redirect URI:
 #
 #     http://localhost:80/oidc
 #     #=&gt; handled by mod_auth_openidc
@@ -362,7 +364,7 @@ scl <span class="nb">enable</span> rh-ruby22 -- rake install
 <h2>3.3. Add Keycloak config to OnDemand Apache for mod_auth_openidc<a class="headerlink" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
 OIDCClientID        &quot;webdev07.hpc.osc.edu&quot;
 OIDCClientSecret    &quot;1111111-1111-1111-1111-111111111111&quot;
 OIDCRedirectURI      https://webdev07.hpc.osc.edu/oidc
@@ -384,19 +386,19 @@ OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_au
 </div>
 <ol class="arabic simple">
 <li>OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface</li>
-<li>OIDCClientSecret: replace <code class="docutils literal"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Install tab of the client in Keycloak admin interface</li>
-<li>OIDCCryptoPassphrase: replace <code class="docutils literal"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">20</span></code>.</li>
+<li>OIDCClientSecret: replace <code class="docutils literal notranslate"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Install tab of the client in Keycloak admin interface</li>
+<li>OIDCCryptoPassphrase: replace <code class="docutils literal notranslate"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">20</span></code>.</li>
 <li>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.</li>
 </ol>
 </li>
 <li><p class="first">Change permission on file to be readable by apache and no one else:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
 sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
 </pre></div>
 </div>
 </li>
 <li><p class="first">Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># stop both</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># stop both</span>
 sudo systemctl stop keycloak
 sudo systemctl stop httpd24-httpd
 
@@ -410,7 +412,7 @@ sudo systemctl start keycloak
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>If when starting Apache you see this error:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>Job for httpd24-httpd.service failed because the control process exited
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Job for httpd24-httpd.service failed because the control process exited
 with error code. See &quot;systemctl status httpd24-httpd.service&quot; and
 &quot;journalctl -xe&quot; for details.
 </pre></div>

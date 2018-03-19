@@ -15,8 +15,7 @@ To get started you will need at a minimum the following prerequisites:
 - The NGINX_ web server version 1.6 or newer
 - The `Phusion Passenger`_ web app server version 4.0.55 or newer
 
-Please see :ref:`software-requirements` on how to install the above
-requirements.
+Please see :ref:`install-software` on how to install the above requirements.
 
 .. toctree::
    :maxdepth: 2

@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
@@ -138,6 +137,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -223,7 +223,7 @@ Rails</a> web application framework.</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>This app is deployed on the OnDemand Server under the following path on the
 local file system:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span>
 </pre></div>
 </div>
 <p>and can be accessed with the following browser request:</p>
@@ -268,7 +268,7 @@ Home Directory. More links can be added to this menu, for Scratch space and
 Project space directories.</p>
 <p>Adding more links currently requires adding a custom initializer to the
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
-<code class="docutils literal"><span class="pre">Pathname</span></code> objects to the <code class="docutils literal"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array, a
+<code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects to the <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array, a
 global attribute that is used in the Dashboard app.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -277,11 +277,11 @@ install a new version of the dashboard and then copy it to the production
 location you do not lose your custom initializer.</p>
 </div>
 <p>In the root directory of the Dashboard app, create
-<code class="docutils literal"><span class="pre">config/initializers/ood.rb</span></code> file. This file is in the gitignore of the
+<code class="docutils literal notranslate"><span class="pre">config/initializers/ood.rb</span></code> file. This file is in the gitignore of the
 Dashboard app, so your customizations will be safe from future changes to the
 dashboard and there will be no version conflicts.</p>
 <p>Here is an example of OSC OnDemand’s initializer:</p>
-<div class="highlight-ruby"><div class="highlight"><pre><span></span><span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
   <span class="c1"># add project space directories</span>
   <span class="n">projects</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/^P./</span><span class="p">)</span>
   <span class="n">paths</span><span class="o">.</span><span class="n">concat</span> <span class="n">projects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/project/</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="p">}</span>
@@ -293,13 +293,13 @@ dashboard and there will be no version conflicts.</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li>The variable <code class="docutils literal"><span class="pre">paths</span></code> is an array of <code class="docutils literal"><span class="pre">Pathname</span></code> objects that define a list of what
+<li>The variable <code class="docutils literal notranslate"><span class="pre">paths</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects that define a list of what
 will appear in the Dashboard menu for Files</li>
 <li>At OSC, the pattern for project paths follows “/fs/project/${PROJECT_GROUP_NAME}”.
 So above we:<ol class="arabic">
 <li>get an array of all user’s groups by name</li>
 <li>filter that array for groups that start with “P” (i.e., PZS0002, PAW0003, …)</li>
-<li>using <code class="docutils literal"><span class="pre">map</span></code> we turn this array into an array of <code class="docutils literal"><span class="pre">Pathname</span></code> objects to
+<li>using <code class="docutils literal notranslate"><span class="pre">map</span></code> we turn this array into an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects to
 all the possible project directories the user could have.</li>
 <li>extend the paths array with this list of paths</li>
 </ol>
@@ -308,7 +308,7 @@ all the possible project directories the user could have.</li>
 “/fs/scratch/${PROJECT_GROUP_NAME}” or “/fs/scratch${USERNAME}#</li>
 </ul>
 <p>On each request, the Dashboard will check for the existence of the directories
-in <code class="docutils literal"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories exist
+in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories exist
 and the user has access to will appear as links in the Files menu under the
 Home Directory link.</p>
 <div class="figure align-center" id="id3">
@@ -316,7 +316,7 @@ Home Directory link.</p>
 <p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
 </div>
 <p>Remember, when editing ood.rb in the build directory, don’t forget to install again i.e.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake build:dashboard
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake build:dashboard
 sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:dashboard
 </pre></div>
 </div>

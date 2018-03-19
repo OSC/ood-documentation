@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
@@ -145,6 +144,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -221,9 +221,9 @@
 <span id="ood-portal-generator-configuration"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
 <p>Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by default
-under the file <code class="file docutils literal"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
+under the file <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
 <p>This project includes a good starting configuration file that you can use:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
 </pre></div>
 </div>
 <p>All the default options are listed in this configuration file. Feel free to
@@ -236,15 +236,15 @@ read it through before continuing on.</p>
 <dd><p>the address and port server listens on for connections</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Don’t add a <code class="docutils literal"><span class="pre">Listen</span></code> directive in this Apache config (typically it
+<dd><p class="first">Don’t add a <code class="docutils literal notranslate"><span class="pre">Listen</span></code> directive in this Apache config (typically it
 exists in another config)</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">listen_addr_port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">listen_addr_port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Explicitly listen on port 443</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">listen_addr_port</span><span class="p p-Indicator">:</span> <span class="s">&quot;443&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">listen_addr_port</span><span class="p p-Indicator">:</span> <span class="s">&quot;443&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -258,13 +258,13 @@ exists in another config)</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Access website through IP address only</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
-<dd><p class="first">Access website through the host name <code class="docutils literal"><span class="pre">www.example.com</span></code></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="s">&quot;www.example.com&quot;</span>
+<dd><p class="first">Access website through the host name <code class="docutils literal notranslate"><span class="pre">www.example.com</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="s">&quot;www.example.com&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -274,18 +274,18 @@ exists in another config)</p>
 <dl class="describe">
 <dt>
 <code class="descname">port (Integer, null)</code></dt>
-<dd><p>the port used to access the Open OnDemand portal (if different than <code class="docutils literal"><span class="pre">80</span></code>
-or <code class="docutils literal"><span class="pre">443</span></code>)</p>
+<dd><p>the port used to access the Open OnDemand portal (if different than <code class="docutils literal notranslate"><span class="pre">80</span></code>
+or <code class="docutils literal notranslate"><span class="pre">443</span></code>)</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Use port <code class="docutils literal"><span class="pre">80</span></code> or port <code class="docutils literal"><span class="pre">443</span></code> if SSL is enabled</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dd><p class="first">Use port <code class="docutils literal notranslate"><span class="pre">80</span></code> or port <code class="docutils literal notranslate"><span class="pre">443</span></code> if SSL is enabled</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use a higher numbered port to access the website</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
 </pre></div>
 </div>
 </dd>
@@ -299,7 +299,7 @@ or <code class="docutils literal"><span class="pre">443</span></code>)</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Disable SSL support</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
@@ -312,17 +312,17 @@ or <code class="docutils literal"><span class="pre">443</span></code>)</p>
 <dt>
 <code class="descname">logroot (String)</code></dt>
 <dd><p>the root directory where log files are stored (can be relative to
-<code class="docutils literal"><span class="pre">ServerRoot</span></code>)</p>
+<code class="docutils literal notranslate"><span class="pre">ServerRoot</span></code>)</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Store logs in <code class="docutils literal"><span class="pre">$ServerRoot/logs</span></code> directory</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logroot</span><span class="p p-Indicator">:</span> <span class="s">&quot;logs&quot;</span>
+<dd><p class="first">Store logs in <code class="docutils literal notranslate"><span class="pre">$ServerRoot/logs</span></code> directory</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logroot</span><span class="p p-Indicator">:</span> <span class="s">&quot;logs&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Store logs in a different directory</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logroot</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/my/logs&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logroot</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/my/logs&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -336,13 +336,13 @@ or <code class="docutils literal"><span class="pre">443</span></code>)</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Point to the install location of <a class="reference internal" href="../mod-ood-proxy.html#mod-ood-proxy"><span class="std std-ref">mod_ood_proxy</span></a></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/mod_ood_proxy/lib&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/mod_ood_proxy/lib&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Point to a different directory</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lua/handlers&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lua/handlers&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -355,14 +355,14 @@ or <code class="docutils literal"><span class="pre">443</span></code>)</p>
 <dd><p>the verbosity of the Lua module in the logs</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Use default log level of <code class="docutils literal"><span class="pre">info</span></code></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_log_level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dd><p class="first">Use default log level of <code class="docutils literal notranslate"><span class="pre">info</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_log_level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Decrease verbosity</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_log_level</span><span class="p p-Indicator">:</span> <span class="s">&quot;warn&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_log_level</span><span class="p p-Indicator">:</span> <span class="s">&quot;warn&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -378,13 +378,13 @@ name</p>
 <dt>Default</dt>
 <dd><p class="first">Use <a class="reference internal" href="../ood-auth-map.html#ood-auth-map"><span class="std std-ref">ood_auth_map</span></a> and echo back the authenticated user name as
 the system user name</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Capture system user name from regular expression</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@example.com&#39;&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@example.com&#39;&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -398,14 +398,14 @@ the system user name</p>
 as the argument for the user mapping command</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Use <code class="docutils literal"><span class="pre">REMOTE_USER</span></code> if not defined</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dd><p class="first">Use <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> if not defined</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use a custom environment variable instead</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="s">&quot;OIDC_CLAIM_preferred_username&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="s">&quot;OIDC_CLAIM_preferred_username&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -420,13 +420,13 @@ name to a system user name</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Don’t redirect the user and just display an error message</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">map_fail_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">map_fail_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Redirect the user to a registration page you set up beforehand</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">map_fail_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/register&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">map_fail_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/register&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -441,13 +441,13 @@ name to a system user name</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Use default install location</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_stage_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;sudo</span><span class="nv"> </span><span class="s">/opt/ood/nginx_stage/sbin/nginx_stage&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_stage_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;sudo</span><span class="nv"> </span><span class="s">/opt/ood/nginx_stage/sbin/nginx_stage&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use a different install location</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_stage_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;sudo</span><span class="nv"> </span><span class="s">/path/to/nginx_stage&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_stage_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;sudo</span><span class="nv"> </span><span class="s">/path/to/nginx_stage&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -463,7 +463,7 @@ various protected resources on the website</p>
 <dt>Default</dt>
 <dd><p class="first">Use basic authentication with a plain-text password file (see
 <a class="reference internal" href="examples/default-authentication.html#default-authentication"><span class="std std-ref">Default Authentication</span></a>)</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthUserFile</span><span class="nv"> </span><span class="s">\&quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd\&quot;&quot;</span>
@@ -487,17 +487,17 @@ various protected resources on the website</p>
 <dt>
 <code class="descname">root_uri (String)</code></dt>
 <dd><p>the URI a user is redirected to when they access the root of the website
-(e.g., <code class="docutils literal"><span class="pre">https://www.example.com/</span></code>)</p>
+(e.g., <code class="docutils literal notranslate"><span class="pre">https://www.example.com/</span></code>)</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Redirect the user to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">root_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">root_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Redirect to a different URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">root_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_uri&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">root_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_uri&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -512,7 +512,7 @@ Analytics account and property</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Do not track analytics</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">analytics</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">analytics</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
@@ -526,7 +526,7 @@ Analytics account and property</p>
 <h2>Configure Public Assets<a class="headerlink" href="#configure-public-assets" title="Permalink to this headline">¶</a></h2>
 <p>This is a location where files can be served without a user being
 authenticated. Useful to serve favicon, images, or user documentation. If
-either of these properties are <code class="docutils literal"><span class="pre">null</span></code> then users won’t be able to access
+either of these properties are <code class="docutils literal notranslate"><span class="pre">null</span></code> then users won’t be able to access
 public assets through the website.</p>
 <dl class="describe">
 <dt>
@@ -534,14 +534,14 @@ public assets through the website.</p>
 <dd><p>the URI used to access public assets (no authentication needed)</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Access as <code class="docutils literal"><span class="pre">http://www.example.com/public</span></code></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/public&quot;</span>
+<dd><p class="first">Access as <code class="docutils literal notranslate"><span class="pre">http://www.example.com/public</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/public&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Access under a different URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/assets&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/assets&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -555,13 +555,13 @@ public assets through the website.</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Using a default installation</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/public&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/public&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Serve files under a different directory</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/public/files&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/public/files&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -574,7 +574,7 @@ public assets through the website.</p>
 <p>The <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> will send the user to this URI when they click the Logout
 button. This URI will then redirect the user to the logout mechanism for your
 corresponding authentication mechanism. If either of these properties are
-<code class="docutils literal"><span class="pre">null</span></code> then users will get an error when they try to logout from the
+<code class="docutils literal notranslate"><span class="pre">null</span></code> then users will get an error when they try to logout from the
 <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p>
 <dl class="describe">
 <dt>
@@ -582,14 +582,14 @@ corresponding authentication mechanism. If either of these properties are
 <dd><p>the URI used to logout from an Apache session</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Access as <code class="docutils literal"><span class="pre">http://www.example.com/logout</span></code></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/logout&quot;</span>
+<dd><p class="first">Access as <code class="docutils literal notranslate"><span class="pre">http://www.example.com/logout</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/logout&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Access under a different URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/log_me_out&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/log_me_out&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -603,7 +603,7 @@ corresponding authentication mechanism. If either of these properties are
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Fallback to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> log out page</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard/logout&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard/logout&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -625,40 +625,40 @@ IP sockets. This is different than what is used for proxying to per-user NGINX
 processes through Unix domain sockets. This can be used to connect to Jupyter
 notebook servers, RStudio servers, VNC servers, and more… This is disabled by
 default as it can be security risk if not properly setup using a good
-<code class="docutils literal"><span class="pre">host_regex</span></code>.</p>
-<p>A URL request to the <code class="docutils literal"><span class="pre">node_uri</span></code> will reverse proxy to the given <code class="docutils literal"><span class="pre">host</span></code> and
-<code class="docutils literal"><span class="pre">port</span></code> using the <strong>full</strong> URI path. So a request to the frontend Apache
+<code class="docutils literal notranslate"><span class="pre">host_regex</span></code>.</p>
+<p>A URL request to the <code class="docutils literal notranslate"><span class="pre">node_uri</span></code> will reverse proxy to the given <code class="docutils literal notranslate"><span class="pre">host</span></code> and
+<code class="docutils literal notranslate"><span class="pre">port</span></code> using the <strong>full</strong> URI path. So a request to the frontend Apache
 proxy that looks like:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.example.edu</span>
 </pre></div>
 </div>
 <p>will be reverse proxied to the backend server with the following request
 format:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">&lt;host&gt;:&lt;port&gt;</span>
 </pre></div>
 </div>
-<p>A URL request to the <code class="docutils literal"><span class="pre">rnode_uri</span></code> will reverse proxy to the given <code class="docutils literal"><span class="pre">host</span></code> and
-<code class="docutils literal"><span class="pre">port</span></code> using the <strong>relative</strong> URI path. So a request to the frontend Apache
+<p>A URL request to the <code class="docutils literal notranslate"><span class="pre">rnode_uri</span></code> will reverse proxy to the given <code class="docutils literal notranslate"><span class="pre">host</span></code> and
+<code class="docutils literal notranslate"><span class="pre">port</span></code> using the <strong>relative</strong> URI path. So a request to the frontend Apache
 proxy that looks like:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;rnode_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;rnode_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.example.edu</span>
 </pre></div>
 </div>
 <p>will be reverse proxied to the backend server with the following request
 format:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">&lt;host&gt;:&lt;port&gt;</span>
 </pre></div>
 </div>
 <p>Notice that we strip off the portion of the URI request path that is used to
 determine the backend web server.</p>
 <p>Both formats are provided to better support the varying capabilities for the
-multitude of web application servers. For the case of using <code class="docutils literal"><span class="pre">node_uri</span></code> the
+multitude of web application servers. For the case of using <code class="docutils literal notranslate"><span class="pre">node_uri</span></code> the
 developer will need to modify the web server to accommodate requests with a
-sub-URI that follows the dynamic formatting of <code class="docutils literal"><span class="pre">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;</span></code>.
-For the case of using <code class="docutils literal"><span class="pre">rnode_uri</span></code> the developer needs to confirm that all
+sub-URI that follows the dynamic formatting of <code class="docutils literal notranslate"><span class="pre">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;</span></code>.
+For the case of using <code class="docutils literal notranslate"><span class="pre">rnode_uri</span></code> the developer needs to confirm that all
 assets and links supplied by the web server are relative and not absolute.</p>
 <dl class="describe">
 <dt>
@@ -669,13 +669,13 @@ proxy to a given host</p>
 <dt>Default</dt>
 <dd><p class="first">Allow proxying to all hosts in the world (please change this if you
 enable this feature)</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;[^/]+&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;[^/]+&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Restrict access to only within internal network</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;[\\w.-]+\\.example\\.com&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;[\\w.-]+\\.example\\.com&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -690,13 +690,13 @@ and port that knows the <strong>full</strong> URI path</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This feature is disabled by default</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use the recommended URI by our team</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/node&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/node&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -711,13 +711,13 @@ and port that knows the <strong>relative</strong> URI path</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This feature is disabled by default</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use the recommended URI by our team</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/rnode&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/rnode&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -727,24 +727,24 @@ and port that knows the <strong>relative</strong> URI path</p>
 </div>
 <div class="section" id="configure-per-user-nginx">
 <h2>Configure per-user NGINX<a class="headerlink" href="#configure-per-user-nginx" title="Permalink to this headline">¶</a></h2>
-<p>The reverse proxy will proxy a request under the <code class="docutils literal"><span class="pre">pun_uri</span></code> URI to the user’s
+<p>The reverse proxy will proxy a request under the <code class="docutils literal notranslate"><span class="pre">pun_uri</span></code> URI to the user’s
 per-user NGINX (PUN) process through Unix domain sockets. It will send process
-signals to the user’s PUN through the <code class="docutils literal"><span class="pre">nginx_uri</span></code> URI. If either of these
-properties are <code class="docutils literal"><span class="pre">null</span></code> then PUN access will be disabled.</p>
+signals to the user’s PUN through the <code class="docutils literal notranslate"><span class="pre">nginx_uri</span></code> URI. If either of these
+properties are <code class="docutils literal notranslate"><span class="pre">null</span></code> then PUN access will be disabled.</p>
 <dl class="describe">
 <dt>
 <code class="descname">nginx_uri (String, null)</code></dt>
 <dd><p>the URI used to control the PUN process</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">User’s can send signals to PUN through <code class="docutils literal"><span class="pre">http://www.example.com/nginx</span></code></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">nginx_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/nginx&quot;</span>
+<dd><p class="first">User’s can send signals to PUN through <code class="docutils literal notranslate"><span class="pre">http://www.example.com/nginx</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">nginx_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/nginx&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use a different URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_pun_controller&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_pun_controller&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -757,14 +757,14 @@ properties are <code class="docutils literal"><span class="pre">null</span></cod
 <dd><p>the URI used to access the PUN process</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">User’s access their PUN through <code class="docutils literal"><span class="pre">http://www.example.com/pun</span></code></p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun&quot;</span>
+<dd><p class="first">User’s access their PUN through <code class="docutils literal notranslate"><span class="pre">http://www.example.com/pun</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Use a different URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_pun_apps&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_pun_apps&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -778,13 +778,13 @@ properties are <code class="docutils literal"><span class="pre">null</span></cod
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Using a default installation</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_socket_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/run/nginx&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_socket_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/run/nginx&quot;</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Socket files are located in a different directory</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_socket_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/pun/sockets&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_socket_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/pun/sockets&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -799,13 +799,13 @@ up and displaying an error to the user</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">Only try 5 times</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Try 25 times</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">25</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">25</span>
 </pre></div>
 </div>
 </dd>
@@ -825,13 +825,13 @@ on <a class="reference external" href="https://github.com/zmartzone/mod_auth_ope
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This is disabled by default</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Enable it on a recommended URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -847,13 +847,13 @@ use to login through</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This is disabled by default</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Enable it to a recommended URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/discover&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/discover&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -868,13 +868,13 @@ the discovery page</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This is disabled by default</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_root</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_root</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Enable it to the recommended path</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/discover&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/discover&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -887,7 +887,7 @@ the discovery page</p>
 <p>If you are using a <strong class="program">grid-mapfile</strong> to map the authenticated user name
 to a system user name, then this will be used to generate mappings in the file
 for a user’s first time accessing your website. Setting either property below
-to <code class="docutils literal"><span class="pre">null</span></code> will disable this feature.</p>
+to <code class="docutils literal notranslate"><span class="pre">null</span></code> will disable this feature.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This is unnecessary if you use regular expressions for mapping the
@@ -901,13 +901,13 @@ authenticated user name and a system user name</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This is disabled by default. An error is displayed the user if mapping fails.</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Enable it to a recommended URI</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/register&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/register&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -922,13 +922,13 @@ the registration page</p>
 <dl class="docutils">
 <dt>Default</dt>
 <dd><p class="first">This is disabled by default. An error is displayed the user if mapping fails.</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Enable it to the recommended path</p>
-<div class="last highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/register&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/register&quot;</span>
 </pre></div>
 </div>
 </dd>

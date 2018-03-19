@@ -13,15 +13,15 @@ deploy it as a System App.
 
 #. Go to your OnDemand sandbox directory:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      cd ~/ondemand/dev
+      $ cd ~/ondemand/dev
 
 #. Copy the app to the system deployment location as **root**:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo cp -r jupyter /var/www/ood/apps/sys/.
+      $ sudo cp -r jupyter /var/www/ood/apps/sys/.
 
 #. In your browser navigate to the OnDemand URL and confirm you see the new app
    in the *Interactive Apps* dropdown on the :ref:`dashboard`::

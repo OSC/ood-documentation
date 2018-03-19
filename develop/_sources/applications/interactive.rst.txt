@@ -21,7 +21,7 @@ web form, submitting the batch job, and displaying connection information to
 the user for a running Interactive App session.
 
 To get started it is **recommended** that an administrator walks through
-:ref:`install-desktops` at least once for your Open OnDemand portal. This will
+:ref:`enable-desktops` at least once for your Open OnDemand portal. This will
 ensure your Open OnDemand portal is properly configured to host Interactive
 Apps.
 

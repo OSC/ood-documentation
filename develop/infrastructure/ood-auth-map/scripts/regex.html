@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
@@ -138,6 +137,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -219,7 +219,7 @@ pattern to capture the local system username. The default regular expression
 if none is provided is to just <em>echo</em> back the supplied authenticated username.
 If no local system username is captured by the regular expression, then a blank
 string is returned.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>bin/ood_auth_map.regex <span class="o">[</span>OPTIONS<span class="o">]</span> &lt;REMOTE_USER&gt;
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bin/ood_auth_map.regex <span class="o">[</span>OPTIONS<span class="o">]</span> &lt;REMOTE_USER&gt;
 </pre></div>
 </div>
 <div class="section" id="general-options">
@@ -227,7 +227,7 @@ string is returned.</p>
 <dl class="option">
 <dt id="cmdoption-ood-auth-map-regex-r">
 <code class="descname">-r</code><code class="descclassname"> &lt;regex&gt;</code><code class="descclassname">, </code><code class="descname">--regex</code><code class="descclassname"> &lt;regex&gt;</code><a class="headerlink" href="#cmdoption-ood-auth-map-regex-r" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default: <code class="docutils literal"><span class="pre">^(.+)$</span></code></p>
+<dd><p>Default: <code class="docutils literal notranslate"><span class="pre">^(.+)$</span></code></p>
 <p>The regular expression used to capture the local system username.</p>
 </dd></dl>
 
@@ -235,21 +235,21 @@ string is returned.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>To echo back the username supplied (useful for LDAP authentication):</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ bin/ood_auth_map.regex <span class="s1">&#39;bob&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ bin/ood_auth_map.regex <span class="s1">&#39;bob&#39;</span>
 bob
 $
 </pre></div>
 </div>
 <p>To capture the local username from a common Shibboleth supplied remote
 username:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@center.edu&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@center.edu&#39;</span>
 bob
 $
 </pre></div>
 </div>
 <p>Recall that if no match is found from the supplied regular expression and
 authenticated username that an empty string is returned instead:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@mit.edu&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@mit.edu&#39;</span>
 
 $
 </pre></div>

@@ -76,10 +76,13 @@ These directions are for installing from source.
 Re-generate main config using ood-portal-generator
 -----------------------------------------------------------
 
-#. In the ood-portal-generator's config.yml file, add these lines:
+#. Edit the YAML configuration file for the :ref:`ood-portal-generator` located
+   under :file:`/etc/ood/config/ood_portal.yml` as such:
 
    .. code-block:: yaml
 
+      # /etc/ood/config/ood_portal.yml
+      ---
       # List of Apache authentication directives
       # NB: Be sure the appropriate Apache module is installed for this
       # Default: (see below, uses basic auth with an htpasswd file)
@@ -109,13 +112,11 @@ Re-generate main config using ood-portal-generator
       (which in this tutorial's case is ``https%3A%2F%2Fwebdev07.hpc.osc.edu``,
       the query param escaped format of ``https://webdev07.hpc.osc.edu``)
 
-#. Using this modified config, regenerate the Apache config, and then install it:
+#. Then build and install the new Apache configuration file with:
 
    .. code-block:: sh
 
-      scl enable rh-ruby22 -- rake
-      scl enable rh-ruby22 -- rake install
-
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
    The effect of this change in the Apache config (in case you want to apply the changes manually) are:
 

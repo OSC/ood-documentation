@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
@@ -140,6 +139,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -237,13 +237,13 @@ restarting the user’s per-user NGINX (PUN) process, and finally
 redirecting the user to the specified application.</p>
 <p><strong>Example request for Dashboard App</strong></p>
 <p>Assuming we have the following defined in the Apache configuration file:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> OOD_NGINX_URI <span class="s2">&quot;/nginx&quot;</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> OOD_NGINX_URI <span class="s2">&quot;/nginx&quot;</span>
 <span class="nb">SetEnv</span> OOD_PUN_URI   <span class="s2">&quot;/pun&quot;</span>
 </pre></div>
 </div>
-<p>and we want to initialize the Dashboard App at <code class="docutils literal"><span class="pre">/pun/sys/dashboard</span></code>,
+<p>and we want to initialize the Dashboard App at <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard</span></code>,
 we’d make the following request:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/nginx/init?redir=%2Fpun%2Fsys%2Fdashboard</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/nginx/init?redir=%2Fpun%2Fsys%2Fdashboard</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -266,12 +266,12 @@ we’d make the following request:</p>
 <p>Stops a user’s PUN process and redirects the user to the URL if specified.</p>
 <p><strong>Example request</strong></p>
 <p>Assuming we have the following defined in the Apache configuration file:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> OOD_NGINX_URI <span class="s2">&quot;/nginx&quot;</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> OOD_NGINX_URI <span class="s2">&quot;/nginx&quot;</span>
 </pre></div>
 </div>
 <p>and we want to stop the user’s PUN followed by a redirect to the root URL,
 we’d make the following request:</p>
-<div class="highlight-http"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/nginx/stop?redir=%2F</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/nginx/stop?redir=%2F</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -285,7 +285,7 @@ to after the app’s NGINX configuration file is generated.</p>
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Configuration is handled by setting CGI environment variables within the Apache
 configuration file with the following format:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> ARG_FOR_LUA <span class="s2">&quot;value of argument&quot;</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> ARG_FOR_LUA <span class="s2">&quot;value of argument&quot;</span>
 </pre></div>
 </div>
 <dl class="envvar">
@@ -300,7 +300,7 @@ local user name. See <a class="reference internal" href="../../ood-auth-map.html
 <code class="descname">OOD_USER_ENV</code><a class="headerlink" href="#envvar-OOD_USER_ENV" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>Optional</em></p>
 <p>Points to the CGI environment variable that stores the authenticated user
-name if different than <code class="docutils literal"><span class="pre">REMOTE_USER</span></code>.</p>
+name if different than <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.</p>
 </dd></dl>
 
 <dl class="envvar">
@@ -323,14 +323,14 @@ user.</p>
 <dt id="envvar-OOD_NGINX_URI">
 <code class="descname">OOD_NGINX_URI</code><a class="headerlink" href="#envvar-OOD_NGINX_URI" title="Permalink to this definition">¶</a></dt>
 <dd><p>The base URI that namespaces this handler from the other handlers.
-Recommended value is <code class="docutils literal"><span class="pre">/nginx</span></code>.</p>
+Recommended value is <code class="docutils literal notranslate"><span class="pre">/nginx</span></code>.</p>
 </dd></dl>
 
 <dl class="envvar">
 <dt id="envvar-OOD_PUN_URI">
 <code class="descname">OOD_PUN_URI</code><a class="headerlink" href="#envvar-OOD_PUN_URI" title="Permalink to this definition">¶</a></dt>
 <dd><p>The base URI that namespaces the <a class="reference internal" href="pun-proxy-handler.html#pun-proxy-handler"><span class="std std-ref">pun_proxy_handler</span></a> from the other
-handlers. Recommended value is <code class="docutils literal"><span class="pre">/pun</span></code>.</p>
+handlers. Recommended value is <code class="docutils literal notranslate"><span class="pre">/pun</span></code>.</p>
 </dd></dl>
 
 </div>

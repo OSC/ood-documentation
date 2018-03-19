@@ -90,11 +90,9 @@ options read from the corresponding cluster configuration file.
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - bc_queue
@@ -119,7 +117,7 @@ options read from the corresponding cluster configuration file.
    attribute with this list of queues/partitions:
 
    .. code-block:: yaml
-      :emphasize-lines: 2-4,11-18,24
+      :emphasize-lines: 2-4,10-17,22
 
       # ~/ondemand/dev/jupyter/form.yml.erb
       <%-
@@ -129,7 +127,6 @@ options read from the corresponding cluster configuration file.
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
         custom_queue:
           label: Queue
@@ -141,7 +138,6 @@ options read from the corresponding cluster configuration file.
           <%- end -%>
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - custom_queue

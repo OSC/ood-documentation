@@ -13,16 +13,13 @@ node:
 
 **Optional** (but recommended) software:
 
-- `Anaconda`_ 4.3.13+ and its `Jupyter Notebook extensions`_ that allow the
-  users to define custom environment-based kernels from within the Jupyter
-  notebook dashboard
 - `Lmod`_ 6.0.1+ or any other CLI tool used to load appropriate environments
   within the batch job before launching the Jupyter Notebook Server, e.g.,
 
-  .. code-block:: shell
+  .. code-block:: console
 
-     module purge
-     module load python/3
+     $ module purge
+     $ module load python
 
 .. warning::
 
@@ -32,6 +29,4 @@ node:
 
 .. _jupyter notebook: http://jupyter.readthedocs.io/en/latest/
 .. _openssl: https://www.openssl.org/
-.. _anaconda: https://www.anaconda.com/distribution/
-.. _jupyter notebook extensions: https://docs.anaconda.com/anaconda/user-guide/tasks/use-jupyter-notebook-extensions
 .. _lmod: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod

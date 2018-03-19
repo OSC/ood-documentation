@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8. Start Apache &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>4. Start Apache &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -43,8 +43,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Installation" href="../installation.html"/>
-        <link rel="next" title="9. Install Applications" href="install-apps.html"/>
-        <link rel="prev" title="7. Add Cluster Configuration Files" href="add-cluster-config.html"/> 
+        <link rel="next" title="5. Add SSL Support" href="add-ssl.html"/>
+        <link rel="prev" title="Configure PBS Professional" href="resource-manager/pbspro.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -107,23 +107,17 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generate-apache-config.html">3. Generate Apache Config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-proxy-module.html">4. Install Proxy Module for Apache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-pun-utility.html">5. Install the PUN Utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-mapping-script.html">6. Install User Mapping Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-cluster-config.html">7. Add Cluster Configuration Files</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8. Start Apache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-apps.html">9. Install Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">10. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">11. Add LDAP Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-cluster-config.html">3. Add Cluster Configuration Files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Start Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">5. Add SSL Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">6. Add LDAP Support</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -137,6 +131,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -186,7 +181,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>8. Start Apache</li>
+      <li>4. Start Apache</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -208,25 +203,50 @@
            <div itemprop="articleBody">
             
   <div class="section" id="start-apache">
-<span id="id1"></span><h1>8. Start Apache<a class="headerlink" href="#start-apache" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>sudo service httpd24-httpd start
-<span class="c1"># =&gt; Starting httpd:                                            [  OK  ]</span>
+<span id="id1"></span><h1>4. Start Apache<a class="headerlink" href="#start-apache" title="Permalink to this headline">¶</a></h1>
+<p>By default the Apache HTTP Server is disabled. In this section we will enable
+it and add our account to the Basic Auth password file. Please see section
+<a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for a more advanced and recommended authentication method after
+this.</p>
+<ol class="arabic">
+<li><p class="first">Start the Apache HTTP Server:</p>
+<dl class="docutils">
+<dt>CentOS/RHEL 6</dt>
+<dd><div class="first last highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo service httpd24-httpd start
+<span class="go">Starting httpd:                                            [  OK  ]</span>
 </pre></div>
 </div>
+</dd>
+<dt>CentOS/RHEL 7</dt>
+<dd><div class="first last highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo systemctl start httpd24-httpd
+</pre></div>
+</div>
+</dd>
+</dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>If using <strong>RHEL 7</strong> you will need to replace the above command with:</p>
-<div class="last highlight-sh"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
+<p class="last">If you access the OnDemand server that you just started, you will be
+presented with a username/password dialog box. Attempting to use your
+system credentials will fail because Apache by default will try to
+authenticate against a nonexistent password file.</p>
+</div>
+</li>
+<li><p class="first">Now we need to add our account to the password file that Apache is using.</p>
+<p>We start by generating an <code class="file docutils literal notranslate"><span class="pre">.htpasswd</span></code> file with our username, but
+whose password does not necessarily need to be the same as our system
+password:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo scl <span class="nb">enable</span> httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd <span class="se">\$</span><span class="o">{</span>SUDO_USER<span class="o">}</span>
+<span class="go">New password:</span>
+<span class="go">Re-type new password:</span>
+<span class="go">Adding password for user .......</span>
 </pre></div>
 </div>
-</div>
-<p>If you access the host now through a web browser you should see this error:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="o">--</span> <span class="n">invalid</span> <span class="n">app</span> <span class="n">root</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span>
-<span class="n">Run</span> <span class="s1">&#39;nginx_stage --help&#39;</span> <span class="n">to</span> <span class="n">see</span> <span class="n">a</span> <span class="n">full</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">available</span> <span class="n">command</span> <span class="n">line</span> <span class="n">options</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>Success! The infrastructure components are installed and now we need to install
-the OOD “System Apps”.</p>
+</li>
+<li><p class="first">Browse to your OnDemand server and login with your username and the password
+you used in the previous step. If everything worked you should be presented
+with the OnDemand <a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p>
+</li>
+</ol>
 </div>
 
 
@@ -239,10 +259,10 @@ the OOD “System Apps”.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="install-apps.html" class="btn btn-neutral float-right" title="9. Install Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="add-ssl.html" class="btn btn-neutral float-right" title="5. Add SSL Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="add-cluster-config.html" class="btn btn-neutral" title="7. Add Cluster Configuration Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="resource-manager/pbspro.html" class="btn btn-neutral" title="Configure PBS Professional" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

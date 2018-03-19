@@ -34,11 +34,9 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - bc_queue
@@ -63,14 +61,13 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
    queues/partitions:
 
    .. code-block:: yaml
-      :emphasize-lines: 8-14,20
+      :emphasize-lines: 7-13,18
 
       # ~/ondemand/dev/jupyter/form.yml
       ---
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
         custom_queue:
           label: Queue
@@ -81,7 +78,6 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
             - [ "Queue 2", "queue2" ]
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - custom_queue

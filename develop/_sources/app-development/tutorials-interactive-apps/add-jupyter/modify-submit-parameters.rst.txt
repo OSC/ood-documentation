@@ -7,9 +7,10 @@ In some cases the Jupyter app batch job fails to submit to the given cluster or
 you are not happy with the default chosen submission parameters. This section
 explains how to modify the submission parameters.
 
-The main responsibility of the ``submit.yml.erb`` file located in the root of
-the app is for modifying the underlying batch script that is generated from an
-internal template and its submission parameters.
+The main responsibility of the ``submit.yml.erb`` file
+(:ref:`app-development-interactive-submit`) located in the root of the app is
+for modifying the underlying batch script that is generated from an internal
+template and its submission parameters.
 
 .. note::
 
@@ -51,7 +52,7 @@ http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initiali
    It is recommended any global ``batch_connect`` attributes be defined in the
    corresponding cluster configuration file under::
 
-     /etc/ood/config/clusters.d/cluster.yml
+     /etc/ood/config/clusters.d/my_cluster.yml
 
    There is further discussion on this under
    :ref:`app-development-interactive-setup-modify-cluster-configuration`.
@@ -101,29 +102,14 @@ For Slurm, you can choose the features on a requested node with:
    batch_connect:
      template: "basic"
    script:
-     native: [ "-N", "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>", "-C", "c12" ]
-
-where we define the :command:`sbatch` parameters as an array under ``script``
-and ``native``.
-
-Arrays can also be written in YAML as:
-
-.. code-block:: yaml
-   :emphasize-lines: 5-
-
-   # ~/ondemand/dev/jupyter/submit.yml.erb
-   ---
-   batch_connect:
-     template: "basic"
-   script:
      native:
        - "-N"
        - "<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
        - "-C"
        - "c12"
 
-Depending on how complicated the array gets you may prefer the more expanded
-format.
+where we define the :command:`sbatch` parameters as an array under ``script``
+and ``native``.
 
 .. note::
 
@@ -181,24 +167,12 @@ This can be specified as such:
    batch_connect:
      template: "basic"
    script:
-     native: [ "-l", "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>" ]
-
-where we define the :command:`qsub` parameters as an array under ``script`` and
-``native``.
-
-Arrays can also be written in YAML as:
-
-.. code-block:: yaml
-   :emphasize-lines: 5-
-
-   # ~/ondemand/dev/jupyter/submit.yml.erb
-   ---
-   batch_connect:
-     template: "basic"
-   script:
      native:
        - "-l"
        - "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
+
+where we define the :command:`qsub` parameters as an array under ``script`` and
+``native``.
 
 If you would like to mimic how Torque handles ``bc_num_slots`` (number of
 **nodes**), then we will first need to change the form label of
@@ -206,20 +180,18 @@ If you would like to mimic how Torque handles ``bc_num_slots`` (number of
 the form configuration file the highlighted lines:
 
 .. code-block:: yaml
-   :emphasize-lines: 8-9
+   :emphasize-lines: 7-8
 
    # ~/ondemand/dev/jupyter/form.yml
    ---
    cluster: "cluster1"
    attributes:
      modules: "python"
-     conda_extensions: "1"
      extra_jupyter_args: ""
      bc_num_slots:
        label: "Number of nodes"
    form:
      - modules
-     - conda_extensions
      - extra_jupyter_args
      - bc_num_hours
      - bc_num_slots
@@ -243,7 +215,9 @@ such:
    batch_connect:
      template: "basic"
    script:
-     native: [ "-l", "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28" ]
+     native:
+       - "-l"
+       - "select=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>:ncpus=28"
 
 where we replace ``ncpus=28`` with the correct number for your cluster. You can
 also append ``mem=...gb`` to the ``select=...`` statement if you'd like.

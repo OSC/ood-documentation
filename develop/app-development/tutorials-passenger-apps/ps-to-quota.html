@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -140,6 +139,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -255,8 +255,8 @@ as a table or graph</li>
 </ol>
 </li>
 <li>the app can be deployed without requiring a build step because gem
-dependencies (specified in <code class="docutils literal"><span class="pre">Gemfile</span></code> and <code class="docutils literal"><span class="pre">Gemfile.lock</span></code>) are pure ruby
-and versioned with the app under <code class="docutils literal"><span class="pre">vendor/bundle</span></code></li>
+dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby
+and versioned with the app under <code class="docutils literal notranslate"><span class="pre">vendor/bundle</span></code></li>
 <li>most of the app can be modified without requiring a restart due to proper use
 of Sinatra reloader extension</li>
 <li>app has a built in scaffold for unit testing using minitest</li>
@@ -320,7 +320,7 @@ where css and javascript files are included</td>
 <td>installed and versioned gem dependencies</td>
 </tr>
 <tr class="row-even"><td>tmp/</td>
-<td>tmp directory is kept so its easier to <code class="docutils literal"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
+<td>tmp directory is kept so its easier to <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
 want to force Passenger to restart an app</td>
 </tr>
 <tr class="row-odd"><td>public/</td>
@@ -332,7 +332,7 @@ change we change the version, which is one cache busting strategy</td>
 </tr>
 <tr class="row-even"><td>Rakefile</td>
 <td>this provides a default Rake task for running the automated tests under
-test/, so you can run the tests by running the command <code class="docutils literal"><span class="pre">rake</span></code></td>
+test/, so you can run the tests by running the command <code class="docutils literal notranslate"><span class="pre">rake</span></code></td>
 </tr>
 <tr class="row-odd"><td>test/minitest_helper.rb</td>
 <td>contains setup code common between all tests</td>
@@ -347,8 +347,8 @@ test/, so you can run the tests by running the command <code class="docutils lit
 <li>Login to Open OnDemand, click “Develop” dropdown menu and click the “My Sandbox Apps (Development)” option.</li>
 <li>Click “New Product” and “Clone Existing App”.</li>
 <li>Fill out the form:<ol class="arabic">
-<li>Directory name: <code class="docutils literal"><span class="pre">quota</span></code></li>
-<li>Git remote: <code class="docutils literal"><span class="pre">https://github.com/OSC/ood-example-ps</span></code></li>
+<li>Directory name: <code class="docutils literal notranslate"><span class="pre">quota</span></code></li>
+<li>Git remote: <code class="docutils literal notranslate"><span class="pre">https://github.com/OSC/ood-example-ps</span></code></li>
 <li>Check “Create new Git Project from this?”</li>
 <li>Click Submit</li>
 </ol>
@@ -363,11 +363,11 @@ Explorer.</li>
 <div class="section" id="edit-to-run-and-parse-quota">
 <h2>Edit to run and parse quota<a class="headerlink" href="#edit-to-run-and-parse-quota" title="Permalink to this headline">¶</a></h2>
 <p>The app runs and parses this command:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>ps aux <span class="p">|</span> grep <span class="s1">&#39;[A]pp&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ps aux <span class="p">|</span> grep <span class="s1">&#39;[A]pp&#39;</span>
 </pre></div>
 </div>
 <p>We will change it to run and parse this command:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>quota -spw
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>quota -spw
 </pre></div>
 </div>
 <div class="section" id="update-test-test-command-rb">
@@ -376,7 +376,7 @@ Explorer.</li>
 update the assertions to expect an array of “quotas” instead of “processes”
 with appropriate attributes.</p>
 <p>Diff:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>  def test_command_output_parsing
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>  def test_command_output_parsing
     output = &lt;&lt;-EOF
 <span class="gd">-</span>
 <span class="gd">-efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota</span>
@@ -408,7 +408,7 @@ EOF
 </pre></div>
 </div>
 <p>Resulting test method:</p>
-<div class="highlight-ruby"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestCommand</span> <span class="o">&lt;</span> <span class="no">Minitest</span><span class="o">::</span><span class="no">Test</span>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestCommand</span> <span class="o">&lt;</span> <span class="no">Minitest</span><span class="o">::</span><span class="no">Test</span>
 
   <span class="k">def</span> <span class="nf">test_command_output_parsing</span>
     <span class="n">output</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="dl">EOF</span>
@@ -435,7 +435,7 @@ EOF
 <div class="section" id="update-command-rb">
 <h3>Update command.rb<a class="headerlink" href="#update-command-rb" title="Permalink to this headline">¶</a></h3>
 <p>Run test by running <cite>rake</cite> command and you will see it fail:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ rake
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ rake
 Run options: --seed <span class="m">58990</span>
 
 <span class="c1"># Running:</span>
@@ -464,23 +464,23 @@ Tasks: <span class="nv">TOP</span> <span class="o">=</span>&gt; <span class="nv"
 a host that has the correct version of Ruby installed. For OnDemand that likely
 means using Software Collections with the same packages used to install OnDemand.</p>
 <p>With SCL, running rake with rh-ruby22 package looks like:</p>
-<p><code class="docutils literal"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">rh-ruby22</span> <span class="pre">--</span> <span class="pre">rake</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">rh-ruby22</span> <span class="pre">--</span> <span class="pre">rake</span></code></p>
 <p>With SCL, running git commands using git19 looks like:</p>
-<p><code class="docutils literal"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">git19</span> <span class="pre">--</span> <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;initial</span> <span class="pre">commit&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">git19</span> <span class="pre">--</span> <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;initial</span> <span class="pre">commit&quot;</span></code></p>
 <p>You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
 For example, in my .bash_profile I have:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">HOSTNAME</span><span class="p">%%.*</span><span class="si">}</span> <span class="o">==</span> webtest04*  <span class="o">]]</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">HOSTNAME</span><span class="p">%%.*</span><span class="si">}</span> <span class="o">==</span> webtest04*  <span class="o">]]</span>
 <span class="k">then</span>
   scl <span class="nb">enable</span> rh-ruby22 nodejs010 git19 v8314 python27 -- bash
 <span class="k">fi</span>
 </pre></div>
 </div>
 <p class="last">This means when I login to the host webtest04.osc.edu the SCL packages will be enabled
-in a new bash session. If you did the same you would replace <code class="docutils literal"><span class="pre">webtest04</span></code> with the hostname
+in a new bash session. If you did the same you would replace <code class="docutils literal notranslate"><span class="pre">webtest04</span></code> with the hostname
 of your development node.</p>
 </div>
 <p>Change the command we are using, fix the command output parsing, and fix the struct definition so the unit test passes.</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>class Command
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>class Command
   def to_s
 <span class="gd">-    &quot;ps aux | grep &#39;[A]pp&#39;&quot;</span>
 <span class="gi">+    &quot;quota -spw&quot;</span>
@@ -502,7 +502,7 @@ of your development node.</p>
 </pre></div>
 </div>
 <p>After the changes part of the command.rb will look like this:</p>
-<div class="highlight-ruby"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Command</span>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Command</span>
   <span class="k">def</span> <span class="nf">to_s</span>
     <span class="s2">&quot;quota -spw&quot;</span>
   <span class="k">end</span>
@@ -520,7 +520,7 @@ of your development node.</p>
 </pre></div>
 </div>
 <p>Now when we run the test they pass:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ rake
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ rake
 Run options: --seed <span class="m">60317</span>
 
 <span class="c1"># Running:</span>
@@ -536,7 +536,7 @@ Finished in <span class="m">0</span>.000966s, <span class="m">1035</span>.1494 r
 <div class="section" id="update-app-rb-and-view-index-html">
 <h3>Update app.rb and view/index.html<a class="headerlink" href="#update-app-rb-and-view-index-html" title="Permalink to this headline">¶</a></h3>
 <p>Update app.rb:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>helpers do
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>helpers do
   def title
 <span class="gd">-    &quot;Passenger App Processes&quot;</span>
 <span class="gi">+    &quot;Quota&quot;</span>
@@ -555,7 +555,7 @@ end
 </pre></div>
 </div>
 <p>In view/index.html, replace the table with this:</p>
-<div class="highlight-erb"><div class="highlight"><pre><span></span><span class="x">&lt;table class=&quot;table table-bordered&quot;&gt;</span>
+<div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;table class=&quot;table table-bordered&quot;&gt;</span>
 <span class="x">  &lt;tr&gt;</span>
 <span class="x">    &lt;th&gt;Filesystem&lt;/th&gt;</span>
 <span class="x">    &lt;th&gt;Blocks&lt;/th&gt;</span>
@@ -589,7 +589,7 @@ end
 <div class="section" id="brand-app">
 <h2>Brand App<a class="headerlink" href="#brand-app" title="Permalink to this headline">¶</a></h2>
 <p>The app is looking good, but the details page still shows the app title “Passenger App Processes”. To change this and the icon, edit the manifest.yml:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gd">-name: Passenger App Processes</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-name: Passenger App Processes</span>
 <span class="gd">-description: Display your running Passenger app processes in a table</span>
 <span class="gi">+name: Quota</span>
 <span class="gi">+description: Display quotas</span>
@@ -597,9 +597,9 @@ end
 </pre></div>
 </div>
 <ul class="simple">
-<li>The icon follows format of <code class="docutils literal"><span class="pre">fa://{FONTAWESOMENAME}</span></code> where you replace <code class="docutils literal"><span class="pre">{FONTAWESOMENAME}</span></code> with an icon from <a class="reference external" href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a>.
-In this case we are using <code class="docutils literal"><span class="pre">fa-hdd-o</span></code> which we write in the manifest as <code class="docutils literal"><span class="pre">fa://hdd-o</span></code>.
-You can see details on this icon at <a class="reference external" href="http://fontawesome.io/icon/hdd-o/">http://fontawesome.io/icon/hdd-o/</a></li>
+<li>The icon follows format of <code class="docutils literal notranslate"><span class="pre">fa://{FONTAWESOMENAME}</span></code> where you replace <code class="docutils literal notranslate"><span class="pre">{FONTAWESOMENAME}</span></code> with an icon from <a class="reference external" href="https://fontawesome.com/icons/">https://fontawesome.com/icons/</a>.
+In this case we are using <code class="docutils literal notranslate"><span class="pre">fa-hdd-o</span></code> which we write in the manifest as <code class="docutils literal notranslate"><span class="pre">fa://hdd-o</span></code>.
+You can see details on this icon at <a class="reference external" href="https://fontawesome.com/icons/hdd?style=regular">https://fontawesome.com/icons/hdd?style=regular</a></li>
 </ul>
 </div>
 <div class="section" id="publish-app">
@@ -613,7 +613,7 @@ You can see details on this icon at <a class="reference external" href="http://f
 <ol class="arabic">
 <li><p class="first">Add category to manifest so app appears in Files menu:</p>
 <blockquote>
-<div><div class="highlight-diff"><div class="highlight"><pre><span></span>name: Quota
+<div><div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>name: Quota
 description: Display quotas
 icon: fa://hdd-o
 <span class="gi">+category: Files</span>
@@ -624,7 +624,7 @@ icon: fa://hdd-o
 </li>
 <li><p class="first">Version these changes. Click Shell button on app details view, and then commit the changes:</p>
 <blockquote>
-<div><div class="highlight-sh"><div class="highlight"><pre><span></span>git add .
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git add .
 git commit -m <span class="s2">&quot;update manifest for production&quot;</span>
 
 <span class="c1"># if there is an external remote associated with this, push to that</span>
@@ -635,7 +635,7 @@ git push origin master
 </li>
 <li><p class="first">As the admin, sudo copy or clone this repo to production</p>
 <blockquote>
-<div><div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># as sudo on OnDemand host:</span>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># as sudo on OnDemand host:</span>
 <span class="nb">cd</span> /var/www/ood/apps/sys
 git clone /users/PZS0562/efranz/ondemand/dev/quota
 </pre></div>

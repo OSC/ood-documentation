@@ -14,26 +14,26 @@ need to be compiled against the ``apxs`` and ``apr`` tools that reside under:
 
    /opt/rh/httpd24/root/usr/bin
 
-and not the versions that come with the default system version of Apache HTTP
-Server.
-
+and **not** the versions that come with the default system version of Apache
+HTTP Server.
 
 Configure Authentication Module
 -------------------------------
 
 Any Apache authentication module specific configuration directives (e.g.,
 ``OIDCCLientID``, ``CASLoginURL``, ...) should reside outside of the
-``ood-portal.conf`` configuration file. The Apache configuration files are
-loaded in lexical order, so placing these module specific configuration
-directives in the file:
+:file:`/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` configuration
+file. The Apache configuration files are loaded in lexical order, so placing
+these module specific configuration directives in the file:
 
 .. code-block:: text
 
    /opt/rh/httpd24/root/etc/httpd/conf.d/auth-config.conf
 
 will cause your authentication configuration directives to be loaded before
-``ood-portal.conf``. If there are any secrets inside this file you can ensure
-privacy by adding restrictive file permissions:
+:file:`/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`. If there are any
+secrets inside this file you can ensure privacy by adding restrictive file
+permissions:
 
 .. code-block:: console
 
@@ -42,16 +42,27 @@ privacy by adding restrictive file permissions:
 Add to OnDemand Portal
 ----------------------
 
-Do not directly edit the ``ood-portal.conf`` to include this authentication
-module within your Open OnDemand portal. Anytime you need to edit the
-``ood-portal.conf`` you should use the :ref:`ood-portal-generator` and its
-corresponding ``config.yml``. For example, to add support for an authentication
-module with ``AuthType`` of ``my-auth``, you would modify the ``config.yml`` as
-such:
+.. danger::
+
+   **Never** directly edit the
+   :file:`/opr/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` to include
+   this authentication module within your Open OnDemand portal. This could
+   cause future upgrades of OnDemand to break.
+
+Edit the YAML configuration file for the :ref:`ood-portal-generator` located
+under :file:`/etc/ood/config/ood_portal.yml`. For example, to add support for
+an authentication module with ``AuthType`` of ``my-auth``, you would modify the
+:file:`/etc/ood/config/ood_portal.yml` file as such:
+
+   .. code-block:: sh
+
+      scl enable rh-ruby22 -- rake
+      scl enable rh-ruby22 -- rake install
+
 
 .. code-block:: yaml
 
-   # /path/to/ood-portal-generator/config.yml
+   # /etc/ood/config/ood_portal.yml
    ---
    # ...
    # Your other custom configuration options...
@@ -61,24 +72,19 @@ such:
      - 'AuthType my-auth'
      - 'Require valid-user'
 
-You would then build the new ``ood-portal.conf`` from this configuration file
-with:
+You would then build and install the new Apache configuration file with:
 
 .. code-block:: console
 
-   $ scl enable rh-ruby22 -- rake
-   Rendering templates/ood-portal.conf.erb => build/ood-portal.conf
-
-This will build ``ood-portal.conf`` in the ``build/`` directory. Open that file
-and confirm everything is accurate, then install it in the global location:
-
-.. code-block:: console
-
-   $ sudo scl enable rh-ruby22 -- rake install
-   cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
+   $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 Finally you will need to restart your Apache HTTP Server for the changes to
 take effect.
+
+.. note::
+
+   You can find more :ref:`ood-portal-generator` configuration examples under
+   :ref:`ood-portal-generator-examples`.
 
 Sanitize Session Information
 ----------------------------
@@ -96,7 +102,7 @@ from the cookies, so we accomplish this with the following options in our
 
 .. code-block:: yaml
 
-   # /path/to/ood-portal-generator/config.yml
+   # /etc/ood/config/ood_portal.yml
    ---
    # ...
    # Your other custom configuration options...

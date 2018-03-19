@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
@@ -140,6 +139,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -219,9 +219,9 @@
 <p>This handler submits an HTTP request using the <a class="reference external" href="https://developers.google.com/analytics/devguides/collection/protocol/v1/">Google Analytics Measurement
 Protocol</a> with data accumulated by the user page request. It only submits the
 data if the user is authenticated and mapped to a local user name.</p>
-<p>It is recommended that this handler be included under the <code class="docutils literal"><span class="pre">/pun</span></code> location
+<p>It is recommended that this handler be included under the <code class="docutils literal notranslate"><span class="pre">/pun</span></code> location
 only. So an example Apache configuration file may look like:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nt">&lt;Location</span> <span class="s">&quot;/pun&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Location</span> <span class="s">&quot;/pun&quot;</span><span class="nt">&gt;</span>
   ...
 
   <span class="nb">SetEnv</span> OOD_ANALYTICS_TRACKING_URL <span class="s2">&quot;http://www.google-analytics.com/collect&quot;</span>
@@ -230,7 +230,7 @@ only. So an example Apache configuration file may look like:</p>
 <span class="nt">&lt;/Location&gt;</span>
 </pre></div>
 </div>
-<p>This handler is called in the <code class="docutils literal"><span class="pre">LuaHookLog</span></code> phase of the request-response
+<p>This handler is called in the <code class="docutils literal notranslate"><span class="pre">LuaHookLog</span></code> phase of the request-response
 lifecycle. This occurs after the client has received the response so it does
 not affect page load time for the client.</p>
 <div class="admonition note">
@@ -243,7 +243,7 @@ we can then share with you.</p>
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Configuration is handled by setting CGI environment variables within the Apache
 configuration file with the following format:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> ARG_FOR_LUA <span class="s2">&quot;value of argument&quot;</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nb">SetEnv</span> ARG_FOR_LUA <span class="s2">&quot;value of argument&quot;</span>
 </pre></div>
 </div>
 <dl class="envvar">
@@ -251,7 +251,7 @@ configuration file with the following format:</p>
 <code class="descname">OOD_ANALYTICS_TRACKING_URL</code><a class="headerlink" href="#envvar-OOD_ANALYTICS_TRACKING_URL" title="Permalink to this definition">¶</a></dt>
 <dd><p>The <a class="reference external" href="https://developers.google.com/analytics/devguides/collection/protocol/v1/">Google Analytics Measurement Protocol</a> URL that this handler submits
 the data to. Recommended value is
-<code class="docutils literal"><span class="pre">http://www.google-analytics.com/collect</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">http://www.google-analytics.com/collect</span></code>.</p>
 </dd></dl>
 
 <dl class="envvar">
