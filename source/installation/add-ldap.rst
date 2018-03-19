@@ -12,39 +12,29 @@ Add LDAP Support
    authentication solution, see :ref:`authentication`.
 
 LDAP support allows for your users to log in using their local username and
-password. It also removes the need for the sys admin to keep updating the
-``.htpasswd`` file.
+password. It also removes the need for the system administrator to keep
+updating the ``.htpasswd`` file.
 
 Requirements:
 
-- an LDAP server preferably with SSL support (``openldap1.infra.osc.edu:636``)
+- an LDAP server preferably with SSL support (``openldap.my_center.edu:636``)
 
-#. Install the necessary Apache module to use LDAP:
-
-   .. code-block:: sh
-
-      sudo yum install httpd24-mod_ldap.x86_64
-
-#. Update the Apache config with LDAP Basic Authentication support. This
-   requires modifying the configuration file for the
-   :ref:`ood-portal-generator`.
-
-   .. code-block:: sh
-
-      cd ~/ood/src/ood-portal-generator
-
-#. :ref:`ood-portal-generator-configuration` is handled by editing the
-   ``config.yml`` as such:
+#. Edit the Open OnDemand Portal :ref:`ood-portal-generator-configuration` file
+   :file:`/etc/ood/config/ood_portal.yml` as such:
 
    .. code-block:: yaml
+      :emphasize-lines: 6-
 
+      # /etc/ood/config/ood_portal.yml
       ---
+
+      # ...
 
       auth:
         - 'AuthType Basic'
         - 'AuthName "private"'
         - 'AuthBasicProvider ldap'
-        - 'AuthLDAPURL "ldaps://openldap1.infra.osc.edu:636/ou=People,ou=hpc,o=osc?uid" SSL'
+        - 'AuthLDAPURL "ldaps://openldap.my_center.edu:636/ou=People,ou=hpc,o=my_center?uid"'
         - 'AuthLDAPGroupAttribute memberUid'
         - 'AuthLDAPGroupAttributeIsDN off'
         - 'RequestHeader unset Authorization'
@@ -55,31 +45,26 @@ Requirements:
       For documentation on LDAP directives please see:
       https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html
 
-#. Re-build the Apache config:
+#. Build/install the updated Apache configuration file:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      scl enable rh-ruby22 -- rake
+      $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
-#. Copy it over to the default location:
+#. Restart the Apache server to have the changes take effect:
 
-   .. code-block:: sh
+   CentOS/RHEL 6:
+     .. code-block:: console
 
-      sudo scl enable rh-ruby22 -- rake install
+        $ sudo service httpd24-httpd condrestart
+        Stopping httpd:                                            [  OK  ]
+        Starting httpd:                                            [  OK  ]
+        $ sudo service httpd24-htcacheclean condrestart
 
-#. Restart the Apache server:
+   CentOS/RHEL 7:
+     .. code-block:: console
 
-   .. code-block:: sh
-
-      sudo service httpd24-httpd restart
-
-   .. warning::
-
-      If using **RHEL 7** you will need to replace the above command with:
-
-      .. code-block:: sh
-
-         sudo systemctl restart httpd24-httpd
+        $ sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 Close your browser so that you are properly logged out. Then open your browser
 again and access the portal. You should now be able to authenticate with your

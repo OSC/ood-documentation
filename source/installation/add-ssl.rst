@@ -11,7 +11,7 @@ user's browser and the Open OnDemand portal.
 Requirements:
 
 - a server name that points to the Open OnDemand server
-  (``webdev05.hpc.osc.edu``)
+  (``ondemand.my_center.edu``)
 - signed SSL certificates with possible intermediate certificates
 
 .. note::
@@ -22,80 +22,65 @@ Requirements:
 .. _let's encrypt: https://letsencrypt.org/
 .. _getting started: https://letsencrypt.org/getting-started/
 
-In this example the certificates are located at:
+In this example we assume the following certificates are provided:
 
-.. code-block:: sh
+Public certificate
+  :file:`/etc/pki/tls/certs/ondemand.my_center.edu.crt`
+Private key
+  :file:`/etc/pki/tls/private/ondemand.my_center.edu.key`
+Intermediate certificate
+  :file:`/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt`
 
-   # Public certificate
-   /etc/pki/tls/certs/webdev05.hpc.osc.edu.crt
-
-   # Private key
-   /etc/pki/tls/private/webdev05.hpc.osc.edu.key
-
-   # Intermediate certificate
-   /etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt
-
-#. Install the necessary Apache module to use SSL:
-
-   .. code-block:: sh
-
-      sudo yum install httpd24-mod_ssl.x86_64
-
-#. Update the Apache config with the server name and paths to the SSL
-   certificates. This requires modifying the configuration file for the
-   :ref:`ood-portal-generator`.
-
-   .. code-block:: sh
-
-      cd ~/ood/src/ood-portal-generator
-
-#. :ref:`ood-portal-generator-configuration` is handled by editing the
-   ``config.yml`` as such:
+#. Edit the Open OnDemand Portal :ref:`ood-portal-generator-configuration` file
+   :file:`/etc/ood/config/ood_portal.yml` as such:
 
    .. code-block:: yaml
+      :emphasize-lines: 6-
 
+      # /etc/ood/config/ood_portal.yml
       ---
 
-      servername: webdev05.hpc.osc.edu
+      # ...
+
+      servername: ondemand.my_center.edu
       ssl:
-        - 'SSLCertificateFile "/etc/pki/tls/certs/webdev05.hpc.osc.edu.crt"'
-        - 'SSLCertificateKeyFile "/etc/pki/tls/private/webdev05.hpc.osc.edu.key"'
-        - 'SSLCertificateChainFile "/etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt"'
+        - 'SSLCertificateFile "/etc/pki/tls/certs/ondemand.my_center.edu.crt"'
+        - 'SSLCertificateKeyFile "/etc/pki/tls/private/ondemand.my_center.edu.key"'
+        - 'SSLCertificateChainFile "/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt"'
 
    .. note::
 
       For documentation on SSL directives please see:
       https://httpd.apache.org/docs/2.4/mod/mod_ssl.html
 
-#. Re-build the Apache config:
+#. Build/install the updated Apache configuration file:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      scl enable rh-ruby22 -- rake
+      $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
-#. Copy it over to the default location:
+#. Restart the Apache server to have the changes take effect:
 
-   .. code-block:: sh
+   CentOS/RHEL 6:
+     .. code-block:: console
 
-      sudo scl enable rh-ruby22 -- rake install
+        $ sudo service httpd24-httpd condrestart
+        Stopping httpd:                                            [  OK  ]
+        Starting httpd:                                            [  OK  ]
+        $ sudo service httpd24-htcacheclean condrestart
 
-#. Restart the Apache server:
+   CentOS/RHEL 7:
+     .. code-block:: console
 
-   .. code-block:: sh
+        $ sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
-      sudo service httpd24-httpd restart
+Now when you browse to your OnDemand portal at::
 
-   .. warning::
+  http://ondemand.my_center.edu
 
-      If using **RHEL 7** you will need to replace the above command with:
+it should redirect you to the HTTP over SSL protocol deployment::
 
-      .. code-block:: sh
+  https://ondemand.my_center.edu
 
-         sudo systemctl restart httpd24-httpd
-
-When you visit the portal in your browser now it should redirect any http
-traffic to the proper https protocol.
-
-::
-
-   http://webdev05.hpc.osc.edu => https://webdev05.hpc.osc.edu
+where depending on your browser, should display a green lock of some kind to
+indicate that the site is secure.

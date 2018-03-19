@@ -19,10 +19,9 @@ Open OnDemand
    :caption: Getting Started
 
    installation
-   install-desktops
+   enable-desktops
    install-ihpc-apps
    authentication
-   updating
 
 .. toctree::
    :maxdepth: 2
@@ -43,6 +42,7 @@ Open OnDemand
    :maxdepth: 2
    :caption: Release Notes
 
+   release-notes/v1.3-release-notes
    release-notes/v1.2-release-notes
    release-notes/v1.1-release-notes
    release-notes/v1.0-release-notes

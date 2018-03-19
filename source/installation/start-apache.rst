@@ -3,25 +3,44 @@
 Start Apache
 ============
 
-.. code-block:: sh
+By default the Apache HTTP Server is disabled. In this section we will enable
+it and add our account to the Basic Auth password file. Please see section
+:ref:`add-ldap` for a more advanced and recommended authentication method after
+this.
 
-   sudo service httpd24-httpd start
-   # => Starting httpd:                                            [  OK  ]
+#. Start the Apache HTTP Server:
 
-.. warning::
+   CentOS/RHEL 6
+     .. code-block:: console
 
-   If using **RHEL 7** you will need to replace the above command with:
+        $ sudo service httpd24-httpd start
+        Starting httpd:                                            [  OK  ]
 
-   .. code-block:: sh
+   CentOS/RHEL 7
+     .. code-block:: console
 
-      sudo systemctl start httpd24-httpd
+        $ sudo systemctl start httpd24-httpd
 
-If you access the host now through a web browser you should see this error:
+   .. warning::
 
-::
+      If you access the OnDemand server that you just started, you will be
+      presented with a username/password dialog box. Attempting to use your
+      system credentials will fail because Apache by default will try to
+      authenticate against a nonexistent password file.
 
-   Error -- invalid app root: /var/www/ood/apps/sys/dashboard
-   Run 'nginx_stage --help' to see a full list of available command line options.
+#. Now we need to add our account to the password file that Apache is using.
 
-Success! The infrastructure components are installed and now we need to install
-the OOD "System Apps".
+   We start by generating an :file:`.htpasswd` file with our username, but
+   whose password does not necessarily need to be the same as our system
+   password:
+
+   .. code-block:: console
+
+      $ sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd \${SUDO_USER}
+      New password:
+      Re-type new password:
+      Adding password for user .......
+
+#. Browse to your OnDemand server and login with your username and the password
+   you used in the previous step. If everything worked you should be presented
+   with the OnDemand :ref:`dashboard`.

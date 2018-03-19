@@ -1,4 +1,4 @@
-.. _install-desktops-software-requirements:
+.. _enable-desktops-software-requirements:
 
 Software Requirements
 =====================

@@ -1,35 +1,46 @@
-.. _install-desktops-customize-desktop-app-modify-form-attributes:
+.. _enable-desktops-modify-form-attributes:
 
 Modify Form Attributes
 ======================
 
-In some cases you may want to modify a form attribute. Some examples:
+In some cases you may want to modify the form presented to the user as well as
+any other configurable options. Some examples:
 
 - Use a Gnome desktop instead of Mate desktop.
-- Remove the "Queue" form field as your scheduler will auto route to the
-  correct queue.
+- Remove the "Queue" form field as your scheduler will auto select the correct
+  queue.
 - Hard-code the "Number of nodes" to just 1, so that users can't launch
   desktops with multiple nodes.
 - Change the label for the form field "Account" to "Project".
 - Add help text to a given form field.
 - Change default value for a form field.
 
-All modifications are done in a custom YAML configuration file that defines a
-given cluster's desktop app:
+The :ref:`app-development-interactive-form` YAML configuration file is
+responsible for defining these form attributes and how they are presented to
+the user.
+
+For each configuration file underneath::
+
+  /etc/ood/config/apps/bc_desktop/
+
+a separate desktop app will be presented as an option to the user from the
+:ref:`dashboard`, with the simplest :ref:`app-development-interactive-form`
+configuration file for an Interactive Desktop app given as:
 
 .. code-block:: yaml
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
 
 Before we begin modifying form attributes. Let us first take a look at the
-default form definition located at :file:`bc_desktop/form.yml`:
+default form definition located in the source file
+:file:`/var/www/ood/apps/sys/bc_desktop/form.yml` (**do not modify**):
 
 .. code-block:: yaml
 
-   # bc_desktop/form.yml
+   # /var/www/ood/apps/sys/bc_desktop/form.yml
    ---
    attributes:
      desktop: "mate"
@@ -49,7 +60,7 @@ default form definition located at :file:`bc_desktop/form.yml`:
      - bc_email_on_started
 
 The ``attributes`` and ``form`` configuration options can all be overridden in
-our local YAML configuration file. But typically you will only modify the
+our global YAML configuration file. But typically you will only modify the
 ``attributes`` options.
 
 In the following sections you will find common examples on how to override the
@@ -58,7 +69,7 @@ above options.
 .. warning::
 
    The ``form`` configuration option defines all the available attributes as
-   well as the order they appear in the form.
+   well as the order they appear in the form (it is an array).
 
    Caution must be taken if you decide to override the ``form`` configuration
    option. As this is an array, you can't simply prepend or append, you will
@@ -74,10 +85,10 @@ the following edits to your custom YAML configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    attributes:
      desktop: "gnome"
 
@@ -100,10 +111,10 @@ configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    attributes:
      bc_queue: null
 
@@ -117,9 +128,9 @@ attribute, it will not show up in the form.
 .. warning::
 
    If you have any
-   :ref:`install-desktops-customize-desktop-app-custom-job-submission`
-   configuration files that use this attribute, they will receive empty strings
-   ``""``, so you will need to test if they are blank before handling them.
+   :ref:`enable-desktops-custom-job-submission` configuration files that use
+   this attribute, they will receive empty strings ``""``, so you will need to
+   test if they are blank before handling them.
 
 Hard-code a Form Field
 ----------------------
@@ -134,10 +145,10 @@ custom YAML configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    attributes:
      bc_num_slots: 1
 
@@ -148,10 +159,9 @@ return ``"1"``.
 
 .. warning::
 
-   If you have any
-   :ref:`install-desktops-customize-desktop-app-custom-job-submission`
-   configuration files that use this attribute, care must be taken when
-   handling the attribute as it will always come back as a `Ruby String`_.
+   If you have any :ref:`enable-desktops-custom-job-submission` configuration
+   files that use this attribute, care must be taken when handling the
+   attribute as it will always come back as a `Ruby String`_.
 
    So if you hard-coded an attribute to the integer ``1`` it will come back as
    the string ``"1"`` and if you perform any arithmetic operations on this
@@ -171,10 +181,10 @@ modified with the following edits to your custom YAML configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    attributes:
      bc_account:
        label: "Project"
@@ -189,11 +199,9 @@ field with the label "Project".
 
 .. warning::
 
-   If you have any
-   :ref:`install-desktops-customize-desktop-app-custom-job-submission`
-   configuration files that use this attribute, changing the label of the
-   attribute will not affect the value received by the user upon form
-   submission.
+   If you have any :ref:`enable-desktops-custom-job-submission` configuration
+   files that use this attribute, changing the label of the attribute will not
+   affect the value received by the user upon form submission.
 
    But care must be taken that if by changing the label of the attribute you
    also change the *meaning* of the attribute, then you may have to handle it
@@ -213,10 +221,10 @@ configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    attributes:
      bc_account:
        help: "You can leave this blank if **not** in multiple projects."
@@ -248,10 +256,10 @@ configuration file:
 .. code-block:: yaml
    :emphasize-lines: 5-
 
-   # bc_desktop/local/cluster1.yml
+   # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
-   title: "Cluster1 Desktop"
-   cluster: "cluster1"
+   title: "My Cluster Desktop"
+   cluster: "my_cluster"
    attributes:
      bc_num_hours:
        value: 8

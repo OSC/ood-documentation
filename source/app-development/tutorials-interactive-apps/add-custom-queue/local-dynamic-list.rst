@@ -47,11 +47,9 @@ options read from a forked off command line call.
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - bc_queue
@@ -75,7 +73,7 @@ options read from a forked off command line call.
    list of queues/partitions (using Slurm as the example):
 
    .. code-block:: yaml
-      :emphasize-lines: 2-15,22-42,48
+      :emphasize-lines: 2-15,21-41,46
 
       # ~/ondemand/dev/jupyter/form.yml.erb
       <%-
@@ -96,7 +94,6 @@ options read from a forked off command line call.
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
         custom_queue:
           label: Queue
@@ -121,7 +118,6 @@ options read from a forked off command line call.
         <%- end -%>
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - custom_queue
