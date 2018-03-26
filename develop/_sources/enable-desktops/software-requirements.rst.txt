@@ -8,8 +8,9 @@ nodes that the batch job is meant to run on, **NOT** the OnDemand node.
 
 The following desktops are currently supported:
 
-- `Gnome`_ 2 (currently we do not support Gnome 3)
-- `Mate Desktop`_ 1+
+- `Xfce Desktop`_ 4+
+- `Mate Desktop`_ 1+ (**default**)
+- `Gnome Desktop`_ 2 (currently we do not support Gnome 3)
 
 .. warning::
 
@@ -17,5 +18,6 @@ The following desktops are currently supported:
    above Desktop Environments are **ONLY** for the **compute nodes** you intend
    on launching Desktops on within batch jobs.
 
-.. _gnome: https://www.gnome.org/
+.. _gnome desktop: https://www.gnome.org/
 .. _mate desktop: https://mate-desktop.org/
+.. _xfce desktop: https://xfce.org/
