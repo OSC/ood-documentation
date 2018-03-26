@@ -6,7 +6,7 @@ Modify Form Attributes
 In some cases you may want to modify the form presented to the user as well as
 any other configurable options. Some examples:
 
-- Use a Gnome desktop instead of Mate desktop.
+- Use an Xfce desktop instead of Mate desktop.
 - Remove the "Queue" form field as your scheduler will auto select the correct
   queue.
 - Hard-code the "Number of nodes" to just 1, so that users can't launch
@@ -75,12 +75,12 @@ above options.
    option. As this is an array, you can't simply prepend or append, you will
    need to completely redefine it with your included modifications.
 
-Change to Gnome Desktop
------------------------
+Change to Xfce Desktop
+----------------------
 
 The default installation has the ``desktop`` attribute hard-coded to the value
-``"mate"``. If you would like to change this to use ``"gnome"`` you can make
-the following edits to your custom YAML configuration file:
+``"mate"``. If you would like to change this to use ``"xfce"`` you can make the
+following edits to your custom YAML configuration file:
 
 .. code-block:: yaml
    :emphasize-lines: 5-
@@ -90,13 +90,13 @@ the following edits to your custom YAML configuration file:
    title: "My Cluster Desktop"
    cluster: "my_cluster"
    attributes:
-     desktop: "gnome"
+     desktop: "xfce"
 
-And all Desktops will attempt to launch the Gnome desktop.
+And all Desktops will attempt to launch the Xfce desktop.
 
 .. note::
 
-   Whenever you hard-code a form attribute to a value like ``"gnome"`` in the
+   Whenever you hard-code a form attribute to a value like ``"xfce"`` in the
    above case, no input field will appear in the form for the user to fill in.
    So in the above case, the user cannot specify the ``desktop`` attribute in
    the form because we hard-coded it.

@@ -4,9 +4,10 @@ Enable Interactive Desktop
 ==========================
 
 This installation guide will walk you through setting up an Interactive Desktop
-app that your users will be able to use to launch a Gnome 2 or Mate desktop on
-a compute node within your HPC cluster. The user should then be able to connect
-to a running session through their browser using the `noVNC`_ client.
+app that your users will be able to use to launch a Gnome 2, Mate, or Xfce
+desktop on a compute node within your HPC cluster. The user should then be able
+to connect to a running session through their browser using the `noVNC`_
+client.
 
 .. danger::
 
