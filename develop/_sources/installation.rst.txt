@@ -10,11 +10,13 @@ means that it will need:
 - a common user/group database, e.g., LDAP + NSS
 - a common host file list
 - the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
-  libraries installed used by the batch servers
-- configuration on both OnDemand node and batch servers to be able to submit,
-  status, and delete jobs from command line
+  libraries used by the batch servers installed
+- configuration on both OnDemand node **and batch servers** to be able to
+  submit, status, and delete jobs from command line
 - signed SSL certificate with corresponding intermediate certificate for your
   advertised OnDemand host name (e.g., `ondemand.my_center.edu`)
+- your LDAP URL, base DN, and attribute to search for (in some rare cases a
+  bind DN and corresponding bind password)
 
 .. toctree::
    :maxdepth: 2
