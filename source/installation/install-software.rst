@@ -56,6 +56,28 @@ software requirements:
 
       $ sudo yum install ondemand
 
+.. note::
+
+   For some older systems, user ids (UID) may start at ``500`` and not the
+   expected ``1000``. If this true for your system, you will need to modify the
+   :file:`/etc/ood/config/nginx_stage.yml` configuration file to allow these
+   users access to OnDemand:
+
+   .. code-block:: yaml
+      :emphasize-lines: 9
+
+      # /etc/ood/config/nginx_stage.yml
+      ---
+
+      # ...
+
+      # Minimum user id required to generate per-user NGINX server as the requested
+      # user (default: 1000)
+      #
+      min_uid: 500
+
+      # ...
+
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
 .. _nginx 1.6: https://www.softwarecollections.org/en/scls/rhscl/nginx16/

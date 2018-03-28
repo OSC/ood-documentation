@@ -14,7 +14,7 @@ means that it will need:
 - configuration on both OnDemand node **and batch servers** to be able to
   submit, status, and delete jobs from command line
 - signed SSL certificate with corresponding intermediate certificate for your
-  advertised OnDemand host name (e.g., `ondemand.my_center.edu`)
+  advertised OnDemand host name (e.g., ``ondemand.my_center.edu``)
 - your LDAP URL, base DN, and attribute to search for (in some rare cases a
   bind DN and corresponding bind password)
 
