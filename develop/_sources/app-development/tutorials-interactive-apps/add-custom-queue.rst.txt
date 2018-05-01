@@ -1,6 +1,6 @@
 .. _app-development-tutorials-interactive-apps-add-custom-queue:
 
-Add Custom Qeueus/Partitions
+Add Custom Queues/Partitions
 ============================
 
 This tutorial will walk you through **replacing** the ``bc_queue`` form
