@@ -26,6 +26,71 @@ defaults should work out of the box for most scenarios.
 Configuration Options
 ---------------------
 
+.. describe:: ondemand_version_path (String)
+
+   path to the OnDemand version file
+
+   Default
+     Set to default path
+
+     .. code-block:: yaml
+
+        ondemand_version_path: "/opt/ood/VERSION"
+
+   Example
+     Supply a custom version file with a different version in it
+
+     .. code-block:: yaml
+
+        ondemand_version_path: "/path/to/VERSION"
+
+.. describe:: ondemand_portal (String, null)
+
+   unique name of this OnDemand portal used to namespace multiple hosted
+   portals
+
+   Default
+     Do not set a custom namespace for this portal
+
+     .. code-block:: yaml
+
+        ondemand_portal: null
+
+   Example
+     Use a custom namespace for this portal
+
+     .. code-block:: yaml
+
+        ondemand_portal: "custom"
+
+   .. note::
+
+      If this is not set then most apps will use the default namespace
+      ``ondemand``.
+
+.. describe:: ondemand_title (String, null)
+
+   title of this OnDemand portal that apps *should* display in their navbar
+
+   Default
+     Do not set a custom title for this portal
+
+     .. code-block:: yaml
+
+        ondemand_title: null
+
+   Example
+     Use a custom title for this portal
+
+     .. code-block:: yaml
+
+        ondemand_title: "My Custom Portal"
+
+   .. note::
+
+      If this is not set then most apps will use the default title ``Open
+      OnDemand``.
+
 .. describe:: template_root (String)
 
    the root directory containing the ERB templates used in generating the NGINX
