@@ -1,5 +1,9 @@
 # OOD Documentation
 
+[![Build Status](https://travis-ci.org/OSC/ood-documentation.svg?branch=develop)](https://travis-ci.org/OSC/ood-documentation)
+[![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Documentation License](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0)
+
 Go to https://osc.github.io/ood-documentation/master/
 
 Or select your version:
