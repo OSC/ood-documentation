@@ -230,7 +230,7 @@ configuration files.</p>
 </div>
 </li>
 <li><p class="first">We will now list all available tasks that we can run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> bin/rake -T test:jobs
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> scl <span class="nb">enable</span> rh-ruby22 nodejs010 -- bin/rake -T test:jobs
 <span class="go">rake test:jobs           # Test all clusters</span>
 <span class="go">rake test:jobs:cluster1  # Test the cluster: cluster1</span>
 <span class="go">rake test:jobs:cluster2  # Test the cluster: cluster2</span>
@@ -245,6 +245,7 @@ configuration files that reside under
 you configured):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
 <span class="go">[sudo] password for user:</span>
+<span class="go">Rails Error: Unable to access log file. Please ensure that /var/www/ood/apps/sys/dashboard/log/production.log exists and is writable (ie, make it writable for user and group: chmod 0664 /var/www/ood/apps/sys/dashboard/log/production.log). The log level has been raised to WARN and the output directed to STDERR until the problem is fixed.</span>
 <span class="go">mkdir -p /home/user/test_jobs</span>
 <span class="go">Testing cluster &#39;cluster1&#39;...</span>
 <span class="go">Submitting job...</span>
@@ -259,6 +260,9 @@ you configured):</p>
 <span class="go">Finished testing cluster &#39;cluster1&#39;</span>
 </pre></div>
 </div>
+<p>Please <strong>ignore</strong> the <code class="docutils literal notranslate"><span class="pre">Rails</span> <span class="pre">Error:</span></code> message as this is just a <em>warning</em>
+that doesn’t affect your OnDemand installation in any way. We are currently
+tracking this issue in GitHub at <a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/364">OSC/dashboard#364</a>.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>We actually launch the <strong class="command">rake</strong> task with <strong class="command">sudo</strong> to best
