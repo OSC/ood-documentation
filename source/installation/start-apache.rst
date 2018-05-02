@@ -36,7 +36,7 @@ this.
 
    .. code-block:: console
 
-      $ sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd \${SUDO_USER}
+      $ sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd $USER
       New password:
       Re-type new password:
       Adding password for user .......

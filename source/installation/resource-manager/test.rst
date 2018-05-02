@@ -24,7 +24,7 @@ configuration files.
 
    .. code-block:: console
 
-      $ bin/rake -T test:jobs
+      $ scl enable rh-ruby22 nodejs010 -- bin/rake -T test:jobs
       rake test:jobs           # Test all clusters
       rake test:jobs:cluster1  # Test the cluster: cluster1
       rake test:jobs:cluster2  # Test the cluster: cluster2
@@ -41,6 +41,7 @@ configuration files.
 
       $ sudo su $USER -c 'scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
       [sudo] password for user:
+      Rails Error: Unable to access log file. Please ensure that /var/www/ood/apps/sys/dashboard/log/production.log exists and is writable (ie, make it writable for user and group: chmod 0664 /var/www/ood/apps/sys/dashboard/log/production.log). The log level has been raised to WARN and the output directed to STDERR until the problem is fixed.
       mkdir -p /home/user/test_jobs
       Testing cluster 'cluster1'...
       Submitting job...
@@ -53,6 +54,11 @@ configuration files.
       Job has status of completed
       Test for 'cluster1' PASSED!
       Finished testing cluster 'cluster1'
+
+   Please **ignore** the ``Rails Error:`` message as this is just a *warning*
+   that doesn't affect your OnDemand installation in any way. We are currently
+   tracking this issue in GitHub at `OSC/dashboard#364
+   <https://github.com/OSC/ood-dashboard/issues/364>`_.
 
    .. tip::
 
