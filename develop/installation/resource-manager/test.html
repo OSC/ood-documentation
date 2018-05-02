@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configure Slurm &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Test Configuration &mdash; Open OnDemand 1.2.0 documentation</title>
   
 
   
@@ -43,8 +43,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="3. Add Cluster Configuration Files" href="../add-cluster-config.html"/>
-        <link rel="next" title="Configure LSF" href="lsf.html"/>
-        <link rel="prev" title="Configure Torque" href="torque.html"/> 
+        <link rel="next" title="4. Start Apache" href="../start-apache.html"/>
+        <link rel="prev" title="Configure PBS Professional" href="pbspro.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -111,10 +111,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../modify-system-security.html">2. Modify System Security</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../add-cluster-config.html">3. Add Cluster Configuration Files</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="torque.html">Configure Torque</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Configure Slurm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
-<li class="toctree-l3"><a class="reference internal" href="test.html">Test Configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Test Configuration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../start-apache.html">4. Start Apache</a></li>
@@ -190,14 +190,14 @@
         
           <li><a href="../add-cluster-config.html">3. Add Cluster Configuration Files</a> &raquo;</li>
         
-      <li>Configure Slurm</li>
+      <li>Test Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/slurm.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/test.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -211,46 +211,83 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="configure-slurm">
-<span id="resource-manager-slurm"></span><h1>Configure Slurm<a class="headerlink" href="#configure-slurm" title="Permalink to this headline">¶</a></h1>
-<p>A YAML cluster configuration file for a Slurm resource manager on an HPC
-cluster looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;slurm&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm/bin&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">conf</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm.conf&quot;</span>
-</span></pre></div>
-</div>
-<p>with the following configuration options:</p>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</dd>
-<dt>cluster</dt>
-<dd>The Slurm cluster name. <em>Optional</em></dd>
-<dt>bin</dt>
-<dd>The path to the Slurm client installation binaries.</dd>
-<dt>conf</dt>
-<dd>The path to the Slurm configuration file for this cluster. <em>Optional</em></dd>
-</dl>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you do not have a multi-cluster Slurm setup you can remove the <code class="docutils literal notranslate"><span class="pre">cluster:</span>
-<span class="pre">&quot;cluster1&quot;</span></code> line from the above configuration file.</p>
-</div>
+  <div class="section" id="test-configuration">
+<span id="resource-manager-test"></span><h1>Test Configuration<a class="headerlink" href="#test-configuration" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The Open OnDemand server will need the appropriate MUNGE keys (see <a class="reference external" href="https://slurm.schedmd.com/quickstart_admin.html">Slurm
-Quick Start Administrator Guide</a>) for the various clusters to be able to
-status and submit batch jobs.</p>
+<p class="last">This is an experimental feature right now that may change drastically in the
+future. So always revisit this documentation after upgrading OnDemand and
+attempting to test your cluster configuration.</p>
 </div>
+<p>We currently provide an experimental <strong class="command">rake</strong> task underneath the
+<a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> for testing your resource manager configuration in the cluster
+configuration files.</p>
+<ol class="arabic">
+<li><p class="first">For all <strong class="command">rake</strong> tasks we will need to be underneath the
+<a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>’s root directory (<em>this will change in the future</em>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> /var/www/ood/apps/sys/dashboard
+</pre></div>
+</div>
+</li>
+<li><p class="first">We will now list all available tasks that we can run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> bin/rake -T test:jobs
+<span class="go">rake test:jobs           # Test all clusters</span>
+<span class="go">rake test:jobs:cluster1  # Test the cluster: cluster1</span>
+<span class="go">rake test:jobs:cluster2  # Test the cluster: cluster2</span>
+</pre></div>
+</div>
+<p>This list is dynamically generated from all the available cluster
+configuration files that reside under
+<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span><em><span class="pre">*</span></em><span class="pre">.yml</span></code>.</p>
+</li>
+<li><p class="first">For now let us test just a single cluster (in our example we use
+<code class="docutils literal notranslate"><span class="pre">cluster1</span></code>, so you will need to replace it with the name of the cluster
+you configured):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
+<span class="go">[sudo] password for user:</span>
+<span class="go">mkdir -p /home/user/test_jobs</span>
+<span class="go">Testing cluster &#39;cluster1&#39;...</span>
+<span class="go">Submitting job...</span>
+<span class="go">[2018-04-24 10:15:32 -0400 ]  INFO &quot;execve = [{\&quot;PBS_DEFAULT\&quot;=&gt;\&quot;oak-batch.osc.edu\&quot;, \&quot;LD_LIBRARY_PATH\&quot;=&gt;\&quot;/opt/torque/lib64:/opt/rh/v8314/root/usr/lib64:/opt/rh/nodejs010/root/usr/lib64:/opt/rh/rh-ruby22/root/usr/lib64\&quot;}, \&quot;/opt/torque/bin/qsub\&quot;, \&quot;-N\&quot;, \&quot;test_jobs_cluster1\&quot;, \&quot;-S\&quot;, \&quot;/bin/bash\&quot;, \&quot;-o\&quot;, \&quot;/users/appl/jnicklas/test_jobs/output_cluster1_2018-04-24T10:15:32-04:00.log\&quot;, \&quot;-l\&quot;, \&quot;walltime=00:01:00\&quot;, \&quot;-j\&quot;, \&quot;oe\&quot;]&quot;</span>
+<span class="go">Got job id &#39;10820525.oak-batch.osc.edu&#39;</span>
+<span class="go">Job has status of queued</span>
+<span class="go">Job has status of queued</span>
+<span class="go">Job has status of queued</span>
+<span class="go">Job has status of queued</span>
+<span class="go">Job has status of completed</span>
+<span class="go">Test for &#39;cluster1&#39; PASSED!</span>
+<span class="go">Finished testing cluster &#39;cluster1&#39;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>We actually launch the <strong class="command">rake</strong> task with <strong class="command">sudo</strong> to best
+mimic the environment that the OnDemand applications are run under.</p>
+<p class="last">You can run the <strong class="command">rake</strong> task as the current user, but it may lead
+to a <em>false positive</em> as your user environment may have the correct
+libraries and paths loaded in it that may not necessarily exist in the
+cleaner OnDemand application environment.</p>
+</div>
+<p>This creates and submits a batch job that <strong class="command">echo</strong>’s a defined
+string. It then pings the batch server every 5 seconds until the job is
+completed. Finally, it parses the output file looking for the defined
+string. The test passes if it can find the string in the output file.</p>
+<p>If something fails at any point in the chain, then the test fails. This may
+require you to make edits to the corresponding cluster configuration file
+under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span></code> and run the test again.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If your job fails to submit because you need to supply more submission
+arguments, e.g., a queue, memory requirements, an account, etc. You can
+provide these command line arguments as a string with the environment
+variable <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS</span></code> as:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS=&quot;-A myaccount&quot;&#39;</span>
+</pre></div>
+</div>
+<p class="last">Note that the <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS=&quot;...&quot;</span></code> is defined at the end of the command.</p>
+</div>
+</li>
+</ol>
 </div>
 
 
@@ -263,10 +300,10 @@ status and submit batch jobs.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="lsf.html" class="btn btn-neutral float-right" title="Configure LSF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../start-apache.html" class="btn btn-neutral float-right" title="4. Start Apache" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="torque.html" class="btn btn-neutral" title="Configure Torque" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pbspro.html" class="btn btn-neutral" title="Configure PBS Professional" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
