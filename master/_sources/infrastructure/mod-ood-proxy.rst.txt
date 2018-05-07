@@ -20,8 +20,7 @@ To get started you will need at a minimum the following prerequisites:
 
 - The Ruby_ language version 2.2 or newer for installation
 
-Please see :ref:`software-requirements` on how to install the above
-requirements.
+Please see :ref:`install-software` on how to install the above requirements.
 
 .. toctree::
    :maxdepth: 2

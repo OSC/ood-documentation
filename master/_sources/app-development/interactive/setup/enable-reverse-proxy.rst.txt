@@ -61,38 +61,30 @@ Requirements
 Steps to Enable in Apache
 -------------------------
 
-#. We will update the Apache configuration file by adding ``Location``
-   directives that will be used for the reverse proxy. This requires modifying
-   the configuration file for the :ref:`ood-portal-generator`.
-
-   .. code-block:: sh
-
-      cd ~/ood/src/ood-portal-generator
-
-#. :ref:`ood-portal-generator-configuration` is handled by editing the
-   ``config.yml`` as such:
+#. This requires modifying the YAML configuration file for
+   :ref:`ood-portal-generator` located at
+   :file:`/etc/ood/config/ood_portal.yml` as such:
 
    .. code-block:: yaml
-      :emphasize-lines: 18-
+      :emphasize-lines: 17-
 
-      # ~/ood/src/ood-portal-generator/config.yml
+      # /etc/ood/config/ood_portal.yml
       ---
-      servername: webdev05.hpc.osc.edu
+      servername: ondemand.my_center.edu
       ssl:
-        - 'SSLCertificateFile "/etc/pki/tls/certs/webdev05.hpc.osc.edu.crt"'
-        - 'SSLCertificateKeyFile "/etc/pki/tls/private/webdev05.hpc.osc.edu.key"'
-        - 'SSLCertificateChainFile "/etc/pki/tls/certs/webdev05.hpc.osc.edu-interm.crt"'
+        - 'SSLCertificateFile "/etc/pki/tls/certs/ondemand.my_center.edu.crt"'
+        - 'SSLCertificateKeyFile "/etc/pki/tls/private/ondemand.my_center.edu.key"'
+        - 'SSLCertificateChainFile "/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt"'
       auth:
         - 'AuthType Basic'
         - 'AuthName "private"'
         - 'AuthBasicProvider ldap'
-        - 'AuthLDAPURL "ldaps://openldap1.infra.osc.edu:636/ou=People,ou=hpc,o=osc?uid" SSL'
+        - 'AuthLDAPURL "ldaps://openldap.my_center.edu:636/ou=People,ou=hpc,o=my_center?uid"'
         - 'AuthLDAPGroupAttribute memberUid'
         - 'AuthLDAPGroupAttributeIsDN off'
         - 'RequestHeader unset Authorization'
         - 'Require valid-user'
-
-      host_regex: '[\w.-]+\.osc\.edu'
+      host_regex: '[\w.-]+\.my_center\.edu'
       node_uri: '/node'
       rnode_uri: '/rnode'
 
@@ -129,39 +121,31 @@ Steps to Enable in Apache
       opens you up to possible phishing attacks. As a malicious party could
       send links to unsuspecting users as::
 
-        https://ondemand.center.edu/rnode/phishing.site.com/80/...
+        https://ondemand.my_center.edu/rnode/phishing.site.com/80/...
 
       And users will implicitly trust the link since it points to the trusting
-      domain of ``ondemand.center.edu``.
+      domain of ``ondemand.my_center.edu``.
 
-#. Re-build the Apache config:
-
-   .. code-block:: console
-
-      $ scl enable rh-ruby22 -- rake
-      mkdir -p build
-      rendering templates/ood-portal.conf.erb => build/ood-portal.conf
-
-#. Copy it over to the default location:
+#. Build/install the updated Apache configuration file:
 
    .. code-block:: console
 
-      $ sudo scl enable rh-ruby22 -- rake install
-      cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
+      $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
-#. Restart the Apache server:
+#. Restart the Apache server to have the changes take effect:
 
-   .. code-block:: console
+   CentOS/RHEL 6:
+     .. code-block:: console
 
-      $ sudo service httpd24-httpd restart
+        $ sudo service httpd24-httpd condrestart
+        Stopping httpd:                                            [  OK  ]
+        Starting httpd:                                            [  OK  ]
+        $ sudo service httpd24-htcacheclean condrestart
 
-   .. warning::
+   CentOS/RHEL 7:
+     .. code-block:: console
 
-      If using **RHEL 7** you will need to replace the above command with:
-
-      .. code-block:: console
-
-         $ sudo systemctl restart httpd24-httpd
+        $ sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 Verify it Works
 ---------------

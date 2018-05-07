@@ -183,5 +183,5 @@ request.
 .. _comsol server: https://www.comsol.com/comsol-server
 .. _rstudio server: https://www.rstudio.com/products/rstudio-server/
 .. _bootstrap 3: https://getbootstrap.com/docs/3.3/
-.. _font awesome: http://fontawesome.io/
+.. _font awesome: https://fontawesome.com/
 .. _class global attribute: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class

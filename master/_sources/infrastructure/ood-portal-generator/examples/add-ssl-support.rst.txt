@@ -17,6 +17,9 @@ such:
 
 .. code-block:: yaml
 
+   # /etc/ood/config/ood_portal.yml
+   ---
+
    servername: ondemand.my-center.edu
    ssl:
      - "SSLCertificateFile \"/path/to/public.crt\""

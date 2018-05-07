@@ -3,27 +3,80 @@
 Usage
 =====
 
-This software uses Rake_ which is a Make-like program implemented in Ruby_. So
-to build a working Apache configuration file from the template, you would run:
+The :program:`ood-portal-generator` tool takes a user-defined YAML
+configuration file and generates an `Apache configuration`_ file from the
+provided template file. This Apache configuration file can then be used in an
+Apache HTTP server to host an Open OnDemand portal.
+
+The command that generates the Apache configuration file is given as:
 
 .. code-block:: sh
 
-   rake
+   bin/generate [OPTIONS]
 
-This will build the following Apache configuration file::
+At any point you can display a quick reference of the capabilities offered by
+:program:`bin/generate` with:
 
-   build/ood-portal.conf
+.. code-block:: console
 
-After viewing and confirming that this Apache configuration file will meet your
-OnDemand portal needs, you will run:
+   $ bin/generate --help
+   Usage: generate [options]
+       -c, --config CONFIG              YAML config file used to render template
+       -t, --template TEMPLATE          ERB template that is rendered
+       -o, --output OUTPUT              File that rendered template is output to
+       -v, --version                    Print current version
+       -h, --help                       Show this help message
 
-.. code-block:: sh
+   Default:
+     generate \
+       -c /etc/ood/config/ood_portal.yml \
+       -t /opt/ood/ood-portal-generator/templates/ood-portal.conf.erb
 
-   sudo rake install
+.. program:: ood-portal-generator
 
-This will copy the build file to::
+Options
+-------
 
-   /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf
+.. option:: -c <config>, --config <config>
 
-.. _ruby: https://www.ruby-lang.org/en/
-.. _rake: https://ruby.github.io/rake/
+   the :program:`ood-portal-generator` YAML configuration file
+
+   Default
+     :file:`/etc/ood/config/ood_portal.yml`
+
+   Example
+     Use a local configuration file
+
+     .. code-block:: sh
+
+        bin/generate -c my_conf.yml
+
+.. option:: -o <output>, --output <output>
+
+   the Apache configuration file that is rendered
+
+   Default
+     piped to standard output
+
+   Example
+     Output Apache configuration file to local file
+
+     .. code-block:: sh
+
+        bin/generate -o my_portal.conf
+
+.. option:: -t <template>, --template <template>
+
+   the ERB template that is used to render the Apache configuration file
+
+   Default
+     use built-in template
+
+   Example
+     Use a custom ERB template for the Apache config (not recommended)
+
+     .. code-block:: sh
+
+        bin/generate -t my_portal.conf.erb
+
+.. _apache configuration: https://httpd.apache.org/docs/2.4/configuring.html

@@ -399,9 +399,9 @@ The app is looking good, but the details page still shows the app title "Passeng
     +description: Display quotas
     +icon: fa://hdd-o
 
-* The icon follows format of ``fa://{FONTAWESOMENAME}`` where you replace ``{FONTAWESOMENAME}`` with an icon from http://fontawesome.io/icons/.
+* The icon follows format of ``fa://{FONTAWESOMENAME}`` where you replace ``{FONTAWESOMENAME}`` with an icon from https://fontawesome.com/icons/.
   In this case we are using ``fa-hdd-o`` which we write in the manifest as ``fa://hdd-o``.
-  You can see details on this icon at http://fontawesome.io/icon/hdd-o/
+  You can see details on this icon at https://fontawesome.com/icons/hdd?style=regular
 
 Publish App
 -----------

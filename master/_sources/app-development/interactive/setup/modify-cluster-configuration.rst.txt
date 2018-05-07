@@ -15,13 +15,13 @@ copies of `TurboVNC`_ and `websockify`_:
 .. code-block:: yaml
    :emphasize-lines: 11-
 
-   # /etc/ood/config/clusters.d/cluster1.yml
+   # /etc/ood/config/clusters.d/my_cluster.yml
    ---
    v2:
      metadata:
        title: "Cluster 1"
      login:
-       host: "cluster1.my_center.edu"
+       host: "my_cluster.my_center.edu"
      job:
        adapter: "..."
        ...

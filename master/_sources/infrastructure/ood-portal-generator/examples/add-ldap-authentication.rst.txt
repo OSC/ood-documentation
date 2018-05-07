@@ -14,6 +14,9 @@ such:
 
 .. code-block:: yaml
 
+   # /etc/ood/config/ood_portal.yml
+   ---
+
    auth:
      - "AuthType Basic"
      - "AuthName \"private\""

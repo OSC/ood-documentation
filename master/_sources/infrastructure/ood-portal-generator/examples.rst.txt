@@ -1,7 +1,7 @@
 .. _ood-portal-generator-examples:
 
-Examples
-========
+Example Configurations
+======================
 
 A few examples of various configuration options that will build an Open
 OnDemand Apache configuration file with different features.

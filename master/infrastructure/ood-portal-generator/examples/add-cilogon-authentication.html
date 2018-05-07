@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add CILogon Authentication &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Add CILogon Authentication &mdash; Open OnDemand 1.3.0 documentation</title>
   
 
   
@@ -41,8 +41,8 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../../index.html"/>
-        <link rel="up" title="Examples" href="../examples.html"/>
+    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Example Configurations" href="../examples.html"/>
         <link rel="next" title="mod_ood_proxy" href="../../mod-ood-proxy.html"/>
         <link rel="prev" title="Add Shibboleth Authentication" href="add-shibboleth-authentication.html"/> 
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.2
+                1.3
               </div>
             
           
@@ -107,18 +107,18 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../infrastructure.html">Infrastructure</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../ood-portal-generator.html">ood-portal-generator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../configuration.html">Configuration</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../examples.html">Example Configurations</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="add-google-analytics.html">Add Google Analytics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="add-ssl-support.html">Add SSL Support</a></li>
 <li class="toctree-l4"><a class="reference internal" href="default-authentication.html">Default Authentication</a></li>
@@ -143,6 +143,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -194,7 +195,7 @@
         
           <li><a href="../../ood-portal-generator.html">ood-portal-generator</a> &raquo;</li>
         
-          <li><a href="../examples.html">Examples</a> &raquo;</li>
+          <li><a href="../examples.html">Example Configurations</a> &raquo;</li>
         
       <li>Add CILogon Authentication</li>
     
@@ -239,7 +240,7 @@ of the scope of this documentation)</li>
 </ul>
 <p>The Apache configuration file for <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> will need to be set up
 along the lines of:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="c"># /path/to/httpd/conf.d/auth_openidc.conf</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="c"># /path/to/httpd/conf.d/auth_openidc.conf</span>
 
 <span class="nb">OIDCMetadataDir</span>      <span class="sx">/path/to/oidc/metadata</span>
 <span class="nb">OIDCDiscoverURL</span>      https://ondemand.my-center.edu/discover
@@ -261,8 +262,8 @@ along the lines of:</p>
 metadata directory you specified in the above config to the following three
 files:</p>
 <ol class="arabic">
-<li><p class="first"><code class="docutils literal"><span class="pre">/path/to/oidc/metadata/cilogon.org.provider</span></code></p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">/path/to/oidc/metadata/cilogon.org.provider</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;issuer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cilogon.org&quot;</span><span class="p">,</span>
   <span class="nt">&quot;authorization_endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cilogon.org/authorize&quot;</span><span class="p">,</span>
   <span class="nt">&quot;token_endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cilogon.org/oauth2/token&quot;</span><span class="p">,</span>
@@ -277,16 +278,16 @@ files:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">/path/to/oidc/metadata/cilogon.org.client</span></code></p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">/path/to/oidc/metadata/cilogon.org.client</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CLIENT ID&gt;&quot;</span><span class="p">,</span>
   <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CLIENT SECRET&gt;&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">/path/to/oidc/metadata/cilogon.org.conf</span></code></p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">/path/to/oidc/metadata/cilogon.org.conf</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;openid email profile org.cilogon.userinfo&quot;</span><span class="p">,</span>
   <span class="nt">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;code&quot;</span><span class="p">,</span>
   <span class="nt">&quot;auth_request_params&quot;</span><span class="p">:</span> <span class="s2">&quot;skin=default&quot;</span>
@@ -299,7 +300,10 @@ files:</p>
 the back and lets continue.</p>
 <p>Now we can modify your <strong class="program">ood-portal-generator</strong> configuration file as
 such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># Use OpenID Connect for authentication</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+
+<span class="c1"># Use OpenID Connect for authentication</span>
 <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
@@ -326,7 +330,7 @@ such:</p>
 <span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile</span>
 </pre></div>
 </div>
-<p>Where the <code class="docutils literal"><span class="pre">logout_redirect</span></code> contains the URL that the user is redirected to
+<p>Where the <code class="docutils literal notranslate"><span class="pre">logout_redirect</span></code> contains the URL that the user is redirected to
 after they are logged out of their session.</p>
 <p>Build the Apache configuration file and install it. Fingers crossed it all
 works.</p>
@@ -375,7 +379,7 @@ works.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

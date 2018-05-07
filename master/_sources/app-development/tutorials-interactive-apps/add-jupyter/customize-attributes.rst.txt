@@ -7,8 +7,9 @@ Now we will customize the app to work on a given cluster. Be sure that you walk
 through :ref:`app-development-tutorials-interactive-apps-add-jupyter-software-requirements`
 for the given cluster ahead of time.
 
-The main responsibility of the ``form.yml`` file located in the root of the app
-is for defining the attributes (their values or HTML form elements) used when
+The main responsibility of the ``form.yml`` file
+(:ref:`app-development-interactive-form`) located in the root of the app is for
+defining the attributes (their values or HTML form elements) used when
 generating the batch script.
 
 #. We will begin by adding a cluster for the Jupyter app to use. You do this by
@@ -22,11 +23,9 @@ generating the batch script.
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - bc_queue
@@ -49,11 +48,9 @@ generating the batch script.
       cluster: "my_cluster"
       attributes:
         modules: "python"
-        conda_extensions: "1"
         extra_jupyter_args: ""
       form:
         - modules
-        - conda_extensions
         - extra_jupyter_args
         - bc_account
         - bc_queue
@@ -69,31 +66,6 @@ generating the batch script.
    .. code-block:: sh
 
       module load <modules>
-
-#. If you do **NOT** have the Conda extensions installed for the above Python
-   modules then we must disable it:
-
-   .. code-block:: yaml
-      :emphasize-lines: 6
-
-      # ~/ondemand/dev/jupyter/form.yml
-      ---
-      cluster: "my_cluster"
-      attributes:
-        modules: "python"
-        conda_extensions: "0"
-        extra_jupyter_args: ""
-      form:
-        - modules
-        - conda_extensions
-        - extra_jupyter_args
-        - bc_account
-        - bc_queue
-        - bc_num_hours
-        - bc_num_slots
-        - bc_email_on_started
-
-   They are enabled by default in this file.
 
 #. We test our changes by again clicking the *Launch Jupyter Notebook* button
    back in our details view of our sandbox app.

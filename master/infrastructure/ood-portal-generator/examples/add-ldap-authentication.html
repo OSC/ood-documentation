@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add LDAP Authentication &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Add LDAP Authentication &mdash; Open OnDemand 1.3.0 documentation</title>
   
 
   
@@ -41,8 +41,8 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../../index.html"/>
-        <link rel="up" title="Examples" href="../examples.html"/>
+    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Example Configurations" href="../examples.html"/>
         <link rel="next" title="Add Shibboleth Authentication" href="add-shibboleth-authentication.html"/>
         <link rel="prev" title="Default Authentication" href="default-authentication.html"/> 
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.2
+                1.3
               </div>
             
           
@@ -107,18 +107,18 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../infrastructure.html">Infrastructure</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../ood-portal-generator.html">ood-portal-generator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../configuration.html">Configuration</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../examples.html">Example Configurations</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="add-google-analytics.html">Add Google Analytics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="add-ssl-support.html">Add SSL Support</a></li>
 <li class="toctree-l4"><a class="reference internal" href="default-authentication.html">Default Authentication</a></li>
@@ -143,6 +143,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -194,7 +195,7 @@
         
           <li><a href="../../ood-portal-generator.html">ood-portal-generator</a> &raquo;</li>
         
-          <li><a href="../examples.html">Examples</a> &raquo;</li>
+          <li><a href="../examples.html">Example Configurations</a> &raquo;</li>
         
       <li>Add LDAP Authentication</li>
     
@@ -221,13 +222,16 @@
 <span id="id1"></span><h1>Add LDAP Authentication<a class="headerlink" href="#add-ldap-authentication" title="Permalink to this headline">¶</a></h1>
 <p>The following prerequisites need to be satisfied:</p>
 <ul class="simple">
-<li>An LDAP server, e.g., <code class="docutils literal"><span class="pre">ldap.my-center.edu</span></code></li>
+<li>An LDAP server, e.g., <code class="docutils literal notranslate"><span class="pre">ldap.my-center.edu</span></code></li>
 <li>NSS configured on the OnDemand Server to look up users via LDAP</li>
 <li>The <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html">mod_authnz_ldap</a> Apache module installed</li>
 </ul>
 <p>Then you can modify your <strong class="program">ood-portal-generator</strong> configuration file as
 such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span>
   <span class="p p-Indicator">-</span> <span class="s">&quot;AuthBasicProvider</span><span class="nv"> </span><span class="s">ldap&quot;</span>
@@ -236,7 +240,7 @@ such:</p>
   <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
 </pre></div>
 </div>
-<p>Where the <code class="docutils literal"><span class="pre">RequestHeader</span></code> setting is used to strip private session
+<p>Where the <code class="docutils literal notranslate"><span class="pre">RequestHeader</span></code> setting is used to strip private session
 information from being sent to the backend web servers.</p>
 <p>Each array item is treated as a line in the Apache configuration file. You can
 add more Apache <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html">LDAP directives</a> as separate array items.</p>
@@ -286,7 +290,7 @@ add more Apache <a class="reference external" href="https://httpd.apache.org/doc
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

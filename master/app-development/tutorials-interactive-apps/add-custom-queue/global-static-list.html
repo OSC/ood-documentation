@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Use a Global Static List &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Use a Global Static List &mdash; Open OnDemand 1.3.0 documentation</title>
   
 
   
@@ -41,8 +41,8 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../../index.html"/>
-        <link rel="up" title="Add Custom Qeueus/Partitions" href="../add-custom-queue.html"/>
+    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Add Custom Queues/Partitions" href="../add-custom-queue.html"/>
         <link rel="next" title="Use a Local Dynamic List" href="local-dynamic-list.html"/>
         <link rel="prev" title="Use a Local Static List" href="local-static-list.html"/> 
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.2
+                1.3
               </div>
             
           
@@ -107,10 +107,9 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -126,7 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../add-custom-queue.html">Add Custom Qeueus/Partitions</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../add-custom-queue.html">Add Custom Queues/Partitions</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="local-static-list.html">Use a Local Static List</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Use a Global Static List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="local-dynamic-list.html">Use a Local Dynamic List</a></li>
@@ -139,6 +138,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -190,7 +190,7 @@
         
           <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-          <li><a href="../add-custom-queue.html">Add Custom Qeueus/Partitions</a> &raquo;</li>
+          <li><a href="../add-custom-queue.html">Add Custom Queues/Partitions</a> &raquo;</li>
         
       <li>Use a Global Static List</li>
     
@@ -219,7 +219,7 @@
 <p class="first admonition-title">Warning</p>
 <p>Requires permissions to modify the global cluster configurations located
 under:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span><span class="o">/</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
@@ -238,10 +238,10 @@ configured Interactive Apps. This is accomplished by:</p>
 <p class="last">This assumes you have walked through <a class="reference internal" href="../../../installation/add-cluster-config.html#add-cluster-config"><span class="std std-ref">Add Cluster Configuration Files</span></a> for the
 cluster you intend on submitting the Interactive App to.</p>
 </div>
-<p>We will add a <code class="docutils literal"><span class="pre">custom:</span></code> field to our cluster configuration file if it doesn’t
+<p>We will add a <code class="docutils literal notranslate"><span class="pre">custom:</span></code> field to our cluster configuration file if it doesn’t
 already exist and then introduce a custom field (named anything your heart
 desires) with a list of available queues/partitions:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
@@ -264,37 +264,35 @@ the Cluster Configuration file for changes to take effect within the app.</p>
 </div>
 <div class="section" id="add-custom-attribute-to-form">
 <span id="app-development-tutorials-interactive-apps-add-custom-queue-global-static-list-add-custom-attribute"></span><h2>Add Custom Attribute to Form<a class="headerlink" href="#add-custom-attribute-to-form" title="Permalink to this headline">¶</a></h2>
-<p>We want to <strong>replace</strong> the <code class="docutils literal"><span class="pre">bc_queue</span></code> form attribute with a custom HTML
-<code class="docutils literal"><span class="pre">&lt;select&gt;</span></code> element (a drop-down list of options) built up of queue/partition
+<p>We want to <strong>replace</strong> the <code class="docutils literal notranslate"><span class="pre">bc_queue</span></code> form attribute with a custom HTML
+<code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element (a drop-down list of options) built up of queue/partition
 options read from the corresponding cluster configuration file.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can read more about customizing attributes in the <code class="docutils literal"><span class="pre">form.yml</span></code> file for
+<p class="last">You can read more about customizing attributes in the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> file for
 Interactive Apps under the
 <a class="reference internal" href="../../interactive/form.html#interactive-development-form-customizing-attributes"><span class="std std-ref">Customizing Attributes</span></a> section.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">First we rename the <code class="docutils literal"><span class="pre">form.yml</span></code> for the Jupyter Interactive App to
-<code class="docutils literal"><span class="pre">form.yml.erb</span></code>:</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
+<li><p class="first">First we rename the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> for the Jupyter Interactive App to
+<code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
 </pre></div>
 </div>
 <p>This will cause the YAML file to be processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (embedded
 Ruby)</a> templating system, which allows us to embed <a class="reference external" href="https://www.ruby-lang.org/en/">Ruby</a> code into the YAML
 configuration file for flow control, variable substitution, and more.</p>
 </li>
-<li><p class="first">Next we remove the <code class="docutils literal"><span class="pre">bc_queue</span></code> field from our <code class="docutils literal"><span class="pre">form.yml</span></code> for the Jupyter
+<li><p class="first">Next we remove the <code class="docutils literal notranslate"><span class="pre">bc_queue</span></code> field from our <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> for the Jupyter
 Interactive App by removing the following line from this file:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml.erb</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml.erb</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
@@ -305,7 +303,7 @@ Interactive App by removing the following line from this file:</p>
 </div>
 </li>
 <li><p class="first">We remove the following line from this file:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
 <span class="hll"><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
 </span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
 </pre></div>
@@ -316,7 +314,7 @@ the “Queue” form element anymore.</p>
 <li><p class="first">We now add in code that reads in the list of available queues/partitions
 from the cluster configuration file and generates a custom drop-down
 attribute with this list of queues/partitions:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml.erb</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml.erb</span>
 <span class="hll"><span class="l l-Scalar l-Scalar-Plain">&lt;%-</span>
 </span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">queues = OodAppkit.clusters[:my_cluster].custom_config[:queues]</span>
 </span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">-%&gt;</span>
@@ -324,7 +322,6 @@ attribute with this list of queues/partitions:</p>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
 <span class="hll">  <span class="l l-Scalar l-Scalar-Plain">custom_queue</span><span class="p p-Indicator">:</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Queue</span>
@@ -336,7 +333,6 @@ attribute with this list of queues/partitions:</p>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
 </span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda_extensions</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
 <span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">custom_queue</span>
@@ -345,33 +341,33 @@ attribute with this list of queues/partitions:</p>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
 </pre></div>
 </div>
-<p>At the top we have an <em>execution tag</em> that sets a local variable <code class="docutils literal"><span class="pre">queues</span></code>
+<p>At the top we have an <em>execution tag</em> that sets a local variable <code class="docutils literal notranslate"><span class="pre">queues</span></code>
 from a line of Ruby code that should read in the list of queues you defined
-under <code class="docutils literal"><span class="pre">custom:</span></code> and <code class="docutils literal"><span class="pre">queues:</span></code> for the corresponding cluster
+under <code class="docutils literal notranslate"><span class="pre">custom:</span></code> and <code class="docutils literal notranslate"><span class="pre">queues:</span></code> for the corresponding cluster
 configuration file.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The cluster defined in <code class="docutils literal"><span class="pre">OodAppkit.clusters[:my_cluster]</span></code> <strong>must</strong>
+<p>The cluster defined in <code class="docutils literal notranslate"><span class="pre">OodAppkit.clusters[:my_cluster]</span></code> <strong>must</strong>
 correspond to a cluster with a cluster configuration file. Also it should
 match the cluster defined on the line:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
 </pre></div>
 </div>
-<p class="last">in the <code class="docutils literal"><span class="pre">form.yml.erb</span></code> file above.</p>
+<p class="last">in the <code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code> file above.</p>
 </div>
 <p>Later in the YAML file we have another <em>execution tag</em> that loops through
-this list of queues/partitions in the local variable <code class="docutils literal"><span class="pre">queues</span></code>. It uses a
+this list of queues/partitions in the local variable <code class="docutils literal notranslate"><span class="pre">queues</span></code>. It uses a
 pair of <em>expression tags</em> to output a YAML pair list (see the note below).</p>
 <p>Now when we refresh the web page for our sandbox Jupyter App we will see a
 “Queue” form element with a drop-down that lists “queue1” and “queue2”.
 Underneath this will be our custom help message defined above.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>An attribute with the field <code class="docutils literal"><span class="pre">widget:</span> <span class="pre">select</span></code> expects an <code class="docutils literal"><span class="pre">options:</span></code>
+<p>An attribute with the field <code class="docutils literal notranslate"><span class="pre">widget:</span> <span class="pre">select</span></code> expects an <code class="docutils literal notranslate"><span class="pre">options:</span></code>
 field with an array of pairs. The first string in the pair is the option
 text and the second string in the pair is the option value.</p>
 <p>For example:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
 <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;Volvo&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;volvo&quot;</span> <span class="p p-Indicator">]</span>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;Ford&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;ford&quot;</span> <span class="p p-Indicator">]</span>
@@ -387,29 +383,29 @@ either “volvo”, “ford”, or “toyota” depending on what the user chose
 </div>
 <div class="section" id="handle-custom-attribute-in-job-submission">
 <span id="app-development-tutorials-interactive-apps-add-custom-queue-global-static-list-handle-custom-attribute"></span><h2>Handle Custom Attribute in Job Submission<a class="headerlink" href="#handle-custom-attribute-in-job-submission" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have our custom form attribute called <code class="docutils literal"><span class="pre">custom_queue</span></code>, we need to
+<p>Now that we have our custom form attribute called <code class="docutils literal notranslate"><span class="pre">custom_queue</span></code>, we need to
 tell our app how to handle it when submitting the job. As of right now our app
 has no idea what to do with this value when the user clicks “Launch” after
 filling out the form.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You can read more about customizing submission arguments in the
-<code class="docutils literal"><span class="pre">submit.yml.erb</span></code> file for Interactive Apps under the
+<code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> file for Interactive Apps under the
 <a class="reference internal" href="../../interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> section.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">We first start with the default <code class="docutils literal"><span class="pre">submit.yml.erb</span></code> for the Jupyter
+<li><p class="first">We first start with the default <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> for the Jupyter
 Interactive App:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">We now create a <code class="docutils literal"><span class="pre">script:</span></code> section if it doesn’t already exist and handle
-the value of the <code class="docutils literal"><span class="pre">custom_queue</span></code> attribute submitted by the user:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
+<li><p class="first">We now create a <code class="docutils literal notranslate"><span class="pre">script:</span></code> section if it doesn’t already exist and handle
+the value of the <code class="docutils literal notranslate"><span class="pre">custom_queue</span></code> attribute submitted by the user:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
@@ -421,7 +417,7 @@ the value of the <code class="docutils literal"><span class="pre">custom_queue</
 (e.g., Slurm, Torque, …) agnostic.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>For the queue/partition we do not need to use the <code class="docutils literal"><span class="pre">native:</span></code> field which
+<p>For the queue/partition we do not need to use the <code class="docutils literal notranslate"><span class="pre">native:</span></code> field which
 <strong>must be</strong> customized for the specific resource manager you are
 leveraging.</p>
 <p class="last">You can find a list of generic fields that are resource manager agnostic
@@ -475,7 +471,7 @@ under the <a class="reference external" href="http://www.rubydoc.info/gems/ood_c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

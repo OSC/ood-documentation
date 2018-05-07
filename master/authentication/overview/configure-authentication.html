@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Configure Apache Authentication &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>1. Configure Apache Authentication &mdash; Open OnDemand 1.3.0 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="../../index.html"/>
+    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../../index.html"/>
         <link rel="up" title="Overview" href="../overview.html"/>
         <link rel="next" title="2. Setup User Mapping" href="map-user.html"/>
         <link rel="prev" title="Overview" href="../overview.html"/> 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.2
+                1.3
               </div>
             
           
@@ -107,7 +107,7 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
@@ -124,7 +124,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -138,6 +137,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -215,40 +215,52 @@
 <div class="section" id="compile-authentication-module">
 <h2>1.1. Compile Authentication Module<a class="headerlink" href="#compile-authentication-module" title="Permalink to this headline">¶</a></h2>
 <p>Open OnDemand uses <a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/httpd24/">Apache HTTP Server 2.4</a> provided by Software Collections.
-This means that any Apache authentication module (<code class="docutils literal"><span class="pre">mod_auth_*</span></code>) used will
-need to be compiled against the <code class="docutils literal"><span class="pre">apxs</span></code> and <code class="docutils literal"><span class="pre">apr</span></code> tools that reside under:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>/opt/rh/httpd24/root/usr/bin
+This means that any Apache authentication module (<code class="docutils literal notranslate"><span class="pre">mod_auth_*</span></code>) used will
+need to be compiled against the <code class="docutils literal notranslate"><span class="pre">apxs</span></code> and <code class="docutils literal notranslate"><span class="pre">apr</span></code> tools that reside under:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/opt/rh/httpd24/root/usr/bin
 </pre></div>
 </div>
-<p>and not the versions that come with the default system version of Apache HTTP
-Server.</p>
+<p>and <strong>not</strong> the versions that come with the default system version of Apache
+HTTP Server.</p>
 </div>
 <div class="section" id="configure-authentication-module">
 <h2>1.2. Configure Authentication Module<a class="headerlink" href="#configure-authentication-module" title="Permalink to this headline">¶</a></h2>
 <p>Any Apache authentication module specific configuration directives (e.g.,
-<code class="docutils literal"><span class="pre">OIDCCLientID</span></code>, <code class="docutils literal"><span class="pre">CASLoginURL</span></code>, …) should reside outside of the
-<code class="docutils literal"><span class="pre">ood-portal.conf</span></code> configuration file. The Apache configuration files are
-loaded in lexical order, so placing these module specific configuration
-directives in the file:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>/opt/rh/httpd24/root/etc/httpd/conf.d/auth-config.conf
+<code class="docutils literal notranslate"><span class="pre">OIDCCLientID</span></code>, <code class="docutils literal notranslate"><span class="pre">CASLoginURL</span></code>, …) should reside outside of the
+<code class="file docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code> configuration
+file. The Apache configuration files are loaded in lexical order, so placing
+these module specific configuration directives in the file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/opt/rh/httpd24/root/etc/httpd/conf.d/auth-config.conf
 </pre></div>
 </div>
 <p>will cause your authentication configuration directives to be loaded before
-<code class="docutils literal"><span class="pre">ood-portal.conf</span></code>. If there are any secrets inside this file you can ensure
-privacy by adding restrictive file permissions:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
+<code class="file docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code>. If there are any
+secrets inside this file you can ensure privacy by adding restrictive file
+permissions:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
 </pre></div>
 </div>
 </div>
 <div class="section" id="add-to-ondemand-portal">
 <h2>1.3. Add to OnDemand Portal<a class="headerlink" href="#add-to-ondemand-portal" title="Permalink to this headline">¶</a></h2>
-<p>Do not directly edit the <code class="docutils literal"><span class="pre">ood-portal.conf</span></code> to include this authentication
-module within your Open OnDemand portal. Anytime you need to edit the
-<code class="docutils literal"><span class="pre">ood-portal.conf</span></code> you should use the <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> and its
-corresponding <code class="docutils literal"><span class="pre">config.yml</span></code>. For example, to add support for an authentication
-module with <code class="docutils literal"><span class="pre">AuthType</span></code> of <code class="docutils literal"><span class="pre">my-auth</span></code>, you would modify the <code class="docutils literal"><span class="pre">config.yml</span></code> as
-such:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /path/to/ood-portal-generator/config.yml</span>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last"><strong>Never</strong> directly edit the
+<code class="file docutils literal notranslate"><span class="pre">/opr/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code> to include
+this authentication module within your Open OnDemand portal. This could
+cause future upgrades of OnDemand to break.</p>
+</div>
+<p>Edit the YAML configuration file for the <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> located
+under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>. For example, to add support for
+an authentication module with <code class="docutils literal notranslate"><span class="pre">AuthType</span></code> of <code class="docutils literal notranslate"><span class="pre">my-auth</span></code>, you would modify the
+<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> file as such:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
+scl <span class="nb">enable</span> rh-ruby22 -- rake install
+</pre></div>
+</div>
+</div></blockquote>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>
 <span class="c1"># ...</span>
 <span class="c1"># Your other custom configuration options...</span>
@@ -259,20 +271,17 @@ such:</p>
   <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
 </pre></div>
 </div>
-<p>You would then build the new <code class="docutils literal"><span class="pre">ood-portal.conf</span></code> from this configuration file
-with:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> scl <span class="nb">enable</span> rh-ruby22 -- rake
-<span class="go">Rendering templates/ood-portal.conf.erb =&gt; build/ood-portal.conf</span>
-</pre></div>
-</div>
-<p>This will build <code class="docutils literal"><span class="pre">ood-portal.conf</span></code> in the <code class="docutils literal"><span class="pre">build/</span></code> directory. Open that file
-and confirm everything is accurate, then install it in the global location:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install
-<span class="go">cp build/ood-portal.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span>
+<p>You would then build and install the new Apache configuration file with:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 <p>Finally you will need to restart your Apache HTTP Server for the changes to
 take effect.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can find more <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> configuration examples under
+<a class="reference internal" href="../../infrastructure/ood-portal-generator/examples.html#ood-portal-generator-examples"><span class="std std-ref">Example Configurations</span></a>.</p>
+</div>
 </div>
 <div class="section" id="sanitize-session-information">
 <h2>1.4. Sanitize Session Information<a class="headerlink" href="#sanitize-session-information" title="Permalink to this headline">¶</a></h2>
@@ -280,12 +289,12 @@ take effect.</p>
 passed to the backend web servers that a user is proxied to. For most Apache
 authentication modules there are module-specific directives that can be enabled
 to wipe session information from being passed as headers (e.g.,
-<code class="docutils literal"><span class="pre">OIDCStripCookies</span> <span class="pre">...</span></code>). In other cases you may have to use regular
+<code class="docutils literal notranslate"><span class="pre">OIDCStripCookies</span> <span class="pre">...</span></code>). In other cases you may have to use regular
 expressions to search for the session cookies and remove them manually.</p>
 <p>For example, Shibboleth does not have a directive to strip session information
 from the cookies, so we accomplish this with the following options in our
 <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> configuration file:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># /path/to/ood-portal-generator/config.yml</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>
 <span class="c1"># ...</span>
 <span class="c1"># Your other custom configuration options...</span>
@@ -299,7 +308,7 @@ from the cookies, so we accomplish this with the following options in our
   <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
 </pre></div>
 </div>
-<p>where we use a regular expression to replace any <code class="docutils literal"><span class="pre">shibsession</span></code> cookies with
+<p>where we use a regular expression to replace any <code class="docutils literal notranslate"><span class="pre">shibsession</span></code> cookies with
 empty strings and delete the cookie header if it becomes empty.</p>
 </div>
 </div>
@@ -347,7 +356,7 @@ empty strings and delete the cookie header if it becomes empty.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

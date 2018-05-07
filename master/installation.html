@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; Open OnDemand 1.2.0 documentation</title>
+  <title>Installation &mdash; Open OnDemand 1.3.0 documentation</title>
   
 
   
@@ -41,8 +41,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Open OnDemand 1.2.0 documentation" href="index.html"/>
-        <link rel="next" title="1. Software Requirements" href="installation/software-requirements.html"/>
+    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="index.html"/>
+        <link rel="next" title="1. Install Software" href="installation/install-software.html"/>
         <link rel="prev" title="What is Open OnDemand" href="about.html"/> 
 
   
@@ -75,7 +75,7 @@
             
             
               <div class="version">
-                1.2
+                1.3
               </div>
             
           
@@ -106,23 +106,17 @@
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation/software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/install-software.html">1. Install Software</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation/modify-system-security.html">2. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/generate-apache-config.html">3. Generate Apache Config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/install-proxy-module.html">4. Install Proxy Module for Apache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/install-pun-utility.html">5. Install the PUN Utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/install-mapping-script.html">6. Install User Mapping Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-cluster-config.html">7. Add Cluster Configuration Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/start-apache.html">8. Start Apache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/install-apps.html">9. Install Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-ssl.html">10. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-ldap.html">11. Add LDAP Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/add-cluster-config.html">3. Add Cluster Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/start-apache.html">4. Start Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/add-ssl.html">5. Add SSL Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/add-ldap.html">6. Add LDAP Support</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="install-desktops.html">Install Desktops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="updating.html">Updating</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul>
@@ -136,6 +130,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
@@ -206,36 +201,37 @@
             
   <div class="section" id="installation">
 <span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>This installation tutorial starts with a web host <code class="docutils literal"><span class="pre">webdev05.hpc.osc.edu</span></code>
-which has</p>
+<p>The OnDemand host machine needs to be setup <em>similarly</em> to a login node. This
+means that it will need:</p>
 <ul class="simple">
-<li>the users are mirrored with the other machines (LDAP+NSS)</li>
-<li>the home directory shared file system is mounted and accessible by users</li>
-<li>Torque, Slurm, or LSF client libraries installed and access provided to
-submit, status, and delete batch jobs to the various clusters from this host
-machine</li>
-<li>signed SSL certificates with corresponding intermediate certificate</li>
-<li>Software Collections package/repo, <strong class="command">lsof</strong>, and <strong class="command">sudo</strong> are
-installed</li>
-<li>the host has been added as a submit host to the respective batch servers</li>
+<li>RedHat/CentOS 6+</li>
+<li>a common user/group database, e.g., LDAP + NSS</li>
+<li>a common host file list</li>
+<li>the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
+libraries used by the batch servers installed</li>
+<li>configuration on both OnDemand node <strong>and batch servers</strong> to be able to
+submit, status, and delete jobs from command line</li>
+<li>signed SSL certificate with corresponding intermediate certificate for your
+advertised OnDemand host name (e.g., <code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>)</li>
+<li>your LDAP URL, base DN, and attribute to search for (in some rare cases a
+bind DN and corresponding bind password)</li>
 </ul>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Quick Start Guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation/software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/install-software.html">1. Install Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation/modify-system-security.html">2. Modify System Security</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/generate-apache-config.html">3. Generate Apache Config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/install-proxy-module.html">4. Install Proxy Module for Apache</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/install-pun-utility.html">5. Install the PUN Utility</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/install-mapping-script.html">6. Install User Mapping Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">7. Add Cluster Configuration Files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-cluster-config.html#example-configs">7.1. Example Configs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">3. Add Cluster Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation/resource-manager/torque.html">Configure Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/resource-manager/slurm.html">Configure Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/resource-manager/lsf.html">Configure LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/resource-manager/pbspro.html">Configure PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/resource-manager/test.html">Test Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation/start-apache.html">8. Start Apache</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/install-apps.html">9. Install Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/add-ssl.html">10. Add SSL Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/add-ldap.html">11. Add LDAP Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/start-apache.html">4. Start Apache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/add-ssl.html">5. Add SSL Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/add-ldap.html">6. Add LDAP Support</a></li>
 </ul>
 </div>
 </div>
@@ -250,7 +246,7 @@ installed</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installation/software-requirements.html" class="btn btn-neutral float-right" title="1. Software Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="installation/install-software.html" class="btn btn-neutral float-right" title="1. Install Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="about.html" class="btn btn-neutral" title="What is Open OnDemand" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -283,7 +279,7 @@ installed</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2.0',
+            VERSION:'1.3.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
