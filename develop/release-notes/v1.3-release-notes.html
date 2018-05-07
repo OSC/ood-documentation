@@ -124,8 +124,22 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">v1.3 Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-2">Upgrading from v1.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure-version-changes">Infrastructure Version Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-version-changes">Application Version Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rpm-based-installation">RPM based installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#store-configuration-under-etc-instead-of-under-app-directories">Store configuration under /etc instead of under app directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#config-changes-no-longer-require-app-rebuilds">Config changes no longer require app rebuilds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cluster-config-verification-script">Cluster config verification script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ignore-apps-if-they-have-a-period-in-directory-name">Ignore apps if they have a period in directory name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-multiple-dashboard-announcements-with-embedded-html">Enable multiple Dashboard announcements with embedded HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-help-links-in-new-window">Open “help” links in new window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-interactive-sessions-link-top-level-item">Make “Interactive Sessions” link top level item</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#better-debugging-of-interactive-apps-by-logging-shell-commands">Better debugging of Interactive Apps by logging shell commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#job-composer-optionally-hide-account-field-in-job-options">Job Composer: Optionally hide Account field in Job Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#active-jobs-display-list-of-nodes-that-a-job-is-running-on">Active Jobs: display list of nodes that a job is running on</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="v1.2-release-notes.html">v1.2 Release Notes</a></li>
@@ -198,10 +212,19 @@
             
   <div class="section" id="v1-3-release-notes">
 <span id="id1"></span><h1>v1.3 Release Notes<a class="headerlink" href="#v1-3-release-notes" title="Permalink to this headline">¶</a></h1>
-<p>Some highlights of this release:</p>
+<p>Highlights in 1.3:</p>
 <ul class="simple">
-<li>…</li>
-<li>A multitude of bugfixes…</li>
+<li><a class="reference internal" href="#rpm-based-installation">RPM based installation</a></li>
+<li><a class="reference internal" href="#store-configuration-under-etc-instead-of-under-app-directories">Store configuration under /etc instead of under app directories</a></li>
+<li><a class="reference internal" href="#config-changes-no-longer-require-app-rebuilds">Config changes no longer require app rebuilds</a></li>
+<li><a class="reference internal" href="#cluster-config-verification-script">Cluster config verification script</a></li>
+<li><a class="reference internal" href="#ignore-apps-if-they-have-a-period-in-directory-name">Ignore apps if they have a period in directory name</a></li>
+<li><a class="reference internal" href="#enable-multiple-dashboard-announcements-with-embedded-html">Enable multiple Dashboard announcements with embedded HTML</a></li>
+<li><a class="reference internal" href="#open-help-links-in-new-window">Open “help” links in new window</a></li>
+<li><a class="reference internal" href="#make-interactive-sessions-link-top-level-item">Make “Interactive Sessions” link top level item</a></li>
+<li><a class="reference internal" href="#better-debugging-of-interactive-apps-by-logging-shell-commands">Better debugging of Interactive Apps by logging shell commands</a></li>
+<li><a class="reference internal" href="#job-composer-optionally-hide-account-field-in-job-options">Job Composer: Optionally hide Account field in Job Options</a></li>
+<li><a class="reference internal" href="#active-jobs-display-list-of-nodes-that-a-job-is-running-on">Active Jobs: display list of nodes that a job is running on</a></li>
 </ul>
 <div class="section" id="upgrading-from-v1-2">
 <h2>Upgrading from v1.2<a class="headerlink" href="#upgrading-from-v1-2" title="Permalink to this headline">¶</a></h2>
@@ -220,8 +243,8 @@ forward.</p>
 <li><p class="first">This RPM installation will want to overwrite any local configuration or
 modifications you may have made in earlier versions of OnDemand, so we will
 first start by making backups of OnDemand and our apps:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo mv /opt/ood /opt/ood.bak
-<span class="gp">$</span> sudo mv /var/www/ood/apps/sys /var/www/ood/apps/sys.bak
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo mv /opt/ood /opt/ood.bak
+sudo mv /var/www/ood/apps/sys /var/www/ood/apps/sys.bak
 </pre></div>
 </div>
 </li>
@@ -233,8 +256,8 @@ configuration/customization files used for the individual OnDemand core
 apps.</p>
 <p>So you will want to copy over the configuration files ahead of time for best
 results:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="c1"># Copy over the YAML configuration file used to generate the Apache configuration file</span>
-<span class="gp">$</span> sudo cp <span class="nv">$HOME</span>/ood/src/ood-portal-generator/config.yml /etc/ood/config/ood_portal.yml
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy over the YAML configuration file used to generate the Apache configuration file</span>
+sudo cp <span class="nv">$HOME</span>/ood/src/ood-portal-generator/config.yml /etc/ood/config/ood_portal.yml
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -245,42 +268,42 @@ the Apache configuration file under
 haven’t been doing this before then now is a good time to start. Feel
 free to contact us if you have trouble with this.</p>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="c1"># Copy over our app configuration (if they exist)</span>
-<span class="gp">$</span> mkdir -p /etc/ood/config/apps
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/dashboard <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/dashboard/.env.local /etc/ood/config/apps/dashboard/env
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/activejobs/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/activejobs <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/activejobs/.env.local /etc/ood/config/apps/activejobs/env
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/myjobs/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/myjobs <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/myjobs/.env.local /etc/ood/config/apps/myjobs/env
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/file-editor/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/file-editor <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/file-editor/.env.local /etc/ood/config/apps/file-editor/env
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/shell/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/shell <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/shell/.env /etc/ood/config/apps/shell/env
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/files/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/files <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/files/.env /etc/ood/config/apps/files/env
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy over our app configuration (if they exist)</span>
+mkdir -p /etc/ood/config/apps
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/dashboard <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/dashboard/.env.local /etc/ood/config/apps/dashboard/env
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/activejobs/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/activejobs <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/activejobs/.env.local /etc/ood/config/apps/activejobs/env
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/myjobs/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/myjobs <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/myjobs/.env.local /etc/ood/config/apps/myjobs/env
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/file-editor/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/file-editor <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/file-editor/.env.local /etc/ood/config/apps/file-editor/env
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/shell/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/shell <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/shell/.env /etc/ood/config/apps/shell/env
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/files/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/files <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/files/.env /etc/ood/config/apps/files/env
 
-<span class="gp">$</span> <span class="c1"># Copy over any custom initializers you may have created (if they exist)</span>
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/dashboard/initializers <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb /etc/ood/config/apps/dashboard/initializers/ood.rb
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/activejobs/initializers <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb /etc/ood/config/apps/activejobs/initializers/filter.rb
+<span class="c1"># Copy over any custom initializers you may have created (if they exist)</span>
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/dashboard/initializers <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb /etc/ood/config/apps/dashboard/initializers/ood.rb
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/activejobs/initializers <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb /etc/ood/config/apps/activejobs/initializers/filter.rb
 
-<span class="gp">$</span> <span class="c1"># Copy over your Job Composer templates (if they exist)</span>
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/myjobs/templates&quot;</span> <span class="o">]]</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/myjobs <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> sudo cp -r /var/www/ood/apps/sys.bak/myjobs/templates /etc/ood/config/apps/myjobs/.
+<span class="c1"># Copy over your Job Composer templates (if they exist)</span>
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/myjobs/templates&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/myjobs <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> sudo cp -r /var/www/ood/apps/sys.bak/myjobs/templates /etc/ood/config/apps/myjobs/.
 
-<span class="gp">$</span> <span class="c1"># Copy over your local Interactive Desktop apps (if they exist)</span>
-<span class="gp">$</span> <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/bc_desktop/local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+<span class="c1"># Copy over your local Interactive Desktop apps (if they exist)</span>
+<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/bc_desktop/local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
     <span class="o">&amp;&amp;</span> sudo cp -r /var/www/ood/apps/sys.bak/bc_desktop/local /etc/ood/config/apps/bc_desktop
 </pre></div>
 </div>
@@ -310,18 +333,18 @@ to:</p>
 </div>
 </li>
 <li><p class="first">Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install https://yum.osc.edu/ondemand/1.3/ondemand-release-web-1.3-1.el7.noarch.rpm
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.3/ondemand-release-web-1.3-1.el7.noarch.rpm
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install OnDemand and all of its dependencies:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install ondemand
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy back any custom apps (e.g., Jupyter, RStudio, …) you installed
 previously from our backup directory:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
 </pre></div>
 </div>
 </li>
@@ -332,8 +355,8 @@ successfully.</p>
 </li>
 </ol>
 </div>
-<div class="section" id="infrastructure">
-<h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="infrastructure-version-changes">
+<h2>Infrastructure Version Changes<a class="headerlink" href="#infrastructure-version-changes" title="Permalink to this headline">¶</a></h2>
 <span id="v1-3-infrastructure-versions"></span><table border="1" class="colwidths-auto docutils" id="id2">
 <caption><span class="caption-number">Table 8 </span><span class="caption-text">Infrastructure Component Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
@@ -363,8 +386,8 @@ successfully.</p>
 previous version it was updated from for each component that make up the
 infrastructure for this release.</p>
 </div>
-<div class="section" id="applications">
-<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="application-version-changes">
+<h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
 <span id="v1-3-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id3">
 <caption><span class="caption-number">Table 9 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
@@ -405,6 +428,112 @@ infrastructure for this release.</p>
 </table>
 <p><a class="reference internal" href="#v1-3-app-versions"><span class="std std-numref">Table 9</span></a> lists the versions as well as the previous version
 it was updated from for each of the system web applications in this release.</p>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rpm-based-installation">
+<h3>RPM based installation<a class="headerlink" href="#rpm-based-installation" title="Permalink to this headline">¶</a></h3>
+<p>This is the biggest change and constitutes the bulk of this release’s work. RPM
+based installation will now be the default and documented way to install and
+update OnDemand. The latest rpms that are in use at OSC can be accessed from
+<a class="reference external" href="https://yum.osc.edu/ondemand/latest/">https://yum.osc.edu/ondemand/latest/</a> and the stable releases will be available
+in specific release version directories, such as
+<a class="reference external" href="https://yum.osc.edu/ondemand/1.3/">https://yum.osc.edu/ondemand/1.3/</a>.</p>
+</div>
+<div class="section" id="store-configuration-under-etc-instead-of-under-app-directories">
+<h3>Store configuration under /etc instead of under app directories<a class="headerlink" href="#store-configuration-under-etc-instead-of-under-app-directories" title="Permalink to this headline">¶</a></h3>
+<p>To enable RPM based installation, two modifications have been made to all
+configuration for OnDemand:</p>
+<ol class="arabic simple">
+<li>All configuration can be moved to files under /etc/ood</li>
+<li>Modifications to configuration only require Passenger app, Per User NINGX,
+or Apache server restart (with the exception of the ood-portal-generater
+config)</li>
+</ol>
+<p>Since all configuration is stored under /etc/ood this directory can be easily
+managed by Puppet or versioned in a git repository.</p>
+</div>
+<div class="section" id="config-changes-no-longer-require-app-rebuilds">
+<h3>Config changes no longer require app rebuilds<a class="headerlink" href="#config-changes-no-longer-require-app-rebuilds" title="Permalink to this headline">¶</a></h3>
+<p>It is now much faster to make and test configuration changes. For most
+configuration changes, you can make the change and then select “Restart Web
+Server” from the “Help” or “Develop” dropdown to see the change.</p>
+</div>
+<div class="section" id="cluster-config-verification-script">
+<h3>Cluster config verification script<a class="headerlink" href="#cluster-config-verification-script" title="Permalink to this headline">¶</a></h3>
+<p>A Rake task has been added to the Dashboard app that will submit and check the
+status of jobs for each cluster specified in the cluster config. This provides
+a quick way to verify that OnDemand has been properly configured for a new
+cluster and should speed up installation. See <a class="reference internal" href="../installation/resource-manager/test.html#resource-manager-test"><span class="std std-ref">Test Configuration</span></a> in
+the cluster configuration documentation for more details.</p>
+</div>
+<div class="section" id="ignore-apps-if-they-have-a-period-in-directory-name">
+<h3>Ignore apps if they have a period in directory name<a class="headerlink" href="#ignore-apps-if-they-have-a-period-in-directory-name" title="Permalink to this headline">¶</a></h3>
+<p>You can effectively hide apps from being displayed in the Dashboard by adding a
+period in the app’s directory name. This is useful if you want to make a backup
+of an app, e.g., <code class="file docutils literal notranslate"><span class="pre">../myapp.bak/</span></code>. Or just want to include a hidden
+directory in the app deployment directory, e.g., <code class="file docutils literal notranslate"><span class="pre">../.hidden-app/</span></code>.</p>
+</div>
+<div class="section" id="enable-multiple-dashboard-announcements-with-embedded-html">
+<h3>Enable multiple Dashboard announcements with embedded HTML<a class="headerlink" href="#enable-multiple-dashboard-announcements-with-embedded-html" title="Permalink to this headline">¶</a></h3>
+<p>Site-wide dashboard announcement support in OnDemand has been expanded. Orinally we supported a file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.md</span></code> but now a YAML file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.yml</span></code> can be used. A collection of markdown and yaml announcements in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcements.d/</span></code> can be added. The yaml file provides extra benefits:</p>
+<ol class="arabic simple">
+<li>Pre process file using ERB so that ERB tags can provide per-request dynamic modification of the announcement</li>
+<li>Control the color of announcement with <code class="docutils literal notranslate"><span class="pre">:type</span></code> which is the Bootstrap alert name (<code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code>, or <code class="docutils literal notranslate"><span class="pre">danger</span></code>)</li>
+<li>Control whether announcement appears or not by setting <code class="docutils literal notranslate"><span class="pre">:msg</span></code> to a string or <code class="docutils literal notranslate"><span class="pre">nil</span></code></li>
+</ol>
+<p>The ability to use ERB means we can set the msg to nil after a certain time period. For example:</p>
+<div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">type: warning</span>
+<span class="x">msg: |</span>
+<span class="x">  </span><span class="cp">&lt;%-</span> <span class="k">if</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="cp">-%&gt;</span><span class="x"></span>
+<span class="x">  **NOTICE:** The Ruby nodes on the Quick cluster will go down on Tuesday</span>
+<span class="x">  January 23, 2018 from 1 - 3 pm for scheduled maintenance. This will affect</span>
+<span class="x">  only **Ruby VDI** sessions scheduled to run during this time period. These</span>
+<span class="x">  sessions will be put on hold until after the maintenance period is complete.</span>
+<span class="x">  </span><span class="cp">&lt;%-</span> <span class="k">end</span> <span class="cp">-%&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>In this example, the announcement appears on the dashboard until Jan 23 at 3:00. We’ll add more documentation for this soon. If you want to take advantage of this now just ask a question on the ood-users mailing list.</p>
+</div>
+<div class="section" id="open-help-links-in-new-window">
+<h3>Open “help” links in new window<a class="headerlink" href="#open-help-links-in-new-window" title="Permalink to this headline">¶</a></h3>
+<p>Currently, any app that is served by a separate Passenger process, external to
+the Dashboard app, is opened in a new window. Thus, Shell Access, Files, Active
+Jobs, and Job Composer all open in new windows. Interactive App Plugins are
+managed by the Dashboard so they open in the same window. We fixed the external
+links in the Help menu to follow this convention.</p>
+</div>
+<div class="section" id="make-interactive-sessions-link-top-level-item">
+<h3>Make “Interactive Sessions” link top level item<a class="headerlink" href="#make-interactive-sessions-link-top-level-item" title="Permalink to this headline">¶</a></h3>
+<p>The Interactive Sessions link was moved from the first item in the Interactive
+Apps menu to a top level item on the navbar. Since these apps are one of the
+pprimary ways users use OnDemand this makes access to active sessions require
+one less click. Also, this frees us to place links to Interactive Apps anywhere
+in the navigation hierarchy without having to provide an associated sessions
+link in the same place.</p>
+</div>
+<div class="section" id="better-debugging-of-interactive-apps-by-logging-shell-commands">
+<h3>Better debugging of Interactive Apps by logging shell commands<a class="headerlink" href="#better-debugging-of-interactive-apps-by-logging-shell-commands" title="Permalink to this headline">¶</a></h3>
+<p>Whenever an Interactive Session is started from the Dashboard, the shell
+command used to submit the job is logged to the user’s NGINX config to help
+with debugging Interactive Apps.</p>
+</div>
+<div class="section" id="job-composer-optionally-hide-account-field-in-job-options">
+<h3>Job Composer: Optionally hide Account field in Job Options<a class="headerlink" href="#job-composer-optionally-hide-account-field-in-job-options" title="Permalink to this headline">¶</a></h3>
+<p>The Job Composer provides a field in the Job Options form to set the Account,
+which when the job is submitted uses the appropriate account flag for the
+resource manager (whether it is <code class="docutils literal notranslate"><span class="pre">-A</span></code> or <code class="docutils literal notranslate"><span class="pre">-P</span></code> or <code class="docutils literal notranslate"><span class="pre">--account</span></code>, etc.). However, some
+sites do not use this, and others use different mechanisms for accounting. Long
+term we want to support flexible configuration of this web form, but for now we
+have added the ability to hide this Account field from the web form. This field
+is hidden by adding to the Job Composer’s env file:
+<code class="docutils literal notranslate"><span class="pre">OOD_SHOW_JOB_OPTIONS_ACCOUNT_FIELD=0</span></code></p>
+</div>
+<div class="section" id="active-jobs-display-list-of-nodes-that-a-job-is-running-on">
+<h3>Active Jobs: display list of nodes that a job is running on<a class="headerlink" href="#active-jobs-display-list-of-nodes-that-a-job-is-running-on" title="Permalink to this headline">¶</a></h3>
+<p>In Active Jobs, if the resource manager provides it, the list of nodes a job is
+running on will display in the details section of the job.</p>
+</div>
 </div>
 </div>
 
