@@ -272,7 +272,26 @@ directory in the app deployment directory, e.g., :file:`../.hidden-app/`.
 Enable multiple Dashboard announcements with embedded HTML
 ..................................................................
 
-TODO
+Site-wide dashboard announcement support in OnDemand has been expanded. Orinally we supported a file ``/etc/ood/config/announcement.md`` but now a YAML file ``/etc/ood/config/announcement.yml`` can be used. A collection of markdown and yaml announcements in ``/etc/ood/config/announcements.d/`` can be added. The yaml file provides extra benefits:
+
+#. Pre process file using ERB so that ERB tags can provide per-request dynamic modification of the announcement
+#. Control the color of announcement with ``:type`` which is the Bootstrap alert name (``warning``, ``info``, ``success``, or ``danger``)
+#. Control whether announcement appears or not by setting ``:msg`` to a string or ``nil``
+
+The ability to use ERB means we can set the msg to nil after a certain time period. For example:
+
+.. code-block:: erb
+
+   type: warning
+   msg: |
+     <%- if Time.now < Time.new(2018, 1, 23, 15, 0, 0) -%>
+     **NOTICE:** The Ruby nodes on the Quick cluster will go down on Tuesday
+     January 23, 2018 from 1 - 3 pm for scheduled maintenance. This will affect
+     only **Ruby VDI** sessions scheduled to run during this time period. These
+     sessions will be put on hold until after the maintenance period is complete.
+     <%- end -%>
+
+In this example, the announcement appears on the dashboard until Jan 23 at 3:00. We'll add more documentation for this soon. If you want to take advantage of this now just ask a question on the ood-users mailing list.
 
 Open "help" links in new window
 ..................................................................
