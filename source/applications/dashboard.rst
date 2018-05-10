@@ -73,20 +73,12 @@ Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
 ``Pathname`` objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
 global attribute that is used in the Dashboard app.
 
-.. warning::
-
-   We recommend doing this change in the build directory, so that when you
-   install a new version of the dashboard and then copy it to the production
-   location you do not lose your custom initializer.
-
-In the root directory of the Dashboard app, create
-``config/initializers/ood.rb`` file. This file is in the gitignore of the
-Dashboard app, so your customizations will be safe from future changes to the
-dashboard and there will be no version conflicts.
-
-Here is an example of OSC OnDemand's initializer:
+Start by creating the file
+:file:`/etc/ood/config/apps/dashboard/initializers/ood.rb` as such:
 
 .. code-block:: ruby
+
+   # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
    OodFilesApp.candidate_favorite_paths.tap do |paths|
      # add project space directories
@@ -129,10 +121,10 @@ Remember, when editing ood.rb in the build directory, don't forget to install ag
    scl enable rh-ruby22 -- rake build:dashboard
    sudo scl enable rh-ruby22 -- rake install:dashboard
 
-- Changes to the initializer shouldn't require a rebuilding of the dashboard assets or
-  reinstalling dependencies, but to see the change it does require a Dashboard app
-  restart, which can be forced by touching the tmp/restart.txt file. Rebuilding the dashboard
-  will automatically handle this for you.
+- Changes to the initializer shouldn't require a rebuilding of the dashboard
+  assets or reinstalling dependencies, but to see the change it does require a
+  Dashboard app restart, which can be forced from the Dashboard itself by
+  selecting *Help* → *Restart Web Server* from the top right menu.
 
 If you access the Dashboard, and it crashes, then you may have made a mistake in ood.rb file,
 whose code is run during the initialization of the Rails app.
