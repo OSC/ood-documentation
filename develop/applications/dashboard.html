@@ -270,18 +270,11 @@ Project space directories.</p>
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
 <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects to the <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array, a
 global attribute that is used in the Dashboard app.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">We recommend doing this change in the build directory, so that when you
-install a new version of the dashboard and then copy it to the production
-location you do not lose your custom initializer.</p>
-</div>
-<p>In the root directory of the Dashboard app, create
-<code class="docutils literal notranslate"><span class="pre">config/initializers/ood.rb</span></code> file. This file is in the gitignore of the
-Dashboard app, so your customizations will be safe from future changes to the
-dashboard and there will be no version conflicts.</p>
-<p>Here is an example of OSC OnDemand’s initializer:</p>
-<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
+<p>Start by creating the file
+<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code> as such:</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/initializers/ood.rb</span>
+
+<span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
   <span class="c1"># add project space directories</span>
   <span class="n">projects</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/^P./</span><span class="p">)</span>
   <span class="n">paths</span><span class="o">.</span><span class="n">concat</span> <span class="n">projects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/project/</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="p">}</span>
@@ -321,10 +314,10 @@ sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:dashboard
 </pre></div>
 </div>
 <ul class="simple">
-<li>Changes to the initializer shouldn’t require a rebuilding of the dashboard assets or
-reinstalling dependencies, but to see the change it does require a Dashboard app
-restart, which can be forced by touching the tmp/restart.txt file. Rebuilding the dashboard
-will automatically handle this for you.</li>
+<li>Changes to the initializer shouldn’t require a rebuilding of the dashboard
+assets or reinstalling dependencies, but to see the change it does require a
+Dashboard app restart, which can be forced from the Dashboard itself by
+selecting <em>Help</em> → <em>Restart Web Server</em> from the top right menu.</li>
 </ul>
 <p>If you access the Dashboard, and it crashes, then you may have made a mistake in ood.rb file,
 whose code is run during the initialization of the Rails app.</p>
