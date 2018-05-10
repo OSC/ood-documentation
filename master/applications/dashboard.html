@@ -286,32 +286,28 @@ global attribute that is used in the Dashboard app.</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li>The variable <code class="docutils literal notranslate"><span class="pre">paths</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects that define a list of what
-will appear in the Dashboard menu for Files</li>
-<li>At OSC, the pattern for project paths follows “/fs/project/${PROJECT_GROUP_NAME}”.
-So above we:<ol class="arabic">
+<li>The variable <code class="docutils literal notranslate"><span class="pre">paths</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects that define a list
+of what will appear in the Dashboard menu for Files</li>
+<li>At OSC, the pattern for project paths follows
+<code class="file docutils literal notranslate"><span class="pre">/fs/project/</span><em><span class="pre">project_name</span></em></code>. So above we:<ol class="arabic">
 <li>get an array of all user’s groups by name</li>
-<li>filter that array for groups that start with “P” (i.e., PZS0002, PAW0003, …)</li>
+<li>filter that array for groups that start with <code class="docutils literal notranslate"><span class="pre">P</span></code> (i.e., <code class="docutils literal notranslate"><span class="pre">PZS0002</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PAW0003</span></code>, …)</li>
 <li>using <code class="docutils literal notranslate"><span class="pre">map</span></code> we turn this array into an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects to
 all the possible project directories the user could have.</li>
 <li>extend the paths array with this list of paths</li>
 </ol>
 </li>
 <li>For possible scratch space directories, we look for either
-“/fs/scratch/${PROJECT_GROUP_NAME}” or “/fs/scratch${USERNAME}#</li>
+<code class="file docutils literal notranslate"><span class="pre">/fs/scratch/</span><em><span class="pre">project_name</span></em></code> or <code class="file docutils literal notranslate"><span class="pre">/fs/scratch/</span><em><span class="pre">user_name</span></em></code></li>
 </ul>
 <p>On each request, the Dashboard will check for the existence of the directories
-in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories exist
-and the user has access to will appear as links in the Files menu under the
-Home Directory link.</p>
+in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories
+exist and the user has access to will appear as links in the Files menu under
+the Home Directory link.</p>
 <div class="figure align-center" id="id3">
 <img alt="../_images/files_menu_shortcuts_osc.png" src="../_images/files_menu_shortcuts_osc.png" />
 <p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
-</div>
-<p>Remember, when editing ood.rb in the build directory, don’t forget to install again i.e.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake build:dashboard
-sudo scl <span class="nb">enable</span> rh-ruby22 -- rake install:dashboard
-</pre></div>
 </div>
 <ul class="simple">
 <li>Changes to the initializer shouldn’t require a rebuilding of the dashboard
@@ -319,8 +315,9 @@ assets or reinstalling dependencies, but to see the change it does require a
 Dashboard app restart, which can be forced from the Dashboard itself by
 selecting <em>Help</em> → <em>Restart Web Server</em> from the top right menu.</li>
 </ul>
-<p>If you access the Dashboard, and it crashes, then you may have made a mistake in ood.rb file,
-whose code is run during the initialization of the Rails app.</p>
+<p>If you access the Dashboard, and it crashes, then you may have made a mistake
+in <code class="docutils literal notranslate"><span class="pre">ood.rb</span></code> file, whose code is run during the initialization of the Rails
+app.</p>
 </div>
 </div>
 
