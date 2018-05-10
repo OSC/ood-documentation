@@ -39,7 +39,9 @@ appear.
 C. Enable for specific users using custom initializer
 .....................................................
 
-Create a custom initializer file in the Dashboard app: ``config/initializers/ood.rb``
+Create a custom initializer file for the Dashboard app at::
+
+  /etc/ood/config/apps/dashboard/initializers/ood.rb
 
 Add whatever Ruby code you want to set the ``Configuration.app_development_enabled`` flag.
 This code will run as the user. This code also has access to the `ood_support
