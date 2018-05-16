@@ -395,7 +395,7 @@ doc_context = {
     'mod_ood_proxy_version':         '0.5.0',
     'ood_auth_map_version':          '0.0.3',
     'nginx_stage_version':           '0.5.0',
-    'dashboard_version':             '1.26.1',
+    'dashboard_version':             '1.26.2',
     'shell_version':                 '1.3.1',
     'files_version':                 '1.4.1',
     'file_editor_version':           '1.3.3',
