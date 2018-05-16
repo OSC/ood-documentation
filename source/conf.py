@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Open OnDemand'
-copyright = u'2017, Ohio Supercomputer Center'
+copyright = u'2017-2018, Ohio Supercomputer Center'
 author = u'Ohio Supercomputer Center'
 
 # The version info for the project you're documenting, acts as replacement for
