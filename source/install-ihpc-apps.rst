@@ -41,4 +41,6 @@ templates.
      - https://github.com/OSC/bc_osc_paraview
    * - RStudio Server
      - https://github.com/OSC/bc_osc_rstudio_server
+   * - VMD
+     - https://github.com/OSC/bc_osc_vmd
 
