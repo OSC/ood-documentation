@@ -10,9 +10,9 @@ Apache HTTP server to host an Open OnDemand portal.
 
 The command that generates the Apache configuration file is given as:
 
-.. code-block:: sh
+.. code-block:: console
 
-   bin/generate [OPTIONS]
+   $ bin/generate [OPTIONS]
 
 At any point you can display a quick reference of the capabilities offered by
 :program:`bin/generate` with:
@@ -47,9 +47,9 @@ Options
    Example
      Use a local configuration file
 
-     .. code-block:: sh
+     .. code-block:: console
 
-        bin/generate -c my_conf.yml
+        $ bin/generate -c my_conf.yml
 
 .. option:: -o <output>, --output <output>
 
@@ -61,9 +61,9 @@ Options
    Example
      Output Apache configuration file to local file
 
-     .. code-block:: sh
+     .. code-block:: console
 
-        bin/generate -o my_portal.conf
+        $ bin/generate -o my_portal.conf
 
 .. option:: -t <template>, --template <template>
 
@@ -75,8 +75,8 @@ Options
    Example
      Use a custom ERB template for the Apache config (not recommended)
 
-     .. code-block:: sh
+     .. code-block:: console
 
-        bin/generate -t my_portal.conf.erb
+        $ bin/generate -t my_portal.conf.erb
 
 .. _apache configuration: https://httpd.apache.org/docs/2.4/configuring.html

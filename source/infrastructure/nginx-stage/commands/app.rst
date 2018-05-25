@@ -6,9 +6,9 @@ nginx_stage app
 This command will generate a web application NGINX configuration file
 and subsequently restart the NGINX process as the user.
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage app [OPTIONS]
+   $ sudo nginx_stage app [OPTIONS]
 
 .. program:: nginx_stage app
 
@@ -48,15 +48,15 @@ To generate an app config from the request::
 
 and subsequently restart the per-user NGINX process:
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/usr/jim/myapp/session/1'
+   $ sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/usr/jim/myapp/session/1'
 
 To generate **only** the app config:
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/sys/dashboard' --skip-nginx
+   $ sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/sys/dashboard' --skip-nginx
 
 This will return the path to the app config and will not restart the
 NGINX process.

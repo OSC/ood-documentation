@@ -16,9 +16,9 @@ under a :program:`sudo` environment.
 At any point you can display a quick reference of the capabilities offered by
 :program:`nginx_stage` with:
 
-.. code-block:: sh
+.. code-block:: console
 
-   nginx_stage [COMMAND] --help
+   $ nginx_stage [COMMAND] --help
 
 .. toctree::
    :maxdepth: 2

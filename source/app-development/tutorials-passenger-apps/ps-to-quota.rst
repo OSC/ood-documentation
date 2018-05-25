@@ -134,15 +134,15 @@ Edit to run and parse quota
 
 The app runs and parses this command:
 
-.. code-block:: sh
+.. code-block:: console
 
-   ps aux | grep '[A]pp'
+   $ ps aux | grep '[A]pp'
 
 We will change it to run and parse this command:
 
-.. code-block:: sh
+.. code-block:: console
 
-   quota -spw
+   $ quota -spw
 
 Update test/test_command.rb
 ...........................
@@ -426,21 +426,21 @@ Steps:
 
 #. Version these changes. Click Shell button on app details view, and then commit the changes:
 
-    .. code-block:: sh
+    .. code-block:: console
 
-       git add .
-       git commit -m "update manifest for production"
+       $ git add .
+       $ git commit -m "update manifest for production"
 
        # if there is an external remote associated with this, push to that
-       git push origin master
+       $ git push origin master
 
 #. As the admin, sudo copy or clone this repo to production
 
-    .. code-block:: sh
+    .. code-block:: console
 
        # as sudo on OnDemand host:
-       cd /var/www/ood/apps/sys
-       git clone /users/PZS0562/efranz/ondemand/dev/quota
+       $ cd /var/www/ood/apps/sys
+       $ git clone /users/PZS0562/efranz/ondemand/dev/quota
 
 
 #. Reload the dashboard.

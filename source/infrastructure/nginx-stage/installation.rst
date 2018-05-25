@@ -5,34 +5,39 @@ Installation
 
 #. Download the latest stable release and unpack it:
 
-   .. code-block:: sh
+   Download the latest release as of this writing:
+   
+   .. code-block:: console
 
-      # Set latest release as of writing this
-      LATEST="{{ nginx_stage_version }}"
+      $ LATEST="{{ nginx_stage_version }}"
+      $ wget --content-disposition https://github.com/OSC/nginx_stage/archive/v${LATEST}.tar.gz
 
-      # Download latest release
-      wget --content-disposition https://github.com/OSC/nginx_stage/archive/v${LATEST}.tar.gz
+   Unpack archive:
+   
+   .. code-block:: console
+   
+      $ tar xzvf nginx_stage-${LATEST}.tar.gz
 
-      # Unpack this archive
-      tar xzvf nginx_stage-${LATEST}.tar.gz
-
-      # Change working directory
-      cd nginx_stage-${LATEST}
+   Change working directory:
+   
+   .. code-block:: console
+   
+      $ cd nginx_stage-${LATEST}
 
 #. Install this package in default ``PREFIX=/opt/ood/nginx_stage`` location:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo scl enable rh-ruby22 -- rake install
+      $ sudo scl enable rh-ruby22 -- rake install
 
    .. note::
 
       The location of the installation can be changed by altering the
       ``PREFIX`` environment variable:
 
-      .. code-block:: sh
+      .. code-block:: console
 
-         sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/nginx_stage"
+         $ sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/nginx_stage"
 
 #. Configure the :program:`nginx_stage` installation by modifying the YAML
    configuration file located at::

@@ -193,7 +193,7 @@ An example before hook ``template/before.sh`` that defines a port and password
 file that can later be used in the script that launches the web server may look
 like:
 
-.. code-block:: shell
+.. code-block:: sh
 
    # Find available port to run web server on
    export port=$(find_port)

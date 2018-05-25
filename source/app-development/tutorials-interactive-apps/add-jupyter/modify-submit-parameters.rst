@@ -82,10 +82,11 @@ is resource manager dependent. Some examples are given below.
    It is recommended you commit the changes you made to ``submit.yml.erb`` to
    `git`_:
 
-   .. code-block:: sh
-
-      # Stage and commit your changes
-      git commit submit.yml.erb -m 'updated batch job options'
+   Stage and commit your changes:
+	
+   .. code-block:: console
+	
+      $ git commit submit.yml.erb -m 'updated batch job options'
 
 .. _app-development-tutorials-interactive-apps-add-jupyter-modify-submit-parameters-slurm:
 
@@ -116,9 +117,9 @@ and ``native``.
    The ``native`` attribute is an array of command line arguments. So the above
    example is equivalent to appending to :command:`sbatch`:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sbatch ... -N <bc_num_slots> -C c12
+      $ sbatch ... -N <bc_num_slots> -C c12
 
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and
@@ -227,9 +228,9 @@ also append ``mem=...gb`` to the ``select=...`` statement if you'd like.
    The ``native`` attribute is an array of command line arguments. So the above
    example is equivalent to appending to :command:`qsub`:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      qsub ... -l select=<bc_num_slots>:ncpus=28
+      $ qsub ... -l select=<bc_num_slots>:ncpus=28
 
    The ``bc_num_slots`` shown above located within the ERB syntax is the value
    returned from web form for "Number of nodes". We check if it is blank and

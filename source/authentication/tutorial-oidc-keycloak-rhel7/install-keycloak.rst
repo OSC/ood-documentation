@@ -18,49 +18,62 @@ Initial Installation Steps
 
 #. Download and unpack Keycloak 3.1.0 (from http://www.keycloak.org/archive/downloads-3.1.0.html)
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      cd /opt
-      sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
-      sudo tar xzf keycloak-3.1.0.Final.tar.gz
+      $ cd /opt
+      $ sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
+      $ sudo tar xzf keycloak-3.1.0.Final.tar.gz
 
 
 #. Add keycloak user and change ownership of files
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo groupadd -r keycloak
-      sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
-      # if -m doesn't work, do this:
-      # sudo install -d -o keycloak -g keycloak /var/lib/keycloak
-      # this makes a home directory, which is needed when running API calls as
-      # keycloak user
-      sudo chown keycloak: -R keycloak-3.1.0.Final
+      $ sudo groupadd -r keycloak
+      $ sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
+	  
+   If -m doesn't work, do this:
+   
+   .. code-block:: console
+      
+	  $ sudo install -d -o keycloak -g keycloak /var/lib/keycloak
+	  
+   This makes a home directory, which is needed when running API calls as keycloak user
+   
+   .. code-block:: console
+   
+      $ sudo chown keycloak: -R keycloak-3.1.0.Final
 
 #. Restrict access to keycloak-3.1.0.Final/standalone, which will contain
    sensitive data for the Keycloak server
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      cd keycloak-3.1.0.Final
-      sudo -u keycloak chmod 700 standalone
+      $ cd keycloak-3.1.0.Final
+      $ sudo -u keycloak chmod 700 standalone
 
 
 #. Install JDK 1.8.0
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      yum install java-1.8.0-openjdk-devel
+      $ yum install java-1.8.0-openjdk-devel
 
 
 #. Added 'admin' to '/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user
 
-   .. code-block:: sh
+   If you are not already there:
+   
+   .. code-block:: console
 
-      # cd /opt/keycloak-3.1.0.Final if you are not already there
+      $ cd /opt/keycloak-3.1.0.Final
 
-      openssl rand -hex 20 # generate a password to use for admin user
-      sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
+   Generate a password to use for admin user:
+   
+   .. code-block:: console
+   
+      $ openssl rand -hex 20
+      $ sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
 
    **Replace KEYCLOAKPASS with a good password and save password for later use**
 
@@ -68,19 +81,19 @@ Initial Installation Steps
 
    Simplest is to run these three commands:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
-      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
-      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
+      $ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
+      $ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
+      $ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
 
    Or you can use a config.cli file that contains these commands. We have
    provided an example file to make use of in this gist, with blocks commented
    out so you can wget the file, edit as appropriate, and run via:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo -u keycloak ./bin/jboss-cli.sh --file=config.cli
+      $ sudo -u keycloak ./bin/jboss-cli.sh --file=config.cli
 
    Where the config.cli looks like:
 
@@ -91,9 +104,9 @@ Start Keycloak Server
 
 #. Create keycloak.service to start and stop the server:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo cat > /etc/systemd/system/keycloak.service <<EOF
+      $ sudo cat > /etc/systemd/system/keycloak.service <<EOF
 
       [Unit]
       Description=Jboss Application Server
@@ -114,12 +127,15 @@ Start Keycloak Server
 
    Then start keycloak:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo systemctl daemon-reload
-      sudo systemctl start keycloak
+      $ sudo systemctl daemon-reload
+      $ sudo systemctl start keycloak
 
-      # it may take a little time to load; verify it has loaded:
+   It may take a little time to load; verify it has loaded:
+   
+   .. code-block:: console
+   
       $ sudo systemctl status keycloak
       keycloak.service - Jboss Application Server
       Loaded: loaded (/etc/systemd/system/keycloak.service; disabled; vendor preset: disabled)
@@ -155,9 +171,9 @@ Place Apache in front of Keycloak
    You may need to modify iptables to open up access to Keycloak the same way
    that you did so with port 80 and 443 for OnDemand:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo iptables -I INPUT -p tcp -m multiport --dports 8443 -m comment --comment "08443 *:8443" -j ACCEPT
+      $ sudo iptables -I INPUT -p tcp -m multiport --dports 8443 -m comment --comment "08443 *:8443" -j ACCEPT
 
    .. note::
 

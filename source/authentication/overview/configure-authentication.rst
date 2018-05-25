@@ -54,10 +54,10 @@ under :file:`/etc/ood/config/ood_portal.yml`. For example, to add support for
 an authentication module with ``AuthType`` of ``my-auth``, you would modify the
 :file:`/etc/ood/config/ood_portal.yml` file as such:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      scl enable rh-ruby22 -- rake
-      scl enable rh-ruby22 -- rake install
+      $ scl enable rh-ruby22 -- rake
+      $ scl enable rh-ruby22 -- rake install
 
 
 .. code-block:: yaml

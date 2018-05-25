@@ -29,9 +29,9 @@ options read from a forked off command line call.
 #. First we rename the ``form.yml`` for the Jupyter Interactive App to
    ``form.yml.erb``:
 
-   .. code-block:: shell
+   .. code-block:: console
 
-      mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
+      $ mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
 
    This will cause the YAML file to be processed using the `eRuby (embedded
    Ruby)`_ templating system, which allows us to embed Ruby_ code into the YAML

@@ -6,9 +6,9 @@ nginx_stage nginx_show
 This command will show the relevant details of a running per-user NGINX (PUN)
 process for a given user.
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage nginx_show [OPTIONS]
+   $ sudo nginx_stage nginx_show [OPTIONS]
 
 .. program:: nginx_stage nginx_show
 
@@ -24,13 +24,13 @@ Examples
 
 To display the details of Bob's PUN process:
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage nginx_show --user 'bob'
-   # User: bob
-   # Instance: 24214
-   # Socket: /var/run/nginx/bob/passenger.sock
-   # Sessions: 1
+   $ sudo nginx_stage nginx_show --user 'bob'
+   User: bob
+   Instance: 24214
+   Socket: /var/run/nginx/bob/passenger.sock
+   Sessions: 1
 
 Where ``Sessions`` is the number of active connections to the given Unix domain
 socket file.

@@ -14,9 +14,9 @@ A. Enable your own account by creating the sandbox directory
 
 Each user can by default enable app development by creating the directory that holds the sandbox apps. In a Shell session, create the dev directory in your home directory:
 
-.. code-block:: sh
+.. code-block:: console
 
-   mkdir -p ~/ondemand/dev
+   $ mkdir -p ~/ondemand/dev
 
 Then reload OnDemand dashboard to see the Develop dropdown appear. Note: this will work only if the administrator has not configured the dashboard to enable or disable app development in the dashboard.
 

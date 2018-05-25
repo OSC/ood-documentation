@@ -63,9 +63,9 @@ generating the batch script.
 
    This will be called within the batch script as:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      module load <modules>
+      $ module load <modules>
 
 #. We test our changes by again clicking the *Launch Jupyter Notebook* button
    back in our details view of our sandbox app.
@@ -104,9 +104,10 @@ Continue to the next section to learn about job submission parameters.
 
    It is recommended you commit any changes you made to ``form.yml`` to `git`_:
 
-   .. code-block:: sh
+   Stage the modified file and commit your changes:
+   
+   .. code-block:: console
 
-      # Stage the modified file and commit your changes
-      git commit form.yml -m 'updated form with cluster attributes'
+      $ git commit form.yml -m 'updated form with cluster attributes'
 
 .. _git: https://git-scm.com/
