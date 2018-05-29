@@ -217,14 +217,17 @@ Update command.rb
 
 Run test by running `rake` command and you will see it fail:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ rake
+	
+Output:
+	
+.. code-block:: irb
+
     Run options: --seed 58990
 
     # Running:
-
-    F
 
     Finished in 0.000943s, 1060.4569 runs/s, 1060.4569 assertions/s.
 
@@ -315,9 +318,14 @@ After the changes part of the command.rb will look like this:
 
 Now when we run the test they pass:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ rake
+	
+Output:
+
+.. code-block:: irb
+	
     Run options: --seed 60317
 
     # Running:

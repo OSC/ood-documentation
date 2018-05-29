@@ -171,9 +171,9 @@ script:
    Example
      Find a random port that is available within the default range
 
-     .. code-block:: shell
+     .. code-block:: console
 
-        port=$(find_port)
+        $ port=$(find_port)
 
 .. describe:: create_passwd [SIZE]
 
@@ -185,9 +185,9 @@ script:
    Example
      Generate a random password 16 characters long
 
-     .. code-block:: shell
+     .. code-block:: console
 
-        password=$(create_passwd 16)
+        $ password=$(create_passwd 16)
 
 An example before hook ``template/before.sh`` that defines a port and password
 file that can later be used in the script that launches the web server may look
@@ -238,7 +238,7 @@ permission. This is where you launch the blocking web server process.
 An example ``template/script.sh`` that launches a simple static HTTP web server
 may look like:
 
-.. code-block:: shell
+.. code-block:: sh
 
    #!/bin/bash -l
 
