@@ -431,14 +431,18 @@ Steps:
        $ git add .
        $ git commit -m "update manifest for production"
 
-       # if there is an external remote associated with this, push to that
+    If there is an external remote associated with this, push to that:
+	
+    .. code-block:: console
+	
        $ git push origin master
 
 #. As the admin, sudo copy or clone this repo to production
 
+    As sudo on OnDemand host:
+	
     .. code-block:: console
-
-       # as sudo on OnDemand host:
+	
        $ cd /var/www/ood/apps/sys
        $ git clone /users/PZS0562/efranz/ondemand/dev/quota
 
