@@ -32,13 +32,15 @@ Initial Installation Steps
       $ sudo groupadd -r keycloak
       $ sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 	  
-   If -m doesn't work, do this:
+   If ``-m`` doesn't work, do this:
    
    .. code-block:: console
       
 	  $ sudo install -d -o keycloak -g keycloak /var/lib/keycloak
 	  
-   This makes a home directory, which is needed when running API calls as keycloak user
+   This makes a home directory, which is needed when running API calls as keycloak user.
+   
+   Finally, set the proper permissions:
    
    .. code-block:: console
    

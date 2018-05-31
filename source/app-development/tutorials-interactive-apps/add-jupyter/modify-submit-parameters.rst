@@ -81,8 +81,6 @@ is resource manager dependent. Some examples are given below.
 
    It is recommended you commit the changes you made to ``submit.yml.erb`` to
    `git`_:
-
-   Stage and commit your changes:
 	
    .. code-block:: console
 	

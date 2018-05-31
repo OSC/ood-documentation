@@ -228,6 +228,8 @@ Output:
     Run options: --seed 58990
 
     # Running:
+	
+    F
 
     Finished in 0.000943s, 1060.4569 runs/s, 1060.4569 assertions/s.
 
@@ -445,9 +447,7 @@ Steps:
 	
        $ git push origin master
 
-#. As the admin, sudo copy or clone this repo to production
-
-    As sudo on OnDemand host:
+#. As the admin, sudo copy or clone this repo to production:
 	
     .. code-block:: console
 	

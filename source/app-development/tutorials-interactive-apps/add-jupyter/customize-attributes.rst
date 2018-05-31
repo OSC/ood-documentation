@@ -63,9 +63,9 @@ generating the batch script.
 
    This will be called within the batch script as:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ module load <modules>
+      module load <modules>
 
 #. We test our changes by again clicking the *Launch Jupyter Notebook* button
    back in our details view of our sandbox app.
@@ -102,9 +102,7 @@ Continue to the next section to learn about job submission parameters.
 
 .. note::
 
-   It is recommended you commit any changes you made to ``form.yml`` to `git`_:
-
-   Stage the modified file and commit your changes:
+   It is recommended to commit any changes made to ``form.yml`` to `git`_:
    
    .. code-block:: console
 

@@ -4,24 +4,12 @@ Installation
 ============
 
 #. Download the latest stable release and unpack it:
-
-   Download the latest release as of this writing:
    
    .. code-block:: console
 
       $ LATEST="{{ nginx_stage_version }}"
       $ wget --content-disposition https://github.com/OSC/nginx_stage/archive/v${LATEST}.tar.gz
-
-   Unpack archive:
-   
-   .. code-block:: console
-   
       $ tar xzvf nginx_stage-${LATEST}.tar.gz
-
-   Change working directory:
-   
-   .. code-block:: console
-   
       $ cd nginx_stage-${LATEST}
 
 #. Install this package in default ``PREFIX=/opt/ood/nginx_stage`` location:
