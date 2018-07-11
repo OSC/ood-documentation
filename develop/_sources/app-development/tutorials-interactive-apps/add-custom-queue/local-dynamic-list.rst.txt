@@ -81,7 +81,7 @@ options read from a forked off command line call.
         begin
           output, status = Open3.capture2e(cmd)
           if status.success?
-            queues = out.split("\n").map(&:strip).reject(&:blank?).sort
+            queues = output.split("\n").map(&:strip).reject(&:blank?).sort
           else
             raise output
           end
