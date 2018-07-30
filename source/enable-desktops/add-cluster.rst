@@ -10,9 +10,9 @@ modify.
 
 #. Start by creating the working directory:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ mkdir -p /etc/ood/config/apps/bc_desktop
+      mkdir -p /etc/ood/config/apps/bc_desktop
 
 #. For *each* cluster that we want to launch a Desktop session on we will need
    a corresponding :ref:`app-development-interactive-form` configuration file

@@ -17,9 +17,9 @@ We will begin by first copying over a pre-built example Jupyter app.
 #. We do all of our app development in our Open OnDemand sandbox directory. So
    we first need to create our sandbox directory:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ mkdir -p "${HOME}/ondemand/dev"
+      mkdir -p "${HOME}/ondemand/dev"
 
    .. note::
 

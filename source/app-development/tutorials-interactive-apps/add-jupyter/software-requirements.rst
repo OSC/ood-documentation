@@ -16,10 +16,10 @@ node:
 - `Lmod`_ 6.0.1+ or any other CLI tool used to load appropriate environments
   within the batch job before launching the Jupyter Notebook Server, e.g.,
 
-  .. code-block:: console
+  .. code-block:: sh
 
-     $ module purge
-     $ module load python
+     module purge
+     module load python
 
 .. warning::
 

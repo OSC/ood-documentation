@@ -47,24 +47,24 @@ Requirements:
 
 #. Build/install the updated Apache configuration file:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 #. Restart the Apache server to have the changes take effect:
 
    CentOS/RHEL 6:
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo service httpd24-httpd condrestart
-        Stopping httpd:                                            [  OK  ]
-        Starting httpd:                                            [  OK  ]
-        $ sudo service httpd24-htcacheclean condrestart
+        sudo service httpd24-httpd condrestart
+        # Stopping httpd:                                            [  OK  ]
+        # Starting httpd:                                            [  OK  ]
+        sudo service httpd24-htcacheclean condrestart
 
    CentOS/RHEL 7:
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+        sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 Close your browser so that you are properly logged out. Then open your browser
 again and access the portal. You should now be able to authenticate with your

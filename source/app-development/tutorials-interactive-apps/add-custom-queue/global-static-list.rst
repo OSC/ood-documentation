@@ -72,7 +72,7 @@ options read from the corresponding cluster configuration file.
 #. First we rename the ``form.yml`` for the Jupyter Interactive App to
    ``form.yml.erb``:
 
-   .. code-block:: shell
+   .. code-block:: sh
 
       mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
 

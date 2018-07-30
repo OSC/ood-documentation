@@ -35,9 +35,9 @@ will cause your authentication configuration directives to be loaded before
 secrets inside this file you can ensure privacy by adding restrictive file
 permissions:
 
-.. code-block:: console
+.. code-block:: sh
 
-   $ sudo chmod 640 /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
+   sudo chmod 640 /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
 
 Add to OnDemand Portal
 ----------------------
@@ -74,9 +74,9 @@ an authentication module with ``AuthType`` of ``my-auth``, you would modify the
 
 You would then build and install the new Apache configuration file with:
 
-.. code-block:: console
+.. code-block:: sh
 
-   $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+   sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 Finally you will need to restart your Apache HTTP Server for the changes to
 take effect.

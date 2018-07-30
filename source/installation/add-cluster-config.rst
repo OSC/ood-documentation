@@ -20,9 +20,9 @@ The following apps do require a cluster configuration file:
 #. Create the default directory that the cluster configuration files reside
    under:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ sudo mkdir -p /etc/ood/config/clusters.d
+      sudo mkdir -p /etc/ood/config/clusters.d
 
 #. Create a cluster YAML configuration file for each HPC cluster you want to
    provide access to. They must have the ``*.yml`` extension.
