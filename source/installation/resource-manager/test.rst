@@ -86,8 +86,8 @@ configuration files.
       provide these command line arguments as a string with the environment
       variable ``SUBMIT_ARGS`` as:
 
-      .. code-block:: shell
+      .. code-block:: console
 
-         sudo su $USER -c 'scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
+         $ sudo su $USER -c 'scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
 
       Note that the ``SUBMIT_ARGS="..."`` is defined at the end of the command.

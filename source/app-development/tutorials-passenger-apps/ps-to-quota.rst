@@ -134,15 +134,15 @@ Edit to run and parse quota
 
 The app runs and parses this command:
 
-.. code-block:: sh
+.. code-block:: console
 
-   ps aux | grep '[A]pp'
+   $ ps aux | grep '[A]pp'
 
 We will change it to run and parse this command:
 
-.. code-block:: sh
+.. code-block:: console
 
-   quota -spw
+   $ quota -spw
 
 Update test/test_command.rb
 ...........................
@@ -217,13 +217,18 @@ Update command.rb
 
 Run test by running `rake` command and you will see it fail:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ rake
+	
+Output:
+	
+.. code-block:: irb
+
     Run options: --seed 58990
 
     # Running:
-
+	
     F
 
     Finished in 0.000943s, 1060.4569 runs/s, 1060.4569 assertions/s.
@@ -315,9 +320,14 @@ After the changes part of the command.rb will look like this:
 
 Now when we run the test they pass:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ rake
+	
+Output:
+
+.. code-block:: irb
+	
     Run options: --seed 60317
 
     # Running:
@@ -426,21 +436,23 @@ Steps:
 
 #. Version these changes. Click Shell button on app details view, and then commit the changes:
 
-    .. code-block:: sh
+    .. code-block:: console
 
-       git add .
-       git commit -m "update manifest for production"
+       $ git add .
+       $ git commit -m "update manifest for production"
 
-       # if there is an external remote associated with this, push to that
-       git push origin master
+    If there is an external remote associated with this, push to that:
+	
+    .. code-block:: console
+	
+       $ git push origin master
 
-#. As the admin, sudo copy or clone this repo to production
-
-    .. code-block:: sh
-
-       # as sudo on OnDemand host:
-       cd /var/www/ood/apps/sys
-       git clone /users/PZS0562/efranz/ondemand/dev/quota
+#. As the admin, sudo copy or clone this repo to production:
+	
+    .. code-block:: console
+	
+       $ cd /var/www/ood/apps/sys
+       $ git clone /users/PZS0562/efranz/ondemand/dev/quota
 
 
 #. Reload the dashboard.

@@ -9,9 +9,9 @@ under the file :file:`/etc/ood/config/ood_portal.yml`.
 
 This project includes a good starting configuration file that you can use:
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
+   $ sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
 
 All the default options are listed in this configuration file. Feel free to
 read it through before continuing on.

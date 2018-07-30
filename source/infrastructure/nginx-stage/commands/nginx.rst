@@ -6,9 +6,9 @@ nginx_stage nginx
 This command will start an NGINX process as the user as well as
 control this process.
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage nginx [OPTIONS]
+   $ sudo nginx_stage nginx [OPTIONS]
 
 .. program:: nginx_stage nginx
 
@@ -45,9 +45,9 @@ Examples
 
 To stop Bob's NGINX process:
 
-.. code-block:: sh
+.. code-block:: console
 
-   sudo nginx_stage nginx --user 'bob' --signal 'stop'
+   $ sudo nginx_stage nginx --user 'bob' --signal 'stop'
 
 This sends a ``stop`` signal to Bob's per-user NGINX process.
 

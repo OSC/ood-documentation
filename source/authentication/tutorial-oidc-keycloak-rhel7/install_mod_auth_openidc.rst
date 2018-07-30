@@ -14,37 +14,37 @@ These directions are for installing from source.
 
 #. Install dependencies for building mod_auth_openidc
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
+      $ yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
 
 #. Install cjose
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
-      tar xzf cjose-0.5.1.tar.gz
-      cd cjose-0.5.1
-      ./configure
-      make
-      sudo make install
+      $ wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
+      $ tar xzf cjose-0.5.1.tar.gz
+      $ cd cjose-0.5.1
+      $ ./configure
+      $ make
+      $ sudo make install
 
 #. Install mod_auth_openidc
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
-      tar xzf mod_auth_openidc-2.3.2.tar.gz
-      cd mod_auth_openidc-2.3.2
+      $ wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
+      $ tar xzf mod_auth_openidc-2.3.2.tar.gz
+      $ cd mod_auth_openidc-2.3.2
 
-      export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
-      export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
-      export APXS2=/opt/rh/httpd24/root/usr/bin/apxs
-      export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-      ./autogen.sh
-      ./configure --prefix=/opt/rh/httpd24/root/usr --exec-prefix=/opt/rh/httpd24/root/usr --bindir=/opt/rh/httpd24/root/usr/bin --sbindir=/opt/rh/httpd24/root/usr/sbin --sysconfdir=/opt/rh/httpd24/root/etc --datadir=/opt/rh/httpd24/root/usr/share --includedir=/opt/rh/httpd24/root/usr/include --libdir=/opt/rh/httpd24/root/usr/lib64 --libexecdir=/opt/rh/httpd24/root/usr/libexec --localstatedir=/opt/rh/httpd24/root/var --sharedstatedir=/opt/rh/httpd24/root/var/lib --mandir=/opt/rh/httpd24/root/usr/share/man --infodir=/opt/rh/httpd24/root/usr/share/info --without-hiredis
-      make
-      sudo make install
+      $ export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
+      $ export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
+      $ export APXS2=/opt/rh/httpd24/root/usr/bin/apxs
+      $ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+      $ ./autogen.sh
+      $ ./configure --prefix=/opt/rh/httpd24/root/usr --exec-prefix=/opt/rh/httpd24/root/usr --bindir=/opt/rh/httpd24/root/usr/bin --sbindir=/opt/rh/httpd24/root/usr/sbin --sysconfdir=/opt/rh/httpd24/root/etc --datadir=/opt/rh/httpd24/root/usr/share --includedir=/opt/rh/httpd24/root/usr/include --libdir=/opt/rh/httpd24/root/usr/lib64 --libexecdir=/opt/rh/httpd24/root/usr/libexec --localstatedir=/opt/rh/httpd24/root/var --sharedstatedir=/opt/rh/httpd24/root/var/lib --mandir=/opt/rh/httpd24/root/usr/share/man --infodir=/opt/rh/httpd24/root/usr/share/info --without-hiredis
+      $ make
+      $ sudo make install
 
 #. Add file ``/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf`` with contents:
 
@@ -114,9 +114,9 @@ Re-generate main config using ood-portal-generator
 
 #. Then build and install the new Apache configuration file with:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+      $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
    The effect of this change in the Apache config (in case you want to apply the changes manually) are:
 
@@ -193,22 +193,26 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
 
 #. Change permission on file to be readable by apache and no one else:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
-      sudo chmod 640 /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+      $ sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+      $ sudo chmod 640 /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
 
 #. Then restart OnDemand's Apache. OnDemand should now be authenticating using KeyCloak.
 
-   .. code-block:: sh
+   Stop both:
+   
+   .. code-block:: console
 
-      # stop both
-      sudo systemctl stop keycloak
-      sudo systemctl stop httpd24-httpd
+      $ sudo systemctl stop keycloak
+      $ sudo systemctl stop httpd24-httpd
 
-      # start Apache FIRST, then start Keycloak
-      sudo systemctl start httpd24-httpd
-      sudo systemctl start keycloak
+   Start Apache FIRST, then start Keycloak:
+   
+   .. code-block:: console
+   
+      $ sudo systemctl start httpd24-httpd
+      $ sudo systemctl start keycloak
 
 .. warning::
 

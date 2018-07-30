@@ -5,31 +5,24 @@ Installation
 
 #. Download the latest stable release and unpack it:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      # Set latest release as of writing this
-      LATEST="{{ ood_auth_map_version }}"
-
-      # Download latest release
-      wget --content-disposition https://github.com/OSC/ood_auth_map/archive/v${LATEST}.tar.gz
-
-      # Unpack this archive
-      tar xzvf ood_auth_map-${LATEST}.tar.gz
-
-      # Change working directory
-      cd ood_auth_map-${LATEST}
+      $ LATEST="{{ ood_auth_map_version }}"
+      $ wget --content-disposition https://github.com/OSC/ood_auth_map/archive/v${LATEST}.tar.gz
+      $ tar xzvf ood_auth_map-${LATEST}.tar.gz
+      $ cd ood_auth_map-${LATEST}
 
 #. Install this package in default ``PREFIX=/opt/ood/ood_auth_map`` location:
 
-   .. code-block:: sh
+   .. code-block:: console
 
-      sudo scl enable rh-ruby22 -- rake install
+      $ sudo scl enable rh-ruby22 -- rake install
 
    .. note::
 
       The location of the installation can be changed by altering the
       ``PREFIX`` environment variable:
 
-      .. code-block:: sh
+      .. code-block:: console
 
-         sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/ood_auth_map"
+         $ sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/ood_auth_map"
