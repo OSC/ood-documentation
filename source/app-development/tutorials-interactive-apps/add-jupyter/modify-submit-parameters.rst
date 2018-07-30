@@ -80,11 +80,10 @@ is resource manager dependent. Some examples are given below.
 .. note::
 
    It is recommended you commit the changes you made to ``submit.yml.erb`` to
-   `git`_:
+   `git`_.
 
    .. code-block:: sh
 
-      # Stage and commit your changes
       git commit submit.yml.erb -m 'updated batch job options'
 
 .. _app-development-tutorials-interactive-apps-add-jupyter-modify-submit-parameters-slurm:

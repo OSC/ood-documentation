@@ -102,11 +102,10 @@ Continue to the next section to learn about job submission parameters.
 
 .. note::
 
-   It is recommended you commit any changes you made to ``form.yml`` to `git`_:
-
+   It is recommended you commit any changes you made to ``form.yml`` to `git`_.
+   
    .. code-block:: sh
 
-      # Stage the modified file and commit your changes
       git commit form.yml -m 'updated form with cluster attributes'
 
 .. _git: https://git-scm.com/
