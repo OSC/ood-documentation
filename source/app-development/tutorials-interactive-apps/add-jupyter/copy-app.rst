@@ -17,9 +17,9 @@ We will begin by first copying over a pre-built example Jupyter app.
 #. We do all of our app development in our Open OnDemand sandbox directory. So
    we first need to create our sandbox directory:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ mkdir -p "${HOME}/ondemand/dev"
+      mkdir -p "${HOME}/ondemand/dev"
 
    .. note::
 
@@ -118,18 +118,18 @@ We will begin by first copying over a pre-built example Jupyter app.
 
    It is recommended you version your new app using `git`_.
 
+   Go to the app directory and create a local repository:
+
    .. code-block:: sh
 
-      # Go to the app directory
       cd ~/ondemand/dev/jupyter
-
-      # Create a local repository
       git init
 
-      # Stage all the files under app
-      git add --all
+Stage all the files under app and make your first commit:
 
-      # Make your first commit
+   .. code-block:: sh
+
+      git add --all
       git commit -m 'my first commit'
 
 .. _git: https://git-scm.com/

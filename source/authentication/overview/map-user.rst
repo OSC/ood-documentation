@@ -31,9 +31,9 @@ its command line argument.
 
 This is equivalent to calling from the command line:
 
-.. code-block:: console
+.. code-block:: sh
 
-   $ /opt/ood/ood_auth_map/bin/ood_auth_map.regex "$REMOTE_USER"
+   /opt/ood/ood_auth_map/bin/ood_auth_map.regex "$REMOTE_USER"
 
 which just echos back the value of ``REMOTE_USER``.
 
@@ -59,9 +59,9 @@ modifying these values.
 After modifying :file:`/etc/ood/config/ood_portal.yml` with the mapping you
 want you would then build and install the new Apache configuration file with:
 
-.. code-block:: console
+.. code-block:: sh
 
-   $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+   sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 Finally you will need to restart your Apache HTTP Server for the changes to
 take effect.

@@ -200,13 +200,17 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
 
 #. Then restart OnDemand's Apache. OnDemand should now be authenticating using KeyCloak.
 
+  Stop both servives:
+
    .. code-block:: sh
 
-      # stop both
       sudo systemctl stop keycloak
       sudo systemctl stop httpd24-httpd
 
-      # start Apache FIRST, then start Keycloak
+  Start Apache FIRST, then start Keycloak
+
+  .. code-block:: sh
+
       sudo systemctl start httpd24-httpd
       sudo systemctl start keycloak
 

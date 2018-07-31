@@ -7,16 +7,19 @@ Installation
 
    .. code-block:: sh
 
-      # Set latest release as of writing this
       LATEST="{{ mod_ood_proxy_version }}"
-
-      # Download latest release
       wget --content-disposition https://github.com/OSC/mod_ood_proxy/archive/v${LATEST}.tar.gz
 
-      # Unpack this archive
+  Unpack this archive:
+
+   .. code-block:: sh
+
       tar xzvf mod_ood_proxy-${LATEST}.tar.gz
 
-      # Change working directory
+  Change working directory
+
+  .. code-block:: sh
+
       cd mod_ood_proxy-${LATEST}
 
 #. Install this package in default ``PREFIX=/opt/ood/mod_ood_proxy`` location:
