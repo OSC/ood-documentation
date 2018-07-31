@@ -64,9 +64,10 @@ Upgrading from v1.2
       haven't been doing this before then now is a good time to start. Feel
       free to contact us if you have trouble with this.
 
-   .. code-block:: sh
+  Copy over our app configuration (if they exist).
 
-      # Copy over our app configuration (if they exist)
+  .. code-block:: sh
+
       mkdir -p /etc/ood/config/apps
       [[ -e "/var/www/ood/apps/sys.bak/dashboard/.env.local" ]] \
         && sudo mkdir -p /etc/ood/config/apps/dashboard \
@@ -87,7 +88,10 @@ Upgrading from v1.2
         && sudo mkdir -p /etc/ood/config/apps/files \
         && sudo cp /var/www/ood/apps/sys.bak/files/.env /etc/ood/config/apps/files/env
 
-      # Copy over any custom initializers you may have created (if they exist)
+  Copy over any custom initializers you may have created (if they exist)
+
+  .. code-block:: sh
+
       [[ -e "/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb" ]] \
         && sudo mkdir -p /etc/ood/config/apps/dashboard/initializers \
         && sudo cp /var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb /etc/ood/config/apps/dashboard/initializers/ood.rb
@@ -95,22 +99,27 @@ Upgrading from v1.2
         && sudo mkdir -p /etc/ood/config/apps/activejobs/initializers \
         && sudo cp /var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb /etc/ood/config/apps/activejobs/initializers/filter.rb
 
-      # Copy over your Job Composer templates (if they exist)
+  Copy over your Job Composer templates (if they exist)
+
+  .. code-block:: sh
+
       [[ -e "/var/www/ood/apps/sys.bak/myjobs/templates" ]] \
         && sudo mkdir -p /etc/ood/config/apps/myjobs \
         && sudo cp -r /var/www/ood/apps/sys.bak/myjobs/templates /etc/ood/config/apps/myjobs/.
 
-      # Copy over your local Interactive Desktop apps (if they exist)
+  Copy over your local Interactive Desktop apps (if they exist)
+
+  .. code-block:: sh
+
       [[ -e "/var/www/ood/apps/sys.bak/bc_desktop/local" ]] \
           && sudo cp -r /var/www/ood/apps/sys.bak/bc_desktop/local /etc/ood/config/apps/bc_desktop
 
-   If all went well, you should have a directory structure that looks *similar*
-   to:
+  If all went well, you should have a directory structure that looks *similar* to:
 
    .. code-block:: sh
 
-      $ tree /etc/ood/config
-      /etc/ood/config
+      tree /etc/ood/config
+      # /etc/ood/config
       # ├── apps
       # │   ├── activejobs
       # │   │   └── ...
