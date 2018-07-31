@@ -22,21 +22,21 @@ software requirements:
 #. Enable the Software Collections repository:
 
    CentOS 6/7
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo yum install centos-release-scl
+        sudo yum install centos-release-scl
 
    RHEL 6
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
-        Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
+        sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
+        # Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
    RHEL 7
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
-        Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
+        sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
+        # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
 
    .. warning::
 
@@ -47,20 +47,20 @@ software requirements:
 #. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
 
    CentOS/RHEL 6
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el6.noarch.rpm
+        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el6.noarch.rpm
 
    CentOS/RHEL 7
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
+        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
 
 #. Install OnDemand and all of its dependencies:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ sudo yum install ondemand
+      sudo yum install ondemand
 
 .. note::
 

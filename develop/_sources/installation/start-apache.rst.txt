@@ -11,15 +11,15 @@ this.
 #. Start the Apache HTTP Server:
 
    CentOS/RHEL 6
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo service httpd24-httpd start
-        Starting httpd:                                            [  OK  ]
+        sudo service httpd24-httpd start
+        # Starting httpd:                                            [  OK  ]
 
    CentOS/RHEL 7
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo systemctl start httpd24-httpd
+        sudo systemctl start httpd24-httpd
 
    .. warning::
 
@@ -34,12 +34,12 @@ this.
    whose password does not necessarily need to be the same as our system
    password:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd $USER
-      New password:
-      Re-type new password:
-      Adding password for user .......
+      sudo scl enable httpd24 -- htpasswd -c /opt/rh/httpd24/root/etc/httpd/.htpasswd $USER
+      # New password:
+      # Re-type new password:
+      # Adding password for user .......
 
 #. Browse to your OnDemand server and login with your username and the password
    you used in the previous step. If everything worked you should be presented

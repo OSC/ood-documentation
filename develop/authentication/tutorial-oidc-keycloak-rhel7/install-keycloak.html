@@ -234,11 +234,14 @@ sudo tar xzf keycloak-3.1.0.Final.tar.gz
 <li><p class="first">Add keycloak user and change ownership of files</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo groupadd -r keycloak
 sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
-<span class="c1"># if -m doesn&#39;t work, do this:</span>
-<span class="c1"># sudo install -d -o keycloak -g keycloak /var/lib/keycloak</span>
-<span class="c1"># this makes a home directory, which is needed when running API calls as</span>
-<span class="c1"># keycloak user</span>
-sudo chown keycloak: -R keycloak-3.1.0.Final
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">-m</span></code> doesn’t work, do this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo install -d -o keycloak -g keycloak /var/lib/keycloak
+</pre></div>
+</div>
+<p>This makes a home directory, which is needed when running API calls as keycloak user. Finally we set proper permissions:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown keycloak: -R keycloak-3.1.0.Final
 </pre></div>
 </div>
 </li>
@@ -254,10 +257,13 @@ sudo -u keycloak chmod <span class="m">700</span> standalone
 </pre></div>
 </div>
 </li>
-<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># cd /opt/keycloak-3.1.0.Final if you are not already there</span>
-
-openssl rand -hex <span class="m">20</span> <span class="c1"># generate a password to use for admin user</span>
+<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
+<p>If you are not already there:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-3.1.0.Final
+</pre></div>
+</div>
+<p>Generate a password to use for the admin user:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>openssl rand -hex <span class="m">20</span> <span class="c1"># generate a password to use for admin user</span>
 sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
 </pre></div>
 </div>
@@ -332,15 +338,16 @@ out so you can wget the file, edit as appropriate, and run via:</p>
 <p>Then start keycloak:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
 sudo systemctl start keycloak
-
-<span class="c1"># it may take a little time to load; verify it has loaded:</span>
-$ sudo systemctl status keycloak
-keycloak.service - Jboss Application Server
-Loaded: loaded <span class="o">(</span>/etc/systemd/system/keycloak.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
-Active: active <span class="o">(</span>running<span class="o">)</span> since Mon <span class="m">2017</span>-09-25 <span class="m">16</span>:19:47 EDT<span class="p">;</span> 2s ago
-...
-Sep <span class="m">25</span> <span class="m">16</span>:19:49 webdev07.hpc.osc.edu standalone.sh<span class="o">[</span><span class="m">111998</span><span class="o">]</span>: <span class="m">16</span>:19:49,644 INFO  <span class="o">[</span>org.wildfly.extension.undertow<span class="o">]</span> <span class="o">(</span>MSC service thread ...0:8080<span class="o">)</span>
-Hint: Some lines were ellipsized, use -l to show in full.
+</pre></div>
+</div>
+<p>It may take a little time to load; verify it has loaded:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl status keycloak
+<span class="c1"># keycloak.service - Jboss Application Server</span>
+<span class="c1"># Loaded: loaded (/etc/systemd/system/keycloak.service; disabled; vendor preset: disabled)</span>
+<span class="c1"># Active: active (running) since Mon 2017-09-25 16:19:47 EDT; 2s ago</span>
+<span class="c1"># ...</span>
+<span class="c1"># Sep 25 16:19:49 webdev07.hpc.osc.edu standalone.sh[111998]: 16:19:49,644 INFO  [#org.wildfly.extension.undertow] (MSC service thread ...0:8080)</span>
+<span class="c1"># Hint: Some lines were ellipsized, use -l to show in full.</span>
 </pre></div>
 </div>
 </li>

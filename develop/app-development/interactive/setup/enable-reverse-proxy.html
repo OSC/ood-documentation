@@ -232,8 +232,8 @@ user to connect to through the proxy (e.g., <code class="docutils literal notran
 </li>
 <li><p class="first">confirm that if you run the command <code class="docutils literal notranslate"><span class="pre">hostname</span></code> from a compute node it will
 return a string that matches the above regular expression</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> hostname
-<span class="go">n0001.ten.osc.edu</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>hostname
+<span class="c1"># n0001.ten.osc.edu</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -336,22 +336,22 @@ domain of <code class="docutils literal notranslate"><span class="pre">ondemand.
 </div>
 </li>
 <li><p class="first">Build/install the updated Apache configuration file:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 </li>
 <li><p class="first">Restart the Apache server to have the changes take effect:</p>
 <dl class="docutils">
 <dt>CentOS/RHEL 6:</dt>
-<dd><div class="first last highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo service httpd24-httpd condrestart
-<span class="go">Stopping httpd:                                            [  OK  ]</span>
-<span class="go">Starting httpd:                                            [  OK  ]</span>
-<span class="gp">$</span> sudo service httpd24-htcacheclean condrestart
+<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo service httpd24-httpd condrestart
+<span class="c1"># Stopping httpd:                                            [  OK  ]</span>
+<span class="c1"># Starting httpd:                                            [  OK  ]</span>
+sudo service httpd24-htcacheclean condrestart
 </pre></div>
 </div>
 </dd>
 <dt>CentOS/RHEL 7:</dt>
-<dd><div class="first last highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 </pre></div>
 </div>
 </dd>
@@ -366,12 +366,12 @@ server on a compute node and connecting to it through the proxy with our
 browser.</p>
 <ol class="arabic">
 <li><p class="first">SSH to any compute node that matches the regular expression above:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ssh n0001.ten.osc.edu
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ssh n0001.ten.osc.edu
 </pre></div>
 </div>
 </li>
 <li><p class="first">Start up a very simple listening server on a high number port:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> nc -l <span class="m">5432</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nc -l <span class="m">5432</span>
 </pre></div>
 </div>
 </li>
@@ -387,11 +387,11 @@ the following URL format:</p>
 </li>
 <li><p class="first">Go back to your SSH session and verify that it received the browser
 request:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> nc -l <span class="m">5432</span>
-<span class="go">GET /node/n0691.ten.osc.edu/5432/ HTTP/1.1</span>
-<span class="go">Host: n0691.ten.osc.edu:5432</span>
-<span class="go">Upgrade-Insecure-Requests: 1</span>
-<span class="go">...</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>nc -l <span class="m">5432</span>
+<span class="c1"># GET /node/n0691.ten.osc.edu/5432/ HTTP/1.1</span>
+<span class="c1"># Host: n0691.ten.osc.edu:5432</span>
+<span class="c1"># Upgrade-Insecure-Requests: 1</span>
+...
 </pre></div>
 </div>
 <div class="admonition note">

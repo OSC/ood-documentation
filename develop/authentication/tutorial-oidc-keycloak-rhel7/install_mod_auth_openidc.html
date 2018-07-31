@@ -398,17 +398,22 @@ sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth
 </div>
 </li>
 <li><p class="first">Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># stop both</span>
-sudo systemctl stop keycloak
+</li>
+</ol>
+<blockquote>
+<div><p>Stop both servives:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop keycloak
 sudo systemctl stop httpd24-httpd
-
-<span class="c1"># start Apache FIRST, then start Keycloak</span>
-sudo systemctl start httpd24-httpd
+</pre></div>
+</div>
+</div></blockquote>
+<p>Start Apache FIRST, then start Keycloak</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
 sudo systemctl start keycloak
 </pre></div>
 </div>
-</li>
-</ol>
+</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>If when starting Apache you see this error:</p>

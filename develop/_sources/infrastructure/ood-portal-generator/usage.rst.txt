@@ -17,20 +17,20 @@ The command that generates the Apache configuration file is given as:
 At any point you can display a quick reference of the capabilities offered by
 :program:`bin/generate` with:
 
-.. code-block:: console
+.. code-block:: sh
 
-   $ bin/generate --help
-   Usage: generate [options]
-       -c, --config CONFIG              YAML config file used to render template
-       -t, --template TEMPLATE          ERB template that is rendered
-       -o, --output OUTPUT              File that rendered template is output to
-       -v, --version                    Print current version
-       -h, --help                       Show this help message
-
-   Default:
-     generate \
-       -c /etc/ood/config/ood_portal.yml \
-       -t /opt/ood/ood-portal-generator/templates/ood-portal.conf.erb
+   bin/generate --help
+   # Usage: generate [options]
+   #    -c, --config CONFIG              YAML config file used to render template
+   #    -t, --template TEMPLATE          ERB template that is rendered
+   #    -o, --output OUTPUT              File that rendered template is output to
+   #    -v, --version                    Print current version
+   #    -h, --help                       Show this help message
+   #
+   # Default:
+   #  generate \
+   #    -c /etc/ood/config/ood_portal.yml \
+   #    -t /opt/ood/ood-portal-generator/templates/ood-portal.conf.erb
 
 .. program:: ood-portal-generator
 

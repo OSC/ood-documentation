@@ -237,7 +237,7 @@ these module specific configuration directives in the file:</p>
 <code class="file docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code>. If there are any
 secrets inside this file you can ensure privacy by adding restrictive file
 permissions:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
 </pre></div>
 </div>
 </div>
@@ -254,12 +254,6 @@ cause future upgrades of OnDemand to break.</p>
 under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>. For example, to add support for
 an authentication module with <code class="docutils literal notranslate"><span class="pre">AuthType</span></code> of <code class="docutils literal notranslate"><span class="pre">my-auth</span></code>, you would modify the
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> file as such:</p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
-scl <span class="nb">enable</span> rh-ruby22 -- rake install
-</pre></div>
-</div>
-</div></blockquote>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>
 <span class="c1"># ...</span>
@@ -272,7 +266,7 @@ scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 <p>You would then build and install the new Apache configuration file with:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 <p>Finally you will need to restart your Apache HTTP Server for the changes to

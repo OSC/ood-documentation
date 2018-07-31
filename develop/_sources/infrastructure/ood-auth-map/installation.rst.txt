@@ -7,16 +7,19 @@ Installation
 
    .. code-block:: sh
 
-      # Set latest release as of writing this
       LATEST="{{ ood_auth_map_version }}"
-
-      # Download latest release
       wget --content-disposition https://github.com/OSC/ood_auth_map/archive/v${LATEST}.tar.gz
 
-      # Unpack this archive
+   Unpack this archive
+
+   .. code-block:: sh
+
       tar xzvf ood_auth_map-${LATEST}.tar.gz
 
-      # Change working directory
+   Change working directory:
+
+   .. code-block:: sh
+
       cd ood_auth_map-${LATEST}
 
 #. Install this package in default ``PREFIX=/opt/ood/ood_auth_map`` location:
