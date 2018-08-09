@@ -38,10 +38,6 @@ conf
    If you do not have a multi-cluster Slurm setup you can remove the ``cluster:
    "cluster1"`` line from the above configuration file.
 
-.. warning::
+.. tip::
 
-   The Open OnDemand server will need the appropriate MUNGE keys (see `Slurm
-   Quick Start Administrator Guide`_) for the various clusters to be able to
-   status and submit batch jobs.
-
-.. _slurm quick start administrator guide: https://slurm.schedmd.com/quickstart_admin.html
+   When installing Slurm ensure that all nodes on your cluster including the node running the Open OnDemand server have the same `Munge <https://github.com/dun/munge/wiki/Installation-Guide>`_ key installed. Read the `Slurm Quick Start Administrator Guide <https://slurm.schedmd.com/quickstart_admin.html>`_ for more information on installing and configuring Slurm itself.
