@@ -40,4 +40,4 @@ conf
 
 .. tip::
 
-   When installing Slurm ensure that all nodes on your cluster including the node running the Open OnDemand server have the same `MUNGE <https://github.com/dun/munge/wiki/Installation-Guide>`_ key installed. Read the `Slurm Quick Start Administrator Guide <https://slurm.schedmd.com/quickstart_admin.html>`_ for more information on installing and configuring Slurm itself.
+   When installing Slurm ensure that all nodes on your cluster including the node running the Open OnDemand server have the same `MUNGE <https://dun.github.io/munge/>`_ key installed. Read the `Slurm Quick Start Administrator Guide <https://slurm.schedmd.com/quickstart_admin.html>`_ for more information on installing and configuring Slurm itself.
