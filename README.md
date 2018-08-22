@@ -46,23 +46,23 @@ If you don't want to use Docker, you can also use pipenv.
 
 1. Ensure plantuml and graphviz are installed:
 
-   ```bash
-   # on OS X
-   brew install plantuml
-   brew install graphviz
-   ```
+    ```bash
+    # on OS X
+    brew install plantuml
+    brew install graphviz
+    ```
 
 2. Install pipenv and use it to install dependencies in same directory:
 
-   ```bash
-   pip install -g pipenv
+    ```bash
+    pip install -g pipenv
 
-   # then in the documentation root directory:
-   WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install
+    # then in the documentation root directory:
+    WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install
 
-   # or using handy rake task:
-   rake pipenv:install
-   ```
+    # or using handy rake task:
+    rake pipenv:install
+    ```
 
 When building the docs, run this command:
 
