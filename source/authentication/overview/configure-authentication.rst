@@ -45,7 +45,7 @@ Add to OnDemand Portal
 .. danger::
 
    **Never** directly edit the
-   :file:`/opr/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` to include
+   :file:`/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` to include
    this authentication module within your Open OnDemand portal. This could
    cause future upgrades of OnDemand to break.
 
