@@ -121,7 +121,7 @@ The job mapping is specific to a cluster's resource manager.
 custom:
 #######
 
-The custom mapping is a space that is available for extension, and does not have a schema. In OSC's usage custom has been used to provide more configuration about our Torque / Moab installations, as well as config for connecting to our Ganglia monitoring.
+The custom mapping is a space that is available for extension, and does not have a schema. In OSC's usage the custom namespace has been used to provide more cluster-specific information for in-house custom applications.
 
 batch_connect:
 ##############
