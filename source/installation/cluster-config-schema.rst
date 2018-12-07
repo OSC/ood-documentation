@@ -61,7 +61,7 @@ Below is the production configuration for OSC's Owens cluster.
           script_wrapper: "module restore\nmodule load ondemand-vnc\n%s"
 
 .. warning::
-  Quick warning: be aware that the YAML requires the use of spaces as indentation characters, tabs are not permitted by `the YAML spec`_.
+  Quick warning: be aware that YAML requires the use of spaces as indentation characters, tabs are not permitted by `the YAML spec`_.
 
 .. _the YAML spec: http://yaml.org/spec/1.2/spec.html#id2777534
 
@@ -117,6 +117,31 @@ The job mapping is specific to a cluster's resource manager.
       lib: "/opt/torque/lib64"
       bin: "/opt/torque/bin"
       version: "6.0.1"
+
+custom_bin:
+-----------
+
+`custom_bin` adds the ability for a site to specify full paths to alternatives to the configured resource manager's client executables. This advanced feature allows a site considerable flexibilty to write wrappers to handle logging, environment or default setting, or use 3rd party API compatible alternative clients without having to alter the resource manager installation.
+
+.. warning ::
+    `custom_bin` is an advanced feature. OOD relies both on return codes from clients, and on parsing the standard output in order to get information about submitted jobs. Care and testing is recommended.
+
+.. code-block :: yaml
+
+    # An example in Slurm
+    job:
+      adapter: "slurm"
+      bin: "/opt/slurm/bin"
+      conf: "/opt/slurm/etc/slurm.conf"
+      custom_bin:
+          squeue: "/usr/local/slurm/bin/squeue_wrapper"
+          # Override just want you want/need to
+          # scontrol: "/usr/local/slurm/bin/scontrol_wrapper"
+          sbatch: "/usr/local/slurm/bin/sbatch_wrapper"
+          # Will be ignored because bsub is not a command used in the Slurm adapter
+          bsub: "/opt/lsf/bin/bsub"
+
+Adapter support for this feature is mixed. For example for Slurm `sbatch`, `scontrol`, `scancel` and `squeue` are all supported. For Torque only `qsub` is supported. Unsupported options are ignored.
 
 custom:
 #######
