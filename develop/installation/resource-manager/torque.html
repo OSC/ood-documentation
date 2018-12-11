@@ -115,6 +115,7 @@
 <li class="toctree-l3"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">Test Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../start-apache.html">4. Start Apache</a></li>
@@ -227,6 +228,8 @@ cluster looks like:</p>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster-batch.my_center.edu&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/torque/lib&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/torque/bin&quot;</span>
+</span><span class="hll">  <span class="c1"># bin_overrides:</span>
+</span><span class="hll">      <span class="c1"># qsub: &quot;/usr/local/bin/qsub&quot;</span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
@@ -239,6 +242,10 @@ cluster looks like:</p>
 <dd>The path to the Torque client libraries.</dd>
 <dt>bin</dt>
 <dd>The path to the Torque client binaries.</dd>
+<dt>bin_overrides</dt>
+<dd><p class="first">Replacements/wrappers for Torque’s job submission and control clients. <em>Optional</em></p>
+<p class="last">The Torque adapter uses the foreign function interface interact with <cite>libtorque.so</cite> and so it is only possible to override <cite>qsub</cite>.</p>
+</dd>
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>

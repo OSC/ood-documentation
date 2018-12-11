@@ -115,6 +115,7 @@
 <li class="toctree-l3"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Configure PBS Professional</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">Test Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../start-apache.html">4. Start Apache</a></li>
@@ -226,6 +227,13 @@ HPC cluster looks like:</p>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;pbspro&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster-batch.my_center.edu&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">exec</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/pbspro&quot;</span>
+</span><span class="hll">   <span class="c1"># bin_overrides:</span>
+</span><span class="hll">      <span class="c1"># qsub: &quot;/usr/local/bin/qsub&quot;</span>
+</span><span class="hll">      <span class="c1"># qselect: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># qstat: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># qhold: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># qrls: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># qdel: &quot;&quot;</span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
@@ -237,6 +245,18 @@ HPC cluster looks like:</p>
 <dt>exec</dt>
 <dd>The installation path for the PBS Pro binaries and libraries on the OnDemand
 host.</dd>
+<dt>bin_overrides</dt>
+<dd><p class="first">Replacements/wrappers for Slurm’s job submission and control clients. <em>Optional</em></p>
+<p>Supports the following clients:</p>
+<ul class="last simple">
+<li><cite>qsub</cite></li>
+<li><cite>qselect</cite></li>
+<li><cite>qstat</cite></li>
+<li><cite>qhold</cite></li>
+<li><cite>qrls</cite></li>
+<li><cite>qdel</cite></li>
+</ul>
+</dd>
 </dl>
 </div>
 

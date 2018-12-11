@@ -115,6 +115,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Configure LSF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">Test Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../start-apache.html">4. Start Apache</a></li>
@@ -228,6 +229,12 @@ looks like:</p>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">libdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/lib&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">envdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/conf&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">serverdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/etc&quot;</span>
+</span><span class="hll">    <span class="c1"># bin_overrides:</span>
+</span><span class="hll">      <span class="c1"># bsub: &quot;/usr/local/bin/bsub&quot;</span>
+</span><span class="hll">      <span class="c1"># bjobs: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># bstop: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># bresume: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># bkill: &quot;&quot;</span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
@@ -242,6 +249,17 @@ looks like:</p>
 <dd>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">conf/</span></code> directory.</dd>
 <dt>serverdir</dt>
 <dd>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">etc/</span></code> directory.</dd>
+<dt>bin_overrides</dt>
+<dd><p class="first">Replacements/wrappers for LSF’s job submission and control clients. <em>Optional</em></p>
+<p>Supports the following clients:</p>
+<ul class="last simple">
+<li><cite>bsub</cite></li>
+<li><cite>bjobs</cite></li>
+<li><cite>bstop</cite></li>
+<li><cite>bresume</cite></li>
+<li><cite>bkill</cite></li>
+</ul>
+</dd>
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>

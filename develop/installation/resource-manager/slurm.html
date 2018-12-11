@@ -115,6 +115,7 @@
 <li class="toctree-l3"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">Test Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../start-apache.html">4. Start Apache</a></li>
@@ -227,6 +228,11 @@ cluster looks like:</p>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm/bin&quot;</span>
 </span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">conf</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm.conf&quot;</span>
+</span><span class="hll">    <span class="c1"># bin_overrides:</span>
+</span><span class="hll">      <span class="c1"># sbatch: &quot;/usr/local/bin/sbatch&quot;</span>
+</span><span class="hll">      <span class="c1"># squeue: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># scontrol: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># scancel: &quot;&quot;</span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
@@ -239,6 +245,16 @@ cluster looks like:</p>
 <dd>The path to the Slurm client installation binaries.</dd>
 <dt>conf</dt>
 <dd>The path to the Slurm configuration file for this cluster. <em>Optional</em></dd>
+<dt>bin_overrides</dt>
+<dd><p class="first">Replacements/wrappers for Slurm’s job submission and control clients. <em>Optional</em></p>
+<p>Supports the following clients:</p>
+<ul class="last simple">
+<li><cite>sbatch</cite></li>
+<li><cite>squeue</cite></li>
+<li><cite>scontrol</cite></li>
+<li><cite>scancel</cite></li>
+</ul>
+</dd>
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

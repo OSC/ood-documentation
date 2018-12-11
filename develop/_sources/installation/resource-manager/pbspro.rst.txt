@@ -20,6 +20,13 @@ HPC cluster looks like:
        adapter: "pbspro"
        host: "my_cluster-batch.my_center.edu"
        exec: "/path/to/pbspro"
+      # bin_overrides:
+         # qsub: "/usr/local/bin/qsub"
+         # qselect: ""
+         # qstat: ""
+         # qhold: ""
+         # qrls: ""
+         # qdel: ""
 
 with the following configuration options:
 
@@ -30,3 +37,14 @@ host
 exec
   The installation path for the PBS Pro binaries and libraries on the OnDemand
   host.
+bin_overrides
+  Replacements/wrappers for Slurm's job submission and control clients. *Optional*
+
+  Supports the following clients:
+
+  - `qsub`
+  - `qselect`
+  - `qstat`
+  - `qhold`
+  - `qrls`
+  - `qdel`
