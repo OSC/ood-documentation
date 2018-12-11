@@ -21,6 +21,11 @@ cluster looks like:
        cluster: "my_cluster"
        bin: "/path/to/slurm/bin"
        conf: "/path/to/slurm.conf"
+       # bin_overrides:
+         # sbatch: "/usr/local/bin/sbatch"
+         # squeue: ""
+         # scontrol: ""
+         # scancel: ""
 
 with the following configuration options:
 
@@ -32,6 +37,15 @@ bin
   The path to the Slurm client installation binaries.
 conf
   The path to the Slurm configuration file for this cluster. *Optional*
+bin_overrides
+  Replacements/wrappers for Slurm's job submission and control clients. *Optional*
+
+  Supports the following clients:
+
+  - `sbatch`
+  - `squeue`
+  - `scontrol`
+  - `scancel`
 
 .. note::
 

@@ -119,7 +119,7 @@ The job mapping is specific to a cluster's resource manager.
       version: "6.0.1"
 
 bin_overrides:
------------
+--------------
 
 `bin_overrides` adds the ability for a site to specify full paths to alternatives to the configured resource manager's client executables. This advanced feature allows a site considerable flexibilty to write wrappers to handle logging, environment or default setting, or use 3rd party API compatible alternative clients without having to alter the resource manager installation.
 
