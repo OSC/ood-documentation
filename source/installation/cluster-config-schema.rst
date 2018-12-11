@@ -118,13 +118,13 @@ The job mapping is specific to a cluster's resource manager.
       bin: "/opt/torque/bin"
       version: "6.0.1"
 
-custom_bin:
+bin_overrides:
 -----------
 
-`custom_bin` adds the ability for a site to specify full paths to alternatives to the configured resource manager's client executables. This advanced feature allows a site considerable flexibilty to write wrappers to handle logging, environment or default setting, or use 3rd party API compatible alternative clients without having to alter the resource manager installation.
+`bin_overrides` adds the ability for a site to specify full paths to alternatives to the configured resource manager's client executables. This advanced feature allows a site considerable flexibilty to write wrappers to handle logging, environment or default setting, or use 3rd party API compatible alternative clients without having to alter the resource manager installation.
 
 .. warning ::
-    `custom_bin` is an advanced feature. OOD relies both on return codes from clients, and on parsing the standard output in order to get information about submitted jobs. Care and testing is recommended.
+    `bin_overrides` is an advanced feature. OOD relies both on return codes from clients, and on parsing the standard output in order to get information about submitted jobs. Care and testing is recommended.
 
 .. code-block :: yaml
 
@@ -133,7 +133,7 @@ custom_bin:
       adapter: "slurm"
       bin: "/opt/slurm/bin"
       conf: "/opt/slurm/etc/slurm.conf"
-      custom_bin:
+      bin_overrides:
           squeue: "/usr/local/slurm/bin/squeue_wrapper"
           # Override just want you want/need to
           # scontrol: "/usr/local/slurm/bin/scontrol_wrapper"
