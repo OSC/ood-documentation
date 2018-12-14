@@ -61,5 +61,6 @@ The following apps do require a cluster configuration file:
    resource-manager/slurm
    resource-manager/lsf
    resource-manager/pbspro
+   resource-manager/sge
    resource-manager/test
    cluster-config-schema
