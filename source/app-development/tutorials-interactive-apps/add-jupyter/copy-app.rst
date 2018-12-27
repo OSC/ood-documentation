@@ -114,22 +114,3 @@ We will begin by first copying over a pre-built example Jupyter app.
 
    If you see this warning message then continue on.
 
-.. note::
-
-   It is recommended you version your new app using `git`_.
-
-   Go to the app directory and create a local repository:
-
-   .. code-block:: sh
-
-      cd ~/ondemand/dev/jupyter
-      git init
-
-Stage all the files under app and make your first commit:
-
-   .. code-block:: sh
-
-      git add --all
-      git commit -m 'my first commit'
-
-.. _git: https://git-scm.com/
