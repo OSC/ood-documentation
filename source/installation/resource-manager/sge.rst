@@ -38,10 +38,10 @@ cluster
   The Grid Engine cluster name. *Optional*
 bin
   The path to the Grid Engine client installation binaries.
+sge_root
+  The path to the root directory of the Grid Engine installation. *Default:* ``/var/lib/gridengine``
 conf
   The path to the Grid Engine configuration file for this cluster. *Optional*
-sge_root
-  The path to the root directory of the Grid Engine installation *Optional*
 libdrmaa_path
   The full path to libdrmaa.so *Optional*
 bin_overrides
