@@ -6,10 +6,9 @@ v1.4 Release Notes
 Highlights in 1.4:
 
 - `Upgrade to Ruby 2.4, NodeJS 6, Passenger 5`_
-- `Security Enhancements`_
-    - Enable whitelisting directories users can navigate to in files app
-    - App development mode is disabled by default
-    - Disable SSH to localhost (on the webnode)
+- Security Enhancement: Enable whitelisting directories users can navigate to in files app
+- Security Enhancement: App development mode is disabled by default
+- Security Enhancement: Disable SSH to localhost on the webnode
 - `Fixed copy paste issues in the Shell app`_
 - `Optional Quota warnings on dashboard`_
 - `Experimental SGE/UGE support`_
@@ -25,14 +24,12 @@ TODO is there a way to manage yum repos such that the dependencies are resolved 
 
 .. code-block:: bash
 
-    # Install OSC NGINX and dependency
-    sudo yum install -y https://yum.osc.edu/ondemand/latest/web/el7/x86_64/nginx-filesystem-1.14.0-1.p5.3.7.el7.noarch.rpm
-    sudo yum install -y https://yum.osc.edu/ondemand/latest/web/el7/x86_64/nginx-1.14.0-1.p5.3.7.el7.x86_64.rpm
-    # Install OSC Passenger
-    sudo yum install -y https://yum.osc.edu/ondemand/latest/web/el7/x86_64/passenger-5.3.7-1.el7.x86_64.rpm
-    sudo yum install -y https://yum.osc.edu/ondemand/latest/web/el7/x86_64/mod_passenger-5.3.7-1.el7.x86_64.rpm
-    # Install OOD
-    sudo yum install -y https://yum.osc.edu/ondemand/latest/web/el7/x86_64/ondemand-1.4.9-1.el7.x86_64.rpm
+    sudo yum install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el7.noarch.rpm
+    sudo yum clean all
+    sudo yum update ondemand
+
+    # Optionally remove dependencies from prior versions of OOD
+    yum remove rh-nodejs010\* rh-passenger40\* rh-ruby22\*
 
 
 .. warning::
@@ -90,7 +87,7 @@ it was updated from for each of the system web applications in this release.
 Details
 -------
 
-`Upgrade to Ruby 2.4, NodeJS 6, Passenger 5`
+Upgrade to Ruby 2.4, NodeJS 6, Passenger 5
 ............................................
 
 This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on "@efranz where did we get the Passenger RPM build information from?".
@@ -99,31 +96,31 @@ This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJ
 
   The Per User NGINX temporary directory has been moved from `/var/lib/nginx/` to `/var/tmp/nginx` due to an issue with more restrictive permissions with NGINX 1.14.
 
-`Security Enhancements`
+Security Enhancements
 .......................
 
 Whitelists: the file editor, file browser and job composer now support a whitelist of browseable/editable directories. Directories and files not in the whitelist will never be shown to users.
 
 Development mode disabled by default: application development gives increased access to a system, and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps
 
-`Fixed copy paste issues in the Shell app`
+Fixed copy paste issues in the Shell app
 ..........................................
 
 A pair of issues (`#48 <https://github.com/OSC/ood-shell/issues/48>`_, `#55 <https://github.com/OSC/ood-shell/issues/55>`_) caused problems with copy and paste in the Shell application.
 
-`Optional Quota warnings on dashboard`
+Optional Quota warnings on dashboard
 ......................................
 
 The Dashboard can now display a configurable disk usage warning to the user if they approach a certain usage threshold.
 
 TODO link to updated Dashboard docs
 
-`Experimental SGE/UGE support`
+Experimental SGE/UGE support
 ..............................
 
 A `job adapter has been written </installation/resource-manager/sge.html>`__ that supports Sun Grid Engine derivatives. The adapter is known to be compatible with SGE 6.2u5 and Univa GE 8.0.1. Thanks to UCLA for donating access to Hoffman2 to aid in development of the adapter.
 
-`Add ability to include Javascript in Batch Connect apps`
+Add ability to include Javascript in Batch Connect apps
 .........................................................
 
 Batch Connect applications may now define up to two automatically included Javascript files to add frontend functionality.
