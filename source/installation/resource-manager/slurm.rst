@@ -50,7 +50,7 @@ bin_overrides
 .. note::
 
    If you do not have a multi-cluster Slurm setup you can remove the ``cluster:
-   "cluster1"`` line from the above configuration file.
+   "my_cluster"`` line from the above configuration file.
 
 .. tip::
 
