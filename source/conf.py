@@ -146,7 +146,15 @@ html_context = {
     'github_user': 'OSC',
     'github_repo': 'ood-documentation',
     'github_version': os.environ.get('TRAVIS_BRANCH', 'develop'),
-    'conf_py_path': '/source/'
+    'conf_py_path': '/source/',
+    'versions' : [
+        ['master', '/master/'],
+        ['1.3', '/release-1.3/'],
+        ['1.2', '/release-1.2/'],
+        ['1.1', '/release-1.1/'],
+        ['1.0', '/release-1.0/'],
+        ['develop', '/develop/']
+    ]
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
