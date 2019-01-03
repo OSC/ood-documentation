@@ -6,21 +6,20 @@ v1.4 Release Notes
 Highlights in 1.4:
 
 - `Upgrade to Ruby 2.4, NodeJS 6, Passenger 5`_
-- Security Enhancement: Enable whitelisting directories users can navigate to in files app
-- Security Enhancement: App development mode is disabled by default
-- Security Enhancement: Disable SSH to localhost on the webnode
+- `Security Enhancement: Enable whitelisting directories users can navigate to in files app`_
+- `Security Enhancement: App development mode is disabled by default`_
+- `Security Enhancement: Require SSH for all hosts in Shell app`_
 - `Fixed copy paste issues in the Shell app`_
 - `Optional Quota warnings on dashboard`_
 - `Experimental SGE/UGE support`_
 - `Add ability to include Javascript in Batch Connect apps`_
+- `Better environment setting`_
 
 
 Upgrading from v1.3
 -------------------
 
 To upgrade run:
-
-TODO is there a way to manage yum repos such that the dependencies are resolved without explicit installs?
 
 .. code-block:: bash
 
@@ -29,7 +28,7 @@ TODO is there a way to manage yum repos such that the dependencies are resolved 
     sudo yum update ondemand
 
     # Optionally remove dependencies from prior versions of OOD
-    yum remove rh-nodejs010\* rh-passenger40\* rh-ruby22\*
+    yum remove rh-nodejs010\* rh-passenger40\* rh-ruby22\* nginx16\*
 
 
 .. warning::
@@ -39,8 +38,6 @@ TODO is there a way to manage yum repos such that the dependencies are resolved 
 .. warning::
 
    As a security enhancement application development privileges must now be enabled on a per user basis. TODO add link.
-
-TODO
 
 Infrastructure Version Changes
 ------------------------------
@@ -96,24 +93,30 @@ This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJ
 
   The Per User NGINX temporary directory has been moved from `/var/lib/nginx/` to `/var/tmp/nginx` due to an issue with more restrictive permissions with NGINX 1.14.
 
-Security Enhancements
-.......................
+Security Enhancement: Enable whitelisting directories users can navigate to in files app
+........................................................................................
 
-Whitelists: the file editor, file browser and job composer now support a whitelist of browseable/editable directories. Directories and files not in the whitelist will never be shown to users.
+The file editor, file browser and job composer now support a whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``custom_env`` map. If no whitelist is provided the feature is disabled.
 
-Development mode disabled by default: application development gives increased access to a system, and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps
+Security Enhancement: App development mode is disabled by default
+.................................................................
+
+Development mode disabled by default: application development gives increased access to a system (e.g. `Security Enhancement: Require SSH for all hosts in Shell app`_), and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps
+
+Security Enhancement: Require SSH for all hosts in Shell app
+.............................................................
+
+Prior to this release it was possible for OOD users to change the URL in the shell application and connect directly to the web node by starting a Bash shell on localhost. Given that this ability for arbitrary user access is counter intuitive to how web servers are typically managed, the exemption for localhost has been removed; users will always use SSH to connect to any host, allowing SSH access controls to work.
 
 Fixed copy paste issues in the Shell app
 ..........................................
 
-A pair of issues (`#48 <https://github.com/OSC/ood-shell/issues/48>`_, `#55 <https://github.com/OSC/ood-shell/issues/55>`_) caused problems with copy and paste in the Shell application.
+Resolved a pair of issues (`#48 <https://github.com/OSC/ood-shell/issues/48>`_, `#55 <https://github.com/OSC/ood-shell/issues/55>`_) that caused problems with copy and paste in the Shell application.
 
 Optional Quota warnings on dashboard
 ......................................
 
-The Dashboard can now display a configurable disk usage warning to the user if they approach a certain usage threshold.
-
-TODO link to updated Dashboard docs
+The Dashboard can now display a configurable disk usage warning to the user if they approach a certain usage threshold. This feature is enabled by defining the environment variable ``OOD_QUOTA_PATH`` which can take a colon delimited path, and may be defined in ``/etc/ood/config/nginx_stage.yml`` under the ``custom_env`` map. The version 1 format for quota files is defined in the `Dashboard README <https://github.com/OSC/ood-dashboard/blob/v1.30.2/README.md#disk-quota-warnings>`__.
 
 Experimental SGE/UGE support
 ..............................
@@ -123,6 +126,11 @@ A `job adapter has been written </installation/resource-manager/sge.html>`__ tha
 Add ability to include Javascript in Batch Connect apps
 .........................................................
 
-Batch Connect applications may now define up to two automatically included Javascript files to add frontend functionality.
+Batch Connect applications may now define up to two automatically included Javascript files to add interactive frontend functionality.
 
 TODO add link to update Dashboard docs
+
+Better environment setting
+..........................
+
+The file ``/etc/ood/config/nginx_stage.yml`` now includes two methods to set the PUN environment. Populating the mapping ``custom_env`` allows sites to define OOD specific environment variables that will be added to the PUN environment. Defining the sequence ``pun_custom_env_declarations`` confers the ability to define an arbitrary list of env vars to declare in the PUN config (so they are retained from whatever is set in /etc/ood/profile).
