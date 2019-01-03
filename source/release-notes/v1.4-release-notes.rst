@@ -6,7 +6,7 @@ v1.4 Release Notes
 Highlights in 1.4:
 
 - `Upgrade to Ruby 2.4, NodeJS 6, Passenger 5`_
-- `Security Enhancement: Enable whitelisting directories users can navigate to in files app`_
+- `Security Enhancement: Enable whitelisting of directories in several core apps`_
 - `Security Enhancement: App development mode is disabled by default`_
 - `Security Enhancement: Require SSH for all hosts in Shell app`_
 - `Fixed copy paste issues in the Shell app`_
@@ -93,10 +93,10 @@ This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJ
 
   The Per User NGINX temporary directory has been moved from `/var/lib/nginx/` to `/var/tmp/nginx` due to an issue with more restrictive permissions with NGINX 1.14.
 
-Security Enhancement: Enable whitelisting directories users can navigate to in files app
+Security Enhancement: Enable whitelisting of directories in several core apps
 ........................................................................................
 
-The file editor, file browser and job composer now support a whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``custom_env`` map. If no whitelist is provided the feature is disabled.
+The file editor, file browser and job composer now support an optional whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``custom_env`` map.
 
 Security Enhancement: App development mode is disabled by default
 .................................................................
