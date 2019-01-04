@@ -1,7 +1,7 @@
-.. _customize_dashboard:
+.. _customization:
 
-Dashboard
-=========
+Customization
+=============
 
 Announcements
 ---------------
@@ -27,7 +27,6 @@ Colors
 .......
 
 .. attention:: TODO
-
 
 Add shortcuts to Files menu
 ---------------------------
@@ -91,8 +90,15 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
-.. .. toctree::
-..    :maxdepth: 2
-..    :glob:
-..
-..    customization/dashboard/*
+Whitelist directories
+---------------------
+
+.. attention:: Should this go in Configure section?
+
+
+Set default ssh host
+--------------------
+
+Custom Job Composer Templates
+-----------------------------
+

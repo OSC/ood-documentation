@@ -34,19 +34,8 @@ web access to their HPC resources.
 
    installation
    authentication
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Configure
-
    installation/add-cluster-config
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Customize
-   :glob:
-
-   customization/*
+   customization
 
 
 .. toctree::
