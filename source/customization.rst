@@ -102,3 +102,16 @@ Set default ssh host
 Custom Job Composer Templates
 -----------------------------
 
+Custom Error Page for Missing Home Directory on Launch
+------------------------------------------------------
+
+Some sites have the home directory auto-create on first ssh login, for example
+via pam_mkhomedir.so. This introduces a problem if users first access the system
+through OnDemand, which expects the existence of a user’s home directory.
+
+In OnDemand <= 1.3 if the user's home directory was missing a non-helpful single
+string error would display. Now a friendly error page displays. This error page
+can be customized by adding a custom one to ``/etc/ood/config/pun/html/missing_home_directory.html``.
+
+See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
+
