@@ -37,11 +37,11 @@ To upgrade run:
 
 .. warning::
 
-  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
+  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance. Ruby and Node have been upgraded, so existing custom apps may need to be re-built.
 
 .. warning::
 
-   As a security enhancement application development privileges must now be enabled on a per user basis. TODO add link.
+   As a security enhancement application development privileges must now be enabled on a per user basis.
 
 Infrastructure Version Changes
 ------------------------------
@@ -89,9 +89,9 @@ Details
 -------
 
 Upgrade to Ruby 2.4, NodeJS 6, Passenger 5
-............................................
+..........................................
 
-This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the `Passenger RPM automation repo <https://github.com/phusion/passenger_rpm_automation>`__.
+This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the `Passenger RPM automation repo <https://github.com/phusion/passenger_rpm_automation>`__. A side effect of these dependency changes is that custom applications may need to be rebuilt before they will work.
 
 .. note::
 
@@ -105,10 +105,10 @@ The PUN will autogenerate its own unique per-user secret key base string which i
 Security Enhancement: App development mode is disabled by default
 .................................................................
 
-Development mode disabled by default: application development gives increased access to a system (e.g. `Security Enhancement: Require SSH for all hosts in Shell app`_), and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps
+Development mode disabled by default: application development gives increased access to a system (e.g. allowing the user to open an interactive shell on the web node), and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps
 
 Security Enhancement: Enable whitelisting of directories in several core apps
-........................................................................................
+.............................................................................
 
 The file editor, file browser and job composer now support an optional whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``pun_custom_env`` map.
 
@@ -132,7 +132,7 @@ For example: `nginx_stage_example.yml. <https://github.com/OSC/ondemand/blob/d85
 Customizable error pages for missing home dirs
 ..............................................
 
-Customizable error pages for missing home directory during the first login flow for sites using pam_mkhomedir.so. `OOD Discourse: launching ondemand when home directory does not exist <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53>`__.
+Customizable error pages for missing home directory during the first login flow for sites using ``pam_mkhomedir.so``. `OOD Discourse: launching ondemand when home directory does not exist <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53>`__.
 
 Experimental SGE/UGE support
 ............................
@@ -140,7 +140,7 @@ Experimental SGE/UGE support
 A `job adapter has been written </installation/resource-manager/sge.html>`__ that supports Sun Grid Engine derivatives. The adapter is known to be compatible with SGE 6.2u5 and Univa GE 8.0.1. Thanks to UCLA for donating access to Hoffman2 to aid in development of the adapter.
 
 Fixed copy paste issues in the Shell app
-..........................................
+........................................
 
 Resolved a pair of issues (`#48 <https://github.com/OSC/ood-shell/issues/48>`_, `#55 <https://github.com/OSC/ood-shell/issues/55>`_) that caused problems with copy and paste in the Shell application.
 
@@ -150,7 +150,7 @@ Introduction of a whitelist mode for apps
 Introduction of a whitelist mode for apps which is disabled by default. This change means that by default, when deploying a new app, if properly configured it will appear in the Dashboard's navigation menu without the need for changing configuration. `OSC/ood-dashboard#295 <https://github.com/OSC/ood-dashboard/issues/295>`__
 
 Optional Quota warnings on dashboard
-......................................
+....................................
 
 The Dashboard can now display a configurable disk usage warning to the user if they approach a certain usage threshold. This feature is enabled by defining the environment variable ``OOD_QUOTA_PATH`` which can take a colon delimited path, and may be defined in ``/etc/ood/config/nginx_stage.yml`` under the ``custom_env`` map. The version 1 format for quota files is defined in the `Dashboard README <https://github.com/OSC/ood-dashboard/blob/v1.30.2/README.md#disk-quota-warnings>`__.
 
