@@ -84,8 +84,6 @@ software requirements:
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
-.. _nginx 1.6: https://www.softwarecollections.org/en/scls/rhscl/nginx16/
-.. _phusion passenger 4.0: https://www.softwarecollections.org/en/scls/rhscl/rh-passenger40/
 .. _ruby 2.4: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby24/
 .. _node.js 6: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs6/
 .. _git 2.9: https://www.softwarecollections.org/en/scls/rhscl/rh-git29/
