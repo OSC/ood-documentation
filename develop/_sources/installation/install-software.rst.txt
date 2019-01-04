@@ -7,12 +7,10 @@ We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
 
 - `Apache HTTP Server 2.4`_
-- `NGINX 1.6`_
-- `Phusion Passenger 4.0`_
-- `Ruby 2.2`_ with :command:`rake`, :command:`bundler`, and development
+- `Ruby 2.4`_ with :command:`rake`, :command:`bundler`, and development
   libraries
-- `Node.js 0.10`_
-- `Git 1.9`_
+- `Node.js 6`_
+- `Git 2.9`_
 
 .. note::
 
@@ -24,7 +22,7 @@ software requirements:
    CentOS 6/7
      .. code-block:: sh
 
-        sudo yum install centos-release-scl
+        sudo yum install epel-release centos-release-scl
 
    RHEL 6
      .. code-block:: sh
@@ -86,9 +84,7 @@ software requirements:
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
-.. _nginx 1.6: https://www.softwarecollections.org/en/scls/rhscl/nginx16/
-.. _phusion passenger 4.0: https://www.softwarecollections.org/en/scls/rhscl/rh-passenger40/
-.. _ruby 2.2: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby22/
-.. _node.js 0.10: https://www.softwarecollections.org/en/scls/rhscl/nodejs010/
-.. _git 1.9: https://www.softwarecollections.org/en/scls/rhscl/git19/
+.. _ruby 2.4: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby24/
+.. _node.js 6: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs6/
+.. _git 2.9: https://www.softwarecollections.org/en/scls/rhscl/rh-git29/
 .. _ohio supercomputer center: https://www.osc.edu/
