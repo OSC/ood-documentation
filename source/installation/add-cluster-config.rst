@@ -57,10 +57,10 @@ The following apps do require a cluster configuration file:
    :maxdepth: 1
    :caption: Resource Manager Configuration
 
+   cluster-config-schema
+   resource-manager/test
    resource-manager/torque
    resource-manager/slurm
    resource-manager/lsf
    resource-manager/pbspro
    resource-manager/sge
-   resource-manager/test
-   cluster-config-schema
