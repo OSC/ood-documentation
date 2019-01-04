@@ -42,6 +42,7 @@ Open OnDemand
    :maxdepth: 2
    :caption: Release Notes
 
+   release-notes/v1.4-release-notes
    release-notes/v1.3-release-notes
    release-notes/v1.2-release-notes
    release-notes/v1.1-release-notes
