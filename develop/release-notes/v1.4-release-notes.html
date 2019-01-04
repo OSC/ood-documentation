@@ -244,11 +244,11 @@ sudo yum remove rh-nodejs010<span class="se">\*</span> rh-passenger40<span class
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance.</p>
+<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance. Ruby and Node have been upgraded, so existing custom apps may need to be re-built.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">As a security enhancement application development privileges must now be enabled on a per user basis. TODO add link.</p>
+<p class="last">As a security enhancement application development privileges must now be enabled on a per user basis.</p>
 </div>
 </div>
 <div class="section" id="infrastructure-version-changes">
@@ -301,7 +301,7 @@ it was updated from for each of the system web applications in this release.</p>
 <h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="upgrade-to-ruby-2-4-nodejs-6-passenger-5">
 <h3>Upgrade to Ruby 2.4, NodeJS 6, Passenger 5<a class="headerlink" href="#upgrade-to-ruby-2-4-nodejs-6-passenger-5" title="Permalink to this headline">¶</a></h3>
-<p>This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the <a class="reference external" href="https://github.com/phusion/passenger_rpm_automation">Passenger RPM automation repo</a>.</p>
+<p>This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the <a class="reference external" href="https://github.com/phusion/passenger_rpm_automation">Passenger RPM automation repo</a>. A side effect of these dependency changes is that custom applications may need to be rebuilt before they will work.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The Per User NGINX temporary directory has been moved from <cite>/var/lib/nginx/</cite> to <cite>/var/tmp/nginx</cite> due to an issue with more restrictive permissions with NGINX 1.14.</p>
@@ -313,7 +313,7 @@ it was updated from for each of the system web applications in this release.</p>
 </div>
 <div class="section" id="security-enhancement-app-development-mode-is-disabled-by-default">
 <h3>Security Enhancement: App development mode is disabled by default<a class="headerlink" href="#security-enhancement-app-development-mode-is-disabled-by-default" title="Permalink to this headline">¶</a></h3>
-<p>Development mode disabled by default: application development gives increased access to a system (e.g. <a class="reference internal" href="#security-enhancement-require-ssh-for-all-hosts-in-shell-app">Security Enhancement: Require SSH for all hosts in Shell app</a>), and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps</p>
+<p>Development mode disabled by default: application development gives increased access to a system (e.g. allowing the user to open an interactive shell on the web node), and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps</p>
 </div>
 <div class="section" id="security-enhancement-enable-whitelisting-of-directories-in-several-core-apps">
 <h3>Security Enhancement: Enable whitelisting of directories in several core apps<a class="headerlink" href="#security-enhancement-enable-whitelisting-of-directories-in-several-core-apps" title="Permalink to this headline">¶</a></h3>
@@ -334,7 +334,7 @@ it was updated from for each of the system web applications in this release.</p>
 </div>
 <div class="section" id="customizable-error-pages-for-missing-home-dirs">
 <h3>Customizable error pages for missing home dirs<a class="headerlink" href="#customizable-error-pages-for-missing-home-dirs" title="Permalink to this headline">¶</a></h3>
-<p>Customizable error pages for missing home directory during the first login flow for sites using pam_mkhomedir.so. <a class="reference external" href="https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53">OOD Discourse: launching ondemand when home directory does not exist</a>.</p>
+<p>Customizable error pages for missing home directory during the first login flow for sites using <code class="docutils literal notranslate"><span class="pre">pam_mkhomedir.so</span></code>. <a class="reference external" href="https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53">OOD Discourse: launching ondemand when home directory does not exist</a>.</p>
 </div>
 <div class="section" id="experimental-sge-uge-support">
 <h3>Experimental SGE/UGE support<a class="headerlink" href="#experimental-sge-uge-support" title="Permalink to this headline">¶</a></h3>
