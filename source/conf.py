@@ -397,17 +397,17 @@ def setup(app):
 
 # Context used for jinja template
 doc_context = {
-    'ondemand_version':              '1.3',
+    'ondemand_version':              '1.4',
     # OOD component versions
-    'ood_portal_generator_version':  '0.7.1',
-    'mod_ood_proxy_version':         '0.5.0',
-    'ood_auth_map_version':          '0.0.3',
+    'ood_portal_generator_version':  '1.4.9',
+    'mod_ood_proxy_version':         '1.4.9',
+    'ood_auth_map_version':          '1.4.9',
     'nginx_stage_version':           '0.5.0',
-    'dashboard_version':             '1.26.2',
-    'shell_version':                 '1.3.1',
-    'files_version':                 '1.4.1',
-    'file_editor_version':           '1.3.3',
-    'active_jobs_version':           '1.6.2',
-    'my_jobs_version':               '2.8.3',
+    'dashboard_version':             '1.30.2',
+    'shell_version':                 '1.4.2',
+    'files_version':                 '1.5.0',
+    'file_editor_version':           '1.4.0',
+    'active_jobs_version':           '1.6.8',
+    'my_jobs_version':               '2.10.1',
     'desktops_version':              '0.2.0',
 }
