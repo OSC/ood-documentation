@@ -1,21 +1,19 @@
 .. _customization:
 
-Customization
-=============
-
-Or the many OOD environment variables:
+Customization (or the many OOD environment variables)
+=====================================================
 
 Setting the PUN Environment With ``nginx_stage.yml``
 ----------------------------------------------------
 
-The configuration file ``nginx_stage.yml`` is the best way to set the environment which the PUN will use. Defining the mapping ``pun_custom_env`` allows setting Open OnDemand specific variables and is used for branding, message of the day setting, quota warnings, whitelists and other uses. For environment variables that OOD applications may need, are already in the environment and should be exposed to OOD (``$PATH``, ``LD_LIBRARY_PATH``, etc...) define the sequence ``pun_custom_env_declarations``.
+The configuration file ``nginx_stage.yml`` is the best way to set the environment which the PUN will use. Defining the mapping ``pun_custom_env`` allows setting Open OnDemand specific variables and is used for branding, message of the day setting, quota warnings, whitelists and other uses. For environment variables that OOD applications may need, are already in the environment and should be exposed to OOD (``$PATH``, ``$LD_LIBRARY_PATH``, etc...) define the sequence ``pun_custom_env_declarations``.
 
 An example of both of these uses may be found in `nginx_stage_example.yml <https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43>`__
 
 Announcements and Message of the Day (MOTD)
 -------------------------------------------
 
-Two hooks for customizing the Dashboard are Announcements and MOTD. Announcements get the classes ``alert alert-warning`` and appear above the ``OOD_DASHBOARD_LOGO`` . Announcement files are expected to be found at: ``/etc/ood/config/announcement.(md|yml)`` or ``/etc/ood/config/announcements.d/any_file_name.(md|yml)``. To display a MOTD file on the Dashboard ensure that the environment variables  ``MOTD_PATH`` and ``MOTD_FORMAT`` are set like so:
+Two hooks for customizing the Dashboard are Announcements and MOTD. Announcements get the classes ``alert alert-warning`` and appear above the ``$OOD_DASHBOARD_LOGO`` . Announcement files are expected to be found at: ``/etc/ood/config/announcement.(md|yml)`` or ``/etc/ood/config/announcements.d/any_file_name.(md|yml)``. To display a MOTD file on the Dashboard ensure that the environment variables ``$MOTD_PATH`` and ``$MOTD_FORMAT`` are set like so:
 
    .. code-block:: sh
 
@@ -27,22 +25,25 @@ Two hooks for customizing the Dashboard are Announcements and MOTD. Announcement
 Branding
 -------------------
 
-.. attention:: TODO
+OOD provides several ways to customize the look of an installation.
 
 Title
 ......
 
-.. attention:: TODO
+The title appears in the navbar and is controlled by the environment variable ``$OOD_DASHBOARD_TITLE``.
 
 Logos
 ......
 
-.. attention:: TODO
+The Dashboard logo is controlled by the environment variable ``$OOD_DASHBOARD_LOGO``. The favicon is expected to exist at the path ``$OOD_PUBLIC_URL/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
 
 Colors
 .......
 
-.. attention:: TODO
+   .. code-block:: sh
+
+      OOD_BRAND_BG_COLOR='#c8102e'
+      OOD_BRAND_LINK_ACTIVE_BG_COLOR='#990c23'
 
 Add shortcuts to Files menu
 ---------------------------
