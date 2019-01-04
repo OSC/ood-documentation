@@ -30,25 +30,31 @@ web access to their HPC resources.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Getting Started
+   :caption: Install
 
    installation
-   enable-desktops
-   install-ihpc-apps
    authentication
 
 .. toctree::
    :maxdepth: 2
-   :caption: Components
+   :caption: Configure
 
-   infrastructure
-   applications
+   installation/add-cluster-config
 
 .. toctree::
    :maxdepth: 2
-   :caption: Resources
+   :caption: Customize
+   :glob:
 
-   user-documentation
+   customization/*
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Extend
+
+   enable-desktops
+   install-ihpc-apps
    app-development
 
 
@@ -60,6 +66,15 @@ web access to their HPC resources.
    release-notes/v1.2-release-notes
    release-notes/v1.1-release-notes
    release-notes/v1.0-release-notes
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Legacy Docs
+
+   infrastructure
+   applications
+   user-documentation
+
 
 .. _website: https://osc.github.io/Open-OnDemand/
 .. _mailing list: https://lists.osu.edu/mailman/listinfo/ood-users

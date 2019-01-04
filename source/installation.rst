@@ -25,7 +25,6 @@ means that it will need:
 
    installation/install-software
    installation/modify-system-security
-   installation/add-cluster-config
    installation/start-apache
    installation/add-ssl
    installation/add-ldap
