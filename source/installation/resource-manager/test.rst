@@ -24,7 +24,7 @@ configuration files.
 
    .. code-block:: sh
 
-      scl enable rh-ruby22 nodejs010 -- bin/rake -T test:jobs
+      scl enable rh-ruby24 rh-nodejs6 -- bin/rake -T test:jobs
       # rake test:jobs           # Test all clusters
       # rake test:jobs:cluster1  # Test the cluster: cluster1
       # rake test:jobs:cluster2  # Test the cluster: cluster2
@@ -39,13 +39,13 @@ configuration files.
 
    .. code-block:: sh
 
-      sudo su $USER -c 'scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
+      sudo su $USER -c 'scl enable rh-ruby24 rh-nodejs6 -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
       # [sudo] password for user:
       # Rails Error: Unable to access log file. Please ensure that /var/www/ood/apps/sys/dashboard/log/production.log exists and is writable (ie, make it writable for user and group: chmod 0664 /var/www/ood/apps/sys/dashboard/log/production.log). The log level has been raised to WARN and the output directed to STDERR until the problem is fixed.
       # mkdir -p /home/user/test_jobs
       # Testing cluster 'cluster1'...
       # Submitting job...
-      # [2018-04-24 10:15:32 -0400 ]  INFO "execve = [{\"PBS_DEFAULT\"=>\"oak-batch.osc.edu\", \"LD_LIBRARY_PATH\"=>\"/opt/torque/lib64:/opt/rh/v8314/root/usr/lib64:/opt/rh/nodejs010/root/usr/lib64:/opt/rh/rh-ruby22/root/usr/lib64\"}, \"/opt/torque/bin/qsub\", \"-N\", \"test_jobs_cluster1\", \"-S\", \"/bin/bash\", \"-o\", \"/users/appl/jnicklas/test_jobs/output_cluster1_2018-04-24T10:15:32-04:00.log\", \"-l\", \"walltime=00:01:00\", \"-j\", \"oe\"]"
+      # [2018-04-24 10:15:32 -0400 ]  INFO "execve = [{\"PBS_DEFAULT\"=>\"oak-batch.osc.edu\", \"LD_LIBRARY_PATH\"=>\"/opt/torque/lib64:/opt/rh/v8314/root/usr/lib64:/opt/rh/rh-nodejs6/root/usr/lib64:/opt/rh/rh-ruby24/root/usr/lib64\"}, \"/opt/torque/bin/qsub\", \"-N\", \"test_jobs_cluster1\", \"-S\", \"/bin/bash\", \"-o\", \"/users/appl/jnicklas/test_jobs/output_cluster1_2018-04-24T10:15:32-04:00.log\", \"-l\", \"walltime=00:01:00\", \"-j\", \"oe\"]"
       # Got job id '10820525.oak-batch.osc.edu'
       # Job has status of queued
       # Job has status of queued
@@ -88,6 +88,6 @@ configuration files.
 
       .. code-block:: sh
 
-         sudo su $USER -c 'scl enable rh-ruby22 nodejs010 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
+         sudo su $USER -c 'scl enable rh-ruby24 rh-nodejs6 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
 
       Note that the ``SUBMIT_ARGS="..."`` is defined at the end of the command.
