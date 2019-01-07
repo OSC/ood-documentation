@@ -247,13 +247,13 @@ Run test by running `rake` command and you will see it fail:
    a host that has the correct version of Ruby installed. For OnDemand that likely
    means using Software Collections with the same packages used to install OnDemand.
 
-   With SCL, running rake with rh-ruby22 package looks like:
+   With SCL, running rake with rh-ruby24 package looks like:
 
-   ``scl enable rh-ruby22 -- rake``
+   ``scl enable rh-ruby24 -- rake``
 
-   With SCL, running git commands using git19 looks like:
+   With SCL, running git commands using rh-git29 looks like:
 
-   ``scl enable git19 -- git commit -m "initial commit"``
+   ``scl enable rh-git29 -- git commit -m "initial commit"``
 
    You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
    For example, in my .bash_profile I have:
@@ -262,7 +262,7 @@ Run test by running `rake` command and you will see it fail:
 
       if [[ ${HOSTNAME%%.*} == webtest04*  ]]
       then
-        scl enable rh-ruby22 nodejs010 git19 v8314 python27 -- bash
+        scl enable rh-ruby24 rh-nodejs6 rh-git29 -- bash
       fi
 
    This means when I login to the host webtest04.osc.edu the SCL packages will be enabled
