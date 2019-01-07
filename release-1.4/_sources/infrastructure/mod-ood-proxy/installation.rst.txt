@@ -26,7 +26,7 @@ Installation
 
    .. code-block:: sh
 
-      sudo scl enable rh-ruby22 -- rake install
+      sudo scl enable rh-ruby24 -- rake install
 
   .. note::
 
@@ -35,4 +35,4 @@ Installation
 
      .. code-block:: sh
 
-        sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/mod_ood_proxy"
+        sudo scl enable rh-ruby24 -- rake install PREFIX="/tmp/mod_ood_proxy"

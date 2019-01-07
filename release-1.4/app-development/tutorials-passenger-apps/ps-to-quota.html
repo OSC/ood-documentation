@@ -103,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization (or the many OOD environment variables)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
 <ul class="current">
@@ -460,15 +460,15 @@ Tasks: <span class="nv">TOP</span> <span class="o">=</span>&gt; <span class="nv"
 <p>To run commands like rake through the shell you need to make sure you are on
 a host that has the correct version of Ruby installed. For OnDemand that likely
 means using Software Collections with the same packages used to install OnDemand.</p>
-<p>With SCL, running rake with rh-ruby22 package looks like:</p>
-<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">rh-ruby22</span> <span class="pre">--</span> <span class="pre">rake</span></code></p>
-<p>With SCL, running git commands using git19 looks like:</p>
-<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">git19</span> <span class="pre">--</span> <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;initial</span> <span class="pre">commit&quot;</span></code></p>
+<p>With SCL, running rake with rh-ruby24 package looks like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">rh-ruby24</span> <span class="pre">--</span> <span class="pre">rake</span></code></p>
+<p>With SCL, running git commands using rh-git29 looks like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">rh-git29</span> <span class="pre">--</span> <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;initial</span> <span class="pre">commit&quot;</span></code></p>
 <p>You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
 For example, in my .bash_profile I have:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">HOSTNAME</span><span class="p">%%.*</span><span class="si">}</span> <span class="o">==</span> webtest04*  <span class="o">]]</span>
 <span class="k">then</span>
-  scl <span class="nb">enable</span> rh-ruby22 nodejs010 git19 v8314 python27 -- bash
+  scl <span class="nb">enable</span> rh-ruby24 rh-nodejs6 rh-git29 -- bash
 <span class="k">fi</span>
 </pre></div>
 </div>
