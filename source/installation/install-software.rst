@@ -17,7 +17,7 @@ software requirements:
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-#. Enable the Software Collections repository:
+#. Enable the EPEL and Software Collections repositories:
 
    CentOS 6/7
      .. code-block:: sh
@@ -27,12 +27,14 @@ software requirements:
    RHEL 6
      .. code-block:: sh
 
+        sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
         # Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
    RHEL 7
      .. code-block:: sh
 
+        sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
         # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
 
