@@ -1,4 +1,4 @@
-.. _bin_overrides:
+.. _bin-overrides:
 
 A Working Example Of A ``bin_overrides`` Script
 ===============================================
