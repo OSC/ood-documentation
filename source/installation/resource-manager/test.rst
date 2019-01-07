@@ -45,7 +45,7 @@ configuration files.
       # mkdir -p /home/user/test_jobs
       # Testing cluster 'cluster1'...
       # Submitting job...
-      # [2018-04-24 10:15:32 -0400 ]  INFO "execve = [{\"PBS_DEFAULT\"=>\"oak-batch.osc.edu\", \"LD_LIBRARY_PATH\"=>\"/opt/torque/lib64:/opt/rh/v8314/root/usr/lib64:/opt/rh/rh-nodejs6/root/usr/lib64:/opt/rh/rh-ruby24/root/usr/lib64\"}, \"/opt/torque/bin/qsub\", \"-N\", \"test_jobs_cluster1\", \"-S\", \"/bin/bash\", \"-o\", \"/users/appl/jnicklas/test_jobs/output_cluster1_2018-04-24T10:15:32-04:00.log\", \"-l\", \"walltime=00:01:00\", \"-j\", \"oe\"]"
+      # [2018-04-24 10:15:32 -0400 ]  INFO "execve = [{\"PBS_DEFAULT\"=>\"oak-batch.osc.edu\", \"LD_LIBRARY_PATH\"=>\"/opt/torque/lib64:/opt/rh/rh-nodejs6/root/usr/lib64:/opt/rh/rh-ruby24/root/usr/lib64\"}, \"/opt/torque/bin/qsub\", \"-N\", \"test_jobs_cluster1\", \"-S\", \"/bin/bash\", \"-o\", \"/users/appl/jnicklas/test_jobs/output_cluster1_2018-04-24T10:15:32-04:00.log\", \"-l\", \"walltime=00:01:00\", \"-j\", \"oe\"]"
       # Got job id '10820525.oak-batch.osc.edu'
       # Job has status of queued
       # Job has status of queued
