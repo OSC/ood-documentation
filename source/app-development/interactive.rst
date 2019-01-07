@@ -31,7 +31,6 @@ Each of these files/directories are described below in their respective stage.
    :maxdepth: 3
    :caption: Stages of an Interactive App
 
-   interactive/setup
    interactive/form
    interactive/template
    interactive/submit

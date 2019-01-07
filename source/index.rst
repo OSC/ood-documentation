@@ -25,6 +25,7 @@ See the `website`_ for more information about the Open OnDemand project.
    :maxdepth: 2
    :caption: Extend
 
+   app-development/interactive/setup
    enable-desktops
    install-ihpc-apps
    app-development
