@@ -64,3 +64,4 @@ The following apps do require a cluster configuration file:
    resource-manager/lsf
    resource-manager/pbspro
    resource-manager/sge
+   resource-manager/bin-override-example
