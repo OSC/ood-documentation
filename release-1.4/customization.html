@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization (or the many OOD environment variables) &mdash; Open OnDemand 1.3.0 documentation</title>
+  <title>Customization &mdash; Open OnDemand 1.3.0 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Open OnDemand 1.3.0 documentation" href="index.html"/>
         <link rel="next" title="Enable Interactive Desktop" href="enable-desktops.html"/>
-        <link rel="prev" title="Configure Grid Engine" href="installation/resource-manager/sge.html"/> 
+        <link rel="prev" title="Customization Overview" href="customization_overview.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -102,9 +102,10 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Customization (or the many OOD environment variables)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setting-the-pun-environment-with-nginx-stage-yml">Setting the PUN Environment With <code class="docutils literal notranslate"><span class="pre">nginx_stage.yml</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#announcements-and-message-of-the-day-motd">Announcements and Message of the Day (MOTD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Customization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#announcements">Announcements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message-of-the-day-motd">Message of the Day (MOTD)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#branding">Branding</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#title">Title</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#logos">Logos</a></li>
@@ -116,6 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set default ssh host</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-error-page-for-missing-home-directory-on-launch">Custom Error Page for Missing Home Directory on Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#control-which-apps-appear-in-the-dashboard-navbar">Control which apps appear in the Dashboard Navbar</a></li>
 </ul>
 </li>
 </ul>
@@ -182,7 +184,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Customization (or the many OOD environment variables)</li>
+      <li>Customization</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -203,19 +205,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="customization-or-the-many-ood-environment-variables">
-<span id="customization"></span><h1>Customization (or the many OOD environment variables)<a class="headerlink" href="#customization-or-the-many-ood-environment-variables" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="setting-the-pun-environment-with-nginx-stage-yml">
-<h2>Setting the PUN Environment With <code class="docutils literal notranslate"><span class="pre">nginx_stage.yml</span></code><a class="headerlink" href="#setting-the-pun-environment-with-nginx-stage-yml" title="Permalink to this headline">¶</a></h2>
-<p>The configuration file <code class="docutils literal notranslate"><span class="pre">nginx_stage.yml</span></code> is the best way to set the environment which the PUN will use. Defining the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> allows setting Open OnDemand specific variables and is used for branding, message of the day setting, quota warnings, whitelists and other uses. For environment variables that OOD applications may need, are already in the environment and should be exposed to OOD (<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">$LD_LIBRARY_PATH</span></code>, etc…) define the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</p>
-<p>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a></p>
-</div>
-<div class="section" id="announcements-and-message-of-the-day-motd">
-<h2>Announcements and Message of the Day (MOTD)<a class="headerlink" href="#announcements-and-message-of-the-day-motd" title="Permalink to this headline">¶</a></h2>
-<p>Two hooks for customizing the Dashboard are Announcements and MOTD. Announcements get the classes <code class="docutils literal notranslate"><span class="pre">alert</span> <span class="pre">alert-warning</span></code> and appear above the <code class="docutils literal notranslate"><span class="pre">$OOD_DASHBOARD_LOGO</span></code> . Announcement files are expected to be found at: <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.(md|yml)</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcements.d/any_file_name.(md|yml)</span></code>. To display a MOTD file on the Dashboard ensure that the environment variables <code class="docutils literal notranslate"><span class="pre">$MOTD_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">$MOTD_FORMAT</span></code> are set like so:</p>
+  <div class="section" id="customization">
+<span id="id1"></span><h1>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="announcements">
+<h2>Announcements<a class="headerlink" href="#announcements" title="Permalink to this headline">¶</a></h2>
+<p>To add an announcement message that appears at the top of the dashboard you can create a file at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.(md|yml)</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcements.d/any_file_name.(md|yml)</span></code>.</p>
+<p>On each request the dashboard will check for the existence of this file. If it exists, the contents will be converted using markdown converter to HTML and displayed inside a bootstrap alert.</p>
+<p>For example, if I create an announcement.md file with the contents:</p>
 <blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">MOTD_PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/your/motd&quot;</span> <span class="c1"># this supports both file and RSS feed URIs</span>
-<span class="nv">MOTD_FORMAT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MOTD_FORMAT_HERE</span><span class="s2">&quot;</span> <span class="c1"># markdown, txt, rss</span>
+<div><div class="highlight-md notranslate"><div class="highlight"><pre><span></span>**NOTICE:** There will be a two day downtime on February 21-22, 2017. OSC
+OnDemand will be unavailable during this period. For details, please visit
+[<span class="nt">http://bit.ly/2jhfyh7</span>](<span class="na">http://bit.ly/2jhfyh7</span>).
+</pre></div>
+</div>
+</div></blockquote>
+<p>the user would see this message at the top of the dashboard:</p>
+<div class="figure align-center" id="id2">
+<img alt="_images/dashboard-announcement.png" src="_images/dashboard-announcement.png" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span></p>
+</div>
+<p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub">type</th>
+<td>warning, info, success, or danger</td>
+<td>this is the Bootstrap alert style</td>
+</tr>
+<tr class="row-even"><th class="stub">msg</th>
+<td>string containing markdown formatted message</td>
+<td>if this is a blank string (only whitespace), the alert will not display</td>
+</tr>
+</tbody>
+</table>
+<p>Because the announcement is rendered via ERB you can do some interesting things, like stop showing the announcement past a specified date:</p>
+<blockquote>
+<div><div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">type: warning</span>
+<span class="x">msg: |</span>
+<span class="x">  </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  A **Ruby Partial Downtime** for 4 hours on Monday, September 24 from 8:00am to 12:00pm</span>
+<span class="x">  will prevent SSH login to Ruby nodes and and Ruby VDI sessions.</span>
+<span class="x">  </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -223,6 +258,17 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Warnings about the announcement file being missing may be present in users’ nginx logs. Despite the warning the Dashboard will still function normally without those files being present.</p>
 </div>
+</div>
+<div class="section" id="message-of-the-day-motd">
+<h2>Message of the Day (MOTD)<a class="headerlink" href="#message-of-the-day-motd" title="Permalink to this headline">¶</a></h2>
+<p>You can configure the Dashboard to display the /etc/motd file on the front page - the same file that is displayed when ssh-ing to a login node.</p>
+<p>To display a MOTD file on the Dashboard ensure that the environment variables <code class="docutils literal notranslate"><span class="pre">$MOTD_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">$MOTD_FORMAT</span></code> are set, where</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">MOTD_PATH</span><span class="o">=</span><span class="s2">&quot;/etc/motd&quot;</span> <span class="c1"># this supports both file and RSS feed URIs</span>
+<span class="nv">MOTD_FORMAT</span><span class="o">=</span><span class="s2">&quot;txt&quot;</span> <span class="c1"># markdown, txt, rss</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="branding">
 <h2>Branding<a class="headerlink" href="#branding" title="Permalink to this headline">¶</a></h2>
@@ -289,9 +335,9 @@ all the possible project directories the user could have.</li>
 in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories
 exist and the user has access to will appear as links in the Files menu under
 the Home Directory link.</p>
-<div class="figure align-center" id="id1">
+<div class="figure align-center" id="id4">
 <img alt="_images/files_menu_shortcuts_osc.png" src="_images/files_menu_shortcuts_osc.png" />
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
 </div>
 <ul class="simple">
 <li>You must restart the Dashboard app to see a configuration change take effect.
@@ -304,16 +350,15 @@ app.</p>
 </div>
 <div class="section" id="whitelist-directories">
 <h2>Whitelist directories<a class="headerlink" href="#whitelist-directories" title="Permalink to this headline">¶</a></h2>
-<div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<p class="last">Should this go in Configure section?</p>
-</div>
+<p>Best place for this is nginx_stage</p>
 </div>
 <div class="section" id="set-default-ssh-host">
 <h2>Set default ssh host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
+<p>COPY FROM</p>
 </div>
 <div class="section" id="custom-job-composer-templates">
 <h2>Custom Job Composer Templates<a class="headerlink" href="#custom-job-composer-templates" title="Permalink to this headline">¶</a></h2>
+<p>COPY FROM</p>
 </div>
 <div class="section" id="custom-error-page-for-missing-home-directory-on-launch">
 <h2>Custom Error Page for Missing Home Directory on Launch<a class="headerlink" href="#custom-error-page-for-missing-home-directory-on-launch" title="Permalink to this headline">¶</a></h2>
@@ -324,6 +369,10 @@ through OnDemand, which expects the existence of a user’s home directory.</p>
 string error would display. Now a friendly error page displays. This error page
 can be customized by adding a custom one to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/pun/html/missing_home_directory.html</span></code>.</p>
 <p>See <a class="reference external" href="https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/">this Discourse discussion</a> for details.</p>
+</div>
+<div class="section" id="control-which-apps-appear-in-the-dashboard-navbar">
+<h2>Control which apps appear in the Dashboard Navbar<a class="headerlink" href="#control-which-apps-appear-in-the-dashboard-navbar" title="Permalink to this headline">¶</a></h2>
+<p>In OnDemand 1.3 and earlier,</p>
 </div>
 </div>
 
@@ -340,7 +389,7 @@ can be customized by adding a custom one to <code class="docutils literal notran
         <a href="enable-desktops.html" class="btn btn-neutral float-right" title="Enable Interactive Desktop" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation/resource-manager/sge.html" class="btn btn-neutral" title="Configure Grid Engine" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="customization_overview.html" class="btn btn-neutral" title="Customization Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

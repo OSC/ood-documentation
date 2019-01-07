@@ -35,6 +35,7 @@ web access to their HPC resources.
    installation
    authentication
    installation/add-cluster-config
+   customization_overview
    customization
 
 

@@ -1,26 +1,68 @@
 .. _customization:
 
-Customization (or the many OOD environment variables)
-=====================================================
+Customization
+=============
 
-Setting the PUN Environment With ``nginx_stage.yml``
-----------------------------------------------------
 
-The configuration file ``nginx_stage.yml`` is the best way to set the environment which the PUN will use. Defining the mapping ``pun_custom_env`` allows setting Open OnDemand specific variables and is used for branding, message of the day setting, quota warnings, whitelists and other uses. For environment variables that OOD applications may need, are already in the environment and should be exposed to OOD (``$PATH``, ``$LD_LIBRARY_PATH``, etc...) define the sequence ``pun_custom_env_declarations``.
+Announcements
+-------------
 
-An example of both of these uses may be found in `nginx_stage_example.yml <https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43>`__
+To add an announcement message that appears at the top of the dashboard you can create a file at ``/etc/ood/config/announcement.(md|yml)`` or ``/etc/ood/config/announcements.d/any_file_name.(md|yml)``.
 
-Announcements and Message of the Day (MOTD)
--------------------------------------------
+On each request the dashboard will check for the existence of this file. If it exists, the contents will be converted using markdown converter to HTML and displayed inside a bootstrap alert.
 
-Two hooks for customizing the Dashboard are Announcements and MOTD. Announcements get the classes ``alert alert-warning`` and appear above the ``$OOD_DASHBOARD_LOGO`` . Announcement files are expected to be found at: ``/etc/ood/config/announcement.(md|yml)`` or ``/etc/ood/config/announcements.d/any_file_name.(md|yml)``. To display a MOTD file on the Dashboard ensure that the environment variables ``$MOTD_PATH`` and ``$MOTD_FORMAT`` are set like so:
+For example, if I create an announcement.md file with the contents:
+
+   .. code-block:: md
+
+      **NOTICE:** There will be a two day downtime on February 21-22, 2017. OSC
+      OnDemand will be unavailable during this period. For details, please visit
+      [http://bit.ly/2jhfyh7](http://bit.ly/2jhfyh7).
+
+the user would see this message at the top of the dashboard:
+
+.. figure:: /images/dashboard-announcement.png
+   :align: center
+
+   Example of the Dashboard announcement.
+
+If the announcement file has the extension ``yml`` and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
+
+.. list-table:: Config Files
+   :stub-columns: 1
+
+   * - type
+     - warning, info, success, or danger
+     - this is the Bootstrap alert style
+   * - msg
+     - string containing markdown formatted message
+     - if this is a blank string (only whitespace), the alert will not display
+
+Because the announcement is rendered via ERB you can do some interesting things, like stop showing the announcement past a specified date:
+
+   .. code-block:: erb
+
+      type: warning
+      msg: |
+        <% if Time.now < Time.new(2018, 9, 24, 12, 0, 0) %>
+        A **Ruby Partial Downtime** for 4 hours on Monday, September 24 from 8:00am to 12:00pm
+        will prevent SSH login to Ruby nodes and and Ruby VDI sessions.
+        <% end %>
+
+.. note:: Warnings about the announcement file being missing may be present in users' nginx logs. Despite the warning the Dashboard will still function normally without those files being present.
+
+Message of the Day (MOTD)
+-------------------------
+
+You can configure the Dashboard to display the /etc/motd file on the front page - the same file that is displayed when ssh-ing to a login node.
+
+To display a MOTD file on the Dashboard ensure that the environment variables ``$MOTD_PATH`` and ``$MOTD_FORMAT`` are set, where 
 
    .. code-block:: sh
 
-      MOTD_PATH="/path/to/your/motd" # this supports both file and RSS feed URIs
-      MOTD_FORMAT="$MOTD_FORMAT_HERE" # markdown, txt, rss
+      MOTD_PATH="/etc/motd" # this supports both file and RSS feed URIs
+      MOTD_FORMAT="txt" # markdown, txt, rss
 
-.. note:: Warnings about the announcement file being missing may be present in users' nginx logs. Despite the warning the Dashboard will still function normally without those files being present.
 
 Branding
 -------------------
@@ -110,14 +152,18 @@ app.
 Whitelist directories
 ---------------------
 
-.. attention:: Should this go in Configure section?
+Best place for this is nginx_stage
 
 
 Set default ssh host
 --------------------
 
+COPY FROM
+
 Custom Job Composer Templates
 -----------------------------
+
+COPY FROM 
 
 Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
@@ -132,3 +178,8 @@ can be customized by adding a custom one to ``/etc/ood/config/pun/html/missing_h
 
 See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
 
+
+Control which apps appear in the Dashboard Navbar
+-------------------------------------------------
+
+In OnDemand 1.3 and earlier, 
