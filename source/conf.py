@@ -149,6 +149,7 @@ html_context = {
     'conf_py_path': '/source/',
     'versions' : [
         ['master', '/master/'],
+        ['1.4', '/release-1.4/'],
         ['1.3', '/release-1.3/'],
         ['1.2', '/release-1.2/'],
         ['1.1', '/release-1.1/'],
