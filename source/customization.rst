@@ -219,16 +219,75 @@ Whitelist directories
 
 Best place for this is nginx_stage
 
+.. warning:: TODO
+
 
 Set default ssh host
 --------------------
 
-COPY FROM
+In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``DEFAULT_SSHHOST="localhost"``.
 
-Custom Job Composer Templates
+This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
+
+
+Custom Job Composer Templates 
 -----------------------------
 
-COPY FROM 
+Below explains how job templates work for the Job Composer and how you can add your own. `Here is an example of the templates we use at OSC for the various clusters we have <https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/myjobs/templates>`_
+
+
+Job Templates Overview
+......................
+
+"Job Composer" attempts to model a simple but common workflow. When creating a new batch job to run a simulation a user may:
+
+1. copy the directory of a job they already ran or an example job
+2. edit the files
+3. submit a new job
+
+"Job Composer" implements these steps by providing the user job template directories and the ability to make copies of them.
+
+1. Copy the a directory of a job they already ran or an example job
+
+   1. User can create a new job from a "default" template. A custom default template can be defined at ``/etc/ood/config/apps/myjobs/templates/default`` or under the app deployment directory at ``/var/www/ood/apps/sys/myjobs/templates/default``. If no default template is specified, the default is ``/var/www/ood/apps/sys/myjobs/example_templates/torque``
+   2. user can select a directory to copy from a list of "System" templates the admin copied to ``/etc/ood/config/apps/myjobs/templates`` or under the app deployment directory at ``/var/www/ood/apps/sys/myjobs/templates`` during installation
+   3. user can select a directory to copy from a list of "User" templates that the user has copied to ``$HOME/ondemand/data/sys/myjobs/templates``
+   4. user can select a job directory to copy that they already created through "Job Composer" from ``$HOME/ondemand/data/sys/myjobs/projects/default``
+
+2. Edit the files
+
+   1. user can open the copied job directory in the File Explorer and edit files using the File Editor
+
+3. Submit a new job
+ 
+   1. user can use the Job Options form specify which host to submit to, what file is the job script
+   2. user can use the web interface to submit the job to the batch system
+   3. after the job is completed, the user can open the directory in the file explorer to view results
+
+Job Template Details
+....................
+
+A template consists of a folder and a `manifest.yml` file.
+
+The folder contains files and scripts related to the job.
+
+The manifest contains additional metadata about a job, such as a name, the default host, the submit script file name, and any notes about the template.
+
+.. code:: yaml
+
+    name: A Template Name
+    host: ruby
+    script: ruby.sh
+    notes: Notes about the template, such as content and function.
+
+In the event that a job is created from a template that is missing from the `manifest.yml`, "Job Composer" will assign the following default values:
+
+- ``name`` The name of the template folder.
+- ``host`` The cluster id of the first cluster with a valid resource_mgr listed in the OOD cluster config
+- ``script`` The first ``.sh`` file appearing in the template folder.
+- ``notes`` The path to the location where a template manifest should be located.
+
+
 
 Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
@@ -247,4 +306,43 @@ See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-w
 Control which apps appear in the Dashboard Navbar
 -------------------------------------------------
 
-In OnDemand 1.3 and earlier, 
+Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.
+
+In OnDemand 1.3 and earlier, a Ruby array (``NavConfig.categories``) stored a whitelist of categories that could appear in the navbar. This whitelist acts both as a sort order for the top level menus of apps and a whitelist of which apps will appear in the menu. The only way to modify this whitelist is to do so in a Dashboard initializer. You would add a file ``/etc/ood/config/apps/dashboard/initializers/ood.rb`` and add this line:
+
+.. code:: ruby
+
+   NavConfig.categories << "Reports"
+
+
+Then an app that specifies "Reports" as the category in the manifest would appear in the "Reports" menu.
+
+In OnDemand 1.4 we changed the behavior by adding a new boolean variable ``NavConfig.categories_whitelist`` which defaults to false. If false, whitelist mode is disabled, and the ``NavConfig.categories`` only exists to act to enforce a sort order and all apps found with a valid category will be available to launch.
+
+Below are different configuration options and the resulting navbar if you had installed:
+
+- OnDemand with a cluster configured that accepts job submissions and shell access
+- at least one interactive app
+- at least one custom app that specifies "Reports" as the category 
+
+.. list-table:: Navbar Configuration
+   :header-rows: 1
+
+   * - Configuration
+     - Resulting Navbar
+     - Reason
+   * - Default configuration
+     - "Files", "Jobs", "Clusters", "Interactive Apps", "Reports"
+     - whitelist mode is false, so whitelist now only enforces sort order
+   * - ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
+     - "Files", "Jobs", "Clusters", "Interactive Apps"
+     - whitelist mode is enabled and since "Reports" is not in the whitelist it is omitted
+   * - ``NavConfig.categories=[]`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
+     - "Clusters", "Files", "Interactive Apps", "Jobs", "Reports"
+     - the app categories appear in alphabetical order since whitelist mode is disabled     
+   * - ``NavConfig.categories=[]`` and ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
+     - no app menus appear!
+     - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
+
+
+
