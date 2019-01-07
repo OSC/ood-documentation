@@ -217,10 +217,22 @@ app.
 Whitelist directories
 ---------------------
 
-Best place for this is nginx_stage
+By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:
 
-.. warning:: TODO
+1. Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the whitelisted paths
+2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitary path that is not an eventual child of the whitelisted paths
+3. Users should not be able to get around this using symlinks
 
+We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would whitelist home directories, project space, and scratch space at OSC:
+
+.. code:: yaml
+
+   pun_custom_env:
+     WHITELIST_PATH: "/users:/fs/project:/fs/scratch"
+
+.. warning:: This is not yet used in production at OSC, so we consider this feature "experimental" for now.
+
+.. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as reliably as using cgroups on the PUN.
 
 Set default ssh host
 --------------------
@@ -345,4 +357,103 @@ Below are different configuration options and the resulting navbar if you had in
      - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
 
 
+Disable Safari Warning on Dashboard
+-----------------------------------
 
+We currently display an alert message at the top of the Dashboard mentioning
+that we don't currently support the Safari browser. This is because of an issue
+in Safari where it fails to connect to websockets if the Apache proxy uses
+Basic Auth for user authentication (on by default for new OOD installations).
+
+If you ever change the authentication mechanism to a cookie-based mechanism
+(e.g., Shibboleth or OpenID Connect), then it is recommended you disable this
+alert message in the dashboard.
+
+You can do this by modifying the ``/etc/ood/config/apps/dashboard/env`` file as such:
+
+.. code:: sh
+
+   DISABLE_SAFARI_BASIC_AUTH_WARNING=1
+
+
+Disk Quota Warnings on Dashboard
+--------------------------------
+
+You can display warnings to users on the Dashboard if their
+disk quota is nearing its limit. This requires an auto-updated (it is
+recommended to update this file every **5 minutes** with a cronjob) JSON file
+that lists all user quotas. The JSON schema for version `1` is given as:
+
+.. code:: json
+
+   {
+     "version": 1,
+     "timestamp": 1525361263,
+     "quotas": [
+       {
+         ...
+       },
+       {
+         ...
+       }
+     ]
+   }
+
+Where ``version`` defines the version of the JSON schema used, ``timestamp``
+defines when this file was generated, and ``quotas`` is a list of quota objects
+(see below).
+
+You can configure the Dashboard to use this JSON file (or files) by setting the
+environment variable ``OOD_QUOTA_PATH`` as a colon-delimited list of all JSON
+file paths in the ``/etc/ood/config/apps/dashboard/env`` file.
+
+The default threshold for displaying the warning is at 95% (`0.95`), but this
+can be changed with the environment variable ``OOD_QUOTA_THRESHOLD``.
+
+An example is given as:
+
+.. code:: sh
+
+   # /etc/ood/config/apps/dashboard/env
+
+   OOD_QUOTA_PATH="/path/to/quota1.json:/path/to/quota2.json"
+   OOD_QUOTA_THRESHOLD="0.80"
+
+
+Individual User Quota
+.....................
+
+If the quota is defined as a ``user`` quota, then it applies to only disk
+resources used by the user alone. This is the default type of quota object and
+is given in the following format:
+
+
+.. warning:: A block must be equal to 1 KB for proper conversions.
+
+
+Individual Fileset Quota
+........................
+
+If the quota is defined as a ``fileset`` quota, then it applies to all disk
+resources used underneath a given volume. This requires the object to be
+repeated for **each user** that uses disk resources under this given volume.
+The format is given as:
+
+.. code:: json
+
+   {
+     "type": "fileset",
+     "user": "user1",
+     "path": "/path/to/volume2",
+     "block_usage": 500,
+     "total_block_usage": 1000,
+     "block_limit": 2000,
+     "file_usage": 1,
+     "total_file_usage": 5,
+     "file_limit": 10
+   }
+
+Where ``block_usage`` and ``file_usage`` are the disk resource usages attributed to
+the specified user only.
+
+.. note:: For each user with resources under this fileset, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
