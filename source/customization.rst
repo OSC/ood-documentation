@@ -232,7 +232,7 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 
 .. warning:: This is not yet used in production at OSC, so we consider this feature "experimental" for now.
 
-.. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as reliably as using cgroups on the PUN.
+.. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
 Set default ssh host
 --------------------
@@ -257,9 +257,9 @@ Job Templates Overview
 2. edit the files
 3. submit a new job
 
-"Job Composer" implements these steps by providing the user job template directories and the ability to make copies of them.
+"Job Composer" implements these steps by providing the user job template directories and the ability to make copies of them: (1) Copy a directory, (2) Edit the files, and (3) Submit a new job.
 
-1. Copy the a directory of a job they already ran or an example job
+1. Copy a directory of a job already ran or an example job
 
    1. User can create a new job from a "default" template. A custom default template can be defined at ``/etc/ood/config/apps/myjobs/templates/default`` or under the app deployment directory at ``/var/www/ood/apps/sys/myjobs/templates/default``. If no default template is specified, the default is ``/var/www/ood/apps/sys/myjobs/example_templates/torque``
    2. user can select a directory to copy from a list of "System" templates the admin copied to ``/etc/ood/config/apps/myjobs/templates`` or under the app deployment directory at ``/var/www/ood/apps/sys/myjobs/templates`` during installation
