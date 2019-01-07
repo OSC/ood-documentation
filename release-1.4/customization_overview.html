@@ -191,9 +191,7 @@
             
   <div class="section" id="customization-overview">
 <span id="id1"></span><h1>Customization Overview<a class="headerlink" href="#customization-overview" title="Permalink to this headline">¶</a></h1>
-<p>Configuration is managed via config files. Some of instruct OnDemand to modify the environment of the PUN (per user NGINX server) or the individual apps.</p>
-<p>All configuration goes under /etc/ood.
-Assets that should be publicly available (such as a favicon or logo image) are placed under /var/www/ood/public.</p>
+<p>OnDemand’s configuration is stored in the environment, which can be modified using a hierarchy of config files. Configuration files are rooted in <code class="docutils literal notranslate"><span class="pre">/etc/ood</span></code>. Assets that should be publicly available (such as a favicon or logo image) are placed under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public</span></code>.</p>
 <table border="1" class="docutils" id="id2">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
@@ -214,7 +212,15 @@ Assets that should be publicly available (such as a favicon or logo image) are p
 </tr>
 <tr class="row-odd"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code></th>
 <td>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</td>
-<td>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a></td>
+<td>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</td>
+</tr>
+<tr class="row-even"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/$APP/env</span></code></th>
+<td>Used to provide application specific config</td>
+<td><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</td>
+</tr>
+<tr class="row-odd"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/$APP/initializers/$SOMETHING.rb</span></code></th>
+<td>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</td>
+<td>This method is specific to Ruby on Rails applications: Activejobs, Dashboard, File Editor, and Job Composer.</td>
 </tr>
 </tbody>
 </table>
