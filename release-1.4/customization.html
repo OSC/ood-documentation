@@ -106,18 +106,24 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Customization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#announcements">Announcements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#message-of-the-day-motd">Message of the Day (MOTD)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#branding">Branding</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#title">Title</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#logos">Logos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#colors">Colors</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#branding">Branding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-urls-to-help-menu">Add URLs to Help menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add shortcuts to Files menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#whitelist-directories">Whitelist directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set default ssh host</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#job-templates-overview">Job Templates Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#job-template-details">Job Template Details</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-error-page-for-missing-home-directory-on-launch">Custom Error Page for Missing Home Directory on Launch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#control-which-apps-appear-in-the-dashboard-navbar">Control which apps appear in the Dashboard Navbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disable-safari-warning-on-dashboard">Disable Safari Warning on Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disk-quota-warnings-on-dashboard">Disk Quota Warnings on Dashboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#individual-user-quota">Individual User Quota</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#individual-fileset-quota">Individual Fileset Quota</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -269,27 +275,111 @@ OnDemand will be unavailable during this period. For details, please visit
 </pre></div>
 </div>
 </div></blockquote>
+<div class="figure align-center" id="id4">
+<img alt="_images/dashboard_motd.png" src="_images/dashboard_motd.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span></p>
+</div>
+<p>We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 </div>
 <div class="section" id="branding">
 <h2>Branding<a class="headerlink" href="#branding" title="Permalink to this headline">¶</a></h2>
-<p>OOD provides several ways to customize the look of an installation.</p>
-<div class="section" id="title">
-<h3>Title<a class="headerlink" href="#title" title="Permalink to this headline">¶</a></h3>
-<p>The title appears in the navbar and is controlled by the environment variable <code class="docutils literal notranslate"><span class="pre">$OOD_DASHBOARD_TITLE</span></code>.</p>
+<p>You can customize the logo, favicon, title, and navbar colors of OnDemand.</p>
+<div class="figure align-center">
+<img alt="_images/dashboard_branding_logo_and_colors.png" src="_images/dashboard_branding_logo_and_colors.png" />
 </div>
-<div class="section" id="logos">
-<h3>Logos<a class="headerlink" href="#logos" title="Permalink to this headline">¶</a></h3>
-<p>The Dashboard logo is controlled by the environment variable <code class="docutils literal notranslate"><span class="pre">$OOD_DASHBOARD_LOGO</span></code>. The favicon is expected to exist at the path <code class="docutils literal notranslate"><span class="pre">$OOD_PUBLIC_URL/favicon.ico</span></code>. For a default OOD installation the favicon will be located at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/favicon.ico</span></code>.</p>
+<p>We recommend setting these environment variables in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as YAML mappings (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. Alternatively you can set these in the env files of the dashboard and the apps. Currently only the dashboard uses the colors in the navbar.</p>
+<table border="1" class="docutils" id="id5">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head stub">Feature</th>
+<th class="head">Environment Variable</th>
+<th class="head">Details</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><th class="stub">Title</th>
+<td>OOD_DASHBOARD_TITLE</td>
+<td>The title appears in the navbar and is controlled by the environment variable <code class="docutils literal notranslate"><span class="pre">$OOD_DASHBOARD_TITLE</span></code>. The default value is “Open OnDemand”.</td>
+</tr>
+<tr class="row-odd"><th class="stub">Logo</th>
+<td>OOD_DASHBOARD_LOGO</td>
+<td>The default value for <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_LOGO</span></code> is <code class="docutils literal notranslate"><span class="pre">/public/logo.png</span></code> and this should be the URL to the logo. By default if you place a logo.png at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/logo.png</span></code> it will be accessible via the URL <code class="docutils literal notranslate"><span class="pre">https://your.ondemand.institution.edu/public/logo.png</span></code>.</td>
+</tr>
+<tr class="row-even"><th class="stub">Favicon</th>
+<td>OOD_PUBLIC_URL</td>
+<td>The favicon is expected to exist at the path <code class="docutils literal notranslate"><span class="pre">$OOD_PUBLIC_URL/favicon.ico</span></code>. For a default OOD installation the favicon will be located at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/favicon.ico</span></code>.</td>
+</tr>
+<tr class="row-odd"><th class="stub">Brand background color</th>
+<td>OOD_BRAND_BG_COLOR</td>
+<td>Controls the background color of the navbar in the dashboard</td>
+</tr>
+<tr class="row-even"><th class="stub">Brand foreground color</th>
+<td>OOD_BRAND_LINK_ACTIVE_BG_COLOR</td>
+<td>Controls the background color the active link in the navbar in the dashboard</td>
+</tr>
+<tr class="row-odd"><th class="stub">Replace header title with logo</th>
+<td>OOD_DASHBOARD_HEADER_IMG_LOGO</td>
+<td>Value should be url to logo i.e. <code class="docutils literal notranslate"><span class="pre">/public/logo.png</span></code>.  the background color the active link in the navbar in the dashboard</td>
+</tr>
+<tr class="row-even"><th class="stub">Use white text on black background for navbar.</th>
+<td>OOD_NAVBAR_TYPE</td>
+<td>By default we use <code class="docutils literal notranslate"><span class="pre">inverse</span></code> for this value, which specifies to use <a class="reference external" href="https://getbootstrap.com/docs/3.3/components/#navbar-inverted">Bootstrap 3’s inverted navbar</a> where text is white and background is black (or dark grey). You can set this to <code class="docutils literal notranslate"><span class="pre">default</span></code> to use black text on light grey background if it fits your branding better.</td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center" id="id6">
+<img alt="_images/dashboard_navbar_branding_bluered.png" src="_images/dashboard_navbar_branding_bluered.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_LINK_ACTIVE_BG_COLOR</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_TITLE</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span></p>
 </div>
-<div class="section" id="colors">
-<h3>Colors<a class="headerlink" href="#colors" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">OOD_BRAND_BG_COLOR</span><span class="o">=</span><span class="s1">&#39;#c8102e&#39;</span>
-<span class="nv">OOD_BRAND_LINK_ACTIVE_BG_COLOR</span><span class="o">=</span><span class="s1">&#39;#990c23&#39;</span>
-</pre></div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If setting in nginx_stage.yml, careful to set the value using quotes i.e. <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR:</span> <span class="pre">'#0000ff'</span></code>. If you omit the quotes, YAML will see <code class="docutils literal notranslate"><span class="pre">#</span></code> as a comment and the value of the <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR</span></code> will be <code class="docutils literal notranslate"><span class="pre">nil</span></code></p>
 </div>
-</div></blockquote>
 </div>
+<div class="section" id="add-urls-to-help-menu">
+<h2>Add URLs to Help menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
+<p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
+<table border="1" class="docutils" id="id7">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head stub">Name</th>
+<th class="head">Environment variable</th>
+<th class="head">Example value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><th class="stub">Support URL</th>
+<td>OOD_DASHBOARD_SUPPORT_URL</td>
+<td><a class="reference external" href="https://www.osc.edu/contact/supercomputing_support">https://www.osc.edu/contact/supercomputing_support</a></td>
+</tr>
+<tr class="row-odd"><th class="stub">Support Email</th>
+<td>OOD_DASHBOARD_SUPPORT_EMAIL</td>
+<td><a class="reference external" href="mailto:oschelp&#37;&#52;&#48;osc&#46;edu">oschelp<span>&#64;</span>osc<span>&#46;</span>edu</a></td>
+</tr>
+<tr class="row-even"><th class="stub">User Documentation</th>
+<td>OOD_DASHBOARD_DOCS_URL</td>
+<td><a class="reference external" href="https://www.osc.edu/ondemand">https://www.osc.edu/ondemand</a></td>
+</tr>
+<tr class="row-odd"><th class="stub">Developer Documentation</th>
+<td>OOD_DASHBOARD_DEV_DOCS_URL</td>
+<td><a class="reference external" href="https://osc.github.io/ood-documentation/master/app-development.html">https://osc.github.io/ood-documentation/master/app-development.html</a> (link appears in Develop dropdown if developer mode enabled for user)</td>
+</tr>
+<tr class="row-even"><th class="stub">Change Password URL</th>
+<td>OOD_DASHBOARD_PASSWD_URL</td>
+<td><a class="reference external" href="https://my.osc.edu">https://my.osc.edu</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="add-shortcuts-to-files-menu">
 <h2>Add shortcuts to Files menu<a class="headerlink" href="#add-shortcuts-to-files-menu" title="Permalink to this headline">¶</a></h2>
@@ -335,9 +425,9 @@ all the possible project directories the user could have.</li>
 in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories
 exist and the user has access to will appear as links in the Files menu under
 the Home Directory link.</p>
-<div class="figure align-center" id="id4">
+<div class="figure align-center" id="id8">
 <img alt="_images/files_menu_shortcuts_osc.png" src="_images/files_menu_shortcuts_osc.png" />
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
 </div>
 <ul class="simple">
 <li>You must restart the Dashboard app to see a configuration change take effect.
@@ -350,15 +440,82 @@ app.</p>
 </div>
 <div class="section" id="whitelist-directories">
 <h2>Whitelist directories<a class="headerlink" href="#whitelist-directories" title="Permalink to this headline">¶</a></h2>
-<p>Best place for this is nginx_stage</p>
+<p>By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:</p>
+<ol class="arabic simple">
+<li>Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the whitelisted paths</li>
+<li>Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitary path that is not an eventual child of the whitelisted paths</li>
+<li>Users should not be able to get around this using symlinks</li>
+</ol>
+<p>We recommend setting this environment variable in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as a YAML mapping (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> i.e. below would whitelist home directories, project space, and scratch space at OSC:</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pun_custom_env</span><span class="p">:</span>
+  <span class="n">WHITELIST_PATH</span><span class="p">:</span> <span class="s2">&quot;/users:/fs/project:/fs/scratch&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is not yet used in production at OSC, so we consider this feature “experimental” for now.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.</p>
+</div>
 </div>
 <div class="section" id="set-default-ssh-host">
 <h2>Set default ssh host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
-<p>COPY FROM</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST</span></code> to change the default ssh host. Otherwise it will default to “localhost” i.e. add the line <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST=&quot;localhost&quot;</span></code>.</p>
+<p>This will control what host the shell app ssh’s to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
 </div>
 <div class="section" id="custom-job-composer-templates">
 <h2>Custom Job Composer Templates<a class="headerlink" href="#custom-job-composer-templates" title="Permalink to this headline">¶</a></h2>
-<p>COPY FROM</p>
+<p>Below explains how job templates work for the Job Composer and how you can add your own. <a class="reference external" href="https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/myjobs/templates">Here is an example of the templates we use at OSC for the various clusters we have</a></p>
+<div class="section" id="job-templates-overview">
+<h3>Job Templates Overview<a class="headerlink" href="#job-templates-overview" title="Permalink to this headline">¶</a></h3>
+<p>“Job Composer” attempts to model a simple but common workflow. When creating a new batch job to run a simulation a user may:</p>
+<ol class="arabic simple">
+<li>copy the directory of a job they already ran or an example job</li>
+<li>edit the files</li>
+<li>submit a new job</li>
+</ol>
+<p>“Job Composer” implements these steps by providing the user job template directories and the ability to make copies of them: (1) Copy a directory, (2) Edit the files, and (3) Submit a new job.</p>
+<ol class="arabic simple">
+<li>Copy a directory of a job already ran or an example job<ol class="arabic">
+<li>User can create a new job from a “default” template. A custom default template can be defined at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/templates/default</span></code> or under the app deployment directory at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/templates/default</span></code>. If no default template is specified, the default is <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/example_templates/torque</span></code></li>
+<li>user can select a directory to copy from a list of “System” templates the admin copied to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/templates</span></code> or under the app deployment directory at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/templates</span></code> during installation</li>
+<li>user can select a directory to copy from a list of “User” templates that the user has copied to <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/templates</span></code></li>
+<li>user can select a job directory to copy that they already created through “Job Composer” from <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/projects/default</span></code></li>
+</ol>
+</li>
+<li>Edit the files<ol class="arabic">
+<li>user can open the copied job directory in the File Explorer and edit files using the File Editor</li>
+</ol>
+</li>
+<li>Submit a new job<ol class="arabic">
+<li>user can use the Job Options form specify which host to submit to, what file is the job script</li>
+<li>user can use the web interface to submit the job to the batch system</li>
+<li>after the job is completed, the user can open the directory in the file explorer to view results</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="job-template-details">
+<h3>Job Template Details<a class="headerlink" href="#job-template-details" title="Permalink to this headline">¶</a></h3>
+<p>A template consists of a folder and a <cite>manifest.yml</cite> file.</p>
+<p>The folder contains files and scripts related to the job.</p>
+<p>The manifest contains additional metadata about a job, such as a name, the default host, the submit script file name, and any notes about the template.</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">A</span> <span class="n">Template</span> <span class="n">Name</span>
+<span class="n">host</span><span class="p">:</span> <span class="n">ruby</span>
+<span class="n">script</span><span class="p">:</span> <span class="n">ruby</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">notes</span><span class="p">:</span> <span class="n">Notes</span> <span class="n">about</span> <span class="n">the</span> <span class="n">template</span><span class="p">,</span> <span class="n">such</span> <span class="k">as</span> <span class="n">content</span> <span class="ow">and</span> <span class="n">function</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In the event that a job is created from a template that is missing from the <cite>manifest.yml</cite>, “Job Composer” will assign the following default values:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> The name of the template folder.</li>
+<li><code class="docutils literal notranslate"><span class="pre">host</span></code> The cluster id of the first cluster with a valid resource_mgr listed in the OOD cluster config</li>
+<li><code class="docutils literal notranslate"><span class="pre">script</span></code> The first <code class="docutils literal notranslate"><span class="pre">.sh</span></code> file appearing in the template folder.</li>
+<li><code class="docutils literal notranslate"><span class="pre">notes</span></code> The path to the location where a template manifest should be located.</li>
+</ul>
+</div>
 </div>
 <div class="section" id="custom-error-page-for-missing-home-directory-on-launch">
 <h2>Custom Error Page for Missing Home Directory on Launch<a class="headerlink" href="#custom-error-page-for-missing-home-directory-on-launch" title="Permalink to this headline">¶</a></h2>
@@ -372,7 +529,137 @@ can be customized by adding a custom one to <code class="docutils literal notran
 </div>
 <div class="section" id="control-which-apps-appear-in-the-dashboard-navbar">
 <h2>Control which apps appear in the Dashboard Navbar<a class="headerlink" href="#control-which-apps-appear-in-the-dashboard-navbar" title="Permalink to this headline">¶</a></h2>
-<p>In OnDemand 1.3 and earlier,</p>
+<p>Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.</p>
+<p>In OnDemand 1.3 and earlier, a Ruby array (<code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code>) stored a whitelist of categories that could appear in the navbar. This whitelist acts both as a sort order for the top level menus of apps and a whitelist of which apps will appear in the menu. The only way to modify this whitelist is to do so in a Dashboard initializer. You would add a file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code> and add this line:</p>
+<div class="code ruby highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NavConfig</span><span class="o">.</span><span class="n">categories</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Reports&quot;</span>
+</pre></div>
+</div>
+<p>Then an app that specifies “Reports” as the category in the manifest would appear in the “Reports” menu.</p>
+<p>In OnDemand 1.4 we changed the behavior by adding a new boolean variable <code class="docutils literal notranslate"><span class="pre">NavConfig.categories_whitelist</span></code> which defaults to false. If false, whitelist mode is disabled, and the <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code> only exists to act to enforce a sort order and all apps found with a valid category will be available to launch.</p>
+<p>Below are different configuration options and the resulting navbar if you had installed:</p>
+<ul class="simple">
+<li>OnDemand with a cluster configured that accepts job submissions and shell access</li>
+<li>at least one interactive app</li>
+<li>at least one custom app that specifies “Reports” as the category</li>
+</ul>
+<table border="1" class="docutils" id="id9">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Navbar Configuration</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Configuration</th>
+<th class="head">Resulting Navbar</th>
+<th class="head">Reason</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Default configuration</td>
+<td>“Files”, “Jobs”, “Clusters”, “Interactive Apps”, “Reports”</td>
+<td>whitelist mode is false, so whitelist now only enforces sort order</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">NavConfig.categories_whitelist=true</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></td>
+<td>“Files”, “Jobs”, “Clusters”, “Interactive Apps”</td>
+<td>whitelist mode is enabled and since “Reports” is not in the whitelist it is omitted</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">NavConfig.categories=[]</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></td>
+<td>“Clusters”, “Files”, “Interactive Apps”, “Jobs”, “Reports”</td>
+<td>the app categories appear in alphabetical order since whitelist mode is disabled</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">NavConfig.categories=[]</span></code> and <code class="docutils literal notranslate"><span class="pre">NavConfig.categories_whitelist=true</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></td>
+<td>no app menus appear!</td>
+<td>whitelist mode is enabled, so only apps in <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code> would appear, and since that is an empty list, no apps appear in the navbar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="disable-safari-warning-on-dashboard">
+<h2>Disable Safari Warning on Dashboard<a class="headerlink" href="#disable-safari-warning-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>We currently display an alert message at the top of the Dashboard mentioning
+that we don’t currently support the Safari browser. This is because of an issue
+in Safari where it fails to connect to websockets if the Apache proxy uses
+Basic Auth for user authentication (on by default for new OOD installations).</p>
+<p>If you ever change the authentication mechanism to a cookie-based mechanism
+(e.g., Shibboleth or OpenID Connect), then it is recommended you disable this
+alert message in the dashboard.</p>
+<p>You can do this by modifying the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file as such:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DISABLE_SAFARI_BASIC_AUTH_WARNING</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disk-quota-warnings-on-dashboard">
+<h2>Disk Quota Warnings on Dashboard<a class="headerlink" href="#disk-quota-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>You can display warnings to users on the Dashboard if their
+disk quota is nearing its limit. This requires an auto-updated (it is
+recommended to update this file every <strong>5 minutes</strong> with a cronjob) JSON file
+that lists all user quotas. The JSON schema for version <cite>1</cite> is given as:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1525361263</span><span class="p">,</span>
+  <span class="s2">&quot;quotas&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">version</span></code> defines the version of the JSON schema used, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>
+defines when this file was generated, and <code class="docutils literal notranslate"><span class="pre">quotas</span></code> is a list of quota objects
+(see below).</p>
+<p>You can configure the Dashboard to use this JSON file (or files) by setting the
+environment variable <code class="docutils literal notranslate"><span class="pre">OOD_QUOTA_PATH</span></code> as a colon-delimited list of all JSON
+file paths in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file.</p>
+<p>The default threshold for displaying the warning is at 95% (<cite>0.95</cite>), but this
+can be changed with the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_QUOTA_THRESHOLD</span></code>.</p>
+<p>An example is given as:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
+
+<span class="n">OOD_QUOTA_PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/quota1.json:/path/to/quota2.json&quot;</span>
+<span class="n">OOD_QUOTA_THRESHOLD</span><span class="o">=</span><span class="s2">&quot;0.80&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="individual-user-quota">
+<h3>Individual User Quota<a class="headerlink" href="#individual-user-quota" title="Permalink to this headline">¶</a></h3>
+<p>If the quota is defined as a <code class="docutils literal notranslate"><span class="pre">user</span></code> quota, then it applies to only disk
+resources used by the user alone. This is the default type of quota object and
+is given in the following format:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">A block must be equal to 1 KB for proper conversions.</p>
+</div>
+</div>
+<div class="section" id="individual-fileset-quota">
+<h3>Individual Fileset Quota<a class="headerlink" href="#individual-fileset-quota" title="Permalink to this headline">¶</a></h3>
+<p>If the quota is defined as a <code class="docutils literal notranslate"><span class="pre">fileset</span></code> quota, then it applies to all disk
+resources used underneath a given volume. This requires the object to be
+repeated for <strong>each user</strong> that uses disk resources under this given volume.
+The format is given as:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fileset&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/volume2&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;block_usage&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+  <span class="s2">&quot;total_block_usage&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="s2">&quot;block_limit&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+  <span class="s2">&quot;file_usage&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;total_file_usage&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s2">&quot;file_limit&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">block_usage</span></code> and <code class="docutils literal notranslate"><span class="pre">file_usage</span></code> are the disk resource usages attributed to
+the specified user only.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For each user with resources under this fileset, the above object will be repeated with just <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">block_usage</span></code>, and <code class="docutils literal notranslate"><span class="pre">file_usage</span></code> changing.</p>
+</div>
+</div>
 </div>
 </div>
 
