@@ -26,7 +26,7 @@ Installation
 
    .. code-block:: sh
 
-      sudo scl enable rh-ruby22 -- rake install
+      sudo scl enable rh-ruby24 -- rake install
 
    .. note::
 
@@ -35,7 +35,7 @@ Installation
 
       .. code-block:: sh
 
-         sudo scl enable rh-ruby22 -- rake install PREFIX="/tmp/nginx_stage"
+         sudo scl enable rh-ruby24 -- rake install PREFIX="/tmp/nginx_stage"
 
 #. Configure the :program:`nginx_stage` installation by modifying the YAML
    configuration file located at::
