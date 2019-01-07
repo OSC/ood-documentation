@@ -63,29 +63,94 @@ To display a MOTD file on the Dashboard ensure that the environment variables ``
       MOTD_PATH="/etc/motd" # this supports both file and RSS feed URIs
       MOTD_FORMAT="txt" # markdown, txt, rss
 
+.. figure:: /images/dashboard_motd.png
+   :align: center
+
+   Message of the Day appears in the body of the index page.
+
+We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
+
 
 Branding
 -------------------
 
-OOD provides several ways to customize the look of an installation.
+You can customize the logo, favicon, title, and navbar colors of OnDemand.
 
-Title
-......
+.. figure:: /images/dashboard_branding_logo_and_colors.png
+   :align: center
 
-The title appears in the navbar and is controlled by the environment variable ``$OOD_DASHBOARD_TITLE``.
 
-Logos
-......
+We recommend setting these environment variables in ``/etc/ood/config/nginx_stage.yml`` as YAML mappings (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env``. Alternatively you can set these in the env files of the dashboard and the apps. Currently only the dashboard uses the colors in the navbar.
 
-The Dashboard logo is controlled by the environment variable ``$OOD_DASHBOARD_LOGO``. The favicon is expected to exist at the path ``$OOD_PUBLIC_URL/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
 
-Colors
-.......
+.. list-table:: Branding
+   :header-rows: 1
+   :stub-columns: 1
 
-   .. code-block:: sh
+   * - Feature
+     - Environment Variable
+     - Details
+   * - Title
+     - OOD_DASHBOARD_TITLE
+     - The title appears in the navbar and is controlled by the environment variable ``$OOD_DASHBOARD_TITLE``. The default value is "Open OnDemand".
+   * - Logo
+     - OOD_DASHBOARD_LOGO
+     - The default value for ``OOD_DASHBOARD_LOGO`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.
+   * - Favicon
+     - OOD_PUBLIC_URL
+     - The favicon is expected to exist at the path ``$OOD_PUBLIC_URL/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
+   * - Brand background color
+     - OOD_BRAND_BG_COLOR
+     - Controls the background color of the navbar in the dashboard
+   * - Brand foreground color
+     - OOD_BRAND_LINK_ACTIVE_BG_COLOR
+     - Controls the background color the active link in the navbar in the dashboard
+   * - Replace header title with logo
+     - OOD_DASHBOARD_HEADER_IMG_LOGO
+     - Value should be url to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
+   * - Use white text on black background for navbar.
+     - OOD_NAVBAR_TYPE
+     - By default we use ``inverse`` for this value, which specifies to use `Bootstrap 3's inverted navbar <https://getbootstrap.com/docs/3.3/components/#navbar-inverted>`_ where text is white and background is black (or dark grey). You can set this to ``default`` to use black text on light grey background if it fits your branding better.
 
-      OOD_BRAND_BG_COLOR='#c8102e'
-      OOD_BRAND_LINK_ACTIVE_BG_COLOR='#990c23'
+
+.. figure:: /images/dashboard_navbar_branding_bluered.png
+   :align: center
+
+   Nav bar if I set ``OOD_BRAND_BG_COLOR`` to ``#0000ff`` and ``OOD_BRAND_LINK_ACTIVE_BG_COLOR`` to ``#ff0000`` and ``OOD_DASHBOARD_TITLE`` to ``OSC OnDemand``
+
+
+.. warning:: If setting in nginx_stage.yml, careful to set the value using quotes i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
+
+
+
+Add URLs to Help menu
+---------------------
+
+These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
+
+.. list-table:: Dashboard URLs
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Name
+     - Environment variable
+     - Example value
+   * - Support URL
+     - OOD_DASHBOARD_SUPPORT_URL
+     - https://www.osc.edu/contact/supercomputing_support
+   * - Support Email
+     - OOD_DASHBOARD_SUPPORT_EMAIL
+     - oschelp@osc.edu
+   * - User Documentation
+     - OOD_DASHBOARD_DOCS_URL
+     - https://www.osc.edu/ondemand
+   * - Developer Documentation
+     - OOD_DASHBOARD_DEV_DOCS_URL
+     - https://osc.github.io/ood-documentation/master/app-development.html (link appears in Develop dropdown if developer mode enabled for user)
+   * - Change Password URL
+     - OOD_DASHBOARD_PASSWD_URL
+     - https://my.osc.edu
+
 
 Add shortcuts to Files menu
 ---------------------------
