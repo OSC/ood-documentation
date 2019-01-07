@@ -3,14 +3,14 @@
 A Working Example Of A ``bin_overrides`` Script
 ===============================================
 
-``sbatch`` is the Slurm scheduler's submission client. In this example we will show how cluster configuration's ``bin_override`` may be used to change default behavior.
+``sbatch`` is the Slurm scheduler's submission client. In this example we will show how cluster configuration's ``bin_overrides`` may be used to change default behavior.
 
-This example demonstrates a few uses of overriding the default scheduler clients:
+This example demonstrates a few uses of wrapping the default scheduler clients:
 
-* Logging values passed to the scheduler
-* Altering arguments passed to the scheduler
 * Using SSH from the web host to launch ``sbatch`` on the submit host
+* Altering arguments passed to the scheduler
 * Altering the script passed to ``sbatch`` (which is almost certainly a terrible idea)
+* Logging values passed to the scheduler in a custom location (note that the values passed to ``sbatch`` are also logged to the PUN log file at ``/var/log/nginx/$USER/error.log`` by the Dashboard and Job Composer when submitting jobs)
 
 .. warning::
 
@@ -28,7 +28,7 @@ This example demonstrates a few uses of overriding the default scheduler clients
   import sys
 
   '''
-  An example of a `bin_override` replacing Slurm `sbatch` for use with Open OnDemand.
+  An example of a `bin_overrides` replacing Slurm `sbatch` for use with Open OnDemand.
 
   Requirements:
 
