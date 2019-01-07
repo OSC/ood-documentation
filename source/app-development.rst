@@ -21,5 +21,5 @@ on a compute node.
 
    app-development/enabling-development-mode
    app-development/interactive
-   app-development/tutorials-passenger-apps
    app-development/tutorials-interactive-apps
+   app-development/tutorials-passenger-apps
