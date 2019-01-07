@@ -10,6 +10,10 @@ Node.js apps that follow a convention for the app's startup file.
 The Dashboard app, Shell app, and all other core apps in OnDemand are Passenger
 apps that can be replaced by custom Passenger apps. Or you can create your own.
 
+OnDemand's Interactive Apps are plugins that contain configuration files and a job
+template for running a VNC Server or Web Server application (such as Jupyter or Matlab)
+on a compute node.
+
 
 .. toctree::
    :maxdepth: 2
