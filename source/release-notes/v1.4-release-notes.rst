@@ -106,9 +106,13 @@ Upgrade to Ruby 2.4, NodeJS 6, Passenger 5
 
 This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the `Passenger RPM automation repo <https://github.com/phusion/passenger_rpm_automation>`__. A side effect of these dependency changes is that custom applications may need to be rebuilt before they will work.
 
-.. note::
+.. warning::
 
-  The Per User NGINX temporary directory has been moved from `/var/lib/nginx/` to `/var/tmp/nginx` due to an issue with more restrictive permissions with NGINX 1.14.
+  The Per User NGINX temporary directory has been moved from ``/var/lib/nginx`` to ``/var/tmp/nginx`` due to an issue with more restrictive permissions with NGINX 1.14.
+
+  A consequence of this NGINX 1.14 upgrade is that NGINX directories like
+  ``/var/log/nginx``  have become more restrictive - owned by the nginx user and set by
+  default to 700.
 
 Security Enhancement - PUN autogenerates secret key base if none is set
 .......................................................................
@@ -118,7 +122,7 @@ The PUN will autogenerate its own unique per-user secret key base string which i
 Security Enhancement: App development mode is disabled by default
 .................................................................
 
-Development mode disabled by default: application development gives increased access to a system (e.g. allowing the user to open an interactive shell on the web node), and should only be enabled for trusted users. To re-enable a user as an application developer: TODO list steps
+Development mode disabled by default: application development gives increased access to a system (e.g. allowing the user to open an interactive shell on the web node), and should only be enabled for trusted users. For details, see :ref:`enabling-development-mode`.
 
 Security Enhancement: Enable whitelisting of directories in several core apps
 .............................................................................
