@@ -314,6 +314,7 @@ can be customized by adding a custom one to ``/etc/ood/config/pun/html/missing_h
 
 See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
 
+.. _dashboard-navbar-config:
 
 Control which apps appear in the Dashboard Navbar
 -------------------------------------------------
