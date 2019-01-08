@@ -29,7 +29,7 @@ options read from a forked off command line call.
 #. First we rename the ``form.yml`` for the Jupyter Interactive App to
    ``form.yml.erb``:
 
-   .. code-block:: shell
+   .. code-block:: sh
 
       mv ~/ondemand/dev/jupyter/form.yml ~/ondemand/dev/jupyter/form.yml.erb
 

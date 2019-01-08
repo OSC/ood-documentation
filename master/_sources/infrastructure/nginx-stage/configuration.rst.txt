@@ -192,11 +192,11 @@ Configuration Options
    the ``locations.ini`` file that describes Passenger installation
 
    Default
-     Use the file supplied by Passenger 4.0 installed by Software Collections
+     Use the file supplied by Passenger 5
 
      .. code-block:: yaml
 
-        passenger_root: "/opt/rh/rh-passenger40/root/usr/share/passenger/phusion_passenger/locations.ini"
+        passenger_root: "/usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini"
 
    Example
      Use a custom file
@@ -221,7 +221,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        passenger_ruby: "/opt/rh/rh-ruby22/root/usr/bin/ruby"
+        passenger_ruby: "/opt/rh/rh-ruby24/root/usr/bin/ruby"
 
 .. describe:: passenger_nodejs (String, null)
 
@@ -235,11 +235,11 @@ Configuration Options
         passenger_nodejs: "/opt/ood/nginx_stage/bin/node"
 
    Example
-     Use the binary supplied by Node.js 0.10 installed by Software Collections
+     Use the binary supplied by Node.js installed by Software Collections
 
      .. code-block:: yaml
 
-        passenger_nodejs: "/opt/rh/nodejs010/root/usr/bin/node"
+        passenger_nodejs: "/opt/rh/rh-nodejs6/root/usr/bin/node"
 
 .. describe:: passenger_python (String, null)
 

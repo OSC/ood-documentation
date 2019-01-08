@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Configure Apache Authentication &mdash; Open OnDemand 1.3.0 documentation</title>
+  <title>1. Configure Apache Authentication &mdash; Open OnDemand 1.4.9 documentation</title>
   
 
   
@@ -36,12 +36,10 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="../../about.html"/>
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../../index.html"/>
+    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../../index.html"/>
         <link rel="up" title="Overview" href="../overview.html"/>
         <link rel="next" title="2. Setup User Mapping" href="map-user.html"/>
         <link rel="prev" title="Overview" href="../overview.html"/> 
@@ -76,7 +74,7 @@
             
             
               <div class="version">
-                1.3
+                1.4
               </div>
             
           
@@ -100,15 +98,9 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../about.html">What is Open OnDemand</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">1. Configure Apache Authentication</a><ul>
@@ -124,23 +116,31 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Components</span></p>
+<p class="caption"><span class="caption-text">Extend</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Resources</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
 </ul>
 
             
@@ -196,7 +196,7 @@
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/master/source/authentication/overview/configure-authentication.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/overview/configure-authentication.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -237,7 +237,7 @@ these module specific configuration directives in the file:</p>
 <code class="file docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code>. If there are any
 secrets inside this file you can ensure privacy by adding restrictive file
 permissions:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod <span class="m">640</span> /opt/rh/httpd/root/etc/httpd/conf.d/auth-config.conf
 </pre></div>
 </div>
 </div>
@@ -254,12 +254,6 @@ cause future upgrades of OnDemand to break.</p>
 under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>. For example, to add support for
 an authentication module with <code class="docutils literal notranslate"><span class="pre">AuthType</span></code> of <code class="docutils literal notranslate"><span class="pre">my-auth</span></code>, you would modify the
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> file as such:</p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby22 -- rake
-scl <span class="nb">enable</span> rh-ruby22 -- rake install
-</pre></div>
-</div>
-</div></blockquote>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>
 <span class="c1"># ...</span>
@@ -272,7 +266,7 @@ scl <span class="nb">enable</span> rh-ruby22 -- rake install
 </pre></div>
 </div>
 <p>You would then build and install the new Apache configuration file with:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 <p>Finally you will need to restart your Apache HTTP Server for the changes to
@@ -348,15 +342,51 @@ empty strings and delete the cookie header if it becomes empty.</p>
     </section>
 
   </div>
-  
-
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/overview/configure-authentication.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/overview/configure-authentication.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/overview/configure-authentication.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/overview/configure-authentication.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/overview/configure-authentication.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/overview/configure-authentication.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/overview/configure-authentication.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
 
   
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.9',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

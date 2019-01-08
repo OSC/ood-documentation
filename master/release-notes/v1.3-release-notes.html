@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>v1.3 Release Notes &mdash; Open OnDemand 1.3.0 documentation</title>
+  <title>v1.3 Release Notes &mdash; Open OnDemand 1.4.9 documentation</title>
   
 
   
@@ -36,14 +36,12 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../index.html"/>
         <link rel="next" title="v1.2 Release Notes" href="v1.2-release-notes.html"/>
-        <link rel="prev" title="Use a Local Dynamic List" href="../app-development/tutorials-interactive-apps/add-custom-queue/local-dynamic-list.html"/> 
+        <link rel="prev" title="v1.4 Release Notes" href="v1.4-release-notes.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -75,7 +73,7 @@
             
             
               <div class="version">
-                1.3
+                1.4
               </div>
             
           
@@ -99,29 +97,25 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../about.html">What is Open OnDemand</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Components</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Resources</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="v1.4-release-notes.html">v1.4 Release Notes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">v1.3 Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-2">Upgrading from v1.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#infrastructure-version-changes">Infrastructure Version Changes</a></li>
@@ -146,6 +140,12 @@
 <li class="toctree-l1"><a class="reference internal" href="v1.2-release-notes.html">v1.2 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="v1.1-release-notes.html">v1.1 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
 </ul>
 
             
@@ -197,7 +197,7 @@
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/master/source/release-notes/v1.3-release-notes.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/release-notes/v1.3-release-notes.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -245,7 +245,7 @@ forward.</p>
 <li><p class="first">This RPM installation will want to overwrite any local configuration or
 modifications you may have made in earlier versions of OnDemand, so we will
 first start by making backups of OnDemand and our apps:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo mv /opt/ood /opt/ood.bak
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo mv /opt/ood /opt/ood.bak
 sudo mv /var/www/ood/apps/sys /var/www/ood/apps/sys.bak
 </pre></div>
 </div>
@@ -258,8 +258,7 @@ configuration/customization files used for the individual OnDemand core
 apps.</p>
 <p>So you will want to copy over the configuration files ahead of time for best
 results:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy over the YAML configuration file used to generate the Apache configuration file</span>
-sudo cp <span class="nv">$HOME</span>/ood/src/ood-portal-generator/config.yml /etc/ood/config/ood_portal.yml
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp <span class="nv">$HOME</span>/ood/src/ood-portal-generator/config.yml /etc/ood/config/ood_portal.yml
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -270,8 +269,11 @@ the Apache configuration file under
 haven’t been doing this before then now is a good time to start. Feel
 free to contact us if you have trouble with this.</p>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy over our app configuration (if they exist)</span>
-mkdir -p /etc/ood/config/apps
+</li>
+</ol>
+<blockquote>
+<div><p>Copy over our app configuration (if they exist).</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir -p /etc/ood/config/apps
 <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/dashboard <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/dashboard/.env.local /etc/ood/config/apps/dashboard/env
@@ -290,63 +292,68 @@ mkdir -p /etc/ood/config/apps
 <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/files/.env.local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/files <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/files/.env /etc/ood/config/apps/files/env
-
-<span class="c1"># Copy over any custom initializers you may have created (if they exist)</span>
-<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+</pre></div>
+</div>
+<p>Copy over any custom initializers you may have created (if they exist)</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/dashboard/initializers <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb /etc/ood/config/apps/dashboard/initializers/ood.rb
 <span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb&quot;</span> <span class="o">]]</span> <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/activejobs/initializers <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo cp /var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb /etc/ood/config/apps/activejobs/initializers/filter.rb
-
-<span class="c1"># Copy over your Job Composer templates (if they exist)</span>
-<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/myjobs/templates&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+</pre></div>
+</div>
+<p>Copy over your Job Composer templates (if they exist)</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/myjobs/templates&quot;</span> <span class="o">]]</span> <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo mkdir -p /etc/ood/config/apps/myjobs <span class="se">\</span>
   <span class="o">&amp;&amp;</span> sudo cp -r /var/www/ood/apps/sys.bak/myjobs/templates /etc/ood/config/apps/myjobs/.
-
-<span class="c1"># Copy over your local Interactive Desktop apps (if they exist)</span>
-<span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/bc_desktop/local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
+</pre></div>
+</div>
+<p>Copy over your local Interactive Desktop apps (if they exist)</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[[</span> -e <span class="s2">&quot;/var/www/ood/apps/sys.bak/bc_desktop/local&quot;</span> <span class="o">]]</span> <span class="se">\</span>
     <span class="o">&amp;&amp;</span> sudo cp -r /var/www/ood/apps/sys.bak/bc_desktop/local /etc/ood/config/apps/bc_desktop
 </pre></div>
 </div>
-<p>If all went well, you should have a directory structure that looks <em>similar</em>
-to:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tree /etc/ood/config
-<span class="go">/etc/ood/config</span>
-<span class="go">├── apps</span>
-<span class="go">│   ├── activejobs</span>
-<span class="go">│   │   └── ...</span>
-<span class="go">│   ├── bc_desktop</span>
-<span class="go">│   │   └── ...</span>
-<span class="go">│   ├── dashboard</span>
-<span class="go">│   │   └── ...</span>
-<span class="go">│   ├── files</span>
-<span class="go">│   │   └── ...</span>
-<span class="go">│   ├── myjobs</span>
-<span class="go">│   │   └── ...</span>
-<span class="go">│   └── shell</span>
-<span class="go">│       └── ...</span>
-<span class="go">├── clusters.d</span>
-<span class="go">│   ├── my_cluster.yml</span>
-<span class="go">│   └── ...</span>
-<span class="go">├── nginx_stage.yml</span>
-<span class="go">└── ood_portal.yml</span>
+<p>If all went well, you should have a directory structure that looks <em>similar</em> to:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>tree /etc/ood/config
+<span class="c1"># /etc/ood/config</span>
+<span class="c1"># ├── apps</span>
+<span class="c1"># │   ├── activejobs</span>
+<span class="c1"># │   │   └── ...</span>
+<span class="c1"># │   ├── bc_desktop</span>
+<span class="c1"># │   │   └── ...</span>
+<span class="c1"># │   ├── dashboard</span>
+<span class="c1"># │   │   └── ...</span>
+<span class="c1"># │   ├── files</span>
+<span class="c1"># │   │   └── ...</span>
+<span class="c1"># │   ├── myjobs</span>
+<span class="c1"># │   │   └── ...</span>
+<span class="c1"># │   └── shell</span>
+<span class="c1"># │       └── ...</span>
+<span class="c1"># ├── clusters.d</span>
+<span class="c1"># │   ├── my_cluster.yml</span>
+<span class="c1"># │   └── ...</span>
+<span class="c1"># ├── nginx_stage.yml</span>
+<span class="c1"># └── ood_portal.yml</span>
 </pre></div>
 </div>
-</li>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic">
 <li><p class="first">Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.3/ondemand-release-web-1.3-1.el7.noarch.rpm
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.3/ondemand-release-web-1.3-1.el7.noarch.rpm
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install OnDemand and all of its dependencies:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
 </pre></div>
 </div>
 </li>
 <li><p class="first">Copy back any custom apps (e.g., Jupyter, RStudio, …) you installed
 previously from our backup directory:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
 </pre></div>
 </div>
 </li>
@@ -360,7 +367,7 @@ successfully.</p>
 <div class="section" id="infrastructure-version-changes">
 <h2>Infrastructure Version Changes<a class="headerlink" href="#infrastructure-version-changes" title="Permalink to this headline">¶</a></h2>
 <span id="v1-3-infrastructure-versions"></span><table border="1" class="colwidths-auto docutils" id="id2">
-<caption><span class="caption-number">Table 8 </span><span class="caption-text">Infrastructure Component Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 12 </span><span class="caption-text">Infrastructure Component Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head stub">Component</th>
 <th class="head">Version</th>
@@ -384,14 +391,14 @@ successfully.</p>
 </tr>
 </tbody>
 </table>
-<p><a class="reference internal" href="#v1-3-infrastructure-versions"><span class="std std-numref">Table 8</span></a> lists the versions as well as the
+<p><a class="reference internal" href="#v1-3-infrastructure-versions"><span class="std std-numref">Table 12</span></a> lists the versions as well as the
 previous version it was updated from for each component that make up the
 infrastructure for this release.</p>
 </div>
 <div class="section" id="application-version-changes">
 <h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
 <span id="v1-3-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id3">
-<caption><span class="caption-number">Table 9 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 13 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head stub">App</th>
 <th class="head">Version</th>
@@ -428,7 +435,7 @@ infrastructure for this release.</p>
 </tr>
 </tbody>
 </table>
-<p><a class="reference internal" href="#v1-3-app-versions"><span class="std std-numref">Table 9</span></a> lists the versions as well as the previous version
+<p><a class="reference internal" href="#v1-3-app-versions"><span class="std std-numref">Table 13</span></a> lists the versions as well as the previous version
 it was updated from for each of the system web applications in this release.</p>
 </div>
 <div class="section" id="details">
@@ -559,7 +566,7 @@ running on will display in the details section of the job.</p>
         <a href="v1.2-release-notes.html" class="btn btn-neutral float-right" title="v1.2 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../app-development/tutorials-interactive-apps/add-custom-queue/local-dynamic-list.html" class="btn btn-neutral" title="Use a Local Dynamic List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="v1.4-release-notes.html" class="btn btn-neutral" title="v1.4 Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -581,15 +588,51 @@ running on will display in the details section of the job.</p>
     </section>
 
   </div>
-  
-
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/release-notes/v1.3-release-notes.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/release-notes/v1.3-release-notes.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/release-notes/v1.3-release-notes.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/release-notes/v1.3-release-notes.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/release-notes/v1.3-release-notes.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/release-notes/v1.3-release-notes.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/release-notes/v1.3-release-notes.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
 
   
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.9',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

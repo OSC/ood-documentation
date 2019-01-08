@@ -31,10 +31,17 @@ Initial Installation Steps
 
       sudo groupadd -r keycloak
       sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
-      # if -m doesn't work, do this:
-      # sudo install -d -o keycloak -g keycloak /var/lib/keycloak
-      # this makes a home directory, which is needed when running API calls as
-      # keycloak user
+      
+   If ``-m`` doesn't work, do this:
+
+   .. code-block:: sh
+
+      sudo install -d -o keycloak -g keycloak /var/lib/keycloak
+
+   This makes a home directory, which is needed when running API calls as keycloak user. Finally we set proper permissions:
+
+   .. code-block:: sh
+
       sudo chown keycloak: -R keycloak-3.1.0.Final
 
 #. Restrict access to keycloak-3.1.0.Final/standalone, which will contain
@@ -53,11 +60,17 @@ Initial Installation Steps
       yum install java-1.8.0-openjdk-devel
 
 
-#. Added 'admin' to '/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user
+#. Added 'admin' to '/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user.
+
+   If you are not already there:
 
    .. code-block:: sh
 
-      # cd /opt/keycloak-3.1.0.Final if you are not already there
+      cd /opt/keycloak-3.1.0.Final 
+
+   Generate a password to use for the admin user:
+
+   .. code-block:: sh
 
       openssl rand -hex 20 # generate a password to use for admin user
       sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
@@ -119,14 +132,17 @@ Start Keycloak Server
       sudo systemctl daemon-reload
       sudo systemctl start keycloak
 
-      # it may take a little time to load; verify it has loaded:
-      $ sudo systemctl status keycloak
-      keycloak.service - Jboss Application Server
-      Loaded: loaded (/etc/systemd/system/keycloak.service; disabled; vendor preset: disabled)
-      Active: active (running) since Mon 2017-09-25 16:19:47 EDT; 2s ago
-      ...
-      Sep 25 16:19:49 webdev07.hpc.osc.edu standalone.sh[111998]: 16:19:49,644 INFO  [org.wildfly.extension.undertow] (MSC service thread ...0:8080)
-      Hint: Some lines were ellipsized, use -l to show in full.
+   It may take a little time to load; verify it has loaded:
+
+   .. code-block:: sh
+
+      sudo systemctl status keycloak
+      # keycloak.service - Jboss Application Server
+      # Loaded: loaded (/etc/systemd/system/keycloak.service; disabled; vendor preset: disabled)
+      # Active: active (running) since Mon 2017-09-25 16:19:47 EDT; 2s ago
+      # ...
+      # Sep 25 16:19:49 webdev07.hpc.osc.edu standalone.sh[111998]: 16:19:49,644 INFO  [#org.wildfly.extension.undertow] (MSC service thread ...0:8080)
+      # Hint: Some lines were ellipsized, use -l to show in full.
 
 
 Place Apache in front of Keycloak

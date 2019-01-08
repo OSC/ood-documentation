@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nginx_stage &mdash; Open OnDemand 1.3.0 documentation</title>
+  <title>nginx_stage &mdash; Open OnDemand 1.4.9 documentation</title>
   
 
   
@@ -36,14 +36,12 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand 1.3.0 documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../index.html"/>
         <link rel="up" title="Infrastructure" href="../infrastructure.html"/>
-        <link rel="next" title="Installation" href="nginx-stage/installation.html"/>
+        <link rel="next" title="Usage" href="nginx-stage/usage.html"/>
         <link rel="prev" title="ood_auth_map.mapfile" href="ood-auth-map/scripts/mapfile.html"/> 
 
   
@@ -76,7 +74,7 @@
             
             
               <div class="version">
-                1.3
+                1.4
               </div>
             
           
@@ -100,25 +98,37 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../about.html">What is Open OnDemand</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Components</span></p>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../infrastructure.html">Infrastructure</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ood-portal-generator.html">ood-portal-generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mod-ood-proxy.html">mod_ood_proxy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ood-auth-map.html">ood_auth_map</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">nginx_stage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="nginx-stage/installation.html">Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nginx-stage/usage.html">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nginx-stage/configuration.html">Configuration</a></li>
 </ul>
@@ -126,18 +136,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Resources</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Release Notes</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
 </ul>
 
             
@@ -191,7 +190,7 @@
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/master/source/infrastructure/nginx-stage.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/infrastructure/nginx-stage.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -207,21 +206,13 @@
             
   <div class="section" id="nginx-stage">
 <span id="id1"></span><h1>nginx_stage<a class="headerlink" href="#nginx-stage" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/OSC/nginx_stage">View on GitHub</a></p>
+<p><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/nginx_stage">View on GitHub</a></p>
 <p>Stages and launches the per-user NGINX (PUN) processes for individual users. It
 is also responsible for staging, listing, and cleaning up web application NGINX
 configuration files, as well as listing and stopping running PUNs.</p>
-<p>To get started you will need at a minimum the following prerequisites:</p>
-<ul class="simple">
-<li>The <a class="reference external" href="https://www.ruby-lang.org/en/">Ruby</a> language version 2.2 or newer</li>
-<li>The <a class="reference external" href="https://www.nginx.com/">NGINX</a> web server version 1.6 or newer</li>
-<li>The <a class="reference external" href="https://www.phusionpassenger.com/">Phusion Passenger</a> web app server version 4.0.55 or newer</li>
-</ul>
-<p>Please see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> on how to install the above requirements.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="nginx-stage/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nginx-stage/usage.html">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="nginx-stage/commands/pun.html">nginx_stage pun</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nginx-stage/commands/app.html">nginx_stage app</a></li>
@@ -252,7 +243,7 @@ configuration files, as well as listing and stopping running PUNs.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="nginx-stage/installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nginx-stage/usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="ood-auth-map/scripts/mapfile.html" class="btn btn-neutral" title="ood_auth_map.mapfile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -277,15 +268,51 @@ configuration files, as well as listing and stopping running PUNs.</p>
     </section>
 
   </div>
-  
-
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/infrastructure/nginx-stage.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/infrastructure/nginx-stage.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/infrastructure/nginx-stage.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/infrastructure/nginx-stage.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/infrastructure/nginx-stage.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/infrastructure/nginx-stage.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/infrastructure/nginx-stage.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
 
   
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.9',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

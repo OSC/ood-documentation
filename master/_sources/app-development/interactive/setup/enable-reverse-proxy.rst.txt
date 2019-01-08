@@ -19,10 +19,10 @@ Requirements
 - confirm that if you run the command ``hostname`` from a compute node it will
   return a string that matches the above regular expression
 
-  .. code-block:: console
+  .. code-block:: sh
 
-     $ hostname
-     n0001.ten.osc.edu
+     hostname
+     # n0001.ten.osc.edu
 
   .. note::
 
@@ -128,24 +128,24 @@ Steps to Enable in Apache
 
 #. Build/install the updated Apache configuration file:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 #. Restart the Apache server to have the changes take effect:
 
    CentOS/RHEL 6:
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo service httpd24-httpd condrestart
-        Stopping httpd:                                            [  OK  ]
-        Starting httpd:                                            [  OK  ]
-        $ sudo service httpd24-htcacheclean condrestart
+        sudo service httpd24-httpd condrestart
+        # Stopping httpd:                                            [  OK  ]
+        # Starting httpd:                                            [  OK  ]
+        sudo service httpd24-htcacheclean condrestart
 
    CentOS/RHEL 7:
-     .. code-block:: console
+     .. code-block:: sh
 
-        $ sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+        sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 Verify it Works
 ---------------
@@ -156,15 +156,15 @@ browser.
 
 #. SSH to any compute node that matches the regular expression above:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ ssh n0001.ten.osc.edu
+      ssh n0001.ten.osc.edu
 
 #. Start up a very simple listening server on a high number port:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ nc -l 5432
+      nc -l 5432
 
 #. In your browser navigate to this server using the Apache reverse proxy with
    the following URL format::
@@ -178,12 +178,12 @@ browser.
 #. Go back to your SSH session and verify that it received the browser
    request:
 
-   .. code-block:: console
+   .. code-block:: sh
 
-      $ nc -l 5432
-      GET /node/n0691.ten.osc.edu/5432/ HTTP/1.1
-      Host: n0691.ten.osc.edu:5432
-      Upgrade-Insecure-Requests: 1
+      nc -l 5432
+      # GET /node/n0691.ten.osc.edu/5432/ HTTP/1.1
+      # Host: n0691.ten.osc.edu:5432
+      # Upgrade-Insecure-Requests: 1
       ...
 
    .. note::

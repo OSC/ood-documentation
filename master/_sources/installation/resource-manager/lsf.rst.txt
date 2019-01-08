@@ -22,6 +22,12 @@ looks like:
        libdir: "/path/to/lsf/lib"
        envdir: "/path/to/lsf/conf"
        serverdir: "/path/to/lsf/etc"
+       # bin_overrides:
+         # bsub: "/usr/local/bin/bsub"
+         # bjobs: ""
+         # bstop: ""
+         # bresume: ""
+         # bkill: ""
 
 with the following configuration options:
 
@@ -35,6 +41,16 @@ envdir
   The path to the LSF client ``conf/`` directory.
 serverdir
   The path to the LSF client ``etc/`` directory.
+bin_overrides
+  Replacements/wrappers for LSF's job submission and control clients. *Optional*
+
+  Supports the following clients:
+
+  - `bsub`
+  - `bjobs`
+  - `bstop`
+  - `bresume`
+  - `bkill`
 
 .. warning::
 

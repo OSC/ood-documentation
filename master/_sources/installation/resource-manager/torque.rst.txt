@@ -21,6 +21,8 @@ cluster looks like:
        host: "my_cluster-batch.my_center.edu"
        lib: "/path/to/torque/lib"
        bin: "/path/to/torque/bin"
+     # bin_overrides:
+         # qsub: "/usr/local/bin/qsub"
 
 with the following configuration options:
 
@@ -32,6 +34,10 @@ lib
   The path to the Torque client libraries.
 bin
   The path to the Torque client binaries.
+bin_overrides
+  Replacements/wrappers for Torque's job submission and control clients. *Optional*
+
+  The Torque adapter uses the foreign function interface interact with `libtorque.so` and so it is only possible to override `qsub`.
 
 .. warning::
 

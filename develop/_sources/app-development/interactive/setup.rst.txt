@@ -1,7 +1,7 @@
 .. _app-development-interactive-setup:
 
-Setup
-=====
+Setup Interactive Apps
+======================
 
 This guide will walk you through setting up your Open OnDemand installation to
 support :ref:`interactive` that run on compute nodes.
