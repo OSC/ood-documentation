@@ -129,8 +129,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#better-environment-setting">Better environment setting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#customizable-error-pages-for-missing-home-dirs">Customizable error pages for missing home dirs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#experimental-sge-uge-support">Experimental SGE/UGE support</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fixed-copy-paste-issues-in-the-shell-app">Fixed copy paste issues in the Shell app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#introduction-of-a-whitelist-mode-for-apps">Introduction of a whitelist mode for apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-copy-and-paste-issues-in-the-shell-app-for-firefox">Fixed copy and paste issues in the Shell app for Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#improve-default-discoverability-of-apps-in-the-dashboard-s-navbar">Improve default discoverability of apps in the Dashboard’s navbar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-quota-warnings-on-dashboard">Optional Quota warnings on dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#slurm-18-support">Slurm 18 Support</a></li>
 </ul>
@@ -225,47 +225,70 @@
 <li><a class="reference internal" href="#better-environment-setting">Better environment setting</a></li>
 <li><a class="reference internal" href="#customizable-error-pages-for-missing-home-dirs">Customizable error pages for missing home dirs</a></li>
 <li><a class="reference internal" href="#experimental-sge-uge-support">Experimental SGE/UGE support</a></li>
-<li><a class="reference internal" href="#fixed-copy-paste-issues-in-the-shell-app">Fixed copy paste issues in the Shell app</a></li>
-<li><a class="reference internal" href="#introduction-of-a-whitelist-mode-for-apps">Introduction of a whitelist mode for apps</a></li>
+<li><a class="reference internal" href="#fixed-copy-and-paste-issues-in-the-shell-app-for-firefox">Fixed copy and paste issues in the Shell app for Firefox</a></li>
+<li><a class="reference internal" href="#improve-default-discoverability-of-apps-in-the-dashboard-s-navbar">Improve default discoverability of apps in the Dashboard’s navbar</a></li>
 <li><a class="reference internal" href="#optional-quota-warnings-on-dashboard">Optional Quota warnings on dashboard</a></li>
 <li><a class="reference internal" href="#slurm-18-support">Slurm 18 support</a></li>
 </ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">We are actively developing this month and will be releasing 1.5 at the end of
+the month. Unless you want access to some of the features listed below now,
+we recommend that you wait till the 1.5 release to upgrade.</p>
+</div>
 <div class="section" id="upgrading-from-v1-3">
 <h2>Upgrading from v1.3<a class="headerlink" href="#upgrading-from-v1-3" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Enable EPEL and update OnDemand release RPM</p>
-<dl class="docutils">
-<dt>CentOS/RHEL 6</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+<p>CentOS/RHEL 6</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 sudo install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el6.noarch.rpm
 </pre></div>
 </div>
-</dd>
-<dt>CentOS/RHEL 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+<p>CentOS/RHEL 7</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el7.noarch.rpm
 </pre></div>
 </div>
-</dd>
-</dl>
 </li>
 <li><p class="first">Update OnDemand</p>
-</li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
 sudo yum update ondemand
-
-<span class="c1"># Optionally remove dependencies from prior versions of OOD</span>
-sudo yum remove nodejs010<span class="se">\*</span> rh-passenger40<span class="se">\*</span> rh-ruby22<span class="se">\*</span> nginx16<span class="se">\*</span> git19<span class="se">\*</span> v8314<span class="se">\*</span>
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance. Ruby and Node have been upgraded, so existing custom apps may need to be re-built.</p>
+</li>
+<li><p class="first">Rebuild any custom Node.js or Ruby apps</p>
+<p>Since we upgraded to Ruby 2.4 from 2.2 and NodeJS 0.10 to NodeJS 6 any custom
+Passenger apps in Ruby or NodeJS that have their dependencies installed in
+vendor/bundle or node_modules will need to be reinstalled. Some code may have
+to be updated or dependency versions changed to work with the latest Ruby version.</p>
+<p>For NodeJS apps:</p>
+<p>For Ruby apps:</p>
+<p>If you need a way to continue to still use Ruby 2.2 or a different version of
+NodeJS <a class="reference external" href="https://discourse.osc.edu">please post a question on our Discourse instance</a>.</p>
+</li>
+<li><p class="first">Verify Navbar contains all the apps you want.</p>
+<p>The behavior changed from 1.3 to 1.4 so by default all categories of any sys
+app found appear as dropdown menus without the need for configuration changes.</p>
+<p>As a result menus may appear that you do not expect, if previously you were relying
+on the “whitelist” functionality of the <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code>.</p>
+<p>See <a class="reference internal" href="../customization.html#dashboard-navbar-config"><span class="std std-ref">Control which apps appear in the Dashboard Navbar</span></a> for details.</p>
+</li>
+<li><p class="first">Verify Developer mode is configured how you want it</p>
+<p>See <a class="reference internal" href="../app-development/enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> for an explanation of how developer mode has changed
+between 1.3 and 1.4 and how to configure things properly. For sites that have active
+developers, this will either be adding configuration to revert to 1.3’s functionality,
+or creating some directories and symlinks to enable specific app developers.</p>
+</li>
+<li><p class="first">Optionally remove dependencies from prior versions of OOD</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove nodejs010<span class="se">\*</span> rh-passenger40<span class="se">\*</span> rh-ruby22<span class="se">\*</span> nginx16<span class="se">\*</span> git19<span class="se">\*</span> v8314<span class="se">\*</span>
+</pre></div>
 </div>
+</li>
+</ol>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">As a security enhancement application development privileges must now be enabled on a per user basis.</p>
+<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance. Remember, Ruby and Node have been upgraded, so existing custom apps may need to be re-built.</p>
 </div>
 </div>
 <div class="section" id="infrastructure-version-changes">
@@ -345,7 +368,18 @@ default to 700.</p>
 </div>
 <div class="section" id="add-ability-to-include-javascript-in-batch-connect-apps">
 <h3>Add ability to include Javascript in Batch Connect apps<a class="headerlink" href="#add-ability-to-include-javascript-in-batch-connect-apps" title="Permalink to this headline">¶</a></h3>
-<p>Batch Connect applications may now define two automatically included Javascript files to add interactive frontend functionality. <a class="reference external" href="https://github.com/OSC/ood-dashboard/pull/426">Github OSC/ood-dashboard#426</a></p>
+<p>Batch Connect applications may now define a Javascript file to add interactive frontend functionality. <a class="reference external" href="https://github.com/OSC/ood-dashboard/pull/426">Github OSC/ood-dashboard#426</a>.
+The contents of this JavaScript file will be embedded in <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> tags at the bottom
+of the form below the Launch button.</p>
+<ul class="simple">
+<li>For apps like <a class="reference external" href="https://github.com/OSC/bc_example_jupyter">the example Jupyter</a> app whose
+form is defined in the form.yml, you can add a <code class="docutils literal notranslate"><span class="pre">form.js</span></code> file alongside the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code>.</li>
+<li>For “subapps” like bc_desktop where you have overrides defined in a <code class="docutils literal notranslate"><span class="pre">custom_name.yml</span></code>
+you can add a <code class="docutils literal notranslate"><span class="pre">custom_name.js</span></code> for that JavaScript file to be loaded by that app.</li>
+</ul>
+<p>So for example, OSC has a Pitzer interactive desktop defined in
+<a class="reference external" href="https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/bc_desktop">this directory</a>
+as <code class="docutils literal notranslate"><span class="pre">pitzer.yml</span></code> so we could add a <code class="docutils literal notranslate"><span class="pre">pitzer.js</span></code> file.</p>
 </div>
 <div class="section" id="better-environment-setting">
 <h3>Better environment setting<a class="headerlink" href="#better-environment-setting" title="Permalink to this headline">¶</a></h3>
@@ -360,13 +394,14 @@ default to 700.</p>
 <h3>Experimental SGE/UGE support<a class="headerlink" href="#experimental-sge-uge-support" title="Permalink to this headline">¶</a></h3>
 <p>A <a class="reference external" href="/installation/resource-manager/sge.html">job adapter has been written</a> that supports Sun Grid Engine derivatives. The adapter is known to be compatible with SGE 6.2u5 and Univa GE 8.0.1. Thanks to UCLA for donating access to Hoffman2 to aid in development of the adapter.</p>
 </div>
-<div class="section" id="fixed-copy-paste-issues-in-the-shell-app">
-<h3>Fixed copy paste issues in the Shell app<a class="headerlink" href="#fixed-copy-paste-issues-in-the-shell-app" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="fixed-copy-and-paste-issues-in-the-shell-app-for-firefox">
+<h3>Fixed copy and paste issues in the Shell app for Firefox<a class="headerlink" href="#fixed-copy-and-paste-issues-in-the-shell-app-for-firefox" title="Permalink to this headline">¶</a></h3>
 <p>Resolved a pair of issues (<a class="reference external" href="https://github.com/OSC/ood-shell/issues/48">#48</a>, <a class="reference external" href="https://github.com/OSC/ood-shell/issues/55">#55</a>) that caused problems with copy and paste in the Shell application.</p>
 </div>
-<div class="section" id="introduction-of-a-whitelist-mode-for-apps">
-<h3>Introduction of a whitelist mode for apps<a class="headerlink" href="#introduction-of-a-whitelist-mode-for-apps" title="Permalink to this headline">¶</a></h3>
-<p>Introduction of a whitelist mode for apps which is disabled by default. This change means that by default, when deploying a new app, if properly configured it will appear in the Dashboard’s navigation menu without the need for changing configuration. <a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/295">OSC/ood-dashboard#295</a></p>
+<div class="section" id="improve-default-discoverability-of-apps-in-the-dashboard-s-navbar">
+<h3>Improve default discoverability of apps in the Dashboard’s navbar<a class="headerlink" href="#improve-default-discoverability-of-apps-in-the-dashboard-s-navbar" title="Permalink to this headline">¶</a></h3>
+<p>Introduction of a whitelist mode for the Dashboard navbar which is disabled by default. This change means that by default, when deploying a new app, if properly configured it will appear in the Dashboard’s navigation menu without the need for changing configuration. <a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/295">OSC/ood-dashboard#295</a></p>
+<p>For details please see <a class="reference internal" href="../customization.html#dashboard-navbar-config"><span class="std std-ref">Control which apps appear in the Dashboard Navbar</span></a>.</p>
 </div>
 <div class="section" id="optional-quota-warnings-on-dashboard">
 <h3>Optional Quota warnings on dashboard<a class="headerlink" href="#optional-quota-warnings-on-dashboard" title="Permalink to this headline">¶</a></h3>
