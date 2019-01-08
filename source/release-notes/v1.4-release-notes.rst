@@ -143,7 +143,18 @@ Prior to this release it was possible for OOD users to change the URL in the she
 Add ability to include Javascript in Batch Connect apps
 .......................................................
 
-Batch Connect applications may now define two automatically included Javascript files to add interactive frontend functionality. `Github OSC/ood-dashboard#426 <https://github.com/OSC/ood-dashboard/pull/426>`__
+Batch Connect applications may now define a Javascript file to add interactive frontend functionality. `Github OSC/ood-dashboard#426 <https://github.com/OSC/ood-dashboard/pull/426>`_.
+The contents of this JavaScript file will be embedded in ``<script>`` tags at the bottom
+of the form below the Launch button.
+
+- For apps like `the example Jupyter <https://github.com/OSC/bc_example_jupyter>`_ app whose
+  form is defined in the form.yml, you can add a ``form.js`` file alongside the ``form.yml``.
+- For "subapps" like bc_desktop where you have overrides defined in a ``custom_name.yml``
+  you can add a ``custom_name.js`` for that JavaScript file to be loaded by that app.
+
+So for example, OSC has a Pitzer interactive desktop defined in
+`this directory <https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/bc_desktop>`_
+as ``pitzer.yml`` so we could add a ``pitzer.js`` file.
 
 Better environment setting
 ..........................
