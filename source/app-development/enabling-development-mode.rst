@@ -21,7 +21,7 @@ In OnDemand 1.4, the app root for a dev app has been changed to ``'/var/www/ood/
 
 Then a user can create the dev directory in their home directory i.e. ``/home/efranz/ondemand/dev``.
 
-If you want to revert to the previous functionality of 1.3, where every user can run dev apps in their home directory, `use the second example mapping here <https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L156-L159>`_ in the ``/etc/ood/config/nginx_stage.yml`` config file. If you do this, it is recommended that you treat the node that OnDemand is running on as a login node, as you are effectively giving those users shell access by letting them run arbitrary code on the OnDemand node (of course the id of the proceses are their user id).
+If you want to revert to the previous functionality of 1.3, where every user can run dev apps in their home directory, `use the second example mapping here <https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L156-L159>`_ in the ``/etc/ood/config/nginx_stage.yml`` config file. If you do this, it is recommended that you treat the node that OnDemand is running on as a login node, as you are effectively giving those users shell access by letting them run arbitrary code on the OnDemand node (of course the UID of the processes are still their regular user UID).
 
 By default the Dashboard will assume it is running in "Developer mode" if the dev apps root directory exists (specified by the environment variable ``OOD_DEV_APPS_ROOT``). If you want to change this behavior, these are the options:
 
