@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview &mdash; Open OnDemand 1.4.9 documentation</title>
+  <title>Resource Manager Configuration &mdash; Open OnDemand 1.4.9 documentation</title>
   
 
   
@@ -40,9 +40,8 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../index.html"/>
-        <link rel="up" title="Authentication" href="../authentication.html"/>
-        <link rel="next" title="1. Configure Apache Authentication" href="overview/configure-authentication.html"/>
-        <link rel="prev" title="Authentication" href="../authentication.html"/> 
+        <link rel="next" title="Configure Torque" href="resource-manager/torque.html"/>
+        <link rel="prev" title="Cluster Config Schema v2" href="cluster-config-schema.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -101,17 +100,18 @@
               <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="overview/configure-authentication.html">1. Configure Apache Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="overview/map-user.html">2. Setup User Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Resource Manager Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/torque.html">Configure Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/slurm.html">Configure Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/lsf.html">Configure LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/pbspro.html">Configure PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/sge.html">Configure Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example Of A <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
 </ul>
@@ -179,16 +179,14 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../authentication.html">Authentication</a> &raquo;</li>
-        
-      <li>Overview</li>
+      <li>Resource Manager Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.4/source/authentication/overview.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.4/source/installation/resource-manager.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -202,29 +200,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="overview">
-<span id="authentication-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>Configuring Open OnDemand to work with an Apache authentication module can be
-broken down into two procedures:</p>
-<ul class="simple">
-<li>Install and configure the Apache authentication module</li>
-<li>Setup the mapping of the remote user to the local user</li>
-</ul>
-<p>These are discussed in more detail in the following sections.</p>
+  <div class="section" id="resource-manager-configuration">
+<span id="resource-manager"></span><h1>Resource Manager Configuration<a class="headerlink" href="#resource-manager-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Below are directions on how to modify the cluster config files to work with the
+resource managers for your clusters. Each cluster can be configured with a
+different resource manager.</p>
+<p>The <a class="reference internal" href="resource-manager/test.html#resource-manager-test"><span class="std std-ref">Test Configuration</span></a> page provides directions on using a Rake task
+to verify the resource manager configuration.</p>
+<p>The <a class="reference internal" href="resource-manager/bin-override-example.html#bin-overrides"><span class="std std-ref">A Working Example Of A bin_overrides Script</span></a> provides directions on how to
+provide a replacement or wrapper script for one or more of the resource manager
+client binaries.</p>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Setup Authentication Module</span></p>
+<p class="caption"><span class="caption-text">Resource Manager Configuration</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview/configure-authentication.html">1. Configure Apache Authentication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#compile-authentication-module">1.1. Compile Authentication Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#configure-authentication-module">1.2. Configure Authentication Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#add-to-ondemand-portal">1.3. Add to OnDemand Portal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#sanitize-session-information">1.4. Sanitize Session Information</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="overview/map-user.html">2. Setup User Mapping</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview/map-user.html#custom-mapping">2.1. Custom Mapping</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/torque.html">Configure Torque</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/slurm.html">Configure Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/lsf.html">Configure LSF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/pbspro.html">Configure PBS Professional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/sge.html">Configure Grid Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example Of A <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
 </ul>
 </div>
 </div>
@@ -239,10 +234,10 @@ broken down into two procedures:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="overview/configure-authentication.html" class="btn btn-neutral float-right" title="1. Configure Apache Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="resource-manager/torque.html" class="btn btn-neutral float-right" title="Configure Torque" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../authentication.html" class="btn btn-neutral" title="Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cluster-config-schema.html" class="btn btn-neutral" title="Cluster Config Schema v2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -274,19 +269,19 @@ broken down into two procedures:</p>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/overview.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/resource-manager.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/overview.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/overview.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/overview.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/overview.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/overview.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/overview.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager.html">develop</a></dd>
       
     </dl>
     <dl>
