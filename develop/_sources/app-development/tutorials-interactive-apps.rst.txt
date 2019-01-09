@@ -3,7 +3,7 @@
 Tutorials: Interactive Apps
 ===========================
 
-A curated list of tutorials for developing interactive apps.
+Below is a list of tutorials for developing interactive apps.
 
 .. toctree::
    :maxdepth: 2
