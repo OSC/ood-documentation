@@ -1,7 +1,7 @@
 .. _app-development-interactive:
 
-Interactive Apps (Plugins)
-==========================
+Interactive Apps
+================
 
 :ref:`interactive` can be developed and deployed using the same tools that are
 currently provided for all Open OnDemand applications but requires further
