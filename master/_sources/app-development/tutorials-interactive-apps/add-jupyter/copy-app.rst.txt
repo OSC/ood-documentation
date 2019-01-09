@@ -114,3 +114,11 @@ We will begin by first copying over a pre-built example Jupyter app.
 
    If you see this warning message then continue on.
 
+.. danger::
+
+   A bug was introduced in 1.4 where an "invalid" interactive app will hide the
+   Launch button in the developer views. This `will be fixed in 1.5 <https://github.com/OSC/ood-dashboard/pull/435>`_.
+
+   A work around is to manually enter the URL to the batch connect app. In this
+   Jupyter tutorial, if the directory name is "jupyter" then the URL will be
+   ``/pun/sys/dashboard/batch_connect/dev/jupyter``.
