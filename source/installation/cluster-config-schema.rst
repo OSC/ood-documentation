@@ -27,6 +27,12 @@ Below is the production configuration for OSC's Owens cluster.
       lib: "/opt/torque/lib64"
       bin: "/opt/torque/bin"
       version: "6.0.1"
+    acls:
+    - adapter: "group"
+      groups:
+        - "cluster_users"
+        - "other_users_of_the_cluster"
+      type: "whitelist"
     custom:
       pbs:
         host: "owens-batch.ten.osc.edu"
@@ -142,6 +148,20 @@ bin_overrides:
           bsub: "/opt/lsf/bin/bsub"
 
 Adapter support for this feature is mixed. For example for Slurm `sbatch`, `scontrol`, `scancel` and `squeue` are all supported. For Torque only `qsub` is supported. Unsupported options are ignored.
+
+acls:
+#####
+
+Access control lists provide a method to limit cluster access by group membership. ACLs are implictly whitelists but may be set explicitly to either `whitelist` or `blacklist`.
+
+.. code-block :: yaml
+
+  acls:
+  - adapter: "group"
+    groups:
+      - "cluster_users"
+      - "other_users_of_the_cluster"
+    type: "whitelist"  # optional, one of "whitelist" or "blacklist"
 
 custom:
 #######
