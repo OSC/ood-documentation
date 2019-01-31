@@ -10,67 +10,11 @@ OnDemand's Apache configs to enable authentication via Keycloak.
 Install mod_auth_openidc
 ------------------------
 
-These directions are for installing from source.
-
-#. Install dependencies for building mod_auth_openidc
+#. Install httpd24-mod_auth_openidc from ondemand-web repo
 
    .. code-block:: sh
 
-      yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
-
-#. Install cjose
-
-   .. code-block:: sh
-
-      wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
-      tar xzf cjose-0.5.1.tar.gz
-      cd cjose-0.5.1
-      ./configure
-      make
-      sudo make install
-
-#. Install mod_auth_openidc
-
-   .. code-block:: sh
-
-      wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
-      tar xzf mod_auth_openidc-2.3.2.tar.gz
-      cd mod_auth_openidc-2.3.2
-
-      export MODULES_DIR=/opt/rh/httpd24/root/usr/lib64/httpd/modules
-      export APXS2_OPTS="-S LIBEXECDIR=${MODULES_DIR}"
-      export APXS2=/opt/rh/httpd24/root/usr/bin/apxs
-      export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-      ./autogen.sh
-      ./configure --prefix=/opt/rh/httpd24/root/usr --exec-prefix=/opt/rh/httpd24/root/usr --bindir=/opt/rh/httpd24/root/usr/bin --sbindir=/opt/rh/httpd24/root/usr/sbin --sysconfdir=/opt/rh/httpd24/root/etc --datadir=/opt/rh/httpd24/root/usr/share --includedir=/opt/rh/httpd24/root/usr/include --libdir=/opt/rh/httpd24/root/usr/lib64 --libexecdir=/opt/rh/httpd24/root/usr/libexec --localstatedir=/opt/rh/httpd24/root/var --sharedstatedir=/opt/rh/httpd24/root/var/lib --mandir=/opt/rh/httpd24/root/usr/share/man --infodir=/opt/rh/httpd24/root/usr/share/info --without-hiredis
-      make
-      sudo make install
-
-#. Add file ``/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf`` with contents:
-
-   .. code-block:: none
-
-      LoadModule auth_openidc_module modules/mod_auth_openidc.so
-
-
-
-.. note::
-
-   https://github.com/zmartzone/mod_auth_openidc does provide rpms for
-   both cjose and mod_auth_openidc. However, we have yet to verify this works with
-   the SCL Apache package we use.
-
-   `Release v2.3.2 Downloads <https://github.com/zmartzone/mod_auth_openidc/releases/tag/v2.3.2>`_
-   at bottom of the page includes an rpm for RHEL7, that is presumably built
-   against Apache 2.4, so that might work.
-   The RHEL6 rpm will not, however, as it is built against Apache 2.2
-   You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
-   (see `Downloads for v2.3.0 <https://github.com/zmartzone/mod_auth_openidc/releases/tag/v2.3.0>`_).
-
-   Both of these rpms actually install the modules to a different locations than
-   the SCL package, so if you use the rpm, you will need to copy the files to
-   the appropriate location in the SCL Apache.
-
+      sudo yum install httpd24-mod_auth_openidc
 
 
 Re-generate main config using ood-portal-generator
@@ -204,28 +148,7 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
 
    .. code-block:: sh
 
-      sudo systemctl stop keycloak
-      sudo systemctl stop httpd24-httpd
-
-  Start Apache FIRST, then start Keycloak
-
-  .. code-block:: sh
-
-      sudo systemctl start httpd24-httpd
-      sudo systemctl start keycloak
-
-.. warning::
-
-   If when starting Apache you see this error:
-
-   .. code-block:: none
-
-      Job for httpd24-httpd.service failed because the control process exited
-      with error code. See "systemctl status httpd24-httpd.service" and
-      "journalctl -xe" for details.
-
-   You may need to first stop Keycloak, then start Apache, then start Keycloak.
-
+      sudo systemctl restart httpd24-httpd
 
 .. note::
 
