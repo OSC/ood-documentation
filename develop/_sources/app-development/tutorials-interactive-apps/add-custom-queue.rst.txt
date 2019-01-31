@@ -24,4 +24,3 @@ well as possible access restrictions that a developer may have.
 
    add-custom-queue/local-static-list
    add-custom-queue/global-static-list
-   add-custom-queue/local-dynamic-list
