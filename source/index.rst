@@ -8,6 +8,20 @@ Open OnDemand
 
 Our `website`_ contains general information about the Open OnDemand project.
 
+Community contributions
+-----------------------
+
+Throughout this documentation we will start highlighting community
+contributions to the project, including linking to external useful projects or
+extensions such as `PSC's Jupyter Notebook extension
+<https://github.com/PSC-PublicHealth/pha-nbextensions>`_ for manipulating the
+environment post launch.
+
+.. note::
+
+   If you have an app or extension that may be useful to others in the
+   OnDemand community please share on our `Discourse <https://discourse.osc.edu/c/open-ondemand>`_ instance and we can then
+   also add it to this documentation site.
 
 .. toctree::
    :maxdepth: 2
