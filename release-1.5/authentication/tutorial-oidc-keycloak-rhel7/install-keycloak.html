@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Install Keycloak &mdash; Open OnDemand 1.4.9 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../../index.html"/>
+        <link rel="up" title="OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/>
+        <link rel="next" title="2. Configure Keycloak" href="configure-keycloak-webui.html"/>
+        <link rel="prev" title="OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1. Install Keycloak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-installation-steps">1.1. Initial Installation Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#start-keycloak-server">1.2. Start Keycloak Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#place-apache-in-front-of-keycloak">1.3. Place Apache in front of Keycloak</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#differences-if-installing-keycloak-on-separate-host">1.4. Differences if installing Keycloak on separate host</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configure-keycloak-webui.html">2. Configure Keycloak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../authentication.html">Authentication</a> &raquo;</li>
+        
+          <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
+        
+      <li>1. Install Keycloak</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.5/source/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-keycloak">
+<span id="authentication-tutorial-oidc-keycloak-rhel7-install-keycloak"></span><h1>1. Install Keycloak<a class="headerlink" href="#install-keycloak" title="Permalink to this headline">¶</a></h1>
+<p>We will install and launch Keycloak server behind Apache.</p>
+<p>Login to the host where you will install Keycloak. In this tutorial, we are
+installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In production we recommend installing Keycloak on a separate host from OnDemand.</p>
+</div>
+<div class="section" id="initial-installation-steps">
+<h2>1.1. Initial Installation Steps<a class="headerlink" href="#initial-installation-steps" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Download and unpack Keycloak 3.1.0 (from <a class="reference external" href="http://www.keycloak.org/archive/downloads-3.1.0.html">http://www.keycloak.org/archive/downloads-3.1.0.html</a>)</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt
+sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
+sudo tar xzf keycloak-3.1.0.Final.tar.gz
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add keycloak user and change ownership of files</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo groupadd -r keycloak
+sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">-m</span></code> doesn’t work, do this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo install -d -o keycloak -g keycloak /var/lib/keycloak
+</pre></div>
+</div>
+<p>This makes a home directory, which is needed when running API calls as keycloak user. Finally we set proper permissions:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown keycloak: -R keycloak-3.1.0.Final
+</pre></div>
+</div>
+</li>
+<li><p class="first">Restrict access to keycloak-3.1.0.Final/standalone, which will contain
+sensitive data for the Keycloak server</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-3.1.0.Final
+sudo -u keycloak chmod <span class="m">700</span> standalone
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install JDK 1.8.0</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>yum install java-1.8.0-openjdk-devel
+</pre></div>
+</div>
+</li>
+<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
+<p>If you are not already there:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-3.1.0.Final
+</pre></div>
+</div>
+<p>Generate a password to use for the admin user:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>openssl rand -hex <span class="m">20</span> <span class="c1"># generate a password to use for admin user</span>
+sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS --realm master
+</pre></div>
+</div>
+<p><strong>Replace KEYCLOAKPASS with a good password and save password for later use</strong></p>
+</li>
+<li><p class="first">Modify <code class="docutils literal notranslate"><span class="pre">standalone/configuration/standalone.xml</span></code> to enable proxying to Keycloak:</p>
+<p>Simplest is to run these three commands:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)&#39;</span>
+sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)&#39;</span>
+sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)&#39;</span>
+</pre></div>
+</div>
+<p>Or you can use a config.cli file that contains these commands. We have
+provided an example file to make use of in this gist, with blocks commented
+out so you can wget the file, edit as appropriate, and run via:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo -u keycloak ./bin/jboss-cli.sh --file<span class="o">=</span>config.cli
+</pre></div>
+</div>
+<p>Where the config.cli looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">embed</span><span class="o">-</span><span class="n">server</span>
+
+<span class="o">/</span><span class="n">subsystem</span><span class="o">=</span><span class="n">undertow</span><span class="o">/</span><span class="n">server</span><span class="o">=</span><span class="n">default</span><span class="o">-</span><span class="n">server</span><span class="o">/</span><span class="n">http</span><span class="o">-</span><span class="n">listener</span><span class="o">=</span><span class="n">default</span><span class="p">:</span><span class="n">write</span><span class="o">-</span><span class="n">attribute</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">proxy</span><span class="o">-</span><span class="n">address</span><span class="o">-</span><span class="n">forwarding</span><span class="p">,</span><span class="n">value</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+<span class="o">/</span><span class="n">subsystem</span><span class="o">=</span><span class="n">undertow</span><span class="o">/</span><span class="n">server</span><span class="o">=</span><span class="n">default</span><span class="o">-</span><span class="n">server</span><span class="o">/</span><span class="n">http</span><span class="o">-</span><span class="n">listener</span><span class="o">=</span><span class="n">default</span><span class="p">:</span><span class="n">write</span><span class="o">-</span><span class="n">attribute</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">redirect</span><span class="o">-</span><span class="n">socket</span><span class="p">,</span><span class="n">value</span><span class="o">=</span><span class="n">proxy</span><span class="o">-</span><span class="n">https</span><span class="p">)</span>
+<span class="o">/</span><span class="n">socket</span><span class="o">-</span><span class="n">binding</span><span class="o">-</span><span class="n">group</span><span class="o">=</span><span class="n">standard</span><span class="o">-</span><span class="n">sockets</span><span class="o">/</span><span class="n">socket</span><span class="o">-</span><span class="n">binding</span><span class="o">=</span><span class="n">proxy</span><span class="o">-</span><span class="n">https</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">443</span><span class="p">)</span>
+
+<span class="c1"># uncomment if using truststore, replacing erb tags &lt;%= %&gt; with correct values</span>
+<span class="c1"># truststore needed if ldap servers are not using trusted certificates (i.e. self signed certificates)</span>
+<span class="c1">#</span>
+<span class="c1">#if (outcome != success) of /subsystem=keycloak-server/spi=truststore:read-resource</span>
+<span class="c1">#/subsystem=keycloak-server/spi=truststore/:add</span>
+<span class="c1">#/subsystem=keycloak-server/spi=truststore/provider=file/:add(enabled=true)</span>
+<span class="c1">#end-if</span>
+<span class="c1">#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=file,value=&lt;%= scope[&#39;keycloak::install_base&#39;] %&gt;/standalone/configuration/truststore.jks)</span>
+<span class="c1">#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=password,value=&lt;%= scope[&#39;keycloak::truststore_password&#39;] %&gt;)</span>
+<span class="c1">#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=hostname-verification-policy,value=&lt;%= scope[&#39;keycloak::truststore_hostname_verification_policy&#39;] %&gt;)</span>
+<span class="c1">#/subsystem=keycloak-server/spi=truststore/provider=file/:map-put(name=properties,key=disabled,value=false)</span>
+
+<span class="c1"># uncomment if doing theme development, so you don&#39;t need to restart Keycloak</span>
+<span class="c1"># with every theme modification</span>
+<span class="c1">#</span>
+<span class="c1">#/subsystem=keycloak-server/theme=defaults/:write-attribute(name=staticMaxAge, value=-1)</span>
+<span class="c1">#/subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheThemes, value=false)</span>
+<span class="c1">#/subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheTemplates, value=false)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="start-keycloak-server">
+<h2>1.2. Start Keycloak Server<a class="headerlink" href="#start-keycloak-server" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Create keycloak.service to start and stop the server:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cat &gt; /etc/systemd/system/keycloak.service <span class="s">&lt;&lt;EOF</span>
+
+<span class="s">[Unit]</span>
+<span class="s">Description=Jboss Application Server</span>
+<span class="s">After=network.target</span>
+
+<span class="s">[Service]</span>
+<span class="s">Type=idle</span>
+<span class="s">User=keycloak</span>
+<span class="s">Group=keycloak</span>
+<span class="s">ExecStart=/opt/keycloak-3.1.0.Final/bin/standalone.sh -b 0.0.0.0</span>
+<span class="s">TimeoutStartSec=600</span>
+<span class="s">TimeoutStopSec=600</span>
+
+<span class="s">[Install]</span>
+<span class="s">WantedBy=multi-user.target</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>Then start keycloak:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
+sudo systemctl start keycloak
+</pre></div>
+</div>
+<p>It may take a little time to load; verify it has loaded:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl status keycloak
+<span class="c1"># keycloak.service - Jboss Application Server</span>
+<span class="c1"># Loaded: loaded (/etc/systemd/system/keycloak.service; disabled; vendor preset: disabled)</span>
+<span class="c1"># Active: active (running) since Mon 2017-09-25 16:19:47 EDT; 2s ago</span>
+<span class="c1"># ...</span>
+<span class="c1"># Sep 25 16:19:49 webdev07.hpc.osc.edu standalone.sh[111998]: 16:19:49,644 INFO  [#org.wildfly.extension.undertow] (MSC service thread ...0:8080)</span>
+<span class="c1"># Hint: Some lines were ellipsized, use -l to show in full.</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="place-apache-in-front-of-keycloak">
+<h2>1.3. Place Apache in front of Keycloak<a class="headerlink" href="#place-apache-in-front-of-keycloak" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Define apache config to proxy keycloak requests</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is the only step in the tutorial that differs significantly based on
+whether you install Keycloak on a separate host from OnDemand or on the
+same host. See below for example differences.</p>
+</div>
+<p>We will stick Apache in front of Keycloak. In this tutorial Keycloak is
+installed on the same node as OnDemand, and we use the same Apache instance
+to serve both OnDemand and Keycloak with the same host, so we can reuse the
+same SSL certificates. You may want to run Keycloak on a separate host, however.</p>
+<p>Add <code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf</span></code>, making changes
+for the appropriate SSL certificate locations. Notice we are proxying
+<code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> to <code class="docutils literal notranslate"><span class="pre">http://localhost:8080</span></code> which is the default
+port the Keycloak webserver runs as.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Listen</span> <span class="mi">8443</span>
+<span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">8443</span><span class="o">&gt;</span>
+  <span class="n">ServerName</span> <span class="n">webdev07</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span>
+
+  <span class="n">ErrorLog</span>  <span class="s2">&quot;logs/webdev07.hpc.osc.edu_keycloak_error_ssl.log&quot;</span>
+  <span class="n">CustomLog</span> <span class="s2">&quot;logs/webdev07.hpc.osc.edu_keycloak_access_ssl.log&quot;</span> <span class="n">combined</span>
+
+  <span class="n">SSLEngine</span> <span class="n">On</span>
+  <span class="n">SSLCertificateFile</span> <span class="s2">&quot;/etc/pki/tls/certs/webdev07.hpc.osc.edu.crt&quot;</span>
+  <span class="n">SSLCertificateKeyFile</span> <span class="s2">&quot;/etc/pki/tls/private/webdev07.hpc.osc.edu.key&quot;</span>
+  <span class="n">SSLCertificateChainFile</span> <span class="s2">&quot;/etc/pki/tls/certs/webdev07.hpc.osc.edu-interm.crt&quot;</span>
+
+  <span class="c1"># Proxy rules</span>
+  <span class="n">ProxyRequests</span> <span class="n">Off</span>
+  <span class="n">ProxyPreserveHost</span> <span class="n">On</span>
+  <span class="n">ProxyPass</span> <span class="o">/</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span>
+  <span class="n">ProxyPassReverse</span> <span class="o">/</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span>
+
+  <span class="c1">## Request header rules</span>
+  <span class="c1">## as per http://httpd.apache.org/docs/2.2/mod/mod_headers.html#requestheader</span>
+  <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Proto</span> <span class="s2">&quot;https&quot;</span>
+  <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Port</span> <span class="s2">&quot;8443&quot;</span>
+<span class="o">&lt;/</span><span class="n">VirtualHost</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You may need to modify iptables to open up access to Keycloak the same way
+that you did so with port 80 and 443 for OnDemand:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">8443</span> -m comment --comment <span class="s2">&quot;08443 *:8443&quot;</span> -j ACCEPT
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We can use the same host because Keycloak properly scopes all cookies it sets to the
+realm. For example, if I have a realm called “ondemand”, then the Keycloak login
+page will be at <code class="docutils literal notranslate"><span class="pre">https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</span></code>
+and cookies set during authentication will be set with the path <code class="docutils literal notranslate"><span class="pre">/auth/realms/ondemand</span></code>,
+including <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_SESSION</span></code>, <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_STATE_CHECKER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">KEYCLOAK_IDENTITY</span></code>, and <code class="docutils literal notranslate"><span class="pre">KC_RESTART</span></code>.</p>
+</div>
+</li>
+<li><p class="first">Now you should be able to access Keycloak: <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code></p>
+</li>
+</ol>
+</div>
+<div class="section" id="differences-if-installing-keycloak-on-separate-host">
+<h2>1.4. Differences if installing Keycloak on separate host<a class="headerlink" href="#differences-if-installing-keycloak-on-separate-host" title="Permalink to this headline">¶</a></h2>
+<p>When installing Keycloak on a separate host, the difference between this
+tutorial would be:</p>
+<ol class="arabic simple">
+<li>throughout the rest of the tutorial replace <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> with the keycloak host</li>
+<li>use a different Apache config, listening instead on 443 instead of 8443 and
+proxying that to Keycloak</li>
+<li>possibly use Apache 2.4 default distribution instead of software collections,
+meaning that configuration would be at /etc/httpd/conf.d/ instead of
+/opt/rh/httpd24/root/etc/httpd/conf.d/ and starting the
+service is likely <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd24-httpd</span></code></li>
+</ol>
+<p>For example, if Keycloak were installed on a separate host idp.hpc.edu then the
+Apache config might look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">443</span><span class="o">&gt;</span>
+  <span class="n">ServerName</span> <span class="n">idp</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">edu</span>
+
+  <span class="n">ErrorLog</span>  <span class="s2">&quot;/var/log/httpd/idp.hpc.edu_error_ssl.log&quot;</span>
+  <span class="n">CustomLog</span> <span class="s2">&quot;/var/log/httpd/idp.hpc.edu_access_ssl.log&quot;</span> <span class="n">combined</span>
+
+  <span class="c1">## SSL directives</span>
+  <span class="n">SSLEngine</span> <span class="n">on</span>
+  <span class="n">SSLCertificateFile</span>      <span class="s2">&quot;/etc/pki/tls/certs/idp.hpc.edu.crt&quot;</span>
+  <span class="n">SSLCertificateKeyFile</span>   <span class="s2">&quot;/etc/pki/tls/private/idp.hpc.edu.key&quot;</span>
+  <span class="n">SSLCertificateChainFile</span> <span class="s2">&quot;/etc/pki/tls/certs/idp.hpc.edu-interm.crt&quot;</span>
+  <span class="n">SSLCACertificatePath</span>    <span class="s2">&quot;/etc/pki/tls/certs&quot;</span>
+
+  <span class="c1"># Proxy rules</span>
+  <span class="n">ProxyRequests</span> <span class="n">Off</span>
+  <span class="n">ProxyPreserveHost</span> <span class="n">On</span>
+  <span class="n">ProxyPass</span> <span class="o">/</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span>
+  <span class="n">ProxyPassReverse</span> <span class="o">/</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span>
+
+  <span class="c1">## Request header rules</span>
+  <span class="c1">## as per http://httpd.apache.org/docs/2.2/mod/mod_headers.html#requestheader</span>
+  <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Proto</span> <span class="s2">&quot;https&quot;</span>
+  <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Port</span> <span class="s2">&quot;443&quot;</span>
+<span class="o">&lt;/</span><span class="n">VirtualHost</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configure-keycloak-webui.html" class="btn btn-neutral float-right" title="2. Configure Keycloak" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral" title="OpenID Connect via KeyCloak on RHEL7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, Ohio Supercomputer Center.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.4.9',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

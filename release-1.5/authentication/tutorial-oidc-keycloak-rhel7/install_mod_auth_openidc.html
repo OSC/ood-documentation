@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Configure OnDemand to authenticate with Keycloak &mdash; Open OnDemand 1.4.9 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../../index.html"/>
+        <link rel="up" title="OpenID Connect via KeyCloak on RHEL7" href="../tutorial-oidc-keycloak-rhel7.html"/>
+        <link rel="next" title="4. Add Custom Theme" href="add-custom-theme.html"/>
+        <link rel="prev" title="2. Configure Keycloak" href="configure-keycloak-webui.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="install-keycloak.html">1. Install Keycloak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure-keycloak-webui.html">2. Configure Keycloak</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3. Configure OnDemand to authenticate with Keycloak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-mod-auth-openidc">3.1. Install mod_auth_openidc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#re-generate-main-config-using-ood-portal-generator">3.2. Re-generate main config using ood-portal-generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc">3.3. Add Keycloak config to OnDemand Apache for mod_auth_openidc</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../authentication.html">Authentication</a> &raquo;</li>
+        
+          <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
+        
+      <li>3. Configure OnDemand to authenticate with Keycloak</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.5/source/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configure-ondemand-to-authenticate-with-keycloak">
+<span id="authentication-tutorial-oidc-keycloak-rhel7-install-mod-auth-openidc"></span><h1>3. Configure OnDemand to authenticate with Keycloak<a class="headerlink" href="#configure-ondemand-to-authenticate-with-keycloak" title="Permalink to this headline">¶</a></h1>
+<p>OnDemand’s Apache needs to use mod_auth_openidc to be able to act as an OpenID
+Connect client to Keycloak. We will install mod_auth_openidc and modify
+OnDemand’s Apache configs to enable authentication via Keycloak.</p>
+<div class="section" id="install-mod-auth-openidc">
+<h2>3.1. Install mod_auth_openidc<a class="headerlink" href="#install-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
+<p>These directions are for installing from source.</p>
+<ol class="arabic">
+<li><p class="first">Install dependencies for building mod_auth_openidc</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>yum install httpd24-httpd-devel openssl-devel curl-devel jansson-devel pcre-devel autoconf automake
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install cjose</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.0/cjose-0.5.1.tar.gz
+tar xzf cjose-0.5.1.tar.gz
+<span class="nb">cd</span> cjose-0.5.1
+./configure
+make
+sudo make install
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install mod_auth_openidc</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.3.2/mod_auth_openidc-2.3.2.tar.gz
+tar xzf mod_auth_openidc-2.3.2.tar.gz
+<span class="nb">cd</span> mod_auth_openidc-2.3.2
+
+<span class="nb">export</span> <span class="nv">MODULES_DIR</span><span class="o">=</span>/opt/rh/httpd24/root/usr/lib64/httpd/modules
+<span class="nb">export</span> <span class="nv">APXS2_OPTS</span><span class="o">=</span><span class="s2">&quot;-S LIBEXECDIR=</span><span class="si">${</span><span class="nv">MODULES_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">export</span> <span class="nv">APXS2</span><span class="o">=</span>/opt/rh/httpd24/root/usr/bin/apxs
+<span class="nb">export</span> <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/usr/local/lib/pkgconfig
+./autogen.sh
+./configure --prefix<span class="o">=</span>/opt/rh/httpd24/root/usr --exec-prefix<span class="o">=</span>/opt/rh/httpd24/root/usr --bindir<span class="o">=</span>/opt/rh/httpd24/root/usr/bin --sbindir<span class="o">=</span>/opt/rh/httpd24/root/usr/sbin --sysconfdir<span class="o">=</span>/opt/rh/httpd24/root/etc --datadir<span class="o">=</span>/opt/rh/httpd24/root/usr/share --includedir<span class="o">=</span>/opt/rh/httpd24/root/usr/include --libdir<span class="o">=</span>/opt/rh/httpd24/root/usr/lib64 --libexecdir<span class="o">=</span>/opt/rh/httpd24/root/usr/libexec --localstatedir<span class="o">=</span>/opt/rh/httpd24/root/var --sharedstatedir<span class="o">=</span>/opt/rh/httpd24/root/var/lib --mandir<span class="o">=</span>/opt/rh/httpd24/root/usr/share/man --infodir<span class="o">=</span>/opt/rh/httpd24/root/usr/share/info --without-hiredis
+make
+sudo make install
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add file <code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.modules.d/auth_openidc.conf</span></code> with contents:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>LoadModule auth_openidc_module modules/mod_auth_openidc.so
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">https://github.com/zmartzone/mod_auth_openidc</a> does provide rpms for
+both cjose and mod_auth_openidc. However, we have yet to verify this works with
+the SCL Apache package we use.</p>
+<p><a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/releases/tag/v2.3.2">Release v2.3.2 Downloads</a>
+at bottom of the page includes an rpm for RHEL7, that is presumably built
+against Apache 2.4, so that might work.
+The RHEL6 rpm will not, however, as it is built against Apache 2.2
+You will need the dependent module cjose-0.5.1-1.el7.centos.x86_64.rpm
+(see <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/releases/tag/v2.3.0">Downloads for v2.3.0</a>).</p>
+<p class="last">Both of these rpms actually install the modules to a different locations than
+the SCL package, so if you use the rpm, you will need to copy the files to
+the appropriate location in the SCL Apache.</p>
+</div>
+</div>
+<div class="section" id="re-generate-main-config-using-ood-portal-generator">
+<h2>3.2. Re-generate main config using ood-portal-generator<a class="headerlink" href="#re-generate-main-config-using-ood-portal-generator" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Edit the YAML configuration file for the <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> located
+under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+<span class="c1"># List of Apache authentication directives</span>
+<span class="c1"># NB: Be sure the appropriate Apache module is installed for this</span>
+<span class="c1"># Default: (see below, uses basic auth with an htpasswd file)</span>
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">openid-connect&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
+
+<span class="c1"># Redirect user to the following URI when accessing logout URI</span>
+<span class="c1"># Example:</span>
+<span class="c1">#     logout_redirect: &#39;/oidc?logout=https%3A%2F%2Fwww.example.com&#39;</span>
+<span class="c1"># Default: &#39;/pun/sys/dashboard/logout&#39; (the Dashboard app provides a simple</span>
+<span class="c1"># HTML page explaining logout to the user)</span>
+<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&#39;/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu&#39;</span>
+
+<span class="c1"># Sub-uri used by mod_auth_openidc for authentication</span>
+<span class="c1"># Example:</span>
+<span class="c1">#     oidc_uri: &#39;/oidc&#39;</span>
+<span class="c1"># Default: null (disable OpenID Connect support)</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&#39;/oidc&#39;</span>
+</pre></div>
+</div>
+<p>Notice that we are</p>
+<blockquote>
+<div><ul class="simple">
+<li>changing the Authentication directives for openid-connect</li>
+<li>specifying /oidc to be the sub-uri used by mod_auth_openidc</li>
+<li>specifying that /logout should redirect to this /oidc sub-uri to handle logout
+and specifying after logout, the user should be redirected back to OnDemand
+(which in this tutorial’s case is <code class="docutils literal notranslate"><span class="pre">https%3A%2F%2Fwebdev07.hpc.osc.edu</span></code>,
+the query param escaped format of <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code>)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Then build and install the new Apache configuration file with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+</pre></div>
+</div>
+<p>The effect of this change in the Apache config (in case you want to apply the changes manually) are:</p>
+<ol class="arabic">
+<li><p class="first">Change the authentication directives for all of the Locations that require authentication i.e.:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>  &lt;Location &quot;/nginx&quot;&gt;
+<span class="gd">-    AuthType basic</span>
+<span class="gd">-    AuthName &quot;Private&quot;</span>
+<span class="gd">-    AuthBasicProvider ldap</span>
+<span class="gd">-    AuthLDAPURL &quot;ldaps://openldap1.infra.osc.edu:636 openldap2.infra.osc.edu:636 openldap3.infra.osc.edu:636 openldap4.infra.osc.edu</span>
+<span class="gd">-    AuthLDAPGroupAttribute memberUid</span>
+<span class="gd">-    AuthLDAPGroupAttributeIsDN off</span>
+<span class="gi">+    AuthType openid-connect</span>
+      Require valid-user
+<span class="gd">-    RequestHeader unset Authorization</span>
+
+    LuaHookFixups nginx.lua nginx_handler
+  &lt;/Location&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Update the <code class="docutils literal notranslate"><span class="pre">Redirect</span> <span class="pre">&quot;logout&quot;</span></code> directive</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-  Redirect &quot;/logout&quot; &quot;/pun/sys/dashboard/logout&quot;</span>
+<span class="gd">-</span>
+<span class="gi">+  Redirect &quot;/logout&quot; &quot;/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the <code class="docutils literal notranslate"><span class="pre">&lt;Location</span> <span class="pre">&quot;/oidc&quot;&gt;</span></code> directive</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># OpenID Connect redirect URI:
+#
+#     http://localhost:80/oidc
+#     #=&gt; handled by mod_auth_openidc
+#
+&lt;Location &quot;/oidc&quot;&gt;
+  AuthType openid-connect
+  Require valid-user
+&lt;/Location&gt;
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc">
+<h2>3.3. Add Keycloak config to OnDemand Apache for mod_auth_openidc<a class="headerlink" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
+OIDCClientID        &quot;webdev07.hpc.osc.edu&quot;
+OIDCClientSecret    &quot;1111111-1111-1111-1111-111111111111&quot;
+OIDCRedirectURI      https://webdev07.hpc.osc.edu/oidc
+OIDCCryptoPassphrase &quot;4444444444444444444444444444444444444444&quot;
+
+# Keep sessions alive for 8 hours
+OIDCSessionInactivityTimeout 28800
+OIDCSessionMaxDuration 28800
+
+# Set REMOTE_USER
+OIDCRemoteUserClaim preferred_username
+
+# Don&#39;t pass claims to backend servers
+OIDCPassClaimsAs environment
+
+# Strip out session cookies before passing to backend
+OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface</li>
+<li>OIDCClientSecret: replace <code class="docutils literal notranslate"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Install tab of the client in Keycloak admin interface</li>
+<li>OIDCCryptoPassphrase: replace <code class="docutils literal notranslate"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">20</span></code>.</li>
+<li>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.</li>
+</ol>
+</li>
+<li><p class="first">Change permission on file to be readable by apache and no one else:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
+</li>
+</ol>
+<blockquote>
+<div><p>Stop both servives:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop keycloak
+sudo systemctl stop httpd24-httpd
+</pre></div>
+</div>
+</div></blockquote>
+<p>Start Apache FIRST, then start Keycloak</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
+sudo systemctl start keycloak
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If when starting Apache you see this error:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Job for httpd24-httpd.service failed because the control process exited
+with error code. See &quot;systemctl status httpd24-httpd.service&quot; and
+&quot;journalctl -xe&quot; for details.
+</pre></div>
+</div>
+<p class="last">You may need to first stop Keycloak, then start Apache, then start Keycloak.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We prevent OIDC_CLAIM headers from being passed through to the PUN
+by specifying in this file to pass claims as environment, instead of
+as HTTP headers, since Apache won’t pass any environment off to the
+PUN when proxying requests, but would pass HTTP headers.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="add-custom-theme.html" class="btn btn-neutral float-right" title="4. Add Custom Theme" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configure-keycloak-webui.html" class="btn btn-neutral" title="2. Configure Keycloak" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, Ohio Supercomputer Center.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.4.9',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
