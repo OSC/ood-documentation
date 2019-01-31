@@ -6,7 +6,7 @@
 Open OnDemand
 =============
 
-See the `website`_ for more information about the Open OnDemand project.
+Our `website`_ contains general information about the Open OnDemand project.
 
 
 .. toctree::
