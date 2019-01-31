@@ -163,6 +163,9 @@ Access control lists provide a method to limit cluster access by group membershi
       - "other_users_of_the_cluster"
     type: "whitelist"  # optional, one of "whitelist" or "blacklist"
 
+Note that to look up group membership ood_core uses the ood_support library which uses ``id -G USERNAME``
+to get the list groups the user is in, and ``getgrgid`` to look up the name of the group.
+
 custom:
 #######
 
