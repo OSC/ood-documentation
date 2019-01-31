@@ -51,7 +51,7 @@ configuration file with the following format:
 
    Absolute path to the directory that contains the user directories with the
    corresponding Unix domain socket files. Under a default installation this
-   should be ``/var/run/nginx``.
+   should be ``/var/run/ondemand-nginx``.
 
 .. envvar:: OOD_PUN_MAX_RETRIES
 

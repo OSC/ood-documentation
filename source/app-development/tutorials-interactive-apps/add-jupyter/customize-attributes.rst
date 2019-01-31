@@ -88,7 +88,7 @@ generating the batch script.
       ``job_script_options.json``
         the job submission parameters (this will be used in the next section if
         you have trouble submitting the job)
-      ``/var/log/nginx/<user>/error.log``
+      ``/var/log/ondemand-nginx/<user>/error.log``
         the per-user NGINX (PUN) log file (this will contain the command line
         called when submitting the batch job, look for ``execve=...``)
 

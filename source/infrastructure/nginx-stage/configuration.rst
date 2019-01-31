@@ -134,11 +134,11 @@ Configuration Options
    the path to the NGINX binary
 
    Default
-     Use NGINX 1.6 installed by Software Collections
+     Use NGINX installed by OnDemand Software Collections
 
      .. code-block:: yaml
 
-        nginx_bin: "/opt/rh/nginx16/root/usr/sbin/nginx"
+        nginx_bin: "/opt/ood/ondemand/root/usr/sbin/nginx"
 
    Example
      NGINX is installed in a different directory
@@ -174,11 +174,11 @@ Configuration Options
    the path to the system-installed NGINX ``mime.types`` file
 
    Default
-     Use the NGINX 1.6 installed by Software Collections file
+     Use the NGINX installed by OnDemand Software Collections file
 
      .. code-block:: yaml
 
-        mime_types_path: "/opt/rh/nginx16/root/etc/nginx/mime.types"
+        mime_types_path: "/opt/ood/ondemand/root/etc/nginx/mime.types"
 
    Example
      Use a custom mime file
@@ -192,11 +192,11 @@ Configuration Options
    the ``locations.ini`` file that describes Passenger installation
 
    Default
-     Use the file supplied by Passenger 5
+     Use the file supplied by Passenger from OnDemand Software Collections
 
      .. code-block:: yaml
 
-        passenger_root: "/usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini"
+        passenger_root: "/opt/ood/ondemand/root/usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini"
 
    Example
      Use a custom file
@@ -217,7 +217,7 @@ Configuration Options
         passenger_ruby: "/opt/ood/nginx_stage/bin/ruby"
 
    Example
-     Use the binary supplied by Ruby 2.2 installed by Software Collections
+     Use the binary supplied by Ruby 2.4 installed by Software Collections
 
      .. code-block:: yaml
 
@@ -268,14 +268,14 @@ Configuration Options
 
      .. code-block:: yaml
 
-        pun_config_path: "/var/lib/nginx/config/puns/%{user}.conf"
+        pun_config_path: "/var/lib/ondemand-nginx/config/puns/%{user}.conf"
 
    Example
      Namespace configs under user directories
 
      .. code-block:: yaml
 
-        pun_config_path: "/var/lib/nginx/config/puns/%{user}/nginx.conf"
+        pun_config_path: "/var/lib/ondemand-nginx/config/puns/%{user}/nginx.conf"
 
 .. describe:: pun_tmp_root (String)
 
@@ -286,7 +286,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        pun_tmp_root: "/var/lib/nginx/tmp/%{user}"
+        pun_tmp_root: "/var/lib/ondemand-nginx/tmp/%{user}"
 
    Example
      Use a custom namespace for root directory
@@ -310,7 +310,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        pun_access_log_path: "/var/log/nginx/%{user}/access.log"
+        pun_access_log_path: "/var/log/ondemand-nginx/%{user}/access.log"
 
    Example
      Use a custom location for the access log file
@@ -328,7 +328,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        pun_error_log_path: "/var/log/nginx/%{user}/error.log"
+        pun_error_log_path: "/var/log/ondemand-nginx/%{user}/error.log"
 
    Example
      Use a custom location for the error log file
@@ -346,7 +346,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        pun_pid_path: "/var/run/nginx/%{user}/passenger.pid"
+        pun_pid_path: "/var/run/ondemand-nginx/%{user}/passenger.pid"
 
    Example
      Use a custom location for the pid files
@@ -364,7 +364,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        pun_pid_path: "/var/run/nginx/%{user}/passenger.sock"
+        pun_pid_path: "/var/run/ondemand-nginx/%{user}/passenger.sock"
 
    Example
      Use a custom location for the socket files
@@ -479,9 +479,9 @@ Configuration Options
      .. code-block:: yaml
 
         app_config_path:
-          dev: "/var/lib/nginx/config/apps/dev/%{owner}/%{name}.conf"
-          usr: "/var/lib/nginx/config/apps/usr/%{owner}/%{name}.conf"
-          sys: "/var/lib/nginx/config/apps/sys/%{name}.conf"
+          dev: "/var/lib/ondemand-nginx/config/apps/dev/%{owner}/%{name}.conf"
+          usr: "/var/lib/ondemand-nginx/config/apps/usr/%{owner}/%{name}.conf"
+          sys: "/var/lib/ondemand-nginx/config/apps/sys/%{name}.conf"
 
 .. describe:: app_root (Hash)
 
