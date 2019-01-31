@@ -11,3 +11,4 @@ Below is a list of tutorials for developing interactive apps.
 
    tutorials-interactive-apps/add-jupyter
    tutorials-interactive-apps/add-custom-queue
+   tutorials-interactive-apps/add-rstudio
