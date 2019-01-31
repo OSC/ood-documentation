@@ -40,9 +40,9 @@ The Singularity image must be built before it can be used. Running a build is tr
 
       singularity build -f rstudio_launcher_centos7.simg Singularity
 
-Where `Singularity` is the file that defines the image. The image is basic, installing only the command `which` over the base CentOS 7 packages. This simplicity is because most of the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host.
+Where ``Singularity`` is the file that defines the image. The image is basic, installing only the command ``which`` over the base CentOS 7 packages. This simplicity is because most of the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host.
 
-Likewise the runscript defined in the image uses the host `$PATH` which is propagated into the guest's environment as `$USER_PATH`.
+Likewise the runscript defined in the image uses the host ``$PATH`` which is propagated into the guest's environment as ``$USER_PATH``.
 
    .. code-block:: sh
 
@@ -54,7 +54,7 @@ Offering Users A Choice Of Software Versions
 
 It is possible to offer users a choice of which versions of R they may run. By offering the choice you enable early adopters a chance to use newer versions of R, without causing potentially breaking changes in existing code.
 
-To begin add a select control in `form.yml` for the versions of R that are available on your system.
+To begin add a select control in ``form.yml`` for the versions of R that are available on your system.
 
   .. code-block:: yaml
 
@@ -67,7 +67,7 @@ To begin add a select control in `form.yml` for the versions of R that are avail
         - [ "3.4.2", "intel/16.0.3 R/3.4.2 rstudio/1.1.380_server"]
         - [ "3.3.2", "intel/16.0.3 R/3.3.2 rstudio/1.0.136_server"]
 
-After users have submitted the form, its values are used as context when expanding the template files; in particular we will have set the modules to load. Next, to set the version of R and RStudio next edit `template/script.sh.erb`.
+After users have submitted the form, its values are used as context when expanding the template files; in particular we will have set the modules to load. Next, to set the version of R and RStudio next edit ``template/script.sh.erb``.
 
   .. code-block:: sh
 
@@ -80,7 +80,7 @@ Running RStudio
 Authentication
 ..............
 
-In `template/before.sh.erb` the variable `password` is set and its value is exported as `RSTUDIO_PASSWORD`.
+In ``template/before.sh.erb`` the variable ``password`` is set and its value is exported as ``RSTUDIO_PASSWORD``.
 
   .. code-block:: sh
 
@@ -88,37 +88,17 @@ In `template/before.sh.erb` the variable `password` is set and its value is expo
     password="$(create_passwd 16)"
     export RSTUDIO_PASSWORD="${password}"
 
-In `template/script.sh.erb` export the path to PAM helper executable `RSTUDIO_AUTH`.
+In ``template/script.sh.erb`` export the path to PAM helper executable ``RSTUDIO_AUTH``.
 
   .. code-block:: sh
 
     # PAM auth helper used by RStudio
     export RSTUDIO_AUTH="${PWD}/bin/auth"
 
-    # Generate an `rsession` wrapper script
-    export RSESSION_WRAPPER_FILE="${PWD}/rsession.sh"
-    (
-    umask 077
-    sed 's/^ \{2\}//' > "${RSESSION_WRAPPER_FILE}" << EOL
-      #!/usr/bin/env bash
-
-      # Log all output from this script
-      export RSESSION_LOG_FILE="${RSTUDIO_SINGULARITY_HOST_MNT}${PWD}/rsession.log"
-
-      exec &>>"\${RSESSION_LOG_FILE}"
-
-      # Launch the original command
-      echo "Launching rsession..."
-      set -x
-      exec rsession --r-libs-user "${R_LIBS_USER}" "\${@}"
-    EOL
-    )
-    chmod 700 "${RSESSION_WRAPPER_FILE}"
-
 Use A Custom RSession Wrapper
 .............................
 
-Using a custom RSession wrapper enables us to get diagnostic logging and ensure that user space libraries are available. We write this file from inside `template/script.sh.erb`.
+Using a custom RSession wrapper enables us to get diagnostic logging and ensure that user space libraries are available. We write this file from inside ``template/script.sh.erb``.
 
   .. code-block:: sh
 
@@ -145,7 +125,7 @@ Using a custom RSession wrapper enables us to get diagnostic logging and ensure 
 Launching RStudio Using Singularity 
 ...................................
 
-Ensure that R, RStudio and their dependencies are available inside the guest by binding their paths on the host into the container. Likewise ensure that each instance of RStudio gets its own private `/tmp` by binding `$TMPDIR` on the host to `/tmp` in the guest.
+Ensure that R, RStudio and their dependencies are available inside the guest by binding their paths on the host into the container. Likewise ensure that each instance of RStudio gets its own private ``/tmp`` by binding ``$TMPDIR`` on the host to ``/tmp`` in the guest.
 
   .. code-block:: sh
 
@@ -160,7 +140,7 @@ Ensure that R, RStudio and their dependencies are available inside the guest by 
 
   .. warning::
 
-      If `$TMPDIR` is not guaranteed to be unique then consider appending the results of a `mktemp -d` to it.
+      If ``$TMPDIR`` is not guaranteed to be unique then consider appending the results of a ``mktemp -d`` to it.
 
 Complete OSC-Specific Example
 -----------------------------
