@@ -24,7 +24,7 @@ configuration files.
 
    .. code-block:: sh
 
-      scl enable rh-ruby24 rh-nodejs6 -- bin/rake -T test:jobs
+      scl enable ondemand -- bin/rake -T test:jobs
       # rake test:jobs           # Test all clusters
       # rake test:jobs:cluster1  # Test the cluster: cluster1
       # rake test:jobs:cluster2  # Test the cluster: cluster2
@@ -39,7 +39,7 @@ configuration files.
 
    .. code-block:: sh
 
-      sudo su $USER -c 'scl enable rh-ruby24 rh-nodejs6 -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
+      sudo su $USER -c 'scl enable ondemand -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
       # [sudo] password for user:
       # Rails Error: Unable to access log file. Please ensure that /var/www/ood/apps/sys/dashboard/log/production.log exists and is writable (ie, make it writable for user and group: chmod 0664 /var/www/ood/apps/sys/dashboard/log/production.log). The log level has been raised to WARN and the output directed to STDERR until the problem is fixed.
       # mkdir -p /home/user/test_jobs
@@ -88,6 +88,6 @@ configuration files.
 
       .. code-block:: sh
 
-         sudo su $USER -c 'scl enable rh-ruby24 rh-nodejs6 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
+         sudo su $USER -c 'scl enable ondemand-- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
 
       Note that the ``SUBMIT_ARGS="..."`` is defined at the end of the command.

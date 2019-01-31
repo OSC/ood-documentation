@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization Overview &mdash; Open OnDemand 1.4.9 documentation</title>
+  <title>Customization Overview &mdash; Open OnDemand 1.5.1 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="index.html"/>
+    <link rel="top" title="Open OnDemand 1.5.1 documentation" href="index.html"/>
         <link rel="next" title="Customization" href="customization.html"/>
         <link rel="prev" title="Test Configuration" href="installation/resource-manager/test.html"/> 
 
@@ -73,7 +73,7 @@
             
             
               <div class="version">
-                1.4
+                1.5
               </div>
             
           
@@ -112,11 +112,13 @@
 <li class="toctree-l1"><a class="reference internal" href="enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-sharing.html">App Sharing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
@@ -196,38 +198,33 @@
   <div class="section" id="customization-overview">
 <span id="id1"></span><h1>Customization Overview<a class="headerlink" href="#customization-overview" title="Permalink to this headline">¶</a></h1>
 <p>OnDemand’s configuration is stored in the environment, which can be modified using a hierarchy of config files. Configuration files are rooted in <code class="docutils literal notranslate"><span class="pre">/etc/ood</span></code>. Assets that should be publicly available (such as a favicon or logo image) are placed under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public</span></code>.</p>
-<table border="1" class="docutils" id="id2">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">File</th>
-<th class="head">Purpose</th>
-<th class="head">Notes</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code></th>
-<td>If exists, this file is sourced instead of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</td>
-<td>You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</td>
-</tr>
-<tr class="row-odd"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code></th>
-<td>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</td>
-<td>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</td>
-</tr>
-<tr class="row-even"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/$APP/env</span></code></th>
-<td>Used to provide application specific config</td>
-<td><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</td>
-</tr>
-<tr class="row-odd"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/$APP/initializers/$SOMETHING.rb</span></code></th>
-<td>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</td>
-<td>This method is specific to Ruby on Rails applications: Activejobs, Dashboard, File Editor, and Job Composer.</td>
-</tr>
-</tbody>
-</table>
+<blockquote>
+<div><ul class="simple">
+<li><strong>/etc/ood/profile</strong><ul>
+<li>If exists, this file is sourced instead of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</li>
+<li>You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</li>
+</ul>
+</li>
+<li><strong>/etc/ood/config/nginx_stage.yml</strong><ul>
+<li>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</li>
+<li>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</li>
+</ul>
+</li>
+<li><strong>/etc/ood/config/apps/$APP/env</strong><ul>
+<li>Used to provide application specific config</li>
+<li><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</li>
+</ul>
+</li>
+<li><strong>/etc/ood/config/apps/$APP/initializers/ood.rb</strong><ul>
+<li>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</li>
+<li>This method is specific to Ruby on Rails applications: Activejobs,
+Dashboard, File Editor, and Job Composer. You can add multiple
+initializer files in this directory and they will be loaded in
+alphabetical order</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
 </div>
 
 
@@ -309,7 +306,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.9',
+            VERSION:'1.5.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

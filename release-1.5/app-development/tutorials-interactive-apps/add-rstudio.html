@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Add A RStudio App &mdash; Open OnDemand 1.5.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Open OnDemand 1.5.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Tutorials: Interactive Apps" href="../tutorials-interactive-apps.html"/>
+        <link rel="next" title="Tutorials: Passenger Apps" href="../tutorials-passenger-apps.html"/>
+        <link rel="prev" title="Use a Global Static List" href="add-custom-queue/global-static-list.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="add-jupyter.html">Add a Jupyter App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-custom-queue.html">Add Custom Queues/Partitions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Add A RStudio App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-is-singularity-required">Why Is Singularity Required?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-singularity-image">Build The Singularity Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#offering-users-a-choice-of-software-versions">Offering Users A Choice Of Software Versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-rstudio">Running RStudio</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-a-custom-rsession-wrapper">Use A Custom RSession Wrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#launching-rstudio-using-singularity">Launching RStudio Using Singularity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-osc-specific-example">Complete OSC-Specific Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
+        
+      <li>Add A RStudio App</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.5/source/app-development/tutorials-interactive-apps/add-rstudio.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="add-a-rstudio-app">
+<span id="app-development-tutorials-rstudio"></span><h1>Add A RStudio App<a class="headerlink" href="#add-a-rstudio-app" title="Permalink to this headline">¶</a></h1>
+<p>In a previous example we showed how an interactive Jupyter application could be set up. In this example we will explore the different requirements of an RStudio installation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Confirm that you have worked through the <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a> and previous examples before continuing on.</p>
+</div>
+<div class="section" id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.r-project.org/">R</a></li>
+<li><a class="reference external" href="https://www.rstudio.com/">RStudio</a></li>
+<li><a class="reference external" href="https://www.sylabs.io/">Singularity</a> (3.x)</li>
+</ul>
+<p><strong>Optional</strong> (but recommended) software:</p>
+<ul>
+<li><p class="first"><a class="reference external" href="https://www.tacc.utexas.edu/research-development/tacc-projects/lmod">Lmod</a> 6.0.1+ or any other CLI tool used to load appropriate environments
+within the batch job before launching the RStudio server, e.g.,</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>module purge
+module load R/3.5.2
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="why-is-singularity-required">
+<h2>Why Is Singularity Required?<a class="headerlink" href="#why-is-singularity-required" title="Permalink to this headline">¶</a></h2>
+<p>RStudio is not intended to run multiple instances on the same machine. Due to several hardcoded paths in RStudio there are conflicts which necessitate running each instance of RStudio in its own filesystem context. There are two ways OSC has accomplished this: using <a class="reference external" href="https://proot-me.github.io/">Proot</a> and Singularity. OSC has decided to chose Singularity as our solution moving forward because it is both a common tool in HPC, and better maintained than Proot.</p>
+</div>
+<div class="section" id="build-the-singularity-image">
+<h2>Build The Singularity Image<a class="headerlink" href="#build-the-singularity-image" title="Permalink to this headline">¶</a></h2>
+<p>The Singularity image must be built before it can be used. Running a build is trivial but does require sudoer access to the build host.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>singularity build -f rstudio_launcher_centos7.simg Singularity
+</pre></div>
+</div>
+</div></blockquote>
+<p>Where <code class="docutils literal notranslate"><span class="pre">Singularity</span></code> is the file that defines the image. The image is basic, installing only the command <code class="docutils literal notranslate"><span class="pre">which</span></code> over the base CentOS 7 packages. This simplicity is because most of the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host.</p>
+<p>Likewise the runscript defined in the image uses the host <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> which is propagated into the guest’s environment as <code class="docutils literal notranslate"><span class="pre">$USER_PATH</span></code>.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$USER_PATH</span><span class="s2">&quot;</span>
+<span class="nb">exec</span> rserver <span class="s2">&quot;</span><span class="si">${</span><span class="p">@</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="offering-users-a-choice-of-software-versions">
+<h2>Offering Users A Choice Of Software Versions<a class="headerlink" href="#offering-users-a-choice-of-software-versions" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to offer users a choice of which versions of R they may run. By offering the choice you enable early adopters a chance to use newer versions of R, without causing potentially breaking changes in existing code.</p>
+<p>To begin add a select control in <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> for the versions of R that are available on your system.</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
+  <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;R</span><span class="nv"> </span><span class="s">version&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="s">&quot;This</span><span class="nv"> </span><span class="s">defines</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">R</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">load.&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+    <span class="c1"># Each value in the options represents a valid set of modules to load</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;3.4.2&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;intel/16.0.3</span><span class="nv"> </span><span class="s">R/3.4.2</span><span class="nv"> </span><span class="s">rstudio/1.1.380_server&quot;</span><span class="p p-Indicator">]</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;3.3.2&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;intel/16.0.3</span><span class="nv"> </span><span class="s">R/3.3.2</span><span class="nv"> </span><span class="s">rstudio/1.0.136_server&quot;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>After users have submitted the form, its values are used as context when expanding the template files; in particular we will have set the modules to load. Next, to set the version of R and RStudio next edit <code class="docutils literal notranslate"><span class="pre">template/script.sh.erb</span></code>.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the version of R and RStudio that the user has selected</span>
+module load &lt;%<span class="o">=</span> context.version %&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="running-rstudio">
+<h2>Running RStudio<a class="headerlink" href="#running-rstudio" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">template/before.sh.erb</span></code> the variable <code class="docutils literal notranslate"><span class="pre">password</span></code> is set and its value is exported as <code class="docutils literal notranslate"><span class="pre">RSTUDIO_PASSWORD</span></code>.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a password and export it for RStudio authentication</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>create_passwd <span class="m">16</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">export</span> <span class="nv">RSTUDIO_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">password</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In <code class="docutils literal notranslate"><span class="pre">template/script.sh.erb</span></code> export the path to PAM helper executable <code class="docutils literal notranslate"><span class="pre">RSTUDIO_AUTH</span></code>.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># PAM auth helper used by RStudio</span>
+<span class="nb">export</span> <span class="nv">RSTUDIO_AUTH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/bin/auth&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="use-a-custom-rsession-wrapper">
+<h3>Use A Custom RSession Wrapper<a class="headerlink" href="#use-a-custom-rsession-wrapper" title="Permalink to this headline">¶</a></h3>
+<p>Using a custom RSession wrapper enables us to get diagnostic logging and ensure that user space libraries are available. We write this file from inside <code class="docutils literal notranslate"><span class="pre">template/script.sh.erb</span></code>.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate an `rsession` wrapper script</span>
+<span class="nb">export</span> <span class="nv">RSESSION_WRAPPER_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/rsession.sh&quot;</span>
+<span class="o">(</span>
+<span class="nb">umask</span> <span class="m">077</span>
+sed <span class="s1">&#39;s/^ \{2\}//&#39;</span> &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">RSESSION_WRAPPER_FILE</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s">&lt;&lt; EOL</span>
+<span class="s">  #!/usr/bin/env bash</span>
+
+<span class="s">  # Log all output from this script</span>
+<span class="s">  export RSESSION_LOG_FILE=&quot;${RSTUDIO_SINGULARITY_HOST_MNT}${PWD}/rsession.log&quot;</span>
+
+<span class="s">  exec &amp;&gt;&gt;&quot;\${RSESSION_LOG_FILE}&quot;</span>
+
+<span class="s">  # Launch the original command</span>
+<span class="s">  echo &quot;Launching rsession...&quot;</span>
+<span class="s">  set -x</span>
+<span class="s">  exec rsession --r-libs-user &quot;${R_LIBS_USER}&quot; &quot;\${@}&quot;</span>
+<span class="s">EOL</span>
+<span class="o">)</span>
+chmod <span class="m">700</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">RSESSION_WRAPPER_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="launching-rstudio-using-singularity">
+<h3>Launching RStudio Using Singularity<a class="headerlink" href="#launching-rstudio-using-singularity" title="Permalink to this headline">¶</a></h3>
+<p>Ensure that R, RStudio and their dependencies are available inside the guest by binding their paths on the host into the container. Likewise ensure that each instance of RStudio gets its own private <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> by binding <code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code> on the host to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> in the guest.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SINGULARITY_BINDPATH</span><span class="o">=</span><span class="s2">&quot;/usr/local,/etc/profile.d/lmod.sh,/usr/share/lmod,/opt/intel,/opt/mvapich2,/usr/lib64,</span><span class="nv">$TMPDIR</span><span class="s2">:/tmp&quot;</span>
+
+singularity run /users/PZS0002/mrodgers/singularity/centos7.simg <span class="se">\</span>
+ --www-port <span class="s2">&quot;</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
+ --auth-none <span class="m">0</span> <span class="se">\</span>
+ --auth-pam-helper-path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">RSTUDIO_AUTH</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
+ --auth-encrypt-password <span class="m">0</span> <span class="se">\</span>
+ --rsession-path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">RSESSION_WRAPPER_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If <code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code> is not guaranteed to be unique then consider appending the results of a <code class="docutils literal notranslate"><span class="pre">mktemp</span> <span class="pre">-d</span></code> to it.</p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="complete-osc-specific-example">
+<h2>Complete OSC-Specific Example<a class="headerlink" href="#complete-osc-specific-example" title="Permalink to this headline">¶</a></h2>
+<p>The OSC offers its OnDemand users an RStudio interactive application. For reference this is the complete OSC-specific implementation available on <a class="reference external" href="https://github.com/OSC/bc_osc_rstudio_server">Github</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tutorials-passenger-apps.html" class="btn btn-neutral float-right" title="Tutorials: Passenger Apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="add-custom-queue/global-static-list.html" class="btn btn-neutral" title="Use a Global Static List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, Ohio Supercomputer Center.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/tutorials-interactive-apps/add-rstudio.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/app-development/tutorials-interactive-apps/add-rstudio.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/app-development/tutorials-interactive-apps/add-rstudio.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/app-development/tutorials-interactive-apps/add-rstudio.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/app-development/tutorials-interactive-apps/add-rstudio.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/app-development/tutorials-interactive-apps/add-rstudio.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-rstudio.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.5.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

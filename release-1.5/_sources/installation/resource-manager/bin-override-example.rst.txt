@@ -10,7 +10,7 @@ This example demonstrates a few uses of wrapping the default scheduler clients:
 * Using SSH from the web host to launch ``sbatch`` on the submit host
 * Altering arguments passed to the scheduler
 * Altering the script passed to ``sbatch`` (which is almost certainly a terrible idea)
-* Logging values passed to the scheduler in a custom location (note that the values passed to ``sbatch`` are also logged to the PUN log file at ``/var/log/nginx/$USER/error.log`` by the Dashboard and Job Composer when submitting jobs)
+* Logging values passed to the scheduler in a custom location (note that the values passed to ``sbatch`` are also logged to the PUN log file at ``/var/log/ondemand-nginx/$USER/error.log`` by the Dashboard and Job Composer when submitting jobs)
 
 .. warning::
 

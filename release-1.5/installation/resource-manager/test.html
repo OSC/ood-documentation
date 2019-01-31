@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Test Configuration &mdash; Open OnDemand 1.4.9 documentation</title>
+  <title>Test Configuration &mdash; Open OnDemand 1.5.1 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../../index.html"/>
+    <link rel="top" title="Open OnDemand 1.5.1 documentation" href="../../index.html"/>
         <link rel="up" title="Resource Manager Configuration" href="../resource-manager.html"/>
         <link rel="next" title="Customization Overview" href="../../customization_overview.html"/>
         <link rel="prev" title="A Working Example Of A bin_overrides Script" href="bin-override-example.html"/> 
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                1.4
+                1.5
               </div>
             
           
@@ -122,11 +122,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
@@ -224,7 +226,7 @@ configuration files.</p>
 </div>
 </li>
 <li><p class="first">We will now list all available tasks that we can run:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> rh-ruby24 rh-nodejs6 -- bin/rake -T test:jobs
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> ondemand -- bin/rake -T test:jobs
 <span class="c1"># rake test:jobs           # Test all clusters</span>
 <span class="c1"># rake test:jobs:cluster1  # Test the cluster: cluster1</span>
 <span class="c1"># rake test:jobs:cluster2  # Test the cluster: cluster2</span>
@@ -237,7 +239,7 @@ configuration files that reside under
 <li><p class="first">For now let us test just a single cluster (in our example we use
 <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>, so you will need to replace it with the name of the cluster
 you configured):</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable rh-ruby24 rh-nodejs6 -- bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable ondemand -- bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
 <span class="c1"># [sudo] password for user:</span>
 <span class="c1"># Rails Error: Unable to access log file. Please ensure that /var/www/ood/apps/sys/dashboard/log/production.log exists and is writable (ie, make it writable for user and group: chmod 0664 /var/www/ood/apps/sys/dashboard/log/production.log). The log level has been raised to WARN and the output directed to STDERR until the problem is fixed.</span>
 <span class="c1"># mkdir -p /home/user/test_jobs</span>
@@ -279,7 +281,7 @@ under <code class="file docutils literal notranslate"><span class="pre">/etc/ood
 arguments, e.g., a queue, memory requirements, an account, etc. You can
 provide these command line arguments as a string with the environment
 variable <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS</span></code> as:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable rh-ruby24 rh-nodejs6 -- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS=&quot;-A myaccount&quot;&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable ondemand-- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS=&quot;-A myaccount&quot;&#39;</span>
 </pre></div>
 </div>
 <p class="last">Note that the <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS=&quot;...&quot;</span></code> is defined at the end of the command.</p>
@@ -367,7 +369,7 @@ variable <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARG
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.9',
+            VERSION:'1.5.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
