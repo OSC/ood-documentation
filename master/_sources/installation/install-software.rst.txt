@@ -62,6 +62,10 @@ software requirements:
 
       sudo yum install ondemand
 
+.. warning::
+
+   The nginx RPM used by ondemand will upgrade the nginx RPMs provided by EPEL, if they are installed.
+
 .. note::
 
    For some older systems, user ids (UID) may start at ``500`` and not the
