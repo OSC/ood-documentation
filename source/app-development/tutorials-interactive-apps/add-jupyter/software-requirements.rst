@@ -7,7 +7,7 @@ The Jupyter app requires the following software to be installed on the
 **compute** nodes that that batch job is meant to run on, **NOT** the OnDemand
 node:
 
-- `Jupyter Notebook`_ 4.2.3+ (earlier versions are untested by may work for
+- `Jupyter Notebook`_ 4.2.3+ (earlier versions are untested but may work for
   you)
 - `OpenSSL`_ 1.0.1+ (used to hash the Jupyter Notebook server password)
 
