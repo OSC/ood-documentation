@@ -23,6 +23,33 @@ environment post launch.
    OnDemand community please share on our `Discourse <https://discourse.osc.edu/c/open-ondemand>`_ instance and we can then
    also add it to this documentation site.
 
+Special Thanks
+--------------
+
+These are institutions who were early adopters or provided HPC resources for development and testing of the resource manager adapters currently available. The success of this project would not be possible without their generous support (in alphabetical order):
+
+- Pittsburgh Supercomputer Center. This work used the Bridges system, which is
+  supported by NSF award number ACI-1445606, at the Pittsburgh Supercomputing
+  Center (PSC). For early adoption and help with the Slurm adapter, platform
+  feedback, and webinar participation.
+- Texas A&M High Performance Research Computing. Portions of this research were
+  conducted with the advanced computing resources provided by Texas A&M High
+  Performance Research Computing. For early adoption and help with the LSF
+  adapter, platform feedback.
+- Tufts Technology Services HPC Research Computing for early adoption and help
+  with Slurm adapter development, platform feedback, and webinar participation.
+- University of Arizona HPC. An allocation of computer time from the UA
+  Research Computing High Performance Computing (HPC) at the University of
+  Arizona is gratefully acknowledged. For early adoption and help with the
+  PBSPro adapter, platform feedback.
+- University at Buffalo Center for Computational Research. For early adoption,
+  platform feedback, and collaboration on the next major version of Open
+  OnDemand, 2.0.
+- UCLA Institute for Digital Research and Education. This work used
+  computational and storage services associated with the Hoffman2 Shared
+  Cluster provided by UCLA Institute for Digital Research and Education’s
+  Research Technology Group. For help with the SGE adapter.
+
 .. toctree::
    :maxdepth: 2
    :caption: Install
