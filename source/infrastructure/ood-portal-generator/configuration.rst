@@ -538,7 +538,7 @@ properties are ``null`` then PUN access will be disabled.
 
        .. code-block:: yaml
 
-          pun_socket_root: "/var/run/nginx"
+          pun_socket_root: "/var/run/ondemand-nginx"
 
      Example
        Socket files are located in a different directory

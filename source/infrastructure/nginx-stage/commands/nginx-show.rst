@@ -29,7 +29,7 @@ To display the details of Bob's PUN process:
    sudo nginx_stage nginx_show --user 'bob'
    # User: bob
    # Instance: 24214
-   # Socket: /var/run/nginx/bob/passenger.sock
+   # Socket: /var/run/ondemand-nginx/bob/passenger.sock
    # Sessions: 1
 
 Where ``Sessions`` is the number of active connections to the given Unix domain
