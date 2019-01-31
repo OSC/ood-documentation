@@ -29,6 +29,7 @@ See the `website`_ for more information about the Open OnDemand project.
    enable-desktops
    install-ihpc-apps
    app-development
+   app-sharing
    app-development/tutorials-interactive-apps
    app-development/tutorials-passenger-apps
 
