@@ -20,8 +20,10 @@ OnDemand's configuration is stored in the environment, which can be modified usi
      - Used to provide application specific config
      - ``env`` files do not override values set by prior methods.
 
-   * **/etc/ood/config/apps/$APP/initializers/$SOMETHING.rb**
+   * **/etc/ood/config/apps/$APP/initializers/ood.rb**
 
      - Modify Rails application behavior `using Ruby code <https://guides.rubyonrails.org/configuring.html#using-initializer-files>`__. Since this is application code environment variables can be set, removed.
      - This method is specific to Ruby on Rails applications: Activejobs,
-       Dashboard, File Editor, and Job Composer.
+       Dashboard, File Editor, and Job Composer. You can add multiple
+       initializer files in this directory and they will be loaded in
+       alphabetical order
