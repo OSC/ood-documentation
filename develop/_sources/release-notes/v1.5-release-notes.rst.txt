@@ -1,0 +1,120 @@
+.. _v1.5-release-notes:
+
+v1.5 Release Notes
+==================
+
+Highlights in 1.5:
+
+- `Add ondemand SCL and use SCL nginx and passenger`_
+
+Upgrading from v1.4
+-------------------
+
+.. warning::
+
+  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
+
+#. Update OnDemand release RPM
+
+   CentOS/RHEL 6
+
+   .. code-block:: sh
+
+      sudo yum install -y https://yum.osc.edu/ondemand/1.5/ondemand-release-web-1.5-1.el6.noarch.rpm
+
+   CentOS/RHEL 7
+
+   .. code-block:: sh
+
+      sudo yum install -y https://yum.osc.edu/ondemand/1.5/ondemand-release-web-1.5-1.el7.noarch.rpm
+
+#. Update OnDemand
+
+   .. code-block:: sh
+
+       sudo yum clean all
+       sudo yum update ondemand
+
+   .. warning::
+
+      The nginx RPM used by ondemand in 1.4 is no longer maintained. If you use nginx outside of OnDemand it's recommended to re-install using nginx from repositories such as EPEL after upgrading OnDemand to 1.5.
+
+      .. code-block:: sh
+
+          sudo yum downgrade nginx nginx-filesystem --disablerepo=ondemand-web
+
+#. Optionally remove dependencies from prior versions of OOD if they are not used by other applications.
+
+   .. code-block:: sh
+
+       sudo yum remove nginx nginx-filesystem passenger
+
+#. Clean up NGINX directories from prior versions of OOD
+
+   The ondemand RPM should have copied all the nginx configurations, tmp files and logs from their previous locations to their new locations if the defaults were not changed. Once the functionality of the OnDemand 1.5 upgrade is verified it is safe to remove these old paths.
+
+   .. warning:: If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.
+
+   .. warning:: At the very minimum ``/var/lib/nginx/config`` needs to be deleted as that path is used by the ondemand RPM to determine if upgrades are taking place from 1.4 to 1.5.
+
+   .. code-block:: sh
+
+       sudo rm -rf /var/lib/nginx/config
+       sudo rm -rf /var/tmp/nginx/*
+       sudo rm -rf /var/log/nginx/*
+
+
+Infrastructure Version Changes
+------------------------------
+
+OnDemand's infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: `OnDemand 1.5.1 <https://github.com/OSC/ondemand/blob/v1.5.1/CHANGELOG.md>`__. `Diff with 1.4.10 <https://github.com/OSC/ondemand/compare/v1.4.10...v1.5.1>`__
+
+
+Application Version Changes
+----------------------------
+
+.. _v1.5-app-versions:
+.. list-table:: Application Versions
+   :widths: auto
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - App
+     - Version
+   * - `Dashboard App`
+     - 1.30.2 → `1.31.0 <https://github.com/OSC/ood-dashboard/blob/v1.31.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-dashboard/compare/v1.30.2...v1.31.0>`__)
+   * - `Shell App`
+     - Unchanged
+   * - `Files App`
+     - Unchanged
+   * - `File Editor App`
+     - Unchanged
+   * - `Active Jobs App`
+     - 1.6.9 → `1.7.0 <https://github.com/OSC/ood-activejobs/blob/v1.7.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-activejobs/compare/v1.6.9...v1.7.0>`__)
+   * - `Job Composer App`
+     - 2.10.2 → `2.11.0 <https://github.com/OSC/ood-myjobs/blob/v2.11.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-myjobs/compare/v2.10.2...v2.11.0>`__)
+   * - `Desktops App`
+     - Unchanged
+
+:numref:`v1.5-app-versions` lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.
+
+
+Details
+-------
+
+Add ondemand SCL and use SCL nginx and passenger
+................................................
+
+This upgrade adds a new ``ondemand`` software collection that is the only software collection needed to interact with OnDemand. This new softare collection will load all the collections needed by OnDemand. The Passenger and NGINX dependencies have been repackaged under this new ``ondemand`` SCL so those packages will no longer interfere with Passenger of NGINX packages from other repositories.
+
+.. warning::
+
+  Several NGINX directories used by OnDemand have changed.
+    - ``/var/lib/nginx`` to ``/var/lib/ondemand-nginx``
+    - ``/var/tmp/nginx`` to ``/var/tmp/ondemand-nginx``
+    - ``/var/log/nginx`` to ``/var/log/ondemand-nginx``
+

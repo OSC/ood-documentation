@@ -70,7 +70,7 @@ System`_ core library for interacting with the local and shared file systems.
    For File Uploads, NGINX_ will buffer the entire file under the following
    path::
 
-     /var/lib/nginx/tmp/<user>/client_body
+     /var/lib/ondemand-nginx/tmp/<user>/client_body
 
    before Passenger_ and subsequently the Files App can gain access to it. The
    space allocated for this location is one of the limiting factors on the size

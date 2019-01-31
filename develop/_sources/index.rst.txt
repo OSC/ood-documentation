@@ -36,6 +36,7 @@ See the `website`_ for more information about the Open OnDemand project.
    :maxdepth: 2
    :caption: Release Notes
 
+   release-notes/v1.5-release-notes
    release-notes/v1.4-release-notes
    release-notes/v1.3-release-notes
    release-notes/v1.2-release-notes
