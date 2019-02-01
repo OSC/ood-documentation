@@ -229,10 +229,10 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 <div class="section" id="initial-installation-steps">
 <h2>1.1. Initial Installation Steps<a class="headerlink" href="#initial-installation-steps" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Download and unpack Keycloak 3.1.0 (from <a class="reference external" href="http://www.keycloak.org/archive/downloads-3.1.0.html">http://www.keycloak.org/archive/downloads-3.1.0.html</a>)</p>
+<li><p class="first">Download and unpack Keycloak 4.8.3 (from <a class="reference external" href="http://www.keycloak.org/archive/downloads-4.8.3.html">http://www.keycloak.org/archive/downloads-4.8.3.html</a>)</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt
-sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
-sudo tar xzf keycloak-3.1.0.Final.tar.gz
+sudo wget https://downloads.jboss.org/keycloak/4.8.3.Final/keycloak-4.8.3.Final.tar.gz
+sudo tar xzf keycloak-4.8.3.Final.tar.gz
 </pre></div>
 </div>
 </li>
@@ -246,25 +246,25 @@ sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 </pre></div>
 </div>
 <p>This makes a home directory, which is needed when running API calls as keycloak user. Finally we set proper permissions:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown keycloak: -R keycloak-3.1.0.Final
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown keycloak: -R keycloak-4.8.3.Final
 </pre></div>
 </div>
 </li>
-<li><p class="first">Restrict access to keycloak-3.1.0.Final/standalone, which will contain
+<li><p class="first">Restrict access to keycloak-4.8.3.Final/standalone, which will contain
 sensitive data for the Keycloak server</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-3.1.0.Final
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-4.8.3.Final
 sudo -u keycloak chmod <span class="m">700</span> standalone
 </pre></div>
 </div>
 </li>
 <li><p class="first">Install JDK 1.8.0</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>yum install java-1.8.0-openjdk-devel
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install java-1.8.0-openjdk-devel
 </pre></div>
 </div>
 </li>
-<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
+<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-4.8.3.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
 <p>If you are not already there:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-3.1.0.Final
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-4.8.3.Final
 </pre></div>
 </div>
 <p>Generate a password to use for the admin user:</p>
@@ -277,7 +277,7 @@ sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS
 <li><p class="first">Modify <code class="docutils literal notranslate"><span class="pre">standalone/configuration/standalone.xml</span></code> to enable proxying to Keycloak:</p>
 <p>Simplest is to run these three commands:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)&#39;</span>
-sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)&#39;</span>
+sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=8443)&#39;</span>
 sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)&#39;</span>
 </pre></div>
 </div>
@@ -331,7 +331,7 @@ out so you can wget the file, edit as appropriate, and run via:</p>
 <span class="s">Type=idle</span>
 <span class="s">User=keycloak</span>
 <span class="s">Group=keycloak</span>
-<span class="s">ExecStart=/opt/keycloak-3.1.0.Final/bin/standalone.sh -b 0.0.0.0</span>
+<span class="s">ExecStart=/opt/keycloak-4.8.3.Final/bin/standalone.sh -b 0.0.0.0</span>
 <span class="s">TimeoutStartSec=600</span>
 <span class="s">TimeoutStopSec=600</span>
 
@@ -510,6 +510,8 @@ Apache config might look like:</p>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.5</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1.4</a></dd>
       

@@ -108,8 +108,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2. Configure Keycloak</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#add-a-new-realm">2.1. Add a new realm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configure-ldap">2.2. Configure LDAP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-oidc-client-template">2.3. Add OIDC client template</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-ondemand-as-a-client">2.4. Add OnDemand as a client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-ondemand-as-a-client">2.3. Add OnDemand as a client</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
@@ -226,7 +225,7 @@ OIDC client that will authenticate with Keycloak.</p>
 <ol class="arabic simple">
 <li>Log into <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> as the admin user</li>
 <li>Hover over “Master” on left and click “Add Realm”</li>
-<li>Type in name “ondemand” and click “Save”. The new realm is loaded.</li>
+<li>Type in name “ondemand” and click “Create”. The new realm is loaded.</li>
 <li>Click Login tab, then adjust parameters:<ol class="arabic">
 <li>Remember Me: ON</li>
 <li>Login with email: OFF</li>
@@ -244,9 +243,9 @@ OIDC client that will authenticate with Keycloak.</p>
 <li>Edit Mode set to READ_ONLY</li>
 <li>Vendor set to other – for OpenLDAP</li>
 <li>User Object Classes set to posixAccount – OSC specific and odd</li>
-<li>Connection URL: ldaps://openldap1.infra.osc.edu:636 ldaps://openldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1</li>
-<li>User DN: ou=People,ou=hpc,o=osc</li>
-<li>Auth Type: simple – OSC specific as we allow anonymous binds</li>
+<li>Connection URL: ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1</li>
+<li>User DN: ou=People,dc=osc,dc=edu</li>
+<li>Auth Type: none – OSC specific as we allow anonymous binds</li>
 <li>Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs</li>
 </ol>
 </li>
@@ -257,33 +256,11 @@ OIDC client that will authenticate with Keycloak.</p>
 <p class="last">These LDAP settings are what we set for OSC. Your configuration may vary from
 this. If you run into any problems, please let us know so that once a
 solution is reached we can document those problem areas here. Contact us on
-the OOD Mailing List at <a class="reference external" href="https://lists.osu.edu/mailman/listinfo/ood-users">https://lists.osu.edu/mailman/listinfo/ood-users</a>.</p>
+the OnDemand Discourse at <a class="reference external" href="https://discourse.osc.edu/c/open-ondemand">https://discourse.osc.edu/c/open-ondemand</a>.</p>
 </div>
-</div>
-<div class="section" id="add-oidc-client-template">
-<h2>2.3. Add OIDC client template<a class="headerlink" href="#add-oidc-client-template" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Choose Client Templates</li>
-<li>Click Create (upper right corner)<ol class="arabic">
-<li>Name: ondemand-clients</li>
-<li>Protocol: openid-connect</li>
-<li>Click Save</li>
-<li>Mappers tab</li>
-<li>Click Add Builtin</li>
-<li>Check box the following: username, email, given name, family name, full name</li>
-<li>Click Add Selected</li>
-<li>Click Scope tab</li>
-<li>Set Full Scope Allowed to ON</li>
-</ol>
-</li>
-<li>Verify Mappers &gt;&gt; username has “Token Claim Name” with value <code class="docutils literal notranslate"><span class="pre">preferred_username</span></code>.
-This means that when the user logs to OnDemand, the <code class="docutils literal notranslate"><span class="pre">preferred_username</span></code> claim will
-contain the username of the user. We will use this when deciding what system user to map
-a request to.</li>
-</ol>
 </div>
 <div class="section" id="add-ondemand-as-a-client">
-<h2>2.4. Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
+<h2>2.3. Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Choose Clients, then click Create in top right corner<ol class="arabic">
 <li>Client ID: webdev07.hpc.osc.edu</li>
@@ -304,9 +281,8 @@ a request to.</li>
 </ol>
 </li>
 <li>Finally, get the client secret to use with OnDemand installation:<ol class="arabic">
-<li>Select the “Installation” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; webdev07.hpc.osc.edu”</li>
-<li>Select Format Option: Keycloak OIDC JSON</li>
-<li>The “secret” string will be in the credentials section. Copy that for future use in this tutorial (and keep it secure).</li>
+<li>Select the “Credentials” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; webdev07.hpc.osc.edu”</li>
+<li>Copy the value for “secret” for future use in this tutorial (and keep it secure).</li>
 </ol>
 </li>
 </ol>
@@ -359,6 +335,8 @@ a request to.</li>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.5</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.4</a></dd>
       

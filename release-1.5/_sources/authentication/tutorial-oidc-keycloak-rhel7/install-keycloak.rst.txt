@@ -16,13 +16,13 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 Initial Installation Steps
 --------------------------
 
-#. Download and unpack Keycloak 3.1.0 (from http://www.keycloak.org/archive/downloads-3.1.0.html)
+#. Download and unpack Keycloak 4.8.3 (from http://www.keycloak.org/archive/downloads-4.8.3.html)
 
    .. code-block:: sh
 
       cd /opt
-      sudo wget https://downloads.jboss.org/keycloak/3.1.0.Final/keycloak-3.1.0.Final.tar.gz
-      sudo tar xzf keycloak-3.1.0.Final.tar.gz
+      sudo wget https://downloads.jboss.org/keycloak/4.8.3.Final/keycloak-4.8.3.Final.tar.gz
+      sudo tar xzf keycloak-4.8.3.Final.tar.gz
 
 
 #. Add keycloak user and change ownership of files
@@ -42,14 +42,14 @@ Initial Installation Steps
 
    .. code-block:: sh
 
-      sudo chown keycloak: -R keycloak-3.1.0.Final
+      sudo chown keycloak: -R keycloak-4.8.3.Final
 
-#. Restrict access to keycloak-3.1.0.Final/standalone, which will contain
+#. Restrict access to keycloak-4.8.3.Final/standalone, which will contain
    sensitive data for the Keycloak server
 
    .. code-block:: sh
 
-      cd keycloak-3.1.0.Final
+      cd keycloak-4.8.3.Final
       sudo -u keycloak chmod 700 standalone
 
 
@@ -57,16 +57,16 @@ Initial Installation Steps
 
    .. code-block:: sh
 
-      yum install java-1.8.0-openjdk-devel
+      sudo yum install java-1.8.0-openjdk-devel
 
 
-#. Added 'admin' to '/opt/keycloak-3.1.0.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user.
+#. Added 'admin' to '/opt/keycloak-4.8.3.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user.
 
    If you are not already there:
 
    .. code-block:: sh
 
-      cd /opt/keycloak-3.1.0.Final 
+      cd /opt/keycloak-4.8.3.Final 
 
    Generate a password to use for the admin user:
 
@@ -84,7 +84,7 @@ Initial Installation Steps
    .. code-block:: sh
 
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
-      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
+      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=8443)'
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
 
    Or you can use a config.cli file that contains these commands. We have
@@ -116,7 +116,7 @@ Start Keycloak Server
       Type=idle
       User=keycloak
       Group=keycloak
-      ExecStart=/opt/keycloak-3.1.0.Final/bin/standalone.sh -b 0.0.0.0
+      ExecStart=/opt/keycloak-4.8.3.Final/bin/standalone.sh -b 0.0.0.0
       TimeoutStartSec=600
       TimeoutStopSec=600
 
