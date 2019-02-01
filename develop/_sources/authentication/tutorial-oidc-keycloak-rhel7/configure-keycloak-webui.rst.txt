@@ -11,14 +11,13 @@ Add a new realm
 
 #. Log into ``https://webdev07.hpc.osc.edu:8443`` as the admin user
 #. Hover over "Master" on left and click "Add Realm"
-#. Type in name "ondemand" and click "Save". The new realm is loaded.
+#. Type in name "ondemand" and click "Create". The new realm is loaded.
 #. Click Login tab, then adjust parameters:
 
    #. Remember Me: ON
    #. Login with email: OFF
 
 #. Click Save.
-
 
 Configure LDAP
 ------------------------------------------
@@ -30,9 +29,9 @@ Configure LDAP
    #. Edit Mode set to READ_ONLY
    #. Vendor set to other – for OpenLDAP
    #. User Object Classes set to posixAccount – OSC specific and odd
-   #. Connection URL: ldaps://openldap1.infra.osc.edu:636 ldaps://openldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1
-   #. User DN: ou=People,ou=hpc,o=osc
-   #. Auth Type: simple – OSC specific as we allow anonymous binds
+   #. Connection URL: ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1
+   #. User DN: ou=People,dc=osc,dc=edu
+   #. Auth Type: none – OSC specific as we allow anonymous binds
    #. Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs
 
 #. Save
@@ -42,29 +41,7 @@ Configure LDAP
    These LDAP settings are what we set for OSC. Your configuration may vary from
    this. If you run into any problems, please let us know so that once a
    solution is reached we can document those problem areas here. Contact us on
-   the OOD Mailing List at https://lists.osu.edu/mailman/listinfo/ood-users.
-
-Add OIDC client template
---------------------------------------------------
-
-#. Choose Client Templates
-#. Click Create (upper right corner)
-
-   #. Name: ondemand-clients
-   #. Protocol: openid-connect
-
-   #. Click Save
-   #. Mappers tab
-   #. Click Add Builtin
-   #. Check box the following: username, email, given name, family name, full name
-   #. Click Add Selected
-   #. Click Scope tab
-   #. Set Full Scope Allowed to ON
-
-#. Verify Mappers >> username has "Token Claim Name" with value ``preferred_username``.
-   This means that when the user logs to OnDemand, the ``preferred_username`` claim will
-   contain the username of the user. We will use this when deciding what system user to map
-   a request to.
+   the OnDemand Discourse at https://discourse.osc.edu/c/open-ondemand.
 
 Add OnDemand as a client
 --------------------------------------------------
@@ -89,7 +66,6 @@ Add OnDemand as a client
 
 #. Finally, get the client secret to use with OnDemand installation:
 
-   #. Select the "Installation" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
-   #. Select Format Option: Keycloak OIDC JSON
-   #. The "secret" string will be in the credentials section. Copy that for future use in this tutorial (and keep it secure).
+   #. Select the "Credentials" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
+   #. Copy the value for "secret" for future use in this tutorial (and keep it secure).
 
