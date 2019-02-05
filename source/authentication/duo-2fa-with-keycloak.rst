@@ -15,13 +15,13 @@ These are the steps to setup two factor authentication with Duo using Keycloak.
       account required   pam_sss.so
 
 #. Because Keycloak doesn’t actually know there is a possible challenge
-   response using SSSD you have to setup Duo to have ``autopush=yes`` and ``prompts=1``
-   so that the 2FA automatically sends a push notification to the person’s
-   phone.
+   response using SSSD you have to configure Duo's ``/etc/duo/pam_duo.conf``
+   to have ``autopush=yes`` and ``prompts=1`` so that the 2FA automatically
+   sends a push notification to the person’s phone.
 
 #. (Optional) Require Duo based on group membership or username list
 
-   If you want to make Duo optional you could do so via group memberships. This works by changing ``groups`` config for pam_duo to something like ``groups=ood_duo``.
+   If you want to make Duo optional you could do so via group memberships. This works by changing ``groups`` config for ``/etc/duo/pam_duo.conf`` to something like ``groups=ood_duo``.
 
    You can also limit based on group membership using the contents of a file that lists users that require Duo.  This is done by modifying the keycloak PAM stack.  The file ``/etc/security/ondemand-duo.conf`` is a list of usernames, one username per line, that must use Duo to authenticate with Keycloak.  The modified PAM configuration at ``/etc/pam.d/keycloak``:
 
