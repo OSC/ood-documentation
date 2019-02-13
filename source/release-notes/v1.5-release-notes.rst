@@ -37,6 +37,15 @@ Upgrading from v1.4
 
    .. warning::
 
+      This step triggers the execution of ``update_ood_portal`` script from ``ood-portal-generator`` which results in
+      ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` being modified. Your previous ``ood-portal.conf`` file will
+      be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.
+
+      Ensure that the resulting ``ood-portal.conf`` Apache config has ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/nginx"``
+      changed to ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/ondemand-nginx"``.
+
+   .. warning::
+
       The nginx RPM used by ondemand in 1.4 is no longer maintained. If you use nginx outside of OnDemand it's recommended to re-install using nginx from repositories such as EPEL after upgrading OnDemand to 1.5.
 
       .. code-block:: sh
@@ -88,6 +97,15 @@ Upgrading from v1.3
 
        sudo yum clean all
        sudo yum update ondemand
+
+   .. warning::
+
+      This step triggers the execution of ``update_ood_portal`` script from ``ood-portal-generator`` which results in
+      ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` being modified. Your previous ``ood-portal.conf`` file will
+      be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.
+
+      Ensure that the resulting ``ood-portal.conf`` Apache config has ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/nginx"``
+      changed to ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/ondemand-nginx"``.
 
 #. Optionally remove dependencies from prior versions of OOD
 
