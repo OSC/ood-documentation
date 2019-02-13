@@ -58,14 +58,16 @@ To begin add a select control in ``form.yml`` for the versions of R that are ava
 
   .. code-block:: yaml
 
-    version:  
-      widget: select
-      label: "R version"
-      help: "This defines the version of R you want to load."
-      options:
-        # Each value in the options represents a valid set of modules to load
-        - [ "3.4.2", "intel/16.0.3 R/3.4.2 rstudio/1.1.380_server"]
-        - [ "3.3.2", "intel/16.0.3 R/3.3.2 rstudio/1.0.136_server"]
+    attributes:
+    # ...
+      version:
+        widget: select
+        label: "R version"
+        help: "This defines the version of R you want to load."
+        options:
+          # Each value in the options represents a valid set of modules to load
+          - [ "3.4.2", "intel/16.0.3 R/3.4.2 rstudio/1.1.380_server"]
+          - [ "3.3.2", "intel/16.0.3 R/3.3.2 rstudio/1.0.136_server"]
 
 After users have submitted the form, its values are used as context when expanding the template files; in particular we will have set the modules to load. Next, to set the version of R and RStudio next edit ``template/script.sh.erb``.
 
