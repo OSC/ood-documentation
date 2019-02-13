@@ -55,11 +55,9 @@ Upgrading from v1.4
 
    .. warning:: If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.
 
-   .. warning:: At the very minimum ``/var/lib/nginx/config`` needs to be deleted as that path is used by the ondemand RPM to determine if upgrades are taking place from 1.4 to 1.5.
-
    .. code-block:: sh
 
-       sudo rm -rf /var/lib/nginx/config
+       sudo rm -rf /var/lib/nginx/config.rpmsave
        sudo rm -rf /var/tmp/nginx/*
        sudo rm -rf /var/log/nginx/*
 
@@ -156,7 +154,7 @@ Upgrading from v1.3
 Infrastructure Version Changes
 ------------------------------
 
-OnDemand's infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: `OnDemand 1.5.1 <https://github.com/OSC/ondemand/blob/v1.5.1/CHANGELOG.md>`__. `Diff with 1.4.10 <https://github.com/OSC/ondemand/compare/v1.4.10...v1.5.1>`__
+OnDemand's infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: `OnDemand 1.5.2 <https://github.com/OSC/ondemand/blob/v1.5.2/CHANGELOG.md>`__. `Diff with 1.4.10 <https://github.com/OSC/ondemand/compare/v1.4.10...v1.5.2>`__
 
 
 Application Version Changes
@@ -208,3 +206,10 @@ This upgrade adds a new ``ondemand`` software collection that is the only softwa
     - ``/var/tmp/nginx`` to ``/var/tmp/ondemand-nginx`` (1.4 to 1.5)
     - ``/var/lib/nginx/tmp`` to ``/var/tmp/ondemand-nginx`` (1.3 to 1.5)
 
+.. warning::
+
+  nginx_stage now loads the ``ondemand`` SCL via ``/opt/ood/nginx_stage/etc/profile`` before loading ``/etc/ood/profile``.
+
+  .. code::
+
+    source scl_source enable ondemand
