@@ -28,6 +28,8 @@ Special Thanks
 
 These are institutions who were early adopters or provided HPC resources for development and testing of the resource manager adapters currently available. The success of this project would not be possible without their generous support (in alphabetical order):
 
+- Bowdoin College. For early adoption and feedback with the SGE adapter.
+- Oregon State University. For early adoption and feedback with the SGE adapter.
 - Pittsburgh Supercomputer Center. This work used the Bridges system, which is
   supported by NSF award number ACI-1445606, at the Pittsburgh Supercomputing
   Center (PSC). For early adoption and help with the Slurm adapter, platform
