@@ -40,7 +40,7 @@ The Singularity image must be built before it can be used. Running a build is tr
 
       singularity build -f rstudio_launcher_centos7.simg Singularity
 
-Where ``Singularity`` is the file that defines the image. The image is basic, installing only the command ``which`` over the base CentOS 7 packages. This simplicity is because most of the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host.
+Where ``Singularity`` is the file that defines the image. The image is basic, installing only the command ``which`` over the base CentOS 7 packages. This simplicity is because most of the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host. By bind-mounting executables and libaries from the host system we are able to swap RStudio versions at launch time without having to update the Singuarlity image.
 
 Likewise the runscript defined in the image uses the host ``$PATH`` which is propagated into the guest's environment as ``$USER_PATH``.
 
