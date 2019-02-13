@@ -252,11 +252,7 @@ sudo yum update ondemand
 <p class="first admonition-title">Warning</p>
 <p class="last">If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.</p>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">At the very minimum <code class="docutils literal notranslate"><span class="pre">/var/lib/nginx/config</span></code> needs to be deleted as that path is used by the ondemand RPM to determine if upgrades are taking place from 1.4 to 1.5.</p>
-</div>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo rm -rf /var/lib/nginx/config
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo rm -rf /var/lib/nginx/config.rpmsave
 sudo rm -rf /var/tmp/nginx/*
 sudo rm -rf /var/log/nginx/*
 </pre></div>
@@ -331,7 +327,7 @@ or creating some directories and symlinks to enable specific app developers.</p>
 </div>
 <div class="section" id="infrastructure-version-changes">
 <h2>Infrastructure Version Changes<a class="headerlink" href="#infrastructure-version-changes" title="Permalink to this headline">¶</a></h2>
-<p>OnDemand’s infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: <a class="reference external" href="https://github.com/OSC/ondemand/blob/v1.5.1/CHANGELOG.md">OnDemand 1.5.1</a>. <a class="reference external" href="https://github.com/OSC/ondemand/compare/v1.4.10...v1.5.1">Diff with 1.4.10</a></p>
+<p>OnDemand’s infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: <a class="reference external" href="https://github.com/OSC/ondemand/blob/v1.5.2/CHANGELOG.md">OnDemand 1.5.2</a>. <a class="reference external" href="https://github.com/OSC/ondemand/compare/v1.4.10...v1.5.2">Diff with 1.4.10</a></p>
 </div>
 <div class="section" id="application-version-changes">
 <h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
@@ -389,6 +385,13 @@ it was updated from for each of the system web applications in this release.</p>
 </ul>
 </dd>
 </dl>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>nginx_stage now loads the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> SCL via <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> before loading <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code>.</p>
+<div class="code last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">scl_source</span> <span class="n">enable</span> <span class="n">ondemand</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
