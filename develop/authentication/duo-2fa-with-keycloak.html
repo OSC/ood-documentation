@@ -216,18 +216,22 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Setting something like <code class="docutils literal notranslate"><span class="pre">groups=*,!root</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/duo/pam_duo.conf</span></code> and the PAM config is enough to require Duo</p>
+<li><p class="first">Because Keycloak doesn’t actually know there is a possible challenge
+response using SSSD you have to configure Duo’s <code class="docutils literal notranslate"><span class="pre">/etc/duo/pam_duo.conf</span></code>
+to have <code class="docutils literal notranslate"><span class="pre">autopush=yes</span></code> and <code class="docutils literal notranslate"><span class="pre">prompts=1</span></code> so that the 2FA automatically
+sends a push notification to the person’s phone.</p>
+</li>
+<li><p class="first">(Optional) Require Duo based on group membership or username list</p>
+<p>If you want to make Duo optional you could do so via group memberships. This works by changing <code class="docutils literal notranslate"><span class="pre">groups</span></code> config for <code class="docutils literal notranslate"><span class="pre">/etc/duo/pam_duo.conf</span></code> to something like <code class="docutils literal notranslate"><span class="pre">groups=ood_duo</span></code>.</p>
+<p>You can also limit based on group membership using the contents of a file that lists users that require Duo.  This is done by modifying the keycloak PAM stack.  The file <code class="docutils literal notranslate"><span class="pre">/etc/security/ondemand-duo.conf</span></code> is a list of usernames, one username per line, that must use Duo to authenticate with Keycloak.  The modified PAM configuration at <code class="docutils literal notranslate"><span class="pre">/etc/pam.d/keycloak</span></code>:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">auth</span>    <span class="n">required</span>   <span class="n">pam_sss</span><span class="o">.</span><span class="n">so</span>
+<span class="n">auth</span>    <span class="p">[</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span> <span class="n">success</span><span class="o">=</span><span class="n">ok</span><span class="p">]</span> <span class="n">pam_listfile</span><span class="o">.</span><span class="n">so</span> <span class="n">onerr</span><span class="o">=</span><span class="n">fail</span> <span class="n">item</span><span class="o">=</span><span class="n">user</span> <span class="n">sense</span><span class="o">=</span><span class="n">allow</span> <span class="n">file</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">security</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">duo</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">auth</span>    <span class="n">required</span>   <span class="n">pam_duo</span><span class="o">.</span><span class="n">so</span>
+<span class="n">account</span> <span class="n">required</span>   <span class="n">pam_sss</span><span class="o">.</span><span class="n">so</span>
+</pre></div>
+</div>
 </li>
 </ol>
-<p>If you want to make Duo optional you could do so via group memberships. This works by changing groups config for pam_duo.</p>
-<p>You could also do clever things with the PAM stack to use pam_duo based on other conditions.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Because Keycloak doesn’t actually know there is a possible challenge
-response using SSSD you have to setup Duo to have autopush=yes and prompts=1
-so that the 2FA automatically sends a push notification to the person’s
-phone.</p>
-</div>
 </div>
 
 
