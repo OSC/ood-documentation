@@ -235,6 +235,14 @@ sudo yum update ondemand
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
+<p>This step triggers the execution of <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> script from <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code> which results in
+<code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code> being modified. Your previous <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> file will
+be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.</p>
+<p class="last">Ensure that the resulting <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> Apache config has <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/nginx&quot;</span></code>
+changed to <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/ondemand-nginx&quot;</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
 <p>The nginx RPM used by ondemand in 1.4 is no longer maintained. If you use nginx outside of OnDemand it’s recommended to re-install using nginx from repositories such as EPEL after upgrading OnDemand to 1.5.</p>
 <div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum downgrade nginx nginx-filesystem --disablerepo<span class="o">=</span>ondemand-web
 </pre></div>
@@ -281,6 +289,14 @@ sudo rm -rf /var/log/nginx/*
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
 sudo yum update ondemand
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This step triggers the execution of <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> script from <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code> which results in
+<code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code> being modified. Your previous <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> file will
+be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.</p>
+<p class="last">Ensure that the resulting <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> Apache config has <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/nginx&quot;</span></code>
+changed to <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/ondemand-nginx&quot;</span></code>.</p>
 </div>
 </li>
 <li><p class="first">Optionally remove dependencies from prior versions of OOD</p>
