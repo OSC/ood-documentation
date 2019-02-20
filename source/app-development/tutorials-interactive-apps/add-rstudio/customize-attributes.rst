@@ -25,18 +25,37 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
 
   where we replace ``my_cluster`` with a valid cluster that corresponds to a cluster configuration file located under ``/etc/ood/config/clusters.d/my_cluster.yml``.
 
-2. Next we will add the modules required to correctly set the RStudio environment.
+2. Next we will modify the runtime environment to allow RStudio to launch inside a Singularity container. There are two ways to accomplish this, and both modify the file ``~/ondemand/dev/bc_example_rstudio/template/script.sh.erb``.
+
+  If you are not using LMod, then in the function ``setup_env`` replace the value for ``RSTUDIO_SERVER_IMAGE`` with the absolute path to the Singularity image, and ``SINGULARITY_BINDPATH`` with all the directories that contain dependencies for RStudio server and R. Discovering those paths may benefit from using ``ptrace`` or ``lsof``. Finally ensure that ``R`` and ``rserver`` are in the ``PATH``. 
+
+  If you are using LMod then create a module like the following:
 
   .. code-block:: lua
-    :emphasize-lines: 3,4,5
+    :emphasize-lines: 4,5,6
 
+    -- $path/to/lmodfiles/rstudio_container/v0.0.1.lua
     help([[ rstudio - loads rstudio with singularity environment for ondemand apps ]])
     whatis("loads rstudio with singularity environment for ondemand")
     setenv("RSTUDIO_SERVER_IMAGE","/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg")
     setenv("SINGULARITY_BINDPATH","/usr/lib,/usr/lib64,/bin,/usr/share,/usr/include")
     append_path("PATH", "/usr/lib/rstudio-server/bin)
-  
-  Replace the value for ``RSTUDIO_SERVER_IMAGE`` with the absolute path to the Singularity image, and ``SINGULARITY_BINDPATH`` with all the directories that contain dependencies for RStudio server and R. Discovering those paths may benefit from using ``ptrace`` or ``lsof``. Finally ensure that ``R`` and ``rserver`` are in the ``PATH``. The paths listed should work with a CentOS 7 RPM based install of RStudio Server.
+
+  Then replace the exports in the function ``setup_env`` with the appropriate ``module use $module_path`` and ``module load rstudio_container/v0.0.1``.
+
+  .. code-block:: sh
+
+    setup_env () {
+      # Additional environment which could be moved into a module
+      # Change these to suit
+      # export RSTUDIO_SERVER_IMAGE="/apps/rserver-launcher-centos7.simg"
+      # export SINGULARITY_BINDPATH="/usr/lib,/usr/lib64,/bin,/usr/share,/usr/include"
+      # export PATH="$PATH:/usr/lib/rstudio-server/bin"
+      # export SINGULARITYENV_PATH="$PATH"
+      module use "$path/to/lmodfiles"
+      module load rstudio_container/v0.0.1
+    }
+    setup_env
 
 .. note::
 
