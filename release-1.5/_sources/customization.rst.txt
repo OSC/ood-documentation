@@ -123,7 +123,7 @@ We recommend setting these environment variables in ``/etc/ood/config/nginx_stag
 
 
 
-Add URLs to Help menu
+Add URLs to Help Menu
 ---------------------
 
 These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
@@ -152,7 +152,7 @@ These URLs can be specified, which will appear in the Help menu and on other loc
      - https://my.osc.edu
 
 
-Add shortcuts to Files menu
+Add Shortcuts to Files Menu
 ---------------------------
 
 The Files menu by default has a single link to open the Files app in the user's
@@ -214,7 +214,7 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
-Whitelist directories
+Whitelist Directories
 ---------------------
 
 By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:
@@ -234,7 +234,7 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 
 .. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
-Set default ssh host
+Set Default SSH Host
 --------------------
 
 In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``DEFAULT_SSHHOST="localhost"``.
@@ -316,7 +316,7 @@ See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-w
 
 .. _dashboard-navbar-config:
 
-Control which apps appear in the Dashboard Navbar
+Control Which Apps Appear in the Dashboard Navbar
 -------------------------------------------------
 
 Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.
@@ -359,7 +359,7 @@ Below are different configuration options and the resulting navbar if you had in
 
 .. _customization_localization:
 
-Customize tagline and other text on Dashboard
+Customize Tagline and Other Text on Dashboard
 ---------------------------------------------
 
 Using Rails support for Internationalization, we localized the html that

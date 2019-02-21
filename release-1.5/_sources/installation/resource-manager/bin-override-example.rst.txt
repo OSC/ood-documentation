@@ -1,6 +1,6 @@
 .. _bin-overrides:
 
-A Working Example Of A ``bin_overrides`` Script
+A Working Example of a ``bin_overrides`` Script
 ===============================================
 
 ``sbatch`` is the Slurm scheduler's submission client. In this example we will show how cluster configuration's ``bin_overrides`` may be used to change default behavior.
