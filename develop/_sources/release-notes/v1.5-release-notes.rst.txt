@@ -6,6 +6,12 @@ v1.5 Release Notes
 Highlights in 1.5:
 
 - `Add ondemand SCL and use SCL nginx and passenger`_
+- `Performance improvements to Active Jobs`_
+- `Basic job array support for Slurm, Torque, and SGE`_
+- `Easier customization of home page text`_
+- `RStudio with varying versions of R`_
+- `Peer to peer app sharing`_
+- `Documentation update for Keycloak and Duo`_
 
 Upgrading from v1.4
 -------------------
@@ -34,6 +40,15 @@ Upgrading from v1.4
 
        sudo yum clean all
        sudo yum update ondemand
+
+   .. warning::
+
+      This step triggers the execution of ``update_ood_portal`` script from ``ood-portal-generator`` which results in
+      ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` being modified. Your previous ``ood-portal.conf`` file will
+      be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.
+
+      Ensure that the resulting ``ood-portal.conf`` Apache config has ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/nginx"``
+      changed to ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/ondemand-nginx"``.
 
    .. warning::
 
@@ -88,6 +103,15 @@ Upgrading from v1.3
 
        sudo yum clean all
        sudo yum update ondemand
+
+   .. warning::
+
+      This step triggers the execution of ``update_ood_portal`` script from ``ood-portal-generator`` which results in
+      ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` being modified. Your previous ``ood-portal.conf`` file will
+      be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.
+
+      Ensure that the resulting ``ood-portal.conf`` Apache config has ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/nginx"``
+      changed to ``SetEnv OOD_PUN_SOCKET_ROOT "/var/run/ondemand-nginx"``.
 
 #. Optionally remove dependencies from prior versions of OOD
 
@@ -213,3 +237,65 @@ This upgrade adds a new ``ondemand`` software collection that is the only softwa
   .. code::
 
     source scl_source enable ondemand
+
+
+Performance improvements to Active Jobs
+................................................
+
+When displaying jobs from all clusters in Active Jobs, the app will now stream
+and display the job data for each cluster as it is retrieved, instead of waiting
+until all the clusters are queried. This takes advantage of the ability to read
+portions of an XHR response before the response has completed, which means you
+will only see the benefits in Chrome and Firefox.
+
+
+Basic job array support for Slurm, Torque, and SGE
+..................................................
+
+For Slurm, Torque, and SGE, a new text field has been added to the Job Options
+for the Job Composer app allowing you to specify arguments for requesting a
+job array when submitting a job. The apps have also been updated to gracefully
+handle querying jobs that are job arrays.
+
+.. note:: Job array support will be added for PBSPro and LSF in the OnDemand 1.6 release.
+
+
+Easier customization of home page text
+......................................
+
+Using Rails support for internationalization, we localized the html that
+shows the logo and tagline on the OnDemand home page, as well as the motd
+section title.
+
+This enables admins to configure most of the home page html and MOTD section title
+by setting these strings in a locales fine under ``/etc/ood/config``.
+
+See :ref:`customization_localization` for details.
+
+
+
+RStudio with varying versions of R
+................................................
+
+We added a new tutorial for setting up a Singularity based RStudio interactive
+app that replaces the need for proot and enables the version of RStudio and the
+version of R to vary.
+
+See :ref:`app-development-tutorials-rstudio` for details.
+
+Peer to peer app sharing
+................................................
+
+Added documentation on peer to peer app sharing, a feature that when enabled
+allows privleged users to deploy OnDemand apps, both Passenger and Interactive,
+to their home directory (or another directory specified by the admin) so that
+other users (peers) can launch these apps. This is also known as "executable
+sharing" because it is similar to how a user can add another user's script to
+the PATH and then execute it.
+
+See :ref:`app_sharing` for details.
+
+Documentation update for Keycloak and Duo
+................................................
+
+Updated :ref:`authentication-tutorial-oidc-keycloak-rhel7` for Keycloak 4.8.3. Added documenation on setting up two factor authentication using Duo with Keycloak via SSSD (see :ref:`authentication-duo-2fa-with-keycloak`).

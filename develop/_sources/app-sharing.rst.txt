@@ -101,7 +101,7 @@ After:
 
 
 
-Controlling who can share and access apps
+Controlling Who Can Share and Access Apps
 -----------------------------------------
 
 Shared apps are deployed to
