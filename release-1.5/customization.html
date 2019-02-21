@@ -119,6 +119,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-error-page-for-missing-home-directory-on-launch">Custom Error Page for Missing Home Directory on Launch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#control-which-apps-appear-in-the-dashboard-navbar">Control which apps appear in the Dashboard Navbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customize-tagline-and-other-text-on-dashboard">Customize tagline and other text on Dashboard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disable-safari-warning-on-dashboard">Disable Safari Warning on Dashboard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disk-quota-warnings-on-dashboard">Disk Quota Warnings on Dashboard</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#individual-user-quota">Individual User Quota</a></li>
@@ -580,6 +581,34 @@ can be customized by adding a custom one to <code class="docutils literal notran
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="customize-tagline-and-other-text-on-dashboard">
+<span id="customization-localization"></span><h2>Customize tagline and other text on Dashboard<a class="headerlink" href="#customize-tagline-and-other-text-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>Using Rails support for Internationalization, we localized the html that
+shows the logo and tagline on the OnDemand home page, as well as the motd
+section title.</p>
+<p>The default locale is “en” and the default locale file can be found at
+<code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/dashboard/config/locales/en.yml</span></code>. To customize,
+you can copy this file (or create a new file with the same stucture of the keys
+you want to modify) to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> and modify your copy.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">en</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">dashboard</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">welcome_html</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">%{logo_img_tag}</span>
+      <span class="no">&lt;p class=&quot;lead&quot;&gt;OnDemand provides an integrated, single access point for all of your HPC resources.&lt;/p&gt;</span>
+    <span class="l l-Scalar l-Scalar-Plain">motd_title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Message</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Day&quot;</span>
+</pre></div>
+</div>
+<p>The key <code class="docutils literal notranslate"><span class="pre">welcome_html</span></code> ends with <code class="docutils literal notranslate"><span class="pre">_html</span></code> and Rails will trust the value of
+this string as valid HTML. The <code class="docutils literal notranslate"><span class="pre">motd_title</span></code> on the other hand will be sanitized.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">welcome_html</span></code> interpolates the variable <code class="docutils literal notranslate"><span class="pre">logo_img_tag</span></code> with the default
+logo, or the logo specified by the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_LOGO</span></code>.</p>
+<p>You can omit this variable in the value you specify for <code class="docutils literal notranslate"><span class="pre">welcome_html</span></code> if you prefer.</p>
+<p>You can use a custom locale. For example, if you want the locale to be French,
+you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard
+to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code>. Do this
+in either the nginx_stage config or in the Dashboard env config file.</p>
+<p>We will be localizing many more strings in the future.</p>
 </div>
 <div class="section" id="disable-safari-warning-on-dashboard">
 <h2>Disable Safari Warning on Dashboard<a class="headerlink" href="#disable-safari-warning-on-dashboard" title="Permalink to this headline">¶</a></h2>

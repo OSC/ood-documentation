@@ -357,6 +357,44 @@ Below are different configuration options and the resulting navbar if you had in
      - no app menus appear!
      - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
 
+.. _customization_localization:
+
+Customize tagline and other text on Dashboard
+---------------------------------------------
+
+Using Rails support for Internationalization, we localized the html that
+shows the logo and tagline on the OnDemand home page, as well as the motd
+section title.
+
+The default locale is "en" and the default locale file can be found at
+``/var/www/ood/apps/sys/dashboard/config/locales/en.yml``. To customize,
+you can copy this file (or create a new file with the same stucture of the keys
+you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify your copy.
+
+.. code-block:: yaml
+
+   en:
+     dashboard:
+       welcome_html: |
+         %{logo_img_tag}
+         <p class="lead">OnDemand provides an integrated, single access point for all of your HPC resources.</p>
+       motd_title: "Message of the Day"
+
+The key ``welcome_html`` ends with ``_html`` and Rails will trust the value of
+this string as valid HTML. The ``motd_title`` on the other hand will be sanitized.
+
+The ``welcome_html`` interpolates the variable ``logo_img_tag`` with the default
+logo, or the logo specified by the environment variable ``OOD_DASHBOARD_LOGO``.
+
+You can omit this variable in the value you specify for ``welcome_html`` if you prefer.
+
+You can use a custom locale. For example, if you want the locale to be French,
+you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard
+to use this locale by setting the environment variable ``OOD_LOCALE=fr``. Do this
+in either the nginx_stage config or in the Dashboard env config file.
+
+We will be localizing many more strings in the future.
+
 
 Disable Safari Warning on Dashboard
 -----------------------------------

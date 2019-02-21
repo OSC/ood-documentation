@@ -125,6 +125,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#application-version-changes">Application Version Changes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#add-ondemand-scl-and-use-scl-nginx-and-passenger">Add ondemand SCL and use SCL nginx and passenger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-improvements-to-active-jobs">Performance Improvements to Active Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-job-array-support-for-slurm-torque-and-sge">Basic Job Array Support for Slurm, Torque, and SGE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#easier-customization-of-home-page-text">Easier customization of home page text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rstudio-with-varying-versions-of-r">RStudio with varying versions of R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peer-to-peer-app-sharing">Peer to Peer App Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-update-for-keycloak-and-duo">Documentation update for Keycloak and Duo</a></li>
 </ul>
 </li>
 </ul>
@@ -210,6 +216,12 @@
 <p>Highlights in 1.5:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#add-ondemand-scl-and-use-scl-nginx-and-passenger">Add ondemand SCL and use SCL nginx and passenger</a></li>
+<li><a class="reference internal" href="#performance-improvements-to-active-jobs">Performance Improvements to Active Jobs</a></li>
+<li><a class="reference internal" href="#basic-job-array-support-for-slurm-torque-and-sge">Basic Job Array Support for Slurm, Torque, and SGE</a></li>
+<li><a class="reference internal" href="#easier-customization-of-home-page-text">Easier customization of home page text</a></li>
+<li><a class="reference internal" href="#rstudio-with-varying-versions-of-r">RStudio with varying versions of R</a></li>
+<li><a class="reference internal" href="#peer-to-peer-app-sharing">Peer to Peer App Sharing</a></li>
+<li><a class="reference internal" href="#documentation-update-for-keycloak-and-duo">Documentation update for Keycloak and Duo</a></li>
 </ul>
 <div class="section" id="upgrading-from-v1-4">
 <h2>Upgrading from v1.4<a class="headerlink" href="#upgrading-from-v1-4" title="Permalink to this headline">¶</a></h2>
@@ -409,6 +421,51 @@ it was updated from for each of the system web applications in this release.</p>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="performance-improvements-to-active-jobs">
+<h3>Performance Improvements to Active Jobs<a class="headerlink" href="#performance-improvements-to-active-jobs" title="Permalink to this headline">¶</a></h3>
+<p>When displaying jobs from all clusters in Active Jobs, the app will now stream
+and display the job data for each cluster as it is retrieved, instead of waiting
+until all the clusters are queried. This takes advantage of the ability to read
+portions of an XHR response before the response has completed, which means you
+will only see the benefits in Chrome and Firefox.</p>
+</div>
+<div class="section" id="basic-job-array-support-for-slurm-torque-and-sge">
+<h3>Basic Job Array Support for Slurm, Torque, and SGE<a class="headerlink" href="#basic-job-array-support-for-slurm-torque-and-sge" title="Permalink to this headline">¶</a></h3>
+<p>For Slurm, Torque, and SGE, a new text field has been added to the Job Options
+for the Job Composer app allowing you to specify arguments for requesting a
+job array when submitting a job. The apps have also been updated to gracefully
+handle querying jobs that are job arrays.</p>
+</div>
+<div class="section" id="easier-customization-of-home-page-text">
+<h3>Easier customization of home page text<a class="headerlink" href="#easier-customization-of-home-page-text" title="Permalink to this headline">¶</a></h3>
+<p>Using Rails support for Internationalization, we localized the html that
+shows the logo and tagline on the OnDemand home page, as well as the motd
+section title.</p>
+<p>This enables admins to configure most of the home page html and MOTD section title
+by setting these strings in a locales fine under <code class="docutils literal notranslate"><span class="pre">/etc/ood/config</span></code>.</p>
+<p>See <a class="reference internal" href="../customization.html#customization-localization"><span class="std std-ref">Customize tagline and other text on Dashboard</span></a> for details.</p>
+</div>
+<div class="section" id="rstudio-with-varying-versions-of-r">
+<h3>RStudio with varying versions of R<a class="headerlink" href="#rstudio-with-varying-versions-of-r" title="Permalink to this headline">¶</a></h3>
+<p>We added a new tutorial for setting up a Singularity based RStudio interactive
+app that replaces the need for proot and enables the version of RStudio and the
+version of R to vary.</p>
+<p>See <a class="reference internal" href="../app-development/tutorials-interactive-apps/add-rstudio.html#app-development-tutorials-rstudio"><span class="std std-ref">Add An RStudio App</span></a> for details.</p>
+</div>
+<div class="section" id="peer-to-peer-app-sharing">
+<h3>Peer to Peer App Sharing<a class="headerlink" href="#peer-to-peer-app-sharing" title="Permalink to this headline">¶</a></h3>
+<p>Added documentation on peer to peer app sharing, a feature that when enabled
+allows privleged users to deploy OnDemand apps, both Passenger and Interactive,
+to their home directory (or another directory specified by the admin) so that
+other users (peers) can launch these apps. This is also known as “executable
+sharing” because it is similar to how a user can add another user’s script to
+the PATH and then execute it.</p>
+<p>See <a class="reference internal" href="../app-sharing.html#app-sharing"><span class="std std-ref">App Sharing</span></a> for details.</p>
+</div>
+<div class="section" id="documentation-update-for-keycloak-and-duo">
+<h3>Documentation update for Keycloak and Duo<a class="headerlink" href="#documentation-update-for-keycloak-and-duo" title="Permalink to this headline">¶</a></h3>
+<p>Updated <a class="reference internal" href="../authentication/tutorial-oidc-keycloak-rhel7.html#authentication-tutorial-oidc-keycloak-rhel7"><span class="std std-ref">OpenID Connect via KeyCloak on RHEL7</span></a> for Keycloak 4.8.3. Added documenation on setting up two factor authentication using Duo with Keycloak via SSSD (see <a class="reference internal" href="../authentication/duo-2fa-with-keycloak.html#authentication-duo-2fa-with-keycloak"><span class="std std-ref">Two Factor Auth using Duo with Keycloak</span></a>).</p>
 </div>
 </div>
 </div>
