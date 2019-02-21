@@ -1,6 +1,6 @@
 .. _app-development-tutorials-rstudio:
 
-Add An RStudio App
+Add an RStudio App
 ==================
 
 This tutorial will walk you through creating an interactive RStudio app that

@@ -1,9 +1,9 @@
 .. _app-development-tutorials-passenger-apps-ps-to-quota:
 
-Creating a status app
+Creating a Status App
 =====================
 
-Overview of app
+Overview of App
 ---------------
 
 We will make a copy of a status app that displays the running Passenger
@@ -59,7 +59,7 @@ because
 #. app has a built in scaffold for unit testing using minitest
 
 
-Files and their purpose
+Files and Their Purpose
 .......................
 
 .. list-table:: Main files
@@ -109,7 +109,7 @@ Files and their purpose
    * - test/minitest_helper.rb
      - contains setup code common between all tests
 
-Clone and setup
+Clone and Setup
 ---------------
 
 #. Login to Open OnDemand, click "Develop" dropdown menu and click the "My Sandbox Apps (Development)" option.
@@ -129,7 +129,7 @@ Clone and setup
    Explorer.
 
 
-Edit to run and parse quota
+Edit to Run and Parse Quota
 ---------------------------
 
 The app runs and parses this command:
