@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A Working Example Of A bin_overrides Script &mdash; Open OnDemand 1.4.9 documentation</title>
+  <title>A Working Example of a bin_overrides Script &mdash; Open OnDemand 1.5.5 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../../index.html"/>
+    <link rel="top" title="Open OnDemand 1.5.5 documentation" href="../../index.html"/>
         <link rel="up" title="Resource Manager Configuration" href="../resource-manager.html"/>
         <link rel="next" title="Test Configuration" href="test.html"/>
         <link rel="prev" title="Configure Grid Engine" href="sge.html"/> 
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                1.4
+                1.5
               </div>
             
           
@@ -109,7 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">A Working Example Of A <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
 </ul>
 </li>
@@ -122,11 +122,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
@@ -184,7 +186,7 @@
         
           <li><a href="../resource-manager.html">Resource Manager Configuration</a> &raquo;</li>
         
-      <li>A Working Example Of A <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</li>
+      <li>A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -206,14 +208,14 @@
            <div itemprop="articleBody">
             
   <div class="section" id="a-working-example-of-a-bin-overrides-script">
-<span id="bin-overrides"></span><h1>A Working Example Of A <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script<a class="headerlink" href="#a-working-example-of-a-bin-overrides-script" title="Permalink to this headline">¶</a></h1>
+<span id="bin-overrides"></span><h1>A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script<a class="headerlink" href="#a-working-example-of-a-bin-overrides-script" title="Permalink to this headline">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">sbatch</span></code> is the Slurm scheduler’s submission client. In this example we will show how cluster configuration’s <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> may be used to change default behavior.</p>
 <p>This example demonstrates a few uses of wrapping the default scheduler clients:</p>
 <ul class="simple">
 <li>Using SSH from the web host to launch <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> on the submit host</li>
 <li>Altering arguments passed to the scheduler</li>
 <li>Altering the script passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> (which is almost certainly a terrible idea)</li>
-<li>Logging values passed to the scheduler in a custom location (note that the values passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> are also logged to the PUN log file at <code class="docutils literal notranslate"><span class="pre">/var/log/nginx/$USER/error.log</span></code> by the Dashboard and Job Composer when submitting jobs)</li>
+<li>Logging values passed to the scheduler in a custom location (note that the values passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> are also logged to the PUN log file at <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/$USER/error.log</span></code> by the Dashboard and Job Composer when submitting jobs)</li>
 </ul>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -417,6 +419,8 @@
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/installation/resource-manager/bin-override-example.html">master</a></dd>
       
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/bin-override-example.html">1.5</a></dd>
+      
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/bin-override-example.html">1.4</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/bin-override-example.html">1.3</a></dd>
@@ -449,7 +453,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.9',
+            VERSION:'1.5.5',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

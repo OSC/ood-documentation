@@ -10,6 +10,7 @@ run on, **NOT** the OnDemand node.
 
 For VNC server support:
 
+- `nmap-ncat`_
 - `TurboVNC`_ 2.1+
 - `websockify`_ 0.8.0+
 
@@ -21,3 +22,4 @@ For VNC server support:
 
 .. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify
+.. _nmap-ncat: http://netcat.sourceforge.net/

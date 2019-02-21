@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Cluster Config Schema v2 &mdash; Open OnDemand 1.4.9 documentation</title>
+  <title>Cluster Config Schema v2 &mdash; Open OnDemand 1.5.5 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Open OnDemand 1.4.9 documentation" href="../index.html"/>
+    <link rel="top" title="Open OnDemand 1.5.5 documentation" href="../index.html"/>
         <link rel="up" title="Add Cluster Configuration Files" href="add-cluster-config.html"/>
         <link rel="next" title="Resource Manager Configuration" href="resource-manager.html"/>
         <link rel="prev" title="Add Cluster Configuration Files" href="add-cluster-config.html"/> 
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                1.4
+                1.5
               </div>
             
           
@@ -110,6 +110,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#meta">meta:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#login">login:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#job">job:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acls">acls:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#custom">custom:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#batch-connect">batch_connect:</a></li>
 </ul>
@@ -128,11 +129,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
@@ -231,6 +234,12 @@
     <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">acls</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;group&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">groups</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;cluster_users&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;other_users_of_the_cluster&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;whitelist&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">custom</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">pbs</span><span class="p p-Indicator">:</span>
       <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
@@ -336,6 +345,20 @@
 <p>Adapter support for this feature is mixed. For example for Slurm <cite>sbatch</cite>, <cite>scontrol</cite>, <cite>scancel</cite> and <cite>squeue</cite> are all supported. For Torque only <cite>qsub</cite> is supported. Unsupported options are ignored.</p>
 </div>
 </div>
+<div class="section" id="acls">
+<h3>acls:<a class="headerlink" href="#acls" title="Permalink to this headline">¶</a></h3>
+<p>Access control lists provide a method to limit cluster access by group membership. ACLs are implictly whitelists but may be set explicitly to either <cite>whitelist</cite> or <cite>blacklist</cite>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">acls</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;group&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">groups</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;cluster_users&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;other_users_of_the_cluster&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;whitelist&quot;</span>  <span class="c1"># optional, one of &quot;whitelist&quot; or &quot;blacklist&quot;</span>
+</pre></div>
+</div>
+<p>Note that to look up group membership ood_core uses the ood_support library which uses <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">-G</span> <span class="pre">USERNAME</span></code>
+to get the list groups the user is in, and <code class="docutils literal notranslate"><span class="pre">getgrgid</span></code> to look up the name of the group.</p>
+</div>
 <div class="section" id="custom">
 <h3>custom:<a class="headerlink" href="#custom" title="Permalink to this headline">¶</a></h3>
 <p>The custom mapping is a space that is available for extension, and does not have a schema. In OSC’s usage the custom namespace has been used to provide more cluster-specific information for in-house custom applications.</p>
@@ -406,6 +429,8 @@
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/installation/cluster-config-schema.html">master</a></dd>
       
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/cluster-config-schema.html">1.5</a></dd>
+      
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/cluster-config-schema.html">1.4</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/cluster-config-schema.html">1.3</a></dd>
@@ -438,7 +463,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.9',
+            VERSION:'1.5.5',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -22,19 +22,17 @@ software requirements:
    CentOS 6/7
      .. code-block:: sh
 
-        sudo yum install epel-release centos-release-scl
+        sudo yum install centos-release-scl
 
    RHEL 6
      .. code-block:: sh
 
-        sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
         # Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
    RHEL 7
      .. code-block:: sh
 
-        sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
         # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
 
@@ -61,10 +59,6 @@ software requirements:
    .. code-block:: sh
 
       sudo yum install ondemand
-
-.. warning::
-
-   The nginx RPM used by ondemand will upgrade the nginx RPMs provided by EPEL, if they are installed.
 
 .. note::
 

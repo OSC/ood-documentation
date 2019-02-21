@@ -123,7 +123,7 @@ We recommend setting these environment variables in ``/etc/ood/config/nginx_stag
 
 
 
-Add URLs to Help menu
+Add URLs to Help Menu
 ---------------------
 
 These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
@@ -152,7 +152,7 @@ These URLs can be specified, which will appear in the Help menu and on other loc
      - https://my.osc.edu
 
 
-Add shortcuts to Files menu
+Add Shortcuts to Files Menu
 ---------------------------
 
 The Files menu by default has a single link to open the Files app in the user's
@@ -214,7 +214,7 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
-Whitelist directories
+Whitelist Directories
 ---------------------
 
 By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:
@@ -234,7 +234,7 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 
 .. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
-Set default ssh host
+Set Default SSH Host
 --------------------
 
 In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``DEFAULT_SSHHOST="localhost"``.
@@ -316,7 +316,7 @@ See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-w
 
 .. _dashboard-navbar-config:
 
-Control which apps appear in the Dashboard Navbar
+Control Which Apps Appear in the Dashboard Navbar
 -------------------------------------------------
 
 Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.
@@ -356,6 +356,44 @@ Below are different configuration options and the resulting navbar if you had in
    * - ``NavConfig.categories=[]`` and ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
      - no app menus appear!
      - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
+
+.. _customization_localization:
+
+Customize Tagline and Other Text on Dashboard
+---------------------------------------------
+
+Using Rails support for Internationalization, we localized the html that
+shows the logo and tagline on the OnDemand home page, as well as the motd
+section title.
+
+The default locale is "en" and the default locale file can be found at
+``/var/www/ood/apps/sys/dashboard/config/locales/en.yml``. To customize,
+you can copy this file (or create a new file with the same stucture of the keys
+you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify your copy.
+
+.. code-block:: yaml
+
+   en:
+     dashboard:
+       welcome_html: |
+         %{logo_img_tag}
+         <p class="lead">OnDemand provides an integrated, single access point for all of your HPC resources.</p>
+       motd_title: "Message of the Day"
+
+The key ``welcome_html`` ends with ``_html`` and Rails will trust the value of
+this string as valid HTML. The ``motd_title`` on the other hand will be sanitized.
+
+The ``welcome_html`` interpolates the variable ``logo_img_tag`` with the default
+logo, or the logo specified by the environment variable ``OOD_DASHBOARD_LOGO``.
+
+You can omit this variable in the value you specify for ``welcome_html`` if you prefer.
+
+You can use a custom locale. For example, if you want the locale to be French,
+you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard
+to use this locale by setting the environment variable ``OOD_LOCALE=fr``. Do this
+in either the nginx_stage config or in the Dashboard env config file.
+
+We will be localizing many more strings in the future.
 
 
 Disable Safari Warning on Dashboard
