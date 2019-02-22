@@ -4,7 +4,7 @@ Add an RStudio App
 ==================
 
 This tutorial will walk you through creating an interactive RStudio app that
-your users will use to launch a `RStudio Server`_ within a batch job
+your users will use to launch a `RStudio Server <rstudio_server_>`_ within a batch job
 on a compute node. The user will then be able to connect to the running server
 through their browser and take advantage of the resources provided within the
 batch job.
@@ -20,4 +20,4 @@ batch job.
    add-rstudio/customize-attributes
    add-rstudio/deploy
 
-.. _rstudio server: .. _rstudio: https://www.rstudio.com/
+.. _rstudio_server: https://www.rstudio.com/
