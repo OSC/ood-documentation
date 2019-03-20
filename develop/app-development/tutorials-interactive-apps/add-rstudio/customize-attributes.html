@@ -243,7 +243,7 @@
 <span class="n">help</span><span class="p">(</span><span class="s">[[ rstudio - loads rstudio with singularity environment for ondemand apps ]]</span><span class="p">)</span>
 <span class="n">whatis</span><span class="p">(</span><span class="s2">&quot;loads rstudio with singularity environment for ondemand&quot;</span><span class="p">)</span>
 <span class="hll"><span class="n">setenv</span><span class="p">(</span><span class="s2">&quot;RSTUDIO_SERVER_IMAGE&quot;</span><span class="p">,</span><span class="s2">&quot;/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg&quot;</span><span class="p">)</span>
-</span><span class="hll"><span class="n">setenv</span><span class="p">(</span><span class="s2">&quot;SINGULARITY_BINDPATH&quot;</span><span class="p">,</span><span class="s2">&quot;/usr/lib,/usr/lib64,/bin,/usr/share,/usr/include&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="n">setenv</span><span class="p">(</span><span class="s2">&quot;SINGULARITY_BINDPATH&quot;</span><span class="p">,</span><span class="s2">&quot;/etc,/media,/mnt,/opt,/srv,/usr,/var&quot;</span><span class="p">)</span>
 </span><span class="hll"><span class="n">append_path</span><span class="p">(</span><span class="s2">&quot;PATH&quot;</span><span class="p">,</span> <span class="s2">&quot;/usr/lib/rstudio-server/bin)</span>
 </span></pre></div>
 </div>
@@ -252,7 +252,16 @@
   <span class="c1"># Additional environment which could be moved into a module</span>
   <span class="c1"># Change these to suit</span>
   <span class="c1"># export RSTUDIO_SERVER_IMAGE=&quot;/apps/rserver-launcher-centos7.simg&quot;</span>
-  <span class="c1"># export SINGULARITY_BINDPATH=&quot;/usr/lib,/usr/lib64,/bin,/usr/share,/usr/include&quot;</span>
+  <span class="c1"># The most robust SINGULARITY_BINDPATH appears to be: /etc,/media,/mnt,/opt,/srv,/usr,/var.</span>
+  <span class="c1"># That, plus Singularity&#39;s standard auto-mounts, covers most of the Filesystem Hierarchy Standard.</span>
+  <span class="c1">#</span>
+  <span class="c1"># Notable exceptions include:</span>
+  <span class="c1">#</span>
+  <span class="c1">#     - /tmp which we are explicitly overriding</span>
+  <span class="c1">#     - those directories which in Centos 7 are commonly symlinks to/usr</span>
+  <span class="c1">#     - root&#39;s home directory</span>
+  <span class="c1">#</span>
+  <span class="c1"># export SINGULARITY_BINDPATH=&quot;/etc,/media,/mnt,/opt,/srv,/usr,/var&quot;</span>
   <span class="c1"># export PATH=&quot;$PATH:/usr/lib/rstudio-server/bin&quot;</span>
   <span class="c1"># export SINGULARITYENV_PATH=&quot;$PATH&quot;</span>
   module use <span class="s2">&quot;</span><span class="nv">$path</span><span class="s2">/to/lmodfiles&quot;</span>
