@@ -38,7 +38,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
     help([[ rstudio - loads rstudio with singularity environment for ondemand apps ]])
     whatis("loads rstudio with singularity environment for ondemand")
     setenv("RSTUDIO_SERVER_IMAGE","/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg")
-    setenv("SINGULARITY_BINDPATH","/usr/lib,/usr/lib64,/bin,/usr/share,/usr/include")
+    setenv("SINGULARITY_BINDPATH","/etc,/media,/mnt,/opt,/srv,/usr,/var")
     append_path("PATH", "/usr/lib/rstudio-server/bin)
 
   Then replace the exports in the function ``setup_env`` with the appropriate ``module use $module_path`` and ``module load rstudio_container/v0.0.1``.
@@ -49,7 +49,16 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
       # Additional environment which could be moved into a module
       # Change these to suit
       # export RSTUDIO_SERVER_IMAGE="/apps/rserver-launcher-centos7.simg"
-      # export SINGULARITY_BINDPATH="/usr/lib,/usr/lib64,/bin,/usr/share,/usr/include"
+      # The most robust SINGULARITY_BINDPATH appears to be: /etc,/media,/mnt,/opt,/srv,/usr,/var.
+      # That, plus Singularity's standard auto-mounts, covers most of the Filesystem Hierarchy Standard.
+      #
+      # Notable exceptions include:
+      #
+      #     - /tmp which we are explicitly overriding
+      #     - those directories which in Centos 7 are commonly symlinks to/usr
+      #     - root's home directory
+      #
+      # export SINGULARITY_BINDPATH="/etc,/media,/mnt,/opt,/srv,/usr,/var"
       # export PATH="$PATH:/usr/lib/rstudio-server/bin"
       # export SINGULARITYENV_PATH="$PATH"
       module use "$path/to/lmodfiles"
