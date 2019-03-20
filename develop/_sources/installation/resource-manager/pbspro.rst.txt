@@ -19,7 +19,7 @@ HPC cluster looks like:
      job:
        adapter: "pbspro"
        host: "my_cluster-batch.my_center.edu"
-       exec: "/path/to/pbspro"
+       exec: "/opt/pbs"
       # bin_overrides:
          # qsub: "/usr/local/bin/qsub"
          # qselect: ""
@@ -35,10 +35,10 @@ adapter
 host
   The host of the PBS Pro batch server.
 exec
-  The installation path for the PBS Pro binaries and libraries on the OnDemand
-  host.
+  The installation path for the PBS Pro executables and libraries on the OnDemand
+  host. For default installs from Github RPM releases this value should be ``/opt/pbs``.
 bin_overrides
-  Replacements/wrappers for Slurm's job submission and control clients. *Optional*
+  Replacements/wrappers for PBSPro's job submission and control clients. *Optional*
 
   Supports the following clients:
 
