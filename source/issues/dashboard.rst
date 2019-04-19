@@ -1,4 +1,4 @@
-.. _dashboard.rst
+.. _dashboard.rst:
 
 Dashboard
 =========

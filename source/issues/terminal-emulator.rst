@@ -1,4 +1,4 @@
-.. _terminal-emulator.rst
+.. _terminal-emulator.rst:
 
 Terminal Emulator
 =================

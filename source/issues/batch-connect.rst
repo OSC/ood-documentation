@@ -1,4 +1,4 @@
-.. _batch-connect.rst
+.. _batch-connect.rst:
 
 Batch Connect
 =============

@@ -1,4 +1,4 @@
-.. _file-explorer.rst
+.. _file-explorer.rst:
 
 File Explorer
 =============
