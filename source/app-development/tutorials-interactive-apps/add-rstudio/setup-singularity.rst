@@ -14,6 +14,10 @@ The Singularity image may be downloaded from Singularity Hub by users without su
 
 This will download the pre-built image to the current working directory.
 
+  .. note::
+
+    The Singularity guest needs to be the same operating system type and major version as the compute host. The provided image is for CentOS 7.
+
 Alternatively, Build The Singularity Image
 ------------------------------------------
 
@@ -27,6 +31,8 @@ An example Singularity file for running RStudio:
 
    .. code-block:: sh
 
+      # Ensure that the guest is the same OS type as the compute hosts that it will run on
+      # Here we use CentOS 7
       Bootstrap: yum
       OSVersion: 7
       MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
