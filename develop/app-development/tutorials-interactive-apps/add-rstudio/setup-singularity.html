@@ -227,6 +227,12 @@
 </div>
 </div></blockquote>
 <p>This will download the pre-built image to the current working directory.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Singularity guest needs to be the same operating system type and major version as the compute host. The provided image is for CentOS 7.</p>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="alternatively-build-the-singularity-image">
 <h2>Alternatively, Build The Singularity Image<a class="headerlink" href="#alternatively-build-the-singularity-image" title="Permalink to this headline">¶</a></h2>
@@ -235,7 +241,9 @@
 <p>Likewise the runscript defined in the image uses the host <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> which is propagated into the guest’s environment as <code class="docutils literal notranslate"><span class="pre">$USER_PATH</span></code>.</p>
 <p>An example Singularity file for running RStudio:</p>
 <blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Bootstrap: yum
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure that the guest is the same OS type as the compute hosts that it will run on</span>
+<span class="c1"># Here we use CentOS 7</span>
+Bootstrap: yum
 OSVersion: <span class="m">7</span>
 MirrorURL: http://mirror.centos.org/centos-%<span class="o">{</span>OSVERSION<span class="o">}</span>/%<span class="o">{</span>OSVERSION<span class="o">}</span>/os/<span class="nv">$basearch</span>/
 Include: yum
