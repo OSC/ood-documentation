@@ -86,7 +86,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    :caption: Known Issues
 
    issues/file-explorer
-   issues/terminal-emulator
+   issues/shell
    issues/batch-connect
    issues/dashboard
 
