@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>v1.4 Release Notes &mdash; Open OnDemand 1.5.5 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Open OnDemand 1.5.5 documentation" href="../index.html"/>
+        <link rel="next" title="v1.3 Release Notes" href="v1.3-release-notes.html"/>
+        <link rel="prev" title="v1.5 Release Notes" href="v1.5-release-notes.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">v1.4 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-3">Upgrading from v1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure-version-changes">Infrastructure Version Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-version-changes">Application Version Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#upgrade-to-ruby-2-4-nodejs-6-passenger-5">Upgrade to Ruby 2.4, NodeJS 6, Passenger 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-enhancement-pun-autogenerates-secret-key-base-if-none-is-set">Security Enhancement - PUN autogenerates secret key base if none is set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-enhancement-app-development-mode-is-disabled-by-default">Security Enhancement: App development mode is disabled by default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-enhancement-enable-whitelisting-of-directories-in-several-core-apps">Security Enhancement: Enable whitelisting of directories in several core apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-enhancement-require-ssh-for-all-hosts-in-shell-app">Security Enhancement: Require SSH for all hosts in Shell app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-ability-to-include-javascript-in-batch-connect-apps">Add ability to include Javascript in Batch Connect apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#better-environment-setting">Better environment setting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizable-error-pages-for-missing-home-dirs">Customizable error pages for missing home dirs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#experimental-sge-uge-support">Experimental SGE/UGE support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-copy-and-paste-issues-in-the-shell-app-for-firefox">Fixed copy and paste issues in the Shell app for Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#improve-default-discoverability-of-apps-in-the-dashboard-s-navbar">Improve default discoverability of apps in the Dashboard’s navbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-quota-warnings-on-dashboard">Optional Quota warnings on dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slurm-18-support">Slurm 18 Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>v1.4 Release Notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.6/source/release-notes/v1.4-release-notes.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="v1-4-release-notes">
+<span id="id1"></span><h1>v1.4 Release Notes<a class="headerlink" href="#v1-4-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>Highlights in 1.4:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#upgrade-to-ruby-2-4-nodejs-6-passenger-5">Upgrade to Ruby 2.4, NodeJS 6, Passenger 5</a></li>
+<li><a class="reference internal" href="#security-enhancement-pun-autogenerates-secret-key-base-if-none-is-set">Security Enhancement - PUN autogenerates secret key base if none is set</a></li>
+<li><a class="reference internal" href="#security-enhancement-app-development-mode-is-disabled-by-default">Security Enhancement: App development mode is disabled by default</a></li>
+<li><a class="reference internal" href="#security-enhancement-enable-whitelisting-of-directories-in-several-core-apps">Security Enhancement: Enable whitelisting of directories in several core apps</a></li>
+<li><a class="reference internal" href="#security-enhancement-require-ssh-for-all-hosts-in-shell-app">Security Enhancement: Require SSH for all hosts in Shell app</a></li>
+<li><a class="reference internal" href="#add-ability-to-include-javascript-in-batch-connect-apps">Add ability to include Javascript in Batch Connect apps</a></li>
+<li><a class="reference internal" href="#better-environment-setting">Better environment setting</a></li>
+<li><a class="reference internal" href="#customizable-error-pages-for-missing-home-dirs">Customizable error pages for missing home dirs</a></li>
+<li><a class="reference internal" href="#experimental-sge-uge-support">Experimental SGE/UGE support</a></li>
+<li><a class="reference internal" href="#fixed-copy-and-paste-issues-in-the-shell-app-for-firefox">Fixed copy and paste issues in the Shell app for Firefox</a></li>
+<li><a class="reference internal" href="#improve-default-discoverability-of-apps-in-the-dashboard-s-navbar">Improve default discoverability of apps in the Dashboard’s navbar</a></li>
+<li><a class="reference internal" href="#optional-quota-warnings-on-dashboard">Optional Quota warnings on dashboard</a></li>
+<li><a class="reference internal" href="#slurm-18-support">Slurm 18 support</a></li>
+</ul>
+<div class="section" id="upgrading-from-v1-3">
+<h2>Upgrading from v1.3<a class="headerlink" href="#upgrading-from-v1-3" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Enable EPEL and update OnDemand release RPM</p>
+<p>CentOS/RHEL 6</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+sudo yum install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el6.noarch.rpm
+</pre></div>
+</div>
+<p>CentOS/RHEL 7</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el7.noarch.rpm
+</pre></div>
+</div>
+</li>
+<li><p class="first">Update OnDemand</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
+sudo yum update ondemand
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The nginx RPM used by ondemand will upgrade the nginx RPMs provided by EPEL, if they are installed.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Rebuild any custom Node.js or Ruby apps</p>
+<p>Since we upgraded to Ruby 2.4 from 2.2 and NodeJS 0.10 to NodeJS 6 any custom
+Passenger apps in Ruby or NodeJS that have their dependencies installed in
+vendor/bundle or node_modules will need to be reinstalled. Some code may have
+to be updated or dependency versions changed to work with the latest Ruby version.</p>
+<p>For NodeJS apps:</p>
+<p>For Ruby apps:</p>
+<p>If you need a way to continue to still use Ruby 2.2 or a different version of
+NodeJS <a class="reference external" href="https://discourse.osc.edu">please post a question on our Discourse instance</a>.</p>
+</li>
+<li><p class="first">Verify Navbar contains all the apps you want.</p>
+<p>The behavior changed from 1.3 to 1.4 so by default all categories of any sys
+app found appear as dropdown menus without the need for configuration changes.</p>
+<p>As a result menus may appear that you do not expect, if previously you were relying
+on the “whitelist” functionality of the <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code>.</p>
+<p>See <a class="reference internal" href="../customization.html#dashboard-navbar-config"><span class="std std-ref">Control Which Apps Appear in the Dashboard Navbar</span></a> for details.</p>
+</li>
+<li><p class="first">Verify Developer mode is configured how you want it</p>
+<p>See <a class="reference internal" href="../app-development/enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> for an explanation of how developer mode has changed
+between 1.3 and 1.4 and how to configure things properly. For sites that have active
+developers, this will either be adding configuration to revert to 1.3’s functionality,
+or creating some directories and symlinks to enable specific app developers.</p>
+</li>
+<li><p class="first">Optionally remove dependencies from prior versions of OOD</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove nodejs010<span class="se">\*</span> rh-passenger40<span class="se">\*</span> rh-ruby22<span class="se">\*</span> nginx16<span class="se">\*</span> git19<span class="se">\*</span> v8314<span class="se">\*</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance. Remember, Ruby and Node have been upgraded, so existing custom apps may need to be re-built.</p>
+</div>
+</div>
+<div class="section" id="infrastructure-version-changes">
+<h2>Infrastructure Version Changes<a class="headerlink" href="#infrastructure-version-changes" title="Permalink to this headline">¶</a></h2>
+<p>OnDemand’s infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: <a class="reference external" href="https://github.com/OSC/ondemand/blob/v1.4.9/CHANGELOG.md">OnDemand 1.4.9</a>. <a class="reference external" href="https://github.com/OSC/ondemand/compare/v1.3.7...v1.4.9">Diff with 1.3.7</a></p>
+</div>
+<div class="section" id="application-version-changes">
+<h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
+<span id="v1-4-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id4">
+<caption><span class="caption-number">Table 11 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head stub">App</th>
+<th class="head">Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><th class="stub"><cite>Dashboard App</cite></th>
+<td>1.26.2 → <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.30.2/CHANGELOG.md">1.30.2</a>
+(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.26.2...v1.30.2">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><cite>Shell App</cite></th>
+<td>1.3.1 → <a class="reference external" href="https://github.com/OSC/ood-shell/blob/v1.4.2/CHANGELOG.md">1.4.2</a>
+(<a class="reference external" href="https://github.com/OSC/ood-shell/compare/v1.3.1...v1.4.2">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><cite>Files App</cite></th>
+<td>1.4.1 → <a class="reference external" href="https://github.com/OSC/ood-fileexplorer/blob/v1.5.0/CHANGELOG.md">1.5.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileexplorer/compare/v1.4.1...v1.5.0">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><cite>File Editor App</cite></th>
+<td>1.3.3 → <a class="reference external" href="https://github.com/OSC/ood-fileeditor/blob/v1.4.0/CHANGELOG.md">1.4.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileeditor/compare/v1.3.3...v1.4.0">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><cite>Active Jobs App</cite></th>
+<td>1.6.2 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.6.8/CHANGELOG.md">1.6.8</a>
+(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.6.2...v1.6.8">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><cite>Job Composer App</cite></th>
+<td>2.8.3 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.10.1/CHANGELOG.md">2.10.1</a>
+(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.8.3...v2.10.1">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><cite>Desktops App</cite></th>
+<td>Unchanged</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#v1-4-app-versions"><span class="std std-numref">Table 11</span></a> lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.</p>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="upgrade-to-ruby-2-4-nodejs-6-passenger-5">
+<h3>Upgrade to Ruby 2.4, NodeJS 6, Passenger 5<a class="headerlink" href="#upgrade-to-ruby-2-4-nodejs-6-passenger-5" title="Permalink to this headline">¶</a></h3>
+<p>This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the <a class="reference external" href="https://github.com/phusion/passenger_rpm_automation">Passenger RPM automation repo</a>. A side effect of these dependency changes is that custom applications may need to be rebuilt before they will work.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The Per User NGINX temporary directory has been moved from <code class="docutils literal notranslate"><span class="pre">/var/lib/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/tmp/nginx</span></code> due to an issue with more restrictive permissions with NGINX 1.14.</p>
+<p class="last">A consequence of this NGINX 1.14 upgrade is that NGINX directories like
+<code class="docutils literal notranslate"><span class="pre">/var/log/nginx</span></code>  have become more restrictive - owned by the nginx user and set by
+default to 700.</p>
+</div>
+</div>
+<div class="section" id="security-enhancement-pun-autogenerates-secret-key-base-if-none-is-set">
+<h3>Security Enhancement - PUN autogenerates secret key base if none is set<a class="headerlink" href="#security-enhancement-pun-autogenerates-secret-key-base-if-none-is-set" title="Permalink to this headline">¶</a></h3>
+<p>The PUN will autogenerate its own unique per-user secret key base string which is generated at first launch if it doesn’t exist. This is used by Rails apps to encrypt cookies and overrides the default one set in <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/a20cae91fb0f636c8a7e3fc8dfe508d9afa34d50/.env.production#L1">env.production</a>.</p>
+</div>
+<div class="section" id="security-enhancement-app-development-mode-is-disabled-by-default">
+<h3>Security Enhancement: App development mode is disabled by default<a class="headerlink" href="#security-enhancement-app-development-mode-is-disabled-by-default" title="Permalink to this headline">¶</a></h3>
+<p>Development mode disabled by default: application development gives increased access to a system (e.g. allowing the user to open an interactive shell on the web node), and should only be enabled for trusted users. For details, see <a class="reference internal" href="../app-development/enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a>.</p>
+</div>
+<div class="section" id="security-enhancement-enable-whitelisting-of-directories-in-several-core-apps">
+<h3>Security Enhancement: Enable whitelisting of directories in several core apps<a class="headerlink" href="#security-enhancement-enable-whitelisting-of-directories-in-several-core-apps" title="Permalink to this headline">¶</a></h3>
+<p>The file editor, file browser and job composer now support an optional whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable <code class="docutils literal notranslate"><span class="pre">WHITELIST_PATH</span></code>, which is best be defined by editing <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> under the <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> map.</p>
+</div>
+<div class="section" id="security-enhancement-require-ssh-for-all-hosts-in-shell-app">
+<h3>Security Enhancement: Require SSH for all hosts in Shell app<a class="headerlink" href="#security-enhancement-require-ssh-for-all-hosts-in-shell-app" title="Permalink to this headline">¶</a></h3>
+<p>Prior to this release it was possible for OOD users to change the URL in the shell application and connect directly to the web node by starting a Bash shell on localhost. Given that this ability for arbitrary user access is counter intuitive to how web servers are typically managed, the exemption for localhost has been removed; users will always use SSH to connect to any host, allowing SSH access controls to work.</p>
+</div>
+<div class="section" id="add-ability-to-include-javascript-in-batch-connect-apps">
+<h3>Add ability to include Javascript in Batch Connect apps<a class="headerlink" href="#add-ability-to-include-javascript-in-batch-connect-apps" title="Permalink to this headline">¶</a></h3>
+<p>Batch Connect applications may now define a Javascript file to add interactive frontend functionality. <a class="reference external" href="https://github.com/OSC/ood-dashboard/pull/426">Github OSC/ood-dashboard#426</a>.
+The contents of this JavaScript file will be embedded in <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> tags at the bottom
+of the form below the Launch button.</p>
+<ul class="simple">
+<li>For apps like <a class="reference external" href="https://github.com/OSC/bc_example_jupyter">the example Jupyter</a> app whose
+form is defined in the form.yml, you can add a <code class="docutils literal notranslate"><span class="pre">form.js</span></code> file alongside the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code>.</li>
+<li>For “subapps” like bc_desktop where you have overrides defined in a <code class="docutils literal notranslate"><span class="pre">custom_name.yml</span></code>
+you can add a <code class="docutils literal notranslate"><span class="pre">custom_name.js</span></code> for that JavaScript file to be loaded by that app.</li>
+</ul>
+<p>So for example, OSC has a Pitzer interactive desktop defined in
+<a class="reference external" href="https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/bc_desktop">this directory</a>
+as <code class="docutils literal notranslate"><span class="pre">pitzer.yml</span></code> so we could add a <code class="docutils literal notranslate"><span class="pre">pitzer.js</span></code> file.</p>
+</div>
+<div class="section" id="better-environment-setting">
+<h3>Better environment setting<a class="headerlink" href="#better-environment-setting" title="Permalink to this headline">¶</a></h3>
+<p>The file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> now includes two methods to set the PUN environment. Populating the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> allows sites to define OOD specific environment variables that will be added to the PUN environment. Defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> confers the ability to define an arbitrary list of env vars to declare in the PUN config (so they are retained from whatever is set in /etc/ood/profile).</p>
+<p>For example: <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml.</a></p>
+</div>
+<div class="section" id="customizable-error-pages-for-missing-home-dirs">
+<h3>Customizable error pages for missing home dirs<a class="headerlink" href="#customizable-error-pages-for-missing-home-dirs" title="Permalink to this headline">¶</a></h3>
+<p>Customizable error pages for missing home directory during the first login flow for sites using <code class="docutils literal notranslate"><span class="pre">pam_mkhomedir.so</span></code>. <a class="reference external" href="https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53">OOD Discourse: launching ondemand when home directory does not exist</a>.</p>
+</div>
+<div class="section" id="experimental-sge-uge-support">
+<h3>Experimental SGE/UGE support<a class="headerlink" href="#experimental-sge-uge-support" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference external" href="/installation/resource-manager/sge.html">job adapter has been written</a> that supports Sun Grid Engine derivatives. The adapter is known to be compatible with SGE 6.2u5 and Univa GE 8.0.1. Thanks to UCLA for donating access to Hoffman2 to aid in development of the adapter.</p>
+</div>
+<div class="section" id="fixed-copy-and-paste-issues-in-the-shell-app-for-firefox">
+<h3>Fixed copy and paste issues in the Shell app for Firefox<a class="headerlink" href="#fixed-copy-and-paste-issues-in-the-shell-app-for-firefox" title="Permalink to this headline">¶</a></h3>
+<p>Resolved a pair of issues (<a class="reference external" href="https://github.com/OSC/ood-shell/issues/48">#48</a>, <a class="reference external" href="https://github.com/OSC/ood-shell/issues/55">#55</a>) that caused problems with copy and paste in the Shell application.</p>
+</div>
+<div class="section" id="improve-default-discoverability-of-apps-in-the-dashboard-s-navbar">
+<h3>Improve default discoverability of apps in the Dashboard’s navbar<a class="headerlink" href="#improve-default-discoverability-of-apps-in-the-dashboard-s-navbar" title="Permalink to this headline">¶</a></h3>
+<p>Introduction of a whitelist mode for the Dashboard navbar which is disabled by default. This change means that by default, when deploying a new app, if properly configured it will appear in the Dashboard’s navigation menu without the need for changing configuration. <a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/295">OSC/ood-dashboard#295</a></p>
+<p>For details please see <a class="reference internal" href="../customization.html#dashboard-navbar-config"><span class="std std-ref">Control Which Apps Appear in the Dashboard Navbar</span></a>.</p>
+</div>
+<div class="section" id="optional-quota-warnings-on-dashboard">
+<h3>Optional Quota warnings on dashboard<a class="headerlink" href="#optional-quota-warnings-on-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>The Dashboard can now display a configurable disk usage warning to the user if they approach a certain usage threshold. This feature is enabled by defining the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_QUOTA_PATH</span></code> which can take a colon delimited path, and may be defined in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> under the <code class="docutils literal notranslate"><span class="pre">custom_env</span></code> map. The version 1 format for quota files is defined in the <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.30.2/README.md#disk-quota-warnings">Dashboard README</a>.</p>
+</div>
+<div class="section" id="slurm-18-support">
+<h3>Slurm 18 Support<a class="headerlink" href="#slurm-18-support" title="Permalink to this headline">¶</a></h3>
+<p>Slurm 18.x introduced <a class="reference external" href="https://bugs.schedmd.com/show_bug.cgi?id=6120">a bug</a> with the fields <cite>gres</cite> or <cite>tres</cite> in <cite>squeue</cite> output which <a class="reference external" href="https://github.com/OSC/ood-activejobs/issues/169">broke prior versions</a> of the Slurm adapter. The OOD team has both updated the OOD Slurm adapter to function normally despite the bug, and submitted a fix which Slurm will be releasing in a future version.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="v1.3-release-notes.html" class="btn btn-neutral float-right" title="v1.3 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="v1.5-release-notes.html" class="btn btn-neutral" title="v1.5 Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, Ohio Supercomputer Center.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/release-notes/v1.4-release-notes.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/release-notes/v1.4-release-notes.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/release-notes/v1.4-release-notes.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/release-notes/v1.4-release-notes.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/release-notes/v1.4-release-notes.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/release-notes/v1.4-release-notes.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/release-notes/v1.4-release-notes.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/release-notes/v1.4-release-notes.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.5.5',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
