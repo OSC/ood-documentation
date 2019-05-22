@@ -82,6 +82,33 @@ software requirements:
 
       # ...
 
+
+OnDemand System Dependencies
+----------------------------
+
+For users attempting to install OnDemand from source on non-CentOS/RHEL systems, it may be useful to know that OnDemand has several other run and build time dependencies that may need to be installed.    
+
+
+.. list-table:: System dependencies
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Program
+     - OnDemand Component 
+   * - Rsync
+     - /var/www/ood/apps/sys/myjobs/app/models/workflow.rb
+   * - GNU Timeout
+     - /var/www/ood/apps/sys/myjobs/app/models/filesystem.rb
+   * - File
+     - /var/www/ood/apps/sys/file-editor/app/controllers/pages_controller.rb
+   * - Xmllint
+     - /opt/ood/ondemand/root/usr/sbin/passenger-status
+   * - GNU Wget
+     - /opt/ood/mod_ood_proxy/lib/analytics.lua
+
+
+**Note:** GCC is a build time dependency and is only required for installing OnDemand from source.
+
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
 .. _ruby 2.4: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby24/
