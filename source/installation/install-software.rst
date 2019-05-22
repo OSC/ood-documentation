@@ -83,10 +83,10 @@ software requirements:
       # ...
 
 
-OnDemand System Dependencies
-----------------------------
+When Installing OnDemand From Source
+------------------------------------
 
-For users attempting to install OnDemand from source on non-CentOS/RHEL systems, it may be useful to know that OnDemand has several other run and build time dependencies that may need to be installed.    
+Installing OnDemand from RPMs should provide all of the system dependencies. For users attempting to install OnDemand from source on non-CentOS/RHEL systems, it may be useful to know that OnDemand has several other build and run time dependencies that may need to be installed on the web node.
 
 
 .. list-table:: System dependencies
@@ -107,7 +107,7 @@ For users attempting to install OnDemand from source on non-CentOS/RHEL systems,
      - /opt/ood/mod_ood_proxy/lib/analytics.lua
 
 
-**Note:** GCC is a build time dependency and is only required for installing OnDemand from source.
+**Note:** GCC is a build time dependency and is only required when building OnDemand from source.
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
