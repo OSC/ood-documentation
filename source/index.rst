@@ -89,6 +89,31 @@ These are institutions who were early adopters or provided HPC resources for dev
    applications
    user-documentation
 
+OnDemand System Dependencies
+----------------------------
+
+The following table lists the system dependencies of OnDemand while it is running.  
+
+
+.. list-table:: System dependencies
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Program
+     - Location Of Execution 
+   * - Rsync
+     - /var/www/ood/apps/sys/myjobs/app/models/workflow.rb
+   * - GNU Timeout
+     - /var/www/ood/apps/sys/myjobs/app/models/filesystem.rb
+   * - File
+     - /var/www/ood/apps/sys/file-editor/app/controllers/pages_controller.rb
+   * - Xmllint
+     - /opt/ood/ondemand/root/usr/sbin/passenger-status
+   * - GNU Wget
+     - /opt/ood/mod_ood_proxy/lib/analytics.lua
+
+
+**Note:** GCC is a builtin dependency and will be required for installing OnDemand from Source.
 
 .. _website: https://osc.github.io/Open-OnDemand/
 .. _bowdoin: https://www.bowdoin.edu/it/resources/high-performance-computing.html
