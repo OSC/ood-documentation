@@ -25,7 +25,7 @@ Details
 OnDemand passed a security audit!
 .................................
 
-At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand [TrustedCI_Audit]_. Quoting their audits major findings:
+At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand [Audit_Citation]_. Quoting the major findings of the audit:
 
   ::
 
@@ -37,7 +37,7 @@ At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand [TrustedC
     - Found a potential vulnerability, dormant based on current configuration
       and launch settings.
 
-The potential security issue was the ability for a user to consume all available resources on a machine using a `fork bomb`_ or similar attack. OnDemand is intentionally designed to allow users to do anything that they are permitted to do on a system. The OnDemand team expects that HPC centers are already active managing user resource utilization with tools like ``ulimit`` or ``cgroups``. After a conversation about the prior two assumptions TrustedCI agreed that the ability of a user to run a fork bomb was not an issue with OnDemand.
+The potential security issue was the ability for a user to consume all available resources on a machine using a `fork bomb`_ or similar attack. OnDemand is designed to allow users to do anything that they are permitted to do on a system; to not 'hide the machine' as our PI likes to say. The OnDemand team expects that HPC centers are using batch schedulers which are configured to limit user resource utilization with tools like ``ulimit`` or ``cgroups``. After a conversation about the prior two assumptions TrustedCI agreed that the ability of a user to run a fork bomb was not an issue with OnDemand.
 
  To address the bugs that were found three issues were opened on Github.
 
@@ -50,6 +50,8 @@ The potential security issue was the ability for a user to consume all available
 .. _ood-myjobs#290: https://github.com/OSC/ood-myjobs/issues/290
 
 The issue with the File Explorer is not a security concern has not been reported as a problem that real users have, and given that the OnDemand team intends to replace the File Explorer as part of the OnDemand 2.0 project the issue is one that will not be fixed for now. The File Explorer issue will be addressed in the next major version of that application. The other two issues-both relating to the Job Composer-have been addressed for the 1.6.x release.
+
+Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the audit!
 
 .. _fork bomb: https://en.wikipedia.org/wiki/Fork_bomb
 .. _TrustedCI: https://trustedci.org/
@@ -67,25 +69,27 @@ Added L18n hooks to the Dashboard and Job Composer
 
 Localization hooks have been added to the Dashboard and the Job Composer. This work does not cover all the strings necessary to provide full internationalization but is the starting point of such a project if there is enough demand.
 
-An initial English/OSC locale has been added. Sites wishing to override the locale should do the following:
+An initial English/OSC locale (``en.yml``) has been added. Sites wishing to localize for themselves should do the following:
 
-  - Step 1
-  - Step b
+  - Apps look for additional locale files at ``/etc/ood/config/locales`` unless ``OOD_LOCALES_ROOT`` is defined in the environment
+  - The locale may be changed by setting ``OOD_LOCALE`` in the environment
+  - Locale files with the same base name will be merged, so it is not necessary for site specific locale files to provide all translations
+  - The available localization values may be discovered in the default locale file at: ``/var/www/ood/apps/sys/$APP/config/locales/en.yml``
 
-.. warning::
+  .. warning::
 
-  Translations have certain variables passed to them for example ``%{support_url}``. Those variables may be used or removed from the translation, but they may not be renamed without crashing the application.
+    Translations have certain variables passed to them for example ``%{support_url}``. Those variables may be used or removed from the translation. Attempting to use a variable that is not available to the translation will crash the application.
 
-.. note::
+  .. note::
 
-  Localization files are YAML documents; remember that YAML is space sensitive, and tabs are not valid for indentation per the `YAML spec`_.
+    Localization files are YAML documents; remember that YAML is space sensitive, and tabs are NOT valid for indentation per the `YAML spec`_.
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
 Updated ngnix_stage to always remove stale PID files
 ....................................................
 
-``nginx_stage clean`` will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted the action is reported to ``stderr``. (`ondemand#11`_)
+``nginx_stage clean`` will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on ``stderr``. (`ondemand#11`_)
 
 .. _ondemand#11: https://github.com/OSC/ondemand/issues/11
 
@@ -117,12 +121,12 @@ Previously, if a job was submitted without an account Active Jobs would display 
 Fixed Time Used format for Active Jobs
 ......................................
 
-In 1.5 the ``Time Used`` field in Active Jobs was simply the number of seconds as an integer. In 1.6 this has been changed back to ``HH:MM:SS``.
+In 1.5 the ``Time Used`` field in Active Jobs was the number of seconds elapsed as an integer. In 1.6 this has been changed back to ``HH:MM:SS``.
 
 Improved Slurm adapter
 ......................
 
-``squeue`` may report the name of a job submitted without an explicit as being the content of the script. To improve the reliability of parsing ``squeue`` output the record delimiter has been changed from newlines to the `ASCII/Unicode record separator`_.
+To improve the reliability of parsing ``squeue`` output the record delimiter has been changed from newlines to the `ASCII/Unicode record separator`_.
 
 .. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
 
@@ -141,4 +145,4 @@ Updated web-application dependencies
 
 Dependencies for the individual web applications have been updated including Ruby gems for most applications, and switching from ``pty.js`` to the actively maintained ``node-pty`` for the Shell application.
 
-.. [TrustedCI_Audit] Elisa Heymann, Joel Atkins, Barton P. Miller.  "TrustedCI: The NSF Cybersecurity Center of Excellence Open OnDemand Report". TrustedCI: The NSF Cybersecurity Center of Excellence. December 2018.
+.. [Audit_Citation] Elisa Heymann, Joel Atkins, Barton P. Miller.  "TrustedCI: The NSF Cybersecurity Center of Excellence Open OnDemand Report". TrustedCI: The NSF Cybersecurity Center of Excellence. December 2018.
