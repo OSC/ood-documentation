@@ -29,8 +29,6 @@ Issue Tracking
 +------------+---------------------+
 | Issue      | Links               |
 +============+=====================+
-| body row 1 | :ref:`github` Sammy |
+| body row 1 |  |
 +------------+---------------------+
 
-
-.. _github: https://github.com/OSC/ood-shell/issues/59/
