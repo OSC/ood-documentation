@@ -6,17 +6,17 @@ v1.6 Release Notes
 Highlights in 1.6:
 
 - `OnDemand passed a security audit!`_
-- `Added rendering of HTML or Markdown in Job Composer template manifests`_
-- `Added L18n hooks to the Dashboard and Job Composer`_
-- `Updated ngnix_stage to always remove stale PID files`_
 - `Added job array support for LSF and PBSPro adapters`_
-- `Disabled warning about eager loading gems`_
-- `Fix crash in nginx_stage`_
-- `Active Jobs shows empty cell if account is nil`_
+- `Added L18n hooks to the Dashboard and Job Composer`_
+- `Added rendering of HTML or Markdown in Job Composer template manifests`_
+- `Changed ngnix_stage to always remove stale PID files`_
+- `Fixed Active Jobs to show empty cell if account is nil`_
+- `Fixed crash in nginx_stage`_
+- `Fixed Job Composer layout when job name is long`_
 - `Fixed Time Used format for Active Jobs`_
-- `Improved Slurm adapter`_
-- `Job Composer layout changes`_
+- `Fixed warning about eager loading gems`_
 - `Improved Grid Engine adapter`_
+- `Improved Slurm adapter`_
 - `Updated web-application dependencies`_
 
 Upgrading from v1.5
@@ -67,7 +67,7 @@ At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand [Audit_Ci
     - Found a potential vulnerability, dormant based on current configuration
       and launch settings.
 
-The potential security issue was the ability for a user to consume all available resources on a machine using a `fork bomb`_ or similar attack. OnDemand is designed to allow users to do anything that they are permitted to do on a system; to not 'hide the machine' as our PI likes to say. The OnDemand team expects that HPC centers are using batch schedulers which are configured to limit user resource utilization with tools like ``ulimit`` or ``cgroups``. After a conversation about the prior two assumptions TrustedCI agreed that the ability of a user to run a fork bomb was not an issue with OnDemand.
+The potential security issue was the ability for a user to consume all available resources on a machine using a `fork bomb`_ or similar attack. OnDemand is designed to allow users to do anything that they are permitted to do on a system; to not 'hide the machine' as our PI likes to say. The OnDemand team expects that HPC centers are using batch schedulers which are configured to limit user resource utilization with tools like ``ulimit`` or ``cgroups``. After a conversation about those assumptions TrustedCI agreed that the ability of a user to run a fork bomb was not an issue with OnDemand.
 
  To address the bugs that were found three issues were opened on Github.
 
@@ -116,7 +116,7 @@ An initial English/OSC locale (``en.yml``) has been added. Sites wishing to loca
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
-Updated ngnix_stage to always remove stale PID files
+Changed ngnix_stage to always remove stale PID files
 ....................................................
 
 ``nginx_stage clean`` will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on ``stderr``. (`ondemand#11`_)
@@ -129,22 +129,22 @@ Added job array support for LSF and PBSPro adapters
 Job Composer and Active Jobs now support job arrays for all adapters that OnDemand supports including LSF and PBSPro.
 
 
-Disabled warning about eager loading gems
-.........................................
+Fixed warning about eager loading gems
+......................................
 
 Job Composer logs will no longer contain complaints about gems not being eager loaded. (`ood-myjobs#285`_)
 
 .. _ood-myjobs#285: https://github.com/OSC/ood-myjobs/issues/285
 
-Fix crash in nginx_stage
-........................
+Fixed crash in nginx_stage
+..........................
 
 ``nginx_stage`` will no longer crash when one of the ``pun_custom_env`` values in ``/etc/ood/config/nginx_stage.yml`` is a number and not a string. (`ondemand#26`_)
 
 .. _ondemand#26: https://github.com/OSC/ondemand/issues/26
 
-Active Jobs shows empty cell if account is nil
-..............................................
+Fixed Active Jobs to show empty cell if account is nil
+......................................................
 
 Previously, if a job was submitted without an account Active Jobs would display that job as having an account of ``(null)``. Now the field will simply be blank.
 
@@ -160,8 +160,8 @@ To improve the reliability of parsing ``squeue`` output the record delimiter has
 
 .. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
 
-Job Composer layout changes
-...........................
+Fixed Job Composer layout when job name is long
+...............................................
 
 Job names that were exceptionally long and did not contain 'break-able' punctuation could break the layout of the Job Composer's data table. The table has been updated so that job names wrap and will break mid-word if necessary.
 
