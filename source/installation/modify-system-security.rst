@@ -14,6 +14,46 @@ Modify System Security
       certain software in your web applications such as being able to access a
       Lustre file system.
 
+   RHEL/CentOS 6/7
+      .. code-block:: sh
+
+         sestatus
+
+      .. code-block:: sh
+
+         #Output
+         **SELinux status**:             **enabled**
+         SELinuxfs mount:                /sys/fs/selinux
+         SELinux root directory:         /etc/selinux
+         Loaded policy name:             targeted
+         Current mode:                   enforcing
+         Mode from config file:          enforcing
+         Policy MLS status:              enabled
+         Policy deny_unknown status:     allowed
+         Max kernel policy version:      31
+
+
+   RHEL/CentOS 6/7
+      .. code-block:: sh
+
+         $ sudo chmod -R 757 /etc/selinux/config  
+
+   Using your favorite text editor open the /etc/selinux/config file and set the SELINUX mode to disabled 
+
+      .. code-block:: sh
+
+         This file controls the state of SELinux on the system.
+         # SELINUX= can take one of these three values:
+         #       enforcing - SELinux security policy is enforced.
+         #       permissive - SELinux prints warnings instead of enforcing.
+         #       disabled - No SELinux policy is loaded.
+         SELINUX=disabled
+         # SELINUXTYPE= can take one of these two values:
+         #       targeted - Targeted processes are protected,
+         #       mls - Multi Level Security protection.
+         SELINUXTYPE=targeted
+
+
 #. Open ports 80 (http) and 443 (https) in the firewall, typically done with
    `iptables`_.
 
@@ -22,6 +62,21 @@ Modify System Security
       If using **RHEL 7** you will need to either use the newer `firewalld`_
       daemon and modify the firewall settings or disable it and install
       `iptables`_.
+
+   RHEL/CentOS 7
+      .. code-block:: sh
+
+         $ systemctl restart firewalld
+         $ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+         $ sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
+         $ sudo firewall-cmd --reload
+
+   RHEL/CentOS 6
+      .. code-block:: sh
+      
+         $ sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+         $ sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+         $ sudo service iptables save    
 
 .. _selinux: https://wiki.centos.org/HowTos/SELinux
 .. _iptables: https://wiki.centos.org/HowTos/Network/IPTables
