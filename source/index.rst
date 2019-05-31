@@ -85,10 +85,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    :maxdepth: 2
    :caption: Known Issues
 
-   issues/file-explorer
-   issues/shell
-   issues/batch-connect
-   issues/dashboard
+   issues/overview
 
 .. toctree::
    :maxdepth: 2
