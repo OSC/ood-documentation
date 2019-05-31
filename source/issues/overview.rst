@@ -1,4 +1,4 @@
-.. _overview.rst
+.. _overview.rst:
 
 .. note::
 	We discuss many common issues as well as try and solve new issues on 
