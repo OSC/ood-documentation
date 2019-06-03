@@ -305,7 +305,7 @@ Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
 
 Some sites have the home directory auto-create on first ssh login, for example
-via pam_mkhomedir.so. This introduces a problem if users first access the system
+via ``pam_mkhomedir.so``. This introduces a problem if users first access the system
 through OnDemand, which expects the existence of a user’s home directory.
 
 In OnDemand <= 1.3 if the user's home directory was missing a non-helpful single
@@ -359,17 +359,50 @@ Below are different configuration options and the resulting navbar if you had in
 
 .. _customization_localization:
 
-Customize Tagline and Other Text on Dashboard
----------------------------------------------
+Customize Text in OnDemand
+--------------------------
 
-Using Rails support for Internationalization, we localized the html that
-shows the logo and tagline on the OnDemand home page, as well as the motd
-section title.
+Using Rails support for Internationaliation (i18n), we have added localization for some features of the Dashboard and the Job Composer.
 
-The default locale is "en" and the default locale file can be found at
-``/var/www/ood/apps/sys/dashboard/config/locales/en.yml``. To customize,
-you can copy this file (or create a new file with the same stucture of the keys
-you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify your copy.
+The default locale is "en". You can use a custom locale. To customize you can copy this file (or create a new file with the same stucture of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy. Translations for multiple apps should be merged into a single locale file. Translations that are not provided will be sourced from the app's default locale file. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard/Job Composer env config file.
+
+.. list-table:: OnDemand Locale Files
+  :header-rows: 1
+  :stub-columns: 1
+
+  * - File path
+    - App
+    - Translation namespace
+  * - ``/var/www/ood/apps/sys/dashboard/config/locales/en.yml``
+    - `Dashboard`_
+    - ``dashboard``
+  * - ``/var/www/ood/apps/sys/myjobs/config/locales/en.yml``
+    - `Job Composer`_
+    - ``jobcomposer``
+  * - ``/etc/ood/config/locales/en.yml``
+    - All localizable apps will default to checking this path
+    - Any
+
+.. warning::
+
+  Translations have certain variables passed to them for example ``%{support_url}``. Those variables may be used or removed from the translation. Attempting to use a variable that is not available to the translation will crash the application.
+
+.. note::
+
+  Localization files are YAML documents; remember that YAML uses spaces for indentation NOT tabs per the `YAML spec`_.
+
+.. note::
+
+  OnDemand uses the convention that translations that accept HTML with be suffixed with ``_html``. Any other translation will treat their values displayed as plain text.
+
+.. Links for the OnDemand 1.6.3 release of these apps
+.. _Dashboard: https://github.com/OSC/ood-dashboard/blob/v1.33.4/config/locales/en.yml
+.. _Job Composer: https://github.com/OSC/ood-myjobs/blob/v2.14.0/config/locales/en.yml
+
+.. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
+
+Change the Dashboard Tagline
+............................
 
 .. code-block:: yaml
 
@@ -380,21 +413,25 @@ you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify your copy.
          <p class="lead">OnDemand provides an integrated, single access point for all of your HPC resources.</p>
        motd_title: "Message of the Day"
 
-The key ``welcome_html`` ends with ``_html`` and Rails will trust the value of
-this string as valid HTML. The ``motd_title`` on the other hand will be sanitized.
-
 The ``welcome_html`` interpolates the variable ``logo_img_tag`` with the default
 logo, or the logo specified by the environment variable ``OOD_DASHBOARD_LOGO``.
 
-You can omit this variable in the value you specify for ``welcome_html`` if you prefer.
+You may omit this variable in the value you specify for ``welcome_html`` if you prefer.
 
-You can use a custom locale. For example, if you want the locale to be French,
-you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard
-to use this locale by setting the environment variable ``OOD_LOCALE=fr``. Do this
-in either the nginx_stage config or in the Dashboard env config file.
+Change quota messages in the Dashboard
+.......................................
 
-We will be localizing many more strings in the future.
+Two messages related to file system usage that sites may want to change:
 
+  - ``quota_additional_message`` - gives the user advice on what to do if they see a quota warning
+  - ``quota_reload_message`` - tells the user that they should reload the page to see their quota usage change, and by default also tells users that the quota values are updated every 5 minutes
+
+Customize Text in the Job Composer's options form
+.................................................
+
+The OSC-default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects. 
+
+Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string ``options_account_help``.
 
 Disable Safari Warning on Dashboard
 -----------------------------------
@@ -444,7 +481,7 @@ defines when this file was generated, and ``quotas`` is a list of quota objects
 
 You can configure the Dashboard to use this JSON file (or files) by setting the
 environment variable ``OOD_QUOTA_PATH`` as a colon-delimited list of all JSON
-file paths in the ``/etc/ood/config/apps/dashboard/env`` file.
+file paths in the ``/etc/ood/config/apps/dashboard/env`` file. Since version 1.6 of OnDemand ``OOD_QUOTA_PATH`` may also be a URL.
 
 The default threshold for displaying the warning is at 95% (`0.95`), but this
 can be changed with the environment variable ``OOD_QUOTA_THRESHOLD``.
