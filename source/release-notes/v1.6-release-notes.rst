@@ -96,37 +96,12 @@ Details
 OnDemand passed a security audit
 ................................
 
-At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand [Audit_Citation]_. Quoting the major findings of the audit:
+At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand and quoting the major findings of the audit: "No major issues were found in a comprehensive evaluation of the architecture and critical resources in Open OnDemand, and analysis of potential code weaknesses in critical components."
 
-  .. highlight:: none
+Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the audit! The full report is available as a PDF at `openondemand.org`_.
 
-  ::
+.. _openondemand.org: https://openondemand.org/documents/Open%20OnDemand%20Trusted%20CI%20Engagement%20Report.pdf
 
-    - Discovered several implementation issues (bugs) that could affect the
-      proper operation of Open OnDemand. 
-    - No major issues were found in a comprehensive evaluation of the
-      architecture and critical resources in Open OnDemand, and analysis of
-      potential code weaknesses in critical components.
-    - Found a potential vulnerability, dormant based on current configuration
-      and launch settings.
-
-The potential security issue was the ability for a user to consume all available resources on a machine using a `fork bomb`_ or similar attack. OnDemand is designed to allow users to do anything that they are permitted to do on a system; to not 'hide the machine' as our PI likes to say. The OnDemand team expects that HPC centers are using batch schedulers which are configured to limit user resource utilization with tools like ``ulimit`` or ``cgroups``. After a conversation about those assumptions TrustedCI agreed that the ability of a user to run a fork bomb was not an issue with OnDemand.
-
- To address the bugs that were found three issues were opened on Github.
-
-  - Creating a new directory whose name includes HTML/XML tags results in unintended behavior (`ood-fileexplorer#198`_)
-  - Datatables does not handle long job names well (`ood-myjobs#290`_)
-  - Default "simple sequential job" is reported to have not execute permissions on job script (`ood-myjobs#289`_)
-
-.. _ood-fileexplorer#198: https://github.com/OSC/ood-fileexplorer/issues/198
-.. _ood-myjobs#289: https://github.com/OSC/ood-myjobs/issues/289
-.. _ood-myjobs#290: https://github.com/OSC/ood-myjobs/issues/290
-
-The issue with the File Explorer is not a security concern has not been reported as a problem that real users have, and given that the OnDemand team intends to replace the File Explorer as part of the OnDemand 2.0 project the issue is one that will not be fixed for now. The File Explorer issue will be addressed in the next major version of that application. The other two issues-both relating to the Job Composer-have been addressed for the 1.6.x release.
-
-Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the audit!
-
-.. _fork bomb: https://en.wikipedia.org/wiki/Fork_bomb
 .. _TrustedCI: https://trustedci.org/
 
 Added rendering of HTML or Markdown in Job Composer template manifests
@@ -225,4 +200,3 @@ To improve the reliability of parsing ``squeue`` output the record delimiter has
 To match the behavior of the other adapters the Grid Engine adapter will now attempt to detect whether the user has set the working directory of a job. If the user has not passed the ``-wd`` or ``-cwd`` flags in the first 1024 characters of their job script then the adapter will append ``-cwd`` to the arguments passed to ``qsub``.
 
 .. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
-.. [Audit_Citation] Elisa Heymann, Joel Atkins, Barton P. Miller.  "TrustedCI: The NSF Cybersecurity Center of Excellence Open OnDemand Report". TrustedCI: The NSF Cybersecurity Center of Excellence. December 2018.
