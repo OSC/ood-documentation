@@ -364,7 +364,9 @@ Customize Text in OnDemand
 
 Using Rails support for Internationaliation (i18n), we have added localization for some features of the Dashboard and the Job Composer.
 
-The default locale is "en". You can use a custom locale. To customize you can copy this file (or create a new file with the same stucture of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy. Translations for multiple apps should be merged into a single locale file. Translations that are not provided will be sourced from the app's default locale file. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard/Job Composer env config file.
+The default locale is "en". You can use a custom locale. To customize you can copy this file (or create a new file with the same stucture of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy. Translations for multiple apps may be merged into a single locale file. Translations that are not provided will be sourced from the app's default locale file. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard/Job Composer env config file.
+
+In each translation file the values that are most site-specific appear at the top.
 
 .. list-table:: OnDemand Locale Files
   :header-rows: 1
@@ -380,7 +382,7 @@ The default locale is "en". You can use a custom locale. To customize you can co
     - `Job Composer`_
     - ``jobcomposer``
   * - ``/etc/ood/config/locales/en.yml``
-    - All localizable apps will default to checking this path
+    - All localizable apps will check this path, unless ``OOD_LOCALES_ROOT`` is set.
     - Any
 
 .. warning::
@@ -481,7 +483,14 @@ defines when this file was generated, and ``quotas`` is a list of quota objects
 
 You can configure the Dashboard to use this JSON file (or files) by setting the
 environment variable ``OOD_QUOTA_PATH`` as a colon-delimited list of all JSON
-file paths in the ``/etc/ood/config/apps/dashboard/env`` file. Since version 1.6 of OnDemand ``OOD_QUOTA_PATH`` may also be a URL.
+file paths in the ``/etc/ood/config/apps/dashboard/env`` file. In addition to
+pointing to files ``OOD_QUOTA_PATH`` may also contain HTTP(s) or FTP protocol 
+URLs. Colons used in URLs are correctly handled and are not treated as delimiters.
+
+.. warning::
+
+  Sites using HTTP(s) or FTP for their quota files may see slower dashboard load
+  times, depending on the responsiveness of the server providing the quota file(s).
 
 The default threshold for displaying the warning is at 95% (`0.95`), but this
 can be changed with the environment variable ``OOD_QUOTA_THRESHOLD``.
@@ -492,7 +501,7 @@ An example is given as:
 
    # /etc/ood/config/apps/dashboard/env
 
-   OOD_QUOTA_PATH="/path/to/quota1.json:/path/to/quota2.json"
+   OOD_QUOTA_PATH="/path/to/quota1.json:https://example.com/quota2.json"
    OOD_QUOTA_THRESHOLD="0.80"
 
 
