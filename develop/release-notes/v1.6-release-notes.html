@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>v1.6 Release Notes &mdash; Open OnDemand 1.6.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="v1.5 Release Notes" href="v1.5-release-notes.html" />
+    <link rel="prev" title="Creating a Status App" href="../app-development/tutorials-passenger-apps/ps-to-quota.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">v1.6 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-5">Upgrading from v1.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure-version-changes">Infrastructure Version Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-version-changes">Application Version Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ondemand-passed-a-security-audit">OnDemand passed a security audit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-rendering-of-html-or-markdown-in-job-composer-template-manifests">Added rendering of HTML or Markdown in Job Composer template manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-localization-options-to-the-dashboard-and-job-composer">Added localization options to the Dashboard and Job Composer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-support-for-fetching-quota-from-a-url">Added support for fetching quota from a URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-version-strings-to-dashboard">Added version strings to Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-job-array-support-for-lsf-and-pbspro-adapters">Added job array support for LSF and PBSPro adapters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-bug-in-file-explorer-relating-to-hiding-the-open-in-terminal-button">Fixed bug in File Explorer relating to hiding the Open in Terminal button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-warning-about-eager-loading-gems">Fixed warning about eager loading gems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-crash-in-nginx-stage">Fixed crash in nginx_stage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-active-jobs-to-show-empty-cell-if-account-is-nil">Fixed Active Jobs to show empty cell if account is nil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-time-used-format-for-active-jobs">Fixed Time Used format for Active Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-job-composer-layout-when-job-name-is-long">Fixed Job Composer layout when job name is long</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#improved-slurm-and-grid-engine-adapters">Improved Slurm and Grid Engine adapters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>v1.6 Release Notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/release-notes/v1.6-release-notes.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="v1-6-release-notes">
+<span id="id1"></span><h1>v1.6 Release Notes<a class="headerlink" href="#v1-6-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>Highlights in 1.6:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#ondemand-passed-a-security-audit">OnDemand passed a security audit</a></li>
+<li><a class="reference internal" href="#added-job-array-support-for-lsf-and-pbspro-adapters">Added job array support for LSF and PBSPro adapters</a></li>
+<li><a class="reference internal" href="#added-localization-options-to-the-dashboard-and-job-composer">Added localization options to the Dashboard and Job Composer</a></li>
+<li><a class="reference internal" href="#added-rendering-of-html-or-markdown-in-job-composer-template-manifests">Added rendering of HTML or Markdown in Job Composer template manifests</a></li>
+<li><a class="reference internal" href="#added-support-for-fetching-quota-from-a-url">Added support for fetching quota from a URL</a></li>
+<li><a class="reference internal" href="#added-version-strings-to-dashboard">Added version strings to Dashboard</a></li>
+<li><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></li>
+<li><a class="reference internal" href="#fixed-active-jobs-to-show-empty-cell-if-account-is-nil">Fixed Active Jobs to show empty cell if account is nil</a></li>
+<li><a class="reference internal" href="#fixed-bug-in-file-explorer-relating-to-hiding-the-open-in-terminal-button">Fixed bug in File Explorer relating to hiding the Open in Terminal button</a></li>
+<li><a class="reference internal" href="#fixed-crash-in-nginx-stage">Fixed crash in nginx_stage</a></li>
+<li><a class="reference internal" href="#fixed-job-composer-layout-when-job-name-is-long">Fixed Job Composer layout when job name is long</a></li>
+<li><a class="reference internal" href="#fixed-time-used-format-for-active-jobs">Fixed Time Used format for Active Jobs</a></li>
+<li><a class="reference internal" href="#fixed-warning-about-eager-loading-gems">Fixed warning about eager loading gems</a></li>
+<li><a class="reference internal" href="#improved-slurm-and-grid-engine-adapters">Improved Slurm and Grid Engine adapters</a></li>
+</ul>
+<div class="section" id="upgrading-from-v1-5">
+<h2>Upgrading from v1.5<a class="headerlink" href="#upgrading-from-v1-5" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Update OnDemand release RPM</p>
+<p>CentOS/RHEL 6</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/1.6/ondemand-release-web-1.6-1.el6.noarch.rpm
+</pre></div>
+</div>
+<p>CentOS/RHEL 7</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/1.6/ondemand-release-web-1.6-1.el7.noarch.rpm
+</pre></div>
+</div>
+</li>
+<li><p class="first">Update OnDemand</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
+sudo yum update ondemand
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="infrastructure-version-changes">
+<h2>Infrastructure Version Changes<a class="headerlink" href="#infrastructure-version-changes" title="Permalink to this headline">¶</a></h2>
+<p>No significant infrastructure changes since 1.5.x.</p>
+</div>
+<div class="section" id="application-version-changes">
+<h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
+<span id="v1-6-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id2">
+<caption><span class="caption-number">Table 11 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head stub">App</th>
+<th class="head">Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><th class="stub"><cite>Dashboard App</cite></th>
+<td>1.31.0 → <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.33.4/CHANGELOG.md">1.33.4</a>
+(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.31.0...v1.33.4">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><cite>Shell App</cite></th>
+<td>1.4.2 → <a class="reference external" href="https://github.com/OSC/ood-shell/blob/v1.4.3/CHANGELOG.md">1.4.3</a>
+(<a class="reference external" href="https://github.com/OSC/ood-shell/compare/v1.4.2...v1.4.3">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><cite>Files App</cite></th>
+<td>1.5.1 → <a class="reference external" href="https://github.com/OSC/ood-fileexplorer/blob/v1.5.2/CHANGELOG.md">1.5.2</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileexplorer/compare/v1.5.1...v1.5.2">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><cite>File Editor App</cite></th>
+<td>1.4.1 → <a class="reference external" href="https://github.com/OSC/ood-fileeditor/blob/v1.4.3/CHANGELOG.md">1.4.3</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileeditor/compare/v1.4.1...v1.4.3">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><cite>Active Jobs App</cite></th>
+<td>1.7.0 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.9.1/CHANGELOG.md">1.9.1</a>
+(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.7.0...v1.9.1">diff</a>)</td>
+</tr>
+<tr class="row-odd"><th class="stub"><cite>Job Composer App</cite></th>
+<td>2.11.0 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.14.0/CHANGELOG.md">2.14.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.11.0...v2.14.0">diff</a>)</td>
+</tr>
+<tr class="row-even"><th class="stub"><cite>Desktops App</cite></th>
+<td>0.2.0 → <a class="reference external" href="https://github.com/OSC/bc_desktop/blob/v0.2.1/CHANGELOG.md">0.2.1</a>
+(<a class="reference external" href="https://github.com/OSC/bc_desktop/compare/v0.2.0...v0.2.1">diff</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#v1-6-app-versions"><span class="std std-numref">Table 11</span></a> lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.</p>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ondemand-passed-a-security-audit">
+<h3>OnDemand passed a security audit<a class="headerlink" href="#ondemand-passed-a-security-audit" title="Permalink to this headline">¶</a></h3>
+<p>At the end of 2018 <a class="reference external" href="https://trustedci.org/">TrustedCI</a> completed a security audit of OnDemand and quoting the major findings of the audit: “No major issues were found in a comprehensive evaluation of the architecture and critical resources in Open OnDemand, and analysis of potential code weaknesses in critical components.”</p>
+<p>Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the audit! The full report is available as a PDF at <a class="reference external" href="https://openondemand.org/documents/Open%20OnDemand%20Trusted%20CI%20Engagement%20Report.pdf">openondemand.org</a>.</p>
+</div>
+<div class="section" id="added-rendering-of-html-or-markdown-in-job-composer-template-manifests">
+<h3>Added rendering of HTML or Markdown in Job Composer template manifests<a class="headerlink" href="#added-rendering-of-html-or-markdown-in-job-composer-template-manifests" title="Permalink to this headline">¶</a></h3>
+<p>If the environment variable <code class="docutils literal notranslate"><span class="pre">RENDER_TEMPLATE_NOTES_AS_MARKDOWN</span></code> is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be run through the RedCarpet renderer. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (<a class="reference external" href="https://github.com/OSC/ood-myjobs/issues/278">ood-mjobs#291</a>)</p>
+</div>
+<div class="section" id="added-localization-options-to-the-dashboard-and-job-composer">
+<h3>Added localization options to the Dashboard and Job Composer<a class="headerlink" href="#added-localization-options-to-the-dashboard-and-job-composer" title="Permalink to this headline">¶</a></h3>
+<p>Localization options have been added to the Dashboard and the Job Composer. This work does not cover all the strings necessary to provide full internationalization but is the starting point of such a project if there is enough demand.</p>
+<p>An initial English/OSC locale (<code class="docutils literal notranslate"><span class="pre">en.yml</span></code>) has been added. Sites wishing to localize for themselves should do the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Apps look for additional locale files at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales</span></code> unless <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> is defined in the environment</li>
+<li>The locale may be changed by setting <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE</span></code> in the environment</li>
+<li>Locale files with the same base name will be merged, so it is not necessary for site specific locale files to provide all translations</li>
+<li>The available localization values may be discovered in the default locale file at: <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/$APP/config/locales/en.yml</span></code></li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Translations have certain variables passed to them for example <code class="docutils literal notranslate"><span class="pre">%{support_url}</span></code>. Those variables may be used or removed from the translation. Attempting to use a variable that is not available to the translation will crash the application.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Localization files are YAML documents; remember that YAML is space sensitive, and tabs are NOT valid for indentation per the <a class="reference external" href="https://yaml.org/spec/1.2/spec.html#id2777534">YAML spec</a>.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="added-support-for-fetching-quota-from-a-url">
+<h3>Added support for fetching quota from a URL<a class="headerlink" href="#added-support-for-fetching-quota-from-a-url" title="Permalink to this headline">¶</a></h3>
+<p>File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to Dan Dietz at Purdue for the initial work on this feature.</p>
+</div>
+<div class="section" id="added-version-strings-to-dashboard">
+<h3>Added version strings to Dashboard<a class="headerlink" href="#added-version-strings-to-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>The Dashboard will now display the version of OnDemand and the Dashboard in the footer. Interactive applications will display their versions next to their title on their launch page.</p>
+</div>
+<div class="section" id="changed-ngnix-stage-to-always-remove-stale-pid-files">
+<h3>Changed ngnix_stage to always remove stale PID files<a class="headerlink" href="#changed-ngnix-stage-to-always-remove-stale-pid-files" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">nginx_stage</span> <span class="pre">clean</span></code> will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on <code class="docutils literal notranslate"><span class="pre">stderr</span></code>. (<a class="reference external" href="https://github.com/OSC/ondemand/issues/11">ondemand#11</a>)</p>
+</div>
+<div class="section" id="added-job-array-support-for-lsf-and-pbspro-adapters">
+<h3>Added job array support for LSF and PBSPro adapters<a class="headerlink" href="#added-job-array-support-for-lsf-and-pbspro-adapters" title="Permalink to this headline">¶</a></h3>
+<p>Job Composer and Active Jobs now support job arrays for all adapters that OnDemand supports including LSF and PBSPro.</p>
+</div>
+<div class="section" id="fixed-bug-in-file-explorer-relating-to-hiding-the-open-in-terminal-button">
+<h3>Fixed bug in File Explorer relating to hiding the Open in Terminal button<a class="headerlink" href="#fixed-bug-in-file-explorer-relating-to-hiding-the-open-in-terminal-button" title="Permalink to this headline">¶</a></h3>
+<p>Setting the environmental variable <code class="docutils literal notranslate"><span class="pre">OOD_SHELL</span></code> to an empty string will now hide the Open in Terminal button as documented. (<a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/191">ood-fileexplorer#191</a>)</p>
+</div>
+<div class="section" id="fixed-warning-about-eager-loading-gems">
+<h3>Fixed warning about eager loading gems<a class="headerlink" href="#fixed-warning-about-eager-loading-gems" title="Permalink to this headline">¶</a></h3>
+<p>Job Composer logs will no longer contain complaints about gems not being eager loaded. (<a class="reference external" href="https://github.com/OSC/ood-myjobs/issues/285">ood-myjobs#285</a>)</p>
+</div>
+<div class="section" id="fixed-crash-in-nginx-stage">
+<h3>Fixed crash in nginx_stage<a class="headerlink" href="#fixed-crash-in-nginx-stage" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">nginx_stage</span></code> will no longer crash when one of the <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> values in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> is a number and not a string. (<a class="reference external" href="https://github.com/OSC/ondemand/issues/26">ondemand#26</a>)</p>
+</div>
+<div class="section" id="fixed-active-jobs-to-show-empty-cell-if-account-is-nil">
+<h3>Fixed Active Jobs to show empty cell if account is nil<a class="headerlink" href="#fixed-active-jobs-to-show-empty-cell-if-account-is-nil" title="Permalink to this headline">¶</a></h3>
+<p>Previously, if a job was submitted without an account Active Jobs would display that job as having an account of <code class="docutils literal notranslate"><span class="pre">(null)</span></code>. Now the field will simply be blank.</p>
+</div>
+<div class="section" id="fixed-time-used-format-for-active-jobs">
+<h3>Fixed Time Used format for Active Jobs<a class="headerlink" href="#fixed-time-used-format-for-active-jobs" title="Permalink to this headline">¶</a></h3>
+<p>In 1.5 the <code class="docutils literal notranslate"><span class="pre">Time</span> <span class="pre">Used</span></code> field in Active Jobs was the number of seconds elapsed as an integer. In 1.6 this has been changed back to <code class="docutils literal notranslate"><span class="pre">HH:MM:SS</span></code>.</p>
+</div>
+<div class="section" id="fixed-job-composer-layout-when-job-name-is-long">
+<h3>Fixed Job Composer layout when job name is long<a class="headerlink" href="#fixed-job-composer-layout-when-job-name-is-long" title="Permalink to this headline">¶</a></h3>
+<p>Job names that were exceptionally long and did not contain ‘break-able’ punctuation could break the layout of the Job Composer’s data table. The table has been updated so that job names wrap and will break mid-word if necessary.</p>
+</div>
+<div class="section" id="improved-slurm-and-grid-engine-adapters">
+<h3>Improved Slurm and Grid Engine adapters<a class="headerlink" href="#improved-slurm-and-grid-engine-adapters" title="Permalink to this headline">¶</a></h3>
+<p>To improve the reliability of parsing <code class="docutils literal notranslate"><span class="pre">squeue</span></code> output the record delimiter has been changed from newline to the <a class="reference external" href="https://en.wikipedia.org/wiki/Delimiter#Conventions">ASCII/Unicode record separator</a>.</p>
+<p>To match the behavior of the other adapters the Grid Engine adapter will now attempt to detect whether the user has set the working directory of a job. If the user has not passed the <code class="docutils literal notranslate"><span class="pre">-wd</span></code> or <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> flags in the first 1024 characters of their job script then the adapter will append <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to the arguments passed to <code class="docutils literal notranslate"><span class="pre">qsub</span></code>. Fixed error where the Grid Engine adapter would throw an error when getting information on a job that had exited the queue.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="v1.5-release-notes.html" class="btn btn-neutral float-right" title="v1.5 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../app-development/tutorials-passenger-apps/ps-to-quota.html" class="btn btn-neutral float-left" title="Creating a Status App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/release-notes/v1.6-release-notes.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/release-notes/v1.6-release-notes.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/release-notes/v1.6-release-notes.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/release-notes/v1.6-release-notes.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/release-notes/v1.6-release-notes.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/release-notes/v1.6-release-notes.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/release-notes/v1.6-release-notes.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/release-notes/v1.6-release-notes.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/release-notes/v1.6-release-notes.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
