@@ -22,4 +22,4 @@ For VNC server support:
 
 .. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify
-.. _nmap-ncat: http://netcat.sourceforge.net/
+.. _nmap-ncat: https://nmap.org/ncat/

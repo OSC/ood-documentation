@@ -40,7 +40,7 @@ By default the Dashboard will assume it is running in "Developer mode" if the de
        .. code-block:: ruby
 
           Configuration.app_development_enabled = OodSupport::Process.groups.include?(
-            OodSupport::Group.new(name: "devgrp")
+            OodSupport::Group.new("devgrp")
           )
 
        Or if you know the id of the group, this will avoid reading the ``/etc/group``
