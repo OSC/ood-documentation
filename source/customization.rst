@@ -393,9 +393,9 @@ The default locale is "en". You can use a custom locale. To customize you can co
 
 .. note::
 
-  OnDemand uses the convention that translations that accept HTML with be suffixed with ``_html``. Any other translation will treat their values displayed as plain text.
+  OnDemand uses the convention that translations that accept HTML with be suffixed with ``_html``. Any other translation will be displayed as plain text.
 
-.. Links for the OnDemand 1.6.3 release of these apps
+.. Links for the OnDemand 1.6.3 release versions of these apps
 .. _Dashboard: https://github.com/OSC/ood-dashboard/blob/v1.33.4/config/locales/en.yml
 .. _Job Composer: https://github.com/OSC/ood-myjobs/blob/v2.14.0/config/locales/en.yml
 
