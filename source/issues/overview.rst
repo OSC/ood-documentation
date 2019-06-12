@@ -12,10 +12,10 @@ Common Issues
 		When trying to use certain HTML characters your file name will appear incorrectly. 
 		An issue like this could be resolved by not using the HTML characters. Below are screenshots of what may happen if you do.
 
-		.. figure:: /images/file-names-bad1.png
+		.. figure:: /images/file-names-bad-1.png
 		   :align: center
 
-		.. figure:: /images/file-names-bad2.png
+		.. figure:: /images/file-names-bad-2.png
 		   :align: center
 
 
