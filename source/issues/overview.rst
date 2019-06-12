@@ -12,10 +12,10 @@ Common Issues
 		When trying to use certain HTML characters your file name will appear incorrectly. 
 		An issue like this could be resolved by not using the HTML characters. Below are screenshots of what may happen if you do.
 
-		.. figure:: ../images/file-names-bad1.png
+		.. figure:: /images/file-names-bad1.png
 		   :align: center
 
-		.. figure:: ../images/file-names-bad2.png
+		.. figure:: /images/file-names-bad2.png
 		   :align: center
 
 
@@ -68,7 +68,7 @@ Common Issues
 
 	rebuild_passenger_rails_app: [{"HOME" => "", "RAILS_ENV" => "production"}, "bin/bundle install --path=vendor/bundle && bin/rake assets:clobber && bin/rake assets:precompile && bin/rake tmp:clear && mkdir -p tmp && touch tmp/restart.txt && echo 'Done!'"] 
 
-.. figure:: ../images/rebuild-not-reliable.png
+.. figure:: /images/rebuild-not-reliable.png
     :align: center
 
 .. note::
@@ -110,10 +110,10 @@ Common Issues
 		Unfortunately, **Microsoft Edge** provides us with a few unintended behaviors when trying to use the ctrl-v action. 
 		Below are a few screenshots of what may happen.  
 				
-		.. figure:: ../images/issues-shell-cutpaste1.png
+		.. figure:: /images/issues-shell-cutpaste1.png
 		   :align: center
 
-		.. figure:: ../images/issues-shell-cutpaste2.png
+		.. figure:: /images/issues-shell-cutpaste2.png
 		   :align: center	
 
 .. warning::
