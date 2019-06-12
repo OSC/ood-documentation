@@ -118,6 +118,7 @@ Common Issues
 
 .. warning::
 	In some instances Microsoft Edge will reload the browser when trying to paste and may even be unable to reach the page after reload.
+
 Issues Table
 ------------
 
