@@ -63,7 +63,8 @@ Make everyone a developer by default (optional)
 
 To revert to the way developer enabling worked in OnDemand 1.3, change the nginx_stage app_root configuration for dev apps by modifying /etc/ood/config/nginx_stage.yml and replacing
 
-.. code: yaml
+.. code-block:: yaml
+   :emphasize-lines: 2
 
    app_root:
      dev: '/var/www/ood/apps/dev/%{owner}/gateway/%{name}'
@@ -74,7 +75,8 @@ To revert to the way developer enabling worked in OnDemand 1.3, change the nginx
 with
 
 
-.. code: yaml
+.. code-block:: yaml
+   :emphasize-lines: 2
 
    app_root:
      dev: '~%{owner}/%{portal}/dev/%{name}'
