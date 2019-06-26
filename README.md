@@ -4,7 +4,7 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Documentation License](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0)
 
-Go to https://osc.github.io/ood-documentation/master/
+Go to https://osc.github.io/ood-documentation/master/ to see the latest published release version.
 
 Or select your version:
 
