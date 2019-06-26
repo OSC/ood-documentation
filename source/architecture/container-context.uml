@@ -1,0 +1,38 @@
+@startuml
+
+title On Demand Container Context
+
+'scale 400*1600
+
+skinparam ArrowColor Black
+
+rectangle "HPC Scheduler" as HS
+rectangle "HPC Node" as HN
+rectangle "Network File System" as NFS
+
+rectangle "On Demand" as OD #red {
+    rectangle "httpd" as HT
+
+    rectangle "Passanger" as PSS {
+        rectangle "nginx" as NG
+
+        rectangle "SSH App" as SSH
+        rectangle "Files App" as FA
+        rectangle "Interactive Apps" as IA
+    
+        HT -[#white]-> NG
+        NG -[#white]-> SSH
+        NG -[#white]> IA
+        NG -[#white]-> FA
+        SSH -> HN
+        IA -> HS
+    }
+}
+
+:User: --> HT: Creates & views jobs, files, desktops and shells.
+
+FA --> NFS : Load/Save/Edit files
+NFS <- HN : Use files
+HS --> HN : Run jobs
+
+@enduml

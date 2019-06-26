@@ -1,0 +1,18 @@
+@startuml
+
+title On Demand System Context
+
+rectangle "On Demand" as OD #red
+rectangle "HPC Scheduler" as HS
+rectangle "HPC Node" as HN
+rectangle "Network File System" as NFS
+
+:User: --> OD: Login through a web browser
+
+OD -> HS : Submit jobs
+OD --> NFS : Load/Save/Edit files
+NFS <- HN : Use files
+HS --> HN : Run jobs
+OD --> HN: SSH/VNC
+
+@enduml
