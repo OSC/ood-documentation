@@ -1,0 +1,47 @@
+@startuml
+
+title Request flow through the OnDemand system
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant Authentication
+participant LuaScripts
+participant Nginx
+participant "Passenger/App"
+
+
+User -[#red]> "Apache Httpd": request
+
+activate "Apache Httpd"
+
+"Apache Httpd" -[#red]> Authentication: Authenticate request
+activate Authentication
+Authentication -[#red]> "Apache Httpd" : Authenticate response
+deactivate Authentication
+
+"Apache Httpd" -[#green]> LuaScripts: Lua Hooks
+activate LuaScripts
+LuaScripts -[#green]> LuaScripts: map user
+alt socket doesn't exist
+  LuaScripts -[#green]> Nginx: Start nginx as $user
+end group
+LuaScripts -[#green]> LuaScripts: modify request and proxy connection
+
+
+"Apache Httpd" -[#blue]> Nginx: proxy request
+deactivate LuaScripts
+Nginx -[#blue]> "Passenger/App": proxy request
+"Passenger/App" -[#blue]> Nginx: response
+Nginx -[#blue]> "Apache Httpd": response
+"Apache Httpd" -[#red]> User: response
+deactivate "Apache Httpd"
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:green>   </back>| commands |
+|<back:blue>   </back>| http over unix socket |
+endlegend
+
+@enduml
