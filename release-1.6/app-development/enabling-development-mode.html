@@ -90,7 +90,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">Install</span></p>
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
@@ -105,7 +109,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../app-development.html">App Development</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Enabling App Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enable-in-ondemand-v1-6">Enable in OnDemand v1.6:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-in-ondemand-v1-4-v1-5">Enable in OnDemand v1.4 &amp; v1.5:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-in-ondemand-v1-3">Enable in OnDemand v1.3:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specify-dedicated-host-for-development-optional">Specify dedicated host for development (optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-everyone-a-developer-by-default-optional">Make everyone a developer by default (optional)</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="interactive.html">Interactive Apps</a></li>
 </ul>
 </li>
@@ -198,40 +209,79 @@
             
   <div class="section" id="enabling-app-development">
 <span id="enabling-development-mode"></span><h1>Enabling App Development<a class="headerlink" href="#enabling-app-development" title="Permalink to this headline">¶</a></h1>
-<p>There are three steps to enabling app development:</p>
-<ol class="arabic simple">
-<li>The PUN must have the config set so the app root looks to the path in the user’s home directory, or whatever per-user path dev apps should reside. This is configurable in the nginx_stage, though the default template string can be used as is.</li>
-<li>The Dashboard app needs to be informed that developer mode is enabled for the user, in order to show the Develop dropdown. By default, the Dashboard does this based on the existence of the path specified by <code class="docutils literal notranslate"><span class="pre">OOD_DEV_APPS_ROOT</span></code> which is set by taking the parent path of the interpolated value of <code class="docutils literal notranslate"><span class="pre">app_root</span></code> for dev apps (<a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L145-L159">see the example nginx_stage.yml config file</a>). There are also other options for configuring the Dashboard at the bottom of this page.</li>
-<li>Specify the development host, if it will differ from the default host for the shell app by setting it in <code class="docutils literal notranslate"><span class="pre">OOD_DEV_SSH_HOST</span></code> environment variable for the dashboard in the file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>. When developing apps, it is necessary to have access to the same versions of Ruby and NodeJS that are running on the OnDemand node. If the default ssh host is not the OnDemand node, then setting <code class="docutils literal notranslate"><span class="pre">OOD_DEV_SSH_HOST</span></code> to a host developers can ssh to with the same Software Collection (SCL) packages will help.</li>
-</ol>
-<p>In OnDemand 1.3, the app root for a dev app was set in the PUN config to <code class="docutils literal notranslate"><span class="pre">'~%{owner}/%{portal}/dev/%{name}'</span></code>. This means for a user with the home directory <code class="docutils literal notranslate"><span class="pre">/home/efranz</span></code> in a default OnDemand install the root directory for the dev apps would be <code class="docutils literal notranslate"><span class="pre">/home/efranz/ondemand/dev</span></code>. If a user did <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/ondemand/dev</span></code> and reloaded the Dashboard app, the Develop dropdown would appear and users could deploy apps in their home directory and launch them.</p>
-<p>In OnDemand 1.4, the app root for a dev app has been changed to <code class="docutils literal notranslate"><span class="pre">'/var/www/ood/apps/dev/%{owner}/gateway/%{name}'</span></code>. So for user <code class="docutils literal notranslate"><span class="pre">efranz</span></code> this would be <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/dev/efranz/gateway/</span></code>. To enable efranz to develop apps, the administrator can then do the following:</p>
+<div class="section" id="enable-in-ondemand-v1-6">
+<h2>Enable in OnDemand v1.6:<a class="headerlink" href="#enable-in-ondemand-v1-6" title="Permalink to this headline">¶</a></h2>
+<p>Here are example steps to enable a user “efranz”, assuming efranz’s home directory is at <code class="docutils literal notranslate"><span class="pre">/home/efranz</span></code>:</p>
+<ol class="arabic">
+<li><p class="first">Create a symlink so OnDemand finds efranz’s apps:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">efranz</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">efranz</span>
 <span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">efranz</span><span class="o">/</span><span class="n">ondemand</span><span class="o">/</span><span class="n">dev</span> <span class="n">gateway</span>
 </pre></div>
 </div>
-<p>Then a user can create the dev directory in their home directory i.e. <code class="docutils literal notranslate"><span class="pre">/home/efranz/ondemand/dev</span></code>.</p>
-<p>If you want to revert to the previous functionality of 1.3, where every user can run dev apps in their home directory, <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L156-L159">use the second example mapping here</a> in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> config file. If you do this, it is recommended that you treat the node that OnDemand is running on as a login node, as you are effectively giving those users shell access by letting them run arbitrary code on the OnDemand node (of course the UID of the processes are still their regular user UID).</p>
-<p>By default the Dashboard will assume it is running in “Developer mode” if the dev apps root directory exists (specified by the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_DEV_APPS_ROOT</span></code>). If you want to change this behavior, these are the options:</p>
-<table border="1" class="docutils" id="id1">
-<caption><span class="caption-number">Table 8 </span><span class="caption-text">Dashboard configuration for app development</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>Action</td>
-<td>Result</td>
-</tr>
-<tr class="row-even"><td>Set <code class="docutils literal notranslate"><span class="pre">OOD_APP_DEVELOPMENT=1</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code></td>
-<td>Developer mode will always be enabled in the Dashboard providing a Develop Dropdown. This can help with discoverability, as user’s do not need to create the dev root directory prior to seeing the Develop dropdown. This only makes sense if every user can develop apps.</td>
-</tr>
-<tr class="row-odd"><td>Set <code class="docutils literal notranslate"><span class="pre">Configuration.app_development_enabled</span></code> to true based on one or more Ruby statements in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></td>
-<td><p class="first">Code in the initializer runs as the user. This code also has access to the <a class="reference external" href="http://www.rubydoc.info/github/OSC/ood_support">ood_support library</a> in which we provide some helper classes to work with User’s and Groups.</p>
-<p>If you want to restrict app development mode to group membership, you could
-do this:</p>
-<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Configuration</span><span class="o">.</span><span class="n">app_development_enabled</span> <span class="o">=</span> <span class="no">OodSupport</span><span class="o">::</span><span class="no">Process</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span>
+</li>
+<li><p class="first">Have efranz access the Dashboard, and efranz will see the Develop dropdown</p>
+</li>
+</ol>
+</div>
+<div class="section" id="enable-in-ondemand-v1-4-v1-5">
+<h2>Enable in OnDemand v1.4 &amp; v1.5:<a class="headerlink" href="#enable-in-ondemand-v1-4-v1-5" title="Permalink to this headline">¶</a></h2>
+<p>Here are example steps to enable a user “efranz”, assuming efranz’s home directory is at <code class="docutils literal notranslate"><span class="pre">/home/efranz</span></code>:</p>
+<ol class="arabic">
+<li><p class="first">Create a symlink so OnDemand finds efranz’s apps:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">efranz</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">efranz</span>
+<span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">efranz</span><span class="o">/</span><span class="n">ondemand</span><span class="o">/</span><span class="n">dev</span> <span class="n">gateway</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create dev directory <code class="docutils literal notranslate"><span class="pre">/home/efranz/ondemand/dev</span></code> where efranz’s dev apps will go (or ask efranz to do that)</p>
+</li>
+<li><p class="first">Have efranz access the Dashboard, and efranz will see the Develop dropdown</p>
+</li>
+</ol>
+</div>
+<div class="section" id="enable-in-ondemand-v1-3">
+<h2>Enable in OnDemand v1.3:<a class="headerlink" href="#enable-in-ondemand-v1-3" title="Permalink to this headline">¶</a></h2>
+<p>Here are example steps to enable a user “efranz”, assuming efranz’s home directory is at <code class="docutils literal notranslate"><span class="pre">/home/efranz</span></code>:</p>
+<ol class="arabic simple">
+<li>Create dev directory <code class="docutils literal notranslate"><span class="pre">/home/efranz/ondemand/dev</span></code> where efranz’s dev apps will go (or ask efranz to do that)</li>
+<li>Have efranz access the Dashboard, and efranz will see the Develop dropdown. (if this doesn’t happen, )</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The rest of the documentation below assumes you are working with OnDemand 1.4+.</p>
+</div>
+</div>
+<div class="section" id="specify-dedicated-host-for-development-optional">
+<h2>Specify dedicated host for development (optional)<a class="headerlink" href="#specify-dedicated-host-for-development-optional" title="Permalink to this headline">¶</a></h2>
+<p>The default host for the shell app is typically a login node. If this node does not contain a similar environment as the host OnDemand is installed on, including access to Software Collection (SCL) packages, it may be useful to provide developers a dedicated development host they can SSH to. This could even be the OnDemand host itself. If you configure the OnDemand dashboard to know about the dedicated development host, the dashboard will present links to open the shell app to this host.</p>
+<p>To specify a dedicated development host so OnDemand, set <code class="docutils literal notranslate"><span class="pre">OOD_DEV_SSH_HOST</span></code> environment variable for the dashboard in the file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>. For example at OSC one of our OnDemand installs uses ondemand-test.osc.edu for the development host so we have this line: <a class="reference external" href="https://github.com/OSC/osc-ood-config/blob/bde54e4c5a9fd756f74ac981f8c607320e9a0bf0/ondemand.osc.edu/apps/dashboard/env#L20">OOD_DEV_SSH_HOST=”ondemand-test.osc.edu”</a></p>
+</div>
+<div class="section" id="make-everyone-a-developer-by-default-optional">
+<h2>Make everyone a developer by default (optional)<a class="headerlink" href="#make-everyone-a-developer-by-default-optional" title="Permalink to this headline">¶</a></h2>
+<p>To revert to the way developer enabling worked in OnDemand 1.3, change the nginx_stage app_root configuration for dev apps by modifying /etc/ood/config/nginx_stage.yml and replacing</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">app_root</span><span class="p p-Indicator">:</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">dev</span><span class="p p-Indicator">:</span> <span class="s">&#39;/var/www/ood/apps/dev/%{owner}/gateway/%{name}&#39;</span>
+</span>  <span class="l l-Scalar l-Scalar-Plain">usr</span><span class="p p-Indicator">:</span> <span class="s">&#39;/var/www/ood/apps/usr/%{owner}/gateway/%{name}&#39;</span>
+  <span class="l l-Scalar l-Scalar-Plain">sys</span><span class="p p-Indicator">:</span> <span class="s">&#39;/var/www/ood/apps/sys/%{name}&#39;</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">app_root</span><span class="p p-Indicator">:</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">dev</span><span class="p p-Indicator">:</span> <span class="s">&#39;~%{owner}/%{portal}/dev/%{name}&#39;</span>
+</span>  <span class="l l-Scalar l-Scalar-Plain">usr</span><span class="p p-Indicator">:</span> <span class="s">&#39;/var/www/ood/apps/usr/%{owner}/gateway/%{name}&#39;</span>
+  <span class="l l-Scalar l-Scalar-Plain">sys</span><span class="p p-Indicator">:</span> <span class="s">&#39;/var/www/ood/apps/sys/%{name}&#39;</span>
+</pre></div>
+</div>
+<p>Then users can just create the directory <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev</span></code> and the Develop dropdown will appear.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you do this, it is recommended that you treat the node that OnDemand is running on as a login node, as you are effectively giving those users shell access by letting them run arbitrary code on the OnDemand node (of course the UID of the processes are still their regular unprivileged user UID).</p>
+</div>
+<p>If you do this, you still might want to restrict who sees the Develop dropdown in the Dashboard. To do that you can explicitly show or hide the dropdown in the Dashboard by setting <code class="docutils literal notranslate"><span class="pre">Configuration.app_development_enabled</span></code> to true based on one or more Ruby statements in the initializer <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code>. Code in the initializer runs as the user. This code also has access to the <a class="reference external" href="http://www.rubydoc.info/github/OSC/ood_support">ood_support library</a> in which we provide some helper classes to work with User’s and Groups. For example:</p>
+<blockquote>
+<div><div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Configuration</span><span class="o">.</span><span class="n">app_development_enabled</span> <span class="o">=</span> <span class="no">OodSupport</span><span class="o">::</span><span class="no">Process</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span>
   <span class="no">OodSupport</span><span class="o">::</span><span class="no">Group</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;devgrp&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
@@ -242,21 +292,12 @@ file:</p>
 </pre></div>
 </div>
 <p>Or a specific user list:</p>
-<div class="last highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Configuration</span><span class="o">.</span><span class="n">app_development_enabled</span> <span class="o">=</span> <span class="sx">%w(</span>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Configuration</span><span class="o">.</span><span class="n">app_development_enabled</span> <span class="o">=</span> <span class="sx">%w(</span>
 <span class="sx">  bgohar efranz bmcmichael</span>
 <span class="sx">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="no">OodSupport</span><span class="o">::</span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The way app development is enabled is a bit clunky. We will be exploring
-other options to reduce the load on the admin in supporting app developers
-in the future. If you have any thoughts or ideas please share them on our
-<a class="reference external" href="https://discourse.osc.edu/">Discourse instance.</a></p>
+</div></blockquote>
 </div>
 </div>
 
