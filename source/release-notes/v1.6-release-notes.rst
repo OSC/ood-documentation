@@ -7,18 +7,12 @@ Highlights in 1.6:
 
 - `OnDemand passed a security audit`_
 - `Added job array support for LSF and PBSPro adapters`_
+- `Improved Slurm and Grid Engine adapters`_
 - `Added localization options to the Dashboard and Job Composer`_
 - `Added rendering of HTML or Markdown in Job Composer template manifests`_
 - `Added support for fetching quota from a URL`_
 - `Added version strings to Dashboard`_
-- `Changed ngnix_stage to always remove stale PID files`_
-- `Fixed Active Jobs to show empty cell if account is nil`_
-- `Fixed bug in File Explorer relating to hiding the Open in Terminal button`_
-- `Fixed crash in nginx_stage`_
-- `Fixed Job Composer layout when job name is long`_
-- `Fixed Time Used format for Active Jobs`_
-- `Fixed warning about eager loading gems`_
-- `Improved Slurm and Grid Engine adapters`_
+- `Many bug fixes`_
 
 Upgrading from v1.5
 -------------------
@@ -104,12 +98,21 @@ Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the aud
 
 .. _TrustedCI: https://trustedci.org/
 
-Added rendering of HTML or Markdown in Job Composer template manifests
-......................................................................
 
-If the environment variable ``RENDER_TEMPLATE_NOTES_AS_MARKDOWN`` is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be run through the RedCarpet renderer. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (`ood-mjobs#291`_)
+Added job array support for LSF and PBSPro adapters
+...................................................
 
-.. _ood-mjobs#291: https://github.com/OSC/ood-myjobs/issues/278
+Job Composer and Active Jobs now support job arrays for all adapters that OnDemand supports including LSF and PBSPro.
+
+
+Improved Slurm and Grid Engine adapters
+.......................................
+
+To improve the reliability of parsing ``squeue`` output the record delimiter has been changed from newline to the `ASCII/Unicode record separator`_.
+
+To match the behavior of the other adapters the Grid Engine adapter will now attempt to detect whether the user has set the working directory of a job. If the user has not passed the ``-wd`` or ``-cwd`` flags in the first 1024 characters of their job script then the adapter will append ``-cwd`` to the arguments passed to ``qsub``. Fixed error where the Grid Engine adapter would throw an error when getting information on a job that had exited the queue.
+
+.. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
 
 
 Added localization options to the Dashboard and Job Composer
@@ -134,6 +137,15 @@ An initial English/OSC locale (``en.yml``) has been added. Sites wishing to loca
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
+
+Added rendering of HTML or Markdown in Job Composer template manifests
+......................................................................
+
+If the environment variable ``RENDER_TEMPLATE_NOTES_AS_MARKDOWN`` is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be run through the RedCarpet renderer. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (`ood-mjobs#291`_)
+
+.. _ood-mjobs#291: https://github.com/OSC/ood-myjobs/issues/278
+
+
 Added support for fetching quota from a URL
 ...........................................
 
@@ -144,59 +156,21 @@ Added version strings to Dashboard
 
 The Dashboard will now display the version of OnDemand and the Dashboard in the footer. Interactive applications will display their versions next to their title on their launch page.
 
-Changed ngnix_stage to always remove stale PID files
-....................................................
 
-``nginx_stage clean`` will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on ``stderr``. (`ondemand#11`_)
+Many bug fixes
+..............
 
-.. _ondemand#11: https://github.com/OSC/ondemand/issues/11
+*  Setting the environmental variable ``OOD_SHELL`` to an empty string will now hide the Open in Terminal button as documented. (`ood-fileexplorer#191`_)
+* Job Composer logs will no longer contain complaints about gems not being eager loaded. (`ood-myjobs#285`_)
+* ``nginx_stage`` will no longer crash when one of the ``pun_custom_env`` values in ``/etc/ood/config/nginx_stage.yml`` is a number and not a string. (`ondemand#26`_)
+* In Active Jobs, display nothing in "Account" column if no account set for the job, instead of displaying ``(null)``.
+* Fixed Time Used format for Active Jobs: In 1.5 the ``Time Used`` field in Active Jobs was the number of seconds elapsed as an integer. In 1.6 this has been changed back to ``HH:MM:SS``.
+* Fixed Job Composer layout when job name is long: Job names that were exceptionally long and did not contain 'break-able' punctuation could break the layout of the Job Composer's data table. The table has been updated so that job names wrap and will break mid-word if necessary.
+* Fixed Shell App paste issues in MS Edge and Firefox (#62, #59, and #64)
 
-Added job array support for LSF and PBSPro adapters
-...................................................
-
-Job Composer and Active Jobs now support job arrays for all adapters that OnDemand supports including LSF and PBSPro.
-
-Fixed bug in File Explorer relating to hiding the Open in Terminal button
-.........................................................................
-
-Setting the environmental variable ``OOD_SHELL`` to an empty string will now hide the Open in Terminal button as documented. (`ood-fileexplorer#191`_)
 
 .. _ood-fileexplorer#191: https://github.com/OSC/ood-fileexplorer/issues/191
-
-Fixed warning about eager loading gems
-......................................
-
-Job Composer logs will no longer contain complaints about gems not being eager loaded. (`ood-myjobs#285`_)
-
 .. _ood-myjobs#285: https://github.com/OSC/ood-myjobs/issues/285
-
-Fixed crash in nginx_stage
-..........................
-
-``nginx_stage`` will no longer crash when one of the ``pun_custom_env`` values in ``/etc/ood/config/nginx_stage.yml`` is a number and not a string. (`ondemand#26`_)
-
 .. _ondemand#26: https://github.com/OSC/ondemand/issues/26
 
-Fixed Active Jobs to show empty cell if account is nil
-......................................................
 
-Previously, if a job was submitted without an account Active Jobs would display that job as having an account of ``(null)``. Now the field will simply be blank.
-
-Fixed Time Used format for Active Jobs
-......................................
-
-In 1.5 the ``Time Used`` field in Active Jobs was the number of seconds elapsed as an integer. In 1.6 this has been changed back to ``HH:MM:SS``.
-
-Fixed Job Composer layout when job name is long
-...............................................
-
-Job names that were exceptionally long and did not contain 'break-able' punctuation could break the layout of the Job Composer's data table. The table has been updated so that job names wrap and will break mid-word if necessary.
-
-Improved Slurm and Grid Engine adapters
-.......................................
-
-To improve the reliability of parsing ``squeue`` output the record delimiter has been changed from newline to the `ASCII/Unicode record separator`_.
-
-To match the behavior of the other adapters the Grid Engine adapter will now attempt to detect whether the user has set the working directory of a job. If the user has not passed the ``-wd`` or ``-cwd`` flags in the first 1024 characters of their job script then the adapter will append ``-cwd`` to the arguments passed to ``qsub``. Fixed error where the Grid Engine adapter would throw an error when getting information on a job that had exited the queue.
-
-.. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
