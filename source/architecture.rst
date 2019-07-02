@@ -39,7 +39,8 @@ Container context
 -----------------------
 
 In the C4 nomenclature, 'containers' are one level below the system context. This is
-not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or Singularity).
+not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or
+Singularity or `OCI containers <https://www.opencontainers.org/>`_).
 
 It's important to note in this diagram that the frontend proxy is the only
 component that is shared for all clients. The system will create Per User
