@@ -362,11 +362,15 @@ Below are different configuration options and the resulting navbar if you had in
 Customize Text in OnDemand
 --------------------------
 
-Using Rails support for Internationaliation (i18n), we have added localization for some features of the Dashboard and the Job Composer.
+Using Rails support for Internationaliation (i18n), we have internationalized many strings in the Dashboard and the Job Composer apps.
 
-The default locale is "en". You can use a custom locale. To customize you can copy this file (or create a new file with the same stucture of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy. Translations for multiple apps may be merged into a single locale file. Translations that are not provided will be sourced from the app's default locale file. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard/Job Composer env config file.
+Initial translation dictionary files with defaults that work well for OSC and using the English locale (``en``) have been added (``/var/www/ood/apps/sys/dashboard/config/locales/en.yml`` and ``/var/www/ood/apps/sys/myjobs/config/locales/en.yml``). Sites wishing to modify these strings in order to provide site specific replacements for English, or use a different locale altogether, should do the following:
 
-In each translation file the values that are most site-specific appear at the top.
+#. Copy the translation dictionary file (or create a new file with the same stucture of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy.
+#. If you want apps to look for these dictionary files in a different location than ``/etc/ood/config/locales/en.yml`` you can change the location by defining ``OOD_LOCALES_ROOT`` environment variable.
+#. The default locale is "en". You can use a custom locale. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.
+
+In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.
 
 .. list-table:: OnDemand Locale Files
   :header-rows: 1
