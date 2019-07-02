@@ -7,18 +7,14 @@ Highlights in 1.6:
 
 - `OnDemand passed a security audit`_
 - `Added job array support for LSF and PBSPro adapters`_
+- `Improved Slurm and Grid Engine adapters`_
 - `Added localization options to the Dashboard and Job Composer`_
 - `Added rendering of HTML or Markdown in Job Composer template manifests`_
 - `Added support for fetching quota from a URL`_
 - `Added version strings to Dashboard`_
 - `Changed ngnix_stage to always remove stale PID files`_
-- `Fixed Active Jobs to show empty cell if account is nil`_
-- `Fixed bug in File Explorer relating to hiding the Open in Terminal button`_
-- `Fixed crash in nginx_stage`_
-- `Fixed Job Composer layout when job name is long`_
-- `Fixed Time Used format for Active Jobs`_
-- `Fixed warning about eager loading gems`_
-- `Improved Slurm and Grid Engine adapters`_
+- `Add ability to disable RewriteEngine in Apache config`_
+- `Many bug fixes`_
 
 Upgrading from v1.5
 -------------------
@@ -48,11 +44,11 @@ Upgrading from v1.5
        sudo yum clean all
        sudo yum update ondemand
 
-Infrastructure Version Changes
-------------------------------
+Infrastructure Changes
+----------------------
 
-No significant infrastructure changes since 1.5.x.
-
+- `Changed ngnix_stage to always remove stale PID files`_
+- `Add ability to disable RewriteEngine in Apache config`_
 
 Application Version Changes
 ----------------------------
@@ -66,29 +62,29 @@ Application Version Changes
    * - App
      - Version
    * - `Dashboard App`
-     - 1.31.0 → `1.33.4 <https://github.com/OSC/ood-dashboard/blob/v1.33.4/CHANGELOG.md>`__
-       (`diff <https://github.com/OSC/ood-dashboard/compare/v1.31.0...v1.33.4>`__)
+     - 1.31.0 → `1.35.0 <https://github.com/OSC/ood-dashboard/blob/v1.35.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-dashboard/compare/v1.31.0...v1.35.0>`__)
    * - `Shell App`
-     - 1.4.2 → `1.4.3 <https://github.com/OSC/ood-shell/blob/v1.4.3/CHANGELOG.md>`__
-       (`diff <https://github.com/OSC/ood-shell/compare/v1.4.2...v1.4.3>`__)
+     - 1.4.2 → `1.4.6 <https://github.com/OSC/ood-shell/blob/v1.4.6/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-shell/compare/v1.4.2...v1.4.6>`__)
    * - `Files App`
-     - 1.5.1 → `1.5.2 <https://github.com/OSC/ood-fileexplorer/blob/v1.5.2/CHANGELOG.md>`__
-       (`diff <https://github.com/OSC/ood-fileexplorer/compare/v1.5.1...v1.5.2>`__)
+     - 1.5.1 → `1.5.3 <https://github.com/OSC/ood-fileexplorer/blob/v1.5.3/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileexplorer/compare/v1.5.1...v1.5.3>`__)
    * - `File Editor App`
      - 1.4.1 → `1.4.3 <https://github.com/OSC/ood-fileeditor/blob/v1.4.3/CHANGELOG.md>`__
        (`diff <https://github.com/OSC/ood-fileeditor/compare/v1.4.1...v1.4.3>`__)
    * - `Active Jobs App`
-     - 1.7.0 → `1.9.1 <https://github.com/OSC/ood-activejobs/blob/v1.9.1/CHANGELOG.md>`__
-       (`diff <https://github.com/OSC/ood-activejobs/compare/v1.7.0...v1.9.1>`__)
+     - 1.7.0 → `1.9.2 <https://github.com/OSC/ood-activejobs/blob/v1.9.2/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-activejobs/compare/v1.7.0...v1.9.2>`__)
    * - `Job Composer App`
-     - 2.11.0 → `2.14.0 <https://github.com/OSC/ood-myjobs/blob/v2.14.0/CHANGELOG.md>`__
-       (`diff <https://github.com/OSC/ood-myjobs/compare/v2.11.0...v2.14.0>`__)
+     - 2.11.0 → `2.15.0 <https://github.com/OSC/ood-myjobs/blob/v2.15.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-myjobs/compare/v2.11.0...v2.15.0>`__)
    * - `Desktops App`
      - 0.2.0 → `0.2.1 <https://github.com/OSC/bc_desktop/blob/v0.2.1/CHANGELOG.md>`__
        (`diff <https://github.com/OSC/bc_desktop/compare/v0.2.0...v0.2.1>`__)
 
-:numref:`v1.6-app-versions` lists the versions as well as the previous version
-it was updated from for each of the system web applications in this release.
+:numref:`v1.6-app-versions` lists the app version changes between OnDemand v1.5.3 and OnDemand 1.6.7
+
 
 Details
 -------
@@ -104,6 +100,31 @@ Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the aud
 
 .. _TrustedCI: https://trustedci.org/
 
+
+Added job array support for LSF and PBSPro adapters
+...................................................
+
+Job Composer and Active Jobs now support job arrays for all adapters that OnDemand supports including LSF and PBSPro.
+
+
+Improved Slurm and Grid Engine adapters
+.......................................
+
+To improve the reliability of parsing ``squeue`` output the record delimiter has been changed from newline to the `ASCII/Unicode record separator`_.
+
+To match the behavior of the other adapters the Grid Engine adapter will now attempt to detect whether the user has set the working directory of a job. If the user has not passed the ``-wd`` or ``-cwd`` flags in the first 1024 characters of their job script then the adapter will append ``-cwd`` to the arguments passed to ``qsub``. Fixed error where the Grid Engine adapter would throw an error when getting information on a job that had exited the queue.
+
+.. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
+
+
+Added localization options to the Dashboard and Job Composer
+............................................................
+
+Many more strings have been internationalized in the Dashboard and the Job Composer. This work does not cover all the strings in the app, but enables localization of the most important ones.
+
+See :ref:`customization_localization` for details.
+
+
 Added rendering of HTML or Markdown in Job Composer template manifests
 ......................................................................
 
@@ -111,28 +132,6 @@ If the environment variable ``RENDER_TEMPLATE_NOTES_AS_MARKDOWN`` is set to a tr
 
 .. _ood-mjobs#291: https://github.com/OSC/ood-myjobs/issues/278
 
-
-Added localization options to the Dashboard and Job Composer
-............................................................
-
-Localization options have been added to the Dashboard and the Job Composer. This work does not cover all the strings necessary to provide full internationalization but is the starting point of such a project if there is enough demand.
-
-An initial English/OSC locale (``en.yml``) has been added. Sites wishing to localize for themselves should do the following:
-
-  - Apps look for additional locale files at ``/etc/ood/config/locales`` unless ``OOD_LOCALES_ROOT`` is defined in the environment
-  - The locale may be changed by setting ``OOD_LOCALE`` in the environment
-  - Locale files with the same base name will be merged, so it is not necessary for site specific locale files to provide all translations
-  - The available localization values may be discovered in the default locale file at: ``/var/www/ood/apps/sys/$APP/config/locales/en.yml``
-
-  .. warning::
-
-    Translations have certain variables passed to them for example ``%{support_url}``. Those variables may be used or removed from the translation. Attempting to use a variable that is not available to the translation will crash the application.
-
-  .. note::
-
-    Localization files are YAML documents; remember that YAML is space sensitive, and tabs are NOT valid for indentation per the `YAML spec`_.
-
-.. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
 Added support for fetching quota from a URL
 ...........................................
@@ -144,6 +143,7 @@ Added version strings to Dashboard
 
 The Dashboard will now display the version of OnDemand and the Dashboard in the footer. Interactive applications will display their versions next to their title on their launch page.
 
+
 Changed ngnix_stage to always remove stale PID files
 ....................................................
 
@@ -151,52 +151,27 @@ Changed ngnix_stage to always remove stale PID files
 
 .. _ondemand#11: https://github.com/OSC/ondemand/issues/11
 
-Added job array support for LSF and PBSPro adapters
-...................................................
 
-Job Composer and Active Jobs now support job arrays for all adapters that OnDemand supports including LSF and PBSPro.
+Add ability to disable RewriteEngine in Apache config
+.....................................................
 
-Fixed bug in File Explorer relating to hiding the Open in Terminal button
-.........................................................................
+You can now omit enabling the RewriteEngine by adding ``use_rewrites: false`` to the ``/etc/ood/config/ood_portal.yml`` config file and re-running the ``sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal`` to update the ood-portal.conf Apache config.
 
-Setting the environmental variable ``OOD_SHELL`` to an empty string will now hide the Open in Terminal button as documented. (`ood-fileexplorer#191`_)
+
+Many bug fixes
+..............
+
+*  Setting the environmental variable ``OOD_SHELL`` to an empty string will now hide the Open in Terminal button as documented. (`ood-fileexplorer#191`_)
+* Job Composer logs will no longer contain complaints about gems not being eager loaded. (`ood-myjobs#285`_)
+* ``nginx_stage`` will no longer crash when one of the ``pun_custom_env`` values in ``/etc/ood/config/nginx_stage.yml`` is a number and not a string. (`ondemand#26`_)
+* In Active Jobs, display nothing in "Account" column if no account set for the job, instead of displaying ``(null)``.
+* Fixed Time Used format for Active Jobs: In 1.5 the ``Time Used`` field in Active Jobs was the number of seconds elapsed as an integer. In 1.6 this has been changed back to ``HH:MM:SS``.
+* Fixed Job Composer layout when job name is long: Job names that were exceptionally long and did not contain 'break-able' punctuation could break the layout of the Job Composer's data table. The table has been updated so that job names wrap and will break mid-word if necessary.
+* Fixed Shell App paste issues in MS Edge and Firefox (#62, #59, and #64)
+
 
 .. _ood-fileexplorer#191: https://github.com/OSC/ood-fileexplorer/issues/191
-
-Fixed warning about eager loading gems
-......................................
-
-Job Composer logs will no longer contain complaints about gems not being eager loaded. (`ood-myjobs#285`_)
-
 .. _ood-myjobs#285: https://github.com/OSC/ood-myjobs/issues/285
-
-Fixed crash in nginx_stage
-..........................
-
-``nginx_stage`` will no longer crash when one of the ``pun_custom_env`` values in ``/etc/ood/config/nginx_stage.yml`` is a number and not a string. (`ondemand#26`_)
-
 .. _ondemand#26: https://github.com/OSC/ondemand/issues/26
 
-Fixed Active Jobs to show empty cell if account is nil
-......................................................
 
-Previously, if a job was submitted without an account Active Jobs would display that job as having an account of ``(null)``. Now the field will simply be blank.
-
-Fixed Time Used format for Active Jobs
-......................................
-
-In 1.5 the ``Time Used`` field in Active Jobs was the number of seconds elapsed as an integer. In 1.6 this has been changed back to ``HH:MM:SS``.
-
-Fixed Job Composer layout when job name is long
-...............................................
-
-Job names that were exceptionally long and did not contain 'break-able' punctuation could break the layout of the Job Composer's data table. The table has been updated so that job names wrap and will break mid-word if necessary.
-
-Improved Slurm and Grid Engine adapters
-.......................................
-
-To improve the reliability of parsing ``squeue`` output the record delimiter has been changed from newline to the `ASCII/Unicode record separator`_.
-
-To match the behavior of the other adapters the Grid Engine adapter will now attempt to detect whether the user has set the working directory of a job. If the user has not passed the ``-wd`` or ``-cwd`` flags in the first 1024 characters of their job script then the adapter will append ``-cwd`` to the arguments passed to ``qsub``. Fixed error where the Grid Engine adapter would throw an error when getting information on a job that had exited the queue.
-
-.. _ASCII/Unicode record separator: https://en.wikipedia.org/wiki/Delimiter#Conventions
