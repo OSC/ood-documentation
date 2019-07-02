@@ -11,6 +11,10 @@ Highlights in 1.6:
 - `Added localization options to the Dashboard and Job Composer`_
 - `Added rendering of HTML or Markdown in Job Composer template manifests`_
 - `Added support for fetching quota from a URL`_
+- `Added VNC quality and compression controls`_
+- `Added link to compute node that a VNC job is running on`_
+- `Changed 'Open in Terminal' button to offer multiple options when OOD_SSH_HOSTS is set`_
+- `Enable BatchConnect applications to raise errors after form submission`_
 - `Added version strings to Dashboard`_
 - `Changed ngnix_stage to always remove stale PID files`_
 - `Add ability to disable RewriteEngine in Apache config`_
@@ -137,6 +141,46 @@ Added support for fetching quota from a URL
 ...........................................
 
 File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to Dan Dietz at Purdue for the initial work on this feature.
+
+
+Added VNC quality and compression controls
+...........................................
+
+Controls to change the VNC compression and quality have been added to interactive session card:
+
+.. figure:: /images/interactive-app-compression-quality.png
+   :align: center
+
+This can help with users who want to sacrifice quality for a better connection speed and others who have great connection speed and want to maximize the quality.
+
+
+Added link to compute node that a VNC job is running on
+.......................................................
+
+For running interactive sessions, the host name becomes a clickable link to open in the shell app:
+
+.. figure:: /images/interactive-app-shell-link.png
+   :align: center
+
+
+Changed 'Open in Terminal' button to offer multiple options when OOD_SSH_HOSTS is set
+.....................................................................................
+
+In the Files app, if the environment variable ``OOD_SSH_HOSTS`` is set to a comma delimited value of ``host:title``, then the Open in Terminal button will display a dropdown of hosts to ssh to, instead of ssh-ing to the default host. For example, in the image below I set ``OOD_SSH_HOSTS="owens.osc.edu:Owens,pitzer.osc.edu:Pitzer,ruby.osc.edu:Ruby"``:
+
+.. figure:: /images/files-open-in-terminal.png
+   :align: center
+
+.. note:: In a future version of OnDemand we will change this app to load the hosts from the cluster configs.
+
+.env file for the shell app
+
+
+Enable BatchConnect applications to raise errors after form submission
+......................................................................
+
+In the ``submit.yml.erb`` of an interactive app, if you raise an exception, the submission process will be aborted and the user will be shown the error. This enables interactive apps to support basic form submission validation.
+
 
 Added version strings to Dashboard
 ..................................

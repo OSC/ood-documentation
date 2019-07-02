@@ -126,6 +126,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#added-localization-options-to-the-dashboard-and-job-composer">Added localization options to the Dashboard and Job Composer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#added-rendering-of-html-or-markdown-in-job-composer-template-manifests">Added rendering of HTML or Markdown in Job Composer template manifests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#added-support-for-fetching-quota-from-a-url">Added support for fetching quota from a URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-vnc-quality-and-compression-controls">Added VNC quality and compression controls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-link-to-compute-node-that-a-vnc-job-is-running-on">Added link to compute node that a VNC job is running on</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set">Changed ‘Open in Terminal’ button to offer multiple options when OOD_SSH_HOSTS is set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-batchconnect-applications-to-raise-errors-after-form-submission">Enable BatchConnect applications to raise errors after form submission</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#added-version-strings-to-dashboard">Added version strings to Dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-config">Add ability to disable RewriteEngine in Apache config</a></li>
@@ -222,6 +226,10 @@
 <li><a class="reference internal" href="#added-localization-options-to-the-dashboard-and-job-composer">Added localization options to the Dashboard and Job Composer</a></li>
 <li><a class="reference internal" href="#added-rendering-of-html-or-markdown-in-job-composer-template-manifests">Added rendering of HTML or Markdown in Job Composer template manifests</a></li>
 <li><a class="reference internal" href="#added-support-for-fetching-quota-from-a-url">Added support for fetching quota from a URL</a></li>
+<li><a class="reference internal" href="#added-vnc-quality-and-compression-controls">Added VNC quality and compression controls</a></li>
+<li><a class="reference internal" href="#added-link-to-compute-node-that-a-vnc-job-is-running-on">Added link to compute node that a VNC job is running on</a></li>
+<li><a class="reference internal" href="#changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set">Changed ‘Open in Terminal’ button to offer multiple options when OOD_SSH_HOSTS is set</a></li>
+<li><a class="reference internal" href="#enable-batchconnect-applications-to-raise-errors-after-form-submission">Enable BatchConnect applications to raise errors after form submission</a></li>
 <li><a class="reference internal" href="#added-version-strings-to-dashboard">Added version strings to Dashboard</a></li>
 <li><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></li>
 <li><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-config">Add ability to disable RewriteEngine in Apache config</a></li>
@@ -329,6 +337,37 @@ sudo yum update ondemand
 <div class="section" id="added-support-for-fetching-quota-from-a-url">
 <h3>Added support for fetching quota from a URL<a class="headerlink" href="#added-support-for-fetching-quota-from-a-url" title="Permalink to this headline">¶</a></h3>
 <p>File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to Dan Dietz at Purdue for the initial work on this feature.</p>
+</div>
+<div class="section" id="added-vnc-quality-and-compression-controls">
+<h3>Added VNC quality and compression controls<a class="headerlink" href="#added-vnc-quality-and-compression-controls" title="Permalink to this headline">¶</a></h3>
+<p>Controls to change the VNC compression and quality have been added to interactive session card:</p>
+<div class="figure align-center">
+<img alt="../_images/interactive-app-compression-quality.png" src="../_images/interactive-app-compression-quality.png" />
+</div>
+<p>This can help with users who want to sacrifice quality for a better connection speed and others who have great connection speed and want to maximize the quality.</p>
+</div>
+<div class="section" id="added-link-to-compute-node-that-a-vnc-job-is-running-on">
+<h3>Added link to compute node that a VNC job is running on<a class="headerlink" href="#added-link-to-compute-node-that-a-vnc-job-is-running-on" title="Permalink to this headline">¶</a></h3>
+<p>For running interactive sessions, the host name becomes a clickable link to open in the shell app:</p>
+<div class="figure align-center">
+<img alt="../_images/interactive-app-shell-link.png" src="../_images/interactive-app-shell-link.png" />
+</div>
+</div>
+<div class="section" id="changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set">
+<h3>Changed ‘Open in Terminal’ button to offer multiple options when OOD_SSH_HOSTS is set<a class="headerlink" href="#changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set" title="Permalink to this headline">¶</a></h3>
+<p>In the Files app, if the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_SSH_HOSTS</span></code> is set to a comma delimited value of <code class="docutils literal notranslate"><span class="pre">host:title</span></code>, then the Open in Terminal button will display a dropdown of hosts to ssh to, instead of ssh-ing to the default host. For example, in the image below I set <code class="docutils literal notranslate"><span class="pre">OOD_SSH_HOSTS=&quot;owens.osc.edu:Owens,pitzer.osc.edu:Pitzer,ruby.osc.edu:Ruby&quot;</span></code>:</p>
+<div class="figure align-center">
+<img alt="../_images/files-open-in-terminal.png" src="../_images/files-open-in-terminal.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In a future version of OnDemand we will change this app to load the hosts from the cluster configs.</p>
+</div>
+<p>.env file for the shell app</p>
+</div>
+<div class="section" id="enable-batchconnect-applications-to-raise-errors-after-form-submission">
+<h3>Enable BatchConnect applications to raise errors after form submission<a class="headerlink" href="#enable-batchconnect-applications-to-raise-errors-after-form-submission" title="Permalink to this headline">¶</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> of an interactive app, if you raise an exception, the submission process will be aborted and the user will be shown the error. This enables interactive apps to support basic form submission validation.</p>
 </div>
 <div class="section" id="added-version-strings-to-dashboard">
 <h3>Added version strings to Dashboard<a class="headerlink" href="#added-version-strings-to-dashboard" title="Permalink to this headline">¶</a></h3>
