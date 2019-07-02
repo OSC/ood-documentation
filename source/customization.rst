@@ -56,7 +56,7 @@ Message of the Day (MOTD)
 
 You can configure the Dashboard to display the /etc/motd file on the front page - the same file that is displayed when ssh-ing to a login node.
 
-To display a MOTD file on the Dashboard ensure that the environment variables ``$MOTD_PATH`` and ``$MOTD_FORMAT`` are set, where 
+To display a MOTD file on the Dashboard ensure that the environment variables ``$MOTD_PATH`` and ``$MOTD_FORMAT`` are set, where
 
    .. code-block:: sh
 
@@ -242,7 +242,7 @@ In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to cha
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
 
-Custom Job Composer Templates 
+Custom Job Composer Templates
 -----------------------------
 
 Below explains how job templates work for the Job Composer and how you can add your own. `Here is an example of the templates we use at OSC for the various clusters we have <https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/myjobs/templates>`_
@@ -271,7 +271,7 @@ Job Templates Overview
    1. user can open the copied job directory in the File Explorer and edit files using the File Editor
 
 3. Submit a new job
- 
+
    1. user can use the Job Options form specify which host to submit to, what file is the job script
    2. user can use the web interface to submit the job to the batch system
    3. after the job is completed, the user can open the directory in the file explorer to view results
@@ -336,7 +336,7 @@ Below are different configuration options and the resulting navbar if you had in
 
 - OnDemand with a cluster configured that accepts job submissions and shell access
 - at least one interactive app
-- at least one custom app that specifies "Reports" as the category 
+- at least one custom app that specifies "Reports" as the category
 
 .. list-table:: Navbar Configuration
    :header-rows: 1
@@ -352,7 +352,7 @@ Below are different configuration options and the resulting navbar if you had in
      - whitelist mode is enabled and since "Reports" is not in the whitelist it is omitted
    * - ``NavConfig.categories=[]`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
      - "Clusters", "Files", "Interactive Apps", "Jobs", "Reports"
-     - the app categories appear in alphabetical order since whitelist mode is disabled     
+     - the app categories appear in alphabetical order since whitelist mode is disabled
    * - ``NavConfig.categories=[]`` and ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
      - no app menus appear!
      - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
@@ -431,7 +431,7 @@ Two messages related to file system usage that sites may want to change:
 Customize Text in the Job Composer's options form
 .................................................
 
-The OSC-default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects. 
+The OSC-default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects.
 
 Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string ``options_account_help``.
 
@@ -484,7 +484,7 @@ defines when this file was generated, and ``quotas`` is a list of quota objects
 You can configure the Dashboard to use this JSON file (or files) by setting the
 environment variable ``OOD_QUOTA_PATH`` as a colon-delimited list of all JSON
 file paths in the ``/etc/ood/config/apps/dashboard/env`` file. In addition to
-pointing to files ``OOD_QUOTA_PATH`` may also contain HTTP(s) or FTP protocol 
+pointing to files ``OOD_QUOTA_PATH`` may also contain HTTP(s) or FTP protocol
 URLs. Colons used in URLs are correctly handled and are not treated as delimiters.
 
 .. warning::
