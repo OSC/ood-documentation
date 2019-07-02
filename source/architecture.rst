@@ -3,8 +3,24 @@
 Architecture
 ============
 
-Architecture diagrams below follow the `C4 <https://c4model.com/>`_ model for
+Overview
+--------
+
+
+.. figure:: /architecture/ood_overview.png
+
+#. Apache is the server front end, running as the Apache user, and accepting all requests from users and serves four primary functions
+
+   #. Authenticates user
+   #. Starts Per-User NGINX processes (PUNs)
+   #. Reverse proxies each user to her PUN via Unix domain sockets
+   #. Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets
+
+#. The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps
+
+Architecture for System context and Container context below follow the `C4 <https://c4model.com/>`_ model for
 software diagrams.
+
 
 System context
 -----------------------
