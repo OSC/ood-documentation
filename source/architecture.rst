@@ -3,6 +3,13 @@
 Architecture
 ============
 
+Below are some diagrams of OnDemand's architecture:
+
+#. Overview is a high level visual generated from Powerpoint
+#. System context and Container context diagrams below follow the `C4 <https://c4model.com/>`_
+   model for software diagrams, are more technically detailed and are built using draw.io
+#. Request flow diagram is a sequence diagram built using plantuml
+
 Overview
 --------
 
@@ -17,9 +24,6 @@ Overview
    #. Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets
 
 #. The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps
-
-Architecture for System context and Container context below follow the `C4 <https://c4model.com/>`_ model for
-software diagrams.
 
 
 System context
