@@ -12,6 +12,8 @@ Highlights in 1.6:
 - `Added rendering of HTML or Markdown in Job Composer template manifests`_
 - `Added support for fetching quota from a URL`_
 - `Added version strings to Dashboard`_
+- `Changed ngnix_stage to always remove stale PID files`_
+- `Add ability to disable RewriteEngine in Apache config`_
 - `Many bug fixes`_
 
 Upgrading from v1.5
@@ -42,11 +44,11 @@ Upgrading from v1.5
        sudo yum clean all
        sudo yum update ondemand
 
-Infrastructure Version Changes
-------------------------------
+Infrastructure Changes
+----------------------
 
-No significant infrastructure changes since 1.5.x.
-
+- `Changed ngnix_stage to always remove stale PID files`_
+- `Add ability to disable RewriteEngine in Apache config`_
 
 Application Version Changes
 ----------------------------
@@ -155,6 +157,20 @@ Added version strings to Dashboard
 ..................................
 
 The Dashboard will now display the version of OnDemand and the Dashboard in the footer. Interactive applications will display their versions next to their title on their launch page.
+
+
+Changed ngnix_stage to always remove stale PID files
+....................................................
+
+``nginx_stage clean`` will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on ``stderr``. (`ondemand#11`_)
+
+.. _ondemand#11: https://github.com/OSC/ondemand/issues/11
+
+
+Add ability to disable RewriteEngine in Apache config
+.....................................................
+
+You can now omit enabling the RewriteEngine by adding ``use_rewrites: false`` to the ``/etc/ood/config/ood_portal.yml`` config file and re-running the ``sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal`` to update the ood-portal.conf Apache config.
 
 
 Many bug fixes
