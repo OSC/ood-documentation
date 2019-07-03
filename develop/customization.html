@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization &mdash; Open OnDemand 1.6.3 documentation</title>
+  <title>Customization &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -588,9 +588,14 @@ can be customized by adding a custom one to <code class="docutils literal notran
 </div>
 <div class="section" id="customize-text-in-ondemand">
 <span id="customization-localization"></span><h2>Customize Text in OnDemand<a class="headerlink" href="#customize-text-in-ondemand" title="Permalink to this headline">¶</a></h2>
-<p>Using Rails support for Internationaliation (i18n), we have added localization for some features of the Dashboard and the Job Composer.</p>
-<p>The default locale is “en”. You can use a custom locale. To customize you can copy this file (or create a new file with the same stucture of the keys you want to modify) to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> and modify that copy. Translations for multiple apps may be merged into a single locale file. Translations that are not provided will be sourced from the app’s default locale file. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard/Job Composer env config file.</p>
-<p>In each translation file the values that are most site-specific appear at the top.</p>
+<p>Using Rails support for Internationaliation (i18n), we have internationalized many strings in the Dashboard and the Job Composer apps.</p>
+<p>Initial translation dictionary files with defaults that work well for OSC and using the English locale (<code class="docutils literal notranslate"><span class="pre">en</span></code>) have been added (<code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/dashboard/config/locales/en.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/config/locales/en.yml</span></code>). Sites wishing to modify these strings in order to provide site specific replacements for English, or use a different locale altogether, should do the following:</p>
+<ol class="arabic simple">
+<li>Copy the translation dictionary file (or create a new file with the same stucture of the keys you want to modify) to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> and modify that copy.</li>
+<li>If you want apps to look for these dictionary files in a different location than <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> you can change the location by defining <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> environment variable.</li>
+<li>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</li>
+</ol>
+<p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
 <table border="1" class="docutils" id="id10">
 <caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
 <colgroup>
