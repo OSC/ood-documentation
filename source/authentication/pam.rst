@@ -73,4 +73,4 @@ community provided, so if you have issues with them, let us know!
 
       sudo service httpd24-httpd condrestart
 
-#. Cleanup the files extracted in step 4 and disable epel if you wish.
+#. Cleanup the files extracted in step 4.
