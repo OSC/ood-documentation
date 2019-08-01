@@ -134,10 +134,3 @@ In summary, to enable a new user to create shared apps, run these commands:
    cd /var/www/ood/apps/usr/efranz
    chmod 750 .
    ln -s ~efranz/ondemand/share gateway
-
-
-Known Issues
-------------
-
-This is being documented as is. There parts of this feature that work well at
-OSC but may need fixed before working at another center.
