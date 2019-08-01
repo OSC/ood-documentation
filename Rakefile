@@ -24,7 +24,12 @@ namespace :docker do
 
   desc "Build docs using docker"
   task :build do
-    exec 'docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html'
+    exec 'docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" --security-opt label=disable ohiosupercomputer/docker-sphinx make html'
+  end
+  
+  desc "Build drawio images"
+  task :build_images do
+    exec ' docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" --security-opt label=disable ohiosupercomputer/docker-sphinx node ../drawio-batch/drawio-batch.js source/architecture/ood_container_view.drawio source/images/ood_container_view.png && node ../drawio-batch/drawio-batch.js source/architecture/ood_system_view.drawio source/images/ood_system_view.png'
   end
 end
 
