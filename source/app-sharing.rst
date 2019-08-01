@@ -30,7 +30,7 @@ The rest of this document addresses OnDemand's support for Executable Sharing.
 File System Permissions
 -----------------------
 
-Admins may install apps to the system by copying the application directory to `/var/www/ood/apps/sys`. Default directory permissions (`755`) will allow all users with access to Ondemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to un-licensed users they might do the following:
+Admins may install apps to the system by copying the application directory to ``/var/www/ood/apps/sys``. Default directory permissions (``755``) will allow all users with access to Ondemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to un-licensed users they might do the following:
 
   .. code-block:: sh
 
