@@ -73,6 +73,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    enable-desktops
    install-ihpc-apps
    app-development
+   app-authorization
    app-sharing
    app-development/tutorials-interactive-apps
    app-development/tutorials-passenger-apps
