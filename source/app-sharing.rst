@@ -18,15 +18,6 @@ Apps may be shared via a variety of methods including:
    home directory that other users can launch. This is similar to adding to your
    PATH the bin directory of another user.
 
-The rest of this document addresses OnDemand's support for Executable Sharing.
-
-.. warning:: Executable sharing means the app and all its code runs as the user
-             executing it, like everything else in OnDemand. User's might not
-             realize this. We currently do not provide an opt in screen warning
-             users that this app "will have permission to do everything on their
-             behalf and act as them". As a result, you should fully trust whoever
-             you enable to do share apps using executable sharing.
-
 File System Permissions
 -----------------------
 
@@ -79,7 +70,12 @@ Peer to Peer Executable Sharing
 
 By setting a few environment variables it is possible to enable a more polished peer to peer app sharing experience. There are two reasons why this mode is not always enabled: the first is that app permissions are the only thing that prevents all a site's Ondemand users from seeing a shared app, so it is important to get the permissions correct, and only to deploy apps that are production ready. The other reason to be careful with app sharing is that is expands the amount of trust placed in app developers.
 
-Why is app sharing an expansion of trust? To begin with an app developer is able to run code on the webserver. Assuming that the webserver is secured as though it were a login node this is requires a fairly trivial amount of trust in a developer. However, when a developer is permitted to share apps, then they write code that others execute, and so a malicious or careless developer could damage or steal their user's work.
+.. note:: Executable sharing means the app and all its code runs as the user
+             executing it, like everything else in OnDemand. User's might not
+             realize this. We currently do not provide an opt in screen warning
+             users that this app "will have permission to do everything on their
+             behalf and act as them". As a result, you should fully trust whoever
+             you enable to do share apps using executable sharing.
 
 Enabling The App Sharing Dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
