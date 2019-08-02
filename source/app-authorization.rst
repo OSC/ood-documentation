@@ -3,6 +3,7 @@
 App Authorization
 =================
 
-OnDemand controls which apps users are able to see and execute using file permissions on the app directories. By default every user may access every app. Read the section on `app sharing using file permissions`_ to learn more.
+OnDemand controls which apps users are able to see and execute using file permissions on the app directories.
 
-.. _app sharing using file permissions: /app-sharing.html#system-installed-apps
+See :ref:`app_sharing_system_installed_apps` for details.
+

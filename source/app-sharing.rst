@@ -18,6 +18,8 @@ Apps may be shared via a variety of methods including:
    home directory that other users can launch. This is similar to adding to your
    PATH the bin directory of another user.
 
+.. _app_sharing_system_installed_apps:
+
 System Installed Apps
 ---------------------
 
