@@ -18,8 +18,8 @@ Apps may be shared via a variety of methods including:
    home directory that other users can launch. This is similar to adding to your
    PATH the bin directory of another user.
 
-File System Permissions
------------------------
+System Installed Apps
+---------------------
 
 Admins may install apps to the system by copying the application directory to ``/var/www/ood/apps/sys``. Default directory permissions (``755``) will allow all users with access to Ondemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to un-licensed users they might do the following:
 
@@ -30,20 +30,70 @@ Admins may install apps to the system by copying the application directory to ``
     # - a group named $NEW_APP_GROUP
     # - and a user named $NEW_APP_USER
 
-    sudo cp "/path/to/$NEW_APP" /var/www/ood/apps/sys
+    sudo cp -r "/path/to/$NEW_APP" /var/www/ood/apps/sys
     sudo chmod 750 "/var/www/ood/apps/sys/$NEW_APP"
     sudo chgrp "$NEW_APP_GROUP" "/var/www/ood/apps/sys/$NEW_APP"
 
     sudo usermod -a -G "$NEW_APP_GROUP" "$NEW_APP_USER"
 
-Using file access lists (FACLs) app sharing may be as specific as desired; sharing with one or more groups, potentially also including or excluding individual users.
+You can utilize file access lists (FACLs) to increase the granularity with whom you share the apps. For example, you could specify multiple groups and individual users to share with, or even exclude specific users or groups.
 
-Another use for app sharing is sharing an in-development application with members of a development team before deploying that app to the system.
+This app authorization mechanism (using file permissions) can also be useful for canary deployments (sharing an app under development with a subset of users, or just your development team).
+
+Example Using File Permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. code-block:: sh
+    :emphasize-lines: 7
+
+    [root@ood sys]# pwd
+    /var/www/ood/apps/sys
+    [root@ood sys]# ls -l
+    total 20
+    drwxr-xr-x. 14 root root 4096 Jul 26 15:20 activejobs
+    drwxr-xr-x.  3 root root  169 Jul 26 15:20 bc_desktop
+    drwxr-xr-x.  5 root root  157 Aug  1 18:19 bc_desktop_example_kde
+    drwxr-xr-x. 13 root root 4096 Jul 26 15:20 dashboard
+    drwxr-xr-x. 14 root root 4096 Jul 26 15:20 file-editor
+    drwxr-xr-x.  7 root root 4096 Jul 26 15:20 files
+    drwxr-xr-x. 14 root root 4096 Jul 26 15:20 myjobs
+    drwxr-xr-x.  7 root root  245 Jul 26 15:20 shell
+
+  .. figure:: /images/app-sharing-permissions-before.png
+   :align: center
+
+To restrict usage to only members of the ``desktopers`` group:
+
+  .. code-block:: sh
+    :emphasize-lines: 9
+
+    [root@ood sys]# pwd
+    /var/www/ood/apps/sys
+    [root@ood sys]# chmod 750 bc_desktop_example_kde/
+    [root@ood sys]# chgrp desktopers bc_desktop_example_kde
+    [root@ood sys]# ls -l
+    total 20
+    drwxr-xr-x. 14 root root       4096 Jul 26 15:20 activejobs
+    drwxr-xr-x.  3 root root        169 Jul 26 15:20 bc_desktop
+    drwxr-x---.  5 root desktopers  157 Aug  1 18:19 bc_desktop_example_kde
+    drwxr-xr-x. 13 root root       4096 Jul 26 15:20 dashboard
+    drwxr-xr-x. 14 root root       4096 Jul 26 15:20 file-editor
+    drwxr-xr-x.  7 root root       4096 Jul 26 15:20 files
+    drwxr-xr-x. 14 root root       4096 Jul 26 15:20 myjobs
+    drwxr-xr-x.  7 root root        245 Jul 26 15:20 shell
+
+Note that user ``ood`` is not a member of the ``desktopers`` supplemental group.
+
+  .. figure:: /images/app-sharing-permissions-after.png
+   :align: center
+
+These changes take effect immediately, although when a user is added or removed from a group their PUN will need to be restarted for the change to take effect.
+
 
 Code Sharing
 ------------
 
-Code sharing is when an application's source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing Zip'd app directories, or a group readable directory symlinked to a user's ``~/ondemand/dev/`` directory.
+Code sharing is when an application's source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing Zip'd app directories, or a group readable directory symlinked to each user's ``~/ondemand/dev/`` directory.
 
 For an example of the later consider:
 
@@ -68,9 +118,9 @@ User ``johrstrom`` will now see ``blender-batch-render-app`` in their Sandbox Ap
 Peer to Peer Executable Sharing
 -------------------------------
 
-By setting a few environment variables it is possible to enable a more polished peer to peer app sharing experience. There are two reasons why this mode is not always enabled: the first is that app permissions are the only thing that prevents all a site's Ondemand users from seeing a shared app, so it is important to get the permissions correct, and only to deploy apps that are production ready. The other reason to be careful with app sharing is that is expands the amount of trust placed in app developers.
+By setting a few environment variables it is possible to enable a more polished peer to peer app sharing experience. There are two reasons why this mode is not always enabled: the first is that app permissions are the only thing that prevents all a site's Ondemand users from seeing a shared app, so it is important to get the permissions correct, and only to deploy apps that are production ready. The other reason to be careful with app sharing is that requires greater trust placed in app developers.
 
-.. note:: Executable sharing means the app and all its code runs as the user
+.. warning:: Executable sharing means the app and all its code runs as the user
              executing it, like everything else in OnDemand. User's might not
              realize this. We currently do not provide an opt in screen warning
              users that this app "will have permission to do everything on their
@@ -141,8 +191,8 @@ In summary, to enable a new user to create shared apps, run these commands:
    chmod 750 .
    ln -s ~efranz/ondemand/share gateway
 
-Examples of App Sharing
------------------------
+Example of Executable Sharing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is with two users Eric (efranz) and Bob (an0047).
 
