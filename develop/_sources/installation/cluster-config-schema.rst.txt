@@ -97,7 +97,7 @@ Meta describes how the cluster will be displayed to the user
       title: "Owens"
       # url: provides the ability to show a link to information about the cluster
       url: "https://www.osc.edu/supercomputing/computing/owens"
-      # hidden: setting this to true causes Ondemand to not show this cluster to the user, the cluster is still available for use by other applications
+      # hidden: setting this to true causes OnDemand to not show this cluster to the user, the cluster is still available for use by other applications
       hidden: false
 
 login:
