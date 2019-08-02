@@ -54,7 +54,7 @@ clean:
 
 .PHONY: html
 html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html && ./$(DRAWIOBUILDPATH) && mv *.png source/images
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html && ./$(DRAWIOBUILDPATH)
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html & drawio images are in source/images."
 
