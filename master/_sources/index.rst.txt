@@ -73,6 +73,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    enable-desktops
    install-ihpc-apps
    app-development
+   app-authorization
    app-sharing
    app-development/tutorials-interactive-apps
    app-development/tutorials-passenger-apps
@@ -88,6 +89,12 @@ These are institutions who were early adopters or provided HPC resources for dev
    release-notes/v1.2-release-notes
    release-notes/v1.1-release-notes
    release-notes/v1.0-release-notes
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Known Issues
+
+   issues/overview
 
 .. toctree::
    :maxdepth: 2
