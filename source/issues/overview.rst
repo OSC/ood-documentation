@@ -30,7 +30,7 @@ Issues Table
 
 	* - Issue
 	  - Github Link
-	* - File names with X?HTML are not fully supported.
+	* - File names with reserved XHTML are not fully supported.
 	  - `Link <FileNames_>`_
 	* - Uploading large files is not reliable.
 	  - `Link <LargeFile_>`_
