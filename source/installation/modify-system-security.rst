@@ -8,6 +8,9 @@ Modify System Security
 SELinux
 --------
 
+.. DANGER::
+   Support for SELinux on the Open OnDemand host is currently considered an alpha feature.
+
 #. If you plan to use `SELinux`_ on the Open OnDemand host you must install the `ondemand-selinux` package.
 
    .. code-block:: sh
@@ -23,6 +26,12 @@ The OnDemand SELinux package makes several changes to allow OnDemand to run with
 * Set context of several ondemand-nginx directories and files.
 * Enable several booleans.
 * Apply a custom policy to allow some additional actions by processes in the `httpd_t` context.
+
+If you experience denails when running SELinux with Open OnDemand please provide denial details by generating a `ood.te` file and posting that to `Discourse <https://discourse.osc.edu/c/open-ondemand>`_. It would also help to post the `audit.log` lines that correspond to the OnDemand specific denials.
+
+   .. code-block:: sh
+
+      cat /var/log/audit/audit.log | audit2allow -M ood
 
 .. _firewall:
 
