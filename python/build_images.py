@@ -1,10 +1,11 @@
-#! /usr/bin/python3.6
+#!/usr/bin/env python3.6
 
 import subprocess
+from pathlib import Path
 
 string=subprocess.check_output(["find", ".", "-name", "*.drawio", "-print"])
-arr=string.splitlines()
-for s in arr:
-    sD=s.decode("utf-8")
-    subprocess.run(["drawio-batch", sD, 'source/images/'  + sD[22:-7] + ".png"])
+found_files=string.splitlines()
+for file in found_files:
+    file_decoded=file.decode("utf-8")
+    subprocess.run(["drawio-batch", file_decoded, 'source/images/'  + Path(file_decoded).stem + ".png"], check=True)
 
