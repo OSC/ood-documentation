@@ -44,15 +44,9 @@ software requirements:
 
 #. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
 
-   CentOS/RHEL 6
      .. code-block:: sh
 
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el6.noarch.rpm
-
-   CentOS/RHEL 7
-     .. code-block:: sh
-
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
+        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
 
 #. Install OnDemand and all of its dependencies:
 
