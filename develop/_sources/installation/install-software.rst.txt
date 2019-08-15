@@ -54,6 +54,12 @@ software requirements:
 
       sudo yum install ondemand
 
+#. Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
+
+   .. code-block:: sh
+
+      sudo yum install ondemand-selinux
+
 .. note::
 
    For some older systems, user ids (UID) may start at ``500`` and not the

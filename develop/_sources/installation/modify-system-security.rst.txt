@@ -3,17 +3,40 @@
 Modify System Security
 ======================
 
-#. Disable `SELinux`_ on the Open OnDemand host you intend on running the web
-   server on.
+.. _ood_selinux:
+
+SELinux
+--------
+
+.. DANGER::
+   Support for SELinux on the Open OnDemand host is currently considered an alpha feature.
+
+#. If you plan to use `SELinux`_ on the Open OnDemand host you must install the `ondemand-selinux` package.
+
+   .. code-block:: sh
+
+      sudo yum install ondemand-selinux
 
    .. note::
 
-      If SELinux is not disabled on the web server host machine this can lead
-      to permission errors when running the web applications. SELinux may also
-      need to be disabled on the web server if you want to take advantage of
-      certain software in your web applications such as being able to access a
-      Lustre file system.
+      OnDemand runs under the Apache `httpd_t` context.
 
+The OnDemand SELinux package makes several changes to allow OnDemand to run with SELinux enabled.
+
+* Set context of several ondemand-nginx directories and files.
+* Enable several booleans.
+* Apply a custom policy to allow some additional actions by processes in the `httpd_t` context.
+
+If you experience denials when running SELinux with Open OnDemand please provide denial details by generating a `ood.te` file and posting that to `Discourse <https://discourse.osc.edu/c/open-ondemand>`_. It would also help to post the `audit.log` lines that correspond to the OnDemand specific denials.
+
+   .. code-block:: sh
+
+      cat /var/log/audit/audit.log | audit2allow -M ood
+
+.. _firewall:
+
+Firewall
+---------
 #. Open ports 80 (http) and 443 (https) in the firewall, typically done with
    `iptables`_.
 
