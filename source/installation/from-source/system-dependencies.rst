@@ -3,42 +3,41 @@
 Install System Dependencies
 ===========================
 
-What follows is a list of the various programs and runtimes that are necessary to run OnDemand on the web node.
+Non-OSC Provided Deps
+---------------------
 
-  .. note::
+Install packages from your regular RPM servers.
 
-    Although newer versions of Ruby and NodeJS are available OnDemand applications are built against specific versions of their runtimes and are not safe to blindly upgrade.
+  .. code-block:: sh
 
-.. Pulled from OSC/ondemand-packaging/web/ondemand-runtime/*.spec
-.. Pulled from OSC/ondemand/packaing/ondemand.spec
-.. Does anything need cjose? which is in OSC/ondemand-packaging
+    sudo yum install epel-release centos-release-scl lsof sudo
 
-- Apache - Mod_ldap
-- Apache - Mod_ssl
-- Apache 2.4
-- Apache development libs
-- centos-release-scl - CentOS/RHEL specific
-- cronie
-- curl
-- epel-release - CentOS/RHEL specific
-- file
-- Git 2.9
-- lsof
-- lua
-- make
-- Nginx 1.14.0
-- NodeJS 6
-- NodeJS - NPM
-- Passenger 5.3.7
-- rsync
-- Ruby - Bundler
-- Ruby - development libraries
-- Ruby - Gem
-- Ruby - Rake
-- Ruby 2.4
-- sqlite3
-- sqlite3 - development libraries
-- sudo
-- timeout
-- wget
-- xmllint
+OSC Provided Deps
+-----------------
+
+Install system specific versions of system dependencies. This is the most annoying/challenging part to do 'from source' and so we are going to use OSC provided RPMs.
+
+Many of OnDemand's system level dependencies are available from ``https://yum.osc.edu/ondemand/$ONDEMAND_RELEASE/web/$ENTERPRISE_LINUX_VERSION/x86_64/`` and need to be installed to the node that will become the OnDemand web server.
+
+  .. code-block:: sh
+
+    # To install deps for OnDemand 1.6.x on CentOS 7:
+    sudo yum install \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-scldevel-1.6-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-runtime-1.6-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-ruby-1.6-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-passenger-devel-5.3.7-2.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-passenger-debuginfo-5.3.7-2.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-passenger-5.3.7-2.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-nodejs-1.6-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-nginx-filesystem-1.14.0-2.p5.3.7.el7.noarch.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-nginx-debuginfo-1.14.0-2.p5.3.7.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-nginx-1.14.0-2.p5.3.7.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-git-1.6-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-apache-1.6-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-1.6.7-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/httpd24-mod_auth_openidc-debuginfo-2.3.11-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/httpd24-mod_auth_openidc-2.3.11-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/cjose-devel-0.6.1-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/cjose-debuginfo-0.6.1-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/cjose-0.6.1-1.el7.x86_64.rpm
