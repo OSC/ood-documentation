@@ -35,7 +35,6 @@ Many of OnDemand's system level dependencies are available from ``https://yum.os
         https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-nginx-1.14.0-2.p5.3.7.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-git-1.6-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-apache-1.6-1.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/ondemand-1.6.7-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/httpd24-mod_auth_openidc-debuginfo-2.3.11-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/httpd24-mod_auth_openidc-2.3.11-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.6/web/el7/x86_64/cjose-devel-0.6.1-1.el7.x86_64.rpm \
