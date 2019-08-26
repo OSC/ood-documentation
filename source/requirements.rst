@@ -39,6 +39,10 @@ Web node:
 
 Compute node:
 
+.. note::
+
+    The following are required for using OnDemand with interactive applications such as desktop environments, Jupyter Notebooks and RStudio. If you do not intend to install interactive applications then these are not necessary.
+
 - `nmap-ncat`_
 - `TurboVNC`_ 2.1+
 - `websockify`_ 0.8.0+
