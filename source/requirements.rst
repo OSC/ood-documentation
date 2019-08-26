@@ -12,20 +12,29 @@ Web node:
 - `centos-release-scl`_
 - `lsof`_
 - `sudo`_
-- `ondemand-release-web-latest-1-2.el7.noarch.rpm`_: the central OnDemand RPM
-    - `Apache HTTP Server 2.4`_
-    - `Git 2.9`_
-    - `Node.js 6`_
-    - `Ruby 2.4`_ with :command:`rake`, :command:`bundler`, and development libraries
+- `ondemand-release-web-latest-1-2.el7.noarch.rpm`_:
+    - cjose-0.6.1-1.el7.x86_64.rpm
+    - cjose-debuginfo-0.6.1-1.el7.x86_64.rpm
+    - cjose-devel-0.6.1-1.el7.x86_64.rpm
+    - httpd24-mod_auth_openidc-2.3.11-1.el7.x86_64.rpm
+    - httpd24-mod_auth_openidc-debuginfo-2.3.11-1.el7.x86_64.rpm
+    - ondemand-apache-{{ondemand_version}}-1.el7.x86_64.rpm
+    - ondemand-git-{{ondemand_version}}-1.el7.x86_64.rpm
+    - ondemand-nginx-1.14.0-2.p5.3.7.el7.x86_64.rpm
+    - ondemand-nginx-debuginfo-1.14.0-2.p5.3.7.el7.x86_64.rpm
+    - ondemand-nginx-filesystem-1.14.0-2.p5.3.7.el7.noarch.rpm
+    - ondemand-nodejs-{{ondemand_version}}-1.el7.x86_64.rpm
+    - ondemand-passenger-5.3.7-2.el7.x86_64.rpm
+    - ondemand-passenger-debuginfo-5.3.7-2.el7.x86_64.rpm
+    - ondemand-passenger-devel-5.3.7-2.el7.x86_64.rpm
+    - ondemand-ruby-{{ondemand_version}}-1.el7.x86_64.rpm
+    - ondemand-runtime-{{ondemand_version}}-1.el7.x86_64.rpm
+    - ondemand-scldevel-{{ondemand_version}}-1.el7.x86_64.rpm
 
-.. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
 .. _centos-release-scl: https://www.softwarecollections.org/en/
 .. _epel-release: https://fedoraproject.org/wiki/EPEL
-.. _git 2.9: https://www.softwarecollections.org/en/scls/rhscl/rh-git29/
 .. _lsof: https://en.wikipedia.org/wiki/Lsof
-.. _node.js 6: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs6/
 .. _ondemand-release-web-latest-1-2.el7.noarch.rpm: https://openondemand.org/
-.. _ruby 2.4: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby24/
 .. _sudo: https://www.sudo.ws/
 
 Compute node:
@@ -41,8 +50,10 @@ Compute node:
 Hardware Requirements
 ---------------------
 
-We have not yet quantified the minimum hardware requirements for OnDemand. At OSC our VMs that we run OnDemand on are over powered for our needs. We have 16 cores and 64GB RAM for OSC OnDemand which is overkill based on Ganglia usage. Our Ganglia graphs show we average 150MB memory per PUN and average CPU percentage per PUN is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time we usually have 60-100 Per User NGINX (PUNs) processes running.
+At `OSC`_ we have not quantified the minimum hardware requirements for OnDemand. The VMs that run OnDemand have 16 cores and 64GB RAM. According to our Ganglia metrics that is over powered for our normal utilization. We average 150MB memory per PUN and the average CPU percentage per Per User NGINX (PUN) is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time usually has 60-100 PUN processes running.
 
 The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache is proxying these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.
 
 Another sizing factor that has impacted us in the past is the size of /tmp.  We’ve had in the past occasions where /tmp is exhausted and have had to increase the size from 20GB to 50GB.
+
+.. _OSC: https://osc.edu
