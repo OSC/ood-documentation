@@ -6,7 +6,7 @@ Requirements
 Software Requirements
 ---------------------
 
-Web node:
+On the Web node serving OnDemand itself:
 
 - `epel-release`_
 - `centos-release-scl`_
@@ -37,7 +37,7 @@ Web node:
 .. _ondemand-release-web-latest-1-2.el7.noarch.rpm: https://openondemand.org/
 .. _sudo: https://www.sudo.ws/
 
-Compute node:
+And on the Compute node(s):
 
 .. note::
 
@@ -58,6 +58,6 @@ At `OSC`_ we have not quantified the minimum hardware requirements for OnDemand.
 
 The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache is proxying these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.
 
-Another sizing factor that has impacted us in the past is the size of /tmp.  We’ve had in the past occasions where /tmp is exhausted and have had to increase the size from 20GB to 50GB.
+Another sizing factor that has impacted us in the past is the size of the ``/tmp`` partition.  We have had incidents where ``/tmp`` is exhausted and so have increased the size from 20GB to 50GB.
 
 .. _OSC: https://osc.edu
