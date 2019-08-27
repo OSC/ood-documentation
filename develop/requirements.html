@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>Requirements &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Install Software" href="installation/install-software.html" />
-    <link rel="prev" title="Requirements" href="requirements.html" /> 
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Architecture" href="architecture.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,15 +96,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation/install-software.html">1. Install Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/modify-system-security.html">2. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/start-apache.html">3. Start Apache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-ssl.html">4. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-ldap.html">5. Add LDAP Support</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation/resource-manager.html">Resource Manager Configuration</a></li>
@@ -188,14 +185,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Installation</li>
+      <li>Requirements</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/requirements.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -209,39 +206,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installation">
-<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>The OnDemand host machine needs to be setup <em>similarly</em> to a login node. This
-means that it will need:</p>
+  <div class="section" id="requirements">
+<span id="id1"></span><h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<p>On the Web node serving OnDemand itself:</p>
 <ul class="simple">
-<li>RedHat/CentOS 6+</li>
-<li>a common user/group database, e.g., LDAP + NSS</li>
-<li>a common host file list</li>
-<li>the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
-libraries used by the batch servers installed</li>
-<li>configuration on both OnDemand node <strong>and batch servers</strong> to be able to
-submit, status, and delete jobs from command line</li>
-<li>signed SSL certificate with corresponding intermediate certificate for your
-advertised OnDemand host name (e.g., <code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>)</li>
-<li>your LDAP URL, base DN, and attribute to search for (in some rare cases a
-bind DN and corresponding bind password)</li>
+<li><a class="reference external" href="https://fedoraproject.org/wiki/EPEL">epel-release</a></li>
+<li><a class="reference external" href="https://www.softwarecollections.org/en/">centos-release-scl</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Lsof">lsof</a></li>
+<li><a class="reference external" href="https://www.sudo.ws/">sudo</a></li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://openondemand.org/">ondemand-release-web-latest-1-2.el7.noarch.rpm</a>:</dt>
+<dd><ul class="first last">
+<li>cjose-0.6.1-1.el7.x86_64.rpm</li>
+<li>cjose-debuginfo-0.6.1-1.el7.x86_64.rpm</li>
+<li>cjose-devel-0.6.1-1.el7.x86_64.rpm</li>
+<li>httpd24-mod_auth_openidc-2.3.11-1.el7.x86_64.rpm</li>
+<li>httpd24-mod_auth_openidc-debuginfo-2.3.11-1.el7.x86_64.rpm</li>
+<li>ondemand-apache-1.6-1.el7.x86_64.rpm</li>
+<li>ondemand-git-1.6-1.el7.x86_64.rpm</li>
+<li>ondemand-nginx-1.14.0-2.p5.3.7.el7.x86_64.rpm</li>
+<li>ondemand-nginx-debuginfo-1.14.0-2.p5.3.7.el7.x86_64.rpm</li>
+<li>ondemand-nginx-filesystem-1.14.0-2.p5.3.7.el7.noarch.rpm</li>
+<li>ondemand-nodejs-1.6-1.el7.x86_64.rpm</li>
+<li>ondemand-passenger-5.3.7-2.el7.x86_64.rpm</li>
+<li>ondemand-passenger-debuginfo-5.3.7-2.el7.x86_64.rpm</li>
+<li>ondemand-passenger-devel-5.3.7-2.el7.x86_64.rpm</li>
+<li>ondemand-ruby-1.6-1.el7.x86_64.rpm</li>
+<li>ondemand-runtime-1.6-1.el7.x86_64.rpm</li>
+<li>ondemand-scldevel-1.6-1.el7.x86_64.rpm</li>
 </ul>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Quick Start Guide</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation/install-software.html">1. Install Software</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation/install-software.html#when-installing-ondemand-from-source">When Installing OnDemand From Source</a></li>
-</ul>
+</dd>
+</dl>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation/modify-system-security.html">2. Modify System Security</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation/modify-system-security.html#selinux">SELinux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/modify-system-security.html#firewall">Firewall</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="installation/start-apache.html">3. Start Apache</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/add-ssl.html">4. Add SSL Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation/add-ldap.html">5. Add LDAP Support</a></li>
+<p>And on the Compute node(s):</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The following are required for using OnDemand with interactive applications such as desktop environments, Jupyter Notebooks and RStudio. If you do not intend to install interactive applications then these are not necessary.</p>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="https://nmap.org/ncat/">nmap-ncat</a></li>
+<li><a class="reference external" href="https://turbovnc.org/">TurboVNC</a> 2.1+</li>
+<li><a class="reference external" href="https://github.com/novnc/websockify">websockify</a> 0.8.0+</li>
 </ul>
+</div>
+<div class="section" id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Permalink to this headline">¶</a></h2>
+<p>At <a class="reference external" href="https://osc.edu">OSC</a> we have not quantified the minimum hardware requirements for OnDemand. The VMs that run OnDemand have 16 cores and 64GB RAM. According to our Ganglia metrics that is over powered for our normal utilization. We average 150MB memory per PUN and the average CPU percentage per Per User NGINX (PUN) is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time usually has 60-100 PUN processes running.</p>
+<p>The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache is proxying these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.</p>
+<p>Another sizing factor that has impacted us in the past is the size of the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> partition.  We have had incidents where <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is exhausted and so have increased the size from 20GB to 50GB.</p>
 </div>
 </div>
 
@@ -253,10 +268,10 @@ bind DN and corresponding bind password)</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installation/install-software.html" class="btn btn-neutral float-right" title="1. Install Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="requirements.html" class="btn btn-neutral float-left" title="Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -288,23 +303,23 @@ bind DN and corresponding bind password)</li>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/installation.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/requirements.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/requirements.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/requirements.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/requirements.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/requirements.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/requirements.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/requirements.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/requirements.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/requirements.html">develop</a></dd>
       
     </dl>
     <dl>
