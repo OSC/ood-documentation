@@ -3,12 +3,18 @@
 Install OnDemand Infrastructure
 ===============================
 
-OnDemand's core infrastructure is stored in a Github repository located at https://github.com/osc/ondemand. By convention it is installed to ``/opt/ood``.
+OnDemand's core infrastructure is stored in a Github repository located at https://github.com/osc/ondemand, and it is installed to ``/opt/ood``.
 
   .. code-block:: sh
 
     cd /opt
-    sudo git clone https://github.com/osc/ondemand ood
+    sudo scl enable rh-git29 -- git init
+    sudo scl enable rh-git29 -- git remote add origin https://github.com/osc/ondemand
+    sudo scl enable rh-git29 -- git pull origin master
+
+.. warning::
+
+    We need to perform the ``git init`` and ``pull`` because ``/opt/ood`` already exists because it is created by one of the other RPMs that we have installed, and ``git`` refuses to clone into an existing directory with contents.
 
 This will install the following components:
 
