@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Install Software &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>1. Install Software From RPM &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Modify System Security" href="modify-system-security.html" />
+    <link rel="next" title="2. Install From Source" href="from-source.html" />
     <link rel="prev" title="Installation" href="../installation.html" /> 
 </head>
 
@@ -98,14 +98,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Install Software</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#when-installing-ondemand-from-source">When Installing OnDemand From Source</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="start-apache.html">3. Start Apache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">4. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">5. Add LDAP Support</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Install Software From RPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">3. Modify System Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">5. Add SSL Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">6. Add LDAP Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
@@ -193,7 +191,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>1. Install Software</li>
+      <li>1. Install Software From RPM</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -214,8 +212,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install-software">
-<span id="id1"></span><h1>1. Install Software<a class="headerlink" href="#install-software" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="install-software-from-rpm">
+<span id="install-software"></span><h1>1. Install Software From RPM<a class="headerlink" href="#install-software-from-rpm" title="Permalink to this headline">¶</a></h1>
 <p>We will use <a class="reference external" href="https://www.softwarecollections.org/en/">Software Collections</a> to satisfy majority of the following
 software requirements:</p>
 <ul class="simple">
@@ -296,40 +294,6 @@ users access to OnDemand:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="when-installing-ondemand-from-source">
-<h2>When Installing OnDemand From Source<a class="headerlink" href="#when-installing-ondemand-from-source" title="Permalink to this headline">¶</a></h2>
-<p>Installing OnDemand from RPMs should provide all of the system dependencies. For users attempting to install OnDemand from source on non-CentOS/RHEL systems, it may be useful to know that OnDemand has several other build and run time dependencies that may need to be installed on the web node.</p>
-<table border="1" class="docutils" id="id2">
-<caption><span class="caption-number">Table 1.1 </span><span class="caption-text">System dependencies</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">Program</th>
-<th class="head">OnDemand Component</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub">Rsync</th>
-<td>/var/www/ood/apps/sys/myjobs/app/models/workflow.rb</td>
-</tr>
-<tr class="row-odd"><th class="stub">GNU Timeout</th>
-<td>/var/www/ood/apps/sys/myjobs/app/models/filesystem.rb</td>
-</tr>
-<tr class="row-even"><th class="stub">File</th>
-<td>/var/www/ood/apps/sys/file-editor/app/controllers/pages_controller.rb</td>
-</tr>
-<tr class="row-odd"><th class="stub">Xmllint</th>
-<td>/opt/ood/ondemand/root/usr/sbin/passenger-status</td>
-</tr>
-<tr class="row-even"><th class="stub">GNU Wget</th>
-<td>/opt/ood/mod_ood_proxy/lib/analytics.lua</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Note:</strong> GCC is a build time dependency and is only required when building OnDemand from source.</p>
-</div>
 </div>
 
 
@@ -340,7 +304,7 @@ users access to OnDemand:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="modify-system-security.html" class="btn btn-neutral float-right" title="2. Modify System Security" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="from-source.html" class="btn btn-neutral float-right" title="2. Install From Source" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
