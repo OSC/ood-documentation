@@ -1,7 +1,7 @@
 .. _install-software:
 
-Install Software
-================
+Install Software From RPM
+=========================
 
 We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
@@ -81,33 +81,6 @@ software requirements:
       min_uid: 500
 
       # ...
-
-
-When Installing OnDemand From Source
-------------------------------------
-
-Installing OnDemand from RPMs should provide all of the system dependencies. For users attempting to install OnDemand from source on non-CentOS/RHEL systems, it may be useful to know that OnDemand has several other build and run time dependencies that may need to be installed on the web node.
-
-
-.. list-table:: System dependencies
-   :header-rows: 1
-   :stub-columns: 1
-
-   * - Program
-     - OnDemand Component 
-   * - Rsync
-     - /var/www/ood/apps/sys/myjobs/app/models/workflow.rb
-   * - GNU Timeout
-     - /var/www/ood/apps/sys/myjobs/app/models/filesystem.rb
-   * - File
-     - /var/www/ood/apps/sys/file-editor/app/controllers/pages_controller.rb
-   * - Xmllint
-     - /opt/ood/ondemand/root/usr/sbin/passenger-status
-   * - GNU Wget
-     - /opt/ood/mod_ood_proxy/lib/analytics.lua
-
-
-**Note:** GCC is a build time dependency and is only required when building OnDemand from source.
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/

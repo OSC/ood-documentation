@@ -24,6 +24,7 @@ means that it will need:
    :caption: Quick Start Guide
 
    installation/install-software
+   installation/from-source
    installation/modify-system-security
    installation/start-apache
    installation/add-ssl
