@@ -7,14 +7,14 @@ OnDemand's core infrastructure is stored in a Github repository located at https
 
   .. code-block:: sh
 
-    cd /opt
+    cd /opt/ood
     sudo scl enable rh-git29 -- git init
     sudo scl enable rh-git29 -- git remote add origin https://github.com/osc/ondemand
     sudo scl enable rh-git29 -- git pull origin master
 
 .. warning::
 
-    We need to perform the ``git init`` and ``pull`` because ``/opt/ood`` already exists because it is created by one of the other RPMs that we have installed, and ``git`` refuses to clone into an existing directory with contents.
+    We need to perform the ``git init`` and ``pull`` instead of a ``clone`` because ``/opt/ood`` already exists because it is created by one of the other RPMs that we have installed, and ``git`` will refuse to clone into an existing directory with contents.
 
 This will install the following components:
 
