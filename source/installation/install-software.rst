@@ -10,7 +10,6 @@ software requirements:
 - `Ruby 2.4`_ with :command:`rake`, :command:`bundler`, and development
   libraries
 - `Node.js 6`_
-- `Git 2.9`_
 
 .. note::
 
