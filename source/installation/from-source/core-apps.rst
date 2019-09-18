@@ -33,7 +33,7 @@ Each application has its own dependencies which need to be installed (from eithe
 
   .. note::
 
-    ``scl enable ondemand`` is equivalent to simultaneously enabling: rh-nodejs6 rh-ruby24 rh-git29.
+    ``scl enable ondemand`` is equivalent to simultaneously enabling: rh-nodejs6 rh-ruby24.
 
   .. note::
 

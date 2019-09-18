@@ -10,7 +10,6 @@ software requirements:
 - `Ruby 2.4`_ with :command:`rake`, :command:`bundler`, and development
   libraries
 - `Node.js 6`_
-- `Git 2.9`_
 
 .. note::
 
@@ -46,7 +45,7 @@ software requirements:
 
      .. code-block:: sh
 
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-2.noarch.rpm
 
 #. Install OnDemand and all of its dependencies:
 
@@ -86,5 +85,4 @@ software requirements:
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
 .. _ruby 2.4: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby24/
 .. _node.js 6: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs6/
-.. _git 2.9: https://www.softwarecollections.org/en/scls/rhscl/rh-git29/
 .. _ohio supercomputer center: https://www.osc.edu/
