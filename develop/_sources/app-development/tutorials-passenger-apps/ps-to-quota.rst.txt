@@ -251,10 +251,6 @@ Run test by running `rake` command and you will see it fail:
 
    ``scl enable ondemand -- rake``
 
-   With SCL, running git commands using ondemand SCL looks like:
-
-   ``scl enable ondemand -- git commit -m "initial commit"``
-
    You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
    For example, in my .bash_profile I have:
 
