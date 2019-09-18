@@ -8,9 +8,9 @@ OnDemand's core infrastructure is stored in a Github repository located at https
   .. code-block:: sh
 
     cd /opt/ood
-    sudo scl enable rh-git29 -- git init
-    sudo scl enable rh-git29 -- git remote add origin https://github.com/osc/ondemand
-    sudo scl enable rh-git29 -- git pull origin master
+    git init
+    git remote add origin https://github.com/osc/ondemand
+    git pull origin master
 
 .. warning::
 
