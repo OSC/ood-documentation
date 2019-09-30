@@ -57,6 +57,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    :maxdepth: 2
    :caption: Install
 
+   requirements
    installation
    authentication
    installation/add-cluster-config
