@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>File Explorer &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>OnDemand’s Known Issues &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -96,6 +96,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
@@ -126,18 +127,19 @@
 </ul>
 <p class="caption"><span class="caption-text">Known Issues</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">File Explorer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#common-issues">Common Issues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#issues-table">Issues Table</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#dashboard">Dashboard</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Common Issues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">Issues Table</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#shell">Shell</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id3">Issues Table</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OnDemand’s Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#file-names-with-xml-or-html-break-display">File names with XML or HTML break display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problems-uploading-files">Problems uploading files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-forbidden-directories-fails-silently">Downloading forbidden directories fails silently</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-large-files-causes-problems">Viewing large files causes problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#incorrect-link-in-tree-root">Incorrect link in tree root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nomethoderror-when-using-a-custom-translation-file">NoMethodError when using a custom translation file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dashboard-may-be-slow-due-to-logic-in-erb-templates">Dashboard may be slow due to logic in ERB templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#batch-connect-sessions-do-not-contain-much-debugging-info">Batch Connect sessions do not contain much debugging info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#novnc-does-not-work-with-safari-and-apache-basic-auth">noVNC does not work with Safari and Apache Basic auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiline-select-does-not-work-in-ms-edge">Multiline select does not work in MS Edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-output-programs-may-freeze-the-shell">High output programs may freeze the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paste-does-not-work-in-older-versions-of-safari">Paste does not work in older versions of Safari</a></li>
 </ul>
 </li>
 </ul>
@@ -191,7 +193,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>File Explorer</li>
+      <li>OnDemand’s Known Issues</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -212,144 +214,115 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="admonition note" id="overview-rst">
-<p class="first admonition-title">Note</p>
-<p class="last">We take community requests and troubleshoot as well on our discourse at <a class="reference external" href="https://discourse.osc.edu/">https://discourse.osc.edu/</a></p>
-</div>
-<div class="section" id="file-explorer">
-<h1>File Explorer<a class="headerlink" href="#file-explorer" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="common-issues">
-<h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>When trying to use certain HTML characters your file name will appear incorrectly.
-An issue like this could be resolved by not using the HTML characters. Below are screenshots of what may happen if you do.</p>
-<div class="figure align-center">
-<img alt="../_images/file-names-bad-1.png" src="../_images/file-names-bad-1.png" />
-</div>
-<div class="figure align-center">
-<img alt="../_images/file-names-bad-2.png" src="../_images/file-names-bad-2.png" />
-</div>
-</div></blockquote>
-</div>
-<div class="section" id="issues-table">
-<h2>Issues Table<a class="headerlink" href="#issues-table" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils" id="id4">
-<caption><span class="caption-number">Table 21 </span><span class="caption-text">Issues Table File Explorer</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">Issue</th>
-<th class="head">Github Link</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub">File names with reserved XHTML are not fully supported.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/pull/199">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">Uploading large files is not reliable.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/103">Link</a></td>
-</tr>
-<tr class="row-even"><th class="stub">Attempting to download forbidden directory fails silently.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/185">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">Viewing large files causes problems.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/196">Link</a></td>
-</tr>
-<tr class="row-even"><th class="stub">Upload may leave broken file if upload directory is full.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/187">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">Incorrect link in tree root.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/173">Link</a></td>
-</tr>
-<tr class="row-even"><th class="stub">Small windows cause file table to distort.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/143">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">Dir/File names wrong with HTML ampersand character codes.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-fileexplorer/issues/160">Link</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section" id="dashboard">
-<h1>Dashboard<a class="headerlink" href="#dashboard" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>Common Issues<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>The <strong>Rebuild App</strong> button fails to work because of the enviormental variable <code class="docutils literal notranslate"><span class="pre">HOME</span></code> is set to nothing and the SCL ruby would complain:</div></blockquote>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>rebuild_passenger_rails_app: <span class="o">[{</span><span class="s2">&quot;HOME&quot;</span> <span class="o">=</span>&gt; <span class="s2">&quot;&quot;</span>, <span class="s2">&quot;RAILS_ENV&quot;</span> <span class="o">=</span>&gt; <span class="s2">&quot;production&quot;</span><span class="o">}</span>, <span class="s2">&quot;bin/bundle install --path=vendor/bundle &amp;&amp; bin/rake assets:clobber &amp;&amp; bin/rake assets:precompile &amp;&amp; bin/rake tmp:clear &amp;&amp; mkdir -p tmp &amp;&amp; touch tmp/restart.txt &amp;&amp; echo &#39;Done!&#39;&quot;</span><span class="o">]</span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="../_images/rebuild-not-reliable.png" src="../_images/rebuild-not-reliable.png" />
-</div>
+  <div class="section" id="ondemand-s-known-issues">
+<span id="overview-rst"></span><h1>OnDemand’s Known Issues<a class="headerlink" href="#ondemand-s-known-issues" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The original intention of setting <code class="docutils literal notranslate"><span class="pre">HOME</span></code> to nothing was for the <code class="docutils literal notranslate"><span class="pre">bundle</span> <span class="pre">install</span></code> command that ran <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p>
+<p class="last">We take community requests and troubleshoot as well on our Discourse at <a class="reference external" href="https://discourse.osc.edu/">https://discourse.osc.edu/</a>.</p>
 </div>
+<ul class="simple">
+<li><a class="reference internal" href="#file-names-with-xml-or-html-break-display">File names with XML or HTML break display</a></li>
+<li><a class="reference internal" href="#problems-uploading-files">Problems uploading files</a></li>
+<li><a class="reference internal" href="#downloading-forbidden-directories-fails-silently">Downloading forbidden directories fails silently</a></li>
+<li><a class="reference internal" href="#viewing-large-files-causes-problems">Viewing large files causes problems</a></li>
+<li><a class="reference internal" href="#incorrect-link-in-tree-root">Incorrect link in tree root</a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="#nomethoderror-when-using-a-custom-translation-file">NoMethodError when using a custom translation file</a></li>
+<li><a class="reference internal" href="#dashboard-may-be-slow-due-to-logic-in-erb-templates">Dashboard may be slow due to logic in ERB templates</a></li>
+<li><a class="reference internal" href="#batch-connect-sessions-do-not-contain-much-debugging-info">Batch Connect sessions do not contain much debugging info</a></li>
+<li><a class="reference internal" href="#novnc-does-not-work-with-safari-and-apache-basic-auth">noVNC does not work with Safari and Apache Basic auth</a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="#multiline-select-does-not-work-in-ms-edge">Multiline select does not work in MS Edge</a></li>
+<li><a class="reference internal" href="#high-output-programs-may-freeze-the-shell">High output programs may freeze the shell</a></li>
+<li><a class="reference internal" href="#paste-does-not-work-in-older-versions-of-safari">Paste does not work in older versions of Safari</a></li>
+</ul>
+<div class="section" id="file-names-with-xml-or-html-break-display">
+<h2>File names with XML or HTML break display<a class="headerlink" href="#file-names-with-xml-or-html-break-display" title="Permalink to this headline">¶</a></h2>
+<p>Files whose names that contain XML or HTML special characters (<code class="docutils literal notranslate"><span class="pre">&lt;,</span> <span class="pre">&gt;,</span> <span class="pre">&amp;</span></code>) break the File Explorer’s display. While this does not introduce corrupt the file system it does render the application unusable.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-fileexplorer/issues/198'>OSC/ood-fileexplorer#198</a></div></blockquote>
+<p>Work arounds: to be able to manipulate files that break the Files app users can use a graphical SFTP client like <a class="reference external" href="https://cyberduck.io">Cyberduck</a> or <a class="reference external" href="https://filezilla-project.org/">FileZilla</a> or the command line.</p>
 </div>
-<div class="section" id="id2">
-<h2>Issues Table<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils" id="id5">
-<caption><span class="caption-number">Table 22 </span><span class="caption-text">Issues Table Dashboard</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">Issue</th>
-<th class="head">Github Link</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub">Invalid OOD_LOCALES_ROOT causes NoMethodError.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/465">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">Processing erb creates performace issues.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/417">Link</a></td>
-</tr>
-<tr class="row-even"><th class="stub">Batch connect adapter errors do not contain stack trace.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/397">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">iHPC sessions fail silently.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/171">Link</a></td>
-</tr>
-<tr class="row-even"><th class="stub">noVNC does not play well with Safari. This has to do with BasicAuth and Websockets.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/177">Link</a></td>
-</tr>
-</tbody>
-</table>
+<div class="section" id="problems-uploading-files">
+<h2>Problems uploading files<a class="headerlink" href="#problems-uploading-files" title="Permalink to this headline">¶</a></h2>
+<p>The File Explorer uses HTTP PUT and the NGINX temporary directory to upload files. For most usage this arrangement is adequate, but large files (which may exceed the capacity of the temp dir), shakey network connections (which may cause a transfer to stop partway through) can result in an unsatisfactory experience.</p>
+<p>If the NGINX temporary directory is on a small partition it is possible to overload it when attempting an upload. In the case that an upload is too large to fit in the upload temp directory the application may send the partially uploaded file to the destination without reporting an error.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-fileexplorer/issues/187'>OSC/ood-fileexplorer#187</a></div></blockquote>
+<p>Work arounds: to be able to upload larger files that fail with the Files app users can use a graphical SFTP client like <a class="reference external" href="https://cyberduck.io">Cyberduck</a>, <a class="reference external" href="https://www.globus.org/globus-connect-personal">Globus Connect Personal</a>, or the command line. Admins should check to ensure that the partition containing the upload temp dir (<code class="docutils literal notranslate"><span class="pre">/var/run/ondemand-nginx</span></code>) is adequate.</p>
 </div>
+<div class="section" id="downloading-forbidden-directories-fails-silently">
+<h2>Downloading forbidden directories fails silently<a class="headerlink" href="#downloading-forbidden-directories-fails-silently" title="Permalink to this headline">¶</a></h2>
+<p>When a user attempts to download a directory for which they do not have adequate file system permissions the download action will fail without notifying the user of the error.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-fileexplorer/issues/185'>OSC/ood-fileexplorer#185</a></div></blockquote>
+<p>Workarounds: No work arounds are available.</p>
 </div>
-<div class="section" id="shell">
-<h1>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id3">
-<h2>Issues Table<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils" id="id6">
-<caption><span class="caption-number">Table 23 </span><span class="caption-text">Issues Table Shell</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">Issue</th>
-<th class="head">Github Link</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub">Multi-line select does not work in MS Edge.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-shell/issues/57">Link</a></td>
-</tr>
-<tr class="row-odd"><th class="stub">Cat a large file and the shell app freezes while chars print.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-shell/issues/28">Link</a></td>
-</tr>
-<tr class="row-even"><th class="stub">Safari 8 and 9 does not allow the paste function to work.</th>
-<td><a class="reference external" href="https://github.com/OSC/ood-shell/issues/16">Link</a></td>
-</tr>
-</tbody>
-</table>
+<div class="section" id="viewing-large-files-causes-problems">
+<h2>Viewing large files causes problems<a class="headerlink" href="#viewing-large-files-causes-problems" title="Permalink to this headline">¶</a></h2>
+<p>When attempting to view large files (multi-megabyte) the File Explorer has been observed to cause right click to stop working in FireFox.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-fileexplorer/issues/196'>OSC/ood-fileexplorer#196</a></div></blockquote>
+<p>Work arounds: if graphical desktops are installed, then use the recommended file viewer / editor for the desired file type. If the correct viewer is not known to the user, but is installed on the system it may be discoverable using the command line program <code class="docutils literal notranslate"><span class="pre">xdg-open</span> <span class="pre">[file-name]</span></code>.</p>
+</div>
+<div class="section" id="incorrect-link-in-tree-root">
+<h2>Incorrect link in tree root<a class="headerlink" href="#incorrect-link-in-tree-root" title="Permalink to this headline">¶</a></h2>
+<p>In the File Explorer attempting to open the tree menu’s root link in a new tab causes an error.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-fileexplorer/issues/173'>OSC/ood-fileexplorer#173</a></div></blockquote>
+<p>Workarounds: No work arounds are available at this time.</p>
+</div>
+<div class="section" id="nomethoderror-when-using-a-custom-translation-file">
+<h2>NoMethodError when using a custom translation file<a class="headerlink" href="#nomethoderror-when-using-a-custom-translation-file" title="Permalink to this headline">¶</a></h2>
+<p>When attempting to use a custom translation file if the directory pointed to by the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> does not exist then attempting to load the application will cause an unhandled <code class="docutils literal notranslate"><span class="pre">NoMethodError</span></code> to be throw in the application controller.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-dashboard/issues/465'>OSC/ood-dashboard#465</a></div></blockquote>
+<p>Workarounds: Admins are encouraged to first test all changes to their OnDemand instances in a test environment before applying changes to production services.</p>
+</div>
+<div class="section" id="dashboard-may-be-slow-due-to-logic-in-erb-templates">
+<h2>Dashboard may be slow due to logic in ERB templates<a class="headerlink" href="#dashboard-may-be-slow-due-to-logic-in-erb-templates" title="Permalink to this headline">¶</a></h2>
+<p>The Dashboard may be slow as a result of how the menu is built if custom Batch Connect applications have complicated logic in their <code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>.</p>
+<p>An example where this may occur is if the ERB templates contain commands that query the cluster’s status.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-dashboard/issues/417'>OSC/ood-dashboard#417</a></div></blockquote>
+<p>Workarounds: Reducing the amount of logic inside ERBs is the near-term solution. In the longer term the OnDemand team will be re-evaluating how the Dashboard menu is constructed so that this will no longer be an issue.</p>
+</div>
+<div class="section" id="batch-connect-sessions-do-not-contain-much-debugging-info">
+<h2>Batch Connect sessions do not contain much debugging info<a class="headerlink" href="#batch-connect-sessions-do-not-contain-much-debugging-info" title="Permalink to this headline">¶</a></h2>
+<p>When troubleshooting a failed Batch Connect job it may be difficult to diagnose certain errors because the adapter error interface is generic and does not contain a stack trace of what has gone wrong.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-dashboard/issues/397'>OSC/ood-dashboard#397</a></div></blockquote>
+<p>Workarounds: no work around is available to the user; admins may find examples of what went wrong in the NGINX logs for the troubled user.</p>
+<p>When a Batch Connect session fails inside of the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> section of its execution the session information is removed from the view and no error message is shown to the user.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-dashboard/issues/171'>OSC/ood-dashboard#171</a></div></blockquote>
+<p>Workarounds: Users or support staff may find logs for failed Batch Connect sessions located in the output directory <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/(sys|dev|usr)/dashboard/batch_connect/(sys|dev|usr)/$APP_NAME/output/$UUID/output.log</span></code>.</p>
+</div>
+<div class="section" id="novnc-does-not-work-with-safari-and-apache-basic-auth">
+<h2>noVNC does not work with Safari and Apache Basic auth<a class="headerlink" href="#novnc-does-not-work-with-safari-and-apache-basic-auth" title="Permalink to this headline">¶</a></h2>
+<p>OnDemand’s Cluster and Interactive Apps do not work with Safari when OnDemand is protected using Basic authentication. This is due to a bug in Safari with using websockets through servers protected using “Basic” auth.</p>
+<p>Workarounds: OnDemand can be installed with another authentication mechanism such as Shibboleth or OpenID Connect. If “Basic” auth is required, Mac users can connect with other browsers like Chrome or Firefox.</p>
+</div>
+<div class="section" id="multiline-select-does-not-work-in-ms-edge">
+<h2>Multiline select does not work in MS Edge<a class="headerlink" href="#multiline-select-does-not-work-in-ms-edge" title="Permalink to this headline">¶</a></h2>
+<p>Multi-line select does not work in Microsoft Edge (pre-Chromium).</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-shell/issues/57'>OSC/ood-shell#57</a></div></blockquote>
+<p>Workarounds: Using another web browser such as FireFox or Chrome.</p>
+</div>
+<div class="section" id="high-output-programs-may-freeze-the-shell">
+<h2>High output programs may freeze the shell<a class="headerlink" href="#high-output-programs-may-freeze-the-shell" title="Permalink to this headline">¶</a></h2>
+<p>The Shell may freeze when attempting to display a large amount of content. This error was initially reported by a user running Python Spark from the Shell app, and has been duplicated by simply running <code class="docutils literal notranslate"><span class="pre">cat</span></code> against hundreds-of-megabyte files.</p>
+<blockquote>
+<div><a href='https://github.com/OSC/ood-shell/issues/28'>OSC/ood-shell#28</a></div></blockquote>
+<p>Workarounds: When attempting to view the contents of a file using the commands <code class="docutils literal notranslate"><span class="pre">less</span></code>, <code class="docutils literal notranslate"><span class="pre">head</span></code> or <code class="docutils literal notranslate"><span class="pre">tail</span></code> instead of <code class="docutils literal notranslate"><span class="pre">cat</span></code> will prevent this error. When running a program that may rapidly produce megabytes of output using a native SSH terminal may be preferable, either from the user’s personal machine, or from within a graphical session on the cluster. Alternatively redirecting application output to a file or files (stdout/stderr) and then using <code class="docutils literal notranslate"><span class="pre">less</span></code> or <code class="docutils literal notranslate"><span class="pre">tail</span></code> to view those files can also solve this problem.</p>
+</div>
+<div class="section" id="paste-does-not-work-in-older-versions-of-safari">
+<h2>Paste does not work in older versions of Safari<a class="headerlink" href="#paste-does-not-work-in-older-versions-of-safari" title="Permalink to this headline">¶</a></h2>
+<p>Pasting from the system clipboard is not supported in Safari 8 or 9.</p>
+<a href='https://github.com/OSC/ood-shell/issues/16'>OSC/ood-shell#16</a><p>Workarounds: At the time of writing the current version of Safari is version 12. Users experiencing this error are highly recommended to upgrade their web browser.</p>
 </div>
 </div>
 
