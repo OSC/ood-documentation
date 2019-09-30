@@ -12,7 +12,7 @@ On the Web node serving OnDemand itself:
 - `centos-release-scl`_
 - `lsof`_
 - `sudo`_
-- `ondemand-release-web-latest-1-2.el7.noarch.rpm`_:
+- `ondemand-release-web-latest-1-5.noarch.rpm`_:
     - cjose-0.6.1-1.el7.x86_64.rpm
     - cjose-debuginfo-0.6.1-1.el7.x86_64.rpm
     - cjose-devel-0.6.1-1.el7.x86_64.rpm
@@ -34,7 +34,7 @@ On the Web node serving OnDemand itself:
 .. _centos-release-scl: https://www.softwarecollections.org/en/
 .. _epel-release: https://fedoraproject.org/wiki/EPEL
 .. _lsof: https://en.wikipedia.org/wiki/Lsof
-.. _ondemand-release-web-latest-1-2.el7.noarch.rpm: https://openondemand.org/
+.. _ondemand-release-web-latest-1-5.noarch.rpm: https://openondemand.org/
 .. _sudo: https://www.sudo.ws/
 
 And on the Compute node(s):
