@@ -33,10 +33,10 @@ Each application has its own dependencies which need to be installed (from eithe
 
   .. note::
 
-    ``scl enable ondemand`` is equivalent to simultaneously enabling: rh-nodejs6 rh-ruby24.
+    ``scl enable ondemand`` is equivalent to simultaneously enabling: rh-nodejs10 rh-ruby25.
 
   .. note::
 
-    For operating systems without `Software Collections`_ the ``scl enable ... --`` portion will be unnecessary so long as the correct versions of NodeJS, Ruby and Git are available at build time.
+    For operating systems without `Software Collections`_ the ``scl enable ... --`` portion will be unnecessary so long as the correct versions of NodeJS and Ruby are available at build time.
 
   .. _Software Collections: https://www.softwarecollections.org/en/
