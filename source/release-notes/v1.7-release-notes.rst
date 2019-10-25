@@ -1,0 +1,66 @@
+.. _v1.7-release-notes:
+
+v1.7 Release Notes
+==================
+
+Highlights in 1.7:
+
+- `Support running OnDemand with SELinux`_
+- `Update Passenger and NGINX dependencies`_
+- `Update Ruby and NodeJS dependencies`_
+- `Drop EL6 and add EL8 support`_
+
+Upgrading from v1.6
+-------------------
+
+.. warning::
+
+  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
+
+.. warning::
+
+  Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
+
+#. Update OnDemand release RPM
+
+   .. code-block:: sh
+
+      sudo yum install -y https://yum.osc.edu/ondemand/1.7/ondemand-release-web-1.7-1.noarch.rpm
+
+#. Update OnDemand
+
+   .. code-block:: sh
+
+       sudo yum clean all
+       sudo yum update ondemand
+
+#. Force all PUNs to restart
+
+   .. code-block:: sh
+
+       /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+Details
+-------
+
+Support running OnDemand with SELinux
+.....................................
+
+Initial support for running OnDemand with SELinux has been added. Support is enabled by installing the ``ondemand-selinux`` package. For details see :ref:`ood_selinux`
+
+
+Update Passenger and NGINX dependencies
+.......................................
+
+Passenger has been upgraded from ``5.3.7`` to ``6.0.4``. NGINX has been upgraded from ``1.14.0`` to ``1.17.3``.
+
+
+Update Ruby and NodeJS dependencies
+...................................
+
+The Ruby verion used by OnDemand has been upgraded from ``2.4`` to ``2.5``. The NodeJS version used by OnDemand has been upgraded from ``6`` to ``10``.
+
+Drop EL6 and add EL8 support
+............................
+
+OnDemand has dropped support for CentOS/RedHat 6 and added support for CentOS/RedHat 8.
