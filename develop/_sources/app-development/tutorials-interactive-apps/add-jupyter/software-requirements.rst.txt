@@ -4,7 +4,7 @@ Software Requirements
 =====================
 
 The Jupyter app requires the following software to be installed on the
-**compute** nodes that that batch job is meant to run on, **NOT** the OnDemand
+**compute** nodes that batch job is meant to run on, **NOT** the OnDemand
 node:
 
 - `Jupyter Notebook`_ 4.2.3+ (earlier versions are untested but may work for
