@@ -56,7 +56,18 @@ Details
 Support running OnDemand with SELinux
 .....................................
 
-Initial support for running OnDemand with SELinux has been added. Support is enabled by installing the ``ondemand-selinux`` package. For details see :ref:`ood_selinux`
+Beta support for running OnDemand with SELinux has been added. Support is enabled by installing the ``ondemand-selinux`` package. For details see :ref:`ood_selinux`
+
+.. warning::
+
+  If the ``ondemand-selinux`` package was installed from the OnDemand 1.6 release there are several changes that must be addressed manually.  Several SELinux booleans were enabled by the ``ondemand-selinux`` package and are no longer needed by OnDemand. The following SELinux booleans can be disabled if not used outside OnDemand:
+
+  .. code-block:: sh
+
+     sudo setsebool -P httpd_execmem=off
+     sudo setsebool -P httpd_unified=off
+     sudo setsebool -P httpd_enable_homedirs=off
+     sudo setsebool -P httpd_read_user_content=off
 
 
 Update Passenger and NGINX dependencies
