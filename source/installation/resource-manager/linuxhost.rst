@@ -11,9 +11,76 @@ LinuxHost Adapter
 First Setup cgroups
 ********************
 
-.. warning::
+The following are some examples of ways to implement cgroups for the LinuxHost Adapter.
 
-   TODO
+Approach #1: Systemd user slices
+--------------------------------
+
+With systemd it's possible to manage the resource limits of user logins through each user's "slice". The limits applied to a user slice are shared by all processes belonging to that user, this is not a per-job or per-node resource limit but a per-user limit. When setting the limits keep in mind the sum of all user limits is the max potential resource consumption on a single host.
+
+First update the PAM stack to include the following line:
+
+.. code-block:: none
+
+   session     required      pam_exec.so type=open_session /etc/security/limits.sh
+
+The following example of ``/etc/security/limits.sh`` is used by OSC on interactive login nodes. Adjust ``MemoryLimit`` and ``CPUQuota`` to meat the needs of your site. See ``man systemd.resource-control``
+
+.. code-block:: bash
+
+   #!/bin/bash
+   set -e
+
+   PAM_UID=$(id -u "${PAM_USER}")
+
+   if [ "${PAM_SERVICE}" = "sshd" -a "${PAM_UID}" -ge 1000 ]; then
+           /usr/bin/systemctl set-property "user-${PAM_UID}.slice" \
+                   MemoryAccounting=true MemoryLimit=64G \
+                   CPUAccounting=true \
+                   CPUQuota=700%
+   fi
+
+Approach #2: libcgroup cgroups
+------------------------------
+
+The libcgroup cgroups rules and configurations are a per-group resource limit where the group is defined in the examples at ``/etc/cgconfig.d/limits.conf``. The following examples limit resources of all tmux processes launched for the LinuxHost Adapter so they all share 700 CPU shares and 64GB of RAM. This requires setting ``tmux_bin`` to a wrapper script that in this example will be ``/usr/local/bin/ondemand_tmux``.
+
+Example of ``/usr/local/bin/ondemanx_tmux``:
+
+.. code-block:: bash
+
+   #!/bin/bash
+   exec tmux "$@"
+
+Setup the cgroup limits at ``/etc/cgconfig.d/limits.conf``:
+
+.. code-block:: none
+
+   group linuxhostadapter {
+           memory {
+                   memory.limit_in_bytes="64G";
+                   memory.memsw.limit_in_bytes="64G";
+           }
+           cpu {
+                   cpu.shares="700";
+           }
+   }
+
+Setup the cgroup rules at ``/etc/cgrules.conf``:
+
+.. code-block:: none
+
+   *:/usr/local/bin/ondemand_tmux memory linuxhostadapter/
+   *:/usr/local/bin/ondemand_tmux cpu linuxhostadapter/
+
+Start the necessary services:
+
+.. code-block:: sh
+
+   sudo systemctl start cgconfig
+   sudo systemctl start cgred
+   sudo systemctl enable cgconfig
+   sudo systemctl enable cgred
 
 How To Configure The Adapter
 ****************************
