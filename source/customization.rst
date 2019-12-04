@@ -150,6 +150,9 @@ These URLs can be specified, which will appear in the Help menu and on other loc
    * - Change Password URL
      - OOD_DASHBOARD_PASSWD_URL
      - https://my.osc.edu
+   * - Custom Help URL (Also requires locale ``en.dashboard.nav_help_custom``)
+     - OOD_DASHBOARD_HELP_CUSTOM_URL
+     - https://idp.osc.edu/auth/realms/osc/account/identity
 
 
 Add Shortcuts to Files Menu
