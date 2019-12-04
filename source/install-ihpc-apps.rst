@@ -43,3 +43,7 @@ templates.
      - https://github.com/OSC/bc_osc_rstudio_server
    * - VMD
      - https://github.com/OSC/bc_osc_vmd
+   * - QGIS
+     - https://github.com/OSC/bc_osc_qgis
+   * - Stata 
+     - https://github.com/OSC/bc_osc_stata
