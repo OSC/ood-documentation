@@ -11,12 +11,12 @@ LinuxHost Adapter
 First Setup cgroups
 ********************
 
-The following are some examples of ways to implement cgroups for the LinuxHost Adapter.
+By default the adapter does not limit the user's CPU or memory utilization, only their "walltime". The following are two examples of ways to implement resource limits for the LinuxHost Adapter using cgroups.
 
 Approach #1: Systemd user slices
 --------------------------------
 
-With systemd it's possible to manage the resource limits of user logins through each user's "slice". The limits applied to a user slice are shared by all processes belonging to that user, this is not a per-job or per-node resource limit but a per-user limit. When setting the limits keep in mind the sum of all user limits is the max potential resource consumption on a single host.
+With systemd it is possible to manage the resource limits of user logins through each user's "slice_". The limits applied to a user slice are shared by all processes belonging to that user, this is not a per-job or per-node resource limit but a per-user limit. When setting the limits keep in mind the sum of all user limits is the max potential resource consumption on a single host.
 
 First update the PAM stack to include the following line:
 
@@ -24,7 +24,7 @@ First update the PAM stack to include the following line:
 
    session     required      pam_exec.so type=open_session /etc/security/limits.sh
 
-The following example of ``/etc/security/limits.sh`` is used by OSC on interactive login nodes. Adjust ``MemoryLimit`` and ``CPUQuota`` to meat the needs of your site. See ``man systemd.resource-control``
+The following example of ``/etc/security/limits.sh`` is used by OSC on interactive login nodes. Adjust ``MemoryLimit`` and ``CPUQuota`` to meet the needs of your site. See ``man systemd.resource-control``
 
 .. code-block:: bash
 
@@ -45,7 +45,7 @@ Approach #2: libcgroup cgroups
 
 The libcgroup cgroups rules and configurations are a per-group resource limit where the group is defined in the examples at ``/etc/cgconfig.d/limits.conf``. The following examples limit resources of all tmux processes launched for the LinuxHost Adapter so they all share 700 CPU shares and 64GB of RAM. This requires setting ``tmux_bin`` to a wrapper script that in this example will be ``/usr/local/bin/ondemand_tmux``.
 
-Example of ``/usr/local/bin/ondemanx_tmux``:
+Example of ``/usr/local/bin/ondemand_tmux``:
 
 .. code-block:: bash
 
@@ -178,3 +178,10 @@ The second way to use Singularity is the designed use of containers: launch a se
      native:
         singularity_bindpath: /etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/fs,/home
         singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif
+
+.. note::
+
+   Subsequent versions of the adapter are expected to use unshare_ for PID namespacing as the default method instead of Singularity. Singularity will continue to be supported.
+
+.. _slice: https://www.freedesktop.org/software/systemd/man/systemd.slice.html
+.. _unshare: man7.org/linux/man-pages/man1/unshare.1.html
