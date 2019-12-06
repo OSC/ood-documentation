@@ -1,7 +1,7 @@
 .. _app-development-tutorials-interactive-apps-add-matlab-deploy:
 
-Deploy RStudio App
-==================
+Deploy Matlab App
+=================
 
 After you have confirmed you are happy with all of your app changes you can
 deploy it as a System App.
