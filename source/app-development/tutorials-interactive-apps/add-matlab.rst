@@ -28,5 +28,6 @@ within the batch job.
    add-matlab/edit-submit-yml
    add-matlab/edit-form-js
    add-matlab/deploy
+   add-matlab/known-issues
 
 .. _Matlab: https://www.mathworks.com/products/matlab.html
