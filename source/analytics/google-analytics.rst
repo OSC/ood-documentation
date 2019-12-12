@@ -4,7 +4,7 @@ Adding Google Analytics
 ========================
 
 .. _Google service accounts: https://cloud.google.com/iam/docs/service-accounts
-.. _Google iam roles: https://cloud.google.com/iam/docs/understanding-roles
+.. _Google IAM roles: https://cloud.google.com/iam/docs/understanding-roles
 .. _Google Analytics: https://analytics.google.com/analytics/web
 
 If you wish you can setup your Open-OnDemand instance to send usage data to Google Analytics
@@ -15,10 +15,10 @@ If you wish you can setup your Open-OnDemand instance to send usage data to Goog
   You'll need to have a `Google Analytics`_ account setup as a prerequisite to this.
 
   To query GA You'll need to have to have a service account setup with the appropriate permissions. See
-  info on `Google service accounts`_ and `Google iam roles`_ for more details on that.
+  info on `Google service accounts`_ and `Google IAM roles`_ for more details on that.
 
 
-Configure Open-OnDemand
+Configure Open OnDemand
 --------------------------
 Add your google analytics id your ood_portal.yml file.
 
