@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. Deploy Jupyter App &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>6. Edit Form.js &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Add an RStudio App" href="../add-rstudio.html" />
-    <link rel="prev" title="4. Modify Submit Parameters" href="modify-submit-parameters.html" /> 
+    <link rel="next" title="7. Deploy Matlab App" href="deploy.html" />
+    <link rel="prev" title="5. Modify Submit Parameters" href="edit-submit-yml.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -113,16 +113,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../app-sharing.html">App Sharing</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a Matlab App</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Jupyter App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="customize-attributes.html">3. Customize Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">5. Deploy Jupyter App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edit-form-yml.html">3. Customize Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edit-script-sh.html">4. Edit Launch Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edit-submit-yml.html">5. Modify Submit Parameters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">6. Edit Form.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="known-issues.html">8. Known Issues</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../add-matlab.html">Add a Matlab App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-custom-queue.html">Add Custom Queues/Partitions</a></li>
 </ul>
 </li>
@@ -194,16 +197,16 @@
         
           <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-          <li><a href="../add-jupyter.html">Add a Jupyter App</a> &raquo;</li>
+          <li><a href="../add-matlab.html">Add a Matlab App</a> &raquo;</li>
         
-      <li>5. Deploy Jupyter App</li>
+      <li>6. Edit Form.js</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/app-development/tutorials-interactive-apps/add-jupyter/deploy.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -217,33 +220,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="deploy-jupyter-app">
-<span id="app-development-tutorials-interactive-apps-add-jupyter-deploy"></span><h1>5. Deploy Jupyter App<a class="headerlink" href="#deploy-jupyter-app" title="Permalink to this headline">¶</a></h1>
-<p>After you’ve confirmed you are happy with all of your app changes you can
-deploy it as a System App.</p>
+  <div class="section" id="edit-form-js">
+<span id="app-development-tutorials-interactive-apps-add-matlab-edit-form-js"></span><h1>6. Edit Form.js<a class="headerlink" href="#edit-form-js" title="Permalink to this headline">¶</a></h1>
+<p>OnDemand supports dynamic interactive forms using a file named <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.js</span></code>. This file is free-form; anything that can be done with client-side JavaScript may be done in this file. OSC has used this file to:</p>
+<ul class="simple">
+<li>Limit the user’s CPU/memory selection options to the type of hardware that they are requesting (<a class="reference external" href="https://github.com/OSC/bc_osc_matlab/blob/master/form.js">OSC Matlab JavaScript</a>)</li>
+<li>Show or hide a license field based on whether the user is permitted to use the OSC academic license or if they are required to use a different license provider (<a class="reference external" href="https://github.com/OSC/bc_osc_ansys_workbench/blob/master/form.js">OSC ANSYS JavaScript</a>)</li>
+<li>Implement a file picker using the File Explorer’s API, <a class="reference external" href="https://webpack.js.org/">Webpack</a>, and <a class="reference external" href="https://vuejs.org/">VueJS</a> (<a class="reference external" href="https://github.com/OSC/bc_js_filepicker">bc_js_filepicker</a>)</li>
+</ul>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The following steps <strong>MUST</strong> be done from the OnDemand host and not another
-machine.</p>
+<p class="last">Be aware that client side validation provided by JavaScript is not perfect and any critical values should be validated / sanitized server side in <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> or <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>.</p>
 </div>
-<ol class="arabic">
-<li><p class="first">Go to your OnDemand sandbox directory:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ondemand/dev
-</pre></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This file is not required and may be empty or not exist.</p>
 </div>
-</li>
-<li><p class="first">Copy the app to the system deployment location as <strong>root</strong>:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp -r jupyter /var/www/ood/apps/sys/.
-</pre></div>
-</div>
-</li>
-<li><p class="first">In your browser navigate to the OnDemand URL and confirm you see the new app
-in the <em>Interactive Apps</em> dropdown on the <a class="reference internal" href="../../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span>
-</pre></div>
-</div>
-</li>
-</ol>
 </div>
 
 
@@ -254,10 +246,10 @@ in the <em>Interactive Apps</em> dropdown on the <a class="reference internal" h
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../add-rstudio.html" class="btn btn-neutral float-right" title="Add an RStudio App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="deploy.html" class="btn btn-neutral float-right" title="7. Deploy Matlab App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="modify-submit-parameters.html" class="btn btn-neutral float-left" title="4. Modify Submit Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="edit-submit-yml.html" class="btn btn-neutral float-left" title="5. Modify Submit Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -289,23 +281,23 @@ in the <em>Interactive Apps</em> dropdown on the <a class="reference internal" h
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-jupyter/deploy.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-matlab/edit-form-js.html">develop</a></dd>
       
     </dl>
     <dl>
