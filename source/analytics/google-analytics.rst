@@ -123,7 +123,7 @@ metric set above. Let's go through each of these things.
     ga:hostname==#{HOST};ga:dimension6==200;ga:pagePath!=/pun/sys/file-editor/edit
   )
 
-  # now we can create our analitycs object and make the query
+  # now we can create our analytics object and make the query
   analytics = Google::Apis::AnalyticsV3::AnalyticsService.new
 
   # Here we query for the data that we want. A lot of things are omitted in this example
