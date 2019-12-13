@@ -161,6 +161,9 @@ More Info
 .. _GA measurement protocol: https://developers.google.com/analytics/devguides/collection/protocol/v1/reference
 .. _analytics lua code: https://github.com/OSC/ondemand/blob/master/mod_ood_proxy/lib/analytics.lua
 
+For reference, here's more detailed information about implementations and protocols described
+in this document.
+
 See our `analytics lua code`_ for the implementation of how we're extracting this information, 
 parsing it and sending it to Google.
 
