@@ -38,13 +38,21 @@ If you experience denials when running SELinux with Open OnDemand please provide
 Firewall
 ---------
 #. Open ports 80 (http) and 443 (https) in the firewall, typically done with
-   `iptables`_.
+   `firewalld`_ or `iptables`_.
 
-   .. warning::
+   Firewalld example:
+     .. code-block:: sh
 
-      If using **RHEL 7** you will need to either use the newer `firewalld`_
-      daemon and modify the firewall settings or disable it and install
-      `iptables`_.
+        $ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+        $ sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
+        $ sudo firewall-cmd --reload
+
+  Iptables example:
+     .. code-block:: sh
+
+        $ sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+        $ sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+        $ sudo iptables-save > /etc/sysconfig/iptables
 
 .. _selinux: https://wiki.centos.org/HowTos/SELinux
 .. _iptables: https://wiki.centos.org/HowTos/Network/IPTables
