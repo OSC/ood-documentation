@@ -46,7 +46,6 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 	@echo "  coverage   to run coverage check of the documentation (if enabled)"
 	@echo "  dummy      to check syntax errors of document sources"
-	@echo "  images     to make drawio images"
 
 .PHONY: clean
 clean:
