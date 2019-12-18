@@ -7,9 +7,6 @@ SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = build
 
-# Path to python drawio images build file
-DRAWIOBUILDPATH   = python/build_images.py
-
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
@@ -53,7 +50,8 @@ clean:
 
 .PHONY: html
 html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html && ./$(DRAWIOBUILDPATH)
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+        find $(BUILDDIR)/html -name "*.drawio" -print | xargs -I {} draw.io -x -f "png" {}
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html & drawio images are in source/images."
 
