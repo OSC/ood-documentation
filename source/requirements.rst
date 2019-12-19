@@ -8,14 +8,13 @@ Software Requirements
 
 On the Web node serving OnDemand itself:
 
-- `EPEL repository`_
 - `Software Collections repositories`_
 - `lsof`_
 - `sudo`_
 - `OnDemand repository`_:
     - ondemand-{{ondemand_version}}-1.el7.x86_64.rpm
+
 .. _Software Collections repositories: https://www.softwarecollections.org/en/
-.. _EPEL repository: https://fedoraproject.org/wiki/EPEL
 .. _lsof: https://en.wikipedia.org/wiki/Lsof
 .. _OnDemand repository: https://openondemand.org/
 .. _sudo: https://www.sudo.ws/
