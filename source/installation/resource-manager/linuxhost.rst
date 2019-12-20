@@ -138,10 +138,14 @@ strict_host_checking
 tmux_bin
   The absolute path to the ``tmux`` executable on the execution host(s).
 
-But, Why? A User Story
-**********************
+.. note::
 
-As an HPC user working in ``R`` I want to be able to be able to launch RStudio so that I can use it as an IDE; because I am limited I will not run anything that takes up more than N CPUs, X memory, or Z hours.
+  In order to communicate with the execution hosts the adapter uses SSH in ``BatchMode``. The adapter does not take a position on whether authentication is performed by user owned passwordless keys, or host-based authentication; however OSC has chosen to provide `host based authentication`_ to its users.
+
+An Example User Story
+*********************
+
+As an HPC user working in ``R`` I want to be able to be able to launch RStudio so that I can use it as an IDE; if I am told that my resources are limited I will not run anything that takes up more than N CPUs, X memory, or Z hours.
 
 A Non-traditional Job Launcher
 ******************************
@@ -183,5 +187,6 @@ The second way to use Singularity is the designed use of containers: launch a se
 
    Subsequent versions of the adapter are expected to use unshare_ for PID namespacing as the default method instead of Singularity. Singularity will continue to be supported.
 
+.. _host based authentication: https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication
 .. _slice: https://www.freedesktop.org/software/systemd/man/systemd.slice.html
 .. _unshare: man7.org/linux/man-pages/man1/unshare.1.html
