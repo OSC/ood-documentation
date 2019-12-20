@@ -44,20 +44,3 @@ Invoking Matlab itself
         set -x
         matlab -desktop  # Launch Matlab
         <%- end -%>
-
-Generalizing our approach: What if the matlab command did not block?
-********************************************************************
-
-Matlab is convenient in that the command ``matlab`` blocks instead of backgrounding itself, this prevents our script from ending immediately, which would prevent the user from accomplishing anything useful. Some other GUI applications like Stata put themselves into the background. For apps like Stata it is necessary to perform the blocking ourselves:
-
-  .. code-block:: shell
-
-    # Launch Stata GUI
-    xstata-mp
-
-    # Get the PID of the last xstata-mp process started that $USER owns
-    stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail )
-    # As long as the PID directory exists we wait
-    while [[ -d "/proc/$stata_pid" ]]; do
-      sleep 1
-    done
