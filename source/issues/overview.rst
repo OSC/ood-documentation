@@ -27,6 +27,10 @@ OnDemand's Known Issues
 - `High output programs may freeze the shell`_
 - `Paste does not work in older versions of Safari`_
 
+.. Other
+
+- `RStudio and Upgrading Singularity 3 to minor version 5`_
+
 File names with XML or HTML break display
 -----------------------------------------
 
@@ -167,6 +171,11 @@ Pasting from the system clipboard is not supported in Safari 8 or 9.
     <a href='https://github.com/OSC/ood-shell/issues/16'>OSC/ood-shell#16</a>
 
 Workarounds: At the time of writing the current version of Safari is version 12. Users experiencing this error are highly recommended to upgrade their web browser.
+
+RStudio and Upgrading Singularity 3 to minor version 5
+------------------------------------------------------
+
+OnDemand RStudio implmentations using Singularity may break when upgrading to Singularity version 3.5 or above. There is an undocumented breaking change where ``LD_LIBRARY_PATH`` is no longer exported to the container by default. Instead the container will default to having ``LD_LIBRARY_PATH=/.singularity.d/libs``. Explicitly exporting the variable by using ``SINGULARITYENV_LD_LIBRARY_PATH="$LD_LIBRARY_PATH" singularity ...`` appears sufficient to fix the issue.
 
 .. _Cyberduck: https://cyberduck.io
 .. _FileZilla: https://filezilla-project.org/
