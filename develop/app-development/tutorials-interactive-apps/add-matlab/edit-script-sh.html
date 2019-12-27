@@ -125,7 +125,6 @@
 <li class="toctree-l4"><a class="reference internal" href="window_managers/mate.html">Mate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="window_managers/fluxbox.html">Fluxbox</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#invoking-matlab-itself">Invoking Matlab itself</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#generalizing-our-approach-what-if-the-matlab-command-did-not-block">Generalizing our approach: What if the matlab command did not block?</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="edit-submit-yml.html">5. Modify Submit Parameters</a></li>
@@ -135,6 +134,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../add-custom-queue.html">Add Custom Queues/Partitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Interactive Apps</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
@@ -267,23 +267,6 @@ module list  <span class="c1"># List loaded modules for debugging purposes</span
 <span class="nb">set</span> -x
 matlab -desktop  <span class="c1"># Launch Matlab</span>
 &lt;%- end -%&gt;
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-<div class="section" id="generalizing-our-approach-what-if-the-matlab-command-did-not-block">
-<h2>Generalizing our approach: What if the matlab command did not block?<a class="headerlink" href="#generalizing-our-approach-what-if-the-matlab-command-did-not-block" title="Permalink to this headline">¶</a></h2>
-<p>Matlab is convenient in that the command <code class="docutils literal notranslate"><span class="pre">matlab</span></code> blocks instead of backgrounding itself, this prevents our script from ending immediately, which would prevent the user from accomplishing anything useful. Some other GUI applications like Stata put themselves into the background. For apps like Stata it is necessary to perform the blocking ourselves:</p>
-<blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch Stata GUI</span>
-xstata-mp
-
-<span class="c1"># Get the PID of the last xstata-mp process started that $USER owns</span>
-<span class="nv">stata_pid</span><span class="o">=</span><span class="k">$(</span> pgrep -u <span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span> <span class="s1">&#39;xstata-mp&#39;</span> <span class="p">|</span> tail <span class="k">)</span>
-<span class="c1"># As long as the PID directory exists we wait</span>
-<span class="k">while</span> <span class="o">[[</span> -d <span class="s2">&quot;/proc/</span><span class="nv">$stata_pid</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
-  sleep <span class="m">1</span>
-<span class="k">done</span>
 </pre></div>
 </div>
 </div></blockquote>

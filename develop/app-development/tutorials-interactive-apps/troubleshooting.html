@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add a Jupyter App &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>Troubleshooting Interactive Apps &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1. Software Requirements" href="add-jupyter/software-requirements.html" />
-    <link rel="prev" title="Tutorials: Interactive Apps" href="../tutorials-interactive-apps.html" /> 
+    <link rel="next" title="Tutorials: Passenger Apps" href="../tutorials-passenger-apps.html" />
+    <link rel="prev" title="Use a Global Static List" href="add-custom-queue/global-static-list.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -114,18 +114,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Add a Jupyter App</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/copy-app.html">2. Copy Jupyter App</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/customize-attributes.html">3. Customize Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html">4. Modify Submit Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-jupyter/deploy.html">5. Deploy Jupyter App</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="add-jupyter.html">Add a Jupyter App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-rstudio.html">Add an RStudio App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-matlab.html">Add a Matlab App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-custom-queue.html">Add Custom Queues/Partitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting Interactive Apps</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting Interactive Apps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-window-cannot-be-resized-moved-maximized">The window cannot be resized/moved/maximized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-throws-java-errors-when-the-window-is-resized">Matlab throws Java errors when the window is resized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#job-finishes-instantly-because-desktop-app-backgrounds-itself">Job finishes instantly because, desktop app backgrounds itself</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
@@ -196,14 +194,14 @@
         
           <li><a href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-      <li>Add a Jupyter App</li>
+      <li>Troubleshooting Interactive Apps</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/app-development/tutorials-interactive-apps/add-jupyter.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/app-development/tutorials-interactive-apps/troubleshooting.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -217,34 +215,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="add-a-jupyter-app">
-<span id="app-development-tutorials-interactive-apps-add-jupyter"></span><h1>Add a Jupyter App<a class="headerlink" href="#add-a-jupyter-app" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial will walk you through creating an interactive Jupyter app that
-your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> within a batch job
-on a compute node. The user will then be able to connect to the running server
-through their browser and take advantage of the resources provided within the
-batch job.</p>
-<div class="admonition danger">
-<p class="first admonition-title">Danger</p>
-<p class="last">Confirm that you have walked through the
-<a class="reference internal" href="../interactive/setup.html#app-development-interactive-setup"><span class="std std-ref">Setup Interactive Apps</span></a> instructions for <a class="reference internal" href="../../applications/interactive.html#interactive"><span class="std std-ref">Interactive Apps (Plugins)</span></a>
-before continuing on.</p>
+  <div class="section" id="troubleshooting-interactive-apps">
+<span id="app-development-tutorials-interactive-apps-troubleshooting"></span><h1>Troubleshooting Interactive Apps<a class="headerlink" href="#troubleshooting-interactive-apps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-window-cannot-be-resized-moved-maximized">
+<h2>The window cannot be resized/moved/maximized<a class="headerlink" href="#the-window-cannot-be-resized-moved-maximized" title="Permalink to this headline">¶</a></h2>
+<p>While a window manager is not strictly required to be able to set up a desktop/VNC application, one is required to be able to perform many common tasks like moving a window, resizing it, or even locating the window after it has been minimized. The Matlab example provides examples of how to set up <a class="reference external" href="https://osc.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-matlab/window_managers/xfce.html">XFCE</a>, <a class="reference external" href="https://osc.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-matlab/window_managers/mate.html">Mate</a>, and <a class="reference external" href="https://osc.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-matlab/window_managers/fluxbox.html">Fluxbox</a> (mentioned in order of OSC preference).</p>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Quick Start Guide</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/copy-app.html">2. Copy Jupyter App</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/customize-attributes.html">3. Customize Attributes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html">4. Modify Submit Parameters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#slurm">Slurm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#torque">Torque</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#pbs-professional">PBS Professional</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-jupyter/modify-submit-parameters.html#other-resource-manager">Other Resource Manager</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="add-jupyter/deploy.html">5. Deploy Jupyter App</a></li>
-</ul>
+<div class="section" id="matlab-throws-java-errors-when-the-window-is-resized">
+<h2>Matlab throws Java errors when the window is resized<a class="headerlink" href="#matlab-throws-java-errors-when-the-window-is-resized" title="Permalink to this headline">¶</a></h2>
+<p>A remedy for Matlab throwing Java errors when its window is resized, moved, or displayed on a secondary monitor is detailed in <a class="reference external" href="https://osc.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-matlab/known-issues.html#if-you-get-java-errors">Matlabs known issues</a>.</p>
+</div>
+<div class="section" id="job-finishes-instantly-because-desktop-app-backgrounds-itself">
+<h2>Job finishes instantly because, desktop app backgrounds itself<a class="headerlink" href="#job-finishes-instantly-because-desktop-app-backgrounds-itself" title="Permalink to this headline">¶</a></h2>
+<p>Many apps are convenient in that their launch command blocks instead of backgrounding itself. By blocking the process our script is prevented from ending immediately, which in turn would prevent the user from accomplishing anything useful. Some GUI applications like Stata put themselves into the background. For apps like Stata it is necessary to perform the blocking ourselves:</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch Stata GUI</span>
+xstata-mp
+
+<span class="c1"># Get the PID of the last xstata-mp process started that $USER owns</span>
+<span class="nv">stata_pid</span><span class="o">=</span><span class="k">$(</span> pgrep -u <span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span> <span class="s1">&#39;xstata-mp&#39;</span> <span class="p">|</span> tail <span class="k">)</span>
+<span class="c1"># As long as the PID directory exists we wait</span>
+<span class="k">while</span> <span class="o">[[</span> -d <span class="s2">&quot;/proc/</span><span class="nv">$stata_pid</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
+  sleep <span class="m">1</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 </div>
 
@@ -256,10 +252,10 @@ before continuing on.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="add-jupyter/software-requirements.html" class="btn btn-neutral float-right" title="1. Software Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../tutorials-passenger-apps.html" class="btn btn-neutral float-right" title="Tutorials: Passenger Apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../tutorials-interactive-apps.html" class="btn btn-neutral float-left" title="Tutorials: Interactive Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="add-custom-queue/global-static-list.html" class="btn btn-neutral float-left" title="Use a Global Static List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -291,23 +287,23 @@ before continuing on.</p>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/tutorials-interactive-apps/add-jupyter.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/tutorials-interactive-apps/troubleshooting.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/tutorials-interactive-apps/add-jupyter.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/tutorials-interactive-apps/troubleshooting.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/app-development/tutorials-interactive-apps/add-jupyter.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/app-development/tutorials-interactive-apps/troubleshooting.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/app-development/tutorials-interactive-apps/add-jupyter.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/app-development/tutorials-interactive-apps/troubleshooting.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/app-development/tutorials-interactive-apps/add-jupyter.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/app-development/tutorials-interactive-apps/troubleshooting.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/app-development/tutorials-interactive-apps/add-jupyter.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/app-development/tutorials-interactive-apps/troubleshooting.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/app-development/tutorials-interactive-apps/add-jupyter.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/app-development/tutorials-interactive-apps/troubleshooting.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/app-development/tutorials-interactive-apps/add-jupyter.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/app-development/tutorials-interactive-apps/troubleshooting.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/add-jupyter.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/app-development/tutorials-interactive-apps/troubleshooting.html">develop</a></dd>
       
     </dl>
     <dl>
