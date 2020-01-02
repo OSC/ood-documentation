@@ -129,6 +129,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#individual-fileset-quota">Individual Fileset Quota</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#balance-warnings-on-dashboard">Balance Warnings on Dashboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-balance">User Balance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-balance">Project Balance</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -395,6 +400,10 @@ OnDemand will be unavailable during this period. For details, please visit
 <tr class="row-even"><th class="stub">Change Password URL</th>
 <td>OOD_DASHBOARD_PASSWD_URL</td>
 <td><a class="reference external" href="https://my.osc.edu">https://my.osc.edu</a></td>
+</tr>
+<tr class="row-odd"><th class="stub">Custom Help URL (Also requires locale <code class="docutils literal notranslate"><span class="pre">en.dashboard.nav_help_custom</span></code>)</th>
+<td>OOD_DASHBOARD_HELP_CUSTOM_URL</td>
+<td><a class="reference external" href="https://idp.osc.edu/auth/realms/osc/account/identity">https://idp.osc.edu/auth/realms/osc/account/identity</a></td>
 </tr>
 </tbody>
 </table>
@@ -763,6 +772,75 @@ the specified user only.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For each user with resources under this fileset, the above object will be repeated with just <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">block_usage</span></code>, and <code class="docutils literal notranslate"><span class="pre">file_usage</span></code> changing.</p>
+</div>
+</div>
+</div>
+<div class="section" id="balance-warnings-on-dashboard">
+<h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>You can display warnings to users on the Dashboard if their
+resource balance is nearing its limit. This requires an auto-updated (it is
+recommended to update this file daily with a cronjob) JSON file
+that lists all user balances. The JSON schema for version <cite>1</cite> is given as:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1525361263</span><span class="p">,</span>
+  <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;RU&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project_type&quot;</span><span class="p">:</span> <span class="s2">&quot;project&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;balances&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">version</span></code> defines the version of the JSON schema used, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>
+defines when this file was generated, and <code class="docutils literal notranslate"><span class="pre">balanaces</span></code> is a list of quota objects
+(see below).</p>
+<p>The value for <code class="docutils literal notranslate"><span class="pre">config.unit</span></code> defines the type of units for balances and
+<code class="docutils literal notranslate"><span class="pre">config.project_type</span></code> would be project, account, or group, etc.
+Both values are used in locales and can be any string value.</p>
+<p>You can configure the Dashboard to use this JSON file (or files) by setting the
+environment variable <code class="docutils literal notranslate"><span class="pre">OOD_BALANCE_PATH</span></code> as a colon-delimited list of all JSON
+file paths.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Sites using HTTP(s) or FTP for their balance files may see slower dashboard load
+times, depending on the responsiveness of the server providing the quota file(s).</p>
+</div>
+<p>The default threshold for displaying the warning is at <code class="docutils literal notranslate"><span class="pre">0</span></code>, but this
+can be changed with the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_BALANCE_THRESHOLD</span></code>.</p>
+<p>An example is given as:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
+
+<span class="n">OOD_BALANCE_PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/balance1.json:/path/to/balance2.json&quot;</span>
+<span class="n">OOD_BALANCE_THRESHOLD</span><span class="o">=</span><span class="mi">1000</span>
+</pre></div>
+</div>
+<div class="section" id="user-balance">
+<h3>User Balance<a class="headerlink" href="#user-balance" title="Permalink to this headline">¶</a></h3>
+<p>If the balance is defined as a <code class="docutils literal notranslate"><span class="pre">user</span></code> balance, then it applies to only that user. Omit the <code class="docutils literal notranslate"><span class="pre">project</span></code> key:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="project-balance">
+<h3>Project Balance<a class="headerlink" href="#project-balance" title="Permalink to this headline">¶</a></h3>
+<p>If the balance is defined as a <code class="docutils literal notranslate"><span class="pre">project</span></code> balance, then it applies to a project/account/group, whatever is defined for <code class="docutils literal notranslate"><span class="pre">config.project_type</span></code>:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </div>
 </div>

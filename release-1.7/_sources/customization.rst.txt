@@ -150,6 +150,9 @@ These URLs can be specified, which will appear in the Help menu and on other loc
    * - Change Password URL
      - OOD_DASHBOARD_PASSWD_URL
      - https://my.osc.edu
+   * - Custom Help URL (Also requires locale ``en.dashboard.nav_help_custom``)
+     - OOD_DASHBOARD_HELP_CUSTOM_URL
+     - https://idp.osc.edu/auth/realms/osc/account/identity
 
 
 Add Shortcuts to Files Menu
@@ -546,3 +549,84 @@ Where ``block_usage`` and ``file_usage`` are the disk resource usages attributed
 the specified user only.
 
 .. note:: For each user with resources under this fileset, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
+
+Balance Warnings on Dashboard
+--------------------------------
+
+You can display warnings to users on the Dashboard if their
+resource balance is nearing its limit. This requires an auto-updated (it is
+recommended to update this file daily with a cronjob) JSON file
+that lists all user balances. The JSON schema for version `1` is given as:
+
+.. code:: json
+
+    {
+      "version": 1,
+      "timestamp": 1525361263,
+      "config": {
+        "unit": "RU",
+        "project_type": "project"
+      },
+      "balances": [
+        {
+          ...
+        },
+        {
+          ...
+        }
+      ]
+    }
+
+Where ``version`` defines the version of the JSON schema used, ``timestamp``
+defines when this file was generated, and ``balanaces`` is a list of quota objects
+(see below).
+
+The value for ``config.unit`` defines the type of units for balances and
+``config.project_type`` would be project, account, or group, etc.
+Both values are used in locales and can be any string value.
+
+You can configure the Dashboard to use this JSON file (or files) by setting the
+environment variable ``OOD_BALANCE_PATH`` as a colon-delimited list of all JSON
+file paths.
+
+.. warning::
+
+  Sites using HTTP(s) or FTP for their balance files may see slower dashboard load
+  times, depending on the responsiveness of the server providing the quota file(s).
+
+The default threshold for displaying the warning is at ``0``, but this
+can be changed with the environment variable ``OOD_BALANCE_THRESHOLD``.
+
+An example is given as:
+
+.. code:: sh
+
+   # /etc/ood/config/apps/dashboard/env
+
+   OOD_BALANCE_PATH="/path/to/balance1.json:/path/to/balance2.json"
+   OOD_BALANCE_THRESHOLD=1000
+
+User Balance
+............
+
+If the balance is defined as a ``user`` balance, then it applies to only that user. Omit the ``project`` key:
+
+.. code:: json
+
+   {
+     "user": "user1",
+     "value": 10
+   }
+
+Project Balance
+...............
+
+If the balance is defined as a ``project`` balance, then it applies to a project/account/group, whatever is defined for ``config.project_type``:
+
+.. code:: json
+
+   {
+     "user": "user1",
+     "project": "project1",
+     "value": 10
+   }
