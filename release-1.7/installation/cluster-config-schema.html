@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cluster Config Schema v2 &mdash; Open OnDemand 1.6.7 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Resource Manager Configuration" href="resource-manager.html" />
+    <link rel="prev" title="Add Cluster Configuration Files" href="add-cluster-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="add-cluster-config.html">Add Cluster Configuration Files</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cluster Config Schema v2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#first-an-example">First an example:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-break-down">A Break Down</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#v2">v2:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#meta">meta:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#login">login:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#job">job:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acls">acls:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom">custom:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#batch-connect">batch_connect:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="add-cluster-config.html">Add Cluster Configuration Files</a> &raquo;</li>
+        
+      <li>Cluster Config Schema v2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.7/source/installation/cluster-config-schema.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cluster-config-schema-v2">
+<span id="cluster-config-schema"></span><h1>Cluster Config Schema v2<a class="headerlink" href="#cluster-config-schema-v2" title="Permalink to this headline">¶</a></h1>
+<p>The cluster config controls many OnDemand features including job submission, shell access, names in menus.</p>
+<div class="section" id="first-an-example">
+<h2>First an example:<a class="headerlink" href="#first-an-example" title="Permalink to this headline">¶</a></h2>
+<p>Below is the production configuration for OSC’s Owens cluster.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">hidden</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;torque&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">acls</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;group&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">groups</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;cluster_users&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;other_users_of_the_cluster&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;whitelist&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">custom</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">pbs</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">moab</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/moab/bin&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;9.0.1&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">homedir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/spool/moab&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">rsv_query</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">torque_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">torque_lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">torque_bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">torque_version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">moab_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">moab_bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/moab/bin&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">moab_version</span><span class="p p-Indicator">:</span> <span class="s">&quot;9.0.1&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">moab_homedir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/spool/moab&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">acls</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;group&quot;</span>
+          <span class="l l-Scalar l-Scalar-Plain">groups</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&quot;sysall&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="s">&quot;sappall&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="s">&quot;clntall&quot;</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;blacklist&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\n%s&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\nmodule</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">ondemand-vnc\n%s&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Quick warning: be aware that YAML requires the use of spaces as indentation characters, tabs are not permitted by <a class="reference external" href="http://yaml.org/spec/1.2/spec.html#id2777534">the YAML spec</a>.</p>
+</div>
+</div>
+<div class="section" id="a-break-down">
+<h2>A Break Down<a class="headerlink" href="#a-break-down" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v2">
+<h3>v2:<a class="headerlink" href="#v2" title="Permalink to this headline">¶</a></h3>
+<p>Version 2 is the current schema, and is the top level mapping for the cluster configuration.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="meta">
+<h3>meta:<a class="headerlink" href="#meta" title="Permalink to this headline">¶</a></h3>
+<p>Meta describes how the cluster will be displayed to the user</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="c1"># title: is the display label that will be used anywhere the cluster is referenced</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
+    <span class="c1"># url: provides the ability to show a link to information about the cluster</span>
+    <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span>
+    <span class="c1"># hidden: setting this to true causes OnDemand to not show this cluster to the user, the cluster is still available for use by other applications</span>
+    <span class="l l-Scalar l-Scalar-Plain">hidden</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="login">
+<h3>login:<a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h3>
+<p>Login controls what hosts should be used when trying to SSH via the Shell app. Used by the Dashboard and the Job Composer (MyJobs).</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="job">
+<h3>job:<a class="headerlink" href="#job" title="Permalink to this headline">¶</a></h3>
+<p>The job mapping is specific to a cluster’s resource manager.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;torque&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">lib</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/lib64&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/torque/bin&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;6.0.1&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="bin-overrides">
+<h4>bin_overrides:<a class="headerlink" href="#bin-overrides" title="Permalink to this headline">¶</a></h4>
+<p><cite>bin_overrides</cite> adds the ability for a site to specify full paths to alternatives to the configured resource manager’s client executables. This advanced feature allows a site considerable flexibilty to write wrappers to handle logging, environment or default setting, or use 3rd party API compatible alternative clients without having to alter the resource manager installation.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><cite>bin_overrides</cite> is an advanced feature. OOD relies both on return codes from clients, and on parsing the standard output in order to get information about submitted jobs. Care and testing is recommended.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># An example in Slurm</span>
+<span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;slurm&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/slurm/bin&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">conf</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/slurm/etc/slurm.conf&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">bin_overrides</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">squeue</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/local/slurm/bin/squeue_wrapper&quot;</span>
+      <span class="c1"># Override just want you want/need to</span>
+      <span class="c1"># scontrol: &quot;/usr/local/slurm/bin/scontrol_wrapper&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">sbatch</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/local/slurm/bin/sbatch_wrapper&quot;</span>
+      <span class="c1"># Will be ignored because bsub is not a command used in the Slurm adapter</span>
+      <span class="l l-Scalar l-Scalar-Plain">bsub</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/lsf/bin/bsub&quot;</span>
+</pre></div>
+</div>
+<p>Adapter support for this feature is mixed. For example for Slurm <cite>sbatch</cite>, <cite>scontrol</cite>, <cite>scancel</cite> and <cite>squeue</cite> are all supported. For Torque only <cite>qsub</cite> is supported. Unsupported options are ignored.</p>
+</div>
+</div>
+<div class="section" id="acls">
+<h3>acls:<a class="headerlink" href="#acls" title="Permalink to this headline">¶</a></h3>
+<p>Access control lists provide a method to limit cluster access by group membership. ACLs are implictly whitelists but may be set explicitly to either <cite>whitelist</cite> or <cite>blacklist</cite>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">acls</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;group&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">groups</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;cluster_users&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;other_users_of_the_cluster&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;whitelist&quot;</span>  <span class="c1"># optional, one of &quot;whitelist&quot; or &quot;blacklist&quot;</span>
+</pre></div>
+</div>
+<p>Note that to look up group membership ood_core uses the ood_support library which uses <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">-G</span> <span class="pre">USERNAME</span></code>
+to get the list groups the user is in, and <code class="docutils literal notranslate"><span class="pre">getgrgid</span></code> to look up the name of the group.</p>
+</div>
+<div class="section" id="custom">
+<h3>custom:<a class="headerlink" href="#custom" title="Permalink to this headline">¶</a></h3>
+<p>The custom mapping is a space that is available for extension, and does not have a schema. In OSC’s usage the custom namespace has been used to provide more cluster-specific information for in-house custom applications.</p>
+</div>
+<div class="section" id="batch-connect">
+<h3>batch_connect:<a class="headerlink" href="#batch-connect" title="Permalink to this headline">¶</a></h3>
+<p>Batch connect controls the defaults for interactive applications such as Jupyter or interactive desktops.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\n%s&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\nmodule</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">ondemand-vnc\n%s&quot;</span>
+</pre></div>
+</div>
+<p>Script wrappers may contain Bash statements, and are useful for setting up a default environment, and or cleaning up after a script. The keys <cite>basic</cite> and <cite>vnc</cite> refer to the two types of batch connect application templates. <cite>script_wrapper’s</cite> have the content of a batch connect script interpolated into them. String interpolation is performed using <cite>sprintf</cite>, with the script’s content replacing the <cite>%s</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The user is responsible for providing the <cite>%s</cite> that is used to place the script content. If a <cite>script_wrapper</cite> is provided without <cite>%s</cite> then batch connect applications are unlikely to work properly.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="resource-manager.html" class="btn btn-neutral float-right" title="Resource Manager Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="add-cluster-config.html" class="btn btn-neutral float-left" title="Add Cluster Configuration Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/cluster-config-schema.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/cluster-config-schema.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/cluster-config-schema.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/cluster-config-schema.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/cluster-config-schema.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/cluster-config-schema.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/cluster-config-schema.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/cluster-config-schema.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/cluster-config-schema.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

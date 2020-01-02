@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Finalizing From Source Installation &mdash; Open OnDemand 1.6.7 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Modify System Security" href="../modify-system-security.html" />
+    <link rel="prev" title="Install OnDemand Core Applications" href="core-apps.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../installation.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../install-software.html">1. Install Software From RPM</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../from-source.html">2. Install From Source</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="system-dependencies.html">Install System Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ood-infrastructure.html">Install OnDemand Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core-apps.html">Install OnDemand Core Applications</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Finalizing From Source Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#update-the-apache-service-environment">Update the Apache service environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-the-sudoers-list">Update the sudoers list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-nginx-configs-for-the-core-web-apps">Add NGINX configs for the core web apps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-a-cronjob-to-prune-long-running-puns">Add a cronjob to prune long running PUNs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-apache-config">Add Apache Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation-complete">Installation Complete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modify-system-security.html">3. Modify System Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start-apache.html">4. Start Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-ssl.html">5. Add SSL Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-ldap.html">6. Add LDAP Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../installation.html">Installation</a> &raquo;</li>
+        
+          <li><a href="../from-source.html">2. Install From Source</a> &raquo;</li>
+        
+      <li>Finalizing From Source Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.7/source/installation/from-source/finalizing.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="finalizing-from-source-installation">
+<span id="finalizing"></span><h1>Finalizing From Source Installation<a class="headerlink" href="#finalizing-from-source-installation" title="Permalink to this headline">¶</a></h1>
+<p>Now that all the necessary software has been installed to the system there are configuration steps that need to be taken to finalize the build.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#update-the-apache-service-environment">Update the Apache service environment</a></li>
+<li><a class="reference internal" href="#update-the-sudoers-list">Update the sudoers list</a></li>
+<li><a class="reference internal" href="#add-nginx-configs-for-the-core-web-apps">Add NGINX configs for the core web apps</a></li>
+<li><a class="reference internal" href="#add-a-cronjob-to-prune-long-running-puns">Add a cronjob to prune long running PUNs</a></li>
+<li><a class="reference internal" href="#add-apache-config">Add Apache Config</a></li>
+</ul>
+<div class="section" id="update-the-apache-service-environment">
+<h2>Update the Apache service environment<a class="headerlink" href="#update-the-apache-service-environment" title="Permalink to this headline">¶</a></h2>
+<p>In order to be able to run Passenger we need Apache’s service environment to know about the correct version of Ruby:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;s/^HTTPD24_HTTPD_SCLS_ENABLED=.*/HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 %{?scl_ondemand_ruby}&quot;/&#39;</span> \
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">rh</span><span class="o">/</span><span class="n">httpd24</span><span class="o">/</span><span class="n">service</span><span class="o">-</span><span class="n">environment</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-the-sudoers-list">
+<h2>Update the sudoers list<a class="headerlink" href="#update-the-sudoers-list" title="Permalink to this headline">¶</a></h2>
+<p>The sudoer’s list must be updated to permit Apache.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>sudo /etc/sudoers.d/ood &lt;&lt; EOF
+Defaults:apache !requiretty, !authenticate
+apache ALL=(ALL) NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage
+EOF
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-nginx-configs-for-the-core-web-apps">
+<h2>Add NGINX configs for the core web apps<a class="headerlink" href="#add-nginx-configs-for-the-core-web-apps" title="Permalink to this headline">¶</a></h2>
+<p>NGINX configs must be generated for all of the core applications otherwise the first user to use each app will be prompted with a first time message.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">activejobs</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">file</span><span class="o">-</span><span class="n">editor</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">files</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">myjobs</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">shell</span><span class="o">.</span><span class="n">conf</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">update_nginx_stage</span> <span class="o">&amp;&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">||</span> <span class="p">:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-cronjob-to-prune-long-running-puns">
+<h2>Add a cronjob to prune long running PUNs<a class="headerlink" href="#add-a-cronjob-to-prune-long-running-puns" title="Permalink to this headline">¶</a></h2>
+<p>Remove in-active PUNs every 2 hours.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cron</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">ood</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
+<span class="c1">#!/bin/bash</span>
+<span class="n">PATH</span><span class="o">=/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span>
+<span class="mi">0</span> <span class="o">*/</span><span class="mi">2</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="n">root</span> <span class="p">[</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx_stage</span> <span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx_stage</span> <span class="n">nginx_clean</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="o">|</span> <span class="n">logger</span> <span class="o">-</span><span class="n">t</span> <span class="n">nginx_clean</span>
+<span class="n">EOF</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-apache-config">
+<h2>Add Apache Config<a class="headerlink" href="#add-apache-config" title="Permalink to this headline">¶</a></h2>
+<p>At this point we still will not see an OnDemand page if we visit our web node because the ood-portal configuration has not been generated. Generate a generic one now:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">generator</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">update_ood_portal</span>
+</pre></div>
+</div>
+<p>This is the basic OnDemand portal configuration and unless you are using Apache’s basic auth for your site you will need to createa custom portal configuration file and re-run the portal generator. More information on the Apache config generator is available in the Configure Authentication section.</p>
+</div>
+<div class="section" id="installation-complete">
+<h2>Installation Complete<a class="headerlink" href="#installation-complete" title="Permalink to this headline">¶</a></h2>
+<p>At this point installation of OnDemand is complete, and it is time to move on to configuring the application.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modify-system-security.html" class="btn btn-neutral float-right" title="3. Modify System Security" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="core-apps.html" class="btn btn-neutral float-left" title="Install OnDemand Core Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/from-source/finalizing.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/from-source/finalizing.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/from-source/finalizing.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/from-source/finalizing.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/from-source/finalizing.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/from-source/finalizing.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/from-source/finalizing.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/from-source/finalizing.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/from-source/finalizing.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
