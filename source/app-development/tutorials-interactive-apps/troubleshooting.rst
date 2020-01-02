@@ -6,7 +6,13 @@ Troubleshooting Interactive Apps
 The window cannot be resized/moved/maximized
 ********************************************
 
-While a window manager is not strictly required to be able to set up a desktop/VNC application, one is required to be able to perform many common tasks like moving a window, resizing it, or even locating the window after it has been minimized. The Matlab example provides examples of how to set up :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-xfce`, :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-mate`, and :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox` (mentioned in order of OSC preference).
+While a window manager is not strictly required to be able to set up a desktop/VNC application, one is required to be able to perform many common tasks like moving a window, resizing it, or even locating the window after it has been minimized. The OnDemand team has experience working with XFCE, Mate and Fluxbox (in order of preference). Select one of the window manager / desktop options and ensure that it is installed on the compute nodes.
+
+You will then need to edit ``$APP/template/script.sh.erb`` to start the window manager / desktop before the interactive app itself. Examples:
+
+- :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-xfce`
+- :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-mate`
+- :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox`
 
 Matlab throws Java errors when the window is resized
 ****************************************************
