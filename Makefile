@@ -53,7 +53,7 @@ html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
         find $(BUILDDIR)/html -name "*.drawio" -print | xargs -I {} draw.io -x -f "png" {}
 	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html & drawio images are in source/images."
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 .PHONY: dirhtml
 dirhtml:
