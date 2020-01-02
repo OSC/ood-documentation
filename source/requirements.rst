@@ -14,6 +14,7 @@ On the Web node serving OnDemand itself:
 - `sudo`_
 - `OnDemand repository`_:
     - ondemand-{{ondemand_version}}-1.el7.x86_64.rpm
+
 .. _Software Collections repositories: https://www.softwarecollections.org/en/
 .. _EPEL repository: https://fedoraproject.org/wiki/EPEL
 .. _lsof: https://en.wikipedia.org/wiki/Lsof
