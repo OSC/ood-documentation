@@ -138,7 +138,7 @@ The code for starting Mate in the background looks like this (see highlighted li
 
 .. note::
 
-    `According to the developers`_ the correct pronunciation of Mate is "may-tah" like the drink, and not matey like pirates, or mate like friends.
+    `According to the developers`_ the correct pronunciation of Mate is "mah-tay" like the drink, and not matey like pirates, or mate like a friend.
 
 .. _app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox:
 
