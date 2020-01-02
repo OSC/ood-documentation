@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Modify System Security &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>3. Modify System Security &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.6
+                1.7
               </div>
             
           
@@ -129,6 +129,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
@@ -220,7 +221,7 @@
 <span id="ood-selinux"></span><h2>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
 <div class="admonition danger">
 <p class="first admonition-title">Danger</p>
-<p class="last">Support for SELinux on the Open OnDemand host is currently considered an alpha feature.</p>
+<p class="last">Support for SELinux on the Open OnDemand host is currently considered a beta feature.</p>
 </div>
 <ol class="arabic">
 <li><p class="first">If you plan to use <a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">SELinux</a> on the Open OnDemand host you must install the <cite>ondemand-selinux</cite> package.</p>
@@ -229,16 +230,43 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">OnDemand runs under the Apache <cite>httpd_t</cite> context.</p>
+<p class="last">OnDemand runs under the <cite>ood_pun_t</cite> context.</p>
 </div>
 </li>
 </ol>
 <p>The OnDemand SELinux package makes several changes to allow OnDemand to run with SELinux enabled.</p>
 <ul class="simple">
-<li>Set context of several ondemand-nginx directories and files.</li>
-<li>Enable several booleans.</li>
-<li>Apply a custom policy to allow some additional actions by processes in the <cite>httpd_t</cite> context.</li>
+<li>Set contexts of several filesystem paths specific to OnDemand.</li>
+<li>Enable SELinux booleans.</li>
+<li>Apply a custom policy to allow actions to performed by <cite>ood_pun_t</cite> context.</li>
 </ul>
+<p>The custom SELinux booleans provided by the OnDemand SELinux policy:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_manage_user_home_dir</span></code> (<strong>default=off</strong>): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_manage_vmblock</span></code> (<strong>default=off</strong>): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_nfs</span></code> (<strong>default=on</strong>): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> (<strong>default=on</strong>): Adds necessary rules to allow the OnDemand Shell app to function.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_sssd</span></code> (<strong>default=on</strong>): Allows OnDemand to access SSSD</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_slurm</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with SLURM and MUNGE.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_torque</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with Torque.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_ldap</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with remote LDAP servers. This does not affect Apache LDAP authentication. This is only necessary if the PUN is interacting with LDAP ports.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_kerberos</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kerberos.</li>
+</ul>
+<p>The following SELinux booleans are enabled by the <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> package:</p>
+<ul class="simple">
+<li>httpd_setrlimit</li>
+<li>httpd_mod_auth_pam</li>
+<li>httpd_run_stickshift</li>
+<li>httpd_can_network_connect</li>
+<li>daemons_use_tty</li>
+<li>use_nfs_home_dirs (can be disabled if the OnDemand web node is not using NFS for home directories)</li>
+</ul>
+<p>The following example disabled the Shell app SELinux boolean.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo setsebool -P <span class="nv">ondemand_use_shell_app</span><span class="o">=</span>off
+</pre></div>
+</div>
+</div></blockquote>
 <p>If you experience denials when running SELinux with Open OnDemand please provide denial details by generating a <cite>ood.te</cite> file and posting that to <a class="reference external" href="https://discourse.osc.edu/c/open-ondemand">Discourse</a>. It would also help to post the <cite>audit.log</cite> lines that correspond to the OnDemand specific denials.</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cat /var/log/audit/audit.log <span class="p">|</span> audit2allow -M ood
