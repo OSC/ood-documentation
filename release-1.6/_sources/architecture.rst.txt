@@ -30,9 +30,6 @@ System context
 -----------------------
 
 Users use OnDemand to interact with their HPC resources through a web browser.
-At the highest level, this is what the OnDemand system does.  OnDemand is the
-system that enables that interaction.
-
 
 .. figure:: /architecture/ood_system_view.png
 
@@ -42,20 +39,20 @@ system.
 Container context
 -----------------------
 
-In the C4 nomenclature, 'containers' are one level below the system context. This is
-not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or
-Singularity or `OCI containers <https://www.opencontainers.org/>`_).
+.. tip::
 
-It's important to note in this diagram that the frontend proxy is the only
-component that is shared for all clients. The system will create Per User
-Nginx processes (referred to as PUNs throughout the documentation). So what's diagrammed
-here in the outer light blue box is replicated for every client accessing the
-system.
+   In the C4 nomenclature, 'containers' are one level below the system context. This is
+   not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or
+   Singularity or `OCI containers <https://www.opencontainers.org/>`_).
+
+The Front-end proxy is the only component that is shared with all clients.
+The Front-end proxy will create Per User Nginx (PUN) processes (light blue boxes labeled "Per User Instance").
 
 .. figure:: /architecture/ood_container_view.png
 
-* Everything contained in the dotted line is a part of the OnDemand system.
+* Everything contained in the dotted line is a part of the OnDemand system (see blue box in System context diagram).
 * Everything outside of it in gray is site specific components.
+* The "Per User Instance" light blue boxes are replicated for every user accessing the system
 
 Request Flow
 -----------------------

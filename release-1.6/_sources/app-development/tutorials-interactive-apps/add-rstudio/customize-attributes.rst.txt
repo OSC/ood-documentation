@@ -73,3 +73,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
 .. warning::
 
   There was a breaking change between Singularity 2.x and 3.x with how a host ``PATH`` may be propagated to the guest. In version 2.x you must export ``PATH`` as ``SINGULARITYENV_PATH`` in order for the ``PATH`` inside the container to include ``rserver``. In version 3.x ``PATH`` alone is sufficient.
+
+.. warning::
+
+  There was a breaking change between Singularity 3.4.x and 3.5.x with how a host ``LD_LIBRARY_PATH`` is propagated to the guest. In version 3.5.x you must export ``LD_LIBRARY_PATH`` as ``SINGULARITYENV_LD_LIBRARY_PATH``.
