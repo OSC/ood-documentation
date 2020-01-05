@@ -60,6 +60,12 @@ In the example above:
   OnDemand portal followed by redirecting the user to log out of the Shibboleth
   IdP server.
 
-Build the Apache configuration file and install it.
+Remember, in order to apply modifications to the :file:`/etc/ood/config/ood_portal.yml`
+you need to generate the new Apache configuration file with:
+
+.. code-block:: sh
+
+   sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
 
 .. _apache module for shibboleth: https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig
