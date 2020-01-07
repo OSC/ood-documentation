@@ -51,7 +51,7 @@ clean:
 .PHONY: html
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
-        find $(BUILDDIR)/html -name "*.drawio" -print | xargs -I {} draw.io -x -f "png" {}
+	find $(BUILDDIR)/html -name "*.drawio" -print | xargs -I {} draw.io -x -f "png" {}
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
