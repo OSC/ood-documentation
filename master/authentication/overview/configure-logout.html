@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Configure Keycloak &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>3. Configure Logout &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3. Configure OnDemand to authenticate with Keycloak" href="install_mod_auth_openidc.html" />
-    <link rel="prev" title="1. Install Keycloak" href="install-keycloak.html" /> 
+    <link rel="next" title="Add Shibboleth Authentication" href="../shibboleth.html" />
+    <link rel="prev" title="2. Setup User Mapping" href="map-user.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,21 +99,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configure-authentication.html">1. Configure Apache Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="map-user.html">2. Setup User Mapping</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3. Configure Logout</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../shibboleth.html">Add Shibboleth Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cas.html">Add CAS Authentication</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="install-keycloak.html">1. Install Keycloak</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Configure Keycloak</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#add-a-new-realm">2.1. Add a new realm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#configure-ldap">2.2. Configure LDAP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-ondemand-as-a-client">2.3. Add OnDemand as a client</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 </ul>
 </li>
@@ -200,16 +194,16 @@
         
           <li><a href="../../authentication.html">Authentication</a> &raquo;</li>
         
-          <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
+          <li><a href="../overview.html">Overview</a> &raquo;</li>
         
-      <li>2. Configure Keycloak</li>
+      <li>3. Configure Logout</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/master/source/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/master/source/authentication/overview/configure-logout.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -223,77 +217,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="configure-keycloak">
-<span id="authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui"></span><h1>2. Configure Keycloak<a class="headerlink" href="#configure-keycloak" title="Permalink to this headline">¶</a></h1>
-<p>We will now use Keycloak’s admin Web UI to setup LDAP and add OnDemand as an
-OIDC client that will authenticate with Keycloak.</p>
-<div class="section" id="add-a-new-realm">
-<h2>2.1. Add a new realm<a class="headerlink" href="#add-a-new-realm" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Log into <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> as the admin user</li>
-<li>Hover over “Master” on left and click “Add Realm”</li>
-<li>Type in name “ondemand” and click “Create”. The new realm is loaded.</li>
-<li>Click Login tab, then adjust parameters:<ol class="arabic">
-<li>Remember Me: ON</li>
-<li>Login with email: OFF</li>
-</ol>
-</li>
-<li>Click Save.</li>
-</ol>
+  <div class="section" id="configure-logout">
+<span id="authentication-overview-configure-logout"></span><h1>3. Configure Logout<a class="headerlink" href="#configure-logout" title="Permalink to this headline">¶</a></h1>
+<p>The logout link on the dashboard is <code class="docutils literal notranslate"><span class="pre">/logout</span></code>. OnDemand’s Apache config has a separate directive to handle <code class="docutils literal notranslate"><span class="pre">/logout</span></code>, which by default redirects the user to <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard/logout</span></code>, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.</p>
+<p>To change the logout_redirect URL, set <code class="docutils literal notranslate"><span class="pre">logout_redirect:</span> <span class="pre">&quot;https:://URL/TO/LOGOUT/USER&quot;</span></code> in the ood-portal-generator config at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> and regenerate the config.</p>
+<dl class="describe">
+<dt>
+<code class="descname">logout_redirect (String, null)</code></dt>
+<dd><p>the URI the user is redirected to when accessing the logout URI above</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Redirect to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> log out page</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard/logout&quot;</span>
+</pre></div>
 </div>
-<div class="section" id="configure-ldap">
-<h2>2.2. Configure LDAP<a class="headerlink" href="#configure-ldap" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Choose User Federation on the left (verify ondemand realm is current realm)</li>
-<li>Select “ldap” for provider<ol class="arabic">
-<li>Import Users set to OFF</li>
-<li>Edit Mode set to READ_ONLY</li>
-<li>Vendor set to other – for OpenLDAP</li>
-<li>User Object Classes set to posixAccount – OSC specific and odd</li>
-<li>Connection URL: ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1</li>
-<li>User DN: ou=People,dc=osc,dc=edu</li>
-<li>Auth Type: none – OSC specific as we allow anonymous binds</li>
-<li>Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs</li>
-</ol>
-</li>
-<li>Save</li>
-</ol>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">These LDAP settings are what we set for OSC. Your configuration may vary from
-this. If you run into any problems, please let us know so that once a
-solution is reached we can document those problem areas here. Contact us on
-the OnDemand Discourse at <a class="reference external" href="https://discourse.osc.edu/c/open-ondemand">https://discourse.osc.edu/c/open-ondemand</a>.</p>
+</dd>
+<dt>Using OpenID Connect Apache module</dt>
+<dd><p class="first">Redirect to the mod_auth_oidc logout location:</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc?logout=https%3A%2F%2Fondemand.my-center.edu&quot;</span>
+</pre></div>
 </div>
+</dd>
+<dt>Using Shibboleth Apache module</dt>
+<dd><p class="first">If the Shibboleth IdP server deployed is at idp.my-center.edu, this is an example redirect with mod_auth_shib:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout&quot;</span>
+</pre></div>
 </div>
-<div class="section" id="add-ondemand-as-a-client">
-<h2>2.3. Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Choose Clients, then click Create in top right corner<ol class="arabic">
-<li>Client ID: webdev07.hpc.osc.edu</li>
-<li>Client Protocol: openid-connect</li>
-<li>Client Template: ondemand-clients</li>
-<li>Save (leave Root URL blank)</li>
-</ol>
-</li>
-<li>Then edit Settings for the newly created client:<ol class="arabic">
-<li>Access Type: confidential</li>
-<li>Direct Access Grants Enabled: off</li>
-<li>Valid Redirect URIs: Press the <code class="docutils literal notranslate"><span class="pre">+</span></code> button to the right of the URI field so you can insert two URLs:<ol class="arabic">
-<li><code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu/oidc</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code></li>
-</ol>
-</li>
-<li>Scroll to bottom and click “Save”</li>
-</ol>
-</li>
-<li>Finally, get the client secret to use with OnDemand installation:<ol class="arabic">
-<li>Select the “Credentials” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; webdev07.hpc.osc.edu”</li>
-<li>Copy the value for “secret” for future use in this tutorial (and keep it secure).</li>
-</ol>
-</li>
-</ol>
-</div>
+<p class="last">See <a class="reference internal" href="../../infrastructure/ood-portal-generator/examples/add-shibboleth-authentication.html#add-shibboleth-authentication"><span class="std std-ref">Add Shibboleth Authentication</span></a> for more details regarding setting up authentication with the Shibboleth Apache module.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -304,10 +258,10 @@ the OnDemand Discourse at <a class="reference external" href="https://discourse.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="install_mod_auth_openidc.html" class="btn btn-neutral float-right" title="3. Configure OnDemand to authenticate with Keycloak" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../shibboleth.html" class="btn btn-neutral float-right" title="Add Shibboleth Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install-keycloak.html" class="btn btn-neutral float-left" title="1. Install Keycloak" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="map-user.html" class="btn btn-neutral float-left" title="2. Setup User Mapping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -339,23 +293,23 @@ the OnDemand Discourse at <a class="reference external" href="https://discourse.
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/overview/configure-logout.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/overview/configure-logout.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/overview/configure-logout.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/overview/configure-logout.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/overview/configure-logout.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/overview/configure-logout.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/overview/configure-logout.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/overview/configure-logout.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/overview/configure-logout.html">develop</a></dd>
       
     </dl>
     <dl>
