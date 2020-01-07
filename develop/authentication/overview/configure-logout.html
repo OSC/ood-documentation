@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Add Custom Theme &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>3. Configure Logout &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Two Factor Auth using Duo with Keycloak" href="../duo-2fa-with-keycloak.html" />
-    <link rel="prev" title="3. Configure OnDemand to authenticate with Keycloak" href="install_mod_auth_openidc.html" /> 
+    <link rel="next" title="Add Shibboleth Authentication" href="../shibboleth.html" />
+    <link rel="prev" title="2. Setup User Mapping" href="map-user.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,16 +99,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../authentication.html">Authentication</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../overview.html">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../shibboleth.html">Add Shibboleth Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cas.html">Add CAS Authentication</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="install-keycloak.html">1. Install Keycloak</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configure-keycloak-webui.html">2. Configure Keycloak</a></li>
-<li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4. Add Custom Theme</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configure-authentication.html">1. Configure Apache Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="map-user.html">2. Setup User Mapping</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3. Configure Logout</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../shibboleth.html">Add Shibboleth Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cas.html">Add CAS Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 </ul>
 </li>
@@ -195,16 +194,16 @@
         
           <li><a href="../../authentication.html">Authentication</a> &raquo;</li>
         
-          <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a> &raquo;</li>
+          <li><a href="../overview.html">Overview</a> &raquo;</li>
         
-      <li>4. Add Custom Theme</li>
+      <li>3. Configure Logout</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/overview/configure-logout.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -218,39 +217,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="add-custom-theme">
-<span id="authentication-tutorial-oidc-keycloak-rhel7-add-custom-theme"></span><h1>4. Add Custom Theme<a class="headerlink" href="#add-custom-theme" title="Permalink to this headline">¶</a></h1>
-<p>Custom themes are added to a realm by</p>
-<ol class="arabic simple">
-<li>adding the theme directory to <code class="docutils literal notranslate"><span class="pre">/opt/keycloak-4.8.3.Final/themes</span></code></li>
-<li>selecting the theme via Admin Web UI &gt;&gt; Realm Settings &gt;&gt; Themes</li>
-</ol>
-<p>Each theme is selectable based on the directory name of the theme. Themes can
-extend other themes.</p>
-<p>Here are two links to get started with a custom theme:</p>
-<ol class="arabic simple">
-<li>Currently version <a class="reference external" href="https://github.com/OSC/keycloak-theme/tree/v2.0.0">v2.0.0 of OSC’s Keycloak theme</a>
-can be used as a starting point for modification. This theme is based off of
-the default <code class="docutils literal notranslate"><span class="pre">keycloak</span></code> theme which itself is based off the <code class="docutils literal notranslate"><span class="pre">base</span></code> theme.
-Files to modify include:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">login/login.ftl</span></code> file for the footer links:
-<a class="reference external" href="https://github.com/OSC/keycloak-theme/blob/v2.0.0/login/login.ftl#L63-L73">https://github.com/OSC/keycloak-theme/blob/v2.0.0/login/login.ftl#L63-L73</a></li>
-<li><code class="docutils literal notranslate"><span class="pre">login/resources/img/ondemand-logo.png</span></code> add a logo with this name here</li>
-<li><code class="docutils literal notranslate"><span class="pre">login/resources/img/favicon.ico</span></code> replace with your own or remove</li>
-<li><code class="docutils literal notranslate"><span class="pre">login/messages/messages_en.properties</span></code> replace text with text
-appropriate for your center</li>
-</ul>
-</li>
-<li>See the Keycloak documentation for themes: <a class="reference external" href="https://www.keycloak.org/docs/latest/server_development/index.html#_themes">https://www.keycloak.org/docs/latest/server_development/index.html#_themes</a></li>
-</ol>
-<p>Remember after adding a theme you still need to configure your realm in the
-Keycloak admin UI to use the theme for the login pages.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Soon we will offer an ood-keycloak base theme that be easier to extended to
-provide most of the common themeing a site might like to perform. It will
-also work well for OTP views.</p>
+  <div class="section" id="configure-logout">
+<span id="authentication-overview-configure-logout"></span><h1>3. Configure Logout<a class="headerlink" href="#configure-logout" title="Permalink to this headline">¶</a></h1>
+<p>The logout link on the dashboard is <code class="docutils literal notranslate"><span class="pre">/logout</span></code>. OnDemand’s Apache config has a separate directive to handle <code class="docutils literal notranslate"><span class="pre">/logout</span></code>, which by default redirects the user to <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard/logout</span></code>, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.</p>
+<p>To change the logout_redirect URL, set <code class="docutils literal notranslate"><span class="pre">logout_redirect:</span> <span class="pre">&quot;https:://URL/TO/LOGOUT/USER&quot;</span></code> in the ood-portal-generator config at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> and regenerate the config.</p>
+<dl class="describe">
+<dt>
+<code class="descname">logout_redirect (String, null)</code></dt>
+<dd><p>the URI the user is redirected to when accessing the logout URI above</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Redirect to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> log out page</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard/logout&quot;</span>
+</pre></div>
 </div>
+</dd>
+<dt>Using OpenID Connect Apache module</dt>
+<dd><p class="first">Redirect to the mod_auth_oidc logout location:</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc?logout=https%3A%2F%2Fondemand.my-center.edu&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Using Shibboleth Apache module</dt>
+<dd><p class="first">If the Shibboleth IdP server deployed is at idp.my-center.edu, this is an example redirect with mod_auth_shib:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout&quot;</span>
+</pre></div>
+</div>
+<p class="last">See <a class="reference internal" href="../../infrastructure/ood-portal-generator/examples/add-shibboleth-authentication.html#add-shibboleth-authentication"><span class="std std-ref">Add Shibboleth Authentication</span></a> for more details regarding setting up authentication with the Shibboleth Apache module.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -261,10 +258,10 @@ also work well for OTP views.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../duo-2fa-with-keycloak.html" class="btn btn-neutral float-right" title="Two Factor Auth using Duo with Keycloak" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../shibboleth.html" class="btn btn-neutral float-right" title="Add Shibboleth Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install_mod_auth_openidc.html" class="btn btn-neutral float-left" title="3. Configure OnDemand to authenticate with Keycloak" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="map-user.html" class="btn btn-neutral float-left" title="2. Setup User Mapping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -296,23 +293,23 @@ also work well for OTP views.</p>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/overview/configure-logout.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/overview/configure-logout.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/overview/configure-logout.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/overview/configure-logout.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/overview/configure-logout.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/overview/configure-logout.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/overview/configure-logout.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/overview/configure-logout.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/overview/configure-logout.html">develop</a></dd>
       
     </dl>
     <dl>
