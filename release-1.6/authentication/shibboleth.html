@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>Add Shibboleth Authentication &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Configure Apache Authentication" href="overview/configure-authentication.html" />
-    <link rel="prev" title="Authentication" href="../authentication.html" /> 
+    <link rel="next" title="Add CAS Authentication" href="cas.html" />
+    <link rel="prev" title="3. Configure Logout" href="overview/configure-logout.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,13 +99,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="overview/configure-authentication.html">1. Configure Apache Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="overview/map-user.html">2. Setup User Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="overview/configure-logout.html">3. Configure Logout</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Add Shibboleth Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Add Shibboleth Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cas.html">Add CAS Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
@@ -194,14 +189,14 @@
         
           <li><a href="../authentication.html">Authentication</a> &raquo;</li>
         
-      <li>Overview</li>
+      <li>Add Shibboleth Authentication</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.6/source/authentication/overview.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.6/source/authentication/shibboleth.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -215,32 +210,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="overview">
-<span id="authentication-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>Configuring Open OnDemand to work with an Apache authentication module can be
-broken down into three procedures:</p>
-<ol class="arabic simple">
-<li>Install and configure the Apache authentication module</li>
-<li>Setup the mapping of the remote user to the local user</li>
-<li>Configure logout</li>
-</ol>
-<p>These are discussed in more detail in the following sections.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Setup Authentication Module</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview/configure-authentication.html">1. Configure Apache Authentication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#compile-authentication-module">1.1. Compile Authentication Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#configure-authentication-module">1.2. Configure Authentication Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#add-to-ondemand-portal">1.3. Add to OnDemand Portal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview/configure-authentication.html#sanitize-session-information">1.4. Sanitize Session Information</a></li>
+  <div class="section" id="add-shibboleth-authentication">
+<span id="authentication-shibboleth"></span><h1>Add Shibboleth Authentication<a class="headerlink" href="#add-shibboleth-authentication" title="Permalink to this headline">¶</a></h1>
+<p>The following prerequisites need to be satisfied:</p>
+<ul class="simple">
+<li>A Shibboleth IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.my-center.edu</span></code> (outside of
+scope of this document)</li>
+<li>The <a class="reference external" href="https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig">Apache module for Shibboleth</a> installed on the OnDemand Server and
+properly configured with its own Apache config (outside of scope of this
+document)</li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="overview/map-user.html">2. Setup User Mapping</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview/map-user.html#custom-mapping">2.1. Custom Mapping</a></li>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>It is required you turn on <code class="docutils literal notranslate"><span class="pre">ShibCompatValidUser</span></code> in your Apache config
+when setting up the Shibboleth module for Apache above.</p>
+<div class="last highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="c"># /path/to/httpd/conf.d/auth_shib.conf</span>
+
+<span class="c">#</span>
+<span class="c"># Turn this on to support &quot;require valid-user&quot; rules from other</span>
+<span class="c"># mod_authn_* modules, and use &quot;require shib-session&quot; for anonymous</span>
+<span class="c"># session-based authorization in mod_shib.</span>
+<span class="c">#</span>
+<span class="nb">ShibCompatValidUser</span> <span class="k">On</span>
+</pre></div>
+</div>
+</div>
+<p>Then you can modify your <strong class="program">ood-portal-generator</strong> configuration file as
+such:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+
+<span class="c1"># Use Shibboleth authentication</span>
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">shibboleth&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;ShibRequestSetting</span><span class="nv"> </span><span class="s">requireSession</span><span class="nv"> </span><span class="s">1&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">edit*</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;(^_shibsession_[^;]*(;\\s*)?|;\\s*_shibsession_[^;]*)\&quot;</span><span class="nv"> </span><span class="s">\&quot;\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;expr=-z</span><span class="nv"> </span><span class="s">%{req:Cookie}\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
+
+<span class="c1"># Use Shibboleth logout</span>
+<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout</span>
+
+<span class="c1"># Capture system user name from authenticated user name</span>
+<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@my-center.edu&#39;&quot;</span>
+</pre></div>
+</div>
+<p>In the example above:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> uses regular expressions to map the authenticated user
+<code class="docutils literal notranslate"><span class="pre">bob&#64;my-center.edu</span></code> to their system user name <code class="docutils literal notranslate"><span class="pre">bob</span></code>.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">RequestHeader</span></code> settings are used to strip private session information
+from being sent to the backend web servers.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">logout_redirect</span></code> will first redirect the user to log out of the Open
+OnDemand portal followed by redirecting the user to log out of the Shibboleth
+IdP server.</li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="overview/configure-logout.html">3. Configure Logout</a></li>
-</ul>
+<p>Remember, in order to apply modifications to the <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>
+you need to generate the new Apache configuration file with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+</pre></div>
 </div>
 </div>
 
@@ -252,10 +280,10 @@ broken down into three procedures:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="overview/configure-authentication.html" class="btn btn-neutral float-right" title="1. Configure Apache Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cas.html" class="btn btn-neutral float-right" title="Add CAS Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../authentication.html" class="btn btn-neutral float-left" title="Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="overview/configure-logout.html" class="btn btn-neutral float-left" title="3. Configure Logout" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -287,23 +315,23 @@ broken down into three procedures:</p>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/overview.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/shibboleth.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/overview.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/shibboleth.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/overview.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/shibboleth.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/overview.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/shibboleth.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/overview.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/shibboleth.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/overview.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/shibboleth.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/overview.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/shibboleth.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/overview.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/shibboleth.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/overview.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/shibboleth.html">develop</a></dd>
       
     </dl>
     <dl>
