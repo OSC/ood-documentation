@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add a Matlab App &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>Add a MATLAB App &mdash; Open OnDemand 1.6.7 documentation</title>
   
 
   
@@ -116,14 +116,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="add-jupyter.html">Add a Jupyter App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-rstudio.html">Add an RStudio App</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Add a Matlab App</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Add a MATLAB App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="add-matlab/software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-matlab/copy-app.html">2. Copy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-matlab/copy-app.html">2. Copy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-matlab/edit-form-yml.html">3. Customize Attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-matlab/edit-script-sh.html">4. Edit Launch Script</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-matlab/edit-submit-yml.html">5. Modify Submit Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-matlab/edit-form-js.html">6. Edit Form.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-matlab/deploy.html">7. Deploy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-matlab/deploy.html">7. Deploy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-matlab/known-issues.html">8. Known Issues</a></li>
 </ul>
 </li>
@@ -199,7 +199,7 @@
         
           <li><a href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-      <li>Add a Matlab App</li>
+      <li>Add a MATLAB App</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -221,10 +221,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="add-a-matlab-app">
-<span id="app-development-tutorials-interactive-apps-add-matlab"></span><h1>Add a Matlab App<a class="headerlink" href="#add-a-matlab-app" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial will walk you through creating an interactive Matlab app that
-your users will use to launch a <a class="reference external" href="https://www.mathworks.com/products/matlab.html">Matlab</a> within a batch job on a compute node.
-Matlab will be launched within the context of an XFCE desktop to provide a
+<span id="app-development-tutorials-interactive-apps-add-matlab"></span><h1>Add a MATLAB App<a class="headerlink" href="#add-a-matlab-app" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will walk you through creating an interactive MATLAB app that
+your users will use to launch a <a class="reference external" href="https://www.mathworks.com/products/matlab.html">MATLAB</a> within a batch job on a compute node.
+MATLAB will be launched within the context of an XFCE desktop to provide a
 window manager and terminal. The user will then be able to connect to the
 application through their browser and take advantage of the resources provided
 within the batch job.</p>
@@ -238,10 +238,10 @@ as well as <a class="reference internal" href="../../enable-desktops.html#enable
 <p class="caption"><span class="caption-text">Quick Start Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="add-matlab/software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-matlab/copy-app.html">2. Copy Matlab App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-matlab/copy-app.html">2. Copy MATLAB App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add-matlab/edit-form-yml.html">3. Customize Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add-matlab/edit-script-sh.html">4. Edit Launch Script</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="add-matlab/edit-script-sh.html#invoking-matlab-without-a-window-manager">Invoking Matlab without a Window Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-matlab/edit-script-sh.html#invoking-matlab-without-a-window-manager">Invoking MATLAB without a Window Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-matlab/edit-script-sh.html#use-xfce-for-the-window-manager">Use XFCE for the Window Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-matlab/edit-script-sh.html#use-mate-for-the-window-manager">Use Mate for the Window Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-matlab/edit-script-sh.html#use-fluxbox-for-the-window-manager">Use Fluxbox for the Window Manager</a></li>
@@ -255,7 +255,7 @@ as well as <a class="reference internal" href="../../enable-desktops.html#enable
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="add-matlab/edit-form-js.html">6. Edit Form.js</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-matlab/deploy.html">7. Deploy Matlab App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-matlab/deploy.html">7. Deploy MATLAB App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add-matlab/known-issues.html">8. Known Issues</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="add-matlab/known-issues.html#if-you-get-java-errors">If you get Java errors</a></li>
 </ul>

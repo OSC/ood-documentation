@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="4. Edit Launch Script" href="edit-script-sh.html" />
-    <link rel="prev" title="2. Copy Matlab App" href="copy-app.html" /> 
+    <link rel="prev" title="2. Copy MATLAB App" href="copy-app.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -116,14 +116,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a Matlab App</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a MATLAB App</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy MATLAB App</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">3. Customize Attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-script-sh.html">4. Edit Launch Script</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-submit-yml.html">5. Modify Submit Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-form-js.html">6. Edit Form.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="known-issues.html">8. Known Issues</a></li>
 </ul>
 </li>
@@ -199,7 +199,7 @@
         
           <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-          <li><a href="../add-matlab.html">Add a Matlab App</a> &raquo;</li>
+          <li><a href="../add-matlab.html">Add a MATLAB App</a> &raquo;</li>
         
       <li>3. Customize Attributes</li>
     
@@ -295,7 +295,7 @@
 the ones that are required, and some that may be universally useful.</p>
 </div>
 <ol class="arabic simple">
-<li>We will begin by adding a cluster for the Matlab app to use. You do this by editing <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.yml</span></code> in your favorite editor as such:</li>
+<li>We will begin by adding a cluster for the MATLAB app to use. You do this by editing <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.yml</span></code> in your favorite editor as such:</li>
 </ol>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/form.yml</span>
@@ -325,7 +325,7 @@ the ones that are required, and some that may be universally useful.</p>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
 <span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">version</span>               <span class="c1"># &lt;-- OSC supports multiple versions of Matlab via LMod</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">version</span>               <span class="c1"># &lt;-- OSC supports multiple versions of MATLAB via LMod</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>            <span class="c1"># &lt;-- the charge account</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>          <span class="c1"># &lt;-- the number of user requested hours that the job run</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>          <span class="c1"># &lt;-- the number of nodes</span>
@@ -372,7 +372,7 @@ the ones that are required, and some that may be universally useful.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">node_type</span></code> allows users to select which hardware they want to run their work on. In the <code class="docutils literal notranslate"><span class="pre">options</span></code> mapping the first value is displayed to the user, the second value is made available to any <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">ERB</a> files in <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/*</span></code> and <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span></code>. <code class="docutils literal notranslate"><span class="pre">version</span></code> allows the user to select what version of Matlab they want to run, and the second value corresponds to OSC’s module names.</p>
+<p><code class="docutils literal notranslate"><span class="pre">node_type</span></code> allows users to select which hardware they want to run their work on. In the <code class="docutils literal notranslate"><span class="pre">options</span></code> mapping the first value is displayed to the user, the second value is made available to any <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">ERB</a> files in <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/*</span></code> and <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span></code>. <code class="docutils literal notranslate"><span class="pre">version</span></code> allows the user to select what version of MATLAB they want to run, and the second value corresponds to OSC’s module names.</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
@@ -428,7 +428,7 @@ the ones that are required, and some that may be universally useful.</p>
         <a href="edit-script-sh.html" class="btn btn-neutral float-right" title="4. Edit Launch Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="copy-app.html" class="btn btn-neutral float-left" title="2. Copy Matlab App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="copy-app.html" class="btn btn-neutral float-left" title="2. Copy MATLAB App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
