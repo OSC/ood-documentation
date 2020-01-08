@@ -73,7 +73,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
     Multiple form elements / attributes are specific to OSC. We will focus on
     the ones that are required, and some that may be universally useful.
 
-1. We will begin by adding a cluster for the Matlab app to use. You do this by editing ``~/ondemand/dev/bc_my_center_matlab/form.yml`` in your favorite editor as such:
+1. We will begin by adding a cluster for the MATLAB app to use. You do this by editing ``~/ondemand/dev/bc_my_center_matlab/form.yml`` in your favorite editor as such:
 
   .. code-block:: yaml
     :emphasize-lines: 3
@@ -106,7 +106,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
       ---
       cluster: "owens"
       form:
-        - version               # <-- OSC supports multiple versions of Matlab via LMod 
+        - version               # <-- OSC supports multiple versions of MATLAB via LMod 
         - bc_account            # <-- the charge account
         - bc_num_hours          # <-- the number of user requested hours that the job run
         - bc_num_slots          # <-- the number of nodes
@@ -149,7 +149,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
             help: "You can leave this blank if **not** in multiple projects."
 
 
-    ``node_type`` allows users to select which hardware they want to run their work on. In the ``options`` mapping the first value is displayed to the user, the second value is made available to any `ERB`_ files in ``~/ondemand/dev/bc_my_center_matlab/template/*`` and ``~/ondemand/dev/bc_my_center_matlab/submit.yml.erb``. ``version`` allows the user to select what version of Matlab they want to run, and the second value corresponds to OSC's module names.
+    ``node_type`` allows users to select which hardware they want to run their work on. In the ``options`` mapping the first value is displayed to the user, the second value is made available to any `ERB`_ files in ``~/ondemand/dev/bc_my_center_matlab/template/*`` and ``~/ondemand/dev/bc_my_center_matlab/submit.yml.erb``. ``version`` allows the user to select what version of MATLAB they want to run, and the second value corresponds to OSC's module names.
 
       .. code-block:: yaml
 

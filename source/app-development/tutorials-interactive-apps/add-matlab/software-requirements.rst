@@ -3,11 +3,11 @@
 Software Requirements
 =====================
 
-The Matlab app requires the following software to be installed on the
+The MATLAB app requires the following software to be installed on the
 **compute** nodes that batch job is meant to run on, **NOT** the OnDemand
 node:
 
-- `Matlab`_
+- `MATLAB`_
 - `Xfce Desktop`_ 4+ or `Mate Desktop`_ 1+ (provides window manager, terminal, file manager)
 - `OpenJDK runtime`_
 - `VirtualGL`_ 2.5+ only necessary to enable GPU acceleration; if you do not
