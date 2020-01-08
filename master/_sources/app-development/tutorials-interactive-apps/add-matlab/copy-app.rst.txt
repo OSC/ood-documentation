@@ -1,17 +1,17 @@
 .. _app-development-tutorials-interactive-apps-add-matlab-copy-app:
 
-Copy Matlab App
+Copy MATLAB App
 ===============
 
-We will begin by first copying over a pre-built Matlab app in production at OSC.
+We will begin by first copying over a pre-built MATLAB app in production at OSC.
 
 .. warning::
 
-   This example Matlab app will not work out of the box and requires each
+   This example MATLAB app will not work out of the box and requires each
    center to develop and maintain it themselves. The goal of this tutorial is
    to:
 
-   - get a working Matlab app running at your center
+   - get a working MATLAB app running at your center
    - introduce you to app development and make you an Interactive App developer
 
 #. We do all of our app development in our Open OnDemand sandbox directory. So
@@ -106,8 +106,8 @@ We will begin by first copying over a pre-built Matlab app in production at OSC.
 
    Then click *Submit*.
 
-#. You should now see a details view of the Matlab app you just created. If
-   you click *Launch Matlab* it should open a new tab with the
+#. You should now see a details view of the MATLAB app you just created. If
+   you click *Launch MATLAB* it should open a new tab with the
    following warning:
 
      This app requires a cluster that does not exist.
@@ -120,5 +120,5 @@ We will begin by first copying over a pre-built Matlab app in production at OSC.
    Launch button in the developer views. This `was fixed in 1.5 <https://github.com/OSC/ood-dashboard/pull/435>`_.
 
    A work around is to manually enter the URL to the batch connect app. In this
-   Matlab tutorial, if the directory name is "bc_my_center_matlab" then the URL will be
+   MATLAB tutorial, if the directory name is "bc_my_center_matlab" then the URL will be
    ``/pun/sys/dashboard/batch_connect/dev/bc_my_center_matlab``.

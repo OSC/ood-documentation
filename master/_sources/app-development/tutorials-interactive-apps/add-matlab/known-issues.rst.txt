@@ -6,7 +6,7 @@ Known Issues
 If you get Java errors
 **********************
 
-    Matlab may throw Java errors when its window is resized, moved, or displayed on a secondary monitor. There does not appear to be an official Matlab fix for this problem, but an interim solution mitigates the bug enough to let work continue. In order to solve the problem: create or edit a file named ``$MATLAB_ROOT/bin/glnxa64/java.opts`` and add a line: ``-Dsun.java2d.xrender=false``. Alternatively the following may be added to the job script (``~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb``) prior to Matlab being started:
+    MATLAB may throw Java errors when its window is resized, moved, or displayed on a secondary monitor. There does not appear to be an official MATLAB fix for this problem, but an interim solution mitigates the bug enough to let work continue. In order to solve the problem: create or edit a file named ``$MATLAB_ROOT/bin/glnxa64/java.opts`` and add a line: ``-Dsun.java2d.xrender=false``. Alternatively the following may be added to the job script (``~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb``) prior to MATLAB being started:
 
         .. code-block:: shell
 
@@ -15,7 +15,7 @@ If you get Java errors
             -Dsun.java2d.xrender=false
             JAVA_OPT
 
-    Confirm that the option has been set by running the following command within Matlab:
+    Confirm that the option has been set by running the following command within MATLAB:
 
         .. code-block:: none
 

@@ -14,10 +14,10 @@ You will then need to edit ``$APP/template/script.sh.erb`` to start the window m
 - :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-mate`
 - :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox`
 
-Matlab throws Java errors when the window is resized
+MATLAB throws Java errors when the window is resized
 ****************************************************
 
-A remedy for Matlab throwing Java errors when its window is resized, moved, or displayed on a secondary monitor is detailed in Matlab's :ref:`app-development-tutorials-interactive-apps-add-matlab-known-issues`.
+A remedy for MATLAB throwing Java errors when its window is resized, moved, or displayed on a secondary monitor is detailed in MATLAB's :ref:`app-development-tutorials-interactive-apps-add-matlab-known-issues`.
 
 Job finishes instantly because, desktop app backgrounds itself
 **************************************************************

@@ -5,7 +5,7 @@ Edit Form.js
 
 OnDemand supports dynamic interactive forms using a file named ``~/ondemand/dev/bc_my_center_matlab/form.js``. This file is free-form; anything that can be done with client-side JavaScript may be done in this file. OSC has used this file to:
 
-- Limit the user's CPU/memory selection options to the type of hardware that they are requesting (`OSC Matlab JavaScript`_)
+- Limit the user's CPU/memory selection options to the type of hardware that they are requesting (`OSC MATLAB JavaScript`_)
 - Show or hide a license field based on whether the user is permitted to use the OSC academic license or if they are required to use a different license provider (`OSC ANSYS JavaScript`_)
 - Implement a file picker using the File Explorer's API, `Webpack`_, and `VueJS`_ (`bc_js_filepicker`_)
 
