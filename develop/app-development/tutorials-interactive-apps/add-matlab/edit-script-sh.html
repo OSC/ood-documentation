@@ -116,12 +116,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a Matlab App</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a MATLAB App</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-form-yml.html">3. Customize Attributes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">4. Edit Launch Script</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#invoking-matlab-without-a-window-manager">Invoking Matlab without a Window Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invoking-matlab-without-a-window-manager">Invoking MATLAB without a Window Manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#use-xfce-for-the-window-manager">Use XFCE for the Window Manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#use-mate-for-the-window-manager">Use Mate for the Window Manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#use-fluxbox-for-the-window-manager">Use Fluxbox for the Window Manager</a></li>
@@ -129,7 +129,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="edit-submit-yml.html">5. Modify Submit Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-form-js.html">6. Edit Form.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="known-issues.html">8. Known Issues</a></li>
 </ul>
 </li>
@@ -205,7 +205,7 @@
         
           <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-          <li><a href="../add-matlab.html">Add a Matlab App</a> &raquo;</li>
+          <li><a href="../add-matlab.html">Add a MATLAB App</a> &raquo;</li>
         
       <li>4. Edit Launch Script</li>
     
@@ -230,7 +230,7 @@
             
   <div class="section" id="edit-launch-script">
 <span id="app-development-tutorials-interactive-apps-add-matlab-edit-script-sh"></span><h1>4. Edit Launch Script<a class="headerlink" href="#edit-launch-script" title="Permalink to this headline">¶</a></h1>
-<p>Here we will look at the script that actually launches Matlab <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb</span></code>.</p>
+<p>Here we will look at the script that actually launches MATLAB <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb</span></code>.</p>
 <p>By now you should have selected your prefered window manager. Examples of using XFCE, Mate, and Fluxbox:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-matlab-wm-xfce"><span class="std std-ref">Use XFCE for the Window Manager</span></a></li>
@@ -238,7 +238,7 @@
 <li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox"><span class="std std-ref">Use Fluxbox for the Window Manager</span></a></li>
 </ul>
 <div class="section" id="invoking-matlab-without-a-window-manager">
-<h2>Invoking Matlab without a Window Manager<a class="headerlink" href="#invoking-matlab-without-a-window-manager" title="Permalink to this headline">¶</a></h2>
+<h2>Invoking MATLAB without a Window Manager<a class="headerlink" href="#invoking-matlab-without-a-window-manager" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -276,12 +276,12 @@
  module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
  module list  <span class="c1"># List loaded modules for debugging purposes</span>
  <span class="nb">set</span> -x
- vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch Matlab using VirtualGL</span>
+ vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
  &lt;%- <span class="k">else</span> -%&gt;
  <span class="c1"># When not using a GPU node</span>
  module list  <span class="c1"># List loaded modules for debugging purposes</span>
  <span class="nb">set</span> -x
- matlab -desktop  <span class="c1"># Launch Matlab</span>
+ matlab -desktop  <span class="c1"># Launch MATLAB</span>
  &lt;%- end -%&gt;
 </pre></div>
 </td></tr></table></div>
@@ -369,12 +369,12 @@
   module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
   module list  <span class="c1"># List loaded modules for debugging purposes</span>
   <span class="nb">set</span> -x
-  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch Matlab using VirtualGL</span>
+  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
   &lt;%- <span class="k">else</span> -%&gt;
   <span class="c1"># When not using a GPU node</span>
   module list  <span class="c1"># List loaded modules for debugging purposes</span>
   <span class="nb">set</span> -x
-  matlab -desktop  <span class="c1"># Launch Matlab</span>
+  matlab -desktop  <span class="c1"># Launch MATLAB</span>
   &lt;%- end -%&gt;
 </pre></div>
 </td></tr></table></div>
@@ -430,12 +430,12 @@
   module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
   module list  <span class="c1"># List loaded modules for debugging purposes</span>
   <span class="nb">set</span> -x
-  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch Matlab using VirtualGL</span>
+  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
   &lt;%- <span class="k">else</span> -%&gt;
   <span class="c1"># When not using a GPU node</span>
   module list  <span class="c1"># List loaded modules for debugging purposes</span>
   <span class="nb">set</span> -x
-  matlab -desktop  <span class="c1"># Launch Matlab</span>
+  matlab -desktop  <span class="c1"># Launch MATLAB</span>
   &lt;%- end -%&gt;
 </pre></div>
 </td></tr></table></div>
@@ -563,12 +563,12 @@
   module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
   module list  <span class="c1"># List loaded modules for debugging purposes</span>
   <span class="nb">set</span> -x
-  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch Matlab using VirtualGL</span>
+  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
   &lt;%- <span class="k">else</span> -%&gt;
   <span class="c1"># When not using a GPU node</span>
   module list  <span class="c1"># List loaded modules for debugging purposes</span>
   <span class="nb">set</span> -x
-  matlab -desktop  <span class="c1"># Launch Matlab</span>
+  matlab -desktop  <span class="c1"># Launch MATLAB</span>
   &lt;%- end -%&gt;
 </pre></div>
 </td></tr></table></div>

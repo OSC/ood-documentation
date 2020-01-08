@@ -3,7 +3,7 @@
 Edit Launch Script
 ==================
 
-Here we will look at the script that actually launches Matlab ``~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb``.
+Here we will look at the script that actually launches MATLAB ``~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb``.
 
 By now you should have selected your prefered window manager. Examples of using XFCE, Mate, and Fluxbox:
 
@@ -12,7 +12,7 @@ By now you should have selected your prefered window manager. Examples of using 
 - :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox`
 
 
-Invoking Matlab without a Window Manager
+Invoking MATLAB without a Window Manager
 ----------------------------------------
 
     .. code-block:: shell
@@ -33,12 +33,12 @@ Invoking Matlab without a Window Manager
         module load intel/16.0.3 virtualgl  # Perform whatever set up you want / need
         module list  # List loaded modules for debugging purposes
         set -x
-        vglrun matlab -desktop -nosoftwareopengl  # Launch Matlab using VirtualGL
+        vglrun matlab -desktop -nosoftwareopengl  # Launch MATLAB using VirtualGL
         <%- else -%>
         # When not using a GPU node
         module list  # List loaded modules for debugging purposes
         set -x
-        matlab -desktop  # Launch Matlab
+        matlab -desktop  # Launch MATLAB
         <%- end -%>
 
 
@@ -89,12 +89,12 @@ XFCE is OSC's prefered desktop environment for launching VNC applications. The c
         module load intel/16.0.3 virtualgl  # Perform whatever set up you want / need
         module list  # List loaded modules for debugging purposes
         set -x
-        vglrun matlab -desktop -nosoftwareopengl  # Launch Matlab using VirtualGL
+        vglrun matlab -desktop -nosoftwareopengl  # Launch MATLAB using VirtualGL
         <%- else -%>
         # When not using a GPU node
         module list  # List loaded modules for debugging purposes
         set -x
-        matlab -desktop  # Launch Matlab
+        matlab -desktop  # Launch MATLAB
         <%- end -%>
 
 .. _app-development-tutorials-interactive-apps-add-matlab-wm-mate:
@@ -128,12 +128,12 @@ The code for starting Mate in the background looks like this (see highlighted li
         module load intel/16.0.3 virtualgl  # Perform whatever set up you want / need
         module list  # List loaded modules for debugging purposes
         set -x
-        vglrun matlab -desktop -nosoftwareopengl  # Launch Matlab using VirtualGL
+        vglrun matlab -desktop -nosoftwareopengl  # Launch MATLAB using VirtualGL
         <%- else -%>
         # When not using a GPU node
         module list  # List loaded modules for debugging purposes
         set -x
-        matlab -desktop  # Launch Matlab
+        matlab -desktop  # Launch MATLAB
         <%- end -%>
 
 .. note::
@@ -207,12 +207,12 @@ The code for starting Fluxbox in the background looks like this (see highlighted
         module load intel/16.0.3 virtualgl  # Perform whatever set up you want / need
         module list  # List loaded modules for debugging purposes
         set -x
-        vglrun matlab -desktop -nosoftwareopengl  # Launch Matlab using VirtualGL
+        vglrun matlab -desktop -nosoftwareopengl  # Launch MATLAB using VirtualGL
         <%- else -%>
         # When not using a GPU node
         module list  # List loaded modules for debugging purposes
         set -x
-        matlab -desktop  # Launch Matlab
+        matlab -desktop  # Launch MATLAB
         <%- end -%>
 
 .. _according to the developers: https://ubuntu-mate.org/blog/how-to-pronounce-mate/

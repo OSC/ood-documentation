@@ -3,7 +3,7 @@
 Modify Submit Parameters
 ========================
 
-In some cases the Matlab app batch job fails to submit to the given cluster or
+In some cases the MATLAB app batch job fails to submit to the given cluster or
 you are not happy with the default chosen submission parameters. This section
 explains how to modify the submission parameters.
 
