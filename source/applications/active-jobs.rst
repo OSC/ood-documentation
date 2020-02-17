@@ -3,7 +3,7 @@
 Active Jobs App
 ===============
 
-`View on GitHub <https://github.com/OSC/ood-activejobs>`__
+`View on GitHub <https://github.com/OSC/ondemand/tree/master/apps/activejobs>`__
 
 .. figure:: /images/active-jobs-app.png
    :align: center

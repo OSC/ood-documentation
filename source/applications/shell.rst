@@ -3,7 +3,7 @@
 Shell App
 =========
 
-`View on Github <https://github.com/OSC/ood-shell>`__
+`View on Github <https://github.com/OSC/ondemand/tree/master/apps/shell>`__
 
 .. figure:: /images/shell-app.png
    :align: center

@@ -3,7 +3,7 @@
 Files App
 =========
 
-`View on GitHub <https://github.com/OSC/ood-fileexplorer>`__
+`View on GitHub <https://github.com/OSC/ondemand/tree/master/apps/files>`__
 
 .. figure:: /images/files-app.png
    :align: center

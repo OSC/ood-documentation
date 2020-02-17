@@ -404,9 +404,9 @@ In each default translation dictionary file the values that are most site-specif
 
   OnDemand uses the convention that translations that accept HTML with be suffixed with ``_html``. Any other translation will be displayed as plain text.
 
-.. Links for the OnDemand 1.6.3 release versions of these apps
-.. _Dashboard: https://github.com/OSC/ood-dashboard/blob/v1.33.4/config/locales/en.yml
-.. _Job Composer: https://github.com/OSC/ood-myjobs/blob/v2.14.0/config/locales/en.yml
+.. Links for the OnDemand 1.7.0 release versions of these apps
+.. _Dashboard: https://github.com/OSC/ondemand/blob/master/apps/dashboard/config/locales/en.yml
+.. _Job Composer: https://github.com/OSC/ondemand/blob/master/apps/myjobs/config/locales/en.yml
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
