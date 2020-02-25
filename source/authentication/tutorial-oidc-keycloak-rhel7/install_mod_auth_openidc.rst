@@ -39,7 +39,7 @@ Re-generate main config using ood-portal-generator
       #     logout_redirect: '/oidc?logout=https%3A%2F%2Fwww.example.com'
       # Default: '/pun/sys/dashboard/logout' (the Dashboard app provides a simple
       # HTML page explaining logout to the user)
-      logout_redirect: '/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu'
+      logout_redirect: '/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu'
 
       # Sub-uri used by mod_auth_openidc for authentication
       # Example:
@@ -53,8 +53,8 @@ Re-generate main config using ood-portal-generator
     * specifying /oidc to be the sub-uri used by mod_auth_openidc
     * specifying that /logout should redirect to this /oidc sub-uri to handle logout
       and specifying after logout, the user should be redirected back to OnDemand
-      (which in this tutorial's case is ``https%3A%2F%2Fwebdev07.hpc.osc.edu``,
-      the query param escaped format of ``https://webdev07.hpc.osc.edu``)
+      (which in this tutorial's case is ``https%3A%2F%2Fondemand-dev.hpc.osc.edu``,
+      the query param escaped format of ``https://ondemand-dev.hpc.osc.edu``)
 
 #. Then build and install the new Apache configuration file with:
 
@@ -69,15 +69,12 @@ Re-generate main config using ood-portal-generator
       .. code-block:: diff
 
            <Location "/nginx">
-         -    AuthType basic
-         -    AuthName "Private"
-         -    AuthBasicProvider ldap
-         -    AuthLDAPURL "ldaps://openldap1.infra.osc.edu:636 openldap2.infra.osc.edu:636 openldap3.infra.osc.edu:636 openldap4.infra.osc.edu
-         -    AuthLDAPGroupAttribute memberUid
-         -    AuthLDAPGroupAttributeIsDN off
-         +    AuthType openid-connect
-               Require valid-user
-         -    RequestHeader unset Authorization
+        -    AuthType Basic
+        -    AuthName "Private"
+        -    AuthUserFile "/opt/rh/httpd24/root/etc/httpd/.htpasswd"
+        -    RequestHeader unset Authorization
+        +    AuthType openid-connect
+             Require valid-user
 
              LuaHookFixups nginx.lua nginx_handler
            </Location>
@@ -87,8 +84,7 @@ Re-generate main config using ood-portal-generator
       .. code-block:: diff
 
          -  Redirect "/logout" "/pun/sys/dashboard/logout"
-         -
-         +  Redirect "/logout" "/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu"
+         +  Redirect "/logout" "/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu"
 
    #. Add the ``<Location "/oidc">`` directive
 
@@ -96,7 +92,7 @@ Re-generate main config using ood-portal-generator
 
          # OpenID Connect redirect URI:
          #
-         #     http://localhost:80/oidc
+         #     https://ondemand-dev.hpc.osc.edu:443/oidc
          #     #=> handled by mod_auth_openidc
          #
          <Location "/oidc">
@@ -111,10 +107,10 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
 
    .. code-block:: none
 
-     OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
-     OIDCClientID        "webdev07.hpc.osc.edu"
+     OIDCProviderMetadataURL https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/.well-known/openid-configuration
+     OIDCClientID        "ondemand-dev.hpc.osc.edu"
      OIDCClientSecret    "1111111-1111-1111-1111-111111111111"
-     OIDCRedirectURI      https://webdev07.hpc.osc.edu/oidc
+     OIDCRedirectURI      https://ondemand-dev.hpc.osc.edu/oidc
      OIDCCryptoPassphrase "4444444444444444444444444444444444444444"
 
      # Keep sessions alive for 8 hours
@@ -131,8 +127,8 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
      OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1
 
    #. OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface
-   #. OIDCClientSecret: replace ``1111111-1111-1111-1111-1111111111111`` with client secret specified from the Install tab of the client in Keycloak admin interface
-   #. OIDCCryptoPassphrase: replace ``4444444444444444444444444444444444444444`` with random generated password. I used ``openssl rand -hex 20``.
+   #. OIDCClientSecret: replace ``1111111-1111-1111-1111-1111111111111`` with client secret specified from the Credentials tab of the client in Keycloak admin interface
+   #. OIDCCryptoPassphrase: replace ``4444444444444444444444444444444444444444`` with random generated password. I used ``openssl rand -hex 40``.
    #. Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.
 
 #. Change permission on file to be readable by apache and no one else:

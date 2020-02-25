@@ -9,7 +9,7 @@ OIDC client that will authenticate with Keycloak.
 Add a new realm
 ------------------------------------------
 
-#. Log into ``https://webdev07.hpc.osc.edu:8443`` as the admin user
+#. Log into ``https://ondemand-idpdev.hpc.osc.edu`` as the admin user
 #. Hover over "Master" on left and click "Add Realm"
 #. Type in name "ondemand" and click "Create". The new realm is loaded.
 #. Click Login tab, then adjust parameters:
@@ -48,9 +48,8 @@ Add OnDemand as a client
 
 #. Choose Clients, then click Create in top right corner
 
-   #. Client ID: webdev07.hpc.osc.edu
+   #. Client ID: ondemand-dev.hpc.osc.edu
    #. Client Protocol: openid-connect
-   #. Client Template: ondemand-clients
    #. Save (leave Root URL blank)
 
 #. Then edit Settings for the newly created client:
@@ -59,13 +58,13 @@ Add OnDemand as a client
    #. Direct Access Grants Enabled: off
    #. Valid Redirect URIs: Press the ``+`` button to the right of the URI field so you can insert two URLs:
 
-      #. ``https://webdev07.hpc.osc.edu/oidc``
-      #. ``https://webdev07.hpc.osc.edu``
+      #. ``https://ondemand-dev.hpc.osc.edu/oidc``
+      #. ``https://ondemand-dev.hpc.osc.edu``
 
    #. Scroll to bottom and click "Save"
 
 #. Finally, get the client secret to use with OnDemand installation:
 
-   #. Select the "Credentials" tab of the "Client" you are viewing i.e. "Clients >> webdev07.hpc.osc.edu"
+   #. Select the "Credentials" tab of the "Client" you are viewing i.e. "Clients >> ondemand-dev.hpc.osc.edu"
    #. Copy the value for "secret" for future use in this tutorial (and keep it secure).
 
