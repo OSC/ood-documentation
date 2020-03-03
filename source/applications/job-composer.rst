@@ -5,7 +5,7 @@ Job Composer App
 
 (formerly called "My Jobs")
 
-`View on GitHub <https://github.com/OSC/ood-myjobs>`__
+`View on GitHub <https://github.com/OSC/ondemand/tree/master/apps/myjobs>`__
 
 .. figure:: /images/my-jobs-app.png
    :align: center

@@ -3,7 +3,7 @@
 File Editor App
 ===============
 
-`View on GitHub <https://github.com/OSC/ood-fileeditor>`__
+`View on GitHub <https://github.com/OSC/ondemand/tree/master/apps/file-editor>`__
 
 .. figure:: /images/editor-app.png
    :align: center
