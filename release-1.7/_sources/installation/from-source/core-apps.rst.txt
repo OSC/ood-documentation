@@ -16,12 +16,12 @@ OnDemand's core applications are stored in their own Github repositories and sho
   - `ood-myjobs`_ : ``/var/www/ood/apps/sys/myjobs``
   - `ood-shell`_: ``/var/www/ood/apps/sys/shell``
 
-  .. _ood-activejobs: https://github.com/OSC/ood-activejobs/
-  .. _ood-dashboard: https://github.com/OSC/ood-dashboard/
-  .. _ood-fileeditor: https://github.com/OSC/ood-fileeditor/
-  .. _ood-fileexplorer: https://github.com/OSC/ood-fileexplorer/
-  .. _ood-myjobs: https://github.com/OSC/ood-myjobs/
-  .. _ood-shell: https://github.com/OSC/ood-shell/
+  .. _ood-activejobs: https://github.com/OSC/ondemand/tree/master/apps/activejobs/
+  .. _ood-dashboard: https://github.com/OSC/ondemand/tree/master/apps/dashboard/
+  .. _ood-fileeditor: https://github.com/OSC/ondemand/tree/master/apps/file-editor/
+  .. _ood-fileexplorer: https://github.com/OSC/ondemand/tree/master/apps/files/
+  .. _ood-myjobs: https://github.com/OSC/ondemand/tree/master/apps/myjobs/
+  .. _ood-shell: https://github.com/OSC/ondemand/tree/master/apps/shell/
 
 Each application has its own dependencies which need to be installed (from either NPM or Ruby Gems) by running the following:
 

@@ -3,7 +3,7 @@
 Dashboard App
 =============
 
-`View on GitHub <https://github.com/OSC/ood-dashboard>`__
+`View on GitHub <https://github.com/OSC/ondemand/tree/master/apps/dashboard>`__
 
 .. figure:: /images/dashboard-app.png
    :align: center
