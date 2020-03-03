@@ -109,6 +109,64 @@ Configure General Options
 
           logroot: "/path/to/my/logs"
 
+.. describe:: use_rewrites (Boolean)
+
+     Should RewriteEngine be used
+
+     Default
+       Use RewriteEngine
+
+       .. code-block:: yaml
+
+          use_rewrites: true
+
+     Example
+       Disable RewriteEngine usage
+
+       .. code-block:: yaml
+
+          use_rewrites: false
+
+.. describe:: use_maintenance (Boolean)
+
+     Enable Rewrite rules for supporting maintenance mode of OnDemand
+     Requires `use_rewrites` to be `true`
+
+     Default
+       Support maintenance mode support
+
+       .. code-block:: yaml
+
+          use_maintenance: true
+
+     Example
+       Disable maintenance mode support
+
+       .. code-block:: yaml
+
+          use_maintenance: false
+
+.. describe:: maintenance_ip_whitelist (Array<String>)
+
+     List of IP regular expressions to be allowed to access OnDemand
+     when maintenance is enabled
+
+     Default
+       No IPs are whitelisted
+
+       .. code-block:: yaml
+
+          maintenance_ip_whitelist: []
+
+     Example
+       Allow 192.168.1.0/24 and 10.0.0.1 to access OnDemand during maintenance
+
+       .. code-block:: yaml
+
+          maintenance_ip_whitelist:
+            - '192.168.1..*'
+            - '10.0.0.1'
+
 .. describe:: lua_root (String)
 
      the root directory where the Lua handler code resides
