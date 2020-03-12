@@ -1,6 +1,6 @@
 .. _app-development-tutorials-interactive-apps-add-matlab-deploy:
 
-Deploy Matlab App
+Deploy MATLAB App
 =================
 
 After you have confirmed you are happy with all of your app changes you can

@@ -198,9 +198,9 @@ Example of Executable Sharing
 
 This is with two users Eric (efranz) and Bob (an0047).
 
-Eric has a dev app "Matlab", and interactive plugin app. Eric can
+Eric has a dev app "MATLAB", and interactive plugin app. Eric can
 
-1. Launch Matlab
+1. Launch MATLAB
 2. View and Edit the code
 
 .. figure:: /images/app-sharing-1.png
@@ -217,7 +217,7 @@ i.e. ``~efranz/ondemand/dev/matlab``:
 If Eric shares the git repo path or URL with Bob, Bob can clone this into his
 home directory if he is enabled as a developer. This is called "Source Code Sharing".
 
-Eric can share this app with Bob by selecting "My Shared Apps" and cloning the Matlab
+Eric can share this app with Bob by selecting "My Shared Apps" and cloning the MATLAB
 repo to deploy ``~efranz/ondemand/share/matlab``
 
 .. figure:: /images/app-sharing-3.png
