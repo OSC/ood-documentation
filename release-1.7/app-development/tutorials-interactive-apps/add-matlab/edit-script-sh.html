@@ -38,8 +38,18 @@
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="XFCE" href="window_managers/xfce.html" />
-    <link rel="prev" title="3. Customize Attributes" href="edit-form-yml.html" /> 
+    <link rel="next" title="5. Modify Submit Parameters" href="edit-submit-yml.html" />
+    <link rel="prev" title="3. Customize Attributes" href="edit-form-yml.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -106,30 +116,36 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../analytics.html">Analytics</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../app-development.html">App Development</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a Matlab App</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a MATLAB App</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-form-yml.html">3. Customize Attributes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">4. Edit Launch Script</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="window_managers/xfce.html">XFCE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="window_managers/mate.html">Mate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="window_managers/fluxbox.html">Fluxbox</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#invoking-matlab-itself">Invoking Matlab itself</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invoking-matlab-without-a-window-manager">Invoking MATLAB without a Window Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-xfce-for-the-window-manager">Use XFCE for the Window Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-mate-for-the-window-manager">Use Mate for the Window Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-fluxbox-for-the-window-manager">Use Fluxbox for the Window Manager</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="edit-submit-yml.html">5. Modify Submit Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edit-form-js.html">6. Edit Form.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy Matlab App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy MATLAB App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="known-issues.html">8. Known Issues</a></li>
 </ul>
 </li>
@@ -137,6 +153,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Interactive Apps</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
@@ -206,7 +225,7 @@
         
           <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
         
-          <li><a href="../add-matlab.html">Add a Matlab App</a> &raquo;</li>
+          <li><a href="../add-matlab.html">Add a MATLAB App</a> &raquo;</li>
         
       <li>4. Edit Launch Script</li>
     
@@ -231,45 +250,348 @@
             
   <div class="section" id="edit-launch-script">
 <span id="app-development-tutorials-interactive-apps-add-matlab-edit-script-sh"></span><h1>4. Edit Launch Script<a class="headerlink" href="#edit-launch-script" title="Permalink to this headline">¶</a></h1>
-<p>Here we will look at the script that actually launches Matlab <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb</span></code>.</p>
+<p>Here we will look at the script that actually launches MATLAB <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb</span></code>.</p>
 <p>By now you should have selected your prefered window manager. Examples of using XFCE, Mate, and Fluxbox:</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Window Manager Options</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="window_managers/xfce.html">XFCE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="window_managers/mate.html">Mate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="window_managers/fluxbox.html">Fluxbox</a></li>
+<ul class="simple">
+<li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-matlab-wm-xfce"><span class="std std-ref">Use XFCE for the Window Manager</span></a></li>
+<li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-matlab-wm-mate"><span class="std std-ref">Use Mate for the Window Manager</span></a></li>
+<li><a class="reference internal" href="#app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox"><span class="std std-ref">Use Fluxbox for the Window Manager</span></a></li>
 </ul>
-</div>
-<div class="section" id="invoking-matlab-itself">
-<h2>Invoking Matlab itself<a class="headerlink" href="#invoking-matlab-itself" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="invoking-matlab-without-a-window-manager">
+<h2>Invoking MATLAB without a Window Manager<a class="headerlink" href="#invoking-matlab-without-a-window-manager" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">$WINDOW_MANAGER_CODE_GOES_HERE</span>
+<div><div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">&quot;</span>
 
-<span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">&quot;</span>
+ <span class="c1">#</span>
+ <span class="c1"># Start MATLAB</span>
+ <span class="c1">#</span>
 
-<span class="c1">#</span>
-<span class="c1"># Start MATLAB</span>
-<span class="c1">#</span>
+ <span class="c1"># Load the required environment</span>
+ module load xalt/latest &lt;%<span class="o">=</span> context.version %&gt;
 
-<span class="c1"># Load the required environment</span>
-module load xalt/latest &lt;%<span class="o">=</span> context.version %&gt;
-
-<span class="c1"># Launch MATLAB</span>
-<span class="c1"># Switch the implementation on if the user requested a visualization GPU node</span>
-&lt;%- <span class="k">if</span> context.node_type.include?<span class="o">(</span><span class="s2">&quot;vis&quot;</span><span class="o">)</span> -%&gt;
-module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
-module list  <span class="c1"># List loaded modules for debugging purposes</span>
-<span class="nb">set</span> -x
-vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch Matlab using VirtualGL</span>
-&lt;%- <span class="k">else</span> -%&gt;
-<span class="c1"># When not using a GPU node</span>
-module list  <span class="c1"># List loaded modules for debugging purposes</span>
-<span class="nb">set</span> -x
-matlab -desktop  <span class="c1"># Launch Matlab</span>
-&lt;%- end -%&gt;
+ <span class="c1"># Launch MATLAB</span>
+ <span class="c1"># Switch the implementation on if the user requested a visualization GPU node</span>
+ &lt;%- <span class="k">if</span> context.node_type.include?<span class="o">(</span><span class="s2">&quot;vis&quot;</span><span class="o">)</span> -%&gt;
+ module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
+ module list  <span class="c1"># List loaded modules for debugging purposes</span>
+ <span class="nb">set</span> -x
+ vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
+ &lt;%- <span class="k">else</span> -%&gt;
+ <span class="c1"># When not using a GPU node</span>
+ module list  <span class="c1"># List loaded modules for debugging purposes</span>
+ <span class="nb">set</span> -x
+ matlab -desktop  <span class="c1"># Launch MATLAB</span>
+ &lt;%- end -%&gt;
 </pre></div>
+</td></tr></table></div>
+</div></blockquote>
 </div>
+<div class="section" id="use-xfce-for-the-window-manager">
+<span id="app-development-tutorials-interactive-apps-add-matlab-wm-xfce"></span><h2>Use XFCE for the Window Manager<a class="headerlink" href="#use-xfce-for-the-window-manager" title="Permalink to this headline">¶</a></h2>
+<p>XFCE is OSC’s prefered desktop environment for launching VNC applications. The code for starting XFCE in the background looks like this (see highlighted lines 1-20):</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll">  <span class="c1">#</span>
+</span><span class="hll">  <span class="c1"># Launch Xfce Window Manager and Panel</span>
+</span><span class="hll">  <span class="c1">#</span>
+</span><span class="hll">
+</span><span class="hll">  <span class="o">(</span>
+</span><span class="hll">    <span class="nb">export</span> <span class="nv">SEND_256_COLORS_TO_REMOTE</span><span class="o">=</span><span class="m">1</span>
+</span><span class="hll">    <span class="c1"># session.staged_root.join(&quot;config&quot;) refers to /.../bc_my_center_matlab/template/config</span>
+</span><span class="hll">    <span class="c1"># which is copied at job start time to a session specifc directory.</span>
+</span><span class="hll">    <span class="c1"># It will override without replacing any XFCE settings that the user</span>
+</span><span class="hll">    <span class="c1"># already has.</span>
+</span><span class="hll">    <span class="nb">export</span> <span class="nv">XDG_CONFIG_HOME</span><span class="o">=</span><span class="s2">&quot;&lt;%= session.staged_root.join(&quot;</span>config<span class="s2">&quot;) %&gt;&quot;</span>
+</span><span class="hll">    <span class="nb">export</span> <span class="nv">XDG_DATA_HOME</span><span class="o">=</span><span class="s2">&quot;&lt;%= session.staged_root.join(&quot;</span>share<span class="s2">&quot;) %&gt;&quot;</span>
+</span><span class="hll">    <span class="nb">export</span> <span class="nv">XDG_CACHE_HOME</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>mktemp -d<span class="k">)</span><span class="s2">&quot;</span>
+</span><span class="hll">    module restore
+</span><span class="hll">    <span class="nb">set</span> -x
+</span><span class="hll">    xfwm4 --compositor<span class="o">=</span>off --daemon --sm-client-disable
+</span><span class="hll">    xsetroot -solid <span class="s2">&quot;#D3D3D3&quot;</span>
+</span><span class="hll">    xfsettingsd --sm-client-disable
+</span><span class="hll">    xfce4-panel --sm-client-disable
+</span><span class="hll">  <span class="o">)</span> <span class="p">&amp;</span>
+</span>
+  <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">&quot;</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># Start MATLAB</span>
+  <span class="c1">#</span>
+
+  <span class="c1"># Load the required environment</span>
+  module load xalt/latest &lt;%<span class="o">=</span> context.version %&gt;
+
+  <span class="c1"># Launch MATLAB</span>
+  <span class="c1"># Switch the implementation on if the user requested a visualization GPU node</span>
+  &lt;%- <span class="k">if</span> context.node_type.include?<span class="o">(</span><span class="s2">&quot;vis&quot;</span><span class="o">)</span> -%&gt;
+  module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
+  module list  <span class="c1"># List loaded modules for debugging purposes</span>
+  <span class="nb">set</span> -x
+  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
+  &lt;%- <span class="k">else</span> -%&gt;
+  <span class="c1"># When not using a GPU node</span>
+  module list  <span class="c1"># List loaded modules for debugging purposes</span>
+  <span class="nb">set</span> -x
+  matlab -desktop  <span class="c1"># Launch MATLAB</span>
+  &lt;%- end -%&gt;
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="use-mate-for-the-window-manager">
+<span id="app-development-tutorials-interactive-apps-add-matlab-wm-mate"></span><h2>Use Mate for the Window Manager<a class="headerlink" href="#use-mate-for-the-window-manager" title="Permalink to this headline">¶</a></h2>
+<p>The code for starting Mate in the background looks like this (see highlighted lines 1-4):</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll">  <span class="c1"># Launch Mate Window Manager and Panel</span>
+</span><span class="hll">  marco --no-composite --no-force-fullscreen --sm-disable <span class="p">&amp;</span>
+</span><span class="hll">  <span class="c1"># mate-panel blocks, but does not work reliably when launched in the same subshell as marco</span>
+</span><span class="hll">  mate-panel <span class="p">&amp;</span>
+</span>
+  <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">&quot;</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># Start MATLAB</span>
+  <span class="c1">#</span>
+
+  <span class="c1"># Load the required environment</span>
+  module load xalt/latest &lt;%<span class="o">=</span> context.version %&gt;
+
+  <span class="c1"># Launch MATLAB</span>
+  <span class="c1"># Switch the implementation on if the user requested a visualization GPU node</span>
+  &lt;%- <span class="k">if</span> context.node_type.include?<span class="o">(</span><span class="s2">&quot;vis&quot;</span><span class="o">)</span> -%&gt;
+  module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
+  module list  <span class="c1"># List loaded modules for debugging purposes</span>
+  <span class="nb">set</span> -x
+  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
+  &lt;%- <span class="k">else</span> -%&gt;
+  <span class="c1"># When not using a GPU node</span>
+  module list  <span class="c1"># List loaded modules for debugging purposes</span>
+  <span class="nb">set</span> -x
+  matlab -desktop  <span class="c1"># Launch MATLAB</span>
+  &lt;%- end -%&gt;
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="https://ubuntu-mate.org/blog/how-to-pronounce-mate/">According to the developers</a> the correct pronunciation of Mate is “mah-tay” like the drink, and not matey like pirates, or mate like a friend.</p>
+</div>
+</div>
+<div class="section" id="use-fluxbox-for-the-window-manager">
+<span id="app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox"></span><h2>Use Fluxbox for the Window Manager<a class="headerlink" href="#use-fluxbox-for-the-window-manager" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Fluxbox has been replaced by XFCE as OSC’s prefered window manager / desktop environment.</p>
+</div>
+<p>The code for starting Fluxbox in the background looks like this (see highlighted lines 1-36):</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll">  <span class="c1">#</span>
+</span><span class="hll">  <span class="c1"># Launch Fluxbox</span>
+</span><span class="hll">  <span class="c1">#</span>
+</span><span class="hll">
+</span><span class="hll">  <span class="nv">FLUXBOX_RC_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/fluxbox.rc&quot;</span>
+</span><span class="hll">  <span class="c1"># Find an example of the Fluxbox assets at https://github.com/OSC/bc_osc_matlab/tree/bcff07264b318688c3f4272a9662b13477833373/template/fluxbox</span>
+</span><span class="hll">  <span class="nv">FLUXBOX_ASSETS_ROOT</span><span class="o">=</span><span class="s2">&quot;&lt;%= session.staged_root.join(&quot;</span>fluxbox<span class="s2">&quot;)%&gt;&quot;</span>
+</span><span class="hll">
+</span><span class="hll">  <span class="c1"># Create Fluxbox root or it will override the below init file</span>
+</span><span class="hll">  <span class="o">(</span>
+</span><span class="hll">    <span class="nb">umask</span> <span class="m">077</span>
+</span><span class="hll">    mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.fluxbox&quot;</span>
+</span><span class="hll">  <span class="o">)</span>
+</span><span class="hll">
+</span><span class="hll">  <span class="c1"># Build Fluxbox init file</span>
+</span><span class="hll">  cat &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FLUXBOX_RC_FILE</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s">&lt;&lt; EOT</span>
+</span><span class="hll"><span class="s">  session.configVersion: 13</span>
+</span><span class="hll"><span class="s">  session.screen0.toolbar.widthPercent: 60</span>
+</span><span class="hll"><span class="s">  session.screen0.toolbar.tools: prevworkspace, workspacename, nextworkspace, iconbar, systemtray, prevwindow, nextwindow, clock</span>
+</span><span class="hll"><span class="s">  session.menuFile: $FLUXBOX_ASSETS_ROOT/menu</span>
+</span><span class="hll"><span class="s">  session.keyFile: $FLUXBOX_ASSETS_ROOT/keys</span>
+</span><span class="hll"><span class="s">  session.styleOverlay: $FLUXBOX_ASSETS_ROOT/overlay</span>
+</span><span class="hll"><span class="s">  EOT</span>
+</span><span class="hll">
+</span><span class="hll">  <span class="c1"># Export the module function for the terminal</span>
+</span><span class="hll">  <span class="o">[[</span> <span class="k">$(</span><span class="nb">type</span> -t module<span class="k">)</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> -f module
+</span><span class="hll">
+</span><span class="hll">  <span class="c1"># Start the Fluxbox window manager (it likes to crash on occassion, make it</span>
+</span><span class="hll">  <span class="c1"># persistent)</span>
+</span><span class="hll">  <span class="o">(</span>
+</span><span class="hll">    <span class="nb">export</span> <span class="nv">FLUXBOX_ASSETS_ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">FLUXBOX_ASSETS_ROOT</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class="hll">    <span class="k">until</span> fluxbox -display <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DISPLAY</span><span class="si">}</span><span class="s2">.0&quot;</span> -rc <span class="s2">&quot;</span><span class="si">${</span><span class="nv">FLUXBOX_RC_FILE</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">do</span>
+</span><span class="hll">      <span class="nb">echo</span> <span class="s2">&quot;Fluxbox crashed with exit code </span><span class="nv">$?</span><span class="s2">. Respawning...&quot;</span> &gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span class="hll">      sleep <span class="m">1</span>
+</span><span class="hll">    <span class="k">done</span>
+</span><span class="hll">  <span class="o">)</span> <span class="p">&amp;</span>
+</span>
+  <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">&quot;</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># Start MATLAB</span>
+  <span class="c1">#</span>
+
+  <span class="c1"># Load the required environment</span>
+  module load xalt/latest &lt;%<span class="o">=</span> context.version %&gt;
+
+  <span class="c1"># Launch MATLAB</span>
+  <span class="c1"># Switch the implementation on if the user requested a visualization GPU node</span>
+  &lt;%- <span class="k">if</span> context.node_type.include?<span class="o">(</span><span class="s2">&quot;vis&quot;</span><span class="o">)</span> -%&gt;
+  module load intel/16.0.3 virtualgl  <span class="c1"># Perform whatever set up you want / need</span>
+  module list  <span class="c1"># List loaded modules for debugging purposes</span>
+  <span class="nb">set</span> -x
+  vglrun matlab -desktop -nosoftwareopengl  <span class="c1"># Launch MATLAB using VirtualGL</span>
+  &lt;%- <span class="k">else</span> -%&gt;
+  <span class="c1"># When not using a GPU node</span>
+  module list  <span class="c1"># List loaded modules for debugging purposes</span>
+  <span class="nb">set</span> -x
+  matlab -desktop  <span class="c1"># Launch MATLAB</span>
+  &lt;%- end -%&gt;
+</pre></div>
+</td></tr></table></div>
 </div></blockquote>
 </div>
 </div>
@@ -282,7 +604,7 @@ matlab -desktop  <span class="c1"># Launch Matlab</span>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="window_managers/xfce.html" class="btn btn-neutral float-right" title="XFCE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="edit-submit-yml.html" class="btn btn-neutral float-right" title="5. Modify Submit Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="edit-form-yml.html" class="btn btn-neutral float-left" title="3. Customize Attributes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

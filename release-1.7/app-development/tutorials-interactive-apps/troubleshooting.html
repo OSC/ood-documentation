@@ -39,7 +39,17 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Tutorials: Passenger Apps" href="../tutorials-passenger-apps.html" />
-    <link rel="prev" title="Use a Global Static List" href="add-custom-queue/global-static-list.html" /> 
+    <link rel="prev" title="Use a Global Static List" href="add-custom-queue/global-static-list.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -106,26 +116,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="add-jupyter.html">Add a Jupyter App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-rstudio.html">Add an RStudio App</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-matlab.html">Add a Matlab App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-matlab.html">Add a MATLAB App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-custom-queue.html">Add Custom Queues/Partitions</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting Interactive Apps</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-window-cannot-be-resized-moved-maximized">The window cannot be resized/moved/maximized</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#matlab-throws-java-errors-when-the-window-is-resized">Matlab throws Java errors when the window is resized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-throws-java-errors-when-the-window-is-resized">MATLAB throws Java errors when the window is resized</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#job-finishes-instantly-because-desktop-app-backgrounds-itself">Job finishes instantly because, desktop app backgrounds itself</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
@@ -220,11 +239,17 @@
 <span id="app-development-tutorials-interactive-apps-troubleshooting"></span><h1>Troubleshooting Interactive Apps<a class="headerlink" href="#troubleshooting-interactive-apps" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-window-cannot-be-resized-moved-maximized">
 <h2>The window cannot be resized/moved/maximized<a class="headerlink" href="#the-window-cannot-be-resized-moved-maximized" title="Permalink to this headline">¶</a></h2>
-<p>While a window manager is not strictly required to be able to set up a desktop/VNC application, one is required to be able to perform many common tasks like moving a window, resizing it, or even locating the window after it has been minimized. The Matlab example provides examples of how to set up <a class="reference internal" href="add-matlab/window_managers/xfce.html#app-development-tutorials-interactive-apps-add-matlab-wm-xfce"><span class="std std-ref">XFCE</span></a>, <a class="reference internal" href="add-matlab/window_managers/mate.html#app-development-tutorials-interactive-apps-add-matlab-wm-mate"><span class="std std-ref">Mate</span></a>, and <a class="reference internal" href="add-matlab/window_managers/fluxbox.html#app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox"><span class="std std-ref">Fluxbox</span></a> (mentioned in order of OSC preference).</p>
+<p>While a window manager is not strictly required to be able to set up a desktop/VNC application, one is required to be able to perform many common tasks like moving a window, resizing it, or even locating the window after it has been minimized. The OnDemand team has experience working with XFCE, Mate and Fluxbox (in order of preference). Select one of the window manager / desktop options and ensure that it is installed on the compute nodes.</p>
+<p>You will then need to edit <code class="docutils literal notranslate"><span class="pre">$APP/template/script.sh.erb</span></code> to start the window manager / desktop before the interactive app itself. Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="add-matlab/edit-script-sh.html#app-development-tutorials-interactive-apps-add-matlab-wm-xfce"><span class="std std-ref">Use XFCE for the Window Manager</span></a></li>
+<li><a class="reference internal" href="add-matlab/edit-script-sh.html#app-development-tutorials-interactive-apps-add-matlab-wm-mate"><span class="std std-ref">Use Mate for the Window Manager</span></a></li>
+<li><a class="reference internal" href="add-matlab/edit-script-sh.html#app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox"><span class="std std-ref">Use Fluxbox for the Window Manager</span></a></li>
+</ul>
 </div>
 <div class="section" id="matlab-throws-java-errors-when-the-window-is-resized">
-<h2>Matlab throws Java errors when the window is resized<a class="headerlink" href="#matlab-throws-java-errors-when-the-window-is-resized" title="Permalink to this headline">¶</a></h2>
-<p>A remedy for Matlab throwing Java errors when its window is resized, moved, or displayed on a secondary monitor is detailed in Matlab’s <a class="reference internal" href="add-matlab/known-issues.html#app-development-tutorials-interactive-apps-add-matlab-known-issues"><span class="std std-ref">Known Issues</span></a>.</p>
+<h2>MATLAB throws Java errors when the window is resized<a class="headerlink" href="#matlab-throws-java-errors-when-the-window-is-resized" title="Permalink to this headline">¶</a></h2>
+<p>A remedy for MATLAB throwing Java errors when its window is resized, moved, or displayed on a secondary monitor is detailed in MATLAB’s <a class="reference internal" href="add-matlab/known-issues.html#app-development-tutorials-interactive-apps-add-matlab-known-issues"><span class="std std-ref">Known Issues</span></a>.</p>
 </div>
 <div class="section" id="job-finishes-instantly-because-desktop-app-backgrounds-itself">
 <h2>Job finishes instantly because, desktop app backgrounds itself<a class="headerlink" href="#job-finishes-instantly-because-desktop-app-backgrounds-itself" title="Permalink to this headline">¶</a></h2>
