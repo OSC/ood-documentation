@@ -14,19 +14,19 @@ are accessible by all users.
    * - Name
      - GitHub URL
    * - Dashboard
-     - https://github.com/OSC/ood-dashboard
+     - https://github.com/OSC/ondemand/tree/master/apps/dashboard
    * - Shell
-     - https://github.com/OSC/ood-shell
+     - https://github.com/OSC/ondemand/tree/master/apps/shell
    * - Files
-     - https://github.com/OSC/ood-fileexplorer
+     - https://github.com/OSC/ondemand/tree/master/apps/files
    * - Editor
-     - https://github.com/OSC/ood-fileeditor
+     - https://github.com/OSC/ondemand/tree/master/apps/file-editor
    * - Active Jobs
-     - https://github.com/OSC/ood-activejobs
+     - https://github.com/OSC/ondemand/tree/master/apps/activejobs
    * - Job Composer
-     - https://github.com/OSC/ood-myjobs
+     - https://github.com/OSC/ondemand/tree/master/apps/myjobs
    * - Interactive Apps: Desktop
-     - https://github.com/OSC/bc_desktop
+     - https://github.com/OSC/ondemand/tree/master/apps/bc_desktop
 
 .. toctree::
    :maxdepth: 2

@@ -18,7 +18,7 @@ In order to be able to run Passenger we need Apache's service environment to kno
 
 .. code:: bash
 
-    sudo sed -i 's/^HTTPD24_HTTPD_SCLS_ENABLED=.*/HTTPD24_HTTPD_SCLS_ENABLED="httpd24 %{?scl_ondemand_ruby}"/' \
+    sudo sed -i 's/^HTTPD24_HTTPD_SCLS_ENABLED=.*/HTTPD24_HTTPD_SCLS_ENABLED="httpd24 rh-ruby25"/' \
     /opt/rh/httpd24/service-environment
 
 Update the sudoers list

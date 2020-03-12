@@ -221,7 +221,7 @@ Configuration Options
 
      .. code-block:: yaml
 
-        passenger_ruby: "/opt/rh/rh-ruby24/root/usr/bin/ruby"
+        passenger_ruby: "/opt/rh/rh-ruby25/root/usr/bin/ruby"
 
 .. describe:: passenger_nodejs (String, null)
 
