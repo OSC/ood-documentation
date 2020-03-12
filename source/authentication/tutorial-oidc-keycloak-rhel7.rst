@@ -44,3 +44,4 @@ please let us know by contacting us on the OnDemand Discourse at https://discour
    tutorial-oidc-keycloak-rhel7/configure-keycloak-webui
    tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc
    tutorial-oidc-keycloak-rhel7/add-custom-theme
+   tutorial-oidc-keycloak-rhel7/configure-cilogon
