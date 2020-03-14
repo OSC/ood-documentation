@@ -122,6 +122,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure-cilogon.html">5. Configure Keycloak with CILogon</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
@@ -277,7 +278,7 @@ under <code class="file docutils literal notranslate"><span class="pre">/etc/ood
 <span class="c1">#     logout_redirect: &#39;/oidc?logout=https%3A%2F%2Fwww.example.com&#39;</span>
 <span class="c1"># Default: &#39;/pun/sys/dashboard/logout&#39; (the Dashboard app provides a simple</span>
 <span class="c1"># HTML page explaining logout to the user)</span>
-<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&#39;/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&#39;/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu&#39;</span>
 
 <span class="c1"># Sub-uri used by mod_auth_openidc for authentication</span>
 <span class="c1"># Example:</span>
@@ -293,8 +294,8 @@ under <code class="file docutils literal notranslate"><span class="pre">/etc/ood
 <li>specifying /oidc to be the sub-uri used by mod_auth_openidc</li>
 <li>specifying that /logout should redirect to this /oidc sub-uri to handle logout
 and specifying after logout, the user should be redirected back to OnDemand
-(which in this tutorial’s case is <code class="docutils literal notranslate"><span class="pre">https%3A%2F%2Fwebdev07.hpc.osc.edu</span></code>,
-the query param escaped format of <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code>)</li>
+(which in this tutorial’s case is <code class="docutils literal notranslate"><span class="pre">https%3A%2F%2Fondemand-dev.hpc.osc.edu</span></code>,
+the query param escaped format of <code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code>)</li>
 </ul>
 </div></blockquote>
 </li>
@@ -305,33 +306,29 @@ the query param escaped format of <code class="docutils literal notranslate"><sp
 <p>The effect of this change in the Apache config (in case you want to apply the changes manually) are:</p>
 <ol class="arabic">
 <li><p class="first">Change the authentication directives for all of the Locations that require authentication i.e.:</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>  &lt;Location &quot;/nginx&quot;&gt;
-<span class="gd">-    AuthType basic</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>   &lt;Location &quot;/nginx&quot;&gt;
+<span class="gd">-    AuthType Basic</span>
 <span class="gd">-    AuthName &quot;Private&quot;</span>
-<span class="gd">-    AuthBasicProvider ldap</span>
-<span class="gd">-    AuthLDAPURL &quot;ldaps://openldap1.infra.osc.edu:636 openldap2.infra.osc.edu:636 openldap3.infra.osc.edu:636 openldap4.infra.osc.edu</span>
-<span class="gd">-    AuthLDAPGroupAttribute memberUid</span>
-<span class="gd">-    AuthLDAPGroupAttributeIsDN off</span>
-<span class="gi">+    AuthType openid-connect</span>
-      Require valid-user
+<span class="gd">-    AuthUserFile &quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd&quot;</span>
 <span class="gd">-    RequestHeader unset Authorization</span>
+<span class="gi">+    AuthType openid-connect</span>
+     Require valid-user
 
-    LuaHookFixups nginx.lua nginx_handler
-  &lt;/Location&gt;
+     LuaHookFixups nginx.lua nginx_handler
+   &lt;/Location&gt;
 </pre></div>
 </div>
 </li>
 <li><p class="first">Update the <code class="docutils literal notranslate"><span class="pre">Redirect</span> <span class="pre">&quot;logout&quot;</span></code> directive</p>
 <div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-  Redirect &quot;/logout&quot; &quot;/pun/sys/dashboard/logout&quot;</span>
-<span class="gd">-</span>
-<span class="gi">+  Redirect &quot;/logout&quot; &quot;/oidc?logout=https%3A%2F%2Fwebdev07.hpc.osc.edu&quot;</span>
+<span class="gi">+  Redirect &quot;/logout&quot; &quot;/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Add the <code class="docutils literal notranslate"><span class="pre">&lt;Location</span> <span class="pre">&quot;/oidc&quot;&gt;</span></code> directive</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># OpenID Connect redirect URI:
 #
-#     http://localhost:80/oidc
+#     https://ondemand-dev.hpc.osc.edu:443/oidc
 #     #=&gt; handled by mod_auth_openidc
 #
 &lt;Location &quot;/oidc&quot;&gt;
@@ -349,10 +346,10 @@ the query param escaped format of <code class="docutils literal notranslate"><sp
 <h2>3.3. Add Keycloak config to OnDemand Apache for mod_auth_openidc<a class="headerlink" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://webdev07.hpc.osc.edu:8443/auth/realms/ondemand/.well-known/openid-configuration
-OIDCClientID        &quot;webdev07.hpc.osc.edu&quot;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/.well-known/openid-configuration
+OIDCClientID        &quot;ondemand-dev.hpc.osc.edu&quot;
 OIDCClientSecret    &quot;1111111-1111-1111-1111-111111111111&quot;
-OIDCRedirectURI      https://webdev07.hpc.osc.edu/oidc
+OIDCRedirectURI      https://ondemand-dev.hpc.osc.edu/oidc
 OIDCCryptoPassphrase &quot;4444444444444444444444444444444444444444&quot;
 
 # Keep sessions alive for 8 hours
@@ -371,8 +368,8 @@ OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_au
 </div>
 <ol class="arabic simple">
 <li>OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface</li>
-<li>OIDCClientSecret: replace <code class="docutils literal notranslate"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Install tab of the client in Keycloak admin interface</li>
-<li>OIDCCryptoPassphrase: replace <code class="docutils literal notranslate"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">20</span></code>.</li>
+<li>OIDCClientSecret: replace <code class="docutils literal notranslate"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Credentials tab of the client in Keycloak admin interface</li>
+<li>OIDCCryptoPassphrase: replace <code class="docutils literal notranslate"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">40</span></code>.</li>
 <li>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.</li>
 </ol>
 </li>
