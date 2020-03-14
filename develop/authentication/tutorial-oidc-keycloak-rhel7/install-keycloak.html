@@ -123,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="configure-keycloak-webui.html">2. Configure Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure-cilogon.html">5. Configure Keycloak with CILogon</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
@@ -256,10 +257,10 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 <div class="section" id="initial-installation-steps">
 <h2>1.1. Initial Installation Steps<a class="headerlink" href="#initial-installation-steps" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Download and unpack Keycloak 4.8.3 (from <a class="reference external" href="http://www.keycloak.org/archive/downloads-4.8.3.html">http://www.keycloak.org/archive/downloads-4.8.3.html</a>)</p>
+<li><p class="first">Download and unpack Keycloak 9.0.0 (from <a class="reference external" href="https://www.keycloak.org/downloads.html">https://www.keycloak.org/downloads.html</a>)</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt
-sudo wget https://downloads.jboss.org/keycloak/4.8.3.Final/keycloak-4.8.3.Final.tar.gz
-sudo tar xzf keycloak-4.8.3.Final.tar.gz
+sudo wget https://downloads.jboss.org/keycloak/9.0.0/keycloak-9.0.0.tar.gz
+sudo tar xzf keycloak-9.0.0.tar.gz
 </pre></div>
 </div>
 </li>
@@ -273,13 +274,13 @@ sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 </pre></div>
 </div>
 <p>This makes a home directory, which is needed when running API calls as keycloak user. Finally we set proper permissions:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown keycloak: -R keycloak-4.8.3.Final
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown keycloak: -R keycloak-9.0.0
 </pre></div>
 </div>
 </li>
-<li><p class="first">Restrict access to keycloak-4.8.3.Final/standalone, which will contain
+<li><p class="first">Restrict access to keycloak-9.0.0/standalone, which will contain
 sensitive data for the Keycloak server</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-4.8.3.Final
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-9.0.0
 sudo -u keycloak chmod <span class="m">700</span> standalone
 </pre></div>
 </div>
@@ -289,9 +290,9 @@ sudo -u keycloak chmod <span class="m">700</span> standalone
 </pre></div>
 </div>
 </li>
-<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-4.8.3.Final/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
+<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-9.0.0/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
 <p>If you are not already there:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-4.8.3.Final
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-9.0.0
 </pre></div>
 </div>
 <p>Generate a password to use for the admin user:</p>
@@ -304,7 +305,7 @@ sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS
 <li><p class="first">Modify <code class="docutils literal notranslate"><span class="pre">standalone/configuration/standalone.xml</span></code> to enable proxying to Keycloak:</p>
 <p>Simplest is to run these three commands:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)&#39;</span>
-sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=8443)&#39;</span>
+sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)&#39;</span>
 sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)&#39;</span>
 </pre></div>
 </div>
@@ -358,7 +359,7 @@ out so you can wget the file, edit as appropriate, and run via:</p>
 <span class="s">Type=idle</span>
 <span class="s">User=keycloak</span>
 <span class="s">Group=keycloak</span>
-<span class="s">ExecStart=/opt/keycloak-4.8.3.Final/bin/standalone.sh -b 0.0.0.0</span>
+<span class="s">ExecStart=/opt/keycloak-9.0.0/bin/standalone.sh -b 0.0.0.0</span>
 <span class="s">TimeoutStartSec=600</span>
 <span class="s">TimeoutStopSec=600</span>
 
@@ -401,14 +402,13 @@ to serve both OnDemand and Keycloak with the same host, so we can reuse the
 same SSL certificates. You may want to run Keycloak on a separate host, however.</p>
 <p>Add <code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf</span></code>, making changes
 for the appropriate SSL certificate locations. Notice we are proxying
-<code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> to <code class="docutils literal notranslate"><span class="pre">http://localhost:8080</span></code> which is the default
+<code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> to <code class="docutils literal notranslate"><span class="pre">http://localhost:8080</span></code> which is the default
 port the Keycloak webserver runs as.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Listen</span> <span class="mi">8443</span>
-<span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">8443</span><span class="o">&gt;</span>
-  <span class="n">ServerName</span> <span class="n">webdev07</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">443</span><span class="o">&gt;</span>
+  <span class="n">ServerName</span> <span class="n">ondemand</span><span class="o">-</span><span class="n">idpdev</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">osc</span><span class="o">.</span><span class="n">edu</span>
 
-  <span class="n">ErrorLog</span>  <span class="s2">&quot;logs/webdev07.hpc.osc.edu_keycloak_error_ssl.log&quot;</span>
-  <span class="n">CustomLog</span> <span class="s2">&quot;logs/webdev07.hpc.osc.edu_keycloak_access_ssl.log&quot;</span> <span class="n">combined</span>
+  <span class="n">ErrorLog</span>  <span class="s2">&quot;logs/keycloak_error_ssl.log&quot;</span>
+  <span class="n">CustomLog</span> <span class="s2">&quot;logs/keycloak_access_ssl.log&quot;</span> <span class="n">combined</span>
 
   <span class="n">SSLEngine</span> <span class="n">On</span>
   <span class="n">SSLCertificateFile</span> <span class="s2">&quot;/etc/pki/tls/certs/webdev07.hpc.osc.edu.crt&quot;</span>
@@ -424,26 +424,21 @@ port the Keycloak webserver runs as.</p>
   <span class="c1">## Request header rules</span>
   <span class="c1">## as per http://httpd.apache.org/docs/2.2/mod/mod_headers.html#requestheader</span>
   <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Proto</span> <span class="s2">&quot;https&quot;</span>
-  <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Port</span> <span class="s2">&quot;8443&quot;</span>
+  <span class="n">RequestHeader</span> <span class="nb">set</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Port</span> <span class="s2">&quot;443&quot;</span>
 <span class="o">&lt;/</span><span class="n">VirtualHost</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>You may need to modify iptables to open up access to Keycloak the same way
-that you did so with port 80 and 443 for OnDemand:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo iptables -I INPUT -p tcp -m multiport --dports <span class="m">8443</span> -m comment --comment <span class="s2">&quot;08443 *:8443&quot;</span> -j ACCEPT
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">We can use the same host because Keycloak properly scopes all cookies it sets to the
 realm. For example, if I have a realm called “ondemand”, then the Keycloak login
-page will be at <code class="docutils literal notranslate"><span class="pre">https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</span></code>
+page will be at <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</span></code>
 and cookies set during authentication will be set with the path <code class="docutils literal notranslate"><span class="pre">/auth/realms/ondemand</span></code>,
 including <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_SESSION</span></code>, <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_STATE_CHECKER</span></code>,
 <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_IDENTITY</span></code>, and <code class="docutils literal notranslate"><span class="pre">KC_RESTART</span></code>.</p>
 </div>
 </li>
-<li><p class="first">Now you should be able to access Keycloak: <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code></p>
+<li><p class="first">Now you should be able to access Keycloak: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code></p>
 </li>
 </ol>
 </div>
@@ -452,9 +447,7 @@ including <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_
 <p>When installing Keycloak on a separate host, the difference between this
 tutorial would be:</p>
 <ol class="arabic simple">
-<li>throughout the rest of the tutorial replace <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> with the keycloak host</li>
-<li>use a different Apache config, listening instead on 443 instead of 8443 and
-proxying that to Keycloak</li>
+<li>throughout the rest of the tutorial replace <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> with the keycloak host</li>
 <li>possibly use Apache 2.4 default distribution instead of software collections,
 meaning that configuration would be at /etc/httpd/conf.d/ instead of
 /opt/rh/httpd24/root/etc/httpd/conf.d/ and starting the
