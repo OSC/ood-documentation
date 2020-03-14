@@ -5,29 +5,60 @@ Two Factor Auth using Duo with Keycloak
 
 These are the steps to setup two factor authentication with Duo using Keycloak.
 
-#. Have Keycloak perform authentication through SSSD running on the Keycloak server.
-#. Follow the `Keycloak docs for using SSSD <https://www.keycloak.org/docs/latest/server_admin/index.html#sssd-and-d-bus>`_ except use a modified ``/etc/pam.d/keycloak``:
+Install Keycloak Duo SPI
+--------------------------------------------------
+
+#. Clone the Keycloak Duo SPI repo
 
    .. code::
 
-      auth    required   pam_sss.so
-      auth    required   pam_duo.so
-      account required   pam_sss.so
+      git clone https://github.com/OSC/keycloak-duo-spi.git
+      cd keycloak-duo-spi
+      git submodule update --init
 
-#. Because Keycloak doesn’t actually know there is a possible challenge
-   response using SSSD you have to configure Duo's ``/etc/duo/pam_duo.conf``
-   to have ``autopush=yes`` and ``prompts=1`` so that the 2FA automatically
-   sends a push notification to the person’s phone.
+#. Edit ``pom.xml`` and ensure ``keycloak.version`` matches the version of Keycloak you are running.
 
-#. (Optional) Require Duo based on group membership or username list
-
-   If you want to make Duo optional you could do so via group memberships. This works by changing ``groups`` config for ``/etc/duo/pam_duo.conf`` to something like ``groups=ood_duo``.
-
-   You can also limit based on group membership using the contents of a file that lists users that require Duo.  This is done by modifying the keycloak PAM stack.  The file ``/etc/security/ondemand-duo.conf`` is a list of usernames, one username per line, that must use Duo to authenticate with Keycloak.  The modified PAM configuration at ``/etc/pam.d/keycloak``:
+#. Build (with Docker) - produces ``target/keycloak-duo-spi-jar-with-dependencies.jar``
 
    .. code::
 
-      auth    required   pam_sss.so
-      auth    [default=1 success=ok] pam_listfile.so onerr=fail item=user sense=allow file=/etc/security/ondemand-duo.conf
-      auth    required   pam_duo.so
-      account required   pam_sss.so
+      docker run --rm -it -v $(pwd):/keycloak-duo-spi -w /keycloak-duo-spi \
+        ohiosupercomputer/keycloak_duo_spi_buildbox:latest mvn clean test package
+
+#. Build (without Docker) - produces ``target/keycloak-duo-spi-jar-with-dependencies.jar``
+
+   .. code::
+
+      yum -y install maven
+      cd build/duo_java/DuoWeb
+      mvn clean test install
+      cd ../../..
+      mvn clean test package
+
+#. Copy the JAR file to Keycloak and instruct Keycloak to install the SPI
+
+   .. code::
+
+      sudo install -o keycloak -g keycloak -m 0644 target/keycloak-duo-spi-jar-with-dependencies.jar \
+        /opt/keycloak-9.0.0/standalone/deployments/keycloak-duo-spi-jar-with-dependencies.jar
+      sudo install -o keycloak -g keycloak -m 0644 /dev/null \
+        /opt/keycloak-9.0.0/standalone/deployments/keycloak-duo-spi-jar-with-dependencies.jar.dodeploy
+
+Configure Duo SPI
+--------------------------------------------------
+
+#. Log into your Keycloak instance
+#. Choose the realm to configure in upper left corner, eg ``ondemand``
+#. Choose ``Realm Settings`` in the left menu then ``Security Defenses`` tab
+#. Add ``frame-src https://*.duosecurity.com/ 'self';`` to the beginning of the value for ``Content-Security-Policy``
+#. Choose ``Authentication`` in the left menu
+#. While on ``Flows`` tab ensure the dropdown for the flow name is ``Browser`` and click ``Copy``
+#. Name the new flow ``browser-with-duo``
+#. For all items below ``Username Password Form`` delete them by choosing ``Actions`` then ``Delete``
+#. Choose ``Actions`` for ``Browser-with-duo Forms`` and choose ``Add Execution``
+#. Select the ``Duo MFA`` provider and click ``Save``
+#. Click ``Actions`` for ``Duo MFA`` and select ``Config``. Fill in all values as appropriate and select ``Save``.
+#. Select ``Required`` for ``Duo MFA``
+#. Choose the ``Bindings`` tab and set ``Browser Flow`` to ``browser-with-duo`` and choose ``Save``
+
+Users logging into Keycloak will be required to verify their identity using Duo.

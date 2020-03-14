@@ -16,13 +16,13 @@ installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
 Initial Installation Steps
 --------------------------
 
-#. Download and unpack Keycloak 4.8.3 (from http://www.keycloak.org/archive/downloads-4.8.3.html)
+#. Download and unpack Keycloak 9.0.0 (from https://www.keycloak.org/downloads.html)
 
    .. code-block:: sh
 
       cd /opt
-      sudo wget https://downloads.jboss.org/keycloak/4.8.3.Final/keycloak-4.8.3.Final.tar.gz
-      sudo tar xzf keycloak-4.8.3.Final.tar.gz
+      sudo wget https://downloads.jboss.org/keycloak/9.0.0/keycloak-9.0.0.tar.gz
+      sudo tar xzf keycloak-9.0.0.tar.gz
 
 
 #. Add keycloak user and change ownership of files
@@ -42,14 +42,14 @@ Initial Installation Steps
 
    .. code-block:: sh
 
-      sudo chown keycloak: -R keycloak-4.8.3.Final
+      sudo chown keycloak: -R keycloak-9.0.0
 
-#. Restrict access to keycloak-4.8.3.Final/standalone, which will contain
+#. Restrict access to keycloak-9.0.0/standalone, which will contain
    sensitive data for the Keycloak server
 
    .. code-block:: sh
 
-      cd keycloak-4.8.3.Final
+      cd keycloak-9.0.0
       sudo -u keycloak chmod 700 standalone
 
 
@@ -60,13 +60,13 @@ Initial Installation Steps
       sudo yum install java-1.8.0-openjdk-devel
 
 
-#. Added 'admin' to '/opt/keycloak-4.8.3.Final/standalone/configuration/keycloak-add-user.json', (re)start server to load user.
+#. Added 'admin' to '/opt/keycloak-9.0.0/standalone/configuration/keycloak-add-user.json', (re)start server to load user.
 
    If you are not already there:
 
    .. code-block:: sh
 
-      cd /opt/keycloak-4.8.3.Final 
+      cd /opt/keycloak-9.0.0
 
    Generate a password to use for the admin user:
 
@@ -84,7 +84,7 @@ Initial Installation Steps
    .. code-block:: sh
 
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
-      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=8443)'
+      sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
 
    Or you can use a config.cli file that contains these commands. We have
@@ -116,7 +116,7 @@ Start Keycloak Server
       Type=idle
       User=keycloak
       Group=keycloak
-      ExecStart=/opt/keycloak-4.8.3.Final/bin/standalone.sh -b 0.0.0.0
+      ExecStart=/opt/keycloak-9.0.0/bin/standalone.sh -b 0.0.0.0
       TimeoutStartSec=600
       TimeoutStopSec=600
 
@@ -163,28 +163,21 @@ Place Apache in front of Keycloak
 
    Add ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf``, making changes
    for the appropriate SSL certificate locations. Notice we are proxying
-   ``https://webdev07.hpc.osc.edu:8443`` to ``http://localhost:8080`` which is the default
+   ``https://ondemand-idpdev.hpc.osc.edu`` to ``http://localhost:8080`` which is the default
    port the Keycloak webserver runs as.
 
    .. literalinclude:: example-keycloak-apache.conf
-
-   You may need to modify iptables to open up access to Keycloak the same way
-   that you did so with port 80 and 443 for OnDemand:
-
-   .. code-block:: sh
-
-      sudo iptables -I INPUT -p tcp -m multiport --dports 8443 -m comment --comment "08443 *:8443" -j ACCEPT
 
    .. note::
 
       We can use the same host because Keycloak properly scopes all cookies it sets to the
       realm. For example, if I have a realm called "ondemand", then the Keycloak login
-      page will be at ``https://idp.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth``
+      page will be at ``https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth``
       and cookies set during authentication will be set with the path ``/auth/realms/ondemand``,
       including ``KEYCLOAK_SESSION``, ``KEYCLOAK_STATE_CHECKER``,
       ``KEYCLOAK_IDENTITY``, and ``KC_RESTART``.
 
-#. Now you should be able to access Keycloak: ``https://webdev07.hpc.osc.edu:8443``
+#. Now you should be able to access Keycloak: ``https://ondemand-idpdev.hpc.osc.edu``
 
 Differences if installing Keycloak on separate host
 ---------------------------------------------------
@@ -192,9 +185,7 @@ Differences if installing Keycloak on separate host
 When installing Keycloak on a separate host, the difference between this
 tutorial would be:
 
-#. throughout the rest of the tutorial replace ``https://webdev07.hpc.osc.edu:8443`` with the keycloak host
-#. use a different Apache config, listening instead on 443 instead of 8443 and
-   proxying that to Keycloak
+#. throughout the rest of the tutorial replace ``https://ondemand-idpdev.hpc.osc.edu`` with the keycloak host
 #. possibly use Apache 2.4 default distribution instead of software collections,
    meaning that configuration would be at /etc/httpd/conf.d/ instead of
    /opt/rh/httpd24/root/etc/httpd/conf.d/ and starting the
