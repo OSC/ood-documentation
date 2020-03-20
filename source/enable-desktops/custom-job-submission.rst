@@ -218,3 +218,21 @@ like.
 
 .. _batch script options: http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
 .. _pbs-ruby documentation: http://www.rubydoc.info/gems/pbs/PBS/Batch#submit_script-instance_method
+
+LinuxHost Adapter
+--------------------
+
+If you're using the :ref:`resource-manager-linuxhost` you actually don't *need* a specialized
+submit.yml.erb. There is no need to specify resources like the other adapters above.
+
+You can however, use it to override the adapter's global fields for mount binding and specifying
+which container use.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/apps/bc_desktop/submit/linuxhost_submit.yml.erb
+   ---
+   batch_connect:
+     native:
+        singularity_bindpath: /etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/fs,/home
+        singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif
