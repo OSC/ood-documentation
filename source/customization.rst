@@ -641,23 +641,27 @@ You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serv
 ``/var/www/ood/public/maintenance/index.html`` which you can change or brand to be your own. Changes
 to this file will persist through upgrades.
 
-Apache return this html file and a 503 response code to all users who's ip does not match one of the
+Apache returns this html file and a 503 response code to all users who's IP does not match one of the
 configured whitelist regular expressions.  The whitelist is to allow staff, localhost or a subset of
 your users access while restricting others.
 
 In this example we allow access to anyone from ``192.168.1..*`` which is the 192.168.1.0/24 CIDR and
-the single ip '10.0.0.1'.
+the single IP '10.0.0.1'.
 
 These are the settings you'll need for this functionality.
 
-.. warning:: use_rewrites is used outside of this functionality so when you reset your configurations
-  after the downtime, be sure to only reset what you have to.
-
 .. code:: yaml
 
+  # /etc/ood/config/ood_portal.yml
   use_rewrites: true
   use_maintenance: true
   maintenance_ip_whitelist:
     # examples only! Your ip regular expressions will be specific to your site.
     - '192.168.1..*'
     - '10.0.0.1'
+
+To start maintenance mode (and thus start serving this page) simply ``touch /etc/ood/maintenance.enable``
+to create the nessecary file. When your downtime is complete just remove the file and all the
+traffic will be served normally again.  The existance of this file is what starts or stops maintenance
+mode, not it's content, so you will not need to restart apache or modify it's config files for this to
+take affect.
