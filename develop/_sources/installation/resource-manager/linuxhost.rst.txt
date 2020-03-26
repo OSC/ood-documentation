@@ -90,7 +90,7 @@ A YAML cluster configuration file for a Linux host looks like:
 .. code-block:: yaml
    :emphasize-lines: 10-
 
-   # /etc/ood/config/clusters.d/my_cluster.yml
+   # /etc/ood/config/clusters.d/owens_login.yml
    ---
    v2:
      metadata:
@@ -122,7 +122,7 @@ adapter
 submit_host
   The target execution host for jobs. May be the head for a login round robin. May also be "localhost".
 ssh_hosts
-  Either the submit_host again, or a list of all nodes in the round robin if one is being used.
+ All nodes the submit_host can DNS resolve to.
 site_timeout
   The number of seconds that a user's job is allowed to run. Distinct from the length of time that a user selects.
 debug
@@ -182,6 +182,84 @@ The second way to use Singularity is the designed use of containers: launch a se
      native:
         singularity_bindpath: /etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/fs,/home
         singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif
+
+Troubleshooting
+***************
+
+Undetermined state
+------------------
+Your job can be in an 'undetermined state' because you haven't listed all the ``ssh_hosts``.
+``ssh_hosts`` should be *anything* the ``submit_host`` can DNS resolve to. You submit your
+job the ``submit_host``, but OnDemand is going to poll the ``ssh_hosts`` for your job and
+in this case, your running a job on a node that OnDemand is not polling.
+
+.. code-block:: yaml
+
+   # /etc/ood/config/clusters.d/no_good_config.yml
+   ---
+   v2:
+     job:
+       submit_host: "owens.osc.edu"  # This is the head for a login round robin
+       ssh_hosts: # These are the actual login nodes
+         - owens-login01.hpc.osc.edu
+         - owens-login02.hpc.osc.edu
+         - # I need 03 and 04 here!
+
+In this example I've only configured hosts 01 and 02 (above), but I got scheduled on 03 (you can tell
+by the 'job name') so the adapter now cannot find my job.
+
+.. figure:: /images/linux_host_undetermined.png
+
+error while loading shared libraries
+------------------------------------
+
+The default mounts for singularity are ``'/etc,/media,/mnt,/opt,/srv,/usr,/var,/users'``.  It's likely
+either you've overwritten this with too few mounts (like /lib, /opt or /usr) or your container lacks
+the library in question.
+
+If the library exists on the host, consider mounting it into the container. Otherwise install it in
+the container definition and rebuild the container.
+
+The job just exists with no errors.
+-----------------------------------
+
+This is where turning debug on with ``debug: true`` is really going to come in handy.
+
+Enable this, and you'll see the two shell scripts that ran during this job. Open the file ending in
+``_tmux`` and you'll see something like below.
+
+.. code-block:: shell
+
+  export SINGULARITY_BINDPATH=/usr,/lib,/lib64,/opt
+  # ... removed for brevity
+  ERROR_PATH=/dev/null
+  ({
+  timeout 28800s /usr/bin/singularity exec  --pid /users/PZS0714/johrstrom/src/images/shelf/centos.sif /bin/bash --login /users/PZS0714/johrstrom/tmp.73S0QFxC5e_sing
+  } | tee "$OUTPUT_PATH") 3>&1 1>&2 2>&3 | tee "$ERROR_PATH"
+
+Export the SINGULARITY_BINDPATH so you're sure to have the same mounts, and run this
+``/usr/bin/singularity exec ... tmp.73S0QFxC5e_sing`` command manually on one of the ssh hosts.  This will
+emulate what the linuxhost adapter is doing and you should be able to modify and rerun until you fix
+the issue.
+
+
+D-Bus errors
+------------
+Maybe you've seen something like below.  Mounting ``/var`` into the container will likely fix the issue.
+
+.. code-block:: shell
+
+  Launching desktop 'xfce'...
+  process 195: D-Bus library appears to be incorrectly set up; failed to read machine uuid: UUID file '/etc/machine-id' should contain a hex string of length 32, not length 0, with no other text
+  See the manual page for dbus-uuidgen to correct this issue.
+    D-Bus not built with -rdynamic so unable to print a backtrace
+
+Again, mounting ``var`` fixed this error too.
+
+.. code-block:: shell
+
+  Starting system message bus: Could not get password database information for UID of current process: User "???" unknown or no memory to allocate password entry
+
 
 .. note::
 

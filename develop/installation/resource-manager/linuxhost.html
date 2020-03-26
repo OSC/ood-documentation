@@ -126,6 +126,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#an-example-user-story">An Example User Story</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-non-traditional-job-launcher">A Non-traditional Job Launcher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-non-traditional-use-of-singularity">A Non-traditional Use of Singularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#undetermined-state">Undetermined state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-while-loading-shared-libraries">error while loading shared libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-job-just-exists-with-no-errors">The job just exists with no errors.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#d-bus-errors">D-Bus errors</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
@@ -313,7 +320,7 @@ sudo systemctl <span class="nb">enable</span> cgred
 <div class="section" id="how-to-configure-the-adapter">
 <h2>How To Configure The Adapter<a class="headerlink" href="#how-to-configure-the-adapter" title="Permalink to this headline">¶</a></h2>
 <p>A YAML cluster configuration file for a Linux host looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens_login.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
@@ -346,7 +353,7 @@ sudo systemctl <span class="nb">enable</span> cgred
 <dt>submit_host</dt>
 <dd>The target execution host for jobs. May be the head for a login round robin. May also be “localhost”.</dd>
 <dt>ssh_hosts</dt>
-<dd>Either the submit_host again, or a list of all nodes in the round robin if one is being used.</dd>
+<dd>All nodes the submit_host can DNS resolve to.</dd>
 <dt>site_timeout</dt>
 <dd>The number of seconds that a user’s job is allowed to run. Distinct from the length of time that a user selects.</dd>
 <dt>debug</dt>
@@ -401,9 +408,75 @@ sudo systemctl <span class="nb">enable</span> cgred
      <span class="l l-Scalar l-Scalar-Plain">singularity_container</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/local/modules/netbeans/netbeans_2019.sif</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="undetermined-state">
+<h3>Undetermined state<a class="headerlink" href="#undetermined-state" title="Permalink to this headline">¶</a></h3>
+<p>Your job can be in an ‘undetermined state’ because you haven’t listed all the <code class="docutils literal notranslate"><span class="pre">ssh_hosts</span></code>.
+<code class="docutils literal notranslate"><span class="pre">ssh_hosts</span></code> should be <em>anything</em> the <code class="docutils literal notranslate"><span class="pre">submit_host</span></code> can DNS resolve to. You submit your
+job the <code class="docutils literal notranslate"><span class="pre">submit_host</span></code>, but OnDemand is going to poll the <code class="docutils literal notranslate"><span class="pre">ssh_hosts</span></code> for your job and
+in this case, your running a job on a node that OnDemand is not polling.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/no_good_config.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">submit_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>  <span class="c1"># This is the head for a login round robin</span>
+    <span class="l l-Scalar l-Scalar-Plain">ssh_hosts</span><span class="p p-Indicator">:</span> <span class="c1"># These are the actual login nodes</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login01.hpc.osc.edu</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login02.hpc.osc.edu</span>
+      <span class="p p-Indicator">-</span> <span class="c1"># I need 03 and 04 here!</span>
+</pre></div>
+</div>
+<p>In this example I’ve only configured hosts 01 and 02 (above), but I got scheduled on 03 (you can tell
+by the ‘job name’) so the adapter now cannot find my job.</p>
+<div class="figure">
+<img alt="../../_images/linux_host_undetermined.png" src="../../_images/linux_host_undetermined.png" />
+</div>
+</div>
+<div class="section" id="error-while-loading-shared-libraries">
+<h3>error while loading shared libraries<a class="headerlink" href="#error-while-loading-shared-libraries" title="Permalink to this headline">¶</a></h3>
+<p>The default mounts for singularity are <code class="docutils literal notranslate"><span class="pre">'/etc,/media,/mnt,/opt,/srv,/usr,/var,/users'</span></code>.  It’s likely
+either you’ve overwritten this with too few mounts (like /lib, /opt or /usr) or your container lacks
+the library in question.</p>
+<p>If the library exists on the host, consider mounting it into the container. Otherwise install it in
+the container definition and rebuild the container.</p>
+</div>
+<div class="section" id="the-job-just-exists-with-no-errors">
+<h3>The job just exists with no errors.<a class="headerlink" href="#the-job-just-exists-with-no-errors" title="Permalink to this headline">¶</a></h3>
+<p>This is where turning debug on with <code class="docutils literal notranslate"><span class="pre">debug:</span> <span class="pre">true</span></code> is really going to come in handy.</p>
+<p>Enable this, and you’ll see the two shell scripts that ran during this job. Open the file ending in
+<code class="docutils literal notranslate"><span class="pre">_tmux</span></code> and you’ll see something like below.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SINGULARITY_BINDPATH</span><span class="o">=</span>/usr,/lib,/lib64,/opt
+<span class="c1"># ... removed for brevity</span>
+<span class="nv">ERROR_PATH</span><span class="o">=</span>/dev/null
+<span class="o">({</span>
+timeout 28800s /usr/bin/singularity <span class="nb">exec</span>  --pid /users/PZS0714/johrstrom/src/images/shelf/centos.sif /bin/bash --login /users/PZS0714/johrstrom/tmp.73S0QFxC5e_sing
+<span class="o">}</span> <span class="p">|</span> tee <span class="s2">&quot;</span><span class="nv">$OUTPUT_PATH</span><span class="s2">&quot;</span><span class="o">)</span> <span class="m">3</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span> <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">3</span> <span class="p">|</span> tee <span class="s2">&quot;</span><span class="nv">$ERROR_PATH</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Export the SINGULARITY_BINDPATH so you’re sure to have the same mounts, and run this
+<code class="docutils literal notranslate"><span class="pre">/usr/bin/singularity</span> <span class="pre">exec</span> <span class="pre">...</span> <span class="pre">tmp.73S0QFxC5e_sing</span></code> command manually on one of the ssh hosts.  This will
+emulate what the linuxhost adapter is doing and you should be able to modify and rerun until you fix
+the issue.</p>
+</div>
+<div class="section" id="d-bus-errors">
+<h3>D-Bus errors<a class="headerlink" href="#d-bus-errors" title="Permalink to this headline">¶</a></h3>
+<p>Maybe you’ve seen something like below.  Mounting <code class="docutils literal notranslate"><span class="pre">/var</span></code> into the container will likely fix the issue.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Launching desktop <span class="s1">&#39;xfce&#39;</span>...
+process <span class="m">195</span>: D-Bus library appears to be incorrectly <span class="nb">set</span> up<span class="p">;</span> failed to <span class="nb">read</span> machine uuid: UUID file <span class="s1">&#39;/etc/machine-id&#39;</span> should contain a hex string of length <span class="m">32</span>, not length <span class="m">0</span>, with no other text
+See the manual page <span class="k">for</span> dbus-uuidgen to correct this issue.
+  D-Bus not built with -rdynamic so unable to print a backtrace
+</pre></div>
+</div>
+<p>Again, mounting <code class="docutils literal notranslate"><span class="pre">var</span></code> fixed this error too.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Starting system message bus: Could not get password database information <span class="k">for</span> UID of current process: User <span class="s2">&quot;???&quot;</span> unknown or no memory to allocate password entry
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Subsequent versions of the adapter are expected to use <a class="reference external" href="man7.org/linux/man-pages/man1/unshare.1.html">unshare</a> for PID namespacing as the default method instead of Singularity. Singularity will continue to be supported.</p>
+</div>
 </div>
 </div>
 </div>
