@@ -296,19 +296,16 @@ really have any meaning in the LinuxHost Adapter.
 
    # /etc/ood/config/apps/bc_desktop/owens_login_desktop.yml
    ---
-   title: "Owens Login XFCE desktop"
-   description: |
-      This launches a XFCE desktop on an Owens login nodes.
-   cluster: "owens_login"
+   title: Owens Login XFCE desktop
+   description: This launches a XFCE desktop on an Owens login nodes.
+   cluster: owens_login
+   form:
+     - desktop
+     - bc_num_hours
    attributes:
-   desktop: "xfce"
-   bc_num_hours:
-      value: 1
-   bc_num_slots: null
-   bc_queue: null
-   bc_account: null
-   node_type: null
-   bc_email_on_started: null
+     bc_num_hours:
+       value: 1
+     desktop: "xfce"
 
 
 .. _ruby string: https://ruby-doc.org/core-2.2.0/String.html
