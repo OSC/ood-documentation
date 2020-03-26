@@ -280,5 +280,33 @@ value of ``8`` in the "Number of hours" form field.
    when you go back to the form page for that given app, it will auto-fill in
    the form with your previous values.
 
+
+Minimal LinuxHost Form
+----------------------
+
+Because the :ref:`resource-manager-linuxhost` is not like a traditional scheduler,
+there are very few form items you'll need to add or have your users choose from.
+
+This is a minimal configuration to launch an XFCE desktop environment on a cluster
+we call owens_login.  You'll notice a lot of entries are null because they don't
+really have any meaning in the LinuxHost Adapter.
+
+.. code-block:: yaml
+   :emphasize-lines: 5-
+
+   # /etc/ood/config/apps/bc_desktop/owens_login_desktop.yml
+   ---
+   title: Owens Login XFCE desktop
+   description: This launches a XFCE desktop on an Owens login nodes.
+   cluster: owens_login
+   form:
+     - desktop
+     - bc_num_hours
+   attributes:
+     bc_num_hours:
+       value: 1
+     desktop: "xfce"
+
+
 .. _ruby string: https://ruby-doc.org/core-2.2.0/String.html
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
