@@ -10,7 +10,7 @@ Dashboard App
 
    Example of the Dashboard after a fresh install.
 
-This Open OnDemand application provides a web-interface for launching the
+his Open OnDemand application provides a web-interface for launching the
 various other Open OnDemand applications. It also provides links for managing
 the session of the logged in user. This application is built with the `Ruby on
 Rails`_ web application framework.
