@@ -93,3 +93,17 @@ This sets the sh shell to behave like bash and ensures you've sourced your users
             set +o posix
             . ~/.bashrc
             %s
+
+Invalid Job name
+****************
+You're likely to encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.
+
+``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
+
+To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` in the ``/etc/ood/config/apps/dashboard/env`` file.
+
+.. code-block:: text
+
+   # /etc/ood/config/apps/dashboard/env
+   OOD_JOB_NAME_ILLEGAL_CHARS="/"
