@@ -74,6 +74,8 @@ We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
 Branding
 -------------------
 
+.. _branding:
+
 You can customize the logo, favicon, title, and navbar colors of OnDemand.
 
 .. figure:: /images/dashboard_branding_logo_and_colors.png
@@ -158,13 +160,15 @@ These URLs can be specified, which will appear in the Help menu and on other loc
 Add Shortcuts to Files Menu
 ---------------------------
 
+.. _add-shortcuts-to-files-menu:
+
 The Files menu by default has a single link to open the Files app in the user's
 Home Directory. More links can be added to this menu, for Scratch space and
 Project space directories.
 
 Adding more links currently requires adding a custom initializer to the
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
-``Pathname`` objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
+``FavoritePath`` objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
 global attribute that is used in the Dashboard app.
 
 Start by creating the file
@@ -174,17 +178,19 @@ Start by creating the file
 
    # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
-   OodFilesApp.candidate_favorite_paths.tap do |paths|
-     # add project space directories
-     projects = User.new.groups.map(&:name).grep(/^P./)
-     paths.concat projects.map { |p| Pathname.new("/fs/project/#{p}")  }
+  OodFilesApp.candidate_favorite_paths.tap do |paths|
+    # add project space directories
+    projects = User.new.groups.map(&:name).grep(/^P./)
+    paths.concat projects.map { |p| FavoritePath.new(Pathname.new("/fs/project/#{p}"))  }
 
-     # add scratch space directories
-     paths << Pathname.new("/fs/scratch/#{User.new.name}")
-     paths.concat projects.map { |p| Pathname.new("/fs/scratch/#{p}")  }
-   end
+    # add scratch space directories
+    paths << FavoritePath.new(Pathname.new("/fs/scratch/#{User.new.name}"))
 
-- The variable ``paths`` is an array of ``Pathname`` objects that define a list
+    # Project scratch has an optional title field.
+    paths.concat projects.map { |p| FavoritePath.new(Pathname.new("/fs/scratch/#{p}"), title: "Scratch")  }
+  end
+
+- The variable ``paths`` is an array of ``FavoritePath`` objects that define a list
   of what will appear in the Dashboard menu for Files
 - At OSC, the pattern for project paths follows
   :file:`/fs/project/{project_name}`. So above we:
@@ -192,12 +198,14 @@ Start by creating the file
   #. get an array of all user's groups by name
   #. filter that array for groups that start with ``P`` (i.e., ``PZS0002``,
      ``PAW0003``, ...)
-  #. using ``map`` we turn this array into an array of ``Pathname`` objects to
+  #. using ``map`` we turn this array into an array of ``FavoritePath`` objects to
      all the possible project directories the user could have.
   #. extend the paths array with this list of paths
 
 - For possible scratch space directories, we look for either
   :file:`/fs/scratch/{project_name}` or :file:`/fs/scratch/{user_name}`
+- Additionally project scratch directories have a 'title' attribute and will
+  with in the dropdown with both the title and the path.
 
 On each request, the Dashboard will check for the existence of the directories
 in ``OodFilesApp.candidate_favorite_paths`` array and whichever directories
@@ -579,6 +587,8 @@ the specified user only.
 Balance Warnings on Dashboard
 --------------------------------
 
+.. _balance-warnings-on-dashboard:
+
 You can display warnings to users on the Dashboard if their
 resource balance is nearing its limit. This requires an auto-updated (it is
 recommended to update this file daily with a cronjob) JSON file
@@ -660,6 +670,8 @@ If the balance is defined as a ``project`` balance, then it applies to a project
 Maintenance Mode
 -----------------
 
+.. _maintenance-mode:
+
 As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.
 
@@ -687,7 +699,7 @@ These are the settings you'll need for this functionality.
     - '10.0.0.1'
 
 To start maintenance mode (and thus start serving this page) simply ``touch /etc/ood/maintenance.enable``
-to create the nessecary file. When your downtime is complete just remove the file and all the
-traffic will be served normally again.  The existance of this file is what starts or stops maintenance
+to create the necessary file. When your downtime is complete just remove the file and all the
+traffic will be served normally again.  The existence of this file is what starts or stops maintenance
 mode, not it's content, so you will not need to restart apache or modify it's config files for this to
 take affect.

@@ -9,6 +9,11 @@ Highlights in 1.7:
 - `Update Passenger and NGINX dependencies`_
 - `Update Ruby and NodeJS dependencies`_
 - `Drop EL6 and add EL8 support`_
+- `Added the Linux Host Adapter`_
+- `Show account balance warnings`_
+- `Job Composer and Active Jobs match Dashboard Branding`_
+- `Titles for Files menu entries`_
+- `Documentation for Keycloak as identity broker with CILogon`_
 
 Upgrading from v1.6
 -------------------
@@ -79,9 +84,59 @@ Passenger has been upgraded from ``5.3.7`` to ``6.0.4``. NGINX has been upgraded
 Update Ruby and NodeJS dependencies
 ...................................
 
-The Ruby verion used by OnDemand has been upgraded from ``2.4`` to ``2.5``. The NodeJS version used by OnDemand has been upgraded from ``6`` to ``10``.
+The Ruby version used by OnDemand has been upgraded from ``2.4`` to ``2.5``. The NodeJS version used by OnDemand has been upgraded from ``6`` to ``10``.
 
 Drop EL6 and add EL8 support
 ............................
 
 OnDemand has dropped support for CentOS/RedHat 6 and added support for CentOS/RedHat 8.
+
+
+Added the Linux Host Adapter
+............................
+
+Support for running jobs directly on Linux hosts has been added. This means interactive 
+jobs can now run on a login node instead of through a batch scheduler.
+
+See the documentation for the :ref:`resource-manager-linuxhost`. for more details.
+
+Show account balance warnings
+.............................
+
+The dashboard can now show account balance warnings if the users' account balance
+is some threshold.
+
+See :ref:`these docs <balance-warnings-on-dashboard>` for more details on how to 
+enable this feature.
+
+Job Composer and Active Jobs match Dashboard Branding
+.....................................................
+
+The Job Composer and Active Jobs apps' top navigation bar now share the same branding
+scheme configured for the dashboard. 
+
+There's no additional configuration required for this other than what's documented 
+:ref:`here <branding>`.
+
+Maintenance mode
+................
+
+OOD can be put into 'maintenance mode' where it serves a static page to either all
+users or a subset (staff on a VPN for example).  This static page informs users
+that maintenance is underway while administrators perform disruptive tasks.
+
+See :ref:`these docs <maintenance-mode>` on how to configure and enable this feature.
+
+Titles for Files menu entries
+.............................
+
+The shortcuts in the files dropdown menu can now show an optional title along with the 
+directory path. The :ref:`original documentation <add-shortcuts-to-files-menu>` on this 
+feature has been updated to reflect the new options.
+
+
+Documentation for Keycloak as identity broker with CILogon
+..........................................................
+
+Documentation for Keycloak as identity broker with CILogon has been added in the documentation
+entitled ':ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`'.
