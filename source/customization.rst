@@ -241,6 +241,24 @@ In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to cha
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
+Set Shell App Origin
+--------------
+
+The OOD shell application verifies the origin of a request to protect against malicious CORS_ attacks.
+
+If, for any reason, you want to disable this feature or change the origin you must modify the ``OOD_SHELL_ORIGIN_CHECK``
+environment variable in the ``/etc/ood/config/apps/shell/env`` file.
+
+.. code:: text
+
+  # /etc/ood/config/apps/shell/env
+  # to disable it, just configure it with something that doesn't start with http
+  OOD_SHELL_ORIGIN_CHECK: 'disbled'
+
+  # to change it simply specify the http(s) origin you want to verify against.
+  OOD_SHELL_ORIGIN_CHECK: 'https://my.other.origin'
+
+.. _CORS: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
 Custom Job Composer Templates 
 -----------------------------
