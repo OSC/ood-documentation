@@ -101,9 +101,12 @@ job names like the error below.
 
 ``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
 
-To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` in the ``/etc/ood/config/apps/dashboard/env`` file.
+To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applications in the 
+``/etc/ood/profile`` file.
 
 .. code-block:: text
 
-   # /etc/ood/config/apps/dashboard/env
+   # /etc/ood/profile
    OOD_JOB_NAME_ILLEGAL_CHARS="/"
+
+   . /opt/ood/nginx_stage/etc/profile
