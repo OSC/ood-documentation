@@ -115,7 +115,13 @@
 <li class="toctree-l2"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Grid Engine</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Grid Engine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shell-environments">Shell environments</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
@@ -288,6 +294,41 @@ cluster looks like:</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">DRMAA improves OnDemand’s ability to report on the precise status of jobs. To use this feature ensure that libdrmaa.so for Grid Engine is installed or built and set the config value for <code class="docutils literal notranslate"><span class="pre">libdrmaa_path</span></code> and <code class="docutils literal notranslate"><span class="pre">sge_root</span></code>. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.</p>
+</div>
+<div class="section" id="common-issues">
+<h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shell-environments">
+<h3>Shell environments<a class="headerlink" href="#shell-environments" title="Permalink to this headline">¶</a></h3>
+<p>You may run into an error similar to this where the script running is using a BASH process
+substitution and there’s a syntax error.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/export/uge/some/file: line 156: syntax error near unexpected token &lt;&#39; /export/uge/some/file:
+line 156: done &lt; &lt;(tail -f --pid=${SCRIPT_PID} “vnc.log”) &amp;’
+</pre></div>
+</div>
+</div></blockquote>
+<p>What you’ll need to do is add a <code class="docutils literal notranslate"><span class="pre">script_wrapper</span></code> element to your clusters’ configuration like below.
+This sets the sh shell to behave like bash and ensures you’ve sourced your users’ bashrc file.</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<span class="c1"># (other elements removed for brevity)</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">set +o posix</span>
+        <span class="no">. ~/.bashrc</span>
+        <span class="no">%s</span>
+    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">set +o posix</span>
+        <span class="no">. ~/.bashrc</span>
+        <span class="no">%s</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 </div>
 </div>
 
