@@ -703,3 +703,58 @@ to create the necessary file. When your downtime is complete just remove the fil
 traffic will be served normally again.  The existence of this file is what starts or stops maintenance
 mode, not it's content, so you will not need to restart apache or modify it's config files for this to
 take affect.
+
+Grafana support
+---------------
+
+.. _grafana-support:
+
+It's possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.
+
+Grafana must be configured to support embedded panels and at this time it is also required to have a anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust `org_name` to match whatever organization you wish to be anonymous.
+
+.. warning::
+
+   Changing a Grafana install to support anonymous access can cause unintended consequences for how authenticated users interact with Grafana.
+   It's recommended to test anonymous access on a non-production Grafana install if you do not already support anonymous access.
+
+.. code:: shell
+
+   [auth.anonymous]
+   enabled = true
+   org_name = Public
+   org_role = Viewer
+
+   [security]
+   allow_embedding = true
+
+The dashboard used by OSC is the `OnDemand Clusters <https://grafana.com/grafana/dashboards/12093>`_ dashboard.
+
+Settings used to access Grafana are configured in the cluster config.  The following is an example from OSC:
+
+.. code:: yaml
+
+   custom:
+     grafana:
+       host: "https://grafana.osc.edu"
+       orgId: 3
+       dashboard:
+         name: "ondemand-clusters"
+         uid: "aaba6Ahbauquag"
+         panels:
+           cpu: 20
+           memory: 24
+       labels:
+         cluster: "cluster"
+         host: "host"
+         jobid: "jobid"
+
+When viewing a dashboard in Grafana choose the panel you'd wish to display and select `Share`.
+Then choose the `Embed` tab which will provide you with the iframe URL that will need to be generated within OnDemand.
+The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by OnDemand.
+
+* ``orgId`` is the ``orgId`` query parameter
+* The dashboard ``name`` is the last segment of the URI before query parameters
+* The ``uid``` is the UID portion of URL that is unique to every dashboard
+* The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
+* The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
