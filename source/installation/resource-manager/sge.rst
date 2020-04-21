@@ -93,3 +93,19 @@ This sets the sh shell to behave like bash and ensures you've sourced your users
             set +o posix
             . ~/.bashrc
             %s
+
+Invalid Job name
+****************
+If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.
+
+``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
+
+To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applications in the 
+``pun_custom_env`` attribute of the ``/etc/ood/config/nginx_stage.yml`` file.
+
+.. code-block:: yaml
+
+    # /etc/ood/config/nginx_stage.yml
+    pun_custom_env:
+      - OOD_JOB_NAME_ILLEGAL_CHARS: "/"
