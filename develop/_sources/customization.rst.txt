@@ -341,6 +341,18 @@ In OnDemand <= 1.3 if the user's home directory was missing a non-helpful single
 string error would display. Now a friendly error page displays. This error page
 can be customized by adding a custom one to ``/etc/ood/config/pun/html/missing_home_directory.html``.
 
+The default error page looks like this:
+
+.. figure:: /images/customization_homedirmissing_default.png
+   :align: center
+
+An example of a custom error page has been provided at ``/opt/ood/nginx_stage/html/missing_home_directory.html.example.pam_mkhomedir`` and can be copied to ``/etc/ood/config/pun/html/missing_home_directory.html``. This example directs the user to first click a link to open the shell app which will create the home directory. The shell app's default host must be configured to be a host that is appropriate for this purpose. The custom error page looks like this:
+
+.. figure:: /images/customization_homedirmissing_pammkdir.png
+   :align: center
+
+
+
 See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
 
 .. _dashboard-navbar-config:
