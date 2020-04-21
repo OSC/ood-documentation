@@ -244,6 +244,32 @@ In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to cha
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
+Fix Unauthorized WebSocket Connection in Shell App
+--------------------------------------------------
+
+If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with wss:// and the response header includes ``X-OOD-Failure-Reason: invalid origin``, you may need to set the ``OOD_SHELL_ORIGIN_CHECK`` configuration option.
+
+There is a security feature that adds proper CSRF_ protection using both the Origin request header check and a CSRF_ token check.
+
+The Origin check uses X-Forwarded-Proto_ and X-Forwarded-Host_ that Apache mod_proxy_ sets to build the string that is used to compare with the Origin request header the browser sends in the WebSocket upgrade request.
+
+In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set ``OOD_SHELL_ORIGIN_CHECK`` env var to the correct https string, or disable the origin check altogether by setting ``OOD_SHELL_ORIGIN_CHECK=off`` (or any other value that does not start with "http") in the ``/etc/ood/config/apps/shell/env`` file.
+
+Either way the CSRF token will still provide protection from this vulnerability.
+
+.. code:: text
+
+  # /etc/ood/config/apps/shell/env
+  # to disable it, just configure it with something that doesn't start with http
+  OOD_SHELL_ORIGIN_CHECK='off'
+
+  # to change it simply specify the http(s) origin you want to verify against.
+  OOD_SHELL_ORIGIN_CHECK='https://my.other.origin'
+
+.. _CSRF: https://owasp.org/www-community/attacks/csrf
+.. _X-Forwarded-Proto: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto
+.. _X-Forwarded-Host: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host
+.. _mod_proxy: https://httpd.apache.org/docs/2.4/mod/mod_proxy.html
 
 Custom Job Composer Templates
 -----------------------------

@@ -120,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add Shortcuts to Files Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#whitelist-directories">Whitelist Directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fix-unauthorized-websocket-connection-in-shell-app">Fix Unauthorized WebSocket Connection in Shell App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#job-templates-overview">Job Templates Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#job-template-details">Job Template Details</a></li>
@@ -512,6 +513,22 @@ app.</p>
 <h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
 <p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST</span></code> to change the default ssh host. Otherwise it will default to “localhost” i.e. add the line <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST=&quot;localhost&quot;</span></code>.</p>
 <p>This will control what host the shell app ssh’s to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
+</div>
+<div class="section" id="fix-unauthorized-websocket-connection-in-shell-app">
+<h2>Fix Unauthorized WebSocket Connection in Shell App<a class="headerlink" href="#fix-unauthorized-websocket-connection-in-shell-app" title="Permalink to this headline">¶</a></h2>
+<p>If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with wss:// and the response header includes <code class="docutils literal notranslate"><span class="pre">X-OOD-Failure-Reason:</span> <span class="pre">invalid</span> <span class="pre">origin</span></code>, you may need to set the <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> configuration option.</p>
+<p>There is a security feature that adds proper <a class="reference external" href="https://owasp.org/www-community/attacks/csrf">CSRF</a> protection using both the Origin request header check and a <a class="reference external" href="https://owasp.org/www-community/attacks/csrf">CSRF</a> token check.</p>
+<p>The Origin check uses <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto">X-Forwarded-Proto</a> and <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host">X-Forwarded-Host</a> that Apache <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_proxy.html">mod_proxy</a> sets to build the string that is used to compare with the Origin request header the browser sends in the WebSocket upgrade request.</p>
+<p>In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> env var to the correct https string, or disable the origin check altogether by setting <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK=off</span></code> (or any other value that does not start with “http”) in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> file.</p>
+<p>Either way the CSRF token will still provide protection from this vulnerability.</p>
+<div class="code text highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
+<span class="c1"># to disable it, just configure it with something that doesn&#39;t start with http</span>
+<span class="n">OOD_SHELL_ORIGIN_CHECK</span><span class="o">=</span><span class="s1">&#39;off&#39;</span>
+
+<span class="c1"># to change it simply specify the http(s) origin you want to verify against.</span>
+<span class="n">OOD_SHELL_ORIGIN_CHECK</span><span class="o">=</span><span class="s1">&#39;https://my.other.origin&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="custom-job-composer-templates">
 <h2>Custom Job Composer Templates<a class="headerlink" href="#custom-job-composer-templates" title="Permalink to this headline">¶</a></h2>
