@@ -31,6 +31,11 @@ Upgrading from v1.6
 
   Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
 
+.. warning::
+
+  Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand 1.7. The RPM upgrade will generate ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``.
+  If there are custom changes made to ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be necessary to merge those changes in after running ``update_ood_portal --force``.
+
 #. Update OnDemand release RPM
 
    .. code-block:: sh
@@ -43,6 +48,13 @@ Upgrading from v1.6
 
        sudo yum clean all
        sudo yum update ondemand
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal --force
+       sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 #. Force all PUNs to restart
 
