@@ -145,6 +145,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#project-balance">Project Balance</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#maintenance-mode">Maintenance Mode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a></li>
@@ -880,6 +881,34 @@ can be changed with the environment variable <code class="docutils literal notra
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="maintenance-mode">
+<h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
+<p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
+while still telling your customers that the downtime is expected.</p>
+<p>You can do this by setting Open OnDemand in ‘Maintenance Mode’. Apache will serve
+<code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/index.html</span></code> which you can change or brand to be your own. Changes
+to this file will persist through upgrades.</p>
+<p>Apache returns this html file and a 503 response code to all users who’s IP does not match one of the
+configured whitelist regular expressions.  The whitelist is to allow staff, localhost or a subset of
+your users access while restricting others.</p>
+<p>In this example we allow access to anyone from <code class="docutils literal notranslate"><span class="pre">192.168.1..*</span></code> which is the 192.168.1.0/24 CIDR and
+the single IP ‘10.0.0.1’.</p>
+<p>These are the settings you’ll need for this functionality.</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="n">use_rewrites</span><span class="p">:</span> <span class="n">true</span>
+<span class="n">use_maintenance</span><span class="p">:</span> <span class="n">true</span>
+<span class="n">maintenance_ip_whitelist</span><span class="p">:</span>
+  <span class="c1"># examples only! Your ip regular expressions will be specific to your site.</span>
+  <span class="o">-</span> <span class="s1">&#39;192.168.1..*&#39;</span>
+  <span class="o">-</span> <span class="s1">&#39;10.0.0.1&#39;</span>
+</pre></div>
+</div>
+<p>To start maintenance mode (and thus start serving this page) simply <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">/etc/ood/maintenance.enable</span></code>
+to create the nessecary file. When your downtime is complete just remove the file and all the
+traffic will be served normally again.  The existance of this file is what starts or stops maintenance
+mode, not it’s content, so you will not need to restart apache or modify it’s config files for this to
+take affect.</p>
 </div>
 </div>
 

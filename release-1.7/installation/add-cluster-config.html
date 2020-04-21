@@ -226,19 +226,16 @@
             
   <div class="section" id="add-cluster-configuration-files">
 <span id="add-cluster-config"></span><h1>Add Cluster Configuration Files<a class="headerlink" href="#add-cluster-configuration-files" title="Permalink to this headline">¶</a></h1>
-<p><strong>(Optional, but recommended)</strong></p>
-<p>The following apps do not require a cluster configuration file:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a></li>
-<li><a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a></li>
-<li><a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> (but only launched from within the Files App)</li>
-</ul>
-<p>The following apps do require a cluster configuration file:</p>
+<p>Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to. Without cluster config files, the only
+apps that work are the <a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> and <a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a> apps, and <a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> if you only want to support ssh to localhost on the web host.</p>
+<p>Apps that require proper cluster configuration include:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> (connect to a cluster login node from the Dashboard App)</li>
 <li><a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a> (view a list of active jobs for the various clusters)</li>
 <li><a class="reference internal" href="../applications/job-composer.html#job-composer"><span class="std std-ref">Job Composer App</span></a> (submit jobs to various clusters)</li>
+<li>All interactive apps such as Jupyter and RStudio</li>
 </ul>
+<p>The cluster config files are where the <a class="reference internal" href="resource-manager.html#resource-manager"><span class="std std-ref">Resource Manager Configuration</span></a> configuration goes, which is necessary for enabling apps to submit batch jobs.</p>
 <ol class="arabic">
 <li><p class="first">Create the default directory that the cluster configuration files reside
 under:</p>

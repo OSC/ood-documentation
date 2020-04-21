@@ -128,6 +128,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#change-a-label">Change a Label</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-help-message-to-field">Add Help Message to Field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#change-field-default-value">Change Field Default Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minimal-linuxhost-form">Minimal LinuxHost Form</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="custom-job-submission.html">4. Custom Job Submission</a></li>
@@ -472,6 +473,28 @@ example. That is because the Interactive Apps tool built into the Dashboard
 <strong>remembers</strong> your last successful app launch for a corresponding app. So
 when you go back to the form page for that given app, it will auto-fill in
 the form with your previous values.</p>
+</div>
+</div>
+<div class="section" id="minimal-linuxhost-form">
+<h2>Minimal LinuxHost Form<a class="headerlink" href="#minimal-linuxhost-form" title="Permalink to this headline">¶</a></h2>
+<p>Because the <a class="reference internal" href="../installation/resource-manager/linuxhost.html#resource-manager-linuxhost"><span class="std std-ref">LinuxHost Adapter</span></a> is not like a traditional scheduler,
+there are very few form items you’ll need to add or have your users choose from.</p>
+<p>This is a minimal configuration to launch an XFCE desktop environment on a cluster
+we call owens_login.  You’ll notice a lot of entries are null because they don’t
+really have any meaning in the LinuxHost Adapter.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/owens_login_desktop.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Owens Login XFCE desktop</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">This launches a XFCE desktop on an Owens login nodes.</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">owens_login</span>
+</span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">desktop</span>
+</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+</span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">desktop</span><span class="p p-Indicator">:</span> <span class="s">&quot;xfce&quot;</span>
+</span></pre></div>
 </div>
 </div>
 </div>
