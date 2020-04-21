@@ -3,19 +3,17 @@
 Add Cluster Configuration Files
 ===============================
 
-**(Optional, but recommended)**
+Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to. Without cluster config files, the only
+apps that work are the :ref:`dashboard` and :ref:`files` apps, and :ref:`shell` if you only want to support ssh to localhost on the web host.
 
-The following apps do not require a cluster configuration file:
-
-- :ref:`dashboard`
-- :ref:`files`
-- :ref:`shell` (but only launched from within the Files App)
-
-The following apps do require a cluster configuration file:
+Apps that require proper cluster configuration include:
 
 - :ref:`shell` (connect to a cluster login node from the Dashboard App)
 - :ref:`active-jobs` (view a list of active jobs for the various clusters)
 - :ref:`job-composer` (submit jobs to various clusters)
+- All interactive apps such as Jupyter and RStudio
+
+The cluster config files are where the :ref:`resource-manager` configuration goes, which is necessary for enabling apps to submit batch jobs.
 
 #. Create the default directory that the cluster configuration files reside
    under:
