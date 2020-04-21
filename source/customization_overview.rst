@@ -23,7 +23,7 @@ These are three files that directly affect the environment or functionality of t
      - replace ``$APP`` above with the name of the app directory deployed to ``/var/www/ood/apps/sys``
      - Modify Rails application behavior `using Ruby code <https://guides.rubyonrails.org/configuring.html#using-initializer-files>`__. Since this is application code environment variables can be set, removed.
      - This method is specific to Ruby on Rails applications: Activejobs,
-       Dashboard, File Editor, and Job Composer. You can add multiple
+       Dashboard, and Job Composer. You can add multiple
        initializer files in this directory and they will be loaded in
        alphabetical order
 
