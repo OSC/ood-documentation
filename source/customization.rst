@@ -617,10 +617,11 @@ the specified user only.
 
 .. note:: For each user with resources under this fileset, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
 
-Balance Warnings on Dashboard
---------------------------------
 
 .. _balance-warnings-on-dashboard:
+
+Balance Warnings on Dashboard
+--------------------------------
 
 You can display warnings to users on the Dashboard if their
 resource balance is nearing its limit. This requires an auto-updated (it is
@@ -700,15 +701,17 @@ If the balance is defined as a ``project`` balance, then it applies to a project
      "value": 10
    }
 
+
+.. _maintenance-mode:
+
 Maintenance Mode
 -----------------
 
-.. _maintenance-mode:
 
 As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.
 
-You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serve 
+You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serve
 ``/var/www/ood/public/maintenance/index.html`` which you can change or brand to be your own. Changes
 to this file will persist through upgrades.
 
@@ -737,10 +740,11 @@ traffic will be served normally again.  The existence of this file is what start
 mode, not it's content, so you will not need to restart apache or modify it's config files for this to
 take affect.
 
-Grafana support
----------------
 
 .. _grafana-support:
+
+Grafana support
+---------------
 
 It's possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.
 
@@ -811,10 +815,11 @@ To disable this, simply set the environment variable in the dashboards' env file
   # don't show ssh link in batch connect card
   OOD_BC_SSH_TO_COMPUTE_NODE=off
 
-Set Illegal Job Name Characters
--------------------------------
 
 .. _set-illegal-job-name-characters:
+
+Set Illegal Job Name Characters
+-------------------------------
 
 If you encounter an issue in running batch connect applications complaining about invalid
 job names like the error below.
