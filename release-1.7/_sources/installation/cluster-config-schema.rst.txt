@@ -60,6 +60,19 @@ Below is the production configuration for OSC's Owens cluster.
               - "sappall"
               - "clntall"
             type: "blacklist"
+      grafana:
+            host: "https://grafana.osc.edu"
+            orgId: 3
+            dashboard:
+              name: "ondemand-clusters"
+              uid: "aaba6Ahbauquag"
+              panels:
+                cpu: 20
+                memory: 24
+            labels:
+              cluster: "cluster"
+              host: "host"
+              jobid: "jobid"
     batch_connect:
         basic:
           script_wrapper: "module restore\n%s"
@@ -170,6 +183,8 @@ custom:
 #######
 
 The custom mapping is a space that is available for extension, and does not have a schema. In OSC's usage the custom namespace has been used to provide more cluster-specific information for in-house custom applications.
+
+For details on configuring Grafana see the :ref:`Grafana Support <grafana-support>` documentation.
 
 batch_connect:
 ##############

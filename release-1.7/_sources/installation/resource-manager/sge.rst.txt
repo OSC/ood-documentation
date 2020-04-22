@@ -101,11 +101,5 @@ job names like the error below.
 
 ``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
 
-To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applications in the 
-``pun_custom_env`` attribute of the ``/etc/ood/config/nginx_stage.yml`` file.
-
-.. code-block:: yaml
-
-    # /etc/ood/config/nginx_stage.yml
-    pun_custom_env:
-      - OOD_JOB_NAME_ILLEGAL_CHARS: "/"
+You'll need to configure illegal job name characters as described
+:ref:`here <set-illegal-job-name-characters>`.

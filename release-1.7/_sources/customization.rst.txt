@@ -74,6 +74,8 @@ We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
 Branding
 -------------------
 
+.. _branding:
+
 You can customize the logo, favicon, title, and navbar colors of OnDemand.
 
 .. figure:: /images/dashboard_branding_logo_and_colors.png
@@ -158,33 +160,41 @@ These URLs can be specified, which will appear in the Help menu and on other loc
 Add Shortcuts to Files Menu
 ---------------------------
 
+.. _add-shortcuts-to-files-menu:
+
 The Files menu by default has a single link to open the Files app in the user's
 Home Directory. More links can be added to this menu, for Scratch space and
 Project space directories.
 
 Adding more links currently requires adding a custom initializer to the
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
-``Pathname`` objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
+``FavoritePath`` (or ``Pathname`` for backwards compatibility)  objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
 global attribute that is used in the Dashboard app.
+
+``FavoritePath`` is instantiated with a single ``String`` or ``Pathname`` argument, the
+directory path, and with an optional keyword argument ``title`` specifying a
+human readable title for that path.
 
 Start by creating the file
 :file:`/etc/ood/config/apps/dashboard/initializers/ood.rb` as such:
 
 .. code-block:: ruby
 
-   # /etc/ood/config/apps/dashboard/initializers/ood.rb
+  # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
-   OodFilesApp.candidate_favorite_paths.tap do |paths|
-     # add project space directories
-     projects = User.new.groups.map(&:name).grep(/^P./)
-     paths.concat projects.map { |p| Pathname.new("/fs/project/#{p}")  }
+  OodFilesApp.candidate_favorite_paths.tap do |paths|
+    # add project space directories
+    projects = User.new.groups.map(&:name).grep(/^P./)
+    paths.concat projects.map { |p| FavoritePath.new("/fs/project/#{p}")  }
 
-     # add scratch space directories
-     paths << Pathname.new("/fs/scratch/#{User.new.name}")
-     paths.concat projects.map { |p| Pathname.new("/fs/scratch/#{p}")  }
-   end
+    # add User scratch space directory
+    paths << FavoritePath.new("/fs/scratch/#{User.new.name}")
 
-- The variable ``paths`` is an array of ``Pathname`` objects that define a list
+    # Project scratch is given an optional title field
+    paths.concat projects.map { |p| FavoritePath.new("/fs/scratch/#{p}", title: "Scratch")  }
+  end
+
+- The variable ``paths`` is an array of ``FavoritePath`` objects that define a list
   of what will appear in the Dashboard menu for Files
 - At OSC, the pattern for project paths follows
   :file:`/fs/project/{project_name}`. So above we:
@@ -192,12 +202,14 @@ Start by creating the file
   #. get an array of all user's groups by name
   #. filter that array for groups that start with ``P`` (i.e., ``PZS0002``,
      ``PAW0003``, ...)
-  #. using ``map`` we turn this array into an array of ``Pathname`` objects to
+  #. using ``map`` we turn this array into an array of ``FavoritePath`` objects to
      all the possible project directories the user could have.
   #. extend the paths array with this list of paths
 
 - For possible scratch space directories, we look for either
   :file:`/fs/scratch/{project_name}` or :file:`/fs/scratch/{user_name}`
+- Additionally project scratch directories have a 'title' attribute and will
+  with in the dropdown with both the title and the path.
 
 On each request, the Dashboard will check for the existence of the directories
 in ``OodFilesApp.candidate_favorite_paths`` array and whichever directories
@@ -243,6 +255,27 @@ Set Default SSH Host
 In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``DEFAULT_SSHHOST="localhost"``.
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
+
+Shell App SSH Command Wrapper
+-----------------------------
+
+.. _ssh-wrapper:
+
+Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.
+
+This is helpful when you pass add additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
+
+To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` to point to your script in ``/etc/ood/config/apps/shell/env``. Also be sure to make your script executable.
+
+Here's a simple example of what a wrapper script could look like.
+
+.. code:: shell
+
+  #!/bin/bash
+
+  args="-o SendEnv=MY_ENV_VAR"
+
+  exec /usr/bin/ssh "$args" "$@"
 
 Fix Unauthorized WebSocket Connection in Shell App
 --------------------------------------------------
@@ -328,7 +361,19 @@ In the event that a job is created from a template that is missing from the `man
 - ``script`` The first ``.sh`` file appearing in the template folder.
 - ``notes`` The path to the location where a template manifest should be located.
 
+Job Composer Script Size Limit
+------------------------------
 
+Since 1.7 the Job composer shows users 'Suggested file(s)' and 'Other valid file(s)'. Other valid files are
+_any_ files less than ``OOD_MAX_SCRIPT_SIZE_KB`` which defaults to 65 (meaning 65kb).
+
+To reconfigure this, simply set the environment variable in the job composers' env file
+``/etc/ood/config/apps/myjobs/env`` like so:
+
+.. code:: sh
+
+  # show any file less than or equal to 15 kb
+  OOD_MAX_SCRIPT_SIZE_KB=15
 
 Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
@@ -340,6 +385,18 @@ through OnDemand, which expects the existence of a user’s home directory.
 In OnDemand <= 1.3 if the user's home directory was missing a non-helpful single
 string error would display. Now a friendly error page displays. This error page
 can be customized by adding a custom one to ``/etc/ood/config/pun/html/missing_home_directory.html``.
+
+The default error page looks like this:
+
+.. figure:: /images/customization_homedirmissing_default.png
+   :align: center
+
+An example of a custom error page has been provided at ``/opt/ood/nginx_stage/html/missing_home_directory.html.example.pam_mkhomedir`` and can be copied to ``/etc/ood/config/pun/html/missing_home_directory.html``. This example directs the user to first click a link to open the shell app which will create the home directory. The shell app's default host must be configured to be a host that is appropriate for this purpose. The custom error page looks like this:
+
+.. figure:: /images/customization_homedirmissing_pammkdir.png
+   :align: center
+
+
 
 See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
 
@@ -576,6 +633,9 @@ the specified user only.
 
 .. note:: For each user with resources under this fileset, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
 
+
+.. _balance-warnings-on-dashboard:
+
 Balance Warnings on Dashboard
 --------------------------------
 
@@ -657,13 +717,17 @@ If the balance is defined as a ``project`` balance, then it applies to a project
      "value": 10
    }
 
+
+.. _maintenance-mode:
+
 Maintenance Mode
 -----------------
+
 
 As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.
 
-You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serve 
+You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serve
 ``/var/www/ood/public/maintenance/index.html`` which you can change or brand to be your own. Changes
 to this file will persist through upgrades.
 
@@ -687,7 +751,102 @@ These are the settings you'll need for this functionality.
     - '10.0.0.1'
 
 To start maintenance mode (and thus start serving this page) simply ``touch /etc/ood/maintenance.enable``
-to create the nessecary file. When your downtime is complete just remove the file and all the
-traffic will be served normally again.  The existance of this file is what starts or stops maintenance
+to create the necessary file. When your downtime is complete just remove the file and all the
+traffic will be served normally again.  The existence of this file is what starts or stops maintenance
 mode, not it's content, so you will not need to restart apache or modify it's config files for this to
 take affect.
+
+
+.. _grafana-support:
+
+Grafana support
+---------------
+
+It's possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.
+
+Grafana must be configured to support embedded panels and at this time it is also required to have a anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust `org_name` to match whatever organization you wish to be anonymous.
+
+.. warning::
+
+   Changing a Grafana install to support anonymous access can cause unintended consequences for how authenticated users interact with Grafana.
+   It's recommended to test anonymous access on a non-production Grafana install if you do not already support anonymous access.
+
+.. code:: shell
+
+   [auth.anonymous]
+   enabled = true
+   org_name = Public
+   org_role = Viewer
+
+   [security]
+   allow_embedding = true
+
+The dashboard used by OSC is the `OnDemand Clusters <https://grafana.com/grafana/dashboards/12093>`_ dashboard.
+
+Settings used to access Grafana are configured in the cluster config.  The following is an example from OSC:
+
+.. code:: yaml
+
+   custom:
+     grafana:
+       host: "https://grafana.osc.edu"
+       orgId: 3
+       dashboard:
+         name: "ondemand-clusters"
+         uid: "aaba6Ahbauquag"
+         panels:
+           cpu: 20
+           memory: 24
+       labels:
+         cluster: "cluster"
+         host: "host"
+         jobid: "jobid"
+
+When viewing a dashboard in Grafana choose the panel you'd wish to display and select `Share`.
+Then choose the `Embed` tab which will provide you with the iframe URL that will need to be generated within OnDemand.
+The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by OnDemand.
+
+* ``orgId`` is the ``orgId`` query parameter
+* The dashboard ``name`` is the last segment of the URI before query parameters
+* The ``uid``` is the UID portion of URL that is unique to every dashboard
+* The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
+* The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
+
+Disable Host Link in Batch Connect Session Card
+-----------------------------------------------
+
+Batch connect session cards like this have links to the compute node on which the job is currently running (highlighted).
+
+.. figure:: /images/bc-card-w-hostlink.png
+  :align: center
+
+However, some sites may want to disable this feature because they do not allow ssh sessions on the compute
+nodes.
+
+To disable this, simply set the environment variable in the dashboards' env file
+``/etc/ood/config/apps/dashboard/env`` to a falsy value (0, false, off).
+
+.. code:: sh
+
+  # don't show ssh link in batch connect card
+  OOD_BC_SSH_TO_COMPUTE_NODE=off
+
+
+.. _set-illegal-job-name-characters:
+
+Set Illegal Job Name Characters
+-------------------------------
+
+If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.
+
+``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
+
+To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applications in the
+``pun_custom_env`` attribute of the ``/etc/ood/config/nginx_stage.yml`` file.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/nginx_stage.yml
+  pun_custom_env:
+    - OOD_JOB_NAME_ILLEGAL_CHARS: "/"
