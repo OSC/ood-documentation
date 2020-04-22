@@ -58,3 +58,48 @@ bin_overrides
 .. tip::
 
    DRMAA improves OnDemand's ability to report on the precise status of jobs. To use this feature ensure that libdrmaa.so for Grid Engine is installed or built and set the config value for ``libdrmaa_path`` and ``sge_root``. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.
+
+Common Issues
+-------------
+
+Shell environments
+******************
+
+You may run into an error similar to this where the script running is using a BASH process
+substitution and there's a syntax error.
+
+  .. code-block:: text
+
+    /export/uge/some/file: line 156: syntax error near unexpected token <' /export/uge/some/file:
+    line 156: done < <(tail -f --pid=${SCRIPT_PID} “vnc.log”) &’
+
+What you'll need to do is add a ``script_wrapper`` element to your clusters' configuration like below.
+This sets the sh shell to behave like bash and ensures you've sourced your users' bashrc file.
+
+  .. code-block:: yaml
+
+    # /etc/ood/config/clusters.d/my_cluster.yml
+    # (other elements removed for brevity)
+    ---
+    v2:
+      batch_connect:
+        basic:
+          script_wrapper: |
+            set +o posix
+            . ~/.bashrc
+            %s
+        vnc:
+          script_wrapper: |
+            set +o posix
+            . ~/.bashrc
+            %s
+
+Invalid Job name
+****************
+If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.
+
+``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
+
+You'll need to configure illegal job name characters as described
+:ref:`here <set-illegal-job-name-characters>`.

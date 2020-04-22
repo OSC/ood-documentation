@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>OpenID Connect via KeyCloak on RHEL7 &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>OpenID Connect via KeyCloak on RHEL7 &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.6
+                1.7
               </div>
             
           
@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">2. Configure Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/add-custom-theme.html">4. Add Custom Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html">5. Configure Keycloak with CILogon</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
@@ -133,14 +134,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
@@ -229,11 +240,11 @@
   <div class="section" id="openid-connect-via-keycloak-on-rhel7">
 <span id="authentication-tutorial-oidc-keycloak-rhel7"></span><h1>OpenID Connect via KeyCloak on RHEL7<a class="headerlink" href="#openid-connect-via-keycloak-on-rhel7" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial shows installing Keycloak as an OpenID Connect Identity Provider and configuring OnDemand as an OpenID Client to authenticate with this provider.</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code> as the example host with OnDemand installed, at the end of the tutorial:</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code> as the example host with OnDemand installed, at the end of the tutorial:</p>
 <ol class="arabic simple">
-<li>Keycloak is running and accessible at <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code></li>
-<li>In both cases Apache is handling requests. Apache proxies requests for <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> to the Keycloak server running on the default port of 8080.</li>
-<li>Attempting to access OnDemand at <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code> redirects the user to <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> to first authenticate.</li>
+<li>Keycloak is running and accessible at <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code></li>
+<li>In both cases Apache is handling requests. Apache proxies requests for <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> to the Keycloak server running on the default port of 8080.</li>
+<li>Attempting to access OnDemand at <code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code> redirects the user to <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> to first authenticate.</li>
 </ol>
 <p>At OSC in production we do two things differently from this tutorial:</p>
 <ol class="arabic simple">
@@ -245,15 +256,14 @@ the default H2 database is probably sufficient. Also by installing Keycloak on
 the same host as OnDemand, we don’t need to provision separate SSL certificates
 and host, which simplifies the tutorial.</p>
 <p>If your site is interested in either of these things and needs assistence,
-please let us know by starting the discussion on the
-<a class="reference external" href="https://lists.osu.edu/mailman/listinfo/ood-users">mailing list</a>.</p>
+please let us know by contacting us on the OnDemand Discourse at <a class="reference external" href="https://discourse.osc.edu/c/open-ondemand">https://discourse.osc.edu/c/open-ondemand</a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">In production we recommend installing Keycloak on a separate host from OnDemand.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This tutorial has only been verified to work with Keycloak 4.8.3.</p>
+<p class="last">This tutorial has only been verified to work with Keycloak 9.0.0.</p>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Tutorial</span></p>
@@ -278,6 +288,12 @@ please let us know by starting the discussion on the
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/add-custom-theme.html">4. Add Custom Theme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html">5. Configure Keycloak with CILogon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html#register-your-keycloak-instance-with-cilogon">5.1. Register your Keycloak instance with CILogon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html#add-the-cilogon-identity-provider">5.2. Add the CILogon Identity Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html#support-users-removing-cilogon-mappings">5.3. Support users removing CILogon mappings</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>

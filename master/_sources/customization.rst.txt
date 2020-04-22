@@ -74,6 +74,8 @@ We recommend setting this in ``/etc/ood/config/apps/dashboard/env``.
 Branding
 -------------------
 
+.. _branding:
+
 You can customize the logo, favicon, title, and navbar colors of OnDemand.
 
 .. figure:: /images/dashboard_branding_logo_and_colors.png
@@ -150,10 +152,15 @@ These URLs can be specified, which will appear in the Help menu and on other loc
    * - Change Password URL
      - OOD_DASHBOARD_PASSWD_URL
      - https://my.osc.edu
+   * - Custom Help URL (Also requires locale ``en.dashboard.nav_help_custom``)
+     - OOD_DASHBOARD_HELP_CUSTOM_URL
+     - https://idp.osc.edu/auth/realms/osc/account/identity
 
 
 Add Shortcuts to Files Menu
 ---------------------------
+
+.. _add-shortcuts-to-files-menu:
 
 The Files menu by default has a single link to open the Files app in the user's
 Home Directory. More links can be added to this menu, for Scratch space and
@@ -161,27 +168,33 @@ Project space directories.
 
 Adding more links currently requires adding a custom initializer to the
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
-``Pathname`` objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
+``FavoritePath`` (or ``Pathname`` for backwards compatibility)  objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
 global attribute that is used in the Dashboard app.
+
+``FavoritePath`` is instantiated with a single ``String`` or ``Pathname`` argument, the
+directory path, and with an optional keyword argument ``title`` specifying a
+human readable title for that path.
 
 Start by creating the file
 :file:`/etc/ood/config/apps/dashboard/initializers/ood.rb` as such:
 
 .. code-block:: ruby
 
-   # /etc/ood/config/apps/dashboard/initializers/ood.rb
+  # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
-   OodFilesApp.candidate_favorite_paths.tap do |paths|
-     # add project space directories
-     projects = User.new.groups.map(&:name).grep(/^P./)
-     paths.concat projects.map { |p| Pathname.new("/fs/project/#{p}")  }
+  OodFilesApp.candidate_favorite_paths.tap do |paths|
+    # add project space directories
+    projects = User.new.groups.map(&:name).grep(/^P./)
+    paths.concat projects.map { |p| FavoritePath.new("/fs/project/#{p}")  }
 
-     # add scratch space directories
-     paths << Pathname.new("/fs/scratch/#{User.new.name}")
-     paths.concat projects.map { |p| Pathname.new("/fs/scratch/#{p}")  }
-   end
+    # add User scratch space directory
+    paths << FavoritePath.new("/fs/scratch/#{User.new.name}")
 
-- The variable ``paths`` is an array of ``Pathname`` objects that define a list
+    # Project scratch is given an optional title field
+    paths.concat projects.map { |p| FavoritePath.new("/fs/scratch/#{p}", title: "Scratch")  }
+  end
+
+- The variable ``paths`` is an array of ``FavoritePath`` objects that define a list
   of what will appear in the Dashboard menu for Files
 - At OSC, the pattern for project paths follows
   :file:`/fs/project/{project_name}`. So above we:
@@ -189,12 +202,14 @@ Start by creating the file
   #. get an array of all user's groups by name
   #. filter that array for groups that start with ``P`` (i.e., ``PZS0002``,
      ``PAW0003``, ...)
-  #. using ``map`` we turn this array into an array of ``Pathname`` objects to
+  #. using ``map`` we turn this array into an array of ``FavoritePath`` objects to
      all the possible project directories the user could have.
   #. extend the paths array with this list of paths
 
 - For possible scratch space directories, we look for either
   :file:`/fs/scratch/{project_name}` or :file:`/fs/scratch/{user_name}`
+- Additionally project scratch directories have a 'title' attribute and will
+  with in the dropdown with both the title and the path.
 
 On each request, the Dashboard will check for the existence of the directories
 in ``OodFilesApp.candidate_favorite_paths`` array and whichever directories
@@ -241,6 +256,53 @@ In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to cha
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
+Shell App SSH Command Wrapper
+-----------------------------
+
+.. _ssh-wrapper:
+
+Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.
+
+This is helpful when you pass add additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
+
+To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` to point to your script in ``/etc/ood/config/apps/shell/env``. Also be sure to make your script executable.
+
+Here's a simple example of what a wrapper script could look like.
+
+.. code:: shell
+
+  #!/bin/bash
+
+  args="-o SendEnv=MY_ENV_VAR"
+
+  exec /usr/bin/ssh "$args" "$@"
+
+Fix Unauthorized WebSocket Connection in Shell App
+--------------------------------------------------
+
+If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with wss:// and the response header includes ``X-OOD-Failure-Reason: invalid origin``, you may need to set the ``OOD_SHELL_ORIGIN_CHECK`` configuration option.
+
+There is a security feature that adds proper CSRF_ protection using both the Origin request header check and a CSRF_ token check.
+
+The Origin check uses X-Forwarded-Proto_ and X-Forwarded-Host_ that Apache mod_proxy_ sets to build the string that is used to compare with the Origin request header the browser sends in the WebSocket upgrade request.
+
+In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set ``OOD_SHELL_ORIGIN_CHECK`` env var to the correct https string, or disable the origin check altogether by setting ``OOD_SHELL_ORIGIN_CHECK=off`` (or any other value that does not start with "http") in the ``/etc/ood/config/apps/shell/env`` file.
+
+Either way the CSRF token will still provide protection from this vulnerability.
+
+.. code:: text
+
+  # /etc/ood/config/apps/shell/env
+  # to disable it, just configure it with something that doesn't start with http
+  OOD_SHELL_ORIGIN_CHECK='off'
+
+  # to change it simply specify the http(s) origin you want to verify against.
+  OOD_SHELL_ORIGIN_CHECK='https://my.other.origin'
+
+.. _CSRF: https://owasp.org/www-community/attacks/csrf
+.. _X-Forwarded-Proto: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto
+.. _X-Forwarded-Host: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host
+.. _mod_proxy: https://httpd.apache.org/docs/2.4/mod/mod_proxy.html
 
 Custom Job Composer Templates
 -----------------------------
@@ -299,7 +361,19 @@ In the event that a job is created from a template that is missing from the `man
 - ``script`` The first ``.sh`` file appearing in the template folder.
 - ``notes`` The path to the location where a template manifest should be located.
 
+Job Composer Script Size Limit
+------------------------------
 
+Since 1.7 the Job composer shows users 'Suggested file(s)' and 'Other valid file(s)'. Other valid files are
+_any_ files less than ``OOD_MAX_SCRIPT_SIZE_KB`` which defaults to 65 (meaning 65kb).
+
+To reconfigure this, simply set the environment variable in the job composers' env file
+``/etc/ood/config/apps/myjobs/env`` like so:
+
+.. code:: sh
+
+  # show any file less than or equal to 15 kb
+  OOD_MAX_SCRIPT_SIZE_KB=15
 
 Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
@@ -311,6 +385,18 @@ through OnDemand, which expects the existence of a user’s home directory.
 In OnDemand <= 1.3 if the user's home directory was missing a non-helpful single
 string error would display. Now a friendly error page displays. This error page
 can be customized by adding a custom one to ``/etc/ood/config/pun/html/missing_home_directory.html``.
+
+The default error page looks like this:
+
+.. figure:: /images/customization_homedirmissing_default.png
+   :align: center
+
+An example of a custom error page has been provided at ``/opt/ood/nginx_stage/html/missing_home_directory.html.example.pam_mkhomedir`` and can be copied to ``/etc/ood/config/pun/html/missing_home_directory.html``. This example directs the user to first click a link to open the shell app which will create the home directory. The shell app's default host must be configured to be a host that is appropriate for this purpose. The custom error page looks like this:
+
+.. figure:: /images/customization_homedirmissing_pammkdir.png
+   :align: center
+
+
 
 See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
 
@@ -401,9 +487,9 @@ In each default translation dictionary file the values that are most site-specif
 
   OnDemand uses the convention that translations that accept HTML with be suffixed with ``_html``. Any other translation will be displayed as plain text.
 
-.. Links for the OnDemand 1.6.3 release versions of these apps
-.. _Dashboard: https://github.com/OSC/ood-dashboard/blob/v1.33.4/config/locales/en.yml
-.. _Job Composer: https://github.com/OSC/ood-myjobs/blob/v2.14.0/config/locales/en.yml
+.. Links for the OnDemand 1.7.0 release versions of these apps
+.. _Dashboard: https://github.com/OSC/ondemand/blob/master/apps/dashboard/config/locales/en.yml
+.. _Job Composer: https://github.com/OSC/ondemand/blob/master/apps/myjobs/config/locales/en.yml
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
@@ -546,3 +632,221 @@ Where ``block_usage`` and ``file_usage`` are the disk resource usages attributed
 the specified user only.
 
 .. note:: For each user with resources under this fileset, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
+
+
+.. _balance-warnings-on-dashboard:
+
+Balance Warnings on Dashboard
+--------------------------------
+
+You can display warnings to users on the Dashboard if their
+resource balance is nearing its limit. This requires an auto-updated (it is
+recommended to update this file daily with a cronjob) JSON file
+that lists all user balances. The JSON schema for version `1` is given as:
+
+.. code:: json
+
+    {
+      "version": 1,
+      "timestamp": 1525361263,
+      "config": {
+        "unit": "RU",
+        "project_type": "project"
+      },
+      "balances": [
+        {
+          ...
+        },
+        {
+          ...
+        }
+      ]
+    }
+
+Where ``version`` defines the version of the JSON schema used, ``timestamp``
+defines when this file was generated, and ``balanaces`` is a list of quota objects
+(see below).
+
+The value for ``config.unit`` defines the type of units for balances and
+``config.project_type`` would be project, account, or group, etc.
+Both values are used in locales and can be any string value.
+
+You can configure the Dashboard to use this JSON file (or files) by setting the
+environment variable ``OOD_BALANCE_PATH`` as a colon-delimited list of all JSON
+file paths.
+
+.. warning::
+
+  Sites using HTTP(s) or FTP for their balance files may see slower dashboard load
+  times, depending on the responsiveness of the server providing the quota file(s).
+
+The default threshold for displaying the warning is at ``0``, but this
+can be changed with the environment variable ``OOD_BALANCE_THRESHOLD``.
+
+An example is given as:
+
+.. code:: sh
+
+   # /etc/ood/config/apps/dashboard/env
+
+   OOD_BALANCE_PATH="/path/to/balance1.json:/path/to/balance2.json"
+   OOD_BALANCE_THRESHOLD=1000
+
+User Balance
+............
+
+If the balance is defined as a ``user`` balance, then it applies to only that user. Omit the ``project`` key:
+
+.. code:: json
+
+   {
+     "user": "user1",
+     "value": 10
+   }
+
+Project Balance
+...............
+
+If the balance is defined as a ``project`` balance, then it applies to a project/account/group, whatever is defined for ``config.project_type``:
+
+.. code:: json
+
+   {
+     "user": "user1",
+     "project": "project1",
+     "value": 10
+   }
+
+
+.. _maintenance-mode:
+
+Maintenance Mode
+-----------------
+
+
+As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
+while still telling your customers that the downtime is expected.
+
+You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serve
+``/var/www/ood/public/maintenance/index.html`` which you can change or brand to be your own. Changes
+to this file will persist through upgrades.
+
+Apache returns this html file and a 503 response code to all users who's IP does not match one of the
+configured whitelist regular expressions.  The whitelist is to allow staff, localhost or a subset of
+your users access while restricting others.
+
+In this example we allow access to anyone from ``192.168.1..*`` which is the 192.168.1.0/24 CIDR and
+the single IP '10.0.0.1'.
+
+These are the settings you'll need for this functionality.
+
+.. code:: yaml
+
+  # /etc/ood/config/ood_portal.yml
+  use_rewrites: true
+  use_maintenance: true
+  maintenance_ip_whitelist:
+    # examples only! Your ip regular expressions will be specific to your site.
+    - '192.168.1..*'
+    - '10.0.0.1'
+
+To start maintenance mode (and thus start serving this page) simply ``touch /etc/ood/maintenance.enable``
+to create the necessary file. When your downtime is complete just remove the file and all the
+traffic will be served normally again.  The existence of this file is what starts or stops maintenance
+mode, not it's content, so you will not need to restart apache or modify it's config files for this to
+take affect.
+
+
+.. _grafana-support:
+
+Grafana support
+---------------
+
+It's possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.
+
+Grafana must be configured to support embedded panels and at this time it is also required to have a anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust `org_name` to match whatever organization you wish to be anonymous.
+
+.. warning::
+
+   Changing a Grafana install to support anonymous access can cause unintended consequences for how authenticated users interact with Grafana.
+   It's recommended to test anonymous access on a non-production Grafana install if you do not already support anonymous access.
+
+.. code:: shell
+
+   [auth.anonymous]
+   enabled = true
+   org_name = Public
+   org_role = Viewer
+
+   [security]
+   allow_embedding = true
+
+The dashboard used by OSC is the `OnDemand Clusters <https://grafana.com/grafana/dashboards/12093>`_ dashboard.
+
+Settings used to access Grafana are configured in the cluster config.  The following is an example from OSC:
+
+.. code:: yaml
+
+   custom:
+     grafana:
+       host: "https://grafana.osc.edu"
+       orgId: 3
+       dashboard:
+         name: "ondemand-clusters"
+         uid: "aaba6Ahbauquag"
+         panels:
+           cpu: 20
+           memory: 24
+       labels:
+         cluster: "cluster"
+         host: "host"
+         jobid: "jobid"
+
+When viewing a dashboard in Grafana choose the panel you'd wish to display and select `Share`.
+Then choose the `Embed` tab which will provide you with the iframe URL that will need to be generated within OnDemand.
+The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by OnDemand.
+
+* ``orgId`` is the ``orgId`` query parameter
+* The dashboard ``name`` is the last segment of the URI before query parameters
+* The ``uid``` is the UID portion of URL that is unique to every dashboard
+* The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
+* The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
+
+Disable Host Link in Batch Connect Session Card
+-----------------------------------------------
+
+Batch connect session cards like this have links to the compute node on which the job is currently running (highlighted).
+
+.. figure:: /images/bc-card-w-hostlink.png
+  :align: center
+
+However, some sites may want to disable this feature because they do not allow ssh sessions on the compute
+nodes.
+
+To disable this, simply set the environment variable in the dashboards' env file
+``/etc/ood/config/apps/dashboard/env`` to a falsy value (0, false, off).
+
+.. code:: sh
+
+  # don't show ssh link in batch connect card
+  OOD_BC_SSH_TO_COMPUTE_NODE=off
+
+
+.. _set-illegal-job-name-characters:
+
+Set Illegal Job Name Characters
+-------------------------------
+
+If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.
+
+``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
+
+To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applications in the
+``pun_custom_env`` attribute of the ``/etc/ood/config/nginx_stage.yml`` file.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/nginx_stage.yml
+  pun_custom_env:
+    - OOD_JOB_NAME_ILLEGAL_CHARS: "/"

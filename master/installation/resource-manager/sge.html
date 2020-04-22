@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configure Grid Engine &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>Configure Grid Engine &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="A Working Example of a bin_overrides Script" href="bin-override-example.html" />
+    <link rel="next" title="LinuxHost Adapter" href="linuxhost.html" />
     <link rel="prev" title="Configure PBS Professional" href="pbspro.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.6
+                1.7
               </div>
             
           
@@ -115,7 +115,15 @@
 <li class="toctree-l2"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Grid Engine</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Grid Engine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shell-environments">Shell environments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invalid-job-name">Invalid Job name</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
 </ul>
@@ -129,14 +137,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
@@ -278,6 +296,49 @@ cluster looks like:</p>
 <p class="first admonition-title">Tip</p>
 <p class="last">DRMAA improves OnDemand’s ability to report on the precise status of jobs. To use this feature ensure that libdrmaa.so for Grid Engine is installed or built and set the config value for <code class="docutils literal notranslate"><span class="pre">libdrmaa_path</span></code> and <code class="docutils literal notranslate"><span class="pre">sge_root</span></code>. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.</p>
 </div>
+<div class="section" id="common-issues">
+<h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shell-environments">
+<h3>Shell environments<a class="headerlink" href="#shell-environments" title="Permalink to this headline">¶</a></h3>
+<p>You may run into an error similar to this where the script running is using a BASH process
+substitution and there’s a syntax error.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/export/uge/some/file: line 156: syntax error near unexpected token &lt;&#39; /export/uge/some/file:
+line 156: done &lt; &lt;(tail -f --pid=${SCRIPT_PID} “vnc.log”) &amp;’
+</pre></div>
+</div>
+</div></blockquote>
+<p>What you’ll need to do is add a <code class="docutils literal notranslate"><span class="pre">script_wrapper</span></code> element to your clusters’ configuration like below.
+This sets the sh shell to behave like bash and ensures you’ve sourced your users’ bashrc file.</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<span class="c1"># (other elements removed for brevity)</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">set +o posix</span>
+        <span class="no">. ~/.bashrc</span>
+        <span class="no">%s</span>
+    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">set +o posix</span>
+        <span class="no">. ~/.bashrc</span>
+        <span class="no">%s</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="invalid-job-name">
+<h3>Invalid Job name<a class="headerlink" href="#invalid-job-name" title="Permalink to this headline">¶</a></h3>
+<p>If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">read</span> <span class="pre">script</span> <span class="pre">file</span> <span class="pre">because</span> <span class="pre">of</span> <span class="pre">error:</span> <span class="pre">ERROR!</span> <span class="pre">argument</span> <span class="pre">to</span> <span class="pre">-N</span> <span class="pre">option</span> <span class="pre">must</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">/</span></code></p>
+<p>You’ll need to configure illegal job name characters as described
+<a class="reference internal" href="../../customization.html#set-illegal-job-name-characters"><span class="std std-ref">here</span></a>.</p>
+</div>
+</div>
 </div>
 
 
@@ -288,7 +349,7 @@ cluster looks like:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bin-override-example.html" class="btn btn-neutral float-right" title="A Working Example of a bin_overrides Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="linuxhost.html" class="btn btn-neutral float-right" title="LinuxHost Adapter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="pbspro.html" class="btn btn-neutral float-left" title="Configure PBS Professional" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -7,27 +7,21 @@ We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
 
 - `Apache HTTP Server 2.4`_
-- `Ruby 2.4`_ with :command:`rake`, :command:`bundler`, and development
+- `Ruby 2.5`_ with :command:`rake`, :command:`bundler`, and development
   libraries
-- `Node.js 6`_
+- `Node.js 10`_
 
 .. note::
 
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-#. Enable the EPEL and Software Collections repositories:
+#. Enable the Software Collections repositories **on CentOS/RHEL 7 only**:
 
-   CentOS 6/7
+   CentOS 7
      .. code-block:: sh
 
         sudo yum install centos-release-scl
-
-   RHEL 6
-     .. code-block:: sh
-
-        sudo subscription-manager repos --enable=rhel-server-rhscl-6-rpms
-        # Repository 'rhel-server-rhscl-6-rpms' is enabled for this system.
 
    RHEL 7
      .. code-block:: sh
@@ -45,7 +39,7 @@ software requirements:
 
      .. code-block:: sh
 
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-4.noarch.rpm
+        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
 
 #. Install OnDemand and all of its dependencies:
 
@@ -83,6 +77,6 @@ software requirements:
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
-.. _ruby 2.4: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby24/
-.. _node.js 6: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs6/
+.. _ruby 2.5: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby25/
+.. _node.js 10: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs10/
 .. _ohio supercomputer center: https://www.osc.edu/

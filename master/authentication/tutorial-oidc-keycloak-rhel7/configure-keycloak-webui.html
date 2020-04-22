@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Configure Keycloak &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>2. Configure Keycloak &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.6
+                1.7
               </div>
             
           
@@ -122,6 +122,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-custom-theme.html">4. Add Custom Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure-cilogon.html">5. Configure Keycloak with CILogon</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
@@ -138,14 +139,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
@@ -240,7 +251,7 @@ OIDC client that will authenticate with Keycloak.</p>
 <div class="section" id="add-a-new-realm">
 <h2>2.1. Add a new realm<a class="headerlink" href="#add-a-new-realm" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Log into <code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu:8443</span></code> as the admin user</li>
+<li>Log into <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> as the admin user</li>
 <li>Hover over “Master” on left and click “Add Realm”</li>
 <li>Type in name “ondemand” and click “Create”. The new realm is loaded.</li>
 <li>Click Login tab, then adjust parameters:<ol class="arabic">
@@ -280,9 +291,8 @@ the OnDemand Discourse at <a class="reference external" href="https://discourse.
 <h2>2.3. Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Choose Clients, then click Create in top right corner<ol class="arabic">
-<li>Client ID: webdev07.hpc.osc.edu</li>
+<li>Client ID: ondemand-dev.hpc.osc.edu</li>
 <li>Client Protocol: openid-connect</li>
-<li>Client Template: ondemand-clients</li>
 <li>Save (leave Root URL blank)</li>
 </ol>
 </li>
@@ -290,15 +300,15 @@ the OnDemand Discourse at <a class="reference external" href="https://discourse.
 <li>Access Type: confidential</li>
 <li>Direct Access Grants Enabled: off</li>
 <li>Valid Redirect URIs: Press the <code class="docutils literal notranslate"><span class="pre">+</span></code> button to the right of the URI field so you can insert two URLs:<ol class="arabic">
-<li><code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu/oidc</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">https://webdev07.hpc.osc.edu</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu/oidc</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code></li>
 </ol>
 </li>
 <li>Scroll to bottom and click “Save”</li>
 </ol>
 </li>
 <li>Finally, get the client secret to use with OnDemand installation:<ol class="arabic">
-<li>Select the “Credentials” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; webdev07.hpc.osc.edu”</li>
+<li>Select the “Credentials” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; ondemand-dev.hpc.osc.edu”</li>
 <li>Copy the value for “secret” for future use in this tutorial (and keep it secure).</li>
 </ol>
 </li>

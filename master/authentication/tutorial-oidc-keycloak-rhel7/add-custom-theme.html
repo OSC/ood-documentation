@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Add Custom Theme &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>4. Add Custom Theme &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Two Factor Auth using Duo with Keycloak" href="../duo-2fa-with-keycloak.html" />
+    <link rel="next" title="5. Configure Keycloak with CILogon" href="configure-cilogon.html" />
     <link rel="prev" title="3. Configure OnDemand to authenticate with Keycloak" href="install_mod_auth_openidc.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.6
+                1.7
               </div>
             
           
@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="configure-keycloak-webui.html">2. Configure Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">4. Add Custom Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure-cilogon.html">5. Configure Keycloak with CILogon</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
@@ -133,14 +134,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
@@ -232,19 +243,17 @@
 <span id="authentication-tutorial-oidc-keycloak-rhel7-add-custom-theme"></span><h1>4. Add Custom Theme<a class="headerlink" href="#add-custom-theme" title="Permalink to this headline">¶</a></h1>
 <p>Custom themes are added to a realm by</p>
 <ol class="arabic simple">
-<li>adding the theme directory to <code class="docutils literal notranslate"><span class="pre">/opt/keycloak-4.8.3.Final/themes</span></code></li>
+<li>adding the theme directory to <code class="docutils literal notranslate"><span class="pre">/opt/keycloak-9.0.0/themes</span></code></li>
 <li>selecting the theme via Admin Web UI &gt;&gt; Realm Settings &gt;&gt; Themes</li>
 </ol>
 <p>Each theme is selectable based on the directory name of the theme. Themes can
 extend other themes.</p>
 <p>Here are two links to get started with a custom theme:</p>
 <ol class="arabic simple">
-<li>Currently version <a class="reference external" href="https://github.com/OSC/keycloak-theme/tree/v2.0.0">v2.0.0 of OSC’s Keycloak theme</a>
+<li>Currently version <a class="reference external" href="https://github.com/OSC/keycloak-theme/tree/v2.3.1">v2.3.1 of OSC’s Keycloak theme</a>
 can be used as a starting point for modification. This theme is based off of
 the default <code class="docutils literal notranslate"><span class="pre">keycloak</span></code> theme which itself is based off the <code class="docutils literal notranslate"><span class="pre">base</span></code> theme.
 Files to modify include:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">login/login.ftl</span></code> file for the footer links:
-<a class="reference external" href="https://github.com/OSC/keycloak-theme/blob/v2.0.0/login/login.ftl#L63-L73">https://github.com/OSC/keycloak-theme/blob/v2.0.0/login/login.ftl#L63-L73</a></li>
 <li><code class="docutils literal notranslate"><span class="pre">login/resources/img/ondemand-logo.png</span></code> add a logo with this name here</li>
 <li><code class="docutils literal notranslate"><span class="pre">login/resources/img/favicon.ico</span></code> replace with your own or remove</li>
 <li><code class="docutils literal notranslate"><span class="pre">login/messages/messages_en.properties</span></code> replace text with text
@@ -271,7 +280,7 @@ also work well for OTP views.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../duo-2fa-with-keycloak.html" class="btn btn-neutral float-right" title="Two Factor Auth using Duo with Keycloak" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="configure-cilogon.html" class="btn btn-neutral float-right" title="5. Configure Keycloak with CILogon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="install_mod_auth_openidc.html" class="btn btn-neutral float-left" title="3. Configure OnDemand to authenticate with Keycloak" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -15,7 +15,7 @@ The following desktops are currently supported:
 .. warning::
 
    Do **NOT** install the Desktop Environment on the **OnDemand node**. The
-   above Desktop Environments are **ONLY** for the **compute nodes** you intend
+   above Desktop Environments are **ONLY** for the **compute or login nodes** you intend
    on launching Desktops on within batch jobs.
 
 .. _gnome desktop: https://www.gnome.org/

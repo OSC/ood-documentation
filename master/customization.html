@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization &mdash; Open OnDemand 1.6.7 documentation</title>
+  <title>Customization &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.6
+                1.7
               </div>
             
           
@@ -120,11 +120,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add Shortcuts to Files Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#whitelist-directories">Whitelist Directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-app-ssh-command-wrapper">Shell App SSH Command Wrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fix-unauthorized-websocket-connection-in-shell-app">Fix Unauthorized WebSocket Connection in Shell App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#job-templates-overview">Job Templates Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#job-template-details">Job Template Details</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#job-composer-script-size-limit">Job Composer Script Size Limit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-error-page-for-missing-home-directory-on-launch">Custom Error Page for Missing Home Directory on Launch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#control-which-apps-appear-in-the-dashboard-navbar">Control Which Apps Appear in the Dashboard Navbar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#customize-text-in-ondemand">Customize Text in OnDemand</a><ul>
@@ -139,6 +142,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#individual-fileset-quota">Individual Fileset Quota</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#balance-warnings-on-dashboard">Balance Warnings on Dashboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-balance">User Balance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-balance">Project Balance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#maintenance-mode">Maintenance Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grafana-support">Grafana support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disable-host-link-in-batch-connect-session-card">Disable Host Link in Batch Connect Session Card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-illegal-job-name-characters">Set Illegal Job Name Characters</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a></li>
@@ -148,14 +160,24 @@
 <li class="toctree-l1"><a class="reference internal" href="app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="app-authorization.html">App Authorization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app-development.html">App Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
@@ -254,13 +276,13 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 </div></blockquote>
 <p>the user would see this message at the top of the dashboard:</p>
-<div class="figure align-center" id="id2">
+<div class="figure align-center" id="id8">
 <img alt="_images/dashboard-announcement.png" src="_images/dashboard-announcement.png" />
 <p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span></p>
 </div>
 <p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
-<table border="1" class="docutils" id="id3">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<table border="1" class="docutils" id="id9">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -303,7 +325,7 @@ OnDemand will be unavailable during this period. For details, please visit
 </pre></div>
 </div>
 </div></blockquote>
-<div class="figure align-center" id="id4">
+<div class="figure align-center" id="id10">
 <img alt="_images/dashboard_motd.png" src="_images/dashboard_motd.png" />
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span></p>
 </div>
@@ -311,13 +333,13 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 <div class="section" id="branding">
 <h2>Branding<a class="headerlink" href="#branding" title="Permalink to this headline">¶</a></h2>
-<p>You can customize the logo, favicon, title, and navbar colors of OnDemand.</p>
+<p id="id2">You can customize the logo, favicon, title, and navbar colors of OnDemand.</p>
 <div class="figure align-center">
 <img alt="_images/dashboard_branding_logo_and_colors.png" src="_images/dashboard_branding_logo_and_colors.png" />
 </div>
 <p>We recommend setting these environment variables in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as YAML mappings (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. Alternatively you can set these in the env files of the dashboard and the apps. Currently only the dashboard uses the colors in the navbar.</p>
-<table border="1" class="docutils" id="id5">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<table border="1" class="docutils" id="id11">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -360,7 +382,7 @@ OnDemand will be unavailable during this period. For details, please visit
 </tr>
 </tbody>
 </table>
-<div class="figure align-center" id="id6">
+<div class="figure align-center" id="id12">
 <img alt="_images/dashboard_navbar_branding_bluered.png" src="_images/dashboard_navbar_branding_bluered.png" />
 <p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_LINK_ACTIVE_BG_COLOR</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_TITLE</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span></p>
 </div>
@@ -372,8 +394,8 @@ OnDemand will be unavailable during this period. For details, please visit
 <div class="section" id="add-urls-to-help-menu">
 <h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
 <p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
-<table border="1" class="docutils" id="id7">
-<caption><span class="caption-number">Table 3 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<table border="1" class="docutils" id="id13">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id13" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -406,18 +428,25 @@ OnDemand will be unavailable during this period. For details, please visit
 <td>OOD_DASHBOARD_PASSWD_URL</td>
 <td><a class="reference external" href="https://my.osc.edu">https://my.osc.edu</a></td>
 </tr>
+<tr class="row-odd"><th class="stub">Custom Help URL (Also requires locale <code class="docutils literal notranslate"><span class="pre">en.dashboard.nav_help_custom</span></code>)</th>
+<td>OOD_DASHBOARD_HELP_CUSTOM_URL</td>
+<td><a class="reference external" href="https://idp.osc.edu/auth/realms/osc/account/identity">https://idp.osc.edu/auth/realms/osc/account/identity</a></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="add-shortcuts-to-files-menu">
 <h2>Add Shortcuts to Files Menu<a class="headerlink" href="#add-shortcuts-to-files-menu" title="Permalink to this headline">¶</a></h2>
-<p>The Files menu by default has a single link to open the Files app in the user’s
+<p id="id3">The Files menu by default has a single link to open the Files app in the user’s
 Home Directory. More links can be added to this menu, for Scratch space and
 Project space directories.</p>
 <p>Adding more links currently requires adding a custom initializer to the
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
-<code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects to the <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array, a
+<code class="docutils literal notranslate"><span class="pre">FavoritePath</span></code> (or <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> for backwards compatibility)  objects to the <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array, a
 global attribute that is used in the Dashboard app.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FavoritePath</span></code> is instantiated with a single <code class="docutils literal notranslate"><span class="pre">String</span></code> or <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> argument, the
+directory path, and with an optional keyword argument <code class="docutils literal notranslate"><span class="pre">title</span></code> specifying a
+human readable title for that path.</p>
 <p>Start by creating the file
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code> as such:</p>
 <div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/initializers/ood.rb</span>
@@ -425,35 +454,39 @@ global attribute that is used in the Dashboard app.</p>
 <span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
   <span class="c1"># add project space directories</span>
   <span class="n">projects</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/^P./</span><span class="p">)</span>
-  <span class="n">paths</span><span class="o">.</span><span class="n">concat</span> <span class="n">projects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/project/</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="p">}</span>
+  <span class="n">paths</span><span class="o">.</span><span class="n">concat</span> <span class="n">projects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="no">FavoritePath</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/project/</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="p">}</span>
 
-  <span class="c1"># add scratch space directories</span>
-  <span class="n">paths</span> <span class="o">&lt;&lt;</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/scratch/</span><span class="si">#{</span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="n">paths</span><span class="o">.</span><span class="n">concat</span> <span class="n">projects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/scratch/</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="p">}</span>
+  <span class="c1"># add User scratch space directory</span>
+  <span class="n">paths</span> <span class="o">&lt;&lt;</span> <span class="no">FavoritePath</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/scratch/</span><span class="si">#{</span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+  <span class="c1"># Project scratch is given an optional title field</span>
+  <span class="n">paths</span><span class="o">.</span><span class="n">concat</span> <span class="n">projects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="no">FavoritePath</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/scratch/</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Scratch&quot;</span><span class="p">)</span>  <span class="p">}</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>The variable <code class="docutils literal notranslate"><span class="pre">paths</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects that define a list
+<li>The variable <code class="docutils literal notranslate"><span class="pre">paths</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">FavoritePath</span></code> objects that define a list
 of what will appear in the Dashboard menu for Files</li>
 <li>At OSC, the pattern for project paths follows
 <code class="file docutils literal notranslate"><span class="pre">/fs/project/</span><em><span class="pre">project_name</span></em></code>. So above we:<ol class="arabic">
 <li>get an array of all user’s groups by name</li>
 <li>filter that array for groups that start with <code class="docutils literal notranslate"><span class="pre">P</span></code> (i.e., <code class="docutils literal notranslate"><span class="pre">PZS0002</span></code>,
 <code class="docutils literal notranslate"><span class="pre">PAW0003</span></code>, …)</li>
-<li>using <code class="docutils literal notranslate"><span class="pre">map</span></code> we turn this array into an array of <code class="docutils literal notranslate"><span class="pre">Pathname</span></code> objects to
+<li>using <code class="docutils literal notranslate"><span class="pre">map</span></code> we turn this array into an array of <code class="docutils literal notranslate"><span class="pre">FavoritePath</span></code> objects to
 all the possible project directories the user could have.</li>
 <li>extend the paths array with this list of paths</li>
 </ol>
 </li>
 <li>For possible scratch space directories, we look for either
 <code class="file docutils literal notranslate"><span class="pre">/fs/scratch/</span><em><span class="pre">project_name</span></em></code> or <code class="file docutils literal notranslate"><span class="pre">/fs/scratch/</span><em><span class="pre">user_name</span></em></code></li>
+<li>Additionally project scratch directories have a ‘title’ attribute and will
+with in the dropdown with both the title and the path.</li>
 </ul>
 <p>On each request, the Dashboard will check for the existence of the directories
 in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories
 exist and the user has access to will appear as links in the Files menu under
 the Home Directory link.</p>
-<div class="figure align-center" id="id8">
+<div class="figure align-center" id="id14">
 <img alt="_images/files_menu_shortcuts_osc.png" src="_images/files_menu_shortcuts_osc.png" />
 <p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span></p>
 </div>
@@ -492,6 +525,36 @@ app.</p>
 <h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
 <p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST</span></code> to change the default ssh host. Otherwise it will default to “localhost” i.e. add the line <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST=&quot;localhost&quot;</span></code>.</p>
 <p>This will control what host the shell app ssh’s to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
+</div>
+<div class="section" id="shell-app-ssh-command-wrapper">
+<h2>Shell App SSH Command Wrapper<a class="headerlink" href="#shell-app-ssh-command-wrapper" title="Permalink to this headline">¶</a></h2>
+<p id="ssh-wrapper">Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.</p>
+<p>This is helpful when you pass add additional environment variable through ssh (<code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">SendEnv=MY_ENV_VAR</span></code>) or ensure some ssh command options be used.</p>
+<p>To use your ssh wrapper configure <code class="docutils literal notranslate"><span class="pre">OOD_SSH_WRAPPER=/usr/bin/changeme</span></code> to point to your script in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code>. Also be sure to make your script executable.</p>
+<p>Here’s a simple example of what a wrapper script could look like.</p>
+<div class="code shell highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="n">args</span><span class="o">=</span><span class="s2">&quot;-o SendEnv=MY_ENV_VAR&quot;</span>
+
+<span class="n">exec</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">ssh</span> <span class="s2">&quot;$args&quot;</span> <span class="s2">&quot;$@&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fix-unauthorized-websocket-connection-in-shell-app">
+<h2>Fix Unauthorized WebSocket Connection in Shell App<a class="headerlink" href="#fix-unauthorized-websocket-connection-in-shell-app" title="Permalink to this headline">¶</a></h2>
+<p>If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with wss:// and the response header includes <code class="docutils literal notranslate"><span class="pre">X-OOD-Failure-Reason:</span> <span class="pre">invalid</span> <span class="pre">origin</span></code>, you may need to set the <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> configuration option.</p>
+<p>There is a security feature that adds proper <a class="reference external" href="https://owasp.org/www-community/attacks/csrf">CSRF</a> protection using both the Origin request header check and a <a class="reference external" href="https://owasp.org/www-community/attacks/csrf">CSRF</a> token check.</p>
+<p>The Origin check uses <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto">X-Forwarded-Proto</a> and <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host">X-Forwarded-Host</a> that Apache <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_proxy.html">mod_proxy</a> sets to build the string that is used to compare with the Origin request header the browser sends in the WebSocket upgrade request.</p>
+<p>In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> env var to the correct https string, or disable the origin check altogether by setting <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK=off</span></code> (or any other value that does not start with “http”) in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> file.</p>
+<p>Either way the CSRF token will still provide protection from this vulnerability.</p>
+<div class="code text highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
+<span class="c1"># to disable it, just configure it with something that doesn&#39;t start with http</span>
+<span class="n">OOD_SHELL_ORIGIN_CHECK</span><span class="o">=</span><span class="s1">&#39;off&#39;</span>
+
+<span class="c1"># to change it simply specify the http(s) origin you want to verify against.</span>
+<span class="n">OOD_SHELL_ORIGIN_CHECK</span><span class="o">=</span><span class="s1">&#39;https://my.other.origin&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="custom-job-composer-templates">
 <h2>Custom Job Composer Templates<a class="headerlink" href="#custom-job-composer-templates" title="Permalink to this headline">¶</a></h2>
@@ -545,6 +608,17 @@ app.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="job-composer-script-size-limit">
+<h2>Job Composer Script Size Limit<a class="headerlink" href="#job-composer-script-size-limit" title="Permalink to this headline">¶</a></h2>
+<p>Since 1.7 the Job composer shows users ‘Suggested file(s)’ and ‘Other valid file(s)’. Other valid files are
+_any_ files less than <code class="docutils literal notranslate"><span class="pre">OOD_MAX_SCRIPT_SIZE_KB</span></code> which defaults to 65 (meaning 65kb).</p>
+<p>To reconfigure this, simply set the environment variable in the job composers’ env file
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/env</span></code> like so:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># show any file less than or equal to 15 kb</span>
+<span class="n">OOD_MAX_SCRIPT_SIZE_KB</span><span class="o">=</span><span class="mi">15</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="custom-error-page-for-missing-home-directory-on-launch">
 <h2>Custom Error Page for Missing Home Directory on Launch<a class="headerlink" href="#custom-error-page-for-missing-home-directory-on-launch" title="Permalink to this headline">¶</a></h2>
 <p>Some sites have the home directory auto-create on first ssh login, for example
@@ -553,6 +627,14 @@ through OnDemand, which expects the existence of a user’s home directory.</p>
 <p>In OnDemand &lt;= 1.3 if the user’s home directory was missing a non-helpful single
 string error would display. Now a friendly error page displays. This error page
 can be customized by adding a custom one to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/pun/html/missing_home_directory.html</span></code>.</p>
+<p>The default error page looks like this:</p>
+<div class="figure align-center">
+<img alt="_images/customization_homedirmissing_default.png" src="_images/customization_homedirmissing_default.png" />
+</div>
+<p>An example of a custom error page has been provided at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/html/missing_home_directory.html.example.pam_mkhomedir</span></code> and can be copied to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/pun/html/missing_home_directory.html</span></code>. This example directs the user to first click a link to open the shell app which will create the home directory. The shell app’s default host must be configured to be a host that is appropriate for this purpose. The custom error page looks like this:</p>
+<div class="figure align-center">
+<img alt="_images/customization_homedirmissing_pammkdir.png" src="_images/customization_homedirmissing_pammkdir.png" />
+</div>
 <p>See <a class="reference external" href="https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/">this Discourse discussion</a> for details.</p>
 </div>
 <div class="section" id="control-which-apps-appear-in-the-dashboard-navbar">
@@ -570,8 +652,8 @@ can be customized by adding a custom one to <code class="docutils literal notran
 <li>at least one interactive app</li>
 <li>at least one custom app that specifies “Reports” as the category</li>
 </ul>
-<table border="1" class="docutils" id="id9">
-<caption><span class="caption-number">Table 4 </span><span class="caption-text">Navbar Configuration</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<table border="1" class="docutils" id="id15">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Navbar Configuration</span><a class="headerlink" href="#id15" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -613,8 +695,8 @@ can be customized by adding a custom one to <code class="docutils literal notran
 <li>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</li>
 </ol>
 <p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
-<table border="1" class="docutils" id="id10">
-<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<table border="1" class="docutils" id="id16">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id16" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -628,11 +710,11 @@ can be customized by adding a custom one to <code class="docutils literal notran
 </thead>
 <tbody valign="top">
 <tr class="row-even"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/dashboard/config/locales/en.yml</span></code></th>
-<td><a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.33.4/config/locales/en.yml">Dashboard</a></td>
+<td><a class="reference external" href="https://github.com/OSC/ondemand/blob/master/apps/dashboard/config/locales/en.yml">Dashboard</a></td>
 <td><code class="docutils literal notranslate"><span class="pre">dashboard</span></code></td>
 </tr>
 <tr class="row-odd"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/config/locales/en.yml</span></code></th>
-<td><a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.14.0/config/locales/en.yml">Job Composer</a></td>
+<td><a class="reference external" href="https://github.com/OSC/ondemand/blob/master/apps/myjobs/config/locales/en.yml">Job Composer</a></td>
 <td><code class="docutils literal notranslate"><span class="pre">jobcomposer</span></code></td>
 </tr>
 <tr class="row-even"><th class="stub"><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code></th>
@@ -774,6 +856,178 @@ the specified user only.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">For each user with resources under this fileset, the above object will be repeated with just <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">block_usage</span></code>, and <code class="docutils literal notranslate"><span class="pre">file_usage</span></code> changing.</p>
 </div>
+</div>
+</div>
+<div class="section" id="balance-warnings-on-dashboard">
+<span id="id4"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>You can display warnings to users on the Dashboard if their
+resource balance is nearing its limit. This requires an auto-updated (it is
+recommended to update this file daily with a cronjob) JSON file
+that lists all user balances. The JSON schema for version <cite>1</cite> is given as:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1525361263</span><span class="p">,</span>
+  <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;RU&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project_type&quot;</span><span class="p">:</span> <span class="s2">&quot;project&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;balances&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">version</span></code> defines the version of the JSON schema used, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>
+defines when this file was generated, and <code class="docutils literal notranslate"><span class="pre">balanaces</span></code> is a list of quota objects
+(see below).</p>
+<p>The value for <code class="docutils literal notranslate"><span class="pre">config.unit</span></code> defines the type of units for balances and
+<code class="docutils literal notranslate"><span class="pre">config.project_type</span></code> would be project, account, or group, etc.
+Both values are used in locales and can be any string value.</p>
+<p>You can configure the Dashboard to use this JSON file (or files) by setting the
+environment variable <code class="docutils literal notranslate"><span class="pre">OOD_BALANCE_PATH</span></code> as a colon-delimited list of all JSON
+file paths.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Sites using HTTP(s) or FTP for their balance files may see slower dashboard load
+times, depending on the responsiveness of the server providing the quota file(s).</p>
+</div>
+<p>The default threshold for displaying the warning is at <code class="docutils literal notranslate"><span class="pre">0</span></code>, but this
+can be changed with the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_BALANCE_THRESHOLD</span></code>.</p>
+<p>An example is given as:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
+
+<span class="n">OOD_BALANCE_PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/balance1.json:/path/to/balance2.json&quot;</span>
+<span class="n">OOD_BALANCE_THRESHOLD</span><span class="o">=</span><span class="mi">1000</span>
+</pre></div>
+</div>
+<div class="section" id="user-balance">
+<h3>User Balance<a class="headerlink" href="#user-balance" title="Permalink to this headline">¶</a></h3>
+<p>If the balance is defined as a <code class="docutils literal notranslate"><span class="pre">user</span></code> balance, then it applies to only that user. Omit the <code class="docutils literal notranslate"><span class="pre">project</span></code> key:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="project-balance">
+<h3>Project Balance<a class="headerlink" href="#project-balance" title="Permalink to this headline">¶</a></h3>
+<p>If the balance is defined as a <code class="docutils literal notranslate"><span class="pre">project</span></code> balance, then it applies to a project/account/group, whatever is defined for <code class="docutils literal notranslate"><span class="pre">config.project_type</span></code>:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="maintenance-mode">
+<span id="id5"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
+<p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
+while still telling your customers that the downtime is expected.</p>
+<p>You can do this by setting Open OnDemand in ‘Maintenance Mode’. Apache will serve
+<code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/index.html</span></code> which you can change or brand to be your own. Changes
+to this file will persist through upgrades.</p>
+<p>Apache returns this html file and a 503 response code to all users who’s IP does not match one of the
+configured whitelist regular expressions.  The whitelist is to allow staff, localhost or a subset of
+your users access while restricting others.</p>
+<p>In this example we allow access to anyone from <code class="docutils literal notranslate"><span class="pre">192.168.1..*</span></code> which is the 192.168.1.0/24 CIDR and
+the single IP ‘10.0.0.1’.</p>
+<p>These are the settings you’ll need for this functionality.</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="n">use_rewrites</span><span class="p">:</span> <span class="n">true</span>
+<span class="n">use_maintenance</span><span class="p">:</span> <span class="n">true</span>
+<span class="n">maintenance_ip_whitelist</span><span class="p">:</span>
+  <span class="c1"># examples only! Your ip regular expressions will be specific to your site.</span>
+  <span class="o">-</span> <span class="s1">&#39;192.168.1..*&#39;</span>
+  <span class="o">-</span> <span class="s1">&#39;10.0.0.1&#39;</span>
+</pre></div>
+</div>
+<p>To start maintenance mode (and thus start serving this page) simply <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">/etc/ood/maintenance.enable</span></code>
+to create the necessary file. When your downtime is complete just remove the file and all the
+traffic will be served normally again.  The existence of this file is what starts or stops maintenance
+mode, not it’s content, so you will not need to restart apache or modify it’s config files for this to
+take affect.</p>
+</div>
+<div class="section" id="grafana-support">
+<span id="id6"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Permalink to this headline">¶</a></h2>
+<p>It’s possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.</p>
+<p>Grafana must be configured to support embedded panels and at this time it is also required to have a anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust <cite>org_name</cite> to match whatever organization you wish to be anonymous.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Changing a Grafana install to support anonymous access can cause unintended consequences for how authenticated users interact with Grafana.
+It’s recommended to test anonymous access on a non-production Grafana install if you do not already support anonymous access.</p>
+</div>
+<div class="code shell highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">auth</span><span class="o">.</span><span class="n">anonymous</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">org_name</span> <span class="o">=</span> <span class="n">Public</span>
+<span class="n">org_role</span> <span class="o">=</span> <span class="n">Viewer</span>
+
+<span class="p">[</span><span class="n">security</span><span class="p">]</span>
+<span class="n">allow_embedding</span> <span class="o">=</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>The dashboard used by OSC is the <a class="reference external" href="https://grafana.com/grafana/dashboards/12093">OnDemand Clusters</a> dashboard.</p>
+<p>Settings used to access Grafana are configured in the cluster config.  The following is an example from OSC:</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span><span class="p">:</span>
+  <span class="n">grafana</span><span class="p">:</span>
+    <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;https://grafana.osc.edu&quot;</span>
+    <span class="n">orgId</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="n">dashboard</span><span class="p">:</span>
+      <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;ondemand-clusters&quot;</span>
+      <span class="n">uid</span><span class="p">:</span> <span class="s2">&quot;aaba6Ahbauquag&quot;</span>
+      <span class="n">panels</span><span class="p">:</span>
+        <span class="n">cpu</span><span class="p">:</span> <span class="mi">20</span>
+        <span class="n">memory</span><span class="p">:</span> <span class="mi">24</span>
+    <span class="n">labels</span><span class="p">:</span>
+      <span class="n">cluster</span><span class="p">:</span> <span class="s2">&quot;cluster&quot;</span>
+      <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span>
+      <span class="n">jobid</span><span class="p">:</span> <span class="s2">&quot;jobid&quot;</span>
+</pre></div>
+</div>
+<p>When viewing a dashboard in Grafana choose the panel you’d wish to display and select <cite>Share</cite>.
+Then choose the <cite>Embed</cite> tab which will provide you with the iframe URL that will need to be generated within OnDemand.
+The time ranges and values for labels (eg: <cite>var-cluster=</cite>) will be autofilled by OnDemand.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">orgId</span></code> is the <code class="docutils literal notranslate"><span class="pre">orgId</span></code> query parameter</li>
+<li>The dashboard <code class="docutils literal notranslate"><span class="pre">name</span></code> is the last segment of the URI before query parameters</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">uid`</span></code> is the UID portion of URL that is unique to every dashboard</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">panelId</span></code> query parameter will be used as the value for either <code class="docutils literal notranslate"><span class="pre">cpu</span></code> or <code class="docutils literal notranslate"><span class="pre">memory</span></code> depending on the panel you have selected</li>
+<li>The values for <code class="docutils literal notranslate"><span class="pre">labels</span></code> are how OnDemand maps labels in Grafana to values expected in OnDemand. The <code class="docutils literal notranslate"><span class="pre">jobid</span></code> key is optional, the others are required.</li>
+</ul>
+</div>
+<div class="section" id="disable-host-link-in-batch-connect-session-card">
+<h2>Disable Host Link in Batch Connect Session Card<a class="headerlink" href="#disable-host-link-in-batch-connect-session-card" title="Permalink to this headline">¶</a></h2>
+<p>Batch connect session cards like this have links to the compute node on which the job is currently running (highlighted).</p>
+<div class="figure align-center">
+<img alt="_images/bc-card-w-hostlink.png" src="_images/bc-card-w-hostlink.png" />
+</div>
+<p>However, some sites may want to disable this feature because they do not allow ssh sessions on the compute
+nodes.</p>
+<p>To disable this, simply set the environment variable in the dashboards’ env file
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> to a falsy value (0, false, off).</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># don&#39;t show ssh link in batch connect card</span>
+<span class="n">OOD_BC_SSH_TO_COMPUTE_NODE</span><span class="o">=</span><span class="n">off</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-illegal-job-name-characters">
+<span id="id7"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Permalink to this headline">¶</a></h2>
+<p>If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">read</span> <span class="pre">script</span> <span class="pre">file</span> <span class="pre">because</span> <span class="pre">of</span> <span class="pre">error:</span> <span class="pre">ERROR!</span> <span class="pre">argument</span> <span class="pre">to</span> <span class="pre">-N</span> <span class="pre">option</span> <span class="pre">must</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">/</span></code></p>
+<p>To resolve this set <code class="docutils literal notranslate"><span class="pre">OOD_JOB_NAME_ILLEGAL_CHARS</span></code> to <code class="docutils literal notranslate"><span class="pre">/</span></code> for all OOD applications in the
+<code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> file.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/nginx_stage.yml</span>
+<span class="l l-Scalar l-Scalar-Plain">pun_custom_env</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">OOD_JOB_NAME_ILLEGAL_CHARS</span><span class="p p-Indicator">:</span> <span class="s">&quot;/&quot;</span>
+</pre></div>
 </div>
 </div>
 </div>
