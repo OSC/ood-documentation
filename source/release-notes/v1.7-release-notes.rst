@@ -29,20 +29,20 @@ Upgrading from v1.6
 
 .. warning::
 
-  If upgrading from OnDemand 1.3.x or older you must upgrade to 1.6.x before upgrading to 1.7.
+   If upgrading from OnDemand 1.3.x or older you must upgrade to 1.6.x before upgrading to 1.7.
 
 .. warning::
 
-  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
+   As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
 
 .. warning::
 
-  Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
+   Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
 
 .. warning::
 
-  Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand 1.7. The RPM upgrade will generate ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``.
-  If there are custom changes made to ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be necessary to merge those changes in after running ``update_ood_portal --force``.
+   Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand 1.7. The RPM upgrade will generate ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``.
+   If there are custom changes made to ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be necessary to merge those changes in after running ``update_ood_portal --force``.
 
 #. Update OnDemand release RPM
 
@@ -54,27 +54,27 @@ Upgrading from v1.6
 
    .. code-block:: sh
 
-       sudo yum clean all
-       sudo yum update ondemand
+      sudo yum clean all
+      sudo yum update ondemand
 
 #. Update Apache configuration and restart Apache.
 
    .. code-block:: sh
 
-       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal --force
-       sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal --force
+      sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 #. Force all PUNs to restart
 
    .. code-block:: sh
 
-       sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 
 #. Optionally remove old dependencies from prior versions of OOD if they are not used by other applications.
 
    .. code-block:: sh
 
-       sudo yum remove rh-ruby24\* rh-nodejs6\* rh-git29\*
+      sudo yum remove rh-ruby24\* rh-nodejs6\* rh-git29\*
 
 Details
 -------
@@ -86,14 +86,14 @@ Beta support for running OnDemand with SELinux has been added. Support is enable
 
 .. warning::
 
-  If the ``ondemand-selinux`` package was installed from the OnDemand 1.6 release there are several changes that must be addressed manually.  Several SELinux booleans were enabled by the ``ondemand-selinux`` package and are no longer needed by OnDemand. The following SELinux booleans can be disabled if not used outside OnDemand:
+   If the ``ondemand-selinux`` package was installed from the OnDemand 1.6 release there are several changes that must be addressed manually.  Several SELinux booleans were enabled by the ``ondemand-selinux`` package and are no longer needed by OnDemand. The following SELinux booleans can be disabled if not used outside OnDemand:
 
-  .. code-block:: sh
+   .. code-block:: sh
 
-     sudo setsebool -P httpd_execmem=off
-     sudo setsebool -P httpd_unified=off
-     sudo setsebool -P httpd_enable_homedirs=off
-     sudo setsebool -P httpd_read_user_content=off
+      sudo setsebool -P httpd_execmem=off
+      sudo setsebool -P httpd_unified=off
+      sudo setsebool -P httpd_enable_homedirs=off
+      sudo setsebool -P httpd_read_user_content=off
 
 
 Update Passenger and NGINX dependencies
