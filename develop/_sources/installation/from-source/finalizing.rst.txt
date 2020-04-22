@@ -70,7 +70,7 @@ At this point we still will not see an OnDemand page if we visit our web node be
 
     sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
-This is the basic OnDemand portal configuration and unless you are using Apache's basic auth for your site you will need to createa custom portal configuration file and re-run the portal generator. More information on the Apache config generator is available in the Configure Authentication section.
+This is the basic OnDemand portal configuration and unless you are using Apache's basic auth for your site you will need to create a custom portal configuration file and re-run the portal generator. More information on the Apache config generator is available in the Configure Authentication section.
 
 Installation Complete
 ---------------------

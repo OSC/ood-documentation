@@ -165,7 +165,7 @@ Adapter support for this feature is mixed. For example for Slurm `sbatch`, `scon
 acls:
 #####
 
-Access control lists provide a method to limit cluster access by group membership. ACLs are implictly whitelists but may be set explicitly to either `whitelist` or `blacklist`.
+Access control lists provide a method to limit cluster access by group membership. ACLs are implicitly whitelists but may be set explicitly to either `whitelist` or `blacklist`.
 
 .. code-block :: yaml
 
