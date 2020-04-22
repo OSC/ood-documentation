@@ -24,25 +24,37 @@ Highlights in 1.7:
 - `Job composer now shows suggested scripts`_
 - `Disable ssh to compute node link in BC card`_
 
+Special thanks
+--------------
+
+Special thanks to these contributors (alpha by first name):
+
+- Bart Verheyde `@baverhey <https://github.com/baverhey>`_
+- Guilherme Maluf Balzana `@guimaluf <https://github.com/guimaluf>`_
+- Jason Buechler `@jasonbuechler <https://github.com/jasonbuechler>`_
+- Shawn Rice `@zooley <https://github.com/zooley>`_
+
+*If you contributed to the 1.7 OnDemand release and you are not on the core team and your name is not listed here please let us know and we will add you.*
+
 Upgrading from v1.6
 -------------------
 
 .. warning::
 
-  If upgrading from OnDemand 1.3.x or older you must upgrade to 1.6.x before upgrading to 1.7.
+   If upgrading from OnDemand 1.3.x or older you must upgrade to 1.6.x before upgrading to 1.7.
 
 .. warning::
 
-  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
+   As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
 
 .. warning::
 
-  Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
+   Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
 
 .. warning::
 
-  Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand 1.7. The RPM upgrade will generate ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``.
-  If there are custom changes made to ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be necessary to merge those changes in after running ``update_ood_portal --force``.
+   Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand 1.7. The RPM upgrade will generate ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``.
+   If there are custom changes made to ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be necessary to merge those changes in after running ``update_ood_portal --force``.
 
 #. Update OnDemand release RPM
 
@@ -54,27 +66,27 @@ Upgrading from v1.6
 
    .. code-block:: sh
 
-       sudo yum clean all
-       sudo yum update ondemand
+      sudo yum clean all
+      sudo yum update ondemand
 
 #. Update Apache configuration and restart Apache.
 
    .. code-block:: sh
 
-       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal --force
-       sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal --force
+      sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
 #. Force all PUNs to restart
 
    .. code-block:: sh
 
-       sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 
 #. Optionally remove old dependencies from prior versions of OOD if they are not used by other applications.
 
    .. code-block:: sh
 
-       sudo yum remove rh-ruby24\* rh-nodejs6\* rh-git29\*
+      sudo yum remove rh-ruby24\* rh-nodejs6\* rh-git29\*
 
 Details
 -------
@@ -86,14 +98,14 @@ Beta support for running OnDemand with SELinux has been added. Support is enable
 
 .. warning::
 
-  If the ``ondemand-selinux`` package was installed from the OnDemand 1.6 release there are several changes that must be addressed manually.  Several SELinux booleans were enabled by the ``ondemand-selinux`` package and are no longer needed by OnDemand. The following SELinux booleans can be disabled if not used outside OnDemand:
+   If the ``ondemand-selinux`` package was installed from the OnDemand 1.6 release there are several changes that must be addressed manually.  Several SELinux booleans were enabled by the ``ondemand-selinux`` package and are no longer needed by OnDemand. The following SELinux booleans can be disabled if not used outside OnDemand:
 
-  .. code-block:: sh
+   .. code-block:: sh
 
-     sudo setsebool -P httpd_execmem=off
-     sudo setsebool -P httpd_unified=off
-     sudo setsebool -P httpd_enable_homedirs=off
-     sudo setsebool -P httpd_read_user_content=off
+      sudo setsebool -P httpd_execmem=off
+      sudo setsebool -P httpd_unified=off
+      sudo setsebool -P httpd_enable_homedirs=off
+      sudo setsebool -P httpd_read_user_content=off
 
 
 Update Passenger and NGINX dependencies
@@ -116,7 +128,7 @@ OnDemand has dropped support for CentOS/RedHat 6 and added support for CentOS/Re
 Added the Linux Host Adapter
 ............................
 
-Support for running jobs directly on Linux hosts has been added. This means interactive 
+Support for running jobs directly on Linux hosts has been added. This means interactive
 jobs can now run on a login node instead of through a batch scheduler.
 
 See the documentation for the :ref:`resource-manager-linuxhost`. for more details.
@@ -127,17 +139,19 @@ Show account balance warnings
 The dashboard can now show account balance warnings if the users' account balance
 is some threshold.
 
-See :ref:`these docs <balance-warnings-on-dashboard>` for more details on how to 
+See :ref:`these docs <balance-warnings-on-dashboard>` for more details on how to
 enable this feature.
 
 Job Composer and Active Jobs match Dashboard Branding
 .....................................................
 
 The Job Composer and Active Jobs apps' top navigation bar now share the same branding
-scheme configured for the dashboard. 
+scheme configured for the dashboard.
 
-There's no additional configuration required for this other than what's documented 
+There's no additional configuration required for this other than what's documented
 :ref:`here <branding>`.
+
+*Special thanks to `@zooley <https://github.com/zooley>`_ (Shawn Rice) for implementing this feature!*
 
 Maintenance mode
 ................
@@ -151,8 +165,8 @@ See :ref:`these docs <maintenance-mode>` on how to configure and enable this fea
 Titles for Files menu entries
 .............................
 
-The shortcuts in the files dropdown menu can now show an optional title along with the 
-directory path. The :ref:`original documentation <add-shortcuts-to-files-menu>` on this 
+The shortcuts in the files dropdown menu can now show an optional title along with the
+directory path. The :ref:`original documentation <add-shortcuts-to-files-menu>` on this
 feature has been updated to reflect the new options.
 
 
@@ -182,6 +196,8 @@ Add an ssh wrapper to the shell app
 
 An ssh wrapper script can now be used instead of just the ``ssh`` command in the
 shell app.  See how to configure this :ref:`here <ssh-wrapper>`.
+
+*Special thanks to `@baverhey <https://github.com/baverhey>`_ (Bart Verheyde) for implementing this feature!*
 
 Regenerate ood-portal.conf with every apache restart
 ....................................................
@@ -219,8 +235,8 @@ kill johndoe's PUN and disregard all the others.
 Dashboard now alerts on malformed cluster configs
 .................................................
 
-Prior to 1.7 the dashboard would not start if there was a cluster cluster definition file 
-(the files in ``/etc/ood/config/clusters.d/``) that had invalid yaml. 
+Prior to 1.7 the dashboard would not start if there was a cluster cluster definition file
+(the files in ``/etc/ood/config/clusters.d/``) that had invalid yaml.
 
 The dashboard now handles this gracefully and shows an error message to the user stating that
 this file is unusable and should indicate the line of the file that is problematic.
@@ -243,8 +259,8 @@ defaults to 65 (meaning 65 kb).
 Disable ssh to compute node link in BC card
 ...........................................
 
-Administrators can now disable the link that appears in the batch connects' card to ssh into the compute 
-node that the job is running on. This is helpful for sites that don't allow regular users to shell into 
+Administrators can now disable the link that appears in the batch connects' card to ssh into the compute
+node that the job is running on. This is helpful for sites that don't allow regular users to shell into
 compute nodes.
 
 To do so, simply set ``OOD_BC_SSH_TO_COMPUTE_NODE=0`` (or 'false' or 'off') in ``/etc/ood/config/apps/dashboard/env``.
