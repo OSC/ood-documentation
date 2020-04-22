@@ -252,6 +252,27 @@ In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to cha
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
+SSH Wrapper
+---------------
+
+.. _ssh-wrapper:
+
+Since OOD 1.7 you can use an ssh wrapper script instead of just the ssh command.
+
+This is helpful when you pass add additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
+
+To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` to point to your script in ``/etc/ood/config/apps/shell/env``. Also be sure to make your script executable.
+
+Here's a simple example of what a wrapper script could look like.
+
+.. code:: shell
+
+  #!/bin/bash
+
+  args="-o SendEnv=MY_ENV_VAR"
+
+  exec /usr/bin/ssh "$args" "$@"
+
 Fix Unauthorized WebSocket Connection in Shell App
 --------------------------------------------------
 

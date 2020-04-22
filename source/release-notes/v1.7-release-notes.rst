@@ -16,6 +16,13 @@ Highlights in 1.7:
 - `Documentation for Keycloak as identity broker with CILogon and Keycloak with Duo 2FA`_
 - `Add Grafana support for ActiveJobs app`_
 - `Improvements to ood-portal-generator`_
+- `Add an ssh wrapper to the shell app`_
+- `Regenerate ood-portal.conf with every apache restart`_
+- `Support sanitizing job names`_
+- `nginx_clean support for a specific user`_
+- `Dashboard now alerts on malformed cluster configs`_
+- `Job composer now shows suggested scripts`_
+- `Disable ssh to compute node link in BC card`_
 
 Upgrading from v1.6
 -------------------
@@ -169,3 +176,64 @@ Improvements to ood-portal-generator
 
 The ood-portal-generator app has been rewritten in Ruby and extensive testing added.
 Checksums generated for ``ood-portal.conf`` now exclude comments.
+
+Add an ssh wrapper to the shell app
+...................................
+
+An ssh wrapper script can now be used instead of just the ``ssh`` command in the
+shell app.  See how to configure this :ref:`here <ssh-wrapper>`.
+
+Regenerate ood-portal.conf with every apache restart
+....................................................
+
+Systemd will now regenerate the ood-portal.conf before every apache restart.  This means
+and administrators can now edit the ``ood_portal.yml`` configuration and then restart httpd
+with systemctl and apache will read the new configuration, because a new ood-portal.conf
+will have been written just before restarting.
+
+Support sanitizing job names
+............................
+
+Administrators can now set the ``OOD_JOB_NAME_ILLEGAL_CHARS`` environment variable to prevent
+characters from being used in job names.  For example if you do not want to use ``/`` in job
+names (as is the case with some :ref:`Grid Engine <resource-manager-sge>` versions) you would
+set ``OOD_JOB_NAME_ILLEGAL_CHARS: '/'`` in the ``pun_custom_env`` attribute of ``nginx_stage.yml``.
+
+nginx_clean support for a specific user
+.......................................
+
+The ``nginx_stage nginx_clean`` command now supports a ``-u`` or ``--user`` option so it may
+clean a specific users' PUN. For example ``nginx_stage nginx_clean -u johndoe`` would only
+clean johndoe's PUN and disregard all the others.
+
+Dashboard now alerts on malformed cluster configs
+.................................................
+
+Prior to 1.7 the dashboard would not start if there was a cluster cluster definition file 
+(the files in ``/etc/ood/config/clusters.d/``) that had invalid yaml. 
+
+The dashboard now handles this gracefully and shows an error message to the user stating that
+this file is unusable and should indicate the line of the file that is problematic.
+
+Job composer now shows suggested scripts
+........................................
+
+When changing the job script in the job composer the user is now presented with a dropdown of
+'Suggested Files' first along with 'Other valid files'.
+
+Files in folder will be suggested if they match any of these criteria:
+* Have one of these extensions: ".sh", ".job", ".slurm", ".batch", ".qsub", ".sbatch", ".srun", ".bsub"
+* The file starts with a shebang line (#!)
+* Has a resource manager's directive (#PBS, #SBATCH, #BSUB or #$) in the first 1000 characters.
+
+Other valid files only have to meet a size requirement of less than ``OOD_MAX_SCRIPT_SIZE_KB`` which
+defaults to 65 (meaning 65 kb).
+
+Disable ssh to compute node link in BC card
+...........................................
+
+Administrators can now disable the link that appears in the batch connects' card to ssh into the compute 
+node that the job is running on. This is helpful for sites that don't allow regular users to shell into 
+compute nodes.
+
+To do so, simply set ``OOD_BC_SSH_TO_COMPUTE_NODE=0`` (or 'false' or 'off') in ``/etc/ood/config/apps/dashboard/env``.
