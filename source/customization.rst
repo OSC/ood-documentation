@@ -800,10 +800,10 @@ The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by
 * The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
 * The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
 
-Disable Host Link in Batch Connect Card
----------------------------------------
+Disable Host Link in Batch Connect Session Card
+-----------------------------------------------
 
-Batch connect cards like this have links to the compute node on which the job is currently running (highlighted).
+Batch connect session cards like this have links to the compute node on which the job is currently running (highlighted).
 
 .. figure:: /images/bc-card-w-hostlink.png
   :align: center
