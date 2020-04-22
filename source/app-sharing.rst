@@ -176,7 +176,7 @@ approach has these benefits (assuming users named ``efranz`` and ``an0047``:
    ``/var/www/ood/apps/usr/an0047`` this ensures that an0047 can only share
    apps with users in his primary group. At times we have created a \
    supplemental group (shinyusr) and chgrp the share directory to this group so
-   that the develepr can share apps with every user in this group.
+   that the developer can share apps with every user in this group.
 #. The developer who can share apps can modify permissions on the app
    directories themselves i.e.
    ``/var/www/ood/apps/usr/an0047/gateway/customapp``
