@@ -6,8 +6,7 @@ v1.7 Release Notes
 Highlights in 1.7:
 
 - `Support running OnDemand with SELinux`_
-- `Update Passenger and NGINX dependencies`_
-- `Update Ruby and NodeJS dependencies`_
+- `Update project dependencies`_
 - `Drop EL6 and add EL8 support`_
 - `Added the Linux Host Adapter`_
 - `Show account balance warnings`_
@@ -22,7 +21,7 @@ Highlights in 1.7:
 - `nginx_clean support for a specific user`_
 - `Dashboard now alerts on malformed cluster configs`_
 - `Job composer now shows suggested scripts`_
-- `Disable ssh to compute node link in BC card`_
+- `Disable ssh to compute node link in batch connect session card`_
 
 Special thanks
 --------------
@@ -36,25 +35,19 @@ Special thanks to these contributors (alpha by first name):
 
 *If you contributed to the 1.7 OnDemand release and you are not on the core team and your name is not listed here please let us know and we will add you.*
 
+
 Upgrading from v1.6
 -------------------
 
-.. warning::
+.. warning:: In v1.7 support for CentOS/RedHat 6 has been dropped
 
-   If upgrading from OnDemand 1.3.x or older you must upgrade to 1.6.x before upgrading to 1.7.
 
-.. warning::
+Before upgrading to v1.7, please consider the following:
 
-   As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance.
+- If upgrading from OnDemand 1.3.x or older **you must upgrade to 1.6.x before upgrading to 1.7**. See directions for upgrading from 1.4 to 1.5 (:ref:`v1.5-release-notes`) and from 1.5 to 1.6 (:ref:`v1.6-release-notes`).
+- As always please update the *development* or *test* instances of OnDemand installed at your center first to test and verify before you modify the *production* instance.
+- All running PUNs must be restarted after the upgrade due to upgrading to new versions of Passenger and Ruby. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
 
-.. warning::
-
-   Because of a change in Passenger versions and Ruby versions it is necessary that all PUNs running before the upgrade be restarted after the upgrade. It's recommended to schedule an short outage of your OnDemand instance to perform this upgrade.
-
-.. warning::
-
-   Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand 1.7. The RPM upgrade will generate ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``.
-   If there are custom changes made to ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be necessary to merge those changes in after running ``update_ood_portal --force``.
 
 #. Update OnDemand release RPM
 
@@ -76,6 +69,17 @@ Upgrading from v1.6
       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal --force
       sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
+   .. warning::
+
+      Due to changes with ``ood-portal-generator`` it is necessary to run
+      ``update_ood_portal`` with ``--force`` flag after upgrading to OnDemand
+      1.7. The RPM upgrade will generate
+      ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf.new``. If there
+      are custom manual changes made to
+      ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`` it will be
+      necessary to merge those changes in after running ``update_ood_portal
+      --force``.
+
 #. Force all PUNs to restart
 
    .. code-block:: sh
@@ -87,6 +91,13 @@ Upgrading from v1.6
    .. code-block:: sh
 
       sudo yum remove rh-ruby24\* rh-nodejs6\* rh-git29\*
+
+
+Upgrading from v1.5
+-------------------
+
+Follow the directions for upgrading to v1.6 first (:ref:`v1.6-release-notes`). After the upgrade is complete and working, follow the directions above.
+
 
 Details
 -------
@@ -107,23 +118,38 @@ Beta support for running OnDemand with SELinux has been added. Support is enable
       sudo setsebool -P httpd_enable_homedirs=off
       sudo setsebool -P httpd_read_user_content=off
 
+Update project dependencies
+...........................
 
-Update Passenger and NGINX dependencies
-.......................................
+.. list-table:: Project Dependencies
+   :header-rows: 1
 
-Passenger has been upgraded from ``5.3.7`` to ``6.0.4``. NGINX has been upgraded from ``1.14.0`` to ``1.17.3``.
-
-
-Update Ruby and NodeJS dependencies
-...................................
-
-The Ruby version used by OnDemand has been upgraded from ``2.4`` to ``2.5``. The NodeJS version used by OnDemand has been upgraded from ``6`` to ``10``.
+   * - Dependency
+     - Old Version
+     - New Version
+   * - Passenger
+     - 5.3.7
+     - 6.0.4
+   * - NGINX
+     - 1.14.0
+     - 1.17.3
+   * - Ruby
+     - 2.4
+     - 2.5
+   * - NodeJS
+     - 6
+     - 10
+   * - Rails
+     - 4.2
+     - 5.2
+   * - noVNC
+     - 1.0.0
+     - 1.1.0
 
 Drop EL6 and add EL8 support
 ............................
 
 OnDemand has dropped support for CentOS/RedHat 6 and added support for CentOS/RedHat 8.
-
 
 Added the Linux Host Adapter
 ............................
@@ -151,7 +177,7 @@ scheme configured for the dashboard.
 There's no additional configuration required for this other than what's documented
 :ref:`here <branding>`.
 
-*Special thanks to `@zooley <https://github.com/zooley>`_ (Shawn Rice) for implementing this feature!*
+Special thanks to `@zooley <https://github.com/zooley>`_ (Shawn Rice) for implementing this feature!
 
 Maintenance mode
 ................
@@ -197,7 +223,7 @@ Add an ssh wrapper to the shell app
 An ssh wrapper script can now be used instead of just the ``ssh`` command in the
 shell app.  See how to configure this :ref:`here <ssh-wrapper>`.
 
-*Special thanks to `@baverhey <https://github.com/baverhey>`_ (Bart Verheyde) for implementing this feature!*
+Special thanks to `@baverhey <https://github.com/baverhey>`_ (Bart Verheyde) for implementing this feature!
 
 Regenerate ood-portal.conf with every apache restart
 ....................................................
@@ -256,8 +282,8 @@ Files in folder will be suggested if they match any of these criteria:
 Other valid files only have to meet a size requirement of less than ``OOD_MAX_SCRIPT_SIZE_KB`` which
 defaults to 65 (meaning 65 kb).
 
-Disable ssh to compute node link in BC card
-...........................................
+Disable ssh to compute node link in batch connect session card
+..............................................................
 
 Administrators can now disable the link that appears in the batch connects' card to ssh into the compute
 node that the job is running on. This is helpful for sites that don't allow regular users to shell into
