@@ -168,8 +168,12 @@ Project space directories.
 
 Adding more links currently requires adding a custom initializer to the
 Dashboard app. Ruby code is placed in the initializer to add one or more Ruby
-``FavoritePath`` objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
+``FavoritePath`` (or ``Pathname`` for backwards compatibility)  objects to the ``OodFilesApp.candidate_favorite_paths`` array, a
 global attribute that is used in the Dashboard app.
+
+``FavoritePath`` is instantiated with a single ``String`` or ``Pathname`` argument, the
+directory path, and with an optional keyword argument ``title`` specifying a
+human readable title for that path.
 
 Start by creating the file
 :file:`/etc/ood/config/apps/dashboard/initializers/ood.rb` as such:
@@ -181,13 +185,13 @@ Start by creating the file
   OodFilesApp.candidate_favorite_paths.tap do |paths|
     # add project space directories
     projects = User.new.groups.map(&:name).grep(/^P./)
-    paths.concat projects.map { |p| FavoritePath.new(Pathname.new("/fs/project/#{p}"))  }
+    paths.concat projects.map { |p| FavoritePath.new("/fs/project/#{p}")  }
 
-    # add scratch space directories
-    paths << FavoritePath.new(Pathname.new("/fs/scratch/#{User.new.name}"))
+    # add User scratch space directory
+    paths << FavoritePath.new("/fs/scratch/#{User.new.name}")
 
-    # Project scratch has an optional title field.
-    paths.concat projects.map { |p| FavoritePath.new(Pathname.new("/fs/scratch/#{p}"), title: "Scratch")  }
+    # Project scratch is given an optional title field
+    paths.concat projects.map { |p| FavoritePath.new("/fs/scratch/#{p}", title: "Scratch")  }
   end
 
 - The variable ``paths`` is an array of ``FavoritePath`` objects that define a list
