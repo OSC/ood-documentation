@@ -235,7 +235,7 @@ Whitelist Directories
 By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:
 
 1. Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the whitelisted paths
-2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitary path that is not an eventual child of the whitelisted paths
+2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the whitelisted paths
 3. Users should not be able to get around this using symlinks
 
 We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would whitelist home directories, project space, and scratch space at OSC:
@@ -664,7 +664,7 @@ that lists all user balances. The JSON schema for version `1` is given as:
     }
 
 Where ``version`` defines the version of the JSON schema used, ``timestamp``
-defines when this file was generated, and ``balanaces`` is a list of quota objects
+defines when this file was generated, and ``balances`` is a list of quota objects
 (see below).
 
 The value for ``config.unit`` defines the type of units for balances and
