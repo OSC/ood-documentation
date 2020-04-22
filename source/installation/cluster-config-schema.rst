@@ -34,32 +34,6 @@ Below is the production configuration for OSC's Owens cluster.
         - "other_users_of_the_cluster"
       type: "whitelist"
     custom:
-      pbs:
-        host: "owens-batch.ten.osc.edu"
-        lib: "/opt/torque/lib64"
-        bin: "/opt/torque/bin"
-        version: "6.0.1"
-      moab:
-        host: "owens-batch.ten.osc.edu"
-        bin: "/opt/moab/bin"
-        version: "9.0.1"
-        homedir: "/var/spool/moab"
-      rsv_query:
-        torque_host: "owens-batch.ten.osc.edu"
-        torque_lib: "/opt/torque/lib64"
-        torque_bin: "/opt/torque/bin"
-        torque_version: "6.0.1"
-        moab_host: "owens-batch.ten.osc.edu"
-        moab_bin: "/opt/moab/bin"
-        moab_version: "9.0.1"
-        moab_homedir: "/var/spool/moab"
-        acls:
-          - adapter: "group"
-            groups:
-              - "sysall"
-              - "sappall"
-              - "clntall"
-            type: "blacklist"
       grafana:
             host: "https://grafana.osc.edu"
             orgId: 3
