@@ -8,9 +8,6 @@ Modify System Security
 SELinux
 --------
 
-.. DANGER::
-   Support for SELinux on the Open OnDemand host is currently considered a beta feature.
-
 #. If you plan to use `SELinux`_ on the Open OnDemand host you must install the `ondemand-selinux` package.
 
    .. code-block:: sh
