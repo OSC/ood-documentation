@@ -176,7 +176,7 @@ Start by creating the file
 
 .. code-block:: ruby
 
-   # /etc/ood/config/apps/dashboard/initializers/ood.rb
+  # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
   OodFilesApp.candidate_favorite_paths.tap do |paths|
     # add project space directories
@@ -252,12 +252,12 @@ In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to cha
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
-SSH Wrapper
----------------
+Shell App SSH Command Wrapper
+-----------------------------
 
 .. _ssh-wrapper:
 
-Since OOD 1.7 you can use an ssh wrapper script instead of just the ssh command.
+Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.
 
 This is helpful when you pass add additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
 
@@ -357,7 +357,19 @@ In the event that a job is created from a template that is missing from the `man
 - ``script`` The first ``.sh`` file appearing in the template folder.
 - ``notes`` The path to the location where a template manifest should be located.
 
+Job Composer Script Size Limit
+------------------------------
 
+Since 1.7 the Job composer shows users 'Suggested file(s)' and 'Other valid file(s)'. Other valid files are
+_any_ files less than ``OOD_MAX_SCRIPT_SIZE_KB`` which defaults to 65 (meaning 65kb).
+
+To reconfigure this, simply set the environment variable in the job composers' env file
+``/etc/ood/config/apps/myjobs/env`` like so:
+
+.. code:: sh
+
+  # show any file less than or equal to 15 kb
+  OOD_MAX_SCRIPT_SIZE_KB=15
 
 Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
@@ -779,3 +791,41 @@ The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by
 * The ``uid``` is the UID portion of URL that is unique to every dashboard
 * The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
 * The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
+
+Disable Host Link in Batch Connect Card
+---------------------------------------
+
+Batch connect cards like this have links to the compute node on which the job is currently running (highlighted).
+
+.. figure:: /images/bc-card-w-hostlink.png
+  :align: center
+
+However, some sites may want to disable this feature because they do not allow ssh sessions on the compute
+nodes.
+
+To disable this, simply set the environment variable in the dashboards' env file
+``/etc/ood/config/apps/dashboard/env`` to a falsy value (0, false, off).
+
+.. code:: sh
+
+  # don't show ssh link in batch connect card
+  OOD_BC_SSH_TO_COMPUTE_NODE=off
+
+Set Illegal Job Name Characters
+-------------------------------
+
+.. _set-illegal-job-name-characters:
+
+If you encounter an issue in running batch connect applications complaining about invalid
+job names like the error below.
+
+``Unable to read script file because of error: ERROR! argument to -N option must not contain /``
+
+To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applications in the
+``pun_custom_env`` attribute of the ``/etc/ood/config/nginx_stage.yml`` file.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/nginx_stage.yml
+  pun_custom_env:
+    - OOD_JOB_NAME_ILLEGAL_CHARS: "/"
