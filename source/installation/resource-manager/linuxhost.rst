@@ -28,9 +28,6 @@ singularity
 .. note:: There are many recipes for managing processes on arbitrary Linux hosts, and we will be exploring others in future development of this adapter.
 
 
-How To Configure The Adapter
-****************************
-
 The adapter and target host can be configured to either:
 
 #. Enable launching any software installed on the target host
@@ -143,12 +140,12 @@ tmux_bin
 
 
 Enforce resource limits on the target host
-******************************************
+------------------------------------------
 
 By default the adapter does not limit the user's CPU or memory utilization, only their "walltime". The following are two examples of ways to implement resource limits for the LinuxHost Adapter using cgroups.
 
 Approach #1: Systemd user slices
---------------------------------
+................................
 
 With systemd it is possible to manage the resource limits of user logins through each user's `slice <https://www.freedesktop.org/software/systemd/man/systemd.slice.html>`_. The limits applied to a user slice are shared by all processes belonging to that user, this is not a per-job or per-node resource limit but a per-user limit. When setting the limits keep in mind the sum of all user limits is the max potential resource consumption on a single host.
 
@@ -175,7 +172,7 @@ The following example of ``/etc/security/limits.sh`` is used by OSC on interacti
    fi
 
 Approach #2: libcgroup cgroups
-------------------------------
+..............................
 
 The libcgroup cgroups rules and configurations are a per-group resource limit where the group is defined in the examples at ``/etc/cgconfig.d/limits.conf``. The following examples limit resources of all tmux processes launched for the LinuxHost Adapter so they all share 700 CPU shares and 64GB of RAM. This requires setting ``tmux_bin`` to a wrapper script that in this example will be ``/usr/local/bin/ondemand_tmux``.
 
@@ -218,10 +215,11 @@ Start the necessary services:
 
 
 Troubleshooting
-***************
+---------------
 
 Undetermined state
-------------------
+..................
+
 Your job can be in an 'undetermined state' because you haven't listed all the ``ssh_hosts``.
 ``ssh_hosts`` should be *anything* the ``submit_host`` can DNS resolve to. You submit your
 job the ``submit_host``, but OnDemand is going to poll the ``ssh_hosts`` for your job and
@@ -245,7 +243,7 @@ by the 'job name') so the adapter now cannot find my job.
 .. figure:: /images/linux_host_undetermined.png
 
 error while loading shared libraries
-------------------------------------
+....................................
 
 The default mounts for singularity are ``'/etc,/media,/mnt,/opt,/srv,/usr,/var,/users'``.  It's likely
 either you've overwritten this with too few mounts (like /lib, /opt or /usr) or your container lacks
@@ -255,7 +253,7 @@ If the library exists on the host, consider mounting it into the container. Othe
 the container definition and rebuild the container.
 
 The job just exists with no errors.
------------------------------------
+...................................
 
 This is where turning debug on with ``debug: true`` is really going to come in handy.
 
@@ -278,7 +276,8 @@ the issue.
 
 
 D-Bus errors
-------------
+............
+
 Maybe you've seen something like below.  Mounting ``/var`` into the container will likely fix the issue.
 
 .. code-block:: shell
