@@ -22,6 +22,8 @@ Highlights in 1.7:
 - `Dashboard now alerts on malformed cluster configs`_
 - `Job composer now shows suggested scripts`_
 - `Add ability to disable SSH to compute node link in batch connect session card`_
+- `Reduced installation size by 30 percent`_
+- `New shared OnDemand gem sets`_
 
 Special thanks
 --------------
@@ -290,3 +292,39 @@ node that the job is running on. This is helpful for sites that don't allow regu
 compute nodes.
 
 To do so, simply set ``OOD_BC_SSH_TO_COMPUTE_NODE=0`` (or 'false' or 'off') in ``/etc/ood/config/apps/dashboard/env``.
+
+Reduced installation size by 30 percent
+.......................................
+
+We reduced the size of the main OnDemand RPM by nearly 40%.
+
+The 1.6 ondemand-1.6.22-1.el7.x86_64.rpm was 162M and in 1.7 this has been reduced by 63M to a total of 99M, split between two RPMs: ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm with 68M, and ondemand-1.7.10-2.el7.x86_64.rpm with 31M. This is in part due to switching to a monorepo at https://github.com/osc/ondemand and installing all the gems into a central shared location, installed using the new ondemand-gems RPM.
+
+The resulting sizes of the two main install directories, /opt/ood and /var/www/ood/apps/sys, were in total reduced by 181M:
+
+.. code-block:: sh
+
+   $ cat /opt/ood/VERSION
+   v1.6.22
+   $ sudo du -h -s  -x /var/www/ood/apps/sys /opt/ood
+   592M	/var/www/ood/apps/sys
+   17M	/opt/ood
+
+vs
+
+.. code-block:: sh
+
+   $ cat /opt/ood/VERSION
+   v1.7.10-2
+   $ sudo du -h -s  -x /var/www/ood/apps/sys /opt/ood
+   172M	/var/www/ood/apps/sys
+   256M	/opt/ood
+
+New shared OnDemand gem sets
+............................
+
+The new ondemand-gems RPMs allow other Passenger apps to be developed using the same gems that the core OnDemand apps use. If you do ``scl enable ondemand`` and then ``gem list`` you can see all the gems available.
+
+Because the ondemand-gems RPMs will include the version in the RPM name, it is possible to install multiple versions of these RPMs on the same system. For example, "ondemand-gems-1.7.10" is the name and "1.7.10-2.el7.x86_64.rpm" is the version of ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm. That way you can upgrade to newer versions of OnDemand but still have the ability to provide apps access to older gems by installing the older gem sets.
+
+Having multiple versions of ondemand-gems RPMs ensure that any custom apps relying on gems provided by OnDemand will not break as OnDemand is upgraded as previous installs of ondemand-gems will remain installed when OnDemand is upgraded.
