@@ -156,6 +156,20 @@ First update the PAM stack to include the following line:
 
    session     required      pam_exec.so type=open_session /etc/security/limits.sh
 
+This goes into a file used by the ``sshd`` PAM configs which on CentOS/RHEL default to ``/etc/pam.d/password-auth-ac`` and needs to be included in the proper position, after ``pam_systemd.so``. Also set ``pam_systemd.so`` to ``required``:
+
+.. code-block:: none
+   :emphasize-lines: 3,4
+   :linenos:
+
+   session     optional      pam_keyinit.so revoke
+   session     required      pam_limits.so
+   session     required      pam_systemd.so
+   session     required      pam_exec.so type=open_session /etc/security/limits.sh
+   session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+   session     required      pam_unix.so
+   session     optional      pam_sss.so
+
 The following example of ``/etc/security/limits.sh`` is used by OSC on interactive login nodes. Adjust ``MemoryLimit`` and ``CPUQuota`` to meet the needs of your site. See ``man systemd.resource-control``
 
 .. code-block:: bash
