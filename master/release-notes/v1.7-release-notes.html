@@ -160,6 +160,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#dashboard-now-alerts-on-malformed-cluster-configs">Dashboard now alerts on malformed cluster configs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#job-composer-now-shows-suggested-scripts">Job composer now shows suggested scripts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-ability-to-disable-ssh-to-compute-node-link-in-batch-connect-session-card">Add ability to disable SSH to compute node link in batch connect session card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reduced-installation-size-by-30-percent">Reduced installation size by 30 percent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-shared-ondemand-gem-sets">New shared OnDemand gem sets</a></li>
 </ul>
 </li>
 </ul>
@@ -268,6 +270,8 @@
 <li><a class="reference internal" href="#dashboard-now-alerts-on-malformed-cluster-configs">Dashboard now alerts on malformed cluster configs</a></li>
 <li><a class="reference internal" href="#job-composer-now-shows-suggested-scripts">Job composer now shows suggested scripts</a></li>
 <li><a class="reference internal" href="#add-ability-to-disable-ssh-to-compute-node-link-in-batch-connect-session-card">Add ability to disable SSH to compute node link in batch connect session card</a></li>
+<li><a class="reference internal" href="#reduced-installation-size-by-30-percent">Reduced installation size by 30 percent</a></li>
+<li><a class="reference internal" href="#new-shared-ondemand-gem-sets">New shared OnDemand gem sets</a></li>
 </ul>
 <div class="section" id="special-thanks">
 <h2>Special thanks<a class="headerlink" href="#special-thanks" title="Permalink to this headline">¶</a></h2>
@@ -404,7 +408,7 @@ sudo setsebool -P <span class="nv">httpd_read_user_content</span><span class="o"
 <h3>Added the Linux Host Adapter<a class="headerlink" href="#added-the-linux-host-adapter" title="Permalink to this headline">¶</a></h3>
 <p>Support for running jobs directly on Linux hosts has been added. This means interactive
 jobs can now run on a login node instead of through a batch scheduler.</p>
-<p>See the documentation for the <a class="reference internal" href="../installation/resource-manager/linuxhost.html#resource-manager-linuxhost"><span class="std std-ref">LinuxHost Adapter</span></a>. for more details.</p>
+<p>See the documentation for the <a class="reference internal" href="../installation/resource-manager/linuxhost.html#resource-manager-linuxhost"><span class="std std-ref">Configure LinuxHost Adapter (beta)</span></a>. for more details.</p>
 </div>
 <div class="section" id="show-account-balance-warnings">
 <h3>Show account balance warnings<a class="headerlink" href="#show-account-balance-warnings" title="Permalink to this headline">¶</a></h3>
@@ -510,6 +514,33 @@ defaults to 65 (meaning 65 kb).</p>
 node that the job is running on. This is helpful for sites that don’t allow regular users to shell into
 compute nodes.</p>
 <p>To do so, simply set <code class="docutils literal notranslate"><span class="pre">OOD_BC_SSH_TO_COMPUTE_NODE=0</span></code> (or ‘false’ or ‘off’) in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
+</div>
+<div class="section" id="reduced-installation-size-by-30-percent">
+<h3>Reduced installation size by 30 percent<a class="headerlink" href="#reduced-installation-size-by-30-percent" title="Permalink to this headline">¶</a></h3>
+<p>We reduced the size of the main OnDemand RPM by nearly 40%.</p>
+<p>The 1.6 ondemand-1.6.22-1.el7.x86_64.rpm was 162M and in 1.7 this has been reduced by 63M to a total of 99M, split between two RPMs: ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm with 68M, and ondemand-1.7.10-2.el7.x86_64.rpm with 31M. This is in part due to switching to a monorepo at <a class="reference external" href="https://github.com/osc/ondemand">https://github.com/osc/ondemand</a> and installing all the gems into a central shared location, installed using the new ondemand-gems RPM.</p>
+<p>The resulting sizes of the two main install directories, /opt/ood and /var/www/ood/apps/sys, were in total reduced by 181M:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ cat /opt/ood/VERSION
+v1.6.22
+$ sudo du -h -s  -x /var/www/ood/apps/sys /opt/ood
+592M /var/www/ood/apps/sys
+17M  /opt/ood
+</pre></div>
+</div>
+<p>vs</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ cat /opt/ood/VERSION
+v1.7.10-2
+$ sudo du -h -s  -x /var/www/ood/apps/sys /opt/ood
+172M /var/www/ood/apps/sys
+256M /opt/ood
+</pre></div>
+</div>
+</div>
+<div class="section" id="new-shared-ondemand-gem-sets">
+<h3>New shared OnDemand gem sets<a class="headerlink" href="#new-shared-ondemand-gem-sets" title="Permalink to this headline">¶</a></h3>
+<p>The new ondemand-gems RPMs allow other Passenger apps to be developed using the same gems that the core OnDemand apps use. If you do <code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">ondemand</span></code> and then <code class="docutils literal notranslate"><span class="pre">gem</span> <span class="pre">list</span></code> you can see all the gems available.</p>
+<p>Because the ondemand-gems RPMs will include the version in the RPM name, it is possible to install multiple versions of these RPMs on the same system. For example, “ondemand-gems-1.7.10” is the name and “1.7.10-2.el7.x86_64.rpm” is the version of ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm. That way you can upgrade to newer versions of OnDemand but still have the ability to provide apps access to older gems by installing the older gem sets.</p>
+<p>Having multiple versions of ondemand-gems RPMs ensure that any custom apps relying on gems provided by OnDemand will not break as OnDemand is upgraded as previous installs of ondemand-gems will remain installed when OnDemand is upgraded.</p>
 </div>
 </div>
 </div>
