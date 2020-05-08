@@ -7,10 +7,21 @@ This is reference documentation for all the configuration files and commands tha
 make up the Open OnDemand infrastructure.
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Components
+   :maxdepth: 1
+   :caption: Files
 
-   reference/ood-portal-generator
+   reference/files/ood-portal-yml
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Commands
+
+   reference/commands/ood-portal-generator
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Legacy
+
    reference/mod-ood-proxy
    reference/ood-auth-map
    reference/nginx-stage

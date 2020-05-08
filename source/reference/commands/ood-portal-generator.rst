@@ -1,7 +1,7 @@
-.. _ood-portal-generator-usage:
+.. _ood-portal-generator:
 
-Usage
-=====
+ood-portal-generator
+====================
 
 The :program:`ood-portal-generator` tool takes a user-defined YAML
 configuration file and generates an `Apache configuration`_ file from the

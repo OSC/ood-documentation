@@ -1,7 +1,7 @@
 .. _ood-portal-generator-configuration:
 
-Configuration
-=============
+ood-portal.yml
+==============
 
 Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by default
@@ -88,7 +88,14 @@ Configure General Options
           ssl: null
 
      Example
-       See :ref:`add-ssl-support`
+       
+       .. code-block:: yaml
+
+         ssl:
+            - SSLCertificateFile /etc/letsencrypt/live/change-me/cert.pem
+            - SSLCertificateKeyFile /etc/letsencrypt/live/change-me/privkey.pem
+            - SSLCertificateChainFile /etc/letsencrypt/live/change-me/chain.pem
+
 
 .. describe:: logroot (String)
 
@@ -288,8 +295,7 @@ Configure General Options
      various protected resources on the website
 
      Default
-       Use basic authentication with a plain-text password file (see
-       :ref:`default-authentication`)
+       Use basic authentication with a plain-text password file.
 
        .. code-block:: yaml
 
@@ -303,9 +309,9 @@ Configure General Options
      Example
        See:
 
-       - :ref:`add-ldap-authentication`
-       - :ref:`add-shibboleth-authentication`
-       - :ref:`add-cilogon-authentication`
+       - :ref:`add-ldap`
+       - :ref:`authentication-shibboleth`
+       - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
 
 .. describe:: root_uri (String)
 
@@ -339,7 +345,7 @@ Configure General Options
           analytics: null
 
      Example
-       See :ref:`add-google-analytics`
+       See :ref:`analytics`
 
 Configure Public Assets
 -----------------------
@@ -426,8 +432,8 @@ corresponding authentication mechanism. If either of these properties are
      Example
        See:
 
-       - :ref:`add-shibboleth-authentication`
-       - :ref:`add-cilogon-authentication`
+       - :ref:`authentication-shibboleth`
+       - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
 
 .. _ood-portal-generator-configuration-configure-reverse-proxy:
 
