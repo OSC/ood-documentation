@@ -272,7 +272,7 @@ Configure General Options
 
 .. describe:: pun_stage_cmd (String)
 
-     the system command used to launch the :ref:`nginx-stage` command with
+     the system command used to launch the :ref:`nginx stage <nginx-stage-usage>` command with
      :program:`sudo` privileges
 
      Default

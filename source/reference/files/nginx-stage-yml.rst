@@ -1,7 +1,7 @@
 .. _nginx-stage-configuration:
 
-Configuration
-=============
+nginx_stage.yml
+===============
 
 Many of the options in the per-user NGINX staging and configuration can be
 configured within :program:`nginx_stage`. In a default installation this

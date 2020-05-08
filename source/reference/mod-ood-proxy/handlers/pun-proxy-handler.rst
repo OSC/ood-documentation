@@ -45,7 +45,7 @@ configuration file with the following format:
 .. envvar:: OOD_PUN_STAGE_CMD
 
    Absolute path to the script that stages the PUN processes. See
-   :ref:`nginx-stage`.
+   :ref:`nginx-stage <nginx-stage-usage>`.
 
 .. envvar:: OOD_PUN_SOCKET_ROOT
 
