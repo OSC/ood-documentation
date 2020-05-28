@@ -3,77 +3,40 @@
 submit.yml.erb
 ==============
 
-This is the file that is submitted to a batch connect job. You can use either
-a ``basic`` template or a ``vnc`` template. VNC templates have more options to
-configure the VNC related items.
+This is the file that is submitted to a batch connect job. It is comprised
+of a ``script`` and a ``batch_connect`` attribute.  The ``batch_connect``
+attribute can either be a ``basic`` template if your app is already an
+http server or a ``vnc`` template if you need VNC capabilities.
 
-Basic template
+
+Simple Example
 ..............
 
   .. code-block:: yaml
-  
-    batch_connect:
-      template: "basic"
-      work_dir: nil
-      conn_file: "connection.yml"
-      conn_params:
-        - host
-        - port
-        - password
-      bash_helpers: "..."
-      min_port: 2000
-      max_port: 65535
-      password_size: 8
-      header: ""
-      footer: ""
-      script_wrapper: "%s"
-      set_host: "host=$(hostname)"
-      before_script: "..."
-      before_file: "before.sh"
-      run_script: "..."
-      script_file: "./script.sh"
-      timeout: ""
-      clean_script: "..."
-      clean_file: "clean.sh"
 
-VNC template
-............
+      # a simple script.yml.erb file
 
-All the options above apply along with the options described below.
+      script:
+        native:
+          - "-n"
+          - "1"
+      batch_connect:
+        template: "basic"
+        header: "#!/bin/bash"
 
-  .. code-block:: yaml
-  
-    batch_connect:
-      template: "vnc"
-      conn_params:
-        - host
-        - port
-        - password
-        - spassword
-        - display
-        - websocket
-      websockify_cmd: "/opt/websockify/run"
-      vnc_passwd: "vnc.passwd"
-      vnc_args: nil
-      name: ""
-      geometry: ""
-      dpi: ""
-      fonts: ""
-      idle: ""
-      extra_args: ""
-      vnc_clean: "..."
 
-Option Details
-..............
+Details on Submit Attributes
+............................
 
 .. toctree::
    :maxdepth: 1
 
-   submit-yml/basic-bc-yml-detailed
-   submit-yml/vnc-bc-yml-detailed
+   submit-yml/basic-bc-options
+   submit-yml/vnc-bc-options
+   submit-yml/script-options
 
-Global
-......
+Setting Batch Connect Options Globally
+......................................
 
 All of these configuration items can also be applied globally to the entire cluster
 in the cluster definition files under ``/etc/ood/config/clusters.d/``. If set globally,

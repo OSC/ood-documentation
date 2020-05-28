@@ -1,8 +1,34 @@
-.. _basic-bc-yml-detailed:
+.. _basic-bc-options:
 
 
-Details on Basic Batch Connect Options
-======================================
+Basic Batch Connect Options
+===========================
+
+  .. code-block:: yaml
+  
+    batch_connect:
+      template: "basic"
+      work_dir: nil
+      conn_file: "connection.yml"
+      conn_params:
+        - host
+        - port
+        - password
+      bash_helpers: "..."
+      min_port: 2000
+      max_port: 65535
+      password_size: 8
+      header: ""
+      footer: ""
+      script_wrapper: "%s"
+      set_host: "host=$(hostname)"
+      before_script: "..."
+      before_file: "before.sh"
+      run_script: "..."
+      script_file: "./script.sh"
+      timeout: ""
+      clean_script: "..."
+      clean_file: "clean.sh"
 
 .. describe:: min_port (Integer, 2000)
 
