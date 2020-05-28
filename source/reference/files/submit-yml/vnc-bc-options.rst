@@ -1,8 +1,34 @@
-.. _vnc-bc-yml-detailed:
+.. _vnc-bc-options:
 
 
-Details on VNC Batch Connect Options
-====================================
+VNC Batch Connect Options
+=========================
+
+
+All the options in :ref:`basic-bc-options` apply in addition to what's listed below.
+
+  .. code-block:: yaml
+  
+    batch_connect:
+      template: "vnc"
+      conn_params:
+        - host
+        - port
+        - password
+        - spassword
+        - display
+        - websocket
+      websockify_cmd: "/opt/websockify/run"
+      vnc_passwd: "vnc.passwd"
+      vnc_args: nil
+      name: ""
+      geometry: ""
+      dpi: ""
+      fonts: ""
+      idle: ""
+      extra_args: ""
+      vnc_clean: "..."
+
 
 .. describe:: websockfiy_cmd (String, "/opt/websockify/run")
 
