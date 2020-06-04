@@ -176,7 +176,7 @@ Configure General Options
      the root directory where the Lua handler code resides
 
      Default
-       Point to the install location of :ref:`mod-ood-proxy`
+       Point to the install location of the ood_mod_proxy lua library
 
        .. code-block:: yaml
 
@@ -214,8 +214,8 @@ Configure General Options
      name
 
      Default
-       Use :ref:`ood-auth-map` and echo back the authenticated user name as
-       the system user name
+       Use the regex :ref:`user mapping script <authentication-overview-map-user>`
+       and echo back the authenticated user name as the system user name
 
        .. code-block:: yaml
 

@@ -381,7 +381,7 @@ Configuration Options
 
    .. danger::
 
-      Currently :ref:`mod-ood-proxy` will only look for socket files following the
+      Currently the proxy will only look for socket files following the
       format::
 
         $OOD_PUN_SOCKET_ROOT/<user>/passenger.sock
