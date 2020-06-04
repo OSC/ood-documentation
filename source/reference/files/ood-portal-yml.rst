@@ -1,17 +1,14 @@
 .. _ood-portal-generator-configuration:
 
-ood-portal.yml
+ood_portal.yml
 ==============
 
 Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by default
 under the file :file:`/etc/ood/config/ood_portal.yml`.
 
-This project includes a good starting configuration file that you can use:
-
-.. code-block:: sh
-
-   sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
+The RPMs copy this file from ``/opt/ood/ood-portal-generator/ood_portal_example.yml``
+during the installation.
 
 All the default options are listed in this configuration file. Feel free to
 read it through before continuing on.
