@@ -96,7 +96,9 @@ Options
 
    .. warning::
       The systemd file for Apache will run the update_ood_portal script with defaults
-      and will not use a different file, rendering this option obsolete.
+      and will not use a different file, rendering this option obsolete unless you also
+      modify systemd config (``/etc/systemd/system/httpd24-httpd.service.d/ood.conf`` in
+      CentOS 7, ``/etc/systemd/system/httpd.service.d/ood.conf`` in CentOS 8).
 
 .. option:: -t <template>, --template <template>
 
@@ -114,6 +116,8 @@ Options
       
    .. warning::
       The systemd file for Apache will run the update_ood_portal script with defaults
-      and will not use a different file, rendering this option obsolete.
+      and will not use a different file, rendering this option obsolete unless you also
+      modify systemd config (``/etc/systemd/system/httpd24-httpd.service.d/ood.conf`` in
+      CentOS 7, ``/etc/systemd/system/httpd.service.d/ood.conf`` in CentOS 8).
 
 .. _apache configuration: https://httpd.apache.org/docs/2.4/configuring.html
