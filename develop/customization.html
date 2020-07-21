@@ -120,7 +120,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add Shortcuts to Files Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#whitelist-directories">Whitelist Directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-ssh-host-allowlist">Set SSH Host Allowlist</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shell-app-ssh-command-wrapper">Shell App SSH Command Wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fix-unauthorized-websocket-connection-in-shell-app">Fix Unauthorized WebSocket Connection in Shell App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a><ul>
@@ -524,13 +523,8 @@ app.</p>
 </div>
 <div class="section" id="set-default-ssh-host">
 <h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
-<p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">OOD_DEFAULT_SSHHOST</span></code> to change the default ssh host. Otherwise it will default to the first cluster yaml file with <code class="docutils literal notranslate"><span class="pre">default:</span> <span class="pre">true</span></code> under login. Else it will default to the first cluster yaml file that does not have <code class="docutils literal notranslate"><span class="pre">hidden:</span> <span class="pre">true</span></code></p>
-<p>This will control what host the shell app ssh’s to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/</span></code> to <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
-</div>
-<div class="section" id="set-ssh-host-allowlist">
-<h2>Set SSH Host Allowlist<a class="headerlink" href="#set-ssh-host-allowlist" title="Permalink to this headline">¶</a></h2>
-<p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">OOD_SSHHOST_ALLOWLIST</span></code> to specify what hosts can be accessed via ssh through the shell app. The format is <code class="docutils literal notranslate"><span class="pre">login1.node.edu:login2.node.edu:*.node.edu</span></code> and it supports wildcards. The login hosts specified in the cluster configs and the default ssh host will automatically be added to the allowlist.</p>
-<p>This will prevent the user from ssh to a host that is not specified in the allowlist.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST</span></code> to change the default ssh host. Otherwise it will default to “localhost” i.e. add the line <code class="docutils literal notranslate"><span class="pre">DEFAULT_SSHHOST=&quot;localhost&quot;</span></code>.</p>
+<p>This will control what host the shell app ssh’s to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
 </div>
 <div class="section" id="shell-app-ssh-command-wrapper">
 <h2>Shell App SSH Command Wrapper<a class="headerlink" href="#shell-app-ssh-command-wrapper" title="Permalink to this headline">¶</a></h2>
