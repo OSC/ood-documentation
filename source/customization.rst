@@ -443,6 +443,13 @@ Below are different configuration options and the resulting navbar if you had in
      - no app menus appear!
      - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
 
+Add Turbolinks to Dashboard
+---------------------------
+
+Turbolinks can improve the speed when changing between pages in the dashboard by asynchronously loading css, javscript, and images from links. 
+
+Turbo links can be enabled in ``/etc/ood/config/apps/dashboard/env`` by defining ``OOD_TURBOLINKS_ENABLED=true``
+
 .. _customization_localization:
 
 Customize Text in OnDemand
