@@ -4,6 +4,14 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Documentation License](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0)
 
+- Website: http://openondemand.org/
+- Documentation: https://osc.github.io/ood-documentation/master/
+- Main code repo: https://github.com/OSC/ondemand
+- Core library repo: https://github.com/OSC/ood_core
+- Original repo with JOSS publication: https://github.com/OSC/Open-OnDemand
+
+## Usage
+
 Go to https://osc.github.io/ood-documentation/master/ to see the latest published release version.
 
 Or select your version:
@@ -19,6 +27,8 @@ Or select your version:
 - [1.0](https://osc.github.io/ood-documentation/release-1.0/)
 
 ## Development
+
+Open pull requests to the develop branch, which is the main branch of this repo. This repo uses the [gitflow branching model](https://nvie.com/posts/a-successful-git-branching-model/).
 
 There are two ways to build the documentation.
 
