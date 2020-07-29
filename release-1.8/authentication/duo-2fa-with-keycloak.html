@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Two Factor Auth using Duo with Keycloak &mdash; Open OnDemand 1.7.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Add Cluster Configuration Files" href="../installation/add-cluster-config.html" />
+    <link rel="prev" title="5. Configure Keycloak with CILogon" href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Add Shibboleth Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cas.html">Add CAS Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Two Factor Auth using Duo with Keycloak</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-keycloak-duo-spi">Install Keycloak Duo SPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-duo-spi">Configure Duo SPI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../authentication.html">Authentication</a> &raquo;</li>
+        
+      <li>Two Factor Auth using Duo with Keycloak</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.8/source/authentication/duo-2fa-with-keycloak.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="two-factor-auth-using-duo-with-keycloak">
+<span id="authentication-duo-2fa-with-keycloak"></span><h1>Two Factor Auth using Duo with Keycloak<a class="headerlink" href="#two-factor-auth-using-duo-with-keycloak" title="Permalink to this headline">¶</a></h1>
+<p>These are the steps to setup two factor authentication with Duo using Keycloak.</p>
+<div class="section" id="install-keycloak-duo-spi">
+<h2>Install Keycloak Duo SPI<a class="headerlink" href="#install-keycloak-duo-spi" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Clone the Keycloak Duo SPI repo</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span>
+<span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span> <span class="o">--</span><span class="n">init</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Edit <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> and ensure <code class="docutils literal notranslate"><span class="pre">keycloak.version</span></code> matches the version of Keycloak you are running.</p>
+</li>
+<li><p class="first">Build (with Docker) - produces <code class="docutils literal notranslate"><span class="pre">target/keycloak-duo-spi-jar-with-dependencies.jar</span></code></p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>docker run --rm -it -v $(pwd):/keycloak-duo-spi -w /keycloak-duo-spi \
+  ohiosupercomputer/keycloak_duo_spi_buildbox:latest mvn clean test package
+</pre></div>
+</div>
+</li>
+<li><p class="first">Build (without Docker) - produces <code class="docutils literal notranslate"><span class="pre">target/keycloak-duo-spi-jar-with-dependencies.jar</span></code></p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">maven</span>
+<span class="n">cd</span> <span class="n">build</span><span class="o">/</span><span class="n">duo_java</span><span class="o">/</span><span class="n">DuoWeb</span>
+<span class="n">mvn</span> <span class="n">clean</span> <span class="n">test</span> <span class="n">install</span>
+<span class="n">cd</span> <span class="o">../../..</span>
+<span class="n">mvn</span> <span class="n">clean</span> <span class="n">test</span> <span class="n">package</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the JAR file to Keycloak and instruct Keycloak to install the SPI</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">install</span> <span class="o">-</span><span class="n">o</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">g</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0644</span> <span class="n">target</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span> \
+  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">standalone</span><span class="o">/</span><span class="n">deployments</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span>
+<span class="n">sudo</span> <span class="n">install</span> <span class="o">-</span><span class="n">o</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">g</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0644</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> \
+  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">standalone</span><span class="o">/</span><span class="n">deployments</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span><span class="o">.</span><span class="n">dodeploy</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-duo-spi">
+<h2>Configure Duo SPI<a class="headerlink" href="#configure-duo-spi" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Log into your Keycloak instance</li>
+<li>Choose the realm to configure in upper left corner, eg <code class="docutils literal notranslate"><span class="pre">ondemand</span></code></li>
+<li>Choose <code class="docutils literal notranslate"><span class="pre">Realm</span> <span class="pre">Settings</span></code> in the left menu then <code class="docutils literal notranslate"><span class="pre">Security</span> <span class="pre">Defenses</span></code> tab</li>
+<li>Add <code class="docutils literal notranslate"><span class="pre">frame-src</span> <span class="pre">https://*.duosecurity.com/</span> <span class="pre">'self';</span></code> to the beginning of the value for <code class="docutils literal notranslate"><span class="pre">Content-Security-Policy</span></code></li>
+<li>Choose <code class="docutils literal notranslate"><span class="pre">Authentication</span></code> in the left menu</li>
+<li>While on <code class="docutils literal notranslate"><span class="pre">Flows</span></code> tab ensure the dropdown for the flow name is <code class="docutils literal notranslate"><span class="pre">Browser</span></code> and click <code class="docutils literal notranslate"><span class="pre">Copy</span></code></li>
+<li>Name the new flow <code class="docutils literal notranslate"><span class="pre">browser-with-duo</span></code></li>
+<li>For all items below <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">Password</span> <span class="pre">Form</span></code> delete them by choosing <code class="docutils literal notranslate"><span class="pre">Actions</span></code> then <code class="docutils literal notranslate"><span class="pre">Delete</span></code></li>
+<li>Choose <code class="docutils literal notranslate"><span class="pre">Actions</span></code> for <code class="docutils literal notranslate"><span class="pre">Browser-with-duo</span> <span class="pre">Forms</span></code> and choose <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Execution</span></code></li>
+<li>Select the <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code> provider and click <code class="docutils literal notranslate"><span class="pre">Save</span></code></li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Actions</span></code> for <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code> and select <code class="docutils literal notranslate"><span class="pre">Config</span></code>. Fill in all values as appropriate and select <code class="docutils literal notranslate"><span class="pre">Save</span></code>.</li>
+<li>Select <code class="docutils literal notranslate"><span class="pre">Required</span></code> for <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code></li>
+<li>Choose the <code class="docutils literal notranslate"><span class="pre">Bindings</span></code> tab and set <code class="docutils literal notranslate"><span class="pre">Browser</span> <span class="pre">Flow</span></code> to <code class="docutils literal notranslate"><span class="pre">browser-with-duo</span></code> and choose <code class="docutils literal notranslate"><span class="pre">Save</span></code></li>
+</ol>
+<p>Users logging into Keycloak will be required to verify their identity using Duo.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../installation/add-cluster-config.html" class="btn btn-neutral float-right" title="Add Cluster Configuration Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial-oidc-keycloak-rhel7/configure-cilogon.html" class="btn btn-neutral float-left" title="5. Configure Keycloak with CILogon" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/duo-2fa-with-keycloak.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/duo-2fa-with-keycloak.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/duo-2fa-with-keycloak.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/duo-2fa-with-keycloak.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/duo-2fa-with-keycloak.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/duo-2fa-with-keycloak.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/duo-2fa-with-keycloak.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/duo-2fa-with-keycloak.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/duo-2fa-with-keycloak.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
