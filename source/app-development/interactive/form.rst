@@ -90,12 +90,21 @@ part of the app developer can look like:
 
    # ${HOME}/ondemand/dev/my_app/form.yml
    ---
-   cluster: "owens"
+   cluster: 
+     - "owens"
+     - "pitzer"
    form:
      - bc_queue
      - bc_account
 
 The most commonly used predefined attributes are given as:
+
+cluster
+  This adds a ``select`` to the HTML form that will allow the user to select 
+  what cluster they want to submit the job.
+
+  If there is only one cluster set in ``form.yml``, the select box will not
+  be added and the job will be sent to the specified cluster.
 
 bc_account
   This adds a ``text_field`` to the HTML form that will be used as the charged
