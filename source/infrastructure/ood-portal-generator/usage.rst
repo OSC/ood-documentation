@@ -24,6 +24,7 @@ At any point you can display a quick reference of the capabilities offered by
    #    -c, --config CONFIG              YAML config file used to render template
    #    -t, --template TEMPLATE          ERB template that is rendered
    #    -o, --output OUTPUT              File that rendered template is output to
+   #    -d, --dex OUTPUT                 File that rendered Dex config is output to
    #    -v, --version                    Print current version
    #    -h, --help                       Show this help message
    #
@@ -64,6 +65,20 @@ Options
      .. code-block:: sh
 
         bin/generate -o my_portal.conf
+
+.. option:: -d <output>, --dex <output>
+
+   the Dex configuration file that is rendered
+
+   Default
+     piped to standard error
+
+   Example
+     Output Dex configuration file to local file
+
+     .. code-block:: sh
+
+        bin/generate -d dex.yaml
 
 .. option:: -t <template>, --template <template>
 

@@ -850,3 +850,59 @@ To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applicat
   # /etc/ood/config/nginx_stage.yml
   pun_custom_env:
     - OOD_JOB_NAME_ILLEGAL_CHARS: "/"
+
+.. _customize_dex_theme:
+
+Customize Dex Theme
+-------------------
+
+It's possible to use a customized theme when authenticating with Dex when using OnDemand's default authentication.
+Refer to the upstream `Dex template docs`_ for additional information on templating Dex.
+
+The simplest approach is to copy the OnDemand theme and make changes.  This is idea if you wish to make the following changes:
+
+- Change navigation or login page logos
+- Change favicon
+- Change CSS styles
+
+.. code-block:: sh
+
+   cp -r /usr/share/ondemand-dex/web/themes/ondemand /usr/share/ondemand-dex/web/themes/mycenter
+
+To update the theme you must modify ``/etc/ood/config/ood_portal.yml`` and regenerate the Dex configuration:
+
+.. code-block:: yaml
+   :emphasize-lines: 3-
+
+   dex:
+   # ...
+     frontend:
+       theme: mycenter
+
+The default ``ondemand`` theme can also be configured using the following configuration keys within ``/etc/ood/config/ood_portal.yml``:
+
+.. code-block:: yaml
+   :emphasize-lines: 4-
+
+   dex:
+   # ...
+     frontend:
+       issuer: "MyCenter OnDemand"
+       extra:
+         navLogo: "/path/to/custom/nav-logo.png"
+         loginLogo: "/path/to/custom/logo.png"
+         loginTitle: "Log in with your Center username and password"
+         loginButtonText: "Log in with your Center account"
+         usernamePlaceholder: "center-username"
+         passwordPlaceholder: "center-password"
+         loginAlertMessage: "Login services will be down during center maintenance between 8:00 AM EST and 10:00 AM EST"
+         loginAlertType: "warning"
+
+Changes are applied by running ``update_ood_portal`` and restarting the ``ondemand-dex`` service.
+
+.. code-block:: sh
+
+   sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+   sudo systemctl restart ondemand-dex.service
+
+.. _dex template docs: https://github.com/dexidp/dex/blob/master/Documentation/templates.md

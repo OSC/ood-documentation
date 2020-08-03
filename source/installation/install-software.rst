@@ -47,7 +47,18 @@ software requirements:
 
       sudo yum install ondemand
 
-#. Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
+#. (Optional) Install :ref:`dex-authentication` package
+
+   .. note::
+
+      If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
+      See :ref:`add-ldap` for details on configuration of LDAP.
+
+   .. code-block:: sh
+
+      sudo yum install ondemand-dex
+
+#. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
 
    .. code-block:: sh
 

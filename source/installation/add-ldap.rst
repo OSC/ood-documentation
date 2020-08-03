@@ -7,45 +7,13 @@ Add LDAP Support
 
 .. warning::
 
-   This page explains how to add LDAP support to basic auth in Open OnDemand.
-   Basic auth should only be used for evaluation purposes. For a more robust
-   authentication solution, see :ref:`authentication`.
+   This page explains how to add LDAP support to Dex in Open OnDemand.
+   For a more robust authentication solution, see :ref:`authentication`.
 
-LDAP support allows for your users to log in using their local username and
-password. It also removes the need for the system administrator to keep
-updating the ``.htpasswd`` file.
 
-Requirements:
+#. Add LDAP configurations to to Dex, refer to :ref:`Configuring OnDemand Dex for LDAP <dex-ldap>`.
 
-- an LDAP server preferably with SSL support (``openldap.my_center.edu:636``)
-
-#. Edit the Open OnDemand Portal :ref:`ood-portal-generator-configuration` file
-   :file:`/etc/ood/config/ood_portal.yml` as such:
-
-   .. code-block:: yaml
-      :emphasize-lines: 6-
-
-      # /etc/ood/config/ood_portal.yml
-      ---
-
-      # ...
-
-      auth:
-        - 'AuthType Basic'
-        - 'AuthName "private"'
-        - 'AuthBasicProvider ldap'
-        - 'AuthLDAPURL "ldaps://openldap.my_center.edu:636/ou=People,ou=hpc,o=my_center?uid"'
-        - 'AuthLDAPGroupAttribute memberUid'
-        - 'AuthLDAPGroupAttributeIsDN off'
-        - 'RequestHeader unset Authorization'
-        - 'Require valid-user'
-
-   .. note::
-
-      For documentation on LDAP directives please see:
-      https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html
-
-#. Build/install the updated Apache configuration file:
+#. Build/install the updated Apache configuration file as well as updated Dex configuration:
 
    .. code-block:: sh
 
@@ -53,11 +21,13 @@ Requirements:
 
 #. Restart the Apache server to have the changes take effect:
 
-   CentOS/RHEL 7:
-     .. code-block:: sh
+   .. code-block:: sh
 
-        sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+      sudo systemctl restart httpd24-httpd.service httpd24-htcacheclean.service
+      sudo systemctl restart ondemand-dex.service
 
-Close your browser so that you are properly logged out. Then open your browser
-again and access the portal. You should now be able to authenticate with your
-local username and password.
+Open your browser and access the portal. You should now be able to authenticate with your
+LDAP username and password.
+
+The theme for Dex can be customized to be site-specific, see :ref:`customize_dex_theme`.
+
