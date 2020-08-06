@@ -10,12 +10,6 @@ this.
 
 #. Start the Apache HTTP Server:
 
-   CentOS/RHEL 6
-     .. code-block:: sh
-
-        sudo service httpd24-httpd start
-        # Starting httpd:                                            [  OK  ]
-
    CentOS/RHEL 7
      .. code-block:: sh
 

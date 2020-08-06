@@ -25,3 +25,4 @@ OpenID Connect with KeyCloak).
    authentication/cas
    authentication/tutorial-oidc-keycloak-rhel7
    authentication/duo-2fa-with-keycloak
+   authentication/adfs-with-auth-mellon

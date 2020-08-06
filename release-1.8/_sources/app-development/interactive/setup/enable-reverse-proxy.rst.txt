@@ -134,14 +134,6 @@ Steps to Enable in Apache
 
 #. Restart the Apache server to have the changes take effect:
 
-   CentOS/RHEL 6:
-     .. code-block:: sh
-
-        sudo service httpd24-httpd condrestart
-        # Stopping httpd:                                            [  OK  ]
-        # Starting httpd:                                            [  OK  ]
-        sudo service httpd24-htcacheclean condrestart
-
    CentOS/RHEL 7:
      .. code-block:: sh
 
