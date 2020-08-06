@@ -9,6 +9,7 @@ OnDemand Apache configuration file with different features.
 .. toctree::
    :maxdepth: 2
 
+   examples/add-oidc-authentication
    examples/add-google-analytics
    examples/add-ssl-support
    examples/default-authentication
