@@ -90,9 +90,7 @@ part of the app developer can look like:
 
    # ${HOME}/ondemand/dev/my_app/form.yml
    ---
-   cluster: 
-     - "owens"
-     - "pitzer"
+   cluster: "owens"
    form:
      - bc_queue
      - bc_account
@@ -100,11 +98,18 @@ part of the app developer can look like:
 The most commonly used predefined attributes are given as:
 
 cluster
-  This adds a ``select`` to the HTML form that will allow the user to select 
-  what cluster they want to submit the job.
+  This specifies the cluster the job will be submitted to and is an optional field as the cluster can now be specified in the submit.yml.
 
-  If there is only one cluster set in ``form.yml``, the select box will not
-  be added and the job will be sent to the specified cluster.
+  This field can also be a list of items as shown below. A dropdown will appear of those options. Glob style matches are also supported - 
+  if there were two clusters named "cluster1" and "cluster2", an input of  "" or "cluster" would include both clusters in the dropdown.
+
+.. code-block:: yaml
+
+  ---
+  cluster:
+    - "owens"
+    - "pitzer"
+  form: 
 
 bc_account
   This adds a ``text_field`` to the HTML form that will be used as the charged
