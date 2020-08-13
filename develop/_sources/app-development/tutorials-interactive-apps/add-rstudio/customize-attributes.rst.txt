@@ -3,7 +3,7 @@
 Customize Attributes
 ====================
 
-Now we will customize the app to work on a given cluster. Be sure that you walk through :ref:`app-development-tutorials-interactive-apps-add-jupyter-software-requirements` for the given cluster ahead of time.
+Now we will customize the app to work on a given cluster. Be sure that you walk through :ref:`app-development-tutorials-interactive-apps-add-rstudio-software-requirements` for the given cluster ahead of time.
 
 The main responsibility of the ``form.yml`` file (:ref:`app-development-interactive-form`) located in the root of the app is for defining the attributes (their values or HTML form elements) used when generating the batch script.
 
