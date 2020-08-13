@@ -740,3 +740,190 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           register_root: "/var/www/ood/register"
+
+.. describe:: oidc_provider_metadata_url (String, null)
+
+     Refer to OIDCProviderMetadataURL in `auth_openidc.conf`_.
+
+     Default
+       This is disabled by default, and no OIDC configurations will be added.
+
+       .. code-block:: yaml
+
+          oidc_provider_metadata_url: null
+
+     Example
+       Set OIDCProviderMetadataURL
+
+       .. code-block:: yaml
+
+          oidc_provider_metadata_url: "https://example.com:5554/.well-known/openid-configuration"
+
+.. describe:: oidc_client_id (String, null)
+
+     Refer to OIDCClientID in `auth_openidc.conf`_.
+
+     Default
+       This is disabled by default, and no OIDC configurations will be added.
+
+       .. code-block:: yaml
+
+          oidc_client_id: null
+
+     Example
+       Set OIDCClientID
+
+       .. code-block:: yaml
+
+          oidc_client_id: "ondemand.example.com"
+
+.. describe:: oidc_client_secret (String, null)
+
+     Refer to OIDCClientSecret in `auth_openidc.conf`_.
+
+     Default
+       This is disabled by default.
+
+       .. code-block:: yaml
+
+          oidc_client_secret: null
+
+     Example
+       Set OIDCClientSecret
+
+       .. code-block:: yaml
+
+          oidc_client_secret: "ondemand.example.com"
+
+.. describe:: oidc_remote_user_claim (String)
+
+     Refer to OIDCRemoteUserClaim in `auth_openidc.conf`_.
+
+     Default
+       The default value is ``email`` if no Dex connectors are defined.
+       If connectors are defined the default is ``preferred_username``
+
+       .. code-block:: yaml
+
+          oidc_remote_user_claim: "email"
+
+     Example
+       Set OIDCRemoteUserClaim
+
+       .. code-block:: yaml
+
+          oidc_remote_user_claim: "preferred_username"
+
+.. describe:: oidc_scope (String)
+
+     Refer to OIDCScope in `auth_openidc.conf`_.
+
+     Default
+       The default value is ``openid profile email``.
+
+       .. code-block:: yaml
+
+          oidc_scope: "openid profile email"
+
+     Example
+       Set OIDCScope
+
+       .. code-block:: yaml
+
+          oidc_scope: "openid profile email groups"
+
+.. describe:: oidc_session_inactivity_timeout (Integer)
+
+     Refer to OIDCSessionInactivityTimeout in `auth_openidc.conf`_.
+
+     Default
+       The default value is ``28800``.
+
+       .. code-block:: yaml
+
+          oidc_session_inactivity_timeout: 28800
+
+     Example
+       Set OIDCSessionInactivityTimeout
+
+       .. code-block:: yaml
+
+          oidc_session_inactivity_timeout: 57600
+
+.. describe:: oidc_session_max_duration (Integer)
+
+     Refer to OIDCSessionMaxDuration in `auth_openidc.conf`_.
+
+     Default
+       The default value is ``28800``.
+
+       .. code-block:: yaml
+
+          oidc_session_max_duration: 28800
+
+     Example
+       Set OIDCSessionMaxDuration
+
+       .. code-block:: yaml
+
+          oidc_session_max_duration: 57600
+
+.. describe:: oidc_state_max_number_of_cookies (String)
+
+     Refer to OIDCStateMaxNumberOfCookies in `auth_openidc.conf`_.
+
+     Default
+       The default value is ``10 true``.
+
+       .. code-block:: yaml
+
+          oidc_state_max_number_of_cookies: "10 true"
+
+     Example
+       Set OIDCStateMaxNumberOfCookies
+
+       .. code-block:: yaml
+
+          oidc_state_max_number_of_cookies: "20 true"
+
+.. describe:: oidc_settings (Hash, {})
+
+     A Hash to supply additional OIDC settings.
+
+     Default
+       The default value is an empty Hash.
+
+       .. code-block:: yaml
+
+          oidc_settings: {}
+
+     Example
+       Set OIDCStateMaxNumberOfCookies
+
+       .. code-block:: yaml
+
+          oidc_settings:
+            OIDCPassIDTokenAs: serialized
+            OIDCPassRefreshToken: On
+
+.. describe:: dex (Hash, null, false)
+
+     The Hash to define Dex configurations.
+     A value of ``false`` or ``null`` will disable Dex configuration generation.
+     Refer to :ref:`OnDemand Dex configuration reference <dex-configuration>` for details.
+
+     Default
+       The default value is an empty Hash.
+
+       .. code-block:: yaml
+
+          dex: {}
+
+     Example
+       Disable Dex configuration management
+
+       .. code-block:: yaml
+
+          dex: false
+
+.. _auth_openidc.conf: https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf

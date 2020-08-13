@@ -137,6 +137,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -1021,6 +1022,211 @@ the registration page</p>
 <dt>Example</dt>
 <dd><p class="first">Enable it to the recommended path</p>
 <div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/register&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_provider_metadata_url (String, null)</code></dt>
+<dd><p>Refer to OIDCProviderMetadataURL in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default, and no OIDC configurations will be added.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_provider_metadata_url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCProviderMetadataURL</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_provider_metadata_url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://example.com:5554/.well-known/openid-configuration&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_client_id (String, null)</code></dt>
+<dd><p>Refer to OIDCClientID in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default, and no OIDC configurations will be added.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCClientID</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand.example.com&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_client_secret (String, null)</code></dt>
+<dd><p>Refer to OIDCClientSecret in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_secret</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCClientSecret</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_secret</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand.example.com&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_remote_user_claim (String)</code></dt>
+<dd><p>Refer to OIDCRemoteUserClaim in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">email</span></code> if no Dex connectors are defined.
+If connectors are defined the default is <code class="docutils literal notranslate"><span class="pre">preferred_username</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_remote_user_claim</span><span class="p p-Indicator">:</span> <span class="s">&quot;email&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCRemoteUserClaim</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_remote_user_claim</span><span class="p p-Indicator">:</span> <span class="s">&quot;preferred_username&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_scope (String)</code></dt>
+<dd><p>Refer to OIDCScope in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">openid</span> <span class="pre">profile</span> <span class="pre">email</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_scope</span><span class="p p-Indicator">:</span> <span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCScope</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_scope</span><span class="p p-Indicator">:</span> <span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">groups&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_session_inactivity_timeout (Integer)</code></dt>
+<dd><p>Refer to OIDCSessionInactivityTimeout in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">28800</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_inactivity_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCSessionInactivityTimeout</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_inactivity_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">57600</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_session_max_duration (Integer)</code></dt>
+<dd><p>Refer to OIDCSessionMaxDuration in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">28800</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_max_duration</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCSessionMaxDuration</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_max_duration</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">57600</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_state_max_number_of_cookies (String)</code></dt>
+<dd><p>Refer to OIDCStateMaxNumberOfCookies in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">true</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_state_max_number_of_cookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCStateMaxNumberOfCookies</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_state_max_number_of_cookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;20</span><span class="nv"> </span><span class="s">true&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_settings (Hash, {})</code></dt>
+<dd><p>A Hash to supply additional OIDC settings.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is an empty Hash.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_settings</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{}</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCStateMaxNumberOfCookies</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_settings</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassIDTokenAs</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">serialized</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassRefreshToken</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">dex (Hash, null, false)</code></dt>
+<dd><p>The Hash to define Dex configurations.
+A value of <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code> will disable Dex configuration generation.
+Refer to <a class="reference internal" href="../../authentication/dex.html#dex-configuration"><span class="std std-ref">OnDemand Dex configuration reference</span></a> for details.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is an empty Hash.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{}</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Disable Dex configuration management</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 </dd>
