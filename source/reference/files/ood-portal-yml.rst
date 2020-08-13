@@ -1,17 +1,14 @@
 .. _ood-portal-generator-configuration:
 
-Configuration
-=============
+ood_portal.yml
+==============
 
 Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by default
 under the file :file:`/etc/ood/config/ood_portal.yml`.
 
-This project includes a good starting configuration file that you can use:
-
-.. code-block:: sh
-
-   sudo cp share/ood_portal_example.yml /etc/ood/config/ood_portal.yml
+The RPMs copy this file from ``/opt/ood/ood-portal-generator/ood_portal_example.yml``
+during the installation.
 
 All the default options are listed in this configuration file. Feel free to
 read it through before continuing on.
@@ -88,7 +85,14 @@ Configure General Options
           ssl: null
 
      Example
-       See :ref:`add-ssl-support`
+       
+       .. code-block:: yaml
+
+         ssl:
+            - SSLCertificateFile /etc/letsencrypt/live/change-me/cert.pem
+            - SSLCertificateKeyFile /etc/letsencrypt/live/change-me/privkey.pem
+            - SSLCertificateChainFile /etc/letsencrypt/live/change-me/chain.pem
+
 
 .. describe:: logroot (String)
 
@@ -172,7 +176,7 @@ Configure General Options
      the root directory where the Lua handler code resides
 
      Default
-       Point to the install location of :ref:`mod-ood-proxy`
+       Point to the install location of the ood_mod_proxy lua library
 
        .. code-block:: yaml
 
@@ -210,8 +214,8 @@ Configure General Options
      name
 
      Default
-       Use :ref:`ood-auth-map` and echo back the authenticated user name as
-       the system user name
+       Use the regex :ref:`user mapping script <authentication-overview-map-user>`
+       and echo back the authenticated user name as the system user name
 
        .. code-block:: yaml
 
@@ -265,7 +269,7 @@ Configure General Options
 
 .. describe:: pun_stage_cmd (String)
 
-     the system command used to launch the :ref:`nginx-stage` command with
+     the system command used to launch the :ref:`nginx stage <nginx-stage-usage>` command with
      :program:`sudo` privileges
 
      Default
@@ -288,8 +292,7 @@ Configure General Options
      various protected resources on the website
 
      Default
-       Use basic authentication with a plain-text password file (see
-       :ref:`default-authentication`)
+       Use basic authentication with a plain-text password file.
 
        .. code-block:: yaml
 
@@ -303,9 +306,9 @@ Configure General Options
      Example
        See:
 
-       - :ref:`add-ldap-authentication`
-       - :ref:`add-shibboleth-authentication`
-       - :ref:`add-cilogon-authentication`
+       - :ref:`add-ldap`
+       - :ref:`authentication-shibboleth`
+       - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
 
 .. describe:: root_uri (String)
 
@@ -339,7 +342,7 @@ Configure General Options
           analytics: null
 
      Example
-       See :ref:`add-google-analytics`
+       See :ref:`analytics`
 
 Configure Public Assets
 -----------------------
@@ -426,8 +429,8 @@ corresponding authentication mechanism. If either of these properties are
      Example
        See:
 
-       - :ref:`add-shibboleth-authentication`
-       - :ref:`add-cilogon-authentication`
+       - :ref:`authentication-shibboleth`
+       - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
 
 .. _ood-portal-generator-configuration-configure-reverse-proxy:
 

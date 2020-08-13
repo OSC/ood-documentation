@@ -1,7 +1,7 @@
 .. _nginx-stage-configuration:
 
-Configuration
-=============
+nginx_stage.yml
+===============
 
 Many of the options in the per-user NGINX staging and configuration can be
 configured within :program:`nginx_stage`. In a default installation this
@@ -381,7 +381,7 @@ Configuration Options
 
    .. danger::
 
-      Currently :ref:`mod-ood-proxy` will only look for socket files following the
+      Currently the proxy will only look for socket files following the
       format::
 
         $OOD_PUN_SOCKET_ROOT/<user>/passenger.sock
