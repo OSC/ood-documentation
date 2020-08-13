@@ -8,6 +8,15 @@ template and modifying it to work at your center. See
 :ref:`app-development-tutorials-interactive-apps-add-jupyter` to install
 Jupyter.
 
+If you have developed an app and would like to contribute it to the community, please post a description and link to the app to https://discourse.osc.edu/c/open-ondemand.
+In order to submit the code of an interactive app that you developed to the GitHub repository, it should be available on the developer’s GitHub and well commented. The comments need to include, but not limited to, mentioning if there are parts of the app that are site-specific. Also, the following files must be included:
+
+- LICENSE file - the license should be open source. If you are not sure what to choose, OnDemand uses MIT License.
+
+- README.md file - which specifies all the dependencies as well as cluster specific instructions
+
+
+
 .. list-table:: Generic Interactive App Templates
    :header-rows: 1
 
