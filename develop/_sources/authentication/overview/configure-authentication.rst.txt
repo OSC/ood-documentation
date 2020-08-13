@@ -75,11 +75,6 @@ You would then build and install the new Apache configuration file with:
 Finally you will need to restart your Apache HTTP Server for the changes to
 take effect.
 
-.. note::
-
-   You can find more :ref:`ood-portal-generator` configuration examples under
-   :ref:`ood-portal-generator-examples`.
-
 Sanitize Session Information
 ----------------------------
 

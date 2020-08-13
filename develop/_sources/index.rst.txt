@@ -51,6 +51,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    :caption: General
 
    architecture
+   reference
 
 
 .. toctree::
@@ -118,7 +119,6 @@ These are institutions who were early adopters or provided HPC resources for dev
    :maxdepth: 2
    :caption: Legacy Docs
 
-   infrastructure
    applications
    user-documentation
 

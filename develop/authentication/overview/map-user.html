@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
@@ -112,7 +113,9 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="configure-authentication.html">1. Configure Apache Authentication</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2. Setup User Mapping</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#custom-mapping">2.1. Custom Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regex-user-mapping">2.1. Regex User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-user-mapping">2.2. File User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-mapping">2.3. Custom Mapping</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="configure-logout.html">3. Configure Logout</a></li>
@@ -168,7 +171,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
 </ul>
@@ -244,15 +246,15 @@
   <div class="section" id="setup-user-mapping">
 <span id="authentication-overview-map-user"></span><h1>2. Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Permalink to this headline">¶</a></h1>
 <p>Every HTTP request sent to the OnDemand portal triggers a call to the
-<a class="reference internal" href="../../infrastructure/ood-auth-map.html#ood-auth-map"><span class="std std-ref">ood_auth_map</span></a> script to map the remote authenticated user name to the
+<code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> to map the remote authenticated user name to the
 local system user name. Mapping to the local system user not only restricts
 access of OnDemand to local users but it is also required by the OnDemand proxy
 to traffic the HTTP data to the user’s corresponding per-user NGINX (PUN)
 server.</p>
-<p>The <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> and its corresponding
-<a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-configuration"><span class="std std-ref">Configuration</span></a> are used to configure both the system
-command that performs the mapping (<a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a>) and the argument fed to the system
-command (<a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-user-env"><span class="std std-ref">user_env</span></a>). By default these
+<p>The <a class="reference internal" href="../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> and its corresponding
+<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> are used to configure both the system
+command that performs the mapping (<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a>) and the argument fed to the system
+command (<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-env"><span class="std std-ref">user_env</span></a>). By default these
 configuration options are defined as:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>
@@ -261,7 +263,7 @@ configuration options are defined as:</p>
 <span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="s">&#39;REMOTE_USER&#39;</span>
 </pre></div>
 </div>
-<p>which uses <a class="reference internal" href="../../infrastructure/ood-auth-map.html#ood-auth-map"><span class="std std-ref">ood_auth_map</span></a> for the mapping command and <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
+<p>which uses regex user mapping for the mapping command and <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
 (this variable holds the name of the authenticated user by the web server) as
 its command line argument.</p>
 <p>This is equivalent to calling from the command line:</p>
@@ -276,16 +278,103 @@ the remote authenticated user name to the local user name. So the Apache
 authentication module used is expected to set the correct local user name in
 <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.</p>
 </div>
+<p>Open OnDemand provides two facilities for user mapping. One through regular
+expressions (the default) and another through a lookup file.  Both of which
+are documented here.  As an alternative you can provide your own custom script
+and simply set the <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> to use it.</p>
+<div class="section" id="regex-user-mapping">
+<h2>2.1. Regex User Mapping<a class="headerlink" href="#regex-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Usage for the regular expression (regex) user mapping script is below.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.regex <span class="o">[</span>options<span class="o">]</span> &lt;authenticated_user&gt;
+</pre></div>
+</div>
+<p>With the options:</p>
+<dl class="option">
+<dt id="cmdoption-r">
+<code class="descname">-r</code><code class="descclassname"> &lt;regex&gt;</code><code class="descclassname">, </code><code class="descname">--regex</code><code class="descclassname"> &lt;regex&gt;</code><a class="headerlink" href="#cmdoption-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default: <code class="docutils literal notranslate"><span class="pre">^(.+)$</span></code></p>
+<p>The regular expression used to capture the local system username.</p>
+</dd></dl>
+
+<div class="section" id="regex-user-mapping-examples">
+<h3>2.1.1. Regex User Mapping Examples<a class="headerlink" href="#regex-user-mapping-examples" title="Permalink to this headline">¶</a></h3>
+<p>Here are some examples of how to use the default regex mapping script.</p>
+<p>To echo back the username supplied (useful for LDAP authentication
+and the default behavior):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.regex <span class="s1">&#39;bob&#39;</span>
+bob
+$
+</pre></div>
+</div>
+<p>To capture the local username from an email address.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@center.edu&#39;</span>
+bob
+$
+</pre></div>
+</div>
+<p>If no match is found from the supplied regular expression and authenticated username
+that an empty string is returned instead:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@mit.edu&#39;</span>
+
+$
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="file-user-mapping">
+<h2>2.2. File User Mapping<a class="headerlink" href="#file-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>This script parses a mapfile with each entry given in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;authenticated_username&quot;</span> <span class="n">local_username</span>
+</pre></div>
+</div>
+<p>and separated by newlines. The script will systematically parse each line in
+the mapfile looking for a match to the <code class="docutils literal notranslate"><span class="pre">authenticated_username</span></code>. When a match
+is found it breaks from the scan and outputs the <code class="docutils literal notranslate"><span class="pre">local_username</span></code> to
+<code class="docutils literal notranslate"><span class="pre">STDOUT</span></code>.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="o">[</span>OPTIONS<span class="o">]</span> &lt;REMOTE_USER&gt;
+</pre></div>
+</div>
+<p>The options for this script are:</p>
+<dl class="option">
+<dt id="cmdoption-ood-auth-map-mapfile-f">
+<code class="descname">-f</code><code class="descclassname"> &lt;file&gt;</code><code class="descclassname">, </code><code class="descname">--file</code><code class="descclassname"> &lt;file&gt;</code><a class="headerlink" href="#cmdoption-ood-auth-map-mapfile-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default: <code class="docutils literal notranslate"><span class="pre">/etc/grid-security/grid-mapfile</span></code></p>
+<p>File used to scan for matches.</p>
+</dd></dl>
+
+<div class="section" id="examples-for-the-mapfile-script">
+<h3>2.2.1. Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Permalink to this headline">¶</a></h3>
+<p>To scan the default grid-mapfile using a URL-encoded authenticated username:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="s1">&#39;http%3A%2F%2Fcilogon.org%2FserverA%2Fusers%2F58606%40cilogon.org&#39;</span>
+bob
+$
+</pre></div>
+</div>
+<p>To scan a custom mapfile using an authenticated username:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile --file <span class="s1">&#39;/path/to/mapfile&#39;</span> <span class="s1">&#39;opaque_remote_username&#39;</span>
+bob
+$
+</pre></div>
+</div>
+<p>If no match is found within the mapfile for the supplied
+authenticated username that an empty string is returned instead:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="s1">&#39;this_remote_username_does_not_exist&#39;</span>
+
+$
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="custom-mapping">
-<h2>2.1. Custom Mapping<a class="headerlink" href="#custom-mapping" title="Permalink to this headline">¶</a></h2>
-<p>As mentioned previously the <a class="reference internal" href="../../infrastructure/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> configuration options
+<h2>2.3. Custom Mapping<a class="headerlink" href="#custom-mapping" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned previously the <a class="reference internal" href="../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> configuration options
 of interest are:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a></li>
-<li><a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-user-env"><span class="std std-ref">user_env</span></a></li>
+<li><a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a></li>
+<li><a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-env"><span class="std std-ref">user_env</span></a></li>
 </ul>
-<p>It is recommended you read the discussion on <a class="reference internal" href="../../infrastructure/ood-auth-map.html#ood-auth-map"><span class="std std-ref">ood_auth_map</span></a> before
-modifying these values.</p>
+<p>Indeed if you need to use the options to the regex or file user mapping scripts
+that come with Open OnDemand you’ll need to specify them in the <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>.</p>
 <p>After modifying <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> with the mapping you
 want you would then build and install the new Apache configuration file with:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
