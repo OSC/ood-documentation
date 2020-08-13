@@ -33,4 +33,4 @@ To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOU
 
           logout_redirect: "/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout"
 
-       See :ref:`add-shibboleth-authentication` for more details regarding setting up authentication with the Shibboleth Apache module.
+       See :ref:`authentication-shibboleth` for more details regarding setting up authentication with the Shibboleth Apache module.
