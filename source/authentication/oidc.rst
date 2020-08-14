@@ -3,6 +3,8 @@
 OpenID Connect
 --------------
 
+This is a summary of using OpenID Connect for authentication. Two example OpenID Connect identity providers we have documented include :ref:`Dex <authentication-dex>` and :ref:`Keycloak <authentication-tutorial-oidc-keycloak-rhel7>`.
+
 The following prerequisites need to be satisfied:
 
 - A OIDC IdP server deployed, e.g., ``idp.example.com`` (outside of scope of this document)
