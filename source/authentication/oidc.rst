@@ -1,4 +1,4 @@
-.. _add-oidc-authentication:
+.. _authentication-oidc:
 
 Add OIDC Authentication
 -----------------------

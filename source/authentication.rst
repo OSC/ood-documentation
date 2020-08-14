@@ -21,6 +21,7 @@ OpenID Connect with KeyCloak).
    :maxdepth: 2
 
    authentication/overview
+   authentication/oidc
    authentication/dex
    authentication/shibboleth
    authentication/cas
