@@ -138,6 +138,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Creating a Status App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#overview-of-app">Overview of App</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#benefits">Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ondemand-system-gems">OnDemand System Gems</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#files-and-their-purpose">Files and Their Purpose</a></li>
 </ul>
 </li>
@@ -286,12 +287,23 @@ as a table or graph</li>
 </ol>
 </li>
 <li>the app can be deployed without requiring a build step because gem
-dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby
-and versioned with the app under <code class="docutils literal notranslate"><span class="pre">vendor/bundle</span></code></li>
+dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby and
+match those that are provided by the ondemand-gems rpm</li>
 <li>most of the app can be modified without requiring a restart due to proper use
 of Sinatra reloader extension</li>
 <li>app has a built in scaffold for unit testing using minitest</li>
 </ol>
+</div>
+<div class="section" id="ondemand-system-gems">
+<h3>OnDemand System Gems<a class="headerlink" href="#ondemand-system-gems" title="Permalink to this headline">¶</a></h3>
+<p>This app is able to run in OnDemand 1.8+ without installing the gems specified in the Gemfile.</p>
+<p>All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps. These include gems used by this example app:</p>
+<ul class="simple">
+<li>sinatra</li>
+<li>sinatra-contrib</li>
+<li>erubi</li>
+</ul>
+<p>On the OnDemand web host, you can execute the command <cite>source scl_source enable ondmeand</cite> and then <cite>gem list</cite> to see all available gems. These gems are provided by a separate <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> rpm that is installed when you do <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">ondemand</span></code>. The name of the RPM includes the OnDemand release version, such as <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm</span></code>. This ensures that if you do yum update this gem will not be removed - so apps can depend on the presence of these gems.</p>
 </div>
 <div class="section" id="files-and-their-purpose">
 <h3>Files and Their Purpose<a class="headerlink" href="#files-and-their-purpose" title="Permalink to this headline">¶</a></h3>
@@ -347,26 +359,26 @@ where css and javascript files are included</td>
 <tr class="row-even"><td>Gemfile, Gemfile.lock</td>
 <td>defines gem dependencies for the app (see <a class="reference external" href="http://bundler.io/rationale.html">Bundler’s Rationale</a>)</td>
 </tr>
-<tr class="row-odd"><td>vendor/bundle</td>
-<td>installed and versioned gem dependencies</td>
-</tr>
-<tr class="row-even"><td>tmp/</td>
+<tr class="row-odd"><td>tmp/</td>
 <td>tmp directory is kept so its easier to <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
 want to force Passenger to restart an app</td>
 </tr>
-<tr class="row-odd"><td>public/</td>
+<tr class="row-even"><td>public/</td>
 <td>serve up static assets like Bootstrap css; in OnDemand, NGINX auto-serves
 all files under public/ directly, without going through the Passenger
 process, which makes this much faster; as a result, each static file is
 in a directory with an explicit version number, so if these files ever
 change we change the version, which is one cache busting strategy</td>
 </tr>
-<tr class="row-even"><td>Rakefile</td>
+<tr class="row-odd"><td>Rakefile</td>
 <td>this provides a default Rake task for running the automated tests under
 test/, so you can run the tests by running the command <code class="docutils literal notranslate"><span class="pre">rake</span></code></td>
 </tr>
-<tr class="row-odd"><td>test/minitest_helper.rb</td>
+<tr class="row-even"><td>test/minitest_helper.rb</td>
 <td>contains setup code common between all tests</td>
+</tr>
+<tr class="row-odd"><td>vendor/bundle</td>
+<td>This directory is added if you execute <code class="docutils literal notranslate"><span class="pre">bin/bundle</span> <span class="pre">install</span> <span class="pre">--path</span> <span class="pre">vendor/bundle</span></code> to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.</td>
 </tr>
 </tbody>
 </table>
