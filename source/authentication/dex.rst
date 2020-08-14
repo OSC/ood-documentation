@@ -1,4 +1,4 @@
-.. _dex-authentication:
+.. _authentication-dex:
 
 Dex Authentication
 ==================
