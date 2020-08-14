@@ -252,7 +252,8 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 Set Default SSH Host
 --------------------
 
-In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to the first cluster yaml file with ``default: true`` under login. Else it will default to the first cluster yaml file that does not have ``hidden: true``
+In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to specify the default ssh host. If not set, the default host will be that of the first cluster config file that has ``default: true`` in the login section. 
+If no cluster config specifies ``default: true``, the first cluster config that does not have ``hidden:true`` in the meta section will be used.
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/`` to ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
@@ -261,7 +262,7 @@ Set SSH Host Allowlist
 
 In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_SSHHOST_ALLOWLIST`` to specify what hosts can be accessed via ssh through the shell app. The format is ``login1.node.edu:login2.node.edu:*.node.edu`` and it supports wildcards. The login hosts specified in the cluster configs and the default ssh host will automatically be added to the allowlist.
 
-This will prevent the user from ssh to a host that is not specified in the allowlist.
+This will prevent the user from using the Shell app to ssh to a host that is not specified in the allowlist.
 
 Shell App SSH Command Wrapper
 -----------------------------
