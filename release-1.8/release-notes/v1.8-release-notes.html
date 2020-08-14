@@ -145,6 +145,18 @@
 <li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#default-authentication-is-now-handled-by-dex">Default authentication is now handled by Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator">Support mod_auth_openidc configuration via ood-portal-generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beta-ccq-scheduler-support">Beta CCQ Scheduler support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retain-completed-jobs-panel-for-debugging">Retain completed jobs panel for debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#torque-and-slurm-schedulers-now-supports-qos-fields">Torque and SLURM schedulers now supports QOS fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMOD integration in the dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chinese-localization">Chinese localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-svg-logos">Support for SVG logos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variable-name-changes">Environment variable name changes</a></li>
 </ul>
 </li>
 </ul>
@@ -238,6 +250,18 @@
 <ul class="simple">
 <li><a class="reference internal" href="#default-authentication-is-now-handled-by-dex">Default authentication is now handled by Dex</a></li>
 <li><a class="reference internal" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator">Support mod_auth_openidc configuration via ood-portal-generator</a></li>
+<li><a class="reference internal" href="#beta-ccq-scheduler-support">Beta CCQ Scheduler support</a></li>
+<li><a class="reference internal" href="#retain-completed-jobs-panel-for-debugging">Retain completed jobs panel for debugging</a></li>
+<li><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></li>
+<li><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></li>
+<li><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></li>
+<li><a class="reference internal" href="#torque-and-slurm-schedulers-now-supports-qos-fields">Torque and SLURM schedulers now supports QOS fields</a></li>
+<li><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></li>
+<li><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMOD integration in the dashboard</a></li>
+<li><a class="reference internal" href="#chinese-localization">Chinese localization</a></li>
+<li><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></li>
+<li><a class="reference internal" href="#support-for-svg-logos">Support for SVG logos</a></li>
+<li><a class="reference internal" href="#environment-variable-name-changes">Environment variable name changes</a></li>
 </ul>
 <div class="section" id="special-thanks">
 <h2>Special thanks<a class="headerlink" href="#special-thanks" title="Permalink to this headline">¶</a></h2>
@@ -245,6 +269,13 @@
 <div class="section" id="upgrading-from-v1-7">
 <h2>Upgrading from v1.7<a class="headerlink" href="#upgrading-from-v1-7" title="Permalink to this headline">¶</a></h2>
 <p>Before upgrading to v1.8, please consider the following:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Shell hosts are now protected behind allowlists.  If you hae not
+explicitly set the default ssh host, you must do so after upgrading. You must
+also update the configuration to allow shell access to any login or compute nodes.
+<a class="reference external" href="#shell-hosts-are-now-protected-behind-allowlists">See the entry in the release notes for more information.</a></p>
+</div>
 <ul class="simple">
 <li>If upgrading from OnDemand 1.5.x or older <strong>you must upgrade to 1.6.x before upgrading to 1.7</strong>. See directions for upgrading from 1.4 to 1.5 (<a class="reference internal" href="v1.5-release-notes.html#v1-5-release-notes"><span class="std std-ref">v1.5 Release Notes</span></a>) and from 1.5 to 1.6 (<a class="reference internal" href="v1.6-release-notes.html#v1-6-release-notes"><span class="std std-ref">v1.6 Release Notes</span></a>).</li>
 <li>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</li>
@@ -300,6 +331,42 @@ See <a class="reference internal" href="../authentication/dex.html#dex-authentic
 <div class="section" id="support-mod-auth-openidc-configuration-via-ood-portal-generator">
 <h3>Support mod_auth_openidc configuration via ood-portal-generator<a class="headerlink" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator" title="Permalink to this headline">¶</a></h3>
 <p>The Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file now supports defining <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> configurations directly.</p>
+</div>
+<div class="section" id="beta-ccq-scheduler-support">
+<h3>Beta CCQ Scheduler support<a class="headerlink" href="#beta-ccq-scheduler-support" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="retain-completed-jobs-panel-for-debugging">
+<h3>Retain completed jobs panel for debugging<a class="headerlink" href="#retain-completed-jobs-panel-for-debugging" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="batch-connect-apps-now-support-multiple-clusters">
+<h3>Batch Connect apps now support multiple clusters<a class="headerlink" href="#batch-connect-apps-now-support-multiple-clusters" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="batch-connect-apps-now-support-disabling-caching-on-fields">
+<h3>Batch Connect apps now support disabling caching on fields<a class="headerlink" href="#batch-connect-apps-now-support-disabling-caching-on-fields" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="extended-view-support-for-gridengine-clusters">
+<h3>Extended view support for GridEngine clusters<a class="headerlink" href="#extended-view-support-for-gridengine-clusters" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="torque-and-slurm-schedulers-now-supports-qos-fields">
+<h3>Torque and SLURM schedulers now supports QOS fields<a class="headerlink" href="#torque-and-slurm-schedulers-now-supports-qos-fields" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="shell-hosts-are-now-protected-behind-allowlists">
+<h3>Shell hosts are now protected behind allowlists<a class="headerlink" href="#shell-hosts-are-now-protected-behind-allowlists" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="beta-xdmod-integration-in-the-dashboard">
+<h3>Beta XDMOD integration in the dashboard<a class="headerlink" href="#beta-xdmod-integration-in-the-dashboard" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="chinese-localization">
+<h3>Chinese localization<a class="headerlink" href="#chinese-localization" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ability-to-add-additional-info-to-batch-connect-app">
+<h3>Ability to add additional info to batch connect app<a class="headerlink" href="#ability-to-add-additional-info-to-batch-connect-app" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="support-for-svg-logos">
+<h3>Support for SVG logos<a class="headerlink" href="#support-for-svg-logos" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="environment-variable-name-changes">
+<h3>Environment variable name changes<a class="headerlink" href="#environment-variable-name-changes" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>
