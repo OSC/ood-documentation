@@ -7,14 +7,6 @@ A Passenger App is any Rack-based Ruby app, WSGI-based Python app, or Node.js ap
 
 At the bottom of the page is a list of tutorials for developing Passenger apps for OnDemand.
 
-In addition, all pre-installed Ruby gems used by OnDemand are available, which makes it easy for users to develop. These include:
-
-- sinatra
-- sinatra-contrib
-- erubi
-
-On the OnDemand web host, you can execute the command `source scl_source enable ondmeand` and then `gem list` to see all available gems. These gems are provided by a separate ``ondemand-gems`` rpm that is installed when you do ``yum install ondemand``. The name of the RPM includes the OnDemand release version, such as ``ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm``. This ensures that if you do yum update this gem will not be removed - so apps can depend on the presence of these gems.
-
 .. toctree::
    :maxdepth: 2
    :caption: Tutorials
