@@ -1,7 +1,7 @@
 .. _authentication-oidc:
 
-Add OIDC Authentication
------------------------
+OpenID Connect
+--------------
 
 The following prerequisites need to be satisfied:
 

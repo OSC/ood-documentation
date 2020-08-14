@@ -1,7 +1,7 @@
 .. _authentication-dex:
 
-Dex Authentication
-==================
+OpenID Connect with Dex
+=======================
 
 `Dex`_ is a lightweight OpenID Connect authentication provider written in Go, and is the default authentication mechanism shipped with Open OnDemand.
 
