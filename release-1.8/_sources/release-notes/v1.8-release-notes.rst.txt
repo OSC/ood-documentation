@@ -1,0 +1,85 @@
+.. _v1.8-release-notes:
+
+v1.8 Release Notes
+==================
+
+Highlights in 1.8:
+
+- `Default authentication is now handled by Dex`_
+- `Support mod_auth_openidc configuration via ood-portal-generator`_
+
+Special thanks
+--------------
+
+
+Upgrading from v1.7
+-------------------
+
+Before upgrading to v1.8, please consider the following:
+
+- If upgrading from OnDemand 1.5.x or older **you must upgrade to 1.6.x before upgrading to 1.7**. See directions for upgrading from 1.4 to 1.5 (:ref:`v1.5-release-notes`) and from 1.5 to 1.6 (:ref:`v1.6-release-notes`).
+- As always please update the *development* or *test* instances of OnDemand installed at your center first to test and verify before you modify the *production* instance.
+
+
+#. Update OnDemand release RPM
+
+   .. code-block:: sh
+
+      sudo yum install -y https://yum.osc.edu/ondemand/1.8/ondemand-release-web-1.8-1.noarch.rpm
+
+#. Update OnDemand
+
+   .. code-block:: sh
+
+      sudo yum clean all
+      sudo yum update ondemand
+
+#. (Optional) If previously using Apache's Basic Auth, for example with LDAP, it is recommended to switch to :ref:`Dex Authentication <dex-authentication>` by installing the ``ondemand-dex`` package.
+
+   .. code-block:: sh
+
+      sudo yum install ondemand-dex
+
+   .. warning::
+
+      The configuration for Dex will need to be made to ``/etc/ood/config/ood_portal.yml`` with your needed LDAP configuration and updates to both Dex and Apache configurations.
+      See :ref:`Configuring OnDemand Dex for LDAP <dex-ldap>` for details on configuration of LDAP.
+
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+      sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+
+#. (Optional) If ``ondemand-dex`` was installed, you must enable and start the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl enable ondemand-dex.service
+      sudo systemctl start ondemand-dex.service
+
+Upgrading from v1.6
+-------------------
+
+Due to changes with ``ood-portal-generator`` it is necessary to run ``update_ood_portal`` with ``--force`` flag
+if upgrading from v1.6 of OnDemand to v1.8.
+
+
+Details
+-------
+
+Default authentication is now handled by Dex
+............................................
+
+The default authentication mechanism for OnDemand is now using the OIDC provider `Dex`_.  The Dex authentication will replace Apache's Basic Auth.  Sites wishing to continue using LDAP authentication or other forms of Basic Auth are recommended to configure Dex.
+See :ref:`Dex Authentication <dex-authentication>` for details on OnDemand Dex.
+
+Support mod_auth_openidc configuration via ood-portal-generator
+...............................................................
+
+The Open OnDemand Portal :ref:`ood-portal-generator-configuration` file now supports defining `mod_auth_openidc`_ configurations directly.
+
+.. _dex: https://github.com/dexidp/dex
+.. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc

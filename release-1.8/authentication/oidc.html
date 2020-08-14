@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Resource Manager Configuration &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>Add OIDC Authentication &mdash; Open OnDemand 1.7.0 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configure Torque" href="resource-manager/torque.html" />
-    <link rel="prev" title="Cluster Config Schema v2" href="cluster-config-schema.html" />
+    <link rel="next" title="Dex Authentication" href="dex.html" />
+    <link rel="prev" title="3. Configure Logout" href="overview/configure-logout.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -109,19 +109,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Add Cluster Configuration Files</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Resource Manager Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/torque.html">Configure Torque</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/slurm.html">Configure Slurm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/lsf.html">Configure LSF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/pbspro.html">Configure PBS Professional</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/sge.html">Configure Grid Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Add OIDC Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dex.html">Dex Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Add Shibboleth Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cas.html">Add CAS Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
@@ -211,14 +211,16 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Resource Manager Configuration</li>
+          <li><a href="../authentication.html">Authentication</a> &raquo;</li>
+        
+      <li>Add OIDC Authentication</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.8/source/installation/resource-manager.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.8/source/authentication/oidc.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -232,29 +234,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="resource-manager-configuration">
-<span id="resource-manager"></span><h1>Resource Manager Configuration<a class="headerlink" href="#resource-manager-configuration" title="Permalink to this headline">¶</a></h1>
-<p>Below are directions on how to modify the cluster config files to work with the
-resource managers for your clusters. Each cluster can be configured with a
-different resource manager.</p>
-<p>The <a class="reference internal" href="resource-manager/test.html#resource-manager-test"><span class="std std-ref">Test Configuration</span></a> page provides directions on using a Rake task
-to verify the resource manager configuration.</p>
-<p>The <a class="reference internal" href="resource-manager/bin-override-example.html#bin-overrides"><span class="std std-ref">A Working Example of a bin_overrides Script</span></a> provides directions on how to
-provide a replacement or wrapper script for one or more of the resource manager
-client binaries.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Resource Manager Configuration</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/torque.html">Configure Torque</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/slurm.html">Configure Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/lsf.html">Configure LSF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/pbspro.html">Configure PBS Professional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/sge.html">Configure Grid Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
+  <div class="section" id="add-oidc-authentication">
+<span id="authentication-oidc"></span><h1>Add OIDC Authentication<a class="headerlink" href="#add-oidc-authentication" title="Permalink to this headline">¶</a></h1>
+<p>The following prerequisites need to be satisfied:</p>
+<ul class="simple">
+<li>A OIDC IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.example.com</span></code> (outside of scope of this document)</li>
+<li>The <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> installed on the OnDemand Server.</li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">OnDemand repos provide the <code class="docutils literal notranslate"><span class="pre">https24-mod_auth_openidc</span></code> RPM for RHEL 7 and CentOS 7 as it must be built against SCL Apache</p>
 </div>
+<p>The following is an example <strong class="program">ood-portal-generator</strong> configuration file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand.example.com</span>
+
+<span class="c1"># Use OIDC authentication</span>
+<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
+
+<span class="c1"># Use OIDC logout</span>
+<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc?logout=https%3A%2F%ondemand.example.com&quot;</span>
+
+<span class="c1"># Capture system user name from authenticated user name</span>
+<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_provider_metadata_url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://idp.example.com/.well-known/openid-configuration&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_client_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand.example.com&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_client_secret</span><span class="p p-Indicator">:</span> <span class="s">&quot;b972c25d-88a4-41fa-87f7-a12ff167dd13&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_remote_user_claim</span><span class="p p-Indicator">:</span> <span class="s">&quot;preferred_username&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_scope</span><span class="p p-Indicator">:</span> <span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">groups&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_session_inactivity_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_session_max_duration</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_state_max_number_of_cookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">oidc_settings</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassIDTokenAs</span><span class="p p-Indicator">:</span> <span class="s">&quot;serialized&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassRefreshToken</span><span class="p p-Indicator">:</span> <span class="s">&quot;On&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassClaimsAs</span><span class="p p-Indicator">:</span> <span class="s">&quot;environment&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCStripCookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;mod_auth_openidc_session</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_chunks</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_0</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_1&quot;</span>
+</pre></div>
+</div>
+<p>Build the Apache configuration file and install it.</p>
 </div>
 
 
@@ -265,10 +288,10 @@ client binaries.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="resource-manager/torque.html" class="btn btn-neutral float-right" title="Configure Torque" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dex.html" class="btn btn-neutral float-right" title="Dex Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cluster-config-schema.html" class="btn btn-neutral float-left" title="Cluster Config Schema v2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="overview/configure-logout.html" class="btn btn-neutral float-left" title="3. Configure Logout" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -300,23 +323,23 @@ client binaries.</p>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/resource-manager.html">master</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/oidc.html">master</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/oidc.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/oidc.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/oidc.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/oidc.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/oidc.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/oidc.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/oidc.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/oidc.html">develop</a></dd>
       
     </dl>
     <dl>
