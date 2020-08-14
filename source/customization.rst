@@ -801,6 +801,7 @@ Settings used to access Grafana are configured in the cluster config.  The follo
          cluster: "cluster"
          host: "host"
          jobid: "jobid"
+       cluster_override: "mysite"
 
 When viewing a dashboard in Grafana choose the panel you'd wish to display and select `Share`.
 Then choose the `Embed` tab which will provide you with the iframe URL that will need to be generated within OnDemand.
@@ -811,6 +812,7 @@ The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by
 * The ``uid``` is the UID portion of URL that is unique to every dashboard
 * The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
 * The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
+* The ``cluster_override`` can override the cluster name used to make requests to Grafana if the Grafana cluster name varies from OnDemand cluster name.
 
 Disable Host Link in Batch Connect Session Card
 -----------------------------------------------
