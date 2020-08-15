@@ -12,13 +12,12 @@ Highlights in 1.8:
 - `Batch Connect apps now support multiple clusters`_
 - `Batch Connect apps now support disabling caching on fields`_
 - `Extended view support for GridEngine clusters`_
-- `Torque and SLURM schedulers now supports QOS fields`_
+- `Torque and Slurm schedulers now support QoS fields`_
 - `Shell hosts are now protected behind allowlists`_
 - `Beta XDMOD integration in the dashboard`_
 - `Chinese localization`_
 - `Ability to add additional info to batch connect app`_
-- `Support for SVG logos`_
-- `Environment variable name changes`_
+- `Support for SVG dashboard logos`_
 
 Special thanks
 --------------
@@ -102,20 +101,67 @@ The Open OnDemand Portal :ref:`ood-portal-generator-configuration` file now supp
 Beta CCQ Scheduler support
 ..........................
 
+We now have beta `Cloudy Cluster`_ support for their ccq scheduler.  You can find
+:ref:`documentation on how to configure the cluster here <resource-manager-cloudy-cluster>`.
+
 Retain completed jobs panel for debugging
 .........................................
+
+When an interactive job completes, its panel will now remain in the view. This is to
+allow users and administrators to debug failed jobs by keeping the session id links
+in view.
 
 Batch Connect apps now support multiple clusters
 ................................................
 
+Batch connect applications now support multiple clusters in their configuration
+instead of just one.
+
+Where previous configuration look like this, with only a single cluster.
+
+.. code-block:: yaml
+
+   cluster: "my_cluster"
+
+Configurations will now accept an array like the example below.  This will create a
+dropdown select menu item at the top of the form where users can choose between
+the two options.
+
+.. code-block:: yaml
+
+   cluster:
+     - "my_cluster"
+     - "my_other_cluster"
+
+
+TODO: there's more to detail here. create and link to some other documentation.
+
 Batch Connect apps now support disabling caching on fields
 ..........................................................
+
+Batch connect apps can now enable or disable caching site wide, on a per app basis
+or on a per item basis.
+
+TODO: create and link to some other documentation.
 
 Extended view support for GridEngine clusters
 .............................................
 
-Torque and SLURM schedulers now supports QOS fields
+GridEngine clusters now have extended view support in the active jobs app.
+
+Torque and Slurm schedulers now support QoS fields
 ...................................................
+
+Torque and Slurm schedulers now support the quality of service (QoS) fields.
+
+``qos`` is now an acceptable script attribute like so:
+
+.. code-block:: yaml
+
+   script:
+     qos: 'best'
+
+In Torque this translates to ``-l qos=best`` and in Slurm it is ``--qos best``.
 
 Shell hosts are now protected behind allowlists
 ...............................................
@@ -123,17 +169,47 @@ Shell hosts are now protected behind allowlists
 Beta XDMOD integration in the dashboard
 .......................................
 
+If your site also uses `XDMOD`_ for job metric collection, Open OnDemand now
+has beta support to connect to that installation and show XDMOD panels in
+the dashboard.
+
+To enable this functionality simply set the ``OOD_XDMOD_HOST`` to it's full URL
+in ``/etc/ood/config/apps/dashboard/env``.
+
+.. code-block:: shell
+
+  OOD_XDMOD_HOST="https://xdmod.mysite.edu"
+
 Chinese localization
 ....................
+
+The Chinese localization ``zh-CN`` is now available in the dashboard and
+job composer applications for sites who wish to use it.
+
+To enable it, simply set the ``OOD_LOCALE`` environment variable globally
+in ``/etc/ood/config/nginx_stage.yml``
+
+.. code-block:: yaml
+
+  pun_custom_env:
+     OOD_LOCALE: "zh-CN"
+
 
 Ability to add additional info to batch connect app
 ...................................................
 
-Support for SVG logos
-.....................
+Batch connect app developers may now add files that add information the the batch
+connect panels.  :ref:`More information is documented here <bc_info_html_md_erb>`
+on batch connect view panels and this feature specifically.
 
-Environment variable name changes
-.................................
+Support for SVG dashboard logos
+...............................
+
+Logos can now be SVG images and controlled through ``OOD_DASHBOARD_LOGO_HEIGHT``
+configuration to resize them. :ref:`See documention on branding for form information. <branding>`
+
 
 .. _dex: https://github.com/dexidp/dex
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
+.. _cloudy cluster: http://cloudycluster.com/
+.. _XDMOD: https://open.xdmod.org/

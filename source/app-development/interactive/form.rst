@@ -36,9 +36,15 @@ building and launching the ``my_app`` Interactive App session.
 Configuration
 -------------
 
-.. describe:: cluster (String)
+.. describe:: cluster (Array<String>)
 
-     the cluster id that the Interactive App session is submitted to
+     the cluster ids that the Interactive App session is submitted to.
+
+     .. tip::
+
+        Prior to 1.8, this configuration was a single string (a single cluster).
+        We now support one application submitting to multiple clusters. See the
+        section below on `configuring which cluster to submit to`_ for more information.
 
      .. warning::
 
@@ -61,6 +67,12 @@ Configuration
 
      the object defining the hard-coded value or HTML form element used for the
      various custom attributes
+
+Configuring which cluster to submit to
+``````````````````````````````````````
+
+TODO: fill in with (1) cluster, (2) form & attributes and (3) defining in
+submit.yml.erb.
 
 Attributes
 ----------

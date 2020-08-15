@@ -97,7 +97,10 @@ We recommend setting these environment variables in ``/etc/ood/config/nginx_stag
      - The title appears in the navbar and is controlled by the environment variable ``$OOD_DASHBOARD_TITLE``. The default value is "Open OnDemand".
    * - Logo
      - OOD_DASHBOARD_LOGO
-     - The default value for ``OOD_DASHBOARD_LOGO`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.
+     - The default value for ``OOD_DASHBOARD_LOGO`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.  SVG logo format is also supported.
+   * - Logo height
+     - OOD_DASHBOARD_LOGO_HEIGHT
+     - The CSS height of the dashboard logo.
    * - Favicon
      - OOD_PUBLIC_URL
      - The favicon is expected to exist at the path ``$OOD_PUBLIC_URL/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
@@ -252,9 +255,46 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 Set Default SSH Host
 --------------------
 
-In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``DEFAULT_SSHHOST="localhost"``.
+In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``OOD_DEFAULT_SSHHOST="localhost"``.
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
+
+Since 1.8 you can also set the default ssh host in the cluster configuration as well.
+
+Simply add default=true attribute to the login section like the example below.
+
+.. code-block:: yaml
+
+   # /etc/ood/config/clusters.d/my_cluster.yml
+   ---
+   v2:
+     metadata:
+       title: "My Cluster"
+     login:
+       host: "my_cluster.my_center.edu"
+       default: true
+
+Set SSH Allowlist
+-----------------
+
+In 1.8 and above we stopped allowing ssh access by default.  Now you have explicitly set
+what hosts users will be allowed to connect to in the shell application.
+
+Every cluster configuration with ``v2.login.host`` that is not hidden (it has
+``v2.metadata.hidden`` attribute set to true) will be added to this allowlist.
+
+To add other hosts into the allow list (for example compute nodes) add the configuration
+``OOD_SSHHOST_ALLOWLIST`` to the ``/etc/ood/config/apps/shell/env`` file.
+
+This configuration is expected to be a colon (:) separated list of GLOBs.
+
+Here's an example of of this configuration with three such GLOBs that allow for shell
+access into any compute node in our three clusters.
+
+.. code:: shell
+
+  # /etc/ood/config/apps/shell/env
+  OOD_SSHHOST_ALLOWLIST="r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu"
 
 Shell App SSH Command Wrapper
 -----------------------------
