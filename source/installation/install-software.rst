@@ -47,7 +47,7 @@ software requirements:
 
       sudo yum install ondemand
 
-#. (Optional) Install :ref:`dex-authentication` package
+#. (Optional) Install :ref:`authentication-dex` package
 
    .. note::
 
