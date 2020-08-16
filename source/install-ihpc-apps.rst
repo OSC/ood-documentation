@@ -17,75 +17,101 @@ Jupyter.
      - https://github.com/OSC/bc_example_jupyter
 
 While we don't yet provide this for other interactive apps, here is a list of
-interactive apps that are currently deployed at OSC and the corresponding OSC
-templates. 
+interactive apps that are currently deployed at OSC and other contributing institutions. 
 
-.. list-table:: OSC Interactive App Templates
+.. list-table:: Interactive App
    :header-rows: 1
 
    * - Name
+     - Institution
      - GitHub URL
-   * - ANSYS Workbench
-     - https://github.com/OSC/bc_osc_ansys_workbench
+     - Notes/Features
    * - Abaqus/CAE
+     - OSC
      - https://github.com/OSC/bc_osc_abaqus
+     -
+   * - 
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_osc_abaqus
+     - 
+   * - ANSYS Workbench
+     - OSC
+     - https://github.com/OSC/bc_osc_ansys_workbench
+     -
    * - COMSOL Multiphysics
+     - OSC
      - https://github.com/OSC/bc_osc_comsol
+     - 
+   * - 
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_osc_comsol
+     -
    * - MATLAB
+     - OSC
      - https://github.com/OSC/bc_osc_matlab
+     -
+   * - 
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_osc_matlab
+     -
    * - Jupyter
+     - OSC
      - https://github.com/OSC/bc_osc_jupyter
-   * - Jupyter + Spark
-     - https://github.com/OSC/bc_osc_jupyter_spark
-   * - Paraview
-     - https://github.com/OSC/bc_osc_paraview
-   * - RStudio Server
-     - https://github.com/OSC/bc_osc_rstudio_server
-   * - VMD
-     - https://github.com/OSC/bc_osc_vmd
-   * - QGIS
-     - https://github.com/OSC/bc_osc_qgis
-   * - Stata 
-     - https://github.com/OSC/bc_osc_stata
-    
-.. list-table:: University of Utah's CHPC Custom OnDemand Apps
-  :header-rows: 1
-   
-  * - Name
-    - GitHub URL
-  * - RStudio Server
-    - https://github.com/CHPC-UofU/bc_osc_rstudio_server
-  * - ANSYS Workbench
-    - https://github.com/CHPC-UofU/bc_osc_ansys_workbench
-  * - Abaqus/CAE
-    - https://github.com/CHPC-UofU/bc_osc_abaqus
-  * - COMSOL Multiphysics
-    - https://github.com/CHPC-UofU/bc_osc_comsol
-  * - Shiny App
-    - https://github.com/CHPC-UofU/bc_osc_example_shiny
-  * - Jupyter
-    - https://github.com/CHPC-UofU/bc_osc_jupyter
-  * - Jupyter w/ Dynamic SLURM Partition 
-    - https://github.com/CHPC-UofU/bc_jupyter_dynpart
-  * - MATLAB
-    - https://github.com/CHPC-UofU/bc_osc_matlab
-
-.. list-table:: Stanford Custom OnDemand Apps for Sherlock
-   :header-rows: 1
-   
-   * - Name
-     - GitHub URL
-   * - sh_jupyter 
+     -
+   * - 
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_osc_jupyter
+     -
+   * -  
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_jupyter_dynpart
+     - Dynamic SLURM Partition
+   * - Jupyter
+     - Standford
      - https://github.com/stanford-rc/sh_ood-apps#sh_jupyter
-   * - sh_rstudio
+     -
+   * - 
+     - TechSquareInc
+     - https://gitlab.com/mjbludwig/jupyter_experimental
+     -
+   * - Jupyter + Spark
+     - OSC
+     - https://github.com/OSC/bc_osc_jupyter_spark
+     - 
+   * - Paraview
+     - OSC
+     - https://github.com/OSC/bc_osc_paraview
+     - 
+   * - RStudio Server
+     - OSC
+     - https://github.com/OSC/bc_osc_rstudio_server
+     - 
+   * - 
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_osc_rstudio_server
+     -
+   * - 
+     - Standord
      - https://github.com/stanford-rc/sh_ood-apps#sh_rstudio
-   * - sh_tensorboard
-     - https://github.com/stanford-rc/sh_ood-apps#sh_tensorboard  
-
-.. list-table:: TechSquareInc Custom Ondemand App
-  :header-rows: 1
-   
-  * - Name
-    - GitLab URL
-  * - jupyter_experimental
-    - https://gitlab.com/mjbludwig/jupyter_experimental
+     -
+   * - VMD
+     - OSC
+     - https://github.com/OSC/bc_osc_vmd
+     -
+   * - QGIS
+     - OSC
+     - https://github.com/OSC/bc_osc_qgis
+     -
+   * - Stata 
+     - OSC
+     - https://github.com/OSC/bc_osc_stata
+     -
+   * - Shiny App
+     - University of Utah
+     - https://github.com/CHPC-UofU/bc_osc_example_shiny
+     -
+   * - Tensorboard
+     - Standford
+     - https://github.com/stanford-rc/sh_ood-apps#sh_tensorboard 
+     -
+  
