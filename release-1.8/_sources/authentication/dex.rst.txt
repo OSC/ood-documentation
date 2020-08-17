@@ -131,6 +131,15 @@ The following is an example configuration using OpenLDAP.
 
       For documentation on Dex LDAP configuration please see the `Dex LDAP docs`_
 
+   .. note::
+
+      If you supply a ``bindPW`` in this file it's recommended to change the file permissions on :file:`/etc/ood/config/ood_portal.yml` to be ``0600`` make the file only readable by ``root``:
+
+         .. code-block:: sh
+
+            sudo chmod root:root /etc/ood/config/ood_portal.yml
+            sudo chmod 0600 /etc/ood/config/ood_portal.yml
+
 Customizing OnDemand Dex
 ------------------------
 
