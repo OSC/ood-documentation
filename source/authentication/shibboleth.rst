@@ -1,7 +1,7 @@
 .. _authentication-shibboleth:
 
-Add Shibboleth Authentication
------------------------------
+Shibboleth
+----------
 
 The following prerequisites need to be satisfied:
 
