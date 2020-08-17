@@ -201,6 +201,41 @@ job_id
 created_at
   The time the session was created
 
+.. _bc_native_vnc_view:
+
+Adding Native VNC instructions to the panel
+-------------------------------------------
+
+Your site may wish to provide users with instructions on how to connect to
+interactive jobs with native VNC tools instead of connecting through the browser.
+To enable this feature configure the dashboard with ``ENABLE_NATIVE_VNC=true`` in
+the dashboard's environment file ``/etc/ood/config/apps/dashboard/env``.
+
+Enabling this will provide generic instructions for the user to create an ssh tunnel
+*a host*. If you wish to specify the host users should tunnel to (a well known login
+host for example) use the ``OOD_NATIVE_VNC_LOGIN_HOST`` configuration in the same
+environment file.
+
+You can also create your own instructions for major OS platforms. You can create
+``_native_vnc_{windows,mac,linux}.html.erb`` files and place them in
+``/etc/ood/config/apps/dashboard/views/batch_connect/sessions/connections/``
+directory to override the default instructions for a given platform.
+
+These file are `eRuby (Embedded Ruby)`_ extensions and so here are some useful
+variables and objects you may need to create helpful instructions. You can also
+`refer to the original files for help in creating new panels
+<https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views/batch_connect/sessions/connections>`_.
+
+Configuration.native_vnc_login_host
+  The OOD_NATIVE_VNC_LOGIN_HOST configuration if given.
+connect.host
+  The compute node host the interactive job is on
+connect.port
+  The compute node port the interactive job has opened
+connect.password
+  The VNC password for the interactive job
+ENV["USER"]
+  The USER environment variable
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
 .. _jupyter notebook server: http://jupyter.readthedocs.io/en/latest/
