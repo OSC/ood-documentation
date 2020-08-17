@@ -40,7 +40,7 @@ Configuration
 
      the cluster ids that the Interactive App session is submitted to.
 
-     .. tip::
+     .. note::
 
         Prior to 1.8, this configuration was a single string (a single cluster).
         We now support one application submitting to multiple clusters. See the
@@ -67,6 +67,10 @@ Configuration
 
      the object defining the hard-coded value or HTML form element used for the
      various custom attributes
+
+.. describe:: cacheable (Boolean)
+
+       whether or not the application is cacheable or not. Defaults to true.
 
 Attributes
 ----------
@@ -390,6 +394,24 @@ are:
         choose from in the HTML form, but the backend will process a value of
         either "volvo", "ford", or "toyota" depending on what the user chose.
 
+.. describe:: cacheable (Boolean, true)
+
+     whether the form item is cacheable or not
+
+     Default
+       cacheable
+
+       .. code-block:: yaml
+
+          cacheable: true
+
+     Example
+       The item is not cacheable
+
+       .. code-block:: yaml
+
+          cacheable: true
+
 Examples
 --------
 
@@ -486,6 +508,49 @@ does two things:
   configuration option
 - it then describes the HTML form element to use for the ``my_module_version``
   attribute
+
+Caching form items
+``````````````````
+
+Since 1.8 caching form items is configurable. By default all form items are
+cacheable. As seen above you can enable or disable caching for the entire app
+when using the top level ``cacheable`` configuration. You can also configure
+on a per item basis through attributes.
+
+Lastly you can also enable or disable this feature for the entire site, using
+the configuration ``OOD_BATCH_CONNECT_CACHE_ATTR_VALUES=false`` in the
+dashboard's environment file ``/etc/ood/config/apps/dashboard/env``.
+
+.. tip::
+
+   Since you can configure caching at different levels the rule of thumb is the
+   closer the the configuration is to the form item, the higher the precedence.
+
+   Setting the configuration on the attribute overrides everything and setting it
+   on a per app basis overrides the global setting.
+
+
+Let's see an example.  Here, we've disabled caching for the app and did not
+set OOD_BATCH_CONNECT_CACHE_ATTR_VALUES, so the site-wide configuration is set
+to true by default.  So, ``bc_num_slots`` and ``python_version`` are not cacheable,
+meaning the user will have to fill those form entries out every time they submit
+the job. But since ``bc_queue``'s attribute is set to true, it is cacheable.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/my_app/form.yml
+   # OOD_BATCH_CONNECT_CACHE_ATTR_VALUES is not set, so defaults to true
+   ---
+   cluster: "owens"
+   cacheable: false
+   form:
+     - bc_num_slots
+     - python_version
+     - bc_queue
+   attributes:
+     bc_queue:
+       cacheable: true
+
 
 .. _configuring-cluster:
 
