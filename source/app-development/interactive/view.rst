@@ -22,7 +22,7 @@ into the HTML file for flow control, variable substitution, and more.
 
 This connection view will be retained for a week in 'My Interactive Sessions' 
 for debugging purposes. The link to Session ID opens a files app directly to 
-the root of the batch connect app.
+the output of the batch connect app.
 
 .. danger::
 
