@@ -68,12 +68,6 @@ Configuration
      the object defining the hard-coded value or HTML form element used for the
      various custom attributes
 
-Configuring which cluster to submit to
-``````````````````````````````````````
-
-TODO: fill in with (1) cluster, (2) form & attributes and (3) defining in
-submit.yml.erb.
-
 Attributes
 ----------
 
@@ -492,5 +486,60 @@ does two things:
   configuration option
 - it then describes the HTML form element to use for the ``my_module_version``
   attribute
+
+.. _configuring-cluster:
+
+Configuring which cluster to submit to
+--------------------------------------
+
+In 1.8 there are now several ways to configure what cluster to submit to.
+
+The easiest way is to use the the top level ``cluster`` configuration. If you've
+configured just one item, then the form UI does not change for the user. If
+you configure an array of two or more options then a select dropdown will
+automatically be added to the top of the form.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/my_app/form.yml
+   # which will generate a dropdown select automatically
+   ---
+   cluster:
+     - "cluster1"
+     - "cluster2"
+
+.. tip::
+
+   GLOBs are also supported. So in the example above one entry of ``cluster*``
+   would have been equivalent to explicitly configuring both ``cluster1`` and
+   ``cluster2``.
+
+   This means you could configure ``cluster: "*"`` to be able to submit to all
+   clusters.
+
+If you would prefer to use some other widget, or you wish to change the text being
+shown in the UI you can configure a cluster form item and specify it's attributes.
+This gives you some flexibility in the form UI instead of the default select
+widget that shows all lowercase cluster names.
+
+Here's an example were the user will be shown a select dropdown menu item with
+different text than the default.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/different_select_cluster/form.yml
+   ---
+   form:
+     - cluster
+   attributes:
+     cluster:
+       widget: "select"
+       options:
+         - ["cluster1", "The first cluster"]
+         - ["cluster2", "The second cluster"]
+
+The last option is to :ref:`configure the cluster in the submit file <configuring-cluster-in-submit-yml>`.
+When using this option, there's no need to add any cluster configuration to the
+form.yml.
 
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
