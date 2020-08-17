@@ -232,6 +232,33 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
+.. _set-upload-limits:
+
+Set Upload Limits
+-----------------
+
+By default, the file size upload limit is 10737420000 bytes (~10.7 GB).
+
+If you want set this to a lower value, set the ``FILE_UPLOAD_MAX`` configuration
+in the file apps' configuration file ``/etc/ood/config/apps/shell/env``.
+
+If you want to set it to a higher value, configure the files app as just described
+and also set ``nginx_file_upload_max`` in ``/etc/ood/config/nginx_stage.yml`` to
+the same number.
+
+If the values differ, the files app will choose the smaller of the two as the maximum
+upload limit.
+
+.. warning::
+   Both of these configurations are expected to be numbers only (no characters)
+   and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10.0 Gib.
+
+   Values like ``1000M`` or ``20G`` will not be accepted and may cause errors.
+
+If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and leave
+the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
+is used).
+
 Whitelist Directories
 ---------------------
 
