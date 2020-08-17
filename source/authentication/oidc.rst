@@ -48,6 +48,15 @@ The following is an example :program:`ood-portal-generator` configuration file:
      OIDCPassClaimsAs: "environment"
      OIDCStripCookies: "mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1"
 
+.. note::
+
+   It's recommended to secure :file:`/etc/ood/config/ood_portal.yml` by changing the file permissions to be ``0600`` and make the file only readable by ``root``:
+
+     .. code-block:: sh
+
+        sudo chmod root:root /etc/ood/config/ood_portal.yml
+        sudo chmod 0600 /etc/ood/config/ood_portal.yml
+
 Build the Apache configuration file and install it.
 
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
