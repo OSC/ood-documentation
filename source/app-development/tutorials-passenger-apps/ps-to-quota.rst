@@ -52,11 +52,26 @@ because
       as a table or graph
 
 #. the app can be deployed without requiring a build step because gem
-   dependencies (specified in ``Gemfile`` and ``Gemfile.lock``) are pure ruby
-   and versioned with the app under ``vendor/bundle`` 
+   dependencies (specified in ``Gemfile`` and ``Gemfile.lock``) are pure ruby and
+   match those that are provided by the ondemand-gems rpm
 #. most of the app can be modified without requiring a restart due to proper use
    of Sinatra reloader extension
 #. app has a built in scaffold for unit testing using minitest
+
+
+OnDemand System Gems
+....................
+
+This app is able to run in OnDemand 1.8+ without installing the gems specified in the Gemfile.
+
+All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps. These include gems used by this example app:
+
+- sinatra
+- sinatra-contrib
+- erubi
+
+On the OnDemand web host, you can execute the command `source scl_source enable ondmeand` and then `gem list` to see all available gems. These gems are provided by a separate ``ondemand-gems`` rpm that is installed when you do ``yum install ondemand``. The name of the RPM includes the OnDemand release version, such as ``ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm``. This ensures that if you do yum update this gem will not be removed - so apps can depend on the presence of these gems.
+
 
 
 Files and Their Purpose
@@ -92,8 +107,6 @@ Files and Their Purpose
      - Description
    * - Gemfile, Gemfile.lock
      - defines gem dependencies for the app (see `Bundler's Rationale <http://bundler.io/rationale.html>`__)
-   * - vendor/bundle
-     - installed and versioned gem dependencies
    * - tmp/
      - tmp directory is kept so its easier to ``touch tmp/restart.txt`` when you
        want to force Passenger to restart an app
@@ -108,6 +121,8 @@ Files and Their Purpose
        test/, so you can run the tests by running the command ``rake``
    * - test/minitest_helper.rb
      - contains setup code common between all tests
+   * - vendor/bundle
+     - This directory is added if you execute ``bin/bundle install --path vendor/bundle`` to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.
 
 Clone and Setup
 ---------------
