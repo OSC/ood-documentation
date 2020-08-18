@@ -352,7 +352,9 @@ Basic Batch Connect Options
 
 .. describe:: conn_params (Array<String>, ['host','port','password'])
 
-    the connection parameters that will be written to the ``conn_file``
+    the connection parameters that will be written to the ``conn_file``.
+    This is useful when you need to generate something in one of the shell scripts
+    and pass it back to the ``view.html.erb`` through the ``connection.yml`` file.
 
     Default
       'host', 'port' and 'password'
@@ -362,7 +364,12 @@ Basic Batch Connect Options
         conn_params: [ 'host', 'port', 'password' ]
 
     Example
-      no example given because users shouldn't set this value
+      The API to connect to can change in the ``script.sh.erb`` based off of
+      something that can only be determined during the job (for example an
+      environment variable in a module).
+
+      conn_params:
+        - the_connect_api
 
 .. describe:: bash_helpers (String, "...")
 

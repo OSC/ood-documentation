@@ -219,4 +219,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
           - 'websocket'
 
     Example
-      no example given because users shouldn't set this value
+      The API to connect to can change in the ``script.sh.erb`` based off of
+      something that can only be determined during the job (for example an
+      environment variable in a module).
+
+      conn_params:
+        - the_connect_api
