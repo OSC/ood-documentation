@@ -45,7 +45,7 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         content: ""
-    
+
     Example
       None given because users should not specify this
 
@@ -160,7 +160,7 @@ Note the use of ERB templates throughout these examples.
 
       .. code-block:: yaml
 
-        email: 
+        email:
         - "<%= ENV['USER'] %>@the-real-domain-I-want.edu"
 
 .. describe:: email_on_started (Boolean, nil)
@@ -202,7 +202,7 @@ Note the use of ERB templates throughout these examples.
 
 .. describe:: job_name (String, nil)
 
-    the name of the job. 
+    the name of the job.
 
     Default
       not set, specified by the batch connect application
@@ -220,7 +220,7 @@ Note the use of ERB templates throughout these examples.
 
 .. describe:: shell_path (String, nil)
 
-    the login shell path of the script 
+    the login shell path of the script
 
     Default
       not specified
@@ -257,7 +257,7 @@ Note the use of ERB templates throughout these examples.
 .. describe:: input_path (String, nil)
 
     use this file for standard input for the job's script.
-    batch connect scripts do not expect to read anything 
+    batch connect scripts do not expect to read anything
     from standard in.
 
     Default
@@ -388,7 +388,7 @@ Note the use of ERB templates throughout these examples.
     the accounting id the job should be charged to
 
     Default
-      not specified, uses the schedulers' default. users should use 
+      not specified, uses the schedulers' default. users should use
       the ``bc_account`` form attribute to set this for convenience.
 
       .. code-block:: yaml
@@ -400,7 +400,7 @@ Note the use of ERB templates throughout these examples.
 
       .. code-block:: yaml
 
-          accounting_id: 'rstudio-class-account' 
+          accounting_id: 'rstudio-class-account'
 
 .. describe:: native (Object, nil)
 
@@ -418,7 +418,7 @@ Note the use of ERB templates throughout these examples.
         native: nil
 
     Example
-      submit the job with SLURM requests for one node, ``num_cores`` (a form variable) 
+      submit the job with SLURM requests for one node, ``num_cores`` (a form variable)
       cores and ``memory`` (another form variable) amount of memory
 
       .. code-block:: yaml
@@ -433,8 +433,8 @@ Note the use of ERB templates throughout these examples.
 
 .. describe:: copy_environment (Boolean, nil)
 
-    have the scheduler to copy the environment. SLURM uses 
-    ``--export=ALL`` (default is NONE). PBS/Torque and LSF 
+    have the scheduler to copy the environment. SLURM uses
+    ``--export=ALL`` (default is NONE). PBS/Torque and LSF
     set the ``-V`` flag.
 
     Default
