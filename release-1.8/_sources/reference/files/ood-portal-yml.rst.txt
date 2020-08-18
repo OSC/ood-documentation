@@ -889,6 +889,24 @@ to ``null`` will disable this feature.
 
           oidc_state_max_number_of_cookies: "20 true"
 
+.. describe:: oidc_cookie_same_site (String)
+
+     Refer to OIDCCookieSameSite in `auth_openidc.conf`_.
+
+     Default
+       The default value is ``On`` when SSL is disabled or ``Off`` when SSL is enabled.
+
+       .. code-block:: yaml
+
+          oidc_cookie_same_site: "On"
+
+     Example
+       Set OIDCCookieSameSite
+
+       .. code-block:: yaml
+
+          oidc_cookie_same_site: "Off"
+
 .. describe:: oidc_settings (Hash, {})
 
      A Hash to supply additional OIDC settings.
