@@ -190,14 +190,14 @@ It's possible for you to add additional information to this connection view.
 
 You can do so by creating a Markdown file ``info.md.erb`` or an html file
 ``info.html.erb`` in the applications folder.  Markdown files get generated
-into html with # turning into a h1 and ## turning into an h2 and so on.
+into html with # turning into an <h1> and ## turning into an <h2> and so on.
 
 Again, they're `eRuby (Embedded Ruby)`_ files so you can add some dynamic behavior
 to them. Along with any library you may choose to use you can also access these
 variables directly.
 
 id
-  The UUID of the job
+  The session UUID of the job
 cluster_id
   The cluster the job was submitted to
 job_id
