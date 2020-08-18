@@ -21,6 +21,9 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 import os
+import datetime 
+
+year = str(datetime.datetime.now().year)
 
 # -- General configuration ------------------------------------------------
 
@@ -55,7 +58,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Open OnDemand'
-copyright = u'2017-2019, Ohio Supercomputer Center'
+#copyright = u'2017-2019, Ohio Supercomputer Center'
+copyright = u'2017-' + year + ', Ohio Supercomputer Center'
 author = u'Ohio Supercomputer Center'
 
 # The version info for the project you're documenting, acts as replacement for
