@@ -279,16 +279,24 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 
 .. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
+.. _set-default-ssh-host:
+
 Set Default SSH Host
 --------------------
 
-In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``OOD_DEFAULT_SSHHOST="localhost"``.
+.. warning::
+   The shell app does not work out of the box because all SSH hosts have to be explicitly allowed
+   through the allowlist (see the section below).
+
+   Because there are no hosts configured, no hosts are allowed.
+
+In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to change the default ssh host.
+Since 1.8, there is no out of the box default (in previous versions it was 'localhost', but this has been removed).
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
 
-Since 1.8 you can also set the default ssh host in the cluster configuration as well.
-
-Simply add default=true attribute to the login section like the example below.
+Since 1.8 you can also set the default ssh host in the cluster configuration as well. Simply add
+default=true attribute to the login section like the example below.
 
 .. code-block:: yaml
 
@@ -300,6 +308,8 @@ Simply add default=true attribute to the login section like the example below.
      login:
        host: "my_cluster.my_center.edu"
        default: true
+
+.. _set-ssh-allowlist:
 
 Set SSH Allowlist
 -----------------
