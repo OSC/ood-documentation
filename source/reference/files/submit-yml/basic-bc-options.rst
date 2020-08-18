@@ -5,7 +5,7 @@ Basic Batch Connect Options
 ===========================
 
   .. code-block:: yaml
-  
+
     batch_connect:
       template: "basic"
       work_dir: nil
@@ -47,7 +47,7 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         min_port: 3005
-      
+
 .. describe:: max_port (Integer, 65535)
 
     the largest value to use when trying to open a port
@@ -211,7 +211,7 @@ Basic Batch Connect Options
     commands to execute the main file
 
     Default
-      execute the configurable ``script_file`` or optionally run with 
+      execute the configurable ``script_file`` or optionally run with
       the timeout command if there is a timeout given.
 
       .. code-block:: ruby
