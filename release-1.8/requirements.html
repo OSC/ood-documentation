@@ -110,6 +110,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#browser-requirements">Browser Requirements</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
@@ -260,6 +261,19 @@
 <p>At <a class="reference external" href="https://osc.edu">OSC</a> we have not quantified the minimum hardware requirements for OnDemand. The VMs that run OnDemand have 16 cores and 64GB RAM. According to our Ganglia metrics that is over powered for our normal utilization. We average 150MB memory per PUN and the average CPU percentage per Per User NGINX (PUN) is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time usually has 60-100 PUN processes running.</p>
 <p>The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache is proxying these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.</p>
 <p>Another sizing factor that has impacted us in the past is the size of the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> partition.  We have had incidents where <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is exhausted and so have increased the size from 20GB to 50GB.</p>
+</div>
+<div class="section" id="browser-requirements">
+<h2>Browser Requirements<a class="headerlink" href="#browser-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">No IE11 support. If you are a site that requires IE11 support and are willing to contribute developer time to the project to support this, please reach out to us.</p>
+</div>
+<p>To have the best experience using OnDemand, use the latest versions of <a class="reference external" href="https://www.google.com/chrome/">Google Chrome</a>, <a class="reference external" href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a> or <a class="reference external" href="https://www.microsoft.com/en-us/edge">Microsoft Edge</a>.
+Use any modern browser that supports ECMAScript 2016.</p>
+<p>Google Chrome has the widest range of support since the <a class="reference internal" href="applications/shell.html"><span class="doc">Shell App</span></a> uses <code class="docutils literal notranslate"><span class="pre">hterm.js</span></code> which is supported officially by Google.
+Chrome currently is the only web browser that natively supports the copy and paste functionality in <code class="docutils literal notranslate"><span class="pre">noVNC</span></code>.
+Other browsers can do copy and pasting manually through the <code class="docutils literal notranslate"><span class="pre">noVNC</span></code> tool drawer.</p>
+<p>Sites have reported problems with Safari when using the <a class="reference internal" href="applications/shell.html"><span class="doc">Shell App</span></a> or <code class="docutils literal notranslate"><span class="pre">noVNC</span></code>. Safari is also known to cause problems with WebSockets and Basic Auth.</p>
 </div>
 </div>
 
