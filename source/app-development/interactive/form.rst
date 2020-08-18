@@ -509,6 +509,8 @@ does two things:
 - it then describes the HTML form element to use for the ``my_module_version``
   attribute
 
+.. _caching-from-items:
+
 Caching form items
 ``````````````````
 
@@ -524,7 +526,7 @@ dashboard's environment file ``/etc/ood/config/apps/dashboard/env``.
 .. tip::
 
    Since you can configure caching at different levels the rule of thumb is the
-   closer the the configuration is to the form item, the higher the precedence.
+   closer the configuration is to the form item, the higher the precedence.
 
    Setting the configuration on the attribute overrides everything and setting it
    on a per app basis overrides the global setting.
