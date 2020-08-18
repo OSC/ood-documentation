@@ -55,7 +55,8 @@ To have the best experience using OnDemand, use the latest versions of `Google C
 Use any modern browser that supports ECMAScript 2016.
 
 Google Chrome has the widest range of support since the :doc:`applications/shell` uses ``hterm.js`` which is supported officially by Google.
-Chrome currently is the only web browser that supports the copy and paste functionality in ``noVNC``.
+Chrome currently is the only web browser that natively supports the copy and paste functionality in ``noVNC``.
+Other browsers can do copy and pasting manually through the ``noVNC`` tool drawer.
 
 Sites have reported problems with Safari when using the :doc:`applications/shell` or ``noVNC``. Safari is also known to cause problems with WebSockets and Basic Auth.
 
