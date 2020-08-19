@@ -150,13 +150,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#torque-and-slurm-schedulers-now-supports-qos-fields">Torque and SLURM schedulers now supports QOS fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#torque-and-slurm-schedulers-now-support-qos-fields">Torque and Slurm schedulers now support QoS fields</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMOD integration in the dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#chinese-localization">Chinese localization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#support-for-svg-logos">Support for SVG logos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#environment-variable-name-changes">Environment variable name changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-svg-dashboard-logos">Support for SVG dashboard logos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-new-native-vnc-views">Support for new Native VNC views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#better-max-file-upload-support">Better max file upload support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drop-ie-11-support">Drop IE 11 support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#added-sinatra-rubygems-into-ondemand-gems-for-other-apps-to-use">Added Sinatra RubyGems into ondemand-gems for other apps to use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streamlined-copy-and-paste-in-novnc-for-chrome">Streamlined copy and paste in noVNC for Chrome</a></li>
 </ul>
 </li>
 </ul>
@@ -255,24 +259,33 @@
 <li><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></li>
 <li><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></li>
 <li><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></li>
-<li><a class="reference internal" href="#torque-and-slurm-schedulers-now-supports-qos-fields">Torque and SLURM schedulers now supports QOS fields</a></li>
+<li><a class="reference internal" href="#torque-and-slurm-schedulers-now-support-qos-fields">Torque and Slurm schedulers now support QoS fields</a></li>
 <li><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></li>
 <li><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMOD integration in the dashboard</a></li>
 <li><a class="reference internal" href="#chinese-localization">Chinese localization</a></li>
 <li><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></li>
-<li><a class="reference internal" href="#support-for-svg-logos">Support for SVG logos</a></li>
-<li><a class="reference internal" href="#environment-variable-name-changes">Environment variable name changes</a></li>
+<li><a class="reference internal" href="#support-for-svg-dashboard-logos">Support for SVG dashboard logos</a></li>
+<li><a class="reference internal" href="#support-for-new-native-vnc-views">Support for new Native VNC views</a></li>
+<li><a class="reference internal" href="#better-max-file-upload-support">Better max file upload support</a></li>
+<li><a class="reference internal" href="#drop-ie-11-support">Drop IE 11 support</a></li>
+<li><a class="reference internal" href="#added-sinatra-rubygems-into-ondemand-gems-for-other-apps-to-use">Added Sinatra RubyGems into ondemand-gems for other apps to use</a></li>
+<li><a class="reference internal" href="#streamlined-copy-and-paste-in-novnc-for-chrome">Streamlined copy and paste in noVNC for Chrome</a></li>
 </ul>
 <div class="section" id="special-thanks">
 <h2>Special thanks<a class="headerlink" href="#special-thanks" title="Permalink to this headline">¶</a></h2>
+<p>Special thanks to <a class="reference external" href="https://github.com/374365283">https://github.com/374365283</a> and <a class="reference external" href="https://github.com/flybirdkh">https://github.com/flybirdkh</a>
+of Shanghai Jiao Tong University (<a class="reference external" href="https://hpc.sjtu.edu.cn/">https://hpc.sjtu.edu.cn/</a>) for <a class="reference internal" href="#chinese-localization">Chinese localization</a>!</p>
+<p>Thanks to <a class="reference external" href="https://github.com/plessbd">Ben Plessinger</a> and the whole
+<a class="reference external" href="https://github.com/ubccr">University of Buffalo Center for Computational Research</a> team for help in XDMoD
+integration.</p>
 </div>
 <div class="section" id="upgrading-from-v1-7">
 <h2>Upgrading from v1.7<a class="headerlink" href="#upgrading-from-v1-7" title="Permalink to this headline">¶</a></h2>
 <p>Before upgrading to v1.8, please consider the following:</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Shell hosts are now protected behind allowlists.  If you hae not
-explicitly set the default ssh host, you must do so after upgrading. You must
+<p class="last">Shell hosts are now protected behind allowlists.  If you have not
+explicitly set the default SSH host, you must do so after upgrading. You must
 also update the configuration to allow shell access to any login or compute nodes.
 <a class="reference external" href="#shell-hosts-are-now-protected-behind-allowlists">See the entry in the release notes for more information.</a></p>
 </div>
@@ -334,39 +347,141 @@ See <a class="reference internal" href="../authentication/dex.html#authenticatio
 </div>
 <div class="section" id="beta-ccq-scheduler-support">
 <h3>Beta CCQ Scheduler support<a class="headerlink" href="#beta-ccq-scheduler-support" title="Permalink to this headline">¶</a></h3>
+<p>We now have beta <a class="reference external" href="http://cloudycluster.com/">Cloudy Cluster</a> support for their ccq scheduler.  You can find
+<a class="reference internal" href="../installation/resource-manager/ccq.html#resource-manager-cloudy-cluster"><span class="std std-ref">documentation on how to configure the cluster here</span></a>.</p>
 </div>
 <div class="section" id="retain-completed-jobs-panel-for-debugging">
 <h3>Retain completed jobs panel for debugging<a class="headerlink" href="#retain-completed-jobs-panel-for-debugging" title="Permalink to this headline">¶</a></h3>
+<p>When an interactive job completes, its panel will now remain in the view. This is to
+allow users and administrators to debug failed jobs by keeping the session id links
+in view.</p>
 </div>
 <div class="section" id="batch-connect-apps-now-support-multiple-clusters">
 <h3>Batch Connect apps now support multiple clusters<a class="headerlink" href="#batch-connect-apps-now-support-multiple-clusters" title="Permalink to this headline">¶</a></h3>
+<p>Batch connect applications now support multiple clusters in their configuration
+instead of just one.</p>
+<p>Where previous configuration look like this, with only a single cluster.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
+</pre></div>
+</div>
+<p>Configurations will now accept an array like the example below.  This will create a
+dropdown select menu item at the top of the form where users can choose between
+the two options.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;my_cluster&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;my_other_cluster&quot;</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../app-development/interactive/form.html#configuring-cluster"><span class="std std-ref">See the documentation on all the ways to configure which cluster to submit to.</span></a></p>
 </div>
 <div class="section" id="batch-connect-apps-now-support-disabling-caching-on-fields">
 <h3>Batch Connect apps now support disabling caching on fields<a class="headerlink" href="#batch-connect-apps-now-support-disabling-caching-on-fields" title="Permalink to this headline">¶</a></h3>
+<p>When a user submits the web form for an interactive app (batch connect) the form
+values the user set are stored in a cache file that is used to pre-populate the web
+form in the future. In some cases, setting the default value of the form field to a
+previously used value is undesirable. You can now disable this caching feature for
+every app, on a per app basis, or on a per field basis.</p>
+<p><a class="reference internal" href="../app-development/interactive/form.html#caching-form-items"><span class="std std-ref">See the documentation on attribute cache enabling for more details.</span></a></p>
 </div>
 <div class="section" id="extended-view-support-for-gridengine-clusters">
 <h3>Extended view support for GridEngine clusters<a class="headerlink" href="#extended-view-support-for-gridengine-clusters" title="Permalink to this headline">¶</a></h3>
+<p>In the Active Jobs app, similar to Torque and Slurm jobs, SGE jobs will now have a details
+view available where the user can see various details about their job such as walltime, Total
+CPUs, etc. The view is made visible by clicking on the arrow on the far left of the table row
+corresponding to the job.</p>
+<p>The data seen in extended view is extracted from the command <code class="docutils literal notranslate"><span class="pre">qstat</span> <span class="pre">-j</span> <span class="pre">-r</span> <span class="pre">-xml</span></code>.</p>
 </div>
-<div class="section" id="torque-and-slurm-schedulers-now-supports-qos-fields">
-<h3>Torque and SLURM schedulers now supports QOS fields<a class="headerlink" href="#torque-and-slurm-schedulers-now-supports-qos-fields" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="torque-and-slurm-schedulers-now-support-qos-fields">
+<h3>Torque and Slurm schedulers now support QoS fields<a class="headerlink" href="#torque-and-slurm-schedulers-now-support-qos-fields" title="Permalink to this headline">¶</a></h3>
+<p>Torque and Slurm schedulers now support the quality of service (QoS) fields.</p>
+<p><code class="docutils literal notranslate"><span class="pre">qos</span></code> is now an acceptable script attribute like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">qos</span><span class="p p-Indicator">:</span> <span class="s">&#39;best&#39;</span>
+</pre></div>
+</div>
+<p>In Torque this translates to <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">qos=best</span></code> and in Slurm it is <code class="docutils literal notranslate"><span class="pre">--qos</span> <span class="pre">best</span></code>.</p>
 </div>
 <div class="section" id="shell-hosts-are-now-protected-behind-allowlists">
 <h3>Shell hosts are now protected behind allowlists<a class="headerlink" href="#shell-hosts-are-now-protected-behind-allowlists" title="Permalink to this headline">¶</a></h3>
+<p>Shell hosts are now protected behind allowlists. This means administrators now need
+to explicitly add hosts to an allowlist for users to be able to access them through
+the shell app.</p>
+<p>Any login host of a cluster config will be allowed, assuming that cluster is not
+configured as “hidden” in the metadata section of the cluster config.
+However, administrators will need to add a configuration for compute nodes and any
+additional hosts they wish to allow access to.</p>
+<p>Administrators should also configure the default ssh host if they’ve not already done
+so because ‘localhost’ is no longer the out of the box default.</p>
+<p><a class="reference internal" href="../customization.html#set-default-ssh-host"><span class="std std-ref">See the documentation for setting the default ssh host</span></a>
+and <a class="reference internal" href="../customization.html#set-ssh-allowlist"><span class="std std-ref">the documentation for setting the allowlist for more details</span></a>.</p>
 </div>
 <div class="section" id="beta-xdmod-integration-in-the-dashboard">
 <h3>Beta XDMOD integration in the dashboard<a class="headerlink" href="#beta-xdmod-integration-in-the-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>If your site also uses <a class="reference external" href="https://open.xdmod.org/">XDMOD</a> for job metric collection, Open OnDemand now
+has beta support to connect to that installation and show XDMOD panels in
+the dashboard.</p>
+<p>To enable this functionality simply set the <code class="docutils literal notranslate"><span class="pre">OOD_XDMOD_HOST</span></code> to it’s full URL
+in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">OOD_XDMOD_HOST</span><span class="o">=</span><span class="s2">&quot;https://xdmod.mysite.edu&quot;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="chinese-localization">
 <h3>Chinese localization<a class="headerlink" href="#chinese-localization" title="Permalink to this headline">¶</a></h3>
+<p>The Chinese localization <code class="docutils literal notranslate"><span class="pre">zh-CN</span></code> is now available in the dashboard and
+job composer applications for sites who wish to use it.</p>
+<p>To enable it, simply set the <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE</span></code> environment variable globally
+in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_custom_env</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">OOD_LOCALE</span><span class="p p-Indicator">:</span> <span class="s">&quot;zh-CN&quot;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="ability-to-add-additional-info-to-batch-connect-app">
 <h3>Ability to add additional info to batch connect app<a class="headerlink" href="#ability-to-add-additional-info-to-batch-connect-app" title="Permalink to this headline">¶</a></h3>
+<p>You can now add an info.html.erb file to an interactive app (batch connect)
+directory and it will render and display in the job panel. This is useful for
+providing documentation links for an app.q
+<a class="reference internal" href="../app-development/interactive/view.html#bc-info-html-md-erb"><span class="std std-ref">See the documentation on info.html.erb for more details.</span></a></p>
 </div>
-<div class="section" id="support-for-svg-logos">
-<h3>Support for SVG logos<a class="headerlink" href="#support-for-svg-logos" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="support-for-svg-dashboard-logos">
+<h3>Support for SVG dashboard logos<a class="headerlink" href="#support-for-svg-dashboard-logos" title="Permalink to this headline">¶</a></h3>
+<p>Logos can now be SVG images and controlled through the <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_LOGO_HEIGHT</span></code>
+configuration to resize them. <a class="reference internal" href="../customization.html#id2"><span class="std std-ref">See documentation on branding for form information.</span></a></p>
 </div>
-<div class="section" id="environment-variable-name-changes">
-<h3>Environment variable name changes<a class="headerlink" href="#environment-variable-name-changes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="support-for-new-native-vnc-views">
+<h3>Support for new Native VNC views<a class="headerlink" href="#support-for-new-native-vnc-views" title="Permalink to this headline">¶</a></h3>
+<p>Sites can now define instructions for connecting to VNC interactive jobs using a native
+VNC client instead of using NoVNC through the browser.</p>
+<p><a class="reference internal" href="../app-development/interactive/view.html#bc-native-vnc-view"><span class="std std-ref">More details on this feature can be found here.</span></a></p>
+</div>
+<div class="section" id="better-max-file-upload-support">
+<h3>Better max file upload support<a class="headerlink" href="#better-max-file-upload-support" title="Permalink to this headline">¶</a></h3>
+<p>While FILE_UPLOAD_MAX configuration has existed for some time, 1.8 adds the corresponding
+nginx configuration so that sites can set the upload max to settings larger than 10 GiB.</p>
+<p><a class="reference internal" href="../customization.html#set-upload-limits"><span class="std std-ref">See the section in the customization page for more details.</span></a></p>
+</div>
+<div class="section" id="drop-ie-11-support">
+<h3>Drop IE 11 support<a class="headerlink" href="#drop-ie-11-support" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.</p>
+</div>
+<p>IE 11 support was officially dropped. See Browser Requirements.</p>
+</div>
+<div class="section" id="added-sinatra-rubygems-into-ondemand-gems-for-other-apps-to-use">
+<h3>Added Sinatra RubyGems into ondemand-gems for other apps to use<a class="headerlink" href="#added-sinatra-rubygems-into-ondemand-gems-for-other-apps-to-use" title="Permalink to this headline">¶</a></h3>
+<p>Sinatra RubyGems were added to the Dashboard application, they are automatically installed with the <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> RPM.
+Other applications can now get started without needing to install RubyGems into the applications directory.</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="n">gem</span> <span class="s2">&quot;sinatra&quot;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+<span class="n">gem</span> <span class="s2">&quot;sinatra-contrib&quot;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+<span class="n">gem</span> <span class="s2">&quot;erubi&quot;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="streamlined-copy-and-paste-in-novnc-for-chrome">
+<h3>Streamlined copy and paste in noVNC for Chrome<a class="headerlink" href="#streamlined-copy-and-paste-in-novnc-for-chrome" title="Permalink to this headline">¶</a></h3>
+<p>Copy and pasting now works out of the box in Chrome. An issue with copy and pasting large clipboard buffers into noVNC applications on Chrome was fixed in version 1.8.</p>
 </div>
 </div>
 </div>

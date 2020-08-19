@@ -97,7 +97,10 @@ We recommend setting these environment variables in ``/etc/ood/config/nginx_stag
      - The title appears in the navbar and is controlled by the environment variable ``$OOD_DASHBOARD_TITLE``. The default value is "Open OnDemand".
    * - Logo
      - OOD_DASHBOARD_LOGO
-     - The default value for ``OOD_DASHBOARD_LOGO`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.
+     - The default value for ``OOD_DASHBOARD_LOGO`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.  SVG logo format is also supported.
+   * - Logo height
+     - OOD_DASHBOARD_LOGO_HEIGHT
+     - The CSS height of the dashboard logo.
    * - Favicon
      - OOD_PUBLIC_URL
      - The favicon is expected to exist at the path ``$OOD_PUBLIC_URL/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
@@ -229,6 +232,33 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
+.. _set-upload-limits:
+
+Set Upload Limits
+-----------------
+
+By default, the file size upload limit is 10737420000 bytes (~10.7 GB).
+
+If you want set this to a lower value, set the ``FILE_UPLOAD_MAX`` configuration
+in the file apps' configuration file ``/etc/ood/config/apps/shell/env``.
+
+If you want to set it to a higher value set ``nginx_file_upload_max``
+in ``/etc/ood/config/nginx_stage.yml`` to the desired value. If you have
+``FILE_UPLOAD_MAX`` set from above, unset it.
+
+If the values differ, the files app will choose the smaller of the two as the maximum
+upload limit.
+
+.. warning::
+   Both of these configurations are expected to be numbers only (no characters)
+   and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10.0 Gib.
+
+   Values like ``1000M`` or ``20G`` will not be accepted and may cause errors.
+
+If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and leave
+the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
+is used).
+
 Whitelist Directories
 ---------------------
 
@@ -249,12 +279,59 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 
 .. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
+.. _set-default-ssh-host:
+
 Set Default SSH Host
 --------------------
 
-In ``/etc/ood/config/apps/shell/env`` set the env var ``DEFAULT_SSHHOST`` to change the default ssh host. Otherwise it will default to "localhost" i.e. add the line ``DEFAULT_SSHHOST="localhost"``.
+.. warning::
+   The shell app does not work out of the box because all SSH hosts have to be explicitly allowed
+   through the allowlist (see the section below).
+
+   Because there are no hosts configured, no hosts are allowed.
+
+In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to change the default ssh host.
+Since 1.8, there is no out of the box default (in previous versions it was 'localhost', but this has been removed).
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
+
+Since 1.8 you can also set the default ssh host in the cluster configuration as well. Simply add
+default=true attribute to the login section like the example below.
+
+.. code-block:: yaml
+
+   # /etc/ood/config/clusters.d/my_cluster.yml
+   ---
+   v2:
+     metadata:
+       title: "My Cluster"
+     login:
+       host: "my_cluster.my_center.edu"
+       default: true
+
+.. _set-ssh-allowlist:
+
+Set SSH Allowlist
+-----------------
+
+In 1.8 and above we stopped allowing ssh access by default.  Now you have explicitly set
+what hosts users will be allowed to connect to in the shell application.
+
+Every cluster configuration with ``v2.login.host`` that is not hidden (it has
+``v2.metadata.hidden`` attribute set to true) will be added to this allowlist.
+
+To add other hosts into the allow list (for example compute nodes) add the configuration
+``OOD_SSHHOST_ALLOWLIST`` to the ``/etc/ood/config/apps/shell/env`` file.
+
+This configuration is expected to be a colon (:) separated list of GLOBs.
+
+Here's an example of of this configuration with three such GLOBs that allow for shell
+access into any compute node in our three clusters.
+
+.. code:: shell
+
+  # /etc/ood/config/apps/shell/env
+  OOD_SSHHOST_ALLOWLIST="r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu"
 
 Shell App SSH Command Wrapper
 -----------------------------

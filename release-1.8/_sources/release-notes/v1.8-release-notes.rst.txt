@@ -12,25 +12,35 @@ Highlights in 1.8:
 - `Batch Connect apps now support multiple clusters`_
 - `Batch Connect apps now support disabling caching on fields`_
 - `Extended view support for GridEngine clusters`_
-- `Torque and SLURM schedulers now supports QOS fields`_
+- `Torque and Slurm schedulers now support QoS fields`_
 - `Shell hosts are now protected behind allowlists`_
 - `Beta XDMOD integration in the dashboard`_
 - `Chinese localization`_
 - `Ability to add additional info to batch connect app`_
-- `Support for SVG logos`_
-- `Environment variable name changes`_
+- `Support for SVG dashboard logos`_
+- `Support for new Native VNC views`_
+- `Better max file upload support`_
+- `Drop IE 11 support`_
+- `Added Sinatra RubyGems into ondemand-gems for other apps to use`_
+- `Streamlined copy and paste in noVNC for Chrome`_
 
 Special thanks
 --------------
 
+Special thanks to https://github.com/374365283 and https://github.com/flybirdkh
+of Shanghai Jiao Tong University (https://hpc.sjtu.edu.cn/) for `Chinese localization`_!
+
+Thanks to `Ben Plessinger`_ and the whole
+`University of Buffalo Center for Computational Research`_ team for help in XDMoD
+integration.
 
 Upgrading from v1.7
 -------------------
 
 Before upgrading to v1.8, please consider the following:
 
-.. warning:: Shell hosts are now protected behind allowlists.  If you hae not
-    explicitly set the default ssh host, you must do so after upgrading. You must
+.. warning:: Shell hosts are now protected behind allowlists.  If you have not
+    explicitly set the default SSH host, you must do so after upgrading. You must
     also update the configuration to allow shell access to any login or compute nodes.
     `See the entry in the release notes for more information. <#shell-hosts-are-now-protected-behind-allowlists>`_
 
@@ -102,38 +112,182 @@ The Open OnDemand Portal :ref:`ood-portal-generator-configuration` file now supp
 Beta CCQ Scheduler support
 ..........................
 
+We now have beta `Cloudy Cluster`_ support for their ccq scheduler.  You can find
+:ref:`documentation on how to configure the cluster here <resource-manager-cloudy-cluster>`.
+
 Retain completed jobs panel for debugging
 .........................................
+
+When an interactive job completes, its panel will now remain in the view. This is to
+allow users and administrators to debug failed jobs by keeping the session id links
+in view.
 
 Batch Connect apps now support multiple clusters
 ................................................
 
+Batch connect applications now support multiple clusters in their configuration
+instead of just one.
+
+Where previous configuration look like this, with only a single cluster.
+
+.. code-block:: yaml
+
+   cluster: "my_cluster"
+
+Configurations will now accept an array like the example below.  This will create a
+dropdown select menu item at the top of the form where users can choose between
+the two options.
+
+.. code-block:: yaml
+
+   cluster:
+     - "my_cluster"
+     - "my_other_cluster"
+
+
+:ref:`See the documentation on all the ways to configure which cluster to submit to.  <configuring-cluster>`
+
 Batch Connect apps now support disabling caching on fields
 ..........................................................
+
+When a user submits the web form for an interactive app (batch connect) the form
+values the user set are stored in a cache file that is used to pre-populate the web
+form in the future. In some cases, setting the default value of the form field to a
+previously used value is undesirable. You can now disable this caching feature for
+every app, on a per app basis, or on a per field basis.
+
+:ref:`See the documentation on attribute cache enabling for more details. <caching-form-items>`
 
 Extended view support for GridEngine clusters
 .............................................
 
-Torque and SLURM schedulers now supports QOS fields
+In the Active Jobs app, similar to Torque and Slurm jobs, SGE jobs will now have a details
+view available where the user can see various details about their job such as walltime, Total
+CPUs, etc. The view is made visible by clicking on the arrow on the far left of the table row
+corresponding to the job.
+
+The data seen in extended view is extracted from the command ``qstat -j -r -xml``.
+
+Torque and Slurm schedulers now support QoS fields
 ...................................................
+
+Torque and Slurm schedulers now support the quality of service (QoS) fields.
+
+``qos`` is now an acceptable script attribute like so:
+
+.. code-block:: yaml
+
+   script:
+     qos: 'best'
+
+In Torque this translates to ``-l qos=best`` and in Slurm it is ``--qos best``.
 
 Shell hosts are now protected behind allowlists
 ...............................................
 
+Shell hosts are now protected behind allowlists. This means administrators now need
+to explicitly add hosts to an allowlist for users to be able to access them through
+the shell app.
+
+Any login host of a cluster config will be allowed, assuming that cluster is not
+configured as "hidden" in the metadata section of the cluster config.
+However, administrators will need to add a configuration for compute nodes and any
+additional hosts they wish to allow access to.
+
+Administrators should also configure the default ssh host if they've not already done
+so because 'localhost' is no longer the out of the box default.
+
+:ref:`See the documentation for setting the default ssh host <set-default-ssh-host>`
+and :ref:`the documentation for setting the allowlist for more details <set-ssh-allowlist>`.
+
 Beta XDMOD integration in the dashboard
 .......................................
+
+If your site also uses `XDMOD`_ for job metric collection, Open OnDemand now
+has beta support to connect to that installation and show XDMOD panels in
+the dashboard.
+
+To enable this functionality simply set the ``OOD_XDMOD_HOST`` to it's full URL
+in ``/etc/ood/config/apps/dashboard/env``.
+
+.. code-block:: shell
+
+  OOD_XDMOD_HOST="https://xdmod.mysite.edu"
 
 Chinese localization
 ....................
 
+The Chinese localization ``zh-CN`` is now available in the dashboard and
+job composer applications for sites who wish to use it.
+
+To enable it, simply set the ``OOD_LOCALE`` environment variable globally
+in ``/etc/ood/config/nginx_stage.yml``
+
+.. code-block:: yaml
+
+  pun_custom_env:
+     OOD_LOCALE: "zh-CN"
+
+
 Ability to add additional info to batch connect app
 ...................................................
 
-Support for SVG logos
-.....................
+You can now add an info.html.erb file to an interactive app (batch connect)
+directory and it will render and display in the job panel. This is useful for
+providing documentation links for an app.q
+:ref:`See the documentation on info.html.erb for more details. <bc_info_html_md_erb>`
 
-Environment variable name changes
-.................................
+Support for SVG dashboard logos
+...............................
+
+Logos can now be SVG images and controlled through the ``OOD_DASHBOARD_LOGO_HEIGHT``
+configuration to resize them. :ref:`See documentation on branding for form information. <branding>`
+
+Support for new Native VNC views
+................................
+
+Sites can now define instructions for connecting to VNC interactive jobs using a native
+VNC client instead of using NoVNC through the browser.
+
+:ref:`More details on this feature can be found here. <bc_native_vnc_view>`
+
+Better max file upload support
+..............................
+
+While FILE_UPLOAD_MAX configuration has existed for some time, 1.8 adds the corresponding
+nginx configuration so that sites can set the upload max to settings larger than 10 GiB.
+
+:ref:`See the section in the customization page for more details. <set-upload-limits>`
+
+Drop IE 11 support
+..................
+
+.. warning::
+  No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.
+
+IE 11 support was officially dropped. See Browser Requirements.
+
+Added Sinatra RubyGems into ondemand-gems for other apps to use
+...............................................................
+
+Sinatra RubyGems were added to the Dashboard application, they are automatically installed with the ``ondemand-gems`` RPM.
+Other applications can now get started without needing to install RubyGems into the applications directory.
+
+.. code-block:: ruby
+
+  gem "sinatra", require: false
+  gem "sinatra-contrib", require: false
+  gem "erubi", require: false
+
+Streamlined copy and paste in noVNC for Chrome
+..............................................
+
+Copy and pasting now works out of the box in Chrome. An issue with copy and pasting large clipboard buffers into noVNC applications on Chrome was fixed in version 1.8.
+
 
 .. _dex: https://github.com/dexidp/dex
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
+.. _cloudy cluster: http://cloudycluster.com/
+.. _XDMOD: https://open.xdmod.org/
+.. _Ben Plessinger: https://github.com/plessbd
+.. _University of Buffalo Center for Computational Research: https://github.com/ubccr
