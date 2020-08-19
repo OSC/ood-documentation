@@ -20,6 +20,9 @@ Highlights in 1.8:
 - `Support for SVG dashboard logos`_
 - `Support for new Native VNC views`_
 - `Better max file upload support`_
+- `Drop IE 11 support`_
+- `Added Sinatra RubyGems into ondemand-gems for other apps to use`_
+- `Streamlined copy and paste in noVNC for Chrome`_
 
 Special thanks
 --------------
@@ -257,3 +260,28 @@ nginx configuration so that sites can set the upload max to settings larger than
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
 .. _cloudy cluster: http://cloudycluster.com/
 .. _XDMOD: https://open.xdmod.org/
+
+Drop IE 11 support
+..................
+
+.. warning::
+  No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.
+
+IE 11 support was officially dropped. See Browser Requirements.
+
+Added Sinatra RubyGems into ondemand-gems for other apps to use
+...............................................................
+
+Sinatra RubyGems were added to the Dashboard application, they are automatically installed with the ``ondemand-gems`` RPM.
+Other applications can now get started without needing to install RubyGems into the applications directory.
+
+.. code-block:: ruby
+
+  gem "sinatra", require: false
+  gem "sinatra-contrib", require: false
+  gem "erubi", require: false
+
+Streamlined copy and paste in noVNC for Chrome
+..............................................
+
+There was an issue with copy and pasting large clipboard buffers into noVNC applications on Chrome. This was fixed in version 1.8.
