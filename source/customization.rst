@@ -602,25 +602,6 @@ The OSC-default value for ``options_account_help`` says that the account field i
 
 Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string ``options_account_help``.
 
-Disable Safari Warning on Dashboard
------------------------------------
-
-We currently display an alert message at the top of the Dashboard mentioning
-that we don't currently support the Safari browser. This is because of an issue
-in Safari where it fails to connect to websockets if the Apache proxy uses
-Basic Auth for user authentication (on by default for new OOD installations).
-
-If you ever change the authentication mechanism to a cookie-based mechanism
-(e.g., Shibboleth or OpenID Connect), then it is recommended you disable this
-alert message in the dashboard.
-
-You can do this by modifying the ``/etc/ood/config/apps/dashboard/env`` file as such:
-
-.. code:: sh
-
-   DISABLE_SAFARI_BASIC_AUTH_WARNING=1
-
-
 Disk Quota Warnings on Dashboard
 --------------------------------
 
