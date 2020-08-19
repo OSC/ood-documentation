@@ -24,6 +24,8 @@ Highlights in 1.8:
 Special thanks
 --------------
 
+Special thanks to https://github.com/374365283 and https://github.com/flybirdkh
+of Shanghai Jiao Tong University (https://hpc.sjtu.edu.cn/) for `Chinese localization`_!
 
 Upgrading from v1.7
 -------------------
@@ -136,22 +138,26 @@ the two options.
      - "my_other_cluster"
 
 
-There are also other ways to configure which cluster to submit to.
-:ref:`Complete documentation can be found here. <configuring-cluster>`
+:ref:`See the documentation on all the ways to configure which cluster to submit to.  <configuring-cluster>`
 
 Batch Connect apps now support disabling caching on fields
 ..........................................................
 
-Batch connect apps can now enable or disable caching site wide, on a per app basis
-or on a per item basis.
+When a user submits the web form for an interactive app (batch connect) the form
+values the user set are stored in a cache file that is used to pre-populate the web
+form in the future. In some cases, setting the default value of the form field to a
+previously used value is undesirable. You can now disable this caching feature for
+every app, on a per app basis, or on a per field basis.
 
-:ref:`See the full documentation on this feature here. <caching-from-items>`
+:ref:`See the documentation on attribute cache enabling for more details. <caching-form-items>`
 
 Extended view support for GridEngine clusters
 .............................................
 
-In the Active Jobs app, each job will have a dropdown where the user can see various details about their job such as walltime, Total CPUs, etc. 
-This functionality was recently implemented for SGE in v1.8 and corresponds to ood_core v0.12.0
+In the Active Jobs app, similar to Torque and Slurm jobs, SGE jobs will now have a details
+view available where the user can see various details about their job such as walltime, Total
+CPUs, etc. The view is made visible by clicking on the arrow on the far left of the table row
+corresponding to the job.
 
 The data seen in extended view is extracted from the command ``qstat -j -r -xml``.
 
@@ -176,7 +182,8 @@ Shell hosts are now protected behind allowlists. This means administrators now n
 to explicitly add hosts to an allowlist for users to be able to access them through
 the shell app.
 
-Any currently configured login host that is not hidden will be automatically allowed.
+Any login host of a cluster config will be allowed, assuming that cluster is not
+configured as "hidden" in the metadata section of the cluster config.
 However, administrators will need to add a configuration for compute nodes and any
 additional hosts they wish to allow access to.
 
@@ -218,21 +225,22 @@ in ``/etc/ood/config/nginx_stage.yml``
 Ability to add additional info to batch connect app
 ...................................................
 
-Batch connect app developers may now add files that add information the the batch
-connect panels.  :ref:`More information is documented here <bc_info_html_md_erb>`
-on batch connect view panels and this feature specifically.
+You can now add an info.html.erb file to an interactive app (batch connect)
+directory and it will render and display in the job panel. This is useful for
+providing documentation links for an app.q
+:ref:`See the documentation on info.html.erb for more details. <bc_info_html_md_erb>`
 
 Support for SVG dashboard logos
 ...............................
 
 Logos can now be SVG images and controlled through the ``OOD_DASHBOARD_LOGO_HEIGHT``
-configuration to resize them. :ref:`See documention on branding for form information. <branding>`
+configuration to resize them. :ref:`See documentation on branding for form information. <branding>`
 
 Support for new Native VNC views
 ................................
 
-Sites can now define instructions for connecting to VNC interactive jobs with native tools
-instead of using NoVNC through the browser.
+Sites can now define instructions for connecting to VNC interactive jobs using a native
+VNC client instead of using NoVNC through the browser.
 
 :ref:`More details on this feature can be found here. <bc_native_vnc_view>`
 

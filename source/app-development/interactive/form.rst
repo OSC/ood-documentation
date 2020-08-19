@@ -36,7 +36,7 @@ building and launching the ``my_app`` Interactive App session.
 Configuration
 -------------
 
-.. describe:: cluster (Array<String>)
+.. describe:: cluster (Array<String> or String)
 
      the cluster ids that the Interactive App session is submitted to.
 
@@ -509,7 +509,7 @@ does two things:
 - it then describes the HTML form element to use for the ``my_module_version``
   attribute
 
-.. _caching-from-items:
+.. _caching-form-items:
 
 Caching form items
 ``````````````````

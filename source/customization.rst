@@ -242,9 +242,9 @@ By default, the file size upload limit is 10737420000 bytes (~10.7 GB).
 If you want set this to a lower value, set the ``FILE_UPLOAD_MAX`` configuration
 in the file apps' configuration file ``/etc/ood/config/apps/shell/env``.
 
-If you want to set it to a higher value, configure the files app as just described
-and also set ``nginx_file_upload_max`` in ``/etc/ood/config/nginx_stage.yml`` to
-the same number.
+If you want to set it to a higher value set ``nginx_file_upload_max``
+in ``/etc/ood/config/nginx_stage.yml`` to the desired value. If you have
+``FILE_UPLOAD_MAX`` set from above, unset it.
 
 If the values differ, the files app will choose the smaller of the two as the maximum
 upload limit.
