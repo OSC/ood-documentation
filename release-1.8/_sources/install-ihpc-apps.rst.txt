@@ -151,6 +151,12 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - yes
      - noVNC
      -
+   * - RELION (for REgularised LIkelihood OptimisatioN)
+     - Shanghai Jiao Tong University (SJTU)
+     - https://github.com/SJTU-HPC/bc_relion
+     - yes
+     - 
+     - 
    * - Stata 
      - OSC
      - https://github.com/OSC/bc_osc_stata
