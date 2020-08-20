@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Job Submission &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>Job Submission &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,7 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
@@ -152,6 +152,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -258,7 +259,7 @@ to embed Ruby code into the YAML configuration file for flow control, variable
 substitution, and more.</p>
 <div class="section" id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>The two possible configuration options that can be used in the
+<p>The three possible configuration options that can be used in the
 <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> file are given as:</p>
 <dl class="describe">
 <dt>
@@ -291,6 +292,37 @@ script (see <a class="reference external" href="http://www.rubydoc.info/gems/ood
 <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;PZS0001&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="s">&quot;parallel&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="configuring-cluster-in-submit-yml"></span><dl class="describe">
+<dt>
+<code class="descname">cluster (String) (Optional)</code></dt>
+<dd><p>the cluster to submit to</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Use this field when you need to choose the cluster in
+a more dynamic way than <a class="reference internal" href="form.html#configuring-cluster"><span class="std std-ref">what’s provided in the form.</span></a>
+Or when you want to choose the cluster for the user given some
+choices like the example below.</p>
+</div>
+<dl class="docutils">
+<dt>Example</dt>
+<dd><p class="first">Submit the job to the the large cluster if requesting more
+than 29 cores, else submit to the small cluster.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;%-</span>
+  <span class="l l-Scalar l-Scalar-Plain">cluster = if num_cores &gt;= 29</span>
+              <span class="l l-Scalar l-Scalar-Plain">&quot;large_cluster&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">else</span>
+               <span class="l l-Scalar l-Scalar-Plain">&quot;small_cluster&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">end</span>
+<span class="l l-Scalar l-Scalar-Plain">-&gt;</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -506,7 +538,7 @@ not need to specify <code class="docutils literal notranslate"><span class="pre"
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -530,6 +562,8 @@ not need to specify <code class="docutils literal notranslate"><span class="pre"
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/interactive/submit.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/app-development/interactive/submit.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/interactive/submit.html">1.6</a></dd>
       

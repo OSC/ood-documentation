@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Enable Reverse Proxy &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>3. Enable Reverse Proxy &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,7 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
@@ -148,6 +148,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -301,16 +302,32 @@ work, e.g.:</p>
   <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu.crt&quot;&#39;</span>
   <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/private/ondemand.my_center.edu.key&quot;&#39;</span>
   <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateChainFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt&quot;&#39;</span>
-<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Basic&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthName</span><span class="nv"> </span><span class="s">&quot;private&quot;&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthBasicProvider</span><span class="nv"> </span><span class="s">ldap&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPURL</span><span class="nv"> </span><span class="s">&quot;ldaps://openldap.my_center.edu:636/ou=People,ou=hpc,o=my_center?uid&quot;&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPGroupAttribute</span><span class="nv"> </span><span class="s">memberUid&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPGroupAttributeIsDN</span><span class="nv"> </span><span class="s">off&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&#39;[\w.-]+\.my_center\.edu&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">connectors</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
+      <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
+      <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">LDAP</span>
+      <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">openldap.my_center.edu:636</span>
+        <span class="l l-Scalar l-Scalar-Plain">insecureSkipVerify</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">bindDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn=admin,dc=example,dc=org</span>
+<span class="hll">        <span class="l l-Scalar l-Scalar-Plain">bindPW</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">userSearch</span><span class="p p-Indicator">:</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=People,dc=example,dc=org</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixAccount)&quot;</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">idAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">emailAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mail</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">gecos</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">preferredUsernameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">groupSearch</span><span class="p p-Indicator">:</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=Groups,dc=example,dc=org</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixGroup)&quot;</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">userMatchers</span><span class="p p-Indicator">:</span>
+</span><span class="hll">            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">userAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DN</span>
+</span><span class="hll">              <span class="l l-Scalar l-Scalar-Plain">groupAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">member</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn</span>
+</span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&#39;[\w.-]+\.my_center\.edu&#39;</span>
 </span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&#39;/node&#39;</span>
 </span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="s">&#39;/rnode&#39;</span>
 </span></pre></div>
@@ -433,7 +450,7 @@ can ignore any errors or warnings you see in your browser.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -457,6 +474,8 @@ can ignore any errors or warnings you see in your browser.</p>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/interactive/setup/enable-reverse-proxy.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/app-development/interactive/setup/enable-reverse-proxy.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/interactive/setup/enable-reverse-proxy.html">1.6</a></dd>
       

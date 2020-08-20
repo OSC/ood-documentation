@@ -24,5 +24,6 @@ client binaries.
    resource-manager/pbspro
    resource-manager/sge
    resource-manager/linuxhost
+   resource-manager/ccq
    resource-manager/bin-override-example
    resource-manager/test

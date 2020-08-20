@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configure Cloudy Cluster (beta) &mdash; Open OnDemand 1.8.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="A Working Example of a bin_overrides Script" href="bin-override-example.html" />
+    <link rel="prev" title="Configure LinuxHost Adapter (beta)" href="linuxhost.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../resource-manager.html">Resource Manager Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="torque.html">Configure Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Cloudy Cluster (beta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prompted-for-input">Prompted for input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../resource-manager.html">Resource Manager Configuration</a> &raquo;</li>
+        
+      <li>Configure Cloudy Cluster (beta)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/ccq.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configure-cloudy-cluster-beta">
+<span id="resource-manager-cloudy-cluster"></span><h1>Configure Cloudy Cluster (beta)<a class="headerlink" href="#configure-cloudy-cluster-beta" title="Permalink to this headline">¶</a></h1>
+<p>A YAML cluster configuration file for a Cloudy Cluster resource manager on an HPC
+cluster looks like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;ccq&quot;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;my-default-image&quot;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">cloud</span><span class="p p-Indicator">:</span> <span class="s">&quot;gcp&quot;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">scheduler</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_scheduler&quot;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/other/CCQ&quot;</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">jobid_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;different</span><span class="nv"> </span><span class="s">job_id</span><span class="nv"> </span><span class="s">regex:</span><span class="nv"> </span><span class="s">(?&lt;job_id&gt;\\d+)</span><span class="nv"> </span><span class="s">&quot;</span>
+</span><span class="hll">    <span class="c1"># bin_overrides:</span>
+</span><span class="hll">      <span class="c1"># ccqstat: &quot;/usr/local/bin/ccqstat&quot;</span>
+</span><span class="hll">      <span class="c1"># ccqdel: &quot;&quot;</span>
+</span><span class="hll">      <span class="c1"># ccqsub: &quot;&quot;</span>
+</span></pre></div>
+</div>
+<p>with the following configuration options:</p>
+<dl class="docutils">
+<dt>adapter</dt>
+<dd>This is set to <code class="docutils literal notranslate"><span class="pre">ccq</span></code>.</dd>
+<dt>image</dt>
+<dd>The default cloud image to use when launching jobs. There is no default.</dd>
+<dt>cloud</dt>
+<dd>The cloud provider being used. Valid options are <code class="docutils literal notranslate"><span class="pre">gcp</span></code> or <code class="docutils literal notranslate"><span class="pre">aws</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">gcp</span></code>.</dd>
+<dt>scheduler</dt>
+<dd>The name of the scheduler being used. There is no default.</dd>
+<dt>bin</dt>
+<dd>The path to the CCQ client installation binaries. Defaults to <code class="docutils literal notranslate"><span class="pre">/opt/CloudyCluster/srv/CCQ</span></code>.</dd>
+<dt>jobid_regex</dt>
+<dd>The regular expression to extract the job id from the ccqstat output. Defaults to <code class="docutils literal notranslate"><span class="pre">job</span> <span class="pre">id</span> <span class="pre">is:</span> <span class="pre">(?&lt;job_id&gt;\\d+)</span> <span class="pre">you</span></code>.
+You should only need this if the ccqstat output changes format. If you are required to reconfigure, you’ll need to
+extract the named group <code class="docutils literal notranslate"><span class="pre">job_id</span></code> as the default does.</dd>
+<dt>bin_overrides</dt>
+<dd><blockquote class="first">
+<div>Replacements/wrappers for CCQ’s job submission and control clients. <em>Optional</em></div></blockquote>
+<p>Supports the following clients:</p>
+<ul class="last simple">
+<li><cite>ccqstat</cite></li>
+<li><cite>ccqdel</cite></li>
+<li><cite>ccqsub</cite></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="common-issues">
+<h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prompted-for-input">
+<h3>Prompted for input<a class="headerlink" href="#prompted-for-input" title="Permalink to this headline">¶</a></h3>
+<p>You may see this error when you initially try to start a job.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>The /opt/CloudyCluster/srv/CCQ/ccqsub command was prompted. You need
+to generate the certificate manually in a shell by running &#39;ccqstat&#39;
+and entering your username/password
+</pre></div>
+</div>
+<p>This is because CCQ libraries require a certificate to be generated to communicate with the
+backend servers.  To remediate you’ll simply have to login through a shell terminal and generate
+a certificate. Do this by running the <code class="docutils literal notranslate"><span class="pre">ccqstat</span></code> command and entering your username and password
+when prompted. If you’re successful, the command will generate a <code class="docutils literal notranslate"><span class="pre">ccqCert.cert</span></code> in your home
+directory that subsequent invocations will use.</p>
+<p>Note these certificates expire, so you may have to generate them every so often or specify
+a very distant expiry date when you do generate them.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bin-override-example.html" class="btn btn-neutral float-right" title="A Working Example of a bin_overrides Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linuxhost.html" class="btn btn-neutral float-left" title="Configure LinuxHost Adapter (beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/resource-manager/ccq.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/resource-manager/ccq.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager/ccq.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/ccq.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/ccq.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/ccq.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager/ccq.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager/ccq.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager/ccq.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager/ccq.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

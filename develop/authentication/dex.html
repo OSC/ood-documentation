@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpenID Connect with Dex &mdash; Open OnDemand 1.8.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shibboleth" href="shibboleth.html" />
+    <link rel="prev" title="OpenID Connect" href="oidc.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oidc.html">OpenID Connect</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OpenID Connect with Dex</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-ondemand-dex-package">Installing OnDemand Dex package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-ondemand-dex-from-source">Installing OnDemand Dex from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex">Configuring OnDemand Dex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#managing-the-ondemand-dex-service">Managing the OnDemand Dex service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex-for-ldap">Configuring OnDemand Dex for LDAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-ondemand-dex">Customizing OnDemand Dex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ondemand-dex-configuration-reference">OnDemand Dex configuration reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Shibboleth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cas.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pam.html">Add PAM Authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../authentication.html">Authentication</a> &raquo;</li>
+        
+      <li>OpenID Connect with Dex</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/dex.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="openid-connect-with-dex">
+<span id="authentication-dex"></span><h1>OpenID Connect with Dex<a class="headerlink" href="#openid-connect-with-dex" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/dexidp/dex">Dex</a> is a lightweight OpenID Connect authentication provider written in Go, and is the default authentication mechanism shipped with Open OnDemand.</p>
+<div class="section" id="installing-ondemand-dex-package">
+<h2>Installing OnDemand Dex package<a class="headerlink" href="#installing-ondemand-dex-package" title="Permalink to this headline">¶</a></h2>
+<p>First the OnDemand yum repos must be enabled, see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software From RPM</span></a>.</p>
+<p>Install the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> RPM:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="installing-ondemand-dex-from-source">
+<h2>Installing OnDemand Dex from source<a class="headerlink" href="#installing-ondemand-dex-from-source" title="Permalink to this headline">¶</a></h2>
+<p>Requirements:</p>
+<ul class="simple">
+<li>Go version 1.14.x with the <code class="docutils literal notranslate"><span class="pre">go</span></code> binary in <code class="docutils literal notranslate"><span class="pre">PATH</span></code></li>
+<li>Git</li>
+<li>Make</li>
+</ul>
+<p>Build and install the ondemand-dex binary:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">GOPATH</span><span class="o">=</span><span class="k">$(</span>go env GOPATH<span class="k">)</span>
+go get github.com/dexidp/dex
+<span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/dexidp/dex
+make
+sudo install -m <span class="m">0755</span> bin/dex /usr/sbin/ondemand-dex
+</pre></div>
+</div>
+</div></blockquote>
+<p>Add the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> user and group:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo groupadd -r ondemand-dex
+sudo useradd -r -d /var/lib/ondemand-dex -g ondemand-dex -s /sbin/nologin -c <span class="s2">&quot;OnDemand Dex&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Get <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> repo and install web files and systemd unit file</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /tmp
+git clone https://github.com/OSC/ondemand-dex
+sudo mkdir /usr/share/ondemand-dex
+sudo cp -R ondemand-dex/web /usr/share/ondemand-dex/web
+sudo install -m <span class="m">0644</span> ondemand-dex/examples/ondemand-dex.service /etc/systemd/system/ondemand-dex.service
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="configuring-ondemand-dex">
+<h2>Configuring OnDemand Dex<a class="headerlink" href="#configuring-ondemand-dex" title="Permalink to this headline">¶</a></h2>
+<p>OnDemand Dex is configured by modifying the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
+<p>The default location for Dex configurations is <code class="file docutils literal notranslate"><span class="pre">/etc/ood/dex/config.yaml</span></code>.</p>
+<p>When changes are needed for OnDemand Dex run the following command:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+sudo systemctl restart ondemand-dex
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If OnDemand is configured to use SSL and SSL certificates are not configured in Dex,
+the default behavior is for Dex to use copies of the OnDemand certificates for SSL.
+This means when the OnDemand certificates are updated it’s necessary to run
+<code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> to make new copies of the certificates and restart <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code>.</p>
+</div>
+</div>
+<div class="section" id="managing-the-ondemand-dex-service">
+<h2>Managing the OnDemand Dex service<a class="headerlink" href="#managing-the-ondemand-dex-service" title="Permalink to this headline">¶</a></h2>
+<p>To service for OnDemand Dex is <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code>:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> ondemand-dex.service
+sudo systemctl start ondemand-dex.service
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="configuring-ondemand-dex-for-ldap">
+<h2>Configuring OnDemand Dex for LDAP<a class="headerlink" href="#configuring-ondemand-dex-for-ldap" title="Permalink to this headline">¶</a></h2>
+<p id="dex-ldap">Requirements:</p>
+<ul class="simple">
+<li>an LDAP server preferably with SSL support (<code class="docutils literal notranslate"><span class="pre">openldap.my_center.edu:636</span></code>)</li>
+</ul>
+<p>The following is an example configuration using OpenLDAP.</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+
+<span class="c1"># ...</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">connectors</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">LDAP</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">openldap.my_center.edu:636</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">insecureSkipVerify</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">bindDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn=admin,dc=example,dc=org</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">bindPW</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">userSearch</span><span class="p p-Indicator">:</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=People,dc=example,dc=org</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixAccount)&quot;</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">idAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">emailAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mail</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">gecos</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">preferredUsernameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
+</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">groupSearch</span><span class="p p-Indicator">:</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=Groups,dc=example,dc=org</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixGroup)&quot;</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">userMatchers</span><span class="p p-Indicator">:</span>
+</span><span class="hll">            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">userAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DN</span>
+</span><span class="hll">              <span class="l l-Scalar l-Scalar-Plain">groupAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">member</span>
+</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For documentation on Dex LDAP configuration please see the <a class="reference external" href="https://github.com/dexidp/dex/blob/master/Documentation/connectors/ldap.md">Dex LDAP docs</a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you supply a <code class="docutils literal notranslate"><span class="pre">bindPW</span></code> in this file it’s recommended to change the file permissions on <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> to be <code class="docutils literal notranslate"><span class="pre">0600</span></code> make the file only readable by <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
+<blockquote class="last">
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod root:root /etc/ood/config/ood_portal.yml
+sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-ondemand-dex">
+<h2>Customizing OnDemand Dex<a class="headerlink" href="#customizing-ondemand-dex" title="Permalink to this headline">¶</a></h2>
+<p>The theme for Dex can be customized to be site-specific, see <a class="reference internal" href="../customization.html#customize-dex-theme"><span class="std std-ref">Customize Dex Theme</span></a>.</p>
+</div>
+<div class="section" id="ondemand-dex-configuration-reference">
+<h2>OnDemand Dex configuration reference<a class="headerlink" href="#ondemand-dex-configuration-reference" title="Permalink to this headline">¶</a></h2>
+<p id="dex-configuration">The OnDemand Dex configuration works by attempting to expose all Dex configuration options as keys nested under the <code class="docutils literal notranslate"><span class="pre">dex</span></code> key in <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
+<p>The following reference is for <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> values set under the <code class="docutils literal notranslate"><span class="pre">dex</span></code> key.</p>
+<dl class="describe">
+<dt>
+<code class="descname">ssl (Boolean, null)</code></dt>
+<dd><p>Boolean to set if SSL is used, is <code class="docutils literal notranslate"><span class="pre">true</span></code> if OnDemand is configured for SSL, otherwise this defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.
+This value is used to determine which listen ports to use for Dex as well as OIDC configurations for OnDemand</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">http_port (String, Integer)</code></dt>
+<dd><p>The HTTP port used by Dex, default is <code class="docutils literal notranslate"><span class="pre">5556</span></code>.
+Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">http</span></code> in the Dex configuration as well as OIDC configurations</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">https_port (String, Integer)</code></dt>
+<dd><p>The HTTPS port used by Dex, default is <code class="docutils literal notranslate"><span class="pre">5554</span></code>. This value is only set if SSL is enabled.
+Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">https</span></code> in the Dex configuration as well as OIDC configurations</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">tls_cert (String, null)</code></dt>
+<dd><p>The path to TLS cert used by Dex.
+The default is to use the SSL certificate for OnDemand if OnDemand is configured with SSL.
+Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">tlsCert</span></code> in the Dex configuration.
+If using the OnDemand certificate, a copy is made to <code class="docutils literal notranslate"><span class="pre">/etc/ood/dex</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> user must be able to read this file if configured.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">tls_key (String, null)</code></dt>
+<dd><p>The path to TLS key used by Dex.
+The default is to use the SSL key for OnDemand if OnDemand is configured with SSL.
+Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">tlsKey</span></code> in the Dex configuration.
+If using the OnDemand key, a copy is made to <code class="docutils literal notranslate"><span class="pre">/etc/ood/dex</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> user must be able to read this file if configured.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">storage_file (String)</code></dt>
+<dd><p>The path to the Dex SQLite storage file.  Defaults to <code class="docutils literal notranslate"><span class="pre">/etc/ood/dex/dex.db</span></code>.
+Used to define <code class="docutils literal notranslate"><span class="pre">storage</span> <span class="pre">-&gt;</span> <span class="pre">config</span> <span class="pre">-&gt;</span> <span class="pre">file</span></code> in the Dex configuration.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">client_id (String)</code></dt>
+<dd><p>The client ID used for the OnDemand OIDC client.
+The default is to use the <code class="docutils literal notranslate"><span class="pre">servername</span></code> for OnDemand, and if that is not defined the host’s FQDN is used.
+Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">id</span></code> in the Dex configuration as well as OnDemand OIDC configurations.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">client_secret (String)</code></dt>
+<dd><p>The client secret used for the OnDemand OIDC client.
+The default is a randomly generated secret stored in <code class="docutils literal notranslate"><span class="pre">/etc/ood/dex/ondemand.secret</span></code>.
+The value for this configuration can either be the secret string or path to file storing the secret.
+If using a file, the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> user must be able to read the file.
+Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">secret</span></code> in the Dex configuration as well as OnDemand OIDC configurations.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">client_redirect_uris (Array&lt;String&gt;)</code></dt>
+<dd><p>Additional OIDC client URIs to authorize for the OnDemand client.
+The values provided for this are merged with the default redirect URI generated for OnDemand.
+Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">redirectURIs</span></code> in the Dex configuration as well as OnDemand OIDC configurations.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">client_name (String)</code></dt>
+<dd><p>The default OIDC client name for Dex. Defaults to <code class="docutils literal notranslate"><span class="pre">OnDemand</span></code>.
+Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">name</span></code> in the Dex configuration.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">connectors (Array&lt;Hash&gt;)</code></dt>
+<dd><p>This defines the external connectors used to authenticate users with Dex.
+If this value is not provided the default behavior is to set a static password of <code class="docutils literal notranslate"><span class="pre">password</span></code> for user <code class="docutils literal notranslate"><span class="pre">ood&#64;localhost</span></code>.
+This value is passed directly to the Dex configuration for <code class="docutils literal notranslate"><span class="pre">connectors</span></code>.
+For an example of LDAP configuration see <a class="reference internal" href="#dex-ldap"><span class="std std-ref">Configuring OnDemand Dex for LDAP</span></a>.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">frontend (Hash)</code></dt>
+<dd><p>This defines various changes for the themes and frontend look of Dex.
+The value provided is passed directly to the Dex configuration for <code class="docutils literal notranslate"><span class="pre">frontend</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">dir</span></code> key is not set the default of <code class="docutils literal notranslate"><span class="pre">/usr/share/ondemand-dex/web</span></code> is used.
+If <code class="docutils literal notranslate"><span class="pre">theme</span></code> key is not set the default of <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> is used.</p>
+<p>Default</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">frontend</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">dir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/share/ondemand-dex/web&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">theme</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">grpc (Hash)</code></dt>
+<dd><p>The configuration for Dex’s gRPC API.
+Value is passed directly to the Dex configuration</p>
+<p>Example:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">grpc</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">addr</span><span class="p p-Indicator">:</span> <span class="s">&quot;127.0.0.1:5557&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">tlsCert</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/ood/dex/grpc-server.crt&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">tlsKey</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/ood/dex/grpc-server.key&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">tlsClientCA</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/ood/dex/grpc-ca.crt&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">expiry (Hash)</code></dt>
+<dd><p>The configuration for Dex’s expirations.
+Value is passed directly to the Dex configuration</p>
+<p>Example:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">expiry</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">signingKeys</span><span class="p p-Indicator">:</span> <span class="s">&quot;6h&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">idTokens</span><span class="p p-Indicator">:</span> <span class="s">&quot;24h&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shibboleth.html" class="btn btn-neutral float-right" title="Shibboleth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="oidc.html" class="btn btn-neutral float-left" title="OpenID Connect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/dex.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/dex.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/dex.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/dex.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/dex.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/dex.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/dex.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/dex.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/dex.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/dex.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

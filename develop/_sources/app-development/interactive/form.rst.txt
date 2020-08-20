@@ -36,9 +36,15 @@ building and launching the ``my_app`` Interactive App session.
 Configuration
 -------------
 
-.. describe:: cluster (String)
+.. describe:: cluster (Array<String> or String)
 
-     the cluster id that the Interactive App session is submitted to
+     the cluster ids that the Interactive App session is submitted to.
+
+     .. note::
+
+        Prior to 1.8, this configuration was a single string (a single cluster).
+        We now support one application submitting to multiple clusters. See the
+        section below on `configuring which cluster to submit to`_ for more information.
 
      .. warning::
 
@@ -61,6 +67,10 @@ Configuration
 
      the object defining the hard-coded value or HTML form element used for the
      various custom attributes
+
+.. describe:: cacheable (Boolean)
+
+       whether or not the application is cacheable or not. Defaults to true.
 
 Attributes
 ----------
@@ -384,6 +394,24 @@ are:
         choose from in the HTML form, but the backend will process a value of
         either "volvo", "ford", or "toyota" depending on what the user chose.
 
+.. describe:: cacheable (Boolean, true)
+
+     whether the form item is cacheable or not
+
+     Default
+       cacheable
+
+       .. code-block:: yaml
+
+          cacheable: true
+
+     Example
+       The item is not cacheable
+
+       .. code-block:: yaml
+
+          cacheable: true
+
 Examples
 --------
 
@@ -480,5 +508,105 @@ does two things:
   configuration option
 - it then describes the HTML form element to use for the ``my_module_version``
   attribute
+
+.. _caching-form-items:
+
+Caching form items
+``````````````````
+
+Since 1.8 caching form items is configurable. By default all form items are
+cacheable. As seen above you can enable or disable caching for the entire app
+when using the top level ``cacheable`` configuration. You can also configure
+on a per item basis through attributes.
+
+Lastly you can also enable or disable this feature for the entire site, using
+the configuration ``OOD_BATCH_CONNECT_CACHE_ATTR_VALUES=false`` in the
+dashboard's environment file ``/etc/ood/config/apps/dashboard/env``.
+
+.. tip::
+
+   Since you can configure caching at different levels the rule of thumb is the
+   closer the configuration is to the form item, the higher the precedence.
+
+   Setting the configuration on the attribute overrides everything and setting it
+   on a per app basis overrides the global setting.
+
+
+Let's see an example.  Here, we've disabled caching for the app and did not
+set OOD_BATCH_CONNECT_CACHE_ATTR_VALUES, so the site-wide configuration is set
+to true by default.  So, ``bc_num_slots`` and ``python_version`` are not cacheable,
+meaning the user will have to fill those form entries out every time they submit
+the job. But since ``bc_queue``'s attribute is set to true, it is cacheable.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/my_app/form.yml
+   # OOD_BATCH_CONNECT_CACHE_ATTR_VALUES is not set, so defaults to true
+   ---
+   cluster: "owens"
+   cacheable: false
+   form:
+     - bc_num_slots
+     - python_version
+     - bc_queue
+   attributes:
+     bc_queue:
+       cacheable: true
+
+
+.. _configuring-cluster:
+
+Configuring which cluster to submit to
+--------------------------------------
+
+In 1.8 there are now several ways to configure what cluster to submit to.
+
+The easiest way is to use the the top level ``cluster`` configuration. If you've
+configured just one item, then the form UI does not change for the user. If
+you configure an array of two or more options then a select dropdown will
+automatically be added to the top of the form.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/my_app/form.yml
+   # which will generate a dropdown select automatically
+   ---
+   cluster:
+     - "cluster1"
+     - "cluster2"
+
+.. tip::
+
+   GLOBs are also supported. So in the example above one entry of ``cluster*``
+   would have been equivalent to explicitly configuring both ``cluster1`` and
+   ``cluster2``.
+
+   This means you could configure ``cluster: "*"`` to be able to submit to all
+   clusters.
+
+If you would prefer to use some other widget, or you wish to change the text being
+shown in the UI you can configure a cluster form item and specify it's attributes.
+This gives you some flexibility in the form UI instead of the default select
+widget that shows all lowercase cluster names.
+
+Here's an example were the user will be shown a select dropdown menu item with
+different text than the default.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/different_select_cluster/form.yml
+   ---
+   form:
+     - cluster
+   attributes:
+     cluster:
+       widget: "select"
+       options:
+         - ["cluster1", "The first cluster"]
+         - ["cluster2", "The second cluster"]
+
+The last option is to :ref:`configure the cluster in the submit file <configuring-cluster-in-submit-yml>`.
+When using this option, there's no need to add any cluster configuration to the
+form.yml.
 
 .. _markdown: https://en.wikipedia.org/wiki/Markdown

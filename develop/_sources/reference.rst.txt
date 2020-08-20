@@ -1,7 +1,7 @@
 .. _reference:
 
-Reference
-=========
+Configuration Reference
+=======================
 
 This is reference documentation for all the configuration files and commands that
 make up the Open OnDemand infrastructure.
