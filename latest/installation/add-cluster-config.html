@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Add Cluster Configuration Files &mdash; Open OnDemand 1.8.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cluster Config Schema v2" href="cluster-config-schema.html" />
+    <link rel="prev" title="Add PAM Authentication" href="../authentication/pam.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Add Cluster Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cluster-config-schema.html">Cluster Config Schema v2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Add Cluster Configuration Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/add-cluster-config.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="add-cluster-configuration-files">
+<span id="add-cluster-config"></span><h1>Add Cluster Configuration Files<a class="headerlink" href="#add-cluster-configuration-files" title="Permalink to this headline">¶</a></h1>
+<p>Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to. Without cluster config files, the only
+apps that work are the <a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> and <a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a> apps, and <a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> if you only want to support ssh to localhost on the web host.</p>
+<p>Apps that require proper cluster configuration include:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../applications/shell.html#shell"><span class="std std-ref">Shell App</span></a> (connect to a cluster login node from the Dashboard App)</li>
+<li><a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a> (view a list of active jobs for the various clusters)</li>
+<li><a class="reference internal" href="../applications/job-composer.html#job-composer"><span class="std std-ref">Job Composer App</span></a> (submit jobs to various clusters)</li>
+<li>All interactive apps such as Jupyter and RStudio</li>
+</ul>
+<p>The cluster config files are where the <a class="reference internal" href="resource-manager.html#resource-manager"><span class="std std-ref">Resource Manager Configuration</span></a> configuration goes, which is necessary for enabling apps to submit batch jobs.</p>
+<ol class="arabic">
+<li><p class="first">Create the default directory that the cluster configuration files reside
+under:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/ood/config/clusters.d
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create a cluster YAML configuration file for each HPC cluster you want to
+provide access to. They must have the <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> extension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is best to name the file after the HPC cluster it is defining. For
+example, we added the cluster configuration file
+<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/oakley.yml</span></code> for the Oakley cluster here
+at OSC.</p>
+</div>
+<p>The <em>simplest</em> cluster configuration file for an HPC cluster with only a login
+node and <strong>no resource manager</strong> looks like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">host</span></code> is the SSH server host for the given cluster.</p>
+<p>In production you will also want to add a resource manager. That is because the
+<a class="reference internal" href="../applications/active-jobs.html#active-jobs"><span class="std std-ref">Active Jobs App</span></a> and the <a class="reference internal" href="../applications/job-composer.html#job-composer"><span class="std std-ref">Job Composer App</span></a> won’t be able to list or submit
+jobs without a defined resource manager.</p>
+<p>See <a class="reference internal" href="resource-manager.html#resource-manager"><span class="std std-ref">Resource Manager Configuration</span></a> for how to modify the cluster config so OnDemand works with your particular resource manager.</p>
+</li>
+</ol>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Cluster Config</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cluster-config-schema.html">Cluster Config Schema v2</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cluster-config-schema.html" class="btn btn-neutral float-right" title="Cluster Config Schema v2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../authentication/pam.html" class="btn btn-neutral float-left" title="Add PAM Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/add-cluster-config.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/add-cluster-config.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/add-cluster-config.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/add-cluster-config.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/add-cluster-config.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/add-cluster-config.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/add-cluster-config.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/add-cluster-config.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/add-cluster-config.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/add-cluster-config.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

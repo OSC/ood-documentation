@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A Working Example of a bin_overrides Script &mdash; Open OnDemand 1.8.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Test Configuration" href="test.html" />
+    <link rel="prev" title="Configure Cloudy Cluster (beta)" href="ccq.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../resource-manager.html">Resource Manager Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="torque.html">Configure Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccq.html">Configure Cloudy Cluster (beta)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../resource-manager.html">Resource Manager Configuration</a> &raquo;</li>
+        
+      <li>A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/resource-manager/bin-override-example.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-working-example-of-a-bin-overrides-script">
+<span id="bin-overrides"></span><h1>A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script<a class="headerlink" href="#a-working-example-of-a-bin-overrides-script" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span></code> is the Slurm scheduler’s submission client. In this example we will show how cluster configuration’s <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> may be used to change default behavior.</p>
+<p>This example demonstrates a few uses of wrapping the default scheduler clients:</p>
+<ul class="simple">
+<li>Using SSH from the web host to launch <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> on the submit host</li>
+<li>Altering arguments passed to the scheduler</li>
+<li>Altering the script passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> (which is almost certainly a terrible idea)</li>
+<li>Logging values passed to the scheduler in a custom location (note that the values passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> are also logged to the PUN log file at <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/$USER/error.log</span></code> by the Dashboard and Job Composer when submitting jobs)</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This wrapper when used with the OOD Job Composer will place any <code class="docutils literal notranslate"><span class="pre">stdout</span></code> or <code class="docutils literal notranslate"><span class="pre">stderr</span></code> files in <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> instead of the usual location of <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/projects/default/$JOBID</span></code>.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python36</span>
+<span class="kn">from</span> <span class="nn">getpass</span> <span class="kn">import</span> <span class="n">getuser</span>
+<span class="kn">from</span> <span class="nn">select</span> <span class="kn">import</span> <span class="n">select</span>
+<span class="kn">from</span> <span class="nn">sh</span> <span class="kn">import</span> <span class="n">ssh</span><span class="p">,</span> <span class="n">ErrorReturnCode</span>  <span class="c1"># pip3 install sh</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">An example of a `bin_overrides` replacing Slurm `sbatch` for use with Open OnDemand.</span>
+
+<span class="sd">Requirements:</span>
+
+<span class="sd">- $USER must be able to SSH from web node to submit node without using a password</span>
+
+<span class="sd">Examples:</span>
+
+<span class="sd">- SSH&#39;s from a web node to a submit node</span>
+<span class="sd">- Logging values passed to sbatch</span>
+<span class="sd">- Altering arguments passed to sbatch</span>
+<span class="sd">- Altering the script passed to sbatch (which is almost certainly a bad idea)</span>
+
+<span class="sd">Thoughts for further development:</span>
+
+<span class="sd">- Add out of script configuration (SUBMISSION_NODE, logging preferences)</span>
+<span class="sd">- Improve logging permission handling (right now it needs to be done manually)</span>
+<span class="sd">- Solve problem of CWD being set to the $HOME</span>
+
+<span class="sd">Note that as of v1.4.9 OOD&#39;s job adapters parse stdout but may not validate;</span>
+<span class="sd">changing the format of sbatch&#39;s stdout can break applications. For exit codes</span>
+<span class="sd">OOD&#39;s job adapters require that the wrapper exit 0 on success and non 0 on</span>
+<span class="sd">failure.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/tmp/sbatch.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">SUBMISSION_NODE</span> <span class="o">=</span> <span class="s1">&#39;head&#39;</span>
+<span class="n">USER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">run_remote_sbatch</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  @brief      SSH and submit the job from the submission node</span>
+
+<span class="sd">  @param      script (str)  The script</span>
+<span class="sd">  @param      argv (list&lt;str&gt;)    The argument vector for sbatch</span>
+
+<span class="sd">  @return     output (str) The merged stdout/stderr of the remote sbatch call</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">output</span> <span class="o">=</span> <span class="bp">None</span>
+
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ssh</span><span class="p">(</span>
+      <span class="s1">&#39;@&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">USER</span><span class="p">,</span> <span class="n">SUBMISSION_NODE</span><span class="p">]),</span>
+      <span class="s1">&#39;-oBatchMode=yes&#39;</span><span class="p">,</span>  <span class="c1"># ensure that SSH does not hang waiting for a password that will never be sent</span>
+      <span class="s1">&#39;/opt/slurm/bin/sbatch&#39;</span><span class="p">,</span>  <span class="c1"># the real sbatch on the remote</span>
+      <span class="o">*</span><span class="n">argv</span><span class="p">,</span>  <span class="c1"># any arguments that sbatch should get</span>
+      <span class="n">_in</span><span class="o">=</span><span class="n">script</span><span class="p">,</span>  <span class="c1"># redirect the script&#39;s contents into stdin</span>
+      <span class="n">_err_to_out</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># merge stdout and stderr</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+  <span class="k">except</span> <span class="n">ErrorReturnCode</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">exit_code</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">def</span> <span class="nf">filter_argv</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  @brief      Filter the argument vector to add or remove arguments</span>
+
+<span class="sd">  @param      argv (list&lt;str&gt;) The original argument vector passed to sbatch</span>
+
+<span class="sd">  @return     argv (list&lt;str&gt;) The altered argument vector to pass to the real sbatch</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;ARGV:&#39;</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+
+  <span class="n">argv</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;--export=THE_ANSWER=42&#39;</span><span class="p">]</span>
+
+  <span class="k">return</span> <span class="n">argv</span>
+
+
+<span class="k">def</span> <span class="nf">filter_script</span><span class="p">(</span><span class="n">script</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  @brief      Alter the script that the user is sending to sbatch</span>
+
+<span class="sd">  This is a terrible fragile idea, but it is possible, so let&#39;s try it! We will set</span>
+<span class="sd">  an environment variable and cleanup /tmp after the user.</span>
+
+<span class="sd">  @param      script (str)  The script</span>
+
+<span class="sd">  @return     script (str) The altered script</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">shebang</span> <span class="o">=</span> <span class="s1">&#39;#!/bin/bash</span><span class="se">\n</span><span class="s1">&#39;</span>
+  <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^(#!.+)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">script</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+    <span class="n">shebang</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+    <span class="n">script</span>  <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">shebang</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">shebang</span> <span class="o">+</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  export THE_QUESTION=&#39;6*9=?&#39;</span>
+<span class="s1">  &#39;&#39;&#39;</span> <span class="o">+</span> <span class="n">script</span> <span class="o">+</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  rm -rf /tmp 2&gt;/dev/null</span>
+<span class="s1">  &#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">load_script</span><span class="p">():</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  @brief      Loads a script from stdin.</span>
+
+<span class="sd">  With OOD and Slurm the user&#39;s script is read from disk and passed to sbatch via stdin</span>
+<span class="sd">  https://github.com/OSC/ood_core/blob/5b4d93636e0968be920cf409252292d674cc951d/lib/ood_core/job/adapters/slurm.rb#L138-L148</span>
+
+<span class="sd">  @return     script (str) The script content</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="c1"># Do not hang waiting for stdin that is not coming</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">select</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mf">0.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;No script available on stdin!&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  @brief      SSHs from web node to submit node and executes the remote sbatch.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">run_remote_sbatch</span><span class="p">(</span>
+    <span class="n">filter_script</span><span class="p">(</span><span class="n">load_script</span><span class="p">()),</span>
+    <span class="n">filter_argv</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+  <span class="p">)</span>
+
+  <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test.html" class="btn btn-neutral float-right" title="Test Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ccq.html" class="btn btn-neutral float-left" title="Configure Cloudy Cluster (beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/master/installation/resource-manager/bin-override-example.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/resource-manager/bin-override-example.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager/bin-override-example.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/bin-override-example.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/bin-override-example.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/bin-override-example.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager/bin-override-example.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager/bin-override-example.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager/bin-override-example.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager/bin-override-example.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
