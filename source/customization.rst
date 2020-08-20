@@ -966,3 +966,54 @@ Changes are applied by running ``update_ood_portal`` and restarting the ``ondema
    sudo systemctl restart ondemand-dex.service
 
 .. _dex template docs: https://github.com/dexidp/dex/blob/master/Documentation/templates.md
+
+.. _xdmod_integration:
+
+XDMoD Integration (BETA)
+------------------------
+
+XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.
+
+.. figure:: /images/customization_xdmod.png
+   :align: center
+
+   Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.
+
+Steps to enable the XDMoD reports in the OnDemand Dashboard:
+
+#. Configure OnDemand with XDMoD host URL in PUN /etc/ood/config/nginx_stage.yml
+
+   .. code-block:: yaml
+
+      pun_custom_env:
+        OOD_XDMOD_HOST: "https://xdmod.osc.edu"
+
+#. Add OnDemand host as domain to XDMoD portal settings for CORS /etc/xdmod/portal_settings.ini
+
+   .. code-block:: none
+
+      domains = "https://ondemand.osc.edu"
+
+#. Configure identity provider to include OnDemand host in HTTP `Content-Security-Policy for frame-ancestors <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors>`_ since OnDemand uses iFrames to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:
+
+   .. code-block:: none
+
+      frame-ancestors https://*.osc.edu 'self'
+
+#. If you want the XDMoD links in the OnDemand Job Composer you also need to configure OnDemand with XDMoD resource id in each cluster config. For example, in the hpctoolset the resource_id for the hpc cluster is 1 in XDMoD, so we modify /etc/ood/config/clusters.d/hpc.yml to add a xdmod map to the custom map at the bottom of the file:
+
+   .. code-block:: yaml
+      :emphasize-lines: 10-
+
+      v2:
+       metadata:
+         title: "HPC Cluster"
+       login:
+         host: "frontend"
+       job:
+         adapter: "slurm"
+         cluster: "hpc"
+         bin: "/usr/bin"
+       custom:
+         xdmod:
+           resource_id: 1
