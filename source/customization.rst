@@ -994,7 +994,7 @@ Steps to enable the XDMoD reports in the OnDemand Dashboard:
 
       domains = "https://ondemand.osc.edu"
 
-#. Configure identity provider to include OnDemand host in HTTP Content-Security-Policy for frame-ancestors since OnDemand uses iFrames to trigger SSO with XDMoD when a user logs in
+#. Configure identity provider to include OnDemand host in HTTP `Content-Security-Policy for frame-ancestors <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors>`_ since OnDemand uses iFrames to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:
 
    .. code-block:: none
 
