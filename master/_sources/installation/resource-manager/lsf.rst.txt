@@ -22,6 +22,7 @@ looks like:
        libdir: "/path/to/lsf/lib"
        envdir: "/path/to/lsf/conf"
        serverdir: "/path/to/lsf/etc"
+       cluster: "mycluster"
        # bin_overrides:
          # bsub: "/usr/local/bin/bsub"
          # bjobs: ""
@@ -43,6 +44,8 @@ serverdir
   The path to the LSF client ``etc/`` directory.
 bin_overrides
   Replacements/wrappers for LSF's job submission and control clients. *Optional*
+cluster
+  The cluster to interact with when running LSF's multi-cluster mode. *Required to enable multi-cluster mode*
 
   Supports the following clients:
 
@@ -51,8 +54,3 @@ bin_overrides
   - `bstop`
   - `bresume`
   - `bkill`
-
-.. warning::
-
-   Verified for only LSF 8.3 and support for LSF MultiCluster is not yet
-   implemented.

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Creating a Status App &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>Creating a Status App &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="v1.7 Release Notes" href="../../release-notes/v1.7-release-notes.html" />
+    <link rel="next" title="v1.8 Release Notes" href="../../release-notes/v1.8-release-notes.html" />
     <link rel="prev" title="Tutorials: Passenger Apps" href="../tutorials-passenger-apps.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
@@ -137,6 +138,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Creating a Status App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#overview-of-app">Overview of App</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#benefits">Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ondemand-system-gems">OnDemand System Gems</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#files-and-their-purpose">Files and Their Purpose</a></li>
 </ul>
 </li>
@@ -156,6 +158,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -171,7 +174,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
 </ul>
@@ -253,12 +255,12 @@ create a new status app that displays quota information in a table.</p>
 this app looks like:</p>
 <div class="figure align-center" id="id1">
 <img alt="../../_images/app-dev-tutorial-ps-to-quota-1.png" src="../../_images/app-dev-tutorial-ps-to-quota-1.png" />
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">What app looks like after cloning and launching.</span></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">What app looks like after cloning and launching.</span></p>
 </div>
 <p>After this tutorial the resulting app will be:</p>
 <div class="figure align-center" id="id2">
 <img alt="../../_images/app-dev-tutorial-ps-to-quota-2.png" src="../../_images/app-dev-tutorial-ps-to-quota-2.png" />
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">What app looks like after modifying in this tutorial.</span></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">What app looks like after modifying in this tutorial.</span></p>
 </div>
 <p>This assumes you have followed the directions to <a class="reference internal" href="../enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> on the
 Dashboard.</p>
@@ -285,17 +287,28 @@ as a table or graph</li>
 </ol>
 </li>
 <li>the app can be deployed without requiring a build step because gem
-dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby
-and versioned with the app under <code class="docutils literal notranslate"><span class="pre">vendor/bundle</span></code></li>
+dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby and
+match those that are provided by the ondemand-gems rpm</li>
 <li>most of the app can be modified without requiring a restart due to proper use
 of Sinatra reloader extension</li>
 <li>app has a built in scaffold for unit testing using minitest</li>
 </ol>
 </div>
+<div class="section" id="ondemand-system-gems">
+<h3>OnDemand System Gems<a class="headerlink" href="#ondemand-system-gems" title="Permalink to this headline">¶</a></h3>
+<p>This app is able to run in OnDemand 1.8+ without installing the gems specified in the Gemfile.</p>
+<p>All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps. These include gems used by this example app:</p>
+<ul class="simple">
+<li>sinatra</li>
+<li>sinatra-contrib</li>
+<li>erubi</li>
+</ul>
+<p>On the OnDemand web host, you can execute the command <cite>source scl_source enable ondmeand</cite> and then <cite>gem list</cite> to see all available gems. These gems are provided by a separate <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> rpm that is installed when you do <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">ondemand</span></code>. The name of the RPM includes the OnDemand release version, such as <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm</span></code>. This ensures that if you do yum update this gem will not be removed - so apps can depend on the presence of these gems.</p>
+</div>
 <div class="section" id="files-and-their-purpose">
 <h3>Files and Their Purpose<a class="headerlink" href="#files-and-their-purpose" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils" id="id3">
-<caption><span class="caption-number">Table 11 </span><span class="caption-text">Main files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">Main files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -332,7 +345,7 @@ where css and javascript files are included</td>
 </tbody>
 </table>
 <table border="1" class="docutils" id="id4">
-<caption><span class="caption-number">Table 12 </span><span class="caption-text">Other files</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 10 </span><span class="caption-text">Other files</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -346,26 +359,26 @@ where css and javascript files are included</td>
 <tr class="row-even"><td>Gemfile, Gemfile.lock</td>
 <td>defines gem dependencies for the app (see <a class="reference external" href="http://bundler.io/rationale.html">Bundler’s Rationale</a>)</td>
 </tr>
-<tr class="row-odd"><td>vendor/bundle</td>
-<td>installed and versioned gem dependencies</td>
-</tr>
-<tr class="row-even"><td>tmp/</td>
+<tr class="row-odd"><td>tmp/</td>
 <td>tmp directory is kept so its easier to <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
 want to force Passenger to restart an app</td>
 </tr>
-<tr class="row-odd"><td>public/</td>
+<tr class="row-even"><td>public/</td>
 <td>serve up static assets like Bootstrap css; in OnDemand, NGINX auto-serves
 all files under public/ directly, without going through the Passenger
 process, which makes this much faster; as a result, each static file is
 in a directory with an explicit version number, so if these files ever
 change we change the version, which is one cache busting strategy</td>
 </tr>
-<tr class="row-even"><td>Rakefile</td>
+<tr class="row-odd"><td>Rakefile</td>
 <td>this provides a default Rake task for running the automated tests under
 test/, so you can run the tests by running the command <code class="docutils literal notranslate"><span class="pre">rake</span></code></td>
 </tr>
-<tr class="row-odd"><td>test/minitest_helper.rb</td>
+<tr class="row-even"><td>test/minitest_helper.rb</td>
 <td>contains setup code common between all tests</td>
+</tr>
+<tr class="row-odd"><td>vendor/bundle</td>
+<td>This directory is added if you execute <code class="docutils literal notranslate"><span class="pre">bin/bundle</span> <span class="pre">install</span> <span class="pre">--path</span> <span class="pre">vendor/bundle</span></code> to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.</td>
 </tr>
 </tbody>
 </table>
@@ -675,7 +688,7 @@ git clone /users/PZS0562/efranz/ondemand/dev/quota
 </ol>
 <div class="figure align-center" id="id5">
 <img alt="../../_images/app-dev-tutorial-ps-to-quota-published.png" src="../../_images/app-dev-tutorial-ps-to-quota-published.png" />
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Every user can now launch the Quota from the Files menu.</span></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Every user can now launch the Quota from the Files menu.</span></p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -693,7 +706,7 @@ killing all websocket connections, which means resetting your active web-based O
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../release-notes/v1.7-release-notes.html" class="btn btn-neutral float-right" title="v1.7 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../release-notes/v1.8-release-notes.html" class="btn btn-neutral float-right" title="v1.8 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../tutorials-passenger-apps.html" class="btn btn-neutral float-left" title="Tutorials: Passenger Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -705,7 +718,7 @@ killing all websocket connections, which means resetting your active web-based O
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -729,6 +742,8 @@ killing all websocket connections, which means resetting your active web-based O
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/tutorials-passenger-apps/ps-to-quota.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/app-development/tutorials-passenger-apps/ps-to-quota.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/tutorials-passenger-apps/ps-to-quota.html">1.6</a></dd>
       

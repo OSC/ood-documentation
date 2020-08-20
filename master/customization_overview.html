@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization Overview &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>Customization Overview &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -68,7 +68,7 @@
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
@@ -137,6 +138,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -152,7 +154,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-documentation.html">User Documentation</a></li>
 </ul>
@@ -224,29 +225,58 @@
   <div class="section" id="customization-overview">
 <span id="id1"></span><h1>Customization Overview<a class="headerlink" href="#customization-overview" title="Permalink to this headline">¶</a></h1>
 <p>OnDemand’s configuration is stored in the environment, which can be modified using a hierarchy of config files. Configuration files are rooted in <code class="docutils literal notranslate"><span class="pre">/etc/ood</span></code>. Assets that should be publicly available (such as a favicon or logo image) are placed under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public</span></code>.</p>
+<p>These are three files that directly affect the environment or functionality of the Per-User NGINX (PUN) processes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><strong>/etc/ood/profile</strong><ul>
-<li>If exists, this file is sourced instead of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</li>
-<li>You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</li>
-</ul>
-</li>
 <li><strong>/etc/ood/config/nginx_stage.yml</strong><ul>
 <li>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</li>
 <li>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</li>
 </ul>
 </li>
 <li><strong>/etc/ood/config/apps/$APP/env</strong><ul>
+<li>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></li>
 <li>Used to provide application specific config</li>
 <li><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</li>
 </ul>
 </li>
 <li><strong>/etc/ood/config/apps/$APP/initializers/ood.rb</strong><ul>
+<li>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></li>
 <li>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</li>
 <li>This method is specific to Ruby on Rails applications: Activejobs,
-Dashboard, File Editor, and Job Composer. You can add multiple
+Dashboard, and Job Composer. You can add multiple
 initializer files in this directory and they will be loaded in
 alphabetical order</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>This file affects the starting of the PUN, and is the appropriate place to change the software collections loaded:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>/etc/ood/profile</strong></p>
+<ul>
+<li><p class="first"><strong>Sourced as root prior to starting the PUN</strong></p>
+</li>
+<li><p class="first">If exists, this file is sourced <strong>instead</strong> of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</p>
+</li>
+<li><p class="first">You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</p>
+</li>
+<li><p class="first">Environment variables set here are not guarenteed to remain set in the PUNs unless those environment variables are added to the YAML sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>. Here is a list of environment variables guarenteed to be preserved when NGINX starts:</p>
+<blockquote>
+<div><ul class="simple">
+<li>PATH</li>
+<li>LD_LIBRARY_PATH</li>
+<li>X_SCLS</li>
+<li>MANPATH</li>
+<li>PCP_DIR</li>
+<li>PERL5LIB</li>
+<li>PKG_CONFIG_PATH</li>
+<li>PYTHONPATH</li>
+<li>XDG_DATA_DIRS</li>
+<li>SCLS RUBYLIB</li>
+</ul>
+</div></blockquote>
+</li>
 </ul>
 </li>
 </ul>
@@ -273,7 +303,7 @@ alphabetical order</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -297,6 +327,8 @@ alphabetical order</li>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/customization_overview.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/customization_overview.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/customization_overview.html">1.6</a></dd>
       

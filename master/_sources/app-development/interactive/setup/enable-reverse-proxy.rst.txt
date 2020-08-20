@@ -75,15 +75,31 @@ Steps to Enable in Apache
         - 'SSLCertificateFile "/etc/pki/tls/certs/ondemand.my_center.edu.crt"'
         - 'SSLCertificateKeyFile "/etc/pki/tls/private/ondemand.my_center.edu.key"'
         - 'SSLCertificateChainFile "/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt"'
-      auth:
-        - 'AuthType Basic'
-        - 'AuthName "private"'
-        - 'AuthBasicProvider ldap'
-        - 'AuthLDAPURL "ldaps://openldap.my_center.edu:636/ou=People,ou=hpc,o=my_center?uid"'
-        - 'AuthLDAPGroupAttribute memberUid'
-        - 'AuthLDAPGroupAttributeIsDN off'
-        - 'RequestHeader unset Authorization'
-        - 'Require valid-user'
+      dex:
+        connectors:
+          - type: ldap
+            id: ldap
+            name: LDAP
+            config:
+              host: openldap.my_center.edu:636
+              insecureSkipVerify: false
+              bindDN: cn=admin,dc=example,dc=org
+              bindPW: admin
+              userSearch:
+                baseDN: ou=People,dc=example,dc=org
+                filter: "(objectClass=posixAccount)"
+                username: uid
+                idAttr: uid
+                emailAttr: mail
+                nameAttr: gecos
+                preferredUsernameAttr: uid
+              groupSearch:
+                baseDN: ou=Groups,dc=example,dc=org
+                filter: "(objectClass=posixGroup)"
+                userMatchers:
+                  - userAttr: DN
+                    groupAttr: member
+                nameAttr: cn
       host_regex: '[\w.-]+\.my_center\.edu'
       node_uri: '/node'
       rnode_uri: '/rnode'
@@ -133,14 +149,6 @@ Steps to Enable in Apache
       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 #. Restart the Apache server to have the changes take effect:
-
-   CentOS/RHEL 6:
-     .. code-block:: sh
-
-        sudo service httpd24-httpd condrestart
-        # Stopping httpd:                                            [  OK  ]
-        # Starting httpd:                                            [  OK  ]
-        sudo service httpd24-htcacheclean condrestart
 
    CentOS/RHEL 7:
      .. code-block:: sh

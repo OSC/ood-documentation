@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Connection View &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>Connection View &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
@@ -139,6 +140,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#reverse-proxy">Reverse Proxy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#stylizing">Stylizing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-additional-information-to-the-panel">Adding Additional Information to the panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-native-vnc-instructions-to-the-panel">Adding Native VNC instructions to the panel</a></li>
 </ul>
 </li>
 </ul>
@@ -153,6 +156,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -168,7 +172,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
 </ul>
@@ -258,6 +261,9 @@ possible. It is located in the root of the application directory.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">.erb</span></code> file extension will cause the HTML file to be processed using the
 <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows you to embed Ruby code
 into the HTML file for flow control, variable substitution, and more.</p>
+<p>This connection view will be retained for a week in ‘My Interactive Sessions’
+for debugging purposes. The link to Session ID opens a files app directly to
+the output of the batch connect app.</p>
 <div class="admonition danger">
 <p class="first admonition-title">Danger</p>
 <p class="last">If developing a VNC Interactive App, <strong>DO NOT</strong> include the
@@ -285,7 +291,7 @@ The possible connection information attributes are:</p>
 <div class="section" id="reverse-proxy">
 <h2>Reverse Proxy<a class="headerlink" href="#reverse-proxy" title="Permalink to this headline">¶</a></h2>
 <p>A detailed introduction to the reverse proxy can be found in
-<a class="reference internal" href="../../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-configuration-configure-reverse-proxy"><span class="std std-ref">Configure Reverse Proxy</span></a>. Under a
+<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-configuration-configure-reverse-proxy"><span class="std std-ref">Configure Reverse Proxy</span></a>. Under a
 default installation the following URL paths will be enabled:</p>
 <dl class="get">
 <dt id="get--node-(host)-(port)(path)">
@@ -406,6 +412,56 @@ doesn’t see and it gets communicated to the Jupyter server in the <code class=
 request.</p>
 </div>
 </div>
+<div class="section" id="adding-additional-information-to-the-panel">
+<span id="bc-info-html-md-erb"></span><h2>Adding Additional Information to the panel<a class="headerlink" href="#adding-additional-information-to-the-panel" title="Permalink to this headline">¶</a></h2>
+<p>It’s possible for you to add additional information to this connection view.</p>
+<p>You can do so by creating a Markdown file <code class="docutils literal notranslate"><span class="pre">info.md.erb</span></code> or an html file
+<code class="docutils literal notranslate"><span class="pre">info.html.erb</span></code> in the applications folder.  Markdown files get generated
+into html with # turning into an &lt;h1&gt; and ## turning into an &lt;h2&gt; and so on.</p>
+<p>Again, they’re <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> files so you can add some dynamic behavior
+to them. Along with any library you may choose to use you can also access these
+variables directly.</p>
+<dl class="docutils">
+<dt>id</dt>
+<dd>The session UUID of the job</dd>
+<dt>cluster_id</dt>
+<dd>The cluster the job was submitted to</dd>
+<dt>job_id</dt>
+<dd>The job id from the scheduler</dd>
+<dt>created_at</dt>
+<dd>The time the session was created</dd>
+</dl>
+</div>
+<div class="section" id="adding-native-vnc-instructions-to-the-panel">
+<span id="bc-native-vnc-view"></span><h2>Adding Native VNC instructions to the panel<a class="headerlink" href="#adding-native-vnc-instructions-to-the-panel" title="Permalink to this headline">¶</a></h2>
+<p>Your site may wish to provide users with instructions on how to connect to
+interactive jobs with native VNC tools instead of connecting through the browser.
+To enable this feature configure the dashboard with <code class="docutils literal notranslate"><span class="pre">ENABLE_NATIVE_VNC=true</span></code> in
+the dashboard’s environment file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
+<p>Enabling this will provide generic instructions for the user to create an ssh tunnel
+<em>a host</em>. If you wish to specify the host users should tunnel to (a well known login
+host for example) use the <code class="docutils literal notranslate"><span class="pre">OOD_NATIVE_VNC_LOGIN_HOST</span></code> configuration in the same
+environment file.</p>
+<p>You can also create your own instructions for major OS platforms. You can create
+<code class="docutils literal notranslate"><span class="pre">_native_vnc_{windows,mac,linux}.html.erb</span></code> files and place them in
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/batch_connect/sessions/connections/</span></code>
+directory to override the default instructions for a given platform.</p>
+<p>These file are <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> extensions and so here are some useful
+variables and objects you may need to create helpful instructions. You can also
+<a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views/batch_connect/sessions/connections">refer to the original files for help in creating new panels</a>.</p>
+<dl class="docutils">
+<dt>Configuration.native_vnc_login_host</dt>
+<dd>The OOD_NATIVE_VNC_LOGIN_HOST configuration if given.</dd>
+<dt>connect.host</dt>
+<dd>The compute node host the interactive job is on</dd>
+<dt>connect.port</dt>
+<dd>The compute node port the interactive job has opened</dd>
+<dt>connect.password</dt>
+<dd>The VNC password for the interactive job</dd>
+<dt>ENV[“USER”]</dt>
+<dd>The USER environment variable</dd>
+</dl>
+</div>
 </div>
 
 
@@ -428,7 +484,7 @@ request.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -452,6 +508,8 @@ request.</p>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/app-development/interactive/view.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/app-development/interactive/view.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/app-development/interactive/view.html">1.6</a></dd>
       

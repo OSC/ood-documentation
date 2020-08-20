@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. Add LDAP Support &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>6. Add LDAP Support &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
@@ -111,7 +112,7 @@
 <li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From RPM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">3. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ssl.html">5. Add SSL Support</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">6. Add LDAP Support</a></li>
 </ul>
@@ -145,6 +146,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -160,7 +162,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
 </ul>
@@ -236,68 +237,27 @@
 <p><strong>(Optional, but recommended)</strong></p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This page explains how to add LDAP support to basic auth in Open OnDemand.
-Basic auth should only be used for evaluation purposes. For a more robust
-authentication solution, see <a class="reference internal" href="../authentication.html#authentication"><span class="std std-ref">Authentication</span></a>.</p>
+<p class="last">This page explains how to add LDAP support to Dex in Open OnDemand.
+For a more robust authentication solution, see <a class="reference internal" href="../authentication.html#authentication"><span class="std std-ref">Authentication</span></a>.</p>
 </div>
-<p>LDAP support allows for your users to log in using their local username and
-password. It also removes the need for the system administrator to keep
-updating the <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> file.</p>
-<p>Requirements:</p>
-<ul class="simple">
-<li>an LDAP server preferably with SSL support (<code class="docutils literal notranslate"><span class="pre">openldap.my_center.edu:636</span></code>)</li>
-</ul>
 <ol class="arabic">
-<li><p class="first">Edit the Open OnDemand Portal <a class="reference internal" href="../infrastructure/ood-portal-generator/configuration.html#ood-portal-generator-configuration"><span class="std std-ref">Configuration</span></a> file
-<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
-
-<span class="c1"># ...</span>
-
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Basic&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthName</span><span class="nv"> </span><span class="s">&quot;private&quot;&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthBasicProvider</span><span class="nv"> </span><span class="s">ldap&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPURL</span><span class="nv"> </span><span class="s">&quot;ldaps://openldap.my_center.edu:636/ou=People,ou=hpc,o=my_center?uid&quot;&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPGroupAttribute</span><span class="nv"> </span><span class="s">memberUid&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthLDAPGroupAttributeIsDN</span><span class="nv"> </span><span class="s">off&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
-</span></pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For documentation on LDAP directives please see:
-<a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html">https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html</a></p>
-</div>
+<li><p class="first">Add LDAP configurations to to Dex, refer to <a class="reference internal" href="../authentication/dex.html#dex-ldap"><span class="std std-ref">Configuring OnDemand Dex for LDAP</span></a>.</p>
 </li>
-<li><p class="first">Build/install the updated Apache configuration file:</p>
+<li><p class="first">Build/install the updated Apache configuration file as well as updated Dex configuration:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 </li>
 <li><p class="first">Restart the Apache server to have the changes take effect:</p>
-<dl class="docutils">
-<dt>CentOS/RHEL 6:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo service httpd24-httpd condrestart
-<span class="c1"># Stopping httpd:                                            [  OK  ]</span>
-<span class="c1"># Starting httpd:                                            [  OK  ]</span>
-sudo service httpd24-htcacheclean condrestart
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl restart httpd24-httpd.service httpd24-htcacheclean.service
+sudo systemctl restart ondemand-dex.service
 </pre></div>
 </div>
-</dd>
-<dt>CentOS/RHEL 7:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
-</pre></div>
-</div>
-</dd>
-</dl>
 </li>
 </ol>
-<p>Close your browser so that you are properly logged out. Then open your browser
-again and access the portal. You should now be able to authenticate with your
-local username and password.</p>
+<p>Open your browser and access the portal. You should now be able to authenticate with your
+LDAP username and password.</p>
+<p>The theme for Dex can be customized to be site-specific, see <a class="reference internal" href="../customization.html#customize-dex-theme"><span class="std std-ref">Customize Dex Theme</span></a>.</p>
 </div>
 
 
@@ -320,7 +280,7 @@ local username and password.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -344,6 +304,8 @@ local username and password.</p>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/installation/add-ldap.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/add-ldap.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/add-ldap.html">1.6</a></dd>
       

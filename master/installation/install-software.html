@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Install Software From RPM &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>1. Install Software From RPM &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
@@ -111,7 +112,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. Install Software From RPM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">3. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ssl.html">5. Add SSL Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ldap.html">6. Add LDAP Support</a></li>
 </ul>
@@ -145,6 +146,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -160,7 +162,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
 </ul>
@@ -270,7 +271,7 @@ repository.</p>
 </li>
 <li><p class="first">Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
 <blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.7/ondemand-release-web-1.7-1.noarch.rpm
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.8/ondemand-release-web-1.8-1.noarch.rpm
 </pre></div>
 </div>
 </div></blockquote>
@@ -280,7 +281,17 @@ repository.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Install OnDemand SELinux support if you have SELinux enabled. For details see <a class="reference internal" href="modify-system-security.html#ood-selinux"><span class="std std-ref">SELinux</span></a></p>
+<li><p class="first">(Optional) Install <a class="reference internal" href="../authentication/dex.html#authentication-dex"><span class="std std-ref">OpenID Connect with Dex</span></a> package</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If authenticating against LDAP or wishing to evaluate OnDemand using <cite>ood</cite> user, you must install <cite>ondemand-dex</cite>.
+See <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for details on configuration of LDAP.</p>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
+</pre></div>
+</div>
+</li>
+<li><p class="first">(Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see <a class="reference internal" href="modify-system-security.html#ood-selinux"><span class="std std-ref">SELinux</span></a></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-selinux
 </pre></div>
 </div>
@@ -328,7 +339,7 @@ users access to OnDemand:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -352,6 +363,8 @@ users access to OnDemand:</p>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/installation/install-software.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/install-software.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/install-software.html">1.6</a></dd>
       

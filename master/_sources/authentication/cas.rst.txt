@@ -1,9 +1,9 @@
 .. _authentication-cas:
 
-Add CAS Authentication
-----------------------
+CAS
+---
 
-Several HPC centers running OnDemand have successfully configured authentication using CAS.
+Several HPC centers running OnDemand have successfully configured authentication using Central Authentication Service (CAS).
 
 See `this Discourse <https://discourse.osc.edu/t/implementing-authentication-via-cas/34>`__ topic regarding several different examples configuring CAS authentication with OnDemand.
 

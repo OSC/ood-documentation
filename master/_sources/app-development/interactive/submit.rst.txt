@@ -23,7 +23,7 @@ substitution, and more.
 Configuration
 -------------
 
-The two possible configuration options that can be used in the
+The three possible configuration options that can be used in the
 ``submit.yml.erb`` file are given as:
 
 .. describe:: batch_connect (Hash)
@@ -56,6 +56,35 @@ The two possible configuration options that can be used in the
         script:
           accounting_id: "PZS0001"
           queue_name: "parallel"
+
+.. _configuring-cluster-in-submit-yml:
+
+.. describe:: cluster (String) (Optional)
+
+   the cluster to submit to
+
+   .. tip::
+      Use this field when you need to choose the cluster in
+      a more dynamic way than :ref:`what's provided in the form. <configuring-cluster>`
+      Or when you want to choose the cluster for the user given some
+      choices like the example below.
+
+   Example
+     Submit the job to the the large cluster if requesting more
+     than 29 cores, else submit to the small cluster.
+
+     .. code-block:: yaml
+
+        # ${HOME}/ondemand/dev/my_app/submit.yml.erb
+        <%-
+          cluster = if num_cores >= 29
+                      "large_cluster"
+                    else
+                       "small_cluster"
+                    end
+        ->
+        ---
+        cluster: "<%= cluster %>"
 
 Each of these configuration options take a set of their own configuration
 options described below.

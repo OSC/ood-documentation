@@ -20,6 +20,10 @@ The ``.erb`` file extension will cause the HTML file to be processed using the
 `eRuby (Embedded Ruby)`_ templating system. This allows you to embed Ruby code
 into the HTML file for flow control, variable substitution, and more.
 
+This connection view will be retained for a week in 'My Interactive Sessions' 
+for debugging purposes. The link to Session ID opens a files app directly to 
+the output of the batch connect app.
+
 .. danger::
 
    If developing a VNC Interactive App, **DO NOT** include the
@@ -176,6 +180,66 @@ login page.
 In this example, the password is stored in a hidden input field that the user
 doesn't see and it gets communicated to the Jupyter server in the ``POST``
 request.
+
+.. _bc_info_html_md_erb:
+
+Adding Additional Information to the panel
+------------------------------------------
+
+It's possible for you to add additional information to this connection view.
+
+You can do so by creating a Markdown file ``info.md.erb`` or an html file
+``info.html.erb`` in the applications folder.  Markdown files get generated
+into html with # turning into an <h1> and ## turning into an <h2> and so on.
+
+Again, they're `eRuby (Embedded Ruby)`_ files so you can add some dynamic behavior
+to them. Along with any library you may choose to use you can also access these
+variables directly.
+
+id
+  The session UUID of the job
+cluster_id
+  The cluster the job was submitted to
+job_id
+  The job id from the scheduler
+created_at
+  The time the session was created
+
+.. _bc_native_vnc_view:
+
+Adding Native VNC instructions to the panel
+-------------------------------------------
+
+Your site may wish to provide users with instructions on how to connect to
+interactive jobs with native VNC tools instead of connecting through the browser.
+To enable this feature configure the dashboard with ``ENABLE_NATIVE_VNC=true`` in
+the dashboard's environment file ``/etc/ood/config/apps/dashboard/env``.
+
+Enabling this will provide generic instructions for the user to create an ssh tunnel
+*a host*. If you wish to specify the host users should tunnel to (a well known login
+host for example) use the ``OOD_NATIVE_VNC_LOGIN_HOST`` configuration in the same
+environment file.
+
+You can also create your own instructions for major OS platforms. You can create
+``_native_vnc_{windows,mac,linux}.html.erb`` files and place them in
+``/etc/ood/config/apps/dashboard/views/batch_connect/sessions/connections/``
+directory to override the default instructions for a given platform.
+
+These file are `eRuby (Embedded Ruby)`_ extensions and so here are some useful
+variables and objects you may need to create helpful instructions. You can also
+`refer to the original files for help in creating new panels
+<https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views/batch_connect/sessions/connections>`_.
+
+Configuration.native_vnc_login_host
+  The OOD_NATIVE_VNC_LOGIN_HOST configuration if given.
+connect.host
+  The compute node host the interactive job is on
+connect.port
+  The compute node port the interactive job has opened
+connect.password
+  The VNC password for the interactive job
+ENV["USER"]
+  The USER environment variable
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
 .. _jupyter notebook server: http://jupyter.readthedocs.io/en/latest/

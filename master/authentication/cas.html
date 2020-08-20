@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add CAS Authentication &mdash; Open OnDemand 1.7.0 documentation</title>
+  <title>CAS &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="OpenID Connect via KeyCloak on RHEL7" href="tutorial-oidc-keycloak-rhel7.html" />
-    <link rel="prev" title="Add Shibboleth Authentication" href="shibboleth.html" />
+    <link rel="next" title="OpenID Connect with KeyCloak on RHEL7" href="tutorial-oidc-keycloak-rhel7.html" />
+    <link rel="prev" title="Shibboleth" href="shibboleth.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -68,7 +68,7 @@
 
           
             
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.7
+                1.8
               </div>
             
           
@@ -103,6 +103,7 @@
               <p class="caption"><span class="caption-text">General</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul class="current">
@@ -110,10 +111,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Add Shibboleth Authentication</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Add CAS Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect via KeyCloak on RHEL7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oidc.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dex.html">OpenID Connect with Dex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Shibboleth</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
@@ -144,6 +149,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
@@ -159,7 +165,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Legacy Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
 </ul>
@@ -209,7 +214,7 @@
         
           <li><a href="../authentication.html">Authentication</a> &raquo;</li>
         
-      <li>Add CAS Authentication</li>
+      <li>CAS</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -230,9 +235,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="add-cas-authentication">
-<span id="authentication-cas"></span><h1>Add CAS Authentication<a class="headerlink" href="#add-cas-authentication" title="Permalink to this headline">¶</a></h1>
-<p>Several HPC centers running OnDemand have successfully configured authentication using CAS.</p>
+  <div class="section" id="cas">
+<span id="authentication-cas"></span><h1>CAS<a class="headerlink" href="#cas" title="Permalink to this headline">¶</a></h1>
+<p>Several HPC centers running OnDemand have successfully configured authentication using Central Authentication Service (CAS).</p>
 <p>See <a class="reference external" href="https://discourse.osc.edu/t/implementing-authentication-via-cas/34">this Discourse</a> topic regarding several different examples configuring CAS authentication with OnDemand.</p>
 <p>Related links:</p>
 <ul class="simple">
@@ -249,10 +254,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral float-right" title="OpenID Connect via KeyCloak on RHEL7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral float-right" title="OpenID Connect with KeyCloak on RHEL7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="shibboleth.html" class="btn btn-neutral float-left" title="Add Shibboleth Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="shibboleth.html" class="btn btn-neutral float-left" title="Shibboleth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -261,7 +266,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2019, Ohio Supercomputer Center
+        &copy; Copyright 2017-2020, Ohio Supercomputer Center
 
     </p>
   </div> 
@@ -285,6 +290,8 @@
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/master/authentication/cas.html">master</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/cas.html">1.7</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/cas.html">1.6</a></dd>
       
