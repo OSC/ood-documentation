@@ -1,4 +1,4 @@
-...................... _customization:
+.. _customization:
 
 Customization
 =============
