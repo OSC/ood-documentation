@@ -47,9 +47,11 @@ Another sizing factor that has impacted us in the past is the size of the ``/tmp
 Browser Requirements
 --------------------
 
+.. _browser-requirements:
+
 .. warning::
 
-    No IE11 support. If you are a site that requires IE11 support and are willing to contribute developer time to the project to support this, please reach out to us.
+    No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.
 
 To have the best experience using OnDemand, use the latest versions of `Google Chrome`_, `Mozilla Firefox`_ or `Microsoft Edge`_.
 Use any modern browser that supports ECMAScript 2016.
