@@ -43,6 +43,7 @@ if [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then
   # Publish official documentation for blessed branches
   if [[ \
       ( ${TRAVIS_BRANCH} == "master"  || \
+        ${TRAVIS_BRANCH} == "latest" || \
         ${TRAVIS_BRANCH} == "develop" || \
         ${TRAVIS_BRANCH} =~ ^release-[0-9]+\.[0-9]+$
       ) \
