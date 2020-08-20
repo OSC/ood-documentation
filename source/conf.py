@@ -152,7 +152,7 @@ html_context = {
     'github_version': os.environ.get('TRAVIS_BRANCH', 'develop'),
     'conf_py_path': '/source/',
     'versions' : [
-        ['master', '/master/'],
+        ['latest', '/latest/'],
         ['1.7', '/release-1.7/'],
         ['1.6', '/release-1.6/'],
         ['1.5', '/release-1.5/'],
