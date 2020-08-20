@@ -154,6 +154,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#disable-host-link-in-batch-connect-session-card">Disable Host Link in Batch Connect Session Card</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-illegal-job-name-characters">Set Illegal Job Name Characters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#customize-dex-theme">Customize Dex Theme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xdmod-integration-beta">XDMoD Integration (BETA)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a></li>
@@ -1121,6 +1122,49 @@ Refer to the upstream <a class="reference external" href="https://github.com/dex
 sudo systemctl restart ondemand-dex.service
 </pre></div>
 </div>
+</div>
+<div class="section" id="xdmod-integration-beta">
+<span id="xdmod-integration"></span><h2>XDMoD Integration (BETA)<a class="headerlink" href="#xdmod-integration-beta" title="Permalink to this headline">¶</a></h2>
+<p>XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.</p>
+<div class="figure align-center" id="id21">
+<img alt="_images/customization_xdmod.png" src="_images/customization_xdmod.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span></p>
+</div>
+<p>Steps to enable the XDMoD reports in the OnDemand Dashboard:</p>
+<ol class="arabic">
+<li><p class="first">Configure OnDemand with XDMoD host URL in PUN /etc/ood/config/nginx_stage.yml</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_custom_env</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">OOD_XDMOD_HOST</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://xdmod.osc.edu&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add OnDemand host as domain to XDMoD portal settings for CORS /etc/xdmod/portal_settings.ini</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>domains = &quot;https://ondemand.osc.edu&quot;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Configure identity provider to include OnDemand host in HTTP <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors">Content-Security-Policy for frame-ancestors</a> since OnDemand uses iFrames to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>frame-ancestors https://*.osc.edu &#39;self&#39;
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you want the XDMoD links in the OnDemand Job Composer you also need to configure OnDemand with XDMoD resource id in each cluster config. For example, in the hpctoolset the resource_id for the hpc cluster is 1 in XDMoD, so we modify /etc/ood/config/clusters.d/hpc.yml to add a xdmod map to the custom map at the bottom of the file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+ <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;HPC</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;frontend&quot;</span>
+ <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;slurm&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;hpc&quot;</span>
+   <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/bin&quot;</span>
+<span class="hll"> <span class="l l-Scalar l-Scalar-Plain">custom</span><span class="p p-Indicator">:</span>
+</span><span class="hll">   <span class="l l-Scalar l-Scalar-Plain">xdmod</span><span class="p p-Indicator">:</span>
+</span><span class="hll">     <span class="l l-Scalar l-Scalar-Plain">resource_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</span></pre></div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 
