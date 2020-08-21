@@ -11,7 +11,7 @@ Before beginning, retrieve the following information from the ADFS administrator
  
 #. The SAML 2.0 service URL (e.g., https://adfs.organization.com/ADFS/ls)
 #. The IdP metadata URL (e.g., https://adfs.organization.com/ADFS/metadata.xml)
-#. Ensure SSL is properly configured and any organizationl certificate authorities are properly integrated into the host's trust store, see :ref:`add-ssl`
+#. Ensure SSL is properly configured and any organizational certificate authorities are properly integrated into the host's trust store, see :ref:`add-ssl`
 
 Install mod_auth_mellon
 --------------------------------------------------
