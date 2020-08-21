@@ -58,7 +58,7 @@ Request Flow
 -----------------------
 
 This is the request flow through the OnDemand system. A user initiates a
-request through a browser and this illustrates how that request propogates
+request through a browser and this illustrates how that request propagates
 through the system to a particular application (including the dashboard).
 
 .. uml:: architecture/request-flow.uml

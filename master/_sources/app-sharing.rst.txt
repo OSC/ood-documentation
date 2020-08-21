@@ -8,7 +8,7 @@ Overview
 
 Apps may be shared via a variety of methods including:
 
-1. System installed by admin for everyone to launch (access controled via file
+1. System installed by admin for everyone to launch (access controlled via file
    permissions)
 2. Source Code Sharing (share code, launch your own copy of an app). This is
    like how the Job Composer works, or how many groups collaborate when using
