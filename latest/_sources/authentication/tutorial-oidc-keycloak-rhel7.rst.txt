@@ -21,7 +21,7 @@ the default H2 database is probably sufficient. Also by installing Keycloak on
 the same host as OnDemand, we don't need to provision separate SSL certificates
 and host, which simplifies the tutorial.
 
-If your site is interested in either of these things and needs assistence,
+If your site is interested in either of these things and needs assistance,
 please let us know by contacting us on the OnDemand Discourse at https://discourse.osc.edu/c/open-ondemand.
 
 .. warning::

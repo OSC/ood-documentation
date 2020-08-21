@@ -39,7 +39,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   with Slurm adapter development, platform feedback, and webinar participation.
 - `UCLA Institute for Digital Research and Education <ucla_>`_ for help with the SGE adapter.
 - `University of Arizona HPC <arizona_>`_ for early adoption and help with the
-  PBSPro adapter, platform feedback, and webinar particpation.
+  PBSPro adapter, platform feedback, and webinar participation.
 - `University at Buffalo Center for Computational Research <buffalo_>`_ for early adoption,
   platform feedback, and collaboration on the next major version of Open
   OnDemand, 2.0.
