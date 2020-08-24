@@ -6,7 +6,15 @@ Connection View
 The HTML template file ``view.html.erb`` is responsible for providing the user
 with a small web interface that makes connecting to the backend web server
 running on the compute node for a given interactive session as simple as
-possible. It is located in the root of the application directory.
+possible. It is located in the root of the application directory.  There are 
+three ways to connect to interactive apps detailed below:
+
+1. VNC  
+2. reverse proxy using full path ``node``  
+3. reverse proxy using relative path ``rnode``  
+
+For a list of apps using each, please see `Install Other Interactive Apps` <https://osc.github.io/ood-documentation/latest/install-ihpc-apps.html>
+
 
 Assuming we already have a sandbox Interactive App deployed under::
 
