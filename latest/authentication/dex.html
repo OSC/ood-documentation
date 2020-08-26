@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#installing-ondemand-dex-from-source">Installing OnDemand Dex from source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex">Configuring OnDemand Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#managing-the-ondemand-dex-service">Managing the OnDemand Dex service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dex-firewall">Dex Firewall</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex-for-ldap">Configuring OnDemand Dex for LDAP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#customizing-ondemand-dex">Customizing OnDemand Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ondemand-dex-configuration-reference">OnDemand Dex configuration reference</a></li>
@@ -141,6 +142,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-snippets.html">Code Snippets</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deploy</span></p>
 <ul>
@@ -250,6 +252,12 @@
 <div class="section" id="installing-ondemand-dex-package">
 <h2>Installing OnDemand Dex package<a class="headerlink" href="#installing-ondemand-dex-package" title="Permalink to this headline">¶</a></h2>
 <p>First the OnDemand yum repos must be enabled, see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software From RPM</span></a>.</p>
+<p>** RHEL/CentOS 8 only** The <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> module must be enabled with DNF:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf module <span class="nb">enable</span> mod_auth_openidc:2.3
+</pre></div>
+</div>
+</div></blockquote>
 <p>Install the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> RPM:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
@@ -321,6 +329,24 @@ sudo systemctl start ondemand-dex.service
 </pre></div>
 </div>
 </div></blockquote>
+</div>
+<div class="section" id="dex-firewall">
+<h2>Dex Firewall<a class="headerlink" href="#dex-firewall" title="Permalink to this headline">¶</a></h2>
+<p id="id1">By default when using SSL Dex will use port <code class="docutils literal notranslate"><span class="pre">5554</span></code> for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is <code class="docutils literal notranslate"><span class="pre">5556</span></code>.  The port being used by Dex must be externally accessible.</p>
+<dl class="docutils">
+<dt>Firewalld example:</dt>
+<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">5554</span>/tcp --permanent
+$ sudo firewall-cmd --reload
+</pre></div>
+</div>
+</dd>
+<dt>Iptables example:</dt>
+<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">5554</span> -j ACCEPT
+$ sudo iptables-save &gt; /etc/sysconfig/iptables
+</pre></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="section" id="configuring-ondemand-dex-for-ldap">
 <h2>Configuring OnDemand Dex for LDAP<a class="headerlink" href="#configuring-ondemand-dex-for-ldap" title="Permalink to this headline">¶</a></h2>
