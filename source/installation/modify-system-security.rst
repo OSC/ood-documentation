@@ -78,6 +78,11 @@ Firewall
         $ sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
         $ sudo iptables-save > /etc/sysconfig/iptables
 
+.. note::
+
+   If using Dex authentication the port used by Dex must also be opened.
+   See :ref:`Dex Firewall <dex-firewall>` for details.
+
 .. _selinux: https://wiki.centos.org/HowTos/SELinux
 .. _iptables: https://wiki.centos.org/HowTos/Network/IPTables
 .. _firewalld: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_firewalls
