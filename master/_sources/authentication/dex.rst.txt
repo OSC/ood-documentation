@@ -10,6 +10,12 @@ Installing OnDemand Dex package
 
 First the OnDemand yum repos must be enabled, see :ref:`install-software`.
 
+** RHEL/CentOS 8 only** The ``mod_auth_openidc`` module must be enabled with DNF:
+
+   .. code-block:: sh
+
+      sudo dnf module enable mod_auth_openidc:2.3
+
 Install the ``ondemand-dex`` RPM:
 
    .. code-block:: sh
@@ -82,6 +88,26 @@ To service for OnDemand Dex is ``ondemand-dex``:
 
       sudo systemctl enable ondemand-dex.service
       sudo systemctl start ondemand-dex.service
+
+Dex Firewall
+------------
+
+.. _dex-firewall:
+
+By default when using SSL Dex will use port ``5554`` for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is ``5556``.  The port being used by Dex must be externally accessible.
+
+Firewalld example:
+   .. code-block:: sh
+
+      $ sudo firewall-cmd --zone=public --add-port=5554/tcp --permanent
+      $ sudo firewall-cmd --reload
+
+Iptables example:
+   .. code-block:: sh
+
+      $ sudo iptables -I INPUT -p tcp -m tcp --dport 5554 -j ACCEPT
+      $ sudo iptables-save > /etc/sysconfig/iptables
+
 
 Configuring OnDemand Dex for LDAP
 ---------------------------------
