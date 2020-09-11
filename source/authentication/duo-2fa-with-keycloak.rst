@@ -35,12 +35,14 @@ Install Keycloak Duo SPI
       cd ../../..
       mvn clean test package
 
-#. Copy the JAR file to Keycloak and instruct Keycloak to install the SPI
+#. Copy the JAR file and necessary template files to Keycloak and instruct Keycloak to install the SPI
 
    .. code::
 
       sudo install -o keycloak -g keycloak -m 0644 target/keycloak-duo-spi-jar-with-dependencies.jar \
         /opt/keycloak-9.0.0/standalone/deployments/keycloak-duo-spi-jar-with-dependencies.jar
+      sudo install -o keycloak -g keycloak -m 0644 src/main/resources/duo-mfa.ftl \
+        /opt/keycloak-9.0.0/themes/base/login/duo-mfa.ftl
       sudo install -o keycloak -g keycloak -m 0644 /dev/null \
         /opt/keycloak-9.0.0/standalone/deployments/keycloak-duo-spi-jar-with-dependencies.jar.dodeploy
 
