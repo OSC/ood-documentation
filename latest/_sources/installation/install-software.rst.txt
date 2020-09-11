@@ -49,14 +49,6 @@ software requirements:
 
 #. (Optional) Install :ref:`authentication-dex` package
 
-   .. warning::
-
-      The ``mod_auth_openidc`` DNF module must be enabled on **RHEL/CentOS 8 only**
-
-      .. code-block:: sh
-
-         sudo dnf module enable mod_auth_openidc:2.3
-
    .. note::
 
       If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
