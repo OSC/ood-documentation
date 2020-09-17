@@ -97,8 +97,8 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - no
      - node
      - Dynamic SLURM Partition
-   * - Jupyter
-     - Standford
+   * - 
+     - Stanford
      - https://github.com/stanford-rc/sh_ood-apps#sh_jupyter
      - no
      - node
@@ -134,7 +134,7 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - rnode
      -
    * - 
-     - Standord
+     - Stanford
      - https://github.com/stanford-rc/sh_ood-apps#sh_rstudio
      - yes
      - rnode
@@ -170,7 +170,7 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - 
      -
    * - Tensorboard
-     - Standford
+     - Stanford
      - https://github.com/stanford-rc/sh_ood-apps#sh_tensorboard 
      - no
      - 
