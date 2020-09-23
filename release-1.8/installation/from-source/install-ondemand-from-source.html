@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install OnDemand Core Applications &mdash; Open OnDemand 1.8.12 documentation</title>
+  <title>Install OnDemand From Source &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Finalizing From Source Installation" href="finalizing.html" />
-    <link rel="prev" title="Install OnDemand Infrastructure" href="ood-infrastructure.html" />
+    <link rel="prev" title="Install System Dependencies" href="system-dependencies.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -112,8 +112,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../install-software.html">1. Install Software From RPM</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../from-source.html">2. Install From Source</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="system-dependencies.html">Install System Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ood-infrastructure.html">Install OnDemand Infrastructure</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Install OnDemand Core Applications</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Install OnDemand From Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="finalizing.html">Finalizing From Source Installation</a></li>
 </ul>
 </li>
@@ -220,14 +219,14 @@
         
           <li><a href="../from-source.html">2. Install From Source</a> &raquo;</li>
         
-      <li>Install OnDemand Core Applications</li>
+      <li>Install OnDemand From Source</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/release-1.8/source/installation/from-source/core-apps.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/release-1.8/source/installation/from-source/install-ondemand-from-source.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -241,39 +240,85 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install-ondemand-core-applications">
-<span id="core-apps"></span><h1>Install OnDemand Core Applications<a class="headerlink" href="#install-ondemand-core-applications" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="install-ondemand-from-source">
+<span id="id1"></span><h1>Install OnDemand From Source<a class="headerlink" href="#install-ondemand-from-source" title="Permalink to this headline">¶</a></h1>
+<p>OnDemand is in a Github repository located at <a class="reference external" href="https://github.com/osc/ondemand">https://github.com/osc/ondemand</a>, and it is installed to <code class="docutils literal notranslate"><span class="pre">/opt/ood</span></code>.</p>
 <blockquote>
-<div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The OnDemand team is in the process of moving core applications to a monolithic repository which will significantly simplify installation.</p>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/ood
+git init
+git remote add origin https://github.com/osc/ondemand
+git pull origin master
+</pre></div>
 </div>
 </div></blockquote>
-<p>OnDemand’s core applications are stored in their own Github repositories and should each be cloned to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/$APP</span></code>:</p>
-<blockquote>
-<div><ul class="simple">
-<li><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/activejobs/">ood-activejobs</a>: <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/activejobs</span></code></li>
-<li><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/">ood-dashboard</a>: <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/dashboard</span></code></li>
-<li><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/file-editor/">ood-fileeditor</a>: <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/file-editor</span></code></li>
-<li><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/files/">ood-fileexplorer</a>: <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/files</span></code></li>
-<li><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/myjobs/">ood-myjobs</a> : <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs</span></code></li>
-<li><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/shell/">ood-shell</a>: <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/shell</span></code></li>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">We need to perform the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> and <code class="docutils literal notranslate"><span class="pre">pull</span></code> instead of a <code class="docutils literal notranslate"><span class="pre">clone</span></code> because <code class="docutils literal notranslate"><span class="pre">/opt/ood</span></code> already exists because it is created by one of the other RPMs that we have installed, and <code class="docutils literal notranslate"><span class="pre">git</span></code> will refuse to clone into an existing directory with contents. These directories are added:</p>
+</div>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">OnDemand</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Directory</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mod_ood_proxy</td>
+<td>Apache OnDemand Lua module</td>
+</tr>
+<tr class="row-odd"><td>nginx_stage</td>
+<td>scripts to manage Per User NGINX processes</td>
+</tr>
+<tr class="row-even"><td>ood_auth_map</td>
+<td>mapping script to map authenticated user to system user</td>
+</tr>
+<tr class="row-odd"><td>ood-portal-generator</td>
+<td>scripts for generating OnDemand Apache config from configuration file</td>
+</tr>
+<tr class="row-even"><td>apps</td>
+<td>directory containing all the core OnDemand apps</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Other directories such as ‘packaging’ are not relevant.</li>
 </ul>
+<p>Now copy the apps to the deployment location:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /var/www/ood/apps/sys
+sudo cp -r /opt/ood/apps/* /var/www/ood/apps/sys
+</pre></div>
+</div>
 </div></blockquote>
-<p>Each application has its own dependencies which need to be installed (from either NPM or Ruby Gems) by running the following:</p>
+<p>Finally install each app’s npm or gem dependencies and build static assets. In each app directory:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /var/www/ood/apps/sys/<span class="nv">$APP</span>
+
 <span class="c1"># We have both Node and Rails applications, let&#39;s cover both in a single command</span>
 sudo <span class="nv">NODE_ENV</span><span class="o">=</span>production <span class="nv">RAILS_ENV</span><span class="o">=</span>production scl <span class="nb">enable</span> ondemand -- bin/setup
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">ondemand</span></code> is equivalent to simultaneously enabling: rh-nodejs10 rh-ruby25.</p>
+</div></blockquote>
+<p>If on an operating system without Software Collections, ensure the correct versions of NodeJS and Ruby are set in the environment when executing sudo and omit <code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">ondemand</span> <span class="pre">--</span></code>:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /var/www/ood/apps/sys/<span class="nv">$APP</span>
+
+<span class="c1"># We have both Node and Rails applications, let&#39;s cover both in a single command</span>
+sudo <span class="nv">NODE_ENV</span><span class="o">=</span>production <span class="nv">RAILS_ENV</span><span class="o">=</span>production bin/setup
+</pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For operating systems without <a class="reference external" href="https://www.softwarecollections.org/en/">Software Collections</a> the <code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">...</span> <span class="pre">--</span></code> portion will be unnecessary so long as the correct versions of NodeJS and Ruby are available at build time.</p>
+</div></blockquote>
+<p>Or force install the Ruby dependencies in each app directory instead of centrally with the Ruby install:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /var/www/ood/apps/sys/<span class="nv">$APP</span>
+
+<span class="c1"># We have both Node and Rails applications, let&#39;s cover both in a single command</span>
+sudo <span class="nv">NODE_ENV</span><span class="o">=</span>production <span class="nv">RAILS_ENV</span><span class="o">=</span>production <span class="nv">BUNDLE_PATH</span><span class="o">=</span>vendor/bundle bin/setup
+</pre></div>
 </div>
 </div></blockquote>
 </div>
@@ -289,7 +334,7 @@ sudo <span class="nv">NODE_ENV</span><span class="o">=</span>production <span cl
         <a href="finalizing.html" class="btn btn-neutral float-right" title="Finalizing From Source Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ood-infrastructure.html" class="btn btn-neutral float-left" title="Install OnDemand Infrastructure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="system-dependencies.html" class="btn btn-neutral float-left" title="Install System Dependencies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -321,25 +366,25 @@ sudo <span class="nv">NODE_ENV</span><span class="o">=</span>production <span cl
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/from-source/core-apps.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/from-source/install-ondemand-from-source.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/from-source/core-apps.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/from-source/install-ondemand-from-source.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/from-source/core-apps.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/from-source/install-ondemand-from-source.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/from-source/core-apps.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/from-source/install-ondemand-from-source.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/from-source/core-apps.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/from-source/install-ondemand-from-source.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/from-source/core-apps.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/from-source/install-ondemand-from-source.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/from-source/core-apps.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/from-source/install-ondemand-from-source.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/from-source/core-apps.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/from-source/install-ondemand-from-source.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/from-source/core-apps.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/from-source/install-ondemand-from-source.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/from-source/core-apps.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/from-source/install-ondemand-from-source.html">develop</a></dd>
       
     </dl>
     <dl>
