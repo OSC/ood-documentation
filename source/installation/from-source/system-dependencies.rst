@@ -25,6 +25,7 @@ Many of OnDemand's system level dependencies are available from ``https://yum.os
     sudo yum install \
         https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-runtime-1.8-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-ruby-1.8-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-gems-1.8.12-1.8.12-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-passenger-6.0.4-6.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-nodejs-1.8-1.el7.x86_64.rpm \
         https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-nginx-1.17.3-6.p6.0.4.el7.x86_64.rpm \
