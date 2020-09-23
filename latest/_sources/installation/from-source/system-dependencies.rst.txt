@@ -21,13 +21,14 @@ Many of OnDemand's system level dependencies are available from ``https://yum.os
 
   .. code-block:: sh
 
-    # To install deps for OnDemand 1.7.x on CentOS 7:
+    # To install deps for OnDemand 1.8.x on CentOS 7:
     sudo yum install \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/ondemand-runtime-1.7-2.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/ondemand-ruby-1.7-2.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/ondemand-passenger-6.0.4-2.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/ondemand-nodejs-1.7-2.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/ondemand-nginx-1.17.3-2.p6.0.4.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/ondemand-apache-1.7-2.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/httpd24-mod_auth_openidc-2.4.0-1.el7.x86_64.rpm \
-        https://yum.osc.edu/ondemand/1.7/web/el7/x86_64/cjose-0.6.1-1.el7.x86_64.rpm
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-runtime-1.8-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-ruby-1.8-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-gems-1.8.12-1.8.12-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-passenger-6.0.4-6.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-nodejs-1.8-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-nginx-1.17.3-6.p6.0.4.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/ondemand-apache-1.8-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/httpd24-mod_auth_openidc-2.4.1-1.el7.x86_64.rpm \
+        https://yum.osc.edu/ondemand/1.8/web/el7/x86_64/cjose-0.6.1-1.el7.x86_64.rpm

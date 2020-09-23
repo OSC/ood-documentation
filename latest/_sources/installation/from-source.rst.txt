@@ -25,6 +25,5 @@ The alternative to installing the core of OnDemand using RPMs is to install from
    :caption: Steps
 
    from-source/system-dependencies
-   from-source/ood-infrastructure
-   from-source/core-apps
+   from-source/install-ondemand-from-source
    from-source/finalizing
