@@ -972,6 +972,7 @@ Changes are applied by running ``update_ood_portal`` and restarting the ``ondema
 XDMoD Integration (BETA)
 ------------------------
 
+
 XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.
 
 .. figure:: /images/customization_xdmod.png
@@ -1017,3 +1018,20 @@ Steps to enable the XDMoD reports in the OnDemand Dashboard:
        custom:
          xdmod:
            resource_id: 1
+
+#. In the Job Composer, Open XDMoD job links will include a warning message that the job may not appear in XDMoD for up to 24 hours after the job completed. The message is to address the gap of time between the job appearing as completed in the Job Composer and the job appearing in Open XDMoD after the ingest and aggregation script is run. This message appears from the time the Job Composer becomes aware of the job completion status, till an elapsed time specified in seconds by the locale key ``en.jobcomposer.xdmod_url_warning_message_seconds_after_job_completion`` which defaults to 24 hours (86400 seconds) with a text message specified by locale key  ``en.jobcomposer.xdmod_url_warning_message``. To disable this message, set the value you your locale file under ``/etc/ood/config/locales``. For example, in the default locale we have these values:
+
+   .. code-block:: yaml
+
+      en:
+        jobcomposer:
+          xdmod_url_warning_message: "This job may not appear in Open XDMoD until 24 hours after the completion of the job."
+          xdmod_url_warning_message_seconds_after_job_completion: 86400
+
+
+   Which results in these warning messages appearing in Job Composer:
+
+   .. figure:: /images/customization_xdmod_jobcomposer_warning_1.png
+      :align: center
+   .. figure:: /images/customization_xdmod_jobcomposer_warning_2.png
+      :align: center
