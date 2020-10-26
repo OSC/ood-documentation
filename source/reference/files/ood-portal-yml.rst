@@ -171,6 +171,42 @@ Configure General Options
             - '192.168.1..*'
             - '10.0.0.1'
 
+.. describe:: security_disable_frames (Boolean)
+
+     Set Header Content-Security-Policy to disallow OnDemand beind loaded in an iFrame.
+
+     Default
+       Set Content-Security-Policy
+
+       .. code-block:: yaml
+
+           security_disable_frames: true
+
+     Example
+       Disable Content-Security-Policy header
+
+       .. code-block:: yaml
+
+          security_disable_frames: false
+
+.. describe:: security_strict_transport (Boolean)
+
+     Set Header Strict-Transport-Security to help enforce SSL
+
+     Default
+       Set Strict-Transport-Security if SSL is defined for OnDemand
+
+       .. code-block:: yaml
+
+           security_strict_transport: true
+
+     Example
+       Disable Strict-Transport-Security header
+
+       .. code-block:: yaml
+
+          security_strict_transport: false
+
 .. describe:: lua_root (String)
 
      the root directory where the Lua handler code resides
