@@ -171,23 +171,23 @@ Configure General Options
             - '192.168.1..*'
             - '10.0.0.1'
 
-.. describe:: security_disable_frames (Boolean)
+.. describe:: security_csp_frame_ancestors (Boolean)
 
-     Set Header Content-Security-Policy to disallow OnDemand beind loaded in an iFrame.
+     Set Header Content-Security-Policy frame-ancestors.
 
      Default
-       Set Content-Security-Policy
+       Set Content-Security-Policy frame-ancestors to servername
 
        .. code-block:: yaml
 
-           security_disable_frames: true
+           security_csp_frame_ancestors: https://ondemand.example.com
 
      Example
        Disable Content-Security-Policy header
 
        .. code-block:: yaml
 
-          security_disable_frames: false
+          security_csp_frame_ancestors: false
 
 .. describe:: security_strict_transport (Boolean)
 
