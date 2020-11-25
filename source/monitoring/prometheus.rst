@@ -5,6 +5,7 @@ Prometheus Monitoring
 
 .. _ondemand_exporter: https://github.com/OSC/ondemand_exporter
 .. _ondemand_exporter Latest Release: https://github.com/OSC/ondemand_exporter/releases/latest
+.. _Grafana Dashboard: https://grafana.com/grafana/dashboards/13465
 .. _Process Exporter: https://github.com/ncabatoff/process-exporter
 
 OnDemand provides the `ondemand_exporter`_ that allows for monitoring some metrics specific to OnDemand.
@@ -134,6 +135,11 @@ The following is an example of how to configure the Prometheus scrape if the OnD
        labels:
          environment: production
          service: ondemand.example.com
+
+Grafana Dashboard
+------------------
+
+An example `Grafana Dashboard`_ is available.
 
 Process Exporter
 -----------------
