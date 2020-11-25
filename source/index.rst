@@ -66,6 +66,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    customization_overview
    customization
    analytics
+   monitoring
 
 
 .. toctree::
