@@ -156,5 +156,8 @@ If you're site is using the `Process Exporter`_ with Prometheus the following is
      - Passenger NodeA
      - PassengerAgent
      - ruby
+   - name: "{%raw %}{{.Comm}}:{{.Username}}{% endraw %}"
+     cmdline:
+     - ".+"
 
 The above example only makes sense on a host that is only running OnDemand and not other services that might also be using NGINX, Passenger or Ruby.
