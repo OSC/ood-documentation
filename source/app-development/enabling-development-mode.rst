@@ -4,7 +4,7 @@ Enabling App Development
 ========================
 
 Enable in OnDemand v1.6+:
-........................
+.........................
 
 Here are example steps to enable a user "efranz", assuming efranz's home directory is at ``/home/efranz``:
 
