@@ -20,8 +20,8 @@ jobs:
         run: docker run --rm -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
 
       - name: Publish to the test repo
-        run: GITHUB_TOKEN=${{ OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation-test"
+        run: GITHUB_TOKEN=${{ secrets.OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation-test"
     
       - name: Publish to the main repo
         if: github.event_name == 'push'
-        run: GITHUB_TOKEN=${{ OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation"
+        run: GITHUB_TOKEN=${{ secrets.OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation"
