@@ -5,8 +5,8 @@ NAME="oscwiag"
 EMAIL="oscwiag@gmail.com"
 
 # Update git configuration
-git config user.name "${NAME}"
-git config user.email "${EMAIL}"
+git config --global user.name "${NAME}"
+git config --global user.email "${EMAIL}"
 
 repo=${1}
 workdir="$(mktemp -d)"
@@ -17,9 +17,11 @@ cd "${workdir}"
 git clone -b gh-pages "https://${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${repo}.git" gh-pages
 cd gh-pages
 
+REF=${GITHUB_HEAD_REF:-$GITHUB_REF}
+
 # Clean up old build and copy in the new built html
-rm -fr "${GITHUB_HEAD_REF}"
-cp -R "${builddir}/build/html" "${GITHUB_HEAD_REF}"
+rm -fr "${REF}"
+cp -R "${builddir}/build/html" "${REF}"
 
 # Add and commit changes
 git add -A .
