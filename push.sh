@@ -17,7 +17,7 @@ cd "${workdir}"
 git clone -b gh-pages "https://${GITHUB_TOKEN}@github.com/${GITHUB_ORG}/${repo}.git" gh-pages
 cd gh-pages
 
-REF=${GITHUB_HEAD_REF:-$GITHUB_REF}
+REF=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
 
 # Clean up old build and copy in the new built html
 rm -fr "${REF}"
