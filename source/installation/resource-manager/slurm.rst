@@ -32,7 +32,7 @@ with the following configuration options:
 adapter
   This is set to ``slurm``.
 cluster
-  The Slurm cluster name. *Optional*
+  The Slurm cluster name. *Optional*, passed to SLURM as ``-M <cluster>``
 bin
   The path to the Slurm client installation binaries.
 conf
