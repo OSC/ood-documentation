@@ -286,4 +286,4 @@ The following reference is for :file:`/etc/ood/config/ood_portal.yml` values set
             idTokens: "24h"
 
 .. _dex: https://github.com/dexidp/dex
-.. _dex ldap docs: https://github.com/dexidp/dex/blob/master/Documentation/connectors/ldap.md
+.. _dex ldap docs: https://dexidp.io/docs/connectors/ldap/
