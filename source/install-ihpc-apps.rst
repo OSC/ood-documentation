@@ -175,4 +175,10 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - no
      - 
      -
+   * - Visual Studio Code
+     - OSC
+     - https://github.com/OSC/bc_osc_codeserver 
+     - no
+     - rnode
+     - Uses https://github.com/cdr/code-server
   
