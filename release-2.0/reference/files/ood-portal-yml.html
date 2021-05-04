@@ -1,0 +1,1347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ood_portal.yml &mdash; Open OnDemand 1.8.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nginx_stage.yml" href="nginx-stage-yml.html" />
+    <link rel="prev" title="Configuration Reference" href="../../reference.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Configuration Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ood_portal.yml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configure-general-options">Configure General Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-public-assets">Configure Public Assets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-logout-redirect">Configure Logout Redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-reverse-proxy">Configure Reverse Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-per-user-nginx">Configure per-user NGINX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-openid-connect">Configure OpenID Connect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-user-registration">Configure User Registration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nginx-stage-yml.html">nginx_stage.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/ood-portal-generator.html">ood-portal-generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/nginx-stage/usage.html">nginx-stage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-snippets.html">Code Snippets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../reference.html">Configuration Reference</a> &raquo;</li>
+        
+      <li>ood_portal.yml</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/reference/files/ood-portal-yml.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ood-portal-yml">
+<span id="ood-portal-generator-configuration"></span><h1>ood_portal.yml<a class="headerlink" href="#ood-portal-yml" title="Permalink to this headline">¶</a></h1>
+<p>Relying on the default build is fine for a demo deployment, but it is not
+recommended for a production environment. Options can be configured by default
+under the file <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
+<p>The RPMs copy this file from <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood-portal-generator/ood_portal_example.yml</span></code>
+during the installation.</p>
+<p>All the default options are listed in this configuration file. Feel free to
+read it through before continuing on.</p>
+<div class="section" id="configure-general-options">
+<h2>Configure General Options<a class="headerlink" href="#configure-general-options" title="Permalink to this headline">¶</a></h2>
+<dl class="describe">
+<dt>
+<code class="descname">listen_addr_port (String, Array&lt;String&gt;, null)</code></dt>
+<dd><p>the address and port server listens on for connections</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Don’t add a <code class="docutils literal notranslate"><span class="pre">Listen</span></code> directive in this Apache config (typically it
+exists in another config)</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">listen_addr_port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Explicitly listen on port 443</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">listen_addr_port</span><span class="p p-Indicator">:</span> <span class="s">&quot;443&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">servername (String, null)</code></dt>
+<dd><p>the host name used to access the Open OnDemand portal</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Access website through IP address only</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Access website through the host name <code class="docutils literal notranslate"><span class="pre">www.example.com</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="s">&quot;www.example.com&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">port (Integer, null)</code></dt>
+<dd><p>the port used to access the Open OnDemand portal (if different than <code class="docutils literal notranslate"><span class="pre">80</span></code>
+or <code class="docutils literal notranslate"><span class="pre">443</span></code>)</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use port <code class="docutils literal notranslate"><span class="pre">80</span></code> or port <code class="docutils literal notranslate"><span class="pre">443</span></code> if SSL is enabled</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use a higher numbered port to access the website</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">ssl (Array&lt;String&gt;, null)</code></dt>
+<dd><p>a list of Apache directives that enable SSL support</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Disable SSL support</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Example</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SSLCertificateFile /etc/letsencrypt/live/change-me/cert.pem</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SSLCertificateKeyFile /etc/letsencrypt/live/change-me/privkey.pem</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SSLCertificateChainFile /etc/letsencrypt/live/change-me/chain.pem</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">logroot (String)</code></dt>
+<dd><p>the root directory where log files are stored (can be relative to
+<code class="docutils literal notranslate"><span class="pre">ServerRoot</span></code>)</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Store logs in <code class="docutils literal notranslate"><span class="pre">$ServerRoot/logs</span></code> directory</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logroot</span><span class="p p-Indicator">:</span> <span class="s">&quot;logs&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Store logs in a different directory</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logroot</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/my/logs&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">use_rewrites (Boolean)</code></dt>
+<dd><p>Should RewriteEngine be used</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use RewriteEngine</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">use_rewrites</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Disable RewriteEngine usage</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">use_rewrites</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">use_maintenance (Boolean)</code></dt>
+<dd><p>Enable Rewrite rules for supporting maintenance mode of OnDemand
+Requires <cite>use_rewrites</cite> to be <cite>true</cite></p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Support maintenance mode support</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">use_maintenance</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Disable maintenance mode support</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">use_maintenance</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">maintenance_ip_whitelist (Array&lt;String&gt;)</code></dt>
+<dd><p>List of IP regular expressions to be allowed to access OnDemand
+when maintenance is enabled</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">No IPs are whitelisted</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">maintenance_ip_whitelist</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Allow 192.168.1.0/24 and 10.0.0.1 to access OnDemand during maintenance</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">maintenance_ip_whitelist</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;192.168.1..*&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;10.0.0.1&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">lua_root (String)</code></dt>
+<dd><p>the root directory where the Lua handler code resides</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Point to the install location of the ood_mod_proxy lua library</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/mod_ood_proxy/lib&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Point to a different directory</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lua/handlers&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">lua_log_level (String, null)</code></dt>
+<dd><p>the verbosity of the Lua module in the logs</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use default log level of <code class="docutils literal notranslate"><span class="pre">info</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_log_level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Decrease verbosity</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">lua_log_level</span><span class="p p-Indicator">:</span> <span class="s">&quot;warn&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="ood-portal-generator-user-map-cmd"></span><dl class="describe">
+<dt>
+<code class="descname">user_map_cmd (String)</code></dt>
+<dd><p>the system command used to map authenticated user name to a system user
+name</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use the regex <a class="reference internal" href="../../authentication/overview/map-user.html#authentication-overview-map-user"><span class="std std-ref">user mapping script</span></a>
+and echo back the authenticated user name as the system user name</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Capture system user name from regular expression</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@example.com&#39;&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="ood-portal-generator-user-env"></span><dl class="describe">
+<dt>
+<code class="descname">user_env (String, null)</code></dt>
+<dd><p>the CGI environment variable that holds the authenticated user name used
+as the argument for the user mapping command</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> if not defined</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use a custom environment variable instead</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="s">&quot;OIDC_CLAIM_preferred_username&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">map_fail_uri (String, null)</code></dt>
+<dd><p>the URI a user is redirected to if we fail to map the authenticated user
+name to a system user name</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Don’t redirect the user and just display an error message</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">map_fail_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Redirect the user to a registration page you set up beforehand</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">map_fail_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/register&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">pun_stage_cmd (String)</code></dt>
+<dd><p>the system command used to launch the <a class="reference internal" href="../commands/nginx-stage/usage.html#nginx-stage-usage"><span class="std std-ref">nginx stage</span></a> command with
+<strong class="program">sudo</strong> privileges</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use default install location</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_stage_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;sudo</span><span class="nv"> </span><span class="s">/opt/ood/nginx_stage/sbin/nginx_stage&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use a different install location</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_stage_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;sudo</span><span class="nv"> </span><span class="s">/path/to/nginx_stage&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">auth (Array&lt;String&gt;)</code></dt>
+<dd><p>the list of Apache directives defining how authentication is handled for
+various protected resources on the website</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Use basic authentication with a plain-text password file.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthUserFile</span><span class="nv"> </span><span class="s">\&quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd\&quot;&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">See:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../../installation/add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a></li>
+<li><a class="reference internal" href="../../authentication/shibboleth.html#authentication-shibboleth"><span class="std std-ref">Shibboleth</span></a></li>
+<li><a class="reference internal" href="../../authentication/tutorial-oidc-keycloak-rhel7/configure-cilogon.html#authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon"><span class="std std-ref">Configure Keycloak with CILogon</span></a></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">root_uri (String)</code></dt>
+<dd><p>the URI a user is redirected to when they access the root of the website
+(e.g., <code class="docutils literal notranslate"><span class="pre">https://www.example.com/</span></code>)</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Redirect the user to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">root_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Redirect to a different URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">root_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_uri&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">analytics (Hash, null)</code></dt>
+<dd><p>the object describing how to track server-side analytics with a Google
+Analytics account and property</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Do not track analytics</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">analytics</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd>See <a class="reference internal" href="../../analytics.html#analytics"><span class="std std-ref">Analytics</span></a></dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="configure-public-assets">
+<h2>Configure Public Assets<a class="headerlink" href="#configure-public-assets" title="Permalink to this headline">¶</a></h2>
+<p>This is a location where files can be served without a user being
+authenticated. Useful to serve favicon, images, or user documentation. If
+either of these properties are <code class="docutils literal notranslate"><span class="pre">null</span></code> then users won’t be able to access
+public assets through the website.</p>
+<dl class="describe">
+<dt>
+<code class="descname">public_uri (String, null)</code></dt>
+<dd><p>the URI used to access public assets (no authentication needed)</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Access as <code class="docutils literal notranslate"><span class="pre">http://www.example.com/public</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/public&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Access under a different URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/assets&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">public_root (String, null)</code></dt>
+<dd><p>the root directory where the public assets are served from</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Using a default installation</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/public&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Serve files under a different directory</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">public_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/public/files&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="configure-logout-redirect">
+<h2>Configure Logout Redirect<a class="headerlink" href="#configure-logout-redirect" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> will send the user to this URI when they click the Logout
+button. This URI will then redirect the user to the logout mechanism for your
+corresponding authentication mechanism. If either of these properties are
+<code class="docutils literal notranslate"><span class="pre">null</span></code> then users will get an error when they try to logout from the
+<a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p>
+<dl class="describe">
+<dt>
+<code class="descname">logout_uri (String, null)</code></dt>
+<dd><p>the URI used to logout from an Apache session</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Access as <code class="docutils literal notranslate"><span class="pre">http://www.example.com/logout</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/logout&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Access under a different URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/log_me_out&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">logout_redirect (String, null)</code></dt>
+<dd><p>the URI the user is redirected to when accessing the logout URI above</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Fallback to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> log out page</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard/logout&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">See:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../../authentication/shibboleth.html#authentication-shibboleth"><span class="std std-ref">Shibboleth</span></a></li>
+<li><a class="reference internal" href="../../authentication/tutorial-oidc-keycloak-rhel7/configure-cilogon.html#authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon"><span class="std std-ref">Configure Keycloak with CILogon</span></a></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="configure-reverse-proxy">
+<span id="ood-portal-generator-configuration-configure-reverse-proxy"></span><h2>Configure Reverse Proxy<a class="headerlink" href="#configure-reverse-proxy" title="Permalink to this headline">¶</a></h2>
+<p>The reverse proxy will proxy a request to any specified host and port through
+IP sockets. This is different than what is used for proxying to per-user NGINX
+processes through Unix domain sockets. This can be used to connect to Jupyter
+notebook servers, RStudio servers, VNC servers, and more… This is disabled by
+default as it can be security risk if not properly setup using a good
+<code class="docutils literal notranslate"><span class="pre">host_regex</span></code>.</p>
+<p>A URL request to the <code class="docutils literal notranslate"><span class="pre">node_uri</span></code> will reverse proxy to the given <code class="docutils literal notranslate"><span class="pre">host</span></code> and
+<code class="docutils literal notranslate"><span class="pre">port</span></code> using the <strong>full</strong> URI path. So a request to the frontend Apache
+proxy that looks like:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.example.edu</span>
+</pre></div>
+</div>
+<p>will be reverse proxied to the backend server with the following request
+format:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">&lt;host&gt;:&lt;port&gt;</span>
+</pre></div>
+</div>
+<p>A URL request to the <code class="docutils literal notranslate"><span class="pre">rnode_uri</span></code> will reverse proxy to the given <code class="docutils literal notranslate"><span class="pre">host</span></code> and
+<code class="docutils literal notranslate"><span class="pre">port</span></code> using the <strong>relative</strong> URI path. So a request to the frontend Apache
+proxy that looks like:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/&lt;rnode_uri&gt;/&lt;host&gt;/&lt;port&gt;/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">ondemand.example.edu</span>
+</pre></div>
+</div>
+<p>will be reverse proxied to the backend server with the following request
+format:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">&lt;host&gt;:&lt;port&gt;</span>
+</pre></div>
+</div>
+<p>Notice that we strip off the portion of the URI request path that is used to
+determine the backend web server.</p>
+<p>Both formats are provided to better support the varying capabilities for the
+multitude of web application servers. For the case of using <code class="docutils literal notranslate"><span class="pre">node_uri</span></code> the
+developer will need to modify the web server to accommodate requests with a
+sub-URI that follows the dynamic formatting of <code class="docutils literal notranslate"><span class="pre">/&lt;node_uri&gt;/&lt;host&gt;/&lt;port&gt;</span></code>.
+For the case of using <code class="docutils literal notranslate"><span class="pre">rnode_uri</span></code> the developer needs to confirm that all
+assets and links supplied by the web server are relative and not absolute.</p>
+<dl class="describe">
+<dt>
+<code class="descname">host_regex (String)</code></dt>
+<dd><p>the regular expression used as a whitelist for allowing a user to reverse
+proxy to a given host</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Allow proxying to all hosts in the world (please change this if you
+enable this feature)</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;[^/]+&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Restrict access to only within internal network</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&quot;[\\w.-]+\\.example\\.com&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">node_uri (String, null)</code></dt>
+<dd><p>the URI used to reverse proxy a user to a server running on a given host
+and port that knows the <strong>full</strong> URI path</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This feature is disabled by default</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use the recommended URI by our team</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/node&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">rnode_uri (String, null)</code></dt>
+<dd><p>the URI used to reverse proxy a user to a server running on a given host
+and port that knows the <strong>relative</strong> URI path</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This feature is disabled by default</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use the recommended URI by our team</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/rnode&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="configure-per-user-nginx">
+<h2>Configure per-user NGINX<a class="headerlink" href="#configure-per-user-nginx" title="Permalink to this headline">¶</a></h2>
+<p>The reverse proxy will proxy a request under the <code class="docutils literal notranslate"><span class="pre">pun_uri</span></code> URI to the user’s
+per-user NGINX (PUN) process through Unix domain sockets. It will send process
+signals to the user’s PUN through the <code class="docutils literal notranslate"><span class="pre">nginx_uri</span></code> URI. If either of these
+properties are <code class="docutils literal notranslate"><span class="pre">null</span></code> then PUN access will be disabled.</p>
+<dl class="describe">
+<dt>
+<code class="descname">nginx_uri (String, null)</code></dt>
+<dd><p>the URI used to control the PUN process</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">User’s can send signals to PUN through <code class="docutils literal notranslate"><span class="pre">http://www.example.com/nginx</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">nginx_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/nginx&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use a different URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_pun_controller&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">pun_uri (String, null)</code></dt>
+<dd><p>the URI used to access the PUN process</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">User’s access their PUN through <code class="docutils literal notranslate"><span class="pre">http://www.example.com/pun</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Use a different URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/my_pun_apps&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">pun_socket_root (String)</code></dt>
+<dd><p>the root directory that contains the socket files for the running PUNs</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Using a default installation</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_socket_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/run/ondemand-nginx&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Socket files are located in a different directory</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_socket_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/pun/sockets&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">pun_max_retries (Integer)</code></dt>
+<dd><p>the number of times the proxy attempt to connect to the PUN before giving
+up and displaying an error to the user</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Only try 5 times</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Try 25 times</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pun_max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">25</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="configure-openid-connect">
+<h2>Configure OpenID Connect<a class="headerlink" href="#configure-openid-connect" title="Permalink to this headline">¶</a></h2>
+<p>If using OpenID Connect for authentication, these are a few properties you will
+need to tweak. For a better understanding of these options you should read more
+on <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a>.</p>
+<dl class="describe">
+<dt>
+<code class="descname">oidc_uri (String, null)</code></dt>
+<dd><p>the redirect URI used by <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> for authentication</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Enable it on a recommended URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_discover_uri (String, null)</code></dt>
+<dd><p>the URI a user is redirected to if they are not authenticated by
+<a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> and is used to discover the ID provider the user will
+use to login through</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Enable it to a recommended URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/discover&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_discover_root (String, null)</code></dt>
+<dd><p>the root directory on the file system that serves the HTML code used for
+the discovery page</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_root</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Enable it to the recommended path</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_discover_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/discover&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="configure-user-registration">
+<h2>Configure User Registration<a class="headerlink" href="#configure-user-registration" title="Permalink to this headline">¶</a></h2>
+<p>If you are using a <strong class="program">grid-mapfile</strong> to map the authenticated user name
+to a system user name, then this will be used to generate mappings in the file
+for a user’s first time accessing your website. Setting either property below
+to <code class="docutils literal notranslate"><span class="pre">null</span></code> will disable this feature.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is unnecessary if you use regular expressions for mapping the
+authenticated user name to a system user name.</p>
+</div>
+<dl class="describe">
+<dt>
+<code class="descname">register_uri (String, null)</code></dt>
+<dd><p>the URI a user is redirected to if no mapping exists between an
+authenticated user name and a system user name</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default. An error is displayed the user if mapping fails.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_uri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Enable it to a recommended URI</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/register&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">register_root (String, null)</code></dt>
+<dd><p>the root directory on the file system that serves the HTML code used for
+the registration page</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default. An error is displayed the user if mapping fails.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Enable it to the recommended path</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">register_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/www/ood/register&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_provider_metadata_url (String, null)</code></dt>
+<dd><p>Refer to OIDCProviderMetadataURL in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default, and no OIDC configurations will be added.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_provider_metadata_url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCProviderMetadataURL</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_provider_metadata_url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://example.com:5554/.well-known/openid-configuration&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_client_id (String, null)</code></dt>
+<dd><p>Refer to OIDCClientID in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default, and no OIDC configurations will be added.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCClientID</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand.example.com&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_client_secret (String, null)</code></dt>
+<dd><p>Refer to OIDCClientSecret in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">This is disabled by default.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_secret</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCClientSecret</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_client_secret</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand.example.com&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_remote_user_claim (String)</code></dt>
+<dd><p>Refer to OIDCRemoteUserClaim in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">email</span></code> if no Dex connectors are defined.
+If connectors are defined the default is <code class="docutils literal notranslate"><span class="pre">preferred_username</span></code></p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_remote_user_claim</span><span class="p p-Indicator">:</span> <span class="s">&quot;email&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCRemoteUserClaim</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_remote_user_claim</span><span class="p p-Indicator">:</span> <span class="s">&quot;preferred_username&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_scope (String)</code></dt>
+<dd><p>Refer to OIDCScope in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">openid</span> <span class="pre">profile</span> <span class="pre">email</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_scope</span><span class="p p-Indicator">:</span> <span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCScope</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_scope</span><span class="p p-Indicator">:</span> <span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">groups&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_session_inactivity_timeout (Integer)</code></dt>
+<dd><p>Refer to OIDCSessionInactivityTimeout in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">28800</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_inactivity_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCSessionInactivityTimeout</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_inactivity_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">57600</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_session_max_duration (Integer)</code></dt>
+<dd><p>Refer to OIDCSessionMaxDuration in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">28800</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_max_duration</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCSessionMaxDuration</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_session_max_duration</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">57600</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_state_max_number_of_cookies (String)</code></dt>
+<dd><p>Refer to OIDCStateMaxNumberOfCookies in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">true</span></code>.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_state_max_number_of_cookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCStateMaxNumberOfCookies</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_state_max_number_of_cookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;20</span><span class="nv"> </span><span class="s">true&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_cookie_same_site (String)</code></dt>
+<dd><p>Refer to OIDCCookieSameSite in <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf">auth_openidc.conf</a>.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is <code class="docutils literal notranslate"><span class="pre">On</span></code> when SSL is disabled or <code class="docutils literal notranslate"><span class="pre">Off</span></code> when SSL is enabled.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_cookie_same_site</span><span class="p p-Indicator">:</span> <span class="s">&quot;On&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCCookieSameSite</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_cookie_same_site</span><span class="p p-Indicator">:</span> <span class="s">&quot;Off&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">oidc_settings (Hash, {})</code></dt>
+<dd><p>A Hash to supply additional OIDC settings.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is an empty Hash.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_settings</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{}</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Set OIDCStateMaxNumberOfCookies</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">oidc_settings</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassIDTokenAs</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">serialized</span>
+  <span class="l l-Scalar l-Scalar-Plain">OIDCPassRefreshToken</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">dex (Hash, null, false)</code></dt>
+<dd><p>The Hash to define Dex configurations.
+A value of <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code> will disable Dex configuration generation.
+Refer to <a class="reference internal" href="../../authentication/dex.html#dex-configuration"><span class="std std-ref">OnDemand Dex configuration reference</span></a> for details.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">The default value is an empty Hash.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{}</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Disable Dex configuration management</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nginx-stage-yml.html" class="btn btn-neutral float-right" title="nginx_stage.yml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../reference.html" class="btn btn-neutral float-left" title="Configuration Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/reference/files/ood-portal-yml.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/reference/files/ood-portal-yml.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/reference/files/ood-portal-yml.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/reference/files/ood-portal-yml.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/reference/files/ood-portal-yml.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/reference/files/ood-portal-yml.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/reference/files/ood-portal-yml.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/reference/files/ood-portal-yml.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/reference/files/ood-portal-yml.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/reference/files/ood-portal-yml.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Architecture &mdash; Open OnDemand 1.8.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration Reference" href="reference.html" />
+    <link rel="prev" title="Open OnDemand" href="index.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-context">System context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#container-context">Container context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#request-flow">Request Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Configuration Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-snippets.html">Code Snippets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/architecture.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="architecture">
+<span id="id1"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p>Below are some diagrams of OnDemand’s architecture:</p>
+<ol class="arabic simple">
+<li>Overview is a high level visual generated from Powerpoint</li>
+<li>System context and Container context diagrams below follow the <a class="reference external" href="https://c4model.com/">C4</a>
+model for software diagrams, are more technically detailed and are built using draw.io</li>
+<li>Request flow diagram is a sequence diagram built using plantuml</li>
+</ol>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="_images/ood_overview.png" src="_images/ood_overview.png" />
+</div>
+<ol class="arabic simple">
+<li>Apache is the server front end, running as the Apache user, and accepting all requests from users and serves four primary functions<ol class="arabic">
+<li>Authenticates user</li>
+<li>Starts Per-User NGINX processes (PUNs)</li>
+<li>Reverse proxies each user to her PUN via Unix domain sockets</li>
+<li>Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets</li>
+</ol>
+</li>
+<li>The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps</li>
+</ol>
+</div>
+<div class="section" id="system-context">
+<h2>System context<a class="headerlink" href="#system-context" title="Permalink to this headline">¶</a></h2>
+<p>Users use OnDemand to interact with their HPC resources through a web browser.</p>
+<div class="figure">
+<img alt="_images/ood_system_view.png" src="_images/ood_system_view.png" />
+</div>
+<p>All the gray components are specific to a given site and outside the OnDemand
+system.</p>
+</div>
+<div class="section" id="container-context">
+<h2>Container context<a class="headerlink" href="#container-context" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">In the C4 nomenclature, ‘containers’ are one level below the system context. This is
+not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or
+Singularity or <a class="reference external" href="https://www.opencontainers.org/">OCI containers</a>).</p>
+</div>
+<p>The Front-end proxy is the only component that is shared with all clients.
+The Front-end proxy will create Per User Nginx (PUN) processes (light blue boxes labeled “Per User Instance”).</p>
+<div class="figure">
+<img alt="_images/ood_container_view.png" src="_images/ood_container_view.png" />
+</div>
+<ul class="simple">
+<li>Everything contained in the dotted line is a part of the OnDemand system (see blue box in System context diagram).</li>
+<li>Everything outside of it in gray is site specific components.</li>
+<li>The “Per User Instance” light blue boxes are replicated for every user accessing the system</li>
+</ul>
+</div>
+<div class="section" id="request-flow">
+<h2>Request Flow<a class="headerlink" href="#request-flow" title="Permalink to this headline">¶</a></h2>
+<p>This is the request flow through the OnDemand system. A user initiates a
+request through a browser and this illustrates how that request propagates
+through the system to a particular application (including the dashboard).</p>
+<p class="plantuml">
+<img src="_images/plantuml-6a8fdab5b21c9c0c998d0a21b362a10878872ac3.png" alt="&#64;startuml
+
+title Request flow through the OnDemand system
+autonumber &quot;&lt;b&gt;[0]&quot;
+
+participant User
+participant &quot;Apache Httpd&quot;
+participant Authentication
+participant LuaScripts
+participant Nginx
+participant &quot;Passenger/App&quot;
+
+
+User -[#red]&gt; &quot;Apache Httpd&quot;: request
+
+activate &quot;Apache Httpd&quot;
+
+&quot;Apache Httpd&quot; -[#red]&gt; Authentication: Authenticate request
+activate Authentication
+Authentication -[#red]&gt; &quot;Apache Httpd&quot; : Authenticate response
+deactivate Authentication
+
+&quot;Apache Httpd&quot; -[#green]&gt; LuaScripts: Lua Hooks
+activate LuaScripts
+LuaScripts -[#green]&gt; LuaScripts: map user
+alt socket doesn't exist
+  LuaScripts -[#green]&gt; Nginx: Start nginx as $user
+end group
+LuaScripts -[#green]&gt; LuaScripts: modify request and proxy connection
+
+
+&quot;Apache Httpd&quot; -[#blue]&gt; Nginx: proxy request
+deactivate LuaScripts
+Nginx -[#blue]&gt; &quot;Passenger/App&quot;: proxy request
+&quot;Passenger/App&quot; -[#blue]&gt; Nginx: response
+Nginx -[#blue]&gt; &quot;Apache Httpd&quot;: response
+&quot;Apache Httpd&quot; -[#red]&gt; User: response
+deactivate &quot;Apache Httpd&quot;
+
+legend left
+|= |= Protocol |
+|&lt;back:red&gt;   &lt;/back&gt;| https over tcp |
+|&lt;back:green&gt;   &lt;/back&gt;| commands |
+|&lt;back:blue&gt;   &lt;/back&gt;| http over unix socket |
+endlegend
+
+&#64;enduml
+"/>
+</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reference.html" class="btn btn-neutral float-right" title="Configuration Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Open OnDemand" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/architecture.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/architecture.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/architecture.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/architecture.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/architecture.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/architecture.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/architecture.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/architecture.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/architecture.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/architecture.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
