@@ -102,6 +102,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    :maxdepth: 2
    :caption: Release Notes
 
+   release-notes/v2.0-release-notes
    release-notes/v1.8-release-notes
    release-notes/v1.7-release-notes
    release-notes/v1.6-release-notes
