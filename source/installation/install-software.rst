@@ -36,12 +36,24 @@ software requirements:
       attach a subscription providing access to RHSCL to be able to use this
       repository.
 
-#. Enable dnf modules for dependencies **on CentOS/RHEL 8 only**:
+#. Enable dnf modules and repositories for dependencies **on CentOS/RHEL 8 only**:
 
     .. code-block:: sh
 
        dnf module enable ruby:2.7
        dnf module enable nodejs:12
+
+    **CentOS 8 only**
+
+    .. code-block:: sh
+
+       sudo dnf config-manager --set-enabled powertools
+
+    **RedHat 8 only**
+
+    .. code-block:: sh
+
+       sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
 #. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
 
