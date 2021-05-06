@@ -171,6 +171,42 @@ Configure General Options
             - '192.168.1..*'
             - '10.0.0.1'
 
+.. describe:: security_csp_frame_ancestors (Boolean)
+
+     Set Header Content-Security-Policy frame-ancestors.
+
+     Default
+       Set Content-Security-Policy frame-ancestors to servername
+
+       .. code-block:: yaml
+
+           security_csp_frame_ancestors: https://ondemand.example.com
+
+     Example
+       Disable Content-Security-Policy header
+
+       .. code-block:: yaml
+
+          security_csp_frame_ancestors: false
+
+.. describe:: security_strict_transport (Boolean)
+
+     Set Header Strict-Transport-Security to help enforce SSL
+
+     Default
+       Set Strict-Transport-Security if SSL is defined for OnDemand
+
+       .. code-block:: yaml
+
+           security_strict_transport: true
+
+     Example
+       Disable Strict-Transport-Security header
+
+       .. code-block:: yaml
+
+          security_strict_transport: false
+
 .. describe:: lua_root (String)
 
      the root directory where the Lua handler code resides
