@@ -7,25 +7,26 @@ We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
 
 - `Apache HTTP Server 2.4`_
-- `Ruby 2.5`_ with :command:`rake`, :command:`bundler`, and development
+- Ruby 2.7 with :command:`rake`, :command:`bundler`, and development
   libraries
-- `Node.js 10`_
+- Node.js 12
 
 .. note::
 
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-#. Enable the Software Collections repositories **on CentOS/RHEL 7 only**:
+#. Enable the dependency repositories **on CentOS/RHEL 7 only**:
 
    CentOS 7
      .. code-block:: sh
 
-        sudo yum install centos-release-scl
+        sudo yum install centos-release-scl epel-release
 
    RHEL 7
      .. code-block:: sh
 
+        sudo yum install epel-release
         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
         # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
 
@@ -34,6 +35,13 @@ software requirements:
       For **RedHat** you may also need to enable the *Optional* channel and
       attach a subscription providing access to RHSCL to be able to use this
       repository.
+
+#. Enable dnf modules for dependencies **on CentOS/RHEL 8 only**:
+
+    .. code-block:: sh
+
+       dnf module enable ruby:2.7
+       dnf module enable nodejs:12
 
 #. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
 
@@ -88,6 +96,4 @@ software requirements:
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
-.. _ruby 2.5: https://www.softwarecollections.org/en/scls/rhscl/rh-ruby25/
-.. _node.js 10: https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs10/
 .. _ohio supercomputer center: https://www.osc.edu/
