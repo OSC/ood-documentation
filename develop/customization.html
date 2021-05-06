@@ -1281,6 +1281,21 @@ sudo systemctl restart ondemand-dex.service
 </span></pre></div>
 </div>
 </li>
+<li><p class="first">In the Job Composer, Open XDMoD job links will include a warning message that the job may not appear in XDMoD for up to 24 hours after the job completed. The message is to address the gap of time between the job appearing as completed in the Job Composer and the job appearing in Open XDMoD after the ingest and aggregation script is run. This message appears from the time the Job Composer becomes aware of the job completion status, till an elapsed time specified in seconds by the locale key <code class="docutils literal notranslate"><span class="pre">en.jobcomposer.xdmod_url_warning_message_seconds_after_job_completion</span></code> which defaults to 24 hours (86400 seconds) with a text message specified by locale key  <code class="docutils literal notranslate"><span class="pre">en.jobcomposer.xdmod_url_warning_message</span></code>. To disable this message, set the value you your locale file under <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales</span></code>. For example, in the default locale we have these values:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">en</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">jobcomposer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">xdmod_url_warning_message</span><span class="p p-Indicator">:</span> <span class="s">&quot;This</span><span class="nv"> </span><span class="s">job</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">appear</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Open</span><span class="nv"> </span><span class="s">XDMoD</span><span class="nv"> </span><span class="s">until</span><span class="nv"> </span><span class="s">24</span><span class="nv"> </span><span class="s">hours</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">completion</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">job.&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">xdmod_url_warning_message_seconds_after_job_completion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">86400</span>
+</pre></div>
+</div>
+<p>Which results in these warning messages appearing in Job Composer:</p>
+<div class="figure align-center">
+<img alt="_images/customization_xdmod_jobcomposer_warning_1.png" src="_images/customization_xdmod_jobcomposer_warning_1.png" />
+</div>
+<div class="figure align-center">
+<img alt="_images/customization_xdmod_jobcomposer_warning_2.png" src="_images/customization_xdmod_jobcomposer_warning_2.png" />
+</div>
+</li>
 </ol>
 </div>
 </div>
