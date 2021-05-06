@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization Overview &mdash; Open OnDemand 1.8.12 documentation</title>
+  <title>Monitoring &mdash; Open OnDemand 1.8.12 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Customization" href="customization.html" />
-    <link rel="prev" title="Test Configuration" href="installation/resource-manager/test.html" />
+    <link rel="next" title="Prometheus Monitoring" href="monitoring/prometheus.html" />
+    <link rel="prev" title="1. Adding Google Analytics" href="analytics/google-analytics.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -112,10 +112,13 @@
 <li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation/resource-manager.html">Resource Manager Configuration</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customization_overview.html">Customization Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="customization.html">Customization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Monitoring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html">Prometheus Monitoring</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
 <ul>
@@ -203,14 +206,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Customization Overview</li>
+      <li>Monitoring</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/customization_overview.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/monitoring.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -224,65 +227,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="customization-overview">
-<span id="id1"></span><h1>Customization Overview<a class="headerlink" href="#customization-overview" title="Permalink to this headline">¶</a></h1>
-<p>OnDemand’s configuration is stored in the environment, which can be modified using a hierarchy of config files. Configuration files are rooted in <code class="docutils literal notranslate"><span class="pre">/etc/ood</span></code>. Assets that should be publicly available (such as a favicon or logo image) are placed under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public</span></code>.</p>
-<p>These are three files that directly affect the environment or functionality of the Per-User NGINX (PUN) processes:</p>
-<blockquote>
-<div><ul class="simple">
-<li><strong>/etc/ood/config/nginx_stage.yml</strong><ul>
-<li>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</li>
-<li>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</li>
-</ul>
-</li>
-<li><strong>/etc/ood/config/apps/$APP/env</strong><ul>
-<li>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></li>
-<li>Used to provide application specific config</li>
-<li><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</li>
-</ul>
-</li>
-<li><strong>/etc/ood/config/apps/$APP/initializers/ood.rb</strong><ul>
-<li>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></li>
-<li>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</li>
-<li>This method is specific to Ruby on Rails applications: Activejobs,
-Dashboard, and Job Composer. You can add multiple
-initializer files in this directory and they will be loaded in
-alphabetical order</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-<p>This file affects the starting of the PUN, and is the appropriate place to change the software collections loaded:</p>
-<blockquote>
-<div><ul>
-<li><p class="first"><strong>/etc/ood/profile</strong></p>
+  <div class="section" id="monitoring">
+<span id="id1"></span><h1>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the various ways to monitor Open OnDemand.</p>
+<div class="toctree-wrapper compound">
 <ul>
-<li><p class="first"><strong>Sourced as root prior to starting the PUN</strong></p>
-</li>
-<li><p class="first">If exists, this file is sourced <strong>instead</strong> of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</p>
-</li>
-<li><p class="first">You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</p>
-</li>
-<li><p class="first">Environment variables set here are not guarenteed to remain set in the PUNs unless those environment variables are added to the YAML sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>. Here is a list of environment variables guarenteed to be preserved when NGINX starts:</p>
-<blockquote>
-<div><ul class="simple">
-<li>PATH</li>
-<li>LD_LIBRARY_PATH</li>
-<li>X_SCLS</li>
-<li>MANPATH</li>
-<li>PCP_DIR</li>
-<li>PERL5LIB</li>
-<li>PKG_CONFIG_PATH</li>
-<li>PYTHONPATH</li>
-<li>XDG_DATA_DIRS</li>
-<li>SCLS RUBYLIB</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring/prometheus.html">Prometheus Monitoring</a></li>
 </ul>
-</div></blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
+</div>
 </div>
 
 
@@ -293,10 +245,10 @@ alphabetical order</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="customization.html" class="btn btn-neutral float-right" title="Customization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="monitoring/prometheus.html" class="btn btn-neutral float-right" title="Prometheus Monitoring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation/resource-manager/test.html" class="btn btn-neutral float-left" title="Test Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="analytics/google-analytics.html" class="btn btn-neutral float-left" title="1. Adding Google Analytics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -328,25 +280,25 @@ alphabetical order</li>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/customization_overview.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/monitoring.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/customization_overview.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/monitoring.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/customization_overview.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/monitoring.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/customization_overview.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/monitoring.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/customization_overview.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/monitoring.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/customization_overview.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/monitoring.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/customization_overview.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/monitoring.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/customization_overview.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/monitoring.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/customization_overview.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/monitoring.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/customization_overview.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/monitoring.html">develop</a></dd>
       
     </dl>
     <dl>
