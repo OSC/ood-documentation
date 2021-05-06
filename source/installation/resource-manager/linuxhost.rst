@@ -57,6 +57,7 @@ Launch specific application containers
    ---
    batch_connect:
      template: vnc
+   script:
      native:
         singularity_bindpath: /fs,/home
         singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif

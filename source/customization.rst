@@ -965,7 +965,7 @@ Changes are applied by running ``update_ood_portal`` and restarting the ``ondema
    sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
    sudo systemctl restart ondemand-dex.service
 
-.. _dex template docs: https://github.com/dexidp/dex/blob/master/Documentation/templates.md
+.. _dex template docs: https://dexidp.io/docs/templates/
 
 .. _xdmod_integration:
 
