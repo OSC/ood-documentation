@@ -520,16 +520,152 @@ Below are different configuration options and the resulting navbar if you had in
      - no app menus appear!
      - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
 
+.. _dashboard_pinned_apps:
+
+Pinning Applications to the Dashboard
+-------------------------------------
+
+In version 2.0 you can now pin app Icons to the dashboard that link to the application form.
+
+When configured a widget like the one below will appear on the dashboard's landing page.
+
+.. figure:: /images/pinned_apps.png
+
+The configuration for what apps to pin allows for three variants.
+
+You can configure specific apps with a string of the type ``router/app_name``. 
+For example ``sys/jupyter`` is the system installed app named jupyter.
+
+Secondly you can configure globs like ``sys/*`` to pin all system installed apps. Or
+Maybe ``sys/minimal_*`` to pin all system installed apps that being with 'minimal'.
+
+Lastly you can choose to pin apps based off of fields in their ``manifest.yml`` file.
+You can match by type, category, subcategory and metadata fields.  These matches are
+cumulative. Meaning an app has to match *all* of these to be pinned.  In the examples below
+there is a configuration of type sys and category minimal. This configuration will only pin
+system installed apps that are in the minimal category.  An app has to meet *both* these
+criteria to be pinned to the dashboard.
+  
+
+Full examples are below:
+
+.. code:: yaml
+
+  # /etc/ood/config/ondemand.d/ondemand.yml
+  pinned_apps:
+    - sys/jupyter           # pin a specific system installed app called 'jupyter'
+ 
+    - 'sys/*'               # pin all system install apps. This also works for usr/* and dev/*
+  
+    - category: 'minimal'   # pin all the apps in the 'minimal' category
+  
+    - type: sys             # pin all system installed apps in the minimal category.
+      category: 'minimal'
+
+    # pin all system installed apps in the minimal category and the 
+    # class instruction subcategory
+    - type: sys
+      category: 'minimal'
+      subcategory: 'class_instruction'
+
+    # pin all system installed apps in the minimal category, the 
+    # class instruction subcategory and the metadata field 'field_of_science'
+    # with an exact match on biology
+    - type: sys             
+      category: 'minimal'
+      subcategory: 'class_instruction'
+      field_of_science: 'biology'
+
+    # pin any app with an exact match on the metadata field_of_science of biology
+    - field_of_science: 'biology'
+
+    # pin any app with an glob match *bio* on the metadata field_of_science of 
+    - field_of_science: '*bio*'
+
+
+Administrators can also configure the pinned apps to be grouped by any field
+in the ``manifest.yml`` including metadata fields with the ``pinned_apps_group_by``
+configuration.
+
+This will create a row and a heading for each group like so (the image was generated
+from grouping by category):
+
+.. figure:: /images/grouped_pinned_apps.png
+
+One can also change the menu length in the 'App's menu item. If you've
+pinned more than 6 apps and you want to them to show up in this dropdown
+list, simply increase the length with the option below.
+
+.. code:: yaml
+
+  # /etc/ood/config/ondemand.d/ondemand.yml
+  pinned_apps_menu_length: 6        # the default number of items in the dropdown menu list
+  pinned_apps_group_by: category    # defaults to nil, no grouping
+
+.. _dashboard_custom_layout:
+
+Custom layouts in the dashboard
+-------------------------------
+
+Administrators can now customize what widgets appear on the dashboard and how they're
+layed out on the page.
+
+In it's simplest form this feature allows for a rearrangement of existing widgets. As
+of 2.0 the existing widgets are:
+
+- ``pinned_apps`` - Pinned apps described above
+- ``motd`` - the Message of the Day
+- ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
+- ``xdmod_widget_jobs`` - the XDMoD widget for job information
+
+This feature also allows for administrators to administrators to *add* custom widgets.
+Simply drop new files into ``/etc/ood/config/dashboard/views/dashboard`` and reference them
+in the configuration.  These partial files can be any format Rails recognizes, notably ``.html`` or
+``.html.erb`` extensions.
+
+.. warning::
+
+ Rails expects files to be prefixed with an underscore. For example if you configured ``my_new_widget``
+ the filename should be ``_my_new_widget.html``.
+
+Without setting this configuration, the dashboard will arrange itself depending on what features are
+enabled. For example if both pinned apps and XDMoD features are enabled it will arrange itself accordingly
+based on a default layout.
+
+Here's the default configuration when all of these features are enabled.
+
+.. code:: yaml
+
+  # /etc/ood/config/ondemand.d/ondemand.yml
+  dashboard_layout:
+    rows:
+      - columns:
+        - width: 8
+          widgets:
+            - pinned_apps
+            - motd
+        - width: 4
+          - widgets:
+            - xdmod_widget_job_efficiency
+            - xdmod_widget_jobs
+
+``rows`` are an array of row elements. Each row element has a ``columns`` field which is an array
+column elements. Each column element two fields. A ``width`` field that specifies the width in the
+`bootstrap grid layout`_ which defaults to 12 columns in total. It also has a ``widgets`` field which
+is an array of existing or newly added widgets to render in that column.
+
+.. _bootstrap grid layout: https://getbootstrap.com/docs/4.0/layout/grid/
+
 .. _customization_localization:
 
 Customize Text in OnDemand
 --------------------------
 
-Using Rails support for Internationaliation (i18n), we have internationalized many strings in the Dashboard and the Job Composer apps.
+Using Rails support for Internationalization (i18n), we have internationalized many strings in the Dashboard and the Job Composer apps.
 
 Initial translation dictionary files with defaults that work well for OSC and using the English locale (``en``) have been added (``/var/www/ood/apps/sys/dashboard/config/locales/en.yml`` and ``/var/www/ood/apps/sys/myjobs/config/locales/en.yml``). Sites wishing to modify these strings in order to provide site specific replacements for English, or use a different locale altogether, should do the following:
 
-#. Copy the translation dictionary file (or create a new file with the same stucture of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy.
+#. Copy the translation dictionary file (or create a new file with the same structure of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy.
 #. If you want apps to look for these dictionary files in a different location than ``/etc/ood/config/locales/en.yml`` you can change the location by defining ``OOD_LOCALES_ROOT`` environment variable.
 #. The default locale is "en". You can use a custom locale. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.
 
