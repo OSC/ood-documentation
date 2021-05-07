@@ -5,6 +5,7 @@ v2.0 Release Notes
 
 Highlights in 2.0:
 
+- `Breaking Changes`_
 - `Pinning apps to the dashboard`_
 - `Customizable layouts in the dashboard`_
 - `Adding metadata to app manifests`_
@@ -17,6 +18,27 @@ Highlights in 2.0:
 
 Upgrading from v1.8
 -------------------
+
+Breaking Changes
+................
+
+.. warning::
+
+   There are some breaking changes in 2.0 that you'll need to work through to upgrade.
+
+
+No longer providing ood_auth_map.regex
+**************************************
+
+2.0 no longer provides ``/opt/ood/ood_auth_map/bin/ood_auth_map.regex`` the 1.8- default 
+``user_map_cmd`` in ``ood_portal.yml``.
+
+Most sites should be able to use ``user_map_match`` instead.  You can still use
+``user_map_cmd``, only you'll have to write your own in a language of your choice.
+
+See the :ref:`documentation on user_map_match <ood-portal-generator-user-map-match>`
+for more information on it.
+
 
 .. warning::
 
@@ -154,7 +176,6 @@ available configurations.
 
 ActiveJobs now a part of the dashboard
 ......................................
-
 
 New File Manager app
 ....................
