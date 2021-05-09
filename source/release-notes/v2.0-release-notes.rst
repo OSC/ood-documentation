@@ -39,6 +39,18 @@ Most sites should be able to use ``user_map_match`` instead.  You can still use
 See the :ref:`documentation on user_map_match <ood-portal-generator-user-map-match>`
 for more information on it.
 
+ActiveJobs configuration changes
+********************************
+
+Because `ActiveJobs now a part of the dashboard`_ configuration files are no longer
+being read from ``/etc/ood/config/apps/activejobs``.
+
+If you have initializers here in this directory, they need to move to
+``/etc/ood/config/apps/dashboard/initializers``.  Similarly views, if any,
+need to move to ``/etc/ood/config/apps/dashboard/views``.
+
+If you used the class ``Filter`` to add or modify the filter menus in an initializer,
+this now needs to be ``ActiveJobs::Filter``.
 
 .. warning::
 
@@ -176,6 +188,14 @@ available configurations.
 
 ActiveJobs now a part of the dashboard
 ......................................
+
+ActiveJobs is now a part of the dashboard. The URL has changed, but redirects from the old
+URL should still work in case sites have this saved somewhere.
+
+The primary benefit to users will be that the navbar is visible in this app now.
+
+However you should view `ActiveJobs configuration changes`_ for the breaking changes this
+introduced.
 
 New File Manager app
 ....................
