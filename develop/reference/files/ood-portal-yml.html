@@ -115,6 +115,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="nginx-stage-yml.html">nginx_stage.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ondemand-d-ymls.html">ondemand.d/*.yml files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="submit-yml-erb.html">submit.yml.erb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/ood-portal-generator.html">ood-portal-generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/nginx-stage/usage.html">nginx-stage</a></li>
@@ -511,19 +512,48 @@ when maintenance is enabled</p>
 name</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Use the regex <a class="reference internal" href="../../authentication/overview/map-user.html#authentication-overview-map-user"><span class="std std-ref">user mapping script</span></a>
-and echo back the authenticated user name as the system user name</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+<dd><p class="first">Since 2.0 there is no provided user map command.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Capture system user name from regular expression</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@example.com&#39;&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/site/site_mapper.sh&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
+</dd></dl>
+
+<span class="target" id="ood-portal-generator-user-map-match"></span><dl class="describe">
+<dt>
+<code class="descname">user_map_match (String)</code></dt>
+<dd><p>The lua pattern to map authenticated user name to a system user
+name.</p>
+<p><code class="docutils literal notranslate"><span class="pre">user_map_match</span></code> was added in 2.0 to be a simpler replacement
+for <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> above. match has precedence over cmd if they’re both
+configured.</p>
+<p>See the <a class="reference external" href="https://www.lua.org/manual/5.1/manual.html#5.4.1">documentation on lua patterns</a> for details.
+You can test your configuration out in a lua shell like so:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">string.match</span><span class="p">(</span><span class="s1">&#39;ktrout@example.edu&#39;</span><span class="p">,</span> <span class="s1">&#39;^([^@]+)@example.edu$&#39;</span><span class="p">)</span>
+<span class="n">ktrout</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Default</dt>
+<dd>Match any characters 0 or more times.</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_match</span><span class="p p-Indicator">:</span> <span class="s">&#39;.*&#39;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Example</dt>
+<dd>Capture system user name from email pattern.</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_match</span><span class="p p-Indicator">:</span> <span class="s">&#39;^([^@]+)@example.edu$&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <span class="target" id="ood-portal-generator-user-env"></span><dl class="describe">
