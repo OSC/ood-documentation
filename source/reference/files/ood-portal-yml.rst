@@ -250,19 +250,51 @@ Configure General Options
      name
 
      Default
-       Use the regex :ref:`user mapping script <authentication-overview-map-user>`
-       and echo back the authenticated user name as the system user name
+       Since 2.0 there is no provided user map command.
 
        .. code-block:: yaml
 
-          user_map_cmd: "/opt/ood/ood_auth_map/bin/ood_auth_map.regex"
+          user_map_cmd: null
 
      Example
        Capture system user name from regular expression
 
        .. code-block:: yaml
 
-          user_map_cmd: "/opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex='^(\\w+)@example.com'"
+          user_map_cmd: "/opt/site/site_mapper.sh"
+
+.. _ood-portal-generator-user-map-match:
+.. describe:: user_map_match (String)
+
+   The lua pattern to map authenticated user name to a system user
+   name.
+
+   ``user_map_match`` was added in 2.0 to be a simpler replacement
+   for ``user_map_cmd`` above. match has precedence over cmd if they're both
+   configured.
+
+   See the `documentation on lua patterns`_ for details.
+   You can test your configuration out in a lua shell like so:
+
+   .. code-block:: lua
+
+      > string.match('ktrout@example.edu', '^([^@]+)@example.edu$')
+      ktrout
+
+   Default
+      Match any characters 0 or more times.
+
+   .. code-block:: yaml
+
+      user_map_match: '.*'
+
+   Example
+      Capture system user name from email pattern.
+
+   .. code-block:: yaml
+
+      user_map_match: '^([^@]+)@example.edu$'
+
 
 .. _ood-portal-generator-user-env:
 .. describe:: user_env (String, null)
@@ -984,3 +1016,4 @@ to ``null`` will disable this feature.
           dex: false
 
 .. _auth_openidc.conf: https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf
+.. _documentation on lua patterns: https://www.lua.org/manual/5.1/manual.html#5.4.1
