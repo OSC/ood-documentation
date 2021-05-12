@@ -51,6 +51,8 @@ Because the announcement is rendered via ERB you can do some interesting things,
 
 .. note:: Warnings about the announcement file being missing may be present in users' nginx logs. Despite the warning the Dashboard will still function normally without those files being present.
 
+.. _motd_customization:
+
 Message of the Day (MOTD)
 -------------------------
 
@@ -61,7 +63,10 @@ To display a MOTD file on the Dashboard ensure that the environment variables ``
    .. code-block:: sh
 
       MOTD_PATH="/etc/motd" # this supports both file and RSS feed URIs
-      MOTD_FORMAT="txt" # markdown, txt, rss
+      MOTD_FORMAT="txt" # markdown, txt, rss, markdown_erb, txt_erb
+
+.. tip::
+    The ``_erb`` formats support ERB rendering to generate more dynamic messages.
 
 .. figure:: /images/dashboard_motd.png
    :align: center
