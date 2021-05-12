@@ -833,10 +833,13 @@ of 2.0 the existing widgets are:</p>
 <li><code class="docutils literal notranslate"><span class="pre">xdmod_widget_job_efficiency</span></code> - the XDMoD widget for job efficiency</li>
 <li><code class="docutils literal notranslate"><span class="pre">xdmod_widget_jobs</span></code> - the XDMoD widget for job information</li>
 </ul>
-<p>This feature also allows for administrators to administrators to <em>add</em> custom widgets.
-Simply drop new files into <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/dashboard/views/dashboard</span></code> and reference them
+<p>This feature also allows for administrators to <em>add</em> custom widgets.
+Simply drop new files into <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/dashboard/views/widgets</span></code> and reference them
 in the configuration.  These partial files can be any format Rails recognizes, notably <code class="docutils literal notranslate"><span class="pre">.html</span></code> or
 <code class="docutils literal notranslate"><span class="pre">.html.erb</span></code> extensions.</p>
+<p>Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
+<code class="docutils literal notranslate"><span class="pre">views/widgets/cluster/_my_cluster_widget.html.erb</span></code> would be referenced in the configuration
+as <code class="docutils literal notranslate"><span class="pre">cluster/my_cluster_widget</span></code>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Rails expects files to be prefixed with an underscore. For example if you configured <code class="docutils literal notranslate"><span class="pre">my_new_widget</span></code>

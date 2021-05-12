@@ -618,10 +618,14 @@ of 2.0 the existing widgets are:
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
 
-This feature also allows for administrators to administrators to *add* custom widgets.
-Simply drop new files into ``/etc/ood/config/dashboard/views/dashboard`` and reference them
+This feature also allows for administrators to *add* custom widgets.
+Simply drop new files into ``/etc/ood/config/dashboard/views/widgets`` and reference them
 in the configuration.  These partial files can be any format Rails recognizes, notably ``.html`` or
 ``.html.erb`` extensions.
+
+Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
+``views/widgets/cluster/_my_cluster_widget.html.erb`` would be referenced in the configuration
+as ``cluster/my_cluster_widget``.
 
 .. warning::
 
