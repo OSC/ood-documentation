@@ -76,7 +76,7 @@ When changes are needed for OnDemand Dex run the following command:
 Managing the OnDemand Dex service
 ---------------------------------
 
-To service for OnDemand Dex is ``ondemand-dex``:
+The service for OnDemand Dex is ``ondemand-dex``:
 
    .. code-block:: sh
 
@@ -88,7 +88,7 @@ Dex Firewall
 
 .. _dex-firewall:
 
-By default when using SSL Dex will use port ``5554`` for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is ``5556``.  The port being used by Dex must be externally accessible.
+By default when using SSL, Dex will use port ``5554`` for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is ``5556``.  The port being used by Dex must be externally accessible.
 
 Firewalld example:
    .. code-block:: sh
