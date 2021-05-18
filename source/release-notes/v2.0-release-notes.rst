@@ -79,6 +79,50 @@ Because Files app is now integrated with the Dashboard app, configurations
 in ``/etc/ood/config/apps/files`` need to move to ``/etc/ood/config/apps/dashboard`` for
 them to take effect.
 
+Changes to the interactive cards
+********************************
+
+The interactive sessions cards have changed with the bootstrap 4 upgrade. If your site
+uses complex logic in your `view.html.erb` you may have to change that.  Here are
+the two changes that may affect your site.
+
+1. The ``panel`` css classes no longer exist. These have been replaced by ``card``.
+   Here are examples in both plain javascript and jquery of what you may have and how
+   it would need to change.
+
+.. code-block:: javascript
+
+   // there is no closes panel to this element anymore. This won't work, because
+   // there are no elements with a 'panel' css class.
+   document.getElementById("someElementId").closest(".panel").id;
+
+   // search for the closest element with a card class instead
+   document.getElementById("someElementId").closest(".card").id;
+
+   // the same thing in jquery
+   $("#someElementId").closest(".card")[0].id
+
+1. The ``id`` of the card divs has changed to prepend ``id_`` to them to fix some issues in Bootstrap-4.
+   So if you use ``<%= session_id >`` to query for elements you will either need to prepend ``id_`` to that
+   or change the query to look for the ``data-id`` attribute of a div.
+
+   .. note::   ``<%= session_id >`` doesn't work directly. You would need to pass it back through the ``conn_params``
+               for it to be usable in this view.
+
+.. code-block:: javascript
+
+   // searching for cards like this will no longer work because the id of the cards has changed.
+   document.getElementById("<= session_id >");
+   $("#<= session_id >"); // same thing in jquery
+
+
+   // you will now have to prepend the string 'id_' to them
+   document.getElementById("id_<= session_id >");
+   $("#id_<= session_id >"); // same thing in jquery
+
+   // the original session id is still stored in the attribute data-id, so this
+   // works in jquery
+   $("div[data-id='<%= session_id >']")
 
 Upgrade directions
 ..................
