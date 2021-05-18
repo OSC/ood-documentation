@@ -162,6 +162,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#changes-in-all-apps-page-layout">Changes in All Apps page layout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#erb-formats-for-message-of-the-day">ERB formats for Message of the day</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute">Control whether an app link opens in a new window using manifest attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memcached-ruby-gem-available-for-use-in-apps">Memcached Ruby gem available for use in apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
 </ul>
 </li>
@@ -268,6 +270,8 @@
 <li><a class="reference internal" href="#configurations-in-an-ondemand-d-directory">Configurations in an ondemand.d directory</a></li>
 <li><a class="reference internal" href="#changes-in-all-apps-page-layout">Changes in All Apps page layout</a></li>
 <li><a class="reference internal" href="#erb-formats-for-message-of-the-day">ERB formats for Message of the day</a></li>
+<li><a class="reference internal" href="#control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute">Control whether an app link opens in a new window using manifest attribute</a></li>
+<li><a class="reference internal" href="#memcached-ruby-gem-available-for-use-in-apps">Memcached Ruby gem available for use in apps</a></li>
 <li><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
 </ul>
 <div class="section" id="upgrading-from-v1-8">
@@ -458,6 +462,19 @@ be dynamically added by <a class="reference internal" href="#adding-metadata-to-
 <p>The message of the day text and markdown formats now support ERB rendering for a more
 dynamic message being rendered. See the <a class="reference internal" href="../customization.html#motd-customization"><span class="std std-ref">documentation on Message of the Day</span></a>
 for more information.</p>
+</div>
+<div class="section" id="control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute">
+<h3>Control whether an app link opens in a new window using manifest attribute<a class="headerlink" href="#control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute" title="Permalink to this headline">¶</a></h3>
+<p>In 1.8, all links to apps that are separate Passenger processes open in a new window or tab. The rationale for this
+was that these apps do not share the navigational context with the Dashboard app - in particular the navbar is not present.</p>
+<p>By adding to the manifest.yml <code class="docutils literal notranslate"><span class="pre">new_window:</span> <span class="pre">false</span></code> the app is indicating it provides enough navigational context for the user
+to not get lost and the Dashboard will not open in new window.</p>
+<p>This feature is used by the Files and Active Jobs apps in 2.0.</p>
+</div>
+<div class="section" id="memcached-ruby-gem-available-for-use-in-apps">
+<h3>Memcached Ruby gem available for use in apps<a class="headerlink" href="#memcached-ruby-gem-available-for-use-in-apps" title="Permalink to this headline">¶</a></h3>
+<p>The “dalli” Ruby gem for interfacing with memcached can now be used in batch connect apps though it needs
+to be explicitly required using a custom initializer or in the form or submit erb files.</p>
 </div>
 <div class="section" id="dependency-updates">
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>
