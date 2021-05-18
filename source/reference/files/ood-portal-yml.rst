@@ -273,7 +273,10 @@ Configure General Options
    for ``user_map_cmd`` above. match has precedence over cmd if they're both
    configured.
 
-   See the `documentation on lua patterns`_ for details.
+   Note that lua patterns are not regular expressions. So boolean OR matches
+   like ``|`` for example are not supported. See the `documentation on lua patterns`_
+   for details more.
+
    You can test your configuration out in a lua shell like so:
 
    .. code-block:: lua

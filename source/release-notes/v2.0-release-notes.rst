@@ -31,11 +31,19 @@ Breaking Changes
 No longer providing ood_auth_map.regex
 **************************************
 
-2.0 no longer provides ``/opt/ood/ood_auth_map/bin/ood_auth_map.regex`` the 1.8- default
+2.0 no longer provides ``/opt/ood/ood_auth_map/bin/ood_auth_map.regex``, the 1.8- default
 ``user_map_cmd`` in ``ood_portal.yml``.
 
 Most sites should be able to use ``user_map_match`` instead.  You can still use
 ``user_map_cmd``, only you'll have to write your own in a language of your choice.
+
+
+.. warning::
+
+   lua patterns may not be sufficient because they are not regular expressions. For example
+   they do not support boolean OR ``|`` operators. If you need such functionality you may
+   find python, perl, ruby (SCL or system installed) or even bash commands that suite your
+   needs.
 
 See the :ref:`documentation on user_map_match <ood-portal-generator-user-map-match>`
 for more information on it.
