@@ -149,15 +149,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#files-app-configuration-changes">Files app configuration changes</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pinning-apps-to-the-dashboard">Pinning apps to the dashboard</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#customizable-layouts-in-the-dashboard">Customizable layouts in the dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard">Pinned Apps: Enhanced app launch interface using large app icons on the dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-dashboard-widgets-and-layout">Custom dashboard widgets and layout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adding-metadata-to-app-manifests">Adding metadata to app manifests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shell-app-now-has-themes">Shell app now has themes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configurations-in-an-ondemand-d-directory">Configurations in an ondemand.d directory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#activejobs-now-a-part-of-the-dashboard">ActiveJobs now a part of the dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tighter-integration-between-the-dashboard-active-jobs-and-files-apps">Tighter integration between the Dashboard, Active Jobs, and Files apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#changes-in-all-apps-page-layout">Changes in All Apps page layout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#erb-formats-for-message-of-the-day">ERB formats for Message of the day</a></li>
@@ -252,16 +253,19 @@
             
   <div class="section" id="v2-0-release-notes">
 <span id="id1"></span><h1>v2.0 Release Notes<a class="headerlink" href="#v2-0-release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">There are some breaking changes in 2.0. See the upgrade directions below for details.</p>
+</div>
 <p>Highlights in 2.0:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
-<li><a class="reference internal" href="#pinning-apps-to-the-dashboard">Pinning apps to the dashboard</a></li>
-<li><a class="reference internal" href="#customizable-layouts-in-the-dashboard">Customizable layouts in the dashboard</a></li>
+<li><a class="reference internal" href="#pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard">Pinned Apps: Enhanced app launch interface using large app icons on the dashboard</a></li>
+<li><a class="reference internal" href="#custom-dashboard-widgets-and-layout">Custom dashboard widgets and layout</a></li>
+<li><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></li>
+<li><cite>Tighter integration between the Dashboard, Active Jobs, and Files apps</cite></li>
 <li><a class="reference internal" href="#adding-metadata-to-app-manifests">Adding metadata to app manifests</a></li>
 <li><a class="reference internal" href="#shell-app-now-has-themes">Shell app now has themes</a></li>
 <li><a class="reference internal" href="#configurations-in-an-ondemand-d-directory">Configurations in an ondemand.d directory</a></li>
-<li><a class="reference internal" href="#activejobs-now-a-part-of-the-dashboard">ActiveJobs now a part of the dashboard</a></li>
-<li><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></li>
 <li><a class="reference internal" href="#changes-in-all-apps-page-layout">Changes in All Apps page layout</a></li>
 <li><a class="reference internal" href="#erb-formats-for-message-of-the-day">ERB formats for Message of the day</a></li>
 <li><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
@@ -270,10 +274,6 @@
 <h2>Upgrading from v1.8<a class="headerlink" href="#upgrading-from-v1-8" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There are some breaking changes in 2.0 that you’ll need to work through to upgrade.</p>
-</div>
 <div class="section" id="no-longer-providing-ood-auth-map-regex">
 <h4>No longer providing ood_auth_map.regex<a class="headerlink" href="#no-longer-providing-ood-auth-map-regex" title="Permalink to this headline">¶</a></h4>
 <p>2.0 no longer provides <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code> the 1.8- default
@@ -292,7 +292,7 @@ each other, so passenger apps will also need to update their bundler dependencie
 </div>
 <div class="section" id="activejobs-configuration-changes">
 <h4>ActiveJobs configuration changes<a class="headerlink" href="#activejobs-configuration-changes" title="Permalink to this headline">¶</a></h4>
-<p>Because <a class="reference internal" href="#activejobs-now-a-part-of-the-dashboard">ActiveJobs now a part of the dashboard</a> configuration files are no longer
+<p>Because ActiveJobs now integrated with the Dashboard app, configuration files are no longer
 being read from <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/activejobs</span></code>.</p>
 <p>If you have initializers here in this directory, they need to move to
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers</span></code>.  Similarly views, if any,
@@ -302,9 +302,13 @@ this now needs to be <code class="docutils literal notranslate"><span class="pre
 </div>
 <div class="section" id="files-app-configuration-changes">
 <h4>Files app configuration changes<a class="headerlink" href="#files-app-configuration-changes" title="Permalink to this headline">¶</a></h4>
-<p>Because there’s a <a class="reference internal" href="#new-file-manager-app">new file manager app</a> that’s a part of the dashboard, so configurations
+<p>Because Files app is now integrated with the Dashboard app, configurations
 in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/files</span></code> need to move to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard</span></code> for
 them to take effect.</p>
+</div>
+</div>
+<div class="section" id="upgrade-directions">
+<h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
@@ -387,15 +391,14 @@ sudo yum update ondemand
 </ol>
 </div>
 </div>
-</div>
 <div class="section" id="details">
 <h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="pinning-apps-to-the-dashboard">
-<h3>Pinning apps to the dashboard<a class="headerlink" href="#pinning-apps-to-the-dashboard" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard">
+<h3>Pinned Apps: Enhanced app launch interface using large app icons on the dashboard<a class="headerlink" href="#pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard" title="Permalink to this headline">¶</a></h3>
 <p>See the <a class="reference internal" href="../customization.html#dashboard-pinned-apps"><span class="std std-ref">documentation on pinning apps to the dashboard</span></a> for details.</p>
 </div>
-<div class="section" id="customizable-layouts-in-the-dashboard">
-<h3>Customizable layouts in the dashboard<a class="headerlink" href="#customizable-layouts-in-the-dashboard" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="custom-dashboard-widgets-and-layout">
+<h3>Custom dashboard widgets and layout<a class="headerlink" href="#custom-dashboard-widgets-and-layout" title="Permalink to this headline">¶</a></h3>
 <p>See the <a class="reference internal" href="../customization.html#dashboard-custom-layout"><span class="std std-ref">documentation on customizing dashboard layouts</span></a> for details.</p>
 </div>
 <div class="section" id="adding-metadata-to-app-manifests">
@@ -415,20 +418,28 @@ thirteen extra themes.</p>
 <p>See <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">the documentation for the ondemand.d configurations</span></a> for all the
 available configurations.</p>
 </div>
-<div class="section" id="activejobs-now-a-part-of-the-dashboard">
-<h3>ActiveJobs now a part of the dashboard<a class="headerlink" href="#activejobs-now-a-part-of-the-dashboard" title="Permalink to this headline">¶</a></h3>
-<p>ActiveJobs is now a part of the dashboard. The URL has changed, but redirects from the old
-URL should still work in case sites have this saved somewhere.</p>
-<p>The primary benefit to users will be that the navbar is visible in this app now.</p>
-<p>However you should view <a class="reference internal" href="#activejobs-configuration-changes">ActiveJobs configuration changes</a> for the breaking changes this
-introduced.</p>
+<div class="section" id="tighter-integration-between-the-dashboard-active-jobs-and-files-apps">
+<h3>Tighter integration between the Dashboard, Active Jobs, and Files apps<a class="headerlink" href="#tighter-integration-between-the-dashboard-active-jobs-and-files-apps" title="Permalink to this headline">¶</a></h3>
+<p>In OnDemand 1.8, the Dashboard, Active Jobs, Files, and File Editor apps were all served by separate
+Passenger application processes. These are all now served by a single Passenger application process per user.</p>
+<p>This change has the following effects:</p>
+<ul class="simple">
+<li>The URL has changed, but redirects from the old URLs should still work for backwards compatibilty.</li>
+<li>The navbar and branding across the dashboard is visible in Active Jobs and File Editor</li>
+<li>the Active Jobs and Files apps both load without opening a new window</li>
+<li>the Active Jobs and Files apps load much faster than before</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Configuration for Active Jobs and Files apps have changed slightly and need to be updated for 2.0.
+See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> above for details.</p>
+</div>
 </div>
 <div class="section" id="new-file-manager-app">
 <h3>New File Manager app<a class="headerlink" href="#new-file-manager-app" title="Permalink to this headline">¶</a></h3>
 <p>2.0 released with a new File manager application.  This looks and feels differently than
-the previous version, but should have the same functionality.  The previous version was a
-dependency not created or managed by the maintainers of Open OnDemand, and so it was hard
-to add features to and keep up to date.</p>
+the previous version, but has similar functionality.  The previous version was a fork of
+a third party app that was difficult to maintain.</p>
 <p>See the <a class="reference internal" href="#files-app-configuration-changes">files app configuration changes</a> for any changes you’ll need to update to the
 configurations of this new app.</p>
 <p>Here’s what this new app looks like. As you can see there are buttons for upload, download
