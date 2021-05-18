@@ -19,6 +19,8 @@ Highlights in 2.0:
 - `Configurations in an ondemand.d directory`_
 - `Changes in All Apps page layout`_
 - `ERB formats for Message of the day`_
+- `Control whether an app link opens in a new window using manifest attribute`_
+- `Memcached Ruby gem available for use in apps`_
 - `Dependency updates`_
 
 Upgrading from v1.8
@@ -256,6 +258,25 @@ ERB formats for Message of the day
 The message of the day text and markdown formats now support ERB rendering for a more
 dynamic message being rendered. See the :ref:`documentation on Message of the Day <motd_customization>`
 for more information.
+
+Control whether an app link opens in a new window using manifest attribute
+..........................................................................
+
+In 1.8, all links to apps that are separate Passenger processes open in a new window or tab. The rationale for this
+was that these apps do not share the navigational context with the Dashboard app - in particular the navbar is not present.
+
+By adding to the manifest.yml ``new_window: false`` the app is indicating it provides enough navigational context for the user
+to not get lost and the Dashboard will not open in new window.
+
+This feature is used by the Files and Active Jobs apps in 2.0.
+
+
+Memcached Ruby gem available for use in apps
+............................................
+
+The "dalli" Ruby gem for interfacing with memcached can now be used in batch connect apps though it needs
+to be explicitly required using a custom initializer or in the form or submit erb files.
+
 
 Dependency updates
 ..................
