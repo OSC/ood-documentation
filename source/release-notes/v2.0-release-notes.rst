@@ -231,15 +231,29 @@ This change has the following effects:
 New File Manager app
 ....................
 
-2.0 released with a new File manager application.  This looks and feels differently than
-the previous version, but has similar functionality.  The previous version was a fork of
-a third party app that was difficult to maintain.
+The Files app in 1.8 was a fork of https://github.com/coderaiser/cloudcmd that was difficult to maintain. The new Files app is rewritten in Ruby and integrated into the Dashboard app. The look and feel has been updated to use Bootstrap 4 and the OnDemand navbar displays above the interface.
+
+New features:
+
+- Modified at column now shows date and time
+- Columns are sortable by size, date, name, type, etc.
+- Owner column displays the actual username instead of just the UID
+- Uploads now managed with Uppy.js which provides a preview window prior to uploading files
+- Copy path button provides easy way to copy the current directory path to clipboard
+- Copy, Move, and Delete events now log details of the action requested in the per user NGINX logs
+- Copy, Move workflow includes a new visual display of the files selected to copy or move
+- Filter box to filter the list of files by inserted text
+
+Changes:
+
+- The left hand navigation tree is replaced with a list of the file location shortcuts
+- Instead of a ".." row to navigate up, there is an "up" button to the left of the path
+- Buttons that apply to only one file or directory were moved to a button dropdown to the right of each filename
+- "Change directory" button replaced "Go to" button
+- Open in Terminal now displays split dropdown button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS env var
 
 See the `files app configuration changes`_ for any changes you'll need to update to the
 configurations of this new app.
-
-Here's what this new app looks like. As you can see there are buttons for upload, download
-and more.
 
 .. figure:: /images/2.0_files_app.png
 
