@@ -534,8 +534,10 @@ name.</p>
 <p><code class="docutils literal notranslate"><span class="pre">user_map_match</span></code> was added in 2.0 to be a simpler replacement
 for <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> above. match has precedence over cmd if they’re both
 configured.</p>
-<p>See the <a class="reference external" href="https://www.lua.org/manual/5.1/manual.html#5.4.1">documentation on lua patterns</a> for details.
-You can test your configuration out in a lua shell like so:</p>
+<p>Note that lua patterns are not regular expressions. So boolean OR matches
+like <code class="docutils literal notranslate"><span class="pre">|</span></code> for example are not supported. See the <a class="reference external" href="https://www.lua.org/manual/5.1/manual.html#5.4.1">documentation on lua patterns</a>
+for details more.</p>
+<p>You can test your configuration out in a lua shell like so:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">string.match</span><span class="p">(</span><span class="s1">&#39;ktrout@example.edu&#39;</span><span class="p">,</span> <span class="s1">&#39;^([^@]+)@example.edu$&#39;</span><span class="p">)</span>
 <span class="n">ktrout</span>
 </pre></div>

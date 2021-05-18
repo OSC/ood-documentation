@@ -280,10 +280,17 @@
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="no-longer-providing-ood-auth-map-regex">
 <h4>No longer providing ood_auth_map.regex<a class="headerlink" href="#no-longer-providing-ood-auth-map-regex" title="Permalink to this headline">¶</a></h4>
-<p>2.0 no longer provides <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code> the 1.8- default
+<p>2.0 no longer provides <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code>, the 1.8- default
 <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> in <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code>.</p>
 <p>Most sites should be able to use <code class="docutils literal notranslate"><span class="pre">user_map_match</span></code> instead.  You can still use
 <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>, only you’ll have to write your own in a language of your choice.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">lua patterns may not be sufficient because they are not regular expressions. For example
+they do not support boolean OR <code class="docutils literal notranslate"><span class="pre">|</span></code> operators. If you need such functionality you may
+find python, perl, ruby (SCL or system installed) or even bash commands that suite your
+needs.</p>
+</div>
 <p>See the <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">documentation on user_map_match</span></a>
 for more information on it.</p>
 </div>
