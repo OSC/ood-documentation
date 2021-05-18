@@ -147,6 +147,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#ruby-and-bundler-updates">Ruby and bundler updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#activejobs-configuration-changes">ActiveJobs configuration changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#files-app-configuration-changes">Files app configuration changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changes-to-the-interactive-cards">Changes to the interactive cards</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
@@ -316,6 +317,53 @@ this now needs to be <code class="docutils literal notranslate"><span class="pre
 <p>Because Files app is now integrated with the Dashboard app, configurations
 in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/files</span></code> need to move to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard</span></code> for
 them to take effect.</p>
+</div>
+<div class="section" id="changes-to-the-interactive-cards">
+<h4>Changes to the interactive cards<a class="headerlink" href="#changes-to-the-interactive-cards" title="Permalink to this headline">¶</a></h4>
+<p>The interactive sessions cards have changed with the bootstrap 4 upgrade. If your site
+uses complex logic in your <cite>view.html.erb</cite> you may have to change that.  Here are
+the two changes that may affect your site.</p>
+<ol class="arabic simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">panel</span></code> css classes no longer exist. These have been replaced by <code class="docutils literal notranslate"><span class="pre">card</span></code>.
+Here are examples in both plain javascript and jquery of what you may have and how
+it would need to change.</li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// there is no closes panel to this element anymore. This won&#39;t work, because</span>
+<span class="c1">// there are no elements with a &#39;panel&#39; css class.</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;someElementId&quot;</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.panel&quot;</span><span class="p">).</span><span class="nx">id</span><span class="p">;</span>
+
+<span class="c1">// search for the closest element with a card class instead</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;someElementId&quot;</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.card&quot;</span><span class="p">).</span><span class="nx">id</span><span class="p">;</span>
+
+<span class="c1">// the same thing in jquery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#someElementId&quot;</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.card&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the card divs has changed to prepend <code class="docutils literal notranslate"><span class="pre">id_</span></code> to them to fix some issues in Bootstrap-4.
+So if you use <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> to query for elements you will either need to prepend <code class="docutils literal notranslate"><span class="pre">id_</span></code> to that
+or change the query to look for the <code class="docutils literal notranslate"><span class="pre">data-id</span></code> attribute of a div.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> doesn’t work directly. You would need to pass it back through the <code class="docutils literal notranslate"><span class="pre">conn_params</span></code>
+for it to be usable in this view.</p>
+</div>
+</li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// searching for cards like this will no longer work because the id of the cards has changed.</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;&lt;= session_id &gt;&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#&lt;= session_id &gt;&quot;</span><span class="p">);</span> <span class="c1">// same thing in jquery</span>
+
+
+<span class="c1">// you will now have to prepend the string &#39;id_&#39; to them</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;id_&lt;= session_id &gt;&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#id_&lt;= session_id &gt;&quot;</span><span class="p">);</span> <span class="c1">// same thing in jquery</span>
+
+<span class="c1">// the original session id is still stored in the attribute data-id, so this</span>
+<span class="c1">// works in jquery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div[data-id=&#39;&lt;%= session_id &gt;&#39;]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="upgrade-directions">
