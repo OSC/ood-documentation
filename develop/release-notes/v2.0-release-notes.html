@@ -264,7 +264,7 @@
 <li><a class="reference internal" href="#pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard">Pinned Apps: Enhanced app launch interface using large app icons on the dashboard</a></li>
 <li><a class="reference internal" href="#custom-dashboard-widgets-and-layout">Custom dashboard widgets and layout</a></li>
 <li><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></li>
-<li><cite>Tighter integration between the Dashboard, Active Jobs, and Files apps</cite></li>
+<li><a class="reference internal" href="#tighter-integration-between-the-dashboard-active-jobs-and-files-apps">Tighter integration between the Dashboard, Active Jobs, and Files apps</a></li>
 <li><a class="reference internal" href="#adding-metadata-to-app-manifests">Adding metadata to app manifests</a></li>
 <li><a class="reference internal" href="#shell-app-now-has-themes">Shell app now has themes</a></li>
 <li><a class="reference internal" href="#configurations-in-an-ondemand-d-directory">Configurations in an ondemand.d directory</a></li>
@@ -441,13 +441,28 @@ See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> 
 </div>
 <div class="section" id="new-file-manager-app">
 <h3>New File Manager app<a class="headerlink" href="#new-file-manager-app" title="Permalink to this headline">¶</a></h3>
-<p>2.0 released with a new File manager application.  This looks and feels differently than
-the previous version, but has similar functionality.  The previous version was a fork of
-a third party app that was difficult to maintain.</p>
+<p>The Files app in 1.8 was a fork of <a class="reference external" href="https://github.com/coderaiser/cloudcmd">https://github.com/coderaiser/cloudcmd</a> that was difficult to maintain. The new Files app is rewritten in Ruby and integrated into the Dashboard app. The look and feel has been updated to use Bootstrap 4 and the OnDemand navbar displays above the interface.</p>
+<p>New features:</p>
+<ul class="simple">
+<li>Modified at column now shows date and time</li>
+<li>Columns are sortable by size, date, name, type, etc.</li>
+<li>Owner column displays the actual username instead of just the UID</li>
+<li>Uploads now managed with Uppy.js which provides a preview window prior to uploading files</li>
+<li>Copy path button provides easy way to copy the current directory path to clipboard</li>
+<li>Copy, Move, and Delete events now log details of the action requested in the per user NGINX logs</li>
+<li>Copy, Move workflow includes a new visual display of the files selected to copy or move</li>
+<li>Filter box to filter the list of files by inserted text</li>
+</ul>
+<p>Changes:</p>
+<ul class="simple">
+<li>The left hand navigation tree is replaced with a list of the file location shortcuts</li>
+<li>Instead of a “..” row to navigate up, there is an “up” button to the left of the path</li>
+<li>Buttons that apply to only one file or directory were moved to a button dropdown to the right of each filename</li>
+<li>“Change directory” button replaced “Go to” button</li>
+<li>Open in Terminal now displays split dropdown button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS env var</li>
+</ul>
 <p>See the <a class="reference internal" href="#files-app-configuration-changes">files app configuration changes</a> for any changes you’ll need to update to the
 configurations of this new app.</p>
-<p>Here’s what this new app looks like. As you can see there are buttons for upload, download
-and more.</p>
 <div class="figure">
 <img alt="../_images/2.0_files_app.png" src="../_images/2.0_files_app.png" />
 </div>
