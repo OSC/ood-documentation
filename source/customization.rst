@@ -584,7 +584,7 @@ Full examples are below:
     # pin any app with an exact match on the metadata field_of_science of biology
     - field_of_science: 'biology'
 
-    # pin any app with an glob match *bio* on the metadata field_of_science of 
+    # pin any app with an glob match *bio* on the metadata field_of_science
     - field_of_science: '*bio*'
 
 
