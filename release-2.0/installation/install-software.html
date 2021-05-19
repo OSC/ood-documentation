@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Install Software From RPM &mdash; Open OnDemand 1.8.12 documentation</title>
+  <title>1. Install Software From RPM &mdash; Open OnDemand 2.0.5 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.8
+                2.0
               </div>
             
           
@@ -123,6 +123,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
 <ul>
@@ -147,6 +148,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/v2.0-release-notes.html">v2.0 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
@@ -239,9 +241,9 @@
 software requirements:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/httpd24/">Apache HTTP Server 2.4</a></li>
-<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/rh-ruby25/">Ruby 2.5</a> with <strong class="command">rake</strong>, <strong class="command">bundler</strong>, and development
+<li>Ruby 2.7 with <strong class="command">rake</strong>, <strong class="command">bundler</strong>, and development
 libraries</li>
-<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/rh-nodejs10/">Node.js 10</a></li>
+<li>Node.js 12</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -249,15 +251,16 @@ libraries</li>
 <strong class="command">sudo</strong> access but is not root.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Enable the Software Collections repositories <strong>on CentOS/RHEL 7 only</strong>:</p>
+<li><p class="first">Enable the dependency repositories <strong>on CentOS/RHEL 7 only</strong>:</p>
 <dl class="docutils">
 <dt>CentOS 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl
+<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
 </pre></div>
 </div>
 </dd>
 <dt>RHEL 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
+<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
+sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
 <span class="c1"># Repository &#39;rhel-server-rhscl-7-rpms&#39; is enabled for this system.</span>
 </pre></div>
 </div>
@@ -270,9 +273,25 @@ attach a subscription providing access to RHSCL to be able to use this
 repository.</p>
 </div>
 </li>
+<li><p class="first">Enable dnf modules and repositories for dependencies <strong>on CentOS/RHEL 8 only</strong>:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dnf module <span class="nb">enable</span> ruby:2.7
+dnf module <span class="nb">enable</span> nodejs:12
+</pre></div>
+</div>
+<p><strong>CentOS 8 only</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf config-manager --set-enabled powertools
+</pre></div>
+</div>
+<p><strong>RedHat 8 only</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+</pre></div>
+</div>
+</div></blockquote>
+</li>
 <li><p class="first">Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
 <blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.8/ondemand-release-web-1.8-1.noarch.rpm
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
 </pre></div>
 </div>
 </div></blockquote>
@@ -364,6 +383,10 @@ users access to OnDemand:</p>
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/install-software.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/install-software.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/install-software.html">1.8</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/install-software.html">1.7</a></dd>
       

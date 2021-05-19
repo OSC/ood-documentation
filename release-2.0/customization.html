@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization &mdash; Open OnDemand 1.8.12 documentation</title>
+  <title>Customization &mdash; Open OnDemand 2.0.5 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.8
+                2.0
               </div>
             
           
@@ -133,6 +133,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#job-composer-script-size-limit">Job Composer Script Size Limit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-error-page-for-missing-home-directory-on-launch">Custom Error Page for Missing Home Directory on Launch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#control-which-apps-appear-in-the-dashboard-navbar">Control Which Apps Appear in the Dashboard Navbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pinning-applications-to-the-dashboard">Pinning Applications to the Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-layouts-in-the-dashboard">Custom layouts in the dashboard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#customize-text-in-ondemand">Customize Text in OnDemand</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#change-the-dashboard-tagline">Change the Dashboard Tagline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#change-quota-messages-in-the-dashboard">Change quota messages in the Dashboard</a></li>
@@ -158,6 +160,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
 <ul>
@@ -182,6 +185,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="release-notes/v2.0-release-notes.html">v2.0 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
@@ -321,15 +325,19 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 </div>
 <div class="section" id="message-of-the-day-motd">
-<h2>Message of the Day (MOTD)<a class="headerlink" href="#message-of-the-day-motd" title="Permalink to this headline">¶</a></h2>
+<span id="motd-customization"></span><h2>Message of the Day (MOTD)<a class="headerlink" href="#message-of-the-day-motd" title="Permalink to this headline">¶</a></h2>
 <p>You can configure the Dashboard to display the /etc/motd file on the front page - the same file that is displayed when ssh-ing to a login node.</p>
 <p>To display a MOTD file on the Dashboard ensure that the environment variables <code class="docutils literal notranslate"><span class="pre">$MOTD_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">$MOTD_FORMAT</span></code> are set, where</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">MOTD_PATH</span><span class="o">=</span><span class="s2">&quot;/etc/motd&quot;</span> <span class="c1"># this supports both file and RSS feed URIs</span>
-<span class="nv">MOTD_FORMAT</span><span class="o">=</span><span class="s2">&quot;txt&quot;</span> <span class="c1"># markdown, txt, rss</span>
+<span class="nv">MOTD_FORMAT</span><span class="o">=</span><span class="s2">&quot;txt&quot;</span> <span class="c1"># markdown, txt, rss, markdown_erb, txt_erb</span>
 </pre></div>
 </div>
 </div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">_erb</span></code> formats support ERB rendering to generate more dynamic messages.</p>
+</div>
 <div class="figure align-center" id="id14">
 <img alt="_images/dashboard_motd.png" src="_images/dashboard_motd.png" />
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span></p>
@@ -749,12 +757,127 @@ can be customized by adding a custom one to <code class="docutils literal notran
 </tbody>
 </table>
 </div>
+<div class="section" id="pinning-applications-to-the-dashboard">
+<span id="dashboard-pinned-apps"></span><h2>Pinning Applications to the Dashboard<a class="headerlink" href="#pinning-applications-to-the-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>In version 2.0 you can now pin app Icons to the dashboard that link to the application form.</p>
+<p>When configured a widget like the one below will appear on the dashboard’s landing page.</p>
+<div class="figure">
+<img alt="_images/pinned_apps.png" src="_images/pinned_apps.png" />
+</div>
+<p>The configuration for what apps to pin allows for three variants.</p>
+<p>You can configure specific apps with a string of the type <code class="docutils literal notranslate"><span class="pre">router/app_name</span></code>.
+For example <code class="docutils literal notranslate"><span class="pre">sys/jupyter</span></code> is the system installed app named jupyter.</p>
+<p>Secondly you can configure globs like <code class="docutils literal notranslate"><span class="pre">sys/*</span></code> to pin all system installed apps. Or
+Maybe <code class="docutils literal notranslate"><span class="pre">sys/minimal_*</span></code> to pin all system installed apps that being with ‘minimal’.</p>
+<p>Lastly you can choose to pin apps based off of fields in their <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> file.
+You can match by type, category, subcategory and metadata fields.  These matches are
+cumulative. Meaning an app has to match <em>all</em> of these to be pinned.  In the examples below
+there is a configuration of type sys and category minimal. This configuration will only pin
+system installed apps that are in the minimal category.  An app has to meet <em>both</em> these
+criteria to be pinned to the dashboard.</p>
+<p>Full examples are below:</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
+<span class="n">pinned_apps</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">sys</span><span class="o">/</span><span class="n">jupyter</span>           <span class="c1"># pin a specific system installed app called &#39;jupyter&#39;</span>
+
+  <span class="o">-</span> <span class="s1">&#39;sys/*&#39;</span>               <span class="c1"># pin all system install apps. This also works for usr/* and dev/*</span>
+
+  <span class="o">-</span> <span class="n">category</span><span class="p">:</span> <span class="s1">&#39;minimal&#39;</span>   <span class="c1"># pin all the apps in the &#39;minimal&#39; category</span>
+
+  <span class="o">-</span> <span class="nb">type</span><span class="p">:</span> <span class="n">sys</span>             <span class="c1"># pin all system installed apps in the minimal category.</span>
+    <span class="n">category</span><span class="p">:</span> <span class="s1">&#39;minimal&#39;</span>
+
+  <span class="c1"># pin all system installed apps in the minimal category and the</span>
+  <span class="c1"># class instruction subcategory</span>
+  <span class="o">-</span> <span class="nb">type</span><span class="p">:</span> <span class="n">sys</span>
+    <span class="n">category</span><span class="p">:</span> <span class="s1">&#39;minimal&#39;</span>
+    <span class="n">subcategory</span><span class="p">:</span> <span class="s1">&#39;class_instruction&#39;</span>
+
+  <span class="c1"># pin all system installed apps in the minimal category, the</span>
+  <span class="c1"># class instruction subcategory and the metadata field &#39;field_of_science&#39;</span>
+  <span class="c1"># with an exact match on biology</span>
+  <span class="o">-</span> <span class="nb">type</span><span class="p">:</span> <span class="n">sys</span>
+    <span class="n">category</span><span class="p">:</span> <span class="s1">&#39;minimal&#39;</span>
+    <span class="n">subcategory</span><span class="p">:</span> <span class="s1">&#39;class_instruction&#39;</span>
+    <span class="n">field_of_science</span><span class="p">:</span> <span class="s1">&#39;biology&#39;</span>
+
+  <span class="c1"># pin any app with an exact match on the metadata field_of_science of biology</span>
+  <span class="o">-</span> <span class="n">field_of_science</span><span class="p">:</span> <span class="s1">&#39;biology&#39;</span>
+
+  <span class="c1"># pin any app with an glob match *bio* on the metadata field_of_science</span>
+  <span class="o">-</span> <span class="n">field_of_science</span><span class="p">:</span> <span class="s1">&#39;*bio*&#39;</span>
+</pre></div>
+</div>
+<p>Administrators can also configure the pinned apps to be grouped by any field
+in the <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> including metadata fields with the <code class="docutils literal notranslate"><span class="pre">pinned_apps_group_by</span></code>
+configuration.</p>
+<p>This will create a row and a heading for each group like so (the image was generated
+from grouping by category):</p>
+<div class="figure">
+<img alt="_images/grouped_pinned_apps.png" src="_images/grouped_pinned_apps.png" />
+</div>
+<p>One can also change the menu length in the ‘App’s menu item. If you’ve
+pinned more than 6 apps and you want to them to show up in this dropdown
+list, simply increase the length with the option below.</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
+<span class="n">pinned_apps_menu_length</span><span class="p">:</span> <span class="mi">6</span>        <span class="c1"># the default number of items in the dropdown menu list</span>
+<span class="n">pinned_apps_group_by</span><span class="p">:</span> <span class="n">category</span>    <span class="c1"># defaults to nil, no grouping</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-layouts-in-the-dashboard">
+<span id="dashboard-custom-layout"></span><h2>Custom layouts in the dashboard<a class="headerlink" href="#custom-layouts-in-the-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>Administrators can now customize what widgets appear on the dashboard and how they’re
+layed out on the page.</p>
+<p>In it’s simplest form this feature allows for a rearrangement of existing widgets. As
+of 2.0 the existing widgets are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> - Pinned apps described above</li>
+<li><code class="docutils literal notranslate"><span class="pre">motd</span></code> - the Message of the Day</li>
+<li><code class="docutils literal notranslate"><span class="pre">xdmod_widget_job_efficiency</span></code> - the XDMoD widget for job efficiency</li>
+<li><code class="docutils literal notranslate"><span class="pre">xdmod_widget_jobs</span></code> - the XDMoD widget for job information</li>
+</ul>
+<p>This feature also allows for administrators to <em>add</em> custom widgets.
+Simply drop new files into <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/dashboard/views/widgets</span></code> and reference them
+in the configuration.  These partial files can be any format Rails recognizes, notably <code class="docutils literal notranslate"><span class="pre">.html</span></code> or
+<code class="docutils literal notranslate"><span class="pre">.html.erb</span></code> extensions.</p>
+<p>Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
+<code class="docutils literal notranslate"><span class="pre">views/widgets/cluster/_my_cluster_widget.html.erb</span></code> would be referenced in the configuration
+as <code class="docutils literal notranslate"><span class="pre">cluster/my_cluster_widget</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Rails expects files to be prefixed with an underscore. For example if you configured <code class="docutils literal notranslate"><span class="pre">my_new_widget</span></code>
+the filename should be <code class="docutils literal notranslate"><span class="pre">_my_new_widget.html</span></code>.</p>
+</div>
+<p>Without setting this configuration, the dashboard will arrange itself depending on what features are
+enabled. For example if both pinned apps and XDMoD features are enabled it will arrange itself accordingly
+based on a default layout.</p>
+<p>Here’s the default configuration when all of these features are enabled.</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
+<span class="n">dashboard_layout</span><span class="p">:</span>
+  <span class="n">rows</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">columns</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">width</span><span class="p">:</span> <span class="mi">8</span>
+        <span class="n">widgets</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">pinned_apps</span>
+          <span class="o">-</span> <span class="n">motd</span>
+      <span class="o">-</span> <span class="n">width</span><span class="p">:</span> <span class="mi">4</span>
+        <span class="o">-</span> <span class="n">widgets</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">xdmod_widget_job_efficiency</span>
+          <span class="o">-</span> <span class="n">xdmod_widget_jobs</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rows</span></code> are an array of row elements. Each row element has a <code class="docutils literal notranslate"><span class="pre">columns</span></code> field which is an array
+column elements. Each column element two fields. A <code class="docutils literal notranslate"><span class="pre">width</span></code> field that specifies the width in the
+<a class="reference external" href="https://getbootstrap.com/docs/4.0/layout/grid/">bootstrap grid layout</a> which defaults to 12 columns in total. It also has a <code class="docutils literal notranslate"><span class="pre">widgets</span></code> field which
+is an array of existing or newly added widgets to render in that column.</p>
+</div>
 <div class="section" id="customize-text-in-ondemand">
 <span id="customization-localization"></span><h2>Customize Text in OnDemand<a class="headerlink" href="#customize-text-in-ondemand" title="Permalink to this headline">¶</a></h2>
-<p>Using Rails support for Internationaliation (i18n), we have internationalized many strings in the Dashboard and the Job Composer apps.</p>
+<p>Using Rails support for Internationalization (i18n), we have internationalized many strings in the Dashboard and the Job Composer apps.</p>
 <p>Initial translation dictionary files with defaults that work well for OSC and using the English locale (<code class="docutils literal notranslate"><span class="pre">en</span></code>) have been added (<code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/dashboard/config/locales/en.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/config/locales/en.yml</span></code>). Sites wishing to modify these strings in order to provide site specific replacements for English, or use a different locale altogether, should do the following:</p>
 <ol class="arabic simple">
-<li>Copy the translation dictionary file (or create a new file with the same stucture of the keys you want to modify) to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> and modify that copy.</li>
+<li>Copy the translation dictionary file (or create a new file with the same structure of the keys you want to modify) to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> and modify that copy.</li>
 <li>If you want apps to look for these dictionary files in a different location than <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> you can change the location by defining <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> environment variable.</li>
 <li>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</li>
 </ol>
@@ -1165,6 +1288,21 @@ sudo systemctl restart ondemand-dex.service
 </span></pre></div>
 </div>
 </li>
+<li><p class="first">In the Job Composer, Open XDMoD job links will include a warning message that the job may not appear in XDMoD for up to 24 hours after the job completed. The message is to address the gap of time between the job appearing as completed in the Job Composer and the job appearing in Open XDMoD after the ingest and aggregation script is run. This message appears from the time the Job Composer becomes aware of the job completion status, till an elapsed time specified in seconds by the locale key <code class="docutils literal notranslate"><span class="pre">en.jobcomposer.xdmod_url_warning_message_seconds_after_job_completion</span></code> which defaults to 24 hours (86400 seconds) with a text message specified by locale key  <code class="docutils literal notranslate"><span class="pre">en.jobcomposer.xdmod_url_warning_message</span></code>. To disable this message, set the value you your locale file under <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales</span></code>. For example, in the default locale we have these values:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">en</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">jobcomposer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">xdmod_url_warning_message</span><span class="p p-Indicator">:</span> <span class="s">&quot;This</span><span class="nv"> </span><span class="s">job</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">appear</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Open</span><span class="nv"> </span><span class="s">XDMoD</span><span class="nv"> </span><span class="s">until</span><span class="nv"> </span><span class="s">24</span><span class="nv"> </span><span class="s">hours</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">completion</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">job.&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">xdmod_url_warning_message_seconds_after_job_completion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">86400</span>
+</pre></div>
+</div>
+<p>Which results in these warning messages appearing in Job Composer:</p>
+<div class="figure align-center">
+<img alt="_images/customization_xdmod_jobcomposer_warning_1.png" src="_images/customization_xdmod_jobcomposer_warning_1.png" />
+</div>
+<div class="figure align-center">
+<img alt="_images/customization_xdmod_jobcomposer_warning_2.png" src="_images/customization_xdmod_jobcomposer_warning_2.png" />
+</div>
+</li>
 </ol>
 </div>
 </div>
@@ -1213,6 +1351,10 @@ sudo systemctl restart ondemand-dex.service
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/latest/customization.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/customization.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/customization.html">1.8</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/customization.html">1.7</a></dd>
       

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ood_portal.yml &mdash; Open OnDemand 1.8.12 documentation</title>
+  <title>ood_portal.yml &mdash; Open OnDemand 2.0.5 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                1.8
+                2.0
               </div>
             
           
@@ -115,6 +115,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="nginx-stage-yml.html">nginx_stage.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ondemand-d-ymls.html">ondemand.d/*.yml files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="submit-yml-erb.html">submit.yml.erb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/ood-portal-generator.html">ood-portal-generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/nginx-stage/usage.html">nginx-stage</a></li>
 </ul>
@@ -130,6 +132,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Extend</span></p>
 <ul>
@@ -154,6 +157,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v2.0-release-notes.html">v2.0 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
@@ -423,6 +427,46 @@ when maintenance is enabled</p>
 
 <dl class="describe">
 <dt>
+<code class="descname">security_csp_frame_ancestors (Boolean)</code></dt>
+<dd><p>Set Header Content-Security-Policy frame-ancestors.</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Set Content-Security-Policy frame-ancestors to servername</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">security_csp_frame_ancestors</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ondemand.example.com</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Disable Content-Security-Policy header</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">security_csp_frame_ancestors</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">security_strict_transport (Boolean)</code></dt>
+<dd><p>Set Header Strict-Transport-Security to help enforce SSL</p>
+<dl class="docutils">
+<dt>Default</dt>
+<dd><p class="first">Set Strict-Transport-Security if SSL is defined for OnDemand</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">security_strict_transport</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt>
+<dd><p class="first">Disable Strict-Transport-Security header</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">security_strict_transport</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
 <code class="descname">lua_root (String)</code></dt>
 <dd><p>the root directory where the Lua handler code resides</p>
 <dl class="docutils">
@@ -468,19 +512,50 @@ when maintenance is enabled</p>
 name</p>
 <dl class="docutils">
 <dt>Default</dt>
-<dd><p class="first">Use the regex <a class="reference internal" href="../../authentication/overview/map-user.html#authentication-overview-map-user"><span class="std std-ref">user mapping script</span></a>
-and echo back the authenticated user name as the system user name</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+<dd><p class="first">Since 2.0 there is no provided user map command.</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
 </dd>
 <dt>Example</dt>
 <dd><p class="first">Capture system user name from regular expression</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@example.com&#39;&quot;</span>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/site/site_mapper.sh&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
+</dd></dl>
+
+<span class="target" id="ood-portal-generator-user-map-match"></span><dl class="describe">
+<dt>
+<code class="descname">user_map_match (String)</code></dt>
+<dd><p>The lua pattern to map authenticated user name to a system user
+name.</p>
+<p><code class="docutils literal notranslate"><span class="pre">user_map_match</span></code> was added in 2.0 to be a simpler replacement
+for <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> above. match has precedence over cmd if they’re both
+configured.</p>
+<p>Note that lua patterns are not regular expressions. So boolean OR matches
+like <code class="docutils literal notranslate"><span class="pre">|</span></code> for example are not supported. See the <a class="reference external" href="https://www.lua.org/manual/5.1/manual.html#5.4.1">documentation on lua patterns</a>
+for details more.</p>
+<p>You can test your configuration out in a lua shell like so:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">string.match</span><span class="p">(</span><span class="s1">&#39;ktrout@example.edu&#39;</span><span class="p">,</span> <span class="s1">&#39;^([^@]+)@example.edu$&#39;</span><span class="p">)</span>
+<span class="n">ktrout</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Default</dt>
+<dd>Match any characters 0 or more times.</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_match</span><span class="p p-Indicator">:</span> <span class="s">&#39;.*&#39;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Example</dt>
+<dd>Capture system user name from email pattern.</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_map_match</span><span class="p p-Indicator">:</span> <span class="s">&#39;^([^@]+)@example.edu$&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <span class="target" id="ood-portal-generator-user-env"></span><dl class="describe">
@@ -1298,6 +1373,10 @@ Refer to <a class="reference internal" href="../../authentication/dex.html#dex-c
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/latest/reference/files/ood-portal-yml.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/reference/files/ood-portal-yml.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/reference/files/ood-portal-yml.html">1.8</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/reference/files/ood-portal-yml.html">1.7</a></dd>
       
