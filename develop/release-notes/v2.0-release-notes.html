@@ -144,6 +144,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-8">Upgrading from v1.8</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#breaking-changes">Breaking Changes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#no-longer-providing-ood-auth-map-regex">No longer providing ood_auth_map.regex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scl-ruby-no-longer-available-to-apache">SCL Ruby no longer available to apache</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ruby-and-bundler-updates">Ruby and bundler updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#activejobs-configuration-changes">ActiveJobs configuration changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#files-app-configuration-changes">Files app configuration changes</a></li>
@@ -294,6 +295,14 @@ needs.</p>
 </div>
 <p>See the <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">documentation on user_map_match</span></a>
 for more information on it.</p>
+</div>
+<div class="section" id="scl-ruby-no-longer-available-to-apache">
+<h4>SCL Ruby no longer available to apache<a class="headerlink" href="#scl-ruby-no-longer-available-to-apache" title="Permalink to this headline">¶</a></h4>
+<p>Related to the ood_auth_map.regex change above, apache no longer relies on the SCL version
+of Ruby.  This means that Ruby 2.7 is unavailable to apache and consequently any <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>
+you employ.</p>
+<p>Should you need Ruby 2.7 in any commands or scripts that apache calls, the best mitigation is
+to employ a wrapper script that can load rh-ruby27.</p>
 </div>
 <div class="section" id="ruby-and-bundler-updates">
 <h4>Ruby and bundler updates<a class="headerlink" href="#ruby-and-bundler-updates" title="Permalink to this headline">¶</a></h4>
