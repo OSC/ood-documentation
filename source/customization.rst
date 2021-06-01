@@ -613,7 +613,7 @@ Custom layouts in the dashboard
 -------------------------------
 
 Administrators can now customize what widgets appear on the dashboard and how they're
-layed out on the page.
+layed out on the page. ``RAILS_ENV`` must be set to production or ``ENV["OOD_LOAD_EXTERNAL_CONFIG”]`` must be enabled.
 
 In it's simplest form this feature allows for a rearrangement of existing widgets. As
 of 2.0 the existing widgets are:
@@ -624,8 +624,8 @@ of 2.0 the existing widgets are:
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
 
 This feature also allows for administrators to *add* custom widgets.
-Simply drop new files into ``/etc/ood/config/dashboard/views/widgets`` and reference them
-in the configuration.  These partial files can be any format Rails recognizes, notably ``.html`` or
+Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` or ``ENV["OOD_APP_CONFIG_ROOT”]/views/widgets``
+and reference them in the configuration.  These partial files can be any format Rails recognizes, notably ``.html`` or
 ``.html.erb`` extensions.
 
 Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
