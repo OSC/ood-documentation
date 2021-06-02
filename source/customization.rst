@@ -654,7 +654,7 @@ Here's the default configuration when all of these features are enabled.
             - pinned_apps
             - motd
         - width: 4
-          - widgets:
+          widgets:
             - xdmod_widget_job_efficiency
             - xdmod_widget_jobs
 
