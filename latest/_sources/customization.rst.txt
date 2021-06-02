@@ -624,8 +624,8 @@ of 2.0 the existing widgets are:
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
 
 This feature also allows for administrators to *add* custom widgets.
-Simply drop new files into ``/etc/ood/config/dashboard/views/widgets`` and reference them
-in the configuration.  These partial files can be any format Rails recognizes, notably ``.html`` or
+Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` and reference them
+in the configuration. These partial files can be any format Rails recognizes, notably ``.html`` or
 ``.html.erb`` extensions.
 
 Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
