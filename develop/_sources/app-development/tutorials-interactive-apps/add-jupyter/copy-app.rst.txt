@@ -14,12 +14,14 @@ We will begin by first copying over a pre-built example Jupyter app.
    - get a working Jupyter app running at your center
    - introduce you to app development and make you an Interactive App developer
 
-#. We do all of our app development in our Open OnDemand sandbox directory. So
-   we first need to create our sandbox directory:
+#. We do all of our app development in our Open OnDemand sandbox directory. First we need
+   to allow our user to create sandbox apps by creating a symlink to point to our homedir:
 
-   .. code-block:: sh
+   .. code:: sh
 
-      mkdir -p "${HOME}/ondemand/dev"
+      sudo mkdir -p /var/www/ood/apps/dev/<USERNAME>
+      cd /var/www/ood/apps/dev/<USERNAME>
+      sudo ln -s /home/<USERNAME>/ondemand/dev gateway
 
    .. note::
 
@@ -68,7 +70,7 @@ We will begin by first copying over a pre-built example Jupyter app.
         Notice that we are using the **system** :ref:`dashboard` to launch the
         **sandbox** Interactive App (Dashboard plugin).
 
-#. After creating the sandbox directory navigate in your browser to::
+#. After creating the symlink, navigate in your browser to::
 
      https://ondemand.my_center.edu/
 
