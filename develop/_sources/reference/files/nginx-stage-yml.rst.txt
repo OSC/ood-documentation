@@ -259,6 +259,45 @@ Configuration Options
 
         passenger_python: "/usr/bin/python"
 
+.. describe:: passenger_pool_idle_time (Integer)
+
+   The maximum number of seconds that an application process may be idle.
+   Set to ``false`` if you don't want this specified in the nginx config
+
+   Default
+     Set idle time to 300
+
+     .. code-block:: yaml
+
+        passenger_pool_idle_time: 300
+
+   Example
+     Increase idle time
+
+     .. code-block:: yaml
+
+        passenger_pool_idle_time: 900
+
+.. describe:: passenger_options (Hash)
+
+   A Hash of additional Passenger options
+   Keys without ``passenger_`` prefix will be ignored
+
+   Default
+     No additional Passenger options defined
+
+     .. code-block:: yaml
+
+        passenger_options: {}
+
+   Example
+     Define custom Passenger options
+
+     .. code-block:: yaml
+
+        passenger_options:
+          passenger_max_preloader_idle_time: 300
+
 .. describe:: pun_config_path (String)
 
    the interpolated path to the user's PUN config file
