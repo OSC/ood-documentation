@@ -138,6 +138,16 @@ Enabling The App Sharing Dashboard
    for finding an app.
 #. Set ``OOD_APP_CATALOG_URL=https://link.to.online/app/catalog`` to link
    externally to an advertised listing of apps available.
+#. Pin usr apps to the dashboard and group them by category.
+
+.. code:: yaml
+
+   # /etc/ood/config/ondemand.d/ondemand.yml
+   pinned_apps:
+     - 'usr/*'
+
+   pinned_apps_group_by: 'category'
+
 
 Enabling App Sharing in the dashboard serves two primary purposes:
 
