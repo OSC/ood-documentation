@@ -75,3 +75,21 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
     .. code-block:: yaml
 
       dashboard_layout: null
+
+.. describe:: files_enable_shell_button: (Bool, true)
+
+  Specify if the Files App has a shell button to open files in.
+
+  Default
+    Files App has access to shell button.
+
+    .. code-block:: yaml
+
+      files_enable_shell_button: true
+
+  Example
+    Disable the terminal button in the Files App.
+
+    .. code-block:: yaml
+
+      files_enable_shell_button: false
