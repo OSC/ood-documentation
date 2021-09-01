@@ -410,7 +410,7 @@ are:
 
        .. code-block:: yaml
 
-          cacheable: true
+          cacheable: false
 
 Examples
 --------
