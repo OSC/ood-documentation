@@ -60,6 +60,26 @@ you employ.
 Should you need Ruby 2.7 in any commands or scripts that apache calls, the best mitigation is
 to employ a wrapper script that can load rh-ruby27.
 
+App sharing landing page
+************************
+
+If your site has enabled app sharing through ``OOD_APP_SHARING`` the dashboard's landing page will
+no longer show these app icons by default.
+
+Your site will need to use the pinned apps feature to have the same look as 1.8.20-.  Here is the relevant
+configuration you'll need to provide to have a comparable landing page layout.
+
+.. code:: yaml
+
+   # /etc/ood/config/ondemand.d/ondemand.yml
+   pinned_apps:
+     - 'usr/*'
+
+   pinned_apps_group_by: 'category'
+
+
+See :ref:`the documentation on pinning apps to the dashboard <dashboard_pinned_apps>` for more details.
+
 Ruby and bundler updates
 *************************
 
@@ -88,6 +108,9 @@ Files app configuration changes
 Because Files app is now integrated with the Dashboard app, configurations
 in ``/etc/ood/config/apps/files`` need to move to ``/etc/ood/config/apps/dashboard`` for
 them to take effect.
+
+The use of the environment variable ``OOD_SHELL`` to hide the Terminal button has been deprecated 
+and can now be set with the ``files_enable_shell_button`` parameter in the ``/etc/ood/config/ondemand.d/*.yml`` file.
 
 Changes to the interactive cards
 ********************************
