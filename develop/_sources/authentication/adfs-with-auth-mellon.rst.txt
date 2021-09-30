@@ -40,7 +40,7 @@ Note that this configuration assumes that SAML has been configured such that the
    .. code-block:: shell
 
       export mellon_endpoint="https://$(hostname)/mellon"
-      /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh "${mellon_endpoint}" "${mellon_endpoint}/metadata"
+      /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh "${mellon_endpoint}/metadata" "${mellon_endpoint}"
       mv *.cert ./mellon.cert
       mv *.key ./mellon.key
       mv *.xml ./mellon_metadata.xml
