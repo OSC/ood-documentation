@@ -25,5 +25,6 @@ client binaries.
    resource-manager/sge
    resource-manager/linuxhost
    resource-manager/ccq
+   resource-manager/kubernetes
    resource-manager/bin-override-example
    resource-manager/test

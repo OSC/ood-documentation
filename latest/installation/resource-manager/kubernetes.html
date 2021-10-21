@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configure Kuberenetes &mdash; Open OnDemand 2.0.13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="A Working Example of a bin_overrides Script" href="bin-override-example.html" />
+    <link rel="prev" title="Configure Cloudy Cluster (beta)" href="ccq.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../resource-manager.html">Resource Manager Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="torque.html">Configure Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccq.html">Configure Cloudy Cluster (beta)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Kuberenetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#per-user-kubernetes">Per User Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bootstrapping-an-open-ondemand-kuberenetes-cluster">Bootstrapping an Open OnDemand Kuberenetes cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#managed-authentication">Managed Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oidc-authentication">OIDC Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gke-authentication">GKE Authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#open-ondemand-apps-in-a-kuberenetes-cluster">Open OnDemand apps in a Kuberenetes cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kyverno-policies">Kyverno Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enforcing-walltimes">Enforcing Walltimes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#image-pull-secrets">Image pull secrets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oidc-audicence">OIDC Audicence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../monitoring.html">Monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-snippets.html">Code Snippets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v2.0-release-notes.html">v2.0 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../resource-manager.html">Resource Manager Configuration</a> &raquo;</li>
+        
+      <li>Configure Kuberenetes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/kubernetes.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configure-kuberenetes">
+<span id="resource-manager-kubernetes"></span><h1>Configure Kuberenetes<a class="headerlink" href="#configure-kuberenetes" title="Permalink to this headline">¶</a></h1>
+<p>TODO table of contents</p>
+<p>A YAML cluster configuration file for a Kubernetes resource manager on an HPC
+cluster looks like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">K8s</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
+  <span class="c1"># you may not want a login section. There may not be a login node</span>
+  <span class="c1"># for your kuberenetes cluster</span>
+  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_k8s_cluster.my_center.edu&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;kubernetes&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">config_file</span><span class="p p-Indicator">:</span> <span class="s">&quot;~/.kube/config&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;ood-prod&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">context</span><span class="p p-Indicator">:</span> <span class="s">&quot;ood-prod&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/bin/kubectl&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">username_prefix</span><span class="p p-Indicator">:</span> <span class="s">&quot;prod-&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">namespace_prefix</span><span class="p p-Indicator">:</span> <span class="s">&quot;user-&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">all_namespaces</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">auto_supplemental_groups</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">server</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">endpoint</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://my_k8s_cluster.my_center.edu&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">cert_authority_file</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/pki/tls/certs/kubernetes-ca.crt&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;oidc&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">mounts</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>adapter</dt>
+<dd>This is set to <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code>.</dd>
+<dt>config_file</dt>
+<dd>The KUBECONFIG file. <em>Optional</em>. Defaults to ~/.kube/config. Sites can also
+set the KUBECONFIG environment varaible, but this configuration has precedence.</dd>
+<dt>cluster</dt>
+<dd>The cluster name. Saved to and referenced from your KUBECONFIG.</dd>
+<dt>context</dt>
+<dd>The context to use when issuing kubectl commands. <em>Optional</em>. Defaults to cluster
+when using OIDC authentication. Saved to and referenced from your KUBECONFIG.</dd>
+<dt>username_prefix</dt>
+<dd>The prefix to your users in your KUBECONFIG. Use this prefix to differentiate between
+different clusters (like test and production).</dd>
+<dt>namespace_prefix</dt>
+<dd>The prefix to your namespace. Use this prefix if you have assertions on what namespaces
+are available. I.e., a Kyverno policy that ensures all namespaces are <code class="docutils literal notranslate"><span class="pre">user-\w+</span></code>.</dd>
+<dt>all_namespaces</dt>
+<dd>A boolean to determine if the user will query for pods in other namespaces.  When false
+users will only query in their namespace. If true they will query and display pods from
+all namespaces.</dd>
+<dt>auto_supplemental_groups:</dt>
+<dd>Automatically populate a container’s <code class="docutils literal notranslate"><span class="pre">securityContext.supplementalGroups</span></code> with the users
+supplemental groups.</dd>
+<dt>server</dt>
+<dd>The kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
+<code class="docutils literal notranslate"><span class="pre">cert_authority_file</span></code> keys.</dd>
+<dt>auth:</dt>
+<dd>See the notes on <a class="reference internal" href="#authentication">Authentication</a> below.</dd>
+<dt>mounts:</dt>
+<dd>Site wide mount points for all kubernetes jobs. See the
+<a class="reference internal" href="../../app-development/tutorials-interactive-apps/k8s-jupyter.html#kubernetes-mounts"><span class="std std-ref">documentation on kubernetes mounts</span></a> for more details.</dd>
+</dl>
+<div class="section" id="per-user-kubernetes">
+<h2>Per User Kubernetes<a class="headerlink" href="#per-user-kubernetes" title="Permalink to this headline">¶</a></h2>
+<p>To get kubernetes to act like a Per User resource there are some conventions
+we put in place. Users only schedule pods in their own namespaces
+and they always run those pods as themselves.</p>
+<p>At most users could be allow to read pods from other namespaces (have sufficient
+privileges to run <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">get</span> <span class="pre">pods</span> <span class="pre">--all-namespaces</span></code>), but this is not required.
+Being able to view pods in other namespaces is only applicable to a feature like
+viewing active jobs and seeing pods from other namespaces in that view.</p>
+<p>Second is that we specify the <a class="reference external" href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context">Kubernetes security context</a> such that pods have
+the same UID and GID as the actual user.</p>
+<p>Open OnDemand will always use the users UID and GID as the runAsUser and runAsGroup.
+fsGroup is always the same as runAsGroup. runAsNonRoot is always set to true.
+supplementalGroups are empty by default. One can automatically populate them with a
+cluster configuration above or specify them for each app individually.</p>
+<p>You should have policies in place to enforce these.</p>
+</div>
+<div class="section" id="bootstrapping-an-open-ondemand-kuberenetes-cluster">
+<h2>Bootstrapping an Open OnDemand Kuberenetes cluster<a class="headerlink" href="#bootstrapping-an-open-ondemand-kuberenetes-cluster" title="Permalink to this headline">¶</a></h2>
+<p>Before anyone can use your Kubernetes cluster from Open OnDemand, you’ll need
+to create the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand kubernetes resources</a> on your cluster.</p>
+<p>We ship with <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/hooks">open ondemand provided hooks</a> to bootstrap users when the login
+to Open OnDemand. These scripts will create their namespace, a networking policy,
+and rolebindings for user and the service accounts in their namespace.</p>
+<p>A user <code class="docutils literal notranslate"><span class="pre">oakley</span></code> would create the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> namespace. If you’ve configured
+to use prefix <code class="docutils literal notranslate"><span class="pre">user-</span></code>, then the namespace would be <code class="docutils literal notranslate"><span class="pre">user-oakley</span></code>.</p>
+<p>The networking policy ensures that pods cannot communicate inbetween namespaces.</p>
+<p>The RoleBindings give user, <code class="docutils literal notranslate"><span class="pre">oakley</span></code> in this case, sufficient privileges
+to the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> namespace.  Refer to the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand kubernetes resources</a>
+for details on the roles and privileges created.</p>
+</div>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>Here are the current configurations you can list for different types of
+authentication.</p>
+<div class="section" id="managed-authentication">
+<h3>Managed Authentication<a class="headerlink" href="#managed-authentication" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&#39;managed&#39;</span>
+</pre></div>
+</div>
+<p>This is the simplest case and is the default. The authentication
+is managed outside of Open OnDemand. We will not <code class="docutils literal notranslate"><span class="pre">set-context</span></code>
+or <code class="docutils literal notranslate"><span class="pre">set-cluster</span></code>.</p>
+<p>We will pass <code class="docutils literal notranslate"><span class="pre">--context</span></code> to kubectl commands if you have it configured
+in the cluster config (above). Otherwise, it’s assumed that the current context
+is set out of bounds.</p>
+</div>
+<div class="section" id="oidc-authentication">
+<h3>OIDC Authentication<a class="headerlink" href="#oidc-authentication" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&#39;odic&#39;</span>
+</pre></div>
+</div>
+<p>This uses the OIDC credentails that you’ve logged in with.  When
+the dashboard starts up it will <code class="docutils literal notranslate"><span class="pre">set-context</span></code> and <code class="docutils literal notranslate"><span class="pre">set-cluster</span></code>
+to what you’ve configured.</p>
+<p>We will pass <code class="docutils literal notranslate"><span class="pre">--context</span></code> to kubectl commands. This defaults to
+the cluster but can be something different if you configure it so.</p>
+</div>
+<div class="section" id="gke-authentication">
+<h3>GKE Authentication<a class="headerlink" href="#gke-authentication" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&#39;gke&#39;</span>
+      <span class="l l-Scalar l-Scalar-Plain">svc_acct_file</span><span class="p p-Indicator">:</span> <span class="s">&#39;~/.gke/my-service-account-file&#39;</span>
+</pre></div>
+</div>
+<p>It’s expected that you have a service account that can then manipulate
+the cluster you’re interacting with. Every user should have a cooresponding
+service account to interact with GKE.</p>
+<p>When the dasbhoard starts up, we use <code class="docutils literal notranslate"><span class="pre">gcloud</span></code> to configure your KUBECONFIG.</p>
+<p>Google Cloud’s Goolge Kubernetes Engine (GKE) needs some more documentation
+on what privileges this serivce account is setup with and how one may bootstrap
+it.</p>
+</div>
+</div>
+<div class="section" id="open-ondemand-apps-in-a-kuberenetes-cluster">
+<h2>Open OnDemand apps in a Kuberenetes cluster<a class="headerlink" href="#open-ondemand-apps-in-a-kuberenetes-cluster" title="Permalink to this headline">¶</a></h2>
+<p>Kuberenetes is so different from other HPC clusters that the interface we have for
+other schedulers didn’t quite fit.  So Open OnDemand apps developed for kubernetes
+clusters look quite different from other schedulers.  Essentially most things we’ll
+need are packed into the <code class="docutils literal notranslate"><span class="pre">native</span></code> key of the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> files.</p>
+<p>See the <a class="reference internal" href="../../app-development/tutorials-interactive-apps/k8s-jupyter.html#app-development-tutorials-interactive-apps-k8s-jupyter"><span class="std std-ref">tutorial for a kubernetes app</span></a>
+for more details.</p>
+</div>
+<div class="section" id="kyverno-policies">
+<h2>Kyverno Policies<a class="headerlink" href="#kyverno-policies" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="enforcing-walltimes">
+<h2>Enforcing Walltimes<a class="headerlink" href="#enforcing-walltimes" title="Permalink to this headline">¶</a></h2>
+<p>TODO docs about the job-pod-reaper and k8-namespace-reaper</p>
+</div>
+<div class="section" id="image-pull-secrets">
+<h2>Image pull secrets<a class="headerlink" href="#image-pull-secrets" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="oidc-audicence">
+<h2>OIDC Audicence<a class="headerlink" href="#oidc-audicence" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bin-override-example.html" class="btn btn-neutral float-right" title="A Working Example of a bin_overrides Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ccq.html" class="btn btn-neutral float-left" title="Configure Cloudy Cluster (beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/resource-manager/kubernetes.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/resource-manager/kubernetes.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/resource-manager/kubernetes.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/resource-manager/kubernetes.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager/kubernetes.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/kubernetes.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/kubernetes.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/kubernetes.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager/kubernetes.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager/kubernetes.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager/kubernetes.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager/kubernetes.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
