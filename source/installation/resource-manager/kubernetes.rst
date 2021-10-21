@@ -3,6 +3,8 @@
 Configure Kuberenetes
 =====================
 
+TODO table of contents
+
 A YAML cluster configuration file for a Kubernetes resource manager on an HPC
 cluster looks like:
 
@@ -92,22 +94,21 @@ You should have policies in place to enforce these.
 Bootstrapping an Open OnDemand Kuberenetes cluster
 **************************************************
 
+Before anyone can use your Kubernetes cluster from Open OnDemand, you'll need
+to create the `open ondemand kubernetes resources`_ on your cluster.
+
 We ship with `open ondemand provided hooks`_ to bootstrap users when the login
 to Open OnDemand. These scripts will create their namespace, a networking policy,
 and rolebindings for user and the service accounts in their namespace.
 
-The namespace is just to create their namespace (perhaps with a prefix configured
-above). A user ``oakley`` would create the ``oakley`` namespace. If you've configured
+A user ``oakley`` would create the ``oakley`` namespace. If you've configured
 to use prefix ``user-``, then the namespace would be ``user-oakley``.
 
 The networking policy ensures that pods cannot communicate inbetween namespaces.
 
-The rolebindings bind the user, ``oakley`` in this case, to the ``ood-user``
-ClusterRole.  It also creates a service account in the namespace ``user-oakley``.
-The service account is used in initializing configmaps and secrets for the Open
-OnDemand pods.
-
-**TODO** Need to find, share and document the ood-user ClusteRole.
+The RoleBindings give user, ``oakley`` in this case, sufficient privileges
+to the ``oakley`` namespace.  Refer to the `open ondemand kubernetes resources`_
+for details on the roles and privileges created.
 
 Authentication
 **************
@@ -177,13 +178,18 @@ for more details.
 Kyverno Policies
 ****************
 
-TODO
+Enforcing Walltimes
+*******************
 
+TODO docs about the job-pod-reaper and k8-namespace-reaper
 
 Image pull secrets
 ******************
 
-TODO
+OIDC Audicence
+**************
+
 
 .. _kubernetes security context: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context
 .. _open ondemand provided hooks: https://github.com/OSC/ondemand/tree/master/hooks
+.. _open ondemand kubernetes resources: https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml
