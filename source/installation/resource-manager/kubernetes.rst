@@ -110,6 +110,32 @@ The RoleBindings give user, ``oakley`` in this case, sufficient privileges
 to the ``oakley`` namespace.  Refer to the `open ondemand kubernetes resources`_
 for details on the roles and privileges created.
 
+You'll need to employ :ref:`PUN pre hooks <ood-portal-generator-pun-pre-hook>`
+to bootstrap your users to this cluster. You'll also have to modify ``/etc/ood/config/hooks.env``
+
+.. code-block:: text
+  # /etc/ood/config/hook.env
+
+  # required if you changed the items in the cluster.d file
+  K8S_USERNAME_PREFIX=""
+  NAMESPACE_PREFIX=""
+
+  # required
+  NETWORK_POLICY_ALLOW_CIDR="127.0.0.1/32"
+
+  # required if you're using OIDC
+  IDP_ISSUER_URL="https://idp.example.com/auth/realms/main/protocol/openid-connect/token"
+  CLIENT_ID="changeme"
+  CLIENT_SECRET="changeme"
+
+  # required if you're using a secret registry
+  IMAGE_PULL_SECRET=""
+  REGISTRY_DOCKER_CONFIG_JSON="/some/path/to/docker/config.json"
+
+  # enable if are enforcing walltimes through the job pod reaper
+  # see 'Enforcing walltimes' below.
+  USE_JOB_POD_REAPER=false
+
 Authentication
 **************
 
