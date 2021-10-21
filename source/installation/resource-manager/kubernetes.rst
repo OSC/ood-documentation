@@ -114,6 +114,7 @@ You'll need to employ :ref:`PUN pre hooks <ood-portal-generator-pun-pre-hook>`
 to bootstrap your users to this cluster. You'll also have to modify ``/etc/ood/config/hooks.env``
 
 .. code-block:: text
+
   # /etc/ood/config/hook.env
 
   # required if you changed the items in the cluster.d file
