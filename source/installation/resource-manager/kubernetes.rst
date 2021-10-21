@@ -116,32 +116,39 @@ Authentication
 Here are the current configurations you can list for different types of
 authentication.
 
+Managed Authentication
+----------------------
+
 .. code-block:: yaml
 
   # /etc/ood/config/clusters.d/my_k8s_cluster.yml
   ---
   v2:
     job:
+      # ...
       auth:
         type: 'managed'
 
-        type: 'odic'
-
-        type: 'gke'
-        svc_acct_file: '~/.gke/my-service-account-file'
-
-managed authentication
-----------------------
-
-This is the simplest case. The authentication is managed outside of
-Open OnDemand. We will not ``set-context`` or ``set-cluster``.
+This is the simplest case and is the default. The authentication
+is managed outside of Open OnDemand. We will not ``set-context``
+or ``set-cluster``.
 
 We will pass ``--context`` to kubectl commands if you have it configured
 in the cluster config (above). Otherwise, it's assumed that the current context
 is set out of bounds.
 
-oidc authentication
+OIDC Authentication
 -------------------
+
+.. code-block:: yaml
+
+  # /etc/ood/config/clusters.d/my_k8s_cluster.yml
+  ---
+  v2:
+    job:
+      # ...
+      auth:
+        type: 'odic'
 
 This uses the OIDC credentails that you've logged in with.  When
 the dashboard starts up it will ``set-context`` and ``set-cluster``
@@ -150,8 +157,19 @@ to what you've configured.
 We will pass ``--context`` to kubectl commands. This defaults to
 the cluster but can be something different if you configure it so.
 
-gke authentication
+GKE Authentication
 ------------------
+
+.. code-block:: yaml
+
+  # /etc/ood/config/clusters.d/my_k8s_cluster.yml
+  ---
+  v2:
+    job:
+      # ...
+      auth:
+        type: 'gke'
+        svc_acct_file: '~/.gke/my-service-account-file'
 
 It's expected that you have a service account that can then manipulate
 the cluster you're interacting with. Every user should have a cooresponding
