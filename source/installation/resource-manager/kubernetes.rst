@@ -111,7 +111,12 @@ to the ``oakley`` namespace.  Refer to the `open ondemand kubernetes resources`_
 for details on the roles and privileges created.
 
 You'll need to employ :ref:`PUN pre hooks <ood-portal-generator-pun-pre-hook>`
-to bootstrap your users to this cluster. You'll also have to modify ``/etc/ood/config/hooks.env``
+to bootstrap your users to this cluster.
+
+You'll also have to modify ``/etc/ood/config/hooks.env`` because `open ondemand provided hooks`_
+require a ``HOOKENV`` environment variable.
+
+Here's what you'll have to edit in the ``hook.env.example`` file we ship.
 
 .. code-block:: text
 
@@ -136,6 +141,43 @@ to bootstrap your users to this cluster. You'll also have to modify ``/etc/ood/c
   # enable if are enforcing walltimes through the job pod reaper
   # see 'Enforcing walltimes' below.
   USE_JOB_POD_REAPER=false
+
+You can refer to `osc's prehook`_ but we'll also provide this example.
+As you can see in this pre hook, the username is passed in to the script
+which then defines the ``HOOKENV`` and calls two `open ondemand provided hooks`_.
+
+``k8s-bootstrap-ondemand.sh`` boostraps the user in the kubernetes cluster as described
+above.
+
+Since we use OIDC at OSC we use ``set-k8s-creds.sh`` to add or update the user in their
+``~/.kube/config`` with the relevant OIDC credentials.
+
+.. code-block:: shell
+
+  #!/bin/bash
+
+  for arg in "$@"
+  do
+    case $arg in
+      --user)
+      ONDEMAND_USERNAME=$2
+      shift
+      shift
+      ;;
+  esac
+  done
+
+  if [ "x${ONDEMAND_USERNAME}" = "x" ]; then
+    echo "Must specify username"
+    exit 1
+  fi
+
+  HOOKSDIR="/opt/ood/hooks"
+  HOOKENV="/etc/ood/config/hook.env"
+
+  /bin/bash "$HOOKSDIR/k8s-bootstrap/k8s-bootstrap-ondemand.sh" "$ONDEMAND_USERNAME" "$HOOKENV"
+  /bin/bash "$HOOKSDIR/k8s-bootstrap/set-k8s-creds.sh" "$ONDEMAND_USERNAME" "$HOOKENV"
+
 
 Authentication
 **************
@@ -238,3 +280,4 @@ OIDC Audicence
 .. _kubernetes security context: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context
 .. _open ondemand provided hooks: https://github.com/OSC/ondemand/tree/master/hooks
 .. _open ondemand kubernetes resources: https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml
+.. _osc's prehook: https://github.com/OSC/osc-ood-config/blob/master/hooks/pre-hook.sh
