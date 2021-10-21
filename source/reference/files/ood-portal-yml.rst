@@ -53,6 +53,25 @@ Configure General Options
 
           servername: "www.example.com"
 
+.. describe:: proxy_server (String, null)
+
+  The proxy server, if one exists. Used when you have a proxy
+  in front of the Open OnDemand server(s).
+
+  Default
+    No proxy server
+
+    .. code-block:: yaml
+
+      proxy_server: null
+
+  Example
+    Access website through the proxy name ``www.example-proxy.com``
+
+    .. code-block:: yaml
+
+      proxy_server: "www.example-proxy.com"
+
 .. describe:: port (Integer, null)
 
      the port used to access the Open OnDemand portal (if different than ``80``
@@ -112,6 +131,60 @@ Configure General Options
        .. code-block:: yaml
 
           logroot: "/path/to/my/logs"
+
+.. describe:: errorlog (String, 'error.log')
+
+  The Error log filename
+
+  Default
+    "error.log"
+
+    .. code-block:: yaml
+
+      errorlog: "error.log"
+
+  Example
+    "my.site.error.log"
+
+    .. code-block:: yaml
+
+      errorlog: "my.site.error.log"
+
+.. describe:: accesslog (String, 'access.log')
+
+  The Access log filename
+
+  Default
+    "access.log"
+
+    .. code-block:: yaml
+
+      accesslog: "access.log"
+
+  Example
+    "my.site.access.log"
+
+    .. code-block:: yaml
+
+      accesslog: "my.site.access.log"
+
+.. describe:: logformat (String, apache conbined format)
+
+  The log format.
+
+  Default
+    apache combined format
+
+    .. code-block:: yaml
+
+      logformat: null
+
+  Example
+    Change the error and access log format.
+
+    .. code-block:: yaml
+
+      logformat: '"%v %h \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" %{SSL_PROTOCOL}x %T"'
 
 .. describe:: use_rewrites (Boolean)
 
@@ -297,7 +370,6 @@ Configure General Options
    .. code-block:: yaml
 
       user_map_match: '^([^@]+)@example.edu$'
-
 
 .. _ood-portal-generator-user-env:
 .. describe:: user_env (String, null)
@@ -697,6 +769,65 @@ properties are ``null`` then PUN access will be disabled.
        .. code-block:: yaml
 
           pun_max_retries: 25
+
+.. _ood-portal-generator-pun-pre-hook:
+
+PUN Pre Hook command is functionality to initialize things as root before
+the PUN starts up.
+
+Authentication information like OIDC tokens are not passed to OnDemand apps like
+the dashboard.  This feature is useful when you need to use things like OIDC tokens
+in some initialization process before the PUN starts.  For example, you can
+configure your ~/.kube/config with OIDC information with this feature.
+
+There is currently only one thing passed into this command and that is the
+username. It's passed as a named argument like so: ``--user USERNAME``.
+
+You may pass in environment variables from apache to this command, though they are
+prefixed with ``OOD_``. For example if you configure this to pass ``OIDC_ACCESS_TOKEN``
+to the pre hook command, you can read the variable as ``OOD_OIDC_ACCESS_TOKEN``.
+
+Additionally you may add entries to ``/etc/ood/config/hook.env`` and source this
+file for additional environment variables. For example environment specific information
+for your test and production environments.
+
+.. describe:: pun_pre_hook_root_cmd (String, null)
+
+  Run a hook command as root before the the PUN starts up.
+
+  Default
+    No pun pre hook.
+
+    .. code-block:: yaml
+
+      pun_pre_hook_root_cmd: null
+
+  Example
+    Run a pre hook called "my_site_hook.sh".
+
+    .. code-block:: yaml
+
+      pun_pre_hook_root_cmd: "/path/to/my_site_hook.sh"
+
+.. describe:: pun_pre_hook_exports (String, null)
+
+  A comma seperated list of environment variables to export to the
+  pun_pre_hook_root_cmd.
+
+  Default
+    Don't pass any environment variables.
+
+    .. code-block:: yaml
+
+      pun_pre_hook_exports: null
+
+  Example
+    Export OIDC_ACCESS_TOKEN and OIDC_CLAIM_EMAIL environment variables
+    to the pun_pre_hook_root_cmd.
+
+    .. code-block:: yaml
+
+      pun_pre_hook_exports: "OIDC_ACCESS_TOKEN,OIDC_CLAIM_EMAIL"
 
 Configure OpenID Connect
 ------------------------
