@@ -390,6 +390,11 @@ OnDemand can be configured to setup `Image Pull Secrets <https://kubernetes.io/d
 The OnDemand web node will need a JSON file setup that includes the username and password of a registry user authorized
 to pull images used by OnDemand apps.
 
+.. warning::
+
+  Once the OnDemand user's namespace is given the registry auth secret, it will be readable by the user.
+  It's recommended to use a read-only auth token that has limited to access just images used by OnDemand.
+
 In the following example you can set the following values:
 
 - ``$REGISTRY`` the registry address.
