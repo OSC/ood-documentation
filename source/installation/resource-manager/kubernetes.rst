@@ -111,11 +111,12 @@ The OnDemand web node ``root`` user must be configured
 to use the ``ondemand`` service account deployed by the `open ondemand kubernetes resources`_ and
 be able to execute ``kubectl`` commands.
 
-First deploy ``kubectl`` to the OnDemand web node:
+First deploy ``kubectl`` to the OnDemand web node.
+Replace ``$VERSION`` with the version of the Kubernetes controller, eg. ``1.21.5``.
 
 .. code-block:: sh
 
-  wget -O /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.21.5/bin/linux/amd64/kubectl
+  wget -O /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v$VERSION/bin/linux/amd64/kubectl
   chmod +x /usr/local/bin/kubectl
 
 Next extract the ``ondemand`` ServiceAccount token.  Here is an example command to extract
