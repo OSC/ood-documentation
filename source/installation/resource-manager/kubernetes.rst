@@ -335,7 +335,7 @@ This tool runs as a deployment inside the Kubernetes cluster.
 Enforcing Walltimes
 *******************
 
-In order to enforce that OnDemand pods have a finite runtime it's necessary to deploy a service that can
+In order to enforce that OnDemand pods are shut down after so much time, it's necessary to deploy a service that can
 cleanup pods that have run past their walltime.  Also because OnDemand is bootstrapping
 a namespace per user it's useful to cleanup unused namespaces.
 
