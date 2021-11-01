@@ -323,7 +323,7 @@ Once Kubernetes is available to OnDemand, it's possible for users to use ``kubec
 Kubernetes. To ensure proper security with Kubernetes a policy engine such as `Kyverno`_ can be used to ensure certain
 security standards.
 
-For OnDemand many of the `Kyverno baseline and restricted sescurity policies`_ will work.  There are also policies that
+For OnDemand, many of the `Kyverno baseline and restricted sescurity policies`_ will work.  There are also policies that
 can be deployed to ensure the UID/GID of user pods match that user's UID/GID on the HPC clusters.
 Some `example policies`_ do things such as enforce UID/GID and other security standards for OnDemand.
 These policies rely heavily on the fact that OnDemand usage in Kubernetes using a namespace prefix.
