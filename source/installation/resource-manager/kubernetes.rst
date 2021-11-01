@@ -319,18 +319,31 @@ for more details.
 Kyverno Policies
 ****************
 
-Once Kubernetes is available to OnDemand, it's possible for users to use ``kubectl`` to submit arbirary pods to Kubernetes. To ensure proper security with Kubernetes a policy engine such as `Kyverno`_ can be used to ensure certain security standards.
+Once Kubernetes is available to OnDemand, it's possible for users to use ``kubectl`` to submit arbirary pods to
+Kubernetes. To ensure proper security with Kubernetes a policy engine such as `Kyverno`_ can be used to ensure certain
+security standards.
 
-For OnDemand maybe of the `Kyverno baseline and restricted sescurity policies`_ will work.  There are also policies that can be deployed to ensure the UID/GID of user pods match that user's UID/GID on the HPC clusters.  Some `example policies`_ do things such as enforce UID/GID and other security standards for OnDemand. These policies rely heavily on the fact that OnDemand usage in Kubernetes using a namespace prefix.
+For OnDemand many of the `Kyverno baseline and restricted sescurity policies`_ will work.  There are also policies that
+can be deployed to ensure the UID/GID of user pods match that user's UID/GID on the HPC clusters.
+Some `example policies`_ do things such as enforce UID/GID and other security standards for OnDemand.
+These policies rely heavily on the fact that OnDemand usage in Kubernetes using a namespace prefix.
 
-The policies enforcing UID/GID and supplemental groups are utilizing the `k8-ldap-configmap`_ tool that generates ConfigMap resources based on LDAP data.  This tool runs as a deployment inside the Kubernetes cluster.
+The policies enforcing UID/GID and supplemental groups are using data supplied by
+the `k8-ldap-configmap`_ tool that generates ConfigMap resources based on LDAP data.
+This tool runs as a deployment inside the Kubernetes cluster.
 
 Enforcing Walltimes
 *******************
 
-In order to enforce that OnDemand pods have a finite runtime it's necessary to deploy a service that can cleanup pods that have run past their walltime.  Also because OnDemand is bootstrapping a namespace per user it's useful to cleanup unused namespaces.
+In order to enforce that OnDemand pods have a finite runtime it's necessary to deploy a service that can
+cleanup pods that have run past their walltime.  Also because OnDemand is bootstrapping
+a namespace per user it's useful to cleanup unused namespaces.
 
-The OnDemand pods will have the ``pod.kubernetes.io/lifetime`` annotation set that is read by `job-pod-reaper`_ that will kill pods that have reached their walltime.  The `job-pod-reaper`_ service runs as a Deployment inside Kubernetes and will kill any pods based on the lifetime annotation.  Below is an example of Helm values to use configure job-pod-reaper for OnDemand:
+The OnDemand pods will have the ``pod.kubernetes.io/lifetime`` annotation set that
+is read by `job-pod-reaper`_ that will kill pods that have reached their walltime.
+The `job-pod-reaper`_ service runs as a Deployment inside Kubernetes and will kill
+any pods based on the lifetime annotation.
+Below is an example of Helm values that can be used to configure job-pod-reaper for OnDemand:
 
 .. code-block:: yaml
 
@@ -339,16 +352,17 @@ The OnDemand pods will have the ``pod.kubernetes.io/lifetime`` annotation set th
   objectLabels: app.kubernetes.io/managed-by=open-ondemand
 
 You will need to tell OnDemand you are using `job-pod-reaper`_ and to bootstrap the necessary RoleBinding so that
-service can delete OnDemand pods. Update ``/etc/ood/config/hooks.env`` to include the following configuration:
+job-pod-reaper can delete OnDemand pods. Update ``/etc/ood/config/hooks.env`` to include the following configuration:
 
 .. code-block:: sh
 
   USE_JOB_POD_REAPER="true"
 
-In order to cleanup unused namespaces the `k8-namespace-reaper`_ tool can be used.  This tool will delete a namespace based on several factors:
+In order to cleanup unused namespaces the `k8-namespace-reaper`_ tool can be used.
+This tool will delete a namespace based on several factors:
 
 - The creation timestamp of the namespace
-- ``openondemand.org/last-hook-execution`` annotation set by OnDemand hook
+- ``openondemand.org/last-hook-execution`` annotation set by the OnDemand pre-PUN hook
 - The last pod to run in that namespace based on Prometheus metrics
 
 Below is an example of Helm values to deploy this tool for OnDemand where the OnDemand namespaces have ``user-`` prefix:
@@ -367,9 +381,11 @@ Below is an example of Helm values to deploy this tool for OnDemand where the On
 Using a private image registry
 ******************************
 
-OnDemand's Kubernetes integration can be setup to pull images from a private registry like `Harbor <https://goharbor.io/>`_.
+OnDemand's Kubernetes integration can be setup to pull images from a private registry
+like `Harbor <https://goharbor.io/>`_.
 
-In order to pull images from a private registry that requires authentication, OnDemand can be configured to setup `Image Pull Secrets <https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/>`_.
+In order to pull images from a private registry that requires authentication,
+OnDemand can be configured to setup `Image Pull Secrets <https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/>`_.
 The OnDemand web node will need a JSON file setup that includes the username and password of a registry user authorized
 to pull images used by OnDemand apps.
 
@@ -394,7 +410,7 @@ In the following example you can set the following values:
   chmod 0600 /etc/ood/config/image-registry.json
 
 Once the registry JSON is created you must configure ``/etc/ood/config/hooks.env`` so OnDemand knows how to bootstrap
-user namespaces with the ability to pull from this registry:
+a user's namespaces with the ability to pull from this registry:
 
 .. code-block:: sh
 
