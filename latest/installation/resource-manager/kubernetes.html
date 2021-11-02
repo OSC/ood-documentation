@@ -128,16 +128,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#managed-authentication">Managed Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#oidc-authentication">OIDC Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gke-authentication">GKE Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oidc-audicence">OIDC Audicence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oidc-token-exchange">OIDC Token Exchange</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#open-ondemand-apps-in-a-kuberenetes-cluster">Open OnDemand apps in a Kuberenetes cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#kyverno-policies">Kyverno Policies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enforcing-walltimes">Enforcing Walltimes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-a-private-image-registry">Using a private image registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#oidc-audicence">OIDC Audicence</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#keycloak">Keycloak</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
@@ -487,7 +485,7 @@ token to be used to authenticate with Kubernetes.
 First both OnDemand and Kubernetes must be using the same OIDC provider.
 In order for the OnDemand token to work with Kubernetes, it’s simplest to
 configure an <a class="reference internal" href="#oidc-k8-audience"><span class="std std-ref">audience</span></a> on the OnDemand OIDC client.
-An alternative approach would be to update the pre-PUN hooks to perform a token exchange.
+An alternative approach would be to update the pre-PUN hooks to perform a <a class="reference internal" href="#oidc-k8-token-exchange"><span class="std std-ref">token exchange</span></a>.
 Another approach would be to use the same OIDC client configuration for OnDemand and Kubernetes.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
 <span class="nn">---</span>
@@ -523,6 +521,33 @@ service account to interact with GKE.</p>
 <p>Google Cloud’s Goolge Kubernetes Engine (GKE) needs some more documentation
 on what privileges this serivce account is setup with and how one may bootstrap
 it.</p>
+</div>
+<div class="section" id="oidc-audicence">
+<span id="oidc-k8-audience"></span><h3>OIDC Audicence<a class="headerlink" href="#oidc-audicence" title="Permalink to this headline">¶</a></h3>
+<p>The simplest way to have the OnDemand OIDC tokens be valid for Kubernetes is to update the OnDemand
+client configuration to include the audience of the Kubernetes client.</p>
+<div class="section" id="keycloak">
+<h4>Keycloak<a class="headerlink" href="#keycloak" title="Permalink to this headline">¶</a></h4>
+<p>In the Keycloak web UI, logged in as the admin user:</p>
+<ol class="arabic simple">
+<li>Navigate to <code class="docutils literal notranslate"><span class="pre">Clients</span></code> then choose the OnDemand client.</li>
+<li>Choose the <code class="docutils literal notranslate"><span class="pre">Mappers</span></code> tab and click <code class="docutils literal notranslate"><span class="pre">Create</span></code></li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Fill in a <code class="docutils literal notranslate"><span class="pre">Name</span></code> and select <code class="docutils literal notranslate"><span class="pre">Audience</span></code> for <code class="docutils literal notranslate"><span class="pre">Mapper</span> <span class="pre">Type</span></code></li>
+<li>For <code class="docutils literal notranslate"><span class="pre">Included</span> <span class="pre">Client</span> <span class="pre">Audience</span></code> choose the Kubernetes client entry</li>
+<li>Turn on both <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">ID</span> <span class="pre">token</span></code> and <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">access</span> <span class="pre">token</span></code></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="oidc-token-exchange">
+<span id="oidc-k8-token-exchange"></span><h3>OIDC Token Exchange<a class="headerlink" href="#oidc-token-exchange" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Keycloak<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the <a class="reference external" href="https://www.keycloak.org/docs/latest/securing_apps/#_token-exchange">Keycloak token exchange documentation</a></p>
+</div>
 </div>
 </div>
 <div class="section" id="open-ondemand-apps-in-a-kuberenetes-cluster">
@@ -623,26 +648,6 @@ a user’s namespaces with the ability to pull from this registry:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">IMAGE_PULL_SECRET</span><span class="o">=</span><span class="s2">&quot;private-docker-registry&quot;</span>
 <span class="nv">REGISTRY_DOCKER_CONFIG_JSON</span><span class="o">=</span><span class="s2">&quot;/etc/ood/config/image-registry.json&quot;</span>
 </pre></div>
-</div>
-</div>
-<div class="section" id="oidc-audicence">
-<span id="oidc-k8-audience"></span><h2>OIDC Audicence<a class="headerlink" href="#oidc-audicence" title="Permalink to this headline">¶</a></h2>
-<p>The simplest way to have the OnDemand OIDC tokens be valid for Kubernetes is to update the OnDemand
-client configuration to include the audience of the Kubernetes client.</p>
-<div class="section" id="keycloak">
-<h3>Keycloak<a class="headerlink" href="#keycloak" title="Permalink to this headline">¶</a></h3>
-<p>In the Keycloak web UI, logged in as the admin user:</p>
-<ol class="arabic simple">
-<li>Navigate to <code class="docutils literal notranslate"><span class="pre">Clients</span></code> then choose the OnDemand client.</li>
-<li>Choose the <code class="docutils literal notranslate"><span class="pre">Mappers</span></code> tab and click <code class="docutils literal notranslate"><span class="pre">Create</span></code></li>
-</ol>
-<blockquote>
-<div><ol class="arabic simple">
-<li>Fill in a <code class="docutils literal notranslate"><span class="pre">Name</span></code> and select <code class="docutils literal notranslate"><span class="pre">Audience</span></code> for <code class="docutils literal notranslate"><span class="pre">Mapper</span> <span class="pre">Type</span></code></li>
-<li>For <code class="docutils literal notranslate"><span class="pre">Included</span> <span class="pre">Client</span> <span class="pre">Audience</span></code> choose the Kubernetes client entry</li>
-<li>Turn on both <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">ID</span> <span class="pre">token</span></code> and <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">access</span> <span class="pre">token</span></code></li>
-</ol>
-</div></blockquote>
 </div>
 </div>
 </div>
