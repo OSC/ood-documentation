@@ -1,7 +1,7 @@
 .. _install-software:
 
-Install Software From RPM
-=========================
+Install Software From Packages
+==============================
 
 We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
@@ -36,20 +36,21 @@ software requirements:
       attach a subscription providing access to RHSCL to be able to use this
       repository.
 
-#. Enable dnf modules and repositories for dependencies **on CentOS/RHEL 8 only**:
+#. Enable dnf modules and repositories for dependencies **on RHEL/Rocky 8 only**:
 
     .. code-block:: sh
 
+       dnf install epel-release
        dnf module enable ruby:2.7
-       dnf module enable nodejs:12
+       dnf module enable nodejs:14
 
-    **CentOS 8 only**
+   **Rocky 8 only**
 
     .. code-block:: sh
 
        sudo dnf config-manager --set-enabled powertools
 
-    **RedHat 8 only**
+   **RedHat 8 only**
 
     .. code-block:: sh
 
@@ -57,15 +58,34 @@ software requirements:
 
 #. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
 
-     .. code-block:: sh
+   **RedHat/CentOS/Rocky only**
 
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+    .. code-block:: sh
+
+       sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+
+   **Ubuntu only**
+
+    .. code-block:: sh
+
+       sudo apt install apt-transport-https ca-certificates
+       wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+       sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+       sudo apt update
 
 #. Install OnDemand and all of its dependencies:
 
-   .. code-block:: sh
+   **RedHat/CentOS/Rocky only**
 
-      sudo yum install ondemand
+    .. code-block:: sh
+
+       sudo yum install ondemand
+
+   **Ubuntu only**
+
+    .. code-block:: sh
+
+       sudo apt install ondemand
 
 #. (Optional) Install :ref:`authentication-dex` package
 
@@ -74,15 +94,25 @@ software requirements:
       If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
       See :ref:`add-ldap` for details on configuration of LDAP.
 
-   .. code-block:: sh
+   **RedHat/CentOS/Rocky only**
 
-      sudo yum install ondemand-dex
+    .. code-block:: sh
+
+       sudo yum install ondemand-dex
+
+   **Ubuntu only**
+
+    .. code-block:: sh
+
+       sudo apt install ondemand-dex
 
 #. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
 
-   .. code-block:: sh
+   **RedHat/CentOS/Rocky only**
 
-      sudo yum install ondemand-selinux
+    .. code-block:: sh
+
+       sudo yum install ondemand-selinux
 
 .. note::
 
