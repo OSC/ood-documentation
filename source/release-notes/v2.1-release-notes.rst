@@ -1,0 +1,153 @@
+.. _v2.1-release-notes:
+
+v2.1 Release Notes
+==================
+
+.. warning::
+
+   There are some breaking changes in 2.1. See the upgrade directions below for details.
+
+
+Highlights in 2.1:
+
+- `Dynamic Javascript in BatchConnect Forms`_
+- `Dependency updates`_
+
+Upgrading from v2.0
+-------------------
+
+Breaking Changes
+................
+
+
+context.json file locations have changed
+****************************************
+
+In versions 2.0 and below, batch connect apps wrote a `context.json` file to
+a directory like ``~/data/sys/dashboard/batch_connect/sys/<APPNAME>/context.json``.
+OnDemand uses these files to cache the choices a user makes for the next time they
+use that app.
+
+Version 2.1 now writes files like ``~/ondemand/data/sys/dashboard/batch_connect/cache/<APPNAME>.json``
+
+When you upgrade, since no files exist in a users cache directory, users will have no
+cached settings in any of their batch connect apps.
+
+
+Upgrade directions
+..................
+
+.. warning::
+
+   As always please update the *development* or *test* instances of OnDemand installed at your center first to test and verify before you modify the *production* instance.
+
+.. warning::
+
+   The OnDemand upgrade has only been tested going from 2.0.x to 2.1.x.
+
+#. Update OnDemand release RPM
+
+   .. code-block:: sh
+
+      sudo yum install -y https://yum.osc.edu/ondemand/2.1/ondemand-release-web-2.1-1.noarch.rpm
+
+#. Enable dependency repos
+
+   **CentOS/RHEL 8 only**
+
+   .. code-block:: sh
+
+      sudo dnf module reset nodejs
+      sudo dnf module enable nodejs:14
+
+   **RedHat 8 only**
+
+   .. code-block:: sh
+
+      sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+
+   **CentOS 8 only**
+
+   .. code-block:: sh
+
+      sudo dnf config-manager --set-enabled powertools
+
+   **CentOS/RHEL 7 only**
+
+   .. code-block:: sh
+
+      sudo yum install epel-release
+
+#. Update OnDemand
+
+   .. code-block:: sh
+
+      sudo yum clean all
+      sudo yum update ondemand
+
+#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+
+   .. code-block:: sh
+
+      sudo yum update ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   **CentOS/RHEL 8 only**
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart httpd
+
+   **CentOS/RHEL 7 only**
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart httpd24-httpd.service
+
+#. (Optional) If ``ondemand-dex`` was installed, restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. Force all PUNs to restart
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+#. (Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.
+
+   .. warning::
+
+      See `Dependency updates`_ warning before uninstalling old Ruby versions.
+
+   **CentOS/RHEL 7 only**
+
+   .. code-block:: sh
+
+      sudo yum remove rh-nodejs12\*
+
+
+Details
+-------
+
+Dynamic Javascript in BatchConnect Forms
+........................................
+
+
+
+
+Dependency updates
+..................
+
+This release updates the following dependencies:
+
+- NodeJS 14
+
+  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
