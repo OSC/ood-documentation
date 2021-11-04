@@ -15,7 +15,7 @@ Please see section :ref:`add-ldap` for a more advanced and recommended authentic
         sudo systemctl start httpd24-httpd
         sudo systemctl enable httpd24-httpd
 
-   RHEL/Rocky Linux 8
+   RHEL/Rocky 8
      .. code-block:: sh
 
         sudo systemctl start httpd

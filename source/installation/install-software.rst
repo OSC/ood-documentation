@@ -36,7 +36,7 @@ software requirements:
       attach a subscription providing access to RHSCL to be able to use this
       repository.
 
-#. Enable dnf modules and repositories for dependencies **on RHEL/Rocky Linux 8 only**:
+#. Enable dnf modules and repositories for dependencies **on RHEL/Rocky 8 only**:
 
     .. code-block:: sh
 
@@ -44,7 +44,7 @@ software requirements:
        dnf module enable ruby:2.7
        dnf module enable nodejs:14
 
-   **Rocky Linux 8 only**
+   **Rocky 8 only**
 
     .. code-block:: sh
 
@@ -58,7 +58,7 @@ software requirements:
 
 #. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
 
-   **RedHat/CentOS/Rocky Linux only**
+   **RedHat/CentOS/Rocky only**
 
     .. code-block:: sh
 
@@ -75,7 +75,7 @@ software requirements:
 
 #. Install OnDemand and all of its dependencies:
 
-   **RedHat/CentOS/Rocky Linux only**
+   **RedHat/CentOS/Rocky only**
 
     .. code-block:: sh
 
@@ -94,7 +94,7 @@ software requirements:
       If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
       See :ref:`add-ldap` for details on configuration of LDAP.
 
-   **RedHat/CentOS/Rocky Linux only**
+   **RedHat/CentOS/Rocky only**
 
     .. code-block:: sh
 
@@ -108,7 +108,7 @@ software requirements:
 
 #. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
 
-   **RedHat/CentOS/Rocky Linux only**
+   **RedHat/CentOS/Rocky only**
 
     .. code-block:: sh
 

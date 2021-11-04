@@ -66,7 +66,7 @@ Intermediate certificate
 
         sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 
-   RHEL/Rocky Linux 8:
+   RHEL/Rocky 8:
      .. code-block:: sh
 
         sudo systemctl try-restart httpd.service htcacheclean.service
