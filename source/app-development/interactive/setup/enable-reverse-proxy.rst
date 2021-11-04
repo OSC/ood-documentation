@@ -150,10 +150,20 @@ Steps to Enable in Apache
 
 #. Restart the Apache server to have the changes take effect:
 
-   CentOS/RHEL 7:
+   RHEL/CentOS 7:
      .. code-block:: sh
 
         sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+
+   RHEL/Rocky Linux 8:
+     .. code-block:: sh
+
+        sudo systemctl try-restart httpd.service htcacheclean.service
+
+   Ubuntu:
+     .. code-block:: sh
+
+        sudo systemctl try-restart apache2.service
 
 Verify it Works
 ---------------

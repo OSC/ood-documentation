@@ -25,7 +25,7 @@ PAM can be used to authenticate users to OnDemand, for example if users only exi
 
       sudo echo "LoadModule authnz_pam_module modules/mod_authnz_pam.so" > /opt/rh/httpd24/root/etc/httpd/conf.modules.d/55-authnz_pam.conf
 
-   RHEL/CentOS 8:
+   RHEL/Rocky Linux 8:
 
    .. code-block:: sh
 
