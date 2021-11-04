@@ -25,7 +25,7 @@ Dependencies:
 Install via RPM
 --------------------------
 
-For RHEL/CentOS 7 and 8 systems the `ondemand_exporter`_ can be installed via RPM.
+For RHEL/CentOS 7 and RHEL/Rocky 8 systems the `ondemand_exporter`_ can be installed via RPM.
 
 .. code-block:: sh
 
@@ -34,7 +34,7 @@ For RHEL/CentOS 7 and 8 systems the `ondemand_exporter`_ can be installed via RP
 The RPM will install the following files that should work out of the box:
 
 - **RHEL/CentOS 7 only**: /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
-- **RHEL/CentOS 8 only**: /etc/httpd/conf.d/ondemand_exporter.conf
+- **RHEL/Rocky 8 only**: /etc/httpd/conf.d/ondemand_exporter.conf
 - /etc/sudoers.d/ondemand_exporter
 
 Ensure that the new Apache configuration is loaded by restarting Apache
@@ -45,7 +45,7 @@ RHEL/CentOS 7
 
     sudo systemctl restart httpd24-httpd
 
-RHEL/CentOS 8
+RHEL/Rocky 8
 
  .. code-block:: sh
 
@@ -85,7 +85,7 @@ RHEL/CentOS 7
      sudo install -o root -g root -m 0440 /tmp/${ARCHIVE}/files/apache.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
      sudo systemctl restart httpd24-httpd
 
-RHEL/CentOS 8
+RHEL/Rocky 8
 
   .. code-block:: sh
 
