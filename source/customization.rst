@@ -1017,6 +1017,8 @@ The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by
 * The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
 * The ``cluster_override`` can override the cluster name used to make requests to Grafana if the Grafana cluster name varies from OnDemand cluster name.
 
+.. _disable-host-link-batch-connect:
+
 Disable Host Link in Batch Connect Session Card
 -----------------------------------------------
 
@@ -1036,6 +1038,15 @@ To disable this, simply set the environment variable in the dashboards' env file
   # don't show ssh link in batch connect card
   OOD_BC_SSH_TO_COMPUTE_NODE=off
 
+If you wish to disable on a per-cluster basis, you can set the following in your :ref:`cluster YAML configuration <cluster-config-schema>`.
+
+.. code-block:: yaml
+   :emphasize-lines: 3-
+
+   v2:
+      # ...
+      batch_connect:
+        ssh_allow: false
 
 .. _set-illegal-job-name-characters:
 
