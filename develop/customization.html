@@ -1179,7 +1179,7 @@ The time ranges and values for labels (eg: <cite>var-cluster=</cite>) will be au
 </ul>
 </div>
 <div class="section" id="disable-host-link-in-batch-connect-session-card">
-<h2>Disable Host Link in Batch Connect Session Card<a class="headerlink" href="#disable-host-link-in-batch-connect-session-card" title="Permalink to this headline">¶</a></h2>
+<span id="disable-host-link-batch-connect"></span><h2>Disable Host Link in Batch Connect Session Card<a class="headerlink" href="#disable-host-link-in-batch-connect-session-card" title="Permalink to this headline">¶</a></h2>
 <p>Batch connect session cards like this have links to the compute node on which the job is currently running (highlighted).</p>
 <div class="figure align-center">
 <img alt="_images/bc-card-w-hostlink.png" src="_images/bc-card-w-hostlink.png" />
@@ -1191,6 +1191,13 @@ nodes.</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># don&#39;t show ssh link in batch connect card</span>
 <span class="n">OOD_BC_SSH_TO_COMPUTE_NODE</span><span class="o">=</span><span class="n">off</span>
 </pre></div>
+</div>
+<p>If you wish to disable on a per-cluster basis, you can set the following in your <a class="reference internal" href="installation/cluster-config-schema.html#cluster-config-schema"><span class="std std-ref">cluster YAML configuration</span></a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
+   <span class="c1"># ...</span>
+<span class="hll">   <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+</span><span class="hll">     <span class="l l-Scalar l-Scalar-Plain">ssh_allow</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></pre></div>
 </div>
 </div>
 <div class="section" id="set-illegal-job-name-characters">
