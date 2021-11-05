@@ -264,6 +264,14 @@ is set out of bounds.
 OIDC Authentication
 -------------------
 
+For OIDC authentication the tokens provided to OnDemand users must be seen as valid for Kubernetes in order for that
+token to be used to authenticate with Kubernetes.
+First both OnDemand and Kubernetes must be using the same OIDC provider.
+In order for the OnDemand token to work with Kubernetes, it's simplest to
+configure an :ref:`audience <oidc_k8_audience>` on the OnDemand OIDC client.
+An alternative approach would be to update the pre-PUN hooks to perform a :ref:`token exchange <oidc_k8_token_exchange>`.
+Another approach would be to use the same OIDC client configuration for OnDemand and Kubernetes.
+
 .. code-block:: yaml
 
   # /etc/ood/config/clusters.d/my_k8s_cluster.yml
@@ -304,6 +312,38 @@ When the dasbhoard starts up, we use ``gcloud`` to configure your KUBECONFIG.
 Google Cloud's Goolge Kubernetes Engine (GKE) needs some more documentation
 on what privileges this serivce account is setup with and how one may bootstrap
 it.
+
+.. _oidc_k8_audience:
+
+OIDC Audicence
+--------------
+
+The simplest way to have the OnDemand OIDC tokens be valid for Kubernetes is to update the OnDemand
+client configuration to include the audience of the Kubernetes client.
+
+Keycloak
+^^^^^^^^
+
+In the Keycloak web UI, logged in as the admin user:
+
+#. Navigate to ``Clients`` then choose the OnDemand client.
+#. Choose the ``Mappers`` tab and click ``Create``
+
+  #. Fill in a ``Name`` and select ``Audience`` for ``Mapper Type``
+
+  #. For ``Included Client Audience`` choose the Kubernetes client entry
+
+  #. Turn on both ``Add to ID token`` and ``Add to access token``
+
+.. _oidc_k8_token_exchange:
+
+OIDC Token Exchange
+-------------------
+
+Keycloak
+^^^^^^^^
+
+Refer to the `Keycloak token exchange documentation <https://www.keycloak.org/docs/latest/securing_apps/#_token-exchange>`_
 
 Open OnDemand apps in a Kuberenetes cluster
 *******************************************
@@ -422,10 +462,6 @@ a user's namespaces with the ability to pull from this registry:
 
   IMAGE_PULL_SECRET="private-docker-registry"
   REGISTRY_DOCKER_CONFIG_JSON="/etc/ood/config/image-registry.json"
-
-OIDC Audicence
-**************
-
 
 .. _kubernetes security context: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context
 .. _open ondemand provided hooks: https://github.com/OSC/ondemand/tree/master/hooks
