@@ -388,9 +388,13 @@ to get the list groups the user is in, and <code class="docutils literal notrans
       <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\n%s&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
       <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\nmodule</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">ondemand-vnc\n%s&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">ssh_allow</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 <p>Script wrappers may contain Bash statements, and are useful for setting up a default environment, and or cleaning up after a script. The keys <cite>basic</cite> and <cite>vnc</cite> refer to the two types of batch connect application templates. <cite>script_wrapper’s</cite> have the content of a batch connect script interpolated into them. String interpolation is performed using <cite>sprintf</cite>, with the script’s content replacing the <cite>%s</cite>.</p>
+<p>Since 2.0, <code class="docutils literal notranslate"><span class="pre">ssh_allow</span></code> can be used to override the global value for <code class="docutils literal notranslate"><span class="pre">OOD_BC_SSH_TO_COMPUTE_NODE</span></code> which is used to determine
+whether batch connect apps will render a link to SSH into the worker node.
+See <a class="reference internal" href="../customization.html#disable-host-link-batch-connect"><span class="std std-ref">Disable Host Link in Batch Connect Session Card</span></a> for more details.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The user is responsible for providing the <cite>%s</cite> that is used to place the script content. If a <cite>script_wrapper</cite> is provided without <cite>%s</cite> then batch connect applications are unlikely to work properly.</p>

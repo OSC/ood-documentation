@@ -172,8 +172,13 @@ Batch connect controls the defaults for interactive applications such as Jupyter
           script_wrapper: "module restore\n%s"
         vnc:
           script_wrapper: "module restore\nmodule load ondemand-vnc\n%s"
+        ssh_allow: true
 
 Script wrappers may contain Bash statements, and are useful for setting up a default environment, and or cleaning up after a script. The keys `basic` and `vnc` refer to the two types of batch connect application templates. `script_wrapper's` have the content of a batch connect script interpolated into them. String interpolation is performed using `sprintf`, with the script's content replacing the `%s`.
+
+Since 2.0, ``ssh_allow`` can be used to override the global value for ``OOD_BC_SSH_TO_COMPUTE_NODE`` which is used to determine
+whether batch connect apps will render a link to SSH into the worker node.
+See :ref:`Disable Host Link in Batch Connect Session Card <disable-host-link-batch-connect>` for more details.
 
 .. note::
 

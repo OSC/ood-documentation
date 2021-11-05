@@ -35,6 +35,8 @@ cluster looks like:
       auth:
         type: "oidc"
       mounts: []
+    batch_connect:
+      ssh_allow: false
 
 
 adapter
@@ -68,6 +70,11 @@ auth:
 mounts:
   Site wide mount points for all kubernetes jobs. See the 
   :ref:`documentation on kubernetes mounts <kubernetes-mounts>` for more details.
+
+.. note::
+
+   The ``batch_connect.ssh_allow`` is important to disable OnDemand from rendering links to SSH into your
+   Kubernetes worker nodes when Batch Connect apps are running.
 
 Per User Kubernetes
 *******************
