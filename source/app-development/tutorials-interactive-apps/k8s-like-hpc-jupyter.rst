@@ -163,7 +163,7 @@ These mounts are defined in the YAML using a loop:
         destination_path: <%= mount %>
     <%- end -%>
 
-Additional mounts are needed to make the pod behave like a HPC compute node. Following are mounted into the container
+Additional mounts are needed to make the pod behave like a HPC compute node. Following are mounted into the container:
 
 - MUNGE socket so SLURM commands inside the pod can work
 - SLURM configuration so SLURM commands inside the pod know about scheduler host
