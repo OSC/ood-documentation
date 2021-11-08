@@ -14,7 +14,7 @@ so it skips a lot of important details about app development that may be found i
 other tutorials like :ref:`app-development-tutorials-interactive-apps-add-jupyter`.
 
 
-We're going to be looking at the `bc osc jupyter`_ app which you can fork, clone
+We're going to be looking at the `bc osc jupyter`_ app which is OSC's production Jupyter app. You can fork, clone
 and modify for your site.  This page also holds the `submit yml in full`_ for reference.
 
 The container
