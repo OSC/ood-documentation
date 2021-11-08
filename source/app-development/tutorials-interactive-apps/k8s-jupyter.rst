@@ -15,6 +15,9 @@ other tutorials like :ref:`app-development-tutorials-interactive-apps-add-jupyte
 We're going to be looking at the `bc k8s jupyter`_ app which you can fork, clone
 and modify for your site.  This page also holds the `submit yml in full`_ for reference.
 
+Refer to :ref:`interactive K8s Jupyter using HPC-like containers <app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter>`
+for details on running Jupyter on Kubernetes with containers that behave more like traditional
+HPC jobs.
 
 container spec
 --------------

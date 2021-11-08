@@ -13,9 +13,11 @@ this document is to describe how to write apps specifically for a kubernetes clu
 so it skips a lot of important details about app development that may be found in
 other tutorials like :ref:`app-development-tutorials-interactive-apps-add-jupyter`.
 
-
 We're going to be looking at the `bc osc jupyter`_ app which is OSC's production Jupyter app. You can fork, clone
 and modify for your site.  This page also holds the `submit yml in full`_ for reference.
+
+Refer to :ref:`the interactive K8s Jupyter app <app-development-tutorials-interactive-apps-k8s-jupyter>` for
+additional details on items defined in ``submit.yml.erb`` as well as a more traditional container approach.
 
 The container
 -------------
@@ -33,8 +35,9 @@ Switch between SLURM and Kubernetes
 -----------------------------------
 
 The first big change from a traditional HPC interactive app is the main YAML structure is wrapped
-in a large ``if`` statement based on the cluster choice. If a user choose one of the HPC clusters,
-the SLURM submit YAML is rendered, otherwise the Kubernetes YAML is rendered.
+in a large ``if`` statement based on the cluster choice. If a user chooses one of the HPC clusters,
+the SLURM submit YAML is rendered, otherwise the Kubernetes YAML is rendered. In the following examples the
+SLURM clusters are named ``owens`` and ``pitzer`` and the Kubernetes cluster is named ``kubernetes``.
 
 Here is the beginning of the block:
 
@@ -67,6 +70,10 @@ The ``image`` should be the HPC container image and ``command`` will be the job 
 work with both SLURM and Kubernetes.  The ``command`` will be run from the user's home directory and will cover mount
 requirements in :ref:`mount requirements <kubernetes-mount-requirements>`.
 
+One important aspect of the ``command`` is that the job script executed is built using the standard ``before.sh``, ``script.sh`` and ``after.sh`` that one would normally use to build the job script for interactive apps running
+on HPC resources.  The way this pod is being setup, the same job script that runs on SLURM would also be used to
+launch the container in Kubernetes.
+
 Next you can specify additional environment variables in ``env``. 
 
 .. code-block:: yaml
@@ -78,56 +85,6 @@ Next you can specify additional environment variables in ``env``.
       image_pull_policy: "IfNotPresent"
       command: ["/bin/bash","-l","<%= staged_root %>/job_script_content.sh"]
       restart_policy: 'OnFailure'
-      env:
-        NB_UID: "<%= Etc.getpwnam(ENV['USER']).uid %>"
-        NB_USER: "<%= ENV['USER'] %>"
-        NB_GID: "<%= Etc.getpwnam(ENV['USER']).gid %>"
-        CLUSTER: "<%= compute_cluster %>"
-
-
-Here is the default environment. You can use a ``null`` here to unset any of these.
-
-.. code-block:: text
-
-  USER: username,
-  UID: run_as_user,
-  HOME: home_dir,
-  GROUP: group,
-  GID: run_as_group,
-  KUBECONFIG: '/dev/null'
-
-
-resource requests
------------------
-
-``port`` is is the port the container is going to listen on.  ``cpu`` and ``memory``
-are the cpu and memory request. Note that memory here has ``Gi`` which is the unit.
-
-.. code-block:: yaml
-
-    container:
-      # ...
-      port: "8080"
-      cpu: "<%= cpu %>"
-      memory: "<%= memory %>Gi"
-
-Kubernetes has some flexibility in requests. One can make _requests_ and _limits_
-which are like hard and soft limits. In the example above, they're both the same.
-
-Here's an example utilizing requests and limits for both memory and cpu. Note that
-we're using millicores in the ``cpu_request``.
-
-.. code-block:: yaml
-
-    container:
-      # ...
-      port: "8080"
-      cpu_request: "0.200"
-      cpu_request: "4"
-      memory_request: "500Mi"
-      memory_limit: "4Gi"
-
-See `kubernetes pod memory`_ and `kubernetes pod cpu`_ for more details.
 
 .. _kubernetes-mount-requirements:
 
