@@ -360,7 +360,8 @@ other schedulers didn't quite fit.  So Open OnDemand apps developed for kubernet
 clusters look quite different from other schedulers.  Essentially most things we'll
 need are packed into the ``native`` key of the ``submit.yml.erb`` files.
 
-See the :ref:`tutorial for a kubernetes app <app-development-tutorials-interactive-apps-k8s-jupyter>`
+See the :ref:`tutorial for a kubernetes app that behaves like HPC compute <app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter>` as well as
+the :ref:`tutorial for a kubernetes app <app-development-tutorials-interactive-apps-k8s-jupyter>`
 for more details.
 
 
