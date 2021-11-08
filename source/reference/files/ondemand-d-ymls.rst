@@ -33,14 +33,14 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
 
       .. code-block:: yaml
 
-        pinned_apps: 6
+        pinned_apps_menu_length: 6
 
     Example
       Show 10 items in the menu.
 
       .. code-block:: yaml
 
-        pinned_apps: 10
+        pinned_apps_menu_length: 10
 
 
 .. describe:: pinned_apps_group_by: (String, null)
