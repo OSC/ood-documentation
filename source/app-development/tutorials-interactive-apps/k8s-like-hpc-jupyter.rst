@@ -26,7 +26,7 @@ need to compatible with packages installed on HPC environment so if you run RHEL
 you would also need to run RHEL 8 inside the container.
 
 Things like Lmod and HPC applications will need to be run inside the Pod's container just like
-if a job was spawned in the traditional HPC resource manager.
+if a job was spawned in a traditional HPC resource manager.
 
 
 Switch between SLURM and Kubernetes
