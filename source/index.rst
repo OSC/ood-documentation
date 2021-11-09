@@ -52,6 +52,7 @@ These are institutions who were early adopters or provided HPC resources for dev
 
    architecture
    reference
+   glossary
 
 
 .. toctree::
