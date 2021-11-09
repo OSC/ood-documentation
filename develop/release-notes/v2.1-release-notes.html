@@ -153,6 +153,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ubuntu-20-04-packages">Ubuntu 20.04 packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
 </ul>
 </li>
 </ul>
@@ -253,6 +254,7 @@
 <li><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></li>
 <li><a class="reference internal" href="#ubuntu-20-04-packages">Ubuntu 20.04 packages</a></li>
 <li><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
+<li><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
 </ul>
 <div class="section" id="upgrading-from-v2-0">
 <h2>Upgrading from v2.0<a class="headerlink" href="#upgrading-from-v2-0" title="Permalink to this headline">¶</a></h2>
@@ -321,6 +323,8 @@ sudo yum update ondemand
 </pre></div>
 </div>
 </li>
+<li><p class="first">(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> was installed, see <a class="reference internal" href="../installation/modify-system-security.html#ood-selinux-updates"><span class="std std-ref">SELinux after Updates</span></a></p>
+</li>
 <li><p class="first">Force all PUNs to restart</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 </pre></div>
@@ -363,6 +367,13 @@ sudo yum update ondemand
 <li><p class="first">NGINX 1.20.1</p>
 </li>
 </ul>
+</div>
+<div class="section" id="selinux-changes">
+<h3>SELinux changes<a class="headerlink" href="#selinux-changes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> SELinux boolean was removed and replaced with <code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code>
+that is enabled by default.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> SELinux boolean was added and is disabled by default.</p>
+<p>See the <a class="reference internal" href="../installation/modify-system-security.html#ood-selinux"><span class="std std-ref">OnDemand SELinux</span></a> documentation for details</p>
 </div>
 </div>
 </div>
