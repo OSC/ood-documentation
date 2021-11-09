@@ -16,7 +16,7 @@ Useful Terms
 #. **Web-node**: Refers to the Apache web server which runs as the apache user.
 
    * Handles authentication and tracking the user session.
-   * Tracks the various `fs` paths that it will associate with the compute nodes which it submit requests to from form data.
+   * Tracks the various `fs` paths that it will associate with the compute nodes which it submits requests to using form data.
    * Proxies requests to the compute nodes.
 
 #. **Compute-node**: Interactive apps and resource managers that run as the authenticated user. These nodes are proxied requests *from* the *web-node* and include things like: 
