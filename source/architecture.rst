@@ -10,13 +10,29 @@ Below are some diagrams of OnDemand's architecture:
    model for software diagrams, are more technically detailed and are built using draw.io
 #. Request flow diagram is a sequence diagram built using plantuml
 
+Useful Terms
+------------
+
+#. **Web-node**: Refers to the Apache web server which runs as the apache user.
+
+   * Handles authentication and tracking the user session.
+   * Tracks the various `fs` paths that it will associate with the compute nodes which it submit requests to from form data.
+   * Proxies requests to the compute nodes.
+
+#. **Compute-node**: Interactive apps and resource managers that run as the authenticated user. These nodes are proxied requests *from* the *web-node* and include things like: 
+
+   * RStudio (http server)
+   * Jupyter (http server)
+   * Ansys (no http server included, needs noVNC)
+   * Resource managers like SLURM, Torque, etc
+
 Overview
 --------
 
-
 .. figure:: /architecture/ood_overview.png
 
-#. Apache is the server front end, running as the Apache user, and accepting all requests from users and serves four primary functions
+#. Apache is the server front end which will be referred to as the **web-node** in these docs, 
+   running as the Apache user, and accepting all requests from users and serves four primary functions
 
    #. Authenticates user
    #. Starts Per-User NGINX processes (PUNs)
