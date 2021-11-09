@@ -23,7 +23,7 @@ Overview
    #. Reverse proxies each user to her PUN via Unix domain sockets.
    #. Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets.
 
-#. The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps.
+#. The Per-User NGINX referred to as the Compute-node, serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps.
 
 
 System context
