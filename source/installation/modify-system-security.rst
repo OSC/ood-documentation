@@ -58,6 +58,13 @@ If you experience denials when running SELinux with Open OnDemand please provide
 
       cat /var/log/audit/audit.log | audit2allow -M ood
 
+.. _ood_selinux_updates:
+
+SELinux after Updates
+---------------------
+
+After OnDemand updates that include the ``ondemand-selinux`` package, some SELinux booleans may be turned back off if their default value is to be disabled.  It is required that after these updates, all SELinux booleans that are enabled should be checked that they are still enabled.
+
 .. _firewall:
 
 Firewall
