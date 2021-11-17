@@ -128,7 +128,7 @@ Clone and Setup
 ---------------
 
 #. Login to Open OnDemand, click "Develop" dropdown menu and click the "My Sandbox Apps (Development)" option.
-#. Click "New Product" and "Clone Existing App".
+#. Click "New App" and "Clone Existing App".
 #. Fill out the form:
 
    #. Directory name: ``quota``
