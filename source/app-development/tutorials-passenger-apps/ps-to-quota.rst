@@ -364,7 +364,7 @@ Update app.rb:
     end
 
 
-In view/index.html, replace the table with this:
+In views/index.erb, replace the table with this:
 
 .. code-block:: erb
 
