@@ -76,7 +76,6 @@ These are institutions who were early adopters or provided HPC resources for dev
    app-development/interactive/setup
    enable-desktops
    install-ihpc-apps
-   code-snippets
 
 .. toctree::
    :maxdepth: 2
