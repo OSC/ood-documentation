@@ -76,7 +76,7 @@ Kubernetes has some flexibility in requests. One can make _requests_ and _limits
 which are like hard and soft limits. In the example above, they're both the same.
 
 Here's an example utilizing requests and limits for both memory and cpu. Note that
-we're using millicores in the ``cpu_request``.
+we're using millicores in ``cpu_request``.
 
 .. code-block:: yaml
 
@@ -84,7 +84,7 @@ we're using millicores in the ``cpu_request``.
       # ...
       port: "8080"
       cpu_request: "0.200"
-      cpu_request: "4"
+      cpu_limit: "4"
       memory_request: "500Mi"
       memory_limit: "4Gi"
 
