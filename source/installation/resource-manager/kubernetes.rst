@@ -322,8 +322,8 @@ it.
 
 .. _oidc_k8_audience:
 
-OIDC Audicence
---------------
+OIDC Audience
+-------------
 
 The simplest way to have the OnDemand OIDC tokens be valid for Kubernetes is to update the OnDemand
 client configuration to include the audience of the Kubernetes client.
