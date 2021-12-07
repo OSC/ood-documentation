@@ -68,6 +68,12 @@ These are institutions who were early adopters or provided HPC resources for dev
    analytics
    monitoring
 
+.. toctree::
+  :maxdepth: 2
+  :caption: How-Tos
+
+  how-tos/apps.rst
+
 
 .. toctree::
    :maxdepth: 2
