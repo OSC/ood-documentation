@@ -204,7 +204,7 @@ submit yml in full
     # here's the bulk of setting up the container. You'll likely need to specify all of these.
     container:
       name: "jupyter"
-      image: "docker.io/jupyter/scipy-notebook:python-3.9.2"
+      image: "docker.io/jupyter/scipy-notebook:python-3.9.7"
       command: "/usr/local/bin/start.sh /opt/conda/bin/jupyter notebook --config=/ood/ondemand_config.py"
       working_dir: "<%= Etc.getpwnam(ENV['USER']).dir %>"
       restart_policy: 'OnFailure'
