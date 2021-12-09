@@ -602,8 +602,8 @@ different text than the default.
      cluster:
        widget: "select"
        options:
-         - ["cluster1", "The first cluster"]
-         - ["cluster2", "The second cluster"]
+         - ["The first cluster", "cluster1"]
+         - ["The second cluster", "cluster2"]
 
 The last option is to :ref:`configure the cluster in the submit file <configuring-cluster-in-submit-yml>`.
 When using this option, there's no need to add any cluster configuration to the
