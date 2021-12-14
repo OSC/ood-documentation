@@ -16,14 +16,14 @@ Overview
 
 .. figure:: /architecture/ood_overview.png
 
-#. Apache is the server front end referred to as the the Web-node, running as the Apache user, accepting all requests from users and serves four primary functions:
+#. Apache is the server front end, running as the Apache user, and accepting all requests from users and serves four primary functions:
 
    #. Authenticates user.
    #. Starts Per-User NGINX processes (PUNs).
    #. Reverse proxies each user to her PUN via Unix domain sockets.
    #. Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets.
 
-#. The Per-User NGINX referred to as the Compute-node, serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps.
+#. The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps.
 
 
 System context
