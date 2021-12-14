@@ -36,149 +36,124 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - GitHub URL
      - Container
      - GUI
-     - Notes/Features
    * - Abaqus/CAE
      - OSC
      - https://github.com/OSC/bc_osc_abaqus
      - no
      - 
-     -
    * - 
      - University of Utah
      - https://github.com/CHPC-UofU/bc_osc_abaqus
      -  no
      - 
-     -
    * - ANSYS Workbench
      - OSC
      - https://github.com/OSC/bc_osc_ansys_workbench
      -  no
      - 
-     -
    * - COMSOL Multiphysics
      - OSC
      - https://github.com/OSC/bc_osc_comsol
      - no
      - noVNC
-     -
    * - 
      - University of Utah
      - https://github.com/CHPC-UofU/bc_osc_comsol
      - no
      - noVNC
-     -
    * - MATLAB
      - OSC
      - https://github.com/OSC/bc_osc_matlab
      - no
      - noVNC
-     -
    * - 
      - University of Utah
      - https://github.com/CHPC-UofU/bc_osc_matlab
      -  no
      - noVNC
-     -
    * - Jupyter
      - OSC
      - https://github.com/OSC/bc_osc_jupyter
      - no
      - node
-     -
    * - 
      - University of Utah
      - https://github.com/CHPC-UofU/bc_osc_jupyter
      - no
      - node
-     -
    * -  
      - University of Utah
      - https://github.com/CHPC-UofU/bc_jupyter_dynpart
      - no
      - node
-     - Dynamic SLURM Partition
    * - 
      - Stanford
      - https://github.com/stanford-rc/sh_ood-apps#sh_jupyter
      - no
      - node
-     -
    * - 
      - TechSquareInc
      - https://gitlab.com/mjbludwig/jupyter_experimental
      - no
      - node
-     -
    * - Jupyter + Spark
      - OSC
      - https://github.com/OSC/bc_osc_jupyter_spark
      - no
      - node
-     -
    * - Paraview
      - OSC
      - https://github.com/OSC/bc_osc_paraview
      - no
      - 
-     -
    * - RStudio Server
      - OSC
      - https://github.com/OSC/bc_osc_rstudio_server
      - hybrid
      - rnode
-     -
    * - 
      - University of Utah
      - https://github.com/CHPC-UofU/bc_osc_rstudio_server
      - yes
      - rnode
-     -
    * - 
      - Stanford
      - https://github.com/stanford-rc/sh_ood-apps#sh_rstudio
      - yes
      - rnode
-     -
    * - VMD
      - OSC
      - https://github.com/OSC/bc_osc_vmd
      - no
      - 
-     -
    * - QGIS
      - OSC
      - https://github.com/OSC/bc_osc_qgis
      - yes
      - noVNC
-     -
    * - RELION (for REgularised LIkelihood OptimisatioN)
      - Shanghai Jiao Tong University (SJTU)
      - https://github.com/SJTU-HPC/bc_relion
      - yes
-     - 
      - 
    * - Stata 
      - OSC
      - https://github.com/OSC/bc_osc_stata
      - no
      - 
-     -
    * - Shiny App
      - University of Utah
      - https://github.com/CHPC-UofU/bc_osc_example_shiny
      - yes
      - 
-     -
    * - Tensorboard
      - Stanford
      - https://github.com/stanford-rc/sh_ood-apps#sh_tensorboard 
      - no
      - 
-     -
    * - Visual Studio Code
      - OSC
      - https://github.com/OSC/bc_osc_codeserver 
      - no
      - rnode
-     - Uses https://github.com/cdr/code-server
   
