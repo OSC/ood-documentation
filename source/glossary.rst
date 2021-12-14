@@ -13,4 +13,7 @@ Glossary
      Similar to the compute-node but used to interact with the file-system or a container using something like ssh.
 
    Web-node
-     Refers to the front end Apache web-server machine itself which runs Apache and the user PUNs as apps.
+     Refers to the front end Apache web-server machine itself which runs Apache and the user's PUN.
+
+   PUN
+    The Per User Nginx. An Nginx instance running on the Web-node as the user.
