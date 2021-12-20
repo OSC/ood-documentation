@@ -296,6 +296,11 @@ and <code class="docutils literal notranslate"><span class="pre">command</span><
 <p>The <code class="docutils literal notranslate"><span class="pre">image</span></code> should be the HPC container image and <code class="docutils literal notranslate"><span class="pre">command</span></code> will be the job script that has been adapted to
 work with both SLURM and Kubernetes.  The <code class="docutils literal notranslate"><span class="pre">command</span></code> will be run from the user’s home directory and will cover mount
 requirements in <a class="reference internal" href="#kubernetes-mount-requirements"><span class="std std-ref">mount requirements</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These examples use images from the Ohio SuperComputer Center’s private registry. They will
+not work at your site as this registry requires authentication.</p>
+</div>
 <p>One important aspect of the <code class="docutils literal notranslate"><span class="pre">command</span></code> is that the job script executed is built using the standard <code class="docutils literal notranslate"><span class="pre">before.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">script.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">after.sh</span></code> that one would normally use to build the job script for interactive apps running
 on HPC resources.  The way this pod is being setup, the same job script that runs on SLURM would also be used to
 launch the container in Kubernetes.</p>

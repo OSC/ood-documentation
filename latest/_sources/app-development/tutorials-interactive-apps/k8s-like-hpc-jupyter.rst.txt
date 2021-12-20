@@ -70,6 +70,10 @@ The ``image`` should be the HPC container image and ``command`` will be the job 
 work with both SLURM and Kubernetes.  The ``command`` will be run from the user's home directory and will cover mount
 requirements in :ref:`mount requirements <kubernetes-mount-requirements>`.
 
+.. warning::
+  These examples use images from the Ohio SuperComputer Center's private registry. They will
+  not work at your site as this registry requires authentication.
+
 One important aspect of the ``command`` is that the job script executed is built using the standard ``before.sh``, ``script.sh`` and ``after.sh`` that one would normally use to build the job script for interactive apps running
 on HPC resources.  The way this pod is being setup, the same job script that runs on SLURM would also be used to
 launch the container in Kubernetes.
