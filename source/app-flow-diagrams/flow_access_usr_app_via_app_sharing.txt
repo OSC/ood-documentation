@@ -1,0 +1,72 @@
+@startuml
+
+title Launching a Shared App
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant LuaScripts
+participant Nginx
+participant Dashboard
+participant "Shared App"
+
+
+User -[#red]> "Apache Httpd": initial request
+activate "Apache Httpd"
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard -[#black]> Dashboard: search file system for apps in shared locations
+activate Dashboard
+Dashboard --[#blue]> "Apache Httpd": HTML response
+deactivate Dashboard
+"Apache Httpd" --[#red]> User: HTML response
+deactivate "Apache Httpd"
+
+User -[#red]> "Apache Httpd": request
+
+activate "Apache Httpd"
+
+"Apache Httpd" -[#green]> LuaScripts: Lua Hooks
+activate LuaScripts
+LuaScripts -[#green]> LuaScripts: map user
+alt socket doesn't exist
+  LuaScripts -[#green]> Nginx: Start nginx as $user
+end group
+LuaScripts -[#green]> LuaScripts: modify request and proxy connection
+
+
+"Apache Httpd" -[#blue]> Nginx: proxy request
+deactivate LuaScripts
+
+activate "Nginx"
+
+alt Passenger app is not running
+  Nginx -[#green]> "Shared App": Passenger to start shared app via unix socket
+  "Shared App" -[#black]> "Shared App": read shared files
+end group
+
+Nginx -[#blue]> "Shared App": proxy request
+
+
+"Shared App" --[#blue]> Nginx: response
+Nginx --[#blue]> "Apache Httpd": response
+deactivate "Nginx"
+
+"Apache Httpd" --[#red]> User: response
+deactivate "Apache Httpd"
+
+group All future requests to the Shared app
+User -[#red]> "Apache Httpd": request to shared app
+"Apache Httpd" -[#blue]> "Shared App": proxy to shared app
+"Shared App" --[#blue]> "Apache Httpd": Shared app's response
+"Apache Httpd" --[#red]> "User": Shared app's response
+end
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:blue>   </back>| http over unix socket |
+|<back:green>   </back>| commands |
+|<back:black>   </back>| file reads |
+endlegend
+
+@enduml

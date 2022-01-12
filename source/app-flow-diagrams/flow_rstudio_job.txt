@@ -1,0 +1,48 @@
+@startuml
+
+title RStudio Job
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant Dashboard
+participant "Scheduler Host"
+participant "Compute Node"
+
+
+User -[#red]> "Apache Httpd": initial request
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+
+User -[#red]> "Apache Httpd": POST form
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard -[#olive]> "Scheduler Host": request resources
+"Scheduler Host" --[#olive]> Dashboard: scheduler response
+Dashboard --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+"Compute Node" -[#black]> "Compute Node": create per session credentials
+"Compute Node" -[#black]> "Compute Node": start RStudio Server
+
+User -[#red]> "Apache Httpd": https request to view sessions
+"Apache Httpd" -[#blue]> Dashboard: request to view sessions
+Dashboard -[#black]> Dashboard: read per session credentials & host info file
+"Dashboard" --[#blue]> "Apache Httpd": response to view sessions
+"Apache Httpd" --[#red]> User: response to view sessions
+
+group All future requests during sessions
+User -[#red]> "Apache Httpd": connect to RStudio Server
+"Apache Httpd" -[#blue]> "Compute Node": proxy to RStudio Server
+"Compute Node" --[#blue]> "Apache Httpd": RStudio Server response
+"Apache Httpd" --[#red]> "User": RStudio Server response
+end
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:blue>   </back>| http over unix socket |
+endlegend
+
+@enduml

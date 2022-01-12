@@ -1,0 +1,39 @@
+@startuml
+
+title Linux Host Adapter
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant Dashboard
+participant "Login Host"
+
+
+User -[#red]> "Apache Httpd": initial request
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+
+User -[#red]> "Apache Httpd": POST form
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard -[#purple]> "Login Host": ssh to the login host
+"Login Host" -[#purple]> "Login Host": start tmux, singularity & the app
+"Login Host" --[#purple]> Dashboard: exit the ssh session
+Dashboard --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+User -[#red]> "Apache Httpd": https request to the app
+"Apache Httpd" -[#blue]> "Login Host": proxy request
+"Login Host" --[#blue]> "Apache Httpd": app response
+"Apache Httpd" --[#red]> User: https app response
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:green>   </back>| commands |
+|<back:blue>   </back>| http over unix socket |
+|<back:purple>   </back>| ssh |
+endlegend
+
+@enduml
