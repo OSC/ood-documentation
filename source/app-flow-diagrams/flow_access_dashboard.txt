@@ -1,0 +1,70 @@
+@startuml
+
+title Access Dashboard
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant Authentication
+participant LuaScripts
+participant Nginx
+participant Dashboard
+participant FileSystem
+participant XDMOD
+
+User -[#red]> "Apache Httpd": request
+
+activate "Apache Httpd"
+
+"Apache Httpd" -[#red]> Authentication: Authenticate request
+activate Authentication
+Authentication --[#red]> "Apache Httpd" : Authenticate response
+deactivate Authentication
+
+"Apache Httpd" -[#green]> LuaScripts: Lua Hooks
+activate LuaScripts
+LuaScripts -[#green]> LuaScripts: map user
+alt socket doesn't exist
+  LuaScripts -[#green]> Nginx: Start nginx as $user
+end group
+LuaScripts -[#green]> LuaScripts: modify request and proxy connection
+
+
+"Apache Httpd" -[#blue]> Nginx: proxy request
+deactivate LuaScripts
+
+activate "Nginx"
+
+alt Dashboard app is not running
+  Nginx -[#green]> "Dashboard": Passenger to start Dashboard app via unix socket
+  Dashboard -[#purple]> FileSystem: Read config files
+end group
+
+Nginx -[#blue]> "Dashboard": proxy request
+
+alt Dashboard configurations that trigger file reads
+  Dashboard -[#purple]> FileSystem: Read json quota files
+  Dashboard -[#purple]> FileSystem: Read message of the day
+  Dashboard -[#purple]> FileSystem: Read and render extra widgets
+end group
+
+"Dashboard" --[#blue]> Nginx: response
+Nginx --[#blue]> "Apache Httpd": response
+deactivate "Nginx"
+
+"Apache Httpd" --[#red]> User: response
+deactivate "Apache Httpd"
+
+alt User configured iframe that loads XDMOD widgets
+  User -[#red]> XDMOD: get data from the XDDoD server
+end group
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:green>   </back>| commands |
+|<back:blue>   </back>| http over unix socket |
+|<back:purple>   </back>| file read |
+endlegend
+
+@enduml

@@ -55,7 +55,7 @@ The Front-end proxy will create Per User Nginx (PUN) processes (light blue boxes
 * The "Per User Instance" light blue boxes are replicated for every user accessing the system.
 
 Request Flow
------------------------
+-------------
 
 This is the request flow through the OnDemand system. A user initiates a
 request through a browser and this illustrates how that request propagates
@@ -63,4 +63,53 @@ through the system to a particular application (including the dashboard).
 
 .. uml:: architecture/request-flow.uml
 
+Other Request Flow Diagrams
+----------------------------
 
+================
+Dashboard Access
+================
+
+.. figure:: /app-flow-diagrams/flow_access_dashboard.png
+
+=============
+Passenger App
+=============
+
+.. figure:: /app-flow-diagrams/flow_access_passenger_app.png
+
+================
+User App Sharing
+================
+
+.. figure:: /app-flow-diagrams/flow_access_usr_app_via_app_sharing.png
+
+==============
+Authentication
+==============
+
+.. figure:: /app-flow-diagrams/flow_authentication.png 
+
+==================
+Linux Host Adapter
+==================
+
+.. figure:: /app-flow-diagrams/flow_linux_host_adapter.png
+
+===========
+Rstudio Job
+===========
+
+.. figure:: /app-flow-diagrams/flow_rstudio_job.png
+
+=============
+Shell Session
+=============
+
+.. figure:: /app-flow-diagrams/flow_start_shell_session.png
+
+===============
+VNC Desktop Job
+===============
+
+.. figure:: /app-flow-diagrams/flow_vnc_desktop_job.png

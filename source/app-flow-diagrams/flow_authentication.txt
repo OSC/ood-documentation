@@ -1,0 +1,19 @@
+@startuml
+
+title Authentication Flow
+autonumber "<b>[0]"
+
+skinparam sequenceMessageAlign center
+
+Browser -> Apache: unauthenticated request
+Browser <-- Apache: redirect to IDP
+Browser -> IDP: request login
+Browser <-- IDP: show login page
+Browser -> IDP: submit login
+Browser <-- IDP: redirect to Apache
+Browser -> Apache: auth request
+Apache -> IDP: verify authenticated user
+Apache <-- IDP: respond with claim headers
+Apache -> Apache: map authenticated user to system user (lua module)
+Apache -> PUN: proxy request to Per User NGINX (PUN)
+@enduml
