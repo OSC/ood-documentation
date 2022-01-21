@@ -298,6 +298,7 @@ Configure General Options
 
           lua_root: "/path/to/lua/handlers"
 
+.. _ood-portal-generator-lua-log-level:
 .. describe:: lua_log_level (String, null)
 
      the verbosity of the Lua module in the logs
@@ -1000,6 +1001,7 @@ to ``null`` will disable this feature.
 
           oidc_client_secret: "ondemand.example.com"
 
+.. _ood-portal-generator-oidc-remote-user-claim:
 .. describe:: oidc_remote_user_claim (String)
 
      Refer to OIDCRemoteUserClaim in `auth_openidc.conf`_.
