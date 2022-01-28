@@ -48,30 +48,27 @@ These are institutions who were early adopters or provided HPC resources for dev
 
 .. toctree::
    :maxdepth: 2
-   :caption: General
-
-   architecture
-   reference
-   release-notes
-   glossary
-
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Install
+   :caption: Getting Started
 
    requirements
    installation
    authentication
    installation/add-cluster-config
    installation/resource-manager
-   customization.rst
-   analytics
-   monitoring
+   customization_overview
+   how-tos/app-development/interactive/setup
+
 
 .. toctree::
   :maxdepth: 2
   :caption: How-Tos
+
+  customization
+  analytics
+  monitoring
+  enable-desktops
+  app-authorization
+  app-sharing
 
   how-tos/apps.rst
   how-tos/app-development
@@ -80,29 +77,21 @@ These are institutions who were early adopters or provided HPC resources for dev
   :maxdepth: 2
   :caption: Tutorials
 
+
+  install-ihpc-apps
   tutorials/tutorials-interactive-apps
   tutorials/tutorials-passenger-apps
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Extend
+  :maxdepth: 2
+  :caption: More
 
-   how-tos/app-development/interactive/setup
-   enable-desktops
-   install-ihpc-apps
+  architecture
+  reference
+  release-notes
+  glossary
+  issues/overview
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Deploy
-
-   app-authorization
-   app-sharing
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Known Issues
-
-   issues/overview
 
 .. toctree::
    :maxdepth: 2
