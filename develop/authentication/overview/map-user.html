@@ -115,9 +115,12 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="configure-authentication.html">1. Configure Apache Authentication</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">2. Setup User Mapping</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#regex-user-mapping">2.1. Regex User Mapping</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-user-mapping">2.2. File User Mapping</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#custom-mapping">2.3. Custom Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remote-user">2.1. Remote User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reguluar-expression-user-mapping">2.2. Reguluar Expression User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dex-automatic-configuration">2.3. Dex Automatic Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-map-command-for-advanced-mappings">2.4. User Map Command for Advanced Mappings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-user-mapping">2.5. File User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-user-mapping">2.6. Debugging User Mapping</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="configure-logout.html">3. Configure Logout</a></li>
@@ -241,84 +244,98 @@
             
   <div class="section" id="setup-user-mapping">
 <span id="authentication-overview-map-user"></span><h1>2. Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Permalink to this headline">¶</a></h1>
-<p>Every HTTP request sent to the OnDemand portal triggers a call to the
-<code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> to map the remote authenticated user name to the
-local system user name. Mapping to the local system user not only restricts
-access of OnDemand to local users but it is also required by the OnDemand proxy
-to traffic the HTTP data to the user’s corresponding per-user NGINX (PUN)
-server.</p>
-<p>The <a class="reference internal" href="../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> and its corresponding
-<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> are used to configure both the system
-command that performs the mapping (<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a>) and the argument fed to the system
-command (<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-env"><span class="std std-ref">user_env</span></a>). By default these
-configuration options are defined as:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
-<span class="c1"># ...</span>
-<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&#39;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&#39;</span>
-<span class="l l-Scalar l-Scalar-Plain">user_env</span><span class="p p-Indicator">:</span> <span class="s">&#39;REMOTE_USER&#39;</span>
-</pre></div>
+<p>Every authenticated HTTP request sent to the OnDemand portal has a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.
+This <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> can be an email like <code class="docutils literal notranslate"><span class="pre">annie.oakley&#64;osc.edu</span></code> and needs to be
+mapped to a Linux system user like <code class="docutils literal notranslate"><span class="pre">aoakley</span></code>.</p>
+<p>This is what we call user mapping.  Mapping apache’s <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from an
+authenticated request to a Linux system user.</p>
+<p>Mapping to the local system user not only restricts access of OnDemand to local users
+but it is also required by the OnDemand proxy to traffic the HTTP data to the user’s
+corresponding per-user NGINX (PUN) server.</p>
+<p>Versions prior to 2.0 relied on <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a> to do this.
+Since 2.0 you should use the simpler and faster <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a>.</p>
+<p>Both with variations will be discussed here.</p>
+<div class="section" id="remote-user">
+<h2>2.1. Remote User<a class="headerlink" href="#remote-user" title="Permalink to this headline">¶</a></h2>
+<p>It’s worth discussusing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is comfing from.  When apache
+has successfully authenticates a request it sets the variable <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
+from, well, the remote.</p>
+<p>This is generally a return value from the authentication system like an
+<a class="reference internal" href="../oidc.html#authentication-oidc"><span class="std std-ref">open id connect provider</span></a>.  It’s common for this
+to be an email address.</p>
+<p>You <em>can</em> configure <a class="reference external" href="ood-portal-generator-user-env">user_env</a> to use something other than <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>, but
+it’s unlikely you should need to.</p>
+<p>If you’re using an OpenID Connect provider you may need to set
+<a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a> as this setting
+tells apache how to set <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from the claim response.</p>
 </div>
-<p>which uses regex user mapping for the mapping command and <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
-(this variable holds the name of the authenticated user by the web server) as
-its command line argument.</p>
-<p>This is equivalent to calling from the command line:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.regex <span class="s2">&quot;</span><span class="nv">$REMOTE_USER</span><span class="s2">&quot;</span>
-</pre></div>
+<div class="section" id="reguluar-expression-user-mapping">
+<h2>2.2. Reguluar Expression User Mapping<a class="headerlink" href="#reguluar-expression-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>The simplest and fastest way to map a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> to a system user is through
+<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.  It isn’t directly
+regular expression matching, but it’s close enough for most use cases.
+See it’s documentation for examples and more.</p>
 </div>
-<p>which just echos back the value of <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The default user mapping employed by an OnDemand portal <strong>directly</strong> maps
-the remote authenticated user name to the local user name. So the Apache
-authentication module used is expected to set the correct local user name in
-<code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.</p>
+<div class="section" id="dex-automatic-configuration">
+<h2>2.3. Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Permalink to this headline">¶</a></h2>
+<p>When using the OpenId Connector <a class="reference external" href="authentication-dex">dex</a> and setting <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a>
+to <code class="docutils literal notranslate"><span class="pre">email</span></code> we automatically set <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a> to <code class="docutils literal notranslate"><span class="pre">^([^&#64;]+)&#64;.*$</span></code> as
+a convienience.</p>
 </div>
-<p>Open OnDemand provides two facilities for user mapping. One through regular
-expressions (the default) and another through a lookup file.  Both of which
-are documented here.  As an alternative you can provide your own custom script
-and simply set the <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> to use it.</p>
-<div class="section" id="regex-user-mapping">
-<h2>2.1. Regex User Mapping<a class="headerlink" href="#regex-user-mapping" title="Permalink to this headline">¶</a></h2>
-<p>Usage for the regular expression (regex) user mapping script is below.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.regex <span class="o">[</span>options<span class="o">]</span> &lt;authenticated_user&gt;
-</pre></div>
+<div class="section" id="user-map-command-for-advanced-mappings">
+<h2>2.4. User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Permalink to this headline">¶</a></h2>
+<p>Versions prior to 2.0 provided a default <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a> in
+<code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code>.  We no longer distribute
+this file.</p>
+<p>Sites instead need to write their own mapping script should they need
+this capability.  Set this custom mapping script in the <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a>
+configuration and be sure to make this mapping script executable.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be aware, this script is executed on every request.</p>
 </div>
-<p>With the options:</p>
-<dl class="option">
-<dt id="cmdoption-r">
-<code class="descname">-r</code><code class="descclassname"> &lt;regex&gt;</code><code class="descclassname">, </code><code class="descname">--regex</code><code class="descclassname"> &lt;regex&gt;</code><a class="headerlink" href="#cmdoption-r" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default: <code class="docutils literal notranslate"><span class="pre">^(.+)$</span></code></p>
-<p>The regular expression used to capture the local system username.</p>
-</dd></dl>
+<p>Let’s take a simple example.  It uses bash’s builtin regular expression matching
+against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an osc dot edu email address.  If that matches against
+<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>), then we return an all lowercase version of the first part
+of an email address.</p>
+<p>The contract this script has with ood is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is passed into it
+as the first arguement, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.  The script will return 0 and output the match if
+it can correctly map the user. Otherwise, if it fails, it will output nothing and
+exit 1.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-<div class="section" id="regex-user-mapping-examples">
-<h3>2.1.1. Regex User Mapping Examples<a class="headerlink" href="#regex-user-mapping-examples" title="Permalink to this headline">¶</a></h3>
-<p>Here are some examples of how to use the default regex mapping script.</p>
-<p>To echo back the username supplied (useful for LDAP authentication
-and the default behavior):</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.regex <span class="s1">&#39;bob&#39;</span>
-bob
-$
-</pre></div>
-</div>
-<p>To capture the local username from an email address.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@center.edu&#39;</span>
-bob
-$
-</pre></div>
-</div>
-<p>If no match is found from the supplied regular expression and authenticated username
-that an empty string is returned instead:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex <span class="s1">&#39;^(\w+)@center.edu$&#39;</span> <span class="s1">&#39;bob@mit.edu&#39;</span>
+<span class="nv">REX</span><span class="o">=</span><span class="s2">&quot;([^@]+)@osc.edu&quot;</span>
+<span class="nv">INPUT_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 
-$
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$INPUT_USER</span> <span class="o">=</span>~ <span class="nv">$REX</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nv">MATCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_REMATCH</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$MATCH</span><span class="s2">&quot;</span> <span class="p">|</span> tr <span class="s1">&#39;[:upper:]&#39;</span> <span class="s1">&#39;[:lower:]&#39;</span>
+<span class="k">else</span>
+  <span class="c1"># can&#39;t write to standard out or error, so let&#39;s use syslog</span>
+  logger -t <span class="s1">&#39;ood-mapping&#39;</span> <span class="s2">&quot;cannot map </span><span class="nv">$INPUT_USER</span><span class="s2">&quot;</span>
+
+  <span class="c1"># and exit 1</span>
+  <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
 </pre></div>
 </div>
+<p>If I were to run and test this script - it would return values like these:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/site/custom_mapping.sh Annie.Oakley@osc.edu
+annie.oakley
+$ /opt/site/custom_mapping.sh jessie@osc.edu
+jessie
+$ /opt/site/custom_mapping.sh jessie.owens@harvard.edu
+$ <span class="nb">echo</span> <span class="nv">$?</span>
+$ <span class="m">1</span>
+$ journalctl -t ood-mapping
+-- Journal begins at Tue <span class="m">2020</span>-06-02 <span class="m">06</span>:45:03 EDT, ends at Wed <span class="m">2022</span>-01-19 <span class="m">15</span>:11:37 EST. --
+Jan <span class="m">19</span> <span class="m">15</span>:03:14 localhost.localdomain ood-mapping<span class="o">[</span><span class="m">149352</span><span class="o">]</span>: cannot map jessie.owens@harvard.edu
+$
+</pre></div>
 </div>
 </div>
 <div class="section" id="file-user-mapping">
-<h2>2.2. File User Mapping<a class="headerlink" href="#file-user-mapping" title="Permalink to this headline">¶</a></h2>
+<h2>2.5. File User Mapping<a class="headerlink" href="#file-user-mapping" title="Permalink to this headline">¶</a></h2>
 <p>This script parses a mapfile with each entry given in the following format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;authenticated_username&quot;</span> <span class="n">local_username</span>
 </pre></div>
@@ -327,6 +344,10 @@ $
 the mapfile looking for a match to the <code class="docutils literal notranslate"><span class="pre">authenticated_username</span></code>. When a match
 is found it breaks from the scan and outputs the <code class="docutils literal notranslate"><span class="pre">local_username</span></code> to
 <code class="docutils literal notranslate"><span class="pre">STDOUT</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be aware, this script is executed and reads a user mapping file on every request.</p>
+</div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="o">[</span>OPTIONS<span class="o">]</span> &lt;REMOTE_USER&gt;
 </pre></div>
 </div>
@@ -339,7 +360,7 @@ is found it breaks from the scan and outputs the <code class="docutils literal n
 </dd></dl>
 
 <div class="section" id="examples-for-the-mapfile-script">
-<h3>2.2.1. Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Permalink to this headline">¶</a></h3>
+<h3>2.5.1. Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Permalink to this headline">¶</a></h3>
 <p>To scan the default grid-mapfile using a URL-encoded authenticated username:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="s1">&#39;http%3A%2F%2Fcilogon.org%2FserverA%2Fusers%2F58606%40cilogon.org&#39;</span>
 bob
@@ -361,23 +382,16 @@ $
 </div>
 </div>
 </div>
-<div class="section" id="custom-mapping">
-<h2>2.3. Custom Mapping<a class="headerlink" href="#custom-mapping" title="Permalink to this headline">¶</a></h2>
-<p>As mentioned previously the <a class="reference internal" href="../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> configuration options
-of interest are:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a></li>
-<li><a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-env"><span class="std std-ref">user_env</span></a></li>
-</ul>
-<p>Indeed if you need to use the options to the regex or file user mapping scripts
-that come with Open OnDemand you’ll need to specify them in the <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>.</p>
-<p>After modifying <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> with the mapping you
-want you would then build and install the new Apache configuration file with:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+<div class="section" id="debugging-user-mapping">
+<h2>2.6. Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>When debugging user mapping, it’s always helpful to increase the <a class="reference external" href="ood-portal-generator-lua-log-level">lua_log_level</a> to
+debug.</p>
+<p>In doing so you’ll see messages like that detail the mapping input, output and
+times like <code class="docutils literal notranslate"><span class="pre">Mapped</span> <span class="pre">'jeff&#64;localhost'</span> <span class="pre">=&gt;</span> <span class="pre">'jeff'</span> <span class="pre">[0.089</span> <span class="pre">ms]</span></code>.</p>
+<p>The full message would look like this.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/var/log/httpd/error.log:<span class="o">[</span>Wed Jan <span class="m">19</span> <span class="m">20</span>:45:36.955855 <span class="m">2022</span><span class="o">]</span> <span class="o">[</span>lua:debug<span class="o">]</span> <span class="o">[</span>pid <span class="m">39</span>:tid <span class="m">140070995539712</span><span class="o">]</span> @/opt/ood/mod_ood_proxy/lib/ood/user_map.lua<span class="o">(</span><span class="m">21</span><span class="o">)</span>: <span class="o">[</span>client <span class="m">10</span>.0.2.100:40172<span class="o">]</span> Mapped <span class="s1">&#39;jeff@localhost&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;jeff&#39;</span> <span class="o">[</span><span class="m">0</span>.089 ms<span class="o">]</span>, referer: http://localhost:5556/
 </pre></div>
 </div>
-<p>Finally you will need to restart your Apache HTTP Server for the changes to
-take effect.</p>
 </div>
 </div>
 
