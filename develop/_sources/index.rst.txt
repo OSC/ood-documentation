@@ -75,13 +75,20 @@ These are institutions who were early adopters or provided HPC resources for dev
   :caption: How-Tos
 
   how-tos/apps.rst
+  how-tos/app-development
 
+.. toctree::
+  :maxdepth: 2
+  :caption: Tutorials
+
+  tutorials/tutorials-interactive-apps
+  tutorials/tutorials-passenger-apps
 
 .. toctree::
    :maxdepth: 2
    :caption: Extend
 
-   app-development/interactive/setup
+   how-tos/app-development/interactive/setup
    enable-desktops
    install-ihpc-apps
 
@@ -91,20 +98,6 @@ These are institutions who were early adopters or provided HPC resources for dev
 
    app-authorization
    app-sharing
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Develop Interactive Apps
-
-   app-development
-   app-development/tutorials-interactive-apps
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Develop Passenger Apps
-
-   app-development/tutorials-passenger-apps
-
 
 .. toctree::
    :maxdepth: 2

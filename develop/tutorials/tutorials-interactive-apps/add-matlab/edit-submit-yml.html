@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. Modify Submit Parameters &mdash; Open OnDemand 2.0.20 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="6. Edit Form.js" href="edit-form-js.html" />
+    <link rel="prev" title="4. Edit Launch Script" href="edit-script-sh.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../customization_overview.html">Customization Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../analytics.html">Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../monitoring.html">Monitoring</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/apps.html">Creating Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../add-jupyter.html">Add a Jupyter App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../add-matlab.html">Add a MATLAB App</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="software-requirements.html">1. Software Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-app.html">2. Copy MATLAB App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edit-form-yml.html">3. Customize Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edit-script-sh.html">4. Edit Launch Script</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5. Modify Submit Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slurm">Slurm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque">Torque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pbs-professional">PBS Professional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-resource-manager">Other Resource Manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="edit-form-js.html">6. Edit Form.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html">7. Deploy MATLAB App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="known-issues.html">8. Known Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../k8s-jupyter.html">Add a Jupyter App on a Kubernetes Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k8s-like-hpc-jupyter.html">Add a Jupyter App on a Kubernetes Cluster that behaves like HPC compute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add-custom-queue.html">Add Custom Queues/Partitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Interactive Apps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Extend</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deploy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../app-authorization.html">App Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app-sharing.html">App Sharing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Known Issues</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Legacy Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user-documentation.html">User Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a> &raquo;</li>
+        
+          <li><a href="../add-matlab.html">Add a MATLAB App</a> &raquo;</li>
+        
+      <li>5. Modify Submit Parameters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="modify-submit-parameters">
+<span id="app-development-tutorials-interactive-apps-add-matlab-submit-yml"></span><h1>5. Modify Submit Parameters<a class="headerlink" href="#modify-submit-parameters" title="Permalink to this headline">¶</a></h1>
+<p>In some cases the MATLAB app batch job fails to submit to the given cluster or
+you are not happy with the default chosen submission parameters. This section
+explains how to modify the submission parameters.</p>
+<p>The main responsibility of the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> file
+(<a class="reference internal" href="../../../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a>) located in the root of the app is
+for modifying the underlying batch script that is generated from an internal
+template and its submission parameters.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">.erb</span></code> file extension will cause the YAML configuration file to be
+processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows
+you to embed Ruby code into the YAML configuration file for flow control,
+variable substitution, validation, and more.</p>
+</div>
+<p>The simplest <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> will look like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+</pre></div>
+</div>
+<p>Which only describes which internal template to use when generating the batch
+script. From here we can add more options to the batch script, such as:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$2}&#39;)&quot;</span>
+</span></pre></div>
+</div>
+<p>where we override the <strong class="command">bash</strong> script used to determine the host name of
+the compute node from within a running batch job.</p>
+<p>You can learn more about possible <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> options here:</p>
+<p><a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initialize">http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initialize</a></p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>It is recommended any global <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> attributes be defined in the
+corresponding cluster configuration file under:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">my_cluster</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p class="last">There is further discussion on this under
+<a class="reference internal" href="../../../how-tos/app-development/interactive/setup/modify-cluster-configuration.html#app-development-interactive-setup-modify-cluster-configuration"><span class="std std-ref">Modify Cluster Configuration</span></a>.</p>
+</div>
+<p>But in most cases you will want to change the actual job submission parameters
+(e.g., node type). These are defined under the <code class="docutils literal notranslate"><span class="pre">script</span></code> option as:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">...</span>
+</span></pre></div>
+</div>
+<p>You can read more about all the available <code class="docutils literal notranslate"><span class="pre">script</span></code> options here:</p>
+<p><a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script</a></p>
+<p>Although in most cases you will want to modify the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute, which
+is resource manager dependent. Some examples are given below.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is recommended you commit the changes you made to <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> to
+<a class="reference external" href="https://git-scm.com/">git</a>.</p>
+<div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>git commit submit.yml.erb -m <span class="s1">&#39;updated batch job options&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slurm">
+<h2>Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h2>
+<p>For Slurm, you can choose the features on a requested node with:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-N&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-C&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;c12&quot;</span>
+</span></pre></div>
+</div>
+<p>where we define the <strong class="command">sbatch</strong> parameters as an array under <code class="docutils literal notranslate"><span class="pre">script</span></code>
+and <code class="docutils literal notranslate"><span class="pre">native</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute is an array of command line arguments. So the above
+example is equivalent to appending to <strong class="command">sbatch</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sbatch ... -N &lt;bc_num_slots&gt; -C c12
+</pre></div>
+</div>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
+returned from web form for “Number of nodes”. We check if it is blank and
+return a valid number (since it wouldn’t make sense to return <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+</div>
+</div>
+<div class="section" id="torque">
+<h2>Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h2>
+<p>For Torque, you can choose processors-per-node with:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
+</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">nodes</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ppn=28&quot;</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>See <a class="reference external" href="http://www.rubydoc.info/gems/pbs/PBS%2FBatch:submit_script">http://www.rubydoc.info/gems/pbs/PBS%2FBatch:submit_script</a> for more
+information on possible values for the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute.</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
+returned from web form for “Number of nodes”. We check if it is blank and
+return a valid number (since it wouldn’t make sense to return <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+</div>
+</div>
+<div class="section" id="pbs-professional">
+<h2>PBS Professional<a class="headerlink" href="#pbs-professional" title="Permalink to this headline">¶</a></h2>
+<p>For most cases of PBS Professional you will want to modify how the
+<code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> (number of CPUs on a single node) is submitted to the batch
+server.</p>
+<p>This can be specified as such:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+</span></pre></div>
+</div>
+<p>where we define the <strong class="command">qsub</strong> parameters as an array under <code class="docutils literal notranslate"><span class="pre">script</span></code> and
+<code class="docutils literal notranslate"><span class="pre">native</span></code>.</p>
+<p>If you would like to mimic how Torque handles <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> (number of
+<strong>nodes</strong>), then we will first need to change the form label of
+<code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> that the user sees in the form. This can be done by adding to
+the form configuration file the highlighted lines:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/form.yml</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
+</span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+</pre></div>
+</div>
+<p>Now when we click <em>Launch Jupyter Notebook</em> from the app details view, the form
+in the browser will have the new label “Number of nodes” instead of “Number of
+CPUs on a single node”.</p>
+<p>Next we will need to handle how we submit the <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> since it means
+something different now. So we modify the job submission configuration file as
+such:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
+</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span>
+</span></pre></div>
+</div>
+<p>where we replace <code class="docutils literal notranslate"><span class="pre">ncpus=28</span></code> with the correct number for your cluster. You can
+also append <code class="docutils literal notranslate"><span class="pre">mem=...gb</span></code> to the <code class="docutils literal notranslate"><span class="pre">select=...</span></code> statement if you’d like.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute is an array of command line arguments. So the above
+example is equivalent to appending to <strong class="command">qsub</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>qsub ... -l <span class="k">select</span><span class="o">=</span>&lt;bc_num_slots&gt;:ncpus<span class="o">=</span><span class="m">28</span>
+</pre></div>
+</div>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
+returned from web form for “Number of nodes”. We check if it is blank and
+return a valid number (since it wouldn’t make sense to return <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+</div>
+</div>
+<div class="section" id="other-resource-manager">
+<h2>Other Resource Manager<a class="headerlink" href="#other-resource-manager" title="Permalink to this headline">¶</a></h2>
+<p>For most of our other adapters (aside from Torque) the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute is
+an array of command line arguments formatted similarly to the
+<a class="reference internal" href="../add-jupyter/modify-submit-parameters.html#app-development-tutorials-interactive-apps-add-jupyter-modify-submit-parameters-slurm"><span class="std std-ref">Slurm</span></a>
+example above.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="edit-form-js.html" class="btn btn-neutral float-right" title="6. Edit Form.js" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="edit-script-sh.html" class="btn btn-neutral float-left" title="4. Edit Launch Script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2022, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/tutorials/tutorials-interactive-apps/add-matlab/edit-submit-yml.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
