@@ -1,7 +1,7 @@
-.. _customization_overview:
+.. _customization-overview:
 
-Customization Overview
-======================
+Overview
+========
 
 OnDemand's configuration is stored in the environment, which can be modified using a hierarchy of config files. Configuration files are rooted in ``/etc/ood``. Assets that should be publicly available (such as a favicon or logo image) are placed under ``/var/www/ood/public``.
 
