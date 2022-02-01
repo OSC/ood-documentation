@@ -65,8 +65,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    authentication
    installation/add-cluster-config
    installation/resource-manager
-   customization_overview
-   customization
+   customization.rst
    analytics
    monitoring
 
