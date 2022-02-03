@@ -66,10 +66,6 @@ These are institutions who were early adopters or provided HPC resources for dev
   analytics
   monitoring
   enable-desktops
-  app-authorization
-  app-sharing
-
-  how-tos/apps.rst
   how-tos/app-development
 
 .. toctree::
