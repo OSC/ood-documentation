@@ -139,7 +139,7 @@ This example shows how to mount host directories and nfs storage locations.
         destination_path: <%= user.home %>
       - type: nfs
         name: cold-storage
-        server: some.nfs.host:3333
+        host: some.nfs.host:3333
         path: /some/location
         destination_path: /some/container/location
 
