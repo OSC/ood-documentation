@@ -18,20 +18,6 @@ means that it will need:
 - your LDAP URL, base DN, and attribute to search for (in some rare cases a
   bind DN and corresponding bind password)
 
-Building From Source
---------------------
-Building from source is left as an exercise to the reader. 
-     
-It's not particularly difficult to build the code, but installing it with all the various files is. Should you be interested, 
-review the Dockerfile and packaging specs for what would be involved.
-
-- https://github.com/OSC/ondemand/blob/master/Dockerfile
-- https://github.com/OSC/ondemand/tree/master/packaging
-
-If you'd like a package built for a system that we don't currently support, feel free to open a ticket!
-
-- https://github.com/OSC/ondemand/issues/new
-
 .. toctree::
    :maxdepth: 2
    :numbered: 1
@@ -42,3 +28,4 @@ If you'd like a package built for a system that we don't currently support, feel
    installation/start-apache
    installation/add-ssl
    installation/add-ldap
+   installation/install-from-source
