@@ -186,10 +186,24 @@ are:
      - ``hidden_field``
      - ``resolution_field`` (used for specifying resolution dimensions
        necessary for VNC)
+     - ``radio_button``   
 
      Some other fields that have varying support across different browsers
      include: ``range_field``, ``date_field``, ``search_field``,
      ``email_field``, ``telephone_field``, ``url_field``, ``password_field``.
+
+     Radio Button Example
+       Note that in the options below, the text to display is on the left of the comma, and the select value is on the right of the comma.
+       The value: key represents the default selection.
+
+       .. code-block:: yaml
+
+          mode:
+            widget: "radio_button"
+            value: "1"
+            options:
+              - ["Jupyter Lab", "1"] 
+              - ["Jupyter Notebook", "0"]
 
      Default
        Accepts any text
