@@ -22,10 +22,7 @@ Form Widgets
 
         test_hidden_field:
           widget: "hidden_field"
-          label: "Test Hidden Field"
           value: "Test Hidden Field Value"
-          help: |
-            Your help message
 
 ==================================================================
 
