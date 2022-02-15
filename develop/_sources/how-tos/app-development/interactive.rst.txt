@@ -34,6 +34,7 @@ Each of these files/directories are described below in their respective stage.
 
    interactive/manifest
    interactive/form
+   interactive/form-widgets
    interactive/template
    interactive/submit
    interactive/view

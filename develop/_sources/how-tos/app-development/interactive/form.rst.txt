@@ -176,16 +176,18 @@ are:
 
 .. describe:: widget (String, null)
 
+    For more detailed information with examples regarding the widget field, see :ref:`form-widgets`.
+
      the type of HTML form element to use for input
 
-     - ``text_field``
-     - ``text_area``
-     - ``number_field`` - can use ``min``, ``max``, ``step``
      - ``check_box``
-     - ``select`` - can use ``options``
      - ``hidden_field``
-     - ``resolution_field`` (used for specifying resolution dimensions
-       necessary for VNC)
+     - ``number_field`` - can use ``min``, ``max``, ``step``
+     - ``radio_button``    
+     - ``resolution_field`` (used for specifying resolution dimensions necessary for VNC)
+     - ``select`` - can use ``options``
+     - ``text_area``
+     - ``text_field``
 
      Some other fields that have varying support across different browsers
      include: ``range_field``, ``date_field``, ``search_field``,
