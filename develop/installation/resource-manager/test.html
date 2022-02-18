@@ -235,7 +235,16 @@ configuration files.</p>
 </div>
 </li>
 <li><p class="first">We will now list all available tasks that we can run:</p>
+<p class="rubric">If your operating system is CentOS 7 or RHEL 7, run this command:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> ondemand -- bin/rake -T test:jobs
+<span class="c1"># rake test:jobs           # Test all clusters</span>
+<span class="c1"># rake test:jobs:cluster1  # Test the cluster: cluster1</span>
+<span class="c1"># rake test:jobs:cluster2  # Test the cluster: cluster2</span>
+</pre></div>
+</div>
+<p class="rubric">Otherwise, run this command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /opt/ood/ondemand/enable
+bin/rake -T test:jobs
 <span class="c1"># rake test:jobs           # Test all clusters</span>
 <span class="c1"># rake test:jobs:cluster1  # Test the cluster: cluster1</span>
 <span class="c1"># rake test:jobs:cluster2  # Test the cluster: cluster2</span>
@@ -248,8 +257,17 @@ configuration files that reside under
 <li><p class="first">For now let us test just a single cluster (in our example we use
 <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>, so you will need to replace it with the name of the cluster
 you configured):</p>
+<blockquote>
+<div><p class="rubric">If your operating system is CentOS 7 or RHEL 7, run this command:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable ondemand -- bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
-<span class="c1"># [sudo] password for user:</span>
+</pre></div>
+</div>
+<p class="rubric">Otherwise, run this command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;source /opt/ood/ondemand/enable; bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
+</pre></div>
+</div>
+<p class="rubric">Results</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># [sudo] password for user:</span>
 <span class="c1"># Rails Error: Unable to access log file. Please ensure that /var/www/ood/apps/sys/dashboard/log/production.log exists and is writable (ie, make it writable for user and group: chmod 0664 /var/www/ood/apps/sys/dashboard/log/production.log). The log level has been raised to WARN and the output directed to STDERR until the problem is fixed.</span>
 <span class="c1"># mkdir -p /home/user/test_jobs</span>
 <span class="c1"># Testing cluster &#39;cluster1&#39;...</span>
@@ -265,6 +283,7 @@ you configured):</p>
 <span class="c1"># Finished testing cluster &#39;cluster1&#39;</span>
 </pre></div>
 </div>
+</div></blockquote>
 <p>Please <strong>ignore</strong> the <code class="docutils literal notranslate"><span class="pre">Rails</span> <span class="pre">Error:</span></code> message as this is just a <em>warning</em>
 that doesn’t affect your OnDemand installation in any way. We are currently
 tracking this issue in GitHub at <a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/364">OSC/dashboard#364</a>.</p>
@@ -290,7 +309,12 @@ under <code class="file docutils literal notranslate"><span class="pre">/etc/ood
 arguments, e.g., a queue, memory requirements, an account, etc. You can
 provide these command line arguments as a string with the environment
 variable <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS</span></code> as:</p>
+<p class="rubric">If your operating system is CentOS 7 or RHEL 7, run this command:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable ondemand-- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS=&quot;-A myaccount&quot;&#39;</span>
+</pre></div>
+</div>
+<p class="rubric">Otherwise, run this command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;source /opt/ood/ondemand/enable; bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS=&quot;-A myaccount&quot;&#39;</span>
 </pre></div>
 </div>
 <p class="last">Note that the <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS=&quot;...&quot;</span></code> is defined at the end of the command.</p>
