@@ -13,8 +13,7 @@ Interactive Apps provide a means for a user to launch and connect to an
 interactive batch job running a local web server (called Interactive App
 sessions) through the OnDemand portal (e.g., `VNC server`_, `Jupyter Notebook
 server`_, `RStudio server`_, `COMSOL server`_). They are considered **Dashboard
-App Plugins** and not Passenger_ apps such as the :ref:`dashboard`,
-:ref:`shell`, :ref:`files`, and etc.
+App Plugins** and not Passenger_ apps such as the the core OnDemand apps.
 
 This means that the Dashboard is responsible for building the Interactive App's
 web form, submitting the batch job, and displaying connection information to
@@ -38,8 +37,7 @@ developing is deployed in your home directory under the following path::
 
   ${HOME}/ondemand/dev/my_app
 
-Interactive Apps are :ref:`dashboard` plugins. They can be directly accessed
-through the following URLs:
+Interactive Apps are plugins that can be accessed through the following URLs:
 
 .. http:get:: /pun/sys/dashboard/batch_connect/(app_type)/(app_name)/session_contexts/new
 

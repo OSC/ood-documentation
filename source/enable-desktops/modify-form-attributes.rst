@@ -24,7 +24,7 @@ For each configuration file underneath::
   /etc/ood/config/apps/bc_desktop/
 
 a separate desktop app will be presented as an option to the user from the
-:ref:`dashboard`, with the simplest :ref:`app-development-interactive-form`
+dashboard, with the simplest :ref:`app-development-interactive-form`
 configuration file for an Interactive Desktop app given as:
 
 .. code-block:: yaml

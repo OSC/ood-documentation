@@ -13,7 +13,7 @@ To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOU
      the URI the user is redirected to when accessing the logout URI above
 
      Default
-       Redirect to the :ref:`dashboard` log out page
+       Redirect to the dashboard's log out page
 
        .. code-block:: yaml
 
