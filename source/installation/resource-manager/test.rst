@@ -22,7 +22,7 @@ configuration files.
 
 #. We will now list all available tasks that we can run:
 
-   .. rubric:: If you are using SCL, run the following command:
+   .. rubric:: If your O/S is CentOS 7 or RHEL 7, run this command:
 
    .. code-block:: sh
 
@@ -32,7 +32,7 @@ configuration files.
       # rake test:jobs:cluster2  # Test the cluster: cluster2
 
 
-   .. rubric:: If you are NOT using SCL, run the following command:
+   .. rubric:: Otherwise, run this command:
 
    .. code-block:: sh
 
@@ -51,13 +51,13 @@ configuration files.
    ``cluster1``, so you will need to replace it with the name of the cluster
    you configured):
 
-      .. rubric:: If you are using SCL, run the following command:
+      .. rubric:: If your O/S is CentOS 7 or RHEL 7, run this command:
 
       .. code-block:: sh
 
          sudo su $USER -c 'scl enable ondemand -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
 
-      .. rubric:: If you are NOT using SCL, run the following command:
+      .. rubric:: Otherwise, run this command:
 
       .. code-block:: sh
 
@@ -113,13 +113,13 @@ configuration files.
       provide these command line arguments as a string with the environment
       variable ``SUBMIT_ARGS`` as:
 
-      .. rubric:: If you are using SCL, run the following command:
+      .. rubric:: If your O/S is CentOS 7 or RHEL 7, run this command:
 
       .. code-block:: sh
 
          sudo su $USER -c 'scl enable ondemand-- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
          
-      .. rubric:: If you are NOT using SCL, run the following command:
+      .. rubric:: Otherwise, run this command:
 
       .. code-block:: sh
 
