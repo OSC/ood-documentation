@@ -9,12 +9,12 @@ Test Configuration
    future. So always revisit this documentation after upgrading OnDemand and
    attempting to test your cluster configuration.
 
-We currently provide an experimental :command:`rake` task underneath the
-:ref:`dashboard` for testing your resource manager configuration in the cluster
+We currently provide an experimental :command:`rake` task in the
+dashboard for testing your resource manager configuration in the cluster
 configuration files.
 
-#. For all :command:`rake` tasks we will need to be underneath the
-   :ref:`dashboard`'s root directory (*this will change in the future*):
+#. For all :command:`rake` tasks we will need to be in the
+   dashboard's root directory (*this will change in the future*):
 
    .. code-block:: sh
 

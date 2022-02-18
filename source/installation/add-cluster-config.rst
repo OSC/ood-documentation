@@ -3,8 +3,9 @@
 Add Cluster Configuration Files
 ===============================
 
-Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to. Without cluster config files, the only
-apps that work are the :ref:`dashboard` and :ref:`files` apps, and :ref:`shell` if you only want to support ssh to localhost on the web host.
+Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to.
+These files detail how the system can interact with your scheduler. Without them, many of the features in 
+Open OnDemand won't work - including interactive apps.
 
 Apps that require proper cluster configuration include:
 
