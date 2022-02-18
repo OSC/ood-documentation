@@ -58,4 +58,4 @@ Please see section :ref:`add-ldap` for a more advanced and recommended authentic
       sudo useradd -d /home/ood -g ood -k /etc/skel -m ood
 
 #. Browse to your OnDemand server and login the username ``ood@localhost`` and the password ``password``.
-   If everything worked you should be presented with the OnDemand :ref:`dashboard`.
+   If everything worked you should be presented with the OnDemand dashboard.

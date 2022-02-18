@@ -20,7 +20,7 @@ The ``form.yml`` configuration file can be found at::
 
   ${HOME}/ondemand/dev/my_app/form.yml
 
-Then in the browser, navigate to the :ref:`dashboard` and choose in the top
+Then in the browser, navigate to the dashboard and choose in the top
 right menu: *Develop* → *My Sandbox Apps (Development)*. Finally click *Launch
 My App* from the list of sandbox apps.
 
