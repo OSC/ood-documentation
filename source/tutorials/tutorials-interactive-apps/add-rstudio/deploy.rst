@@ -24,6 +24,6 @@ deploy it as a System App.
       sudo cp -r bc_example_rstudio /var/www/ood/apps/sys/.
 
 #. In your browser navigate to the OnDemand URL and confirm you see the new app
-   in the *Interactive Apps* dropdown on the :ref:`dashboard`::
+   in the *Interactive Apps* dropdown on the dashboard.
 
      https://ondemand.my_center.edu/

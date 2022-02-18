@@ -460,7 +460,7 @@ Configure General Options
      (e.g., ``https://www.example.com/``)
 
      Default
-       Redirect the user to the :ref:`dashboard`
+       Redirect the user to the dashboard
 
        .. code-block:: yaml
 
@@ -535,11 +535,11 @@ public assets through the website.
 Configure Logout Redirect
 -------------------------
 
-The :ref:`dashboard` will send the user to this URI when they click the Logout
+The dashboard will send the user to this URI when they click the Logout
 button. This URI will then redirect the user to the logout mechanism for your
 corresponding authentication mechanism. If either of these properties are
 ``null`` then users will get an error when they try to logout from the
-:ref:`dashboard`.
+dashboard.
 
 .. describe:: logout_uri (String, null)
 
@@ -564,7 +564,7 @@ corresponding authentication mechanism. If either of these properties are
      the URI the user is redirected to when accessing the logout URI above
 
      Default
-       Fallback to the :ref:`dashboard` log out page
+       Fallback to the dashboard's log out page
 
        .. code-block:: yaml
 
