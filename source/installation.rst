@@ -30,7 +30,7 @@ means that it will need:
    installation/add-ldap
 
 Building From Source
-====================
+--------------------
 
 Building from source is left as an exercise to the reader. 
      
