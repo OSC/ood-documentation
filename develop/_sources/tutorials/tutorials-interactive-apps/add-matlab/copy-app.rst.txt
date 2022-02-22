@@ -65,7 +65,7 @@ We will begin by first copying over a pre-built MATLAB app in production at OSC.
 
           https://ondemand.my_center.edu/pun/sys/dashboard/batch_connect/dev/<app_directory>/session_contexts/new
 
-        Notice that we are using the **system** :ref:`dashboard` to launch the
+        Notice that we are using the **system** dashboard to launch the
         **sandbox** Interactive App (Dashboard plugin).
 
 #. After creating the sandbox directory navigate in your browser to::
@@ -73,7 +73,7 @@ We will begin by first copying over a pre-built MATLAB app in production at OSC.
      https://ondemand.my_center.edu/
 
    You should now see a *Develop* dropdown menu option in the top right of the
-   :ref:`dashboard`.
+   dashboard.
 
 #. Open up the *Develop* menu dropdown and click the link *My Sandbox Apps
    (Development)*.
