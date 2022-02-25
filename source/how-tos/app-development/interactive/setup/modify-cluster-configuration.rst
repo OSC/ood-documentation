@@ -5,7 +5,7 @@ Modify Cluster Configuration
 
 If you haven't already done so, you will need to first have a corresponding
 cluster configuration file for the cluster you intend to submit
-:ref:`interactive` batch jobs to. It is recommended you follow the directions
+interactive batch jobs to. It is recommended you follow the directions
 on :ref:`add-cluster-config`.
 
 Modify the cluster configuration file with the necessary information so that
