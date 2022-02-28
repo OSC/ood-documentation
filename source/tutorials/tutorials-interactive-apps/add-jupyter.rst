@@ -12,7 +12,7 @@ batch job.
 .. danger::
 
    Confirm that you have walked through the
-   :ref:`app-development-interactive-setup` instructions for :ref:`interactive`
+   :ref:`app-development-interactive-setup` instructions for interactive apps
    before continuing on.
 
 .. toctree::

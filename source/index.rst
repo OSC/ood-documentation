@@ -87,15 +87,6 @@ These are institutions who were early adopters or provided HPC resources for dev
   glossary
   issues/overview
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Legacy Docs
-
-   applications
-   user-documentation
-
-
 .. _website: http://openondemand.org/
 .. _bowdoin: https://www.bowdoin.edu/it/resources/high-performance-computing.html
 .. _louthan: http://www.ou.edu/oscer/people

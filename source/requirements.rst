@@ -56,11 +56,11 @@ Browser Requirements
 To have the best experience using OnDemand, use the latest versions of `Google Chrome`_, `Mozilla Firefox`_ or `Microsoft Edge`_.
 Use any modern browser that supports ECMAScript 2016.
 
-Google Chrome has the widest range of support since the :doc:`applications/shell` uses ``hterm.js`` which is supported officially by Google.
+Google Chrome has the widest range of support since the shell application uses ``hterm.js`` which is supported officially by Google.
 Chrome currently is the only web browser that natively supports the copy and paste functionality in ``noVNC``.
 Other browsers can do copy and pasting manually through the ``noVNC`` tool drawer.
 
-Sites have reported problems with Safari when using the :doc:`applications/shell` or ``noVNC``. Safari is also known to cause problems with WebSockets and Basic Auth.
+Sites have reported problems with Safari when using the shell application or ``noVNC``. Safari is also known to cause problems with WebSockets and Basic Auth.
 
 .. _`Google Chrome`: https://www.google.com/chrome/
 .. _`Mozilla Firefox`: https://www.mozilla.org/en-US/firefox/new/

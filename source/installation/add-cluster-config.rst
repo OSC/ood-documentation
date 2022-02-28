@@ -9,9 +9,9 @@ Open OnDemand won't work - including interactive apps.
 
 Apps that require proper cluster configuration include:
 
-- :ref:`shell` (connect to a cluster login node from the Dashboard App)
-- :ref:`active-jobs` (view a list of active jobs for the various clusters)
-- :ref:`job-composer` (submit jobs to various clusters)
+- shell (connect to a cluster login node from the Dashboard App)
+- active-jobs (view a list of active jobs for the various clusters)
+- job-composer (submit jobs to various clusters)
 - All interactive apps such as Jupyter and RStudio
 
 The cluster config files are where the :ref:`resource-manager` configuration goes, which is necessary for enabling apps to submit batch jobs.
@@ -49,7 +49,7 @@ The cluster config files are where the :ref:`resource-manager` configuration goe
    Where ``host`` is the SSH server host for the given cluster.
 
    In production you will also want to add a resource manager. That is because the
-   :ref:`active-jobs` and the :ref:`job-composer` won't be able to list or submit
+   active-jobs and job-composer pages won't be able to list or submit
    jobs without a defined resource manager.
 
    See :ref:`resource-manager` for how to modify the cluster config so OnDemand works with your particular resource manager.

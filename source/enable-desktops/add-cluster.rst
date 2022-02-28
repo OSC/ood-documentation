@@ -48,6 +48,6 @@ modify.
 
       If by some chance when you click "Launch" and it actually successfully
       submits a job to your cluster, it is **highly** recommended that you
-      click the link under "Session ID:". This will open the :ref:`files`
+      click the link under "Session ID:". This will open the file browser
       underneath the working directory of the batch job. This will allow you to
       read all the logs generated to help debug any issues that may crop up.

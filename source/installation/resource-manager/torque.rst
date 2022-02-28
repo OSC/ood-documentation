@@ -42,5 +42,4 @@ bin_overrides
 .. warning::
 
    The corresponding cluster's batch server will need to be configured with the
-   Open OnDemand server as a valid ``submit_host`` to allow the
-   :ref:`job-composer` to submit jobs to it.
+   Open OnDemand server as a valid ``submit_host`` to allow the jobs to be submitted.
