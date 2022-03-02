@@ -45,6 +45,7 @@ to a *particular user* such as:
 
 - Debuggin issues related to job submissions for a user. For example, commands being issued to the scheduler 
   (``sbatch``, ``qsub``, etc) can be seen here by searching for ``execve``.
+- Issues related to PUNs crashing and/or pages not rendering correctly.
 
 These logs are located at:
 
