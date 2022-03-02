@@ -40,9 +40,13 @@ Look in either of:
 
 **NGINX Logs**
 
-For logs relating to issues about:
+The NGINX logs are the output of the user :ref:`PUN <glossary>`. These logs will capture things relevant 
+to a *particular user* such as:
 
- - Users trying to connect to a :ref:`login-node <glossary>` from their PUN check:
+- Debuggin issues related to job submissions for a user. For example, commands being issued to the scheduler 
+  (``sbatch``, ``qsub``, etc) can be seen here by searching for ``execve``.
+
+These logs are located at:
 
 :file:`/var/log/ondemand-nginx/<user>`
 
@@ -53,23 +57,29 @@ For logs relating to issues about:
 
 Session Data
 ------------
-Though not logs per-se, these files will provide information around connections between the user's PUN and a 
-:ref:`login-node<glossary>`, such as an interactive app like Jupyter.
+These files will provide information around connections between the user's PUN and a 
+:ref:`compute-node <glossary>`. 
+
+These logs provide *information around connections* and are also *the working directory of the job and location 
+of* ``stderr`` *and* ``stdout`` for a job (typically to ``output.log``). Other apps will also output 
+information they may need there as well for connections and errors.
+
 
 .. note::
 
     The files will be *owned by the user* and so admins will need to ensure they are either 
     able to substitue user or escalate to root in order to see these files.
 
-In general the session data or job submission files for apps across the dashboard, such as the Job Composer, Batch Connect, 
-or Frame-renderer, all start from the root of:
+In general the session data or job submission files for apps across the dashboard, such as the Job Composer, 
+Batch Connect, or Frame-renderer, all start from the root of:
 
 :file:`~/ondemand/data/sys/`
 
-**Batch Connect**
+**Batch Connect Apps**
+
 User session data for batch connect apps can be seen from a *user's* home directory at:
 
-:file:`~/ondemand/data/sys/dashboard/batch_connect/db/<session-file>`
+:file:`~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session ide>`
 
 This file is used for the session data presented on the interactive apps page and data 
 used to connect to the batch connect app.
