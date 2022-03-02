@@ -88,6 +88,7 @@ To see what data is being used by this batch connect app for the connection, loo
 .. code-block:: sh
     
     cat ~/ondemand/data/sys/dashboard/batch_connect/db/<session-file>
+    
 This will output a json object which will give the information to debug 
 any issues this session is having when connecting, such as ``id``, ``token``, ``cluster_id``, 
 and ``job_id``.
