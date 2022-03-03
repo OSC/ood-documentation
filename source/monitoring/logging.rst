@@ -24,7 +24,7 @@ For logs relating to issues about:
  - Authenticating to the web-node
  - Configuring OnDemand 
 
-Look in either of:
+There are two locations to check depending on what information is needed:
 
 :file:`/var/log/httpd/<hostname>_error.log`
 
@@ -80,16 +80,19 @@ Batch Connect, or Frame-renderer, all start from the root of:
 
 User session data for batch connect apps can be seen from a *user's* home directory at:
 
-:file:`~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session id>`
+:file:`~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session id>/output.log`
 
 This file is used for the session data presented on the interactive apps page and data 
 used to connect to the batch connect app.
 
 .. note::
 
-    There may be more than one file in this directory, and sometimes you will have to look through 
-    various files to find the correct session data being used by looking at things like the ``created_at`` 
-    field in the file.
+    There may be more than one file in the ``<session id>`` directory, but in the Interactive Apps 
+    page you can match the Session ID you see there to the directory with the desired ``output.log`` to 
+    debug.
+
+One important thing to note is if trying to launch a Jupyter or Rstudio session and encountering failures, the 
+``output.log`` would show you things like what modules are being loaded and what kernels are available.
 
 **Example**
 
@@ -98,8 +101,10 @@ To see what data is being used by this batch connect app for the connection, loo
 
 .. code-block:: sh
     
-    cat ~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session id>
+    cat ~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session id>/output.log
     
-This will output a json object which will give the information to debug 
-any issues this session is having when connecting, such as ``id``, ``token``, ``cluster_id``, 
-and ``job_id``.
+This should result in output that will give the logging information around what happened as this session 
+was started to include ports, address, app version, and the token used for the connection. 
+
+You would also see any ``ERROR`` and ``WARN`` messages as well which will likely be beneficial to debug failed 
+connections or launches.
