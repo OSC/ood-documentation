@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Logging &mdash; Open OnDemand 2.0.20 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Prometheus Monitoring" href="prometheus.html" />
+    <link rel="prev" title="Monitoring" href="../monitoring.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Add Cluster Configuration Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/resource-manager.html">Resource Manager Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../monitoring.html">Monitoring</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-logs">System Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#session-data">Session Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prometheus.html">Prometheus Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">More</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../monitoring.html">Monitoring</a> &raquo;</li>
+        
+      <li>Logging</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/monitoring/logging.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="logging">
+<span id="id1"></span><h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p>This page provides an overview of the locations Open OnDemand writes logs and useful session data and
+provides context around these locations.</p>
+<p>In general administrators will want to note whether they need to see:</p>
+<ul class="simple">
+<li>System type logs for authentication to the <a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">web-node</span></a> itself or OOD’s own configuration.</li>
+<li>Session data for things like connecting to interactive apps (Jupyter, Rstudio, Codeserver, etc.) from
+the user’s PUN, which is already running on the web-node.</li>
+</ul>
+<div class="section" id="system-logs">
+<h2>System Logs<a class="headerlink" href="#system-logs" title="Permalink to this headline">¶</a></h2>
+<p>These logs will provide information around authentication and internal Open OnDemand errors. They are very useful
+when initially installing and configuring Open OnDemand.</p>
+<p><strong>Apache Logs</strong></p>
+<p>For logs relating to issues about:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Authenticating to the web-node</li>
+<li>Configuring OnDemand</li>
+</ul>
+</div></blockquote>
+<p>There are two locations to check depending on what information is needed:</p>
+<p><code class="file docutils literal notranslate"><span class="pre">/var/log/httpd/&lt;hostname&gt;_error.log</span></code></p>
+<ul class="simple">
+<li>OnDemand will log to this location for its own configuration errors.</li>
+</ul>
+<p><code class="file docutils literal notranslate"><span class="pre">/var/log/httpd/&lt;hostname&gt;_access.log</span></code></p>
+<ul class="simple">
+<li>Where OnDemand will log succsseful logins.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">There are no entries for failed logins.</p>
+</div>
+<p><strong>NGINX Logs</strong></p>
+<p>The NGINX logs are the output of the user <a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">PUN</span></a>. These logs will capture things relevant
+to a <em>particular user</em> such as:</p>
+<ul class="simple">
+<li>Debuggin issues related to job submissions for a user. For example, commands being issued to the scheduler
+(<code class="docutils literal notranslate"><span class="pre">sbatch</span></code>, <code class="docutils literal notranslate"><span class="pre">qsub</span></code>, etc) can be seen here by searching for <code class="docutils literal notranslate"><span class="pre">execve</span></code>.</li>
+<li>Issues related to PUNs crashing and/or pages not rendering correctly.</li>
+</ul>
+<p>These logs are located at:</p>
+<p><code class="file docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/&lt;user&gt;</span></code></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These logs by default have <code class="docutils literal notranslate"><span class="pre">root:root</span></code> ownership. It may be beneficial
+to <code class="docutils literal notranslate"><span class="pre">chown</span></code> an appropriate staff group on these files for troubleshooting down the road.</p>
+</div>
+</div>
+<div class="section" id="session-data">
+<h2>Session Data<a class="headerlink" href="#session-data" title="Permalink to this headline">¶</a></h2>
+<p>These files will provide information around connections between the user’s PUN and a
+<a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">compute-node</span></a>.</p>
+<p>These logs provide <em>information around connections</em> and are also <em>the working directory of the job and location
+of</em> <code class="docutils literal notranslate"><span class="pre">stderr</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">stdout</span></code> for a job (typically to <code class="docutils literal notranslate"><span class="pre">output.log</span></code>). Other apps will also output
+information they may need there as well for connections and errors.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The files will be <em>owned by the user</em> and so admins will need to ensure they are either
+able to substitue user or escalate to root in order to see these files.</p>
+</div>
+<p>In general the session data or job submission files for apps across the dashboard, such as the Job Composer,
+Batch Connect, or Frame-renderer, all start from the root of:</p>
+<p><code class="file docutils literal notranslate"><span class="pre">~/ondemand/data/sys/</span></code></p>
+<p><strong>Batch Connect Apps</strong></p>
+<p>User session data for batch connect apps can be seen from a <em>user’s</em> home directory at:</p>
+<p><code class="file docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/batch_connect/sys/&lt;app&gt;/output/&lt;session</span> <span class="pre">id&gt;/output.log</span></code></p>
+<p>This file is used for the session data presented on the interactive apps page and data
+used to connect to the batch connect app.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There may be more than one file in the <code class="docutils literal notranslate"><span class="pre">&lt;session</span> <span class="pre">id&gt;</span></code> directory, but in the Interactive Apps
+page you can match the Session ID you see there to the directory with the desired <code class="docutils literal notranslate"><span class="pre">output.log</span></code> to
+debug.</p>
+</div>
+<p>One important thing to note is if trying to launch a Jupyter or Rstudio session and encountering failures, the
+<code class="docutils literal notranslate"><span class="pre">output.log</span></code> would show you things like what modules are being loaded and what kernels are available.</p>
+<p><strong>Example</strong></p>
+<p>Suppose a user is having trouble connecting to a Codeserver session they created.
+To see what data is being used by this batch connect app for the connection, look in:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cat ~/ondemand/data/sys/dashboard/batch_connect/sys/&lt;app&gt;/output/&lt;session id&gt;/output.log
+</pre></div>
+</div>
+<p>This should result in output that will give the logging information around what happened as this session
+was started to include ports, address, app version, and the token used for the connection.</p>
+<p>You would also see any <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> and <code class="docutils literal notranslate"><span class="pre">WARN</span></code> messages as well which will likely be beneficial to debug failed
+connections or launches.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="prometheus.html" class="btn btn-neutral float-right" title="Prometheus Monitoring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../monitoring.html" class="btn btn-neutral float-left" title="Monitoring" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2022, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/monitoring/logging.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/monitoring/logging.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/monitoring/logging.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/monitoring/logging.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/monitoring/logging.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/monitoring/logging.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/monitoring/logging.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/monitoring/logging.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/monitoring/logging.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/monitoring/logging.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/monitoring/logging.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/monitoring/logging.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
