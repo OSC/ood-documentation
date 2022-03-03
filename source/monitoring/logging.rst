@@ -80,7 +80,7 @@ Batch Connect, or Frame-renderer, all start from the root of:
 
 User session data for batch connect apps can be seen from a *user's* home directory at:
 
-:file:`~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session ide>`
+:file:`~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session id>`
 
 This file is used for the session data presented on the interactive apps page and data 
 used to connect to the batch connect app.
@@ -98,7 +98,7 @@ To see what data is being used by this batch connect app for the connection, loo
 
 .. code-block:: sh
     
-    cat ~/ondemand/data/sys/dashboard/batch_connect/db/<session-file>
+    cat ~/ondemand/data/sys/dashboard/batch_connect/sys/<app>/output/<session id>
     
 This will output a json object which will give the information to debug 
 any issues this session is having when connecting, such as ``id``, ``token``, ``cluster_id``, 
