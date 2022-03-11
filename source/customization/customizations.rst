@@ -248,12 +248,12 @@ Add Menu Items to the Navbar
   .. code-block:: yaml
 
     ---
-    name: Setup Custom Menu on the navbar   # This will show as the menu item.
+    name: Add Menu Items to the navbar   # This will show as the menu item.
     category: Links  # specify the main menu for the item to be under.  If it doesn't exist, it will be created.
     description: |-
       A description of what the menu item does.
     icon: fa://clock-o   # icon for the link.
-    url: 'https://osc.github.io/ood-documentation/develop/customization/customizations.html#custom-menu-on-the-navbar'
+    url: 'https://osc.github.io/ood-documentation/develop/customization/customizations.html#add-menu-items-to-the-navbar'
     new_window: true/false   # open link in new browser window or same browser window.
 
 .. _dashboard-navbar-config:
