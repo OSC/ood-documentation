@@ -235,10 +235,10 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
-.. _custom-menu-on-navbar:
+.. _add-menu-items-to-the-navbar:
 
-Add a menu item to the Navbar
--------------------------------------
+Add Menu Items to the Navbar
+-----------------------------
 
   Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.
 
