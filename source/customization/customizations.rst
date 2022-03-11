@@ -237,7 +237,7 @@ app.
 
 .. _custom-menu-on-navbar:
 
-Add Custom Menu on the Navbar
+Add a menu item to the Navbar
 -------------------------------------
 
   Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.
