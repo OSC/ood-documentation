@@ -9,6 +9,12 @@ make up the Open OnDemand infrastructure.
 
 .. toctree::
    :maxdepth: 1
+   :caption: Overviews
+
+   reference/pun-environment
+
+.. toctree::
+   :maxdepth: 1
    :caption: Files
 
    reference/files/ood-portal-yml
