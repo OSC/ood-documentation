@@ -30,7 +30,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       vnc_clean: "..."
 
 
-.. describe:: websockfiy_cmd (String, "/opt/websockify/run")
+.. describe:: websockify_cmd (String, "/opt/websockify/run")
 
     the command to start websockify
 
@@ -39,7 +39,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
       .. code-block:: yaml
 
-        websockfiy_cmd: "/opt/websockify/run"
+        websockify_cmd: "/opt/websockify/run"
 
     Example
       the '/usr/bin/websockify' command
