@@ -131,8 +131,6 @@ We recommend setting these environment variables in ``/etc/ood/config/nginx_stag
 
 .. warning:: If setting in nginx_stage.yml, careful to set the value using quotes i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
 
-
-
 Add URLs to Help Menu
 ---------------------
 
@@ -236,6 +234,71 @@ the Home Directory link.
 If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
+
+.. _add-menu-items-to-the-navbar:
+
+Add Menu Items to the Navbar
+-----------------------------
+
+  Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.
+
+  * sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>
+  * sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml
+  
+  .. code-block:: yaml
+
+    ---
+    name: Add Menu Items to the navbar   # This will show as the menu item.
+    category: Links  # specify the main menu for the item to be under.  If it doesn't exist, it will be created.
+    description: |-
+      A description of what the menu item does.
+    icon: fa://clock-o   # icon for the link.
+    url: 'https://osc.github.io/ood-documentation/develop/customization/customizations.html#add-menu-items-to-the-navbar'
+    new_window: true   # open link in new browser window or same browser window.
+
+.. _dashboard-navbar-config:
+
+Control Which Apps Appear in the Dashboard Navbar
+-------------------------------------------------
+
+Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.
+
+In OnDemand 1.3 and earlier, a Ruby array (``NavConfig.categories``) stored a whitelist of categories that could appear in the navbar. This whitelist acts both as a sort order for the top level menus of apps and a whitelist of which apps will appear in the menu. The only way to modify this whitelist is to do so in a Dashboard initializer. You would add a file ``/etc/ood/config/apps/dashboard/initializers/ood.rb`` and add this line:
+
+.. code:: ruby
+
+   NavConfig.categories << "Reports"
+
+
+Then an app that specifies "Reports" as the category in the manifest would appear in the "Reports" menu.
+
+In OnDemand 1.4 we changed the behavior by adding a new boolean variable ``NavConfig.categories_whitelist`` which defaults to false. If false, whitelist mode is disabled, and the ``NavConfig.categories`` only exists to act to enforce a sort order and all apps found with a valid category will be available to launch.
+
+Below are different configuration options and the resulting navbar if you had installed:
+
+- OnDemand with a cluster configured that accepts job submissions and shell access
+- at least one interactive app
+- at least one custom app that specifies "Reports" as the category
+
+.. list-table:: Navbar Configuration
+   :header-rows: 1
+
+   * - Configuration
+     - Resulting Navbar
+     - Reason
+   * - Default configuration
+     - "Files", "Jobs", "Clusters", "Interactive Apps", "Reports"
+     - whitelist mode is false, so whitelist now only enforces sort order
+   * - ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
+     - "Files", "Jobs", "Clusters", "Interactive Apps"
+     - whitelist mode is enabled and since "Reports" is not in the whitelist it is omitted
+   * - ``NavConfig.categories=[]`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
+     - "Clusters", "Files", "Interactive Apps", "Jobs", "Reports"
+     - the app categories appear in alphabetical order since whitelist mode is disabled
+   * - ``NavConfig.categories=[]`` and ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
+     - no app menus appear!
+     - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
+
 
 .. _set-upload-limits:
 
@@ -481,49 +544,6 @@ An example of a custom error page has been provided at ``/opt/ood/nginx_stage/ht
 
 
 See `this Discourse discussion <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53/>`_ for details.
-
-.. _dashboard-navbar-config:
-
-Control Which Apps Appear in the Dashboard Navbar
--------------------------------------------------
-
-Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.
-
-In OnDemand 1.3 and earlier, a Ruby array (``NavConfig.categories``) stored a whitelist of categories that could appear in the navbar. This whitelist acts both as a sort order for the top level menus of apps and a whitelist of which apps will appear in the menu. The only way to modify this whitelist is to do so in a Dashboard initializer. You would add a file ``/etc/ood/config/apps/dashboard/initializers/ood.rb`` and add this line:
-
-.. code:: ruby
-
-   NavConfig.categories << "Reports"
-
-
-Then an app that specifies "Reports" as the category in the manifest would appear in the "Reports" menu.
-
-In OnDemand 1.4 we changed the behavior by adding a new boolean variable ``NavConfig.categories_whitelist`` which defaults to false. If false, whitelist mode is disabled, and the ``NavConfig.categories`` only exists to act to enforce a sort order and all apps found with a valid category will be available to launch.
-
-Below are different configuration options and the resulting navbar if you had installed:
-
-- OnDemand with a cluster configured that accepts job submissions and shell access
-- at least one interactive app
-- at least one custom app that specifies "Reports" as the category
-
-.. list-table:: Navbar Configuration
-   :header-rows: 1
-
-   * - Configuration
-     - Resulting Navbar
-     - Reason
-   * - Default configuration
-     - "Files", "Jobs", "Clusters", "Interactive Apps", "Reports"
-     - whitelist mode is false, so whitelist now only enforces sort order
-   * - ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
-     - "Files", "Jobs", "Clusters", "Interactive Apps"
-     - whitelist mode is enabled and since "Reports" is not in the whitelist it is omitted
-   * - ``NavConfig.categories=[]`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
-     - "Clusters", "Files", "Interactive Apps", "Jobs", "Reports"
-     - the app categories appear in alphabetical order since whitelist mode is disabled
-   * - ``NavConfig.categories=[]`` and ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
-     - no app menus appear!
-     - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
 
 .. _dashboard_pinned_apps:
 
