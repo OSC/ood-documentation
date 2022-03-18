@@ -254,7 +254,7 @@ Add Menu Items to the Navbar
       A description of what the menu item does.
     icon: fa://clock-o   # icon for the link.
     url: 'https://osc.github.io/ood-documentation/develop/customization/customizations.html#add-menu-items-to-the-navbar'
-    new_window: true/false   # open link in new browser window or same browser window.
+    new_window: true   # open link in new browser window or same browser window.
 
 .. _dashboard-navbar-config:
 
