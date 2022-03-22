@@ -62,7 +62,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   :maxdepth: 2
   :caption: How-Tos
 
-  customization
+  customizations
   analytics
   monitoring
   enable-desktops
