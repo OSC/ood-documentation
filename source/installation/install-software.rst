@@ -87,12 +87,12 @@ software requirements:
 
        sudo apt install ondemand
 
+.. note::
+
+   If *authenticating against LDAP* or *wishing to evaluate OnDemand* using `ood` user, you **must install** `ondemand-dex` as 
+   described below. See :ref:`add-ldap` for details on configuration of LDAP and :ref:`start-services` for the `ood` user.
+
 #. (Optional) Install :ref:`authentication-dex` package
-
-   .. note::
-
-      If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
-      See :ref:`add-ldap` for details on configuration of LDAP.
 
    **RedHat/CentOS/Rocky only**
 
@@ -114,7 +114,7 @@ software requirements:
 
        sudo yum install ondemand-selinux
 
-.. note::
+.. warning::
 
    For some older systems, user ids (UID) may start at ``500`` and not the
    expected ``1000``. If this true for your system, you will need to modify the
