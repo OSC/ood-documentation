@@ -1,7 +1,7 @@
 .. _resource-manager-torque:
 
-Configure Torque
-================
+Torque
+======
 
 A YAML cluster configuration file for a Torque/PBS resource manager on an HPC
 cluster looks like:
