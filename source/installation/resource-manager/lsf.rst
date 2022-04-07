@@ -1,7 +1,7 @@
 .. _resource-manager-lsf:
 
-Configure LSF
-=============
+LSF
+===
 
 A YAML cluster configuration file for an LSF resource manager on an HPC cluster
 looks like:
