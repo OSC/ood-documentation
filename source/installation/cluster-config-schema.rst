@@ -139,6 +139,12 @@ Adapter support for this feature is mixed. For example for Slurm `sbatch`, `scon
 acls:
 #####
 
+.. warning::
+
+  Sites should not use this OnDemand feature and instead just use Linux's base support for
+  File Access Control lists. This provides the same basic functionality but since permissions
+  are being handled in the Linux kernel, is much faster, simpler and frankly, safer.
+
 Access control lists provide a method to limit cluster access by group membership. ACLs are implicitly whitelists but may be set explicitly to either `whitelist` or `blacklist`.
 
 .. code-block :: yaml

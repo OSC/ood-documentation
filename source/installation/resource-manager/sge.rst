@@ -1,7 +1,7 @@
 .. _resource-manager-sge:
 
-Configure Grid Engine
-=====================
+Grid Engine
+===========
 
 A YAML cluster configuration file for a Grid Engine (Sun Grid Engine, Son of Grid Engine, Univa Grid Engine) resource manager on an HPC
 cluster looks like:

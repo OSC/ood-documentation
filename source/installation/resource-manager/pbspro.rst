@@ -1,7 +1,7 @@
 .. _resource-manager-pbspro:
 
-Configure PBS Professional
-==========================
+PBS Professional
+================
 
 A YAML cluster configuration file for a PBS Professional resource manager on an
 HPC cluster looks like:

@@ -1,7 +1,7 @@
 .. _resource-manager-slurm:
 
-Configure Slurm
-===============
+Slurm
+=====
 
 A YAML cluster configuration file for a Slurm resource manager on an HPC
 cluster looks like:

@@ -1,11 +1,13 @@
 .. _add-cluster-config:
 
-Add Cluster Configuration Files
-===============================
+Cluster Configuration
+=====================
 
 Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to.
 These files detail how the system can interact with your scheduler. Without them, many of the features in 
 Open OnDemand won't work - including interactive apps.
+
+Indeed, one of the main reasons to use Open OnDemand is use your clusters interactively.
 
 Apps that require proper cluster configuration include:
 
@@ -14,7 +16,11 @@ Apps that require proper cluster configuration include:
 - job-composer (submit jobs to various clusters)
 - All interactive apps such as Jupyter and RStudio
 
-The cluster config files are where the :ref:`resource-manager` configuration goes, which is necessary for enabling apps to submit batch jobs.
+
+.. tip::
+
+   We provide a `puppet module`_ and an `ansible role`_ for automating all of this configuration.
+
 
 #. Create the default directory that the cluster configuration files reside
    under:
@@ -24,7 +30,7 @@ The cluster config files are where the :ref:`resource-manager` configuration goe
       sudo mkdir -p /etc/ood/config/clusters.d
 
 #. Create a cluster YAML configuration file for each HPC cluster you want to
-   provide access to. They must have the ``*.yml`` extension.
+   provide access to. They must have the ``.yml`` or ``.yaml`` extensions.
 
    .. note::
 
@@ -52,11 +58,30 @@ The cluster config files are where the :ref:`resource-manager` configuration goe
    active-jobs and job-composer pages won't be able to list or submit
    jobs without a defined resource manager.
 
-   See :ref:`resource-manager` for how to modify the cluster config so OnDemand works with your particular resource manager.
+
+The :ref:`resource-manager-test` page provides directions on using a Rake task
+to verify the resource manager configuration.
+
+The :ref:`bin-overrides` provides directions on how to
+provide a replacement or wrapper script for one or more of the resource manager
+client binaries.
 
 .. toctree::
    :maxdepth: 1
    :caption: Cluster Config
 
    cluster-config-schema
+   resource-manager/torque
+   resource-manager/slurm
+   resource-manager/lsf
+   resource-manager/pbspro
+   resource-manager/sge
+   resource-manager/linuxhost
+   resource-manager/ccq
+   resource-manager/kubernetes
+   resource-manager/systemd
+   resource-manager/bin-override-example
+   resource-manager/test
 
+.. _puppet module: https://forge.puppet.com/modules/osc/openondemand
+.. _ansible role: https://galaxy.ansible.com/osc/open_ondemand

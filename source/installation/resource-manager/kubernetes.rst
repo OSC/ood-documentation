@@ -1,7 +1,7 @@
 .. _resource-manager-kubernetes:
 
-Configure Kuberenetes
-=====================
+Kuberenetes
+===========
 
 TODO table of contents
 
