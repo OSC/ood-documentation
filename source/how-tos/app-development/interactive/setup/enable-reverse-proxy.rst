@@ -5,7 +5,7 @@ Enable Reverse Proxy
 
 The `reverse proxy`_ will proxy a request to any specified host and port through
 IP sockets. This can be used to connect to Jupyter notebook servers, RStudio
-servers, VNC servers, and more... This is disabled by default as it can be a
+servers, VNC servers, and more! This is disabled by default as it can be a
 security risk if not properly setup using a good ``host_regex``.
 
 You can read more about how this works in Open OnDemand under
@@ -61,45 +61,14 @@ Requirements
 Steps to Enable in Apache
 -------------------------
 
-#. This requires modifying the YAML configuration file for
-   :ref:`ood-portal-generator` located at
-   :file:`/etc/ood/config/ood_portal.yml` as such:
+#. This requires modifying the YAML :ref:`portal configuration file <ood-portal-generator-configuration>`
+   located at :file:`/etc/ood/config/ood_portal.yml` as such:
 
    .. code-block:: yaml
-      :emphasize-lines: 17-
+      :emphasize-lines: 3-
 
       # /etc/ood/config/ood_portal.yml
       ---
-      servername: ondemand.my_center.edu
-      ssl:
-        - 'SSLCertificateFile "/etc/pki/tls/certs/ondemand.my_center.edu.crt"'
-        - 'SSLCertificateKeyFile "/etc/pki/tls/private/ondemand.my_center.edu.key"'
-        - 'SSLCertificateChainFile "/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt"'
-      dex:
-        connectors:
-          - type: ldap
-            id: ldap
-            name: LDAP
-            config:
-              host: openldap.my_center.edu:636
-              insecureSkipVerify: false
-              bindDN: cn=admin,dc=example,dc=org
-              bindPW: admin
-              userSearch:
-                baseDN: ou=People,dc=example,dc=org
-                filter: "(objectClass=posixAccount)"
-                username: uid
-                idAttr: uid
-                emailAttr: mail
-                nameAttr: gecos
-                preferredUsernameAttr: uid
-              groupSearch:
-                baseDN: ou=Groups,dc=example,dc=org
-                filter: "(objectClass=posixGroup)"
-                userMatchers:
-                  - userAttr: DN
-                    groupAttr: member
-                nameAttr: cn
       host_regex: '[\w.-]+\.my_center\.edu'
       node_uri: '/node'
       rnode_uri: '/rnode'

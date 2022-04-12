@@ -34,6 +34,8 @@ Details on Submit Attributes
    submit-yml/basic-bc-options
    submit-yml/vnc-bc-options
 
+.. _global-bc-settings:
+
 Setting Batch Connect Options Globally
 ......................................
 
