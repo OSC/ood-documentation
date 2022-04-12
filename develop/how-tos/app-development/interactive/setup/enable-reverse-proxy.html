@@ -211,7 +211,7 @@
 <span id="app-development-interactive-setup-enable-reverse-proxy"></span><h1>3. Enable Reverse Proxy<a class="headerlink" href="#enable-reverse-proxy" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_proxy">reverse proxy</a> will proxy a request to any specified host and port through
 IP sockets. This can be used to connect to Jupyter notebook servers, RStudio
-servers, VNC servers, and more… This is disabled by default as it can be a
+servers, VNC servers, and more! This is disabled by default as it can be a
 security risk if not properly setup using a good <code class="docutils literal notranslate"><span class="pre">host_regex</span></code>.</p>
 <p>You can read more about how this works in Open OnDemand under
 <a class="reference internal" href="../../../../reference/files/ood-portal-yml.html#ood-portal-generator-configuration-configure-reverse-proxy"><span class="std std-ref">Configure Reverse Proxy</span></a>.</p>
@@ -265,42 +265,11 @@ work, e.g.:</p>
 <div class="section" id="steps-to-enable-in-apache">
 <h2>3.2. Steps to Enable in Apache<a class="headerlink" href="#steps-to-enable-in-apache" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">This requires modifying the YAML configuration file for
-<a class="reference internal" href="../../../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> located at
-<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
+<li><p class="first">This requires modifying the YAML <a class="reference internal" href="../../../../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">portal configuration file</span></a>
+located at <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand.my_center.edu</span>
-<span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu.crt&quot;&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/private/ondemand.my_center.edu.key&quot;&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateChainFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt&quot;&#39;</span>
-<span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">connectors</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
-      <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
-      <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">LDAP</span>
-      <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">openldap.my_center.edu:636</span>
-        <span class="l l-Scalar l-Scalar-Plain">insecureSkipVerify</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-        <span class="l l-Scalar l-Scalar-Plain">bindDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn=admin,dc=example,dc=org</span>
-<span class="hll">        <span class="l l-Scalar l-Scalar-Plain">bindPW</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">userSearch</span><span class="p p-Indicator">:</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=People,dc=example,dc=org</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixAccount)&quot;</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">idAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">emailAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mail</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">gecos</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">preferredUsernameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">groupSearch</span><span class="p p-Indicator">:</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=Groups,dc=example,dc=org</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixGroup)&quot;</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">userMatchers</span><span class="p p-Indicator">:</span>
-</span><span class="hll">            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">userAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DN</span>
-</span><span class="hll">              <span class="l l-Scalar l-Scalar-Plain">groupAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">member</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn</span>
-</span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&#39;[\w.-]+\.my_center\.edu&#39;</span>
+<span class="hll"><span class="l l-Scalar l-Scalar-Plain">host_regex</span><span class="p p-Indicator">:</span> <span class="s">&#39;[\w.-]+\.my_center\.edu&#39;</span>
 </span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">node_uri</span><span class="p p-Indicator">:</span> <span class="s">&#39;/node&#39;</span>
 </span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">rnode_uri</span><span class="p p-Indicator">:</span> <span class="s">&#39;/rnode&#39;</span>
 </span></pre></div>

@@ -208,16 +208,15 @@
 cluster configuration file for the cluster you intend to submit
 interactive batch jobs to. It is recommended you follow the directions
 on <a class="reference internal" href="../../../../installation/add-cluster-config.html#add-cluster-config"><span class="std std-ref">Cluster Configuration</span></a>.</p>
-<p>Modify the cluster configuration file with the necessary information so that
-a batch script generated from an interactive app can find the installed
-copies of <a class="reference external" href="https://turbovnc.org/">TurboVNC</a> and <a class="reference external" href="https://github.com/novnc/websockify">websockify</a>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
+<p>This is a simple example that ensures modules are always being purged and
+<code class="docutils literal notranslate"><span class="pre">vnc</span></code> applications have the right environment variables for <a class="reference external" href="https://turbovnc.org/">TurboVNC</a> and <a class="reference external" href="https://github.com/novnc/websockify">websockify</a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/example_cluster.yml</span>
 <span class="nn">---</span>
 <span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster</span><span class="nv"> </span><span class="s">1&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Example</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;example.my_center.edu&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;...&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">...</span>
@@ -234,30 +233,17 @@ copies of <a class="reference external" href="https://turbovnc.org/">TurboVNC</a
 </span><span class="hll">        <span class="no">%s</span>
 </span></pre></div>
 </div>
-<p>where we introduced the configuration option <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> that allows us
-to add global settings for both a <code class="docutils literal notranslate"><span class="pre">basic</span></code> interactive web server as well as a
-<code class="docutils literal notranslate"><span class="pre">vnc</span></code> interactive web server.</p>
-<p>In the above case we modify the global setting <code class="docutils literal notranslate"><span class="pre">script_wrapper</span></code> for both
-<code class="docutils literal notranslate"><span class="pre">basic</span></code> and <code class="docutils literal notranslate"><span class="pre">vnc</span></code> sessions. This allows us to supply <strong class="command">bash</strong> code
-that wraps around the body of the template script (specified by <code class="docutils literal notranslate"><span class="pre">%s</span></code>). First,
-we purge the module environment to remove any conflicting modules that may have
+<p>In this example we’re <a class="reference internal" href="../../../../reference/files/submit-yml-erb.html#global-bc-settings"><span class="std std-ref">setting batch connect options globally</span></a>
+that wrap the <code class="docutils literal notranslate"><span class="pre">basic</span></code> and <code class="docutils literal notranslate"><span class="pre">vnc</span></code> scripts.  That’s important, because it means <em>any</em>
+batch connect app used on this cluster will use these settings.</p>
+<p>This example uses <strong class="command">bash</strong> code that wraps around the body Open OnDemand provided
+scripts (the variable <code class="docutils literal notranslate"><span class="pre">%s</span></code>). First, we purge the module environment to remove any conflicting modules that may have
 been loaded by the user’s <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> files. Then we
-specify the required environment needed by the <code class="docutils literal notranslate"><span class="pre">vnc</span></code> script to launch
-<a class="reference external" href="https://turbovnc.org/">TurboVNC</a> and <a class="reference external" href="https://github.com/novnc/websockify">websockify</a>.</p>
+set environment variables needed by the <code class="docutils literal notranslate"><span class="pre">vnc</span></code> script to launch <a class="reference external" href="https://turbovnc.org/">TurboVNC</a> and <a class="reference external" href="https://github.com/novnc/websockify">websockify</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>You will most likely need to replace the block of code below in your cluster
-configuration file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-  <span class="no">module purge</span>
-  <span class="no">export PATH=&quot;/usr/local/turbovnc/bin:$PATH&quot;</span>
-  <span class="no">export WEBSOCKIFY_CMD=&quot;/usr/local/websockify/run&quot;</span>
-  <span class="no">%s</span>
-</pre></div>
-</div>
-<p class="last">with a block that adds the full path to the TurboVNC binaries into the
-<code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable as well as the corresponding websockify
-launcher into the <code class="docutils literal notranslate"><span class="pre">WEBSOCKIFY_CMD</span></code> environment variable.</p>
+<p class="last">This is an example of how to <a class="reference internal" href="../../../../reference/files/submit-yml-erb.html#global-bc-settings"><span class="std std-ref">set batch connect options globally</span></a>.  You
+will likely need use different values.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
