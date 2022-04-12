@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add Cluster Configuration Files &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>Cluster Configuration &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -105,11 +105,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Add Cluster Configuration Files</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cluster Configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cluster-config-schema.html">Cluster Config Schema v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/torque.html">Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/slurm.html">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/lsf.html">LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/pbspro.html">PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/sge.html">Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/linuxhost.html">LinuxHost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/ccq.html">Cloudy Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/kubernetes.html">Kuberenetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/systemd.html">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager.html">Resource Manager Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">How-Tos</span></p>
@@ -178,7 +188,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Add Cluster Configuration Files</li>
+      <li>Cluster Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -199,11 +209,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="add-cluster-configuration-files">
-<span id="add-cluster-config"></span><h1>Add Cluster Configuration Files<a class="headerlink" href="#add-cluster-configuration-files" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="cluster-configuration">
+<span id="add-cluster-config"></span><h1>Cluster Configuration<a class="headerlink" href="#cluster-configuration" title="Permalink to this headline">¶</a></h1>
 <p>Cluster configuration files describe each cluster a user may submit jobs to and login hosts the user can ssh to.
 These files detail how the system can interact with your scheduler. Without them, many of the features in
 Open OnDemand won’t work - including interactive apps.</p>
+<p>Indeed, one of the main reasons to use Open OnDemand is use your clusters interactively.</p>
 <p>Apps that require proper cluster configuration include:</p>
 <ul class="simple">
 <li>shell (connect to a cluster login node from the Dashboard App)</li>
@@ -211,7 +222,10 @@ Open OnDemand won’t work - including interactive apps.</p>
 <li>job-composer (submit jobs to various clusters)</li>
 <li>All interactive apps such as Jupyter and RStudio</li>
 </ul>
-<p>The cluster config files are where the <a class="reference internal" href="resource-manager.html#resource-manager"><span class="std std-ref">Resource Manager Configuration</span></a> configuration goes, which is necessary for enabling apps to submit batch jobs.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">We provide a <a class="reference external" href="https://forge.puppet.com/modules/osc/openondemand">puppet module</a> and an <a class="reference external" href="https://galaxy.ansible.com/osc/open_ondemand">ansible role</a> for automating all of this configuration.</p>
+</div>
 <ol class="arabic">
 <li><p class="first">Create the default directory that the cluster configuration files reside
 under:</p>
@@ -220,7 +234,7 @@ under:</p>
 </div>
 </li>
 <li><p class="first">Create a cluster YAML configuration file for each HPC cluster you want to
-provide access to. They must have the <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> extension.</p>
+provide access to. They must have the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> or <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> extensions.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">It is best to name the file after the HPC cluster it is defining. For
@@ -243,13 +257,28 @@ node and <strong>no resource manager</strong> looks like:</p>
 <p>In production you will also want to add a resource manager. That is because the
 active-jobs and job-composer pages won’t be able to list or submit
 jobs without a defined resource manager.</p>
-<p>See <a class="reference internal" href="resource-manager.html#resource-manager"><span class="std std-ref">Resource Manager Configuration</span></a> for how to modify the cluster config so OnDemand works with your particular resource manager.</p>
 </li>
 </ol>
+<p>The <a class="reference internal" href="resource-manager/test.html#resource-manager-test"><span class="std std-ref">Test Configuration</span></a> page provides directions on using a Rake task
+to verify the resource manager configuration.</p>
+<p>The <a class="reference internal" href="resource-manager/bin-override-example.html#bin-overrides"><span class="std std-ref">A Working Example of a bin_overrides Script</span></a> provides directions on how to
+provide a replacement or wrapper script for one or more of the resource manager
+client binaries.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Cluster Config</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cluster-config-schema.html">Cluster Config Schema v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/torque.html">Torque</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/slurm.html">Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/lsf.html">LSF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/pbspro.html">PBS Professional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/sge.html">Grid Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/linuxhost.html">LinuxHost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/ccq.html">Cloudy Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/kubernetes.html">Kuberenetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/systemd.html">Systemd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
 </ul>
 </div>
 </div>

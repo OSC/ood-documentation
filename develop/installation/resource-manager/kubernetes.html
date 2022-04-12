@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configure Kuberenetes &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>Kuberenetes &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="A Working Example of a bin_overrides Script" href="bin-override-example.html" />
-    <link rel="prev" title="Configure Cloudy Cluster (beta)" href="ccq.html" />
+    <link rel="next" title="Systemd" href="systemd.html" />
+    <link rel="prev" title="Cloudy Cluster" href="ccq.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -105,16 +105,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../add-cluster-config.html">Add Cluster Configuration Files</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../resource-manager.html">Resource Manager Configuration</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="torque.html">Configure Torque</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slurm.html">Configure Slurm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lsf.html">Configure LSF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pbspro.html">Configure PBS Professional</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccq.html">Configure Cloudy Cluster (beta)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Kuberenetes</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../add-cluster-config.html">Cluster Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torque.html">Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm.html">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lsf.html">LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbspro.html">PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sge.html">Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccq.html">Cloudy Cluster</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Kuberenetes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#per-user-kubernetes">Per User Kubernetes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bootstrapping-the-kuberenetes-cluster">Bootstrapping the Kuberenetes cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bootstrapping-ondemand-web-node-to-communicate-with-kubernetes">Bootstrapping OnDemand web node to communicate with Kubernetes</a></li>
@@ -133,6 +133,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#using-a-private-image-registry">Using a private image registry</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
 </ul>
@@ -205,9 +206,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../resource-manager.html">Resource Manager Configuration</a> &raquo;</li>
+          <li><a href="../add-cluster-config.html">Cluster Configuration</a> &raquo;</li>
         
-      <li>Configure Kuberenetes</li>
+      <li>Kuberenetes</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -228,8 +229,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="configure-kuberenetes">
-<span id="resource-manager-kubernetes"></span><h1>Configure Kuberenetes<a class="headerlink" href="#configure-kuberenetes" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="kuberenetes">
+<span id="resource-manager-kubernetes"></span><h1>Kuberenetes<a class="headerlink" href="#kuberenetes" title="Permalink to this headline">¶</a></h1>
 <p>TODO table of contents</p>
 <p>A YAML cluster configuration file for a Kubernetes resource manager on an HPC
 cluster looks like:</p>
@@ -639,10 +640,10 @@ a user’s namespaces with the ability to pull from this registry:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bin-override-example.html" class="btn btn-neutral float-right" title="A Working Example of a bin_overrides Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="systemd.html" class="btn btn-neutral float-right" title="Systemd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ccq.html" class="btn btn-neutral float-left" title="Configure Cloudy Cluster (beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ccq.html" class="btn btn-neutral float-left" title="Cloudy Cluster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

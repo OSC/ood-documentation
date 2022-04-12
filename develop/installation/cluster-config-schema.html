@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Resource Manager Configuration" href="resource-manager.html" />
-    <link rel="prev" title="Add Cluster Configuration Files" href="add-cluster-config.html" />
+    <link rel="next" title="Torque" href="resource-manager/torque.html" />
+    <link rel="prev" title="Cluster Configuration" href="add-cluster-config.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -105,7 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="add-cluster-config.html">Add Cluster Configuration Files</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="add-cluster-config.html">Cluster Configuration</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Cluster Config Schema v2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#first-an-example">First an example:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-break-down">A Break Down</a><ul>
@@ -120,9 +120,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/torque.html">Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/slurm.html">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/lsf.html">LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/pbspro.html">PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/sge.html">Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/linuxhost.html">LinuxHost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/ccq.html">Cloudy Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/kubernetes.html">Kuberenetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/systemd.html">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager.html">Resource Manager Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 </ul>
 <p class="caption"><span class="caption-text">How-Tos</span></p>
@@ -191,7 +201,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="add-cluster-config.html">Add Cluster Configuration Files</a> &raquo;</li>
+          <li><a href="add-cluster-config.html">Cluster Configuration</a> &raquo;</li>
         
       <li>Cluster Config Schema v2</li>
     
@@ -334,6 +344,12 @@
 </div>
 <div class="section" id="acls">
 <h3>acls:<a class="headerlink" href="#acls" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Sites should not use this OnDemand feature and instead just use Linux’s base support for
+File Access Control lists. This provides the same basic functionality but since permissions
+are being handled in the Linux kernel, is much faster, simpler and frankly, safer.</p>
+</div>
 <p>Access control lists provide a method to limit cluster access by group membership. ACLs are implicitly whitelists but may be set explicitly to either <cite>whitelist</cite> or <cite>blacklist</cite>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">acls</span><span class="p p-Indicator">:</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;group&quot;</span>
@@ -382,10 +398,10 @@ See <a class="reference internal" href="../customizations.html#disable-host-link
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="resource-manager.html" class="btn btn-neutral float-right" title="Resource Manager Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="resource-manager/torque.html" class="btn btn-neutral float-right" title="Torque" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="add-cluster-config.html" class="btn btn-neutral float-left" title="Add Cluster Configuration Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="add-cluster-config.html" class="btn btn-neutral float-left" title="Cluster Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

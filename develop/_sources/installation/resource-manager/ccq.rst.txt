@@ -1,7 +1,7 @@
 .. _resource-manager-cloudy-cluster:
 
-Configure Cloudy Cluster (beta)
-===============================
+Cloudy Cluster
+==============
 
 A YAML cluster configuration file for a Cloudy Cluster resource manager on an HPC
 cluster looks like:
