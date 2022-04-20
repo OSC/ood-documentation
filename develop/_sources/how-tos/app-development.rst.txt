@@ -22,4 +22,3 @@ on a compute node.
    app-development/enabling-development-mode
    app-development/interactive
    app-development/app-sharing
-   app-development/dynamic-apps

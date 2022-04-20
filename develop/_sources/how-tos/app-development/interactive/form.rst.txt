@@ -3,12 +3,35 @@
 User Form
 =========
 
-The configuration file ``form.yml`` is responsible for:
+The configuration file ``form.yml`` creates the `html form`_ your customers will use
+to start the interactive application.
 
-- defining all the attributes used throughout the various ERB files (defined as
-  the session context) that make up the Interactive App
-- setting the HTML form input or hard-coded value of each attribute
-- designating a cluster to submit the batch job to
+
+Let's look at a simple example of how the main components ``form`` and ``attributes`` work.
+``form`` is a list of form choices for the application. ``attributes`` is then specifying
+_what_ those items in ``form`` are, whether they're number fields or choices and so on.
+
+.. code-block:: yaml
+
+  # ${HOME}/ondemand/dev/my_app/form.yml
+  ---
+
+  # the cluster(s) this app can submit jobs to.
+  cluster: "owens"
+
+  # 'form' is a list of form choices for this app. Here we're allowing users to set
+  # the account and the number of cores they want to request for this job.
+  form:
+    - account
+    - cores
+
+  # By default, everything defined in 'form' above is a text_field. Let's leave account alone
+  # We do however, want cores to be a number_field and with some min & max values.
+  attributes:
+    cores:
+      widget: 'number_field'
+      min: 1
+      max: 40
 
 It is located in the root of the application directory.
 
@@ -35,6 +58,8 @@ building and launching the ``my_app`` Interactive App session.
 
 Configuration
 -------------
+
+This is the full list of items with details, you may supply to this yaml file to configure this application.
 
 .. describe:: cluster (Array<String> or String)
 
@@ -612,3 +637,4 @@ When using this option, there's no need to add any cluster configuration to the
 form.yml.
 
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
+.. _html form: https://en.wikipedia.org/wiki/Form_(HTML)

@@ -126,13 +126,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="form-widgets.html">Form Widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic-form-widgets.html">Dynamic Form Widgets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission</a></li>
 <li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamic-apps.html">Batch connect apps with dynamic behavior</a></li>
 </ul>
 </li>
 </ul>
@@ -221,13 +221,32 @@
             
   <div class="section" id="user-form">
 <span id="app-development-interactive-form"></span><h1>User Form<a class="headerlink" href="#user-form" title="Permalink to this headline">¶</a></h1>
-<p>The configuration file <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> is responsible for:</p>
-<ul class="simple">
-<li>defining all the attributes used throughout the various ERB files (defined as
-the session context) that make up the Interactive App</li>
-<li>setting the HTML form input or hard-coded value of each attribute</li>
-<li>designating a cluster to submit the batch job to</li>
-</ul>
+<p>The configuration file <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> creates the <a class="reference external" href="https://en.wikipedia.org/wiki/Form_(HTML)">html form</a> your customers will use
+to start the interactive application.</p>
+<p>Let’s look at a simple example of how the main components <code class="docutils literal notranslate"><span class="pre">form</span></code> and <code class="docutils literal notranslate"><span class="pre">attributes</span></code> work.
+<code class="docutils literal notranslate"><span class="pre">form</span></code> is a list of form choices for the application. <code class="docutils literal notranslate"><span class="pre">attributes</span></code> is then specifying
+_what_ those items in <code class="docutils literal notranslate"><span class="pre">form</span></code> are, whether they’re number fields or choices and so on.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
+<span class="nn">---</span>
+
+<span class="c1"># the cluster(s) this app can submit jobs to.</span>
+<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
+
+<span class="c1"># &#39;form&#39; is a list of form choices for this app. Here we&#39;re allowing users to set</span>
+<span class="c1"># the account and the number of cores they want to request for this job.</span>
+<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">account</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cores</span>
+
+<span class="c1"># By default, everything defined in &#39;form&#39; above is a text_field. Let&#39;s leave account alone</span>
+<span class="c1"># We do however, want cores to be a number_field and with some min &amp; max values.</span>
+<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">cores</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&#39;number_field&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="l l-Scalar l-Scalar-Plain">max</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">40</span>
+</pre></div>
+</div>
 <p>It is located in the root of the application directory.</p>
 <p>Assuming we already have a sandbox Interactive App deployed under:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app
@@ -249,6 +268,7 @@ form file to <code class="docutils literal notranslate"><span class="pre">form.y
 </div>
 <div class="section" id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>This is the full list of items with details, you may supply to this yaml file to configure this application.</p>
 <dl class="describe">
 <dt>
 <code class="descname">cluster (Array&lt;String&gt; or String)</code></dt>
