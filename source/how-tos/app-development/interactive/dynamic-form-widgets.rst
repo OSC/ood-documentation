@@ -1,7 +1,7 @@
 .. _dynamic-bc-apps:
 
-Batch connect apps with dynamic behavior
-========================================
+Dynamic Form Widgets
+====================
 
 .. note::
   This feature was added in version 2.0.
