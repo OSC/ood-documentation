@@ -579,6 +579,8 @@ Full examples are below:
   # /etc/ood/config/ondemand.d/ondemand.yml
   pinned_apps:
     - sys/jupyter           # pin a specific system installed app called 'jupyter'
+    
+    - sys/bc_desktop/desk1  # pinned desktop app must contain exact desktop name - 'desk1'
  
     - 'sys/*'               # pin all system install apps. This also works for usr/* and dev/*
   
