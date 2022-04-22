@@ -44,7 +44,7 @@ Currently all builds are generated using the
 built using the following command from the root of this repo:
 
 ```bash
-docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/docker-sphinx make html
+docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/ood-doc-build make html
 ```
 
 Or use the rake task added:
