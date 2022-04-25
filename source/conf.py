@@ -38,6 +38,7 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinxcontrib.httpdomain',
     'sphinxcontrib.plantuml',
+    'sphinx_tabs.tabs'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

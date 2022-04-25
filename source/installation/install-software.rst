@@ -16,76 +16,80 @@ software requirements:
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-#. Enable the dependency repositories **on CentOS/RHEL 7 only**:
+1. Enable the dependency repositories
 
-   CentOS 7
-     .. code-block:: sh
+.. tabs::
 
-        sudo yum install centos-release-scl epel-release
+   .. tab:: CentOS 7
 
-   RHEL 7
-     .. code-block:: sh
+      .. code-block:: sh
 
-        sudo yum install epel-release
-        sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
-        # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
+         sudo yum install centos-release-scl epel-release
 
-   .. warning::
 
-      For **RedHat** you may also need to enable the *Optional* channel and
-      attach a subscription providing access to RHSCL to be able to use this
-      repository.
+   .. tab:: RockyLinux 8
 
-#. Enable dnf modules and repositories for dependencies **on RHEL/Rocky 8 only**:
+      .. code-block:: sh
 
-    .. code-block:: sh
+         sudo dnf config-manager --set-enabled powertools
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:2.7
+         sudo dnf module enable nodejs:12
 
-       dnf install epel-release
-       dnf module enable ruby:2.7
-       dnf module enable nodejs:14
+   .. tab:: RHEL 7
 
-   **Rocky 8 only**
+      .. warning::
 
-    .. code-block:: sh
+         You may also need to enable the *Optional* channel and
+         attach a subscription providing access to RHSCL to be able to use this
+         repository.
 
-       sudo dnf config-manager --set-enabled powertools
+      .. code-block:: sh
 
-   **RedHat 8 only**
+         sudo yum install epel-release
+         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
 
-    .. code-block:: sh
 
-       sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+   .. tab:: RHEL 8
 
-#. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
+      .. warning::
 
-   **RedHat/CentOS/Rocky only**
+         You may also need to enable the *Optional* channel and
+         attach a subscription providing access to RHSCL to be able to use this
+         repository.
 
-    .. code-block:: sh
+      .. code-block:: sh
 
-       sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+         sudo dnf config-manager --set-enabled powertools
+         sudo dnf install epel-releaseq
+         sudo dnf module enable ruby:2.7
+         sudo dnf module enable nodejs:12
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
-   **Ubuntu only**
 
-    .. code-block:: sh
+2. Add Open OnDemand's repository and install:
 
-       sudo apt install apt-transport-https ca-certificates
-       wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
-       sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
-       sudo apt update
+   .. tabs::
 
-#. Install OnDemand and all of its dependencies:
+      .. tab:: RHEL clones
 
-   **RedHat/CentOS/Rocky only**
+         .. code-block:: sh
 
-    .. code-block:: sh
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
 
-       sudo yum install ondemand
+            sudo yum install ondemand
 
-   **Ubuntu only**
 
-    .. code-block:: sh
+      .. tab:: Ubuntu
 
-       sudo apt install ondemand
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
 
 .. note::
 
