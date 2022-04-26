@@ -71,7 +71,7 @@ software requirements:
 
    .. tabs::
 
-      .. tab:: RHEL clones
+      .. tab:: yum/dnf
 
          .. code-block:: sh
 
@@ -80,7 +80,7 @@ software requirements:
             sudo yum install ondemand
 
 
-      .. tab:: Ubuntu
+      .. tab:: apt
 
          .. code-block:: sh
 
