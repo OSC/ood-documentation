@@ -783,12 +783,8 @@ that lists all user quotas. The JSON schema for version `1` is given as:
      "version": 1,
      "timestamp": 1525361263,
      "quotas": [
-       {
-         ...
-       },
-       {
-         ...
-       }
+       {},
+       {}
      ]
    }
 
@@ -879,12 +875,8 @@ that lists all user balances. The JSON schema for version `1` is given as:
         "project_type": "project"
       },
       "balances": [
-        {
-          ...
-        },
-        {
-          ...
-        }
+        {},
+        {}
       ]
     }
 
