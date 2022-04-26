@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -235,9 +235,9 @@
 <h2>Installing OnDemand Dex from source<a class="headerlink" href="#installing-ondemand-dex-from-source" title="Permalink to this headline">¶</a></h2>
 <p>Requirements:</p>
 <ul class="simple">
-<li>Go version 1.14.x with the <code class="docutils literal notranslate"><span class="pre">go</span></code> binary in <code class="docutils literal notranslate"><span class="pre">PATH</span></code></li>
-<li>Git</li>
-<li>Make</li>
+<li><p>Go version 1.14.x with the <code class="docutils literal notranslate"><span class="pre">go</span></code> binary in <code class="docutils literal notranslate"><span class="pre">PATH</span></code></p></li>
+<li><p>Git</p></li>
+<li><p>Make</p></li>
 </ul>
 <p>Build and install the ondemand-dex binary:</p>
 <blockquote>
@@ -279,8 +279,8 @@ sudo systemctl restart ondemand-dex
 </div>
 </div></blockquote>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If OnDemand is configured to use SSL and SSL certificates are not configured in Dex,
+<p class="admonition-title">Warning</p>
+<p>If OnDemand is configured to use SSL and SSL certificates are not configured in Dex,
 the default behavior is for Dex to use copies of the OnDemand certificates for SSL.
 This means when the OnDemand certificates are updated it’s necessary to run
 <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> to make new copies of the certificates and restart <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code>.</p>
@@ -299,15 +299,13 @@ sudo systemctl start ondemand-dex.service
 <div class="section" id="dex-firewall">
 <h2>Dex Firewall<a class="headerlink" href="#dex-firewall" title="Permalink to this headline">¶</a></h2>
 <p id="id1">By default when using SSL, Dex will use port <code class="docutils literal notranslate"><span class="pre">5554</span></code> for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is <code class="docutils literal notranslate"><span class="pre">5556</span></code>.  The port being used by Dex must be externally accessible.</p>
-<dl class="docutils">
-<dt>Firewalld example:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">5554</span>/tcp --permanent
+<dl>
+<dt>Firewalld example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">5554</span>/tcp --permanent
 $ sudo firewall-cmd --reload
 </pre></div>
 </div>
 </dd>
-<dt>Iptables example:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">5554</span> -j ACCEPT
+<dt>Iptables example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">5554</span> -j ACCEPT
 $ sudo iptables-save &gt; /etc/sysconfig/iptables
 </pre></div>
 </div>
@@ -318,49 +316,49 @@ $ sudo iptables-save &gt; /etc/sysconfig/iptables
 <h2>Configuring OnDemand Dex for LDAP<a class="headerlink" href="#configuring-ondemand-dex-for-ldap" title="Permalink to this headline">¶</a></h2>
 <p id="dex-ldap">Requirements:</p>
 <ul class="simple">
-<li>an LDAP server preferably with SSL support (<code class="docutils literal notranslate"><span class="pre">openldap.my_center.edu:636</span></code>)</li>
+<li><p>an LDAP server preferably with SSL support (<code class="docutils literal notranslate"><span class="pre">openldap.my_center.edu:636</span></code>)</p></li>
 </ul>
 <p>The following is an example configuration using OpenLDAP.</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
 
-<span class="c1"># ...</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">dex</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">connectors</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
-</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ldap</span>
-</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">LDAP</span>
-</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">openldap.my_center.edu:636</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">insecureSkipVerify</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">bindDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn=admin,dc=example,dc=org</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">bindPW</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">userSearch</span><span class="p p-Indicator">:</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=People,dc=example,dc=org</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixAccount)&quot;</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">idAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">emailAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mail</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">gecos</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">preferredUsernameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uid</span>
-</span><span class="hll">        <span class="l l-Scalar l-Scalar-Plain">groupSearch</span><span class="p p-Indicator">:</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">baseDN</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ou=Groups,dc=example,dc=org</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">filter</span><span class="p p-Indicator">:</span> <span class="s">&quot;(objectClass=posixGroup)&quot;</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">userMatchers</span><span class="p p-Indicator">:</span>
-</span><span class="hll">            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">userAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DN</span>
-</span><span class="hll">              <span class="l l-Scalar l-Scalar-Plain">groupAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">member</span>
-</span><span class="hll">          <span class="l l-Scalar l-Scalar-Plain">nameAttr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cn</span>
+<span class="c1"># ...</span><span class="w"></span>
+<span class="hll"><span class="nt">dex</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="nt">connectors</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldap</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldap</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LDAP</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openldap.my_center.edu:636</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">insecureSkipVerify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">bindDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cn=admin,dc=example,dc=org</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">bindPW</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">userSearch</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">baseDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ou=People,dc=example,dc=org</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;(objectClass=posixAccount)&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uid</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">idAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uid</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">emailAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mail</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">nameAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gecos</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">preferredUsernameAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uid</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">groupSearch</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">baseDN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ou=Groups,dc=example,dc=org</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;(objectClass=posixGroup)&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">userMatchers</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">userAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DN</span><span class="w"></span>
+</span><span class="hll"><span class="w">              </span><span class="nt">groupAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">member</span><span class="w"></span>
+</span><span class="hll"><span class="w">          </span><span class="nt">nameAttr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cn</span><span class="w"></span>
 </span></pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For documentation on Dex LDAP configuration please see the <a class="reference external" href="https://dexidp.io/docs/connectors/ldap/">Dex LDAP docs</a></p>
+<p class="admonition-title">Note</p>
+<p>For documentation on Dex LDAP configuration please see the <a class="reference external" href="https://dexidp.io/docs/connectors/ldap/">Dex LDAP docs</a></p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>If you supply a <code class="docutils literal notranslate"><span class="pre">bindPW</span></code> in this file it’s recommended to change the file permissions on <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> to be <code class="docutils literal notranslate"><span class="pre">0600</span></code> make the file only readable by <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
-<blockquote class="last">
+<blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown root:root /etc/ood/config/ood_portal.yml
 sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
 </pre></div>
@@ -379,28 +377,28 @@ sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
 <p>The following reference is for <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> values set under the <code class="docutils literal notranslate"><span class="pre">dex</span></code> key.</p>
 <dl class="describe">
 <dt>
-<code class="descname">ssl (Boolean, null)</code></dt>
+<code class="sig-name descname">ssl (Boolean, null)</code></dt>
 <dd><p>Boolean to set if SSL is used, is <code class="docutils literal notranslate"><span class="pre">true</span></code> if OnDemand is configured for SSL, otherwise this defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.
 This value is used to determine which listen ports to use for Dex as well as OIDC configurations for OnDemand</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">http_port (String, Integer)</code></dt>
+<code class="sig-name descname">http_port (String, Integer)</code></dt>
 <dd><p>The HTTP port used by Dex, default is <code class="docutils literal notranslate"><span class="pre">5556</span></code>.
 Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">http</span></code> in the Dex configuration as well as OIDC configurations</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">https_port (String, Integer)</code></dt>
+<code class="sig-name descname">https_port (String, Integer)</code></dt>
 <dd><p>The HTTPS port used by Dex, default is <code class="docutils literal notranslate"><span class="pre">5554</span></code>. This value is only set if SSL is enabled.
 Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">https</span></code> in the Dex configuration as well as OIDC configurations</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">tls_cert (String, null)</code></dt>
+<code class="sig-name descname">tls_cert (String, null)</code></dt>
 <dd><p>The path to TLS cert used by Dex.
 The default is to use the SSL certificate for OnDemand if OnDemand is configured with SSL.
 Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">tlsCert</span></code> in the Dex configuration.
@@ -410,7 +408,7 @@ The <code class="docutils literal notranslate"><span class="pre">ondemand-dex</s
 
 <dl class="describe">
 <dt>
-<code class="descname">tls_key (String, null)</code></dt>
+<code class="sig-name descname">tls_key (String, null)</code></dt>
 <dd><p>The path to TLS key used by Dex.
 The default is to use the SSL key for OnDemand if OnDemand is configured with SSL.
 Used to define <code class="docutils literal notranslate"><span class="pre">web</span> <span class="pre">-&gt;</span> <span class="pre">tlsKey</span></code> in the Dex configuration.
@@ -420,14 +418,14 @@ The <code class="docutils literal notranslate"><span class="pre">ondemand-dex</s
 
 <dl class="describe">
 <dt>
-<code class="descname">storage_file (String)</code></dt>
+<code class="sig-name descname">storage_file (String)</code></dt>
 <dd><p>The path to the Dex SQLite storage file.  Defaults to <code class="docutils literal notranslate"><span class="pre">/etc/ood/dex/dex.db</span></code>.
 Used to define <code class="docutils literal notranslate"><span class="pre">storage</span> <span class="pre">-&gt;</span> <span class="pre">config</span> <span class="pre">-&gt;</span> <span class="pre">file</span></code> in the Dex configuration.</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">client_id (String)</code></dt>
+<code class="sig-name descname">client_id (String)</code></dt>
 <dd><p>The client ID used for the OnDemand OIDC client.
 The default is to use the <code class="docutils literal notranslate"><span class="pre">servername</span></code> for OnDemand, and if that is not defined the host’s FQDN is used.
 Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">id</span></code> in the Dex configuration as well as OnDemand OIDC configurations.</p>
@@ -435,7 +433,7 @@ Sets <code class="docutils literal notranslate"><span class="pre">staticClients[
 
 <dl class="describe">
 <dt>
-<code class="descname">client_secret (String)</code></dt>
+<code class="sig-name descname">client_secret (String)</code></dt>
 <dd><p>The client secret used for the OnDemand OIDC client.
 The default is a randomly generated secret stored in <code class="docutils literal notranslate"><span class="pre">/etc/ood/dex/ondemand.secret</span></code>.
 The value for this configuration can either be the secret string or path to file storing the secret.
@@ -445,7 +443,7 @@ Sets <code class="docutils literal notranslate"><span class="pre">staticClients[
 
 <dl class="describe">
 <dt>
-<code class="descname">client_redirect_uris (Array&lt;String&gt;)</code></dt>
+<code class="sig-name descname">client_redirect_uris (Array&lt;String&gt;)</code></dt>
 <dd><p>Additional OIDC client URIs to authorize for the OnDemand client.
 The values provided for this are merged with the default redirect URI generated for OnDemand.
 Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">redirectURIs</span></code> in the Dex configuration as well as OnDemand OIDC configurations.</p>
@@ -453,14 +451,14 @@ Sets <code class="docutils literal notranslate"><span class="pre">staticClients[
 
 <dl class="describe">
 <dt>
-<code class="descname">client_name (String)</code></dt>
+<code class="sig-name descname">client_name (String)</code></dt>
 <dd><p>The default OIDC client name for Dex. Defaults to <code class="docutils literal notranslate"><span class="pre">OnDemand</span></code>.
 Sets <code class="docutils literal notranslate"><span class="pre">staticClients[0]</span> <span class="pre">-&gt;</span> <span class="pre">name</span></code> in the Dex configuration.</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">connectors (Array&lt;Hash&gt;)</code></dt>
+<code class="sig-name descname">connectors (Array&lt;Hash&gt;)</code></dt>
 <dd><p>This defines the external connectors used to authenticate users with Dex.
 If this value is not provided the default behavior is to set a static password of <code class="docutils literal notranslate"><span class="pre">password</span></code> for user <code class="docutils literal notranslate"><span class="pre">ood&#64;localhost</span></code>.
 This value is passed directly to the Dex configuration for <code class="docutils literal notranslate"><span class="pre">connectors</span></code>.
@@ -469,16 +467,16 @@ For an example of LDAP configuration see <a class="reference internal" href="#de
 
 <dl class="describe">
 <dt>
-<code class="descname">frontend (Hash)</code></dt>
+<code class="sig-name descname">frontend (Hash)</code></dt>
 <dd><p>This defines various changes for the themes and frontend look of Dex.
 The value provided is passed directly to the Dex configuration for <code class="docutils literal notranslate"><span class="pre">frontend</span></code>.
 If <code class="docutils literal notranslate"><span class="pre">dir</span></code> key is not set the default of <code class="docutils literal notranslate"><span class="pre">/usr/share/ondemand-dex/web</span></code> is used.
 If <code class="docutils literal notranslate"><span class="pre">theme</span></code> key is not set the default of <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> is used.</p>
 <p>Default</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">frontend</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">dir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/share/ondemand-dex/web&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">theme</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand&quot;</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">frontend</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/share/ondemand-dex/web&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ondemand&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -486,16 +484,16 @@ If <code class="docutils literal notranslate"><span class="pre">theme</span></co
 
 <dl class="describe">
 <dt>
-<code class="descname">grpc (Hash)</code></dt>
+<code class="sig-name descname">grpc (Hash)</code></dt>
 <dd><p>The configuration for Dex’s gRPC API.
 Value is passed directly to the Dex configuration</p>
 <p>Example:</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">grpc</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">addr</span><span class="p p-Indicator">:</span> <span class="s">&quot;127.0.0.1:5557&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">tlsCert</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/ood/dex/grpc-server.crt&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">tlsKey</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/ood/dex/grpc-server.key&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">tlsClientCA</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/ood/dex/grpc-ca.crt&quot;</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">grpc</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;127.0.0.1:5557&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tlsCert</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/ood/dex/grpc-server.crt&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tlsKey</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/ood/dex/grpc-server.key&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tlsClientCA</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/ood/dex/grpc-ca.crt&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -503,14 +501,14 @@ Value is passed directly to the Dex configuration</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">expiry (Hash)</code></dt>
+<code class="sig-name descname">expiry (Hash)</code></dt>
 <dd><p>The configuration for Dex’s expirations.
 Value is passed directly to the Dex configuration</p>
 <p>Example:</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">expiry</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">signingKeys</span><span class="p p-Indicator">:</span> <span class="s">&quot;6h&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">idTokens</span><span class="p p-Indicator">:</span> <span class="s">&quot;24h&quot;</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">expiry</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">signingKeys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6h&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">idTokens</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;24h&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>

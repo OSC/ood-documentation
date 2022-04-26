@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -211,9 +211,9 @@
 provides context around these locations.</p>
 <p>In general administrators will want to note whether they need to see:</p>
 <ul class="simple">
-<li>System type logs for authentication to the <a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">web-node</span></a> itself or OOD’s own configuration.</li>
-<li>Session data for things like connecting to interactive apps (Jupyter, Rstudio, Codeserver, etc.) from
-the user’s PUN, which is already running on the web-node.</li>
+<li><p>System type logs for authentication to the <a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">web-node</span></a> itself or OOD’s own configuration.</p></li>
+<li><p>Session data for things like connecting to interactive apps (Jupyter, Rstudio, Codeserver, etc.) from
+the user’s PUN, which is already running on the web-node.</p></li>
 </ul>
 <div class="section" id="system-logs">
 <h2>System Logs<a class="headerlink" href="#system-logs" title="Permalink to this headline">¶</a></h2>
@@ -223,36 +223,36 @@ when initially installing and configuring Open OnDemand.</p>
 <p>For logs relating to issues about:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Authenticating to the web-node</li>
-<li>Configuring OnDemand</li>
+<li><p>Authenticating to the web-node</p></li>
+<li><p>Configuring OnDemand</p></li>
 </ul>
 </div></blockquote>
 <p>There are two locations to check depending on what information is needed:</p>
 <p><code class="file docutils literal notranslate"><span class="pre">/var/log/httpd/&lt;hostname&gt;_error.log</span></code></p>
 <ul class="simple">
-<li>OnDemand will log to this location for its own configuration errors.</li>
+<li><p>OnDemand will log to this location for its own configuration errors.</p></li>
 </ul>
 <p><code class="file docutils literal notranslate"><span class="pre">/var/log/httpd/&lt;hostname&gt;_access.log</span></code></p>
 <ul class="simple">
-<li>Where OnDemand will log succsseful logins.</li>
+<li><p>Where OnDemand will log succsseful logins.</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There are no entries for failed logins.</p>
+<p class="admonition-title">Warning</p>
+<p>There are no entries for failed logins.</p>
 </div>
 <p><strong>NGINX Logs</strong></p>
 <p>The NGINX logs are the output of the user <a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">PUN</span></a>. These logs will capture things relevant
 to a <em>particular user</em> such as:</p>
 <ul class="simple">
-<li>Debuggin issues related to job submissions for a user. For example, commands being issued to the scheduler
-(<code class="docutils literal notranslate"><span class="pre">sbatch</span></code>, <code class="docutils literal notranslate"><span class="pre">qsub</span></code>, etc) can be seen here by searching for <code class="docutils literal notranslate"><span class="pre">execve</span></code>.</li>
-<li>Issues related to PUNs crashing and/or pages not rendering correctly.</li>
+<li><p>Debuggin issues related to job submissions for a user. For example, commands being issued to the scheduler
+(<code class="docutils literal notranslate"><span class="pre">sbatch</span></code>, <code class="docutils literal notranslate"><span class="pre">qsub</span></code>, etc) can be seen here by searching for <code class="docutils literal notranslate"><span class="pre">execve</span></code>.</p></li>
+<li><p>Issues related to PUNs crashing and/or pages not rendering correctly.</p></li>
 </ul>
 <p>These logs are located at:</p>
 <p><code class="file docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/&lt;user&gt;</span></code></p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">These logs by default have <code class="docutils literal notranslate"><span class="pre">root:root</span></code> ownership. It may be beneficial
+<p class="admonition-title">Note</p>
+<p>These logs by default have <code class="docutils literal notranslate"><span class="pre">root:root</span></code> ownership. It may be beneficial
 to <code class="docutils literal notranslate"><span class="pre">chown</span></code> an appropriate staff group on these files for troubleshooting down the road.</p>
 </div>
 </div>
@@ -264,8 +264,8 @@ to <code class="docutils literal notranslate"><span class="pre">chown</span></co
 of</em> <code class="docutils literal notranslate"><span class="pre">stderr</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">stdout</span></code> for a job (typically to <code class="docutils literal notranslate"><span class="pre">output.log</span></code>). Other apps will also output
 information they may need there as well for connections and errors.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The files will be <em>owned by the user</em> and so admins will need to ensure they are either
+<p class="admonition-title">Note</p>
+<p>The files will be <em>owned by the user</em> and so admins will need to ensure they are either
 able to substitue user or escalate to root in order to see these files.</p>
 </div>
 <p>In general the session data or job submission files for apps across the dashboard, such as the Job Composer,
@@ -277,8 +277,8 @@ Batch Connect, or Frame-renderer, all start from the root of:</p>
 <p>This file is used for the session data presented on the interactive apps page and data
 used to connect to the batch connect app.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">There may be more than one file in the <code class="docutils literal notranslate"><span class="pre">&lt;session</span> <span class="pre">id&gt;</span></code> directory, but in the Interactive Apps
+<p class="admonition-title">Note</p>
+<p>There may be more than one file in the <code class="docutils literal notranslate"><span class="pre">&lt;session</span> <span class="pre">id&gt;</span></code> directory, but in the Interactive Apps
 page you can match the Session ID you see there to the directory with the desired <code class="docutils literal notranslate"><span class="pre">output.log</span></code> to
 debug.</p>
 </div>

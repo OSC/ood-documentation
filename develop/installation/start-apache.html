@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -184,7 +184,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>3. Start Services</li>
+      <li><span class="section-number">3. </span>Start Services</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -206,51 +206,48 @@
            <div itemprop="articleBody">
             
   <div class="section" id="start-services">
-<span id="id1"></span><h1>3. Start Services<a class="headerlink" href="#start-services" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1><span class="section-number">3. </span>Start Services<a class="headerlink" href="#start-services" title="Permalink to this headline">¶</a></h1>
 <p>By default the Apache HTTP Server is disabled. In this section we will enable
 the Apache service.
 Please see section <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for a more advanced and recommended authentication method after this.</p>
 <ol class="arabic">
-<li><p class="first">Start the Apache HTTP Server:</p>
-<dl class="docutils">
-<dt>RHEL/CentOS 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
+<li><p>Start the Apache HTTP Server:</p>
+<dl>
+<dt>RHEL/CentOS 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
 sudo systemctl <span class="nb">enable</span> httpd24-httpd
 </pre></div>
 </div>
 </dd>
-<dt>RHEL/Rocky 8</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd
+<dt>RHEL/Rocky 8</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd
 sudo systemctl <span class="nb">enable</span> httpd
 </pre></div>
 </div>
 </dd>
-<dt>Ubuntu</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start apache2
+<dt>Ubuntu</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start apache2
 sudo systemctl <span class="nb">enable</span> apache2
 </pre></div>
 </div>
 </dd>
 </dl>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you access the OnDemand server that you just started, you will be
+<p class="admonition-title">Warning</p>
+<p>If you access the OnDemand server that you just started, you will be
 presented with a username/password dialog box.
 The default user must exist on the system before login is possible.</p>
 </div>
 </li>
-<li><p class="first">(Optional) Start the Dex server</p>
+<li><p>(Optional) Start the Dex server</p>
 <p>If using the default OnDemand authentication mechanism, you must start the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start ondemand-dex
 sudo systemctl <span class="nb">enable</span> ondemand-dex
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) Configure default user</p>
+<li><p>(Optional) Configure default user</p>
 <p>If you wish to use the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> you must create that user on the OnDemand system.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Using the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> user is not recommended for production and is intended only for
+<p class="admonition-title">Warning</p>
+<p>Using the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> user is not recommended for production and is intended only for
 evaluation and testing of OnDemand. The recommended approach is to configure LDAP, see <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a>,
 or some othe authentication mechanism in Apache such as OIDC or Shibboleth.</p>
 </div>
@@ -259,9 +256,8 @@ sudo useradd -d /home/ood -g ood -k /etc/skel -m ood
 </pre></div>
 </div>
 </li>
-<li><p class="first">Browse to your OnDemand server and login the username <code class="docutils literal notranslate"><span class="pre">ood&#64;localhost</span></code> and the password <code class="docutils literal notranslate"><span class="pre">password</span></code>.
-If everything worked you should be presented with the OnDemand dashboard.</p>
-</li>
+<li><p>Browse to your OnDemand server and login the username <code class="docutils literal notranslate"><span class="pre">ood&#64;localhost</span></code> and the password <code class="docutils literal notranslate"><span class="pre">password</span></code>.
+If everything worked you should be presented with the OnDemand dashboard.</p></li>
 </ol>
 </div>
 

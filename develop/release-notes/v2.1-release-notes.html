@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -227,15 +227,15 @@
   <div class="section" id="v2-1-release-notes">
 <span id="id1"></span><h1>v2.1 Release Notes<a class="headerlink" href="#v2-1-release-notes" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There are some breaking changes in 2.1. See the upgrade directions below for details.</p>
+<p class="admonition-title">Warning</p>
+<p>There are some breaking changes in 2.1. See the upgrade directions below for details.</p>
 </div>
 <p>Highlights in 2.1:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></li>
-<li><a class="reference internal" href="#ubuntu-20-04-packages">Ubuntu 20.04 packages</a></li>
-<li><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
-<li><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
+<li><p><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></p></li>
+<li><p><a class="reference internal" href="#ubuntu-20-04-packages">Ubuntu 20.04 packages</a></p></li>
+<li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
+<li><p><a class="reference internal" href="#selinux-changes">SELinux changes</a></p></li>
 </ul>
 <div class="section" id="upgrading-from-v2-0">
 <h2>Upgrading from v2.0<a class="headerlink" href="#upgrading-from-v2-0" title="Permalink to this headline">¶</a></h2>
@@ -255,38 +255,38 @@ cached settings in any of their batch connect apps.</p>
 <div class="section" id="upgrade-directions">
 <h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
+<p class="admonition-title">Warning</p>
+<p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The OnDemand upgrade has only been tested going from 2.0.x to 2.1.x.</p>
+<p class="admonition-title">Warning</p>
+<p>The OnDemand upgrade has only been tested going from 2.0.x to 2.1.x.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Update OnDemand release RPM</p>
+<li><p>Update OnDemand release RPM</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/2.1/ondemand-release-web-2.1-1.noarch.rpm
 </pre></div>
 </div>
 </li>
-<li><p class="first">Enable dependency repos</p>
+<li><p>Enable dependency repos</p>
 <p><strong>RHEL/Rocky 8 only</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf module reset nodejs
 sudo dnf module <span class="nb">enable</span> nodejs:14
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update OnDemand</p>
+<li><p>Update OnDemand</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
 sudo yum update ondemand
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) If using Dex based authentiction, update the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
+<li><p>(Optional) If using Dex based authentiction, update the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum update ondemand-dex
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update Apache configuration and restart Apache.</p>
+<li><p>Update Apache configuration and restart Apache.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
@@ -299,22 +299,21 @@ sudo yum update ondemand
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> was installed, restart the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
+<li><p>(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> was installed, restart the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart ondemand-dex.service
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> was installed, see <a class="reference internal" href="../installation/modify-system-security.html#ood-selinux-updates"><span class="std std-ref">SELinux after Updates</span></a></p>
-</li>
-<li><p class="first">Force all PUNs to restart</p>
+<li><p>(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> was installed, see <a class="reference internal" href="../installation/modify-system-security.html#ood-selinux-updates"><span class="std std-ref">SELinux after Updates</span></a></p></li>
+<li><p>Force all PUNs to restart</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.</p>
+<li><p>(Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">See <a class="reference internal" href="#dependency-updates">Dependency updates</a> warning before uninstalling old Ruby versions.</p>
+<p class="admonition-title">Warning</p>
+<p>See <a class="reference internal" href="#dependency-updates">Dependency updates</a> warning before uninstalling old Ruby versions.</p>
 </div>
 <p><strong>RHEL/CentOS 7 only</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove rh-nodejs12<span class="se">\*</span>
@@ -337,16 +336,14 @@ sudo yum update ondemand
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>
 <p>This release updates the following dependencies:</p>
 <ul>
-<li><p class="first">NodeJS 14</p>
+<li><p>NodeJS 14</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
+<p class="admonition-title">Warning</p>
+<p>The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
 </div>
 </li>
-<li><p class="first">Passenger 6.0.11</p>
-</li>
-<li><p class="first">NGINX 1.20.1</p>
-</li>
+<li><p>Passenger 6.0.11</p></li>
+<li><p>NGINX 1.20.1</p></li>
 </ul>
 </div>
 <div class="section" id="selinux-changes">

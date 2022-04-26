@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -213,49 +213,49 @@
 <p>This is a summary of using OpenID Connect for authentication. Two example OpenID Connect identity providers we have documented include <a class="reference internal" href="dex.html#authentication-dex"><span class="std std-ref">Dex</span></a> and <a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html#authentication-tutorial-oidc-keycloak-rhel7"><span class="std std-ref">Keycloak</span></a>.</p>
 <p>The following prerequisites need to be satisfied:</p>
 <ul class="simple">
-<li>A OIDC IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.example.com</span></code> (outside of scope of this document)</li>
-<li>The <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> installed on the OnDemand Server.</li>
+<li><p>A OIDC IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.example.com</span></code> (outside of scope of this document)</p></li>
+<li><p>The <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> installed on the OnDemand Server.</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">OnDemand repos provide the <code class="docutils literal notranslate"><span class="pre">https24-mod_auth_openidc</span></code> RPM for RHEL 7 and CentOS 7 as it must be built against SCL Apache. The OnDemand repos also have the <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.</p>
+<p class="admonition-title">Note</p>
+<p>OnDemand repos provide the <code class="docutils literal notranslate"><span class="pre">https24-mod_auth_openidc</span></code> RPM for RHEL 7 and CentOS 7 as it must be built against SCL Apache. The OnDemand repos also have the <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.</p>
 </div>
 <p>The following is an example <strong class="program">ood-portal-generator</strong> configuration file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand.example.com</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">servername</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand.example.com</span><span class="w"></span>
 
-<span class="c1"># Use OIDC authentication</span>
-<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
+<span class="c1"># Use OIDC authentication</span><span class="w"></span>
+<span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span><span class="w"></span>
 
-<span class="c1"># Use OIDC logout</span>
-<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc?logout=https%3A%2F%ondemand.example.com&quot;</span>
+<span class="c1"># Use OIDC logout</span><span class="w"></span>
+<span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc?logout=https%3A%2F%ondemand.example.com&quot;</span><span class="w"></span>
 
-<span class="c1"># Capture system user name from authenticated user name</span>
-<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+<span class="c1"># Capture system user name from authenticated user name</span><span class="w"></span>
+<span class="nt">user_map_cmd</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_provider_metadata_url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://idp.example.com/.well-known/openid-configuration&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_client_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;ondemand.example.com&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_client_secret</span><span class="p p-Indicator">:</span> <span class="s">&quot;b972c25d-88a4-41fa-87f7-a12ff167dd13&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_remote_user_claim</span><span class="p p-Indicator">:</span> <span class="s">&quot;preferred_username&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_scope</span><span class="p p-Indicator">:</span> <span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">groups&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_session_inactivity_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_session_max_duration</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">28800</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_state_max_number_of_cookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_settings</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">OIDCPassIDTokenAs</span><span class="p p-Indicator">:</span> <span class="s">&quot;serialized&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">OIDCPassRefreshToken</span><span class="p p-Indicator">:</span> <span class="s">&quot;On&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">OIDCPassClaimsAs</span><span class="p p-Indicator">:</span> <span class="s">&quot;environment&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">OIDCStripCookies</span><span class="p p-Indicator">:</span> <span class="s">&quot;mod_auth_openidc_session</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_chunks</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_0</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_1&quot;</span>
+<span class="nt">oidc_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc&quot;</span><span class="w"></span>
+<span class="nt">oidc_provider_metadata_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://idp.example.com/.well-known/openid-configuration&quot;</span><span class="w"></span>
+<span class="nt">oidc_client_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ondemand.example.com&quot;</span><span class="w"></span>
+<span class="nt">oidc_client_secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;b972c25d-88a4-41fa-87f7-a12ff167dd13&quot;</span><span class="w"></span>
+<span class="nt">oidc_remote_user_claim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;preferred_username&quot;</span><span class="w"></span>
+<span class="nt">oidc_scope</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">groups&quot;</span><span class="w"></span>
+<span class="nt">oidc_session_inactivity_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">28800</span><span class="w"></span>
+<span class="nt">oidc_session_max_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">28800</span><span class="w"></span>
+<span class="nt">oidc_state_max_number_of_cookies</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span><span class="w"></span>
+<span class="nt">oidc_settings</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCPassIDTokenAs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;serialized&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCPassRefreshToken</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCPassClaimsAs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;environment&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCStripCookies</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mod_auth_openidc_session</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_chunks</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_0</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_1&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>It’s recommended to secure <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> by changing the file permissions to be <code class="docutils literal notranslate"><span class="pre">0600</span></code> and make the file only readable by <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
-<blockquote class="last">
+<blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod root:root /etc/ood/config/ood_portal.yml
 sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
 </pre></div>

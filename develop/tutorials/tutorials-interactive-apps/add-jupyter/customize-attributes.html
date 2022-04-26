@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -194,7 +194,7 @@
         
           <li><a href="../add-jupyter.html">Add a Jupyter App</a> &raquo;</li>
         
-      <li>3. Customize Attributes</li>
+      <li><span class="section-number">3. </span>Customize Attributes</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -216,7 +216,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="customize-attributes">
-<span id="app-development-tutorials-interactive-apps-add-jupyter-customize-attributes"></span><h1>3. Customize Attributes<a class="headerlink" href="#customize-attributes" title="Permalink to this headline">¶</a></h1>
+<span id="app-development-tutorials-interactive-apps-add-jupyter-customize-attributes"></span><h1><span class="section-number">3. </span>Customize Attributes<a class="headerlink" href="#customize-attributes" title="Permalink to this headline">¶</a></h1>
 <p>Now we will customize the app to work on a given cluster. Be sure that you walk
 through <a class="reference internal" href="software-requirements.html#app-development-tutorials-interactive-apps-add-jupyter-software-requirements"><span class="std std-ref">Software Requirements</span></a>
 for the given cluster ahead of time.</p>
@@ -225,44 +225,44 @@ for the given cluster ahead of time.</p>
 defining the attributes (their values or HTML form elements) used when
 generating the batch script.</p>
 <ol class="arabic">
-<li><p class="first">We will begin by adding a cluster for the Jupyter app to use. You do this by
+<li><p>We will begin by adding a cluster for the Jupyter app to use. You do this by
 editing the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> in your favorite editor as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
-<span class="nn">---</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-</span><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="hll"><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+</span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">modules</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;python&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">extra_jupyter_args</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">modules</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w"></span>
 </pre></div>
 </div>
 <p>where we replace <code class="docutils literal notranslate"><span class="pre">my_cluster</span></code> with a valid cluster that corresponds to a
 cluster configuration file located under
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span><em><span class="pre">my_cluster</span></em><span class="pre">.yml</span></code>.</p>
 </li>
-<li><p class="first">We will also edit the module(s) that is(are) required to be loaded within
+<li><p>We will also edit the module(s) that is(are) required to be loaded within
 our batch job to get a Jupyter Notebook Server running:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
-</span>  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">modules</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;python&quot;</span><span class="w"></span>
+</span><span class="w">  </span><span class="nt">extra_jupyter_args</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">modules</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w"></span>
 </pre></div>
 </div>
 <p>where we replace <code class="docutils literal notranslate"><span class="pre">python</span></code> with a list of required modules for our given
@@ -272,37 +272,31 @@ cluster.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">We test our changes by again clicking the <em>Launch Jupyter Notebook</em> button
-back in our details view of our sandbox app.</p>
-</li>
-<li><p class="first">You should see a web form for the Jupyter app. Fill in the form now and try
+<li><p>We test our changes by again clicking the <em>Launch Jupyter Notebook</em> button
+back in our details view of our sandbox app.</p></li>
+<li><p>You should see a web form for the Jupyter app. Fill in the form now and try
 to <em>Launch</em> a Jupyter batch job.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>While you are waiting for the job to start it is <strong>recommended</strong> that you
 click the link under the “Session ID:”. This will open the File Explorer
 in the working directory of the currently launched Jupyter batch job.</p>
 <p>Useful debugging files (before job runs):</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">user_defined_context.json</span></code></dt>
-<dd><p class="first last">attributes submitted by the user in the web form</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">user_defined_context.json</span></code></dt><dd><p>attributes submitted by the user in the web form</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">job_script_content.sh</span></code></dt>
-<dd><p class="first last">the batch script content</p>
+<dt><code class="docutils literal notranslate"><span class="pre">job_script_content.sh</span></code></dt><dd><p>the batch script content</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">job_script_options.json</span></code></dt>
-<dd><p class="first last">the job submission parameters (this will be used in the next section if
+<dt><code class="docutils literal notranslate"><span class="pre">job_script_options.json</span></code></dt><dd><p>the job submission parameters (this will be used in the next section if
 you have trouble submitting the job)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/&lt;user&gt;/error.log</span></code></dt>
-<dd><p class="first last">the per-user NGINX (PUN) log file (this will contain the command line
+<dt><code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/&lt;user&gt;/error.log</span></code></dt><dd><p>the per-user NGINX (PUN) log file (this will contain the command line
 called when submitting the batch job, look for <code class="docutils literal notranslate"><span class="pre">execve=...</span></code>)</p>
 </dd>
 </dl>
 <p>Useful debugging files (after job runs):</p>
-<dl class="last docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">output.log</span></code></dt>
-<dd><p class="first last">this is the log file of the batch job (useful if batch job runs but
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">output.log</span></code></dt><dd><p>this is the log file of the batch job (useful if batch job runs but
 then dies abruptly)</p>
 </dd>
 </dl>
@@ -311,9 +305,9 @@ then dies abruptly)</p>
 </ol>
 <p>Continue to the next section to learn about job submission parameters.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>It is recommended you commit any changes you made to <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> to <a class="reference external" href="https://git-scm.com/">git</a>.</p>
-<div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>git commit form.yml -m <span class="s1">&#39;updated form with cluster attributes&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git commit form.yml -m <span class="s1">&#39;updated form with cluster attributes&#39;</span>
 </pre></div>
 </div>
 </div>

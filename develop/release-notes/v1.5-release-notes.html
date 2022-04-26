@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -230,22 +230,22 @@
 <span id="id1"></span><h1>v1.5 Release Notes<a class="headerlink" href="#v1-5-release-notes" title="Permalink to this headline">¶</a></h1>
 <p>Highlights in 1.5:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#add-ondemand-scl-and-use-scl-nginx-and-passenger">Add ondemand SCL and use SCL nginx and passenger</a></li>
-<li><a class="reference internal" href="#performance-improvements-to-active-jobs">Performance improvements to Active Jobs</a></li>
-<li><a class="reference internal" href="#basic-job-array-support-for-slurm-torque-and-sge">Basic job array support for Slurm, Torque, and SGE</a></li>
-<li><a class="reference internal" href="#easier-customization-of-home-page-text">Easier customization of home page text</a></li>
-<li><a class="reference internal" href="#rstudio-with-varying-versions-of-r">RStudio with varying versions of R</a></li>
-<li><a class="reference internal" href="#peer-to-peer-app-sharing">Peer to peer app sharing</a></li>
-<li><a class="reference internal" href="#documentation-update-for-keycloak-and-duo">Documentation update for Keycloak and Duo</a></li>
+<li><p><a class="reference internal" href="#add-ondemand-scl-and-use-scl-nginx-and-passenger">Add ondemand SCL and use SCL nginx and passenger</a></p></li>
+<li><p><a class="reference internal" href="#performance-improvements-to-active-jobs">Performance improvements to Active Jobs</a></p></li>
+<li><p><a class="reference internal" href="#basic-job-array-support-for-slurm-torque-and-sge">Basic job array support for Slurm, Torque, and SGE</a></p></li>
+<li><p><a class="reference internal" href="#easier-customization-of-home-page-text">Easier customization of home page text</a></p></li>
+<li><p><a class="reference internal" href="#rstudio-with-varying-versions-of-r">RStudio with varying versions of R</a></p></li>
+<li><p><a class="reference internal" href="#peer-to-peer-app-sharing">Peer to peer app sharing</a></p></li>
+<li><p><a class="reference internal" href="#documentation-update-for-keycloak-and-duo">Documentation update for Keycloak and Duo</a></p></li>
 </ul>
 <div class="section" id="upgrading-from-v1-4">
 <h2>Upgrading from v1.4<a class="headerlink" href="#upgrading-from-v1-4" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance.</p>
+<p class="admonition-title">Warning</p>
+<p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Update OnDemand release RPM</p>
+<li><p>Update OnDemand release RPM</p>
 <p>CentOS/RHEL 6</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/1.5/ondemand-release-web-1.5-1.el6.noarch.rpm
 </pre></div>
@@ -255,37 +255,37 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update OnDemand</p>
+<li><p>Update OnDemand</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
 sudo yum update ondemand
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>This step triggers the execution of <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> script from <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code> which results in
 <code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code> being modified. Your previous <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> file will
 be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.</p>
-<p class="last">Ensure that the resulting <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> Apache config has <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/nginx&quot;</span></code>
+<p>Ensure that the resulting <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> Apache config has <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/nginx&quot;</span></code>
 changed to <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/ondemand-nginx&quot;</span></code>.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>The nginx RPM used by ondemand in 1.4 is no longer maintained. If you use nginx outside of OnDemand it’s recommended to re-install using nginx from repositories such as EPEL after upgrading OnDemand to 1.5.</p>
-<div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum downgrade nginx nginx-filesystem --disablerepo<span class="o">=</span>ondemand-web
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum downgrade nginx nginx-filesystem --disablerepo<span class="o">=</span>ondemand-web
 </pre></div>
 </div>
 </div>
 </li>
-<li><p class="first">Optionally remove dependencies from prior versions of OOD if they are not used by other applications.</p>
+<li><p>Optionally remove dependencies from prior versions of OOD if they are not used by other applications.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove nginx nginx-filesystem passenger
 </pre></div>
 </div>
 </li>
-<li><p class="first">Clean up NGINX directories from prior versions of OOD</p>
+<li><p>Clean up NGINX directories from prior versions of OOD</p>
 <p>The ondemand RPM should have copied all the nginx configurations, tmp files and logs from their previous locations to their new locations if the defaults were not changed. Once the functionality of the OnDemand 1.5 upgrade is verified it is safe to remove these old paths.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.</p>
+<p class="admonition-title">Warning</p>
+<p>If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.</p>
 </div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo rm -rf /var/lib/nginx/config.rpmsave
 sudo rm -rf /var/tmp/nginx/*
@@ -298,11 +298,11 @@ sudo rm -rf /var/log/nginx/*
 <div class="section" id="upgrading-from-v1-3">
 <h2>Upgrading from v1.3<a class="headerlink" href="#upgrading-from-v1-3" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance.</p>
+<p class="admonition-title">Warning</p>
+<p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first before you modify the <em>production</em> instance.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Update OnDemand release RPM</p>
+<li><p>Update OnDemand release RPM</p>
 <p>CentOS/RHEL 6</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/1.5/ondemand-release-web-1.5-1.el6.noarch.rpm
 </pre></div>
@@ -312,30 +312,30 @@ sudo rm -rf /var/log/nginx/*
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update OnDemand</p>
+<li><p>Update OnDemand</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
 sudo yum update ondemand
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>This step triggers the execution of <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> script from <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code> which results in
 <code class="docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code> being modified. Your previous <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> file will
 be copied to a backup in the same directory, which you may need to restore if you have made custom modifications to this file.</p>
-<p class="last">Ensure that the resulting <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> Apache config has <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/nginx&quot;</span></code>
+<p>Ensure that the resulting <code class="docutils literal notranslate"><span class="pre">ood-portal.conf</span></code> Apache config has <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/nginx&quot;</span></code>
 changed to <code class="docutils literal notranslate"><span class="pre">SetEnv</span> <span class="pre">OOD_PUN_SOCKET_ROOT</span> <span class="pre">&quot;/var/run/ondemand-nginx&quot;</span></code>.</p>
 </div>
 </li>
-<li><p class="first">Optionally remove dependencies from prior versions of OOD</p>
+<li><p>Optionally remove dependencies from prior versions of OOD</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove nodejs010<span class="se">\*</span> rh-passenger40<span class="se">\*</span> rh-ruby22<span class="se">\*</span> nginx16<span class="se">\*</span> git19<span class="se">\*</span> v8314<span class="se">\*</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Clean up NGINX directories from prior versions of OOD</p>
+<li><p>Clean up NGINX directories from prior versions of OOD</p>
 <p>The ondemand RPM should have copied all the nginx configurations, tmp files and logs from their previous locations to their new locations if the defaults were not changed. Once the functionality of the OnDemand 1.5 upgrade is verified it is safe to remove these old paths.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.</p>
+<p class="admonition-title">Warning</p>
+<p>If the host running OnDemand has other applications using NGINX then special care needs to be taken not to delete files belonging to the other applications.</p>
 </div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo rm -rf /var/lib/nginx/config.rpmsave
 sudo rm -rf /var/lib/nginx/tmp/*
@@ -343,7 +343,7 @@ sudo rm -rf /var/log/nginx/*
 </pre></div>
 </div>
 </li>
-<li><p class="first">Rebuild any custom Node.js or Ruby apps</p>
+<li><p>Rebuild any custom Node.js or Ruby apps</p>
 <p>Since we upgraded to Ruby 2.4 from 2.2 and NodeJS 0.10 to NodeJS 6 any custom
 Passenger apps in Ruby or NodeJS that have their dependencies installed in
 vendor/bundle or node_modules will need to be reinstalled. Some code may have
@@ -353,14 +353,14 @@ to be updated or dependency versions changed to work with the latest Ruby versio
 <p>If you need a way to continue to still use Ruby 2.2 or a different version of
 NodeJS <a class="reference external" href="https://discourse.osc.edu">please post a question on our Discourse instance</a>.</p>
 </li>
-<li><p class="first">Verify Navbar contains all the apps you want.</p>
+<li><p>Verify Navbar contains all the apps you want.</p>
 <p>The behavior changed from 1.3 to 1.5 so by default all categories of any sys
 app found appear as dropdown menus without the need for configuration changes.</p>
 <p>As a result menus may appear that you do not expect, if previously you were relying
 on the “whitelist” functionality of the <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code>.</p>
 <p>See <a class="reference internal" href="../customizations.html#dashboard-navbar-config"><span class="std std-ref">Control Which Apps Appear in the Dashboard Navbar</span></a> for details.</p>
 </li>
-<li><p class="first">Verify Developer mode is configured how you want it</p>
+<li><p>Verify Developer mode is configured how you want it</p>
 <p>See <a class="reference internal" href="../how-tos/app-development/enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> for an explanation of how developer mode has changed
 between 1.3 and 1.5 and how to configure things properly. For sites that have active
 developers, this will either be adding configuration to revert to 1.3’s functionality,
@@ -374,37 +374,37 @@ or creating some directories and symlinks to enable specific app developers.</p>
 </div>
 <div class="section" id="application-version-changes">
 <h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
-<span id="v1-5-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id2">
+<span id="v1-5-app-versions"></span><table class="colwidths-auto docutils align-default" id="id2">
 <caption><span class="caption-number">Table 13 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">App</th>
-<th class="head">Version</th>
+<thead>
+<tr class="row-odd"><th class="head stub"><p>App</p></th>
+<th class="head"><p>Version</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub"><cite>Dashboard App</cite></th>
-<td>1.30.2 → <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.31.0/CHANGELOG.md">1.31.0</a>
-(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.30.2...v1.31.0">diff</a>)</td>
+<tbody>
+<tr class="row-even"><th class="stub"><p><cite>Dashboard App</cite></p></th>
+<td><p>1.30.2 → <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.31.0/CHANGELOG.md">1.31.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.30.2...v1.31.0">diff</a>)</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><cite>Shell App</cite></th>
-<td>Unchanged</td>
+<tr class="row-odd"><th class="stub"><p><cite>Shell App</cite></p></th>
+<td><p>Unchanged</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><cite>Files App</cite></th>
-<td>Unchanged</td>
+<tr class="row-even"><th class="stub"><p><cite>Files App</cite></p></th>
+<td><p>Unchanged</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><cite>File Editor App</cite></th>
-<td>Unchanged</td>
+<tr class="row-odd"><th class="stub"><p><cite>File Editor App</cite></p></th>
+<td><p>Unchanged</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><cite>Active Jobs App</cite></th>
-<td>1.6.9 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.7.0/CHANGELOG.md">1.7.0</a>
-(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.6.9...v1.7.0">diff</a>)</td>
+<tr class="row-even"><th class="stub"><p><cite>Active Jobs App</cite></p></th>
+<td><p>1.6.9 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.7.0/CHANGELOG.md">1.7.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.6.9...v1.7.0">diff</a>)</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><cite>Job Composer App</cite></th>
-<td>2.10.2 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.11.0/CHANGELOG.md">2.11.0</a>
-(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.10.2...v2.11.0">diff</a>)</td>
+<tr class="row-odd"><th class="stub"><p><cite>Job Composer App</cite></p></th>
+<td><p>2.10.2 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.11.0/CHANGELOG.md">2.11.0</a>
+(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.10.2...v2.11.0">diff</a>)</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><cite>Desktops App</cite></th>
-<td>Unchanged</td>
+<tr class="row-even"><th class="stub"><p><cite>Desktops App</cite></p></th>
+<td><p>Unchanged</p></td>
 </tr>
 </tbody>
 </table>
@@ -417,22 +417,21 @@ it was updated from for each of the system web applications in this release.</p>
 <h3>Add ondemand SCL and use SCL nginx and passenger<a class="headerlink" href="#add-ondemand-scl-and-use-scl-nginx-and-passenger" title="Permalink to this headline">¶</a></h3>
 <p>This upgrade adds a new <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> software collection that is the only software collection needed to interact with OnDemand. This new softare collection will load all the collections needed by OnDemand. The Passenger and NGINX dependencies have been repackaged under this new <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> SCL so those packages will no longer interfere with Passenger of NGINX packages from other repositories.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<dl class="last docutils">
-<dt>Several NGINX directories used by OnDemand have changed.</dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">/var/lib/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/lib/ondemand-nginx</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">/var/log/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">/var/tmp/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/tmp/ondemand-nginx</span></code> (1.4 to 1.5)</li>
-<li><code class="docutils literal notranslate"><span class="pre">/var/lib/nginx/tmp</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/tmp/ondemand-nginx</span></code> (1.3 to 1.5)</li>
+<p class="admonition-title">Warning</p>
+<dl class="simple">
+<dt>Several NGINX directories used by OnDemand have changed.</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/lib/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/lib/ondemand-nginx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/log/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/tmp/nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/tmp/ondemand-nginx</span></code> (1.4 to 1.5)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var/lib/nginx/tmp</span></code> to <code class="docutils literal notranslate"><span class="pre">/var/tmp/ondemand-nginx</span></code> (1.3 to 1.5)</p></li>
 </ul>
 </dd>
 </dl>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>nginx_stage now loads the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> SCL via <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> before loading <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code>.</p>
-<div class="code last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">scl_source</span> <span class="n">enable</span> <span class="n">ondemand</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">scl_source</span> <span class="n">enable</span> <span class="n">ondemand</span>
 </pre></div>
 </div>
 </div>
@@ -452,8 +451,8 @@ for the Job Composer app allowing you to specify arguments for requesting a
 job array when submitting a job. The apps have also been updated to gracefully
 handle querying jobs that are job arrays.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Job array support will be added for PBSPro and LSF in the OnDemand 1.6 release.</p>
+<p class="admonition-title">Note</p>
+<p>Job array support will be added for PBSPro and LSF in the OnDemand 1.6 release.</p>
 </div>
 </div>
 <div class="section" id="easier-customization-of-home-page-text">

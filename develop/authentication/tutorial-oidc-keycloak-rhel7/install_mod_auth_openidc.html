@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -201,7 +201,7 @@
         
           <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a> &raquo;</li>
         
-      <li>3. Configure OnDemand to authenticate with Keycloak</li>
+      <li><span class="section-number">3. </span>Configure OnDemand to authenticate with Keycloak</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -223,14 +223,14 @@
            <div itemprop="articleBody">
             
   <div class="section" id="configure-ondemand-to-authenticate-with-keycloak">
-<span id="authentication-tutorial-oidc-keycloak-rhel7-install-mod-auth-openidc"></span><h1>3. Configure OnDemand to authenticate with Keycloak<a class="headerlink" href="#configure-ondemand-to-authenticate-with-keycloak" title="Permalink to this headline">¶</a></h1>
+<span id="authentication-tutorial-oidc-keycloak-rhel7-install-mod-auth-openidc"></span><h1><span class="section-number">3. </span>Configure OnDemand to authenticate with Keycloak<a class="headerlink" href="#configure-ondemand-to-authenticate-with-keycloak" title="Permalink to this headline">¶</a></h1>
 <p>OnDemand’s Apache needs to use mod_auth_openidc to be able to act as an OpenID
 Connect client to Keycloak. We will install mod_auth_openidc and modify
 OnDemand’s Apache configs to enable authentication via Keycloak.</p>
 <div class="section" id="install-mod-auth-openidc">
-<h2>3.1. Install mod_auth_openidc<a class="headerlink" href="#install-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1. </span>Install mod_auth_openidc<a class="headerlink" href="#install-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Install httpd24-mod_auth_openidc from ondemand-web repo</p>
+<li><p>Install httpd24-mod_auth_openidc from ondemand-web repo</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install httpd24-mod_auth_openidc
 </pre></div>
 </div>
@@ -238,72 +238,72 @@ OnDemand’s Apache configs to enable authentication via Keycloak.</p>
 </ol>
 </div>
 <div class="section" id="re-generate-main-config-using-ood-portal-generator">
-<h2>3.2. Re-generate main config using ood-portal-generator<a class="headerlink" href="#re-generate-main-config-using-ood-portal-generator" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Re-generate main config using ood-portal-generator<a class="headerlink" href="#re-generate-main-config-using-ood-portal-generator" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Edit the YAML configuration file for the <a class="reference internal" href="../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> located
+<li><p>Edit the YAML configuration file for the <a class="reference internal" href="../../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> located
 under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
-<span class="c1"># List of Apache authentication directives</span>
-<span class="c1"># NB: Be sure the appropriate Apache module is installed for this</span>
-<span class="c1"># Default: (see below, uses basic auth with an htpasswd file)</span>
-<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">openid-connect&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="c1"># List of Apache authentication directives</span><span class="w"></span>
+<span class="c1"># NB: Be sure the appropriate Apache module is installed for this</span><span class="w"></span>
+<span class="c1"># Default: (see below, uses basic auth with an htpasswd file)</span><span class="w"></span>
+<span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">openid-connect&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span><span class="w"></span>
 
-<span class="c1"># Redirect user to the following URI when accessing logout URI</span>
-<span class="c1"># Example:</span>
-<span class="c1">#     logout_redirect: &#39;/oidc?logout=https%3A%2F%2Fwww.example.com&#39;</span>
-<span class="c1"># Default: &#39;/pun/sys/dashboard/logout&#39; (the Dashboard app provides a simple</span>
-<span class="c1"># HTML page explaining logout to the user)</span>
-<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&#39;/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu&#39;</span>
+<span class="c1"># Redirect user to the following URI when accessing logout URI</span><span class="w"></span>
+<span class="c1"># Example:</span><span class="w"></span>
+<span class="c1">#     logout_redirect: &#39;/oidc?logout=https%3A%2F%2Fwww.example.com&#39;</span><span class="w"></span>
+<span class="c1"># Default: &#39;/pun/sys/dashboard/logout&#39; (the Dashboard app provides a simple</span><span class="w"></span>
+<span class="c1"># HTML page explaining logout to the user)</span><span class="w"></span>
+<span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu&#39;</span><span class="w"></span>
 
-<span class="c1"># Sub-uri used by mod_auth_openidc for authentication</span>
-<span class="c1"># Example:</span>
-<span class="c1">#     oidc_uri: &#39;/oidc&#39;</span>
-<span class="c1"># Default: null (disable OpenID Connect support)</span>
-<span class="l l-Scalar l-Scalar-Plain">oidc_uri</span><span class="p p-Indicator">:</span> <span class="s">&#39;/oidc&#39;</span>
+<span class="c1"># Sub-uri used by mod_auth_openidc for authentication</span><span class="w"></span>
+<span class="c1"># Example:</span><span class="w"></span>
+<span class="c1">#     oidc_uri: &#39;/oidc&#39;</span><span class="w"></span>
+<span class="c1"># Default: null (disable OpenID Connect support)</span><span class="w"></span>
+<span class="nt">oidc_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/oidc&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Notice that we are</p>
 <blockquote>
 <div><ul class="simple">
-<li>changing the Authentication directives for openid-connect</li>
-<li>specifying /oidc to be the sub-uri used by mod_auth_openidc</li>
-<li>specifying that /logout should redirect to this /oidc sub-uri to handle logout
+<li><p>changing the Authentication directives for openid-connect</p></li>
+<li><p>specifying /oidc to be the sub-uri used by mod_auth_openidc</p></li>
+<li><p>specifying that /logout should redirect to this /oidc sub-uri to handle logout
 and specifying after logout, the user should be redirected back to OnDemand
 (which in this tutorial’s case is <code class="docutils literal notranslate"><span class="pre">https%3A%2F%2Fondemand-dev.hpc.osc.edu</span></code>,
-the query param escaped format of <code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code>)</li>
+the query param escaped format of <code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code>)</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Then build and install the new Apache configuration file with:</p>
+<li><p>Then build and install the new Apache configuration file with:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 <p>The effect of this change in the Apache config (in case you want to apply the changes manually) are:</p>
 <ol class="arabic">
-<li><p class="first">Change the authentication directives for all of the Locations that require authentication i.e.:</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>   &lt;Location &quot;/nginx&quot;&gt;
-<span class="gd">-    AuthType Basic</span>
-<span class="gd">-    AuthName &quot;Private&quot;</span>
-<span class="gd">-    AuthUserFile &quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd&quot;</span>
-<span class="gd">-    RequestHeader unset Authorization</span>
-<span class="gi">+    AuthType openid-connect</span>
-     Require valid-user
+<li><p>Change the authentication directives for all of the Locations that require authentication i.e.:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>  &lt;Location &quot;/nginx&quot;&gt;<span class="w"></span>
+<span class="gd">-    AuthType Basic</span><span class="w"></span>
+<span class="gd">-    AuthName &quot;Private&quot;</span><span class="w"></span>
+<span class="gd">-    AuthUserFile &quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd&quot;</span><span class="w"></span>
+<span class="gd">-    RequestHeader unset Authorization</span><span class="w"></span>
+<span class="gi">+    AuthType openid-connect</span><span class="w"></span>
+<span class="w"> </span>    Require valid-user<span class="w"></span>
 
-     LuaHookFixups nginx.lua nginx_handler
-   &lt;/Location&gt;
+<span class="w"> </span>    LuaHookFixups nginx.lua nginx_handler<span class="w"></span>
+<span class="w"> </span>  &lt;/Location&gt;<span class="w"></span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update the <code class="docutils literal notranslate"><span class="pre">Redirect</span> <span class="pre">&quot;logout&quot;</span></code> directive</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-  Redirect &quot;/logout&quot; &quot;/pun/sys/dashboard/logout&quot;</span>
-<span class="gi">+  Redirect &quot;/logout&quot; &quot;/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu&quot;</span>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">Redirect</span> <span class="pre">&quot;logout&quot;</span></code> directive</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-  Redirect &quot;/logout&quot; &quot;/pun/sys/dashboard/logout&quot;</span><span class="w"></span>
+<span class="gi">+  Redirect &quot;/logout&quot; &quot;/oidc?logout=https%3A%2F%2Fondemand-dev.hpc.osc.edu&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add the <code class="docutils literal notranslate"><span class="pre">&lt;Location</span> <span class="pre">&quot;/oidc&quot;&gt;</span></code> directive</p>
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">&lt;Location</span> <span class="pre">&quot;/oidc&quot;&gt;</span></code> directive</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># OpenID Connect redirect URI:
 #
 #     https://ondemand-dev.hpc.osc.edu:443/oidc
@@ -321,9 +321,9 @@ the query param escaped format of <code class="docutils literal notranslate"><sp
 </ol>
 </div>
 <div class="section" id="add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc">
-<h2>3.3. Add Keycloak config to OnDemand Apache for mod_auth_openidc<a class="headerlink" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.3. </span>Add Keycloak config to OnDemand Apache for mod_auth_openidc<a class="headerlink" href="#add-keycloak-config-to-ondemand-apache-for-mod-auth-openidc" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
+<li><p>Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>OIDCProviderMetadataURL https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/.well-known/openid-configuration
 OIDCClientID        &quot;ondemand-dev.hpc.osc.edu&quot;
 OIDCClientSecret    &quot;1111111-1111-1111-1111-111111111111&quot;
@@ -345,20 +345,19 @@ OIDCStripCookies mod_auth_openidc_session mod_auth_openidc_session_chunks mod_au
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li>OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface</li>
-<li>OIDCClientSecret: replace <code class="docutils literal notranslate"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Credentials tab of the client in Keycloak admin interface</li>
-<li>OIDCCryptoPassphrase: replace <code class="docutils literal notranslate"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">40</span></code>.</li>
-<li>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.</li>
+<li><p>OIDCClientID: replace with the client id specified when installing the client in Keycloak admin interface</p></li>
+<li><p>OIDCClientSecret: replace <code class="docutils literal notranslate"><span class="pre">1111111-1111-1111-1111-1111111111111</span></code> with client secret specified from the Credentials tab of the client in Keycloak admin interface</p></li>
+<li><p>OIDCCryptoPassphrase: replace <code class="docutils literal notranslate"><span class="pre">4444444444444444444444444444444444444444</span></code> with random generated password. I used <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">rand</span> <span class="pre">-hex</span> <span class="pre">40</span></code>.</p></li>
+<li><p>Verify the OIDCProviderMetadataURL uses the correct realm and the port Apache exposes to the world for Keycloak by accessing the URL.</p></li>
 </ol>
 </li>
-<li><p class="first">Change permission on file to be readable by apache and no one else:</p>
+<li><p>Change permission on file to be readable by apache and no one else:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chgrp apache /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
 sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf
 </pre></div>
 </div>
 </li>
-<li><p class="first">Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p>
-</li>
+<li><p>Then restart OnDemand’s Apache. OnDemand should now be authenticating using KeyCloak.</p></li>
 </ol>
 <blockquote>
 <div><p>Stop both servives:</p>
@@ -369,8 +368,8 @@ sudo chmod <span class="m">640</span> /opt/rh/httpd24/root/etc/httpd/conf.d/auth
 </div></blockquote>
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We prevent OIDC_CLAIM headers from being passed through to the PUN
+<p class="admonition-title">Note</p>
+<p>We prevent OIDC_CLAIM headers from being passed through to the PUN
 by specifying in this file to pass claims as environment, instead of
 as HTTP headers, since Apache won’t pass any environment off to the
 PUN when proxying requests, but would pass HTTP headers.</p>

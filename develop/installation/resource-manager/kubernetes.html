@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -234,71 +234,71 @@
 <p>TODO table of contents</p>
 <p>A YAML cluster configuration file for a Kubernetes resource manager on an HPC
 cluster looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">K8s</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="c1"># you may not want a login section. There may not be a login node</span>
-  <span class="c1"># for your kuberenetes cluster</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_k8s_cluster.my_center.edu&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;kubernetes&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">config_file</span><span class="p p-Indicator">:</span> <span class="s">&quot;~/.kube/config&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;ood-prod&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">context</span><span class="p p-Indicator">:</span> <span class="s">&quot;ood-prod&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/bin/kubectl&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">username_prefix</span><span class="p p-Indicator">:</span> <span class="s">&quot;prod-&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">namespace_prefix</span><span class="p p-Indicator">:</span> <span class="s">&quot;user-&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">all_namespaces</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">auto_supplemental_groups</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">server</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">endpoint</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://my_k8s_cluster.my_center.edu&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">cert_authority_file</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/pki/tls/certs/kubernetes-ca.crt&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&quot;oidc&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">mounts</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">ssh_allow</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">K8s</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># you may not want a login section. There may not be a login node</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># for your kuberenetes cluster</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_k8s_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;kubernetes&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;~/.kube/config&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ood-prod&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ood-prod&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/bin/kubectl&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">username_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;prod-&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">namespace_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user-&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">all_namespaces</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">    </span><span class="nt">auto_supplemental_groups</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://my_k8s_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">cert_authority_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/pki/tls/certs/kubernetes-ca.crt&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;oidc&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">mounts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ssh_allow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code>.</dd>
-<dt>config_file</dt>
-<dd>The KUBECONFIG file. <em>Optional</em>. Defaults to ~/.kube/config. Sites can also
-set the KUBECONFIG environment varaible, but this configuration has precedence.</dd>
-<dt>cluster</dt>
-<dd>The cluster name. Saved to and referenced from your KUBECONFIG.</dd>
-<dt>context</dt>
-<dd>The context to use when issuing kubectl commands. <em>Optional</em>. Defaults to cluster
-when using OIDC authentication. Saved to and referenced from your KUBECONFIG.</dd>
-<dt>username_prefix</dt>
-<dd>The prefix to your users in your KUBECONFIG. Use this prefix to differentiate between
-different clusters (like test and production).</dd>
-<dt>namespace_prefix</dt>
-<dd>The prefix to your namespace. Use this prefix if you have assertions on what namespaces
-are available. I.e., a Kyverno policy that ensures all namespaces are <code class="docutils literal notranslate"><span class="pre">user-\w+</span></code>.</dd>
-<dt>all_namespaces</dt>
-<dd>A boolean to determine if the user will query for pods in other namespaces.  When false
+<dl class="simple">
+<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code>.</p>
+</dd>
+<dt>config_file</dt><dd><p>The KUBECONFIG file. <em>Optional</em>. Defaults to ~/.kube/config. Sites can also
+set the KUBECONFIG environment varaible, but this configuration has precedence.</p>
+</dd>
+<dt>cluster</dt><dd><p>The cluster name. Saved to and referenced from your KUBECONFIG.</p>
+</dd>
+<dt>context</dt><dd><p>The context to use when issuing kubectl commands. <em>Optional</em>. Defaults to cluster
+when using OIDC authentication. Saved to and referenced from your KUBECONFIG.</p>
+</dd>
+<dt>username_prefix</dt><dd><p>The prefix to your users in your KUBECONFIG. Use this prefix to differentiate between
+different clusters (like test and production).</p>
+</dd>
+<dt>namespace_prefix</dt><dd><p>The prefix to your namespace. Use this prefix if you have assertions on what namespaces
+are available. I.e., a Kyverno policy that ensures all namespaces are <code class="docutils literal notranslate"><span class="pre">user-\w+</span></code>.</p>
+</dd>
+<dt>all_namespaces</dt><dd><p>A boolean to determine if the user will query for pods in other namespaces.  When false
 users will only query in their namespace. If true they will query and display pods from
-all namespaces.</dd>
-<dt>auto_supplemental_groups:</dt>
-<dd>Automatically populate a container’s <code class="docutils literal notranslate"><span class="pre">securityContext.supplementalGroups</span></code> with the users
-supplemental groups.</dd>
-<dt>server</dt>
-<dd>The kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
-<code class="docutils literal notranslate"><span class="pre">cert_authority_file</span></code> keys.</dd>
-<dt>auth:</dt>
-<dd>See the notes on <a class="reference internal" href="#authentication">Authentication</a> below.</dd>
-<dt>mounts:</dt>
-<dd>Site wide mount points for all kubernetes jobs. See the
-<a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-jupyter.html#kubernetes-mounts"><span class="std std-ref">documentation on kubernetes mounts</span></a> for more details.</dd>
+all namespaces.</p>
+</dd>
+<dt>auto_supplemental_groups:</dt><dd><p>Automatically populate a container’s <code class="docutils literal notranslate"><span class="pre">securityContext.supplementalGroups</span></code> with the users
+supplemental groups.</p>
+</dd>
+<dt>server</dt><dd><p>The kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
+<code class="docutils literal notranslate"><span class="pre">cert_authority_file</span></code> keys.</p>
+</dd>
+<dt>auth:</dt><dd><p>See the notes on <a class="reference internal" href="#authentication">Authentication</a> below.</p>
+</dd>
+<dt>mounts:</dt><dd><p>Site wide mount points for all kubernetes jobs. See the
+<a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-jupyter.html#kubernetes-mounts"><span class="std std-ref">documentation on kubernetes mounts</span></a> for more details.</p>
+</dd>
 </dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">batch_connect.ssh_allow</span></code> is important to disable OnDemand from rendering links to SSH into your
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">batch_connect.ssh_allow</span></code> is important to disable OnDemand from rendering links to SSH into your
 Kubernetes worker nodes when Batch Connect apps are running.</p>
 </div>
 <div class="section" id="per-user-kubernetes">
@@ -354,9 +354,9 @@ kubectl config use-context ondemand@kubernetes
 </div>
 <p>Replace the following values:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">$CONTROLLER</span></code> with the Kubernetes Controller FQDN or IP address</li>
-<li><code class="docutils literal notranslate"><span class="pre">$CACERT</span></code> the path to Kubernetes cluster CA cert</li>
-<li><code class="docutils literal notranslate"><span class="pre">$TOKEN</span></code> the token for <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> ServiceAccount</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$CONTROLLER</span></code> with the Kubernetes Controller FQDN or IP address</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$CACERT</span></code> the path to Kubernetes cluster CA cert</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$TOKEN</span></code> the token for <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> ServiceAccount</p></li>
 </ul>
 <p>Below is an example of verifying the kubeconfig is valid:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kubectl cluster-info
@@ -411,9 +411,9 @@ above.</p>
 <code class="docutils literal notranslate"><span class="pre">~/.kube/config</span></code> with the relevant OIDC credentials.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-<span class="k">for</span> arg in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="k">for</span> arg <span class="k">in</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 <span class="k">do</span>
-  <span class="k">case</span> <span class="nv">$arg</span> in
+  <span class="k">case</span> <span class="nv">$arg</span> <span class="k">in</span>
     --user<span class="o">)</span>
     <span class="nv">ONDEMAND_USERNAME</span><span class="o">=</span><span class="nv">$2</span>
     <span class="nb">shift</span>
@@ -441,13 +441,13 @@ above.</p>
 authentication.</p>
 <div class="section" id="managed-authentication">
 <h3>Managed Authentication<a class="headerlink" href="#managed-authentication" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-    <span class="c1"># ...</span>
-    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&#39;managed&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># ...</span><span class="w"></span>
+<span class="w">    </span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;managed&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This is the simplest case and is the default. The authentication
@@ -466,13 +466,13 @@ In order for the OnDemand token to work with Kubernetes, it’s simplest to
 configure an <a class="reference internal" href="#oidc-k8-audience"><span class="std std-ref">audience</span></a> on the OnDemand OIDC client.
 An alternative approach would be to update the pre-PUN hooks to perform a <a class="reference internal" href="#oidc-k8-token-exchange"><span class="std std-ref">token exchange</span></a>.
 Another approach would be to use the same OIDC client configuration for OnDemand and Kubernetes.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-    <span class="c1"># ...</span>
-    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&#39;odic&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># ...</span><span class="w"></span>
+<span class="w">    </span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;odic&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This uses the OIDC credentails that you’ve logged in with.  When
@@ -483,14 +483,14 @@ the cluster but can be something different if you configure it so.</p>
 </div>
 <div class="section" id="gke-authentication">
 <h3>GKE Authentication<a class="headerlink" href="#gke-authentication" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-    <span class="c1"># ...</span>
-    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="s">&#39;gke&#39;</span>
-      <span class="l l-Scalar l-Scalar-Plain">svc_acct_file</span><span class="p p-Indicator">:</span> <span class="s">&#39;~/.gke/my-service-account-file&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_k8s_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># ...</span><span class="w"></span>
+<span class="w">    </span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;gke&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">svc_acct_file</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;~/.gke/my-service-account-file&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>It’s expected that you have a service account that can then manipulate
@@ -509,14 +509,14 @@ client configuration to include the audience of the Kubernetes client.</p>
 <h4>Keycloak<a class="headerlink" href="#keycloak" title="Permalink to this headline">¶</a></h4>
 <p>In the Keycloak web UI, logged in as the admin user:</p>
 <ol class="arabic simple">
-<li>Navigate to <code class="docutils literal notranslate"><span class="pre">Clients</span></code> then choose the OnDemand client.</li>
-<li>Choose the <code class="docutils literal notranslate"><span class="pre">Mappers</span></code> tab and click <code class="docutils literal notranslate"><span class="pre">Create</span></code></li>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Clients</span></code> then choose the OnDemand client.</p></li>
+<li><p>Choose the <code class="docutils literal notranslate"><span class="pre">Mappers</span></code> tab and click <code class="docutils literal notranslate"><span class="pre">Create</span></code></p></li>
 </ol>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Fill in a <code class="docutils literal notranslate"><span class="pre">Name</span></code> and select <code class="docutils literal notranslate"><span class="pre">Audience</span></code> for <code class="docutils literal notranslate"><span class="pre">Mapper</span> <span class="pre">Type</span></code></li>
-<li>For <code class="docutils literal notranslate"><span class="pre">Included</span> <span class="pre">Client</span> <span class="pre">Audience</span></code> choose the Kubernetes client entry</li>
-<li>Turn on both <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">ID</span> <span class="pre">token</span></code> and <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">access</span> <span class="pre">token</span></code></li>
+<li><p>Fill in a <code class="docutils literal notranslate"><span class="pre">Name</span></code> and select <code class="docutils literal notranslate"><span class="pre">Audience</span></code> for <code class="docutils literal notranslate"><span class="pre">Mapper</span> <span class="pre">Type</span></code></p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">Included</span> <span class="pre">Client</span> <span class="pre">Audience</span></code> choose the Kubernetes client entry</p></li>
+<li><p>Turn on both <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">ID</span> <span class="pre">token</span></code> and <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">access</span> <span class="pre">token</span></code></p></li>
 </ol>
 </div></blockquote>
 </div>
@@ -562,9 +562,9 @@ is read by <a class="reference external" href="https://github.com/OSC/job-pod-re
 The <a class="reference external" href="https://github.com/OSC/job-pod-reaper">job-pod-reaper</a> service runs as a Deployment inside Kubernetes and will kill
 any pods based on the lifetime annotation.
 Below is an example of Helm values that can be used to configure job-pod-reaper for OnDemand:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">reapNamespaces</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="l l-Scalar l-Scalar-Plain">namespaceLabels</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app.kubernetes.io/name=open-ondemand</span>
-<span class="l l-Scalar l-Scalar-Plain">objectLabels</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app.kubernetes.io/managed-by=open-ondemand</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">reapNamespaces</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="nt">namespaceLabels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.kubernetes.io/name=open-ondemand</span><span class="w"></span>
+<span class="nt">objectLabels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.kubernetes.io/managed-by=open-ondemand</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You will need to tell OnDemand you are using <a class="reference external" href="https://github.com/OSC/job-pod-reaper">job-pod-reaper</a> and to bootstrap the necessary RoleBinding so that
@@ -575,19 +575,19 @@ job-pod-reaper can delete OnDemand pods. Update <code class="docutils literal no
 <p>In order to cleanup unused namespaces the <a class="reference external" href="https://github.com/OSC/k8-namespace-reaper">k8-namespace-reaper</a> tool can be used.
 This tool will delete a namespace based on several factors:</p>
 <ul class="simple">
-<li>The creation timestamp of the namespace</li>
-<li><code class="docutils literal notranslate"><span class="pre">openondemand.org/last-hook-execution</span></code> annotation set by the OnDemand pre-PUN hook</li>
-<li>The last pod to run in that namespace based on Prometheus metrics</li>
+<li><p>The creation timestamp of the namespace</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openondemand.org/last-hook-execution</span></code> annotation set by the OnDemand pre-PUN hook</p></li>
+<li><p>The last pod to run in that namespace based on Prometheus metrics</p></li>
 </ul>
 <p>Below is an example of Helm values to deploy this tool for OnDemand where the OnDemand namespaces have <code class="docutils literal notranslate"><span class="pre">user-</span></code> prefix:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">namespaceLabels</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app.kubernetes.io/name=open-ondemand</span>
-  <span class="l l-Scalar l-Scalar-Plain">namespaceRegexp</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">user-.+</span>
-  <span class="l l-Scalar l-Scalar-Plain">namespaceLastUsedAnnotation</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">openondemand.org/last-hook-execution</span>
-  <span class="l l-Scalar l-Scalar-Plain">prometheusAddress</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://prometheus.prometheus:9090</span>
-  <span class="l l-Scalar l-Scalar-Plain">reapAfter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8h</span>
-  <span class="l l-Scalar l-Scalar-Plain">lastUsedThreshold</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4h</span>
-  <span class="l l-Scalar l-Scalar-Plain">interval</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2h</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">namespaceLabels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.kubernetes.io/name=open-ondemand</span><span class="w"></span>
+<span class="w">  </span><span class="nt">namespaceRegexp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-.+</span><span class="w"></span>
+<span class="w">  </span><span class="nt">namespaceLastUsedAnnotation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openondemand.org/last-hook-execution</span><span class="w"></span>
+<span class="w">  </span><span class="nt">prometheusAddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://prometheus.prometheus:9090</span><span class="w"></span>
+<span class="w">  </span><span class="nt">reapAfter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8h</span><span class="w"></span>
+<span class="w">  </span><span class="nt">lastUsedThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4h</span><span class="w"></span>
+<span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2h</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -600,15 +600,15 @@ OnDemand can be configured to setup <a class="reference external" href="https://
 The OnDemand web node will need a JSON file setup that includes the username and password of a registry user authorized
 to pull images used by OnDemand apps.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Once the OnDemand user’s namespace is given the registry auth secret, it will be readable by the user.
+<p class="admonition-title">Warning</p>
+<p>Once the OnDemand user’s namespace is given the registry auth secret, it will be readable by the user.
 It’s recommended to use a read-only auth token that has limited to access just images used by OnDemand.</p>
 </div>
 <p>In the following example you can set the following values:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">$REGISTRY</span></code> the registry address.</li>
-<li><code class="docutils literal notranslate"><span class="pre">$REGISTRY_USER</span></code> the username of the user authorized to pull the images</li>
-<li><code class="docutils literal notranslate"><span class="pre">$REGISTRY_PASSWORD</span></code> the password of the user authorized to pull the images</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$REGISTRY</span></code> the registry address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$REGISTRY_USER</span></code> the username of the user authorized to pull the images</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$REGISTRY_PASSWORD</span></code> the password of the user authorized to pull the images</p></li>
 </ul>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">AUTH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRY_USER</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">REGISTRY_PASSWORD</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">|</span> base64<span class="k">)</span>
 cat &gt; /etc/ood/config/image-registry.json <span class="s">&lt;&lt;EOF</span>

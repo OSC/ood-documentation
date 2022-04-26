@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -215,51 +215,50 @@
 <span id="resource-manager-lsf"></span><h1>LSF<a class="headerlink" href="#lsf" title="Permalink to this headline">¶</a></h1>
 <p>A YAML cluster configuration file for an LSF resource manager on an HPC cluster
 looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;lsf&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bindir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/bin&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">libdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/lib&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">envdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/conf&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">serverdir</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/lsf/etc&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;mycluster&quot;</span>
-</span><span class="hll">    <span class="c1"># bin_overrides:</span>
-</span><span class="hll">      <span class="c1"># bsub: &quot;/usr/local/bin/bsub&quot;</span>
-</span><span class="hll">      <span class="c1"># bjobs: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># bstop: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># bresume: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># bkill: &quot;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lsf&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">bindir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/lsf/bin&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">libdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/lsf/lib&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">envdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/lsf/conf&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">serverdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/lsf/etc&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mycluster&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="c1"># bin_overrides:</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># bsub: &quot;/usr/local/bin/bsub&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># bjobs: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># bstop: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># bresume: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># bkill: &quot;&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">lsf</span></code>.</dd>
-<dt>bindir</dt>
-<dd>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory.</dd>
-<dt>libdir</dt>
-<dd>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">lib/</span></code> directory.</dd>
-<dt>envdir</dt>
-<dd>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">conf/</span></code> directory.</dd>
-<dt>serverdir</dt>
-<dd>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">etc/</span></code> directory.</dd>
-<dt>bin_overrides</dt>
-<dd>Replacements/wrappers for LSF’s job submission and control clients. <em>Optional</em></dd>
-<dt>cluster</dt>
-<dd><p class="first">The cluster to interact with when running LSF’s multi-cluster mode. <em>Required to enable multi-cluster mode</em></p>
+<dl>
+<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">lsf</span></code>.</p>
+</dd>
+<dt>bindir</dt><dd><p>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory.</p>
+</dd>
+<dt>libdir</dt><dd><p>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">lib/</span></code> directory.</p>
+</dd>
+<dt>envdir</dt><dd><p>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">conf/</span></code> directory.</p>
+</dd>
+<dt>serverdir</dt><dd><p>The path to the LSF client <code class="docutils literal notranslate"><span class="pre">etc/</span></code> directory.</p>
+</dd>
+<dt>bin_overrides</dt><dd><p>Replacements/wrappers for LSF’s job submission and control clients. <em>Optional</em></p>
+</dd>
+<dt>cluster</dt><dd><p>The cluster to interact with when running LSF’s multi-cluster mode. <em>Required to enable multi-cluster mode</em></p>
 <p>Supports the following clients:</p>
-<ul class="last simple">
-<li><cite>bsub</cite></li>
-<li><cite>bjobs</cite></li>
-<li><cite>bstop</cite></li>
-<li><cite>bresume</cite></li>
-<li><cite>bkill</cite></li>
+<ul class="simple">
+<li><p><cite>bsub</cite></p></li>
+<li><p><cite>bjobs</cite></p></li>
+<li><p><cite>bstop</cite></p></li>
+<li><p><cite>bresume</cite></p></li>
+<li><p><cite>bkill</cite></p></li>
 </ul>
 </dd>
 </dl>

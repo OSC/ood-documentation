@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -267,21 +267,21 @@ and <code class="docutils literal notranslate"><span class="pre">command</span><
 work with both SLURM and Kubernetes.  The <code class="docutils literal notranslate"><span class="pre">command</span></code> will be run from the user’s home directory and will cover mount
 requirements in <a class="reference internal" href="#kubernetes-mount-requirements"><span class="std std-ref">mount requirements</span></a>.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">These examples use images from the Ohio SuperComputer Center’s private registry. They will
+<p class="admonition-title">Warning</p>
+<p>These examples use images from the Ohio SuperComputer Center’s private registry. They will
 not work at your site as this registry requires authentication.</p>
 </div>
 <p>One important aspect of the <code class="docutils literal notranslate"><span class="pre">command</span></code> is that the job script executed is built using the standard <code class="docutils literal notranslate"><span class="pre">before.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">script.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">after.sh</span></code> that one would normally use to build the job script for interactive apps running
 on HPC resources.  The way this pod is being setup, the same job script that runs on SLURM would also be used to
 launch the container in Kubernetes.</p>
 <p>Next you can specify additional environment variables in <code class="docutils literal notranslate"><span class="pre">env</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">container</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;jupyter&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;docker-registry.osc.edu/ondemand/ondemand-base-rhel7:0.3.1&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">image_pull_policy</span><span class="p p-Indicator">:</span> <span class="s">&quot;IfNotPresent&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">staged_root</span><span class="nv"> </span><span class="s">%&gt;/job_script_content.sh&quot;</span><span class="p p-Indicator">]</span>
-    <span class="l l-Scalar l-Scalar-Plain">restart_policy</span><span class="p p-Indicator">:</span> <span class="s">&#39;OnFailure&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">container</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jupyter&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docker-registry.osc.edu/ondemand/ondemand-base-rhel7:0.3.1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image_pull_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IfNotPresent&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">staged_root</span><span class="nv"> </span><span class="s">%&gt;/job_script_content.sh&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;OnFailure&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -313,199 +313,199 @@ the container is the same as the path inside the container:</p>
 </div>
 <p>Additional mounts are needed to make the pod behave like a HPC compute node. Following are mounted into the container:</p>
 <ul class="simple">
-<li>MUNGE socket so SLURM commands inside the pod can work</li>
-<li>SLURM configuration so SLURM commands inside the pod know about scheduler host</li>
-<li>SSSD pipes and configuration as well as nsswitch.conf so ID lookups inside the pod will work</li>
-<li>Lmod initialization script</li>
-<li>Lmod HPC applications</li>
+<li><p>MUNGE socket so SLURM commands inside the pod can work</p></li>
+<li><p>SLURM configuration so SLURM commands inside the pod know about scheduler host</p></li>
+<li><p>SSSD pipes and configuration as well as nsswitch.conf so ID lookups inside the pod will work</p></li>
+<li><p>Lmod initialization script</p></li>
+<li><p>Lmod HPC applications</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">munge-socket</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Socket</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">slurm-conf</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sssd-pipes</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sssd-conf</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nsswitch</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">File</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lmod-init</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">File</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;/lmod/lmod.sh</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/profile.d/lmod.sh</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">intel</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/nfsroot/&lt;%= compute_cluster %&gt;/opt/intel</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/intel</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">apps</span>
-  <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-  <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= apps_path %&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">munge-socket</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Socket</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slurm-conf</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sssd-pipes</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sssd-conf</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nsswitch</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lmod-init</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;/lmod/lmod.sh</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/profile.d/lmod.sh</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">intel</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/nfsroot/&lt;%= compute_cluster %&gt;/opt/intel</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/intel</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= apps_path %&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="submit-yml-in-full">
 <h2>submit yml in full<a class="headerlink" href="#submit-yml-in-full" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;%-</span>
-  <span class="l l-Scalar l-Scalar-Plain">cores = num_cores.to_i</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;%-</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">cores = num_cores.to_i</span><span class="w"></span>
 
-  <span class="l l-Scalar l-Scalar-Plain">if cores == 0 &amp;&amp; cluster == &quot;pitzer&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain"># little optimization for pitzer nodes. They want the whole node, if they chose &#39;any&#39;,</span>
-    <span class="l l-Scalar l-Scalar-Plain"># it can be scheduled on p18 or p20 nodes. If not, they&#39;ll get the constraint below.</span>
-    <span class="l l-Scalar l-Scalar-Plain">base_slurm_args = [&quot;--nodes&quot;, &quot;1&quot;, &quot;--exclusive&quot;]</span>
-  <span class="l l-Scalar l-Scalar-Plain">elsif cores == 0</span>
-    <span class="l l-Scalar l-Scalar-Plain"># full node on owens</span>
-    <span class="l l-Scalar l-Scalar-Plain">cores = 28</span>
-    <span class="l l-Scalar l-Scalar-Plain">base_slurm_args = [&quot;--nodes&quot;, &quot;1&quot;, &quot;--ntasks-per-node&quot;, &quot;28&quot;]</span>
-  <span class="l l-Scalar l-Scalar-Plain">else</span>
-    <span class="l l-Scalar l-Scalar-Plain">base_slurm_args = [&quot;--nodes&quot;, &quot;1&quot;, &quot;--ntasks-per-node&quot;, &quot;#{cores}&quot;]</span>
-  <span class="l l-Scalar l-Scalar-Plain">end</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">if cores == 0 &amp;&amp; cluster == &quot;pitzer&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain"># little optimization for pitzer nodes. They want the whole node, if they chose &#39;any&#39;,</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain"># it can be scheduled on p18 or p20 nodes. If not, they&#39;ll get the constraint below.</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args = [&quot;--nodes&quot;, &quot;1&quot;, &quot;--exclusive&quot;]</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">elsif cores == 0</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain"># full node on owens</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">cores = 28</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args = [&quot;--nodes&quot;, &quot;1&quot;, &quot;--ntasks-per-node&quot;, &quot;28&quot;]</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">else</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args = [&quot;--nodes&quot;, &quot;1&quot;, &quot;--ntasks-per-node&quot;, &quot;#{cores}&quot;]</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">end</span><span class="w"></span>
 
-  <span class="l l-Scalar l-Scalar-Plain">slurm_args = case node_type</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;gpu-40core&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;40core&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;gpu-48core&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;48core&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;any-40core&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;40core&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;any-48core&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;48core&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;hugemem&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--partition&quot;, &quot;hugemem&quot;, &quot;--exclusive&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;largemem&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--partition&quot;, &quot;largemem&quot;, &quot;--exclusive&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">when &quot;debug&quot;</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args += [&quot;--partition&quot;, &quot;debug&quot;, &quot;--exclusive&quot;]</span>
-              <span class="l l-Scalar l-Scalar-Plain">else</span>
-                <span class="l l-Scalar l-Scalar-Plain">base_slurm_args</span>
-              <span class="l l-Scalar l-Scalar-Plain">end</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">slurm_args = case node_type</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;gpu-40core&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;40core&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;gpu-48core&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;48core&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;any-40core&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;40core&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;any-48core&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--constraint&quot;, &quot;48core&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;hugemem&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--partition&quot;, &quot;hugemem&quot;, &quot;--exclusive&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;largemem&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args + [&quot;--partition&quot;, &quot;largemem&quot;, &quot;--exclusive&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">when &quot;debug&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args += [&quot;--partition&quot;, &quot;debug&quot;, &quot;--exclusive&quot;]</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">else</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">base_slurm_args</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">end</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">-%&gt;</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;% if cluster =~ /owens|pitzer/ -%&gt;</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">conn_params</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyter_api</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;% if node_type =~ /gpu/ -%&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">gpus_per_node</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;% end -%&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;%- slurm_args.each do |arg| %&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">- &quot;&lt;%= arg %&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;%- end %&gt;</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;% elsif cluster =~ /kubernetes/</span>
-   <span class="l l-Scalar l-Scalar-Plain">if node_type =~ /owens/</span>
-     <span class="l l-Scalar l-Scalar-Plain">compute_cluster = &quot;owens&quot;</span>
-     <span class="l l-Scalar l-Scalar-Plain">apps_path = &quot;/usr/local&quot;</span>
-     <span class="l l-Scalar l-Scalar-Plain"># Memory per core with hyperthreading enabled</span>
-     <span class="l l-Scalar l-Scalar-Plain">memory_mb = num_cores.to_i * 2200</span>
-   <span class="l l-Scalar l-Scalar-Plain">elsif node_type =~ /pitzer/</span>
-     <span class="l l-Scalar l-Scalar-Plain">compute_cluster = &quot;pitzer&quot;</span>
-     <span class="l l-Scalar l-Scalar-Plain">apps_path = &quot;/apps&quot;</span>
-     <span class="l l-Scalar l-Scalar-Plain"># Memory per core with hyperthreading enabled</span>
-     <span class="l l-Scalar l-Scalar-Plain">memory_mb = num_cores.to_i * 4000</span>
-   <span class="l l-Scalar l-Scalar-Plain">end</span>
-   <span class="l l-Scalar l-Scalar-Plain">mounts = {</span>
-     <span class="l l-Scalar l-Scalar-Plain">&#39;home&#39;    =&gt; OodSupport::User.new.home,</span>
-     <span class="l l-Scalar l-Scalar-Plain">&#39;support&#39; =&gt; OodSupport::User.new(&#39;support&#39;).home,</span>
-     <span class="l l-Scalar l-Scalar-Plain">&#39;project&#39; =&gt; &#39;/fs/project&#39;,</span>
-     <span class="l l-Scalar l-Scalar-Plain">&#39;scratch&#39; =&gt; &#39;/fs/scratch&#39;,</span>
-     <span class="l l-Scalar l-Scalar-Plain">&#39;ess&#39;     =&gt; &#39;/fs/ess&#39;,</span>
-   <span class="l l-Scalar l-Scalar-Plain">}</span>
-<span class="l l-Scalar l-Scalar-Plain">-%&gt;</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_hours.to_i</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">3600</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">&lt;%- if node_type =~ /gpu/ -%&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">gpus_per_node</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-  <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">container</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;jupyter&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;docker-registry.osc.edu/ondemand/ondemand-base-rhel7:0.3.1&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">image_pull_policy</span><span class="p p-Indicator">:</span> <span class="s">&quot;IfNotPresent&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">staged_root</span><span class="nv"> </span><span class="s">%&gt;/job_script_content.sh&quot;</span><span class="p p-Indicator">]</span>
-      <span class="l l-Scalar l-Scalar-Plain">restart_policy</span><span class="p p-Indicator">:</span> <span class="s">&#39;OnFailure&#39;</span>
-      <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">NB_UID</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).uid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-        <span class="l l-Scalar l-Scalar-Plain">NB_USER</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">ENV[&#39;USER&#39;]</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-        <span class="l l-Scalar l-Scalar-Plain">NB_GID</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).gid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-        <span class="l l-Scalar l-Scalar-Plain">CLUSTER</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">compute_cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-        <span class="l l-Scalar l-Scalar-Plain">KUBECONFIG</span><span class="p p-Indicator">:</span> <span class="s">&quot;/dev/null&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">osc.edu/cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">compute_cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="s">&quot;8080&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">cpu</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">num_cores</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory_mb</span><span class="nv"> </span><span class="s">%&gt;Mi&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">mounts</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;%- mounts.each_pair do |name, mount| -%&gt;</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= name %&gt;</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= mount %&gt;</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= mount %&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">munge-socket</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Socket</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">slurm-conf</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sssd-pipes</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sssd-conf</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nsswitch</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">File</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lmod-init</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">File</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;/lmod/lmod.sh</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/profile.d/lmod.sh</span>
-      <span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">apps</span>
-        <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;</span>
-        <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= apps_path %&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">node_selector</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">osc.edu/role</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;% end -%&gt;</span>
+<span class="l l-Scalar l-Scalar-Plain">-%&gt;</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;% if cluster =~ /owens|pitzer/ -%&gt;</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">conn_params</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter_api</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;% if node_type =~ /gpu/ -%&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">gpus_per_node</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;% end -%&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- slurm_args.each do |arg| %&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">- &quot;&lt;%= arg %&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- end %&gt;</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;% elsif cluster =~ /kubernetes/</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">if node_type =~ /owens/</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">compute_cluster = &quot;owens&quot;</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">apps_path = &quot;/usr/local&quot;</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain"># Memory per core with hyperthreading enabled</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">memory_mb = num_cores.to_i * 2200</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">elsif node_type =~ /pitzer/</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">compute_cluster = &quot;pitzer&quot;</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">apps_path = &quot;/apps&quot;</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain"># Memory per core with hyperthreading enabled</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">memory_mb = num_cores.to_i * 4000</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">end</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">mounts = {</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">&#39;home&#39;    =&gt; OodSupport::User.new.home,</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">&#39;support&#39; =&gt; OodSupport::User.new(&#39;support&#39;).home,</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">&#39;project&#39; =&gt; &#39;/fs/project&#39;,</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">&#39;scratch&#39; =&gt; &#39;/fs/scratch&#39;,</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">&#39;ess&#39;     =&gt; &#39;/fs/ess&#39;,</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">}</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">-%&gt;</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_hours.to_i</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">3600</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- if node_type =~ /gpu/ -%&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">gpus_per_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">container</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jupyter&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docker-registry.osc.edu/ondemand/ondemand-base-rhel7:0.3.1&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">image_pull_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IfNotPresent&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-l&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">staged_root</span><span class="nv"> </span><span class="s">%&gt;/job_script_content.sh&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;OnFailure&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">NB_UID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).uid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">NB_USER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">ENV[&#39;USER&#39;]</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">NB_GID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).gid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">CLUSTER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">compute_cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">KUBECONFIG</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/dev/null&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">osc.edu/cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">compute_cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8080&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">num_cores</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory_mb</span><span class="nv"> </span><span class="s">%&gt;Mi&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">mounts</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- mounts.each_pair do |name, mount| -%&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= name %&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= mount %&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= mount %&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">munge-socket</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Socket</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/munge/munge.socket.2</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slurm-conf</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/slurm</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sssd-pipes</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/sss/pipes</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sssd-conf</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sssd</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nsswitch</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nsswitch.conf</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lmod-init</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">File</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;/lmod/lmod.sh</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/profile.d/lmod.sh</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">- type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/apps/&lt;%= compute_cluster %&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= apps_path %&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">node_selector</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">osc.edu/role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;% end -%&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

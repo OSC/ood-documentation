@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -216,14 +216,14 @@
 <p><code class="docutils literal notranslate"><span class="pre">sbatch</span></code> is the Slurm scheduler’s submission client. In this example we will show how cluster configuration’s <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> may be used to change default behavior.</p>
 <p>This example demonstrates a few uses of wrapping the default scheduler clients:</p>
 <ul class="simple">
-<li>Using SSH from the web host to launch <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> on the submit host</li>
-<li>Altering arguments passed to the scheduler</li>
-<li>Altering the script passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> (which is almost certainly a terrible idea)</li>
-<li>Logging values passed to the scheduler in a custom location (note that the values passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> are also logged to the PUN log file at <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/$USER/error.log</span></code> by the Dashboard and Job Composer when submitting jobs)</li>
+<li><p>Using SSH from the web host to launch <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> on the submit host</p></li>
+<li><p>Altering arguments passed to the scheduler</p></li>
+<li><p>Altering the script passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> (which is almost certainly a terrible idea)</p></li>
+<li><p>Logging values passed to the scheduler in a custom location (note that the values passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> are also logged to the PUN log file at <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/$USER/error.log</span></code> by the Dashboard and Job Composer when submitting jobs)</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This wrapper when used with the OOD Job Composer will place any <code class="docutils literal notranslate"><span class="pre">stdout</span></code> or <code class="docutils literal notranslate"><span class="pre">stderr</span></code> files in <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> instead of the usual location of <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/projects/default/$JOBID</span></code>.</p>
+<p class="admonition-title">Warning</p>
+<p>This wrapper when used with the OOD Job Composer will place any <code class="docutils literal notranslate"><span class="pre">stdout</span></code> or <code class="docutils literal notranslate"><span class="pre">stderr</span></code> files in <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> instead of the usual location of <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/projects/default/$JOBID</span></code>.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python36</span>
 <span class="kn">from</span> <span class="nn">getpass</span> <span class="kn">import</span> <span class="n">getuser</span>
@@ -276,7 +276,7 @@
 <span class="sd">  @return     output (str) The merged stdout/stderr of the remote sbatch call</span>
 <span class="sd">  &quot;&quot;&quot;</span>
 
-  <span class="n">output</span> <span class="o">=</span> <span class="bp">None</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
 
   <span class="k">try</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">ssh</span><span class="p">(</span>
@@ -285,7 +285,7 @@
       <span class="s1">&#39;/opt/slurm/bin/sbatch&#39;</span><span class="p">,</span>  <span class="c1"># the real sbatch on the remote</span>
       <span class="o">*</span><span class="n">argv</span><span class="p">,</span>  <span class="c1"># any arguments that sbatch should get</span>
       <span class="n">_in</span><span class="o">=</span><span class="n">script</span><span class="p">,</span>  <span class="c1"># redirect the script&#39;s contents into stdin</span>
-      <span class="n">_err_to_out</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># merge stdout and stderr</span>
+      <span class="n">_err_to_out</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># merge stdout and stderr</span>
     <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -293,7 +293,7 @@
   <span class="k">except</span> <span class="n">ErrorReturnCode</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">exit_code</span><span class="p">)</span>
 
   <span class="k">return</span> <span class="n">output</span>
@@ -353,7 +353,7 @@
 <span class="sd">  &quot;&quot;&quot;</span>
   <span class="c1"># Do not hang waiting for stdin that is not coming</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="n">select</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mf">0.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;No script available on stdin!&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No script available on stdin!&#39;</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
   <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -368,7 +368,7 @@
     <span class="n">filter_argv</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
   <span class="p">)</span>
 
-  <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
   <span class="n">main</span><span class="p">()</span>

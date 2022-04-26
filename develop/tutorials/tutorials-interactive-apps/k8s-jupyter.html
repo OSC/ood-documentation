@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -235,17 +235,17 @@ and <code class="docutils literal notranslate"><span class="pre">command</span><
 a container may specify this.  <code class="docutils literal notranslate"><span class="pre">restart_policy</span></code> is also optional and is Never
 by default.</p>
 <p>Next you can specify additional environment variables in <code class="docutils literal notranslate"><span class="pre">env</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">container</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;jupyter&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;docker.io/jupyter/scipy-notebook:python-3.9.7&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/local/bin/start.sh</span><span class="nv"> </span><span class="s">/opt/conda/bin/jupyter</span><span class="nv"> </span><span class="s">notebook</span><span class="nv"> </span><span class="s">--config=/ood/ondemand_config.py&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">working_dir</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).dir</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">restart_policy</span><span class="p p-Indicator">:</span> <span class="s">&#39;OnFailure&#39;</span>
-  <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">NB_UID</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.uid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">NB_USER</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">NB_GID</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.group.id</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">HOME</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.home</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">container</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jupyter&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docker.io/jupyter/scipy-notebook:python-3.9.7&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/start.sh</span><span class="nv"> </span><span class="s">/opt/conda/bin/jupyter</span><span class="nv"> </span><span class="s">notebook</span><span class="nv"> </span><span class="s">--config=/ood/ondemand_config.py&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).dir</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;OnFailure&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">NB_UID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.uid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">NB_USER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">NB_GID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.group.id</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">HOME</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.home</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Here is the default environment. You can use a <code class="docutils literal notranslate"><span class="pre">null</span></code> here to unset any of these.</p>
@@ -262,24 +262,24 @@ KUBECONFIG: &#39;/dev/null&#39;
 <h2>resource requests<a class="headerlink" href="#resource-requests" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">port</span></code> is is the port the container is going to listen on.  <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">memory</span></code>
 are the cpu and memory request. Note that memory here has <code class="docutils literal notranslate"><span class="pre">Gi</span></code> which is the unit.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">container</span><span class="p p-Indicator">:</span>
-  <span class="c1"># ...</span>
-  <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="s">&quot;8080&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">cpu</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cpu</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">%&gt;Gi&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">container</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># ...</span><span class="w"></span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8080&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cpu</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">%&gt;Gi&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Kubernetes has some flexibility in requests. One can make _requests_ and _limits_
 which are like hard and soft limits. In the example above, they’re both the same.</p>
 <p>Here’s an example utilizing requests and limits for both memory and cpu. Note that
 we’re using millicores in <code class="docutils literal notranslate"><span class="pre">cpu_request</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">container</span><span class="p p-Indicator">:</span>
-  <span class="c1"># ...</span>
-  <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="s">&quot;8080&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">cpu_request</span><span class="p p-Indicator">:</span> <span class="s">&quot;0.200&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">cpu_limit</span><span class="p p-Indicator">:</span> <span class="s">&quot;4&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">memory_request</span><span class="p p-Indicator">:</span> <span class="s">&quot;500Mi&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">memory_limit</span><span class="p p-Indicator">:</span> <span class="s">&quot;4Gi&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">container</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># ...</span><span class="w"></span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8080&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cpu_request</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.200&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cpu_limit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">memory_request</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;500Mi&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">memory_limit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4Gi&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/">kubernetes pod memory</a> and <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/">kubernetes pod cpu</a> for more details.</p>
@@ -294,16 +294,16 @@ see how we initialize it.</p>
 the contents of the file.  <code class="docutils literal notranslate"><span class="pre">mount_path</span></code> is the directory in the container
 the file will be mounted to.  <code class="docutils literal notranslate"><span class="pre">files</span></code> here is an array so you can add many
 files to a single configmap.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">configmap</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">files</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">filename</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">c.NotebookApp.port = 8080</span>
-        <span class="no">c.NotebookApp.ip = &#39;0.0.0.0&#39;</span>
-        <span class="no">c.NotebookApp.disable_check_xsrf = True</span>
-        <span class="no">c.NotebookApp.allow_origin = &#39;*&#39;</span>
-        <span class="no">c.Application.log_level = &#39;DEBUG&#39;</span>
-      <span class="l l-Scalar l-Scalar-Plain">mount_path</span><span class="p p-Indicator">:</span> <span class="s">&#39;/ood&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">configmap</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">files</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">c.NotebookApp.port = 8080</span><span class="w"></span>
+<span class="w">        </span><span class="no">c.NotebookApp.ip = &#39;0.0.0.0&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="no">c.NotebookApp.disable_check_xsrf = True</span><span class="w"></span>
+<span class="w">        </span><span class="no">c.NotebookApp.allow_origin = &#39;*&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="no">c.Application.log_level = &#39;DEBUG&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">mount_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/ood&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -315,17 +315,17 @@ the files they work on.  This example mounts the home directory,
 but could mount any project or scratch space just the same.</p>
 <p>When mounting a host directory <code class="docutils literal notranslate"><span class="pre">host_type</span></code> must alwasy be Directory.
 This example shows how to mount host directories and nfs storage locations.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mounts</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">home</span>
-    <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-    <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nfs</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cold-storage</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">some.nfs.host:3333</span>
-    <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/some/location</span>
-    <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/some/container/location</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mounts</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nfs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cold-storage</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some.nfs.host:3333</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/some/location</span><span class="w"></span>
+<span class="w">    </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/some/container/location</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -336,17 +336,17 @@ This example shows how to mount host directories and nfs storage locations.</p>
 <p>We provide <code class="docutils literal notranslate"><span class="pre">docker.io/ohiosupercomputer/ood-k8s-utils</span></code> for some simple
 reusable functionality.</p>
 <p>You must specify a <code class="docutils literal notranslate"><span class="pre">name</span></code>, an <code class="docutils literal notranslate"><span class="pre">image</span></code> and the <code class="docutils literal notranslate"><span class="pre">command</span></code> to be run.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">init_containers</span><span class="p p-Indicator">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;init-secret&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;/bin/save_passwd_as_secret&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;user-&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">init_containers</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;init-secret&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/save_passwd_as_secret&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;user-&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">If you’re mounting a users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory into the container, you
+<p class="admonition-title">Tip</p>
+<p>If you’re mounting a users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory into the container, you
 likely don’t need init containers.  They’re provided for sites &amp; use cases
 where you’re not mounting the users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.  This example
 does both because it is just an example.</p>
@@ -361,72 +361,72 @@ of the pod and sets the <code class="docutils literal notranslate"><span class="
 </div>
 <div class="section" id="submit-yml-in-full">
 <h2>submit yml in full<a class="headerlink" href="#submit-yml-in-full" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;%</span>
- <span class="l l-Scalar l-Scalar-Plain">pwd_cfg = &quot;c.NotebookApp.password=u\&#39;sha1:${SALT}:${PASSWORD_SHA1}\&#39;&quot;</span>
- <span class="l l-Scalar l-Scalar-Plain">host_port_cfg = &quot;c.NotebookApp.base_url=\&#39;/node/${HOST_CFG}/${PORT_CFG}/\&#39;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;%</span><span class="w"></span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pwd_cfg = &quot;c.NotebookApp.password=u\&#39;sha1:${SALT}:${PASSWORD_SHA1}\&#39;&quot;</span><span class="w"></span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host_port_cfg = &quot;c.NotebookApp.base_url=\&#39;/node/${HOST_CFG}/${PORT_CFG}/\&#39;&quot;</span><span class="w"></span>
 
- <span class="l l-Scalar l-Scalar-Plain">configmap_filename = &quot;ondemand_config.py&quot;</span>
- <span class="l l-Scalar l-Scalar-Plain">configmap_data = &quot;c.NotebookApp.port = 8080&quot;</span>
- <span class="l l-Scalar l-Scalar-Plain">utility_img = &quot;docker.io/ohiosupercomputer/ood-k8s-utils:v1.0.0&quot;</span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configmap_filename = &quot;ondemand_config.py&quot;</span><span class="w"></span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configmap_data = &quot;c.NotebookApp.port = 8080&quot;</span><span class="w"></span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utility_img = &quot;docker.io/ohiosupercomputer/ood-k8s-utils:v1.0.0&quot;</span><span class="w"></span>
 
- <span class="l l-Scalar l-Scalar-Plain">user = OodSupport::User.new</span>
-<span class="l l-Scalar l-Scalar-Plain">%&gt;</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-<span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">wall_time.to_i</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">3600</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user = OodSupport::User.new</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">%&gt;</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">wall_time.to_i</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">3600</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="nt">native</span><span class="p">:</span><span class="w"></span>
 
-  <span class="c1"># here&#39;s the bulk of setting up the container. You&#39;ll likely need to specify all of these.</span>
-  <span class="l l-Scalar l-Scalar-Plain">container</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;jupyter&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;docker.io/jupyter/scipy-notebook:python-3.9.7&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/local/bin/start.sh</span><span class="nv"> </span><span class="s">/opt/conda/bin/jupyter</span><span class="nv"> </span><span class="s">notebook</span><span class="nv"> </span><span class="s">--config=/ood/ondemand_config.py&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">working_dir</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).dir</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">restart_policy</span><span class="p p-Indicator">:</span> <span class="s">&#39;OnFailure&#39;</span>
-    <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">NB_UID</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.uid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">NB_USER</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">NB_GID</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.group.id</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">HOME</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.home</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="s">&quot;8080&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">cpu</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cpu</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">%&gt;Gi&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">configmap</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">files</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">filename</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-        <span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-          <span class="no">c.NotebookApp.port = 8080</span>
-          <span class="no">c.NotebookApp.ip = &#39;0.0.0.0&#39;</span>
-          <span class="no">c.NotebookApp.disable_check_xsrf = True</span>
-          <span class="no">c.NotebookApp.allow_origin = &#39;*&#39;</span>
-          <span class="no">c.Application.log_level = &#39;DEBUG&#39;</span>
-        <span class="l l-Scalar l-Scalar-Plain">mount_path</span><span class="p p-Indicator">:</span> <span class="s">&#39;/ood&#39;</span>
-  <span class="l l-Scalar l-Scalar-Plain">mounts</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-      <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">home</span>
-      <span class="l l-Scalar l-Scalar-Plain">host_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Directory</span>
-      <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span>
-      <span class="l l-Scalar l-Scalar-Plain">destination_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">init_containers</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;init-secret&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;/bin/save_passwd_as_secret&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;user-&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;add-passwd-to-cfg&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;/bin/bash&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;-c&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;source</span><span class="nv"> </span><span class="s">/bin/passwd_from_secret;</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">/bin/create_salt_and_sha1;</span><span class="nv"> </span><span class="s">/bin/add_line_to_configmap</span><span class="nv"> </span><span class="s">\\\&quot;&lt;%=</span><span class="nv"> </span><span class="s">pwd_cfg</span><span class="nv"> </span><span class="s">%&gt;\\\&quot;</span><span class="nv"> </span><span class="s">&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;add-hostport-to-cfg&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;/bin/bash&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;-c&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;source</span><span class="nv"> </span><span class="s">/bin/find_host_port;</span><span class="nv"> </span><span class="s">/bin/add_line_to_configmap</span><span class="nv"> </span><span class="s">\\\&quot;&lt;%=</span><span class="nv"> </span><span class="s">host_port_cfg</span><span class="nv"> </span><span class="s">%&gt;\\\&quot;</span><span class="nv"> </span><span class="s">&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<span class="w">  </span><span class="c1"># here&#39;s the bulk of setting up the container. You&#39;ll likely need to specify all of these.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">container</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jupyter&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docker.io/jupyter/scipy-notebook:python-3.9.7&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/start.sh</span><span class="nv"> </span><span class="s">/opt/conda/bin/jupyter</span><span class="nv"> </span><span class="s">notebook</span><span class="nv"> </span><span class="s">--config=/ood/ondemand_config.py&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">Etc.getpwnam(ENV[&#39;USER&#39;]).dir</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;OnFailure&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">NB_UID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.uid</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">NB_USER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">NB_GID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.group.id</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">HOME</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">user.home</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8080&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cpu</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">%&gt;Gi&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">configmap</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">files</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">          </span><span class="no">c.NotebookApp.port = 8080</span><span class="w"></span>
+<span class="w">          </span><span class="no">c.NotebookApp.ip = &#39;0.0.0.0&#39;</span><span class="w"></span>
+<span class="w">          </span><span class="no">c.NotebookApp.disable_check_xsrf = True</span><span class="w"></span>
+<span class="w">          </span><span class="no">c.NotebookApp.allow_origin = &#39;*&#39;</span><span class="w"></span>
+<span class="w">          </span><span class="no">c.Application.log_level = &#39;DEBUG&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">mount_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/ood&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">mounts</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class="w"></span>
+<span class="w">      </span><span class="nt">host_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Directory</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">destination_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= user.home %&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">init_containers</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;init-secret&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/save_passwd_as_secret&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;user-&lt;%=</span><span class="nv"> </span><span class="s">user.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;add-passwd-to-cfg&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/bash&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;source</span><span class="nv"> </span><span class="s">/bin/passwd_from_secret;</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">/bin/create_salt_and_sha1;</span><span class="nv"> </span><span class="s">/bin/add_line_to_configmap</span><span class="nv"> </span><span class="s">\\\&quot;&lt;%=</span><span class="nv"> </span><span class="s">pwd_cfg</span><span class="nv"> </span><span class="s">%&gt;\\\&quot;</span><span class="nv"> </span><span class="s">&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;add-hostport-to-cfg&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">utility_img</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/bash&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;source</span><span class="nv"> </span><span class="s">/bin/find_host_port;</span><span class="nv"> </span><span class="s">/bin/add_line_to_configmap</span><span class="nv"> </span><span class="s">\\\&quot;&lt;%=</span><span class="nv"> </span><span class="s">host_port_cfg</span><span class="nv"> </span><span class="s">%&gt;\\\&quot;</span><span class="nv"> </span><span class="s">&lt;%=</span><span class="nv"> </span><span class="s">configmap_filename</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

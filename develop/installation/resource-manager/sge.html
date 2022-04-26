@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -222,57 +222,56 @@
 <span id="resource-manager-sge"></span><h1>Grid Engine<a class="headerlink" href="#grid-engine" title="Permalink to this headline">¶</a></h1>
 <p>A YAML cluster configuration file for a Grid Engine (Sun Grid Engine, Son of Grid Engine, Univa Grid Engine) resource manager on an HPC
 cluster looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;sge&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/usr/lib/gridengine&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">conf</span><span class="p p-Indicator">:</span> <span class="s">&quot;/etc/default/gridengine&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">sge_root</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/lib/gridengine&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">libdrmaa_path</span><span class="p p-Indicator">:</span> <span class="s">&quot;/var/lib/gridengine/drmaa/libdrmaa.so&quot;</span>
-</span><span class="hll">    <span class="c1"># bin_overrides:</span>
-</span><span class="hll">      <span class="c1"># qsub: &quot;/usr/local/bin/qsub_wrapper&quot;</span>
-</span><span class="hll">      <span class="c1"># qstat: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qhold: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qrls: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qdel: &quot;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sge&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/lib/gridengine&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">conf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/default/gridengine&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">sge_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/gridengine&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">libdrmaa_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/gridengine/drmaa/libdrmaa.so&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="c1"># bin_overrides:</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qsub: &quot;/usr/local/bin/qsub_wrapper&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qstat: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qhold: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qrls: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qdel: &quot;&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">sge</span></code>.</dd>
-<dt>cluster</dt>
-<dd>The Grid Engine cluster name. <em>Optional</em></dd>
-<dt>bin</dt>
-<dd>The path to the Grid Engine client installation binaries.</dd>
-<dt>sge_root</dt>
-<dd>The path to the root directory of the Grid Engine installation. <em>Default:</em> <code class="docutils literal notranslate"><span class="pre">/var/lib/gridengine</span></code></dd>
-<dt>conf</dt>
-<dd>The path to the Grid Engine configuration file for this cluster. <em>Optional</em></dd>
-<dt>libdrmaa_path</dt>
-<dd>The full path to libdrmaa.so. Provide this to enable use of libdrmaa for more precise job status reporting.  <em>Optional</em></dd>
-<dt>bin_overrides</dt>
-<dd><p class="first">Replacements/wrappers for Grid Engine’s job submission and control clients. <em>Optional</em></p>
+<dl>
+<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">sge</span></code>.</p>
+</dd>
+<dt>cluster</dt><dd><p>The Grid Engine cluster name. <em>Optional</em></p>
+</dd>
+<dt>bin</dt><dd><p>The path to the Grid Engine client installation binaries.</p>
+</dd>
+<dt>sge_root</dt><dd><p>The path to the root directory of the Grid Engine installation. <em>Default:</em> <code class="docutils literal notranslate"><span class="pre">/var/lib/gridengine</span></code></p>
+</dd>
+<dt>conf</dt><dd><p>The path to the Grid Engine configuration file for this cluster. <em>Optional</em></p>
+</dd>
+<dt>libdrmaa_path</dt><dd><p>The full path to libdrmaa.so. Provide this to enable use of libdrmaa for more precise job status reporting.  <em>Optional</em></p>
+</dd>
+<dt>bin_overrides</dt><dd><p>Replacements/wrappers for Grid Engine’s job submission and control clients. <em>Optional</em></p>
 <p>Supports the following clients:</p>
-<ul class="last simple">
-<li><code class="docutils literal notranslate"><span class="pre">qsub</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">qstat</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">qhold</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">qrls</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">qdel</span></code></li>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">qsub</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qstat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qhold</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qrls</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qdel</span></code></p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">DRMAA improves OnDemand’s ability to report on the precise status of jobs. To use this feature ensure that libdrmaa.so for Grid Engine is installed or built and set the config value for <code class="docutils literal notranslate"><span class="pre">libdrmaa_path</span></code> and <code class="docutils literal notranslate"><span class="pre">sge_root</span></code>. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.</p>
+<p class="admonition-title">Tip</p>
+<p>DRMAA improves OnDemand’s ability to report on the precise status of jobs. To use this feature ensure that libdrmaa.so for Grid Engine is installed or built and set the config value for <code class="docutils literal notranslate"><span class="pre">libdrmaa_path</span></code> and <code class="docutils literal notranslate"><span class="pre">sge_root</span></code>. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.</p>
 </div>
 <div class="section" id="common-issues">
 <h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
@@ -289,21 +288,21 @@ line 156: done &lt; &lt;(tail -f --pid=${SCRIPT_PID} “vnc.log”) &amp;’
 <p>What you’ll need to do is add a <code class="docutils literal notranslate"><span class="pre">script_wrapper</span></code> element to your clusters’ configuration like below.
 This sets the sh shell to behave like bash and ensures you’ve sourced your users’ bashrc file.</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="c1"># (other elements removed for brevity)</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">basic</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">set +o posix</span>
-        <span class="no">. ~/.bashrc</span>
-        <span class="no">%s</span>
-    <span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">script_wrapper</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">set +o posix</span>
-        <span class="no">. ~/.bashrc</span>
-        <span class="no">%s</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
+<span class="c1"># (other elements removed for brevity)</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">basic</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">script_wrapper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">set +o posix</span><span class="w"></span>
+<span class="w">        </span><span class="no">. ~/.bashrc</span><span class="w"></span>
+<span class="w">        </span><span class="no">%s</span><span class="w"></span>
+<span class="w">    </span><span class="nt">vnc</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">script_wrapper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">set +o posix</span><span class="w"></span>
+<span class="w">        </span><span class="no">. ~/.bashrc</span><span class="w"></span>
+<span class="w">        </span><span class="no">%s</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>

@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -201,7 +201,7 @@
         
           <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a> &raquo;</li>
         
-      <li>5. Configure Keycloak with CILogon</li>
+      <li><span class="section-number">5. </span>Configure Keycloak with CILogon</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -223,67 +223,67 @@
            <div itemprop="articleBody">
             
   <div class="section" id="configure-keycloak-with-cilogon">
-<span id="authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon"></span><h1>5. Configure Keycloak with CILogon<a class="headerlink" href="#configure-keycloak-with-cilogon" title="Permalink to this headline">¶</a></h1>
+<span id="authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon"></span><h1><span class="section-number">5. </span>Configure Keycloak with CILogon<a class="headerlink" href="#configure-keycloak-with-cilogon" title="Permalink to this headline">¶</a></h1>
 <p>We will now use Keycloak’s admin Web UI to setup the ability to log existing users in with CILogon.</p>
 <p>When a user logs in with CILogon for the first time they will be redirected back to Keycloak to log in with their local (ie LDAP)
 credentials. This performs a mapping of their CILogon identity with their Keycloak identity.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">CILogon can only map a single external identity to a Keycloak account. This means if a user logs in with Institution A they
+<p class="admonition-title">Warning</p>
+<p>CILogon can only map a single external identity to a Keycloak account. This means if a user logs in with Institution A they
 must remove their mapping in order to log in with Institution B.</p>
 </div>
 <div class="section" id="register-your-keycloak-instance-with-cilogon">
-<h2>5.1. Register your Keycloak instance with CILogon<a class="headerlink" href="#register-your-keycloak-instance-with-cilogon" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Register your Keycloak instance with CILogon<a class="headerlink" href="#register-your-keycloak-instance-with-cilogon" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Go to <code class="docutils literal notranslate"><span class="pre">https://cilogon.org/oauth2/register</span></code> and fill out the form</li>
+<li><p>Go to <code class="docutils literal notranslate"><span class="pre">https://cilogon.org/oauth2/register</span></code> and fill out the form</p></li>
 </ol>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The Home URL will be the base URL of your Keycloak instance, eg: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code>.</li>
-<li>The callback URL will be <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/&lt;REALM&gt;/broker/cilogon/endpoint</span></code>.
-Replace <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> with your Keycloak instance</li>
-<li>The box for “Is this a public client?” should not be checked</li>
-<li>For “Scopes” be sure to check “profile” and “org.cilogon.userinfo”</li>
+<li><p>The Home URL will be the base URL of your Keycloak instance, eg: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code>.</p></li>
+<li><p>The callback URL will be <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/&lt;REALM&gt;/broker/cilogon/endpoint</span></code>.
+Replace <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> with your Keycloak instance</p></li>
+<li><p>The box for “Is this a public client?” should not be checked</p></li>
+<li><p>For “Scopes” be sure to check “profile” and “org.cilogon.userinfo”</p></li>
 </ol>
 </div></blockquote>
 <p>You will be provided a Client ID and a Client Secret, be sure to save these values.
 Your registered client will not be usable until you receive an email from CILogon stating your client has been approved.</p>
 </div>
 <div class="section" id="add-the-cilogon-identity-provider">
-<h2>5.2. Add the CILogon Identity Provider<a class="headerlink" href="#add-the-cilogon-identity-provider" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.2. </span>Add the CILogon Identity Provider<a class="headerlink" href="#add-the-cilogon-identity-provider" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Log into <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> as the admin user</li>
-<li>Select your desired realm in the upper left corner</li>
-<li>Choose “Identity Providers” in the left menu</li>
-<li>Select the “Add provider…” drop down and choose “OpenID Connect v1.0”</li>
-<li>Fill in the fields as noted below<ol class="arabic">
-<li>Alias: cilogon (This must be cilogon as this alias is used in the callback URL)</li>
-<li>Display Name: CILogon</li>
-<li>Enabled: ON</li>
-<li>First Login Flow: browser</li>
-<li>Authorization URL: <a class="reference external" href="https://cilogon.org/authorize">https://cilogon.org/authorize</a></li>
-<li>Token URL: <a class="reference external" href="https://cilogon.org/oauth2/token">https://cilogon.org/oauth2/token</a></li>
-<li>User Info URL: <a class="reference external" href="https://cilogon.org/oauth2/userinfo">https://cilogon.org/oauth2/userinfo</a></li>
-<li>Client Authentication: Client secret sent as post</li>
-<li>Client ID: &lt;Client ID provided by CILogon at registration&gt;</li>
-<li>Client Secret: &lt;Client Secret provided by CILogon at registration&gt;</li>
-<li>Default Scopes: “openid profile org.cilogon.userinfo”</li>
+<li><p>Log into <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> as the admin user</p></li>
+<li><p>Select your desired realm in the upper left corner</p></li>
+<li><p>Choose “Identity Providers” in the left menu</p></li>
+<li><p>Select the “Add provider…” drop down and choose “OpenID Connect v1.0”</p></li>
+<li><p>Fill in the fields as noted below</p>
+<ol class="arabic simple">
+<li><p>Alias: cilogon (This must be cilogon as this alias is used in the callback URL)</p></li>
+<li><p>Display Name: CILogon</p></li>
+<li><p>Enabled: ON</p></li>
+<li><p>First Login Flow: browser</p></li>
+<li><p>Authorization URL: <a class="reference external" href="https://cilogon.org/authorize">https://cilogon.org/authorize</a></p></li>
+<li><p>Token URL: <a class="reference external" href="https://cilogon.org/oauth2/token">https://cilogon.org/oauth2/token</a></p></li>
+<li><p>User Info URL: <a class="reference external" href="https://cilogon.org/oauth2/userinfo">https://cilogon.org/oauth2/userinfo</a></p></li>
+<li><p>Client Authentication: Client secret sent as post</p></li>
+<li><p>Client ID: &lt;Client ID provided by CILogon at registration&gt;</p></li>
+<li><p>Client Secret: &lt;Client Secret provided by CILogon at registration&gt;</p></li>
+<li><p>Default Scopes: “openid profile org.cilogon.userinfo”</p></li>
 </ol>
 </li>
-<li>Click “Save”</li>
+<li><p>Click “Save”</p></li>
 </ol>
 </div>
 <div class="section" id="support-users-removing-cilogon-mappings">
-<h2>5.3. Support users removing CILogon mappings<a class="headerlink" href="#support-users-removing-cilogon-mappings" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.3. </span>Support users removing CILogon mappings<a class="headerlink" href="#support-users-removing-cilogon-mappings" title="Permalink to this headline">¶</a></h2>
 <p>In order for a user to remove an existing CILogon mapping in Keycloak they must navigate to <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/&lt;REALM&gt;/account/identity</span></code>.
 Replace <code class="docutils literal notranslate"><span class="pre">ondemand-idpdev.hpc.osc.edu</span></code> with the web URL for your Keycloak instance.</p>
 <p>The URL can be added to the OnDemand Help dropdown with custom text to make it easier for users to access their Keycloak identity page.</p>
 <ol class="arabic">
-<li><p class="first">Add <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_HELP_CUSTOM_URL</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> that points to the URL of the identity page for your Keycloak instance.
-Example: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/osc/account/identity</span></code></p>
-</li>
-<li><p class="first">Update <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> with the text to be used for the Identity provider Help link</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">en</span><span class="p">:</span>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_HELP_CUSTOM_URL</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> that points to the URL of the identity page for your Keycloak instance.
+Example: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/osc/account/identity</span></code></p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> with the text to be used for the Identity provider Help link</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">en</span><span class="p">:</span>
   <span class="n">dashboard</span><span class="p">:</span>
     <span class="n">nav_help_custom</span><span class="p">:</span> <span class="n">Manage</span> <span class="n">Federated</span> <span class="n">Identity</span>
 </pre></div>

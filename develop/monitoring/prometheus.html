@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -214,15 +214,15 @@
 <p>OnDemand provides the <a class="reference external" href="https://github.com/OSC/ondemand_exporter">ondemand_exporter</a> that allows for monitoring some metrics specific to OnDemand.</p>
 <p>General metrics provided:</p>
 <ul class="simple">
-<li>Number of active PUNs and type of apps running</li>
-<li>Types of web connections for OnDemand</li>
-<li>Aggregate PUN resource consumption</li>
-<li>Passenger app resource consumption aggregated by app</li>
+<li><p>Number of active PUNs and type of apps running</p></li>
+<li><p>Types of web connections for OnDemand</p></li>
+<li><p>Aggregate PUN resource consumption</p></li>
+<li><p>Passenger app resource consumption aggregated by app</p></li>
 </ul>
 <p>Dependencies:</p>
 <ul class="simple">
-<li>OnDemand &gt;= 1.8</li>
-<li><strong>RPM Installs</strong> - ondemand-passenger &gt;= 6.0.4-6</li>
+<li><p>OnDemand &gt;= 1.8</p></li>
+<li><p><strong>RPM Installs</strong> - ondemand-passenger &gt;= 6.0.4-6</p></li>
 </ul>
 <div class="section" id="install-via-rpm">
 <h2>Install via RPM<a class="headerlink" href="#install-via-rpm" title="Permalink to this headline">¶</a></h2>
@@ -232,9 +232,9 @@
 </div>
 <p>The RPM will install the following files that should work out of the box:</p>
 <ul class="simple">
-<li><strong>RHEL/CentOS 7 only</strong>: /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf</li>
-<li><strong>RHEL/Rocky 8 only</strong>: /etc/httpd/conf.d/ondemand_exporter.conf</li>
-<li>/etc/sudoers.d/ondemand_exporter</li>
+<li><p><strong>RHEL/CentOS 7 only</strong>: /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf</p></li>
+<li><p><strong>RHEL/Rocky 8 only</strong>: /etc/httpd/conf.d/ondemand_exporter.conf</p></li>
+<li><p>/etc/sudoers.d/ondemand_exporter</p></li>
 </ul>
 <p>Ensure that the new Apache configuration is loaded by restarting Apache</p>
 <p>RHEL/CentOS 7</p>
@@ -260,8 +260,8 @@
 <h2>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h2>
 <p>Check for the <a class="reference external" href="https://github.com/OSC/ondemand_exporter/releases/latest">ondemand_exporter Latest Release</a> version number.  Replace <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> with latest release version</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If Passenger was not installed using <code class="docutils literal notranslate"><span class="pre">ondemand-passenger</span></code> RPM then it is required that before starting
+<p class="admonition-title">Warning</p>
+<p>If Passenger was not installed using <code class="docutils literal notranslate"><span class="pre">ondemand-passenger</span></code> RPM then it is required that before starting
 the <code class="docutils literal notranslate"><span class="pre">ondemand_exporter</span></code> daemon you must specify the path to <code class="docutils literal notranslate"><span class="pre">passenger-status</span></code> via the <code class="docutils literal notranslate"><span class="pre">--path.passenger-status</span></code> flag.</p>
 </div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;0.8.0&quot;</span>
@@ -315,16 +315,16 @@ sudo cat &gt; /etc/systemd/system/ondemand_exporter.service.d/passenger-status.c
 <div class="section" id="prometheus-configuration">
 <h2>Prometheus Configuration<a class="headerlink" href="#prometheus-configuration" title="Permalink to this headline">¶</a></h2>
 <p>The following is an example of how to configure the Prometheus scrape if the OnDemand host is <code class="docutils literal notranslate"><span class="pre">web.example.com</span></code> and the OnDemand ServerName is <code class="docutils literal notranslate"><span class="pre">ondemand.example.com</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">job_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand</span>
-  <span class="l l-Scalar l-Scalar-Plain">metrics_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/metrics</span>
-  <span class="l l-Scalar l-Scalar-Plain">scrape_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20s</span>
-  <span class="l l-Scalar l-Scalar-Plain">scrape_interval</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2m</span>
-  <span class="l l-Scalar l-Scalar-Plain">static_configs</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">targets</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">web.example.com:9301</span>
-    <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">production</span>
-      <span class="l l-Scalar l-Scalar-Plain">service</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand.example.com</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metrics</span><span class="w"></span>
+<span class="w">  </span><span class="nt">scrape_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20s</span><span class="w"></span>
+<span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2m</span><span class="w"></span>
+<span class="w">  </span><span class="nt">static_configs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web.example.com:9301</span><span class="w"></span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span><span class="w"></span>
+<span class="w">      </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand.example.com</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -335,17 +335,17 @@ sudo cat &gt; /etc/systemd/system/ondemand_exporter.service.d/passenger-status.c
 <div class="section" id="id2">
 <h2>Process Exporter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>If you’re site is using the <a class="reference external" href="https://github.com/ncabatoff/process-exporter">Process Exporter</a> with Prometheus the following is an example configuration that can be used to collect metrics similar to the <a class="reference external" href="https://github.com/OSC/ondemand_exporter">ondemand_exporter</a> about running processes for OnDemand.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">process_names</span><span class="p p-Indicator">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ood-pun</span>
-  <span class="l l-Scalar l-Scalar-Plain">comm</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Passenger</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Passenger NodeA</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PassengerAgent</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ruby</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;{{.Comm}}:{{.Username}}&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">cmdline</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;.+&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process_names</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ood-pun</span><span class="w"></span>
+<span class="w">  </span><span class="nt">comm</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Passenger</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Passenger NodeA</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PassengerAgent</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruby</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{.Comm}}:{{.Username}}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cmdline</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;.+&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The above example only makes sense on a host that is only running OnDemand and not other services that might also be using NGINX, Passenger or Ruby.</p>

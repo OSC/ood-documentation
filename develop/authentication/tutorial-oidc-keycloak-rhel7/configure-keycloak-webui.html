@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -201,7 +201,7 @@
         
           <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a> &raquo;</li>
         
-      <li>2. Configure Keycloak</li>
+      <li><span class="section-number">2. </span>Configure Keycloak</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -223,71 +223,77 @@
            <div itemprop="articleBody">
             
   <div class="section" id="configure-keycloak">
-<span id="authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui"></span><h1>2. Configure Keycloak<a class="headerlink" href="#configure-keycloak" title="Permalink to this headline">¶</a></h1>
+<span id="authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui"></span><h1><span class="section-number">2. </span>Configure Keycloak<a class="headerlink" href="#configure-keycloak" title="Permalink to this headline">¶</a></h1>
 <p>We will now use Keycloak’s admin Web UI to setup LDAP and add OnDemand as an
 OIDC client that will authenticate with Keycloak.</p>
 <div class="section" id="add-a-new-realm">
-<h2>2.1. Add a new realm<a class="headerlink" href="#add-a-new-realm" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Add a new realm<a class="headerlink" href="#add-a-new-realm" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Log into <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> as the admin user</li>
-<li>Hover over “Master” on left and click “Add Realm”</li>
-<li>Type in name “ondemand” and click “Create”. The new realm is loaded.</li>
-<li>Click Login tab, then adjust parameters:<ol class="arabic">
-<li>Remember Me: ON</li>
-<li>Login with email: OFF</li>
+<li><p>Log into <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> as the admin user</p></li>
+<li><p>Hover over “Master” on left and click “Add Realm”</p></li>
+<li><p>Type in name “ondemand” and click “Create”. The new realm is loaded.</p></li>
+<li><p>Click Login tab, then adjust parameters:</p>
+<ol class="arabic simple">
+<li><p>Remember Me: ON</p></li>
+<li><p>Login with email: OFF</p></li>
 </ol>
 </li>
-<li>Click Save.</li>
+<li><p>Click Save.</p></li>
 </ol>
 </div>
 <div class="section" id="configure-ldap">
-<h2>2.2. Configure LDAP<a class="headerlink" href="#configure-ldap" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Configure LDAP<a class="headerlink" href="#configure-ldap" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Choose User Federation on the left (verify ondemand realm is current realm)</li>
-<li>Select “ldap” for provider<ol class="arabic">
-<li>Import Users set to OFF</li>
-<li>Edit Mode set to READ_ONLY</li>
-<li>Vendor set to other – for OpenLDAP</li>
-<li>User Object Classes set to posixAccount – OSC specific and odd</li>
-<li>Connection URL: ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1</li>
-<li>User DN: ou=People,dc=osc,dc=edu</li>
-<li>Auth Type: none – OSC specific as we allow anonymous binds</li>
-<li>Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs</li>
+<li><p>Choose User Federation on the left (verify ondemand realm is current realm)</p></li>
+<li><p>Select “ldap” for provider</p>
+<ol class="arabic simple">
+<li><p>Import Users set to OFF</p></li>
+<li><p>Edit Mode set to READ_ONLY</p></li>
+<li><p>Vendor set to other – for OpenLDAP</p></li>
+<li><p>User Object Classes set to posixAccount – OSC specific and odd</p></li>
+<li><p>Connection URL: ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636 – using multiple to demonstrate more than 1</p></li>
+<li><p>User DN: ou=People,dc=osc,dc=edu</p></li>
+<li><p>Auth Type: none – OSC specific as we allow anonymous binds</p></li>
+<li><p>Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no truststoreSpi defined in XML configs</p></li>
 </ol>
 </li>
-<li>Save</li>
+<li><p>Save</p></li>
 </ol>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">These LDAP settings are what we set for OSC. Your configuration may vary from
+<p class="admonition-title">Warning</p>
+<p>These LDAP settings are what we set for OSC. Your configuration may vary from
 this. If you run into any problems, please let us know so that once a
 solution is reached we can document those problem areas here. Contact us on
 the OnDemand Discourse at <a class="reference external" href="https://discourse.osc.edu/c/open-ondemand">https://discourse.osc.edu/c/open-ondemand</a>.</p>
 </div>
 </div>
 <div class="section" id="add-ondemand-as-a-client">
-<h2>2.3. Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Add OnDemand as a client<a class="headerlink" href="#add-ondemand-as-a-client" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Choose Clients, then click Create in top right corner<ol class="arabic">
-<li>Client ID: ondemand-dev.hpc.osc.edu</li>
-<li>Client Protocol: openid-connect</li>
-<li>Save (leave Root URL blank)</li>
+<li><p>Choose Clients, then click Create in top right corner</p>
+<ol class="arabic simple">
+<li><p>Client ID: ondemand-dev.hpc.osc.edu</p></li>
+<li><p>Client Protocol: openid-connect</p></li>
+<li><p>Save (leave Root URL blank)</p></li>
 </ol>
 </li>
-<li>Then edit Settings for the newly created client:<ol class="arabic">
-<li>Access Type: confidential</li>
-<li>Direct Access Grants Enabled: off</li>
-<li>Valid Redirect URIs: Press the <code class="docutils literal notranslate"><span class="pre">+</span></code> button to the right of the URI field so you can insert two URLs:<ol class="arabic">
-<li><code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu/oidc</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code></li>
+<li><p>Then edit Settings for the newly created client:</p>
+<ol class="arabic simple">
+<li><p>Access Type: confidential</p></li>
+<li><p>Direct Access Grants Enabled: off</p></li>
+<li><p>Valid Redirect URIs: Press the <code class="docutils literal notranslate"><span class="pre">+</span></code> button to the right of the URI field so you can insert two URLs:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu/oidc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https://ondemand-dev.hpc.osc.edu</span></code></p></li>
 </ol>
 </li>
-<li>Scroll to bottom and click “Save”</li>
+<li><p>Scroll to bottom and click “Save”</p></li>
 </ol>
 </li>
-<li>Finally, get the client secret to use with OnDemand installation:<ol class="arabic">
-<li>Select the “Credentials” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; ondemand-dev.hpc.osc.edu”</li>
-<li>Copy the value for “secret” for future use in this tutorial (and keep it secure).</li>
+<li><p>Finally, get the client secret to use with OnDemand installation:</p>
+<ol class="arabic simple">
+<li><p>Select the “Credentials” tab of the “Client” you are viewing i.e. “Clients &gt;&gt; ondemand-dev.hpc.osc.edu”</p></li>
+<li><p>Copy the value for “secret” for future use in this tutorial (and keep it secure).</p></li>
 </ol>
 </li>
 </ol>

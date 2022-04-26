@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -217,40 +217,40 @@ Open OnDemand won’t work - including interactive apps.</p>
 <p>Indeed, one of the main reasons to use Open OnDemand is use your clusters interactively.</p>
 <p>Apps that require proper cluster configuration include:</p>
 <ul class="simple">
-<li>shell (connect to a cluster login node from the Dashboard App)</li>
-<li>active-jobs (view a list of active jobs for the various clusters)</li>
-<li>job-composer (submit jobs to various clusters)</li>
-<li>All interactive apps such as Jupyter and RStudio</li>
+<li><p>shell (connect to a cluster login node from the Dashboard App)</p></li>
+<li><p>active-jobs (view a list of active jobs for the various clusters)</p></li>
+<li><p>job-composer (submit jobs to various clusters)</p></li>
+<li><p>All interactive apps such as Jupyter and RStudio</p></li>
 </ul>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">We provide a <a class="reference external" href="https://forge.puppet.com/modules/osc/openondemand">puppet module</a> and an <a class="reference external" href="https://galaxy.ansible.com/osc/open_ondemand">ansible role</a> for automating all of this configuration.</p>
+<p class="admonition-title">Tip</p>
+<p>We provide a <a class="reference external" href="https://forge.puppet.com/modules/osc/openondemand">puppet module</a> and an <a class="reference external" href="https://galaxy.ansible.com/osc/open_ondemand">ansible role</a> for automating all of this configuration.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Create the default directory that the cluster configuration files reside
+<li><p>Create the default directory that the cluster configuration files reside
 under:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/ood/config/clusters.d
 </pre></div>
 </div>
 </li>
-<li><p class="first">Create a cluster YAML configuration file for each HPC cluster you want to
+<li><p>Create a cluster YAML configuration file for each HPC cluster you want to
 provide access to. They must have the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> or <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> extensions.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is best to name the file after the HPC cluster it is defining. For
+<p class="admonition-title">Note</p>
+<p>It is best to name the file after the HPC cluster it is defining. For
 example, we added the cluster configuration file
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/oakley.yml</span></code> for the Oakley cluster here
 at OSC.</p>
 </div>
 <p>The <em>simplest</em> cluster configuration file for an HPC cluster with only a login
 node and <strong>no resource manager</strong> looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">host</span></code> is the SSH server host for the given cluster.</p>
