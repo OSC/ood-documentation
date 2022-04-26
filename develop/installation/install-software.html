@@ -27,6 +27,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +37,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Modify System Security" href="modify-system-security.html" />
@@ -220,78 +222,60 @@ libraries</p></li>
 <p>This tutorial is run from the perspective of an account that has
 <strong class="command">sudo</strong> access but is not root.</p>
 </div>
-<ol class="arabic">
-<li><p>Enable the dependency repositories <strong>on CentOS/RHEL 7 only</strong>:</p>
-<dl>
-<dt>CentOS 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
+<ol class="arabic simple">
+<li><p>Enable the dependency repositories</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">CentOS 7</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RockyLinux 8</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">RHEL 7</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">RHEL 8</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
 </pre></div>
 </div>
-</dd>
-<dt>RHEL 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
-sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
-<span class="c1"># Repository &#39;rhel-server-rhscl-7-rpms&#39; is enabled for this system.</span>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf config-manager --set-enabled powertools
+sudo dnf install epel-release
+sudo dnf module <span class="nb">enable</span> ruby:2.7
+sudo dnf module <span class="nb">enable</span> nodejs:12
 </pre></div>
 </div>
-</dd>
-</dl>
-<div class="admonition warning">
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>For <strong>RedHat</strong> you may also need to enable the <em>Optional</em> channel and
+<p>You may also need to enable the <em>Optional</em> channel and
 attach a subscription providing access to RHSCL to be able to use this
 repository.</p>
 </div>
-</li>
-<li><p>Enable dnf modules and repositories for dependencies <strong>on RHEL/Rocky 8 only</strong>:</p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dnf install epel-release
-dnf module <span class="nb">enable</span> ruby:2.7
-dnf module <span class="nb">enable</span> nodejs:14
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
+sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
 </pre></div>
 </div>
-</div></blockquote>
-<p><strong>Rocky 8 only</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf config-manager --set-enabled powertools
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You may also need to enable the <em>Optional</em> channel and
+attach a subscription providing access to RHSCL to be able to use this
+repository.</p>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf config-manager --set-enabled powertools
+sudo dnf install epel-releaseq
+sudo dnf module <span class="nb">enable</span> ruby:2.7
+sudo dnf module <span class="nb">enable</span> nodejs:12
+sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 </pre></div>
 </div>
-</div></blockquote>
-<p><strong>RedHat 8 only</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+</div></div>
+<ol class="arabic" start="2">
+<li><p>Add Open OnDemand’s repository and install:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">yum/dnf</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">apt</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
+
+sudo yum install ondemand
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p>Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
-<p><strong>RedHat/CentOS/Rocky only</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>Ubuntu only</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install apt-transport-https ca-certificates
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install apt-transport-https ca-certificates
 wget -O /tmp/ondemand-release-web_2.0.0_all.deb https://apt.osc.edu/ondemand/2.0/ondemand-release-web_2.0.0_all.deb
 sudo apt install /tmp/ondemand-release-web_2.0.0_all.deb
 sudo apt update
+
+sudo apt install ondemand
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p>Install OnDemand and all of its dependencies:</p>
-<p><strong>RedHat/CentOS/Rocky only</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>Ubuntu only</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install ondemand
-</pre></div>
-</div>
-</div></blockquote>
+</div></div>
 </li>
 </ol>
 <div class="admonition note">
