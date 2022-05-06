@@ -62,7 +62,7 @@ and restart apache.  Or you're using the wrong hostname in your browser.
 
           /opt/rh/httpd24/root/sbin/httpd -S
 
-      .. tab:: RHEL/CentOS/Rocky 8
+      .. tab:: RHEL/Rocky 8
 
          .. code-block:: sh
 
