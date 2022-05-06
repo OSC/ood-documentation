@@ -129,14 +129,6 @@ is the case - then you should :ref:`secure your apache <add-ssl>` then :ref:`add
 If you're seeing the default apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
 and likely :ref:`configure a servername <ood-portal-generator-servername>`.
 
-
-.. warning::
-
-    For some older systems, user ids (UID) may start at ``500`` and not the
-    expected ``1000``. If this true for your system, you will need to modify the
-    `min_uid` property in the :ref:`nginx-stage-configuration` file to allow these
-    users access to OnDemand.
-
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
 .. _ohio supercomputer center: https://www.osc.edu/
