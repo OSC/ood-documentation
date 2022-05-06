@@ -10,12 +10,24 @@ with an Open OnDemand installation. Tutorials will also be provided with the
 focus on setting up some of the more common authentication modules (e.g.,
 OpenID Connect with KeyCloak).
 
+After installing Open OnDemand you _must_ add authentiction of some kind
+to generate the correct apache configuration.  When no authentiction is
+supplied apache will only serve a static page that directs you here.
+
+No Open OnDemand functionality is available without authentiction.
+
 .. note::
 
    If you managed to install an Apache authentication module at your center
    that currently does not have a tutorial listed below we would greatly
    appreciate it if you could take the time to contribute a detailed
    walkthrough.
+
+
+.. tip::
+
+    :ref:`Dex <authentication-dex>` is a very good starting option if you can connect
+    to an LDAP and not an institutional Single-Sign-On Service.
 
 .. toctree::
    :maxdepth: 2
