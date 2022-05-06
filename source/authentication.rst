@@ -27,7 +27,7 @@ No Open OnDemand functionality is available without authentiction.
 .. tip::
 
     :ref:`Dex <authentication-dex>` is a very good starting option if you can connect
-    to an LDAP and not an institutional Single-Sign-On Service.
+    to an LDAP and not an institutional Single Sign-On service.
 
 .. toctree::
    :maxdepth: 2
