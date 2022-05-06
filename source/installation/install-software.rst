@@ -105,7 +105,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
           sudo systemctl enable httpd24-httpd
 
 
-      .. tab:: RHEL/CentOS/Rocky 8
+      .. tab:: RHEL/Rocky 8
 
          .. code-block:: sh
 
