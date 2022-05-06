@@ -48,7 +48,7 @@ Show VirtualHosts
 OpenOnDemand creates it's own VirtualHost in apache.  Apache will route
 requests based off of the hostname in the request to different VirtualHosts.
 
-Showing virtualhosts can help debug apache request routing.  The outpt from these
+Showing virtualhosts can help debug apache request routing.  The output from these
 commands will show you how apache is routing based off of the servname in the VirtualHost.
 
 If you're seeing the default apache webpage you likely have to `servername configuration`
