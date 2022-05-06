@@ -28,7 +28,7 @@ Restart services
           sudo systemctl try-restart httpd24-httpd httpd24-htcacheclean
 
 
-      .. tab:: RHEL/CentOS/Rocky 8
+      .. tab:: RHEL/Rocky 8
 
          .. code-block:: sh
 
