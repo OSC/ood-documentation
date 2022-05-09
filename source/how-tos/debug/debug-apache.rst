@@ -7,7 +7,7 @@ How to Debug Apache
 
   While this page is helpful it is no replacement for `Apache Httpd's documentation`_. If
   you are an administrator responsible for Open OnDemand, you are now an administrator of
-  apache httpd.  As such, you should get comfortable with it as from time to time you will
+  Apache Httpd as well.  As such, you should get comfortable with it as from time to time you will
   have to troubleshoot it.
 
 
