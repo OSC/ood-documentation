@@ -5,7 +5,7 @@ Secure Apache httpd
 
 The SSL protocol provides for a secure channel of communication between the
 user's browser and the Open OnDemand portal.  It is recommended that you secure
-you're apache server by adding these configurations.
+your Apache server by adding these configurations.
 
 .. warning::
 
