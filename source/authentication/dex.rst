@@ -59,7 +59,7 @@ OnDemand Dex is configured by modifying the Open OnDemand Portal :ref:`ood-porta
 
 The default location for Dex configurations is :file:`/etc/ood/dex/config.yaml`.
 
-When changes are needed for OnDemand Dex :ref:`restart-apache` and then restart dex with:
+When changes are needed for OnDemand Dex :ref:`restart-apache` and then restart Dex with:
 
    .. code-block:: sh
 
