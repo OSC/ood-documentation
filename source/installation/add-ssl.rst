@@ -63,7 +63,7 @@ Intermediate certificate
 
 #. Restart the Apache server for the changes take effect.
 
-:ref:`Restart the apache server <restart-apache>` for the changes take effect.
+:ref:`Restart the Apache service <restart-apache>` for the changes take effect.
 
 Now when you browse to your OnDemand portal at::
 
