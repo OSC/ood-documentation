@@ -10,7 +10,7 @@ means that it will need:
 - signed SSL certificate with corresponding intermediate certificate for your
   advertised OnDemand host name (e.g., ``ondemand.my_center.edu``)
 
-Adding SELinux policies is optional for RHEL systems.  Open OnDemand, by default,
+Adding :ref:`Open OnDemand SELinux policies <modify-system-security>` is optional for RHEL systems.  Open OnDemand, by default,
 expects Apache to have SSL enabled.  Sites may reconfigure their deployment to allow
 for plain text traffic see FIXME-LINK-NEEDED.
 
