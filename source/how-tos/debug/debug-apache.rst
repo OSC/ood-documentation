@@ -5,7 +5,7 @@ How to Debug Apache
 
 ..  tip::
 
-  While this page is helpful it is no replacement for `apache httpd's documentation`. If
+  While this page is helpful it is no replacement for `Apache Httpd's documentation`_. If
   you are an administrator responsible for Open OnDemand, you are now an administrator of
   apache httpd.  As such, you should get comfortable with it as from time to time you will
   have to troubleshoot it.
@@ -75,5 +75,5 @@ and restart Apache.  Or you're using the wrong hostname in your browser.
           sudo /sbin/apache2 -S
 
 
-.. _apache httpd's documentation: https://httpd.apache.org/docs/current/getting-started.html
+.. _Apache Httpd's documentation: https://httpd.apache.org/docs/current/getting-started.html
 .. _servername configuration: ood-portal-generator-servername
