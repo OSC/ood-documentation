@@ -32,7 +32,7 @@ Restart services
 
          .. code-block:: sh
 
-          sudo systemctl try-restart httpd htcacheclean
+          sudo systemctl try-restart httpd
 
       .. tab:: Ubuntu
 
