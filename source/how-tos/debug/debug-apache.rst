@@ -60,19 +60,19 @@ and restart Apache.  Or you're using the wrong hostname in your browser.
 
         .. code-block:: sh
 
-          /opt/rh/httpd24/root/sbin/httpd -S
+          sudo /opt/rh/httpd24/root/sbin/httpd -S
 
       .. tab:: RHEL/Rocky 8
 
          .. code-block:: sh
 
-          /sbin/httpd -S
+          sudo /sbin/httpd -S
 
       .. tab:: Ubuntu
 
          .. code-block:: sh
 
-          /sbin/apache2 -S
+          sudo /sbin/apache2 -S
 
 
 .. _apache httpd's documentation: https://httpd.apache.org/docs/current/getting-started.html
