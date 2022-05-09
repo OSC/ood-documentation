@@ -52,7 +52,7 @@ Showing virtualhosts can help debug Apache request routing.  The output from the
 commands will show you how Apache is routing based off of the ServerName in the VirtualHost.
 
 If you're seeing the default Apache webpage you likely have to `configure the ServerName <ood-portal-generator-servername>`
-and restart apache.  Or you're using the wrong hostname in your browser.
+and restart Apache.  Or you're using the wrong hostname in your browser.
 
    .. tabs::
 
