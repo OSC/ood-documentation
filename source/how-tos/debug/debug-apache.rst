@@ -45,7 +45,7 @@ Restart services
 Show VirtualHosts
 -----------------
 
-OpenOnDemand creates it's own VirtualHost in apache.  Apache will route
+OpenOnDemand creates it's own VirtualHost in Apache.  Apache will route
 requests based off of the hostname in the request to different VirtualHosts.
 
 Showing virtualhosts can help debug apache request routing.  The output from these
