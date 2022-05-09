@@ -12,7 +12,7 @@ OpenID Connect with KeyCloak).
 
 After installing Open OnDemand you **must** add authentiction of some kind
 to generate the correct apache configuration.  When no authentiction is
-supplied apache will only serve a static page that directs you here.
+supplied Apache will only serve a static page that directs you here.
 
 No Open OnDemand functionality is available without authentiction.
 
