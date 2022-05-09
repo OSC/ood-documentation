@@ -45,14 +45,17 @@ Restart services
 Show VirtualHosts
 -----------------
 
-OpenOnDemand creates it's own VirtualHost in Apache.  Apache will route
-requests based off of the hostname in the request to different VirtualHosts.
+OpenOnDemand creates it's own `VirtualHost`_ in Apache.  Apache will route
+requests based off of the hostname in the request to different VirtualHosts
+and the ServerName you may have configured.
 
 Showing virtualhosts can help debug Apache request routing.  The output from these
 commands will show you how Apache is routing based off of the ServerName in the VirtualHost.
 
-If you're seeing the default Apache webpage you likely have to `configure the ServerName <ood-portal-generator-servername>`
-and restart Apache.  Or you're using the wrong hostname in your browser.
+If you're seeing the default Apache webpage you likely have to :ref:`configure the ServerName <ood-portal-generator-servername>`
+which corresponds directly to `Apache's ServerName configuration`_ (and restart Apache).
+
+Or you're using the wrong hostname in your browser.
 
    .. tabs::
 
@@ -76,4 +79,5 @@ and restart Apache.  Or you're using the wrong hostname in your browser.
 
 
 .. _Apache Httpd's documentation: https://httpd.apache.org/docs/current/getting-started.html
-.. _servername configuration: ood-portal-generator-servername
+.. _Apache's ServerName configuration: https://httpd.apache.org/docs/2.4/mod/core.html#servername
+.. _VirtualHost: https://httpd.apache.org/docs/2.4/vhosts/
