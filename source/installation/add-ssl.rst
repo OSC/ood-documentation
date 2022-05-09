@@ -61,7 +61,7 @@ Intermediate certificate
       For documentation on SSL directives please see:
       https://httpd.apache.org/docs/2.4/mod/mod_ssl.html
 
-#. Restart the Apache server for the changes take effect.
+#. Restart the Apache service for the changes take effect.
 
 :ref:`Restart the Apache service <restart-apache>` for the changes take effect.
 
