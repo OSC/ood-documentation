@@ -135,6 +135,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../monitoring.html">Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging Open OnDemand</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
 </ul>
@@ -224,7 +225,7 @@
 <p><a class="reference external" href="https://github.com/dexidp/dex">Dex</a> is a lightweight OpenID Connect authentication provider written in Go, and is the default authentication mechanism shipped with Open OnDemand.</p>
 <div class="section" id="installing-ondemand-dex-package">
 <h2>Installing OnDemand Dex package<a class="headerlink" href="#installing-ondemand-dex-package" title="Permalink to this headline">¶</a></h2>
-<p>First the OnDemand yum repos must be enabled, see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software From Packages</span></a>.</p>
+<p>First the OnDemand yum repos must be enabled, see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a>.</p>
 <p>Install the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> RPM:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
@@ -272,10 +273,9 @@ sudo install -m <span class="m">0644</span> ondemand-dex/examples/ondemand-dex.s
 <h2>Configuring OnDemand Dex<a class="headerlink" href="#configuring-ondemand-dex" title="Permalink to this headline">¶</a></h2>
 <p>OnDemand Dex is configured by modifying the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
 <p>The default location for Dex configurations is <code class="file docutils literal notranslate"><span class="pre">/etc/ood/dex/config.yaml</span></code>.</p>
-<p>When changes are needed for OnDemand Dex run the following command:</p>
+<p>When changes are needed for OnDemand Dex <a class="reference internal" href="../how-tos/debug/debug-apache.html#restart-apache"><span class="std std-ref">Restart services</span></a> and then restart Dex with:</p>
 <blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
-sudo systemctl restart ondemand-dex
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl restart ondemand-dex
 </pre></div>
 </div>
 </div></blockquote>

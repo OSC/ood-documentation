@@ -1,7 +1,7 @@
 .. _modify-system-security:
 
-Modify System Security
-======================
+Add SELinux
+===========
 
 .. _ood_selinux:
 

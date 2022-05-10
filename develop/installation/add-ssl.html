@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Add SSL Support &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>3. Secure Apache httpd &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Add LDAP Support" href="add-ldap.html" />
-    <link rel="prev" title="3. Start Services" href="start-apache.html" />
+    <link rel="next" title="Authentication" href="../authentication.html" />
+    <link rel="prev" title="2. Add SELinux" href="modify-system-security.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -105,11 +105,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Modify System Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="start-apache.html">3. Start Services</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">5. Add LDAP Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Add SELinux</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Secure Apache httpd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
@@ -122,6 +120,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../monitoring.html">Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging Open OnDemand</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
 </ul>
@@ -185,7 +184,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li><span class="section-number">4. </span>Add SSL Support</li>
+      <li><span class="section-number">3. </span>Secure Apache httpd</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -206,20 +205,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="add-ssl-support">
-<span id="add-ssl"></span><h1><span class="section-number">4. </span>Add SSL Support<a class="headerlink" href="#add-ssl-support" title="Permalink to this headline">¶</a></h1>
-<p><strong>(Optional, but recommended)</strong></p>
+  <div class="section" id="secure-apache-httpd">
+<span id="add-ssl"></span><h1><span class="section-number">3. </span>Secure Apache httpd<a class="headerlink" href="#secure-apache-httpd" title="Permalink to this headline">¶</a></h1>
 <p>The SSL protocol provides for a secure channel of communication between the
-user’s browser and the Open OnDemand portal.</p>
+user’s browser and the Open OnDemand portal.  It is recommended that you secure
+your Apache server by adding these configurations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Open OnDemand expects secure (https) traffic by default. If you do
+not add SSL to your Apache server you will have to follow FIXME-LINK-NEEDED
+to enable some (if not most) functionality.</p>
+<p>This is not recommended as someone on your network could see your traffic in
+plain text, including passwords.</p>
+</div>
 <p>Requirements:</p>
 <ul class="simple">
-<li><p>a server name that points to the Open OnDemand server
-(<code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>)</p></li>
+<li><p>A server name that points to the Open OnDemand server (<code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>).
+I.e., <cite>nslookup ondemand.my_center.edu</cite> resolves to your instance.</p></li>
 <li><p>signed SSL certificates with possible intermediate certificates</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You may use <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> to obtain a free SSL certificate. You can read
+<p><a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> is a great option to obtain a free SSL certificate. You can read
 more about it in their <a class="reference external" href="https://letsencrypt.org/getting-started/">Getting Started</a> documentation.</p>
 </div>
 <p>In this example we assume the following certificates are provided:</p>
@@ -252,28 +259,9 @@ more about it in their <a class="reference external" href="https://letsencrypt.o
 <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_ssl.html">https://httpd.apache.org/docs/2.4/mod/mod_ssl.html</a></p>
 </div>
 </li>
-<li><p>Build/install the updated Apache configuration file:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
-</pre></div>
-</div>
-</li>
-<li><p>Restart the Apache server to have the changes take effect:</p>
-<dl>
-<dt>RHEL/CentOS 7:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
-</pre></div>
-</div>
-</dd>
-<dt>RHEL/Rocky 8:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart httpd.service htcacheclean.service
-</pre></div>
-</div>
-</dd>
-<dt>Ubuntu:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart apache2.service
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
+<li><p>Restart the Apache service for the changes take effect.</p></li>
 </ol>
+<p><a class="reference internal" href="../how-tos/debug/debug-apache.html#restart-apache"><span class="std std-ref">Restart the Apache service</span></a> for the changes take effect.</p>
 <p>Now when you browse to your OnDemand portal at:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span>
 </pre></div>
@@ -294,10 +282,10 @@ indicate that the site is secure.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="add-ldap.html" class="btn btn-neutral float-right" title="5. Add LDAP Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../authentication.html" class="btn btn-neutral float-right" title="Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="start-apache.html" class="btn btn-neutral float-left" title="3. Start Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modify-system-security.html" class="btn btn-neutral float-left" title="2. Add SELinux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

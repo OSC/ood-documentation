@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analytics.html">Analytics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../monitoring.html">Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging Open OnDemand</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
 </ul>
@@ -246,7 +247,7 @@ exists in another config)</p>
 </dl>
 </dd></dl>
 
-<dl class="describe">
+<span class="target" id="ood-portal-generator-servername"></span><dl class="describe">
 <dt>
 <code class="sig-name descname">servername (String, null)</code></dt>
 <dd><p>the host name used to access the Open OnDemand portal</p>
@@ -638,25 +639,22 @@ name to a system user name</p>
 <dl class="describe">
 <dt>
 <code class="sig-name descname">auth (Array&lt;String&gt;)</code></dt>
-<dd><p>the list of Apache directives defining how authentication is handled for
-various protected resources on the website</p>
+<dd><p>The list of Apache directives defining how authentication is handled for
+various protected resources on the website. See <a class="reference internal" href="../../authentication.html#authentication"><span class="std std-ref">Authentication</span></a> for
+more details.</p>
 <dl>
-<dt>Default</dt><dd><p>Use basic authentication with a plain-text password file.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">Basic&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthName</span><span class="nv"> </span><span class="s">\&quot;private\&quot;&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthUserFile</span><span class="nv"> </span><span class="s">\&quot;/opt/rh/httpd24/root/etc/httpd/.htpasswd\&quot;&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Authorization&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span><span class="w"></span>
+<dt>Default</dt><dd><p>Empty. No authentication. Open OnDemand will not work at all without authentication
+of some kind.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auth</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt><dd><p>See:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../../installation/add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a></p></li>
-<li><p><a class="reference internal" href="../../authentication/shibboleth.html#authentication-shibboleth"><span class="std std-ref">Shibboleth</span></a></p></li>
-<li><p><a class="reference internal" href="../../authentication/tutorial-oidc-keycloak-rhel7/configure-cilogon.html#authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon"><span class="std std-ref">Configure Keycloak with CILogon</span></a></p></li>
-</ul>
+<dt>Example</dt><dd><p>Open ID Connect authentication.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
