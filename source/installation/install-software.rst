@@ -1,22 +1,24 @@
 .. _install-software:
 
-Install Software From Packages
-==============================
+Install Software
+================
 
-We will use `Software Collections`_ to satisfy majority of the following
-software requirements:
+Open OnDemand uses these packages, among many others.
 
 - `Apache HTTP Server 2.4`_
 - Ruby 2.7 with :command:`rake`, :command:`bundler`, and development
   libraries
-- Node.js 12
+- Node.js 14
+
+Some operating systems use `Software Collections`_ to satisfy these.
 
 .. note::
 
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-1. Enable the dependency repositories
+1. Enable Dependencies
+----------------------
 
 .. tabs::
 
@@ -33,8 +35,7 @@ software requirements:
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7
-         sudo dnf module enable nodejs:12
+         sudo dnf module enable ruby:2.7 nodejs:14
 
    .. tab:: RHEL 7
 
@@ -61,13 +62,13 @@ software requirements:
       .. code-block:: sh
 
          sudo dnf config-manager --set-enabled powertools
-         sudo dnf install epel-releaseq
-         sudo dnf module enable ruby:2.7
-         sudo dnf module enable nodejs:12
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:2.7 nodejs:14
          sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
 
-2. Add Open OnDemand's repository and install:
+2. Add repository and install
+-----------------------------
 
    .. tabs::
 
@@ -91,54 +92,43 @@ software requirements:
 
             sudo apt install ondemand
 
-.. note::
+3. Start services
+-----------------
 
-   If *authenticating against LDAP* or *wishing to evaluate OnDemand* using `ood` user, you **must install** `ondemand-dex` as 
-   described below. See :ref:`add-ldap` for details on configuration of LDAP and :ref:`start-services` for the `ood` user.
+   .. tabs::
 
-#. (Optional) Install :ref:`authentication-dex` package
+      .. tab:: RHEL/CentOS 7
 
-   **RedHat/CentOS/Rocky only**
+        .. code-block:: sh
 
-    .. code-block:: sh
+          sudo systemctl start httpd24-httpd
+          sudo systemctl enable httpd24-httpd
 
-       sudo yum install ondemand-dex
 
-   **Ubuntu only**
+      .. tab:: RHEL/Rocky 8
 
-    .. code-block:: sh
+         .. code-block:: sh
 
-       sudo apt install ondemand-dex
+          sudo systemctl start httpd
+          sudo systemctl enable httpd
 
-#. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
+      .. tab:: Ubuntu
 
-   **RedHat/CentOS/Rocky only**
+         .. code-block:: sh
 
-    .. code-block:: sh
+          sudo systemctl start apache2
+          sudo systemctl enable apache2
 
-       sudo yum install ondemand-selinux
+4. Verify installation
+----------------------
 
-.. warning::
+Now that Open OnDemand is installed and Apache is running, it should be serving
+a public page telling you to come back here and setup authentication.  If this
+is the case - then you should :ref:`secure your apache <add-ssl>` then :ref:`add authentication <authentication>`.
+You may also want to :ref:`enable SELinux <modify-system-security>`.
 
-   For some older systems, user ids (UID) may start at ``500`` and not the
-   expected ``1000``. If this true for your system, you will need to modify the
-   :file:`/etc/ood/config/nginx_stage.yml` configuration file to allow these
-   users access to OnDemand:
-
-   .. code-block:: yaml
-      :emphasize-lines: 9
-
-      # /etc/ood/config/nginx_stage.yml
-      ---
-
-      # ...
-
-      # Minimum user id required to generate per-user NGINX server as the requested
-      # user (default: 1000)
-      #
-      min_uid: 500
-
-      # ...
+If you're seeing the default apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
+and likely :ref:`configure a servername <ood-portal-generator-servername>`.
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/

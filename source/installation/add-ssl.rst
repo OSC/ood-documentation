@@ -1,23 +1,31 @@
 .. _add-ssl:
 
-Add SSL Support
-===============
-
-**(Optional, but recommended)**
+Secure Apache httpd
+===================
 
 The SSL protocol provides for a secure channel of communication between the
-user's browser and the Open OnDemand portal.
+user's browser and the Open OnDemand portal.  It is recommended that you secure
+your Apache server by adding these configurations.
+
+.. warning::
+
+    Open OnDemand expects secure (https) traffic by default. If you do
+    not add SSL to your Apache server you will have to follow FIXME-LINK-NEEDED
+    to enable some (if not most) functionality.
+
+    This is not recommended as someone on your network could see your traffic in
+    plain text, including passwords.
 
 Requirements:
 
-- a server name that points to the Open OnDemand server
-  (``ondemand.my_center.edu``)
+- A server name that points to the Open OnDemand server (``ondemand.my_center.edu``).
+  I.e., `nslookup ondemand.my_center.edu` resolves to your instance.
 - signed SSL certificates with possible intermediate certificates
 
 .. note::
 
-   You may use `Let's Encrypt`_ to obtain a free SSL certificate. You can read
-   more about it in their `Getting Started`_ documentation.
+    `Let's Encrypt`_ is a great option to obtain a free SSL certificate. You can read
+    more about it in their `Getting Started`_ documentation.
 
 .. _let's encrypt: https://letsencrypt.org/
 .. _getting started: https://letsencrypt.org/getting-started/
@@ -53,28 +61,9 @@ Intermediate certificate
       For documentation on SSL directives please see:
       https://httpd.apache.org/docs/2.4/mod/mod_ssl.html
 
-#. Build/install the updated Apache configuration file:
+#. Restart the Apache service for the changes take effect.
 
-   .. code-block:: sh
-
-      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
-
-#. Restart the Apache server to have the changes take effect:
-
-   RHEL/CentOS 7:
-     .. code-block:: sh
-
-        sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
-
-   RHEL/Rocky 8:
-     .. code-block:: sh
-
-        sudo systemctl try-restart httpd.service htcacheclean.service
-
-   Ubuntu:
-     .. code-block:: sh
-
-        sudo systemctl try-restart apache2.service
+:ref:`Restart the Apache service <restart-apache>` for the changes take effect.
 
 Now when you browse to your OnDemand portal at::
 

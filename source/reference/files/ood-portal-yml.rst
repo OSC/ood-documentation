@@ -35,6 +35,7 @@ Configure General Options
 
           listen_addr_port: "443"
 
+.. _ood-portal-generator-servername:
 .. describe:: servername (String, null)
 
      the host name used to access the Open OnDemand portal
@@ -432,27 +433,26 @@ Configure General Options
 
 .. describe:: auth (Array<String>)
 
-     the list of Apache directives defining how authentication is handled for
-     various protected resources on the website
+    The list of Apache directives defining how authentication is handled for
+    various protected resources on the website. See :ref:`authentication` for
+    more details.
 
-     Default
-       Use basic authentication with a plain-text password file.
+    Default
+      Empty. No authentication. Open OnDemand will not work at all without authentication
+      of some kind.
 
-       .. code-block:: yaml
+      .. code-block:: yaml
+
+          auth: []
+
+    Example
+      Open ID Connect authentication.
+
+      .. code-block:: yaml
 
           auth:
-            - "AuthType Basic"
-            - "AuthName \"private\""
-            - "AuthUserFile \"/opt/rh/httpd24/root/etc/httpd/.htpasswd\""
-            - "RequestHeader unset Authorization"
+            - "AuthType openid-connect"
             - "Require valid-user"
-
-     Example
-       See:
-
-       - :ref:`add-ldap`
-       - :ref:`authentication-shibboleth`
-       - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
 
 .. describe:: root_uri (String)
 
