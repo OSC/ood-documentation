@@ -12,7 +12,7 @@ The following prerequisites need to be satisfied:
 
 .. note::
 
-   OnDemand repos provide the ``https24-mod_auth_openidc`` RPM for RHEL 7 and CentOS 7 as it must be built against SCL Apache. The OnDemand repos also have the ``mod_auth_openidc`` RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.
+   OnDemand repos provide the ``httpd24-mod_auth_openidc`` RPM for RHEL 7 and CentOS 7 as it must be built against SCL Apache. The OnDemand repos also have the ``mod_auth_openidc`` RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.
 
 The following is an example :program:`ood-portal-generator` configuration file:
 
@@ -28,7 +28,7 @@ The following is an example :program:`ood-portal-generator` configuration file:
      - "Require valid-user"
 
    # Use OIDC logout
-   logout_redirect: "/oidc?logout=https%3A%2F%ondemand.example.com"
+   logout_redirect: "/oidc?logout=https%3A%2F%2Fondemand.example.com"
 
    # Capture system user name from authenticated user name
    user_map_cmd: "/opt/ood/ood_auth_map/bin/ood_auth_map.regex"
