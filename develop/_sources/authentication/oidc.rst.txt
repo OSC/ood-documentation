@@ -47,6 +47,7 @@ The following is an example :program:`ood-portal-generator` configuration file:
      OIDCPassRefreshToken: "On"
      OIDCPassClaimsAs: "environment"
      OIDCStripCookies: "mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1"
+     OIDCResponseType: "code"
 
 .. note::
 
