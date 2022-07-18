@@ -34,6 +34,8 @@ lib
   The path to the Torque client libraries.
 bin
   The path to the Torque client binaries.
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 bin_overrides
   Replacements/wrappers for Torque's job submission and control clients. *Optional*
 
