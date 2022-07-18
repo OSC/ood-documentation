@@ -71,9 +71,28 @@ Dex users may encounter issues with SSL certificates like::
   remote error: tls: unknown certificate authority
 
 If this is the case, you need to ensure that their certificate authority (CA) is
-in the system trust store.
+in the system trust store and that your CA certificates are up to date.
 
-Copy your certificate authority (examples could be ``fullchain.pem``)
+First, try updating your CA certificates.  This could especially happen when
+you have a `Let's Encrypt`_ and your machine does not know it's a certificate
+authority.
+
+.. tabs::
+
+  .. tab:: RHEL
+
+    .. code:: sh
+
+      sudo yum update ca-certificates
+
+  .. tab:: Ubuntu
+
+    .. code:: sh
+
+      sudo apt update ca-certificates
+
+
+If you're still having issues, copy your certificate authority (examples could be ``fullchain.pem``)
 to your trust store. replace ``CA CERT location`` with the actual certificate
 authority you're using and run these commands to copy it to the appropriate place.
 
@@ -85,14 +104,12 @@ authority you're using and run these commands to copy it to the appropriate plac
 
       sudo cp <CA CERT location> /etc/pki/ca-trust/source/anchors/
       sudo update-ca-trust extract
-      sudo yum update ca-certificates
 
   .. tab:: Ubuntu
 
     .. code:: sh
 
       sudo cp <CA CERT location> /usr/local/share/ca-certificates/
-      sudo update-ca-certificates
 
 3. Restart the Apache service for the changes take effect.
 ``````````````````````````````````````````````````````````
