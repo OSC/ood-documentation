@@ -74,7 +74,7 @@ If this is the case, you need to ensure that their certificate authority (CA) is
 in the system trust store and that your CA certificates are up to date.
 
 First, try updating your CA certificates.  This could especially happen when
-you have a `Let's Encrypt`_ and your machine does not know it's a certificate
+you have a `Let's Encrypt`_ and your machine does not know about that certificate
 authority.
 
 .. tabs::
