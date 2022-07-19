@@ -103,8 +103,7 @@ authority you're using and run these commands to copy it to the appropriate plac
     .. code:: sh
 
       sudo cp <CA CERT location> /etc/pki/ca-trust/source/anchors/
-      sudo update-ca-trust extract
-      update-ca-certificates
+      sudo update-ca-trust
 
   .. tab:: Ubuntu
 
