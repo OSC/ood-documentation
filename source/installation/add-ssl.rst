@@ -111,7 +111,7 @@ authority you're using and run these commands to copy it to the appropriate plac
     .. code:: sh
 
       sudo cp <CA CERT location> /usr/local/share/ca-certificates/
-      update-ca-certificates
+      sudo update-ca-certificates
 
 3. Restart the Apache service for the changes take effect.
 ``````````````````````````````````````````````````````````
