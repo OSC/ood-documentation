@@ -174,6 +174,22 @@ bc_email_on_started
   This attribute sets value of `OodCore::Job::Script#email_on_started`_
   depending on whether the user checked the box or not.
 
+auto_primary_group
+  This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
+  primary group of the user.  No choice will be given to the user.
+
+auto_module_<MODULE>
+  auto_module_<MODULE> will generate a list of modules in a dropdown list.
+  For example ``auto_module_matlab`` will automatically populate a dropdown
+  list of every single ``matlab`` version available.
+
+  See :ref:`the module directory configuration <module_file_dir>` on how to enable
+  the cluster module files that need to be read.
+
+  If you have dynamic form widgets enabled, the option list will be cluster aware.
+  Meaning only versions appropriate to a given cluster will be shown when that
+  cluster is chosen.
+
 .. _`oodcore::job::script#accounting_id`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id
 .. _`oodcore::job::script#queue_name`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name
 .. _`oodcore::job::script#wall_time`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:wall_time
