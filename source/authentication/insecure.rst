@@ -3,7 +3,7 @@
 Other Insecure Options
 ======================
 
-There are other insecure options that you may find apache supports.
+There are other insecure options that you may find Apache supports.
 
 It's left to the reader to try those out. Open OnDemand developers
 highly discourge users attempting to authenticate with apache's
