@@ -39,7 +39,9 @@ Private key
 Intermediate certificate
   :file:`/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt`
 
-#. Edit the Open OnDemand Portal :ref:`ood-portal-generator-configuration` file
+1. Edit the Open OnDemand Portal :ref:`ood-portal-generator-configuration` file
+```````````````````````````````````````````````````````````````````````````````
+
    :file:`/etc/ood/config/ood_portal.yml` as such:
 
    .. code-block:: yaml
@@ -61,7 +63,57 @@ Intermediate certificate
       For documentation on SSL directives please see:
       https://httpd.apache.org/docs/2.4/mod/mod_ssl.html
 
-#. Restart the Apache service for the changes take effect.
+2. Update CA (Dex Users only)
+`````````````````````````````
+
+Dex users may encounter issues with SSL certificates like::
+
+  remote error: tls: unknown certificate authority
+
+If this is the case, you need to ensure that their certificate authority (CA) is
+in the system trust store and that your CA certificates are up to date.
+
+First, try updating your CA certificates.  This could especially happen when
+you have a `Let's Encrypt`_ and your machine does not know about that certificate
+authority.
+
+.. tabs::
+
+  .. tab:: RHEL
+
+    .. code:: sh
+
+      sudo yum update ca-certificates
+
+  .. tab:: Ubuntu
+
+    .. code:: sh
+
+      sudo apt update ca-certificates
+
+
+If you're still having issues, copy your certificate authority (examples could be ``fullchain.pem``)
+to your trust store. replace ``CA CERT location`` with the actual certificate
+authority you're using and run these commands to copy it to the appropriate place.
+
+.. tabs::
+
+  .. tab:: RHEL
+
+    .. code:: sh
+
+      sudo cp <CA CERT location> /etc/pki/ca-trust/source/anchors/
+      sudo update-ca-trust
+
+  .. tab:: Ubuntu
+
+    .. code:: sh
+
+      sudo cp <CA CERT location> /usr/local/share/ca-certificates/
+      sudo update-ca-certificates
+
+3. Restart the Apache service for the changes take effect.
+``````````````````````````````````````````````````````````
 
 :ref:`Restart the Apache service <restart-apache>` for the changes take effect.
 

@@ -27,6 +27,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -107,7 +108,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Add SELinux</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Secure Apache httpd</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Secure Apache httpd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#edit-the-open-ondemand-portal-ood-portal-generator-configuration-file">1. Edit the Open OnDemand Portal <span class="xref std std-ref">ood-portal-generator-configuration</span> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-ca-dex-users-only">2. Update CA (Dex Users only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restart-the-apache-service-for-the-changes-take-effect">3. Restart the Apache service for the changes take effect.</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
@@ -238,9 +244,10 @@ more about it in their <a class="reference external" href="https://letsencrypt.o
 <dt>Intermediate certificate</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt</span></code></p>
 </dd>
 </dl>
-<ol class="arabic">
-<li><p>Edit the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file
-<code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
+<div class="section" id="edit-the-open-ondemand-portal-ood-portal-generator-configuration-file">
+<h2>1. Edit the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file<a class="headerlink" href="#edit-the-open-ondemand-portal-ood-portal-generator-configuration-file" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
 <span class="nn">---</span><span class="w"></span>
 
@@ -258,9 +265,43 @@ more about it in their <a class="reference external" href="https://letsencrypt.o
 <p>For documentation on SSL directives please see:
 <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_ssl.html">https://httpd.apache.org/docs/2.4/mod/mod_ssl.html</a></p>
 </div>
-</li>
-<li><p>Restart the Apache service for the changes take effect.</p></li>
-</ol>
+</div></blockquote>
+</div>
+<div class="section" id="update-ca-dex-users-only">
+<h2>2. Update CA (Dex Users only)<a class="headerlink" href="#update-ca-dex-users-only" title="Permalink to this headline">¶</a></h2>
+<p>Dex users may encounter issues with SSL certificates like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">remote</span> <span class="n">error</span><span class="p">:</span> <span class="n">tls</span><span class="p">:</span> <span class="n">unknown</span> <span class="n">certificate</span> <span class="n">authority</span>
+</pre></div>
+</div>
+<p>If this is the case, you need to ensure that their certificate authority (CA) is
+in the system trust store and that your CA certificates are up to date.</p>
+<p>First, try updating your CA certificates.  This could especially happen when
+you have a <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> and your machine does not know about that certificate
+authority.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">RHEL</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum update ca-certificates
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt update ca-certificates
+</pre></div>
+</div>
+</div></div>
+<p>If you’re still having issues, copy your certificate authority (examples could be <code class="docutils literal notranslate"><span class="pre">fullchain.pem</span></code>)
+to your trust store. replace <code class="docutils literal notranslate"><span class="pre">CA</span> <span class="pre">CERT</span> <span class="pre">location</span></code> with the actual certificate
+authority you’re using and run these commands to copy it to the appropriate place.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">RHEL</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp &lt;CA CERT location&gt; /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp &lt;CA CERT location&gt; /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+</pre></div>
+</div>
+</div></div>
+</div>
+<div class="section" id="restart-the-apache-service-for-the-changes-take-effect">
+<h2>3. Restart the Apache service for the changes take effect.<a class="headerlink" href="#restart-the-apache-service-for-the-changes-take-effect" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="../how-tos/debug/debug-apache.html#restart-apache"><span class="std std-ref">Restart the Apache service</span></a> for the changes take effect.</p>
 <p>Now when you browse to your OnDemand portal at:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span>
@@ -272,6 +313,7 @@ more about it in their <a class="reference external" href="https://letsencrypt.o
 </div>
 <p>where depending on your browser, should display a green lock of some kind to
 indicate that the site is secure.</p>
+</div>
 </div>
 
 
