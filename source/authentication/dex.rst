@@ -21,7 +21,7 @@ Installing OnDemand Dex from source
 
 Requirements:
 
-- Go version 1.14.x with the ``go`` binary in ``PATH``
+- Go version 1.16.x with the ``go`` binary in ``PATH``
 - Git
 - Make
 
@@ -32,7 +32,7 @@ Build and install the ondemand-dex binary:
       GOPATH=$(go env GOPATH)
       go get github.com/dexidp/dex
       cd $GOPATH/src/github.com/dexidp/dex
-      make
+      make build
       sudo install -m 0755 bin/dex /usr/sbin/ondemand-dex
 
 Add the ``ondemand-dex`` user and group:
