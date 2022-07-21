@@ -40,7 +40,7 @@ Add the ``ondemand-dex`` user and group:
    .. code-block:: sh
 
       sudo groupadd -r ondemand-dex
-      sudo useradd -r -d /var/lib/ondemand-dex -g ondemand-dex -s /sbin/nologin -c "OnDemand Dex"
+      sudo useradd -r -d /var/lib/ondemand-dex -g ondemand-dex -s /sbin/nologin -c "OnDemand Dex" ondemand-dex
 
 Get ``ondemand-dex`` repo and install web files and systemd unit file
 
