@@ -28,7 +28,7 @@ Restart services
           sudo systemctl try-restart httpd24-httpd
 
 
-      .. tab:: RHEL/Rocky 8
+      .. tab:: RHEL/Rocky 8 & 9
 
          .. code-block:: sh
 
@@ -65,7 +65,7 @@ Or you're using the wrong hostname in your browser.
 
           sudo /opt/rh/httpd24/root/sbin/httpd -S
 
-      .. tab:: RHEL/Rocky 8
+      .. tab:: RHEL/Rocky 8 & 9
 
          .. code-block:: sh
 

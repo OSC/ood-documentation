@@ -35,7 +35,14 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7 nodejs:14
+         sudo dnf module enable ruby:3.0 nodejs:14
+
+   .. tab:: RockyLinux 9
+
+      .. code-block:: sh
+
+         sudo dnf config-manager --set-enabled crb
+         sudo dnf install epel-release
 
    .. tab:: RHEL 7
 
@@ -53,19 +60,20 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
    .. tab:: RHEL 8
 
-      .. warning::
+      .. code-block:: sh
 
-         You may also need to enable the *Optional* channel and
-         attach a subscription providing access to RHSCL to be able to use this
-         repository.
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:3.0 nodejs:14
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+
+
+   .. tab:: RHEL 9
 
       .. code-block:: sh
 
-         sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7 nodejs:14
-         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
-
+         sudo dnf module enable ruby:3.0 nodejs:14
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
 2. Add repository and install
 -----------------------------
@@ -105,7 +113,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
           sudo systemctl enable httpd24-httpd
 
 
-      .. tab:: RHEL/Rocky 8
+      .. tab:: RHEL/Rocky 8 & 9
 
          .. code-block:: sh
 

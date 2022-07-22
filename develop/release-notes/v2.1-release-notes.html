@@ -137,7 +137,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ubuntu-20-04-packages">Ubuntu 20.04 packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
 </ul>
@@ -235,7 +235,7 @@
 <p>Highlights in 2.1:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></p></li>
-<li><p><a class="reference internal" href="#ubuntu-20-04-packages">Ubuntu 20.04 packages</a></p></li>
+<li><p><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 <li><p><a class="reference internal" href="#selinux-changes">SELinux changes</a></p></li>
 </ul>
@@ -274,6 +274,8 @@ cached settings in any of their batch connect apps.</p>
 <p><strong>RHEL/Rocky 8 only</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf module reset nodejs
 sudo dnf module <span class="nb">enable</span> nodejs:14
+sudo dnf module reset ruby
+sudo dnf module <span class="nb">enable</span> ruby:3.0
 </pre></div>
 </div>
 </li>
@@ -318,7 +320,7 @@ sudo yum update ondemand
 <p>See <a class="reference internal" href="#dependency-updates">Dependency updates</a> warning before uninstalling old Ruby versions.</p>
 </div>
 <p><strong>RHEL/CentOS 7 only</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove rh-nodejs12<span class="se">\*</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove rh-nodejs12<span class="se">\*</span> rh-ruby27<span class="se">\*</span>
 </pre></div>
 </div>
 </li>
@@ -330,22 +332,34 @@ sudo yum update ondemand
 <div class="section" id="dynamic-javascript-in-batchconnect-forms">
 <h3>Dynamic Javascript in BatchConnect Forms<a class="headerlink" href="#dynamic-javascript-in-batchconnect-forms" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="ubuntu-20-04-packages">
-<h3>Ubuntu 20.04 packages<a class="headerlink" href="#ubuntu-20-04-packages" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> for instructions on how to install OnDemand using the new Ubuntu 20.04 packages.</p>
+<div class="section" id="el9-ubuntu-22-04-and-ubuntu-20-04-packages">
+<h3>EL9, Ubuntu 22.04 and Ubuntu 20.04 packages<a class="headerlink" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> for instructions on how to install OnDemand using the new EL9, Ubuntu 22.04 and Ubuntu 20.04 packages.</p>
 </div>
 <div class="section" id="dependency-updates">
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>
 <p>This release updates the following dependencies:</p>
 <ul>
+<li><p>Ruby 3.0</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own <code class="docutils literal notranslate"><span class="pre">bin/ruby</span></code> to use the older version of ruby.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ruby 2.7 is still supported and used by Ubuntu 20.04.</p>
+</div>
+</li>
 <li><p>NodeJS 14</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
 </div>
 </li>
-<li><p>Passenger 6.0.11</p></li>
-<li><p>NGINX 1.20.1</p></li>
+<li><p>Passenger 6.0.14</p></li>
+<li><p>NGINX 1.20.2</p></li>
+<li><p>ondemand-dex 2.32.0</p></li>
+<li><p>OnDemand package now depends on Python 3 instead of Python 2</p></li>
 </ul>
 </div>
 <div class="section" id="selinux-changes">

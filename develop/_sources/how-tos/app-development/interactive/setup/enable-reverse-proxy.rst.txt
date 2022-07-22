@@ -117,22 +117,7 @@ Steps to Enable in Apache
 
       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
-#. Restart the Apache server to have the changes take effect:
-
-   RHEL/CentOS 7:
-     .. code-block:: sh
-
-        sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
-
-   RHEL/Rocky 8:
-     .. code-block:: sh
-
-        sudo systemctl try-restart httpd.service htcacheclean.service
-
-   Ubuntu:
-     .. code-block:: sh
-
-        sudo systemctl try-restart apache2.service
+#. :ref:`Restart the Apache service <restart-apache>` to have the changes take effect:
 
 Verify it Works
 ---------------
