@@ -122,12 +122,12 @@ Steps to Enable in Apache
    RHEL/CentOS 7:
      .. code-block:: sh
 
-        sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+        sudo systemctl try-restart httpd24-httpd.service
 
-   RHEL/Rocky 8:
+   RHEL/Rocky 8 & 9:
      .. code-block:: sh
 
-        sudo systemctl try-restart httpd.service htcacheclean.service
+        sudo systemctl try-restart httpd.service
 
    Ubuntu:
      .. code-block:: sh

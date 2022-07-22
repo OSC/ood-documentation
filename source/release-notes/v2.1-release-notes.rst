@@ -11,7 +11,7 @@ v2.1 Release Notes
 Highlights in 2.1:
 
 - `Dynamic Javascript in BatchConnect Forms`_
-- `Ubuntu 20.04 packages`_
+- `EL9, Ubuntu 22.04 and Ubuntu 20.04 packages`_
 - `Dependency updates`_
 - `SELinux changes`_
 
@@ -61,6 +61,8 @@ Upgrade directions
 
       sudo dnf module reset nodejs
       sudo dnf module enable nodejs:14
+      sudo dnf module reset ruby
+      sudo dnf module enable ruby:3.0
 
 #. Update OnDemand
 
@@ -117,7 +119,7 @@ Upgrade directions
 
    .. code-block:: sh
 
-      sudo yum remove rh-nodejs12\*
+      sudo yum remove rh-nodejs12\* rh-ruby27\*
 
 
 Details
@@ -126,23 +128,30 @@ Details
 Dynamic Javascript in BatchConnect Forms
 ........................................
 
+EL9, Ubuntu 22.04 and Ubuntu 20.04 packages
+...........................................
 
-Ubuntu 20.04 packages
-.....................
-
-See :ref:`Install Software <install-software>` for instructions on how to install OnDemand using the new Ubuntu 20.04 packages.
+See :ref:`Install Software <install-software>` for instructions on how to install OnDemand using the new EL9, Ubuntu 22.04 and Ubuntu 20.04 packages.
 
 Dependency updates
 ..................
 
 This release updates the following dependencies:
 
+- Ruby 3.0
+
+  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt.
+
+  .. note:: Ruby 2.7 is still supported and used by Ubuntu 20.04.
+
 - NodeJS 14
 
   .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
 
-- Passenger 6.0.11
-- NGINX 1.20.1
+- Passenger 6.0.14
+- NGINX 1.20.2
+- ondemand-dex 2.32.0
+- OnDemand package now depends on Python 3 instead of Python 2
 
 SELinux changes
 ...............
