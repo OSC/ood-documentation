@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -245,15 +245,15 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Apps may be shared via a variety of methods including:</p>
 <ol class="arabic simple">
-<li>System installed by admin for everyone to launch (access controlled via file
-permissions)</li>
-<li>Source Code Sharing (share code, launch your own copy of an app). This is
+<li><p>System installed by admin for everyone to launch (access controlled via file
+permissions)</p></li>
+<li><p>Source Code Sharing (share code, launch your own copy of an app). This is
 like how the Job Composer works, or how many groups collaborate when using
 HPC: they share their job scripts and code, and use their own copies to
-submit jobs.</li>
-<li>Executable Sharing (peer to peer) is where a user deploys an app in their
+submit jobs.</p></li>
+<li><p>Executable Sharing (peer to peer) is where a user deploys an app in their
 home directory that other users can launch. This is similar to adding to your
-PATH the bin directory of another user.</li>
+PATH the bin directory of another user.</p></li>
 </ol>
 </div>
 <div class="section" id="system-installed-apps">
@@ -350,8 +350,8 @@ owens-login01:johrstrom johrstrom$ ln -s /fs/project/PZS0714/mrodgers/blender-ba
 <h2>Peer to Peer Executable Sharing<a class="headerlink" href="#peer-to-peer-executable-sharing" title="Permalink to this headline">¶</a></h2>
 <p>By setting a few environment variables it is possible to enable a more polished peer to peer app sharing experience. There are two reasons why this mode is not always enabled: the first is that app permissions are the only thing that prevents all a site’s OnDemand users from seeing a shared app, so it is important to get the permissions correct, and only to deploy apps that are production ready. The other reason to be careful with app sharing is that requires greater trust placed in app developers.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Executable sharing means the app and all its code runs as the user
+<p class="admonition-title">Warning</p>
+<p>Executable sharing means the app and all its code runs as the user
 executing it, like everything else in OnDemand. User’s might not
 realize this. We currently do not provide an opt in screen warning
 users that this app “will have permission to do everything on their
@@ -361,25 +361,25 @@ you enable to do share apps using executable sharing.</p>
 <div class="section" id="enabling-the-app-sharing-dashboard">
 <h3>Enabling The App Sharing Dashboard<a class="headerlink" href="#enabling-the-app-sharing-dashboard" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>To enable App Sharing in the Dashboard, set <code class="docutils literal notranslate"><span class="pre">OOD_APP_SHARING=1</span></code> in
-<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</li>
-<li>Set <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_SUPPORT_EMAIL=your&#64;email.edu</span></code> to add a link to support
-for finding an app.</li>
-<li>Set <code class="docutils literal notranslate"><span class="pre">OOD_APP_CATALOG_URL=https://link.to.online/app/catalog</span></code> to link
-externally to an advertised listing of apps available.</li>
-<li>Pin usr apps to the dashboard and group them by category.</li>
+<li><p>To enable App Sharing in the Dashboard, set <code class="docutils literal notranslate"><span class="pre">OOD_APP_SHARING=1</span></code> in
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_SUPPORT_EMAIL=your&#64;email.edu</span></code> to add a link to support
+for finding an app.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">OOD_APP_CATALOG_URL=https://link.to.online/app/catalog</span></code> to link
+externally to an advertised listing of apps available.</p></li>
+<li><p>Pin usr apps to the dashboard and group them by category.</p></li>
 </ol>
-<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
-<span class="n">pinned_apps</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s1">&#39;usr/*&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span><span class="w"></span>
+<span class="nt">pinned_apps</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;usr/*&#39;</span><span class="w"></span>
 
-<span class="n">pinned_apps_group_by</span><span class="p">:</span> <span class="s1">&#39;category&#39;</span>
+<span class="nt">pinned_apps_group_by</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;category&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Enabling App Sharing in the dashboard serves two primary purposes:</p>
 <ol class="arabic simple">
-<li>For shared app users, provide an interface to launch those apps</li>
-<li>For app developers, provide an interface to help manage shared apps</li>
+<li><p>For shared app users, provide an interface to launch those apps</p></li>
+<li><p>For app developers, provide an interface to help manage shared apps</p></li>
 </ol>
 <p>Currently this significantly changes the interface of the Dashboard. The MOTD
 moves to the right of the screen and shared apps appear below the welcome logo
@@ -401,26 +401,26 @@ be a symlink to the user’s home directory at <code class="docutils literal not
 by default set <code class="docutils literal notranslate"><span class="pre">750</span></code> permissions on <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/$USER</span></code>. This
 approach has these benefits (assuming users named <code class="docutils literal notranslate"><span class="pre">efranz</span></code> and <code class="docutils literal notranslate"><span class="pre">an0047</span></code>:</p>
 <ol class="arabic simple">
-<li>The admin as root controls who can share apps by creating root owned
+<li><p>The admin as root controls who can share apps by creating root owned
 directories like <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/efranz</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047</span></code>.</li>
-<li>The admin controls who can access that user’s shared apps by setting
+<code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047</span></code>.</p></li>
+<li><p>The admin controls who can access that user’s shared apps by setting
 permissions on this directory. Thus by setting <code class="docutils literal notranslate"><span class="pre">750</span></code> on
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047</span></code> this ensures that an0047 can only share
 apps with users in his primary group. At times we have created a supplemental group (shinyusr) and chgrp the share directory to this group so
-that the developer can share apps with every user in this group.</li>
-<li>The developer who can share apps can modify permissions on the app
+that the developer can share apps with every user in this group.</p></li>
+<li><p>The developer who can share apps can modify permissions on the app
 directories themselves i.e.
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047/gateway/customapp</span></code>
 so that only a subset of the users he could share with have access. This can
-be done through FACLs or using the same chgrp + 755 approach</li>
+be done through FACLs or using the same chgrp + 755 approach</p></li>
 </ol>
 <p>In summary, to enable a new user to create shared apps, run these commands:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># given a user efranz</span>
-<span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">efranz</span>
-<span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">efranz</span>
-<span class="n">chmod</span> <span class="mi">750</span> <span class="o">.</span>
-<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">~</span><span class="n">efranz</span><span class="o">/</span><span class="n">ondemand</span><span class="o">/</span><span class="n">share</span> <span class="n">gateway</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># given a user efranz</span>
+sudo mkdir -p /var/www/ood/apps/usr/efranz
+<span class="nb">cd</span> /var/www/ood/apps/usr/efranz
+chmod <span class="m">750</span> .
+ln -s ~efranz/ondemand/share gateway
 </pre></div>
 </div>
 </div>
@@ -429,8 +429,8 @@ be done through FACLs or using the same chgrp + 755 approach</li>
 <p>This is with two users Eric (efranz) and Bob (an0047).</p>
 <p>Eric has a dev app “MATLAB”, and interactive plugin app. Eric can</p>
 <ol class="arabic simple">
-<li>Launch MATLAB</li>
-<li>View and Edit the code</li>
+<li><p>Launch MATLAB</p></li>
+<li><p>View and Edit the code</p></li>
 </ol>
 <div class="figure align-center">
 <img alt="_images/app-sharing-1.png" src="_images/app-sharing-1.png" />

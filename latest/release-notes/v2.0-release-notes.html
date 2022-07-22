@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -259,23 +259,23 @@
   <div class="section" id="v2-0-release-notes">
 <span id="id1"></span><h1>v2.0 Release Notes<a class="headerlink" href="#v2-0-release-notes" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There are some breaking changes in 2.0. See the upgrade directions below for details.</p>
+<p class="admonition-title">Warning</p>
+<p>There are some breaking changes in 2.0. See the upgrade directions below for details.</p>
 </div>
 <p>Highlights in 2.0:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard">Pinned Apps: Enhanced app launch interface using large app icons on the dashboard</a></li>
-<li><a class="reference internal" href="#custom-dashboard-widgets-and-layout">Custom dashboard widgets and layout</a></li>
-<li><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></li>
-<li><a class="reference internal" href="#tighter-integration-between-the-dashboard-active-jobs-and-files-apps">Tighter integration between the Dashboard, Active Jobs, and Files apps</a></li>
-<li><a class="reference internal" href="#adding-metadata-to-app-manifests">Adding metadata to app manifests</a></li>
-<li><a class="reference internal" href="#shell-app-now-has-themes">Shell app now has themes</a></li>
-<li><a class="reference internal" href="#configurations-in-an-ondemand-d-directory">Configurations in an ondemand.d directory</a></li>
-<li><a class="reference internal" href="#changes-in-all-apps-page-layout">Changes in All Apps page layout</a></li>
-<li><a class="reference internal" href="#erb-formats-for-message-of-the-day">ERB formats for Message of the day</a></li>
-<li><a class="reference internal" href="#control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute">Control whether an app link opens in a new window using manifest attribute</a></li>
-<li><a class="reference internal" href="#memcached-ruby-gem-available-for-use-in-apps">Memcached Ruby gem available for use in apps</a></li>
-<li><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
+<li><p><a class="reference internal" href="#pinned-apps-enhanced-app-launch-interface-using-large-app-icons-on-the-dashboard">Pinned Apps: Enhanced app launch interface using large app icons on the dashboard</a></p></li>
+<li><p><a class="reference internal" href="#custom-dashboard-widgets-and-layout">Custom dashboard widgets and layout</a></p></li>
+<li><p><a class="reference internal" href="#new-file-manager-app">New File Manager app</a></p></li>
+<li><p><a class="reference internal" href="#tighter-integration-between-the-dashboard-active-jobs-and-files-apps">Tighter integration between the Dashboard, Active Jobs, and Files apps</a></p></li>
+<li><p><a class="reference internal" href="#adding-metadata-to-app-manifests">Adding metadata to app manifests</a></p></li>
+<li><p><a class="reference internal" href="#shell-app-now-has-themes">Shell app now has themes</a></p></li>
+<li><p><a class="reference internal" href="#configurations-in-an-ondemand-d-directory">Configurations in an ondemand.d directory</a></p></li>
+<li><p><a class="reference internal" href="#changes-in-all-apps-page-layout">Changes in All Apps page layout</a></p></li>
+<li><p><a class="reference internal" href="#erb-formats-for-message-of-the-day">ERB formats for Message of the day</a></p></li>
+<li><p><a class="reference internal" href="#control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute">Control whether an app link opens in a new window using manifest attribute</a></p></li>
+<li><p><a class="reference internal" href="#memcached-ruby-gem-available-for-use-in-apps">Memcached Ruby gem available for use in apps</a></p></li>
+<li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 </ul>
 <div class="section" id="upgrading-from-v1-8">
 <h2>Upgrading from v1.8<a class="headerlink" href="#upgrading-from-v1-8" title="Permalink to this headline">¶</a></h2>
@@ -288,8 +288,8 @@
 <p>Most sites should be able to use <code class="docutils literal notranslate"><span class="pre">user_map_match</span></code> instead.  You can still use
 <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>, only you’ll have to write your own in a language of your choice.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">lua patterns may not be sufficient because they are not regular expressions. For example
+<p class="admonition-title">Warning</p>
+<p>lua patterns may not be sufficient because they are not regular expressions. For example
 they do not support boolean OR <code class="docutils literal notranslate"><span class="pre">|</span></code> operators. If you need such functionality you may
 find python, perl, ruby (SCL or system installed) or even bash commands that suite your
 needs.</p>
@@ -311,11 +311,11 @@ to employ a wrapper script that can load rh-ruby27.</p>
 no longer show these app icons by default.</p>
 <p>Your site will need to use the pinned apps feature to have the same look as 1.8.20-.  Here is the relevant
 configuration you’ll need to provide to have a comparable landing page layout.</p>
-<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
-<span class="n">pinned_apps</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s1">&#39;usr/*&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span><span class="w"></span>
+<span class="nt">pinned_apps</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;usr/*&#39;</span><span class="w"></span>
 
-<span class="n">pinned_apps_group_by</span><span class="p">:</span> <span class="s1">&#39;category&#39;</span>
+<span class="nt">pinned_apps_group_by</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;category&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="../customization.html#dashboard-pinned-apps"><span class="std std-ref">the documentation on pinning apps to the dashboard</span></a> for more details.</p>
@@ -351,9 +351,9 @@ and can now be set with the <code class="docutils literal notranslate"><span cla
 uses complex logic in your <cite>view.html.erb</cite> you may have to change that.  Here are
 the two changes that may affect your site.</p>
 <ol class="arabic simple">
-<li>The <code class="docutils literal notranslate"><span class="pre">panel</span></code> css classes no longer exist. These have been replaced by <code class="docutils literal notranslate"><span class="pre">card</span></code>.
+<li><p>The <code class="docutils literal notranslate"><span class="pre">panel</span></code> css classes no longer exist. These have been replaced by <code class="docutils literal notranslate"><span class="pre">card</span></code>.
 Here are examples in both plain javascript and jquery of what you may have and how
-it would need to change.</li>
+it would need to change.</p></li>
 </ol>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// there is no closes panel to this element anymore. This won&#39;t work, because</span>
 <span class="c1">// there are no elements with a &#39;panel&#39; css class.</span>
@@ -363,16 +363,16 @@ it would need to change.</li>
 <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;someElementId&quot;</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.card&quot;</span><span class="p">).</span><span class="nx">id</span><span class="p">;</span>
 
 <span class="c1">// the same thing in jquery</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#someElementId&quot;</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.card&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#someElementId&quot;</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.card&quot;</span><span class="p">)[</span><span class="mf">0</span><span class="p">].</span><span class="nx">id</span>
 </pre></div>
 </div>
 <ol class="arabic">
-<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the card divs has changed to prepend <code class="docutils literal notranslate"><span class="pre">id_</span></code> to them to fix some issues in Bootstrap-4.
+<li><p>The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the card divs has changed to prepend <code class="docutils literal notranslate"><span class="pre">id_</span></code> to them to fix some issues in Bootstrap-4.
 So if you use <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> to query for elements you will either need to prepend <code class="docutils literal notranslate"><span class="pre">id_</span></code> to that
 or change the query to look for the <code class="docutils literal notranslate"><span class="pre">data-id</span></code> attribute of a div.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> doesn’t work directly. You would need to pass it back through the <code class="docutils literal notranslate"><span class="pre">conn_params</span></code>
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> doesn’t work directly. You would need to pass it back through the <code class="docutils literal notranslate"><span class="pre">conn_params</span></code>
 for it to be usable in this view.</p>
 </div>
 </li>
@@ -396,20 +396,20 @@ for it to be usable in this view.</p>
 <div class="section" id="upgrade-directions">
 <h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
+<p class="admonition-title">Warning</p>
+<p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The OnDemand upgrade has only been tested going from 1.8.x to 2.0.x.</p>
+<p class="admonition-title">Warning</p>
+<p>The OnDemand upgrade has only been tested going from 1.8.x to 2.0.x.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Update OnDemand release RPM</p>
+<li><p>Update OnDemand release RPM</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
 </pre></div>
 </div>
 </li>
-<li><p class="first">Enable dependency repos</p>
+<li><p>Enable dependency repos</p>
 <p><strong>CentOS/RHEL 8 only</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf module reset ruby
 sudo dnf module <span class="nb">enable</span> ruby:2.7
@@ -430,18 +430,18 @@ sudo dnf module <span class="nb">enable</span> nodejs:12
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update OnDemand</p>
+<li><p>Update OnDemand</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
 sudo yum update ondemand
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) If using Dex based authentiction, update the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
+<li><p>(Optional) If using Dex based authentiction, update the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum update ondemand-dex
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update Apache configuration and restart Apache.</p>
+<li><p>Update Apache configuration and restart Apache.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
@@ -454,20 +454,20 @@ sudo yum update ondemand
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> was installed, restart the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
+<li><p>(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> was installed, restart the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart ondemand-dex.service
 </pre></div>
 </div>
 </li>
-<li><p class="first">Force all PUNs to restart</p>
+<li><p>Force all PUNs to restart</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.</p>
+<li><p>(Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">See <a class="reference internal" href="#dependency-updates">Dependency updates</a> warning before uninstalling old Ruby versions.</p>
+<p class="admonition-title">Warning</p>
+<p>See <a class="reference internal" href="#dependency-updates">Dependency updates</a> warning before uninstalling old Ruby versions.</p>
 </div>
 <p><strong>CentOS/RHEL 7 only</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum remove rh-ruby25<span class="se">\*</span> rh-nodejs10<span class="se">\*</span>
@@ -523,14 +523,14 @@ available configurations.</p>
 Passenger application processes. These are all now served by a single Passenger application process per user.</p>
 <p>This change has the following effects:</p>
 <ul class="simple">
-<li>The URL has changed, but redirects from the old URLs should still work for backwards compatibilty.</li>
-<li>The navbar and branding across the dashboard is visible in Active Jobs and File Editor</li>
-<li>the Active Jobs and Files apps both load without opening a new window</li>
-<li>the Active Jobs and Files apps load much faster than before</li>
+<li><p>The URL has changed, but redirects from the old URLs should still work for backwards compatibilty.</p></li>
+<li><p>The navbar and branding across the dashboard is visible in Active Jobs and File Editor</p></li>
+<li><p>the Active Jobs and Files apps both load without opening a new window</p></li>
+<li><p>the Active Jobs and Files apps load much faster than before</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Configuration for Active Jobs and Files apps have changed slightly and need to be updated for 2.0.
+<p class="admonition-title">Warning</p>
+<p>Configuration for Active Jobs and Files apps have changed slightly and need to be updated for 2.0.
 See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> above for details.</p>
 </div>
 </div>
@@ -539,26 +539,26 @@ See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> 
 <p>The Files app in 1.8 was a fork of <a class="reference external" href="https://github.com/coderaiser/cloudcmd">https://github.com/coderaiser/cloudcmd</a> that was difficult to maintain. The new Files app is rewritten in Ruby and integrated into the Dashboard app. The look and feel has been updated to use Bootstrap 4 and the OnDemand navbar displays above the interface.</p>
 <p>New features:</p>
 <ul class="simple">
-<li>Modified at column now shows date and time</li>
-<li>Columns are sortable by size, date, name, type, etc.</li>
-<li>Owner column displays the actual username instead of just the UID</li>
-<li>Uploads now managed with Uppy.js which provides a preview window prior to uploading files</li>
-<li>Copy path button provides easy way to copy the current directory path to clipboard</li>
-<li>Copy, Move, and Delete events now log details of the action requested in the per user NGINX logs</li>
-<li>Copy, Move workflow includes a new visual display of the files selected to copy or move</li>
-<li>Filter box to filter the list of files by inserted text</li>
+<li><p>Modified at column now shows date and time</p></li>
+<li><p>Columns are sortable by size, date, name, type, etc.</p></li>
+<li><p>Owner column displays the actual username instead of just the UID</p></li>
+<li><p>Uploads now managed with Uppy.js which provides a preview window prior to uploading files</p></li>
+<li><p>Copy path button provides easy way to copy the current directory path to clipboard</p></li>
+<li><p>Copy, Move, and Delete events now log details of the action requested in the per user NGINX logs</p></li>
+<li><p>Copy, Move workflow includes a new visual display of the files selected to copy or move</p></li>
+<li><p>Filter box to filter the list of files by inserted text</p></li>
 </ul>
 <p>Changes:</p>
 <ul class="simple">
-<li>The left hand navigation tree is replaced with a list of the file location shortcuts</li>
-<li>Instead of a “..” row to navigate up, there is an “up” button to the left of the path</li>
-<li>Buttons that apply to only one file or directory were moved to a button dropdown to the right of each filename</li>
-<li>“Change directory” button replaced “Go to” button</li>
-<li>Open in Terminal now displays split dropdown button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS env var</li>
+<li><p>The left hand navigation tree is replaced with a list of the file location shortcuts</p></li>
+<li><p>Instead of a “..” row to navigate up, there is an “up” button to the left of the path</p></li>
+<li><p>Buttons that apply to only one file or directory were moved to a button dropdown to the right of each filename</p></li>
+<li><p>“Change directory” button replaced “Go to” button</p></li>
+<li><p>Open in Terminal now displays split dropdown button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS env var</p></li>
 </ul>
 <p>See the <a class="reference internal" href="#files-app-configuration-changes">files app configuration changes</a> for any changes you’ll need to update to the
 configurations of this new app.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/2.0_files_app.png" src="../_images/2.0_files_app.png" />
 </div>
 </div>
@@ -590,16 +590,13 @@ to be explicitly required using a custom initializer or in the form or submit er
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>
 <p>This release updates the following dependencies:</p>
 <ul>
-<li><p class="first">Ruby 2.7</p>
-</li>
-<li><p class="first">NodeJS 12</p>
-</li>
-<li><p class="first">Passenger 6.0.7</p>
-</li>
-<li><p class="first">NGINX 1.18.0</p>
+<li><p>Ruby 2.7</p></li>
+<li><p>NodeJS 12</p></li>
+<li><p>Passenger 6.0.7</p></li>
+<li><p>NGINX 1.18.0</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
+<p class="admonition-title">Warning</p>
+<p>The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
 </div>
 </li>
 </ul>

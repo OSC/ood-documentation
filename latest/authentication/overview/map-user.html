@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -232,7 +232,7 @@
         
           <li><a href="../overview.html">Overview</a> &raquo;</li>
         
-      <li>2. Setup User Mapping</li>
+      <li><span class="section-number">2. </span>Setup User Mapping</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -254,7 +254,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="setup-user-mapping">
-<span id="authentication-overview-map-user"></span><h1>2. Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Permalink to this headline">¶</a></h1>
+<span id="authentication-overview-map-user"></span><h1><span class="section-number">2. </span>Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Permalink to this headline">¶</a></h1>
 <p>Every authenticated HTTP request sent to the OnDemand portal has a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.
 This <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> can be an email like <code class="docutils literal notranslate"><span class="pre">annie.oakley&#64;osc.edu</span></code> and needs to be
 mapped to a Linux system user like <code class="docutils literal notranslate"><span class="pre">aoakley</span></code>.</p>
@@ -267,7 +267,7 @@ corresponding per-user NGINX (PUN) server.</p>
 Since 2.0 you should use the simpler and faster <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a>.</p>
 <p>Both with variations will be discussed here.</p>
 <div class="section" id="remote-user">
-<h2>2.1. Remote User<a class="headerlink" href="#remote-user" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Remote User<a class="headerlink" href="#remote-user" title="Permalink to this headline">¶</a></h2>
 <p>It’s worth discussusing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is comfing from.  When apache
 has successfully authenticates a request it sets the variable <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
 from, well, the remote.</p>
@@ -281,20 +281,20 @@ it’s unlikely you should need to.</p>
 tells apache how to set <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from the claim response.</p>
 </div>
 <div class="section" id="reguluar-expression-user-mapping">
-<h2>2.2. Reguluar Expression User Mapping<a class="headerlink" href="#reguluar-expression-user-mapping" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Reguluar Expression User Mapping<a class="headerlink" href="#reguluar-expression-user-mapping" title="Permalink to this headline">¶</a></h2>
 <p>The simplest and fastest way to map a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> to a system user is through
 <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.  It isn’t directly
 regular expression matching, but it’s close enough for most use cases.
 See it’s documentation for examples and more.</p>
 </div>
 <div class="section" id="dex-automatic-configuration">
-<h2>2.3. Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Permalink to this headline">¶</a></h2>
 <p>When using the OpenId Connector <a class="reference external" href="authentication-dex">dex</a> and setting <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a>
 to <code class="docutils literal notranslate"><span class="pre">email</span></code> we automatically set <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a> to <code class="docutils literal notranslate"><span class="pre">^([^&#64;]+)&#64;.*$</span></code> as
 a convienience.</p>
 </div>
 <div class="section" id="user-map-command-for-advanced-mappings">
-<h2>2.4. User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Permalink to this headline">¶</a></h2>
 <p>Versions prior to 2.0 provided a default <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a> in
 <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code>.  We no longer distribute
 this file.</p>
@@ -302,8 +302,8 @@ this file.</p>
 this capability.  Set this custom mapping script in the <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a>
 configuration and be sure to make this mapping script executable.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Be aware, this script is executed on every request.</p>
+<p class="admonition-title">Warning</p>
+<p>Be aware, this script is executed on every request.</p>
 </div>
 <p>Let’s take a simple example.  It uses bash’s builtin regular expression matching
 against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an osc dot edu email address.  If that matches against
@@ -346,7 +346,7 @@ $
 </div>
 </div>
 <div class="section" id="file-user-mapping">
-<h2>2.5. File User Mapping<a class="headerlink" href="#file-user-mapping" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.5. </span>File User Mapping<a class="headerlink" href="#file-user-mapping" title="Permalink to this headline">¶</a></h2>
 <p>This script parses a mapfile with each entry given in the following format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;authenticated_username&quot;</span> <span class="n">local_username</span>
 </pre></div>
@@ -356,8 +356,8 @@ the mapfile looking for a match to the <code class="docutils literal notranslate
 is found it breaks from the scan and outputs the <code class="docutils literal notranslate"><span class="pre">local_username</span></code> to
 <code class="docutils literal notranslate"><span class="pre">STDOUT</span></code>.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Be aware, this script is executed and reads a user mapping file on every request.</p>
+<p class="admonition-title">Warning</p>
+<p>Be aware, this script is executed and reads a user mapping file on every request.</p>
 </div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="o">[</span>OPTIONS<span class="o">]</span> &lt;REMOTE_USER&gt;
 </pre></div>
@@ -365,13 +365,13 @@ is found it breaks from the scan and outputs the <code class="docutils literal n
 <p>The options for this script are:</p>
 <dl class="option">
 <dt id="cmdoption-ood-auth-map-mapfile-f">
-<code class="descname">-f</code><code class="descclassname"> &lt;file&gt;</code><code class="descclassname">, </code><code class="descname">--file</code><code class="descclassname"> &lt;file&gt;</code><a class="headerlink" href="#cmdoption-ood-auth-map-mapfile-f" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">-f</code><code class="sig-prename descclassname"> &lt;file&gt;</code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--file</code><code class="sig-prename descclassname"> &lt;file&gt;</code><a class="headerlink" href="#cmdoption-ood-auth-map-mapfile-f" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default: <code class="docutils literal notranslate"><span class="pre">/etc/grid-security/grid-mapfile</span></code></p>
 <p>File used to scan for matches.</p>
 </dd></dl>
 
 <div class="section" id="examples-for-the-mapfile-script">
-<h3>2.5.1. Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.5.1. </span>Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Permalink to this headline">¶</a></h3>
 <p>To scan the default grid-mapfile using a URL-encoded authenticated username:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="s1">&#39;http%3A%2F%2Fcilogon.org%2FserverA%2Fusers%2F58606%40cilogon.org&#39;</span>
 bob
@@ -394,7 +394,7 @@ $
 </div>
 </div>
 <div class="section" id="debugging-user-mapping">
-<h2>2.6. Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.6. </span>Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Permalink to this headline">¶</a></h2>
 <p>When debugging user mapping, it’s always helpful to increase the <a class="reference external" href="ood-portal-generator-lua-log-level">lua_log_level</a> to
 debug.</p>
 <p>In doing so you’ll see messages like that detail the mapping input, output and

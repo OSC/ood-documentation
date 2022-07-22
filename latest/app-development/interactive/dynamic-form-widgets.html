@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -251,22 +251,22 @@
   <div class="section" id="dynamic-form-widgets">
 <span id="dynamic-bc-apps"></span><h1>Dynamic Form Widgets<a class="headerlink" href="#dynamic-form-widgets" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This feature was added in version 2.0.</p>
+<p class="admonition-title">Note</p>
+<p>This feature was added in version 2.0.</p>
 </div>
 <p>Prior to version 2.0, sites would have to make their own custom <cite>form.js</cite> to
 add dynamic behavior for batch connect forms.  While sites can still have their
 own custom javascript, 2.0 added out of the box support for common use cases based
 on configuration.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Form fields use underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) as a word separator and these directives use hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>).
+<p class="admonition-title">Warning</p>
+<p>Form fields use underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) as a word separator and these directives use hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>).
 So when referencing the element <code class="docutils literal notranslate"><span class="pre">node_type</span></code> you will need to reference it as <code class="docutils literal notranslate"><span class="pre">node-type</span></code>.</p>
 </div>
 <p>To enable any of the dynamic batch connect capabilities described in this page,
 set the <code class="docutils literal notranslate"><span class="pre">OOD_BC_DYNAMIC_JS</span></code> environment variable in the dashboard’s env file.</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
-<span class="n">OOD_BC_DYNAMIC_JS</span><span class="o">=</span><span class="n">true</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
+<span class="nv">OOD_BC_DYNAMIC_JS</span><span class="o">=</span><span class="nb">true</span>
 </pre></div>
 </div>
 <div class="section" id="your-own-form-js">
@@ -288,20 +288,20 @@ the <code class="docutils literal notranslate"><span class="pre">oakley</span></
 <p>Open OnDemand provides <code class="docutils literal notranslate"><span class="pre">data-option-for</span></code> directive for this use case.</p>
 <p>With this one configuration we’re telling the OnDemand system that <code class="docutils literal notranslate"><span class="pre">gpu</span></code> is not an option
 for the <code class="docutils literal notranslate"><span class="pre">ruby</span></code> cluster.  It will then hide it every time the cluster <code class="docutils literal notranslate"><span class="pre">ruby</span></code> is chosen.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&#39;standard&#39;</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span>
-          <span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span>
-<span class="hll">          <span class="nv">data-option-for-cluster-ruby</span><span class="p p-Indicator">:</span> <span class="nv">false</span>
-</span>        <span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="hll"><span class="w">          </span><span class="nv">data-option-for-cluster-ruby</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">false</span><span class="w"></span>
+</span><span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">This example shows toggling options based on the cluster, but this feature
+<p class="admonition-title">Tip</p>
+<p>This example shows toggling options based on the cluster, but this feature
 generically support any field and value.</p>
 </div>
 </div>
@@ -316,15 +316,15 @@ So, we want to hide the <code class="docutils literal notranslate"><span class="
 <p>Here’s the example YAML for this app with two select widgets.  This
 instructs the webpage to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when the <code class="docutils literal notranslate"><span class="pre">standard</span></code>
 <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is selected.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span>
-          <span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;standard&#39;</span>
-<span class="hll">          <span class="nv">data-hide-cuda-version</span><span class="p p-Indicator">:</span> <span class="nv">true</span>
-</span>        <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="s">&#39;gpu&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="w"></span>
+<span class="hll"><span class="w">          </span><span class="nv">data-hide-cuda-version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span><span class="w"></span>
+</span><span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -342,20 +342,20 @@ different sizes. In the <code class="docutils literal notranslate"><span class="
 <p>In this example <code class="docutils literal notranslate"><span class="pre">data-max-num-cores-for-cluster-oakley</span></code> is attached to the standard
 node type. This config is saying, when the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is <code class="docutils literal notranslate"><span class="pre">standard</span></code>
 and the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> is <code class="docutils literal notranslate"><span class="pre">oakley</span></code> set maximum <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> to 28.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span>
-          <span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span>
-          <span class="nv">data-max-num-cores-for-cluster-oakley</span><span class="p p-Indicator">:</span> <span class="nv">28</span><span class="p p-Indicator">,</span>
-          <span class="nv">data-max-num-cores-for-cluster-ruby</span><span class="p p-Indicator">:</span> <span class="nv">40</span><span class="p p-Indicator">,</span>
-        <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span>
-          <span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span>
-          <span class="nv">data-max-num-cores</span><span class="p p-Indicator">:</span> <span class="nv">1</span><span class="p p-Indicator">,</span>
-          <span class="nv">data-min-num-cores</span><span class="p p-Indicator">:</span> <span class="nv">1</span><span class="p p-Indicator">,</span>
-        <span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-max-num-cores-for-cluster-oakley</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">28</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-max-num-cores-for-cluster-ruby</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">40</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-max-num-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-min-num-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This example also illustrates a simpler variant of this directive attached to <code class="docutils literal notranslate"><span class="pre">gpu</span></code>.
@@ -370,21 +370,21 @@ on the current value of a select element.</p>
 account automatically based on the selection of node type.</p>
 <p>In this example, when <code class="docutils literal notranslate"><span class="pre">standard</span></code> <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is chosen, the <code class="docutils literal notranslate"><span class="pre">charge_account</span></code> element
 will be automatically set to <code class="docutils literal notranslate"><span class="pre">standard-charge-code</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">charge_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">node_type</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span>
-          <span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span>
-          <span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span> <span class="s">&#39;standard-charge-code&#39;</span>
-        <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span>
-          <span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span>
-          <span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span> <span class="s">&#39;gpu-charge-code&#39;</span><span class="p p-Indicator">,</span>
-        <span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">charge_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;standard-charge-code&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;gpu-charge-code&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

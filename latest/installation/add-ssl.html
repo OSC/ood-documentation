@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -214,7 +214,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>5. Add SSL Support</li>
+      <li><span class="section-number">5. </span>Add SSL Support</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -236,60 +236,59 @@
            <div itemprop="articleBody">
             
   <div class="section" id="add-ssl-support">
-<span id="add-ssl"></span><h1>5. Add SSL Support<a class="headerlink" href="#add-ssl-support" title="Permalink to this headline">¶</a></h1>
+<span id="add-ssl"></span><h1><span class="section-number">5. </span>Add SSL Support<a class="headerlink" href="#add-ssl-support" title="Permalink to this headline">¶</a></h1>
 <p><strong>(Optional, but recommended)</strong></p>
 <p>The SSL protocol provides for a secure channel of communication between the
 user’s browser and the Open OnDemand portal.</p>
 <p>Requirements:</p>
 <ul class="simple">
-<li>a server name that points to the Open OnDemand server
-(<code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>)</li>
-<li>signed SSL certificates with possible intermediate certificates</li>
+<li><p>a server name that points to the Open OnDemand server
+(<code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>)</p></li>
+<li><p>signed SSL certificates with possible intermediate certificates</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You may use <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> to obtain a free SSL certificate. You can read
+<p class="admonition-title">Note</p>
+<p>You may use <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> to obtain a free SSL certificate. You can read
 more about it in their <a class="reference external" href="https://letsencrypt.org/getting-started/">Getting Started</a> documentation.</p>
 </div>
 <p>In this example we assume the following certificates are provided:</p>
-<dl class="docutils">
-<dt>Public certificate</dt>
-<dd><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu.crt</span></code></dd>
-<dt>Private key</dt>
-<dd><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/private/ondemand.my_center.edu.key</span></code></dd>
-<dt>Intermediate certificate</dt>
-<dd><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt</span></code></dd>
+<dl class="simple">
+<dt>Public certificate</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu.crt</span></code></p>
+</dd>
+<dt>Private key</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/private/ondemand.my_center.edu.key</span></code></p>
+</dd>
+<dt>Intermediate certificate</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt</span></code></p>
+</dd>
 </dl>
 <ol class="arabic">
-<li><p class="first">Edit the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file
+<li><p>Edit the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
 
-<span class="c1"># ...</span>
+<span class="c1"># ...</span><span class="w"></span>
 
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">servername</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ondemand.my_center.edu</span>
-</span><span class="hll"><span class="l l-Scalar l-Scalar-Plain">ssl</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu.crt&quot;&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/private/ondemand.my_center.edu.key&quot;&#39;</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="s">&#39;SSLCertificateChainFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt&quot;&#39;</span>
+<span class="hll"><span class="nt">servername</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand.my_center.edu</span><span class="w"></span>
+</span><span class="hll"><span class="nt">ssl</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLCertificateFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu.crt&quot;&#39;</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/private/ondemand.my_center.edu.key&quot;&#39;</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLCertificateChainFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt&quot;&#39;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For documentation on SSL directives please see:
+<p class="admonition-title">Note</p>
+<p>For documentation on SSL directives please see:
 <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_ssl.html">https://httpd.apache.org/docs/2.4/mod/mod_ssl.html</a></p>
 </div>
 </li>
-<li><p class="first">Build/install the updated Apache configuration file:</p>
+<li><p>Build/install the updated Apache configuration file:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 </li>
-<li><p class="first">Restart the Apache server to have the changes take effect:</p>
-<dl class="docutils">
-<dt>CentOS/RHEL 7:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+<li><p>Restart the Apache server to have the changes take effect:</p>
+<dl>
+<dt>CentOS/RHEL 7:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
 </pre></div>
 </div>
 </dd>

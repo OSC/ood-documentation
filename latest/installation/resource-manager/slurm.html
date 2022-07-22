@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -243,54 +243,53 @@
 <span id="resource-manager-slurm"></span><h1>Configure Slurm<a class="headerlink" href="#configure-slurm" title="Permalink to this headline">¶</a></h1>
 <p>A YAML cluster configuration file for a Slurm resource manager on an HPC
 cluster looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;slurm&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">bin</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm/bin&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">conf</span><span class="p p-Indicator">:</span> <span class="s">&quot;/path/to/slurm.conf&quot;</span>
-</span><span class="hll">    <span class="c1"># bin_overrides:</span>
-</span><span class="hll">      <span class="c1"># sbatch: &quot;/usr/local/bin/sbatch&quot;</span>
-</span><span class="hll">      <span class="c1"># squeue: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># scontrol: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># scancel: &quot;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/slurm/bin&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">conf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/slurm.conf&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="c1"># bin_overrides:</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># sbatch: &quot;/usr/local/bin/sbatch&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># squeue: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># scontrol: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># scancel: &quot;&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</dd>
-<dt>cluster</dt>
-<dd>The Slurm cluster name. <em>Optional</em>, passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code></dd>
-<dt>bin</dt>
-<dd>The path to the Slurm client installation binaries.</dd>
-<dt>conf</dt>
-<dd>The path to the Slurm configuration file for this cluster. <em>Optional</em></dd>
-<dt>bin_overrides</dt>
-<dd><p class="first">Replacements/wrappers for Slurm’s job submission and control clients. <em>Optional</em></p>
+<dl>
+<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</p>
+</dd>
+<dt>cluster</dt><dd><p>The Slurm cluster name. <em>Optional</em>, passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code></p>
+</dd>
+<dt>bin</dt><dd><p>The path to the Slurm client installation binaries.</p>
+</dd>
+<dt>conf</dt><dd><p>The path to the Slurm configuration file for this cluster. <em>Optional</em></p>
+</dd>
+<dt>bin_overrides</dt><dd><p>Replacements/wrappers for Slurm’s job submission and control clients. <em>Optional</em></p>
 <p>Supports the following clients:</p>
-<ul class="last simple">
-<li><cite>sbatch</cite></li>
-<li><cite>squeue</cite></li>
-<li><cite>scontrol</cite></li>
-<li><cite>scancel</cite></li>
+<ul class="simple">
+<li><p><cite>sbatch</cite></p></li>
+<li><p><cite>squeue</cite></p></li>
+<li><p><cite>scontrol</cite></p></li>
+<li><p><cite>scancel</cite></p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you do not have a multi-cluster Slurm setup you can remove the <code class="docutils literal notranslate"><span class="pre">cluster:</span>
+<p class="admonition-title">Note</p>
+<p>If you do not have a multi-cluster Slurm setup you can remove the <code class="docutils literal notranslate"><span class="pre">cluster:</span>
 <span class="pre">&quot;my_cluster&quot;</span></code> line from the above configuration file.</p>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">When installing Slurm ensure that all nodes on your cluster including the node running the Open OnDemand server have the same <a class="reference external" href="https://dun.github.io/munge/">MUNGE</a> key installed. Read the <a class="reference external" href="https://slurm.schedmd.com/quickstart_admin.html">Slurm Quick Start Administrator Guide</a> for more information on installing and configuring Slurm itself.</p>
+<p class="admonition-title">Tip</p>
+<p>When installing Slurm ensure that all nodes on your cluster including the node running the Open OnDemand server have the same <a class="reference external" href="https://dun.github.io/munge/">MUNGE</a> key installed. Read the <a class="reference external" href="https://slurm.schedmd.com/quickstart_admin.html">Slurm Quick Start Administrator Guide</a> for more information on installing and configuring Slurm itself.</p>
 </div>
 </div>
 

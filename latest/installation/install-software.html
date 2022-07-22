@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -214,7 +214,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>1. Install Software From RPM</li>
+      <li><span class="section-number">1. </span>Install Software From RPM</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -236,30 +236,28 @@
            <div itemprop="articleBody">
             
   <div class="section" id="install-software-from-rpm">
-<span id="install-software"></span><h1>1. Install Software From RPM<a class="headerlink" href="#install-software-from-rpm" title="Permalink to this headline">¶</a></h1>
+<span id="install-software"></span><h1><span class="section-number">1. </span>Install Software From RPM<a class="headerlink" href="#install-software-from-rpm" title="Permalink to this headline">¶</a></h1>
 <p>We will use <a class="reference external" href="https://www.softwarecollections.org/en/">Software Collections</a> to satisfy majority of the following
 software requirements:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/httpd24/">Apache HTTP Server 2.4</a></li>
-<li>Ruby 2.7 with <strong class="command">rake</strong>, <strong class="command">bundler</strong>, and development
-libraries</li>
-<li>Node.js 12</li>
+<li><p><a class="reference external" href="https://www.softwarecollections.org/en/scls/rhscl/httpd24/">Apache HTTP Server 2.4</a></p></li>
+<li><p>Ruby 2.7 with <strong class="command">rake</strong>, <strong class="command">bundler</strong>, and development
+libraries</p></li>
+<li><p>Node.js 12</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This tutorial is run from the perspective of an account that has
+<p class="admonition-title">Note</p>
+<p>This tutorial is run from the perspective of an account that has
 <strong class="command">sudo</strong> access but is not root.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">Enable the dependency repositories <strong>on CentOS/RHEL 7 only</strong>:</p>
-<dl class="docutils">
-<dt>CentOS 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
+<li><p>Enable the dependency repositories <strong>on CentOS/RHEL 7 only</strong>:</p>
+<dl>
+<dt>CentOS 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
 </pre></div>
 </div>
 </dd>
-<dt>RHEL 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
+<dt>RHEL 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
 sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
 <span class="c1"># Repository &#39;rhel-server-rhscl-7-rpms&#39; is enabled for this system.</span>
 </pre></div>
@@ -267,13 +265,13 @@ sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhsc
 </dd>
 </dl>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For <strong>RedHat</strong> you may also need to enable the <em>Optional</em> channel and
+<p class="admonition-title">Warning</p>
+<p>For <strong>RedHat</strong> you may also need to enable the <em>Optional</em> channel and
 attach a subscription providing access to RHSCL to be able to use this
 repository.</p>
 </div>
 </li>
-<li><p class="first">Enable dnf modules and repositories for dependencies <strong>on CentOS/RHEL 8 only</strong>:</p>
+<li><p>Enable dnf modules and repositories for dependencies <strong>on CentOS/RHEL 8 only</strong>:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dnf module <span class="nb">enable</span> ruby:2.7
 dnf module <span class="nb">enable</span> nodejs:12
@@ -289,51 +287,51 @@ dnf module <span class="nb">enable</span> nodejs:12
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
+<li><p>Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Install OnDemand and all of its dependencies:</p>
+<li><p>Install OnDemand and all of its dependencies:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) Install <a class="reference internal" href="../authentication/dex.html#authentication-dex"><span class="std std-ref">OpenID Connect with Dex</span></a> package</p>
+<li><p>(Optional) Install <a class="reference internal" href="../authentication/dex.html#authentication-dex"><span class="std std-ref">OpenID Connect with Dex</span></a> package</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If authenticating against LDAP or wishing to evaluate OnDemand using <cite>ood</cite> user, you must install <cite>ondemand-dex</cite>.
+<p class="admonition-title">Note</p>
+<p>If authenticating against LDAP or wishing to evaluate OnDemand using <cite>ood</cite> user, you must install <cite>ondemand-dex</cite>.
 See <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for details on configuration of LDAP.</p>
 </div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
 </pre></div>
 </div>
 </li>
-<li><p class="first">(Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see <a class="reference internal" href="modify-system-security.html#ood-selinux"><span class="std std-ref">SELinux</span></a></p>
+<li><p>(Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see <a class="reference internal" href="modify-system-security.html#ood-selinux"><span class="std std-ref">SELinux</span></a></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-selinux
 </pre></div>
 </div>
 </li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>For some older systems, user ids (UID) may start at <code class="docutils literal notranslate"><span class="pre">500</span></code> and not the
 expected <code class="docutils literal notranslate"><span class="pre">1000</span></code>. If this true for your system, you will need to modify the
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> configuration file to allow these
 users access to OnDemand:</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/nginx_stage.yml</span>
-<span class="nn">---</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/nginx_stage.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
 
-<span class="c1"># ...</span>
+<span class="c1"># ...</span><span class="w"></span>
 
-<span class="c1"># Minimum user id required to generate per-user NGINX server as the requested</span>
-<span class="c1"># user (default: 1000)</span>
-<span class="c1">#</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">min_uid</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">500</span>
+<span class="c1"># Minimum user id required to generate per-user NGINX server as the requested</span><span class="w"></span>
+<span class="c1"># user (default: 1000)</span><span class="w"></span>
+<span class="c1">#</span><span class="w"></span>
+<span class="hll"><span class="nt">min_uid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span><span class="w"></span>
 </span>
-<span class="c1"># ...</span>
+<span class="c1"># ...</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

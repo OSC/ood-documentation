@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -251,10 +251,10 @@
 <span id="app-development-interactive-form"></span><h1>User Form<a class="headerlink" href="#user-form" title="Permalink to this headline">¶</a></h1>
 <p>The configuration file <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> is responsible for:</p>
 <ul class="simple">
-<li>defining all the attributes used throughout the various ERB files (defined as
-the session context) that make up the Interactive App</li>
-<li>setting the HTML form input or hard-coded value of each attribute</li>
-<li>designating a cluster to submit the batch job to</li>
+<li><p>defining all the attributes used throughout the various ERB files (defined as
+the session context) that make up the Interactive App</p></li>
+<li><p>setting the HTML form input or hard-coded value of each attribute</p></li>
+<li><p>designating a cluster to submit the batch job to</p></li>
 </ul>
 <p>It is located in the root of the application directory.</p>
 <p>Assuming we already have a sandbox Interactive App deployed under:</p>
@@ -271,27 +271,27 @@ My App</em> from the list of sandbox apps.</p>
 <p>You should now see the HTML form used to gather the user-defined attributes for
 building and launching the <code class="docutils literal notranslate"><span class="pre">my_app</span></code> Interactive App session.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">You can include dynamically generated content in the form by renaming the
+<p class="admonition-title">Tip</p>
+<p>You can include dynamically generated content in the form by renaming the
 form file to <code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code> and incorporating ERB syntax.</p>
 </div>
 <div class="section" id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <dl class="describe">
 <dt>
-<code class="descname">cluster (Array&lt;String&gt; or String)</code></dt>
+<code class="sig-name descname">cluster (Array&lt;String&gt; or String)</code></dt>
 <dd><p>the cluster ids that the Interactive App session is submitted to.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Prior to 1.8, this configuration was a single string (a single cluster).
+<p class="admonition-title">Note</p>
+<p>Prior to 1.8, this configuration was a single string (a single cluster).
 We now support one application submitting to multiple clusters. See the
 section below on <a class="reference internal" href="#configuring-which-cluster-to-submit-to">configuring which cluster to submit to</a> for more information.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>The cluster id must correspond to a cluster configuration file located
 under:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span>
 </pre></div>
 </div>
 </div>
@@ -299,26 +299,26 @@ under:</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">form (Array&lt;String&gt;)</code></dt>
+<code class="sig-name descname">form (Array&lt;String&gt;)</code></dt>
 <dd><p>a list of <strong>all</strong> the attributes that will be used as the context for
 describing an Interactive App session</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The attributes that appear as HTML form elements will appear to the
+<p class="admonition-title">Note</p>
+<p>The attributes that appear as HTML form elements will appear to the
 user in the order they are listed in this configuration option.</p>
 </div>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">attributes (Hash)</code></dt>
+<code class="sig-name descname">attributes (Hash)</code></dt>
 <dd><p>the object defining the hard-coded value or HTML form element used for the
 various custom attributes</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">cacheable (Boolean)</code></dt>
+<code class="sig-name descname">cacheable (Boolean)</code></dt>
 <dd><p>whether or not the application is cacheable or not. Defaults to true.</p>
 </dd></dl>
 
@@ -340,51 +340,46 @@ with very little or no modification on the part of the developer.</p>
 an account to submit the batch job (interactive session) to, and then
 subsequently submits the job to that queue without any customization on the
 part of the app developer can look like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The most commonly used predefined attributes are given as:</p>
-<dl class="docutils">
-<dt>bc_account</dt>
-<dd><p class="first">This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will be used as the charged
+<dl>
+<dt>bc_account</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will be used as the charged
 account for the submitted job.</p>
-<p class="last">This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id">OodCore::Job::Script#accounting_id</a>.</p>
+<p>This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id">OodCore::Job::Script#accounting_id</a>.</p>
 </dd>
-<dt>bc_queue</dt>
-<dd><p class="first">This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will supply the name of the
+<dt>bc_queue</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will supply the name of the
 queue that the batch job is submitted to.</p>
-<p class="last">This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name">OodCore::Job::Script#queue_name</a>.</p>
+<p>This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name">OodCore::Job::Script#queue_name</a>.</p>
 </dd>
-<dt>bc_num_hours</dt>
-<dd><p class="first">This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the maximum
+<dt>bc_num_hours</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the maximum
 amount of hours the submitted batch job may run.</p>
-<p class="last">This attribute gets converted to seconds and then set on
+<p>This attribute gets converted to seconds and then set on
 <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:wall_time">OodCore::Job::Script#wall_time</a>.</p>
 </dd>
-<dt>bc_num_slots</dt>
-<dd><p class="first">This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the number of
+<dt>bc_num_slots</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the number of
 processors, CPUs on a single node, or nodes that the submitted job may use
 (depends on the resource manager used, e.g., Torque, Slurm, …).</p>
 <p>This attribute manipulates the brittle <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:native">OodCore::Job::Script#native</a> field
 with a value that depends on the given resource manager for the cluster.</p>
-<div class="last admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This predefined attribute is very resource manager specific, and is the
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This predefined attribute is very resource manager specific, and is the
 most brittle of all the other predefined attributes. May require
 customization (see
 <a class="reference internal" href="#interactive-development-form-customizing-attributes"><span class="std std-ref">Customizing Attributes</span></a>) to work at
 your center.</p>
 </div>
 </dd>
-<dt>bc_email_on_started</dt>
-<dd><p class="first">This adds a <code class="docutils literal notranslate"><span class="pre">check_box</span></code> to the HTML form that determines whether the user
+<dt>bc_email_on_started</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">check_box</span></code> to the HTML form that determines whether the user
 should be notified by email when the batch job starts.</p>
-<p class="last">This attribute sets value of <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:email_on_started">OodCore::Job::Script#email_on_started</a>
+<p>This attribute sets value of <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:email_on_started">OodCore::Job::Script#email_on_started</a>
 depending on whether the user checked the box or not.</p>
 </dd>
 </dl>
@@ -394,41 +389,39 @@ depending on whether the user checked the box or not.</p>
 <p>For each defined attribute in the <code class="docutils literal notranslate"><span class="pre">form:</span></code> configuration option, you can
 modify/override any component that makes up the HTML form element in the
 <code class="docutils literal notranslate"><span class="pre">attributes:</span></code> configuration option, e.g.:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">my_custom_attribute</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">custom</span><span class="nv"> </span><span class="s">label&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">...</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">my_custom_attribute</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">custom</span><span class="nv"> </span><span class="s">label&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The available configuration options that can be modified for a given attribute
 are:</p>
 <dl class="describe">
 <dt>
-<code class="descname">widget (String, null)</code></dt>
+<code class="sig-name descname">widget (String, null)</code></dt>
 <dd><p>the type of HTML form element to use for input</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">text_field</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">text_area</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">number_field</span></code> - can use <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">step</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">check_box</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">select</span></code> - can use <code class="docutils literal notranslate"><span class="pre">options</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">hidden_field</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">resolution_field</span></code> (used for specifying resolution dimensions
-necessary for VNC)</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_field</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_area</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number_field</span></code> - can use <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">step</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_box</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select</span></code> - can use <code class="docutils literal notranslate"><span class="pre">options</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_field</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolution_field</span></code> (used for specifying resolution dimensions
+necessary for VNC)</p></li>
 </ul>
 <p>Some other fields that have varying support across different browsers
 include: <code class="docutils literal notranslate"><span class="pre">range_field</span></code>, <code class="docutils literal notranslate"><span class="pre">date_field</span></code>, <code class="docutils literal notranslate"><span class="pre">search_field</span></code>,
 <code class="docutils literal notranslate"><span class="pre">email_field</span></code>, <code class="docutils literal notranslate"><span class="pre">telephone_field</span></code>, <code class="docutils literal notranslate"><span class="pre">url_field</span></code>, <code class="docutils literal notranslate"><span class="pre">password_field</span></code>.</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">Accepts any text</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&quot;text_field&quot;</span>
+<dl>
+<dt>Default</dt><dd><p>Accepts any text</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;text_field&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Accepts only numbers</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&quot;number_field&quot;</span>
+<dt>Example</dt><dd><p>Accepts only numbers</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number_field&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -437,25 +430,23 @@ include: <code class="docutils literal notranslate"><span class="pre">range_fiel
 
 <dl class="describe">
 <dt>
-<code class="descname">value (String, null)</code></dt>
+<code class="sig-name descname">value (String, null)</code></dt>
 <dd><p>the default value used for the input field</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">None</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+<dl>
+<dt>Default</dt><dd><p>None</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Set default value of 5</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="s">&quot;5&quot;</span>
+<dt>Example</dt><dd><p>Set default value of 5</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
 </dl>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Values get cached so that users do not need to repeat previous session
+<p class="admonition-title">Warning</p>
+<p>Values get cached so that users do not need to repeat previous session
 submissions. So this default value will only appear for the user if
 they have no cached value.</p>
 </div>
@@ -463,14 +454,13 @@ they have no cached value.</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">label (String, null)</code></dt>
+<code class="sig-name descname">label (String, null)</code></dt>
 <dd><p>the label displayed above the input field</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd>Uses the name of the attribute</dd>
-<dt>Example</dt>
-<dd><p class="first">Better describe the attribute</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
+<dl>
+<dt>Default</dt><dd><p>Uses the name of the attribute</p>
+</dd>
+<dt>Example</dt><dd><p>Better describe the attribute</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -479,18 +469,16 @@ they have no cached value.</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">required (Boolean, null)</code></dt>
+<code class="sig-name descname">required (Boolean, null)</code></dt>
 <dd><p>whether this field must be filled out before submitting the form</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">Not required by default</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<dl>
+<dt>Default</dt><dd><p>Not required by default</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Make field required</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<dt>Example</dt><dd><p>Make field required</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -499,24 +487,22 @@ they have no cached value.</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">help (String, null)</code></dt>
+<code class="sig-name descname">help (String, null)</code></dt>
 <dd><p>help text that appears below the field (can be written in <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>)</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">No help text appears below input field</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dl>
+<dt>Default</dt><dd><p>No help text appears below input field</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Leave a long descriptive help message using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">Markdown</a></p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-  <span class="no">Please fill in this field with **one** of the following</span>
-  <span class="no">options:</span>
+<dt>Example</dt><dd><p>Leave a long descriptive help message using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">Markdown</a></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">  </span><span class="no">Please fill in this field with **one** of the following</span><span class="w"></span>
+<span class="w">  </span><span class="no">options:</span><span class="w"></span>
 
-  <span class="no">- `red`</span>
-  <span class="no">- `blue`</span>
-  <span class="no">- `green`</span>
+<span class="w">  </span><span class="no">- `red`</span><span class="w"></span>
+<span class="w">  </span><span class="no">- `blue`</span><span class="w"></span>
+<span class="w">  </span><span class="no">- `green`</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -525,20 +511,18 @@ they have no cached value.</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">pattern (String, null)</code></dt>
+<code class="sig-name descname">pattern (String, null)</code></dt>
 <dd><p>a regular expression that the control’s value is checked against (only
 applies to widgets: <code class="docutils literal notranslate"><span class="pre">text_field</span></code>, <code class="docutils literal notranslate"><span class="pre">search_field</span></code>, <code class="docutils literal notranslate"><span class="pre">telephone_field</span></code>,
 <code class="docutils literal notranslate"><span class="pre">url_field</span></code>, <code class="docutils literal notranslate"><span class="pre">email_field</span></code>, <code class="docutils literal notranslate"><span class="pre">password_field</span></code>)</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">No pattern</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pattern</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dl>
+<dt>Default</dt><dd><p>No pattern</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Only accept three letter country codes</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pattern</span><span class="p p-Indicator">:</span> <span class="s">&quot;[A-Za-z]{3}&quot;</span>
+<dt>Example</dt><dd><p>Only accept three letter country codes</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[A-Za-z]{3}&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -547,19 +531,17 @@ applies to widgets: <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="describe">
 <dt>
-<code class="descname">min (Integer, null)</code></dt>
+<code class="sig-name descname">min (Integer, null)</code></dt>
 <dd><p>specifies minimum value for this item, which must not be greater than its
 maximum value (only applies to widget: <code class="docutils literal notranslate"><span class="pre">number_field</span></code>)</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">No minimum value</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dl>
+<dt>Default</dt><dd><p>No minimum value</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Set minimum value of 5</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+<dt>Example</dt><dd><p>Set minimum value of 5</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -568,19 +550,17 @@ maximum value (only applies to widget: <code class="docutils literal notranslate
 
 <dl class="describe">
 <dt>
-<code class="descname">max (Integer, null)</code></dt>
+<code class="sig-name descname">max (Integer, null)</code></dt>
 <dd><p>specifies maximum value for this item, which must not be less than its
 minimum value (only applies to widget: <code class="docutils literal notranslate"><span class="pre">number_field</span></code>)</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">No maximum value</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dl>
+<dt>Default</dt><dd><p>No maximum value</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Set maximum value of 15</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">15</span>
+<dt>Example</dt><dd><p>Set maximum value of 15</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -589,20 +569,18 @@ minimum value (only applies to widget: <code class="docutils literal notranslate
 
 <dl class="describe">
 <dt>
-<code class="descname">step (Integer, null)</code></dt>
+<code class="sig-name descname">step (Integer, null)</code></dt>
 <dd><p>works with <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> options to limit the increments at which a
 value can be set, it can be the string <code class="docutils literal notranslate"><span class="pre">&quot;any&quot;</span></code> or positive floating
 point number (only applies to widget: <code class="docutils literal notranslate"><span class="pre">number_field</span></code>)</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">No step size</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">step</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<dl>
+<dt>Default</dt><dd><p>No step size</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Only accept integer values</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">step</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<dt>Example</dt><dd><p>Only accept integer values</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -611,31 +589,29 @@ point number (only applies to widget: <code class="docutils literal notranslate"
 
 <dl class="describe">
 <dt>
-<code class="descname">options (Array&lt;Array&lt;String&gt;&gt;, null)</code></dt>
+<code class="sig-name descname">options (Array&lt;Array&lt;String&gt;&gt;, null)</code></dt>
 <dd><p>a list of options for the <code class="docutils literal notranslate"><span class="pre">select</span></code> widget</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">No options are supplied</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+<dl>
+<dt>Default</dt><dd><p>No options are supplied</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">Provide a list of cars</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;Volvo&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;volvo&quot;</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;Ford&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;ford&quot;</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;Toyota&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;toyota&quot;</span><span class="p p-Indicator">]</span>
+<dt>Example</dt><dd><p>Provide a list of cars</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Volvo&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;volvo&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Ford&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ford&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Toyota&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;toyota&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
 </dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Typically the options are given as a list of pairs. The first string in
 the pair is the option text and the second string in the pair is the
 option value.</p>
-<p class="last">The user will see a list of options “Volvo”, “Ford”, and “Toyota” to
+<p>The user will see a list of options “Volvo”, “Ford”, and “Toyota” to
 choose from in the HTML form, but the backend will process a value of
 either “volvo”, “ford”, or “toyota” depending on what the user chose.</p>
 </div>
@@ -643,18 +619,16 @@ either “volvo”, “ford”, or “toyota” depending on what the user chose
 
 <dl class="describe">
 <dt>
-<code class="descname">cacheable (Boolean, true)</code></dt>
+<code class="sig-name descname">cacheable (Boolean, true)</code></dt>
 <dd><p>whether the form item is cacheable or not</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">cacheable</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cacheable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<dl>
+<dt>Default</dt><dd><p>cacheable</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cacheable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt>
-<dd><p class="first">The item is not cacheable</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cacheable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<dt>Example</dt><dd><p>The item is not cacheable</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cacheable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -666,9 +640,9 @@ either “volvo”, “ford”, or “toyota” depending on what the user chose
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>The simplest example consists of only a cluster id</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>where we expect the Interactive App session to be submitted with the following
@@ -682,11 +656,11 @@ since we didn’t define <code class="docutils literal notranslate"><span class=
 <div class="section" id="user-defined-attributes">
 <h3>User-defined Attributes<a class="headerlink" href="#user-defined-attributes" title="Permalink to this headline">¶</a></h3>
 <p>The following configuration file</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">my_module_version</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_module_version</span><span class="w"></span>
 </pre></div>
 </div>
 <p>defines a session context attribute called <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code>.</p>
@@ -699,22 +673,22 @@ submission parameters that are discussed in a later section.</p>
 <div class="section" id="hard-coded-attributes">
 <h3>Hard-coded Attributes<a class="headerlink" href="#hard-coded-attributes" title="Permalink to this headline">¶</a></h3>
 <p>The following configuration file</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">my_module_version</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">my_module_version</span><span class="p p-Indicator">:</span> <span class="s">&quot;2.2.0&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_module_version</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">my_module_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2.2.0&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>does two things:</p>
 <ul class="simple">
-<li>it defines a context attribute called <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> in the <code class="docutils literal notranslate"><span class="pre">form:</span></code>
-configuration option</li>
-<li>it then sets the value of <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;2.2.0&quot;</span></code> in the
+<li><p>it defines a context attribute called <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> in the <code class="docutils literal notranslate"><span class="pre">form:</span></code>
+configuration option</p></li>
+<li><p>it then sets the value of <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;2.2.0&quot;</span></code> in the
 <code class="docutils literal notranslate"><span class="pre">attributes:</span></code> configuration option to later be used when defining the batch
-job script and/or submission parameters</li>
+job script and/or submission parameters</p></li>
 </ul>
 <p>The user will now <strong>ONLY</strong> be presented with a Launch button in the HTML form
 because the attribute <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> is hard-coded, so there is no need
@@ -723,28 +697,28 @@ for a input text box.</p>
 <div class="section" id="customize-user-defined-attributes">
 <h3>Customize User-defined Attributes<a class="headerlink" href="#customize-user-defined-attributes" title="Permalink to this headline">¶</a></h3>
 <p>The following configuration file</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">my_module_version</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">my_module_version</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&quot;number_field&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Module</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">#&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="s">&quot;Please</span><span class="nv"> </span><span class="s">input</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">number</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">1-10&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="l l-Scalar l-Scalar-Plain">max</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">11</span>
-    <span class="l l-Scalar l-Scalar-Plain">step</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_module_version</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">my_module_version</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number_field&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Module</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">#&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Please</span><span class="nv"> </span><span class="s">input</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">number</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">1-10&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">11</span><span class="w"></span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
 </pre></div>
 </div>
 <p>does two things:</p>
 <ul class="simple">
-<li>it defines a context attribute called <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> in the <code class="docutils literal notranslate"><span class="pre">form:</span></code>
-configuration option</li>
-<li>it then describes the HTML form element to use for the <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code>
-attribute</li>
+<li><p>it defines a context attribute called <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code> in the <code class="docutils literal notranslate"><span class="pre">form:</span></code>
+configuration option</p></li>
+<li><p>it then describes the HTML form element to use for the <code class="docutils literal notranslate"><span class="pre">my_module_version</span></code>
+attribute</p></li>
 </ul>
 </div>
 <div class="section" id="caching-form-items">
@@ -757,10 +731,10 @@ on a per item basis through attributes.</p>
 the configuration <code class="docutils literal notranslate"><span class="pre">OOD_BATCH_CONNECT_CACHE_ATTR_VALUES=false</span></code> in the
 dashboard’s environment file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<p class="admonition-title">Tip</p>
 <p>Since you can configure caching at different levels the rule of thumb is the
 closer the configuration is to the form item, the higher the precedence.</p>
-<p class="last">Setting the configuration on the attribute overrides everything and setting it
+<p>Setting the configuration on the attribute overrides everything and setting it
 on a per app basis overrides the global setting.</p>
 </div>
 <p>Let’s see an example.  Here, we’ve disabled caching for the app and did not
@@ -768,18 +742,18 @@ set OOD_BATCH_CONNECT_CACHE_ATTR_VALUES, so the site-wide configuration is set
 to true by default.  So, <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> and <code class="docutils literal notranslate"><span class="pre">python_version</span></code> are not cacheable,
 meaning the user will have to fill those form entries out every time they submit
 the job. But since <code class="docutils literal notranslate"><span class="pre">bc_queue</span></code>’s attribute is set to true, it is cacheable.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="c1"># OOD_BATCH_CONNECT_CACHE_ATTR_VALUES is not set, so defaults to true</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">cacheable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python_version</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">cacheable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="c1"># OOD_BATCH_CONNECT_CACHE_ATTR_VALUES is not set, so defaults to true</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">cacheable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python_version</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_queue</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cacheable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -791,20 +765,20 @@ the job. But since <code class="docutils literal notranslate"><span class="pre">
 configured just one item, then the form UI does not change for the user. If
 you configure an array of two or more options then a select dropdown will
 automatically be added to the top of the form.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
-<span class="c1"># which will generate a dropdown select automatically</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;cluster1&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;cluster2&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="c1"># which will generate a dropdown select automatically</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cluster1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cluster2&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<p class="admonition-title">Tip</p>
 <p>GLOBs are also supported. So in the example above one entry of <code class="docutils literal notranslate"><span class="pre">cluster*</span></code>
 would have been equivalent to explicitly configuring both <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">cluster2</span></code>.</p>
-<p class="last">This means you could configure <code class="docutils literal notranslate"><span class="pre">cluster:</span> <span class="pre">&quot;*&quot;</span></code> to be able to submit to all
+<p>This means you could configure <code class="docutils literal notranslate"><span class="pre">cluster:</span> <span class="pre">&quot;*&quot;</span></code> to be able to submit to all
 clusters.</p>
 </div>
 <p>If you would prefer to use some other widget, or you wish to change the text being
@@ -813,16 +787,16 @@ This gives you some flexibility in the form UI instead of the default select
 widget that shows all lowercase cluster names.</p>
 <p>Here’s an example were the user will be shown a select dropdown menu item with
 different text than the default.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/different_select_cluster/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cluster</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&quot;select&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;cluster1&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;The</span><span class="nv"> </span><span class="s">first</span><span class="nv"> </span><span class="s">cluster&quot;</span><span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;cluster2&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;The</span><span class="nv"> </span><span class="s">second</span><span class="nv"> </span><span class="s">cluster&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/different_select_cluster/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cluster</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;select&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;cluster1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">first</span><span class="nv"> </span><span class="s">cluster&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;cluster2&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">second</span><span class="nv"> </span><span class="s">cluster&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The last option is to <a class="reference internal" href="submit.html#configuring-cluster-in-submit-yml"><span class="std std-ref">configure the cluster in the submit file</span></a>.

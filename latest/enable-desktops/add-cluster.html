@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -212,7 +212,7 @@
         
           <li><a href="../enable-desktops.html">Enable Interactive Desktop</a> &raquo;</li>
         
-      <li>2. Add a Cluster</li>
+      <li><span class="section-number">2. </span>Add a Cluster</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -234,35 +234,35 @@
            <div itemprop="articleBody">
             
   <div class="section" id="add-a-cluster">
-<span id="enable-desktops-add-cluster"></span><h1>2. Add a Cluster<a class="headerlink" href="#add-a-cluster" title="Permalink to this headline">¶</a></h1>
+<span id="enable-desktops-add-cluster"></span><h1><span class="section-number">2. </span>Add a Cluster<a class="headerlink" href="#add-a-cluster" title="Permalink to this headline">¶</a></h1>
 <p>We now need to add this cluster as a Desktop option in the Interactive Apps
 list. All customization is done underneath the root directory
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/bc_desktop</span></code> which requires escalated privileges to
 modify.</p>
 <ol class="arabic">
-<li><p class="first">Start by creating the working directory:</p>
+<li><p>Start by creating the working directory:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir -p /etc/ood/config/apps/bc_desktop
 </pre></div>
 </div>
 </li>
-<li><p class="first">For <em>each</em> cluster that we want to launch a Desktop session on we will need
+<li><p>For <em>each</em> cluster that we want to launch a Desktop session on we will need
 a corresponding <a class="reference internal" href="../app-development/interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a> configuration file
 in YAML format located in this directory.</p>
 <p>Assuming we want to launch a desktop on OSC’s Oakley cluster we would have:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/oakley.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Oakley</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;oakley&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/oakley.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Oakley</span><span class="nv"> </span><span class="s">Desktop&quot;</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;oakley&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">cluster</span></code> attribute above <strong>MUST</strong> match a valid cluster
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cluster</span></code> attribute above <strong>MUST</strong> match a valid cluster
 configuration file located underneath
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span></code>.</p>
 </div>
 </li>
-<li><p class="first">Navigate to your OnDemand site, in particular the Dashboard App, and you
+<li><p>Navigate to your OnDemand site, in particular the Dashboard App, and you
 should see in the top dropdown menu “Interactive Apps” ⇒ “Oakley Desktop”
 (or whatever you set as the <code class="docutils literal notranslate"><span class="pre">title</span></code>).</p>
 <p>After choosing “Oakley Desktop” from the menu, you should be presented with
@@ -271,8 +271,8 @@ a form to “Launch” a Desktop session to the given cluster.</p>
 will need to configure the submission parameters for cluster’s resource
 manager.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If by some chance when you click “Launch” and it actually successfully
+<p class="admonition-title">Note</p>
+<p>If by some chance when you click “Launch” and it actually successfully
 submits a job to your cluster, it is <strong>highly</strong> recommended that you
 click the link under “Session ID:”. This will open the <a class="reference internal" href="../applications/files.html#files"><span class="std std-ref">Files App</span></a>
 underneath the working directory of the batch job. This will allow you to

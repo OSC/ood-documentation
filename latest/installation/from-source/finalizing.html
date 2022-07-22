@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,7 +227,7 @@
         
           <li><a href="../../installation.html">Installation</a> &raquo;</li>
         
-          <li><a href="../from-source.html">2. Install From Source</a> &raquo;</li>
+          <li><a href="../from-source.html"><span class="section-number">2. </span>Install From Source</a> &raquo;</li>
         
       <li>Finalizing From Source Installation</li>
     
@@ -254,58 +254,58 @@
 <span id="finalizing"></span><h1>Finalizing From Source Installation<a class="headerlink" href="#finalizing-from-source-installation" title="Permalink to this headline">¶</a></h1>
 <p>Now that all the necessary software has been installed to the system there are configuration steps that need to be taken to finalize the build.</p>
 <ul class="simple">
-<li><a class="reference internal" href="#update-the-apache-service-environment">Update the Apache service environment</a></li>
-<li><a class="reference internal" href="#update-the-sudoers-list">Update the sudoers list</a></li>
-<li><a class="reference internal" href="#add-nginx-configs-for-the-core-web-apps">Add NGINX configs for the core web apps</a></li>
-<li><a class="reference internal" href="#add-a-cronjob-to-prune-long-running-puns">Add a cronjob to prune long running PUNs</a></li>
-<li><a class="reference internal" href="#add-apache-config">Add Apache Config</a></li>
+<li><p><a class="reference internal" href="#update-the-apache-service-environment">Update the Apache service environment</a></p></li>
+<li><p><a class="reference internal" href="#update-the-sudoers-list">Update the sudoers list</a></p></li>
+<li><p><a class="reference internal" href="#add-nginx-configs-for-the-core-web-apps">Add NGINX configs for the core web apps</a></p></li>
+<li><p><a class="reference internal" href="#add-a-cronjob-to-prune-long-running-puns">Add a cronjob to prune long running PUNs</a></p></li>
+<li><p><a class="reference internal" href="#add-apache-config">Add Apache Config</a></p></li>
 </ul>
 <div class="section" id="update-the-apache-service-environment">
 <h2>Update the Apache service environment<a class="headerlink" href="#update-the-apache-service-environment" title="Permalink to this headline">¶</a></h2>
 <p>In order to be able to run Passenger we need Apache’s service environment to know about the correct version of Ruby:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;s/^HTTPD24_HTTPD_SCLS_ENABLED=.*/HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 rh-ruby25&quot;/&#39;</span> \
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">rh</span><span class="o">/</span><span class="n">httpd24</span><span class="o">/</span><span class="n">service</span><span class="o">-</span><span class="n">environment</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo sed -i <span class="s1">&#39;s/^HTTPD24_HTTPD_SCLS_ENABLED=.*/HTTPD24_HTTPD_SCLS_ENABLED=&quot;httpd24 rh-ruby25&quot;/&#39;</span> <span class="se">\</span>
+/opt/rh/httpd24/service-environment
 </pre></div>
 </div>
 </div>
 <div class="section" id="update-the-sudoers-list">
 <h2>Update the sudoers list<a class="headerlink" href="#update-the-sudoers-list" title="Permalink to this headline">¶</a></h2>
 <p>The sudoer’s list must be updated to permit Apache.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>sudo /etc/sudoers.d/ood &lt;&lt; EOF
-Defaults:apache !requiretty, !authenticate
-apache ALL=(ALL) NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage
-EOF
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /etc/sudoers.d/ood <span class="s">&lt;&lt; EOF</span>
+<span class="s">Defaults:apache !requiretty, !authenticate</span>
+<span class="s">apache ALL=(ALL) NOPASSWD: /opt/ood/nginx_stage/sbin/nginx_stage</span>
+<span class="s">EOF</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="add-nginx-configs-for-the-core-web-apps">
 <h2>Add NGINX configs for the core web apps<a class="headerlink" href="#add-nginx-configs-for-the-core-web-apps" title="Permalink to this headline">¶</a></h2>
 <p>NGINX configs must be generated for all of the core applications otherwise the first user to use each app will be prompted with a first time message.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">activejobs</span><span class="o">.</span><span class="n">conf</span>
-<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">.</span><span class="n">conf</span>
-<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">file</span><span class="o">-</span><span class="n">editor</span><span class="o">.</span><span class="n">conf</span>
-<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">files</span><span class="o">.</span><span class="n">conf</span>
-<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">myjobs</span><span class="o">.</span><span class="n">conf</span>
-<span class="n">touch</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">shell</span><span class="o">.</span><span class="n">conf</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">update_nginx_stage</span> <span class="o">&amp;&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">||</span> <span class="p">:</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch /var/lib/ondemand-nginx/config/apps/sys/activejobs.conf
+touch /var/lib/ondemand-nginx/config/apps/sys/dashboard.conf
+touch /var/lib/ondemand-nginx/config/apps/sys/file-editor.conf
+touch /var/lib/ondemand-nginx/config/apps/sys/files.conf
+touch /var/lib/ondemand-nginx/config/apps/sys/myjobs.conf
+touch /var/lib/ondemand-nginx/config/apps/sys/shell.conf
+/opt/ood/nginx_stage/sbin/update_nginx_stage <span class="p">&amp;</span>&gt;/dev/null <span class="o">||</span> :
 </pre></div>
 </div>
 </div>
 <div class="section" id="add-a-cronjob-to-prune-long-running-puns">
 <h2>Add a cronjob to prune long running PUNs<a class="headerlink" href="#add-a-cronjob-to-prune-long-running-puns" title="Permalink to this headline">¶</a></h2>
 <p>Remove in-active PUNs every 2 hours.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cron</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">ood</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
-<span class="c1">#!/bin/bash</span>
-<span class="n">PATH</span><span class="o">=/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span>
-<span class="mi">0</span> <span class="o">*/</span><span class="mi">2</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="n">root</span> <span class="p">[</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx_stage</span> <span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx_stage</span> <span class="n">nginx_clean</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="o">|</span> <span class="n">logger</span> <span class="o">-</span><span class="n">t</span> <span class="n">nginx_clean</span>
-<span class="n">EOF</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /etc/cron.d/ood <span class="s">&lt;&lt; EOF</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span>
+<span class="s">0 */2 * * * root [ -f /opt/ood/nginx_stage/sbin/nginx_stage ] &amp;&amp; /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean 2&gt;&amp;1 | logger -t nginx_clean</span>
+<span class="s">EOF</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="add-apache-config">
 <h2>Add Apache Config<a class="headerlink" href="#add-apache-config" title="Permalink to this headline">¶</a></h2>
 <p>At this point we still will not see an OnDemand page if we visit our web node because the ood-portal configuration has not been generated. Generate a generic one now:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">ood</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">generator</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">update_ood_portal</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
 <p>This is the basic OnDemand portal configuration and unless you are using Apache’s basic auth for your site you will need to create a custom portal configuration file and re-run the portal generator. More information on the Apache config generator is available in the Configure Authentication section.</p>

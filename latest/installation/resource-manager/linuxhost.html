@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -259,118 +259,118 @@
   <div class="section" id="configure-linuxhost-adapter-beta">
 <span id="resource-manager-linuxhost"></span><h1>Configure LinuxHost Adapter (beta)<a class="headerlink" href="#configure-linuxhost-adapter-beta" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">While we have tested this at OSC, we do not currently use it in a production capacity nor do any other centers as of April 23, 2020. If you are an early adopter of this feature, please let us know on Discourse or by email about your experience and any improvements we can make.</p>
+<p class="admonition-title">Warning</p>
+<p>While we have tested this at OSC, we do not currently use it in a production capacity nor do any other centers as of April 23, 2020. If you are an early adopter of this feature, please let us know on Discourse or by email about your experience and any improvements we can make.</p>
 </div>
 <p>The LinuxHost adapter facilitates launching jobs immediately without using a batch scheduler or resource manager. Use cases for this non-traditional job adapter include:</p>
 <ul class="simple">
-<li>Interactive work on login nodes, such as remote desktop or IDE</li>
-<li>Providing an option to start an interactive session immediately, without any queue time imposed</li>
-<li>Using OnDemand on systems that do not have a supported scheduler installed</li>
+<li><p>Interactive work on login nodes, such as remote desktop or IDE</p></li>
+<li><p>Providing an option to start an interactive session immediately, without any queue time imposed</p></li>
+<li><p>Using OnDemand on systems that do not have a supported scheduler installed</p></li>
 </ul>
 <p>The adapter pieces together several tools to achieve behavior similar to what a scheduler offers:</p>
-<dl class="docutils">
-<dt>ssh</dt>
-<dd>connects from the web node to a configured host such as a login node.</dd>
-<dt>tmux</dt>
-<dd>Specially named <code class="docutils literal notranslate"><span class="pre">tmux</span></code> sessions offer the ability to rediscover running jobs</dd>
-<dt>timeout</dt>
-<dd>is used to set a ‘walltime’ after which the job is killed</dd>
-<dt>pstree</dt>
-<dd>is used to detect the job’s parent <code class="docutils literal notranslate"><span class="pre">sinit</span></code> process so that it can be killed</dd>
-<dt>singularity</dt>
-<dd>containerization provides a PID namespace without requiring elevated privileges that ensures that all child processes are cleaned up when the job either times out or is killed</dd>
+<dl class="simple">
+<dt>ssh</dt><dd><p>connects from the web node to a configured host such as a login node.</p>
+</dd>
+<dt>tmux</dt><dd><p>Specially named <code class="docutils literal notranslate"><span class="pre">tmux</span></code> sessions offer the ability to rediscover running jobs</p>
+</dd>
+<dt>timeout</dt><dd><p>is used to set a ‘walltime’ after which the job is killed</p>
+</dd>
+<dt>pstree</dt><dd><p>is used to detect the job’s parent <code class="docutils literal notranslate"><span class="pre">sinit</span></code> process so that it can be killed</p>
+</dd>
+<dt>singularity</dt><dd><p>containerization provides a PID namespace without requiring elevated privileges that ensures that all child processes are cleaned up when the job either times out or is killed</p>
+</dd>
 </dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">There are many recipes for managing processes on arbitrary Linux hosts, and we will be exploring others in future development of this adapter.</p>
+<p class="admonition-title">Note</p>
+<p>There are many recipes for managing processes on arbitrary Linux hosts, and we will be exploring others in future development of this adapter.</p>
 </div>
 <p>The adapter and target host can be configured to either:</p>
 <ol class="arabic simple">
-<li>Enable launching any software installed on the target host</li>
-<li>Enable launching a specific application container</li>
+<li><p>Enable launching any software installed on the target host</p></li>
+<li><p>Enable launching a specific application container</p></li>
 </ol>
 <p>The cluster configuration can be shared between both strategies and each interactive app plugin individually configured to use the appropriate strategy.</p>
 <div class="section" id="launch-any-software-on-target-host">
 <h2>Launch any software on target host<a class="headerlink" href="#launch-any-software-on-target-host" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Install on the target host a Singularity base OS image matching the OS of the target host. In the cluster configuration example below we use <code class="docutils literal notranslate"><span class="pre">/opt/ood/linuxhost_adapter/centos_7.6.sif</span></code> as the target host is running CentOS7.</li>
-<li>See <a class="reference internal" href="#resource-manager-linuxhost-cluster-configuration"><span class="std std-ref">Cluster Configuration</span></a> below to add the cluster configuration file for the target host</li>
+<li><p>Install on the target host a Singularity base OS image matching the OS of the target host. In the cluster configuration example below we use <code class="docutils literal notranslate"><span class="pre">/opt/ood/linuxhost_adapter/centos_7.6.sif</span></code> as the target host is running CentOS7.</p></li>
+<li><p>See <a class="reference internal" href="#resource-manager-linuxhost-cluster-configuration"><span class="std std-ref">Cluster Configuration</span></a> below to add the cluster configuration file for the target host</p></li>
 </ol>
 <p>This base image is used to provide an unprivileged PID namespace when launching the app. To make the rest of the software installed on the host available to launch within the image, most/all of the host file system is bind-mounted into the running container. For this reason many existing interactive apps will just work when launched by the LinuxHost adapter.</p>
 </div>
 <div class="section" id="launch-specific-application-containers">
 <h2>Launch specific application containers<a class="headerlink" href="#launch-specific-application-containers" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Install the specific application containers on the target host.</li>
-<li>See <a class="reference internal" href="#resource-manager-linuxhost-cluster-configuration"><span class="std std-ref">Cluster Configuration</span></a> below to add the cluster configuration file for the target host. Specify a default application container for <code class="docutils literal notranslate"><span class="pre">singularity_image:</span></code> and <code class="docutils literal notranslate"><span class="pre">singularity_bindpath:</span></code> even if you will override it.</li>
-<li>In each interactive app plugin, specify the image to launch and host directories to mount by setting the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute <code class="docutils literal notranslate"><span class="pre">singularity_container</span></code> and <code class="docutils literal notranslate"><span class="pre">singularity_bindpath</span></code>. In interactive app plugins these attributes may be set in the file <code class="docutils literal notranslate"><span class="pre">submit.yml</span></code>. For example:</li>
+<li><p>Install the specific application containers on the target host.</p></li>
+<li><p>See <a class="reference internal" href="#resource-manager-linuxhost-cluster-configuration"><span class="std std-ref">Cluster Configuration</span></a> below to add the cluster configuration file for the target host. Specify a default application container for <code class="docutils literal notranslate"><span class="pre">singularity_image:</span></code> and <code class="docutils literal notranslate"><span class="pre">singularity_bindpath:</span></code> even if you will override it.</p></li>
+<li><p>In each interactive app plugin, specify the image to launch and host directories to mount by setting the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute <code class="docutils literal notranslate"><span class="pre">singularity_container</span></code> and <code class="docutils literal notranslate"><span class="pre">singularity_bindpath</span></code>. In interactive app plugins these attributes may be set in the file <code class="docutils literal notranslate"><span class="pre">submit.yml</span></code>. For example:</p></li>
 </ol>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">vnc</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-     <span class="l l-Scalar l-Scalar-Plain">singularity_bindpath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/fs,/home</span>
-     <span class="l l-Scalar l-Scalar-Plain">singularity_container</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/local/modules/netbeans/netbeans_2019.sif</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vnc</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">     </span><span class="nt">singularity_bindpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/fs,/home</span><span class="w"></span>
+<span class="w">     </span><span class="nt">singularity_container</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/modules/netbeans/netbeans_2019.sif</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cluster-configuration">
 <span id="resource-manager-linuxhost-cluster-configuration"></span><h2>Cluster Configuration<a class="headerlink" href="#cluster-configuration" title="Permalink to this headline">¶</a></h2>
 <p>A YAML cluster configuration file for a Linux host looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens_login.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Owens&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">hidden</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;linux_host&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">submit_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>  <span class="c1"># This is the head for a login round robin</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">ssh_hosts</span><span class="p p-Indicator">:</span> <span class="c1"># These are the actual login nodes</span>
-</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login01.hpc.osc.edu</span>
-</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login02.hpc.osc.edu</span>
-</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login03.hpc.osc.edu</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">site_timeout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7200</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">debug</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">singularity_bin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/bin/singularity</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">singularity_bindpath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/users</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">singularity_image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/ood/linuxhost_adapter/centos_7.6.sif</span>
-</span><span class="hll">    <span class="c1"># Enabling strict host checking may cause the adapter to fail if the user&#39;s known_hosts does not have all the roundrobin hosts</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">strict_host_checking</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">tmux_bin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/bin/tmux</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens_login.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Owens&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;linux_host&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">submit_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span><span class="w">  </span><span class="c1"># This is the head for a login round robin</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">ssh_hosts</span><span class="p">:</span><span class="w"> </span><span class="c1"># These are the actual login nodes</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login01.hpc.osc.edu</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login02.hpc.osc.edu</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login03.hpc.osc.edu</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">site_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">singularity_bin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/bin/singularity</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">singularity_bindpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/users</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">singularity_image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/ood/linuxhost_adapter/centos_7.6.sif</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="c1"># Enabling strict host checking may cause the adapter to fail if the user&#39;s known_hosts does not have all the roundrobin hosts</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">strict_host_checking</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">tmux_bin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/bin/tmux</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">linux_host</span></code>.</dd>
-<dt>submit_host</dt>
-<dd>The target execution host for jobs. May be the head for a login round robin. May also be “localhost”.</dd>
-<dt>ssh_hosts</dt>
-<dd>All nodes the submit_host can DNS resolve to.</dd>
-<dt>site_timeout</dt>
-<dd>The number of seconds that a user’s job is allowed to run. Distinct from the length of time that a user selects.</dd>
-<dt>debug</dt>
-<dd>When set to <code class="docutils literal notranslate"><span class="pre">true</span></code> job scripts are written to <code class="docutils literal notranslate"><span class="pre">$HOME/tmp.UUID_tmux</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME/tmp.UUID_sing</span></code> for debugging purposes. When <code class="docutils literal notranslate"><span class="pre">false</span></code> those files are written to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and deleted as soon as they have been read.</dd>
-<dt>singularity_bin</dt>
-<dd>The absolute path to the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> executable on the execution host(s).</dd>
-<dt>singularity_bindpath</dt>
-<dd>The comma delimited list of paths to bind mount into the host; cannot simply be <code class="docutils literal notranslate"><span class="pre">/</span></code> because Singularity expects certain dot files in its containers’ root; defaults to: <code class="docutils literal notranslate"><span class="pre">/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/users</span></code>.</dd>
-<dt>singularity_image</dt>
-<dd>The absolute path to the Singularity image used when simply PID namespacing jobs; expected to be a base distribution image with no customizations.</dd>
-<dt>strict_host_checking</dt>
-<dd>When <code class="docutils literal notranslate"><span class="pre">false</span></code> the SSH options include <code class="docutils literal notranslate"><span class="pre">StrictHostKeyChecking=no</span></code> and <code class="docutils literal notranslate"><span class="pre">UserKnownHostsFile=/dev/null</span></code> this prevents jobs from failing to launch.</dd>
-<dt>tmux_bin</dt>
-<dd>The absolute path to the <code class="docutils literal notranslate"><span class="pre">tmux</span></code> executable on the execution host(s).</dd>
+<dl class="simple">
+<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">linux_host</span></code>.</p>
+</dd>
+<dt>submit_host</dt><dd><p>The target execution host for jobs. May be the head for a login round robin. May also be “localhost”.</p>
+</dd>
+<dt>ssh_hosts</dt><dd><p>All nodes the submit_host can DNS resolve to.</p>
+</dd>
+<dt>site_timeout</dt><dd><p>The number of seconds that a user’s job is allowed to run. Distinct from the length of time that a user selects.</p>
+</dd>
+<dt>debug</dt><dd><p>When set to <code class="docutils literal notranslate"><span class="pre">true</span></code> job scripts are written to <code class="docutils literal notranslate"><span class="pre">$HOME/tmp.UUID_tmux</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME/tmp.UUID_sing</span></code> for debugging purposes. When <code class="docutils literal notranslate"><span class="pre">false</span></code> those files are written to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> and deleted as soon as they have been read.</p>
+</dd>
+<dt>singularity_bin</dt><dd><p>The absolute path to the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> executable on the execution host(s).</p>
+</dd>
+<dt>singularity_bindpath</dt><dd><p>The comma delimited list of paths to bind mount into the host; cannot simply be <code class="docutils literal notranslate"><span class="pre">/</span></code> because Singularity expects certain dot files in its containers’ root; defaults to: <code class="docutils literal notranslate"><span class="pre">/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/users</span></code>.</p>
+</dd>
+<dt>singularity_image</dt><dd><p>The absolute path to the Singularity image used when simply PID namespacing jobs; expected to be a base distribution image with no customizations.</p>
+</dd>
+<dt>strict_host_checking</dt><dd><p>When <code class="docutils literal notranslate"><span class="pre">false</span></code> the SSH options include <code class="docutils literal notranslate"><span class="pre">StrictHostKeyChecking=no</span></code> and <code class="docutils literal notranslate"><span class="pre">UserKnownHostsFile=/dev/null</span></code> this prevents jobs from failing to launch.</p>
+</dd>
+<dt>tmux_bin</dt><dd><p>The absolute path to the <code class="docutils literal notranslate"><span class="pre">tmux</span></code> executable on the execution host(s).</p>
+</dd>
 </dl>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This adapter was designed with the primary goal of launching installed
+<p class="admonition-title">Warning</p>
+<p>This adapter was designed with the primary goal of launching installed
 software on the target host, not launching specific application containers.
 As a result, even if your use of this adapter is reserved to launching
 specific application containers, you currently must specify a value in the
@@ -378,8 +378,8 @@ cluster config for <code class="docutils literal notranslate"><span class="pre">
 if these will be specified in each interactive app plugin.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In order to communicate with the execution hosts the adapter uses SSH in
+<p class="admonition-title">Note</p>
+<p>In order to communicate with the execution hosts the adapter uses SSH in
 <code class="docutils literal notranslate"><span class="pre">BatchMode</span></code>. The adapter does not take a position on whether authentication
 is performed by user owned passwordless keys, or host-based authentication;
 however OSC has chosen to provide <a class="reference external" href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication">host based authentication</a>
@@ -397,13 +397,13 @@ to its users.</p>
 </pre></div>
 </div>
 <p>This goes into a file used by the <code class="docutils literal notranslate"><span class="pre">sshd</span></code> PAM configs which on CentOS/RHEL default to <code class="docutils literal notranslate"><span class="pre">/etc/pam.d/password-auth-ac</span></code> and needs to be included in the proper position, after <code class="docutils literal notranslate"><span class="pre">pam_systemd.so</span></code>. Also set <code class="docutils literal notranslate"><span class="pre">pam_systemd.so</span></code> to <code class="docutils literal notranslate"><span class="pre">required</span></code>:</p>
-<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>session     optional      pam_keyinit.so revoke
+<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>session     optional      pam_keyinit.so revoke
 session     required      pam_limits.so
 <span class="hll">session     required      pam_systemd.so
 </span><span class="hll">session     required      pam_exec.so type=open_session /etc/security/limits.sh
@@ -469,20 +469,20 @@ sudo systemctl <span class="nb">enable</span> cgred
 <code class="docutils literal notranslate"><span class="pre">ssh_hosts</span></code> should be <em>anything</em> the <code class="docutils literal notranslate"><span class="pre">submit_host</span></code> can DNS resolve to. You submit your
 job the <code class="docutils literal notranslate"><span class="pre">submit_host</span></code>, but OnDemand is going to poll the <code class="docutils literal notranslate"><span class="pre">ssh_hosts</span></code> for your job and
 in this case, your running a job on a node that OnDemand is not polling.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/no_good_config.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">submit_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens.osc.edu&quot;</span>  <span class="c1"># This is the head for a login round robin</span>
-    <span class="l l-Scalar l-Scalar-Plain">ssh_hosts</span><span class="p p-Indicator">:</span> <span class="c1"># These are the actual login nodes</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login01.hpc.osc.edu</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">owens-login02.hpc.osc.edu</span>
-      <span class="p p-Indicator">-</span> <span class="c1"># I need 03 and 04 here!</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/no_good_config.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">submit_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span><span class="w">  </span><span class="c1"># This is the head for a login round robin</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ssh_hosts</span><span class="p">:</span><span class="w"> </span><span class="c1"># These are the actual login nodes</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login01.hpc.osc.edu</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login02.hpc.osc.edu</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="c1"># I need 03 and 04 here!</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In this example I’ve only configured hosts 01 and 02 (above), but I got scheduled on 03 (you can tell
 by the ‘job name’) so the adapter now cannot find my job.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../../_images/linux_host_undetermined.png" src="../../_images/linux_host_undetermined.png" />
 </div>
 </div>
@@ -526,8 +526,8 @@ See the manual page <span class="k">for</span> dbus-uuidgen to correct this issu
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Subsequent versions of the adapter are expected to use <a class="reference external" href="http://man7.org/linux/man-pages/man1/unshare.1.html">unshare</a> for PID namespacing as the default method instead of Singularity. Singularity will continue to be supported.</p>
+<p class="admonition-title">Note</p>
+<p>Subsequent versions of the adapter are expected to use <a class="reference external" href="http://man7.org/linux/man-pages/man1/unshare.1.html">unshare</a> for PID namespacing as the default method instead of Singularity. Singularity will continue to be supported.</p>
 </div>
 </div>
 </div>

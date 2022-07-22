@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -248,23 +248,22 @@
 <div class="section" id="install-keycloak-duo-spi">
 <h2>Install Keycloak Duo SPI<a class="headerlink" href="#install-keycloak-duo-spi" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Clone the Keycloak Duo SPI repo</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">.</span><span class="n">git</span>
+<li><p>Clone the Keycloak Duo SPI repo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OSC</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span>
 <span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span> <span class="o">--</span><span class="n">init</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Edit <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> and ensure <code class="docutils literal notranslate"><span class="pre">keycloak.version</span></code> matches the version of Keycloak you are running.</p>
-</li>
-<li><p class="first">Build (with Docker) - produces <code class="docutils literal notranslate"><span class="pre">target/keycloak-duo-spi-jar-with-dependencies.jar</span></code></p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>docker run --rm -it -v $(pwd):/keycloak-duo-spi -w /keycloak-duo-spi \
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> and ensure <code class="docutils literal notranslate"><span class="pre">keycloak.version</span></code> matches the version of Keycloak you are running.</p></li>
+<li><p>Build (with Docker) - produces <code class="docutils literal notranslate"><span class="pre">target/keycloak-duo-spi-jar-with-dependencies.jar</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run --rm -it -v $(pwd):/keycloak-duo-spi -w /keycloak-duo-spi \
   ohiosupercomputer/keycloak_duo_spi_buildbox:latest mvn clean test package
 </pre></div>
 </div>
 </li>
-<li><p class="first">Build (without Docker) - produces <code class="docutils literal notranslate"><span class="pre">target/keycloak-duo-spi-jar-with-dependencies.jar</span></code></p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">maven</span>
+<li><p>Build (without Docker) - produces <code class="docutils literal notranslate"><span class="pre">target/keycloak-duo-spi-jar-with-dependencies.jar</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">maven</span>
 <span class="n">cd</span> <span class="n">build</span><span class="o">/</span><span class="n">duo_java</span><span class="o">/</span><span class="n">DuoWeb</span>
 <span class="n">mvn</span> <span class="n">clean</span> <span class="n">test</span> <span class="n">install</span>
 <span class="n">cd</span> <span class="o">../../..</span>
@@ -272,13 +271,13 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Copy the JAR file and necessary template files to Keycloak and instruct Keycloak to install the SPI</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">install</span> <span class="o">-</span><span class="n">o</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">g</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0644</span> <span class="n">target</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span> \
-  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">standalone</span><span class="o">/</span><span class="n">deployments</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span>
+<li><p>Copy the JAR file and necessary template files to Keycloak and instruct Keycloak to install the SPI</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">install</span> <span class="o">-</span><span class="n">o</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">g</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0644</span> <span class="n">target</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span> \
+  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0.0</span><span class="o">/</span><span class="n">standalone</span><span class="o">/</span><span class="n">deployments</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span>
 <span class="n">sudo</span> <span class="n">install</span> <span class="o">-</span><span class="n">o</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">g</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0644</span> <span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">duo</span><span class="o">-</span><span class="n">mfa</span><span class="o">.</span><span class="n">ftl</span> \
-  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">themes</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">login</span><span class="o">/</span><span class="n">duo</span><span class="o">-</span><span class="n">mfa</span><span class="o">.</span><span class="n">ftl</span>
+  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0.0</span><span class="o">/</span><span class="n">themes</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">login</span><span class="o">/</span><span class="n">duo</span><span class="o">-</span><span class="n">mfa</span><span class="o">.</span><span class="n">ftl</span>
 <span class="n">sudo</span> <span class="n">install</span> <span class="o">-</span><span class="n">o</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">g</span> <span class="n">keycloak</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0644</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> \
-  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">standalone</span><span class="o">/</span><span class="n">deployments</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span><span class="o">.</span><span class="n">dodeploy</span>
+  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="mf">9.0.0</span><span class="o">/</span><span class="n">standalone</span><span class="o">/</span><span class="n">deployments</span><span class="o">/</span><span class="n">keycloak</span><span class="o">-</span><span class="n">duo</span><span class="o">-</span><span class="n">spi</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="o">.</span><span class="n">jar</span><span class="o">.</span><span class="n">dodeploy</span>
 </pre></div>
 </div>
 </li>
@@ -287,19 +286,19 @@
 <div class="section" id="configure-duo-spi">
 <h2>Configure Duo SPI<a class="headerlink" href="#configure-duo-spi" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Log into your Keycloak instance</li>
-<li>Choose the realm to configure in upper left corner, eg <code class="docutils literal notranslate"><span class="pre">ondemand</span></code></li>
-<li>Choose <code class="docutils literal notranslate"><span class="pre">Realm</span> <span class="pre">Settings</span></code> in the left menu then <code class="docutils literal notranslate"><span class="pre">Security</span> <span class="pre">Defenses</span></code> tab</li>
-<li>Add <code class="docutils literal notranslate"><span class="pre">frame-src</span> <span class="pre">https://*.duosecurity.com/</span> <span class="pre">'self';</span></code> to the beginning of the value for <code class="docutils literal notranslate"><span class="pre">Content-Security-Policy</span></code></li>
-<li>Choose <code class="docutils literal notranslate"><span class="pre">Authentication</span></code> in the left menu</li>
-<li>While on <code class="docutils literal notranslate"><span class="pre">Flows</span></code> tab ensure the dropdown for the flow name is <code class="docutils literal notranslate"><span class="pre">Browser</span></code> and click <code class="docutils literal notranslate"><span class="pre">Copy</span></code></li>
-<li>Name the new flow <code class="docutils literal notranslate"><span class="pre">browser-with-duo</span></code></li>
-<li>For all items below <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">Password</span> <span class="pre">Form</span></code> delete them by choosing <code class="docutils literal notranslate"><span class="pre">Actions</span></code> then <code class="docutils literal notranslate"><span class="pre">Delete</span></code></li>
-<li>Choose <code class="docutils literal notranslate"><span class="pre">Actions</span></code> for <code class="docutils literal notranslate"><span class="pre">Browser-with-duo</span> <span class="pre">Forms</span></code> and choose <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Execution</span></code></li>
-<li>Select the <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code> provider and click <code class="docutils literal notranslate"><span class="pre">Save</span></code></li>
-<li>Click <code class="docutils literal notranslate"><span class="pre">Actions</span></code> for <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code> and select <code class="docutils literal notranslate"><span class="pre">Config</span></code>. Fill in all values as appropriate and select <code class="docutils literal notranslate"><span class="pre">Save</span></code>.</li>
-<li>Select <code class="docutils literal notranslate"><span class="pre">Required</span></code> for <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code></li>
-<li>Choose the <code class="docutils literal notranslate"><span class="pre">Bindings</span></code> tab and set <code class="docutils literal notranslate"><span class="pre">Browser</span> <span class="pre">Flow</span></code> to <code class="docutils literal notranslate"><span class="pre">browser-with-duo</span></code> and choose <code class="docutils literal notranslate"><span class="pre">Save</span></code></li>
+<li><p>Log into your Keycloak instance</p></li>
+<li><p>Choose the realm to configure in upper left corner, eg <code class="docutils literal notranslate"><span class="pre">ondemand</span></code></p></li>
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">Realm</span> <span class="pre">Settings</span></code> in the left menu then <code class="docutils literal notranslate"><span class="pre">Security</span> <span class="pre">Defenses</span></code> tab</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">frame-src</span> <span class="pre">https://*.duosecurity.com/</span> <span class="pre">'self';</span></code> to the beginning of the value for <code class="docutils literal notranslate"><span class="pre">Content-Security-Policy</span></code></p></li>
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">Authentication</span></code> in the left menu</p></li>
+<li><p>While on <code class="docutils literal notranslate"><span class="pre">Flows</span></code> tab ensure the dropdown for the flow name is <code class="docutils literal notranslate"><span class="pre">Browser</span></code> and click <code class="docutils literal notranslate"><span class="pre">Copy</span></code></p></li>
+<li><p>Name the new flow <code class="docutils literal notranslate"><span class="pre">browser-with-duo</span></code></p></li>
+<li><p>For all items below <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">Password</span> <span class="pre">Form</span></code> delete them by choosing <code class="docutils literal notranslate"><span class="pre">Actions</span></code> then <code class="docutils literal notranslate"><span class="pre">Delete</span></code></p></li>
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">Actions</span></code> for <code class="docutils literal notranslate"><span class="pre">Browser-with-duo</span> <span class="pre">Forms</span></code> and choose <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Execution</span></code></p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code> provider and click <code class="docutils literal notranslate"><span class="pre">Save</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Actions</span></code> for <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code> and select <code class="docutils literal notranslate"><span class="pre">Config</span></code>. Fill in all values as appropriate and select <code class="docutils literal notranslate"><span class="pre">Save</span></code>.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Required</span></code> for <code class="docutils literal notranslate"><span class="pre">Duo</span> <span class="pre">MFA</span></code></p></li>
+<li><p>Choose the <code class="docutils literal notranslate"><span class="pre">Bindings</span></code> tab and set <code class="docutils literal notranslate"><span class="pre">Browser</span> <span class="pre">Flow</span></code> to <code class="docutils literal notranslate"><span class="pre">browser-with-duo</span></code> and choose <code class="docutils literal notranslate"><span class="pre">Save</span></code></p></li>
 </ol>
 <p>Users logging into Keycloak will be required to verify their identity using Duo.</p>
 </div>

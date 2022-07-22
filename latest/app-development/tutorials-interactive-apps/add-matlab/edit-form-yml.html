@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -227,7 +227,7 @@
         
           <li><a href="../add-matlab.html">Add a MATLAB App</a> &raquo;</li>
         
-      <li>3. Customize Attributes</li>
+      <li><span class="section-number">3. </span>Customize Attributes</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -249,137 +249,137 @@
            <div itemprop="articleBody">
             
   <div class="section" id="customize-attributes">
-<span id="app-development-tutorials-interactive-apps-add-matlab-edit-form-yml"></span><h1>3. Customize Attributes<a class="headerlink" href="#customize-attributes" title="Permalink to this headline">¶</a></h1>
+<span id="app-development-tutorials-interactive-apps-add-matlab-edit-form-yml"></span><h1><span class="section-number">3. </span>Customize Attributes<a class="headerlink" href="#customize-attributes" title="Permalink to this headline">¶</a></h1>
 <p>Now we will customize the app to work on your cluster. Be sure that you walk through <a class="reference internal" href="software-requirements.html#app-development-tutorials-interactive-apps-add-matlab-software-requirements"><span class="std std-ref">Software Requirements</span></a> for the given cluster ahead of time.</p>
 <p>The main responsibility of the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> file (<a class="reference internal" href="../../interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a>) located in the root of the app is defining the attributes (their values or HTML form elements) used when generating the batch script.</p>
 <ol class="arabic simple" start="0">
-<li>Open <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.yml</span></code> you should see something that looks like this:</li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.yml</span></code> you should see something that looks like this:</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">version</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">num_cores</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">node_type</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">num_cores</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&quot;number_field&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">cores&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-      <span class="no">Number of cores on node type (4 GB per core unless requesting whole</span>
-      <span class="no">node). Leave blank if requesting full node.</span>
-    <span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-    <span class="l l-Scalar l-Scalar-Plain">max</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">48</span>
-    <span class="l l-Scalar l-Scalar-Plain">step</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="s">&#39;num_cores&#39;</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Project&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="s">&quot;You</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">leave</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">blank</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">**not**</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">multiple</span><span class="nv"> </span><span class="s">projects.&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Node</span><span class="nv"> </span><span class="s">type&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-      <span class="no">- **any** - (*1-28 cores*) Use any available Owens node. This reduces the</span>
-        <span class="no">wait time as there are no node requirements.</span>
-      <span class="no">- **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of</span>
-        <span class="no">available RAM as well as 48 cores. There are 16 of these nodes on</span>
-        <span class="no">Owens. Requesting hugemem nodes allocates entire nodes.</span>
-      <span class="no">- **vis** - (*1-28 cores*) Use an Owens node that has an [NVIDIA Tesla P100</span>
-        <span class="no">GPU](http://www.nvidia.com/object/tesla-p100.html) with an X server</span>
-        <span class="no">running in the background. This utilizes the GPU for hardware</span>
-        <span class="no">accelerated 3D visualization. There are 160 of these nodes on Owens.</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;any&quot;</span><span class="p p-Indicator">,</span>     <span class="s">&quot;&quot;</span>            <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;hugemem&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;:hugemem&quot;</span>    <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;vis&quot;</span><span class="p p-Indicator">,</span>     <span class="s">&quot;:vis:gpus=1&quot;</span> <span class="p p-Indicator">]</span>
-  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;MATLAB</span><span class="nv"> </span><span class="s">version&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="s">&quot;This</span><span class="nv"> </span><span class="s">defines</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">MATLAB</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">load.&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2018b&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2018b&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2018a&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2018a&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2017a&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2017a&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2016b&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2016b&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2015b&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2015b&quot;</span> <span class="p p-Indicator">]</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">num_cores</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">num_cores</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number_field&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">cores&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">      </span><span class="no">Number of cores on node type (4 GB per core unless requesting whole</span><span class="w"></span>
+<span class="w">      </span><span class="no">node). Leave blank if requesting full node.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">48</span><span class="w"></span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;num_cores&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_num_slots</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_vnc_resolution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_account</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Project&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;You</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">leave</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">blank</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">**not**</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">multiple</span><span class="nv"> </span><span class="s">projects.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Node</span><span class="nv"> </span><span class="s">type&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">      </span><span class="no">- **any** - (*1-28 cores*) Use any available Owens node. This reduces the</span><span class="w"></span>
+<span class="w">        </span><span class="no">wait time as there are no node requirements.</span><span class="w"></span>
+<span class="w">      </span><span class="no">- **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of</span><span class="w"></span>
+<span class="w">        </span><span class="no">available RAM as well as 48 cores. There are 16 of these nodes on</span><span class="w"></span>
+<span class="w">        </span><span class="no">Owens. Requesting hugemem nodes allocates entire nodes.</span><span class="w"></span>
+<span class="w">      </span><span class="no">- **vis** - (*1-28 cores*) Use an Owens node that has an [NVIDIA Tesla P100</span><span class="w"></span>
+<span class="w">        </span><span class="no">GPU](http://www.nvidia.com/object/tesla-p100.html) with an X server</span><span class="w"></span>
+<span class="w">        </span><span class="no">running in the background. This utilizes the GPU for hardware</span><span class="w"></span>
+<span class="w">        </span><span class="no">accelerated 3D visualization. There are 160 of these nodes on Owens.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;any&quot;</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="s">&quot;&quot;</span><span class="w">            </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;hugemem&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;:hugemem&quot;</span><span class="w">    </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;vis&quot;</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="s">&quot;:vis:gpus=1&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MATLAB</span><span class="nv"> </span><span class="s">version&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;This</span><span class="nv"> </span><span class="s">defines</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">MATLAB</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">load.&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2018b&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2018b&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2018a&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2018a&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2017a&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2017a&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2016b&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2016b&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2015b&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2015b&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Multiple form elements / attributes are specific to OSC. We will focus on
+<p class="admonition-title">Note</p>
+<p>Multiple form elements / attributes are specific to OSC. We will focus on
 the ones that are required, and some that may be universally useful.</p>
 </div>
 <ol class="arabic simple">
-<li>We will begin by adding a cluster for the MATLAB app to use. You do this by editing <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.yml</span></code> in your favorite editor as such:</li>
+<li><p>We will begin by adding a cluster for the MATLAB app to use. You do this by editing <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/form.yml</span></code> in your favorite editor as such:</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/form.yml</span>
-<span class="nn">---</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>  <span class="c1"># &lt;---- Change this</span>
-</span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">version</span>  <span class="c1"># At OSC we provide</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">num_cores</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">node_type</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
-<span class="c1"># ...</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_my_center_matlab/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="hll"><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w">  </span><span class="c1"># &lt;---- Change this</span><span class="w"></span>
+</span><span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="w">  </span><span class="c1"># At OSC we provide</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">num_cores</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w"></span>
+<span class="c1"># ...</span><span class="w"></span>
 </pre></div>
 </div>
 <p>where we replace <code class="docutils literal notranslate"><span class="pre">owens</span></code> with a valid cluster that corresponds to a cluster configuration file located under <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/owens.yml</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">cluster</span></code> attribute is not available to the form and cannot be changed at runtime.</p>
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cluster</span></code> attribute is not available to the form and cannot be changed at runtime.</p>
 </div>
 </div></blockquote>
 <ol class="arabic" start="2">
-<li><p class="first">Set common options:</p>
+<li><p>Set common options:</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;owens&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">version</span>               <span class="c1"># &lt;-- OSC supports multiple versions of MATLAB via LMod</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>            <span class="c1"># &lt;-- the charge account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>          <span class="c1"># &lt;-- the number of user requested hours that the job run</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>          <span class="c1"># &lt;-- the number of nodes</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">num_cores</span>             <span class="c1"># &lt;-- the number of processors per node</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">node_type</span>             <span class="c1"># &lt;-- OSC offers different hardware types (any, huge memory, GPU, ...)</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span>     <span class="c1"># &lt;-- the resolution settings for the VNC connection</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>   <span class="c1"># &lt;-- should the system email the user when the job starts</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="w">               </span><span class="c1"># &lt;-- OSC supports multiple versions of MATLAB via LMod</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w">            </span><span class="c1"># &lt;-- the charge account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w">          </span><span class="c1"># &lt;-- the number of user requested hours that the job run</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w">          </span><span class="c1"># &lt;-- the number of nodes</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">num_cores</span><span class="w">             </span><span class="c1"># &lt;-- the number of processors per node</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="w">             </span><span class="c1"># &lt;-- OSC offers different hardware types (any, huge memory, GPU, ...)</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span><span class="w">     </span><span class="c1"># &lt;-- the resolution settings for the VNC connection</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w">   </span><span class="c1"># &lt;-- should the system email the user when the job starts</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Set attribute values for each form element</p>
+<li><p>Set attribute values for each form element</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">num_cores</span></code> has a max and min set that are specific to OSC’s Owens cluster; set these values to whatever makes sense for your site.</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">num_cores</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="s">&quot;number_field&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">cores&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-      <span class="no">Number of cores on node type (4 GB per core unless requesting whole</span>
-      <span class="no">node). Leave blank if requesting full node.</span>
-    <span class="l l-Scalar l-Scalar-Plain">min</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-    <span class="l l-Scalar l-Scalar-Plain">max</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">48</span>
-    <span class="l l-Scalar l-Scalar-Plain">step</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="s">&#39;num_cores&#39;</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">num_cores</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number_field&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">cores&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">      </span><span class="no">Number of cores on node type (4 GB per core unless requesting whole</span><span class="w"></span>
+<span class="w">      </span><span class="no">node). Leave blank if requesting full node.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">48</span><span class="w"></span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;num_cores&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -387,48 +387,48 @@ the ones that are required, and some that may be universally useful.</p>
 <p><code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> is hardcoded to 1 and is not user editable because OSC does not support MPI work from the Batch Connect app. The value for <code class="docutils literal notranslate"><span class="pre">bc_vnc_resolution</span></code> should be copied verbatim. <code class="docutils literal notranslate"><span class="pre">bc_account</span></code> is the charge account for the batch work.</p>
 <blockquote>
 <div><blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span> <span class="s">&quot;1&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_vnc_resolution</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Project&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="s">&quot;You</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">leave</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">blank</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">**not**</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">multiple</span><span class="nv"> </span><span class="s">projects.&quot;</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_num_slots</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_vnc_resolution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_account</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Project&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;You</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">leave</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">blank</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">**not**</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">multiple</span><span class="nv"> </span><span class="s">projects.&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">node_type</span></code> allows users to select which hardware they want to run their work on. In the <code class="docutils literal notranslate"><span class="pre">options</span></code> mapping the first value is displayed to the user, the second value is made available to any <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">ERB</a> files in <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/template/*</span></code> and <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_my_center_matlab/submit.yml.erb</span></code>. <code class="docutils literal notranslate"><span class="pre">version</span></code> allows the user to select what version of MATLAB they want to run, and the second value corresponds to OSC’s module names.</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-      <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Node</span><span class="nv"> </span><span class="s">type&quot;</span>
-      <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">- **any** - (*1-28 cores*) Use any available Owens node. This reduces the</span>
-          <span class="no">wait time as there are no node requirements.</span>
-        <span class="no">- **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of</span>
-          <span class="no">available RAM as well as 48 cores. There are 16 of these nodes on</span>
-          <span class="no">Owens. Requesting hugemem nodes allocates entire nodes.</span>
-        <span class="no">- **vis** - (*1-28 cores*) Use an Owens node that has an [NVIDIA Tesla P100</span>
-          <span class="no">GPU](http://www.nvidia.com/object/tesla-p100.html) with an X server</span>
-          <span class="no">running in the background. This utilizes the GPU for hardware</span>
-          <span class="no">accelerated 3D visualization. There are 160 of these nodes on Owens.</span>
-      <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-        <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;any&quot;</span><span class="p p-Indicator">,</span>     <span class="s">&quot;&quot;</span>            <span class="p p-Indicator">]</span>
-        <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;hugemem&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;:hugemem&quot;</span>    <span class="p p-Indicator">]</span>
-        <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;vis&quot;</span><span class="p p-Indicator">,</span>     <span class="s">&quot;:vis:gpus=1&quot;</span> <span class="p p-Indicator">]</span>
-  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">widget</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">select</span>
-    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;MATLAB</span><span class="nv"> </span><span class="s">version&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">help</span><span class="p p-Indicator">:</span> <span class="s">&quot;This</span><span class="nv"> </span><span class="s">defines</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">MATLAB</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">load.&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2018b&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2018b&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2018a&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2018a&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2017a&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2017a&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2016b&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2016b&quot;</span> <span class="p p-Indicator">]</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span> <span class="s">&quot;R2015b&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;matlab/r2015b&quot;</span> <span class="p p-Indicator">]</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">      </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Node</span><span class="nv"> </span><span class="s">type&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">- **any** - (*1-28 cores*) Use any available Owens node. This reduces the</span><span class="w"></span>
+<span class="w">          </span><span class="no">wait time as there are no node requirements.</span><span class="w"></span>
+<span class="w">        </span><span class="no">- **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of</span><span class="w"></span>
+<span class="w">          </span><span class="no">available RAM as well as 48 cores. There are 16 of these nodes on</span><span class="w"></span>
+<span class="w">          </span><span class="no">Owens. Requesting hugemem nodes allocates entire nodes.</span><span class="w"></span>
+<span class="w">        </span><span class="no">- **vis** - (*1-28 cores*) Use an Owens node that has an [NVIDIA Tesla P100</span><span class="w"></span>
+<span class="w">          </span><span class="no">GPU](http://www.nvidia.com/object/tesla-p100.html) with an X server</span><span class="w"></span>
+<span class="w">          </span><span class="no">running in the background. This utilizes the GPU for hardware</span><span class="w"></span>
+<span class="w">          </span><span class="no">accelerated 3D visualization. There are 160 of these nodes on Owens.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;any&quot;</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="s">&quot;&quot;</span><span class="w">            </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;hugemem&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;:hugemem&quot;</span><span class="w">    </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;vis&quot;</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="s">&quot;:vis:gpus=1&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MATLAB</span><span class="nv"> </span><span class="s">version&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;This</span><span class="nv"> </span><span class="s">defines</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">MATLAB</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">load.&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2018b&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2018b&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2018a&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2018a&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2017a&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2017a&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2016b&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2016b&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;R2015b&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;matlab/r2015b&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -437,8 +437,8 @@ the ones that are required, and some that may be universally useful.</p>
 </ol>
 <blockquote>
 <div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> may also be <code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> if there is no requirement to pass form values to the adapter, or perform another server-side task.</p>
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> may also be <code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> if there is no requirement to pass form values to the adapter, or perform another server-side task.</p>
 </div>
 </div></blockquote>
 </div>

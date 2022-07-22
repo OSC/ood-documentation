@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -227,7 +227,7 @@
         
           <li><a href="../add-matlab.html">Add a MATLAB App</a> &raquo;</li>
         
-      <li>2. Copy MATLAB App</li>
+      <li><span class="section-number">2. </span>Copy MATLAB App</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -249,31 +249,30 @@
            <div itemprop="articleBody">
             
   <div class="section" id="copy-matlab-app">
-<span id="app-development-tutorials-interactive-apps-add-matlab-copy-app"></span><h1>2. Copy MATLAB App<a class="headerlink" href="#copy-matlab-app" title="Permalink to this headline">¶</a></h1>
+<span id="app-development-tutorials-interactive-apps-add-matlab-copy-app"></span><h1><span class="section-number">2. </span>Copy MATLAB App<a class="headerlink" href="#copy-matlab-app" title="Permalink to this headline">¶</a></h1>
 <p>We will begin by first copying over a pre-built MATLAB app in production at OSC.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>This example MATLAB app will not work out of the box and requires each
 center to develop and maintain it themselves. The goal of this tutorial is
 to:</p>
-<ul class="last simple">
-<li>get a working MATLAB app running at your center</li>
-<li>introduce you to app development and make you an Interactive App developer</li>
+<ul class="simple">
+<li><p>get a working MATLAB app running at your center</p></li>
+<li><p>introduce you to app development and make you an Interactive App developer</p></li>
 </ul>
 </div>
 <ol class="arabic">
-<li><p class="first">We do all of our app development in our Open OnDemand sandbox directory. So
+<li><p>We do all of our app development in our Open OnDemand sandbox directory. So
 we first need to create our sandbox directory:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/ondemand/dev&quot;</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Open OnDemand looks for apps in <em>special</em> directories on the file system.
 Two types of apps in particular are <strong>system</strong> apps and <strong>sandbox</strong> apps.</p>
-<dl class="last docutils">
-<dt>system apps</dt>
-<dd><p class="first">These are apps that all users have access to and appear in the
+<dl>
+<dt>system apps</dt><dd><p>These are apps that all users have access to and appear in the
 Dashboard dropdown menus. They are installed on the local disk with
 very permissive file permissions.</p>
 <p>Located on the file system under:</p>
@@ -286,12 +285,11 @@ very permissive file permissions.</p>
 </div>
 <p>If this is a system Interactive App (Dashboard plugin), then it can be
 accessed by navigating to:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">sys</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">sys</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
 </pre></div>
 </div>
 </dd>
-<dt>sandbox apps</dt>
-<dd><p class="first">These are apps that <strong>only</strong> the owner of the app can access
+<dt>sandbox apps</dt><dd><p>These are apps that <strong>only</strong> the owner of the app can access
 irrespective of file permissions. Typically you develop apps in your
 sandbox before moving them to the production system location.</p>
 <p>Located on the file system under:</p>
@@ -309,61 +307,52 @@ accessed by navigating to:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">pun</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">dashboard</span><span class="o">/</span><span class="n">batch_connect</span><span class="o">/</span><span class="n">dev</span><span class="o">/&lt;</span><span class="n">app_directory</span><span class="o">&gt;/</span><span class="n">session_contexts</span><span class="o">/</span><span class="n">new</span>
 </pre></div>
 </div>
-<p class="last">Notice that we are using the <strong>system</strong> <a class="reference internal" href="../../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> to launch the
+<p>Notice that we are using the <strong>system</strong> <a class="reference internal" href="../../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> to launch the
 <strong>sandbox</strong> Interactive App (Dashboard plugin).</p>
 </dd>
 </dl>
 </div>
 </li>
-<li><p class="first">After creating the sandbox directory navigate in your browser to:</p>
+<li><p>After creating the sandbox directory navigate in your browser to:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span>
 </pre></div>
 </div>
 <p>You should now see a <em>Develop</em> dropdown menu option in the top right of the
 <a class="reference internal" href="../../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p>
 </li>
-<li><p class="first">Open up the <em>Develop</em> menu dropdown and click the link <em>My Sandbox Apps
-(Development)</em>.</p>
-</li>
-<li><p class="first">You will navigate to a page that lists all of your sandbox apps (all the
+<li><p>Open up the <em>Develop</em> menu dropdown and click the link <em>My Sandbox Apps
+(Development)</em>.</p></li>
+<li><p>You will navigate to a page that lists all of your sandbox apps (all the
 apps in your sandbox directory). For now click <em>New App</em> in the top left
-of the page.</p>
-</li>
-<li><p class="first">Currently there is only one option for building new apps and that is to
-“Clone an existing app”. Click the button <em>Clone Existing App</em>.</p>
-</li>
-<li><p class="first">Now we are presented with a form that describes how we will clone the app.</p>
+of the page.</p></li>
+<li><p>Currently there is only one option for building new apps and that is to
+“Clone an existing app”. Click the button <em>Clone Existing App</em>.</p></li>
+<li><p>Now we are presented with a form that describes how we will clone the app.</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>Directory name</dt>
-<dd><p class="first last">this is the directory that the app will be cloned to in our sandbox
+<div><dl class="simple">
+<dt>Directory name</dt><dd><p>this is the directory that the app will be cloned to in our sandbox
 directory (must be unique)</p>
 </dd>
-<dt>Git remote</dt>
-<dd><p class="first last">this is the link to the git repo that is cloned</p>
+<dt>Git remote</dt><dd><p>this is the link to the git repo that is cloned</p>
 </dd>
-<dt>Create a new Git Project from this?</dt>
-<dd><p class="first last">whether we want to create a new app from this git repo</p>
+<dt>Create a new Git Project from this?</dt><dd><p>whether we want to create a new app from this git repo</p>
 </dd>
 </dl>
 </div></blockquote>
 <p>For now fill in the form with the following values:</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>Directory name</dt>
-<dd><p class="first last"><code class="docutils literal notranslate"><span class="pre">bc_my_center_matlab</span></code></p>
+<div><dl class="simple">
+<dt>Directory name</dt><dd><p><code class="docutils literal notranslate"><span class="pre">bc_my_center_matlab</span></code></p>
 </dd>
-<dt>Git remote</dt>
-<dd><p class="first last"><code class="docutils literal notranslate"><span class="pre">https://github.com/OSC/bc_osc_matlab.git</span></code></p>
+<dt>Git remote</dt><dd><p><code class="docutils literal notranslate"><span class="pre">https://github.com/OSC/bc_osc_matlab.git</span></code></p>
 </dd>
-<dt>Create a new Git Project from this?</dt>
-<dd><p class="first last">check this!</p>
+<dt>Create a new Git Project from this?</dt><dd><p>check this!</p>
 </dd>
 </dl>
 </div></blockquote>
 <p>Then click <em>Submit</em>.</p>
 </li>
-<li><p class="first">You should now see a details view of the MATLAB app you just created. If
+<li><p>You should now see a details view of the MATLAB app you just created. If
 you click <em>Launch MATLAB</em> it should open a new tab with the
 following warning:</p>
 <blockquote>
@@ -373,10 +362,10 @@ following warning:</p>
 </li>
 </ol>
 <div class="admonition danger">
-<p class="first admonition-title">Danger</p>
+<p class="admonition-title">Danger</p>
 <p>A bug was introduced in 1.4 where an “invalid” interactive app will hide the
 Launch button in the developer views. This <a class="reference external" href="https://github.com/OSC/ood-dashboard/pull/435">was fixed in 1.5</a>.</p>
-<p class="last">A work around is to manually enter the URL to the batch connect app. In this
+<p>A work around is to manually enter the URL to the batch connect app. In this
 MATLAB tutorial, if the directory name is “bc_my_center_matlab” then the URL will be
 <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard/batch_connect/dev/bc_my_center_matlab</span></code>.</p>
 </div>

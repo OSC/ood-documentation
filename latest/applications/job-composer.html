@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -249,7 +249,7 @@
 <p><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/myjobs">View on GitHub</a></p>
 <div class="figure align-center" id="id1">
 <img alt="../_images/my-jobs-app.png" src="../_images/my-jobs-app.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Example of the Job Composer App displaying jobs generated from templates.</span></p>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Example of the Job Composer App displaying jobs generated from templates.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>This Open OnDemand application provides a web-based utility for creating and
 managing batch jobs from template directories. This application is built with
@@ -258,10 +258,10 @@ the <a class="reference external" href="http://rubyonrails.org/">Ruby on Rails</
 users of an HPC center use. When users create new batch jobs they will follow
 the given workflow:</p>
 <ol class="arabic simple">
-<li>Copy a directory of a previous job, either one of their previous jobs or a
-job from a group member</li>
-<li>Make minor modifications to the input files</li>
-<li>Submit this new job</li>
+<li><p>Copy a directory of a previous job, either one of their previous jobs or a
+job from a group member</p></li>
+<li><p>Make minor modifications to the input files</p></li>
+<li><p>Submit this new job</p></li>
 </ol>
 <p>The Job Composer app replicates this through “templates” which are just directories
 with common job input files. The user will be able to create their own template
@@ -293,7 +293,7 @@ local file system:</p>
 <p>and can be accessed with the following browser request:</p>
 <dl class="get">
 <dt id="get--pun-sys-myjobs">
-<code class="descname">GET </code><code class="descname">/pun/sys/myjobs</code><a class="headerlink" href="#get--pun-sys-myjobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">/pun/sys/myjobs</code><a class="headerlink" href="#get--pun-sys-myjobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches the Job Composer App web-based utility.</p>
 </dd></dl>
 
@@ -302,26 +302,26 @@ local file system:</p>
 <p>A template is a directory with input files for a job as well as a
 <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> file. The manifest contains metadata about the corresponding
 job:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ./manifest.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Example Template</span>
-<span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cluster1</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">my_job.sh</span>
-<span class="l l-Scalar l-Scalar-Plain">notes</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Notes about the template that describes its function to the user</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ./manifest.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Example Template</span><span class="w"></span>
+<span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster1</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_job.sh</span><span class="w"></span>
+<span class="nt">notes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notes about the template that describes its function to the user</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In the event that a job is created from a template that has no manifest or has
 missing metadata, the Job Composer app will assign the following default values:</p>
-<dl class="docutils">
-<dt>name</dt>
-<dd>The template directory name</dd>
-<dt>host</dt>
-<dd>The first cluster with a valid Resource Manager Server in the OOD cluster
-config</dd>
-<dt>script</dt>
-<dd>The first <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> appearing in the template directory</dd>
-<dt>notes</dt>
-<dd>The path to this manifest if it existed</dd>
+<dl class="simple">
+<dt>name</dt><dd><p>The template directory name</p>
+</dd>
+<dt>host</dt><dd><p>The first cluster with a valid Resource Manager Server in the OOD cluster
+config</p>
+</dd>
+<dt>script</dt><dd><p>The first <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> appearing in the template directory</p>
+</dd>
+<dt>notes</dt><dd><p>The path to this manifest if it existed</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -329,13 +329,13 @@ config</dd>
 <h2>How it Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>Requirements needed for the Job Composer App to work on your local HPC network:</p>
 <ul class="simple">
-<li>OnDemand Server</li>
-<li>Resource Manager Server (e.g., Torque/PBS Batch Server)</li>
-<li>Shared File System</li>
+<li><p>OnDemand Server</p></li>
+<li><p>Resource Manager Server (e.g., Torque/PBS Batch Server)</p></li>
+<li><p>Shared File System</p></li>
 </ul>
 <div class="figure align-center" id="id2">
 <span id="my-jobs-diagram"></span><img alt="../_images/my-jobs-diagram.png" src="../_images/my-jobs-diagram.png" />
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Diagram detailing how the Job Composer App interacts with the HPC infrastructure.</span></p>
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Diagram detailing how the Job Composer App interacts with the HPC infrastructure.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p><a class="reference internal" href="#my-jobs-diagram"><span class="std std-numref">Fig. 21</span></a> details how the Job Composer App works on a local HPC
 system. The user’s PUN running on the OnDemand Server launches the Ruby on
