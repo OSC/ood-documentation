@@ -6,7 +6,7 @@ Installation
 The OnDemand host machine needs to be setup *similarly* to a login node. This
 means that it will need:
 
-- RedHat/CentOS 7+ or Ubuntu 20.04
+- RedHat/CentOS 7+ or Ubuntu 20.04 or Ubuntu 22.04
 - signed SSL certificate with corresponding intermediate certificate for your
   advertised OnDemand host name (e.g., ``ondemand.my_center.edu``)
 
