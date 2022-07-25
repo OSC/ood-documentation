@@ -474,6 +474,13 @@ The following configuration file
 
 defines a session context attribute called ``my_module_version``.
 
+.. warning::
+
+   Do not use ``partition`` as attribute name within the form. The (Ruby)
+   object created by the form is of type enumerable and ``partition`` is
+   method of that particular class. This causes the value set in the form not
+   being correctly passed to the submit script.
+
 After modifying the ``form.yml`` click *Launch My App* from the Dashboard
 sandbox app list and you will see an empty text box with the label "My Module
 Version". The user can input any value here and launch the Interactive App
