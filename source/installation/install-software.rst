@@ -59,7 +59,6 @@ software requirements:
 
       .. code-block:: sh
 
-         sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
          sudo dnf module enable ruby:2.7 nodejs:14
          sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
