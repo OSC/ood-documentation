@@ -101,6 +101,20 @@ Iptables example:
       $ sudo iptables -I INPUT -p tcp -m tcp --dport 5554 -j ACCEPT
       $ sudo iptables-save > /etc/sysconfig/iptables
 
+Configuring OnDemand Dex behind Apache reverse proxy
+----------------------------------------------------
+
+The OnDemand Dex service can be proxied behind the Apache web service using a reverse proxy.
+This would mean port 5554 or 5556 would not need to be opened.
+
+Enabling the OnDemand Dex reverse proxy logic will force Dex to listen only on ``localhost`` and only
+via HTTP.
+
+Example of configuration change to put Dex behind the Apache reverse proxy
+
+   .. code-block:: yaml
+
+      dex_uri: /dex
 
 Configuring OnDemand Dex for LDAP
 ---------------------------------
