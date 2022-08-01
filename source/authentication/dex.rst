@@ -102,7 +102,7 @@ Iptables example:
       $ sudo iptables -I INPUT -p tcp -m tcp --dport 5554 -j ACCEPT
       $ sudo iptables-save > /etc/sysconfig/iptables
 
-Configuring OnDemand Dex behing Apache reverse proxy
+Configuring OnDemand Dex behind Apache reverse proxy
 ----------------------------------------------------
 
 The OnDemand Dex service can be proxied behind the Apache web service using a reverse proxy.
