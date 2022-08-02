@@ -587,31 +587,37 @@ point number (only applies to widget: <code class="docutils literal notranslate"
 <dl class="describe">
 <dt>
 <code class="sig-name descname">options (Array&lt;Array&lt;String&gt;&gt;, null)</code></dt>
-<dd><p>a list of options for the <code class="docutils literal notranslate"><span class="pre">select</span></code> widget</p>
-<dl>
+<dd><p>A list of options for a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget.  In the simplest form
+you can have a list of strings like <code class="docutils literal notranslate"><span class="pre">chevy</span></code> in example below.
+They can also be in the form <code class="docutils literal notranslate"><span class="pre">[&lt;label&gt;,</span> <span class="pre">&lt;value&gt;]</span></code> where label is the
+HTML label shown in the web page and value is the actual value
+that will be sent to the server and used.</p>
+<p>Lastly you can also set extra <code class="docutils literal notranslate"><span class="pre">data</span></code> HTML attributes like the
+example <code class="docutils literal notranslate"><span class="pre">Toyota</span></code> below. These extra attributes can be used by javascript
+or options for <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>.</p>
+<blockquote>
+<div><dl>
 <dt>Default</dt><dd><p>No options are supplied</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt><dd><p>Provide a list of cars</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+</dl>
+<p>Example</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Volvo&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;volvo&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Ford&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ford&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Toyota&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;toyota&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;chevy&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;Toyota&quot;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;toyota&quot;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">      </span><span class="nv">data-some-extra-attribute</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;set&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Typically the options are given as a list of pairs. The first string in
-the pair is the option text and the second string in the pair is the
-option value.</p>
-<p>The user will see a list of options “Volvo”, “Ford”, and “Toyota” to
-choose from in the HTML form, but the backend will process a value of
-either “volvo”, “ford”, or “toyota” depending on what the user chose.</p>
-</div>
+</div></blockquote>
+</div></blockquote>
 </dd></dl>
 
 <dl class="describe">
