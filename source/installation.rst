@@ -6,7 +6,7 @@ Installation
 The OnDemand host machine needs to be setup *similarly* to a login node. This
 means that it will need:
 
-- RedHat/CentOS 7+
+- RedHat/CentOS 7+ or Ubuntu 18.04+
 - a common user/group database, e.g., LDAP + NSS
 - a common host file list
 - the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
