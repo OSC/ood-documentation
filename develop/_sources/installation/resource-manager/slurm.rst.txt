@@ -37,6 +37,8 @@ bin
   The path to the Slurm client installation binaries.
 conf
   The path to the Slurm configuration file for this cluster. *Optional*
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 bin_overrides
   Replacements/wrappers for Slurm's job submission and control clients. *Optional*
 
