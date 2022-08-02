@@ -1131,6 +1131,26 @@ to ``null`` will disable this feature.
             OIDCPassIDTokenAs: serialized
             OIDCPassRefreshToken: On
 
+.. describe:: dex_uri (String, null, false)
+
+     The Dex URI used behind the Apache reverse proxy.
+     Setting this value to some path will result in Dex listening on local host
+     as well as only using HTTP for proxied communication.
+
+     Default
+       The default value is /dex
+
+       .. code-block:: yaml
+
+          dex_uri: /dex
+
+     Example
+       Disable Dex behind a reverse proxy
+
+       .. code-block:: yaml
+
+          dex_uri: false
+
 .. describe:: dex (Hash, null, false)
 
      The Hash to define Dex configurations.

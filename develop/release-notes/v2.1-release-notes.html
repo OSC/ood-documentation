@@ -136,6 +136,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
 </ul>
@@ -234,6 +235,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></p></li>
 <li><p><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></p></li>
+<li><p><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 <li><p><a class="reference internal" href="#selinux-changes">SELinux changes</a></p></li>
 </ul>
@@ -333,6 +335,24 @@ sudo yum update ondemand
 <div class="section" id="el9-ubuntu-22-04-and-ubuntu-20-04-packages">
 <h3>EL9, Ubuntu 22.04 and Ubuntu 20.04 packages<a class="headerlink" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages" title="Permalink to this headline">¶</a></h3>
 <p>See <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> for instructions on how to install OnDemand using the new EL9, Ubuntu 22.04 and Ubuntu 20.04 packages.</p>
+</div>
+<div class="section" id="dex-behind-apache-reverse-proxy-by-default">
+<h3>Dex behind Apache reverse proxy by default<a class="headerlink" href="#dex-behind-apache-reverse-proxy-by-default" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Dex behind the Apache reverse proxy is a behavior change from OnDemand 2.0 where the reverse proxy configuration was optional.
+This is to improve security as well as allow Apache to provide access logs.
+If you have opened ports for Dex they can be closed as all traffic to Dex will flow through Apache.</p>
+</div>
+</div></blockquote>
+<p>By default Dex now sits behind the Apache reverse proxy.
+If you wish to go back to Dex being directly accessed set the following in <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dex_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="dependency-updates">
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>

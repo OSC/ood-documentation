@@ -113,6 +113,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#installing-ondemand-dex-from-source">Installing OnDemand Dex from source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex">Configuring OnDemand Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#managing-the-ondemand-dex-service">Managing the OnDemand Dex service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ondemand-dex-behind-apache-reverse-proxy">OnDemand Dex behind Apache reverse proxy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dex-firewall">Dex Firewall</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex-for-ldap">Configuring OnDemand Dex for LDAP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#customizing-ondemand-dex">Customizing OnDemand Dex</a></li>
@@ -295,9 +296,27 @@ sudo systemctl start ondemand-dex.service
 </div>
 </div></blockquote>
 </div>
+<div class="section" id="ondemand-dex-behind-apache-reverse-proxy">
+<h2>OnDemand Dex behind Apache reverse proxy<a class="headerlink" href="#ondemand-dex-behind-apache-reverse-proxy" title="Permalink to this headline">¶</a></h2>
+<p>By default Dex sits behing Apache and is accessed via a reverse proxy.
+OnDemand Dex behind the reverse proxy logic will force Dex to listen only on <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and only
+via HTTP.</p>
+<p>To disable Dex behind a reverse proxy set <code class="docutils literal notranslate"><span class="pre">dex_uri</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dex_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>When Dex is not behind a reverse proxy firewall adjustments may be needed.
+See <a class="reference internal" href="#id1"><span class="std std-ref">Dex Firewall</span></a> for instructions on opening Dex ports through your firewall.</p>
+</div>
 <div class="section" id="dex-firewall">
 <h2>Dex Firewall<a class="headerlink" href="#dex-firewall" title="Permalink to this headline">¶</a></h2>
-<p id="id1">By default when using SSL, Dex will use port <code class="docutils literal notranslate"><span class="pre">5554</span></code> for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is <code class="docutils literal notranslate"><span class="pre">5556</span></code>.  The port being used by Dex must be externally accessible.</p>
+<div class="admonition note" id="id1">
+<p class="admonition-title">Note</p>
+<p>The Dex firewall changes are only needed when <code class="docutils literal notranslate"><span class="pre">dex_uri</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+<p>By default when using SSL, Dex will use port <code class="docutils literal notranslate"><span class="pre">5554</span></code> for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is <code class="docutils literal notranslate"><span class="pre">5556</span></code>.  The port being used by Dex must be externally accessible.</p>
 <dl>
 <dt>Firewalld example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">5554</span>/tcp --permanent
 $ sudo firewall-cmd --reload
