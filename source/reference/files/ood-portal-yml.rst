@@ -486,7 +486,7 @@ Configure General Options
           analytics: null
 
      Example
-       See :ref:`analytics`
+       See :ref:`google-analytics`
 
 Configure Public Assets
 -----------------------
