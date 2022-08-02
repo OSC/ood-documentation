@@ -82,10 +82,30 @@ The service for OnDemand Dex is ``ondemand-dex``:
       sudo systemctl enable ondemand-dex.service
       sudo systemctl start ondemand-dex.service
 
+OnDemand Dex behind Apache reverse proxy
+----------------------------------------
+
+By default Dex sits behing Apache and is accessed via a reverse proxy.
+OnDemand Dex behind the reverse proxy logic will force Dex to listen only on ``localhost`` and only
+via HTTP.
+
+To disable Dex behind a reverse proxy set ``dex_uri`` to ``false`` or ``null``
+
+   .. code-block:: yaml
+
+      dex_uri: false
+
+When Dex is not behind a reverse proxy firewall adjustments may be needed.
+See :ref:`Dex Firewall <dex-firewall>` for instructions on opening Dex ports through your firewall.
+
 Dex Firewall
 ------------
 
 .. _dex-firewall:
+
+.. note::
+
+   The Dex firewall changes are only needed when ``dex_uri`` is set to ``false`` or ``null``.
 
 By default when using SSL, Dex will use port ``5554`` for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is ``5556``.  The port being used by Dex must be externally accessible.
 
@@ -100,7 +120,6 @@ Iptables example:
 
       $ sudo iptables -I INPUT -p tcp -m tcp --dport 5554 -j ACCEPT
       $ sudo iptables-save > /etc/sysconfig/iptables
-
 
 Configuring OnDemand Dex for LDAP
 ---------------------------------
