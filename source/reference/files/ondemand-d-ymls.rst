@@ -93,3 +93,26 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
     .. code-block:: yaml
 
       files_enable_shell_button: false
+
+.. _module_file_dir:
+.. describe:: module_file_dir (String, null)
+
+  Specify a directory where module files per cluster exist. This directory
+  should have module spider-json output as indicated by the command below.
+  Open OnDemand will read these files and potentially show them in a from.
+
+  ``$LMOD_DIR/spider -o spider-json $MODULEPATH > /some/directory/my_cluster.json``
+
+  Default
+    No directory given
+
+    .. code-block:: yaml
+
+      module_file_dir: null
+
+  Example
+    Look for json files in the /etc/reporing/modules directory.
+
+    .. code-block:: yaml
+
+      module_file_dir: /etc/reporing/modules
