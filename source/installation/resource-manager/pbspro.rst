@@ -37,6 +37,8 @@ host
 exec
   The installation path for the PBS Pro executables and libraries on the OnDemand
   host. For default installs from Github RPM releases this value should be ``/opt/pbs``.
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 bin_overrides
   Replacements/wrappers for PBSPro's job submission and control clients. *Optional*
 

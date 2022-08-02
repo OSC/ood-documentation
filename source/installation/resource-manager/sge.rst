@@ -44,6 +44,8 @@ conf
   The path to the Grid Engine configuration file for this cluster. *Optional*
 libdrmaa_path
   The full path to libdrmaa.so. Provide this to enable use of libdrmaa for more precise job status reporting.  *Optional*
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 bin_overrides
   Replacements/wrappers for Grid Engine's job submission and control clients. *Optional*
 
