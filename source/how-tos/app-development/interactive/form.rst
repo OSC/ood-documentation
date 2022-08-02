@@ -392,7 +392,15 @@ are:
 
 .. describe:: options (Array<Array<String>>, null)
 
-     a list of options for the ``select`` widget
+    A list of options for a ``select`` widget.  In the simplest form
+    you can have a list of strings like ``chevy`` in example below.
+    They can also be in the form ``[<label>, <value>]`` where label is the
+    HTML label shown in the web page and value is the actual value
+    that will be sent to the server and used.
+
+    Lastly you can also set extra ``data`` HTML attributes like the
+    example ``Toyota`` below. These extra attributes can be used by javascript
+    or options for :ref:`dynamic options <dynamic-bc-apps>`.
 
      Default
        No options are supplied
@@ -402,24 +410,18 @@ are:
           options: []
 
      Example
-       Provide a list of cars
 
        .. code-block:: yaml
 
           options:
             - ["Volvo", "volvo"]
             - ["Ford", "ford"]
-            - ["Toyota", "toyota"]
-
-     .. note::
-
-        Typically the options are given as a list of pairs. The first string in
-        the pair is the option text and the second string in the pair is the
-        option value.
-
-        The user will see a list of options "Volvo", "Ford", and "Toyota" to
-        choose from in the HTML form, but the backend will process a value of
-        either "volvo", "ford", or "toyota" depending on what the user chose.
+            - "chevy"
+            - [
+                "Toyota",
+                "toyota",
+                data-some-extra-attribute: 'set'
+              ]
 
 .. describe:: cacheable (Boolean, true)
 
