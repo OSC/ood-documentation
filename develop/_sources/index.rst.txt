@@ -62,8 +62,6 @@ These are institutions who were early adopters or provided HPC resources for dev
   :caption: How-Tos
 
   customizations
-  analytics
-  monitoring
   how-tos/debug
   enable-desktops
   how-tos/app-development

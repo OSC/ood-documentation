@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Debugging Open OnDemand &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>Debugging and Monitoring &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="How to Debug Apache" href="debug/debug-apache.html" />
-    <link rel="prev" title="Prometheus Monitoring" href="../monitoring/prometheus.html" />
+    <link rel="prev" title="Customizations" href="../customizations.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -112,10 +112,11 @@
 <p class="caption"><span class="caption-text">How-Tos</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../monitoring.html">Monitoring</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Debugging Open OnDemand</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Debugging and Monitoring</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="debug/debug-apache.html">How to Debug Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html">Prometheus Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics/google-analytics.html">Adding Google Analytics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
@@ -179,7 +180,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Debugging Open OnDemand</li>
+      <li>Debugging and Monitoring</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -200,17 +201,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="debugging-open-ondemand">
-<span id="how-to-debug"></span><h1>Debugging Open OnDemand<a class="headerlink" href="#debugging-open-ondemand" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="debugging-and-monitoring">
+<span id="how-to-debug"></span><h1>Debugging and Monitoring<a class="headerlink" href="#debugging-and-monitoring" title="Permalink to this headline">¶</a></h1>
 <p>OnDemand has a lot of moving parts and you may have to troubleshoot
 all sorts of things.</p>
-<p>These pages should help you debug components or failure modes.</p>
+<p>These pages should help you monitor &amp; debug components or failure modes.
+As well as how to monitor your Open OnDemand deployment.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="debug/debug-apache.html">How to Debug Apache</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="debug/debug-apache.html#log-locations">Log locations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debug/debug-apache.html#restart-services">Restart services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debug/debug-apache.html#show-virtualhosts">Show VirtualHosts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring/logging.html">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/logging.html#system-logs">System Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/logging.html#session-data">Session Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring/prometheus.html">Prometheus Monitoring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html#install-via-rpm">Install via RPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html#test-prometheus-exporter">Test Prometheus Exporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html#prometheus-configuration">Prometheus Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html#id1">Grafana Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring/prometheus.html#id2">Process Exporter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analytics/google-analytics.html">Adding Google Analytics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analytics/google-analytics.html#configure-open-ondemand">Configure Open OnDemand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics/google-analytics.html#configure-google-analytics">Configure Google Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics/google-analytics.html#querying-google-analytics">Querying Google Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics/google-analytics.html#more-info">More Info</a></li>
 </ul>
 </li>
 </ul>
@@ -228,7 +251,7 @@ all sorts of things.</p>
         <a href="debug/debug-apache.html" class="btn btn-neutral float-right" title="How to Debug Apache" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../monitoring/prometheus.html" class="btn btn-neutral float-left" title="Prometheus Monitoring" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../customizations.html" class="btn btn-neutral float-left" title="Customizations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
