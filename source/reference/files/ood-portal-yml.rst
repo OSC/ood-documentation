@@ -1138,18 +1138,18 @@ to ``null`` will disable this feature.
      as well as only using HTTP for proxied communication.
 
      Default
-       The default value is null
-
-       .. code-block:: yaml
-
-          dex_uri: null
-
-     Example
-       Enable Dex URI and Dex behind a reverse proxy
+       The default value is /dex
 
        .. code-block:: yaml
 
           dex_uri: /dex
+
+     Example
+       Disable Dex behind a reverse proxy
+
+       .. code-block:: yaml
+
+          dex_uri: false
 
 .. describe:: dex (Hash, null, false)
 
