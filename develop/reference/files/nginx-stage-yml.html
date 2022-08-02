@@ -299,6 +299,52 @@ portals</p>
 
 <dl class="describe">
 <dt>
+<code class="sig-name descname">pun_custom_env (Object, null)</code></dt>
+<dd><p>Custom environment variables to set for the PUN environment.</p>
+<dl>
+<dt>Default</dt><dd><p>No new environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Set some custom environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_DASHBOARD_TITLE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Open</span><span class="nv"> </span><span class="s">OnDemand&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_BRAND_BG_COLOR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#53565a&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_BRAND_LINK_ACTIVE_BG_COLOR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#fff&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_custom_env_declarations (Array, null)</code></dt>
+<dd><p>List of environment variables to pass onto PUN environment
+from /etc/ood/profile. Example below shows some default
+env vars that are declared.</p>
+<dl>
+<dt>Default</dt><dd><p>No declarations of new environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Decleary several environment variables to pass to the PUN.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PATH</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LD_LIBRARY_PATH</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MANPATH</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCLS</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">X_SCLS</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
 <code class="sig-name descname">template_root (String)</code></dt>
 <dd><p>the root directory containing the ERB templates used in generating the NGINX
 configuration files</p>
@@ -506,6 +552,30 @@ Keys without <code class="docutils literal notranslate"><span class="pre">passen
 
 <dl class="describe">
 <dt>
+<code class="sig-name descname">nginx_file_upload_max (Integer, 10737420000)</code></dt>
+<dd><p>Max file upload size in bytes (e.g., 10737420000)</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><blockquote>
+<div><p>~10 GB max upload.</p>
+</div></blockquote>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_file_upload_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10737420000</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><blockquote>
+<div><p>Double the max upload.</p>
+</div></blockquote>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_file_upload_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21474840000</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
 <code class="sig-name descname">pun_config_path (String)</code></dt>
 <dd><p>the interpolated path to the user’s PUN config file</p>
 <dl>
@@ -580,6 +650,46 @@ resides in will limit the maximum file upload size.</p>
 </div>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_secret_key_base_path (String)</code></dt>
+<dd><p>The secret key location. Note these are per user.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>Per User secret in var lib ondemand-nginx.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_secret_key_base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/puns/%{user}.secret_key_base.txt&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom location for secret files.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_secret_key_base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/secrets/%{user}.secret_key_base.txt&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_log_format (String)</code></dt>
+<dd><p>The format of the access and error logs.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>The default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_log_format</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$remote_addr</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">$remote_user</span><span class="nv"> </span><span class="s">[$time_local]</span><span class="nv"> </span><span class="s">&quot;$request&quot;</span><span class="nv"> </span><span class="s">$status</span><span class="nv"> </span><span class="s">$body_bytes_sent</span><span class="nv"> </span><span class="s">&quot;$http_referer&quot;</span><span class="nv"> </span><span class="s">&quot;$http_user_agent&quot;</span><span class="nv"> </span><span class="s">&quot;$http_x_forwarded_for&quot;&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom log format.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_log_format</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$remote_addr</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">$remote_user</span><span class="nv"> </span><span class="s">[$time_local]</span><span class="nv"> </span><span class="s">&quot;$request&quot;</span><span class="nv"> </span><span class="s">$status</span><span class="nv"> </span><span class="s">$body_bytes_sent&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="describe">
@@ -912,6 +1022,29 @@ doesn’t restrict the other administrative commands
 <a class="reference internal" href="../commands/nginx-stage/commands/nginx.html#nginx-stage-nginx"><span class="std std-ref">nginx_stage nginx</span></a> and <a class="reference internal" href="../commands/nginx-stage/commands/nginx-clean.html#nginx-stage-nginx-clean"><span class="std std-ref">nginx_stage nginx_clean</span></a> when manually
 starting and stopping the NGINX process.</p>
 </div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">disable_bundle_user_config (Integer)</code></dt>
+<dd><blockquote>
+<div><p>Set BUNDLE_USER_CONFIG to /dev/null in the PUN environment.
+NB: This prevents a user’s ~/.bundle/config from affecting
+OnDemand applications.</p>
+</div></blockquote>
+<dl>
+<dt>Default</dt><dd><p>Disable bundle user configuration.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_bundle_user_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Enable bundle user configuration. This may adversly affect
+system deployed apps.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_bundle_user_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
