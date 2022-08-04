@@ -265,10 +265,12 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_user_home_dir</span></code> (<strong>default=off</strong>): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_vmblock</span></code> (<strong>default=off</strong>): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_nfs</span></code> (<strong>default=on</strong>): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> (<strong>default=on</strong>): Adds necessary rules to allow the OnDemand Shell app to function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> (<strong>default=off</strong>): <strong>DEPRECATED, see ondemand_use_ssh</strong> Adds necessary rules to allow the OnDemand Shell app to function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code> (<strong>default=on</strong>): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_sssd</span></code> (<strong>default=on</strong>): Allows OnDemand to access SSSD</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_slurm</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with SLURM and MUNGE.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_torque</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with Torque.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kubernetes.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ldap</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with remote LDAP servers. This does not affect Apache LDAP authentication. This is only necessary if the PUN is interacting with LDAP ports.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_kerberos</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kerberos.</p></li>
 </ul>
@@ -281,9 +283,9 @@
 <li><p>daemons_use_tty</p></li>
 <li><p>use_nfs_home_dirs (can be disabled if the OnDemand web node is not using NFS for home directories)</p></li>
 </ul>
-<p>The following example disabled the Shell app SELinux boolean.</p>
+<p>The following example disabled the OnDemand SSH SELinux boolean.</p>
 <blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo setsebool -P <span class="nv">ondemand_use_shell_app</span><span class="o">=</span>off
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo setsebool -P <span class="nv">ondemand_use_ssh</span><span class="o">=</span>off
 </pre></div>
 </div>
 </div></blockquote>
