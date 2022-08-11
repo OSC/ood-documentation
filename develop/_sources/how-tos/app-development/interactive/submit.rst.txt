@@ -1,7 +1,7 @@
 .. _app-development-interactive-submit:
 
-Job Submission
-==============
+Job Submission (submit.yml.erb)
+===============================
 
 The configuration file ``submit.yml.erb`` controls the content of the batch
 script as well as the submission arguments used when submitting the batch job.
@@ -296,6 +296,27 @@ the user supplied a non-blank value to the form attribute ``my_queue``.
 
    For example, if you used the predefined form attribute ``bc_queue``, you do
    not need to specify ``queue_name:`` in the ``submit.yml.erb``.
+
+.. _global-bc-settings:
+
+Setting Batch Connect Options Globally
+``````````````````````````````````````
+
+All of these configuration items can also be applied globally to the entire cluster
+in the cluster definition files under ``/etc/ood/config/clusters.d/``. If set globally,
+the option is applied to all applications in that cluster.
+
+Here's an example of how to set the ``header`` configuration for both vnc and basic
+templates.
+
+  .. code-block:: yaml
+
+    v2:
+      batch_connect:
+        basic:
+          header: "#!/bin/bash"
+        vnc:
+          header: "#!/bin/bash"
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
 .. _`oodcore::batchconnect::template`: http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template

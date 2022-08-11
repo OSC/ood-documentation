@@ -211,14 +211,14 @@
             
   <div class="section" id="custom-job-submission">
 <span id="enable-desktops-custom-job-submission"></span><h1><span class="section-number">4. </span>Custom Job Submission<a class="headerlink" href="#custom-job-submission" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> configuration file describes how
+<p>The <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission (submit.yml.erb)</span></a> configuration file describes how
 the batch job should be submitted to your cluster. The location of this file
 <strong>must</strong> be specified in the respective
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/bc_desktop/</span><em><span class="pre">my_cluster</span></em><span class="pre">.yml</span></code> form configuration
 file, so that when a user submits the form, the specified submission
 configuration is used when submitting the batch job.</p>
 <p>To customize job submission we will need to first edit our custom desktop app
-<a class="reference internal" href="../how-tos/app-development/interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a> YAML file as such:</p>
+<a class="reference internal" href="../how-tos/app-development/interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form (form.yml.erb)</span></a> YAML file as such:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/my_cluster.yml</span><span class="w"></span>
 <span class="nn">---</span><span class="w"></span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster</span><span class="nv"> </span><span class="s">Desktop&quot;</span><span class="w"></span>
@@ -227,7 +227,7 @@ configuration is used when submitting the batch job.</p>
 </span></pre></div>
 </div>
 <p>Notice we included the configuration option <code class="docutils literal notranslate"><span class="pre">submit</span></code> that points to our
-custom <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> YAML configuration file. This
+custom <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission (submit.yml.erb)</span></a> YAML configuration file. This
 can be an absolute file path or a relative file path with respect to the
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/bc_desktop/</span></code> directory.</p>
 <div class="admonition note">
@@ -239,14 +239,14 @@ variable substitution, and more.</p>
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Do not put the <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> configuration file
+<p>Do not put the <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission (submit.yml.erb)</span></a> configuration file
 directly underneath <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/bc_desktop</span></code> or it will think
 this an Interactive Desktop app. Instead we typically create the directory
 <code class="file docutils literal notranslate"><span class="pre">submit/</span></code> underneath and put our
-<a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> configuration files underneath
+<a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission (submit.yml.erb)</span></a> configuration files underneath
 that.</p>
 </div>
-<p>We can now create and modify the <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a>
+<p>We can now create and modify the <a class="reference internal" href="../how-tos/app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission (submit.yml.erb)</span></a>
 configuration file at:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">bc_desktop</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="n">my_submit</span><span class="o">.</span><span class="n">yml</span><span class="o">.</span><span class="n">erb</span>
 </pre></div>

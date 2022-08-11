@@ -1,7 +1,7 @@
 .. _app-development-interactive-form:
 
-User Form
-=========
+User Form (form.yml.erb)
+========================
 
 The configuration file ``form.yml`` creates the `html form`_ your customers will use
 to start the interactive application.
