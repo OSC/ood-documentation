@@ -1,7 +1,7 @@
 .. _install-software:
 
-Install Software From RPM
-=========================
+Install Software From Package
+=============================
 
 We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
@@ -16,56 +16,76 @@ software requirements:
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-#. Enable the dependency repositories **on CentOS/RHEL 7 only**:
+1. Enable the dependency repositories:
 
-   CentOS 7
-     .. code-block:: sh
+.. tabs::
 
-        sudo yum install centos-release-scl epel-release
+   .. tab:: CentOS 7
 
-   RHEL 7
-     .. code-block:: sh
+      .. code-block:: sh
 
-        sudo yum install epel-release
-        sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
-        # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
+         sudo yum install centos-release-scl epel-release
 
-   .. warning::
 
-      For **RedHat** you may also need to enable the *Optional* channel and
-      attach a subscription providing access to RHSCL to be able to use this
-      repository.
+   .. tab:: RockyLinux 8
 
-#. Enable dnf modules and repositories for dependencies **on CentOS/RHEL 8 only**:
+      .. code-block:: sh
 
-    .. code-block:: sh
+         sudo dnf config-manager --set-enabled powertools
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:2.7 nodejs:14
 
-       dnf module enable ruby:2.7
-       dnf module enable nodejs:12
+   .. tab:: RHEL 7
 
-    **CentOS 8 only**
+      .. warning::
 
-    .. code-block:: sh
+         You may also need to enable the *Optional* channel and
+         attach a subscription providing access to RHSCL to be able to use this
+         repository.
 
-       sudo dnf config-manager --set-enabled powertools
+      .. code-block:: sh
 
-    **RedHat 8 only**
+         sudo yum install epel-release
+         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
 
-    .. code-block:: sh
 
-       sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+   .. tab:: RHEL 8
 
-#. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
+      .. warning::
 
-     .. code-block:: sh
+         You may also need to enable the *Optional* channel and
+         attach a subscription providing access to RHSCL to be able to use this
+         repository.
 
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+      .. code-block:: sh
 
-#. Install OnDemand and all of its dependencies:
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:2.7 nodejs:14
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
-   .. code-block:: sh
+2. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_ and install:
 
-      sudo yum install ondemand
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+
+            sudo yum install ondemand
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates wget
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
 
 #. (Optional) Install :ref:`authentication-dex` package
 
@@ -74,15 +94,34 @@ software requirements:
       If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
       See :ref:`add-ldap` for details on configuration of LDAP.
 
-   .. code-block:: sh
+   .. tabs::
 
-      sudo yum install ondemand-dex
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum install ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt install ondemand-dex
 
 #. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
 
-   .. code-block:: sh
+   .. tabs::
 
-      sudo yum install ondemand-selinux
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum install ondemand-selinux
+
+      .. tab:: apt
+
+          Not available for Debian systems.
 
 .. note::
 

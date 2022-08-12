@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Shibboleth" href="shibboleth.html" />
@@ -118,6 +119,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex">Configuring OnDemand Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#managing-the-ondemand-dex-service">Managing the OnDemand Dex service</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dex-firewall">Dex Firewall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex-behind-apache-reverse-proxy">Configuring OnDemand Dex behind Apache reverse proxy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-ondemand-dex-for-ldap">Configuring OnDemand Dex for LDAP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#customizing-ondemand-dex">Customizing OnDemand Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ondemand-dex-configuration-reference">OnDemand Dex configuration reference</a></li>
@@ -253,7 +255,7 @@
 <p><a class="reference external" href="https://github.com/dexidp/dex">Dex</a> is a lightweight OpenID Connect authentication provider written in Go, and is the default authentication mechanism shipped with Open OnDemand.</p>
 <div class="section" id="installing-ondemand-dex-package">
 <h2>Installing OnDemand Dex package<a class="headerlink" href="#installing-ondemand-dex-package" title="Permalink to this headline">¶</a></h2>
-<p>First the OnDemand yum repos must be enabled, see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software From RPM</span></a>.</p>
+<p>First the OnDemand yum repos must be enabled, see <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software From Package</span></a>.</p>
 <p>Install the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> RPM:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
@@ -341,6 +343,19 @@ $ sudo iptables-save &gt; /etc/sysconfig/iptables
 </div>
 </dd>
 </dl>
+</div>
+<div class="section" id="configuring-ondemand-dex-behind-apache-reverse-proxy">
+<h2>Configuring OnDemand Dex behind Apache reverse proxy<a class="headerlink" href="#configuring-ondemand-dex-behind-apache-reverse-proxy" title="Permalink to this headline">¶</a></h2>
+<p>The OnDemand Dex service can be proxied behind the Apache web service using a reverse proxy.
+This would mean port 5554 or 5556 would not need to be opened.</p>
+<p>Enabling the OnDemand Dex reverse proxy logic will force Dex to listen only on <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and only
+via HTTP.</p>
+<p>Example of configuration change to put Dex behind the Apache reverse proxy</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dex_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dex</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="configuring-ondemand-dex-for-ldap">
 <h2>Configuring OnDemand Dex for LDAP<a class="headerlink" href="#configuring-ondemand-dex-for-ldap" title="Permalink to this headline">¶</a></h2>

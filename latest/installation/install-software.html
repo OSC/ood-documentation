@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Install Software From RPM &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>1. Install Software From Package &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -27,6 +27,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +37,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Install From Source" href="from-source.html" />
@@ -109,7 +111,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Install Software From RPM</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Install Software From Package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">3. Modify System Security</a></li>
 <li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Services</a></li>
@@ -214,7 +216,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li><span class="section-number">1. </span>Install Software From RPM</li>
+      <li><span class="section-number">1. </span>Install Software From Package</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -235,8 +237,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install-software-from-rpm">
-<span id="install-software"></span><h1><span class="section-number">1. </span>Install Software From RPM<a class="headerlink" href="#install-software-from-rpm" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="install-software-from-package">
+<span id="install-software"></span><h1><span class="section-number">1. </span>Install Software From Package<a class="headerlink" href="#install-software-from-package" title="Permalink to this headline">¶</a></h1>
 <p>We will use <a class="reference external" href="https://www.softwarecollections.org/en/">Software Collections</a> to satisfy majority of the following
 software requirements:</p>
 <ul class="simple">
@@ -250,54 +252,57 @@ libraries</p></li>
 <p>This tutorial is run from the perspective of an account that has
 <strong class="command">sudo</strong> access but is not root.</p>
 </div>
-<ol class="arabic">
-<li><p>Enable the dependency repositories <strong>on CentOS/RHEL 7 only</strong>:</p>
-<dl>
-<dt>CentOS 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
+<ol class="arabic simple">
+<li><p>Enable the dependency repositories:</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">CentOS 7</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RockyLinux 8</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">RHEL 7</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">RHEL 8</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install centos-release-scl epel-release
 </pre></div>
 </div>
-</dd>
-<dt>RHEL 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
-sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
-<span class="c1"># Repository &#39;rhel-server-rhscl-7-rpms&#39; is enabled for this system.</span>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf config-manager --set-enabled powertools
+sudo dnf install epel-release
+sudo dnf module <span class="nb">enable</span> ruby:2.7 nodejs:14
 </pre></div>
 </div>
-</dd>
-</dl>
-<div class="admonition warning">
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>For <strong>RedHat</strong> you may also need to enable the <em>Optional</em> channel and
+<p>You may also need to enable the <em>Optional</em> channel and
 attach a subscription providing access to RHSCL to be able to use this
 repository.</p>
 </div>
-</li>
-<li><p>Enable dnf modules and repositories for dependencies <strong>on CentOS/RHEL 8 only</strong>:</p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dnf module <span class="nb">enable</span> ruby:2.7
-dnf module <span class="nb">enable</span> nodejs:12
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install epel-release
+sudo subscription-manager repos --enable<span class="o">=</span>rhel-server-rhscl-7-rpms
 </pre></div>
 </div>
-<p><strong>CentOS 8 only</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf config-manager --set-enabled powertools
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You may also need to enable the <em>Optional</em> channel and
+attach a subscription providing access to RHSCL to be able to use this
+repository.</p>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf install epel-release
+sudo dnf module <span class="nb">enable</span> ruby:2.7 nodejs:14
+sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 </pre></div>
 </div>
-<p><strong>RedHat 8 only</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+</div></div>
+<ol class="arabic" start="2">
+<li><p>Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a> and install:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">yum/dnf</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">apt</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
+
+sudo yum install ondemand
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p>Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install apt-transport-https ca-certificates wget
+wget -O /tmp/ondemand-release-web_2.0.0_all.deb https://apt.osc.edu/ondemand/2.0/ondemand-release-web_2.0.0_all.deb
+sudo apt install /tmp/ondemand-release-web_2.0.0_all.deb
+sudo apt update
+
+sudo apt install ondemand
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p>Install OnDemand and all of its dependencies:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
-</pre></div>
-</div>
+</div></div>
 </li>
 <li><p>(Optional) Install <a class="reference internal" href="../authentication/dex.html#authentication-dex"><span class="std std-ref">OpenID Connect with Dex</span></a> package</p>
 <div class="admonition note">
@@ -305,14 +310,22 @@ dnf module <span class="nb">enable</span> nodejs:12
 <p>If authenticating against LDAP or wishing to evaluate OnDemand using <cite>ood</cite> user, you must install <cite>ondemand-dex</cite>.
 See <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for details on configuration of LDAP.</p>
 </div>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">yum/dnf</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">apt</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
 </pre></div>
 </div>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install ondemand-dex
+</pre></div>
+</div>
+</div></div>
 </li>
 <li><p>(Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see <a class="reference internal" href="modify-system-security.html#ood-selinux"><span class="std std-ref">SELinux</span></a></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-selinux
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">yum/dnf</button><button aria-controls="panel-3-3-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-1" name="3-1" role="tab" tabindex="-1">apt</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-selinux
 </pre></div>
 </div>
+</div><div aria-labelledby="tab-3-3-1" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-1" name="3-1" role="tabpanel" tabindex="0"><p>Not available for Debian systems.</p>
+</div></div>
 </li>
 </ol>
 <div class="admonition note">

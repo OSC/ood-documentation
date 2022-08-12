@@ -27,6 +27,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +37,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Add SSL Support" href="add-ssl.html" />
@@ -109,7 +111,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From RPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From Package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">3. Modify System Security</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">4. Start Services</a></li>
@@ -242,18 +244,20 @@ the Apache service.
 Please see section <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for a more advanced and recommended authentication method after this.</p>
 <ol class="arabic">
 <li><p>Start the Apache HTTP Server:</p>
-<dl>
-<dt>CentOS/RHEL 7</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">RHEL/CentOS 7</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RHEL/Rocky 8</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
 sudo systemctl <span class="nb">enable</span> httpd24-httpd
 </pre></div>
 </div>
-</dd>
-<dt>CentOS/RHEL 8</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd
 sudo systemctl <span class="nb">enable</span> httpd
 </pre></div>
 </div>
-</dd>
-</dl>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start apache2
+sudo systemctl <span class="nb">enable</span> apache2
+</pre></div>
+</div>
+</div></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you access the OnDemand server that you just started, you will be
@@ -263,13 +267,12 @@ The default user must exist on the system before login is possible.</p>
 </li>
 <li><p>(Optional) Start the Dex server</p>
 <p>If using the default OnDemand authentication mechanism, you must start the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
-<dl>
-<dt>CentOS/RHEL 7 &amp; 8</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start ondemand-dex
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start ondemand-dex
 sudo systemctl <span class="nb">enable</span> ondemand-dex
 </pre></div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p>(Optional) Configure default user</p>
 <p>If you wish to use the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> you must create that user on the OnDemand system.</p>
