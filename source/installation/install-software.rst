@@ -80,7 +80,7 @@ software requirements:
 
          .. code-block:: sh
 
-            sudo apt install apt-transport-https ca-certificates
+            sudo apt install apt-transport-https ca-certificates wget
             wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
             sudo apt update
