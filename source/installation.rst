@@ -6,7 +6,11 @@ Installation
 The OnDemand host machine needs to be setup *similarly* to a login node. This
 means that it will need:
 
-- RedHat/CentOS 7+ or Ubuntu 20.04 or Ubuntu 22.04
+- RedHat/CentOS 7+ or Ubuntu 20.04-22.04
+- the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
+  libraries used by the batch servers installed
+- configuration on both OnDemand node **and batch servers** to be able to
+  submit, status, and delete jobs from command line
 - signed SSL certificate with corresponding intermediate certificate for your
   advertised OnDemand host name (e.g., ``ondemand.my_center.edu``)
 
