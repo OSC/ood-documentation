@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CAS &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>NSF ACCESS &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="OpenID Connect with KeyCloak on RHEL7" href="tutorial-oidc-keycloak-rhel7.html" />
-    <link rel="prev" title="Shibboleth" href="shibboleth.html" />
+    <link rel="next" title="Add PAM Authentication" href="pam.html" />
+    <link rel="prev" title="SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon" href="adfs-with-auth-mellon.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -115,11 +115,15 @@
 <li class="toctree-l2"><a class="reference internal" href="oidc.html">OpenID Connect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dex.html">OpenID Connect with Dex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Shibboleth</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cas.html">CAS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nsf-access.html">NSF ACCESS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NSF ACCESS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oidc-client-registration">OIDC Client Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mapping-users">Mapping Users</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -219,14 +223,14 @@
         
           <li><a href="../authentication.html">Authentication</a> &raquo;</li>
         
-      <li>CAS</li>
+      <li>NSF ACCESS</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/cas.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/nsf-access.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -240,15 +244,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="cas">
-<span id="authentication-cas"></span><h1>CAS<a class="headerlink" href="#cas" title="Permalink to this headline">¶</a></h1>
-<p>Several HPC centers running OnDemand have successfully configured authentication using Central Authentication Service (CAS).</p>
-<p>See <a class="reference external" href="https://discourse.osc.edu/t/implementing-authentication-via-cas/34">this Discourse</a> topic regarding several different examples configuring CAS authentication with OnDemand.</p>
-<p>Related links:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/apereo/mod_auth_cas">mod_auth_cas</a></p></li>
-<li><p><a class="reference external" href="https://www.apereo.org/projects/cas">CAS project website</a></p></li>
-</ul>
+  <div class="section" id="nsf-access">
+<span id="id1"></span><h1>NSF ACCESS<a class="headerlink" href="#nsf-access" title="Permalink to this headline">¶</a></h1>
+<p>If your site is a part of the <a class="reference external" href="https://www.nsf.gov/">National Science Foundation</a>’s (NSF)
+<a class="reference external" href="https://access-ci.org/">ACCESS</a> program (formerley <a class="reference external" href="https://www.xsede.org/">XSEDE</a>) you can use their Identity Provider (IDP)
+to authenticate users for your Open OnDemand instance.</p>
+<div class="section" id="oidc-client-registration">
+<h2>OIDC Client Registration<a class="headerlink" href="#oidc-client-registration" title="Permalink to this headline">¶</a></h2>
+<p>You should read the <a class="reference external" href="https://identity.access-ci.org/">ACCESS IDP documentation</a> on how to register your Open OnDemand
+instance as an Open ID Connect (OIDC) client.</p>
+<p>Once you’ve registered your Open OnDemand instance, you can then configure it accordingly.
+Since <a class="reference external" href="https://access-ci.org/">ACCESS</a> uses Open ID Connect (OIDC) you can see our <a class="reference internal" href="oidc.html#authentication-oidc"><span class="std std-ref">oidc documentation</span></a>
+for more details on how to configure Open OnDemand with what CI Logon has provided in
+registering your application.</p>
+</div>
+<div class="section" id="mapping-users">
+<h2>Mapping Users<a class="headerlink" href="#mapping-users" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://access-ci.org/">ACCESS</a> users have allocations on many <a class="reference external" href="https://access-ci.org/">ACCESS</a> resource, of which you are one.
+This means they have disparate usernames on all these systems and a unique username
+on _your_ system.</p>
+<p>As a part of <a class="reference external" href="https://access-ci.org/">ACCESS</a> your site likely already has the infrastructure around creating
+<a class="reference external" href="https://access-ci.org/">ACCESS</a> users on your systems through AMIE protocols which populate gridmap files.</p>
+<p>If you already have a <code class="docutils literal notranslate"><span class="pre">/etc/grid-security/grid-mapfile</span></code> file, Open OnDemand can be
+configured to map users using the gridmap files. See <a class="reference internal" href="overview/map-user.html#gridmap-user-mapping"><span class="std std-ref">the documentation on gridmap files</span></a>
+for how to enable that.</p>
+</div>
 </div>
 
 
@@ -259,10 +279,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tutorial-oidc-keycloak-rhel7.html" class="btn btn-neutral float-right" title="OpenID Connect with KeyCloak on RHEL7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pam.html" class="btn btn-neutral float-right" title="Add PAM Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="shibboleth.html" class="btn btn-neutral float-left" title="Shibboleth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="adfs-with-auth-mellon.html" class="btn btn-neutral float-left" title="SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -294,29 +314,29 @@
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/authentication/cas.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/authentication/nsf-access.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/authentication/cas.html">2.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/authentication/nsf-access.html">2.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/authentication/cas.html">1.8</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/authentication/nsf-access.html">1.8</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/cas.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/nsf-access.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/cas.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/nsf-access.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/cas.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/nsf-access.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/cas.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/nsf-access.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/cas.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/nsf-access.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/cas.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/nsf-access.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/cas.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/nsf-access.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/cas.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/nsf-access.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/cas.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/nsf-access.html">develop</a></dd>
       
     </dl>
     <dl>
