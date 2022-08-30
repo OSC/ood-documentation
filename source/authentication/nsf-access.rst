@@ -29,7 +29,7 @@ As a part of `ACCESS`_ your site likely already has the infrastructure around cr
 `ACCESS`_ users on your systems through AMIE protocols which populate gridmap files.
 
 If you already have a ``/etc/grid-security/grid-mapfile`` file, Open OnDemand can be
-configured to map users using the gridmap files. See :ref:`gridmap usermapping <the documentation on gridmap files>`_
+configured to map users using the gridmap files. See :ref:`the documentation on gridmap files <gridmap_user_mapping>`
 for how to enable that.
 
 
