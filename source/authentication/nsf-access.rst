@@ -22,7 +22,7 @@ Mapping Users
 *************
 
 `ACCESS`_ users have allocations on many `ACCESS`_ resource, of which you are one.
-This means they have disperate usernames on all these systems and a unique username
+This means they have disparate usernames on all these systems and a unique username
 on _your_ system.
 
 As a part of `ACCESS`_ your site likely already has the infrastructure around creating
