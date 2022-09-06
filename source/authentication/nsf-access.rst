@@ -18,6 +18,29 @@ Since `ACCESS`_ uses Open ID Connect (OIDC) you can see our :ref:`oidc documenta
 for more details on how to configure Open OnDemand with what CI Logon has provided in
 registering your application.
 
+
+Here's an example you can use to get started. Note that ``oidc_client_id`` and ``oidc_client_secret``
+are commented out because the are specific to your site.
+
+.. code-block:: yaml
+  :emphasize-lines: 3-4
+
+  oidc_uri: "/oidc"
+  oidc_provider_metadata_url: "https://cilogon.org/.well-known/openid-configuration"
+  # oidc_client_id: "cilogon:/client_id/..."
+  # oidc_client_secret: "..."
+  oidc_remote_user_claim: "eppn"
+  oidc_scope: "openid email org.cilogon.userinfo"
+  oidc_session_inactivity_timeout: 28800
+  oidc_session_max_duration: 28800
+  oidc_state_max_number_of_cookies: "10 true"
+  oidc_settings:
+    OIDCPassIDTokenAs: "serialized"
+    OIDCPassRefreshToken: "On"
+    OIDCPassClaimsAs: "environment"
+    OIDCStripCookies: "mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1"
+    OIDCAuthRequestParams: "idphint=https%3A%2F%2Faccess-ci.org%2Fidp"
+
 Mapping Users
 *************
 
