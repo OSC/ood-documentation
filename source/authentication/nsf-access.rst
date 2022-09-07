@@ -47,7 +47,7 @@ Shibboleth and InCommon
 If your campus already runs Shibboleth authentication, you have an alternative to the Open ID Connect
 configuration above.
 
-`CILogon`_ provides a bridge from campus authentication, via the InCommon Federation,
+`CI Logon`_ provides a bridge from campus authentication, via the InCommon Federation,
 to certificate-based and OAuth/OIDC-based research cyberinfrastructure (CI).
 
 The SAML metadata for idp.access-ci.org is not yet published by InCommon. Please manually fetch the
