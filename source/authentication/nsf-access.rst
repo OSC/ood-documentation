@@ -19,7 +19,7 @@ for more details on how to configure Open OnDemand with what CI Logon has provid
 registering your application.
 
 Here's an example you can use to get started. Note that ``oidc_client_id`` and ``oidc_client_secret``
-are commented out because the are specific to your site.
+are commented out because they are specific to your site.
 
 .. code-block:: yaml
   :emphasize-lines: 3-4
