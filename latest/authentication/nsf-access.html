@@ -121,6 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">NSF ACCESS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#oidc-client-registration">OIDC Client Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shibboleth-and-incommon">Shibboleth and InCommon</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mapping-users">Mapping Users</a></li>
 </ul>
 </li>
@@ -248,7 +249,7 @@
 <span id="id1"></span><h1>NSF ACCESS<a class="headerlink" href="#nsf-access" title="Permalink to this headline">¶</a></h1>
 <p>If your site is a part of the <a class="reference external" href="https://www.nsf.gov/">National Science Foundation</a>’s (NSF)
 <a class="reference external" href="https://access-ci.org/">ACCESS</a> program (formerley <a class="reference external" href="https://www.xsede.org/">XSEDE</a>) you can use their Identity Provider (IDP)
-to authenticate users for your Open OnDemand instance.</p>
+<a class="reference external" href="https://www.cilogon.org/faq">CI Logon</a> to authenticate users for your Open OnDemand instance.</p>
 <div class="section" id="oidc-client-registration">
 <h2>OIDC Client Registration<a class="headerlink" href="#oidc-client-registration" title="Permalink to this headline">¶</a></h2>
 <p>You should read the <a class="reference external" href="https://identity.access-ci.org/">ACCESS IDP documentation</a> on how to register your Open OnDemand
@@ -257,6 +258,37 @@ instance as an Open ID Connect (OIDC) client.</p>
 Since <a class="reference external" href="https://access-ci.org/">ACCESS</a> uses Open ID Connect (OIDC) you can see our <a class="reference internal" href="oidc.html#authentication-oidc"><span class="std std-ref">oidc documentation</span></a>
 for more details on how to configure Open OnDemand with what CI Logon has provided in
 registering your application.</p>
+<p>Here’s an example you can use to get started. Note that <code class="docutils literal notranslate"><span class="pre">oidc_client_id</span></code> and <code class="docutils literal notranslate"><span class="pre">oidc_client_secret</span></code>
+are commented out because they are specific to your site.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">oidc_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc&quot;</span><span class="w"></span>
+<span class="nt">oidc_provider_metadata_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://cilogon.org/.well-known/openid-configuration&quot;</span><span class="w"></span>
+<span class="hll"><span class="c1"># oidc_client_id: &quot;cilogon:/client_id/...&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="c1"># oidc_client_secret: &quot;...&quot;</span><span class="w"></span>
+</span><span class="nt">oidc_remote_user_claim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eppn&quot;</span><span class="w"></span>
+<span class="nt">oidc_scope</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openid</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">org.cilogon.userinfo&quot;</span><span class="w"></span>
+<span class="nt">oidc_session_inactivity_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">28800</span><span class="w"></span>
+<span class="nt">oidc_session_max_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">28800</span><span class="w"></span>
+<span class="nt">oidc_state_max_number_of_cookies</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span><span class="w"></span>
+<span class="nt">oidc_settings</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCPassIDTokenAs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;serialized&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCPassRefreshToken</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCPassClaimsAs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;environment&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCStripCookies</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mod_auth_openidc_session</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_chunks</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_0</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCAuthRequestParams</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;idphint=https%3A%2F%2Faccess-ci.org%2Fidp&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="shibboleth-and-incommon">
+<h2>Shibboleth and InCommon<a class="headerlink" href="#shibboleth-and-incommon" title="Permalink to this headline">¶</a></h2>
+<p>If your campus already runs Shibboleth authentication, you have an alternative to the Open ID Connect
+configuration above.</p>
+<p><a class="reference external" href="https://www.cilogon.org/faq">CI Logon</a> provides a bridge from campus authentication, via the InCommon Federation,
+to certificate-based and OAuth/OIDC-based research cyberinfrastructure (CI).</p>
+<p>The SAML metadata for idp.access-ci.org is not yet published by InCommon. Please manually fetch the
+metadata from <a class="reference external" href="https://identity.access-ci.org/access-metadata.xml">https://identity.access-ci.org/access-metadata.xml</a> and configure it in a local file
+until we can complete the InCommon publication process.</p>
+<p>See our <a class="reference internal" href="shibboleth.html#authentication-shibboleth"><span class="std std-ref">shibboleth documentation</span></a> for more information on
+Shibboleth authentication.</p>
 </div>
 <div class="section" id="mapping-users">
 <h2>Mapping Users<a class="headerlink" href="#mapping-users" title="Permalink to this headline">¶</a></h2>
