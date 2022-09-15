@@ -16,6 +16,12 @@ software requirements:
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
+..  tip::
+
+  If you are an administrator responsible for Open OnDemand, you are now an administrator of
+  Apache Httpd as well.  As such, you should get comfortable with it as from time to time you will
+  have to troubleshoot it.
+
 1. Enable the dependency repositories:
 
 .. tabs::
