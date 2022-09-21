@@ -64,12 +64,13 @@ Mapping Users
 This means they have disparate usernames on all these systems and a unique username
 on _your_ system.
 
-As a part of `ACCESS`_ your site likely already has the infrastructure around creating
-`ACCESS`_ users on your systems through AMIE protocols which populate gridmap files.
+.. warning::
+  The Ohio SuperComputer Center is not a direct `ACCESS`_ resource. As such, the developers
+  of Open OnDemand don't yet know what guidance to give around user mapping because we only
+  have local users, not `ACCESS`_ users.
 
-If you already have a ``/etc/grid-security/grid-mapfile`` file, Open OnDemand can be
-configured to map users using the gridmap files. See :ref:`the documentation on gridmap files <gridmap_user_mapping>`
-for how to enable that.
+  We're working to provide guidance in this area, and would love some community contributions
+  for the same!
 
 
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
