@@ -16,6 +16,11 @@ software requirements:
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
+.. warning::
+
+   Be sure to check :ref:`Supported Operating Systems <os-support>` before proceeding with install to verify
+   you are on a supported operating system.
+
 ..  warning::
 
   If you are an administrator responsible for Open OnDemand, you are now an administrator of
