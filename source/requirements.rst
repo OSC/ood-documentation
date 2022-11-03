@@ -3,6 +3,19 @@
 Requirements
 ============
 
+Supported Operating Systems
+---------------------------
+
+.. _os-support:
+
+At this time OnDemand only supports the following operating systems:
+
+- RedHat/CentOS 7
+- RedHat/Rocky Linux/AlmaLinux 8
+- RedHat/Rocky Linux/AlmaLinux 9
+- Ubuntu 20.04
+- Ubuntu 22.04
+
 Software Requirements
 ---------------------
 
