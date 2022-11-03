@@ -17,6 +17,11 @@ Some operating systems use `Software Collections`_ to satisfy these.
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
+.. warning::
+
+   Be sure to check :ref:`Supported Operating Systems <os-support>` before proceeding with install to verify
+   you are on a supported operating system.
+
 1. Enable Dependencies
 ----------------------
 
