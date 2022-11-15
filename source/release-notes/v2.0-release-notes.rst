@@ -23,6 +23,45 @@ Highlights in 2.0:
 - `Memcached Ruby gem available for use in apps`_
 - `Dependency updates`_
 
+Upgrading to v2.0.29
+--------------------
+
+Major Changes
+.............
+
+Require NodeJS 14
+*****************
+
+NodeJS 14 is now required as NodeJS 12 is currenlty End-Of-Life.
+
+Upgrade directions
+..................
+
+.. tabs::
+
+   .. tab:: RHEL/CentOS 7
+
+      .. code-block:: sh
+
+         sudo yum update ondemand
+
+   .. tab:: RHEL/Rocky Linux 8
+
+      .. code-block:: sh
+
+         sudo dnf module reset nodejs
+         sudo dnf module enable nodejs:14
+         sudo dnf update ondemand
+
+   .. tab:: Ubuntu
+
+      .. code-block:: sh
+
+         wget -O /tmp/ondemand-release-web_2.0.1_all.deb https://apt.osc.edu/ondemand/2.0/ondemand-release-web_2.0.1_all.deb
+         sudo apt -o Dpkg::Options::="--force-confnew" install /tmp/ondemand-release-web_2.0.1_all.deb
+         sudo apt update
+         sudo apt install --only-upgrade ondemand
+
 Upgrading from v1.8
 -------------------
 
