@@ -27,6 +27,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -142,6 +143,14 @@
 <p class="caption"><span class="caption-text">Release Notes</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">v2.0 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-to-v2-0-29">Upgrading to v2.0.29</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#require-nodejs-14">Require NodeJS 14</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#upgrading-from-v1-8">Upgrading from v1.8</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#breaking-changes">Breaking Changes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#no-longer-providing-ood-auth-map-regex">No longer providing ood_auth_map.regex</a></li>
@@ -153,7 +162,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#changes-to-the-interactive-cards">Changes to the interactive cards</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Upgrade directions</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
@@ -278,6 +287,35 @@
 <li><p><a class="reference internal" href="#memcached-ruby-gem-available-for-use-in-apps">Memcached Ruby gem available for use in apps</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 </ul>
+<div class="section" id="upgrading-to-v2-0-29">
+<h2>Upgrading to v2.0.29<a class="headerlink" href="#upgrading-to-v2-0-29" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="major-changes">
+<h3>Major Changes<a class="headerlink" href="#major-changes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="require-nodejs-14">
+<h4>Require NodeJS 14<a class="headerlink" href="#require-nodejs-14" title="Permalink to this headline">¶</a></h4>
+<p>NodeJS 14 is now required as NodeJS 12 is currenlty End-Of-Life.</p>
+</div>
+</div>
+<div class="section" id="upgrade-directions">
+<h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">RHEL/CentOS 7</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RHEL/Rocky Linux 8</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum update ondemand
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf module reset nodejs
+sudo dnf module <span class="nb">enable</span> nodejs:14
+sudo dnf update ondemand
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget -O /tmp/ondemand-release-web_2.0.1_all.deb https://apt.osc.edu/ondemand/2.0/ondemand-release-web_2.0.1_all.deb
+sudo apt -o Dpkg::Options::<span class="o">=</span><span class="s2">&quot;--force-confnew&quot;</span> install /tmp/ondemand-release-web_2.0.1_all.deb
+sudo apt update
+sudo apt install --only-upgrade ondemand
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>
 <div class="section" id="upgrading-from-v1-8">
 <h2>Upgrading from v1.8<a class="headerlink" href="#upgrading-from-v1-8" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="breaking-changes">
@@ -394,8 +432,8 @@ for it to be usable in this view.</p>
 </div>
 </div>
 </div>
-<div class="section" id="upgrade-directions">
-<h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Upgrade directions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
