@@ -88,7 +88,7 @@ Httpd has to serve many clients (I.e., when you have a lot of customers using Op
 
 We suggest configurations similar to this. 
 
-.. note:: 
+.. note::
   The most important directives used to control this MPM are `ThreadsPerChild`, which controls 
   the number of threads deployed by each child process and `MaxRequestWorkers`, which controls
   the maximum total number of threads that may be launched.
@@ -102,6 +102,7 @@ We suggest configurations similar to this.
   # conf.modules.d will vary depending on the platform and version.
   # $APACHE_HOME/conf.modules.d/mpm.conf
   
+  # MPM event is actually important for idle VNC connections alive.
   LoadModule mpm_event_module modules/mod_mpm_event.so
 
   <IfModule mpm_event_module>
