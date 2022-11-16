@@ -9,7 +9,7 @@ software requirements:
 - `Apache HTTP Server 2.4`_
 - Ruby 2.7 with :command:`rake`, :command:`bundler`, and development
   libraries
-- Node.js 12
+- Node.js 14
 
 .. note::
 
@@ -44,7 +44,7 @@ software requirements:
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7 nodejs:12
+         sudo dnf module enable ruby:2.7 nodejs:14
 
    .. tab:: RHEL 7
 
@@ -71,7 +71,7 @@ software requirements:
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7 nodejs:12
+         sudo dnf module enable ruby:2.7 nodejs:14
          sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
 2. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_ and install:
