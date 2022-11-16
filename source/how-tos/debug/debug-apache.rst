@@ -83,35 +83,45 @@ Performance Tuning
 ------------------
 
 If you're servicing many clients at time (more than 50) you will likely need to change the
-`Apache Httpd's worker configuration`_. The default configuration may degrade service when
+`Apache Httpd's MPM configuration`_. The default configuration may degrade service when
 Httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).
 
 We suggest configurations similar to this. 
 
-.. warning:: 
-  `ServerLimit` and `ThreadsPerChild` should not exceed the number of cores available. 8
-  is given in the example, but will likely need to change.
+.. note:: 
+  The most important directives used to control this MPM are `ThreadsPerChild`, which controls 
+  the number of threads deployed by each child process and `MaxRequestWorkers`, which controls
+  the maximum total number of threads that may be launched.
+  
+  MaxRequestWorkers * ThreadsPerChild will be your effictive cap on the number of 
+  simultaneous requests that will be served.
+   
 
 .. code-block:: apache
 
-  # /opt/rh/httpd24/root/etc/httpd/conf.d/mpm.conf
-
+  # conf.modules.d will vary depending on the platform and version.
+  # $APACHE_HOME/conf.modules.d/mpm.conf
+  
   LoadModule mpm_event_module modules/mod_mpm_event.so
 
   <IfModule mpm_event_module>
-    ServerLimit            8
+
+    # ServerLimit is MaxRequestWorkers / ThreadsPerChild then doubled
+    ServerLimit            32
     StartServers           2
     MaxRequestWorkers      512
     MinSpareThreads        25
     MaxSpareThreads        75
-    ThreadsPerChild        8
+
+    # ThreadsPerChild value is MaxRequestWorkers / # cpus for production
+    ThreadsPerChild        32
     MaxRequestsPerChild    0
     ThreadLimit            512
     ListenBacklog          511
   </IfModule>
 
 
-.. _Apache Httpd's worker configuration: https://httpd.apache.org/docs/2.4/mod/worker.html
+.. _Apache Httpd's MPM configuration: https://httpd.apache.org/docs/2.4/mod/mpm_common.html
 .. _Apache Httpd's documentation: https://httpd.apache.org/docs/current/getting-started.html
 .. _Apache's ServerName configuration: https://httpd.apache.org/docs/2.4/mod/core.html#servername
 .. _VirtualHost: https://httpd.apache.org/docs/2.4/vhosts/
