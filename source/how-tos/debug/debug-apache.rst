@@ -102,7 +102,8 @@ We suggest configurations similar to this.
   # conf.modules.d will vary depending on the platform and version.
   # $APACHE_HOME/conf.modules.d/mpm.conf
   
-  # MPM event is actually important for idle VNC connections alive.
+  # MPM event is actually important for idle VNC connections alive. You may
+  # need delete occurences of mpm_prefork_module if you have that configured.
   LoadModule mpm_event_module modules/mod_mpm_event.so
 
   <IfModule mpm_event_module>
