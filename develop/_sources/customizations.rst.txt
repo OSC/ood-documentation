@@ -520,6 +520,20 @@ To reconfigure this, simply set the environment variable in the job composers' e
   # show any file less than or equal to 15 kb
   OOD_MAX_SCRIPT_SIZE_KB=15
 
+Hiding Job Arrays
+------------------------------
+
+When composing a new job, the job arrays field is shown on supported clusters. To Hide this field even on 
+supported clusters, an option was added.
+
+To reconfigure this, simply set the environment variable in the job composers' env file
+``/etc/ood/config/apps/myjobs/env`` like so:
+
+.. code:: sh
+
+  # Don't show job arrays field even on supported clusters
+  OOD_HIDE_JOB_ARRAYS=True
+
 Custom Error Page for Missing Home Directory on Launch
 ------------------------------------------------------
 
