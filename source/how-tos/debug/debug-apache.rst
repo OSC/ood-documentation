@@ -95,6 +95,12 @@ We suggest configurations similar to this.
   
   MaxRequestWorkers * ThreadsPerChild will be your effictive cap on the number of 
   simultaneous requests that will be served.
+
+  The example configuration below can handle about 8000 simultaneous requests.
+  It starts with 256 `MaxRequestWorkers` and assumes 8 cores.  Use this as an
+  example and increase or decrease `MaxRequestWorkers` accordingly (based on your
+  resources, cpus & memory and how much traffic you anticipate) then recalculate
+  `ServerLimit`, `ThreadsPerChild` and whatever else you may want to change.
    
 
 .. code-block:: apache
@@ -109,17 +115,17 @@ We suggest configurations similar to this.
   <IfModule mpm_event_module>
 
     # ServerLimit is MaxRequestWorkers / ThreadsPerChild then doubled
-    ServerLimit            32
+    ServerLimit            16
     StartServers           2
-    MaxRequestWorkers      512
+    MaxRequestWorkers      256
     MinSpareThreads        25
     MaxSpareThreads        75
 
     # ThreadsPerChild value is MaxRequestWorkers / # cpus for production
     ThreadsPerChild        32
     MaxRequestsPerChild    0
-    ThreadLimit            512
-    ListenBacklog          511
+    ThreadLimit            256
+    ListenBacklog          255
   </IfModule>
 
 
