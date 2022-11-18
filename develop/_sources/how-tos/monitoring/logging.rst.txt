@@ -14,8 +14,11 @@ In general administrators will want to note whether they need to see:
 
 System Logs
 -----------
+
 These logs will provide information around authentication and internal Open OnDemand errors. They are very useful 
 when initially installing and configuring Open OnDemand.
+
+.. _apache-logs:
 
 **Apache Logs**
 

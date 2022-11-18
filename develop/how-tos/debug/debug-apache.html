@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to Debug Apache &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>Apache httpd tips &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -114,10 +114,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../debug.html">Debugging and Monitoring</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to Debug Apache</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Apache httpd tips</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#log-locations">Log locations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restart-services">Restart services</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#show-virtualhosts">Show VirtualHosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-tuning">Performance Tuning</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../monitoring/logging.html">Logging</a></li>
@@ -188,7 +189,7 @@
         
           <li><a href="../debug.html">Debugging and Monitoring</a> &raquo;</li>
         
-      <li>How to Debug Apache</li>
+      <li>Apache httpd tips</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -209,8 +210,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="how-to-debug-apache">
-<span id="debug-apache"></span><h1>How to Debug Apache<a class="headerlink" href="#how-to-debug-apache" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="apache-httpd-tips">
+<span id="apache-extra"></span><h1>Apache httpd tips<a class="headerlink" href="#apache-httpd-tips" title="Permalink to this headline">¶</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>While this page is helpful it is no replacement for <a class="reference external" href="https://httpd.apache.org/docs/current/getting-started.html">Apache Httpd’s documentation</a>. If
@@ -220,6 +221,7 @@ have to troubleshoot it.</p>
 </div>
 <div class="section" id="log-locations">
 <h2>Log locations<a class="headerlink" href="#log-locations" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../monitoring/logging.html#apache-logs"><span class="std std-ref">Information about apache log location.</span></a></p>
 </div>
 <div class="section" id="restart-services">
 <span id="restart-apache"></span><h2>Restart services<a class="headerlink" href="#restart-services" title="Permalink to this headline">¶</a></h2>
@@ -260,6 +262,46 @@ which corresponds directly to <a class="reference external" href="https://httpd.
 </div>
 </div></div>
 </div></blockquote>
+</div>
+<div class="section" id="performance-tuning">
+<h2>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Permalink to this headline">¶</a></h2>
+<p>If you’re servicing many clients at time (more than 50) you will likely need to change the
+<a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mpm_common.html">Apache Httpd’s MPM configuration</a>. The default configuration may degrade service when
+Httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).</p>
+<p>We suggest configurations similar to this.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The most important directives are <cite>MaxRequestWorkers</cite>, which controls the number of simultaneous
+requests and <cite>ServerLimit</cite> combined with <cite>ThreadsPerChild</cite>, which when multiplied must be at least as big as
+the value for <cite>MaxRequestWorkers</cite>.</p>
+<p>It’s best to keep <cite>ServerLimit</cite> at or below the number of cores for the OnDemand web host.</p>
+<p>The example configuration below can handle about 256 simultaneous requests.
+Use this as an example and increase or decrease <cite>MaxRequestWorkers</cite> accordingly
+(based on your resources, cpus &amp; memory and how much traffic you anticipate) then recalculate
+<cite>ServerLimit</cite>, <cite>ThreadsPerChild</cite> and whatever else you may want to change.</p>
+</div>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="c"># conf.modules.d will vary depending on the platform and version.</span><span class="w"></span>
+<span class="c"># $APACHE_HOME/conf.modules.d/mpm.conf</span><span class="w"></span>
+
+<span class="c"># MPM event is actually important for idle VNC connections alive. You may</span><span class="w"></span>
+<span class="c"># need delete occurences of mpm_prefork_module if you have that configured.</span><span class="w"></span>
+<span class="nb">LoadModule</span><span class="w"> </span>mpm_event_module<span class="w"> </span>modules/mod_mpm_event.so<span class="w"></span>
+
+<span class="nt">&lt;IfModule</span><span class="w"> </span><span class="s">mpm_event_module</span><span class="nt">&gt;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c"># ServerLimit is MaxRequestWorkers / ThreadsPerChild</span><span class="w"></span>
+<span class="w">  </span><span class="nb">ServerLimit</span><span class="w">            </span><span class="m">8</span><span class="w"></span>
+<span class="w">  </span><span class="nb">StartServers</span><span class="w">           </span><span class="m">2</span><span class="w"></span>
+<span class="w">  </span><span class="nb">MaxRequestWorkers</span><span class="w">      </span><span class="m">256</span><span class="w"></span>
+<span class="w">  </span><span class="nb">MinSpareThreads</span><span class="w">        </span><span class="m">25</span><span class="w"></span>
+<span class="w">  </span><span class="nb">MaxSpareThreads</span><span class="w">        </span><span class="m">75</span><span class="w"></span>
+<span class="w">  </span><span class="nb">ThreadsPerChild</span><span class="w">        </span><span class="m">32</span><span class="w"></span>
+<span class="w">  </span><span class="nb">MaxRequestsPerChild</span><span class="w">    </span><span class="m">0</span><span class="w"></span>
+<span class="w">  </span><span class="nb">ThreadLimit</span><span class="w">            </span><span class="m">256</span><span class="w"></span>
+<span class="w">  </span><span class="nb">ListenBacklog</span><span class="w">          </span><span class="m">255</span><span class="w"></span>
+<span class="nt">&lt;/IfModule&gt;</span><span class="w"></span>
+</pre></div>
+</div>
 </div>
 </div>
 
