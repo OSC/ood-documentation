@@ -89,17 +89,15 @@ Httpd has to serve many clients (I.e., when you have a lot of customers using Op
 We suggest configurations similar to this. 
 
 .. note::
-  The most important directives used to control this MPM are `ThreadsPerChild`, which controls 
-  the number of threads deployed by each child process and `MaxRequestWorkers`, which controls
-  the maximum total number of threads that may be launched.
+  The most important directives are `MaxRequestWorkers`, which controls the number of simultaneous
+  requests and `ServerLimit` combined with `ThreadsPerChild`, which when multiplied must be at least as big as
+  the value for `MaxRequestWorkers`.
   
-  MaxRequestWorkers * ThreadsPerChild will be your effictive cap on the number of 
-  simultaneous requests that will be served.
+  It's best to keep `ServerLimit` at or below the number of cores for the OnDemand web host.
 
-  The example configuration below can handle about 8000 simultaneous requests.
-  It starts with 256 `MaxRequestWorkers` and assumes 8 cores.  Use this as an
-  example and increase or decrease `MaxRequestWorkers` accordingly (based on your
-  resources, cpus & memory and how much traffic you anticipate) then recalculate
+  The example configuration below can handle about 256 simultaneous requests.
+  Use this as an example and increase or decrease `MaxRequestWorkers` accordingly
+  (based on your resources, cpus & memory and how much traffic you anticipate) then recalculate
   `ServerLimit`, `ThreadsPerChild` and whatever else you may want to change.
    
 
@@ -114,14 +112,12 @@ We suggest configurations similar to this.
 
   <IfModule mpm_event_module>
 
-    # ServerLimit is MaxRequestWorkers / ThreadsPerChild then doubled
-    ServerLimit            16
+    # ServerLimit is MaxRequestWorkers / ThreadsPerChild
+    ServerLimit            8
     StartServers           2
     MaxRequestWorkers      256
     MinSpareThreads        25
     MaxSpareThreads        75
-
-    # ThreadsPerChild value is MaxRequestWorkers / # cpus for production
     ThreadsPerChild        32
     MaxRequestsPerChild    0
     ThreadLimit            256
