@@ -264,13 +264,17 @@ If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and 
 the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
 is used).
 
-Whitelist Directories
----------------------
+Block or Allow Directory Access
+-------------------------------
 
-By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:
+By default, all directories are open and accessible through Open OnDemand (barring POSIX file permissions. Open OnDemand
+can never read files the user cannot read).
 
-1. Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the whitelisted paths
-2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the whitelisted paths
+By setting a colon delimited `OOD_ALLOWLIST_PATH` environment variable, the Job Composer, File Editor, and Files app
+respect the allowlist in the following manner:
+
+1. Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the allowlisted paths
+2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths
 3. Users should not be able to get around this using symlinks
 
 We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would whitelist home directories, project space, and scratch space at OSC:
@@ -278,11 +282,11 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 .. code:: yaml
 
    pun_custom_env:
-     WHITELIST_PATH: "/users:/fs/project:/fs/scratch"
+    OOD_ALLOWLIST_PATH: "/users:/fs/project:/fs/scratch"
 
 .. warning:: This is not yet used in production at OSC, so we consider this feature "experimental" for now.
 
-.. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
+.. warning:: This allowlist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
 .. _set-default-ssh-host:
 
