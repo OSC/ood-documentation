@@ -273,7 +273,7 @@ can never read files the user cannot read).
 By setting a colon delimited `OOD_ALLOWLIST_PATH` environment variable, the Job Composer, File Editor, and Files app
 respect the allowlist in the following manner:
 
-1. Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the allowlisted paths
+1. Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowlisted paths
 2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths
 3. Users should not be able to get around this using symlinks
 
