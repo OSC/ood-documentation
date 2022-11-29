@@ -121,7 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#add-urls-to-help-menu">Add URLs to Help Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add Shortcuts to Files Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-upload-limits">Set Upload Limits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#whitelist-directories">Whitelist Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#block-or-allow-directory-access">Block or Allow Directory Access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-ssh-allowlist">Set SSH Allowlist</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shell-app-ssh-command-wrapper">Shell App SSH Command Wrapper</a></li>
@@ -538,17 +538,20 @@ and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10
 the <code class="docutils literal notranslate"><span class="pre">nginx_file_upload_max</span></code> configuration alone (or comment it out so the default
 is used).</p>
 </div>
-<div class="section" id="whitelist-directories">
-<h2>Whitelist Directories<a class="headerlink" href="#whitelist-directories" title="Permalink to this headline">¶</a></h2>
-<p>By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:</p>
+<div class="section" id="block-or-allow-directory-access">
+<h2>Block or Allow Directory Access<a class="headerlink" href="#block-or-allow-directory-access" title="Permalink to this headline">¶</a></h2>
+<p>By default, all directories are open and accessible through Open OnDemand (barring POSIX file permissions. Open OnDemand
+can never read files the user cannot read).</p>
+<p>By setting a colon delimited <cite>OOD_ALLOWLIST_PATH</cite> environment variable, the Job Composer, File Editor, and Files app
+respect the allowlist in the following manner:</p>
 <ol class="arabic simple">
-<li><p>Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the whitelisted paths</p></li>
-<li><p>Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the whitelisted paths</p></li>
+<li><p>Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowlisted paths</p></li>
+<li><p>Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths</p></li>
 <li><p>Users should not be able to get around this using symlinks</p></li>
 </ol>
 <p>We recommend setting this environment variable in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as a YAML mapping (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> i.e. below would whitelist home directories, project space, and scratch space at OSC:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">WHITELIST_PATH</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/users:/fs/project:/fs/scratch&quot;</span><span class="w"></span>
+<span class="w"> </span><span class="nt">OOD_ALLOWLIST_PATH</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/users:/fs/project:/fs/scratch&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -557,7 +560,7 @@ is used).</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.</p>
+<p>This allowlist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.</p>
 </div>
 </div>
 <div class="section" id="set-default-ssh-host">
