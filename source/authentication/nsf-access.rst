@@ -64,13 +64,30 @@ Mapping Users
 This means they have disparate usernames on all these systems and a unique username
 on _your_ system.
 
-.. warning::
-  The Ohio SuperComputer Center is not a direct `ACCESS`_ resource. As such, the developers
-  of Open OnDemand don't yet know what guidance to give around user mapping because we only
-  have local users, not `ACCESS`_ users.
+So you'll need an additional utility provided by access `ACCESS`_, namely the
+`access-oauth-mapfile`_.
 
-  We're working to provide guidance in this area, and would love some community contributions
-  for the same!
+Follow the instructions to install that utility and you'll get a lookup table
+in ``/etc/grid-security/access-oauth-mapfile`` like so:
+
+.. code-block:: sh
+
+  annie-oakley@access-ci.org aoakley
+
+
+You can set the `user_map_cmd`_ in ``ood_portal.yml`` to search this file and return
+the local user given the ACCESS username.
+
+.. code-block:: sh
+
+  #!/bin/bash
+
+  MAPPED_USER=$(grep "$1" ./delme.txt | awk '{print $2}')
+  if [[ "$MAPPED_USER" != "" ]]; then
+    echo -n "$MAPPED_USER"
+  else
+    echo "$1-not-found"
+  fi
 
 
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
@@ -79,3 +96,5 @@ on _your_ system.
 .. _XSEDE: https://www.xsede.org/
 .. _ACCESS IDP documentation: https://identity.access-ci.org/
 .. _CI Logon: https://www.cilogon.org/faq
+.. _access-oauth-mapfile: https://software.xsede.org/production/access-oauth-mapfile/INSTALL
+.. _user_map_cmd: ood-portal-generator-user-map-cmd
