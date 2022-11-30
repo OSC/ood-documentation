@@ -295,13 +295,24 @@ Shibboleth authentication.</p>
 <p><a class="reference external" href="https://access-ci.org/">ACCESS</a> users have allocations on many <a class="reference external" href="https://access-ci.org/">ACCESS</a> resource, of which you are one.
 This means they have disparate usernames on all these systems and a unique username
 on _your_ system.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The Ohio SuperComputer Center is not a direct <a class="reference external" href="https://access-ci.org/">ACCESS</a> resource. As such, the developers
-of Open OnDemand don’t yet know what guidance to give around user mapping because we only
-have local users, not <a class="reference external" href="https://access-ci.org/">ACCESS</a> users.</p>
-<p>We’re working to provide guidance in this area, and would love some community contributions
-for the same!</p>
+<p>So you’ll need an additional utility provided by access <a class="reference external" href="https://access-ci.org/">ACCESS</a>, namely the
+<a class="reference external" href="https://software.xsede.org/production/access-oauth-mapfile/INSTALL">access-oauth-mapfile</a>.</p>
+<p>Follow the instructions to install that utility and you’ll get a lookup table
+in <code class="docutils literal notranslate"><span class="pre">/etc/grid-security/access-oauth-mapfile</span></code> like so:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>annie-oakley@access-ci.org aoakley
+</pre></div>
+</div>
+<p>You can set the <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a> in <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> to search this file and return
+the local user given the ACCESS username.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">MAPPED_USER</span><span class="o">=</span><span class="k">$(</span>grep <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> ./delme.txt <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$MAPPED_USER</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> -n <span class="s2">&quot;</span><span class="nv">$MAPPED_USER</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">-not-found&quot;</span>
+<span class="k">fi</span>
+</pre></div>
 </div>
 </div>
 </div>
