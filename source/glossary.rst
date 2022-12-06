@@ -11,7 +11,7 @@ Glossary
 
    Login-node
      A server on the compute cluster that can be anything from the OOD dashboard itself, to a shell, to the file-browser app, etc. 
-     A specific type of compute-node.
+     Runs on the cluster but is not a compute-node.
 
    Web-node
      A term used for when a site or institution has enough funds/personel to run the OOD login on a dedicated server and not on a login-node. 
