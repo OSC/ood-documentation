@@ -18,4 +18,4 @@ Glossary
      this is.
 
    PUN
-    The Per User Nginx. Used to namespace a user through a process ID.
+    The Per User Nginx. An Nginx instance running as the user.
