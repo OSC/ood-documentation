@@ -15,7 +15,6 @@ Glossary
 
    Web-node
      A term used for when a site or institution has enough funds/personel to run the OOD login on a dedicated server and not on a login-node. 
-     This term is a bit wonky and I'd recommend avoiding it as it only creates confusion. Better to say "Dedicated server" to convey what 
      this is.
 
    PUN
