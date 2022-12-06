@@ -93,7 +93,7 @@ instructs the webpage to hide the ``cuda_version`` when the ``standard``
       widget: select
       options:
         - [ 
-            'standard', 'standard' 
+            'standard', 'standard',
             data-hide-cuda-version: true
           ]
         - 'gpu'
