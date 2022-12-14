@@ -53,46 +53,6 @@ Or use the rake task added:
 rake docker:build
 ```
 
-#### pipenv
-
-If you don't want to use Docker, you can also use pipenv.
-
-1. Ensure plantuml and graphviz are installed:
-
-    ```bash
-    # on OS X
-    brew install plantuml
-    brew install graphviz
-    ```
-
-2. Install pipenv and use it to install dependencies in same directory:
-
-    ```bash
-    pip install -g pipenv
-
-    # then in the documentation root directory:
-    WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install
-
-    # or using handy rake task:
-    rake pipenv:install
-    ```
-
-When building the docs, run this command:
-
-```bash
-WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make html
-```
-
-or use the rake task:
-
-```bash
-rake pipenv:build
-
-# or
-
-rake build
-```
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
