@@ -377,14 +377,14 @@ are:
 
        .. code-block:: yaml
 
-          min: null
+          max: null
 
      Example
        Set maximum value of 15
 
        .. code-block:: yaml
 
-          min: 15
+          max: 15
 
 .. describe:: step (Integer, null)
 
