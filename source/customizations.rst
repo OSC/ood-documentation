@@ -258,6 +258,10 @@ Add Menu Items to the Navbar
 
 .. _dashboard-navbar-config:
 
+.. include:: customizations/main-navigation.inc
+.. include:: customizations/help-navigation.inc
+.. include:: customizations/interactive-apps-menu.inc
+
 Control Which Apps Appear in the Dashboard Navbar
 -------------------------------------------------
 
@@ -576,7 +580,7 @@ You can configure specific apps with a string of the type ``router/app_name``.
 For example ``sys/jupyter`` is the system installed app named jupyter.
 
 Secondly you can configure globs like ``sys/*`` to pin all system installed apps. Or
-Maybe ``sys/minimal_*`` to pin all system installed apps that being with 'minimal'.
+Maybe ``sys/minimal_*`` to pin all system installed apps that begin with 'minimal'.
 
 Lastly you can choose to pin apps based off of fields in their ``manifest.yml`` file.
 You can match by type, category, subcategory and metadata fields.  These matches are
@@ -1224,3 +1228,6 @@ Steps to enable the XDMoD reports in the OnDemand Dashboard:
       :align: center
    .. figure:: /images/customization_xdmod_jobcomposer_warning_2.png
       :align: center
+  
+
+.. include:: customizations/custom-pages.inc
