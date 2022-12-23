@@ -176,7 +176,8 @@ Configuration Properties with profile support
 
 .. describe:: profile_links: (Array<Object>, [])
 
-  List of profiles to display in the ``Help`` menu. This will allow users to change profiles.
+  List of profiles to display in the ``Help`` navigation menu. This will allow users to change profiles.
+  For more information see the :ref:`profile selection documentation. <profiles_selection_guide>`
 
   Default
     Empty list, no profile links will be shown.
