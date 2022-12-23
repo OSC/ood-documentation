@@ -7,59 +7,21 @@ Most of the configurations are now held within yml files in the ``/etc/ood/confi
 Open OnDemand will read all the ``.yml`` and ``.yml.erb`` files within this directory for
 configurations.
 
-Profiles
--------------
-
-For more complex requirements, these configurations can be organized using profiles. With profiles,
-administrators can create different configuration settings within the same OnDemand installation.
-The selection of a profile can be configured to be manually selected by the user or automatically
-selected based on request data like the domain.
-
-To create a new profile, we simply have to add a new configuration entry under the ``profiles`` key:
-
-.. code-block:: yaml
-
-  profiles:
-    profile_name:
-      config_property: config_value
-
-
-
-To simplify the configuration, OnDemand uses an inheritance and override approach for profiles.
-The root configuration provides default properties that all profiles inherit.
-Then, each profile can overridde these properties or define new ones as needed.
-
-The example below shows how the root profile defines a value for ``pinned_apps`` and ``pinned_apps_menu_length``.
-The ``rstudio_group`` profile inherits the property value for ``pinned_apps_menu_length``,
-and overrides the value for ``pinned_apps`` just to the RStudio application.
-As well, it defines the property ``pinned_apps_group_by``.
-
-.. code-block:: yaml
-
-  pinned_apps: [sys/*]
-  pinned_apps_menu_length: 10
-
-  profiles:
-    rstudio_group:
-      pinned_apps: [sys/rstudio]
-      pinned_apps_group_by: "department"
-
-.. note::
-
-   The profile based configuration is an experimental feature. Not all properties support profile based configuration.
-   See the list below for the list of supported properties.
-
 To use a different directory other than this use the ``OOD_CONFIG_D_DIRECTORY`` environment variable
 in the ``/etc/ood/config/apps/dashboard/env`` file.
 
-Profile Configuration Properties
---------------------------------
+These properties support profile based configuration, see the :ref:`profile configuration documentation. <profiles_guide>`
 
-.. describe:: dashboard_header_img_logo (String, null)
+.. _profile_properties:
+
+Configuration Properties with profile support
+---------------------------------------------
+
+.. describe:: dashboard_header_img_logo: (String, null)
 
     The url to the logo image for the main navigation. If no logo is configured, the ``dashboard_title``
     property will be used as text.
-
+      
     Default
       No logo image will be shown, just the ``dashboard_title`` text.
     Example
@@ -83,7 +45,7 @@ Profile Configuration Properties
 
         dashboard_title: "My Institution"
 
-.. describe:: dashboard_logo (String, null)
+.. describe:: dashboard_logo: (String, null)
 
   The url to the logo image for the homepage welcome message. If no logo is configured, the ``dashboard_title``
   property will be used as text.
@@ -97,7 +59,7 @@ Profile Configuration Properties
 
       dashboard_logo: "/public/welcome.png"
 
-.. describe:: dashboard_logo_height (Integer, null)
+.. describe:: dashboard_logo_height: (Integer, null)
 
     HTML image overide for the height of the welcome message logo image configured with ``dashboard_logo``
 
@@ -110,7 +72,7 @@ Profile Configuration Properties
 
         dashboard_logo_height: "150"
 
-.. describe:: disable_dashboard_logo (Bool, false)
+.. describe:: disable_dashboard_logo: (Bool, false)
 
     Whether to show the ``dashboard_logo`` property in the homepage welcome message.
 
@@ -123,7 +85,7 @@ Profile Configuration Properties
 
         disable_dashboard_logo: true
 
-.. describe:: public_url (String, '/public')
+.. describe:: public_url: (String, '/public')
 
   The prefix url used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
 
@@ -136,7 +98,7 @@ Profile Configuration Properties
 
       public_url: "/public/resources"
 
-.. describe:: brand_bg_color (String, null)
+.. describe:: brand_bg_color: (String, null)
 
   The CSS color override for the main navbar background. Any valid CSS color value can be used.
 
@@ -149,7 +111,7 @@ Profile Configuration Properties
 
       brand_bg_color: "#007FFF"
 
-.. describe:: brand_link_active_bg_color (String, null)
+.. describe:: brand_link_active_bg_color: (String, null)
 
   The CSS color override for background of the active navigation link in the navbar.
   Any valid CSS color value can be used.
@@ -175,7 +137,7 @@ Profile Configuration Properties
   Example
     See the  :ref:`dashboard layout documentation <dashboard_custom_layout>`
   
-.. describe:: pinned_apps (Array<Object>, null)
+.. describe:: pinned_apps: (Array<Object>, null)
 
   An array of pinned app objects specifying what apps to pin to the dashboard.
   See the :ref:`documentation on pinned apps <dashboard_pinned_apps>` for details
@@ -338,7 +300,6 @@ Profile Configuration Properties
   Example
     See the  :ref:`custom pages documentation <custom_pages_guide>`
 
-
 Configuration Properties
 ------------------------
 
@@ -347,21 +308,146 @@ Configuration Properties
   Specify if the Files App has a shell button to open files in.
 
   Default
-    Files App has access to shell button.
-
-    .. code-block:: yaml
-
-      files_enable_shell_button: true
-
+    True. Files App has access to shell button.
   Example
     Disable the terminal button in the Files App.
 
     .. code-block:: yaml
 
       files_enable_shell_button: false
+  
+.. describe:: csp_enabled: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      csp_enabled: true
+  
+.. describe:: csp_report_only: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      csp_report_only: true
+
+.. describe:: bc_dynamic_js: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      bc_dynamic_js: true
+
+.. describe:: per_cluster_dataroot: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      per_cluster_dataroot: true
+
+.. describe:: file_navigator: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      file_navigator: true
+
+.. describe:: jobs_app_alpha: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      jobs_app_alpha: true
+
+.. describe:: files_app_remote_files: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      files_app_remote_files: true
+
+.. describe:: host_based_profiles: (Bool, false)
+
+  Feature flag to enable automatic selection of configuration profiles based on the hostname of the request.
+
+  Default
+    False. Profiles will be selected manually based on the user settings file.
+  Example
+    Enable automatic hostname profile selection.
+
+    .. code-block:: yaml
+
+      host_based_profiles: true
+
+.. describe:: disable_bc_shell: (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      disable_bc_shell: true
+
+.. describe:: cancel_session_enabled: (Bool, false)
+
+  Feature flag to enable the cancellation of active interactive sessions without deleting the session card.
+
+  Default
+    False. Active interactive sessions can only be deleted.
+  Example
+    Enable interactive sessions cancellations.
+
+    .. code-block:: yaml
+
+      cancel_session_enabled: true
 
 .. _module_file_dir:
-.. describe:: module_file_dir (String, null)
+.. describe:: module_file_dir: (String, null)
 
   Specify a directory where module files per cluster exist. This directory
   should have module spider-json output as indicated by the command below.
@@ -370,15 +456,38 @@ Configuration Properties
   ``$LMOD_DIR/spider -o spider-json $MODULEPATH > /some/directory/my_cluster.json``
 
   Default
-    No directory given
-
-    .. code-block:: yaml
-
-      module_file_dir: null
-
+    Null. No directory given
   Example
     Look for json files in the /etc/reporing/modules directory.
 
     .. code-block:: yaml
 
-      module_file_dir: /etc/reporing/modules
+      module_file_dir: "/etc/reporing/modules"
+
+.. describe:: user_settings_file: (String, '.ood')
+
+  The name of the file to store user settings. This file is used to store the selected profile.
+  The path to the file is managed by the configuration variable ``Configuration.dataroot``.
+  This is usually: ``~/ondemand/data/sys/dashboard``
+
+  Default
+    '.ood'.
+  Example
+    Use ``user_settings.txt`` as the file name for user settings.
+
+    .. code-block:: yaml
+
+      user_settings_file: "user_settings.txt"
+
+.. describe:: facl_domain: (String, null)
+
+  TBC
+
+  Default
+    Null
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      facl_domain: "some_value"
