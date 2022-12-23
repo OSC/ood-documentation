@@ -3,6 +3,7 @@
 Customizations
 ==============
 
+.. include:: customizations/profiles.inc
 
 Announcements
 -------------
