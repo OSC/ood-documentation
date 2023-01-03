@@ -10,7 +10,7 @@ Configuration Profiles
 
 Configuration properties can be organized in a hierarchy using profiles. With profiles,
 administrators can create different configuration settings within the same OnDemand installation.
-A profile can be pre-selected or dinamically changed while using the Dashboard application.
+A profile can be pre-selected or dynamically changed while using the Dashboard application.
 
 To define profile properties, we have group them under a profile name within the ``profiles`` keyword.
 Multiple profiles can be created using different files, the configuration
@@ -48,7 +48,7 @@ Manual Profile Selection
 
 The selection of a profile can be done manually by the user or automatically based on request data.
 
-Links can be added the Help naviagtion menu to dinamically switch between profiles.
+Links can be added the Help naviagtion menu to dynamically switch between profiles.
 These links can be configured using the configuration property ``link_profiles``.
 
 .. code-block:: yaml
