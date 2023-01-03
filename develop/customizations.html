@@ -1105,12 +1105,17 @@ can be changed with the environment variable <code class="docutils literal notra
 <span id="id9"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
 <p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.</p>
-<p>You can do this by setting Open OnDemand in ‘Maintenance Mode’. Apache will serve
-<code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/index.html</span></code> which you can change or brand to be your own. Changes
-to this file will persist through upgrades.</p>
-<p>Apache returns this html file and a 503 response code to all users who’s IP does not match one of the
-configured whitelist regular expressions.  The whitelist is to allow staff, localhost or a subset of
-your users access while restricting others.</p>
+<p>You can do this by setting Open OnDemand in ‘Maintenance Mode’.
+While Maintenance mode is active, Apache will not serve requests for paths outside the
+<code class="docutils literal notranslate"><span class="pre">/public/maintenance/*</span></code> wildcard. Instead, it will serve the <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/index.html</span></code>
+file, which you can change or brand to be your own. Changes to this file will persist through upgrades.
+Any assets (e.g., images, stylesheets, or javascript) needed by the HTML file should be placed
+in the <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/</span></code> directory. You can also put symbolic links into the
+<code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/</span></code> directory, if you want to reuse assets located elsewhere in your
+file system.</p>
+<p>While in maintenance mode, Apache returns the HTML file and a 503 response code to all users whose
+IP does not match one of the configured whitelist regular expressions.
+The whitelist is to allow staff, localhost or a subset of your users access while restricting others.</p>
 <p>In this example we allow access to anyone from <code class="docutils literal notranslate"><span class="pre">192.168.1..*</span></code> which is the 192.168.1.0/24 CIDR and
 the single IP ‘10.0.0.1’.</p>
 <p>These are the settings you’ll need for this functionality.</p>
@@ -1335,7 +1340,7 @@ sudo systemctl restart ondemand-dex.service
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2022, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 
