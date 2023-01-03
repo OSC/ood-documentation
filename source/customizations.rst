@@ -958,13 +958,18 @@ Maintenance Mode
 As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.
 
-You can do this by setting Open OnDemand in 'Maintenance Mode'. Apache will serve
-``/var/www/ood/public/maintenance/index.html`` which you can change or brand to be your own. Changes
-to this file will persist through upgrades.
+You can do this by setting Open OnDemand in 'Maintenance Mode'.
+While Maintenance mode is active, Apache will not serve requests for paths outside the
+``/public/maintenance/*`` wildcard. Instead, it will serve the ``/var/www/ood/public/maintenance/index.html``
+file, which you can change or brand to be your own. Changes to this file will persist through upgrades.
+Any assets (e.g., images, stylesheets, or javascript) needed by the HTML file should be placed
+in the ``/var/www/ood/public/maintenance/`` directory. You can also put symbolic links into the
+``/var/www/ood/public/maintenance/`` directory, if you want to reuse assets located elsewhere in your
+file system.
 
-Apache returns this html file and a 503 response code to all users who's IP does not match one of the
-configured whitelist regular expressions.  The whitelist is to allow staff, localhost or a subset of
-your users access while restricting others.
+While in maintenance mode, Apache returns the HTML file and a 503 response code to all users whose
+IP does not match one of the configured whitelist regular expressions.
+The whitelist is to allow staff, localhost or a subset of your users access while restricting others.
 
 In this example we allow access to anyone from ``192.168.1..*`` which is the 192.168.1.0/24 CIDR and
 the single IP '10.0.0.1'.
