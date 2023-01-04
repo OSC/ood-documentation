@@ -17,7 +17,7 @@ These properties support profile based configuration, see the :ref:`profile conf
 Configuration Properties with profile support
 ---------------------------------------------
 
-.. describe:: dashboard_header_img_logo: (String, null)
+.. describe:: dashboard_header_img_logo (String, null)
 
     The url to the logo image for the main navigation. If no logo is configured, the ``dashboard_title``
     property will be used as text.
@@ -31,7 +31,7 @@ Configuration Properties with profile support
 
         dashboard_header_img_logo: "/public/logo.png"
 
-.. describe:: dashboard_title: (String, 'Open OnDemand')
+.. describe:: dashboard_title (String, 'Open OnDemand')
 
     The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
     this property will be used as the HTML image title.
@@ -45,7 +45,7 @@ Configuration Properties with profile support
 
         dashboard_title: "My Institution"
 
-.. describe:: dashboard_logo: (String, null)
+.. describe:: dashboard_logo (String, null)
 
   The url to the logo image for the homepage welcome message. If no logo is configured, the ``dashboard_title``
   property will be used as text.
@@ -59,7 +59,7 @@ Configuration Properties with profile support
 
       dashboard_logo: "/public/welcome.png"
 
-.. describe:: dashboard_logo_height: (Integer, null)
+.. describe:: dashboard_logo_height (Integer, null)
 
     HTML image overide for the height of the welcome message logo image configured with ``dashboard_logo``
 
@@ -72,7 +72,7 @@ Configuration Properties with profile support
 
         dashboard_logo_height: "150"
 
-.. describe:: disable_dashboard_logo: (Bool, false)
+.. describe:: disable_dashboard_logo (Bool, false)
 
     Whether to show the ``dashboard_logo`` property in the homepage welcome message.
 
@@ -85,7 +85,7 @@ Configuration Properties with profile support
 
         disable_dashboard_logo: true
 
-.. describe:: public_url: (String, '/public')
+.. describe:: public_url (String, '/public')
 
   The prefix url used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
 
@@ -98,7 +98,7 @@ Configuration Properties with profile support
 
       public_url: "/public/resources"
 
-.. describe:: brand_bg_color: (String, null)
+.. describe:: brand_bg_color (String, null)
 
   The CSS color override for the main navbar background. Any valid CSS color value can be used.
 
@@ -111,7 +111,7 @@ Configuration Properties with profile support
 
       brand_bg_color: "#007FFF"
 
-.. describe:: brand_link_active_bg_color: (String, null)
+.. describe:: brand_link_active_bg_color (String, null)
 
   The CSS color override for background of the active navigation link in the navbar.
   Any valid CSS color value can be used.
@@ -125,7 +125,7 @@ Configuration Properties with profile support
 
       brand_link_active_bg_color: "#007FFF"
 
-.. describe:: dashboard_layout: (Object, null)
+.. describe:: dashboard_layout (Object, null)
 
   Specify the dashboard layout.  Rearrange existing widgets
   and add more custom widgets. See the 
@@ -137,7 +137,7 @@ Configuration Properties with profile support
   Example
     See the  :ref:`dashboard layout documentation <dashboard_custom_layout>`
   
-.. describe:: pinned_apps: (Array<Object>, null)
+.. describe:: pinned_apps (Array<Object>, null)
 
   An array of pinned app objects specifying what apps to pin to the dashboard.
   See the :ref:`documentation on pinned apps <dashboard_pinned_apps>` for details
@@ -148,7 +148,7 @@ Configuration Properties with profile support
   Example
     See the  :ref:`pinned apps documentation <dashboard_pinned_apps>`
 
-.. describe:: pinned_apps_menu_length: (Integer, 6)
+.. describe:: pinned_apps_menu_length (Integer, 6)
 
     The maximum number of pinned apps in the 'Apps' menu bar.
 
@@ -161,7 +161,7 @@ Configuration Properties with profile support
 
         pinned_apps_menu_length: 10
 
-.. describe:: pinned_apps_group_by: (String, null)
+.. describe:: pinned_apps_group_by (String, null)
 
   Group the pinned apps icons by this field in the dashboard.
 
@@ -174,7 +174,7 @@ Configuration Properties with profile support
 
       pinned_apps_group_by: "category"
 
-.. describe:: profile_links: (Array<Object>, [])
+.. describe:: profile_links (Array<Object>, [])
 
   List of profiles to display in the ``Help`` navigation menu. This will allow users to change profiles.
   For more information see the :ref:`profile selection documentation. <profiles_selection_guide>`
@@ -194,7 +194,7 @@ Configuration Properties with profile support
           name: "OnDemand Profile"
           icon: "user"
 
-.. describe:: custom_css_files: (Array<String>, [])
+.. describe:: custom_css_files (Array<String>, [])
 
   List of relative URLs to the CSS files to include in all Dashboard pages.
   These CSS files can be used to customize the look and feel of the Dashboard.
@@ -210,7 +210,7 @@ Configuration Properties with profile support
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
 
-.. describe:: show_all_apps_link: (Bool, false)
+.. describe:: show_all_apps_link (Bool, false)
 
   Whether to show the ``All Apps`` link in the navbar.
   This links to the Dashboard page showing all system installed applications.
@@ -224,7 +224,7 @@ Configuration Properties with profile support
 
       show_all_apps_link: true
 
-.. describe:: nav_categories: (Array<String>, NavConfig.categories)
+.. describe:: nav_categories (Array<String>, NavConfig.categories)
 
   List of application categories used to sort and filter the applications that appear in the navbar.
 
@@ -238,7 +238,7 @@ Configuration Properties with profile support
 
       nav_categories: ["Apps", "Files", "Jobs"]
 
-.. describe:: navbar_type: (String, 'dark')
+.. describe:: navbar_type (String, 'dark')
   
   The navbar theme type. There are 2 themes, ``light`` and ``dark``.
   The selected theme will update the colors of the navbar.
@@ -252,7 +252,7 @@ Configuration Properties with profile support
 
       navbar_type: "light"
 
-.. describe:: nav_bar: (Array<Object>, [])
+.. describe:: nav_bar (Array<Object>, [])
 
   An array of navigation items to create a custom navbar.
   This property sets the navigation items for the left hand side navigation menu in the header.
@@ -264,7 +264,7 @@ Configuration Properties with profile support
   Example
     See the  :ref:`custom navigation documentation <navbar_guide>`
 
-.. describe:: help_bar: (Array<Object>, [])
+.. describe:: help_bar (Array<Object>, [])
 
   An array of navigation items to create a custom help navigation.
   This property sets the navigation items for the right hand side navigation menu on the header.
@@ -276,7 +276,7 @@ Configuration Properties with profile support
   Example
     See the  :ref:`custom help navigation documentation <helpbar_guide>`
 
-.. describe:: interactive_apps_menu: (Object, {})
+.. describe:: interactive_apps_menu (Object, {})
 
   A single navigation item to create a custom interactive apps menu.
   This property sets the interactive applications to display in the left hand side menu
@@ -289,7 +289,7 @@ Configuration Properties with profile support
   Example
     See the  :ref:`interactive apps menu documentation <interactive_apps_menu_guide>`
 
-.. describe:: custom_pages: (Hash<String, Object>, {})
+.. describe:: custom_pages (Hash<String, Object>, {})
 
   A hash with the definition of the layouts for the configured custom pages.
   The key is a string with the page code. The value is the custom page layout definition.
@@ -304,7 +304,7 @@ Configuration Properties with profile support
 Configuration Properties
 ------------------------
 
-.. describe:: files_enable_shell_button: (Bool, true)
+.. describe:: files_enable_shell_button (Bool, true)
 
   Specify if the Files App has a shell button to open files in.
 
@@ -317,7 +317,7 @@ Configuration Properties
 
       files_enable_shell_button: false
   
-.. describe:: csp_enabled: (Bool, false)
+.. describe:: csp_enabled (Bool, false)
 
   TBC
 
@@ -330,7 +330,7 @@ Configuration Properties
 
       csp_enabled: true
   
-.. describe:: csp_report_only: (Bool, false)
+.. describe:: csp_report_only (Bool, false)
 
   TBC
 
@@ -343,7 +343,7 @@ Configuration Properties
 
       csp_report_only: true
 
-.. describe:: bc_dynamic_js: (Bool, false)
+.. describe:: bc_dynamic_js (Bool, false)
 
   TBC
 
@@ -356,7 +356,7 @@ Configuration Properties
 
       bc_dynamic_js: true
 
-.. describe:: per_cluster_dataroot: (Bool, false)
+.. describe:: per_cluster_dataroot (Bool, false)
 
   TBC
 
@@ -369,7 +369,7 @@ Configuration Properties
 
       per_cluster_dataroot: true
 
-.. describe:: file_navigator: (Bool, false)
+.. describe:: file_navigator (Bool, false)
 
   TBC
 
@@ -382,7 +382,7 @@ Configuration Properties
 
       file_navigator: true
 
-.. describe:: jobs_app_alpha: (Bool, false)
+.. describe:: jobs_app_alpha (Bool, false)
 
   TBC
 
@@ -395,7 +395,7 @@ Configuration Properties
 
       jobs_app_alpha: true
 
-.. describe:: files_app_remote_files: (Bool, false)
+.. describe:: files_app_remote_files (Bool, false)
 
   TBC
 
@@ -408,7 +408,7 @@ Configuration Properties
 
       files_app_remote_files: true
 
-.. describe:: host_based_profiles: (Bool, false)
+.. describe:: host_based_profiles (Bool, false)
 
   Feature flag to enable automatic selection of configuration profiles based on the hostname of the request.
 
@@ -421,7 +421,7 @@ Configuration Properties
 
       host_based_profiles: true
 
-.. describe:: disable_bc_shell: (Bool, false)
+.. describe:: disable_bc_shell (Bool, false)
 
   TBC
 
@@ -434,7 +434,7 @@ Configuration Properties
 
       disable_bc_shell: true
 
-.. describe:: cancel_session_enabled: (Bool, false)
+.. describe:: cancel_session_enabled (Bool, false)
 
   Feature flag to enable the cancellation of active interactive sessions without deleting the session card.
 
@@ -448,7 +448,7 @@ Configuration Properties
       cancel_session_enabled: true
 
 .. _module_file_dir:
-.. describe:: module_file_dir: (String, null)
+.. describe:: module_file_dir (String, null)
 
   Specify a directory where module files per cluster exist. This directory
   should have module spider-json output as indicated by the command below.
@@ -465,7 +465,7 @@ Configuration Properties
 
       module_file_dir: "/etc/reporing/modules"
 
-.. describe:: user_settings_file: (String, '.ood')
+.. describe:: user_settings_file (String, '.ood')
 
   The name of the file to store user settings. This file is used to store the selected profile.
   The path to the file is managed by the configuration variable ``Configuration.dataroot``.
@@ -480,7 +480,7 @@ Configuration Properties
 
       user_settings_file: "user_settings.txt"
 
-.. describe:: facl_domain: (String, null)
+.. describe:: facl_domain (String, null)
 
   TBC
 
