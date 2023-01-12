@@ -49,23 +49,27 @@ Manual Profile Selection
 The selection of a profile can be done manually by the user or automatically based on request data.
 
 Links can be added the Help naviagtion menu to dynamically switch between profiles.
-These links can be configured using the configuration property ``link_profiles``.
+These links can be configured using the configuration property ``profile_links``.
 
 .. code-block:: yaml
 
   profile_links:
-    - id: ""
-      name: "Root Profile"
-      icon: "cog"
-    - id: rstudio_group
-      name: "Rstudio Profile"
-      icon: "user"
-    - id: jupyter_group
-      name: "Jupiter Profile"
-      icon: "user"
+    - profile: ""
+      title: "Root Profile"
+      icon_uri: "fas://cog"
+    - profile: rstudio_group
+      title: "Rstudio Profile"
+      icon_uri: "fas://user"
+    - profile: jupyter_group
+      title: "Jupiter Profile"
+      icon_uri: "fas://user"
 
 .. figure:: /images/def-profiles-links.png
    :align: center
+
+.. tip::
+    If you require to update the ``Profiles`` header text, use the translation properties to set a new value.
+    :ref:`See the customize text documentation <customization_localization>`
 
 
 Automatic Profile Selection
