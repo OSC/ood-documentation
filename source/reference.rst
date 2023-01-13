@@ -14,8 +14,6 @@ make up the Open OnDemand infrastructure.
    reference/files/ood-portal-yml
    reference/files/nginx-stage-yml
    reference/files/ondemand-d-ymls
-   how-tos/app-development/interactive/submit
-   how-tos/app-development/interactive/form
 
 .. toctree::
    :maxdepth: 1
