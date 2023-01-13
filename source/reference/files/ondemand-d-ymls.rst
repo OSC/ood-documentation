@@ -123,7 +123,7 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
   Specify a filter for the :ref:`automatic form option <auto-bc-form-options>` ``auto_groups``.
 
     Default
-    No filter given. All Unix groups will be shown.
+      No filter given. All Unix groups will be shown.
 
     .. code-block:: yaml
 
@@ -135,3 +135,22 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
     .. code-block:: yaml
 
       auto_groups_filter: '^P.+'
+
+.. _remote_files_enabled:
+.. describe:: remote_files_enabled (Boolean, false)
+
+  Enable remote file browsing, editing and downloading.
+
+  Default
+    Remote files are disabled.
+
+  .. code-block:: yaml
+
+    remote_files_enabled: false
+
+  Example
+    Enable remote filesystems through ``rclone``.
+
+    .. code-block:: yaml
+
+      remote_files_enabled: true
