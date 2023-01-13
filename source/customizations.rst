@@ -1158,8 +1158,8 @@ Changes are applied by running ``update_ood_portal`` and restarting the ``ondema
 
 .. _xdmod_integration:
 
-XDMoD Integration (BETA)
-------------------------
+XDMoD Integration
+-----------------
 
 
 XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.
