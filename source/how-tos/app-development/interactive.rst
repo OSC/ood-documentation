@@ -39,3 +39,4 @@ Each of these files/directories are described below in their respective stage.
    interactive/template
    interactive/submit
    interactive/view
+   interactive/sub-apps
