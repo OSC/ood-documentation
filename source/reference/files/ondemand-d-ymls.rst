@@ -111,8 +111,8 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
       module_file_dir: null
 
   Example
-    Look for json files in the /etc/reporing/modules directory.
+    Look for json files in the /etc/reporting/modules directory.
 
     .. code-block:: yaml
 
-      module_file_dir: /etc/reporing/modules
+      module_file_dir: /etc/reporting/modules
