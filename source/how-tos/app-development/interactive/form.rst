@@ -174,12 +174,26 @@ bc_email_on_started
   This attribute sets value of `OodCore::Job::Script#email_on_started`_
   depending on whether the user checked the box or not.
 
+
+.. _auto-bc-form-options:
+
+Automatic Predefined Attributes
+````````````````````````````````
+
+Automatic attributes automatically generate lists or values.  For example
+``bc_queue`` above will generate a ``text_field`` where the user has to
+input the queue name themselves.
+
+``auto_queue`` on the other hand will automatically build a list of queues
+for the user to choose from without intervention from the administrator
+or the user.
+
 auto_primary_group
   This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
   primary group of the user.  No choice will be given to the user.
 
 auto_module_<MODULE>
-  auto_module_<MODULE> will generate a list of modules in a dropdown list.
+  This will generate a list of modules in a ``select`` widget.
   For example ``auto_module_matlab`` will automatically populate a dropdown
   list of every single ``matlab`` version available.
 
@@ -189,6 +203,26 @@ auto_module_<MODULE>
   If you have dynamic form widgets enabled, the option list will be cluster aware.
   Meaning only versions appropriate to a given cluster will be shown when that
   cluster is chosen.
+
+auto_groups
+  This will automatically generate a ``select`` widget populated with a list of the Unix
+  groups the user is currently in. Administrators can configure :ref:`filter for autogroups <auto_groups_filter>`
+  to limit the groups shown.
+
+auto_queue
+  This will generate a ``select`` widget list of all the queues available to the user.
+
+  .. warning::
+    We only have support for Slurm queues (partitions) at this time.
+
+auto_accounts
+  This will generate a ``select`` widget list of all the accounts available to the user.
+
+  .. warning::
+    We only have support for Slurm accounts at this time.
+
+auto_qos
+  Coming soon!
 
 .. _`oodcore::job::script#accounting_id`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id
 .. _`oodcore::job::script#queue_name`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name

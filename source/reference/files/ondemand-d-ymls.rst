@@ -116,3 +116,22 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
     .. code-block:: yaml
 
       module_file_dir: /etc/reporting/modules
+
+.. _auto_groups_filter:
+.. describe:: auto_groups_filter (String, null)
+
+  Specify a filter for the :ref:`automatic form option <auto-bc-form-options>` ``auto_groups``.
+
+    Default
+    No filter given. All Unix groups will be shown.
+
+    .. code-block:: yaml
+
+      auto_groups_filter: null
+
+  Example
+    Only show Unix groups that start with ``P``.
+
+    .. code-block:: yaml
+
+      auto_groups_filter: '^P.+'
