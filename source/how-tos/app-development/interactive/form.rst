@@ -9,7 +9,7 @@ to start the interactive application.
 
 Let's look at a simple example of how the main components ``form`` and ``attributes`` work.
 ``form`` is a list of form choices for the application. ``attributes`` is then specifying
-_what_ those items in ``form`` are, whether they're number fields or choices and so on.
+*what* those items in ``form`` are, whether they're number fields or choices and so on.
 
 .. code-block:: yaml
 
