@@ -13,10 +13,12 @@ In fact, this is how the ``bc_desktop`` application works. Open OnDemand
 ships the base app and sites provide sub apps with configurations specific
 to their site.
 
-Pre-Set Apps
-............
+.. _quick-launch-apps:
 
-Pre-Set apps are a special version of Sub-Apps that have all their
+Quick Launch Apps
+..................
+
+Quick launch apps are a special version of Sub-Apps that have all their
 from options with hard coded values. Indeed, they're not really options
 at all as users will not be able to *choose* anything.
 

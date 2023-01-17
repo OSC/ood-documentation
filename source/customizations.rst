@@ -1225,6 +1225,9 @@ Steps to enable the XDMoD reports in the OnDemand Dashboard:
    .. figure:: /images/customization_xdmod_jobcomposer_warning_2.png
       :align: center
 
+
+.. _remote-file-systems:
+
 Accessing Remote File Systems
 -----------------------------
 
