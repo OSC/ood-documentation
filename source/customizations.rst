@@ -3,6 +3,7 @@
 Customizations
 ==============
 
+.. include:: customizations/profiles.inc
 
 Announcements
 -------------
@@ -87,49 +88,65 @@ You can customize the logo, favicon, title, and navbar colors of OnDemand.
    :align: center
 
 
-We recommend setting these environment variables in ``/etc/ood/config/nginx_stage.yml`` as YAML mappings (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env``. Alternatively you can set these in the env files of the dashboard and the apps. Currently only the dashboard uses the colors in the navbar.
-
+We recommend setting these values using the :ref:`OnDemand configuration properties <ondemand-d-ymls>`.
+Currently only the dashboard uses the colors in the navbar.
 
 .. list-table:: Branding
    :header-rows: 1
    :stub-columns: 1
 
    * - Feature
-     - Environment Variable
+     - Property
      - Details
    * - Title
-     - OOD_DASHBOARD_TITLE
-     - The title appears in the navbar and is controlled by the environment variable ``$OOD_DASHBOARD_TITLE``. The default value is "Open OnDemand".
+     - dashboard_title
+     - The title appears in the navbar and is controlled by the property ``dashboard_title``. The default value is "Open OnDemand".
    * - Logo
-     - OOD_DASHBOARD_LOGO
-     - The default value for ``OOD_DASHBOARD_LOGO`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.  SVG logo format is also supported.
+     - dashboard_logo
+     - The default value for ``dashboard_logo`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.  SVG logo format is also supported.
    * - Logo height
-     - OOD_DASHBOARD_LOGO_HEIGHT
+     - dashboard_logo_height
      - The CSS height of the dashboard logo.
    * - Favicon
-     - OOD_PUBLIC_URL
-     - The favicon is expected to exist at the path ``$OOD_PUBLIC_URL/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
+     - public_url
+     - The favicon is expected to exist at the path ``$public_url/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
    * - Brand background color
-     - OOD_BRAND_BG_COLOR
+     - brand_bg_color
      - Controls the background color of the navbar in the dashboard
    * - Brand foreground color
-     - OOD_BRAND_LINK_ACTIVE_BG_COLOR
+     - brand_link_active_bg_color
      - Controls the background color the active link in the navbar in the dashboard
    * - Replace header title with logo
-     - OOD_DASHBOARD_HEADER_IMG_LOGO
+     - dashboard_header_img_logo
      - Value should be url to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
    * - Use white text on black background for navbar.
-     - OOD_NAVBAR_TYPE
+     - navbar_type
      - By default we use ``inverse`` for this value, which specifies to use `Bootstrap 3's inverted navbar <https://getbootstrap.com/docs/3.3/components/#navbar-inverted>`_ where text is white and background is black (or dark grey). You can set this to ``default`` to use black text on light grey background if it fits your branding better.
 
+.. note:: It is possible to configure these settings using environment variables, although this is deprecated.
+          For information about the properties and environment variables, see the :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
 
 .. figure:: /images/dashboard_navbar_branding_bluered.png
    :align: center
 
-   Nav bar if I set ``OOD_BRAND_BG_COLOR`` to ``#0000ff`` and ``OOD_BRAND_LINK_ACTIVE_BG_COLOR`` to ``#ff0000`` and ``OOD_DASHBOARD_TITLE`` to ``OSC OnDemand``
+   Nav bar if I set ``brand_bg_color`` to ``#0000ff`` and ``brand_link_active_bg_color`` to ``#ff0000`` and ``dashboard_title`` to ``OSC OnDemand``
 
+Custom CSS files
+................
 
-.. warning:: If setting in nginx_stage.yml, careful to set the value using quotes i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
+For more control on the look and feel of the dashboard pages, use custom CSS files.
+These CSS files will be added to all dashboard pages and loaded last to have precedence over default styles.
+
+Add your CSS file references to the ``custom_css_files`` array property.
+Drop the files into the Apache public assets folder, the default location is: ``/var/www/ood/public``.
+The system will prepend the ``/public`` URL path, based on the ``public_url`` property, to load the files correctly.
+
+**Example:** to load the following CSS file: ``/var/www/ood/public/myfolder/custom-branding.css``, add the configuration below.
+This will result in a CSS tag added to all dashboard pages with the path: ``/public/myfolder/custom-branding.css``.
+
+.. code-block:: yaml
+
+  custom_css_files: ["/myfolder/custom-branding.css"]
 
 Add URLs to Help Menu
 ---------------------
@@ -257,6 +274,9 @@ Add Menu Items to the Navbar
     new_window: true   # open link in new browser window or same browser window.
 
 .. _dashboard-navbar-config:
+
+.. include:: customizations/main-navigation.inc
+.. include:: customizations/interactive-apps-menu.inc
 
 Control Which Apps Appear in the Dashboard Navbar
 -------------------------------------------------
@@ -576,7 +596,7 @@ You can configure specific apps with a string of the type ``router/app_name``.
 For example ``sys/jupyter`` is the system installed app named jupyter.
 
 Secondly you can configure globs like ``sys/*`` to pin all system installed apps. Or
-Maybe ``sys/minimal_*`` to pin all system installed apps that being with 'minimal'.
+Maybe ``sys/minimal_*`` to pin all system installed apps that begin with 'minimal'.
 
 Lastly you can choose to pin apps based off of fields in their ``manifest.yml`` file.
 You can match by type, category, subcategory and metadata fields.  These matches are
@@ -643,6 +663,29 @@ list, simply increase the length with the option below.
   pinned_apps_menu_length: 6        # the default number of items in the dropdown menu list
   pinned_apps_group_by: category    # defaults to nil, no grouping
 
+Pinned Apps customizations
+..........................
+
+To customize the text, icon, or color of the pinned app tile,
+use the ``tile`` configuration property in the application ``manifest`` or ``form``.
+The ``form`` values will take precedence over any set in the ``manifest``.
+All the values are optional and any set will override the default from the application.
+
+.. code:: yaml
+
+  tile:
+    title: "Custom Title"
+    icon_uri: fa://desktop
+    border_color: "red"
+    sub_caption: |
+      Custom Text Line 1
+      Text Line 2
+      Text Line 3
+
+The CSS for the pinned app tiles has been optimized to support upto three lines of text for the ``sub_caption`` property.
+
+.. figure:: /images/custom_pinned_apps.png
+
 .. _dashboard_custom_layout:
 
 Custom layouts in the dashboard
@@ -655,6 +698,7 @@ In it's simplest form this feature allows for a rearrangement of existing widget
 of 2.0 the existing widgets are:
 
 - ``pinned_apps`` - Pinned apps described above
+- ``sessions`` - The three most recent active interactive sessions
 - ``motd`` - the Message of the Day
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
@@ -1224,6 +1268,7 @@ Steps to enable the XDMoD reports in the OnDemand Dashboard:
       :align: center
    .. figure:: /images/customization_xdmod_jobcomposer_warning_2.png
       :align: center
+<<<<<<< HEAD
 
 
 .. _remote-file-systems:
@@ -1243,3 +1288,8 @@ that Open OnDemand is installed. You also have to enable the feature through
 the :ref:`configuration entry for enabling remote filesystems <remote_files_enabled>`.
 
 .. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
+=======
+  
+
+.. include:: customizations/custom-pages.inc
+>>>>>>> develop
