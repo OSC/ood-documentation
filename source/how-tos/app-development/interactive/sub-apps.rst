@@ -13,6 +13,21 @@ In fact, this is how the ``bc_desktop`` application works. Open OnDemand
 ships the base app and sites provide sub apps with configurations specific
 to their site.
 
+The way it works is this: Let's say you  have an existing application in ``/var/www/ood/apps/sys/my_app``.
+
+You have 2 options for supplying sub-app overrides.
+
+  * Place new ``form.yml`` files in ``/etc/ood/config/apps/my_app``.
+  * OR provide new ``form.yml`` files in  ``/var/www/ood/apps/sys/my_app/local``.
+
+There are pros and cons to each scheme. With the former, you sperate the overriedes (the sub-apps)
+and the actuall app. The subapps residing in ``/etc/ood`` and the actual apps residing in ``/var/www``.
+This would allow you to update one without having to update the other.
+
+With latter scheme you keep the overrides with the main application itself. This has the benefit
+of having everything in the same place, perhaps a git repository so that the apps (the main app and
+the sub-app) get updated together.
+
 .. _quick-launch-apps:
 
 Quick Launch Apps
