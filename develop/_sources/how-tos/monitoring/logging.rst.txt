@@ -79,7 +79,9 @@ Batch Connect, or Frame-renderer, all start from the root of:
 
 :file:`~/ondemand/data/sys/`
 
-**Batch Connect Apps**
+.. _interactive-app-logs:
+
+**Interactive Apps**
 
 User session data for batch connect apps can be seen from a *user's* home directory at:
 

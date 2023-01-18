@@ -134,9 +134,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#automatic-form-options">Automatic Form Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-remote-files">Support for remote files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quick-launch-apps">Quick Launch Apps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
 </ul>
@@ -233,9 +235,11 @@
 </div>
 <p>Highlights in 2.1:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#dynamic-javascript-in-batchconnect-forms">Dynamic Javascript in BatchConnect Forms</a></p></li>
 <li><p><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></p></li>
 <li><p><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></p></li>
+<li><p><a class="reference internal" href="#automatic-form-options">Automatic Form Options</a></p></li>
+<li><p><a class="reference internal" href="#support-for-remote-files">Support for remote files</a></p></li>
+<li><p><a class="reference internal" href="#quick-launch-apps">Quick Launch Apps</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 <li><p><a class="reference internal" href="#selinux-changes">SELinux changes</a></p></li>
 </ul>
@@ -245,13 +249,12 @@
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="context-json-file-locations-have-changed">
 <h4>context.json file locations have changed<a class="headerlink" href="#context-json-file-locations-have-changed" title="Permalink to this headline">¶</a></h4>
+<p>This is an interal item to Open OnDemand and not likely to really affect you at all.</p>
 <p>In versions 2.0 and below, batch connect apps wrote a <cite>context.json</cite> file to
 a directory like <code class="docutils literal notranslate"><span class="pre">~/data/sys/dashboard/batch_connect/sys/&lt;APPNAME&gt;/context.json</span></code>.
 OnDemand uses these files to cache the choices a user makes for the next time they
 use that app.</p>
 <p>Version 2.1 now writes files like <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/batch_connect/cache/&lt;APPNAME&gt;.json</span></code></p>
-<p>When you upgrade, since no files exist in a users cache directory, users will have no
-cached settings in any of their batch connect apps.</p>
 </div>
 </div>
 <div class="section" id="upgrade-directions">
@@ -329,9 +332,6 @@ sudo yum update ondemand
 </div>
 <div class="section" id="details">
 <h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="dynamic-javascript-in-batchconnect-forms">
-<h3>Dynamic Javascript in BatchConnect Forms<a class="headerlink" href="#dynamic-javascript-in-batchconnect-forms" title="Permalink to this headline">¶</a></h3>
-</div>
 <div class="section" id="el9-ubuntu-22-04-and-ubuntu-20-04-packages">
 <h3>EL9, Ubuntu 22.04 and Ubuntu 20.04 packages<a class="headerlink" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages" title="Permalink to this headline">¶</a></h3>
 <p>See <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> for instructions on how to install OnDemand using the new EL9, Ubuntu 22.04 and Ubuntu 20.04 packages.</p>
@@ -353,6 +353,26 @@ If you wish to go back to Dex being directly accessed set the following in <code
 </pre></div>
 </div>
 </div></blockquote>
+</div>
+<div class="section" id="automatic-form-options">
+<h3>Automatic Form Options<a class="headerlink" href="#automatic-form-options" title="Permalink to this headline">¶</a></h3>
+<p>2.1 ships with some <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> options that populate forms automatically. This includes
+<code class="docutils literal notranslate"><span class="pre">auto_primary_group</span></code>, <code class="docutils literal notranslate"><span class="pre">auto_groups</span></code>, <code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code> and more.</p>
+<p>See the section on <a class="reference internal" href="../how-tos/app-development/interactive/form.html#auto-bc-form-options"><span class="std std-ref">Automatic Predefined Attributes</span></a> for all available options.</p>
+</div>
+<div class="section" id="support-for-remote-files">
+<h3>Support for remote files<a class="headerlink" href="#support-for-remote-files" title="Permalink to this headline">¶</a></h3>
+<p>2.1 ships with the ability to browse, edit and download remote files from <code class="docutils literal notranslate"><span class="pre">rclone</span></code>.
+Refer to <a class="reference internal" href="../customizations.html#remote-file-systems"><span class="std std-ref">Accessing Remote File Systems</span></a> for how to turn this feature on.</p>
+</div>
+<div class="section" id="quick-launch-apps">
+<h3>Quick Launch Apps<a class="headerlink" href="#quick-launch-apps" title="Permalink to this headline">¶</a></h3>
+<p>Quick Launch Apps launch with one click and hard coded settings.  This allows for sites
+with common resource requests to hard code those requests into the app such that the
+user is never presented with the form.</p>
+<p>These launch with 1 click from the user and do not allow for choices. I.e., the user
+is never presented with a form to fill out, the app simply launches when clicked.</p>
+<p>See the documentation for <a class="reference internal" href="../how-tos/app-development/interactive/sub-apps.html#quick-launch-apps"><span class="std std-ref">Quick Launch Apps</span></a> for more information.</p>
 </div>
 <div class="section" id="dependency-updates">
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>

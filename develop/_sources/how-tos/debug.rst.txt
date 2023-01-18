@@ -14,6 +14,7 @@ As well as how to monitor your Open OnDemand deployment.
     :maxdepth: 2
 
     debug/debug-apache
+    debug/debug-interactive-apps
     monitoring/logging
     monitoring/prometheus
     analytics/google-analytics

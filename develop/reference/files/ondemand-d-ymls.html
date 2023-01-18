@@ -133,8 +133,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#configuration-properties">Configuration Properties</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../how-tos/app-development/interactive/submit.html">Job Submission (submit.yml.erb)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../how-tos/app-development/interactive/form.html">User Form (form.yml.erb)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/ood-portal-generator.html">ood-portal-generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/nginx-stage/usage.html">nginx-stage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pun-environment.html">PUN environment</a></li>
@@ -741,8 +739,8 @@ Open OnDemand will read these files and potentially show them in a from.</p>
 <dl>
 <dt>Default</dt><dd><p>Null. No directory given</p>
 </dd>
-<dt>Example</dt><dd><p>Look for json files in the /etc/reporing/modules directory.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">module_file_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/reporing/modules&quot;</span><span class="w"></span>
+<dt>Example</dt><dd><p>Look for json files in the /etc/reporting/modules directory.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">module_file_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/reporting/modules&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -769,12 +767,13 @@ This is usually: <code class="docutils literal notranslate"><span class="pre">~/
 <dl class="describe">
 <dt>
 <code class="sig-name descname">facl_domain (String, null)</code></dt>
-<dd><p>TBC</p>
+<dd><p>The File Access Control List (FACL) domain to use when setting FACLs
+on files or directories.</p>
 <dl>
-<dt>Default</dt><dd><p>Null</p>
+<dt>Default</dt><dd><p>No facl domain given.</p>
 </dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">facl_domain</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some_value&quot;</span><span class="w"></span>
+<dt>Example</dt><dd><p>What we use at OSC.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">facl_domain</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;osc.edu&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -790,6 +789,48 @@ This is usually: <code class="docutils literal notranslate"><span class="pre">~/
 <dt>Default</dt><dd><p>Empty object, support ticket feature is disabled.</p>
 </dd>
 <dt>Example</dt><dd><p>See the  <a class="reference internal" href="../../how-tos/support_ticket.html#support-ticket-guide"><span class="std std-ref">Support Ticket documentation</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="auto-groups-filter"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">auto_groups_filter (String, null)</code></dt>
+<dd><p>Specify a filter for the <a class="reference internal" href="../../how-tos/app-development/interactive/form.html#auto-bc-form-options"><span class="std std-ref">automatic form option</span></a> <code class="docutils literal notranslate"><span class="pre">auto_groups</span></code>.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Default</dt><dd><p>No filter given. All Unix groups will be shown.</p>
+</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auto_groups_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl>
+<dt>Example</dt><dd><p>Only show Unix groups that start with <code class="docutils literal notranslate"><span class="pre">P</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auto_groups_filter</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^P.+&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="remote-files-enabled"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">remote_files_enabled (Boolean, false)</code></dt>
+<dd><p>Enable remote file browsing, editing and downloading.</p>
+<dl class="simple">
+<dt>Default</dt><dd><p>Remote files are disabled.</p>
+</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_files_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+<dl>
+<dt>Example</dt><dd><p>Enable remote filesystems through <code class="docutils literal notranslate"><span class="pre">rclone</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_files_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
