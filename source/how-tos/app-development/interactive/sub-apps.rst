@@ -53,7 +53,7 @@ has choices for the account to use and the amount of cores to request.
   # 'form' is a list of form choices for this app. Here we're allowing users to set
   # the account and the number of cores they want to request for this job.
   form:
-    - account
+    - bc_account
     - cores
 
 This will allow users to choose their account and cores.
@@ -77,10 +77,10 @@ chosen for them.
   # so users will submit a job with account abc123 and request 1 core without
   # being presented with any choice.
   form:
-    - account
+    - bc_account
     - cores
   attributes:
-    account:
+    bc_account:
       value: 'abc123'
     cores:
       value: 1
