@@ -471,11 +471,11 @@ Configuration Properties
   Default
     Null. No directory given
   Example
-    Look for json files in the /etc/reporing/modules directory.
+    Look for json files in the /etc/reporting/modules directory.
 
     .. code-block:: yaml
 
-      module_file_dir: "/etc/reporing/modules"
+      module_file_dir: "/etc/reporting/modules"
 
 .. describe:: user_settings_file (String, '.ood')
 
@@ -518,12 +518,6 @@ Configuration Properties
     Empty object, support ticket feature is disabled.
   Example
     See the  :ref:`Support Ticket documentation <support_ticket_guide>`
-
-    Look for json files in the /etc/reporting/modules directory.
-
-    .. code-block:: yaml
-
-      module_file_dir: /etc/reporting/modules
 
 .. _auto_groups_filter:
 .. describe:: auto_groups_filter (String, null)
