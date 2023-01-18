@@ -29,3 +29,4 @@ make up the Open OnDemand infrastructure.
    :caption: Overviews
 
    reference/pun-environment
+   how-tos/support_ticket

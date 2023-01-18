@@ -3,66 +3,141 @@
 ondemand.d/\*.yml files
 =======================
 
-Some configurations are held within yml files in the ``/etc/ood/config/ondemand.d/`` directory.
+Most of the configurations are now held within yml files in the ``/etc/ood/config/ondemand.d/`` directory.
 Open OnDemand will read all the ``.yml`` and ``.yml.erb`` files within this directory for
 configurations.
 
 To use a different directory other than this use the ``OOD_CONFIG_D_DIRECTORY`` environment variable
 in the ``/etc/ood/config/apps/dashboard/env`` file.
 
-.. describe:: pinned_apps (Array<Object>, null)
+These properties support profile based configuration, see the :ref:`profile configuration documentation. <profiles_guide>`
 
-    An array of pinned app objects specifying what apps to pin to the dashboard.
-    See the :ref:`documentation on pinned apps <dashboard_pinned_apps>` for details
-    and examples.
+.. note:: Although it is currently deprecated, these properties can be configured using environment variables as well.
+          The name of the environment variable will be the property name in capitals prepended with ``OOD_``.
+          eg: property ``brand_bg_color`` will be ``OOD_BRAND_BG_COLOR`` enviroment variable.
 
+          We recommend setting environment variables in ``/etc/ood/config/nginx_stage.yml``
+          as YAML mappings (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env``.
+          Alternatively you can set these in the env files of the dashboard and the apps.
+
+.. warning:: When using environment variables with ``nginx_stage.yml`` file, be careful to set the value using quotes
+             i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
+
+
+.. _profile_properties:
+
+Configuration Properties with profile support
+---------------------------------------------
+
+.. describe:: dashboard_header_img_logo (String, null)
+
+    The url to the logo image for the main navigation. If no logo is configured, the ``dashboard_title``
+    property will be used as text.
+      
     Default
-      Don't pin any apps to the dashboard.
-
-      .. code-block:: yaml
-
-        pinned_apps: null
-
-
-.. describe:: pinned_apps_menu_length: (Integer, 6)
-
-    The maximum number of pinned apps in the 'Apps' menu bar.
-
-    Default
-      Show a maximum of 6 pinned apps.
-
-      .. code-block:: yaml
-
-        pinned_apps_menu_length: 6
-
+      No logo image will be shown, just the ``dashboard_title`` text.
     Example
-      Show 10 items in the menu.
+      Show ``/public/logo.png`` as the logo image.
 
       .. code-block:: yaml
 
-        pinned_apps_menu_length: 10
+        dashboard_header_img_logo: "/public/logo.png"
 
+.. describe:: dashboard_title (String, 'Open OnDemand')
 
-.. describe:: pinned_apps_group_by: (String, null)
+    The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
+    this property will be used as the HTML image title.
 
-  Group the pinned apps icons by this field in the dashboard.
+    Default
+      ``Open OnDemand`` text
+    Example
+      Show ``My Institution`` as the logo text.
+
+      .. code-block:: yaml
+
+        dashboard_title: "My Institution"
+
+.. describe:: dashboard_logo (String, null)
+
+  The url to the logo image for the homepage welcome message. If no logo is configured, the ``dashboard_title``
+  property will be used as text.
 
   Default
-    Do no group pinned apps by any field.
-
-    .. code-block:: yaml
-
-      pinned_apps_group_by: null
-
+    No logo image will be shown with the welcome message.
   Example
-    Group the pinned apps by category.
+    Show ``/public/welcome.png`` as the welcome message logo image.
 
     .. code-block:: yaml
 
-      pinned_apps_group_by: "category"
+      dashboard_logo: "/public/welcome.png"
 
+.. describe:: dashboard_logo_height (Integer, null)
 
-.. describe:: dashboard_layout: (Object, null)
+    HTML image overide for the height of the welcome message logo image configured with ``dashboard_logo``
+
+    Default
+      ``null``, no override will be applied and the original image height will be used.
+    Example
+      Adjust the image height to 150
+
+      .. code-block:: yaml
+
+        dashboard_logo_height: "150"
+
+.. describe:: disable_dashboard_logo (Bool, false)
+
+    Whether to show the ``dashboard_logo`` property in the homepage welcome message.
+
+    Default
+      ``false``, the ``dashboard_logo`` logo will be shown in the homepage welcome message.
+    Example
+      Disable the logo in the welcome message.
+
+      .. code-block:: yaml
+
+        disable_dashboard_logo: true
+
+.. describe:: public_url (String, '/public')
+
+  The prefix url used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
+
+  Default
+    '/public' prefix url.
+  Example
+    Use ``/public/resources`` as the prefix path to load these resources.
+
+    .. code-block:: yaml
+
+      public_url: "/public/resources"
+
+.. describe:: brand_bg_color (String, null)
+
+  The CSS color override for the main navbar background. Any valid CSS color value can be used.
+
+  Default
+    Null, no background color override. The default theme color from the ``navbar_type`` property will be used. 
+  Example
+    Use ``#007FFF`` (shade of blue) as the background color for the navbar.
+
+    .. code-block:: yaml
+
+      brand_bg_color: "#007FFF"
+
+.. describe:: brand_link_active_bg_color (String, null)
+
+  The CSS color override for background of the active navigation link in the navbar.
+  Any valid CSS color value can be used.
+
+  Default
+    Null, no color override. The default theme color from the ``navbar_type`` property will be used. 
+  Example
+    Use ``#007FFF`` (shade of blue) for the background color of the active navigation link.
+
+    .. code-block:: yaml
+
+      brand_link_active_bg_color: "#007FFF"
+
+.. describe:: dashboard_layout (Object, null)
 
   Specify the dashboard layout.  Rearrange existing widgets
   and add more custom widgets. See the 
@@ -70,29 +145,319 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
   for details and examples.
 
   Default
-    Do not change the default dashboard layout.
+    Null, do not change the default dashboard layout.
+  Example
+    See the  :ref:`dashboard layout documentation <dashboard_custom_layout>`
+  
+.. describe:: pinned_apps (Array<Object>, null)
+
+  An array of pinned app objects specifying what apps to pin to the dashboard.
+  See the :ref:`documentation on pinned apps <dashboard_pinned_apps>` for details
+  and examples.
+
+  Default
+    Null, don't pin any apps to the dashboard.
+  Example
+    See the  :ref:`pinned apps documentation <dashboard_pinned_apps>`
+
+.. describe:: pinned_apps_menu_length (Integer, 6)
+
+    The maximum number of pinned apps in the 'Apps' menu bar.
+
+    Default
+      6, show a maximum of 6 pinned apps.
+    Example
+      Show 10 items in the menu.
+
+      .. code-block:: yaml
+
+        pinned_apps_menu_length: 10
+
+.. describe:: pinned_apps_group_by (String, null)
+
+  Group the pinned apps icons by this field in the dashboard.
+
+  Default
+    Null, do no group pinned apps by any field.
+  Example
+    Group the pinned apps by ``category``.
 
     .. code-block:: yaml
 
-      dashboard_layout: null
+      pinned_apps_group_by: "category"
 
-.. describe:: files_enable_shell_button: (Bool, true)
+.. describe:: profile_links (Array<Object>, [])
+
+  List of profiles to display in the ``Help`` navigation menu. This will allow users to change profiles.
+  For more information see the :ref:`profile selection documentation. <profiles_selection_guide>`
+
+  Default
+    Empty list, no profile links will be shown.
+  Example
+    Add a link to the ``default`` and ``ondemand`` profiles to the ``Help`` menu.
+
+    .. code-block:: yaml
+
+      profile_links:
+        - id: ""
+          name: "Default"
+          icon: "house-user"
+        - id: "ondemand"
+          name: "OnDemand Profile"
+          icon: "user"
+
+.. describe:: custom_css_files (Array<String>, [])
+
+  List of relative URLs to the CSS files to include in all Dashboard pages.
+  These CSS files can be used to customize the look and feel of the Dashboard.
+
+  The relative path will be prefixed with the value of the ``public_url`` property.
+
+  Default
+    Empty list, no custom css files will be included.
+  Example
+    Add two custom CSS files: ``/myfolder/navigation.css`` and ``/myfolder/pinned_apps.css`` to the Dashboard.
+
+    .. code-block:: yaml
+
+      custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
+
+.. describe:: show_all_apps_link (Bool, false)
+
+  Whether to show the ``All Apps`` link in the navbar.
+  This links to the Dashboard page showing all system installed applications.
+
+  Default
+    ``false``, the ``All Apps`` link will not be shown in the navbar.
+  Example
+    Include the ``All Apps`` link in the navbar.
+
+    .. code-block:: yaml
+
+      show_all_apps_link: true
+
+.. describe:: nav_categories (Array<String>, NavConfig.categories)
+
+  List of application categories used to sort and filter the applications that appear in the navbar.
+
+  Default
+    ``['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps']``,
+    the default list of categories as configured with the ``NavConfig.categories`` variable.
+  Example
+    Set the categories to ``['Apps', 'Files', 'Jobs']``
+
+    .. code-block:: yaml
+
+      nav_categories: ["Apps", "Files", "Jobs"]
+
+.. describe:: navbar_type (String, 'dark')
+  
+  The navbar theme type. There are 2 themes, ``light`` and ``dark``.
+  The selected theme will update the colors of the navbar.
+
+  Default
+    ``dark``,
+  Example
+    Set theme to ``light``
+
+    .. code-block:: yaml
+
+      navbar_type: "light"
+
+.. describe:: nav_bar (Array<Object>, [])
+
+  An array of navigation items to create a custom navbar.
+  This property sets the navigation items for the left hand side navigation menu in the header.
+
+  See the :ref:`documentation on custom navigation <navbar_guide>` for details and examples.
+
+  Default
+    Empty array, show the default navbar.
+  Example
+    See the  :ref:`custom navigation documentation <navbar_guide>`
+
+.. describe:: help_bar (Array<Object>, [])
+
+  An array of navigation items to create a custom help navigation.
+  This property sets the navigation items for the right hand side navigation menu on the header.
+
+  See the :ref:`documentation on custom navigation <navbar_guide>` for details and examples.
+
+  Default
+    Empty array, show the default help navigation.
+  Example
+     See the  :ref:`custom navigation documentation <navbar_guide>`
+
+.. describe:: interactive_apps_menu (Object, {})
+
+  A single navigation item to create a custom interactive apps menu.
+  This property sets the interactive applications to display in the left hand side menu
+  on the ``Interactive Apps`` and ``Interactive Sessions`` pages.
+
+  See the :ref:`documentation on interactive apps menu <interactive_apps_menu_guide>` for details and examples.
+
+  Default
+    Empty object, No customizations, show the currently installed interactive applications.
+  Example
+    See the  :ref:`interactive apps menu documentation <interactive_apps_menu_guide>`
+
+.. describe:: custom_pages (Hash<String, Object>, {})
+
+  A hash with the definition of the layouts for the configured custom pages.
+  The key is a string with the page code. The value is the custom page layout definition.
+
+  See the :ref:`documentation on custom pages <custom_pages_guide>` for details and examples.
+
+  Default
+    Empty hash, No custom pages defined.
+  Example
+    See the  :ref:`custom pages documentation <custom_pages_guide>`
+
+Configuration Properties
+------------------------
+
+.. describe:: files_enable_shell_button (Bool, true)
 
   Specify if the Files App has a shell button to open files in.
 
   Default
-    Files App has access to shell button.
-
-    .. code-block:: yaml
-
-      files_enable_shell_button: true
-
+    True. Files App has access to shell button.
   Example
     Disable the terminal button in the Files App.
 
     .. code-block:: yaml
 
       files_enable_shell_button: false
+  
+.. describe:: csp_enabled (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      csp_enabled: true
+  
+.. describe:: csp_report_only (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      csp_report_only: true
+
+.. describe:: bc_dynamic_js (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      bc_dynamic_js: true
+
+.. describe:: per_cluster_dataroot (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      per_cluster_dataroot: true
+
+.. describe:: file_navigator (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      file_navigator: true
+
+.. describe:: jobs_app_alpha (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      jobs_app_alpha: true
+
+.. describe:: files_app_remote_files (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      files_app_remote_files: true
+
+.. describe:: host_based_profiles (Bool, false)
+
+  Feature flag to enable automatic selection of configuration profiles based on the hostname of the request.
+
+  Default
+    False. Profiles will be selected manually based on the user settings file.
+  Example
+    Enable automatic hostname profile selection.
+
+    .. code-block:: yaml
+
+      host_based_profiles: true
+
+.. describe:: disable_bc_shell (Bool, false)
+
+  TBC
+
+  Default
+    False.
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      disable_bc_shell: true
+
+.. describe:: cancel_session_enabled (Bool, false)
+
+  Feature flag to enable the cancellation of active interactive sessions without deleting the session card.
+
+  Default
+    False. Active interactive sessions can only be deleted.
+  Example
+    Enable interactive sessions cancellations.
+
+    .. code-block:: yaml
+
+      cancel_session_enabled: true
 
 .. _module_file_dir:
 .. describe:: module_file_dir (String, null)
@@ -104,15 +469,51 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
   ``$LMOD_DIR/spider -o spider-json $MODULEPATH > /some/directory/my_cluster.json``
 
   Default
-    No directory given
-
-    .. code-block:: yaml
-
-      module_file_dir: null
-
+    Null. No directory given
   Example
     Look for json files in the /etc/reporing/modules directory.
 
     .. code-block:: yaml
 
-      module_file_dir: /etc/reporing/modules
+      module_file_dir: "/etc/reporing/modules"
+
+.. describe:: user_settings_file (String, '.ood')
+
+  The name of the file to store user settings. This file is used to store the selected profile.
+  The path to the file is managed by the configuration variable ``Configuration.dataroot``.
+  This is usually: ``~/ondemand/data/sys/dashboard``
+
+  Default
+    '.ood'.
+  Example
+    Use ``user_settings.txt`` as the file name for user settings.
+
+    .. code-block:: yaml
+
+      user_settings_file: "user_settings.txt"
+
+.. describe:: facl_domain (String, null)
+
+  TBC
+
+  Default
+    Null
+  Example
+    TBC.
+
+    .. code-block:: yaml
+
+      facl_domain: "some_value"
+
+.. describe:: support_ticket (Object, {})
+
+  Configuration settings to enable and configure the support ticket feature.
+
+  See the :ref:`documentation on Support Ticket <support_ticket_guide>` for details and examples.
+
+
+  Default
+    Empty object, support ticket feature is disabled.
+  Example
+    See the  :ref:`Support Ticket documentation <support_ticket_guide>`
+
