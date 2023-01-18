@@ -212,6 +212,11 @@ auto_groups
 auto_queue
   This will generate a ``select`` widget list of all the queues available to the user.
 
+  By default, we return exactly what the scheduler returns. These accounts may be lowercase
+  when you need uppercase accounts. To enable uppercase accounts set the environment variable
+  ``OOD_UPCASE_ACCOUNTS`` to anything.  If the environment variable is set to *anything* the
+  system will uppercase the accounts (set it to ``yes`` if you don't know what value to give).
+
   .. warning::
     We only have support for Slurm queues (partitions) at this time.
 
