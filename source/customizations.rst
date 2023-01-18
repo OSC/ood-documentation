@@ -1268,7 +1268,6 @@ Steps to enable the XDMoD reports in the OnDemand Dashboard:
       :align: center
    .. figure:: /images/customization_xdmod_jobcomposer_warning_2.png
       :align: center
-<<<<<<< HEAD
 
 
 .. _remote-file-systems:
@@ -1288,8 +1287,6 @@ that Open OnDemand is installed. You also have to enable the feature through
 the :ref:`configuration entry for enabling remote filesystems <remote_files_enabled>`.
 
 .. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
-=======
   
 
 .. include:: customizations/custom-pages.inc
->>>>>>> develop

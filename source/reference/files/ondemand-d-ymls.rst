@@ -494,16 +494,18 @@ Configuration Properties
 
 .. describe:: facl_domain (String, null)
 
-  TBC
+  The File Access Control List (FACL) domain to use when setting FACLs
+  on files or directories.
 
   Default
-    Null
+    No facl domain given.
+
   Example
-    TBC.
+    What we use at OSC.
 
     .. code-block:: yaml
 
-      facl_domain: "some_value"
+      facl_domain: "osc.edu"
 
 .. describe:: support_ticket (Object, {})
 
