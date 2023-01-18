@@ -471,11 +471,11 @@ Configuration Properties
   Default
     Null. No directory given
   Example
-    Look for json files in the /etc/reporing/modules directory.
+    Look for json files in the /etc/reporting/modules directory.
 
     .. code-block:: yaml
 
-      module_file_dir: "/etc/reporing/modules"
+      module_file_dir: "/etc/reporting/modules"
 
 .. describe:: user_settings_file (String, '.ood')
 
@@ -494,16 +494,18 @@ Configuration Properties
 
 .. describe:: facl_domain (String, null)
 
-  TBC
+  The File Access Control List (FACL) domain to use when setting FACLs
+  on files or directories.
 
   Default
-    Null
+    No facl domain given.
+
   Example
-    TBC.
+    What we use at OSC.
 
     .. code-block:: yaml
 
-      facl_domain: "some_value"
+      facl_domain: "osc.edu"
 
 .. describe:: support_ticket (Object, {})
 
@@ -517,3 +519,40 @@ Configuration Properties
   Example
     See the  :ref:`Support Ticket documentation <support_ticket_guide>`
 
+.. _auto_groups_filter:
+.. describe:: auto_groups_filter (String, null)
+
+  Specify a filter for the :ref:`automatic form option <auto-bc-form-options>` ``auto_groups``.
+
+    Default
+      No filter given. All Unix groups will be shown.
+
+    .. code-block:: yaml
+
+      auto_groups_filter: null
+
+  Example
+    Only show Unix groups that start with ``P``.
+
+    .. code-block:: yaml
+
+      auto_groups_filter: '^P.+'
+
+.. _remote_files_enabled:
+.. describe:: remote_files_enabled (Boolean, false)
+
+  Enable remote file browsing, editing and downloading.
+
+  Default
+    Remote files are disabled.
+
+  .. code-block:: yaml
+
+    remote_files_enabled: false
+
+  Example
+    Enable remote filesystems through ``rclone``.
+
+    .. code-block:: yaml
+
+      remote_files_enabled: true

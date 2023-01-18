@@ -3,6 +3,8 @@
 Form Widgets
 ============
   Checkbox (check_box)
+    A checkbox. Note that you can change the checked and unchecked values. For example changing
+    them from ``1`` and ``0`` to ``yes`` and ``no``.
   
       .. code-block:: yaml
 
@@ -17,6 +19,7 @@ Form Widgets
 ==================================================================
 
   Hidden Field (hidden_field)
+    A hidden field that will not be shown, but will still be in the HTML.
 
       .. code-block:: yaml
 
@@ -27,6 +30,7 @@ Form Widgets
 ==================================================================
 
   Number Field (number_field)
+    A number field.
 
       .. code-block:: yaml
 
@@ -60,6 +64,7 @@ Form Widgets
 ==================================================================
 
   Resolution Field (resolution_field)
+    Change the resolution for interactive applications that use VNC.
 
       .. code-block:: yaml
 
@@ -91,6 +96,7 @@ Form Widgets
 ==================================================================
 
   TextArea Field (text_area)
+    A text area.  This allows for multiple lines of text input.
 
       .. code-block:: yaml
 
@@ -104,6 +110,7 @@ Form Widgets
 ==================================================================
 
   Text Field (text_field)
+    A text field.  This only allows for a single line of text input.
 
       .. code-block:: yaml
 
