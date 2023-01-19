@@ -223,6 +223,15 @@ auto_queue
 auto_accounts
   This will generate a ``select`` widget list of all the accounts available to the user.
 
+  ``auto_accounts`` will generate cluster aware lists if you have :ref:`dynamic options <dynamic-bc-apps>`
+  enabled.  This means it will only show a list of accounts available for the ``cluster`` that's
+  currently selected.  If this setting is not enabled, it will generate a list of all accounts
+  available on all clusters and will not hide any of them.
+
+  If, however, your site has a simpler accounting scheme where all accounts are available on
+  all clusters, you can set the :ref:`bc_simple_auto_accounts <bc_simple_auto_accounts>` setting
+  for some optimizations.
+
   .. warning::
     We only have support for Slurm accounts at this time.
 
