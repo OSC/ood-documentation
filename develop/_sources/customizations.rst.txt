@@ -281,43 +281,28 @@ Add Menu Items to the Navbar
 Control Which Apps Appear in the Dashboard Navbar
 -------------------------------------------------
 
-Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.
+Apps contain a manifest.yml file that specify things like the title, icon, category,
+and possibly subcategory. The Dashboard searchs the search paths for all the possible
+apps and uses the manifests of the apps it finds to build the navbar (navigation bar)
+at the top of the page.
 
-In OnDemand 1.3 and earlier, a Ruby array (``NavConfig.categories``) stored a whitelist of categories that could appear in the navbar. This whitelist acts both as a sort order for the top level menus of apps and a whitelist of which apps will appear in the menu. The only way to modify this whitelist is to do so in a Dashboard initializer. You would add a file ``/etc/ood/config/apps/dashboard/initializers/ood.rb`` and add this line:
+Apps are placed in the top level menus based on the category, and then in dropdown menu
+sections based on subcategory.
 
-.. code:: ruby
+By default, the Open OnDemand system will generate dropdown menus on the navigation
+bar for certian categories of applications.
 
-   NavConfig.categories << "Reports"
+If you wish to add or remove which categories create dropdown menu items
+use the :ref:`nav_categories configuration property <nav_categories>`.
 
+.. warning::
 
-Then an app that specifies "Reports" as the category in the manifest would appear in the "Reports" menu.
+  Prior to 2.1, controlling which categories appear in the navigation bar was controlled
+  by a Ruby initializer that you needed to modify. While the 2.x series will still support
+  this scheme, Open OnDemand 3.0 will not.  3.0 will only support the ``nav_categories``
+  property.
 
-In OnDemand 1.4 we changed the behavior by adding a new boolean variable ``NavConfig.categories_whitelist`` which defaults to false. If false, whitelist mode is disabled, and the ``NavConfig.categories`` only exists to act to enforce a sort order and all apps found with a valid category will be available to launch.
-
-Below are different configuration options and the resulting navbar if you had installed:
-
-- OnDemand with a cluster configured that accepts job submissions and shell access
-- at least one interactive app
-- at least one custom app that specifies "Reports" as the category
-
-.. list-table:: Navbar Configuration
-   :header-rows: 1
-
-   * - Configuration
-     - Resulting Navbar
-     - Reason
-   * - Default configuration
-     - "Files", "Jobs", "Clusters", "Interactive Apps", "Reports"
-     - whitelist mode is false, so whitelist now only enforces sort order
-   * - ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
-     - "Files", "Jobs", "Clusters", "Interactive Apps"
-     - whitelist mode is enabled and since "Reports" is not in the whitelist it is omitted
-   * - ``NavConfig.categories=[]`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
-     - "Clusters", "Files", "Interactive Apps", "Jobs", "Reports"
-     - the app categories appear in alphabetical order since whitelist mode is disabled
-   * - ``NavConfig.categories=[]`` and ``NavConfig.categories_whitelist=true`` in ``/etc/ood/config/apps/dashboard/initializers/ood.rb``
-     - no app menus appear!
-     - whitelist mode is enabled, so only apps in ``NavConfig.categories`` would appear, and since that is an empty list, no apps appear in the navbar
+  Here is the `2.0 documentation for controling the navbar`_.
 
 
 .. _set-upload-limits:
@@ -1279,14 +1264,14 @@ Since 2.1 you can use ``rclone`` to interact with remote file systems.  Since
 every command in Open OnDemand is issued *as the user*, the user themselves
 are required to setup their ``rclone`` remomtes.
 
-You can refer to the `OSC's rclone documentation` on how to configure rclone
+You can refer to the `OSC's rclone documentation`_ on how to configure rclone
 remotes.
 
 To enable this feature ensure that ``rclone`` is installed on the same machine
 that Open OnDemand is installed. You also have to enable the feature through
 the :ref:`configuration entry for enabling remote filesystems <remote_files_enabled>`.
 
-.. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
-  
-
 .. include:: customizations/custom-pages.inc
+
+.. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
+.. _2.0 documentation for controling the navbar: https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar

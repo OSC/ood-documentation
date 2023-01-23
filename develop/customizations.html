@@ -828,51 +828,24 @@ The custom menu will replace the <code class="docutils literal notranslate"><spa
 </div>
 <div class="section" id="control-which-apps-appear-in-the-dashboard-navbar">
 <h2>Control Which Apps Appear in the Dashboard Navbar<a class="headerlink" href="#control-which-apps-appear-in-the-dashboard-navbar" title="Permalink to this headline">¶</a></h2>
-<p>Apps contain a manifest.yml file that specify things like the title, icon, category, and possibly subcategory. The Dashboard searchs the search paths for all the possible apps and uses the manifests of the apps it finds to build the navbar (navigation menu) at the top of the page. Apps are placed in the top level menus based on the category, and then in dropdown menu sections based on subcategory.</p>
-<p>In OnDemand 1.3 and earlier, a Ruby array (<code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code>) stored a whitelist of categories that could appear in the navbar. This whitelist acts both as a sort order for the top level menus of apps and a whitelist of which apps will appear in the menu. The only way to modify this whitelist is to do so in a Dashboard initializer. You would add a file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code> and add this line:</p>
-<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">NavConfig</span><span class="o">.</span><span class="n">categories</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Reports&quot;</span>
-</pre></div>
+<p>Apps contain a manifest.yml file that specify things like the title, icon, category,
+and possibly subcategory. The Dashboard searchs the search paths for all the possible
+apps and uses the manifests of the apps it finds to build the navbar (navigation bar)
+at the top of the page.</p>
+<p>Apps are placed in the top level menus based on the category, and then in dropdown menu
+sections based on subcategory.</p>
+<p>By default, the Open OnDemand system will generate dropdown menus on the navigation
+bar for certian categories of applications.</p>
+<p>If you wish to add or remove which categories create dropdown menu items
+use the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Prior to 2.1, controlling which categories appear in the navigation bar was controlled
+by a Ruby initializer that you needed to modify. While the 2.x series will still support
+this scheme, Open OnDemand 3.0 will not.  3.0 will only support the <code class="docutils literal notranslate"><span class="pre">nav_categories</span></code>
+property.</p>
+<p>Here is the <a class="reference external" href="https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar">2.0 documentation for controling the navbar</a>.</p>
 </div>
-<p>Then an app that specifies “Reports” as the category in the manifest would appear in the “Reports” menu.</p>
-<p>In OnDemand 1.4 we changed the behavior by adding a new boolean variable <code class="docutils literal notranslate"><span class="pre">NavConfig.categories_whitelist</span></code> which defaults to false. If false, whitelist mode is disabled, and the <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code> only exists to act to enforce a sort order and all apps found with a valid category will be available to launch.</p>
-<p>Below are different configuration options and the resulting navbar if you had installed:</p>
-<ul class="simple">
-<li><p>OnDemand with a cluster configured that accepts job submissions and shell access</p></li>
-<li><p>at least one interactive app</p></li>
-<li><p>at least one custom app that specifies “Reports” as the category</p></li>
-</ul>
-<table class="docutils align-default" id="id21">
-<caption><span class="caption-number">Table 4 </span><span class="caption-text">Navbar Configuration</span><a class="headerlink" href="#id21" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Configuration</p></th>
-<th class="head"><p>Resulting Navbar</p></th>
-<th class="head"><p>Reason</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Default configuration</p></td>
-<td><p>“Files”, “Jobs”, “Clusters”, “Interactive Apps”, “Reports”</p></td>
-<td><p>whitelist mode is false, so whitelist now only enforces sort order</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NavConfig.categories_whitelist=true</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></p></td>
-<td><p>“Files”, “Jobs”, “Clusters”, “Interactive Apps”</p></td>
-<td><p>whitelist mode is enabled and since “Reports” is not in the whitelist it is omitted</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NavConfig.categories=[]</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></p></td>
-<td><p>“Clusters”, “Files”, “Interactive Apps”, “Jobs”, “Reports”</p></td>
-<td><p>the app categories appear in alphabetical order since whitelist mode is disabled</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NavConfig.categories=[]</span></code> and <code class="docutils literal notranslate"><span class="pre">NavConfig.categories_whitelist=true</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers/ood.rb</span></code></p></td>
-<td><p>no app menus appear!</p></td>
-<td><p>whitelist mode is enabled, so only apps in <code class="docutils literal notranslate"><span class="pre">NavConfig.categories</span></code> would appear, and since that is an empty list, no apps appear in the navbar</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="set-upload-limits">
 <span id="id5"></span><h2>Set Upload Limits<a class="headerlink" href="#set-upload-limits" title="Permalink to this headline">¶</a></h2>
@@ -1230,8 +1203,8 @@ is an array of existing or newly added widgets to render in that column.</p>
 <li><p>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</p></li>
 </ol>
 <p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
-<table class="docutils align-default" id="id22">
-<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id22" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id21">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id21" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1602,9 +1575,9 @@ sudo systemctl restart ondemand-dex.service
 <div class="section" id="xdmod-integration">
 <span id="id13"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Permalink to this headline">¶</a></h2>
 <p>XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.</p>
-<div class="figure align-center" id="id23">
+<div class="figure align-center" id="id22">
 <img alt="_images/customization_xdmod.png" src="_images/customization_xdmod.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
 </div>
 <p>Steps to enable the XDMoD reports in the OnDemand Dashboard:</p>
 <ol class="arabic">
@@ -1662,7 +1635,7 @@ sudo systemctl restart ondemand-dex.service
 <p>Since 2.1 you can use <code class="docutils literal notranslate"><span class="pre">rclone</span></code> to interact with remote file systems.  Since
 every command in Open OnDemand is issued <em>as the user</em>, the user themselves
 are required to setup their <code class="docutils literal notranslate"><span class="pre">rclone</span></code> remomtes.</p>
-<p>You can refer to the <cite>OSC’s rclone documentation</cite> on how to configure rclone
+<p>You can refer to the <a class="reference external" href="https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data">OSC’s rclone documentation</a> on how to configure rclone
 remotes.</p>
 <p>To enable this feature ensure that <code class="docutils literal notranslate"><span class="pre">rclone</span></code> is installed on the same machine
 that Open OnDemand is installed. You also have to enable the feature through
