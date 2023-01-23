@@ -84,23 +84,17 @@ the support ticket form fields can be arranged or changed as required.
 
 .. note::
   
-  Please note that an ``email`` field must be present in the form for the support ticket feature to be funtional.
+  Please note that an ``email`` field must be present in the form for the support ticket feature to be functional.
 
-Custom fields can be added, but they will require a custom email template to make use of the field values to generate the email body.
-Drop the template file into ``/etc/ood/config/apps/dashboard/views/support_ticket/email`` folder and reference it
-in the configuration. This template file can be any format Rails recognizes for emails, usually the ``.txt.erb`` extension.
+Custom fields can be added, but they will require a custom email template to make use of the provided values in the email body.
+Override the default email template with your own by dropping a file named ``_email.text.erb`` into the folder
+``/etc/ood/config/apps/dashboard/views/support_ticket/email/``
 
-.. warning::
-
- Rails expects files to be prefixed with an underscore. For example if you configured ``my_email_template``
- the filename should be ``_my_email_template.text.erb``.
-
-The example below shows a custom template configuration with 3 fields and how to use them in the template to generate the email body.
+The example below shows a custom form configuration with 3 fields and how to use them in the template to generate the email body.
 
   .. code-block:: yaml
 
     support_ticket:
-      email_template: "custom_template"
       attributes:
         email:
           required: true
@@ -113,7 +107,7 @@ The example below shows a custom template configuration with 3 fields and how to
 
   .. code-block::
 
-    # /etc/ood/config/apps/dashboard/views/support_ticket/email/_custom_template.txt.erb
+    # /etc/ood/config/apps/dashboard/views/support_ticket/email/_email.text.erb
     Email Intro
     Department: <%= @context.support_ticket.department %>
     Subject Copy: <%= @context.support_ticket.subject %>
