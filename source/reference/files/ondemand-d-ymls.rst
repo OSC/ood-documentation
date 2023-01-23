@@ -357,6 +357,52 @@ Configuration Properties
 
       bc_dynamic_js: true
 
+.. _bc_clean_old_dirs:
+.. describe:: bc_clean_old_dirs(Bool, false)
+
+  Interactive Apps create a new directory ``~/ondemand/data/sys/dashboard/batch_connect/...`` every time
+  the application is launched.  Over time users may create many directories that hold essentially old
+  and useless data.
+
+  When enabled, the system will remove every directory that is older than 30 days.
+  See ``bc_clean_old_dirs_days`` below to change the time range. You may wish to keep
+  directories for longer or shorter intervals.
+
+  Default
+    False. Never delete these directories.
+
+    .. code-block:: yaml
+
+      bc_clean_old_dirs: false
+
+  Example
+    Delete these directories after 30 days.
+
+    .. code-block:: yaml
+
+      bc_clean_old_dirs: true
+
+.. describe:: bc_clean_old_dirs_days(Integer, 30)
+
+  If you have ``bc_clean_old_dirs`` above enabled, the system will clean every directory that
+  is older than 30 days. This configuration specifies how old a directory (in days) must be to
+  be removed.
+
+  The system checks creation time, not modification time.
+
+  Default
+    Delete these directories after 30 days if ``bc_clean_old_dirs`` is enabled.
+
+    .. code-block:: yaml
+
+      bc_clean_old_dirs_days: 30
+
+  Example
+    Delete these directories after 15 days if ``bc_clean_old_dirs`` is enabled.
+
+    .. code-block:: yaml
+
+      bc_clean_old_dirs_days: 15
 
 .. describe:: host_based_profiles (Bool, false)
 
