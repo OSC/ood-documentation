@@ -603,6 +603,50 @@ on what this feature does.</p>
 </dl>
 </dd></dl>
 
+<span class="target" id="bc-clean-old-dirs"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">bc_clean_old_dirs(Bool, false)</code></dt>
+<dd><p>Interactive Apps create a new directory <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/batch_connect/...</span></code> every time
+the application is launched.  Over time users may create many directories that hold essentially old
+and useless data.</p>
+<p>When enabled, the system will remove every directory that is older than 30 days.
+See <code class="docutils literal notranslate"><span class="pre">bc_clean_old_dirs_days</span></code> below to change the time range. You may wish to keep
+directories for longer or shorter intervals.</p>
+<dl>
+<dt>Default</dt><dd><p>False. Never delete these directories.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_clean_old_dirs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Delete these directories after 30 days.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_clean_old_dirs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">bc_clean_old_dirs_days(Integer, 30)</code></dt>
+<dd><p>If you have <code class="docutils literal notranslate"><span class="pre">bc_clean_old_dirs</span></code> above enabled, the system will clean every directory that
+is older than 30 days. This configuration specifies how old a directory (in days) must be to
+be removed.</p>
+<p>The system checks creation time, not modification time.</p>
+<dl>
+<dt>Default</dt><dd><p>Delete these directories after 30 days if <code class="docutils literal notranslate"><span class="pre">bc_clean_old_dirs</span></code> is enabled.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_clean_old_dirs_days</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Delete these directories after 15 days if <code class="docutils literal notranslate"><span class="pre">bc_clean_old_dirs</span></code> is enabled.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_clean_old_dirs_days</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="describe">
 <dt>
 <code class="sig-name descname">host_based_profiles (Bool, false)</code></dt>
