@@ -236,19 +236,30 @@ Configuration Properties with profile support
 
       show_all_apps_link: true
 
-.. describe:: nav_categories (Array<String>, NavConfig.categories)
+.. _nav_categories:
+.. describe:: nav_categories (Array<String>, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])
 
-  List of application categories used to sort and filter the applications that appear in the navbar.
+  By default Open OnDemand will create dropdown menus on the navigation bar for certain
+  categories listed below.
+
+  Use this property to add or remove which application categories will create dropdown menus
+  on the navigation bar.
 
   Default
-    ``['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps']``,
-    the default list of categories as configured with the ``NavConfig.categories`` variable.
-  Example
-    Set the categories to ``['Apps', 'Files', 'Jobs']``
+    Create dropdown menus on the navigation bar items for the categories ``Apps``, ``Files``, ``Jobs``,
+    ``Clusters`` and ``Interactive Apps``.
 
     .. code-block:: yaml
 
-      nav_categories: ["Apps", "Files", "Jobs"]
+      nav_categories: ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps']
+
+  Example
+    Only create dropdown menus on the navigation bar for the categories ``Apps``,
+    ``Files`` and ``Jobs``.
+
+    .. code-block:: yaml
+
+      nav_categories: ['Apps', 'Files', 'Jobs']
 
 .. describe:: navbar_type (String, 'dark')
   
