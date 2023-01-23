@@ -403,12 +403,23 @@ groups the user is currently in. Administrators can configure <a class="referenc
 to limit the groups shown.</p>
 </dd>
 <dt>auto_queue</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the queues available to the user.</p>
+<p>By default, we return exactly what the scheduler returns. These accounts may be lowercase
+when you need uppercase accounts. To enable uppercase accounts set the environment variable
+<code class="docutils literal notranslate"><span class="pre">OOD_UPCASE_ACCOUNTS</span></code> to anything.  If the environment variable is set to <em>anything</em> the
+system will uppercase the accounts (set it to <code class="docutils literal notranslate"><span class="pre">yes</span></code> if you don’t know what value to give).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>We only have support for Slurm queues (partitions) at this time.</p>
 </div>
 </dd>
 <dt>auto_accounts</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the accounts available to the user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code> will generate cluster aware lists if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
+enabled.  This means it will only show a list of accounts available for the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> that’s
+currently selected.  If this setting is not enabled, it will generate a list of all accounts
+available on all clusters and will not hide any of them.</p>
+<p>If, however, your site has a simpler accounting scheme where all accounts are available on
+all clusters, you can set the <a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#bc-simple-auto-accounts"><span class="std std-ref">bc_simple_auto_accounts</span></a> setting
+for some optimizations.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>We only have support for Slurm accounts at this time.</p>

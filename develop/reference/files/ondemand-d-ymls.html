@@ -220,7 +220,7 @@ in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/con
 <p>These properties support profile based configuration, see the <a class="reference internal" href="../../customizations.html#profiles-guide"><span class="std std-ref">profile configuration documentation.</span></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Although it is currently deprecated, these properties can be configured using environment variables as well.
+<p>Simple properties (strings and booleans) can be configured using environment variables as well.
 The name of the environment variable will be the property name in capitals prepended with <code class="docutils literal notranslate"><span class="pre">OOD_</span></code>.
 eg: property <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> will be <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR</span></code> enviroment variable.</p>
 <p>We recommend setting environment variables in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>
@@ -567,9 +567,14 @@ The key is a string with the page code. The value is the custom page layout defi
 <dl class="describe">
 <dt>
 <code class="sig-name descname">files_enable_shell_button (Bool, true)</code></dt>
-<dd><p>Specify if the Files App has a shell button to open files in.</p>
+<dd><p>While browsing files, by default, Open OnDemand will show a button to
+shell into that directory location. Use this configuration to disable that
+behaviour.</p>
 <dl>
-<dt>Default</dt><dd><p>True. Files App has access to shell button.</p>
+<dt>Default</dt><dd><p>True. Files App has will show a button to open a shell to that location.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">files_enable_shell_button</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 <dt>Example</dt><dd><p>Disable the terminal button in the Files App.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">files_enable_shell_button</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
@@ -579,105 +584,19 @@ The key is a string with the page code. The value is the custom page layout defi
 </dl>
 </dd></dl>
 
-<dl class="describe">
-<dt>
-<code class="sig-name descname">csp_enabled (Bool, false)</code></dt>
-<dd><p>TBC</p>
-<dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">csp_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">csp_report_only (Bool, false)</code></dt>
-<dd><p>TBC</p>
-<dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">csp_report_only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
+<span class="target" id="bc-dynamic-js"></span><dl class="describe">
 <dt>
 <code class="sig-name descname">bc_dynamic_js (Bool, false)</code></dt>
-<dd><p>TBC</p>
+<dd><p>Enable dynamic interactive app forms. See <a class="reference internal" href="../../how-tos/app-development/interactive/dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">Dynamic Form Widgets</span></a> for more information
+on what this feature does.</p>
 <dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
+<dt>Default</dt><dd><p>False. Interactive app forms will not be dynamic.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_dynamic_js</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">per_cluster_dataroot (Bool, false)</code></dt>
-<dd><p>TBC</p>
-<dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">per_cluster_dataroot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">file_navigator (Bool, false)</code></dt>
-<dd><p>TBC</p>
-<dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">file_navigator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">jobs_app_alpha (Bool, false)</code></dt>
-<dd><p>TBC</p>
-<dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">jobs_app_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">files_app_remote_files (Bool, false)</code></dt>
-<dd><p>TBC</p>
-<dl>
-<dt>Default</dt><dd><p>False.</p>
-</dd>
-<dt>Example</dt><dd><p>TBC.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">files_app_remote_files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<dt>Example</dt><dd><p>Interactive app forms will be dynamic.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_dynamic_js</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -690,6 +609,9 @@ The key is a string with the page code. The value is the custom page layout defi
 <dd><p>Feature flag to enable automatic selection of configuration profiles based on the hostname of the request.</p>
 <dl>
 <dt>Default</dt><dd><p>False. Profiles will be selected manually based on the user settings file.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host_based_profiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 <dt>Example</dt><dd><p>Enable automatic hostname profile selection.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host_based_profiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
@@ -702,11 +624,16 @@ The key is a string with the page code. The value is the custom page layout defi
 <dl class="describe">
 <dt>
 <code class="sig-name descname">disable_bc_shell (Bool, false)</code></dt>
-<dd><p>TBC</p>
+<dd><p>Some schedulers like <a class="reference internal" href="../../installation/resource-manager/lsf.html#resource-manager-lsf"><span class="std std-ref">LSF</span></a> use the the <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag to bsub
+for purposes other than setting the shell path. Interactive apps set the shell path
+to <code class="docutils literal notranslate"><span class="pre">/bin/bash</span></code> by default using various flags or editing scripts.</p>
 <dl>
-<dt>Default</dt><dd><p>False.</p>
+<dt>Default</dt><dd><p>False. All interactive apps will submit jobs with the shell path flag set.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_bc_shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
-<dt>Example</dt><dd><p>TBC.</p>
+<dt>Example</dt><dd><p>Do not submit interactive jobs with any shell path.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_bc_shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
@@ -720,6 +647,9 @@ The key is a string with the page code. The value is the custom page layout defi
 <dd><p>Feature flag to enable the cancellation of active interactive sessions without deleting the session card.</p>
 <dl>
 <dt>Default</dt><dd><p>False. Active interactive sessions can only be deleted.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cancel_session_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 <dt>Example</dt><dd><p>Enable interactive sessions cancellations.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cancel_session_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
@@ -737,7 +667,10 @@ should have module spider-json output as indicated by the command below.
 Open OnDemand will read these files and potentially show them in a from.</p>
 <p><code class="docutils literal notranslate"><span class="pre">$LMOD_DIR/spider</span> <span class="pre">-o</span> <span class="pre">spider-json</span> <span class="pre">$MODULEPATH</span> <span class="pre">&gt;</span> <span class="pre">/some/directory/my_cluster.json</span></code></p>
 <dl>
-<dt>Default</dt><dd><p>Null. No directory given</p>
+<dt>Default</dt><dd><p>Null. No directory given.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">module_file_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 <dt>Example</dt><dd><p>Look for json files in the /etc/reporting/modules directory.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">module_file_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/reporting/modules&quot;</span><span class="w"></span>
@@ -754,7 +687,10 @@ Open OnDemand will read these files and potentially show them in a from.</p>
 The path to the file is managed by the configuration variable <code class="docutils literal notranslate"><span class="pre">Configuration.dataroot</span></code>.
 This is usually: <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard</span></code></p>
 <dl>
-<dt>Default</dt><dd><p>‘.ood’.</p>
+<dt>Default</dt><dd><p>A file called ‘.ood’.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">user_settings_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;.ood&quot;</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 <dt>Example</dt><dd><p>Use <code class="docutils literal notranslate"><span class="pre">user_settings.txt</span></code> as the file name for user settings.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">user_settings_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user_settings.txt&quot;</span><span class="w"></span>
@@ -771,6 +707,9 @@ This is usually: <code class="docutils literal notranslate"><span class="pre">~/
 on files or directories.</p>
 <dl>
 <dt>Default</dt><dd><p>No facl domain given.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">facl_domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 <dt>Example</dt><dd><p>What we use at OSC.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">facl_domain</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;osc.edu&quot;</span><span class="w"></span>
@@ -815,18 +754,37 @@ on files or directories.</p>
 </dl>
 </dd></dl>
 
+<span class="target" id="bc-simple-auto-accounts"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">bc_simple_auto_accounts (Boolean, false)</code></dt>
+<dd><p>Use a simple accounting scheme that assumes all accounts are available on all
+clusters.</p>
+<dl>
+<dt>Default</dt><dd><p>False. The account list generated will be a list of all the accounts available
+across all clusters.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_simple_auto_accounts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Enable simple accounts. This will generate a list of accounts that should be
+available on all clusters.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bc_simple_auto_accounts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 <span class="target" id="remote-files-enabled"></span><dl class="describe">
 <dt>
 <code class="sig-name descname">remote_files_enabled (Boolean, false)</code></dt>
 <dd><p>Enable remote file browsing, editing and downloading.</p>
-<dl class="simple">
+<dl>
 <dt>Default</dt><dd><p>Remote files are disabled.</p>
-</dd>
-</dl>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_files_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </pre></div>
 </div>
-<dl>
+</dd>
 <dt>Example</dt><dd><p>Enable remote filesystems through <code class="docutils literal notranslate"><span class="pre">rclone</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_files_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
