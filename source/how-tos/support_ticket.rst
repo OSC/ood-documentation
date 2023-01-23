@@ -90,12 +90,6 @@ Custom fields can be added, but they will require a custom email template to mak
 Override the default email template with your own by dropping a file named ``_email.text.erb`` into the folder
 ``/etc/ood/config/apps/dashboard/views/support_ticket/email/``
 
-.. tip::
-
-  To test the custom template in the development or test environments,
-  please enable the external configuration environment variable: ``OOD_LOAD_EXTERNAL_CONFIG=true``.
-  We recommned setting environment vaariables in the ``/etc/ood/config/apps/dashboard/env`` file.
-
 The example below shows a custom form configuration with 3 fields and how to use them in the template to generate the email body.
 
   .. code-block:: yaml
