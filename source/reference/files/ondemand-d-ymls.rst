@@ -12,7 +12,7 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
 
 These properties support profile based configuration, see the :ref:`profile configuration documentation. <profiles_guide>`
 
-.. note:: Although it is currently deprecated, these properties can be configured using environment variables as well.
+.. note:: Simple properties (strings and booleans) can be configured using environment variables as well.
           The name of the environment variable will be the property name in capitals prepended with ``OOD_``.
           eg: property ``brand_bg_color`` will be ``OOD_BRAND_BG_COLOR`` enviroment variable.
 
@@ -318,107 +318,45 @@ Configuration Properties
 
 .. describe:: files_enable_shell_button (Bool, true)
 
-  Specify if the Files App has a shell button to open files in.
+  While browsing files, by default, Open OnDemand will show a button to
+  shell into that directory location. Use this configuration to disable that
+  behaviour.
 
   Default
-    True. Files App has access to shell button.
+    True. Files App has will show a button to open a shell to that location.
+
+    .. code-block:: yaml
+
+      files_enable_shell_button: true
+
   Example
     Disable the terminal button in the Files App.
 
     .. code-block:: yaml
 
       files_enable_shell_button: false
-  
-.. describe:: csp_enabled (Bool, false)
 
-  TBC
 
-  Default
-    False.
-  Example
-    TBC.
-
-    .. code-block:: yaml
-
-      csp_enabled: true
-  
-.. describe:: csp_report_only (Bool, false)
-
-  TBC
-
-  Default
-    False.
-  Example
-    TBC.
-
-    .. code-block:: yaml
-
-      csp_report_only: true
-
+.. _bc_dynamic_js:
 .. describe:: bc_dynamic_js (Bool, false)
 
-  TBC
+  Enable dynamic interactive app forms. See :ref:`dynamic-bc-apps` for more information
+  on what this feature does.
 
   Default
-    False.
-  Example
-    TBC.
+    False. Interactive app forms will not be dynamic.
 
     .. code-block:: yaml
 
       bc_dynamic_js: true
 
-.. describe:: per_cluster_dataroot (Bool, false)
-
-  TBC
-
-  Default
-    False.
   Example
-    TBC.
+    Interactive app forms will be dynamic.
 
     .. code-block:: yaml
 
-      per_cluster_dataroot: true
+      bc_dynamic_js: true
 
-.. describe:: file_navigator (Bool, false)
-
-  TBC
-
-  Default
-    False.
-  Example
-    TBC.
-
-    .. code-block:: yaml
-
-      file_navigator: true
-
-.. describe:: jobs_app_alpha (Bool, false)
-
-  TBC
-
-  Default
-    False.
-  Example
-    TBC.
-
-    .. code-block:: yaml
-
-      jobs_app_alpha: true
-
-.. describe:: files_app_remote_files (Bool, false)
-
-  TBC
-
-  Default
-    False.
-  Example
-    TBC.
-
-    .. code-block:: yaml
-
-      files_app_remote_files: true
 
 .. describe:: host_based_profiles (Bool, false)
 
@@ -426,6 +364,11 @@ Configuration Properties
 
   Default
     False. Profiles will be selected manually based on the user settings file.
+
+    .. code-block:: yaml
+
+      host_based_profiles: false
+
   Example
     Enable automatic hostname profile selection.
 
@@ -435,12 +378,19 @@ Configuration Properties
 
 .. describe:: disable_bc_shell (Bool, false)
 
-  TBC
+  Some schedulers like :ref:`resource-manager-lsf` use the the ``-L`` flag to bsub
+  for purposes other than setting the shell path. Interactive apps set the shell path
+  to ``/bin/bash`` by default using various flags or editing scripts.
 
   Default
-    False.
+    False. All interactive apps will submit jobs with the shell path flag set.
+
+    .. code-block:: yaml
+
+      disable_bc_shell: false
+
   Example
-    TBC.
+    Do not submit interactive jobs with any shell path.
 
     .. code-block:: yaml
 
@@ -452,6 +402,11 @@ Configuration Properties
 
   Default
     False. Active interactive sessions can only be deleted.
+
+    .. code-block:: yaml
+
+      cancel_session_enabled: false
+
   Example
     Enable interactive sessions cancellations.
 
@@ -469,7 +424,12 @@ Configuration Properties
   ``$LMOD_DIR/spider -o spider-json $MODULEPATH > /some/directory/my_cluster.json``
 
   Default
-    Null. No directory given
+    Null. No directory given.
+
+    .. code-block:: yaml
+
+      module_file_dir: null
+
   Example
     Look for json files in the /etc/reporting/modules directory.
 
@@ -484,7 +444,12 @@ Configuration Properties
   This is usually: ``~/ondemand/data/sys/dashboard``
 
   Default
-    '.ood'.
+    A file called '.ood'.
+
+    .. code-block:: yaml
+
+      user_settings_file: ".ood"
+
   Example
     Use ``user_settings.txt`` as the file name for user settings.
 
@@ -500,6 +465,10 @@ Configuration Properties
   Default
     No facl domain given.
 
+    .. code-block:: yaml
+
+      facl_domain: null
+
   Example
     What we use at OSC.
 
@@ -512,7 +481,6 @@ Configuration Properties
   Configuration settings to enable and configure the support ticket feature.
 
   See the :ref:`documentation on Support Ticket <support_ticket_guide>` for details and examples.
-
 
   Default
     Empty object, support ticket feature is disabled.
@@ -538,6 +506,29 @@ Configuration Properties
 
       auto_groups_filter: '^P.+'
 
+.. _bc_simple_auto_accounts:
+.. describe:: bc_simple_auto_accounts (Boolean, false)
+
+  Use a simple accounting scheme that assumes all accounts are available on all
+  clusters.
+
+  Default
+    False. The account list generated will be a list of all the accounts available
+    across all clusters.
+
+    .. code-block:: yaml
+
+      bc_simple_auto_accounts: false
+
+  Example
+    Enable simple accounts. This will generate a list of accounts that should be
+    available on all clusters.
+  
+    .. code-block:: yaml
+
+      bc_simple_auto_accounts: true
+
+
 .. _remote_files_enabled:
 .. describe:: remote_files_enabled (Boolean, false)
 
@@ -546,9 +537,9 @@ Configuration Properties
   Default
     Remote files are disabled.
 
-  .. code-block:: yaml
+    .. code-block:: yaml
 
-    remote_files_enabled: false
+      remote_files_enabled: false
 
   Example
     Enable remote filesystems through ``rclone``.

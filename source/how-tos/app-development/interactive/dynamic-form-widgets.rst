@@ -16,12 +16,8 @@ on configuration.
   So when referencing the element ``node_type`` you will need to reference it as ``node-type``.
 
 To enable any of the dynamic batch connect capabilities described in this page,
-set the ``OOD_BC_DYNAMIC_JS`` environment variable in the dashboard's env file.
+set the :ref:`dynamic batch connect setting <bc_dynamic_js>`.
 
-.. code:: sh
-
-  # /etc/ood/config/apps/dashboard/env
-  OOD_BC_DYNAMIC_JS=true
 
 Your own ``form.js``
 ********************
