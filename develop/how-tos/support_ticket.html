@@ -288,20 +288,14 @@ In the same way that you can configure the <a class="reference internal" href=".
 the support ticket form fields can be arranged or changed as required.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please note that an <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be funtional.</p>
+<p>Please note that an <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional.</p>
 </div>
-<p>Custom fields can be added, but they will require a custom email template to make use of the field values to generate the email body.
-Drop the template file into <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/support_ticket/email</span></code> folder and reference it
-in the configuration. This template file can be any format Rails recognizes for emails, usually the <code class="docutils literal notranslate"><span class="pre">.txt.erb</span></code> extension.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Rails expects files to be prefixed with an underscore. For example if you configured <code class="docutils literal notranslate"><span class="pre">my_email_template</span></code>
-the filename should be <code class="docutils literal notranslate"><span class="pre">_my_email_template.text.erb</span></code>.</p>
-</div>
-<p>The example below shows a custom template configuration with 3 fields and how to use them in the template to generate the email body.</p>
+<p>Custom fields can be added, but they will require a custom email template to make use of the provided values in the email body.
+Override the default email template with your own by dropping a file named <code class="docutils literal notranslate"><span class="pre">_email.text.erb</span></code> into the folder
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/support_ticket/email/</span></code></p>
+<p>The example below shows a custom form configuration with 3 fields and how to use them in the template to generate the email body.</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">email_template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom_template&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
@@ -313,7 +307,7 @@ the filename should be <code class="docutils literal notranslate"><span class="p
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">department</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/views/support_ticket/email/_custom_template.txt.erb</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/views/support_ticket/email/_email.text.erb</span>
 <span class="n">Email</span> <span class="n">Intro</span>
 <span class="n">Department</span><span class="p">:</span> <span class="o">&lt;%=</span> <span class="nd">@context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">department</span> <span class="o">%&gt;</span>
 <span class="n">Subject</span> <span class="n">Copy</span><span class="p">:</span> <span class="o">&lt;%=</span> <span class="nd">@context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">subject</span> <span class="o">%&gt;</span>
