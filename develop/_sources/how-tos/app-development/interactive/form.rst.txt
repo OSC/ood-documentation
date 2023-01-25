@@ -505,6 +505,24 @@ are:
 
           cacheable: false
 
+.. describe:: display (Boolean, false)
+
+     whether the form item should be displayed in the session card after it was created.
+
+     Default
+       False. The form item will not be displayed.
+
+       .. code-block:: yaml
+
+          display: false
+
+     Example
+       Display form item in the session card.
+
+       .. code-block:: yaml
+
+          display: true
+
 Examples
 --------
 
@@ -653,6 +671,30 @@ the job. But since ``bc_queue``'s attribute is set to true, it is cacheable.
      bc_queue:
        cacheable: true
 
+
+Displaying form items in the session card
+`````````````````````````````````````````
+
+Now, submitted form values can be displayed in the session card for users to see.
+By default, items will not be shown. Add the display property to the form attributes that you wish to show.
+Form values will be added after the default session card items. The order is driven from the ``form`` array.
+
+.. code-block:: yaml
+
+   # ${HOME}/ondemand/dev/my_app/form.yml
+   ---
+   cluster: "owens"
+   form:
+     - bc_num_hours
+     - bc_num_slots
+   attributes:
+     bc_num_slots:
+       display: true
+     bc_num_hours:
+       display: true
+
+.. figure:: /images/form-display-attribute.png
+   :align: center
 
 .. _configuring-cluster:
 

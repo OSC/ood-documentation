@@ -689,6 +689,24 @@ or options for <a class="reference internal" href="dynamic-form-widgets.html#dyn
 </dl>
 </dd></dl>
 
+<dl class="describe">
+<dt>
+<code class="sig-name descname">display (Boolean, false)</code></dt>
+<dd><p>whether the form item should be displayed in the session card after it was created.</p>
+<dl>
+<dt>Default</dt><dd><p>False. The form item will not be displayed.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">display</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Display form item in the session card.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">display</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="examples">
@@ -816,6 +834,28 @@ the job. But since <code class="docutils literal notranslate"><span class="pre">
 <span class="w">  </span><span class="nt">bc_queue</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">cacheable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="displaying-form-items-in-the-session-card">
+<h3>Displaying form items in the session card<a class="headerlink" href="#displaying-form-items-in-the-session-card" title="Permalink to this headline">¶</a></h3>
+<p>Now, submitted form values can be displayed in the session card for users to see.
+By default, items will not be shown. Add the display property to the form attributes that you wish to show.
+Form values will be added after the default session card items. The order is driven from the <code class="docutils literal notranslate"><span class="pre">form</span></code> array.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens&quot;</span><span class="w"></span>
+<span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_num_slots</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">display</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bc_num_hours</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">display</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../../_images/form-display-attribute.png" src="../../../_images/form-display-attribute.png" />
 </div>
 </div>
 </div>

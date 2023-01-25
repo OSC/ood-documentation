@@ -680,10 +680,12 @@ Administrators can now customize what widgets appear on the dashboard and how th
 layed out on the page.
 
 In it's simplest form this feature allows for a rearrangement of existing widgets. As
-of 2.0 the existing widgets are:
+of 2.1 the existing widgets are:
 
-- ``pinned_apps`` - Pinned apps described above
-- ``sessions`` - The three most recent active interactive sessions
+- ``pinned_apps`` - Pinned Apps described above
+- ``recently_used_apps`` - the four most recently used interactive applications.
+  Launching these applications will start a new interactive session with the previously submitted parameters.
+- ``sessions`` - the three most recent active interactive sessions
 - ``motd`` - the Message of the Day
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
