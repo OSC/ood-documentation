@@ -92,21 +92,27 @@ If you do this, you still might want to restrict who sees the Develop dropdown i
 
     .. code-block:: ruby
 
-       Configuration.app_development_enabled = OodSupport::Process.groups.include?(
-         OodSupport::Group.new("devgrp")
-       )
+      Rails.application.config.after_initialize do
+        Configuration.app_development_enabled = OodSupport::Process.groups.include?(
+          OodSupport::Group.new("devgrp")
+        )
+      end
 
     Or if you know the id of the group, this will avoid reading the ``/etc/group``
     file:
 
     .. code-block:: ruby
 
-       Configuration.app_development_enabled = Process.groups.include?(5014)
+      Rails.application.config.after_initialize do
+        Configuration.app_development_enabled = Process.groups.include?(5014)
+      end
 
     Or a specific user list:
 
     .. code-block:: ruby
 
-       Configuration.app_development_enabled = %w(
-         bgohar efranz bmcmichael
-       ).include?(OodSupport::User.new.name)
+      Rails.application.config.after_initialize do
+        Configuration.app_development_enabled = %w(
+          bgohar efranz bmcmichael
+        ).include?(OodSupport::User.new.name)
+      end
