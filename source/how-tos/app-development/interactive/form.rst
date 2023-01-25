@@ -510,7 +510,11 @@ are:
      whether the form item should be displayed in the session card after it was created.
 
      Default
-       False. The form item will not be displayed. 
+       False. The form item will not be displayed.
+
+       .. code-block:: yaml
+
+          display: false
 
      Example
        Display form item in the session card.
