@@ -192,11 +192,20 @@ auto_primary_group
   This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
   primary group of the user.  No choice will be given to the user.
 
-auto_module_<MODULE>
+auto_modules_<MODULE>
   This will generate a list of modules in a ``select`` widget.
-  For example ``auto_module_matlab`` will automatically populate a dropdown
-  list of every single ``matlab`` version available.
+  For example ``auto_modules_matlab`` will automatically populate a dropdown
+  list of every single ``matlab`` version available, including the default
+  version.
+  
+  To disable the default version, use the ``attributes`` field like so:
+  
+  .. code-block:: yaml
 
+     attributes:
+       auto_modules_matlab:
+         default: false
+  
   See :ref:`the module directory configuration <module_file_dir>` on how to enable
   the cluster module files that need to be read.
 
