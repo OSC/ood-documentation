@@ -21,6 +21,7 @@ jobs:
       - name: Make Html
         run: |
           OOD_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          env
           docker run --rm -v "${PWD}:/doc" -u "$(id -u):$(id -g)" -e OOD_BRANCH ohiosupercomputer/ood-doc-build:v2.0.0 make html
 
       - name: Publish to the test repo
