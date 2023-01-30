@@ -8,7 +8,7 @@ namespace :docker do
 
   desc "Build docs using docker"
   task :build do
-    exec 'docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/ood-doc-build make html'
+    exec 'docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/ood-doc-build:v2.0.0 make html'
   end
 end
 
