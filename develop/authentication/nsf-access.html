@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>OpenID Connect &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>NSF ACCESS &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="OpenID Connect with Dex" href="dex.html" />
-    <link rel="prev" title="3. Configure Logout" href="overview/configure-logout.html" />
+    <link rel="next" title="Other Insecure Options" href="insecure.html" />
+    <link rel="prev" title="SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon" href="adfs-with-auth-mellon.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -107,14 +107,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../authentication.html">Authentication</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oidc.html">OpenID Connect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dex.html">OpenID Connect with Dex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shibboleth.html">Shibboleth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cas.html">CAS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nsf-access.html">NSF ACCESS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NSF ACCESS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oidc-client-registration">OIDC Client Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shibboleth-and-incommon">Shibboleth and InCommon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mapping-users">Mapping Users</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="insecure.html">Other Insecure Options</a></li>
 </ul>
 </li>
@@ -188,14 +193,14 @@
         
           <li><a href="../authentication.html">Authentication</a> &raquo;</li>
         
-      <li>OpenID Connect</li>
+      <li>NSF ACCESS</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/oidc.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/authentication/nsf-access.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -209,40 +214,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="openid-connect">
-<span id="authentication-oidc"></span><h1>OpenID Connect<a class="headerlink" href="#openid-connect" title="Permalink to this headline">¶</a></h1>
-<p>This is a summary of using OpenID Connect for authentication. Two example OpenID Connect identity providers we have documented include <a class="reference internal" href="dex.html#authentication-dex"><span class="std std-ref">Dex</span></a> and <a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html#authentication-tutorial-oidc-keycloak-rhel7"><span class="std std-ref">Keycloak</span></a>.</p>
-<p>The following prerequisites need to be satisfied:</p>
-<ul class="simple">
-<li><p>A OIDC IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.example.com</span></code> (outside of scope of this document)</p></li>
-<li><p>The <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> installed on the OnDemand Server.</p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>OnDemand repos provide the <code class="docutils literal notranslate"><span class="pre">httpd24-mod_auth_openidc</span></code> RPM for RHEL 7 and CentOS 7 as it must be built against SCL Apache. The OnDemand repos also have the <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.</p>
-</div>
-<p>The following is an example <strong class="program">ood-portal-generator</strong> configuration file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
-<span class="nn">---</span><span class="w"></span>
-<span class="nt">servername</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand.example.com</span><span class="w"></span>
-
-<span class="c1"># Use OIDC authentication</span><span class="w"></span>
-<span class="nt">auth</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span><span class="w"></span>
-
-<span class="c1"># Use OIDC logout</span><span class="w"></span>
-<span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc?logout=https%3A%2F%2Fondemand.example.com&quot;</span><span class="w"></span>
-
-<span class="c1"># Capture system user name from authenticated user name</span><span class="w"></span>
-<span class="nt">user_map_cmd</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span><span class="w"></span>
-
-<span class="nt">oidc_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc&quot;</span><span class="w"></span>
-<span class="nt">oidc_provider_metadata_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://idp.example.com/.well-known/openid-configuration&quot;</span><span class="w"></span>
-<span class="nt">oidc_client_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ondemand.example.com&quot;</span><span class="w"></span>
-<span class="nt">oidc_client_secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;b972c25d-88a4-41fa-87f7-a12ff167dd13&quot;</span><span class="w"></span>
-<span class="nt">oidc_remote_user_claim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;preferred_username&quot;</span><span class="w"></span>
-<span class="nt">oidc_scope</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openid</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">groups&quot;</span><span class="w"></span>
+  <div class="section" id="nsf-access">
+<span id="id1"></span><h1>NSF ACCESS<a class="headerlink" href="#nsf-access" title="Permalink to this headline">¶</a></h1>
+<p>If your site is a part of the <a class="reference external" href="https://www.nsf.gov/">National Science Foundation</a>’s (NSF)
+<a class="reference external" href="https://access-ci.org/">ACCESS</a> program (formerley <a class="reference external" href="https://www.xsede.org/">XSEDE</a>) you can use their Identity Provider (IDP)
+to authenticate users for your Open OnDemand instance.</p>
+<div class="section" id="oidc-client-registration">
+<h2>OIDC Client Registration<a class="headerlink" href="#oidc-client-registration" title="Permalink to this headline">¶</a></h2>
+<p>You should read the <a class="reference external" href="https://identity.access-ci.org/about-access-idp">ACCESS IDP documentation</a> on how to register your Open OnDemand
+instance as an Open ID Connect (OIDC) client.
+ACCESS uses <a class="reference external" href="https://www.cilogon.org/faq">CILogon</a> to provide a bridge from campus authentication, via the InCommon Federation,
+to OAuth/OIDC-based research cyberinfrastructure (CI).</p>
+<p>Once you’ve registered your Open OnDemand instance, you can then configure it accordingly.
+Since <a class="reference external" href="https://access-ci.org/">ACCESS</a> uses Open ID Connect (OIDC) you can see our <a class="reference internal" href="oidc.html#authentication-oidc"><span class="std std-ref">oidc documentation</span></a>
+for more details on how to configure Open OnDemand with what CILogon has provided in
+registering your application.</p>
+<p>Here’s an example you can use to get started. Note that <code class="docutils literal notranslate"><span class="pre">oidc_client_id</span></code> and <code class="docutils literal notranslate"><span class="pre">oidc_client_secret</span></code>
+are commented out because they are specific to your site.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">oidc_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc&quot;</span><span class="w"></span>
+<span class="nt">oidc_provider_metadata_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://cilogon.org/.well-known/openid-configuration&quot;</span><span class="w"></span>
+<span class="hll"><span class="c1"># oidc_client_id: &quot;cilogon:/client_id/...&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="c1"># oidc_client_secret: &quot;...&quot;</span><span class="w"></span>
+</span><span class="nt">oidc_remote_user_claim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sub&quot;</span><span class="w"></span>
+<span class="nt">oidc_scope</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openid</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">profile</span><span class="nv"> </span><span class="s">org.cilogon.userinfo&quot;</span><span class="w"></span>
 <span class="nt">oidc_session_inactivity_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">28800</span><span class="w"></span>
 <span class="nt">oidc_session_max_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">28800</span><span class="w"></span>
 <span class="nt">oidc_state_max_number_of_cookies</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10</span><span class="nv"> </span><span class="s">true&quot;</span><span class="w"></span>
@@ -251,20 +245,46 @@
 <span class="w">  </span><span class="nt">OIDCPassRefreshToken</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">OIDCPassClaimsAs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;environment&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">OIDCStripCookies</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mod_auth_openidc_session</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_chunks</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_0</span><span class="nv"> </span><span class="s">mod_auth_openidc_session_1&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="nt">OIDCResponseType</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;code&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OIDCAuthRequestParams</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;idphint=https%3A%2F%2Faccess-ci.org%2Fidp&quot;</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It’s recommended to secure <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> by changing the file permissions to be <code class="docutils literal notranslate"><span class="pre">0600</span></code> and make the file only readable by <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod root:root /etc/ood/config/ood_portal.yml
-sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
+</div>
+<div class="section" id="shibboleth-and-incommon">
+<h2>Shibboleth and InCommon<a class="headerlink" href="#shibboleth-and-incommon" title="Permalink to this headline">¶</a></h2>
+<p>If your campus already runs Shibboleth authentication, you have an alternative to the Open ID Connect
+configuration above.</p>
+<p>The SAML metadata for idp.access-ci.org is published by InCommon and can be downloaded using the
+Metadata Query (MDQ) Service from <a class="reference external" href="https://mdq.incommon.org/entities/https%3A%2F%2Faccess-ci.org%2Fidp">https://mdq.incommon.org/entities/https%3A%2F%2Faccess-ci.org%2Fidp</a> .
+Alternatively, you can download the metadata from <a class="reference external" href="https://identity.access-ci.org/access-metadata.xml">https://identity.access-ci.org/access-metadata.xml</a>
+and configure it in a local file.</p>
+<p>See our <a class="reference internal" href="shibboleth.html#authentication-shibboleth"><span class="std std-ref">shibboleth documentation</span></a> for more information on
+Shibboleth authentication.</p>
+</div>
+<div class="section" id="mapping-users">
+<h2>Mapping Users<a class="headerlink" href="#mapping-users" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://access-ci.org/">ACCESS</a> users have allocations on many <a class="reference external" href="https://access-ci.org/">ACCESS</a> resource, of which you are one.
+This means they have disparate usernames on all these systems and a unique username
+on _your_ system.</p>
+<p>So you’ll need an additional utility provided by access <a class="reference external" href="https://access-ci.org/">ACCESS</a>, namely the
+<a class="reference external" href="https://github.com/access-ci-org/access-oauth-mapfile">access-oauth-mapfile</a>.</p>
+<p>Follow the instructions to install that utility and you’ll get a lookup table
+in <code class="docutils literal notranslate"><span class="pre">/etc/grid-security/access-oauth-mapfile</span></code> like so:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>annie-oakley@access-ci.org aoakley
 </pre></div>
 </div>
-</div></blockquote>
+<p>You can set the <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a> in <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> to search this file and return
+the local user given the ACCESS username.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">MAPPED_USER</span><span class="o">=</span><span class="k">$(</span>grep <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> ./delme.txt <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$MAPPED_USER</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> -n <span class="s2">&quot;</span><span class="nv">$MAPPED_USER</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">-not-found&quot;</span>
+<span class="k">fi</span>
+</pre></div>
 </div>
-<p>Build the Apache configuration file and install it.</p>
+</div>
 </div>
 
 
@@ -275,10 +295,10 @@ sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dex.html" class="btn btn-neutral float-right" title="OpenID Connect with Dex" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="insecure.html" class="btn btn-neutral float-right" title="Other Insecure Options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="overview/configure-logout.html" class="btn btn-neutral float-left" title="3. Configure Logout" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="adfs-with-auth-mellon.html" class="btn btn-neutral float-left" title="SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -310,29 +330,29 @@ sudo chmod <span class="m">0600</span> /etc/ood/config/ood_portal.yml
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/authentication/oidc.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/authentication/nsf-access.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/authentication/oidc.html">2.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/authentication/nsf-access.html">2.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/authentication/oidc.html">1.8</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/authentication/nsf-access.html">1.8</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/oidc.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/nsf-access.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/oidc.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/nsf-access.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/oidc.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/nsf-access.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/oidc.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/nsf-access.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/oidc.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/nsf-access.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/oidc.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/nsf-access.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/oidc.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/nsf-access.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/oidc.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/nsf-access.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/oidc.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/nsf-access.html">develop</a></dd>
       
     </dl>
     <dl>

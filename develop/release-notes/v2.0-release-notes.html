@@ -27,6 +27,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -129,9 +130,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../release-notes.html">Release Notes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="v2.1-release-notes.html">v2.1 Release Notes</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">v2.0 Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-to-v2-0-29">Upgrading to v2.0.29</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#major-changes">Major Changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#upgrading-from-v1-8">Upgrading from v1.8</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Upgrade directions</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
@@ -253,6 +259,35 @@
 <li><p><a class="reference internal" href="#memcached-ruby-gem-available-for-use-in-apps">Memcached Ruby gem available for use in apps</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 </ul>
+<div class="section" id="upgrading-to-v2-0-29">
+<h2>Upgrading to v2.0.29<a class="headerlink" href="#upgrading-to-v2-0-29" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="major-changes">
+<h3>Major Changes<a class="headerlink" href="#major-changes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="require-nodejs-14">
+<h4>Require NodeJS 14<a class="headerlink" href="#require-nodejs-14" title="Permalink to this headline">¶</a></h4>
+<p>NodeJS 14 is now required as NodeJS 12 is currently End-Of-Life.</p>
+</div>
+</div>
+<div class="section" id="upgrade-directions">
+<h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">RHEL/CentOS 7</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RHEL/Rocky Linux 8</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum update ondemand
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo dnf module reset nodejs
+sudo dnf module <span class="nb">enable</span> nodejs:14
+sudo dnf update ondemand
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget -O /tmp/ondemand-release-web_2.0.1_all.deb https://apt.osc.edu/ondemand/2.0/ondemand-release-web_2.0.1_all.deb
+sudo apt -o Dpkg::Options::<span class="o">=</span><span class="s2">&quot;--force-confnew&quot;</span> install /tmp/ondemand-release-web_2.0.1_all.deb
+sudo apt update
+sudo apt install --only-upgrade ondemand
+</pre></div>
+</div>
+</div></div>
+</div>
+</div>
 <div class="section" id="upgrading-from-v1-8">
 <h2>Upgrading from v1.8<a class="headerlink" href="#upgrading-from-v1-8" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="breaking-changes">
@@ -305,7 +340,7 @@ each other, so passenger apps will also need to update their bundler dependencie
 </div>
 <div class="section" id="activejobs-configuration-changes">
 <h4>ActiveJobs configuration changes<a class="headerlink" href="#activejobs-configuration-changes" title="Permalink to this headline">¶</a></h4>
-<p>Because ActiveJobs now integrated with the Dashboard app, configuration files are no longer
+<p>Because ActiveJobs is now integrated with the Dashboard app, configuration files are no longer
 being read from <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/activejobs</span></code>.</p>
 <p>If you have initializers here in this directory, they need to move to
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/initializers</span></code>.  Similarly views, if any,
@@ -369,8 +404,8 @@ for it to be usable in this view.</p>
 </div>
 </div>
 </div>
-<div class="section" id="upgrade-directions">
-<h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Upgrade directions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
@@ -412,7 +447,7 @@ sudo yum update ondemand
 </pre></div>
 </div>
 </li>
-<li><p>(Optional) If using Dex based authentiction, update the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
+<li><p>(Optional) If using Dex based authentication, update the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum update ondemand-dex
 </pre></div>
 </div>
@@ -464,7 +499,7 @@ become desirable to be able to present only a small subset of the apps that are 
 for a particular user.</p>
 <p>2.0 now allows sites to pin a grid of application icons to the dashboard for easy access
 and to a subset of apps that you want to feature. The grid layout of application icons
-is is meant to give users a desktop look and feel to the dashboard.</p>
+is meant to give users a desktop look and feel to the dashboard.</p>
 <p>There are several strategies available to choose which apps to pin. For example, metadata
 in the app manifests could specify a field_of_science attribute, and then the pinned apps
 could be configured to display all apps with the field_of_science being “Biology”. The
@@ -479,12 +514,12 @@ a particular attribute.</p>
 </div>
 <div class="section" id="adding-metadata-to-app-manifests">
 <h3>Adding metadata to app manifests<a class="headerlink" href="#adding-metadata-to-app-manifests" title="Permalink to this headline">¶</a></h3>
-<p>App manifest files now allow for metedata fields for grouping and diplay in the all apps table.
+<p>App manifest files now allow for metadata fields for grouping and display in the all apps table.
 See <a class="reference internal" href="../how-tos/app-development/interactive/manifest.html#app-development-manifest"><span class="std std-ref">documentation on manifest files</span></a> for more details.</p>
 </div>
 <div class="section" id="shell-app-now-has-themes">
 <h3>Shell app now has themes<a class="headerlink" href="#shell-app-now-has-themes" title="Permalink to this headline">¶</a></h3>
-<p>The shell app now allows for users to choose a color themes than the default and ships with
+<p>The shell app now allows for users to choose a color theme other than the default and ships with
 thirteen extra themes.</p>
 </div>
 <div class="section" id="configurations-in-an-ondemand-d-directory">
@@ -500,7 +535,7 @@ available configurations.</p>
 Passenger application processes. These are all now served by a single Passenger application process per user.</p>
 <p>This change has the following effects:</p>
 <ul class="simple">
-<li><p>The URL has changed, but redirects from the old URLs should still work for backwards compatibilty.</p></li>
+<li><p>The URL has changed, but redirects from the old URLs should still work for backwards compatibility.</p></li>
 <li><p>The navbar and branding across the dashboard is visible in Active Jobs and File Editor</p></li>
 <li><p>the Active Jobs and Files apps both load without opening a new window</p></li>
 <li><p>the Active Jobs and Files apps load much faster than before</p></li>

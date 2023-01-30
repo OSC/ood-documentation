@@ -22,6 +22,12 @@ Some operating systems use `Software Collections`_ to satisfy these.
    Be sure to check :ref:`Supported Operating Systems <os-support>` before proceeding with install to verify
    you are on a supported operating system.
 
+..  warning::
+
+  If you are an administrator responsible for Open OnDemand, you are now an administrator of
+  Apache Httpd as well.  As such, you should get comfortable with it as from time to time you will
+  have to troubleshoot it.
+
 1. Enable Dependencies
 ----------------------
 
@@ -142,6 +148,21 @@ You may also want to :ref:`enable SELinux <modify-system-security>`.
 
 If you're seeing the default apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
 and likely :ref:`configure a servername <ood-portal-generator-servername>`.
+
+Building From Source
+--------------------
+
+Building from source is left as an exercise to the reader. 
+     
+It's not particularly difficult to build the code, but installing it with all the various files is. Should you be interested, 
+review the ``Dockerfile`` and packaging specs for what would be involved.
+
+- https://github.com/OSC/ondemand/blob/master/Dockerfile
+- https://github.com/OSC/ondemand/tree/master/packaging
+
+If you'd like a package built for a system that we don't currently support, feel free to open a ticket!
+
+- https://github.com/OSC/ondemand/issues/new
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
