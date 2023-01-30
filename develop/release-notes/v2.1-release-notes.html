@@ -130,6 +130,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">v2.1 Release Notes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#upgrading-from-v2-0">Upgrading from v2.0</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deprecations">Deprecations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
 </ul>
 </li>
@@ -257,6 +258,35 @@ a directory like <code class="docutils literal notranslate"><span class="pre">~/
 OnDemand uses these files to cache the choices a user makes for the next time they
 use that app.</p>
 <p>Version 2.1 now writes files like <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/batch_connect/cache/&lt;APPNAME&gt;.json</span></code></p>
+</div>
+</div>
+<div class="section" id="deprecations">
+<h3>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="autoloading-during-initialization-is-deprecated">
+<h4>Autoloading during initialization is deprecated.<a class="headerlink" href="#autoloading-during-initialization-is-deprecated" title="Permalink to this headline">¶</a></h4>
+<p>This comes from the Ruby on Rails framework that Open OnDemand utilizes.
+It affects initializers you may have written, for example to <a class="reference internal" href="../customizations.html#add-shortcuts-to-files-menu"><span class="std std-ref">Add Shortcuts to Files Menu</span></a>.</p>
+<p>To resolve this, wrap your code in a  <code class="docutils literal notranslate"><span class="pre">Rails.application.config.after_initialize</span></code> block.</p>
+<p>For example, if you have:</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/initializers/ood.rb</span>
+
+  <span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
+    <span class="c1"># add User project space directory</span>
+    <span class="n">paths</span> <span class="o">&lt;&lt;</span> <span class="no">FavoritePath</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/project/</span><span class="si">#{</span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+</pre></div>
+</div>
+<p>You will need to modify that file like so:</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/initializers/ood.rb</span>
+
+  <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">after_initialize</span> <span class="k">do</span>
+    <span class="no">OodFilesApp</span><span class="o">.</span><span class="n">candidate_favorite_paths</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">paths</span><span class="o">|</span>
+      <span class="c1"># add User project space directory</span>
+      <span class="n">paths</span> <span class="o">&lt;&lt;</span> <span class="no">FavoritePath</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;/fs/project/</span><span class="si">#{</span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="upgrade-directions">
