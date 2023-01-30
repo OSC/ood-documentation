@@ -180,10 +180,10 @@ These URLs can be specified, which will appear in the Help menu and on other loc
      - https://idp.osc.edu/auth/realms/osc/account/identity
 
 
+.. _add-shortcuts-to-files-menu:
+
 Add Shortcuts to Files Menu
 ---------------------------
-
-.. _add-shortcuts-to-files-menu:
 
 The Files menu by default has a single link to open the Files app in the user's
 Home Directory. More links can be added to this menu, for Scratch space and
@@ -205,16 +205,18 @@ Start by creating the file
 
   # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
-  OodFilesApp.candidate_favorite_paths.tap do |paths|
-    # add project space directories
-    projects = User.new.groups.map(&:name).grep(/^P./)
-    paths.concat projects.map { |p| FavoritePath.new("/fs/project/#{p}")  }
+  Rails.application.config.after_initialize do
+    OodFilesApp.candidate_favorite_paths.tap do |paths|
+      # add project space directories
+      projects = User.new.groups.map(&:name).grep(/^P./)
+      paths.concat projects.map { |p| FavoritePath.new("/fs/project/#{p}")  }
 
-    # add User scratch space directory
-    paths << FavoritePath.new("/fs/scratch/#{User.new.name}")
+      # add User scratch space directory
+      paths << FavoritePath.new("/fs/scratch/#{User.new.name}")
 
-    # Project scratch is given an optional title field
-    paths.concat projects.map { |p| FavoritePath.new("/fs/scratch/#{p}", title: "Scratch")  }
+      # Project scratch is given an optional title field
+      paths.concat projects.map { |p| FavoritePath.new("/fs/scratch/#{p}", title: "Scratch")  }
+    end
   end
 
 - The variable ``paths`` is an array of ``FavoritePath`` objects that define a list
