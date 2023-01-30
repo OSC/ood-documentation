@@ -192,9 +192,9 @@ auto_primary_group
   This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
   primary group of the user.  No choice will be given to the user.
 
-auto_module_<MODULE>
+auto_modules_<MODULE>
   This will generate a list of modules in a ``select`` widget.
-  For example ``auto_module_matlab`` will automatically populate a dropdown
+  For example ``auto_modules_matlab`` will automatically populate a dropdown
   list of every single ``matlab`` version available.
 
   See :ref:`the module directory configuration <module_file_dir>` on how to enable
