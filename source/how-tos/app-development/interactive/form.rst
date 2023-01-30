@@ -195,8 +195,17 @@ auto_primary_group
 auto_modules_<MODULE>
   This will generate a list of modules in a ``select`` widget.
   For example ``auto_modules_matlab`` will automatically populate a dropdown
-  list of every single ``matlab`` version available.
+  list of every single ``matlab`` version available, including the default
+  version.
+  
+  To disable the default version, use the ``attributes`` field like so:
+  
+  .. code-block:: yaml
 
+     attributes:
+       auto_modules_matlab:
+         default: false
+  
   See :ref:`the module directory configuration <module_file_dir>` on how to enable
   the cluster module files that need to be read.
 
