@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [latest, develop, release-*]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -15,7 +19,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Make Html
-        run: docker run --rm -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/ood-doc-build:v2.0.0 make html
+        run: |
+          OOD_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          docker run --rm -v "${PWD}:/doc" -u "$(id -u):$(id -g)" -e OOD_BRANCH ohiosupercomputer/ood-doc-build:v2.0.0 make html
 
       - name: Publish to the test repo
         run: GITHUB_TOKEN=${{ secrets.OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation-test"
