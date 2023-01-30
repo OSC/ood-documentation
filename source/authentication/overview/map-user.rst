@@ -112,6 +112,7 @@ If I were to run and test this script - it would return values like these:
   Jan 19 15:03:14 localhost.localdomain ood-mapping[149352]: cannot map jessie.owens@harvard.edu
   $
 
+.. _gridmap_user_mapping:
 
 File User Mapping
 -----------------
