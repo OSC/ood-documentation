@@ -681,6 +681,8 @@ the job. But since ``bc_queue``'s attribute is set to true, it is cacheable.
        cacheable: true
 
 
+.. _display-form-choices:
+
 Displaying form items in the session card
 `````````````````````````````````````````
 

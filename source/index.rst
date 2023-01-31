@@ -85,7 +85,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   glossary
   issues/overview
 
-.. _website: http://openondemand.org/
+.. _website: https://openondemand.org/
 .. _bowdoin: https://www.bowdoin.edu/it/resources/high-performance-computing.html
 .. _louthan: http://www.ou.edu/oscer/people
 .. _oregonstate: https://oregonstate.edu/

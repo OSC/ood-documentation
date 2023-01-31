@@ -604,3 +604,21 @@ Configuration Properties
     .. code-block:: yaml
 
       remote_files_enabled: true
+
+.. describe:: hide_app_version (Boolean, false)
+
+  Hide the interactive application's version.
+
+  Default
+    Interactive application versions are shown.
+
+    .. code-block:: yaml
+
+      hide_app_version: false
+
+  Example
+    Never show interactive application versions.
+
+    .. code-block:: yaml
+
+      hide_app_version: true

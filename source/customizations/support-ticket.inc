@@ -1,7 +1,7 @@
 .. _support_ticket_guide:
 
-Support Ticket
-==============
+Support Tickets
+---------------
 
 The Dashboard now supports sending a support ticket to your institution Help Desk system.
 The feature uses email as the delivery mechanism, but it could be extended to support others.

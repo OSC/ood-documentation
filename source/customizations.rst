@@ -1280,6 +1280,7 @@ that Open OnDemand is installed. You also have to enable the feature through
 the :ref:`configuration entry for enabling remote filesystems <remote_files_enabled>`.
 
 .. include:: customizations/custom-pages.inc
+.. include:: customizations/support-ticket.inc
 
 .. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
 .. _2.0 documentation for controling the navbar: https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar
