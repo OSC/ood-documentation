@@ -1320,10 +1320,6 @@ This functionality will allow users to remove the job from the scheduler and kee
 This feature is disabled behind a feature toggle. To enable it, set the configuration property ``cancel_session_enabled: true``.
 For more information on how to configure properties, see :ref:`configuration documentation <configuration_properties>`.
 
-.. warning::
-  *Cancel Interactive Sessions* is an experimental feature.
-  It is fully functional, but it could be removed in future OnDemand releases depending on feedback from the community.
-
 When enabled, the cancel button will appear for active sessions.
 When the session is cancelled, the job will be cancelled in the scheduler,
 the status will change to ``completed``, and the session card will be kept.
