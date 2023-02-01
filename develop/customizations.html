@@ -175,6 +175,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#customize-dex-theme">Customize Dex Theme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#xdmod-integration">XDMoD Integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#accessing-remote-file-systems">Accessing Remote File Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cancel-interactive-sessions">Cancel Interactive Sessions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-pages">Custom Pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-tickets">Support Tickets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
@@ -308,6 +309,7 @@ As well, it defines the property <code class="docutils literal notranslate"><spa
 <p>Links can be added the Help naviagtion menu to dynamically switch between profiles.
 These links can be configured using the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profile_links</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Profiles&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Root</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://cog&quot;</span><span class="w"></span>
@@ -324,8 +326,13 @@ These links can be configured using the configuration property <code class="docu
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you require to update the <code class="docutils literal notranslate"><span class="pre">Profiles</span></code> header text, use the translation properties to set a new value.
-<a class="reference internal" href="#customization-localization"><span class="std std-ref">See the customize text documentation</span></a></p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">group</span></code> property to add a section header or to organize your profiles as shown above.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your profile selection is stored in your OnDemand settings file under the <code class="docutils literal notranslate"><span class="pre">profile</span></code> key.
+This file is stored in your OnDemand data folder, this is usually <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/.ood</span></code>.
+Updates to this file will require an application restart to load the new values.</p>
 </div>
 </div>
 <div class="section" id="automatic-profile-selection">
@@ -514,7 +521,7 @@ This will result in a CSS tag added to all dashboard pages with the path: <code 
 </div>
 </div>
 <div class="section" id="add-urls-to-help-menu">
-<h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
+<span id="help-menu-guide"></span><h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
 <p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 <table class="docutils align-default" id="id21">
 <caption><span class="caption-number">Table 3 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id21" title="Permalink to this table">¶</a></caption>
@@ -556,6 +563,32 @@ This will result in a CSS tag added to all dashboard pages with the path: <code 
 </tr>
 </tbody>
 </table>
+<p>Since OnDemand 2.1, custom links can be added to the Help menu using the configuration property <code class="docutils literal notranslate"><span class="pre">help_menu</span></code>.
+Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.</p>
+<p><code class="docutils literal notranslate"><span class="pre">help_menu</span></code> supports all the link definitions developed for the custom navigation configuration.
+For more information on how to create custom links, see the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">link definition documentation</span></a>.</p>
+<p>For information about how to configure properties, see the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">help_menu</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Documentation&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jupyter</span><span class="nv"> </span><span class="s">Docs&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://book&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://mydomain.com/path/jupyter&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Support</span><span class="nv"> </span><span class="s">Docs&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://book&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://mydomain.com/path/support/docs&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Custom</span><span class="nv"> </span><span class="s">Pages&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">page</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rstudio_guide&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;RStudio</span><span class="nv"> </span><span class="s">Guide&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://window-restore&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Profiles&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;team1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Team</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://user&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/help_menu_links.png" src="_images/help_menu_links.png" />
+</div>
 </div>
 <div class="section" id="add-shortcuts-to-files-menu">
 <span id="id3"></span><h2>Add Shortcuts to Files Menu<a class="headerlink" href="#add-shortcuts-to-files-menu" title="Permalink to this headline">¶</a></h2>
@@ -723,7 +756,7 @@ The supported templates are: <code class="docutils literal notranslate"><span cl
 </div>
 </div>
 <div class="section" id="navigation-links">
-<h3>Navigation Links<a class="headerlink" href="#navigation-links" title="Permalink to this headline">¶</a></h3>
+<span id="navbar-links-guide"></span><h3>Navigation Links<a class="headerlink" href="#navigation-links" title="Permalink to this headline">¶</a></h3>
 <p>Navigation links can be used as top level navigation items or as links within a navigation menu.</p>
 <ul>
 <li><p><strong>App links:</strong> applications identified by the tokens are added to the menu.
@@ -1653,6 +1686,20 @@ remotes.</p>
 that Open OnDemand is installed. You also have to enable the feature through
 the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#remote-files-enabled"><span class="std std-ref">configuration entry for enabling remote filesystems</span></a>.</p>
 </div>
+<div class="section" id="cancel-interactive-sessions">
+<h2>Cancel Interactive Sessions<a class="headerlink" href="#cancel-interactive-sessions" title="Permalink to this headline">¶</a></h2>
+<p>We can now cancel an interactive session from the session panel without deleting the session card.
+This functionality will allow users to remove the job from the scheduler and keep the information in the OnDemand interface.</p>
+<p>This feature is disabled behind a feature toggle. To enable it, set the configuration property <code class="docutils literal notranslate"><span class="pre">cancel_session_enabled:</span> <span class="pre">true</span></code>.
+For more information on how to configure properties, see <a class="reference internal" href="reference/files/ondemand-d-ymls.html#configuration-properties"><span class="std std-ref">configuration documentation</span></a>.</p>
+<p>When enabled, the cancel button will appear for active sessions.
+When the session is cancelled, the job will be cancelled in the scheduler,
+the status will change to <code class="docutils literal notranslate"><span class="pre">completed</span></code>, and the session card will be kept.
+For completed sessions, the system will only show the delete button.</p>
+<div class="figure align-center">
+<img alt="_images/cancel_session.png" src="_images/cancel_session.png" />
+</div>
+</div>
 <div class="section" id="custom-pages">
 <span id="custom-pages-guide"></span><h2>Custom Pages<a class="headerlink" href="#custom-pages" title="Permalink to this headline">¶</a></h2>
 <p>Custom pages allow administrators to add custom content to new dashboard pages.
@@ -1675,9 +1722,14 @@ It will render a layout with the <code class="docutils literal notranslate"><spa
 <div class="figure align-center">
 <img alt="_images/custom-pages-documentation.png" src="_images/custom-pages-documentation.png" />
 </div>
-<p>Links can be added the Help navigation menu to select the custom pages.
-These links can be configured using the configuration property <code class="docutils literal notranslate"><span class="pre">page_links</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">page_links</span><span class="p">:</span><span class="w"></span>
+<p>Links to the custom pages can be added the Help dropdown menu.
+To add links to the Help menu use the configuration property <code class="docutils literal notranslate"><span class="pre">help_menu</span></code>.
+See the <a class="reference internal" href="#help-menu-guide"><span class="std std-ref">documentation on adding urls to the Help menu</span></a> for details and examples.</p>
+<p>Adding custom pages links uses the same notation and attributes as when created for the custom Dashboard navbar.
+See the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">custom Dashboard navbar documentation</span></a></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adding a link to the custom page with page_code = &quot;documentation&quot;</span><span class="w"></span>
+<span class="nt">help_menu</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Custom</span><span class="nv"> </span><span class="s">Pages&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">page</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;documentation&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Site</span><span class="nv"> </span><span class="s">Documentation&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://book&quot;</span><span class="w"></span>
@@ -1685,11 +1737,6 @@ These links can be configured using the configuration property <code class="docu
 </div>
 <div class="figure align-center">
 <img alt="_images/def-page-links.png" src="_images/def-page-links.png" />
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If you require to update the <code class="docutils literal notranslate"><span class="pre">Custom</span> <span class="pre">Pages</span></code> header text, use the translation properties to set a new value.
-<a class="reference internal" href="#customization-localization"><span class="std std-ref">See the customize text documentation</span></a></p>
 </div>
 </div>
 <div class="section" id="support-tickets">

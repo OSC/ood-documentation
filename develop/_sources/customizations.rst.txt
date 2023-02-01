@@ -148,6 +148,8 @@ This will result in a CSS tag added to all dashboard pages with the path: ``/pub
 
   custom_css_files: ["/myfolder/custom-branding.css"]
 
+.. _help_menu_guide:
+
 Add URLs to Help Menu
 ---------------------
 
@@ -178,6 +180,36 @@ These URLs can be specified, which will appear in the Help menu and on other loc
    * - Custom Help URL (Also requires locale ``en.dashboard.nav_help_custom``)
      - OOD_DASHBOARD_HELP_CUSTOM_URL
      - https://idp.osc.edu/auth/realms/osc/account/identity
+
+Since OnDemand 2.1, custom links can be added to the Help menu using the configuration property ``help_menu``.
+Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.
+
+``help_menu`` supports all the link definitions developed for the custom navigation configuration.
+For more information on how to create custom links, see the :ref:`link definition documentation <navbar_links_guide>`.
+
+For information about how to configure properties, see the :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
+
+.. code-block:: yaml
+
+  help_menu:
+    - group: "Documentation"
+    - title: "Jupyter Docs"
+      icon_uri: "fas://book"
+      url: "https://mydomain.com/path/jupyter"
+    - title: "Support Docs"
+      icon_uri: "fas://book"
+      url: "https://mydomain.com/path/support/docs"
+    - group: "Custom Pages"
+    - page: "rstudio_guide"
+      title: "RStudio Guide"
+      icon_uri: "fas://window-restore"
+    - group: "Profiles"
+    - profile: "team1"
+      title: "Team 1"
+      icon_uri: "fas://user"
+
+.. figure:: /images/help_menu_links.png
+   :align: center
 
 
 .. _add-shortcuts-to-files-menu:
@@ -1278,6 +1310,23 @@ remotes.
 To enable this feature ensure that ``rclone`` is installed on the same machine
 that Open OnDemand is installed. You also have to enable the feature through
 the :ref:`configuration entry for enabling remote filesystems <remote_files_enabled>`.
+
+Cancel Interactive Sessions
+---------------------------
+
+We can now cancel an interactive session from the session panel without deleting the session card.
+This functionality will allow users to remove the job from the scheduler and keep the information in the OnDemand interface.
+
+This feature is disabled behind a feature toggle. To enable it, set the configuration property ``cancel_session_enabled: true``.
+For more information on how to configure properties, see :ref:`configuration documentation <configuration_properties>`.
+
+When enabled, the cancel button will appear for active sessions.
+When the session is cancelled, the job will be cancelled in the scheduler,
+the status will change to ``completed``, and the session card will be kept.
+For completed sessions, the system will only show the delete button.
+
+.. figure:: /images/cancel_session.png
+  :align: center
 
 .. include:: customizations/custom-pages.inc
 .. include:: customizations/support-ticket.inc

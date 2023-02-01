@@ -299,6 +299,18 @@ Configuration Properties with profile support
   Example
      See the  :ref:`custom navigation documentation <navbar_guide>`
 
+.. describe:: help_menu (Array<Object>, [])
+
+  A single navigation item to add links to the Help dropdown menu.
+  This property adds navigation items at the end of any exisiting links in the menu.
+
+  See the :ref:`documentation on adding urls to the Help menu <help_menu_guide>` for details and examples.
+
+  Default
+   Empty array, no additional links will be added to the Help menu.
+  Example
+    See the  :ref:`documentation on adding urls to the Help menu <help_menu_guide>`
+
 .. describe:: interactive_apps_menu (Object, {})
 
   A single navigation item to create a custom interactive apps menu.
@@ -323,6 +335,8 @@ Configuration Properties with profile support
     Empty hash, No custom pages defined.
   Example
     See the  :ref:`custom pages documentation <custom_pages_guide>`
+
+.. _configuration_properties:
 
 Configuration Properties
 ------------------------
