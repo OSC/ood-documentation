@@ -28,19 +28,21 @@ It will render a layout with the ``pinned_apps`` widget under the URL: ``/sys/pu
 .. figure:: /images/custom-pages-documentation.png
    :align: center
 
-Links can be added the Help navigation menu to select the custom pages.
-These links can be configured using the configuration property ``page_links``.
+Links to the custom pages can be added the Help dropdown menu.
+To add links to the Help menu use the configuration property ``help_menu``.
+See the :ref:`documentation on adding urls to the Help menu <help_menu_guide>` for details and examples.
+
+Adding custom pages links uses the same notation and attributes as when created for the custom Dashboard navbar.
+See the :ref:`custom Dashboard navbar documentation <navbar_links_guide>`
 
 .. code-block:: yaml
 
-  page_links:
+  # Adding a link to the custom page with page_code = "documentation"
+  help_menu:
+    - group: "Custom Pages"
     - page: "documentation"
       title: "Site Documentation"
       icon_uri: "fas://book"
 
 .. figure:: /images/def-page-links.png
    :align: center
-
-.. tip::
-    If you require to update the ``Custom Pages`` header text, use the translation properties to set a new value.
-    :ref:`See the customize text documentation <customization_localization>`

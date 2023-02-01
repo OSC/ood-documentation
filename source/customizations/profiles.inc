@@ -54,6 +54,7 @@ These links can be configured using the configuration property ``profile_links``
 .. code-block:: yaml
 
   profile_links:
+    - group: "Profiles"
     - profile: ""
       title: "Root Profile"
       icon_uri: "fas://cog"
@@ -68,8 +69,12 @@ These links can be configured using the configuration property ``profile_links``
    :align: center
 
 .. tip::
-    If you require to update the ``Profiles`` header text, use the translation properties to set a new value.
-    :ref:`See the customize text documentation <customization_localization>`
+    Use the ``group`` property to add a section header or to organize your profiles as shown above.
+
+.. note::
+    Your profile selection is stored in your OnDemand settings file under the ``profile`` key.
+    This file is stored in your OnDemand data folder, this is usually ``~/ondemand/data/sys/dashboard/.ood``.
+    Updates to this file will require an application restart to load the new values.
 
 
 Automatic Profile Selection

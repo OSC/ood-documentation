@@ -87,6 +87,7 @@ There are several ways of creating a navigation menu.
 .. figure:: /images/def-templates-menu.png
    :align: center
 
+.. _navbar_links_guide:
 
 Navigation Links
 ......................
