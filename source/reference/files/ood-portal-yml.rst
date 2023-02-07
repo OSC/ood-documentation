@@ -224,24 +224,24 @@ Configure General Options
 
           use_maintenance: false
 
-.. describe:: maintenance_ip_whitelist (Array<String>)
+.. describe:: maintenance_ip_allowlist (Array<String>)
 
      List of IP regular expressions to be allowed to access OnDemand
      when maintenance is enabled
 
      Default
-       No IPs are whitelisted
+       No IPs are allowed.
 
        .. code-block:: yaml
 
-          maintenance_ip_whitelist: []
+          maintenance_ip_allowlist: []
 
      Example
        Allow 192.168.1.0/24 and 10.0.0.1 to access OnDemand during maintenance
 
        .. code-block:: yaml
 
-          maintenance_ip_whitelist:
+          maintenance_ip_allowlist:
             - '192.168.1..*'
             - '10.0.0.1'
 
@@ -634,8 +634,8 @@ assets and links supplied by the web server are relative and not absolute.
 
 .. describe:: host_regex (String)
 
-     the regular expression used as a whitelist for allowing a user to reverse
-     proxy to a given host
+     the regular expression used as a allowlist for allowing a user to reverse
+     proxy to a given host.
 
      Default
        Allow proxying to all hosts in the world (please change this if you
