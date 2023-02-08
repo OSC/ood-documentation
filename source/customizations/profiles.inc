@@ -6,13 +6,13 @@ Configuration Profiles
 .. note::
 
    The profile based configuration is an experimental feature. Not all properties have been migrated to be compatible.
-   See the list the list of supported properties in the :ref:`configuration documentation <profile_properties>`
+   See the list of supported properties in the :ref:`configuration documentation <profile_properties>`
 
 Configuration properties can be organized in a hierarchy using profiles. With profiles,
 administrators can create different configuration settings within the same OnDemand installation.
 A profile can be pre-selected or dynamically changed while using the Dashboard application.
 
-To define profile properties, we have group them under a profile name within the ``profiles`` keyword.
+To define profile properties, we have to group them under a profile name within the ``profiles`` keyword.
 Multiple profiles can be created using different files, the configuration
 logic will aggregate all profiles into a single consolidated object.
 
@@ -23,13 +23,12 @@ logic will aggregate all profiles into a single consolidated object.
       config_property: config_value
 
 OnDemand uses an inheritance and override approach for profiles.
-The root configuration provides default properties that all profiles inherit.
-Then, profile properties can override these values or define new ones as needed.
+The root profile, this is the default profile created by the system based on all the properties defined outside any profile definition,
+provide the default values that all profiles inherit. Then, profile properties can override these values or define new ones as required.
 
-The example below shows how the root profile defines a value for ``pinned_apps`` and ``pinned_apps_menu_length``.
+The example below shows how the root profile defines a value for ``pinned_apps`` and ``pinned_apps_menu_length`` properties.
 The ``rstudio_group`` profile inherits the property value for ``pinned_apps_menu_length``,
-and overrides the value for ``pinned_apps`` just to the RStudio application.
-As well, it defines the property ``pinned_apps_group_by``.
+and overrides the value for ``pinned_apps``. As well, it defines a value for the property ``pinned_apps_group_by``.
 
 .. code-block:: yaml
 
@@ -46,10 +45,12 @@ As well, it defines the property ``pinned_apps_group_by``.
 Manual Profile Selection
 ........................
 
-The selection of a profile can be done manually by the user or automatically based on request data.
+The selection of a profile can be done manually by updating the user settings profile. By default the root profile is selected.
+Profile selection can be done using configurable navigation links.
+These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard. 
 
-Links can be added the Help naviagtion menu to dynamically switch between profiles.
-These links can be configured using the configuration property ``profile_links``.
+To add profile links to the Help navigation dropdown menu use the configuration property ``profile_links``.
+For more information on how to configure profile links, see the :ref:`link definition documentation. <navbar_links_guide>`.
 
 .. code-block:: yaml
 
@@ -70,19 +71,21 @@ These links can be configured using the configuration property ``profile_links``
 
 .. tip::
     Use the ``group`` property to add a section header or to organize your profiles as shown above.
+    Profile links can be configured as well using the :ref:`Help menu customizations <help_menu_guide>`.
 
 .. note::
-    Your profile selection is stored in your OnDemand settings file under the ``profile`` key.
-    This file is stored in your OnDemand data folder, this is usually ``~/ondemand/data/sys/dashboard/.ood``.
-    Updates to this file will require an application restart to load the new values.
+    Your profile selection is stored in your OnDemand user settings file.
+    The ``profile`` key in this YAML file provides the value used to select your current profile.
+    The user settings file is stored in your OnDemand data folder, this is usually ``~/ondemand/data/sys/dashboard/.ood``.
+    Manual updates to this file will require an application restart to load the new values.
 
 
 Automatic Profile Selection
 ...........................
 
-* **Request Hostname profile selection:** use the current request hostname as the profile name.
+* **Request Hostname profile selection:** use the current request hostname as the selected profile.
   To enable this feature, set the configuration property ``host_based_profiles`` to ``true``.
-  A request to ``https://www.ondmeand.com/pun/sys/dashboard`` will use ``www.ondemand.com`` as the profile name.
+  A request to ``https://www.ondemand.com/pun/sys/dashboard`` will use ``www.ondemand.com`` as the selected profile name.
 
   Configure the profiles using the hostname and the system will use the profile properties automatically.
 
