@@ -918,7 +918,7 @@ respect the allowlist in the following manner:</p>
 <li><p>Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths</p></li>
 <li><p>Users should not be able to get around this using symlinks</p></li>
 </ol>
-<p>We recommend setting this environment variable in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as a YAML mapping (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> i.e. below would whitelist home directories, project space, and scratch space at OSC:</p>
+<p>We recommend setting this environment variable in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as a YAML mapping (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> i.e. below would a list that allows access to home directories, project space, and scratch space at OSC:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
 <span class="w"> </span><span class="nt">OOD_ALLOWLIST_PATH</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/users:/fs/project:/fs/scratch&quot;</span><span class="w"></span>
 </pre></div>
@@ -1471,15 +1471,15 @@ in the <code class="docutils literal notranslate"><span class="pre">/var/www/ood
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/</span></code> directory, if you want to reuse assets located elsewhere in your
 file system.</p>
 <p>While in maintenance mode, Apache returns the HTML file and a 503 response code to all users whose
-IP does not match one of the configured whitelist regular expressions.
-The whitelist is to allow staff, localhost or a subset of your users access while restricting others.</p>
+IP does not match one of the configured allowlist regular expressions.
+The allowlist is to allow staff, localhost or a subset of your users access while restricting others.</p>
 <p>In this example we allow access to anyone from <code class="docutils literal notranslate"><span class="pre">192.168.1..*</span></code> which is the 192.168.1.0/24 CIDR and
 the single IP ‘10.0.0.1’.</p>
 <p>These are the settings you’ll need for this functionality.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
 <span class="nt">use_rewrites</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 <span class="nt">use_maintenance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="nt">maintenance_ip_whitelist</span><span class="p">:</span><span class="w"></span>
+<span class="nt">maintenance_ip_allowlist</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="c1"># examples only! Your ip regular expressions will be specific to your site.</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;192.168.1..*&#39;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;10.0.0.1&#39;</span><span class="w"></span>

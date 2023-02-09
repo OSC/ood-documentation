@@ -696,7 +696,7 @@ Configuration Options
    .. note::
 
       Modifying anything in this configuration option other than the
-      whitelisted characters will require you modify ``app_request_uri`` as
+      allowed characters will require you modify ``app_request_uri`` as
       well.
 
 .. describe:: app_token (Hash)
