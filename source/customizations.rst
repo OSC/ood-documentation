@@ -379,7 +379,7 @@ respect the allowlist in the following manner:
 2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths
 3. Users should not be able to get around this using symlinks
 
-We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would whitelist home directories, project space, and scratch space at OSC:
+We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would a list that allows access to home directories, project space, and scratch space at OSC:
 
 .. code:: yaml
 
@@ -1037,8 +1037,8 @@ in the ``/var/www/ood/public/maintenance/`` directory. You can also put symbolic
 file system.
 
 While in maintenance mode, Apache returns the HTML file and a 503 response code to all users whose
-IP does not match one of the configured whitelist regular expressions.
-The whitelist is to allow staff, localhost or a subset of your users access while restricting others.
+IP does not match one of the configured allowlist regular expressions.
+The allowlist is to allow staff, localhost or a subset of your users access while restricting others.
 
 In this example we allow access to anyone from ``192.168.1..*`` which is the 192.168.1.0/24 CIDR and
 the single IP '10.0.0.1'.
@@ -1050,7 +1050,7 @@ These are the settings you'll need for this functionality.
   # /etc/ood/config/ood_portal.yml
   use_rewrites: true
   use_maintenance: true
-  maintenance_ip_whitelist:
+  maintenance_ip_allowlist:
     # examples only! Your ip regular expressions will be specific to your site.
     - '192.168.1..*'
     - '10.0.0.1'
