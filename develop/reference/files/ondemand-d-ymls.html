@@ -251,14 +251,13 @@ property will be used as text.</p>
 
 <dl class="describe">
 <dt>
-<code class="sig-name descname">dashboard_title (String, 'Open OnDemand')</code></dt>
-<dd><p>The text to use as the main navigation logo. If the <code class="docutils literal notranslate"><span class="pre">dashboard_header_img_logo</span></code> property is defined,
-this property will be used as the HTML image title.</p>
+<code class="sig-name descname">disable_dashboard_logo (Bool, false)</code></dt>
+<dd><p>Whether to show the <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code> property in the homepage welcome message.</p>
 <dl>
-<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">OnDemand</span></code> text</p>
+<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">false</span></code>, the <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code> logo will be shown in the homepage welcome message.</p>
 </dd>
-<dt>Example</dt><dd><p>Show <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Institution</span></code> as the logo text.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dashboard_title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Institution&quot;</span><span class="w"></span>
+<dt>Example</dt><dd><p>Disable the logo in the welcome message.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_dashboard_logo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -290,36 +289,6 @@ property will be used as text.</p>
 </dd>
 <dt>Example</dt><dd><p>Adjust the image height to 150</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dashboard_logo_height</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;150&quot;</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">disable_dashboard_logo (Bool, false)</code></dt>
-<dd><p>Whether to show the <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code> property in the homepage welcome message.</p>
-<dl>
-<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">false</span></code>, the <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code> logo will be shown in the homepage welcome message.</p>
-</dd>
-<dt>Example</dt><dd><p>Disable the logo in the welcome message.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_dashboard_logo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<code class="sig-name descname">public_url (String, '/public')</code></dt>
-<dd><p>The prefix url used to load the <code class="docutils literal notranslate"><span class="pre">favicon.ico</span></code> and custom CSS files configured with the <code class="docutils literal notranslate"><span class="pre">custom_css_files</span></code> property.</p>
-<dl>
-<dt>Default</dt><dd><p>‘/public’ prefix url.</p>
-</dd>
-<dt>Example</dt><dd><p>Use <code class="docutils literal notranslate"><span class="pre">/public/resources</span></code> as the prefix path to load these resources.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">public_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/public/resources&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -457,37 +426,14 @@ These CSS files can be used to customize the look and feel of the Dashboard.</p>
 
 <dl class="describe">
 <dt>
-<code class="sig-name descname">show_all_apps_link (Bool, false)</code></dt>
-<dd><p>Whether to show the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Apps</span></code> link in the navbar.
-This links to the Dashboard page showing all system installed applications.</p>
+<code class="sig-name descname">dashboard_title (String, 'Open OnDemand')</code></dt>
+<dd><p>The text to use as the main navigation logo. If the <code class="docutils literal notranslate"><span class="pre">dashboard_header_img_logo</span></code> property is defined,
+this property will be used as the HTML image title.</p>
 <dl>
-<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">false</span></code>, the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Apps</span></code> link will not be shown in the navbar.</p>
+<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">OnDemand</span></code> text</p>
 </dd>
-<dt>Example</dt><dd><p>Include the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Apps</span></code> link in the navbar.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">show_all_apps_link</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<span class="target" id="nav-categories"></span><dl class="describe">
-<dt>
-<code class="sig-name descname">nav_categories (Array&lt;String&gt;, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])</code></dt>
-<dd><p>By default Open OnDemand will create dropdown menus on the navigation bar for certain
-categories listed below.</p>
-<p>Use this property to add or remove which application categories will create dropdown menus
-on the navigation bar.</p>
-<dl>
-<dt>Default</dt><dd><p>Create dropdown menus on the navigation bar items for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>, <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">Interactive</span> <span class="pre">Apps</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_categories</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Apps&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Files&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Jobs&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Clusters&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Interactive</span><span class="nv"> </span><span class="s">Apps&#39;</span><span class="p p-Indicator">]</span><span class="w"></span>
-</pre></div>
-</div>
-</dd>
-<dt>Example</dt><dd><p>Only create dropdown menus on the navigation bar for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Files</span></code> and <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_categories</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Apps&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Files&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Jobs&#39;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<dt>Example</dt><dd><p>Show <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Institution</span></code> as the logo text.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dashboard_title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Institution&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -496,14 +442,14 @@ on the navigation bar.</p>
 
 <dl class="describe">
 <dt>
-<code class="sig-name descname">navbar_type (String, 'dark')</code></dt>
-<dd><p>The navbar theme type. There are 2 themes, <code class="docutils literal notranslate"><span class="pre">light</span></code> and <code class="docutils literal notranslate"><span class="pre">dark</span></code>.
-The selected theme will update the colors of the navbar.</p>
+<code class="sig-name descname">show_all_apps_link (Bool, false)</code></dt>
+<dd><p>Whether to show the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Apps</span></code> link in the navbar.
+This links to the Dashboard page showing all system installed applications.</p>
 <dl>
-<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">dark</span></code>,</p>
+<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">false</span></code>, the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Apps</span></code> link will not be shown in the navbar.</p>
 </dd>
-<dt>Example</dt><dd><p>Set theme to <code class="docutils literal notranslate"><span class="pre">light</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">navbar_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;light&quot;</span><span class="w"></span>
+<dt>Example</dt><dd><p>Include the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Apps</span></code> link in the navbar.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">show_all_apps_link</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -577,6 +523,60 @@ The key is a string with the page code. The value is the custom page layout defi
 <dt>Default</dt><dd><p>Empty hash, No custom pages defined.</p>
 </dd>
 <dt>Example</dt><dd><p>See the  <a class="reference internal" href="../../customizations.html#custom-pages-guide"><span class="std std-ref">custom pages documentation</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">navbar_type (String, 'dark')</code></dt>
+<dd><p>The navbar theme type. There are 2 themes, <code class="docutils literal notranslate"><span class="pre">light</span></code> and <code class="docutils literal notranslate"><span class="pre">dark</span></code>.
+The selected theme will update the colors of the navbar.</p>
+<dl>
+<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">dark</span></code>,</p>
+</dd>
+<dt>Example</dt><dd><p>Set theme to <code class="docutils literal notranslate"><span class="pre">light</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">navbar_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;light&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">public_url (String, '/public')</code></dt>
+<dd><p>The prefix url used to load the <code class="docutils literal notranslate"><span class="pre">favicon.ico</span></code> and custom CSS files configured with the <code class="docutils literal notranslate"><span class="pre">custom_css_files</span></code> property.</p>
+<dl>
+<dt>Default</dt><dd><p>‘/public’ prefix url.</p>
+</dd>
+<dt>Example</dt><dd><p>Use <code class="docutils literal notranslate"><span class="pre">/public/resources</span></code> as the prefix path to load these resources.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">public_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/public/resources&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="nav-categories"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">nav_categories (Array&lt;String&gt;, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])</code></dt>
+<dd><p>By default Open OnDemand will create dropdown menus on the navigation bar for certain
+categories listed below.</p>
+<p>Use this property to add or remove which application categories will create dropdown menus
+on the navigation bar.</p>
+<dl>
+<dt>Default</dt><dd><p>Create dropdown menus on the navigation bar items for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>, <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">Interactive</span> <span class="pre">Apps</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_categories</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Apps&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Files&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Jobs&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Clusters&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Interactive</span><span class="nv"> </span><span class="s">Apps&#39;</span><span class="p p-Indicator">]</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Only create dropdown menus on the navigation bar for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Files</span></code> and <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_categories</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Apps&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Files&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Jobs&#39;</span><span class="p p-Indicator">]</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>

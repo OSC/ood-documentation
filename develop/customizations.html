@@ -274,12 +274,12 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The profile based configuration is an experimental feature. Not all properties have been migrated to be compatible.
-See the list the list of supported properties in the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#profile-properties"><span class="std std-ref">configuration documentation</span></a></p>
+See the list of supported properties in the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#profile-properties"><span class="std std-ref">configuration documentation</span></a></p>
 </div>
 <p>Configuration properties can be organized in a hierarchy using profiles. With profiles,
 administrators can create different configuration settings within the same OnDemand installation.
 A profile can be pre-selected or dynamically changed while using the Dashboard application.</p>
-<p>To define profile properties, we have group them under a profile name within the <code class="docutils literal notranslate"><span class="pre">profiles</span></code> keyword.
+<p>To define profile properties, we have to group them under a profile name within the <code class="docutils literal notranslate"><span class="pre">profiles</span></code> keyword.
 Multiple profiles can be created using different files, the configuration
 logic will aggregate all profiles into a single consolidated object.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
@@ -288,12 +288,12 @@ logic will aggregate all profiles into a single consolidated object.</p>
 </pre></div>
 </div>
 <p>OnDemand uses an inheritance and override approach for profiles.
-The root configuration provides default properties that all profiles inherit.
-Then, profile properties can override these values or define new ones as needed.</p>
-<p>The example below shows how the root profile defines a value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> and <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code>.
+The root profile is the default profile created by the system based on all the properties defined
+outside any profile definition. All other profiles will inherit these values.</p>
+<p>Then, profile properties can override these values or define new ones as required.</p>
+<p>The example below shows how the root profile defines a value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> and <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code> properties.
 The <code class="docutils literal notranslate"><span class="pre">rstudio_group</span></code> profile inherits the property value for <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code>,
-and overrides the value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> just to the RStudio application.
-As well, it defines the property <code class="docutils literal notranslate"><span class="pre">pinned_apps_group_by</span></code>.</p>
+and overrides the value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code>. As well, it defines a value for the property <code class="docutils literal notranslate"><span class="pre">pinned_apps_group_by</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pinned_apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">sys/*</span><span class="p p-Indicator">]</span><span class="w"></span>
 <span class="nt">pinned_apps_menu_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
 
@@ -305,9 +305,11 @@ As well, it defines the property <code class="docutils literal notranslate"><spa
 </div>
 <div class="section" id="manual-profile-selection">
 <span id="profiles-selection-guide"></span><h3>Manual Profile Selection<a class="headerlink" href="#manual-profile-selection" title="Permalink to this headline">¶</a></h3>
-<p>The selection of a profile can be done manually by the user or automatically based on request data.</p>
-<p>Links can be added the Help naviagtion menu to dynamically switch between profiles.
-These links can be configured using the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.</p>
+<p>The selection of a profile can be done manually by updating the user settings profile. By default the root profile is selected.
+Profile selection can be done using configurable navigation links.
+These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard.</p>
+<p>To add profile links to the Help navigation dropdown menu use the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.
+For more information on how to configure profile links, see the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">link definition documentation.</span></a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profile_links</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Profiles&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
@@ -326,21 +328,23 @@ These links can be configured using the configuration property <code class="docu
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">group</span></code> property to add a section header or to organize your profiles as shown above.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">group</span></code> property to add a section header or to organize your profiles as shown above.
+Profile links can be configured as well using the <a class="reference internal" href="#help-menu-guide"><span class="std std-ref">Help menu customizations</span></a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Your profile selection is stored in your OnDemand settings file under the <code class="docutils literal notranslate"><span class="pre">profile</span></code> key.
-This file is stored in your OnDemand data folder, this is usually <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/.ood</span></code>.
-Updates to this file will require an application restart to load the new values.</p>
+<p>Your profile selection is stored in your OnDemand user settings file.
+The <code class="docutils literal notranslate"><span class="pre">profile</span></code> key in this YAML file provides the value used to select your current profile.
+The user settings file is stored in your OnDemand data folder, this is usually <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/.ood</span></code>.
+Manual updates to this file will require an application restart to load the new values.</p>
 </div>
 </div>
 <div class="section" id="automatic-profile-selection">
 <h3>Automatic Profile Selection<a class="headerlink" href="#automatic-profile-selection" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p><strong>Request Hostname profile selection:</strong> use the current request hostname as the profile name.
+<li><p><strong>Request Hostname profile selection:</strong> use the current request hostname as the selected profile.
 To enable this feature, set the configuration property <code class="docutils literal notranslate"><span class="pre">host_based_profiles</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.
-A request to <code class="docutils literal notranslate"><span class="pre">https://www.ondmeand.com/pun/sys/dashboard</span></code> will use <code class="docutils literal notranslate"><span class="pre">www.ondemand.com</span></code> as the profile name.</p>
+A request to <code class="docutils literal notranslate"><span class="pre">https://www.ondemand.com/pun/sys/dashboard</span></code> will use <code class="docutils literal notranslate"><span class="pre">www.ondemand.com</span></code> as the selected profile name.</p>
 <p>Configure the profiles using the hostname and the system will use the profile properties automatically.</p>
 </li>
 </ul>
@@ -741,12 +745,14 @@ It is not possible to set an icon. The <code class="docutils literal notranslate
 </div>
 <ul class="simple">
 <li><p><strong>Menu template:</strong> these are pre-configured navigation menus that are currently used in the default OnDemand Dashboard navbar.
-The supported templates are: <code class="docutils literal notranslate"><span class="pre">all_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">featured_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">sessions</span></code>, <code class="docutils literal notranslate"><span class="pre">log_out</span></code>, <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p></li>
+The supported templates are: <code class="docutils literal notranslate"><span class="pre">all_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">featured_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">sessions</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">log_out</span></code>, and <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p></li>
 </ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;all_apps&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;pinned_apps&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;featured_apps&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;develop&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;help&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;log_out&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="w"></span>
 </pre></div>
@@ -758,6 +764,27 @@ The supported templates are: <code class="docutils literal notranslate"><span cl
 <div class="section" id="navigation-links">
 <span id="navbar-links-guide"></span><h3>Navigation Links<a class="headerlink" href="#navigation-links" title="Permalink to this headline">¶</a></h3>
 <p>Navigation links can be used as top level navigation items or as links within a navigation menu.</p>
+<ul class="simple">
+<li><p><strong>Static links:</strong> these are pre-defined links ready to use with a simple string definition.
+Currently supported static links are: <code class="docutils literal notranslate"><span class="pre">all_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">sessions</span></code>, <code class="docutils literal notranslate"><span class="pre">support_ticket</span></code>, <code class="docutils literal notranslate"><span class="pre">docs</span></code>, <code class="docutils literal notranslate"><span class="pre">products_dev</span></code>, <code class="docutils literal notranslate"><span class="pre">products_usr</span></code>, <code class="docutils literal notranslate"><span class="pre">log_out</span></code>, and <code class="docutils literal notranslate"><span class="pre">restart</span></code>.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Navigation link</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Menu</span><span class="nv"> </span><span class="s">Item&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;all_apps&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;support_ticket&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;docs&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;products_dev&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;products_usr&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;log_out&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;restart&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/def-static-links.png" src="_images/def-static-links.png" />
+</div>
 <ul>
 <li><p><strong>App links:</strong> applications identified by the tokens are added to the menu.
 When configured as a top level link, only one application token is supported.
