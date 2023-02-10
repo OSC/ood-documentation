@@ -23,8 +23,10 @@ logic will aggregate all profiles into a single consolidated object.
       config_property: config_value
 
 OnDemand uses an inheritance and override approach for profiles.
-The root profile, this is the default profile created by the system based on all the properties defined outside any profile definition,
-provide the default values that all profiles inherit. Then, profile properties can override these values or define new ones as required.
+The root profile is the default profile created by the system based on all the properties defined
+outside any profile definition. All other profiles will inherit these values.
+
+Then, profile properties can override these values or define new ones as required.
 
 The example below shows how the root profile defines a value for ``pinned_apps`` and ``pinned_apps_menu_length`` properties.
 The ``rstudio_group`` profile inherits the property value for ``pinned_apps_menu_length``,
