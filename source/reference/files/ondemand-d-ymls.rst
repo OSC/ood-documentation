@@ -43,19 +43,18 @@ Configuration Properties with profile support
 
         dashboard_header_img_logo: "/public/logo.png"
 
-.. describe:: dashboard_title (String, 'Open OnDemand')
+.. describe:: disable_dashboard_logo (Bool, false)
 
-    The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
-    this property will be used as the HTML image title.
+    Whether to show the ``dashboard_logo`` property in the homepage welcome message.
 
     Default
-      ``Open OnDemand`` text
+      ``false``, the ``dashboard_logo`` logo will be shown in the homepage welcome message.
     Example
-      Show ``My Institution`` as the logo text.
+      Disable the logo in the welcome message.
 
       .. code-block:: yaml
 
-        dashboard_title: "My Institution"
+        disable_dashboard_logo: true
 
 .. describe:: dashboard_logo (String, null)
 
@@ -83,32 +82,6 @@ Configuration Properties with profile support
       .. code-block:: yaml
 
         dashboard_logo_height: "150"
-
-.. describe:: disable_dashboard_logo (Bool, false)
-
-    Whether to show the ``dashboard_logo`` property in the homepage welcome message.
-
-    Default
-      ``false``, the ``dashboard_logo`` logo will be shown in the homepage welcome message.
-    Example
-      Disable the logo in the welcome message.
-
-      .. code-block:: yaml
-
-        disable_dashboard_logo: true
-
-.. describe:: public_url (String, '/public')
-
-  The prefix url used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
-
-  Default
-    '/public' prefix url.
-  Example
-    Use ``/public/resources`` as the prefix path to load these resources.
-
-    .. code-block:: yaml
-
-      public_url: "/public/resources"
 
 .. describe:: brand_bg_color (String, null)
 
@@ -222,6 +195,20 @@ Configuration Properties with profile support
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
 
+.. describe:: dashboard_title (String, 'Open OnDemand')
+
+    The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
+    this property will be used as the HTML image title.
+
+    Default
+      ``Open OnDemand`` text
+    Example
+      Show ``My Institution`` as the logo text.
+
+      .. code-block:: yaml
+
+        dashboard_title: "My Institution"
+
 .. describe:: show_all_apps_link (Bool, false)
 
   Whether to show the ``All Apps`` link in the navbar.
@@ -235,45 +222,6 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       show_all_apps_link: true
-
-.. _nav_categories:
-.. describe:: nav_categories (Array<String>, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])
-
-  By default Open OnDemand will create dropdown menus on the navigation bar for certain
-  categories listed below.
-
-  Use this property to add or remove which application categories will create dropdown menus
-  on the navigation bar.
-
-  Default
-    Create dropdown menus on the navigation bar items for the categories ``Apps``, ``Files``, ``Jobs``,
-    ``Clusters`` and ``Interactive Apps``.
-
-    .. code-block:: yaml
-
-      nav_categories: ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps']
-
-  Example
-    Only create dropdown menus on the navigation bar for the categories ``Apps``,
-    ``Files`` and ``Jobs``.
-
-    .. code-block:: yaml
-
-      nav_categories: ['Apps', 'Files', 'Jobs']
-
-.. describe:: navbar_type (String, 'dark')
-  
-  The navbar theme type. There are 2 themes, ``light`` and ``dark``.
-  The selected theme will update the colors of the navbar.
-
-  Default
-    ``dark``,
-  Example
-    Set theme to ``light``
-
-    .. code-block:: yaml
-
-      navbar_type: "light"
 
 .. describe:: nav_bar (Array<Object>, [])
 
@@ -335,6 +283,58 @@ Configuration Properties with profile support
     Empty hash, No custom pages defined.
   Example
     See the  :ref:`custom pages documentation <custom_pages_guide>`
+
+.. describe:: navbar_type (String, 'dark')
+  
+  The navbar theme type. There are 2 themes, ``light`` and ``dark``.
+  The selected theme will update the colors of the navbar.
+
+  Default
+    ``dark``,
+  Example
+    Set theme to ``light``
+
+    .. code-block:: yaml
+
+      navbar_type: "light"
+
+.. describe:: public_url (String, '/public')
+
+  The prefix url used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
+
+  Default
+    '/public' prefix url.
+  Example
+    Use ``/public/resources`` as the prefix path to load these resources.
+
+    .. code-block:: yaml
+
+      public_url: "/public/resources"
+
+.. _nav_categories:
+.. describe:: nav_categories (Array<String>, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])
+
+  By default Open OnDemand will create dropdown menus on the navigation bar for certain
+  categories listed below.
+
+  Use this property to add or remove which application categories will create dropdown menus
+  on the navigation bar.
+
+  Default
+    Create dropdown menus on the navigation bar items for the categories ``Apps``, ``Files``, ``Jobs``,
+    ``Clusters`` and ``Interactive Apps``.
+
+    .. code-block:: yaml
+
+      nav_categories: ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps']
+
+  Example
+    Only create dropdown menus on the navigation bar for the categories ``Apps``,
+    ``Files`` and ``Jobs``.
+
+    .. code-block:: yaml
+
+      nav_categories: ['Apps', 'Files', 'Jobs']
 
 .. _configuration_properties:
 

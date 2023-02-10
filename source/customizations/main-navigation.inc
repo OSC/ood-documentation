@@ -73,14 +73,16 @@ There are several ways of creating a navigation menu.
    :align: center
 
 * **Menu template:** these are pre-configured navigation menus that are currently used in the default OnDemand Dashboard navbar.
-  The supported templates are: ``all_apps``, ``featured_apps``, ``sessions``, ``log_out``, ``user``.
+  The supported templates are: ``all_apps``, ``featured_apps``, ``sessions``, ``develop``, ``help``, ``log_out``, and ``user``.
 
 .. code-block:: yaml
   
   nav_bar:
     - "all_apps"
-    - "pinned_apps"
+    - "featured_apps"
     - "sessions"
+    - "develop"
+    - "help"
     - "log_out"
     - "user"
 
@@ -93,6 +95,27 @@ Navigation Links
 ......................
 
 Navigation links can be used as top level navigation items or as links within a navigation menu.
+
+* **Static links:** these are pre-defined links ready to use with a simple string definition.
+  Currently supported static links are: ``all_apps``, ``sessions``, ``support_ticket``, ``docs``, ``products_dev``, ``products_usr``, ``log_out``, and ``restart``.
+
+.. code-block:: yaml
+
+  nav_bar:
+    # Navigation link
+    - title: "Menu Item"
+      links:
+        - "all_apps"
+        - "sessions"
+        - "support_ticket"
+        - "docs"
+        - "products_dev"
+        - "products_usr"
+        - "log_out"
+        - "restart"
+
+.. figure:: /images/def-static-links.png
+   :align: center
 
 * **App links:** applications identified by the tokens are added to the menu.
   When configured as a top level link, only one application token is supported.
