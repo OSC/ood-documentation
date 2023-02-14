@@ -3,7 +3,9 @@
 Customizations
 ==============
 
-.. include:: customizations/profiles.inc
+.. tip::
+  Check out the :ref:`pun-environment` for an overview of how environment variables can be
+  added.
 
 Announcements
 -------------
@@ -285,6 +287,8 @@ the Home Directory link.
 If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
+
+.. include:: customizations/profiles.inc
 
 .. _add-menu-items-to-the-navbar:
 
