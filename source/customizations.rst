@@ -293,23 +293,6 @@ app.
 .. include:: customizations/main-navigation.inc
 .. include:: customizations/interactive-apps-menu.inc
 
-Control Which Apps Appear in the Dashboard Navbar
--------------------------------------------------
-
-Apps contain a manifest.yml file that specify things like the title, icon, category,
-and possibly subcategory. The Dashboard searchs the search paths for all the possible
-apps and uses the manifests of the apps it finds to build the navbar (navigation bar)
-at the top of the page.
-
-Apps are placed in the top level menus based on the category, and then in dropdown menu
-sections based on subcategory.
-
-By default, the Open OnDemand system will generate dropdown menus on the navigation
-bar for certian categories of applications.
-
-If you wish to add or remove which categories create dropdown menu items
-use the :ref:`nav_categories configuration property <nav_categories>`.
-
 .. warning::
 
   Prior to 2.1, controlling which categories appear in the navigation bar was controlled
