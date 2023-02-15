@@ -36,6 +36,11 @@ Configuration Properties with profile support
       
     Default
       No logo image will be shown, just the ``dashboard_title`` text.
+
+      .. code-block:: yaml
+
+        dashboard_header_img_logo: null
+
     Example
       Show ``/public/logo.png`` as the logo image.
 
@@ -49,6 +54,11 @@ Configuration Properties with profile support
 
     Default
       ``false``, the ``dashboard_logo`` logo will be shown in the homepage welcome message.
+
+      .. code-block:: yaml
+
+        disable_dashboard_logo: false
+
     Example
       Disable the logo in the welcome message.
 
@@ -63,6 +73,11 @@ Configuration Properties with profile support
 
   Default
     No logo image will be shown with the welcome message.
+
+    .. code-block:: yaml
+
+      dashboard_logo: null
+
   Example
     Show ``/public/welcome.png`` as the welcome message logo image.
 
@@ -76,19 +91,29 @@ Configuration Properties with profile support
 
     Default
       ``null``, no override will be applied and the original image height will be used.
-    Example
-      Adjust the image height to 150
 
       .. code-block:: yaml
 
-        dashboard_logo_height: "150"
+        dashboard_logo_height: null
+
+    Example
+      Adjust the image height to 150 pixels.
+
+      .. code-block:: yaml
+
+        dashboard_logo_height: "150px"
 
 .. describe:: brand_bg_color (String, null)
 
   The CSS color override for the main navbar background. Any valid CSS color value can be used.
 
   Default
-    Null, no background color override. The default theme color from the ``navbar_type`` property will be used. 
+    Null, no background color override. The default theme color from the ``navbar_type`` property will be used.
+
+    .. code-block:: yaml
+
+      brand_bg_color: null
+
   Example
     Use ``#007FFF`` (shade of blue) as the background color for the navbar.
 
@@ -102,7 +127,12 @@ Configuration Properties with profile support
   Any valid CSS color value can be used.
 
   Default
-    Null, no color override. The default theme color from the ``navbar_type`` property will be used. 
+    Null, no color override. The default theme color from the ``navbar_type`` property will be used.
+
+    .. code-block:: yaml
+
+      brand_link_active_bg_color: null
+
   Example
     Use ``#007FFF`` (shade of blue) for the background color of the active navigation link.
 
@@ -138,7 +168,12 @@ Configuration Properties with profile support
     The maximum number of pinned apps in the 'Apps' menu bar.
 
     Default
-      6, show a maximum of 6 pinned apps.
+      Show 6 items in the menu.
+      
+      .. code-block:: yaml
+
+        pinned_apps_menu_length: 6
+
     Example
       Show 10 items in the menu.
 
@@ -152,6 +187,11 @@ Configuration Properties with profile support
 
   Default
     Null, do no group pinned apps by any field.
+
+    .. code-block:: yaml
+
+      pinned_apps_group_by: null
+
   Example
     Group the pinned apps by ``category``.
 
@@ -166,6 +206,11 @@ Configuration Properties with profile support
 
   Default
     Empty list, no profile links will be shown.
+
+    .. code-block:: yaml
+
+      profile_links: []
+
   Example
     Add a link to the ``default`` and ``ondemand`` profiles to the ``Help`` menu.
 
@@ -188,6 +233,11 @@ Configuration Properties with profile support
 
   Default
     Empty list, no custom css files will be included.
+
+    .. code-block:: yaml
+
+      custom_css_files: []
+
   Example
     Add two custom CSS files: ``/myfolder/navigation.css`` and ``/myfolder/pinned_apps.css`` to the Dashboard.
 
@@ -202,6 +252,11 @@ Configuration Properties with profile support
 
     Default
       ``Open OnDemand`` text
+
+      .. code-block:: yaml
+
+        dashboard_title: "Open OnDemand"
+
     Example
       Show ``My Institution`` as the logo text.
 
@@ -216,6 +271,11 @@ Configuration Properties with profile support
 
   Default
     ``false``, the ``All Apps`` link will not be shown in the navbar.
+
+    .. code-block:: yaml
+
+      show_all_apps_link: false
+
   Example
     Include the ``All Apps`` link in the navbar.
 
@@ -290,9 +350,14 @@ Configuration Properties with profile support
   The selected theme will update the colors of the navbar.
 
   Default
-    ``dark``,
+    Set theme to ``dark``.
+
+    .. code-block:: yaml
+
+      navbar_type: "dark"
+
   Example
-    Set theme to ``light``
+    Set theme to ``light``.
 
     .. code-block:: yaml
 
@@ -304,6 +369,11 @@ Configuration Properties with profile support
 
   Default
     '/public' prefix url.
+
+    .. code-block:: yaml
+
+      public_url: "/public"
+
   Example
     Use ``/public/resources`` as the prefix path to load these resources.
 

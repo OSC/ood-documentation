@@ -112,11 +112,6 @@
 <p class="caption"><span class="caption-text">How-Tos</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Customizations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-profiles">Configuration Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#manual-profile-selection">Manual Profile Selection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#automatic-profile-selection">Automatic Profile Selection</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="#announcements">Announcements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#message-of-the-day-motd">Message of the Day (MOTD)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#branding">Branding</a><ul>
@@ -125,6 +120,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#add-urls-to-help-menu">Add URLs to Help Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add Shortcuts to Files Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-profiles">Configuration Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manual-profile-selection">Manual Profile Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-profile-selection">Automatic Profile Selection</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#add-menu-items-to-the-navbar">Add Menu Items to the Navbar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-dashboard-navbar">Custom Dashboard Navbar</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#navigation-menus">Navigation Menus</a></li>
@@ -269,109 +269,10 @@
             
   <div class="section" id="customizations">
 <span id="id1"></span><h1>Customizations<a class="headerlink" href="#customizations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="configuration-profiles">
-<span id="profiles-guide"></span><h2>Configuration Profiles<a class="headerlink" href="#configuration-profiles" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The profile based configuration is an experimental feature. Not all properties have been migrated to be compatible.
-See the list of supported properties in the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#profile-properties"><span class="std std-ref">configuration documentation</span></a></p>
-</div>
-<p>Configuration properties can be organized in a hierarchy using profiles. With profiles,
-administrators can create different configuration settings within the same OnDemand installation.
-A profile can be pre-selected or dynamically changed while using the Dashboard application.</p>
-<p>To define profile properties, we have to group them under a profile name within the <code class="docutils literal notranslate"><span class="pre">profiles</span></code> keyword.
-Multiple profiles can be created using different files, the configuration
-logic will aggregate all profiles into a single consolidated object.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">profile_name</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
-</pre></div>
-</div>
-<p>OnDemand uses an inheritance and override approach for profiles.
-The root profile is the default profile created by the system based on all the properties defined
-outside any profile definition. All other profiles will inherit these values.</p>
-<p>Then, profile properties can override these values or define new ones as required.</p>
-<p>The example below shows how the root profile defines a value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> and <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code> properties.
-The <code class="docutils literal notranslate"><span class="pre">rstudio_group</span></code> profile inherits the property value for <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code>,
-and overrides the value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code>. As well, it defines a value for the property <code class="docutils literal notranslate"><span class="pre">pinned_apps_group_by</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pinned_apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">sys/*</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">pinned_apps_menu_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
-
-<span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">rstudio_group</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">pinned_apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">sys/rstudio</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="w">    </span><span class="nt">pinned_apps_group_by</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;department&quot;</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="section" id="manual-profile-selection">
-<span id="profiles-selection-guide"></span><h3>Manual Profile Selection<a class="headerlink" href="#manual-profile-selection" title="Permalink to this headline">¶</a></h3>
-<p>The selection of a profile can be done manually by updating the user settings profile. By default the root profile is selected.
-Profile selection can be done using configurable navigation links.
-These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard.</p>
-<p>To add profile links to the Help navigation dropdown menu use the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.
-For more information on how to configure profile links, see the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">link definition documentation.</span></a>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profile_links</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Profiles&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Root</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://cog&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rstudio_group</span><span class="w"></span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Rstudio</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://user&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter_group</span><span class="w"></span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jupiter</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://user&quot;</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/def-profiles-links.png" src="_images/def-profiles-links.png" />
-</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">group</span></code> property to add a section header or to organize your profiles as shown above.
-Profile links can be configured as well using the <a class="reference internal" href="#help-menu-guide"><span class="std std-ref">Help menu customizations</span></a>.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Your profile selection is stored in your OnDemand user settings file.
-The <code class="docutils literal notranslate"><span class="pre">profile</span></code> key in this YAML file provides the value used to select your current profile.
-The user settings file is stored in your OnDemand data folder, this is usually <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/.ood</span></code>.
-Manual updates to this file will require an application restart to load the new values.</p>
-</div>
-</div>
-<div class="section" id="automatic-profile-selection">
-<h3>Automatic Profile Selection<a class="headerlink" href="#automatic-profile-selection" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p><strong>Request Hostname profile selection:</strong> use the current request hostname as the selected profile.
-To enable this feature, set the configuration property <code class="docutils literal notranslate"><span class="pre">host_based_profiles</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.
-A request to <code class="docutils literal notranslate"><span class="pre">https://www.ondemand.com/pun/sys/dashboard</span></code> will use <code class="docutils literal notranslate"><span class="pre">www.ondemand.com</span></code> as the selected profile name.</p>
-<p>Configure the profiles using the hostname and the system will use the profile properties automatically.</p>
-</li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">www.ondemand.com</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If you have a need to create multiple profile definitions that have the same configuration, you could use aliases.
-This is a feaure of YAML files. You can use YAML <code class="docutils literal notranslate"><span class="pre">anchors</span></code> and <code class="docutils literal notranslate"><span class="pre">aliases</span></code> to set the same profile configuration
-to more than one definition without duplication. This YAML feature only works when defined and used within the same file.</p>
-<p>The example below creates 4 profiles all with the same configuration:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">www.production.com</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;production_profile</span><span class="w"> </span><span class="c1"># Anchor definition</span><span class="w"></span>
-<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
-<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
-<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
-
-<span class="w">  </span><span class="nt">www.local.com</span><span class="p">:</span><span class="w"> </span><span class="nv">*production_profile</span><span class="w"> </span><span class="c1"># Defining an alias to the previously set anchor.</span><span class="w"></span>
-<span class="w">  </span><span class="nt">www.test.com</span><span class="p">:</span><span class="w"> </span><span class="nv">*production_profile</span><span class="w"></span>
-<span class="w">  </span><span class="nt">www.staging.com</span><span class="p">:</span><span class="w"> </span><span class="nv">*production_profile</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>Check out the <a class="reference internal" href="reference/pun-environment.html#pun-environment"><span class="std std-ref">PUN environment</span></a> for an overview of how environment variables can be
+added.</p>
 </div>
 <div class="section" id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Permalink to this headline">¶</a></h2>
@@ -660,6 +561,110 @@ This can be forced from the Dashboard itself by selecting
 <p>If you access the Dashboard, and it crashes, then you may have made a mistake
 in <code class="docutils literal notranslate"><span class="pre">ood.rb</span></code> file, whose code is run during the initialization of the Rails
 app.</p>
+</div>
+<div class="section" id="configuration-profiles">
+<span id="profiles-guide"></span><h2>Configuration Profiles<a class="headerlink" href="#configuration-profiles" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The profile based configuration is an experimental feature. Not all properties have been migrated to be compatible.
+See the list of supported properties in the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#profile-properties"><span class="std std-ref">configuration documentation</span></a></p>
+</div>
+<p>Configuration properties can be organized in a hierarchy using profiles. With profiles,
+administrators can create different configuration settings within the same OnDemand installation.
+A profile can be pre-selected or dynamically changed while using the Dashboard application.</p>
+<p>To define profile properties, we have to group them under a profile name within the <code class="docutils literal notranslate"><span class="pre">profiles</span></code> keyword.
+Multiple profiles can be created using different files, the configuration
+logic will aggregate all profiles into a single consolidated object.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">profile_name</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
+</pre></div>
+</div>
+<p>OnDemand uses an inheritance and override approach for profiles.
+The root profile is the default profile created by the system based on all the properties defined
+outside any profile definition. All other profiles will inherit these values.</p>
+<p>Then, profile properties can override these values or define new ones as required.</p>
+<p>The example below shows how the root profile defines a value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> and <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code> properties.
+The <code class="docutils literal notranslate"><span class="pre">rstudio_group</span></code> profile inherits the property value for <code class="docutils literal notranslate"><span class="pre">pinned_apps_menu_length</span></code>,
+and overrides the value for <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code>. As well, it defines a value for the property <code class="docutils literal notranslate"><span class="pre">pinned_apps_group_by</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pinned_apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">sys/*</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">pinned_apps_menu_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
+
+<span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">rstudio_group</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pinned_apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">sys/rstudio</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pinned_apps_group_by</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;department&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="section" id="manual-profile-selection">
+<span id="profiles-selection-guide"></span><h3>Manual Profile Selection<a class="headerlink" href="#manual-profile-selection" title="Permalink to this headline">¶</a></h3>
+<p>The selection of a profile can be done manually by updating the user settings profile. By default the root profile is selected.
+Profile selection can be done using configurable navigation links.
+These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard.</p>
+<p>To add profile links to the Help navigation dropdown menu use the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.
+For more information on how to configure profile links, see the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">link definition documentation.</span></a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profile_links</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Profiles&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Root</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://cog&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rstudio_group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Rstudio</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://user&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter_group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jupiter</span><span class="nv"> </span><span class="s">Profile&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://user&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/def-profiles-links.png" src="_images/def-profiles-links.png" />
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">group</span></code> property to add a section header or to organize your profiles as shown above.
+Profile links can be configured as well using the <a class="reference internal" href="#help-menu-guide"><span class="std std-ref">Help menu customizations</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your profile selection is stored in your OnDemand user settings file.
+The <code class="docutils literal notranslate"><span class="pre">profile</span></code> key in this YAML file provides the value used to select your current profile.
+The user settings file is stored in your OnDemand data folder, this is usually <code class="docutils literal notranslate"><span class="pre">~/ondemand/data/sys/dashboard/.ood</span></code>.
+Manual updates to this file will require an application restart to load the new values.</p>
+</div>
+</div>
+<div class="section" id="automatic-profile-selection">
+<h3>Automatic Profile Selection<a class="headerlink" href="#automatic-profile-selection" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Request Hostname profile selection:</strong> use the current request hostname as the selected profile.
+To enable this feature, set the configuration property <code class="docutils literal notranslate"><span class="pre">host_based_profiles</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.
+A request to <code class="docutils literal notranslate"><span class="pre">https://www.ondemand.com/pun/sys/dashboard</span></code> will use <code class="docutils literal notranslate"><span class="pre">www.ondemand.com</span></code> as the selected profile name.</p>
+<p>Configure the profiles using the hostname and the system will use the profile properties automatically.</p>
+</li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">www.ondemand.com</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have a need to create multiple profile definitions that have the same configuration, you could use aliases.
+This is a feaure of YAML files. You can use YAML <code class="docutils literal notranslate"><span class="pre">anchors</span></code> and <code class="docutils literal notranslate"><span class="pre">aliases</span></code> to set the same profile configuration
+to more than one definition without duplication. This YAML feature only works when defined and used within the same file.</p>
+<p>The example below creates 4 profiles all with the same configuration:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">www.production.com</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;production_profile</span><span class="w"> </span><span class="c1"># Anchor definition</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config_property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_value</span><span class="w"></span>
+
+<span class="w">  </span><span class="nt">www.local.com</span><span class="p">:</span><span class="w"> </span><span class="nv">*production_profile</span><span class="w"> </span><span class="c1"># Defining an alias to the previously set anchor.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">www.test.com</span><span class="p">:</span><span class="w"> </span><span class="nv">*production_profile</span><span class="w"></span>
+<span class="w">  </span><span class="nt">www.staging.com</span><span class="p">:</span><span class="w"> </span><span class="nv">*production_profile</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="add-menu-items-to-the-navbar">
 <span id="id4"></span><h2>Add Menu Items to the Navbar<a class="headerlink" href="#add-menu-items-to-the-navbar" title="Permalink to this headline">¶</a></h2>
