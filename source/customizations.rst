@@ -196,19 +196,19 @@ For information about how to configure properties, see the :ref:`OnDemand config
   help_menu:
     - group: "Documentation"
     - title: "Jupyter Docs"
-      icon_uri: "fas://book"
+      icon: "fas://book"
       url: "https://mydomain.com/path/jupyter"
     - title: "Support Docs"
-      icon_uri: "fas://book"
+      icon: "fas://book"
       url: "https://mydomain.com/path/support/docs"
     - group: "Custom Pages"
     - page: "rstudio_guide"
       title: "RStudio Guide"
-      icon_uri: "fas://window-restore"
+      icon: "fas://window-restore"
     - group: "Profiles"
     - profile: "team1"
       title: "Team 1"
-      icon_uri: "fas://user"
+      icon: "fas://user"
 
 .. figure:: /images/help_menu_links.png
    :align: center
@@ -662,7 +662,7 @@ All the values are optional and any set will override the default from the appli
 
   tile:
     title: "Custom Title"
-    icon_uri: fa://desktop
+    icon: fa://desktop
     border_color: "red"
     sub_caption: |
       Custom Text Line 1

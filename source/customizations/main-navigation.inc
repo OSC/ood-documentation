@@ -152,7 +152,7 @@ full control on the menu links, order, and grouping.
 
   nav_bar:
     - title: "My Apps"
-      icon_uri: "fa://code"
+      icon: "fa://code"
       links:
         - group: "RStudio"
         - "sys/Rstudio/*"
@@ -176,7 +176,7 @@ simpler to configure, order is based on the position in the array.
   
   nav_bar:
     - title: "My Apps"
-      icon_uri: "fas://window-restore"
+      icon: "fas://window-restore"
       apps:
         - "sys/Rstudio/*"
         - "sys/bc_desktop"
@@ -290,14 +290,14 @@ to create links to change the user profile to the one identified by the ``profil
   nav_bar:
     # Top level link
     - title: "Title"
-      icon_uri: "fa://desktop" # optional, defaults to fas://cog
+      icon: "fa://desktop" # optional, defaults to fas://cog
       profile: "team1"
       new_tab: true # optional, defaults to false
     # Navigation link
     - title: "Menu Item"
       links:
         - title: "Title"
-          icon_uri: "fa://desktop" # optional, defaults to fas://cog
+          icon: "fa://desktop" # optional, defaults to fas://cog
           profile: "team1"
           new_tab: true # optional, defaults to false
 
@@ -311,14 +311,14 @@ to create links to a custom page identified by the ``page`` property.
   nav_bar:
     # Top level link
     - title: "Title"
-      icon_uri: "fa://desktop" # optional, defaults to fas://cog
+      icon: "fa://desktop" # optional, defaults to fas://cog
       page: "documentation"
       new_tab: true # optional, defaults to false
     # Navigation link
     - title: "Menu Item"
       links:
         - title: "Title"
-          icon_uri: "fa://desktop" # optional, defaults to fas://cog
+          icon: "fa://desktop" # optional, defaults to fas://cog
           page: "documentation"
           new_tab: true # optional, defaults to false
 
@@ -332,14 +332,14 @@ to full control of the URL the link goes to. It accepts relative and absolute UR
   nav_bar:
     # Top level link
     - title: "Title"
-      icon_uri: "fa://desktop" # optional, defaults to fas://cog
+      icon: "fa://desktop" # optional, defaults to fas://cog
       url: "/docs"
       new_tab: true # optional, defaults to false
     # Navigation link
     - title: "Menu Item"
       links:
         - title: "Title"
-          icon_uri: "fa://desktop" # optional, defaults to fas://cog
+          icon: "fa://desktop" # optional, defaults to fas://cog
           url: "/docs"
           new_tab: true # optional, defaults to false
 

@@ -42,7 +42,7 @@ See the :ref:`custom Dashboard navbar documentation <navbar_links_guide>`
     - group: "Custom Pages"
     - page: "documentation"
       title: "Site Documentation"
-      icon_uri: "fas://book"
+      icon: "fas://book"
 
 .. figure:: /images/def-page-links.png
    :align: center

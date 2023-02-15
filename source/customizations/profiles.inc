@@ -60,13 +60,13 @@ For more information on how to configure profile links, see the :ref:`link defin
     - group: "Profiles"
     - profile: ""
       title: "Root Profile"
-      icon_uri: "fas://cog"
+      icon: "fas://cog"
     - profile: rstudio_group
       title: "Rstudio Profile"
-      icon_uri: "fas://user"
+      icon: "fas://user"
     - profile: jupyter_group
       title: "Jupiter Profile"
-      icon_uri: "fas://user"
+      icon: "fas://user"
 
 .. figure:: /images/def-profiles-links.png
    :align: center
