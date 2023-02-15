@@ -290,29 +290,6 @@ app.
 
 .. include:: customizations/profiles.inc
 
-.. _add-menu-items-to-the-navbar:
-
-Add Menu Items to the Navbar
------------------------------
-
-  Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.
-
-  * sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>
-  * sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml
-  
-  .. code-block:: yaml
-
-    ---
-    name: Add Menu Items to the navbar   # This will show as the menu item.
-    category: Links  # specify the main menu for the item to be under.  If it doesn't exist, it will be created.
-    description: |-
-      A description of what the menu item does.
-    icon: fa://clock-o   # icon for the link.
-    url: 'https://osc.github.io/ood-documentation/develop/customization/customizations.html#add-menu-items-to-the-navbar'
-    new_window: true   # open link in new browser window or same browser window.
-
-.. _dashboard-navbar-config:
-
 .. include:: customizations/main-navigation.inc
 .. include:: customizations/interactive-apps-menu.inc
 
