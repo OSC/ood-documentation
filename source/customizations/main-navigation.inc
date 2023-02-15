@@ -2,8 +2,43 @@
 
 .. _add-menu-items-to-the-navbar:
 
+Changing the Navigation bar
+---------------------------
+
+There are a couple ways to change the navigation bar in Open OnDemand, some
+are simpler than others.
+
+
+This section provides the outline of how the navigation bar is generated to begin
+with, then details the various ways to modify it.
+
+Once you understand how the navigation bar is generated automatically,
+you can take steps to custimize it as you see fit.
+
+Understanding the default navigation bar
+........................................
+
+Some navigation menus and links are built-in to the system. The system
+will generate dropdown menus for ``Files``, ``Jobs``, ``Clusters`` and
+``Interactive Apps`` automatically. It will also generate the link for
+``My Interactive Sessions`` by default.
+
+Open OnDemand is a platform for other applications, like Jupyter & RStudio.
+As such, the default navigation bar builds itself based on what applications
+it has discovered.  The system will search ``/var/www/ood/apps/sys/`` for these
+applications.
+
+Every application should have :ref:`app-development-manifest`.  The system reads
+these manifests files and builds additional dropdown menus (or adds to existing menus)
+based on the ``category`` field.
+
+By default, the system will generate a new dropdown menu for every ``category``
+it encounters.  Within each dropdown menu it will add seperators for each
+``subcategory`` it encounters.
+
+
 Add Menu Items to the Navbar
------------------------------
+............................
 
   Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.
 
@@ -22,7 +57,7 @@ Add Menu Items to the Navbar
     new_window: true   # open link in new browser window or same browser window.
 
 Custom Dashboard Navbar
------------------------
+.......................
 
 From OnDemand 2.1, there is a new way of customizing the top navigation bar.
 
