@@ -141,6 +141,32 @@ A navigation menu contains a list of navigation links with optional link groups.
 
 There are several ways of creating a navigation menu.
 
+Menus by Application category
+*****************************
+
+One of the easiest ways to create menus is to create them based off of
+the applications categories.
+
+The title of the dropdown menu will be the ``category`` itself, and menu items
+(applications) will be grouped by their ``subcategory``. It is not possible to
+set an icon. The ``category`` matching is case insensitive.
+
+Here's an example using the ``interactive apps`` ``category``. Just like the default
+navigation bar, this will generate a dropdown menu of all the applications the system
+has discovered in that ``category``.
+
+As you can see from the image, the system has discovered eight applications in two
+subcategories.
+
+.. code-block:: yaml
+
+  nav_bar:
+    - "interactive apps"
+
+.. figure:: /images/def-category-menu.png
+    :align: center
+    :alt: An open dropdown menu titled "Interactive Apps". The first submenu is titled "Desktops" and has two list items. The second submenu is titled "Servers" and has six list items.
+
 Full navigation menu definition
 ********************************
 
@@ -184,20 +210,7 @@ simpler to configure, order is based on the position in the array.
 .. figure:: /images/def-apps-menu.png
    :align: center
 
-Applications category
-*********************
 
-it is possible to create a navigation menu by using the name of an application ``category``
-  as defined in the manifest file. The menu title will be the ``category``, applications will be grouped by ``subcategory``.
-  It is not possible to set an icon. The ``category`` matching is case insensitive.
-
-.. code-block:: yaml
-  
-  nav_bar:
-    - "interactive apps"
-
-.. figure:: /images/def-category-menu.png
-   :align: center
 
 Menu template
 *************
