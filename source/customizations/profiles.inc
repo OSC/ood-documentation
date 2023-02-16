@@ -52,7 +52,7 @@ Profile selection can be done using configurable navigation links.
 These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard. 
 
 To add profile links to the Help navigation dropdown menu use the configuration property ``profile_links``.
-For more information on how to configure profile links, see the :ref:`link definition documentation. <navbar_links_guide>`.
+For more information on how to configure profile links, see the `menus-based-on-links`_.
 
 .. code-block:: yaml
 

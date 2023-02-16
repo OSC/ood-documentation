@@ -208,6 +208,8 @@ Here's an example of defining all of them and what that would look like.
     :align: center
     :alt: An image of the navigation bar. From left to right the items are "All Apps" link, "Apps" dropdown menu, "My Interactive Sesssions" link, "Develop" drop down menu, "Help" drop down menu, "Logout" link and 'logged in as ood' text.
 
+.. _menus-based-on-applications:
+
 Menus based on applications
 ***************************
 
@@ -232,6 +234,8 @@ The order of the menu items is based on the order you've defined.
     :alt: An open dropdown menu titled "My Apps". The menu shows two submenus. The first is titled "Servers" and has five list items for all the discovered through the "sys/Rstudio/*" configuration. The second submenu is titled "Desktops" and has one list item for the discovered through the "sys/bc_desktop" configuration.
 
 
+.. _menus-based-on-links:
+
 Menus based on links
 ********************
 
@@ -241,13 +245,33 @@ As seen in the previous sections, using an ``apps`` array will automatically gen
 submenus based on the ``subcategory`` of the applications that have been discovered.
 
 When using links, we can override this behaviour to provide different titles to
-the submenus.
+the submenus, or with no submenus and subtitles at all.
 
-Let's look at this example using the same application tokens, but using ``links`` instead.
-The system will discover and generate list items for the same eight applications.  Only this
-time, because we're using ``links`` and have provided a different ``group``, the submenus
-will have the new titles based on the ``group`` we've defined.
+Let's look at this example using the same application tokens, but using ``links`` instead
+of ``apps``. The system will discover and generate list items for the same eight applications,
+only without **any** submenus.  It is simply a list of all the discovered applications with
+no further grouping.
 
+.. code-block:: yaml
+
+  nav_bar:
+    - title: "My Apps"
+      icon: "fa://code"
+      links:
+        - "sys/Rstudio/*"
+        - "sys/bc_desktop"
+
+
+**IMAGE NEEDED**
+
+To add submenus, simply use the ``group`` attribute.
+
+When ``links`` are used with the ``group`` attribute, the discovered applications
+will now be grouped and submenu titles created based on the configuration provided.
+
+This will look and feel similar to `menus-based-on-applications`_ with the exception
+being that submenus are defined by the ``group`` configuration instead of the ``subcategory``
+of the applications in the list.
 
 .. code-block:: yaml
 
@@ -264,70 +288,9 @@ will have the new titles based on the ``group`` we've defined.
     :align: center
     :alt: An image showing one open drop down menu titled "My Apps". The first submenu, titled "Rstudio" has five list items that have been discovered through the "sys/Rstudio/*" configuration. The second submenu, titled "Remote" has one list item that has been discovered through the "sys/bc_desktop" configuration.
 
-.. _applications_based_menu:
+.. tip::
+  You can also used predefined links (described above) in the ``links`` section here.
 
-
-
-.. _navbar_links_guide:
-
-Navigation Links
-****************
-
-Navigation links can be used as top level navigation items or as links within a navigation menu.
-
-Static links
-************
-
- these are pre-defined links ready to use with a simple string definition.
-  Currently supported static links are: ``all_apps``, ``sessions``, ``support_ticket``, ``docs``, ``products_dev``, ``products_usr``, ``log_out``, and ``restart``.
-
-.. code-block:: yaml
-
-  nav_bar:
-    # Navigation link
-    - title: "Menu Item"
-      links:
-        - "all_apps"
-        - "sessions"
-        - "support_ticket"
-        - "docs"
-        - "products_dev"
-        - "products_usr"
-        - "log_out"
-        - "restart"
-
-.. figure:: /images/def-static-links.png
-   :align: center
-
-App links
-*********
-
-applications identified by the tokens are added to the menu.
-  When configured as a top level link, only one application token is supported.
-  If the token matches multiple applications, the navigation entry is ignored.
-
-  When configured as a ``links`` array item, the subcategory will not be used to group the matched applications.
-  The definition order is respected when rendering the links.
-  If grouping is required, use the ``group`` property to add the desired structure as shown in the
-  :ref:`applications based menu above. <applications_based_menu>`
-
-.. code-block:: yaml
-
-  nav_bar:
-    # Top level link
-    - "sys/bc_desktop"
-    # Navigation link
-    - title: "Menu Item"
-      links:
-        # within the links property, a string can be used.
-        - "sys/bc_desktop"
-        # apps property supports a single string token
-        - apps: "sys/bc_desktop"
-        # apps property supports array of application tokens
-        - apps: ["sys/bc_desktop"]
-
-.. figure:: /images/def-apps-link.png
-   :align: center
 
 Profile links
 *************

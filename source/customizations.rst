@@ -187,7 +187,7 @@ Since OnDemand 2.1, custom links can be added to the Help menu using the configu
 Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.
 
 ``help_menu`` supports all the link definitions developed for the custom navigation configuration.
-For more information on how to create custom links, see the :ref:`link definition documentation <navbar_links_guide>`.
+For more information on how to create custom links, see `menus-based-on-links`_.
 
 For information about how to configure properties, see the :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
 
