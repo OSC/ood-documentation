@@ -167,6 +167,40 @@ subcategories.
     :align: center
     :alt: An open dropdown menu titled "Interactive Apps". The first submenu is titled "Desktops" and has two list items. The second submenu is titled "Servers" and has six list items.
 
+Predefined templates
+*********************
+
+As you can see from the example default configuration in `fully-customizing-the-navbar`_, there
+are several pre-defined navigation menus that you can use.
+
+A complete list of predefined templates is:
+
+* ``all_apps`` - The link to the all applications page.
+* ``apps`` - A drop down menu of ``pinned_apps``. Note that you need to set ``pinned_apps`` for this to show up.
+*  ``sessions`` - The link to "My Interactive Sessions" page.
+* ``develop`` - The dropdown menu for developers, titled "Develop".
+* ``help`` - The "Help" dropdown menu.
+* ``log_out`` - The link to logout, titled "Logout".
+* ``user`` - The "Logged in as <user>" text.
+
+Here's an example of defining all of them and what that would look like.
+
+.. code-block:: yaml
+
+  nav_bar:
+    - "all_apps"
+    - "apps"
+    - "sessions"
+    - "develop"
+    - "help"
+    - "log_out"
+    - "user"
+
+.. figure:: /images/def-templates-menu.png
+    :align: center
+    :alt: An image of the navigation bar. From left to right the items are "All Apps" link, "Apps" dropdown menu, "My Interactive Sesssions" link, "Develop" drop down menu, "Help" drop down menu, "Logout" link and 'logged in as ood' text.
+
+
 Full navigation menu definition
 ********************************
 
@@ -208,28 +242,6 @@ simpler to configure, order is based on the position in the array.
         - "sys/bc_desktop"
 
 .. figure:: /images/def-apps-menu.png
-   :align: center
-
-
-
-Menu template
-*************
-
-these are pre-configured navigation menus that are currently used in the default OnDemand Dashboard navbar.
-  The supported templates are: ``all_apps``, ``featured_apps``, ``sessions``, ``develop``, ``help``, ``log_out``, and ``user``.
-
-.. code-block:: yaml
-  
-  nav_bar:
-    - "all_apps"
-    - "featured_apps"
-    - "sessions"
-    - "develop"
-    - "help"
-    - "log_out"
-    - "user"
-
-.. figure:: /images/def-templates-menu.png
    :align: center
 
 .. _navbar_links_guide:
