@@ -369,3 +369,4 @@ through the ``url`` attribute.
 
 .. figure:: /images/def-navigation-link.png
     :align: center
+    :alt: An image of the navigation bar with a single link "Title" and an open dropdown menu titled "Menu Item". The dropdown menu has one list item titled "Title".
