@@ -53,7 +53,7 @@ These links will update the profile, save the newly selected profile in the user
 
 To add profile links to the Help navigation dropdown menu use the configuration property ``profile_links``.
 For more information on how to add profile links to the navigation bar in various places, see
-`menus for profile links <menus-for-profile links>`.
+:ref:`menus for profile links <menus-for-profile-links>`.
 
 .. code-block:: yaml
 

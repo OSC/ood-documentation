@@ -261,8 +261,9 @@ no further grouping.
         - "sys/Rstudio/*"
         - "sys/bc_desktop"
 
-
-**IMAGE NEEDED**
+.. figure:: /images/app-links-no-group.png
+    :align: center
+    :alt: An open dropdown menu titled "My Apps". The menu has no submenus. It simply lists all eight the apps.
 
 To add submenus, simply use the ``group`` attribute.
 
