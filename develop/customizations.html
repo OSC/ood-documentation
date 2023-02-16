@@ -125,14 +125,23 @@
 <li class="toctree-l3"><a class="reference internal" href="#automatic-profile-selection">Automatic Profile Selection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#add-menu-items-to-the-navbar">Add Menu Items to the Navbar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#custom-dashboard-navbar">Custom Dashboard Navbar</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#navigation-menus">Navigation Menus</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#navigation-links">Navigation Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-the-navigation-bar">Changing the Navigation bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#understanding-the-default-navigation-bar">Understanding the default navigation bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limit-auto-generated-menu-bars">Limit auto generated menu bars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-manifests-to-create-menu-items">Using manifests to create menu items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fully-customizing-the-navigation-bar">Fully customizing the navigation bar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#menus-by-application-category">Menus by Application category</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predefined-templates">Predefined templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#menus-based-on-applications">Menus based on applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#menus-based-on-links">Menus based on links</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#menus-for-profile-links">Menus for profile links</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#menus-for-custom-pages">Menus for custom pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#menus-for-urls">Menus for URLs</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#interactive-apps-menu">Interactive Apps Menu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#control-which-apps-appear-in-the-dashboard-navbar">Control Which Apps Appear in the Dashboard Navbar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-upload-limits">Set Upload Limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#block-or-allow-directory-access">Block or Allow Directory Access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
@@ -179,7 +188,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#custom-pages">Custom Pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-tickets">Support Tickets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">Customizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Customizations</a></li>
 </ul>
 </li>
 </ul>
@@ -287,13 +296,13 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 </div></blockquote>
 <p>the user would see this message at the top of the dashboard:</p>
-<div class="figure align-center" id="id16">
+<div class="figure align-center" id="id21">
 <img alt="_images/dashboard-announcement.png" src="_images/dashboard-announcement.png" />
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 <p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
-<table class="docutils align-default" id="id17">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id17" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id22">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id22" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -340,9 +349,9 @@ OnDemand will be unavailable during this period. For details, please visit
 <p class="admonition-title">Tip</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">_erb</span></code> formats support ERB rendering to generate more dynamic messages.</p>
 </div>
-<div class="figure align-center" id="id18">
+<div class="figure align-center" id="id23">
 <img alt="_images/dashboard_motd.png" src="_images/dashboard_motd.png" />
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
 </div>
 <p>We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 </div>
@@ -354,8 +363,8 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 <p>We recommend setting these values using the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration properties</span></a>.
 Currently only the dashboard uses the colors in the navbar.</p>
-<table class="docutils align-default" id="id19">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id19" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id24">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id24" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -407,9 +416,9 @@ Currently only the dashboard uses the colors in the navbar.</p>
 <p>It is possible to configure these settings using environment variables, although this is deprecated.
 For information about the properties and environment variables, see the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
 </div>
-<div class="figure align-center" id="id20">
+<div class="figure align-center" id="id25">
 <img alt="_images/dashboard_navbar_branding_bluered.png" src="_images/dashboard_navbar_branding_bluered.png" />
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
 </div>
 <div class="section" id="custom-css-files">
 <h3>Custom CSS files<a class="headerlink" href="#custom-css-files" title="Permalink to this headline">¶</a></h3>
@@ -428,8 +437,8 @@ This will result in a CSS tag added to all dashboard pages with the path: <code 
 <div class="section" id="add-urls-to-help-menu">
 <span id="help-menu-guide"></span><h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
 <p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
-<table class="docutils align-default" id="id21">
-<caption><span class="caption-number">Table 3 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id21" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id26">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id26" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -471,7 +480,7 @@ This will result in a CSS tag added to all dashboard pages with the path: <code 
 <p>Since OnDemand 2.1, custom links can be added to the Help menu using the configuration property <code class="docutils literal notranslate"><span class="pre">help_menu</span></code>.
 Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.</p>
 <p><code class="docutils literal notranslate"><span class="pre">help_menu</span></code> supports all the link definitions developed for the custom navigation configuration.
-For more information on how to create custom links, see the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">link definition documentation</span></a>.</p>
+For more information on how to create custom links, see for example <a class="reference internal" href="#menus-for-urls"><span class="std std-ref">adding urls to menus</span></a>.</p>
 <p>For information about how to configure properties, see the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">help_menu</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Documentation&quot;</span><span class="w"></span>
@@ -549,9 +558,9 @@ with in the dropdown with both the title and the path.</p></li>
 in <code class="docutils literal notranslate"><span class="pre">OodFilesApp.candidate_favorite_paths</span></code> array and whichever directories
 exist and the user has access to will appear as links in the Files menu under
 the Home Directory link.</p>
-<div class="figure align-center" id="id22">
+<div class="figure align-center" id="id27">
 <img alt="_images/files_menu_shortcuts_osc.png" src="_images/files_menu_shortcuts_osc.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
 </div>
 <ul class="simple">
 <li><p>You must restart the Dashboard app to see a configuration change take effect.
@@ -602,7 +611,8 @@ and overrides the value for <code class="docutils literal notranslate"><span cla
 Profile selection can be done using configurable navigation links.
 These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard.</p>
 <p>To add profile links to the Help navigation dropdown menu use the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.
-For more information on how to configure profile links, see the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">link definition documentation.</span></a>.</p>
+For more information on how to add profile links to the navigation bar in various places, see
+<a class="reference internal" href="#menus-for-profile-links"><span class="std std-ref">menus for profile links</span></a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profile_links</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Profiles&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
@@ -666,49 +676,226 @@ to more than one definition without duplication. This YAML feature only works wh
 </div>
 </div>
 </div>
-<div class="section" id="add-menu-items-to-the-navbar">
-<span id="id4"></span><h2>Add Menu Items to the Navbar<a class="headerlink" href="#add-menu-items-to-the-navbar" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.</p>
-<ul class="simple">
+<div class="section" id="changing-the-navigation-bar">
+<span id="navbar-guide"></span><h2>Changing the Navigation bar<a class="headerlink" href="#changing-the-navigation-bar" title="Permalink to this headline">¶</a></h2>
+<p>There are a couple ways to change the navigation bar in Open OnDemand, some
+are simpler than others.</p>
+<p>This section provides the outline of how the navigation bar is generated to begin
+with, then details the various ways to modify it.</p>
+<p>Once you understand how the navigation bar is generated automatically,
+you can take steps to custimize it as you see fit.</p>
+<div class="section" id="understanding-the-default-navigation-bar">
+<span id="understanding-default-nav-bar"></span><h3>Understanding the default navigation bar<a class="headerlink" href="#understanding-the-default-navigation-bar" title="Permalink to this headline">¶</a></h3>
+<p>Some navigation menus and links are built-in to the system. The system
+will generate dropdown menus for <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>, <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Interactive</span> <span class="pre">Apps</span></code> automatically. It will also generate the link for
+<code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Interactive</span> <span class="pre">Sessions</span></code> by default.</p>
+<p>Here’s an image of you’d expect to see by default.</p>
+<div class="figure align-center">
+<img alt="An image of the default navigation bar showing dropdown menus for files, jobs, clusters, interactive apps, and my interactive apps." src="_images/main-navigation-menu.png" />
+</div>
+<p>Open OnDemand is a platform for other applications, like Jupyter &amp; RStudio.
+As such, the default navigation bar builds itself based on what applications
+it has discovered.  The system will search <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/</span></code> for these
+applications.</p>
+<p>Every application should have <a class="reference internal" href="how-tos/app-development/interactive/manifest.html#app-development-manifest"><span class="std std-ref">Manifest yml files</span></a>.  The system reads
+these manifests files and builds additional dropdown menus (or adds to existing menus)
+based on the <code class="docutils literal notranslate"><span class="pre">category</span></code> field.</p>
+<p>By default, the system will generate a new dropdown menu for every <code class="docutils literal notranslate"><span class="pre">category</span></code>
+it encounters.  Within each dropdown menu it will add seperators for each
+<code class="docutils literal notranslate"><span class="pre">subcategory</span></code> it encounters.</p>
+</div>
+<div class="section" id="limit-auto-generated-menu-bars">
+<h3>Limit auto generated menu bars<a class="headerlink" href="#limit-auto-generated-menu-bars" title="Permalink to this headline">¶</a></h3>
+<p>As described in the previous section, the system will generate new dropdown
+menus for every <code class="docutils literal notranslate"><span class="pre">category</span></code> it discovers.</p>
+<p>If you wish to add or remove which categories create dropdown menus
+use the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Should you need more granular control over the navigation bar,
+read <a class="reference internal" href="#fully-customizing-the-navbar"><span class="std std-ref">Fully customizing the navigation bar</span></a> below.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Prior to 2.1, controlling which categories appear in the navigation bar was controlled
+by a Ruby initializer that you needed to modify. While the 2.x series will still support
+this scheme, Open OnDemand 3.0 will not.  3.0 will only support the <code class="docutils literal notranslate"><span class="pre">nav_categories</span></code>
+property.</p>
+<p>Here is the <a class="reference external" href="https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar">2.0 documentation for controling the navbar</a>.</p>
+</div>
+</div>
+<div class="section" id="using-manifests-to-create-menu-items">
+<h3>Using manifests to create menu items<a class="headerlink" href="#using-manifests-to-create-menu-items" title="Permalink to this headline">¶</a></h3>
+<p>As described in <a class="reference internal" href="#understanding-default-nav-bar"><span class="std std-ref">Understanding the default navigation bar</span></a>, the system automatically
+creates dropdown menus based on the applications it encounters.</p>
+<p>So, with that knowledge, one can create or add to dropdown menus by creating
+applications with the correct information in their <a class="reference external" href="app-development-manifest">manifest.yml</a>.</p>
+<p>It’s fairly simple to make this application. Simply create the directory in the correct location
+and create a <a class="reference external" href="app-development-manifest">manifest.yml</a>.</p>
+<ul>
 <li><p>sudo mkdir /var/www/ood/apps/sys/&lt;NEW MENU ITEM&gt;</p></li>
-<li><p>sudo vi /var/www/ood/apps/sys/&lt;NEW MENU ITEM&gt;/manifest.yml</p></li>
-</ul>
+<li><p>sudo vi /var/www/ood/apps/sys/&lt;NEW MENU ITEM&gt;/manifest.yml</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
-<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add Menu Items to the navbar</span><span class="w">   </span><span class="c1"># This will show as the menu item.</span><span class="w"></span>
-<span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Links</span><span class="w">  </span><span class="c1"># specify the main menu for the item to be under.  If it doesn&#39;t exist, it will be created.</span><span class="w"></span>
+<span class="c1"># This is the text that will show up in the dropdown menu.</span><span class="w"></span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add Menu Items to the navbar</span><span class="w"></span>
+
+<span class="c1"># This will create the &#39;Links&#39; dropdown menu if it doesn&#39;t already exist.</span><span class="w"></span>
+<span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Links</span><span class="w"></span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span><span class="w"></span>
 <span class="w">  </span><span class="no">A description of what the menu item does.</span><span class="w"></span>
 <span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fa://clock-o</span><span class="w">   </span><span class="c1"># icon for the link.</span><span class="w"></span>
-<span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://osc.github.io/ood-documentation/develop/customization/customizations.html#add-menu-items-to-the-navbar&#39;</span><span class="w"></span>
-<span class="nt">new_window</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">   </span><span class="c1"># open link in new browser window or same browser window.</span><span class="w"></span>
+<span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://openondemand.org/&#39;</span><span class="w"></span>
+
+<span class="c1"># open link in new browser window or same browser window.</span><span class="w"></span>
+<span class="nt">new_window</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
-</div></blockquote>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This scheme may be fine with one or two additional links. Should you need
+more granular control over the navigation bar, read <a class="reference internal" href="#fully-customizing-the-navbar"><span class="std std-ref">Fully customizing the navigation bar</span></a>
+below.</p>
 </div>
-<div class="section" id="custom-dashboard-navbar">
-<span id="navbar-guide"></span><span id="dashboard-navbar-config"></span><h2>Custom Dashboard Navbar<a class="headerlink" href="#custom-dashboard-navbar" title="Permalink to this headline">¶</a></h2>
-<p>From OnDemand 2.1, there is a new way of customizing the top navigation bar.</p>
-<div class="figure align-center">
-<img alt="_images/main-navigation-menu.png" src="_images/main-navigation-menu.png" />
 </div>
-<p>We can define a custom left hand side navbar using the configuration property <code class="docutils literal notranslate"><span class="pre">nav_bar</span></code>.
-This will replace the navigation items: <em>Apps</em>, <em>Files</em>, <em>Jobs</em>, <em>Clusters</em>, <em>Interactive Apps</em>, and <em>My Interactive Sessions</em>
-in the picture above.</p>
-<p>We can, as well, define a custom right hand side navbar using the configuration property <code class="docutils literal notranslate"><span class="pre">help_bar</span></code>.
-This will replace the navigation items: <em>Develop</em>, <em>Help</em>, <em>Logged in as</em> , and <em>Log Out</em> in the picture above.</p>
-<p>For more information on how to setup these properties, see <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration files</span></a></p>
+<div class="section" id="fully-customizing-the-navigation-bar">
+<span id="fully-customizing-the-navbar"></span><h3>Fully customizing the navigation bar<a class="headerlink" href="#fully-customizing-the-navigation-bar" title="Permalink to this headline">¶</a></h3>
+<p>Since 2.1, Open OnDemand provides a way to completely control the navigation bar
+through the <code class="docutils literal notranslate"><span class="pre">nav_bar</span></code> and <code class="docutils literal notranslate"><span class="pre">help_bar</span></code> <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a> configuration properties.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As described in <a class="reference internal" href="#understanding-default-nav-bar"><span class="std std-ref">Understanding the default navigation bar</span></a>, the system auto-generates
+dropdown menus based on the applications it discovers.  If the <code class="docutils literal notranslate"><span class="pre">nav_bar</span></code> or
+<code class="docutils literal notranslate"><span class="pre">help_bar</span></code> configurations are set, the system will <strong>only</strong> show what you’ve defined.</p>
+</div>
+<p>Before we look at how to modify it in detail, let’s look at what the default
+configuration would be (without showing any discovered apps).</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;nav_bar&#39; is the left side of the navigation bar.</span><span class="w"></span>
+<span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># &#39;apps&#39; dropdown menu is shown if you&#39;ve set &#39;pinned_apps&#39;.</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobs</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clusters</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interactive apps</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my interactive sessions</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># &#39;all apps&#39; is disabled by default, but would be next if you set &#39;show_all_apps_link&#39;.</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># - all apps</span><span class="w"></span>
+
+<span class="c1"># &#39;help_bar&#39; is the right side of the navigation bar.</span><span class="w"></span>
+<span class="nt">help_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">develop</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">help</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logout</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The configuration above would be equvialent to the default navigation bar as described
+in <a class="reference internal" href="#understanding-default-nav-bar"><span class="std std-ref">Understanding the default navigation bar</span></a>.</p>
+<p>As menus are dynamically discovered <em>from your system</em>, this documentation can only cover
+how a fresh install - with no other applications - would behave.</p>
 <p>A custom navigation definition is a list of navigation items.
 A navigation item could be a navigation menu or a navigation link.
 A navigation menu contains a list of navigation links with optional link groups.</p>
-<div class="section" id="navigation-menus">
-<h3>Navigation Menus<a class="headerlink" href="#navigation-menus" title="Permalink to this headline">¶</a></h3>
 <p>There are several ways of creating a navigation menu.</p>
+<div class="section" id="menus-by-application-category">
+<h4>Menus by Application category<a class="headerlink" href="#menus-by-application-category" title="Permalink to this headline">¶</a></h4>
+<p>One of the easiest ways to create menus is to create them based off of
+the applications categories.</p>
+<p>The title of the dropdown menu will be the <code class="docutils literal notranslate"><span class="pre">category</span></code> itself, and menu items
+(applications) will be grouped by their <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>. It is not possible to
+set an icon. The <code class="docutils literal notranslate"><span class="pre">category</span></code> matching is case insensitive.</p>
+<p>Here’s an example using the <code class="docutils literal notranslate"><span class="pre">interactive</span> <span class="pre">apps</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>. Just like the default
+navigation bar, this will generate a dropdown menu of all the applications the system
+has discovered in that <code class="docutils literal notranslate"><span class="pre">category</span></code>.</p>
+<p>As you can see from the image, the system has discovered eight applications in two
+subcategories.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;interactive</span><span class="nv"> </span><span class="s">apps&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="An open dropdown menu titled &quot;Interactive Apps&quot;. The first submenu is titled &quot;Desktops&quot; and has two list items. The second submenu is titled &quot;Servers&quot; and has six list items." src="_images/def-category-menu.png" />
+</div>
+</div>
+<div class="section" id="predefined-templates">
+<h4>Predefined templates<a class="headerlink" href="#predefined-templates" title="Permalink to this headline">¶</a></h4>
+<p>As you can see from the example default configuration in <a class="reference internal" href="#fully-customizing-the-navbar">fully-customizing-the-navbar</a>, there
+are several pre-defined navigation menus that you can use.</p>
+<p>A complete list of predefined templates is:</p>
 <ul class="simple">
-<li><p><strong>Full navigation menu definition:</strong> full control on the menu links, order, and grouping.
-Use the <code class="docutils literal notranslate"><span class="pre">links</span></code> array to define the list of navigation links for the menu.
-Use the <code class="docutils literal notranslate"><span class="pre">group</span></code> keyword to create subsections within the navigation menu and organize the links as you require.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all_apps</span></code> - The link to the all applications page.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apps</span></code> - A drop down menu of <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code>. Note that you need to set <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> for this to show up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sessions</span></code> - The link to “My Interactive Sessions” page.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">develop</span></code> - The dropdown menu for developers, titled “Develop”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code> - The “Help” dropdown menu.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log_out</span></code> - The link to logout, titled “Logout”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code> - The “Logged in as &lt;user&gt;” text.</p></li>
 </ul>
+<p>Here’s an example of defining all of them and what that would look like.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;all_apps&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;apps&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;develop&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;help&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;log_out&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="An image of the navigation bar. From left to right the items are &quot;All Apps&quot; link, &quot;Apps&quot; dropdown menu, &quot;My Interactive Sesssions&quot; link, &quot;Develop&quot; drop down menu, &quot;Help&quot; drop down menu, &quot;Logout&quot; link and 'logged in as ood' text." src="_images/def-templates-menu.png" />
+</div>
+</div>
+<div class="section" id="menus-based-on-applications">
+<span id="id5"></span><h4>Menus based on applications<a class="headerlink" href="#menus-based-on-applications" title="Permalink to this headline">¶</a></h4>
+<p>You can create dropdown menus based on applications the system can discover.</p>
+<p>Menu items are automatically grouped based on the applications <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>.
+Use the <code class="docutils literal notranslate"><span class="pre">apps</span></code> array to define the app tokens for this navigation menu.</p>
+<p>The order of the menu items is based on the order you’ve defined.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://window-restore&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">apps</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sys/Rstudio/*&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="An open dropdown menu titled &quot;My Apps&quot;. The menu shows two submenus. The first is titled &quot;Servers&quot; and has five list items for all the discovered through the &quot;sys/Rstudio/*&quot; configuration. The second submenu is titled &quot;Desktops&quot; and has one list item for the discovered through the &quot;sys/bc_desktop&quot; configuration." src="_images/def-apps-menu.png" />
+</div>
+</div>
+<div class="section" id="menus-based-on-links">
+<span id="id6"></span><h4>Menus based on links<a class="headerlink" href="#menus-based-on-links" title="Permalink to this headline">¶</a></h4>
+<p>Menus based on links provide even more granular control on how the dropdown menu is generated.</p>
+<p>As seen in the previous sections, using an <code class="docutils literal notranslate"><span class="pre">apps</span></code> array will automatically generate
+submenus based on the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> of the applications that have been discovered.</p>
+<p>When using links, we can override this behaviour to provide different titles to
+the submenus, or with no submenus and subtitles at all.</p>
+<p>Let’s look at this example using the same application tokens, but using <code class="docutils literal notranslate"><span class="pre">links</span></code> instead
+of <code class="docutils literal notranslate"><span class="pre">apps</span></code>. The system will discover and generate list items for the same eight applications,
+only without <strong>any</strong> submenus.  It is simply a list of all the discovered applications with
+no further grouping.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fa://code&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sys/Rstudio/*&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="An open dropdown menu titled &quot;My Apps&quot;. The menu has no submenus. It simply lists all eight the apps." src="_images/app-links-no-group.png" />
+</div>
+<p>To add submenus, simply use the <code class="docutils literal notranslate"><span class="pre">group</span></code> attribute.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">links</span></code> are used with the <code class="docutils literal notranslate"><span class="pre">group</span></code> attribute, the discovered applications
+will now be grouped and submenu titles created based on the configuration provided.</p>
+<p>This will look and feel similar to <a class="reference internal" href="#menus-based-on-applications">menus-based-on-applications</a> with the exception
+being that submenus are defined by the <code class="docutils literal notranslate"><span class="pre">group</span></code> configuration instead of the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>
+of the applications in the list.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fa://code&quot;</span><span class="w"></span>
@@ -720,113 +907,25 @@ Use the <code class="docutils literal notranslate"><span class="pre">group</span
 </pre></div>
 </div>
 <div class="figure align-center">
-<img alt="_images/def-full-menu.png" src="_images/def-full-menu.png" />
+<img alt="An image showing one open drop down menu titled &quot;My Apps&quot;. The first submenu, titled &quot;Rstudio&quot; has five list items that have been discovered through the &quot;sys/Rstudio/*&quot; configuration. The second submenu, titled &quot;Remote&quot; has one list item that has been discovered through the &quot;sys/bc_desktop&quot; configuration." src="_images/def-full-menu.png" />
 </div>
-<ul class="simple" id="applications-based-menu">
-<li><p><strong>Menu based on applications:</strong> simpler to configure, order is based on the position in the array.
-Items are automatically grouped based on the applications <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>. Use the <code class="docutils literal notranslate"><span class="pre">apps</span></code>
-array to define the app tokens for this navigation menu.</p></li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also used predefined links (described above) in the <code class="docutils literal notranslate"><span class="pre">links</span></code> section here.</p>
+</div>
+</div>
+<div class="section" id="menus-for-profile-links">
+<span id="id7"></span><h4>Menus for profile links<a class="headerlink" href="#menus-for-profile-links" title="Permalink to this headline">¶</a></h4>
+<p>If you’ve enabled <cite>Profiles &lt;profiles_guide&gt;</cite> you can create navigation bar menus and
+links to those profiles through the <code class="docutils literal notranslate"><span class="pre">profile</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://window-restore&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;sys/Rstudio/*&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/def-apps-menu.png" src="_images/def-apps-menu.png" />
-</div>
-<ul class="simple">
-<li><p><strong>Applications category:</strong> it is possible to create a navigation menu by using the name of an application <code class="docutils literal notranslate"><span class="pre">category</span></code>
-as defined in the manifest file. The menu title will be the <code class="docutils literal notranslate"><span class="pre">category</span></code>, applications will be grouped by <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>.
-It is not possible to set an icon. The <code class="docutils literal notranslate"><span class="pre">category</span></code> matching is case insensitive.</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;interactive</span><span class="nv"> </span><span class="s">apps&quot;</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/def-category-menu.png" src="_images/def-category-menu.png" />
-</div>
-<ul class="simple">
-<li><p><strong>Menu template:</strong> these are pre-configured navigation menus that are currently used in the default OnDemand Dashboard navbar.
-The supported templates are: <code class="docutils literal notranslate"><span class="pre">all_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">featured_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">sessions</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">log_out</span></code>, and <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;all_apps&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;featured_apps&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;develop&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;help&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;log_out&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/def-templates-menu.png" src="_images/def-templates-menu.png" />
-</div>
-</div>
-<div class="section" id="navigation-links">
-<span id="navbar-links-guide"></span><h3>Navigation Links<a class="headerlink" href="#navigation-links" title="Permalink to this headline">¶</a></h3>
-<p>Navigation links can be used as top level navigation items or as links within a navigation menu.</p>
-<ul class="simple">
-<li><p><strong>Static links:</strong> these are pre-defined links ready to use with a simple string definition.
-Currently supported static links are: <code class="docutils literal notranslate"><span class="pre">all_apps</span></code>, <code class="docutils literal notranslate"><span class="pre">sessions</span></code>, <code class="docutils literal notranslate"><span class="pre">support_ticket</span></code>, <code class="docutils literal notranslate"><span class="pre">docs</span></code>, <code class="docutils literal notranslate"><span class="pre">products_dev</span></code>, <code class="docutils literal notranslate"><span class="pre">products_usr</span></code>, <code class="docutils literal notranslate"><span class="pre">log_out</span></code>, and <code class="docutils literal notranslate"><span class="pre">restart</span></code>.</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Navigation link</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Menu</span><span class="nv"> </span><span class="s">Item&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;all_apps&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;support_ticket&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;docs&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;products_dev&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;products_usr&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;log_out&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;restart&quot;</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/def-static-links.png" src="_images/def-static-links.png" />
-</div>
-<ul>
-<li><p><strong>App links:</strong> applications identified by the tokens are added to the menu.
-When configured as a top level link, only one application token is supported.
-If the token matches multiple applications, the navigation entry is ignored.</p>
-<p>When configured as a <code class="docutils literal notranslate"><span class="pre">links</span></code> array item, the subcategory will not be used to group the matched applications.
-The definition order is respected when rendering the links.
-If grouping is required, use the <code class="docutils literal notranslate"><span class="pre">group</span></code> property to add the desired structure as shown in the
-<a class="reference internal" href="#applications-based-menu"><span class="std std-ref">applications based menu above.</span></a></p>
-</li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Top level link</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Navigation link</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Menu</span><span class="nv"> </span><span class="s">Item&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="c1"># within the links property, a string can be used.</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="c1"># apps property supports a single string token</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apps</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="c1"># apps property supports array of application tokens</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sys/bc_desktop&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/def-apps-link.png" src="_images/def-apps-link.png" />
-</div>
-<ul class="simple">
-<li><p><strong>Profile links:</strong> to create links to change the user profile to the one identified by the <code class="docutils literal notranslate"><span class="pre">profile</span></code> property.</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Top level link</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Single top level link</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fa://desktop&quot;</span><span class="w"> </span><span class="c1"># optional, defaults to fas://cog</span><span class="w"></span>
 <span class="w">    </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;team1&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">new_tab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># optional, defaults to false</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Navigation link</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># Dropdown menu</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Menu</span><span class="nv"> </span><span class="s">Item&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title&quot;</span><span class="w"></span>
@@ -835,16 +934,19 @@ If grouping is required, use the <code class="docutils literal notranslate"><spa
 <span class="w">        </span><span class="nt">new_tab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># optional, defaults to false</span><span class="w"></span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>Custom page links:</strong> to create links to a custom page identified by the <code class="docutils literal notranslate"><span class="pre">page</span></code> property.</p></li>
-</ul>
+</div>
+<div class="section" id="menus-for-custom-pages">
+<span id="id8"></span><h4>Menus for custom pages<a class="headerlink" href="#menus-for-custom-pages" title="Permalink to this headline">¶</a></h4>
+<p>If you’ve enabled <a class="reference internal" href="#custom-pages-guide">custom_pages_guide</a> you can create navigation menus
+or single links directly to those pages through the the <code class="docutils literal notranslate"><span class="pre">page</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Top level link</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Single top level link</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fa://desktop&quot;</span><span class="w"> </span><span class="c1"># optional, defaults to fas://cog</span><span class="w"></span>
 <span class="w">    </span><span class="nt">page</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;documentation&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">new_tab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># optional, defaults to false</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Navigation link</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># Dropdown menu</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Menu</span><span class="nv"> </span><span class="s">Item&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title&quot;</span><span class="w"></span>
@@ -853,28 +955,30 @@ If grouping is required, use the <code class="docutils literal notranslate"><spa
 <span class="w">        </span><span class="nt">new_tab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># optional, defaults to false</span><span class="w"></span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>Full link definition:</strong> to full control of the URL the link goes to. It accepts relative and absolute URLs.</p></li>
-</ul>
+</div>
+<div class="section" id="menus-for-urls">
+<span id="id9"></span><h4>Menus for URLs<a class="headerlink" href="#menus-for-urls" title="Permalink to this headline">¶</a></h4>
+<p>You can even create menu items for relative and absolute URLs to link anywhere
+through the <code class="docutils literal notranslate"><span class="pre">url</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Top level link</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Single top level link</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fa://desktop&quot;</span><span class="w"> </span><span class="c1"># optional, defaults to fas://cog</span><span class="w"></span>
 <span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/docs&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">new_tab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># optional, defaults to false</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Navigation link</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># Dropdown menu</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Menu</span><span class="nv"> </span><span class="s">Item&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title&quot;</span><span class="w"></span>
 <span class="w">        </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fa://desktop&quot;</span><span class="w"> </span><span class="c1"># optional, defaults to fas://cog</span><span class="w"></span>
-<span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/docs&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://openondemand.org/&quot;</span><span class="w"></span>
 <span class="w">        </span><span class="nt">new_tab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># optional, defaults to false</span><span class="w"></span>
 </pre></div>
 </div>
-<p><strong>Profile links</strong>, <strong>custom page links</strong>, and <strong>full link definitions</strong> will render the same
-look and feel navigation link as a menu item or as a top level link. The only difference will be the generated URL.</p>
 <div class="figure align-center">
-<img alt="_images/def-navigation-link.png" src="_images/def-navigation-link.png" />
+<img alt="An image of the navigation bar with a single link &quot;Title&quot; and an open dropdown menu titled &quot;Menu Item&quot;. The dropdown menu has one list item titled &quot;Title&quot;." src="_images/def-navigation-link.png" />
+</div>
 </div>
 </div>
 </div>
@@ -898,29 +1002,8 @@ The custom menu will replace the <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 </div>
-<div class="section" id="control-which-apps-appear-in-the-dashboard-navbar">
-<h2>Control Which Apps Appear in the Dashboard Navbar<a class="headerlink" href="#control-which-apps-appear-in-the-dashboard-navbar" title="Permalink to this headline">¶</a></h2>
-<p>Apps contain a manifest.yml file that specify things like the title, icon, category,
-and possibly subcategory. The Dashboard searchs the search paths for all the possible
-apps and uses the manifests of the apps it finds to build the navbar (navigation bar)
-at the top of the page.</p>
-<p>Apps are placed in the top level menus based on the category, and then in dropdown menu
-sections based on subcategory.</p>
-<p>By default, the Open OnDemand system will generate dropdown menus on the navigation
-bar for certian categories of applications.</p>
-<p>If you wish to add or remove which categories create dropdown menu items
-use the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Prior to 2.1, controlling which categories appear in the navigation bar was controlled
-by a Ruby initializer that you needed to modify. While the 2.x series will still support
-this scheme, Open OnDemand 3.0 will not.  3.0 will only support the <code class="docutils literal notranslate"><span class="pre">nav_categories</span></code>
-property.</p>
-<p>Here is the <a class="reference external" href="https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar">2.0 documentation for controling the navbar</a>.</p>
-</div>
-</div>
 <div class="section" id="set-upload-limits">
-<span id="id5"></span><h2>Set Upload Limits<a class="headerlink" href="#set-upload-limits" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2>Set Upload Limits<a class="headerlink" href="#set-upload-limits" title="Permalink to this headline">¶</a></h2>
 <p>By default, the file size upload limit is 10737420000 bytes (~10.7 GB).</p>
 <p>If you want set this to a lower value, set the <code class="docutils literal notranslate"><span class="pre">FILE_UPLOAD_MAX</span></code> configuration
 in the file apps’ configuration file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code>.</p>
@@ -965,7 +1048,7 @@ respect the allowlist in the following manner:</p>
 </div>
 </div>
 <div class="section" id="set-default-ssh-host">
-<span id="id6"></span><h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
+<span id="id11"></span><h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The shell app does not work out of the box because all SSH hosts have to be explicitly allowed
@@ -989,7 +1072,7 @@ default=true attribute to the login section like the example below.</p>
 </div>
 </div>
 <div class="section" id="set-ssh-allowlist">
-<span id="id7"></span><h2>Set SSH Allowlist<a class="headerlink" href="#set-ssh-allowlist" title="Permalink to this headline">¶</a></h2>
+<span id="id12"></span><h2>Set SSH Allowlist<a class="headerlink" href="#set-ssh-allowlist" title="Permalink to this headline">¶</a></h2>
 <p>In 1.8 and above we stopped allowing ssh access by default.  Now you have explicitly set
 what hosts users will be allowed to connect to in the shell application.</p>
 <p>Every cluster configuration with <code class="docutils literal notranslate"><span class="pre">v2.login.host</span></code> that is not hidden (it has
@@ -1280,8 +1363,8 @@ is an array of existing or newly added widgets to render in that column.</p>
 <li><p>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</p></li>
 </ol>
 <p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
-<table class="docutils align-default" id="id23">
-<caption><span class="caption-number">Table 4 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id23" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id28">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id28" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1426,7 +1509,7 @@ the specified user only.</p>
 </div>
 </div>
 <div class="section" id="balance-warnings-on-dashboard">
-<span id="id8"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<span id="id13"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
 <p>You can display warnings to users on the Dashboard if their
 resource balance is nearing its limit. This requires an auto-updated (it is
 recommended to update this file daily with a cronjob) JSON file
@@ -1491,7 +1574,7 @@ can be changed with the environment variable <code class="docutils literal notra
 </div>
 </div>
 <div class="section" id="maintenance-mode">
-<span id="id9"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
+<span id="id14"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
 <p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.</p>
 <p>You can do this by setting Open OnDemand in ‘Maintenance Mode’.
@@ -1524,7 +1607,7 @@ mode, not it’s content, so you will not need to restart apache or modify it’
 take affect.</p>
 </div>
 <div class="section" id="grafana-support">
-<span id="id10"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Permalink to this headline">¶</a></h2>
+<span id="id15"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Permalink to this headline">¶</a></h2>
 <p>It’s possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.</p>
 <p>Grafana must be configured to support embedded panels and at this time it is also required to have a anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust <cite>org_name</cite> to match whatever organization you wish to be anonymous.</p>
 <div class="admonition warning">
@@ -1595,7 +1678,7 @@ nodes.</p>
 </div>
 </div>
 <div class="section" id="set-illegal-job-name-characters">
-<span id="id11"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Permalink to this headline">¶</a></h2>
+<span id="id16"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Permalink to this headline">¶</a></h2>
 <p>If you encounter an issue in running batch connect applications complaining about invalid
 job names like the error below.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">read</span> <span class="pre">script</span> <span class="pre">file</span> <span class="pre">because</span> <span class="pre">of</span> <span class="pre">error:</span> <span class="pre">ERROR!</span> <span class="pre">argument</span> <span class="pre">to</span> <span class="pre">-N</span> <span class="pre">option</span> <span class="pre">must</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">/</span></code></p>
@@ -1608,7 +1691,7 @@ job names like the error below.</p>
 </div>
 </div>
 <div class="section" id="customize-dex-theme">
-<span id="id12"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Permalink to this headline">¶</a></h2>
+<span id="id17"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Permalink to this headline">¶</a></h2>
 <p>It’s possible to use a customized theme when authenticating with Dex when using OnDemand’s default authentication.
 Refer to the upstream <a class="reference external" href="https://dexidp.io/docs/templates/">Dex template docs</a> for additional information on templating Dex.</p>
 <p>The simplest approach is to copy the OnDemand theme and make changes.  This is idea if you wish to make the following changes:</p>
@@ -1650,11 +1733,11 @@ sudo systemctl restart ondemand-dex.service
 </div>
 </div>
 <div class="section" id="xdmod-integration">
-<span id="id13"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Permalink to this headline">¶</a></h2>
+<span id="id18"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Permalink to this headline">¶</a></h2>
 <p>XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.</p>
-<div class="figure align-center" id="id24">
+<div class="figure align-center" id="id29">
 <img alt="_images/customization_xdmod.png" src="_images/customization_xdmod.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
 </div>
 <p>Steps to enable the XDMoD reports in the OnDemand Dashboard:</p>
 <ol class="arabic">
@@ -1758,7 +1841,7 @@ It will render a layout with the <code class="docutils literal notranslate"><spa
 To add links to the Help menu use the configuration property <code class="docutils literal notranslate"><span class="pre">help_menu</span></code>.
 See the <a class="reference internal" href="#help-menu-guide"><span class="std std-ref">documentation on adding urls to the Help menu</span></a> for details and examples.</p>
 <p>Adding custom pages links uses the same notation and attributes as when created for the custom Dashboard navbar.
-See the <a class="reference internal" href="#navbar-links-guide"><span class="std std-ref">custom Dashboard navbar documentation</span></a></p>
+See <a class="reference internal" href="#menus-for-custom-pages"><span class="std std-ref">How to add menus for custom pages</span></a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adding a link to the custom page with page_code = &quot;documentation&quot;</span><span class="w"></span>
 <span class="nt">help_menu</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Custom</span><span class="nv"> </span><span class="s">Pages&quot;</span><span class="w"></span>
@@ -1842,8 +1925,8 @@ See example below or the <a class="reference external" href="https://guides.ruby
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="id15">
-<h3>Customizations<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id20">
+<h3>Customizations<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <p>The support ticket form can be customized using the <code class="docutils literal notranslate"><span class="pre">form</span></code> and <code class="docutils literal notranslate"><span class="pre">attributes</span></code> configuration properties.
 In the same way that you can configure the <a class="reference internal" href="enable-desktops/modify-form-attributes.html#enable-desktops-modify-form-attributes"><span class="std std-ref">form for interactive applications</span></a>,
 the support ticket form fields can be arranged or changed as required.</p>
