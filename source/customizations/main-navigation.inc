@@ -6,7 +6,6 @@ Changing the Navigation bar
 There are a couple ways to change the navigation bar in Open OnDemand, some
 are simpler than others.
 
-
 This section provides the outline of how the navigation bar is generated to begin
 with, then details the various ways to modify it.
 
@@ -54,6 +53,15 @@ use the :ref:`nav_categories configuration property <nav_categories>`.
 .. tip::
     Should you need more granular control over the navigation bar,
     read :ref:`fully-customizing-the-navbar` below.
+
+.. warning::
+
+  Prior to 2.1, controlling which categories appear in the navigation bar was controlled
+  by a Ruby initializer that you needed to modify. While the 2.x series will still support
+  this scheme, Open OnDemand 3.0 will not.  3.0 will only support the ``nav_categories``
+  property.
+
+  Here is the `2.0 documentation for controling the navbar`_.
 
 Using manifests to create menu items
 ....................................

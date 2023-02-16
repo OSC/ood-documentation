@@ -293,16 +293,6 @@ app.
 .. include:: customizations/main-navigation.inc
 .. include:: customizations/interactive-apps-menu.inc
 
-.. warning::
-
-  Prior to 2.1, controlling which categories appear in the navigation bar was controlled
-  by a Ruby initializer that you needed to modify. While the 2.x series will still support
-  this scheme, Open OnDemand 3.0 will not.  3.0 will only support the ``nav_categories``
-  property.
-
-  Here is the `2.0 documentation for controling the navbar`_.
-
-
 .. _set-upload-limits:
 
 Set Upload Limits
