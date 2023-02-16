@@ -187,7 +187,7 @@ Since OnDemand 2.1, custom links can be added to the Help menu using the configu
 Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.
 
 ``help_menu`` supports all the link definitions developed for the custom navigation configuration.
-For more information on how to create custom links, see the :ref:`link definition documentation <navbar_links_guide>`.
+For more information on how to create custom links, see for example :ref:`adding urls to menus <menus-for-urls>`.
 
 For information about how to configure properties, see the :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
 
@@ -290,58 +290,8 @@ app.
 
 .. include:: customizations/profiles.inc
 
-.. _add-menu-items-to-the-navbar:
-
-Add Menu Items to the Navbar
------------------------------
-
-  Menus/Sub-menus are viewed as apps in Open Ondemand.  For every menu/sub-menu you want to show in the navbar, you will need to do the following for each item.
-
-  * sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>
-  * sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml
-  
-  .. code-block:: yaml
-
-    ---
-    name: Add Menu Items to the navbar   # This will show as the menu item.
-    category: Links  # specify the main menu for the item to be under.  If it doesn't exist, it will be created.
-    description: |-
-      A description of what the menu item does.
-    icon: fa://clock-o   # icon for the link.
-    url: 'https://osc.github.io/ood-documentation/develop/customization/customizations.html#add-menu-items-to-the-navbar'
-    new_window: true   # open link in new browser window or same browser window.
-
-.. _dashboard-navbar-config:
-
 .. include:: customizations/main-navigation.inc
 .. include:: customizations/interactive-apps-menu.inc
-
-Control Which Apps Appear in the Dashboard Navbar
--------------------------------------------------
-
-Apps contain a manifest.yml file that specify things like the title, icon, category,
-and possibly subcategory. The Dashboard searchs the search paths for all the possible
-apps and uses the manifests of the apps it finds to build the navbar (navigation bar)
-at the top of the page.
-
-Apps are placed in the top level menus based on the category, and then in dropdown menu
-sections based on subcategory.
-
-By default, the Open OnDemand system will generate dropdown menus on the navigation
-bar for certian categories of applications.
-
-If you wish to add or remove which categories create dropdown menu items
-use the :ref:`nav_categories configuration property <nav_categories>`.
-
-.. warning::
-
-  Prior to 2.1, controlling which categories appear in the navigation bar was controlled
-  by a Ruby initializer that you needed to modify. While the 2.x series will still support
-  this scheme, Open OnDemand 3.0 will not.  3.0 will only support the ``nav_categories``
-  property.
-
-  Here is the `2.0 documentation for controling the navbar`_.
-
 
 .. _set-upload-limits:
 
