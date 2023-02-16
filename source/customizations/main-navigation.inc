@@ -292,20 +292,24 @@ of the applications in the list.
   You can also used predefined links (described above) in the ``links`` section here.
 
 
-Profile links
-*************
+.. _menus-for-profile-links:
 
-to create links to change the user profile to the one identified by the ``profile`` property.
+Menus for profile links
+***********************
+
+If you've enabled `Profiles <profiles_guide>` you can create navigation bar menus and
+links to those profiles through the ``profile`` attribute.
 
 .. code-block:: yaml
 
   nav_bar:
-    # Top level link
+    # Single top level link
     - title: "Title"
       icon: "fa://desktop" # optional, defaults to fas://cog
       profile: "team1"
       new_tab: true # optional, defaults to false
-    # Navigation link
+
+    # Dropdown menu
     - title: "Menu Item"
       links:
         - title: "Title"
@@ -313,20 +317,24 @@ to create links to change the user profile to the one identified by the ``profil
           profile: "team1"
           new_tab: true # optional, defaults to false
 
-Custom page links
-*****************
+.. _menus-for-custom-pages:
 
-to create links to a custom page identified by the ``page`` property.
+Menus for custom pages
+**********************
+
+If you've enabled `custom_pages_guide`_ you can create navigation menus
+or single links directly to those pages through the the ``page`` attribute.
 
 .. code-block:: yaml
 
   nav_bar:
-    # Top level link
+    # Single top level link
     - title: "Title"
       icon: "fa://desktop" # optional, defaults to fas://cog
       page: "documentation"
       new_tab: true # optional, defaults to false
-    # Navigation link
+
+    # Dropdown menu
     - title: "Menu Item"
       links:
         - title: "Title"
@@ -334,29 +342,30 @@ to create links to a custom page identified by the ``page`` property.
           page: "documentation"
           new_tab: true # optional, defaults to false
 
-Full link definition
-********************
+.. _menus-for-urls:
 
-to full control of the URL the link goes to. It accepts relative and absolute URLs.
+Menus for URLs
+**************
+
+You can even create menu items for relative and absolute URLs to link anywhere
+through the ``url`` attribute.
 
 .. code-block:: yaml
 
   nav_bar:
-    # Top level link
+    # Single top level link
     - title: "Title"
       icon: "fa://desktop" # optional, defaults to fas://cog
       url: "/docs"
       new_tab: true # optional, defaults to false
-    # Navigation link
+
+    # Dropdown menu
     - title: "Menu Item"
       links:
         - title: "Title"
           icon: "fa://desktop" # optional, defaults to fas://cog
-          url: "/docs"
+          url: "https://openondemand.org/"
           new_tab: true # optional, defaults to false
 
-**Profile links**, **custom page links**, and **full link definitions** will render the same
-look and feel navigation link as a menu item or as a top level link. The only difference will be the generated URL.
-
 .. figure:: /images/def-navigation-link.png
-   :align: center
+    :align: center

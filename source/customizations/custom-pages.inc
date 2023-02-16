@@ -33,7 +33,7 @@ To add links to the Help menu use the configuration property ``help_menu``.
 See the :ref:`documentation on adding urls to the Help menu <help_menu_guide>` for details and examples.
 
 Adding custom pages links uses the same notation and attributes as when created for the custom Dashboard navbar.
-See `menus-based-on-links`_.
+See :ref:`How to add menus for custom pages <menus-for-custom-pages>`.
 
 .. code-block:: yaml
 
