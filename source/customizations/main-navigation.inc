@@ -208,13 +208,46 @@ Here's an example of defining all of them and what that would look like.
     :align: center
     :alt: An image of the navigation bar. From left to right the items are "All Apps" link, "Apps" dropdown menu, "My Interactive Sesssions" link, "Develop" drop down menu, "Help" drop down menu, "Logout" link and 'logged in as ood' text.
 
+Menus based on applications
+***************************
 
-Full navigation menu definition
-********************************
+You can create dropdown menus based on applications the system can discover.
 
-full control on the menu links, order, and grouping.
-  Use the ``links`` array to define the list of navigation links for the menu. 
-  Use the ``group`` keyword to create subsections within the navigation menu and organize the links as you require.
+Menu items are automatically grouped based on the applications ``subcategory``.
+Use the ``apps`` array to define the app tokens for this navigation menu.
+
+The order of the menu items is based on the order you've defined.
+
+.. code-block:: yaml
+
+  nav_bar:
+    - title: "My Apps"
+      icon: "fas://window-restore"
+      apps:
+        - "sys/Rstudio/*"
+        - "sys/bc_desktop"
+
+.. figure:: /images/def-apps-menu.png
+    :align: center
+    :alt: An open dropdown menu titled "My Apps". The menu shows two submenus. The first is titled "Servers" and has five list items for all the discovered through the "sys/Rstudio/*" configuration. The second submenu is titled "Desktops" and has one list item for the discovered through the "sys/bc_desktop" configuration.
+
+
+Menus based on links
+********************
+
+Menus based on links provide even more granular control on how the dropdown menu is generated.
+
+As seen in the previous sections, using an ``apps`` array will automatically generate
+submenus based on the ``subcategory`` of the applications that have been discovered.
+
+When using links, we can override this behaviour to provide different titles to
+the submenus.
+
+Let's look at this example using the same application tokens, but using ``links`` instead.
+The system will discover and generate list items for the same eight applications.  Only this
+time, because we're using ``links`` and have provided a different ``group``, the submenus
+will have the new titles based on the ``group`` we've defined.
+
 
 .. code-block:: yaml
 
@@ -233,24 +266,7 @@ full control on the menu links, order, and grouping.
 
 .. _applications_based_menu:
 
-Menu based on applications
-**************************
 
-simpler to configure, order is based on the position in the array.
-  Items are automatically grouped based on the applications ``subcategory``. Use the ``apps``
-  array to define the app tokens for this navigation menu.
-
-.. code-block:: yaml
-  
-  nav_bar:
-    - title: "My Apps"
-      icon: "fas://window-restore"
-      apps:
-        - "sys/Rstudio/*"
-        - "sys/bc_desktop"
-
-.. figure:: /images/def-apps-menu.png
-   :align: center
 
 .. _navbar_links_guide:
 
