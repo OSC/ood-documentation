@@ -245,7 +245,9 @@ auto_accounts
     We only have support for Slurm accounts at this time.
 
 auto_qos
-  Coming soon!
+  This will automatically generate a ``select`` widget populated with a list of all the QoS
+  (Quality of Service) values available.  These are cluster aware if you have
+  :ref:`dynamic options <dynamic-bc-apps>` enabled.
 
 .. _`oodcore::job::script#accounting_id`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id
 .. _`oodcore::job::script#queue_name`: http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name
