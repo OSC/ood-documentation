@@ -41,6 +41,8 @@ By default, the system will generate a new dropdown menu for every ``category``
 it encounters.  Within each dropdown menu it will add seperators for each
 ``subcategory`` it encounters.
 
+.. _limit-auto-generated-menu-bars:
+
 Limit auto generated menu bars
 ..............................
 
