@@ -249,7 +249,7 @@
 <span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cluster_users&quot;</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;other_users_of_the_cluster&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;whitelist&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;allowlist&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">custom</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">grafana</span><span class="p">:</span><span class="w"></span>
 <span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://grafana.osc.edu&quot;</span><span class="w"></span>
@@ -350,13 +350,14 @@
 File Access Control lists. This provides the same basic functionality but since permissions
 are being handled in the Linux kernel, is much faster, simpler and frankly, safer.</p>
 </div>
-<p>Access control lists provide a method to limit cluster access by group membership. ACLs are implicitly whitelists but may be set explicitly to either <cite>whitelist</cite> or <cite>blacklist</cite>.</p>
+<p>Access control lists provide a method to limit cluster access by group membership.
+ACLs are implicitly allowlists but may be set explicitly to either <cite>allowlist</cite> or <cite>blocklist</cite>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">acls</span><span class="p">:</span><span class="w"></span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;group&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">groups</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cluster_users&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;other_users_of_the_cluster&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;whitelist&quot;</span><span class="w">  </span><span class="c1"># optional, one of &quot;whitelist&quot; or &quot;blacklist&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;allowlist&quot;</span><span class="w">  </span><span class="c1"># optional, one of &quot;allowlist&quot; or &quot;blocklist&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that to look up group membership ood_core uses the ood_support library which uses <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">-G</span> <span class="pre">USERNAME</span></code>
