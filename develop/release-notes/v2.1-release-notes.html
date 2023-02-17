@@ -137,6 +137,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#significant-changes-to-navbar-configurations">Significant changes to navbar configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-profiles">Support for Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-custom-pages">Support for custom pages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#automatic-form-options">Automatic Form Options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#support-for-remote-files">Support for remote files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#quick-launch-apps">Quick Launch Apps</a></li>
@@ -244,6 +247,9 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></p></li>
 <li><p><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></p></li>
+<li><p><a class="reference internal" href="#significant-changes-to-navbar-configurations">Significant changes to navbar configurations</a></p></li>
+<li><p><a class="reference internal" href="#support-for-profiles">Support for Profiles</a></p></li>
+<li><p><a class="reference internal" href="#support-for-custom-pages">Support for custom pages</a></p></li>
 <li><p><a class="reference internal" href="#automatic-form-options">Automatic Form Options</a></p></li>
 <li><p><a class="reference internal" href="#support-for-remote-files">Support for remote files</a></p></li>
 <li><p><a class="reference internal" href="#quick-launch-apps">Quick Launch Apps</a></p></li>
@@ -297,6 +303,14 @@ It affects initializers you may have written, for example to <a class="reference
   <span class="k">end</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="navconfig-is-deprecated">
+<h4>NavConfig is deprecated<a class="headerlink" href="#navconfig-is-deprecated" title="Permalink to this headline">¶</a></h4>
+<p>The initializers used to modify the navigation bar and the class
+<code class="docutils literal notranslate"><span class="pre">NavConfig</span></code> is deprecated.  The 2.x series will continue to support
+this, but sites should use the <code class="docutils literal notranslate"><span class="pre">nav_categories</span></code> property instead.</p>
+<p>See <a class="reference internal" href="../customizations.html#limit-auto-generated-menu-bars"><span class="std std-ref">Limit auto generated menu bars</span></a> and the
+<a class="reference internal" href="../reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a> for more details.</p>
 </div>
 </div>
 <div class="section" id="upgrade-directions">
@@ -396,6 +410,33 @@ If you wish to go back to Dex being directly accessed set the following in <code
 </div>
 </div></blockquote>
 </div>
+<div class="section" id="significant-changes-to-navbar-configurations">
+<h3>Significant changes to navbar configurations<a class="headerlink" href="#significant-changes-to-navbar-configurations" title="Permalink to this headline">¶</a></h3>
+<p>Significant changes have been made to allow for very granular
+modification of the navigation bar. At a high level sites can
+now modify any aspect of the navigation bar.</p>
+<p>See <a class="reference internal" href="../customizations.html#navbar-guide"><span class="std std-ref">Changing the Navigation bar</span></a> and the subsequent sections for more
+details.</p>
+</div>
+<div class="section" id="support-for-profiles">
+<h3>Support for Profiles<a class="headerlink" href="#support-for-profiles" title="Permalink to this headline">¶</a></h3>
+<p>2.1 addes support for profiles.  Profiles are basically distinct
+sets of configurations. For example you may have one profile that
+only shows applications for the <code class="docutils literal notranslate"><span class="pre">biology</span></code> category and nothing
+else. You may have another profile that shows all applications.
+Users can then toggle between the two different profiles to have
+two different views into the same Open OnDemand installation.</p>
+<p>See <a class="reference internal" href="../customizations.html#profiles-guide"><span class="std std-ref">Configuration Profiles</span></a> for more details.</p>
+</div>
+<div class="section" id="support-for-custom-pages">
+<h3>Support for custom pages<a class="headerlink" href="#support-for-custom-pages" title="Permalink to this headline">¶</a></h3>
+<p>2.0 allowed sites to modify the layout of the dashboard’s
+landing page.</p>
+<p>2.1 extends this by allowing sites to create brand new pages
+in which sites can modify the layout in the same manner you
+modify the layout of the landing page.</p>
+<p>See <a class="reference internal" href="../customizations.html#custom-pages-guide"><span class="std std-ref">Custom Pages</span></a> for more information.</p>
+</div>
 <div class="section" id="automatic-form-options">
 <h3>Automatic Form Options<a class="headerlink" href="#automatic-form-options" title="Permalink to this headline">¶</a></h3>
 <p>2.1 ships with some <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> options that populate forms automatically. This includes
@@ -454,7 +495,7 @@ to them through the landing page without having to navigate anywhere else.</p>
 <div class="section" id="submitting-help-tickets">
 <h3>Submitting Help tickets<a class="headerlink" href="#submitting-help-tickets" title="Permalink to this headline">¶</a></h3>
 <p>Sites can enable submitting help tickets from interactive cards.</p>
-<p>see <a class="reference internal" href="../customizations.html#support-ticket-guide"><span class="std std-ref">Support Tickets</span></a> for more information on how this
+<p>See <a class="reference internal" href="../customizations.html#support-ticket-guide"><span class="std std-ref">Support Tickets</span></a> for more information on how this
 behaves and how to enable it.</p>
 </div>
 <div class="section" id="dependency-updates">
