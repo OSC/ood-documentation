@@ -398,6 +398,22 @@ access into any compute node in our three clusters.
   # /etc/ood/config/apps/shell/env
   OOD_SSHHOST_ALLOWLIST="r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu"
 
+Set OOD SSH Port
+-----------------
+
+As of version 2.1 you are allowed to configure a non-standard ssh port.  
+
+To change the ssh port for submitting jobs in OOD, you need to add the configuration
+``OOD_SSH_PORT`` to the ``/etc/ood/config/apps/dashboard/env`` file.
+
+Here's an example of of this configuration.
+
+.. code:: shell
+
+  # /etc/ood/config/apps/dashboard/env
+  OOD_SSH_PORT="2222"
+
+
 Shell App SSH Command Wrapper
 -----------------------------
 
