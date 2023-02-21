@@ -146,6 +146,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#block-or-allow-directory-access">Block or Allow Directory Access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-ssh-allowlist">Set SSH Allowlist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-ood-ssh-port">Set OOD SSH Port</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shell-app-ssh-command-wrapper">Shell App SSH Command Wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fix-unauthorized-websocket-connection-in-shell-app">Fix Unauthorized WebSocket Connection in Shell App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-job-composer-templates">Custom Job Composer Templates</a><ul>
@@ -1084,6 +1085,17 @@ what hosts users will be allowed to connect to in the shell application.</p>
 access into any compute node in our three clusters.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
 <span class="nv">OOD_SSHHOST_ALLOWLIST</span><span class="o">=</span><span class="s2">&quot;r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-ood-ssh-port">
+<h2>Set OOD SSH Port<a class="headerlink" href="#set-ood-ssh-port" title="Permalink to this headline">¶</a></h2>
+<p>As of version 2.1 you are allowed to configure a non-standard ssh port.</p>
+<p>To change the ssh port for submitting jobs in OOD, you need to add the configuration
+<code class="docutils literal notranslate"><span class="pre">OOD_SSH_PORT</span></code> to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file.</p>
+<p>Here’s an example of of this configuration.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
+<span class="nv">OOD_SSH_PORT</span><span class="o">=</span><span class="s2">&quot;2222&quot;</span>
 </pre></div>
 </div>
 </div>
