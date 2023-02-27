@@ -381,6 +381,28 @@ Configuration Properties with profile support
 
       public_url: "/public/resources"
 
+.. describe:: announcement_path (Array<String>, ['/etc/ood/config/announcement.md', '/etc/ood/config/announcement.yml', '/etc/ood/config/announcements.d'])
+
+  The file or directory path to load announcement messages from.
+
+  Default
+    The default files are: ``/etc/ood/config/announcement.md``, ``/etc/ood/config/announcement.yml``, and ``/etc/ood/config/announcements.d``
+
+    .. code-block:: yaml
+
+      announcement_path:
+        - "/etc/ood/config/announcement.md"
+        - "/etc/ood/config/announcement.yml"
+        - "/etc/ood/config/announcements.d"
+
+
+  Example
+    Use ``/etc/ood/config/announcement.team1.d/`` as the path to load announcements.
+
+    .. code-block:: yaml
+
+      announcement_path: "/etc/ood/config/announcement.team1.d/"
+
 .. _nav_categories:
 .. describe:: nav_categories (Array<String>, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])
 
