@@ -54,6 +54,8 @@ Because the announcement is rendered via ERB you can do some interesting things,
 
 .. note:: Warnings about the announcement file being missing may be present in users' nginx logs. Despite the warning the Dashboard will still function normally without those files being present.
 
+   The file path for the announcement message can be customize using configuration properties, see :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
+
 .. _motd_customization:
 
 Message of the Day (MOTD)
@@ -90,7 +92,7 @@ You can customize the logo, favicon, title, and navbar colors of OnDemand.
    :align: center
 
 
-We recommend setting these values using the :ref:`OnDemand configuration properties <ondemand-d-ymls>`.
+We recommend setting these values using the `:ref:`OnDemand configuration properties <ondemand-d-ymls>`.`
 Currently only the dashboard uses the colors in the navbar.
 
 .. list-table:: Branding
