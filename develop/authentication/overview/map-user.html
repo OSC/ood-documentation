@@ -278,16 +278,18 @@ configuration and be sure to make this mapping script executable.</p>
 </div>
 <p>Let’s take a simple example.  It uses bash’s builtin regular expression matching
 against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an osc dot edu email address.  If that matches against
-<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>), then we return an all lowercase version of the first part
-of an email address.</p>
-<p>The contract this script has with ood is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is passed into it
-as the first arguement, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.  The script will return 0 and output the match if
-it can correctly map the user. Otherwise, if it fails, it will output nothing and
-exit 1.</p>
+<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) after it’s url-decoded, then we return an all lowercase
+version of the first part of an email address.</p>
+<p>The contract this script has with ood is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is url-encoded and
+passed into it as the first arguement, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.</p>
+<p>The script will return 0 and output the match if it can correctly map the user.
+Otherwise, if it fails, it will output nothing and exit 1.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
+<span class="k">function</span> urldecode<span class="o">()</span> <span class="o">{</span> : <span class="s2">&quot;</span><span class="si">${</span><span class="p">*//+/ </span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="nb">echo</span> -e <span class="s2">&quot;</span><span class="si">${</span><span class="nv">_</span><span class="p">//%/</span><span class="se">\\</span><span class="nv">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="o">}</span>
+
 <span class="nv">REX</span><span class="o">=</span><span class="s2">&quot;([^@]+)@osc.edu&quot;</span>
-<span class="nv">INPUT_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">INPUT_USER</span><span class="o">=</span><span class="k">$(</span>urldecode <span class="nv">$1</span><span class="k">)</span>
 
 <span class="k">if</span> <span class="o">[[</span> <span class="nv">$INPUT_USER</span> <span class="o">=</span>~ <span class="nv">$REX</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
   <span class="nv">MATCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_REMATCH</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span>
