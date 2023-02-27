@@ -70,20 +70,23 @@ configuration and be sure to make this mapping script executable.
 
 Let's take a simple example.  It uses bash's builtin regular expression matching
 against ``([^@]+)@osc.edu`` - an osc dot edu email address.  If that matches against 
-``$1`` (the ``REMOTE_USER``), then we return an all lowercase version of the first part
-of an email address.
+``$1`` (the ``REMOTE_USER``) after it's url-decoded, then we return an all lowercase
+version of the first part of an email address.
 
-The contract this script has with ood is that ``REMOTE_USER`` is passed into it
-as the first arguement, ``$1``.  The script will return 0 and output the match if
-it can correctly map the user. Otherwise, if it fails, it will output nothing and
-exit 1.
+The contract this script has with ood is that ``REMOTE_USER`` is url-encoded and
+passed into it as the first arguement, ``$1``.
+
+The script will return 0 and output the match if it can correctly map the user.
+Otherwise, if it fails, it will output nothing and exit 1.
 
 .. code-block:: sh
 
   #!/bin/bash
 
+  function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
+
   REX="([^@]+)@osc.edu"
-  INPUT_USER="$1"
+  INPUT_USER=$(urldecode $1)
 
   if [[ $INPUT_USER =~ $REX ]]; then
     MATCH="${BASH_REMATCH[1]}"
@@ -95,6 +98,7 @@ exit 1.
     # and exit 1
     exit 1
   fi
+
 
 If I were to run and test this script - it would return values like these:
 
