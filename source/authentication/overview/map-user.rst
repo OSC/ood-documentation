@@ -106,9 +106,9 @@ If I were to run and test this script - it would return values like these:
 
   $ /opt/site/custom_mapping.sh 'Annie.Oakley%40osc.edu'
   annie.oakley
-  $ /opt/site/custom_mapping.sh jessie%40osc.edu
+  $ /opt/site/custom_mapping.sh 'jessie%40osc.edu'
   jessie
-  $ /opt/site/custom_mapping.sh jessie.owens%40harvard.edu
+  $ /opt/site/custom_mapping.sh 'jessie.owens%40harvard.edu'
   $ echo $?
   $ 1
   $ journalctl -t ood-mapping
