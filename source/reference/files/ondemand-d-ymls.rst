@@ -344,6 +344,17 @@ Configuration Properties with profile support
   Example
     See the  :ref:`custom pages documentation <custom_pages_guide>`
 
+.. describe:: support_ticket (Object, {})
+
+  Configuration settings to enable and configure the support ticket feature.
+
+  See the :ref:`documentation on Support Ticket <support_ticket_guide>` for details and examples.
+
+  Default
+    Empty object, support ticket feature is disabled.
+  Example
+    See the  :ref:`Support Ticket documentation <support_ticket_guide>`
+
 .. describe:: navbar_type (String, 'dark')
   
   The navbar theme type. There are 2 themes, ``light`` and ``dark``.
@@ -638,17 +649,6 @@ Configuration Properties
     .. code-block:: yaml
 
       facl_domain: "osc.edu"
-
-.. describe:: support_ticket (Object, {})
-
-  Configuration settings to enable and configure the support ticket feature.
-
-  See the :ref:`documentation on Support Ticket <support_ticket_guide>` for details and examples.
-
-  Default
-    Empty object, support ticket feature is disabled.
-  Example
-    See the  :ref:`Support Ticket documentation <support_ticket_guide>`
 
 .. _auto_groups_filter:
 .. describe:: auto_groups_filter (String, null)

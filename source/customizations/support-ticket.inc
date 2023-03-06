@@ -34,7 +34,7 @@ Configuration
 
 These are the most common configuration properties needed to enable and setup the support ticket feature:
 
-* ``description``: Text to customize the support ticket header. It supports HTML.
+* ``description``: Text to customize the support ticket header.
 * ``from``: The email address to set the email from field when sending the email. It defaults to the email field set in the form.
   This is useful to prevent the incoming emails being considered spam.
 * ``to``: The destination email address of your Help Desk. 
@@ -48,12 +48,23 @@ Sample configuration:
   .. code-block:: yaml
 
     support_ticket:
+      # Optional.
+      # Validation configuration for attachments.
+      attachments:
+        # Maximum number of attachments. Defaults to 4
+        max_items: 1
+        # Maximum size for a single attachment in bytes. Defaults to 6MB
+        # Common file sizes:
+        #  2MB = 2097152
+        #  5MB = 5242880
+        #  6MB = 6291456
+        #  10MB = 10485760
+        max_size: 2097152
+      # Optional.
+      # Text added to the page under the support ticket header
+      description: |
+        My optional description Text for the support ticket feture
       email:
-        # Optional.
-        # Text/HTML added to the page under the support ticket header
-        description: |
-          <strong>My Description Text</strong><br />
-          This is a description text for the frontend with HTML support
         # Optional.
         # To set the email from field. Defaults to the email set in the form.
         from: "config@example.com" 
