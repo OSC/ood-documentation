@@ -1896,7 +1896,7 @@ session to the body of the email to help troubleshoot the issue.</p>
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
 <p>These are the most common configuration properties needed to enable and setup the support ticket feature:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Text to customize the support ticket header. It supports HTML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Text to customize the support ticket header.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: The email address to set the email from field when sending the email. It defaults to the email field set in the form.
 This is useful to prevent the incoming emails being considered spam.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: The destination email address of your Help Desk.</p></li>
@@ -1908,12 +1908,23 @@ See example below or the <a class="reference external" href="https://guides.ruby
 <p>Sample configuration:</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Optional.</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Validation configuration for attachments.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">attachments</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Maximum number of attachments. Defaults to 4</span><span class="w"></span>
+<span class="w">    </span><span class="nt">max_items</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Maximum size for a single attachment in bytes. Defaults to 6MB</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Common file sizes:</span><span class="w"></span>
+<span class="w">    </span><span class="c1">#  2MB = 2097152</span><span class="w"></span>
+<span class="w">    </span><span class="c1">#  5MB = 5242880</span><span class="w"></span>
+<span class="w">    </span><span class="c1">#  6MB = 6291456</span><span class="w"></span>
+<span class="w">    </span><span class="c1">#  10MB = 10485760</span><span class="w"></span>
+<span class="w">    </span><span class="nt">max_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2097152</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Optional.</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Text added to the page under the support ticket header</span><span class="w"></span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">    </span><span class="no">My optional description Text for the support ticket feture</span><span class="w"></span>
 <span class="w">  </span><span class="nt">email</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># Optional.</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># Text/HTML added to the page under the support ticket header</span><span class="w"></span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
-<span class="w">      </span><span class="no">&lt;strong&gt;My Description Text&lt;/strong&gt;&lt;br /&gt;</span><span class="w"></span>
-<span class="w">      </span><span class="no">This is a description text for the frontend with HTML support</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># Optional.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># To set the email from field. Defaults to the email set in the form.</span><span class="w"></span>
 <span class="w">    </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config@example.com&quot;</span><span class="w"></span>
