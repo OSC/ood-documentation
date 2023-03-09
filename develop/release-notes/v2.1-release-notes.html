@@ -128,15 +128,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../release-notes.html">Release Notes</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">v2.1 Release Notes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#upgrading-from-v2-0">Upgrading from v2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#administrative-changes">Administrative changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details-of-administrative-changes">Details of administrative changes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#deprecations">Deprecations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentation-changes">Documentation changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details-of-new-features">Details of new features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#el9-and-ubuntu-22-04-packages">EL9 and Ubuntu 22.04 packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#significant-changes-to-navbar-configurations">Significant changes to navbar configurations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#support-for-profiles">Support for Profiles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#support-for-custom-pages">Support for custom pages</a></li>
@@ -149,8 +154,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#running-sessions-widget">Running Sessions widget</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#displaying-form-options">Displaying Form options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#submitting-help-tickets">Submitting Help tickets</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#selinux-changes">SELinux changes</a></li>
 </ul>
 </li>
 </ul>
@@ -243,10 +246,22 @@
 <p class="admonition-title">Warning</p>
 <p>There are some breaking changes in 2.1. See the upgrade directions below for details.</p>
 </div>
-<p>Highlights in 2.1:</p>
+<div class="section" id="administrative-changes">
+<h2>Administrative changes<a class="headerlink" href="#administrative-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages">EL9, Ubuntu 22.04 and Ubuntu 20.04 packages</a></p></li>
+<li><p><a class="reference internal" href="#breaking-changes">Breaking Changes</a></p></li>
+<li><p><a class="reference internal" href="#deprecations">Deprecations</a></p></li>
+<li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
+<li><p><a class="reference internal" href="#selinux-changes">SELinux changes</a></p></li>
 <li><p><a class="reference internal" href="#dex-behind-apache-reverse-proxy-by-default">Dex behind Apache reverse proxy by default</a></p></li>
+<li><p><a class="reference internal" href="#documentation-changes">Documentation changes</a></p></li>
+<li><p><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></p></li>
+</ul>
+</div>
+<div class="section" id="new-features">
+<h2>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#el9-and-ubuntu-22-04-packages">EL9 and Ubuntu 22.04 packages</a></p></li>
 <li><p><a class="reference internal" href="#significant-changes-to-navbar-configurations">Significant changes to navbar configurations</a></p></li>
 <li><p><a class="reference internal" href="#support-for-profiles">Support for Profiles</a></p></li>
 <li><p><a class="reference internal" href="#support-for-custom-pages">Support for custom pages</a></p></li>
@@ -259,16 +274,15 @@
 <li><p><a class="reference internal" href="#running-sessions-widget">Running Sessions widget</a></p></li>
 <li><p><a class="reference internal" href="#displaying-form-options">Displaying form options</a></p></li>
 <li><p><a class="reference internal" href="#submitting-help-tickets">Submitting help tickets</a></p></li>
-<li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
-<li><p><a class="reference internal" href="#selinux-changes">SELinux changes</a></p></li>
 </ul>
-<div class="section" id="upgrading-from-v2-0">
-<h2>Upgrading from v2.0<a class="headerlink" href="#upgrading-from-v2-0" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="details-of-administrative-changes">
+<h2>Details of administrative changes<a class="headerlink" href="#details-of-administrative-changes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="context-json-file-locations-have-changed">
 <h4>context.json file locations have changed<a class="headerlink" href="#context-json-file-locations-have-changed" title="Permalink to this headline">¶</a></h4>
-<p>This is an interal item to Open OnDemand and not likely to really affect you at all.</p>
+<p>This is an internal item to Open OnDemand and not likely to really affect you at all.</p>
 <p>In versions 2.0 and below, batch connect apps wrote a <cite>context.json</cite> file to
 a directory like <code class="docutils literal notranslate"><span class="pre">~/data/sys/dashboard/batch_connect/sys/&lt;APPNAME&gt;/context.json</span></code>.
 OnDemand uses these files to cache the choices a user makes for the next time they
@@ -312,6 +326,63 @@ this, but sites should use the <code class="docutils literal notranslate"><span 
 <p>See <a class="reference internal" href="../customizations.html#limit-auto-generated-menu-bars"><span class="std std-ref">Limit auto generated menu bars</span></a> and the
 <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a> for more details.</p>
 </div>
+</div>
+<div class="section" id="dependency-updates">
+<h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>
+<p>This release updates the following dependencies:</p>
+<ul>
+<li><p>Ruby 3.0</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own <code class="docutils literal notranslate"><span class="pre">bin/ruby</span></code> to use the older version of ruby.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ruby 2.7 is still supported and used by Ubuntu 20.04.</p>
+</div>
+</li>
+<li><p>NodeJS 14</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
+</div>
+</li>
+<li><p>Passenger 6.0.14</p></li>
+<li><p>NGINX 1.20.2</p></li>
+<li><p>ondemand-dex 2.32.0</p></li>
+<li><p>OnDemand package now depends on Python 3 instead of Python 2</p></li>
+</ul>
+</div>
+<div class="section" id="selinux-changes">
+<h3>SELinux changes<a class="headerlink" href="#selinux-changes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> SELinux boolean was removed and replaced with <code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code>
+that is enabled by default.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> SELinux boolean was added and is disabled by default.</p>
+<p>See the <a class="reference internal" href="../installation/modify-system-security.html#ood-selinux"><span class="std std-ref">OnDemand SELinux</span></a> documentation for details</p>
+</div>
+<div class="section" id="dex-behind-apache-reverse-proxy-by-default">
+<h3>Dex behind Apache reverse proxy by default<a class="headerlink" href="#dex-behind-apache-reverse-proxy-by-default" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Dex behind the Apache reverse proxy is a behavior change from OnDemand 2.0 where the reverse proxy configuration was optional.
+This is to improve security as well as allow Apache to provide access logs.
+If you have opened ports for Dex they can be closed as all traffic to Dex will flow through Apache.</p>
+</div>
+</div></blockquote>
+<p>By default Dex now sits behind the Apache reverse proxy.
+If you wish to go back to Dex being directly accessed set the following in <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dex_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="documentation-changes">
+<h3>Documentation changes<a class="headerlink" href="#documentation-changes" title="Permalink to this headline">¶</a></h3>
+<p>As you may have noticed, we have restructured the documentation in an attempt to
+group sections more logically. Please reach out if you have further suggestions on
+improving our documentation in either its content or its organization.</p>
 </div>
 <div class="section" id="upgrade-directions">
 <h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Permalink to this headline">¶</a></h3>
@@ -386,29 +457,13 @@ sudo yum update ondemand
 </ol>
 </div>
 </div>
-<div class="section" id="details">
-<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="el9-ubuntu-22-04-and-ubuntu-20-04-packages">
-<h3>EL9, Ubuntu 22.04 and Ubuntu 20.04 packages<a class="headerlink" href="#el9-ubuntu-22-04-and-ubuntu-20-04-packages" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> for instructions on how to install OnDemand using the new EL9, Ubuntu 22.04 and Ubuntu 20.04 packages.</p>
-</div>
-<div class="section" id="dex-behind-apache-reverse-proxy-by-default">
-<h3>Dex behind Apache reverse proxy by default<a class="headerlink" href="#dex-behind-apache-reverse-proxy-by-default" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Dex behind the Apache reverse proxy is a behavior change from OnDemand 2.0 where the reverse proxy configuration was optional.
-This is to improve security as well as allow Apache to provide access logs.
-If you have opened ports for Dex they can be closed as all traffic to Dex will flow through Apache.</p>
-</div>
-</div></blockquote>
-<p>By default Dex now sits behind the Apache reverse proxy.
-If you wish to go back to Dex being directly accessed set the following in <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>:</p>
-<blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dex_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-</pre></div>
-</div>
-</div></blockquote>
+<div class="section" id="details-of-new-features">
+<h2>Details of new features<a class="headerlink" href="#details-of-new-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="el9-and-ubuntu-22-04-packages">
+<h3>EL9 and Ubuntu 22.04 packages<a class="headerlink" href="#el9-and-ubuntu-22-04-packages" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="../installation/install-software.html#install-software"><span class="std std-ref">Install Software</span></a> for instructions on how
+to install OnDemand using the new EL9 and Ubuntu 22.04 packages. 2.1
+also has support for EL8, EL7 and Ubuntu 20.04.</p>
 </div>
 <div class="section" id="significant-changes-to-navbar-configurations">
 <h3>Significant changes to navbar configurations<a class="headerlink" href="#significant-changes-to-navbar-configurations" title="Permalink to this headline">¶</a></h3>
@@ -497,39 +552,6 @@ to them through the landing page without having to navigate anywhere else.</p>
 <p>Sites can enable submitting help tickets from interactive cards.</p>
 <p>See <a class="reference internal" href="../customizations.html#support-ticket-guide"><span class="std std-ref">Support Tickets</span></a> for more information on how this
 behaves and how to enable it.</p>
-</div>
-<div class="section" id="dependency-updates">
-<h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Permalink to this headline">¶</a></h3>
-<p>This release updates the following dependencies:</p>
-<ul>
-<li><p>Ruby 3.0</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own <code class="docutils literal notranslate"><span class="pre">bin/ruby</span></code> to use the older version of ruby.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ruby 2.7 is still supported and used by Ubuntu 20.04.</p>
-</div>
-</li>
-<li><p>NodeJS 14</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
-</div>
-</li>
-<li><p>Passenger 6.0.14</p></li>
-<li><p>NGINX 1.20.2</p></li>
-<li><p>ondemand-dex 2.32.0</p></li>
-<li><p>OnDemand package now depends on Python 3 instead of Python 2</p></li>
-</ul>
-</div>
-<div class="section" id="selinux-changes">
-<h3>SELinux changes<a class="headerlink" href="#selinux-changes" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> SELinux boolean was removed and replaced with <code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code>
-that is enabled by default.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> SELinux boolean was added and is disabled by default.</p>
-<p>See the <a class="reference internal" href="../installation/modify-system-security.html#ood-selinux"><span class="std std-ref">OnDemand SELinux</span></a> documentation for details</p>
 </div>
 </div>
 </div>

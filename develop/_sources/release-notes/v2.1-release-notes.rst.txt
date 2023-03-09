@@ -8,10 +8,21 @@ v2.1 Release Notes
    There are some breaking changes in 2.1. See the upgrade directions below for details.
 
 
-Highlights in 2.1:
+Administrative changes
+----------------------
 
-- `EL9, Ubuntu 22.04 and Ubuntu 20.04 packages`_
+- `Breaking Changes`_
+- `Deprecations`_
+- `Dependency updates`_
+- `SELinux changes`_
 - `Dex behind Apache reverse proxy by default`_
+- `Documentation changes`_
+- `Upgrade directions`_
+
+New Features
+------------
+
+- `EL9 and Ubuntu 22.04 packages`_
 - `Significant changes to navbar configurations`_
 - `Support for Profiles`_
 - `Support for custom pages`_
@@ -24,11 +35,10 @@ Highlights in 2.1:
 - `Running Sessions widget`_
 - `Displaying form options`_
 - `Submitting help tickets`_
-- `Dependency updates`_
-- `SELinux changes`_
 
-Upgrading from v2.0
--------------------
+
+Details of administrative changes
+---------------------------------
 
 Breaking Changes
 ................
@@ -36,7 +46,7 @@ Breaking Changes
 context.json file locations have changed
 ****************************************
 
-This is an interal item to Open OnDemand and not likely to really affect you at all.
+This is an internal item to Open OnDemand and not likely to really affect you at all.
 
 In versions 2.0 and below, batch connect apps wrote a `context.json` file to
 a directory like ``~/data/sys/dashboard/batch_connect/sys/<APPNAME>/context.json``.
@@ -90,6 +100,58 @@ this, but sites should use the ``nav_categories`` property instead.
 See :ref:`limit-auto-generated-menu-bars` and the
 :ref:`nav_categories configuration property <nav_categories>` for more details.
 
+Dependency updates
+..................
+
+This release updates the following dependencies:
+
+- Ruby 3.0
+
+  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of ruby.
+
+  .. note:: Ruby 2.7 is still supported and used by Ubuntu 20.04.
+
+- NodeJS 14
+
+  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
+
+- Passenger 6.0.14
+- NGINX 1.20.2
+- ondemand-dex 2.32.0
+- OnDemand package now depends on Python 3 instead of Python 2
+
+SELinux changes
+...............
+
+The ``ondemand_use_shell_app`` SELinux boolean was removed and replaced with ``ondemand_use_ssh``
+that is enabled by default.
+
+The ``ondemand_use_kubernetes`` SELinux boolean was added and is disabled by default.
+
+See the :ref:`OnDemand SELinux <ood_selinux>` documentation for details
+
+Dex behind Apache reverse proxy by default
+..........................................
+
+  .. warning::
+
+     Dex behind the Apache reverse proxy is a behavior change from OnDemand 2.0 where the reverse proxy configuration was optional.
+     This is to improve security as well as allow Apache to provide access logs.
+     If you have opened ports for Dex they can be closed as all traffic to Dex will flow through Apache.
+
+By default Dex now sits behind the Apache reverse proxy.
+If you wish to go back to Dex being directly accessed set the following in :file:`/etc/ood/config/ood_portal.yml`:
+
+   .. code-block:: yaml
+
+      dex_uri: false
+
+Documentation changes
+.....................
+
+As you may have noticed, we have restructured the documentation in an attempt to
+group sections more logically. Please reach out if you have further suggestions on
+improving our documentation in either its content or its organization.
 
 Upgrade directions
 ..................
@@ -177,29 +239,16 @@ Upgrade directions
       sudo yum remove rh-nodejs12\* rh-ruby27\*
 
 
-Details
--------
+Details of new features
+-----------------------
 
-EL9, Ubuntu 22.04 and Ubuntu 20.04 packages
-...........................................
+EL9 and Ubuntu 22.04 packages
+.............................
 
-See :ref:`Install Software <install-software>` for instructions on how to install OnDemand using the new EL9, Ubuntu 22.04 and Ubuntu 20.04 packages.
+See :ref:`Install Software <install-software>` for instructions on how
+to install OnDemand using the new EL9 and Ubuntu 22.04 packages. 2.1
+also has support for EL8, EL7 and Ubuntu 20.04.
 
-Dex behind Apache reverse proxy by default
-..........................................
-
-  .. warning::
-
-     Dex behind the Apache reverse proxy is a behavior change from OnDemand 2.0 where the reverse proxy configuration was optional.
-     This is to improve security as well as allow Apache to provide access logs.
-     If you have opened ports for Dex they can be closed as all traffic to Dex will flow through Apache.
-
-By default Dex now sits behind the Apache reverse proxy.
-If you wish to go back to Dex being directly accessed set the following in :file:`/etc/ood/config/ood_portal.yml`:
-
-   .. code-block:: yaml
-
-      dex_uri: false
 
 Significant changes to navbar configurations
 ............................................
@@ -314,32 +363,4 @@ Sites can enable submitting help tickets from interactive cards.
 See :ref:`support_ticket_guide` for more information on how this
 behaves and how to enable it.
 
-Dependency updates
-..................
 
-This release updates the following dependencies:
-
-- Ruby 3.0
-
-  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of ruby.
-
-  .. note:: Ruby 2.7 is still supported and used by Ubuntu 20.04.
-
-- NodeJS 14
-
-  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
-
-- Passenger 6.0.14
-- NGINX 1.20.2
-- ondemand-dex 2.32.0
-- OnDemand package now depends on Python 3 instead of Python 2
-
-SELinux changes
-...............
-
-The ``ondemand_use_shell_app`` SELinux boolean was removed and replaced with ``ondemand_use_ssh``
-that is enabled by default.
-
-The ``ondemand_use_kubernetes`` SELinux boolean was added and is disabled by default.
-
-See the :ref:`OnDemand SELinux <ood_selinux>` documentation for details
