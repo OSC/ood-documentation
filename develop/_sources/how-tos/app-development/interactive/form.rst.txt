@@ -184,7 +184,7 @@ Automatic attributes automatically generate lists or values.  For example
 ``bc_queue`` above will generate a ``text_field`` where the user has to
 input the queue name themselves.
 
-``auto_queue`` on the other hand will automatically build a list of queues
+``auto_queues`` on the other hand will automatically build a list of queues
 for the user to choose from without intervention from the administrator
 or the user.
 
@@ -218,13 +218,11 @@ auto_groups
   groups the user is currently in. Administrators can configure :ref:`filter for autogroups <auto_groups_filter>`
   to limit the groups shown.
 
-auto_queue
+auto_queues
   This will generate a ``select`` widget list of all the queues available to the user.
-
-  By default, we return exactly what the scheduler returns. These accounts may be lowercase
-  when you need uppercase accounts. To enable uppercase accounts set the environment variable
-  ``OOD_UPCASE_ACCOUNTS`` to anything.  If the environment variable is set to *anything* the
-  system will uppercase the accounts (set it to ``yes`` if you don't know what value to give).
+  These queues will be cluster if you have :ref:`dynamic options <dynamic-bc-apps>`
+  enabled. That is, they'll show or hide relevant lists given the currently selected
+  ``cluster``.
 
   .. warning::
     We only have support for Slurm queues (partitions) at this time.
@@ -240,6 +238,11 @@ auto_accounts
   If, however, your site has a simpler accounting scheme where all accounts are available on
   all clusters, you can set the :ref:`bc_simple_auto_accounts <bc_simple_auto_accounts>` setting
   for some optimizations.
+
+  By default, we return exactly what the scheduler returns. These accounts may be lowercase
+  when you need uppercase accounts. To enable uppercase accounts set the environment variable
+  ``OOD_UPCASE_ACCOUNTS`` to anything.  If the environment variable is set to *anything* the
+  system will uppercase the accounts (set it to ``yes`` if you don't know what value to give).
 
   .. warning::
     We only have support for Slurm accounts at this time.
