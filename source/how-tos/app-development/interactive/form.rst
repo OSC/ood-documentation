@@ -184,7 +184,7 @@ Automatic attributes automatically generate lists or values.  For example
 ``bc_queue`` above will generate a ``text_field`` where the user has to
 input the queue name themselves.
 
-``auto_queue`` on the other hand will automatically build a list of queues
+``auto_queues`` on the other hand will automatically build a list of queues
 for the user to choose from without intervention from the administrator
 or the user.
 
@@ -218,7 +218,7 @@ auto_groups
   groups the user is currently in. Administrators can configure :ref:`filter for autogroups <auto_groups_filter>`
   to limit the groups shown.
 
-auto_queue
+auto_queues
   This will generate a ``select`` widget list of all the queues available to the user.
 
   By default, we return exactly what the scheduler returns. These accounts may be lowercase
