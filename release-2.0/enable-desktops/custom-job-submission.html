@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Custom Job Submission &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>4. Custom Job Submission &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Install Other Interactive Apps" href="../install-ihpc-apps.html" />
@@ -218,7 +219,7 @@
         
           <li><a href="../enable-desktops.html">Enable Interactive Desktop</a> &raquo;</li>
         
-      <li>4. Custom Job Submission</li>
+      <li><span class="section-number">4. </span>Custom Job Submission</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -240,7 +241,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="custom-job-submission">
-<span id="enable-desktops-custom-job-submission"></span><h1>4. Custom Job Submission<a class="headerlink" href="#custom-job-submission" title="Permalink to this headline">¶</a></h1>
+<span id="enable-desktops-custom-job-submission"></span><h1><span class="section-number">4. </span>Custom Job Submission<a class="headerlink" href="#custom-job-submission" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="../app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> configuration file describes how
 the batch job should be submitted to your cluster. The location of this file
 <strong>must</strong> be specified in the respective
@@ -249,11 +250,11 @@ file, so that when a user submits the form, the specified submission
 configuration is used when submitting the batch job.</p>
 <p>To customize job submission we will need to first edit our custom desktop app
 <a class="reference internal" href="../app-development/interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a> YAML file as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/my_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster</span><span class="nv"> </span><span class="s">Desktop&quot;</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">submit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;submit/my_submit.yml.erb&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>Notice we included the configuration option <code class="docutils literal notranslate"><span class="pre">submit</span></code> that points to our
@@ -261,15 +262,15 @@ custom <a class="reference internal" href="../app-development/interactive/submit
 can be an absolute file path or a relative file path with respect to the
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/bc_desktop/</span></code> directory.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">*.erb</span></code> file extension will cause the YAML configuration file to be
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*.erb</span></code> file extension will cause the YAML configuration file to be
 processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows
 you to embed Ruby code into the YAML configuration file for flow control,
 variable substitution, and more.</p>
 </div>
 <div class="admonition danger">
-<p class="first admonition-title">Danger</p>
-<p class="last">Do not put the <a class="reference internal" href="../app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> configuration file
+<p class="admonition-title">Danger</p>
+<p>Do not put the <a class="reference internal" href="../app-development/interactive/submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission</span></a> configuration file
 directly underneath <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/apps/bc_desktop</span></code> or it will think
 this an Interactive Desktop app. Instead we typically create the directory
 <code class="file docutils literal notranslate"><span class="pre">submit/</span></code> underneath and put our
@@ -284,37 +285,31 @@ configuration file at:</p>
 <p>Since it has the extension <code class="docutils literal notranslate"><span class="pre">.erb</span></code> we can take advantage of the Ruby language
 to make the configuration file dynamic. In particular, you will now have access
 to the user-submitted form arguments defined as:</p>
-<dl class="docutils">
-<dt>bc_num_hours</dt>
-<dd><p class="first"><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
-<p class="last">A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> containing the number of hours a user requested for the
+<dl>
+<dt>bc_num_hours</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
+<p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> containing the number of hours a user requested for the
 Desktop batch job to run.</p>
 </dd>
-<dt>bc_num_slots</dt>
-<dd><p class="first"><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
-<p class="last">A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> containing either the number of nodes or processors
+<dt>bc_num_slots</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
+<p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> containing either the number of nodes or processors
 (depending on the type of resource manager the cluster uses) a user
 requested.</p>
 </dd>
-<dt>bc_account</dt>
-<dd><p class="first"><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
-<p class="last">A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that holds the account the user supplied to charge the job
+<dt>bc_account</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that holds the account the user supplied to charge the job
 against.</p>
 </dd>
-<dt>bc_queue</dt>
-<dd><p class="first"><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
-<p class="last">A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that holds the queue the user requested for the job to run
+<dt>bc_queue</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that holds the queue the user requested for the job to run
 on.</p>
 </dd>
-<dt>bc_email_on_started</dt>
-<dd><p class="first"><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code></p>
-<p class="last">A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that can either be <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code> (do not send the user an email
+<dt>bc_email_on_started</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code></p>
+<p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that can either be <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code> (do not send the user an email
 when the job starts) or <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code> (send an email to the user when the job
 starts).</p>
 </dd>
-<dt>node_type</dt>
-<dd><p class="first"><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
-<p class="last">A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that can be used for more advanced job submission. This is
+<dt>node_type</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that can be used for more advanced job submission. This is
 an advanced option that is disabled by default and does nothing if you do
 enable it, unless you add it to a custom job submission configuration file.</p>
 </dd>
@@ -326,12 +321,12 @@ in the following sections for the given resource manager.</p>
 <p>For most cases of Slurm you will want to modify how the <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code>
 (number of nodes) is submitted to the batch server.</p>
 <p>This can be handled in your custom job submission configuration file as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;-N&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-N&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal notranslate"><span class="pre">script</span></code> configuration option.
@@ -339,8 +334,8 @@ In particular since there is no option to modify number of nodes, we need to
 directly interact with the <code class="docutils literal notranslate"><span class="pre">native</span></code> command line arguments. This is specified
 as an array of <strong class="command">sbatch</strong> arguments.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
+<p class="admonition-title">Note</p>
+<p>It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
 using the <code class="docutils literal notranslate"><span class="pre">native</span></code> fallback.</p>
 </div>
 </div>
@@ -349,12 +344,12 @@ using the <code class="docutils literal notranslate"><span class="pre">native</s
 <p>For most cases of Torque you will want to modify how the <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code>
 (number of nodes) is submitted to the batch server.</p>
 <p>This can be handled in your custom job submission configuration file as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">nodes</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ppn=28&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">nodes</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ppn=28&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal notranslate"><span class="pre">script</span></code> configuration option.
@@ -363,8 +358,8 @@ directly interact with the <code class="docutils literal notranslate"><span clas
 <p>For more information on the available options for the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute
 when using Torque please see the <a class="reference external" href="http://www.rubydoc.info/gems/pbs/PBS/Batch#submit_script-instance_method">pbs-ruby documentation</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
+<p class="admonition-title">Note</p>
+<p>It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
 using the <code class="docutils literal notranslate"><span class="pre">native</span></code> fallback.</p>
 </div>
 </div>
@@ -374,12 +369,12 @@ using the <code class="docutils literal notranslate"><span class="pre">native</s
 <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> (number of CPUs on a single node) is submitted to the batch
 server.</p>
 <p>This can be handled in your custom job submission configuration file as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-l&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal notranslate"><span class="pre">script</span></code> configuration option.
@@ -390,14 +385,14 @@ specified as an array of <strong class="command">qsub</strong> arguments.</p>
 <strong>nodes</strong>), then we will first need to change the form label of
 <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> that the user sees in the form. This can be done by modifying
 our Desktop app local YAML configuration file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
-</span><span class="l l-Scalar l-Scalar-Plain">submit</span><span class="p p-Indicator">:</span> <span class="s">&quot;submit/my_submit.yml.erb&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Cluster1</span><span class="nv"> </span><span class="s">Desktop&quot;</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cluster1&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="nt">bc_num_slots</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span><span class="w"></span>
+</span><span class="nt">submit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;submit/my_submit.yml.erb&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Now when we go to the Desktop app form in our browser it will have the new
@@ -405,19 +400,19 @@ label “Number of nodes” instead of “Number of CPUs on a single node”.</p
 <p>Next we will need to handle how we submit the <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> since it means
 something different now. So now modify the job submission configuration file as
 such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/my_submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-l&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You can also append <code class="docutils literal notranslate"><span class="pre">mem=...gb</span></code> to the <code class="docutils literal notranslate"><span class="pre">select=...</span></code> statement if you’d
 like.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
+<p class="admonition-title">Note</p>
+<p>It is recommended you use the corresponding <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> before
 using the <code class="docutils literal notranslate"><span class="pre">native</span></code> fallback.</p>
 </div>
 </div>
@@ -427,12 +422,12 @@ using the <code class="docutils literal notranslate"><span class="pre">native</s
 submit.yml.erb. There is no need to specify resources like the other adapters above.</p>
 <p>You can however, use it to override the adapter’s global fields for mount binding and specifying
 which container use.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/linuxhost_submit.yml.erb</span>
- <span class="l l-Scalar l-Scalar-Plain">---</span>
- <span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">singularity_bindpath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/fs,/home</span>
-      <span class="l l-Scalar l-Scalar-Plain">singularity_container</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/local/modules/netbeans/netbeans_2019.sif</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/linuxhost_submit.yml.erb</span><span class="w"></span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">---</span><span class="w"></span>
+<span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">   </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">singularity_bindpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/fs,/home</span><span class="w"></span>
+<span class="w">      </span><span class="nt">singularity_container</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/modules/netbeans/netbeans_2019.sif</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -458,7 +453,7 @@ which container use.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

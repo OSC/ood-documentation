@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Configure Logout &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>3. Configure Logout &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="OpenID Connect" href="../oidc.html" />
@@ -123,6 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nsf-access.html">NSF ACCESS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -224,7 +226,7 @@
         
           <li><a href="../overview.html">Overview</a> &raquo;</li>
         
-      <li>3. Configure Logout</li>
+      <li><span class="section-number">3. </span>Configure Logout</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -246,32 +248,29 @@
            <div itemprop="articleBody">
             
   <div class="section" id="configure-logout">
-<span id="authentication-overview-configure-logout"></span><h1>3. Configure Logout<a class="headerlink" href="#configure-logout" title="Permalink to this headline">¶</a></h1>
+<span id="authentication-overview-configure-logout"></span><h1><span class="section-number">3. </span>Configure Logout<a class="headerlink" href="#configure-logout" title="Permalink to this headline">¶</a></h1>
 <p>The logout link on the dashboard is <code class="docutils literal notranslate"><span class="pre">/logout</span></code>. OnDemand’s Apache config has a separate directive to handle <code class="docutils literal notranslate"><span class="pre">/logout</span></code>, which by default redirects the user to <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard/logout</span></code>, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.</p>
 <p>To change the logout_redirect URL, set <code class="docutils literal notranslate"><span class="pre">logout_redirect:</span> <span class="pre">&quot;https:://URL/TO/LOGOUT/USER&quot;</span></code> in the ood-portal-generator config at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> and regenerate the config.</p>
 <dl class="describe">
 <dt>
-<code class="descname">logout_redirect (String, null)</code></dt>
+<code class="sig-name descname">logout_redirect (String, null)</code></dt>
 <dd><p>the URI the user is redirected to when accessing the logout URI above</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><p class="first">Redirect to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> log out page</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/pun/sys/dashboard/logout&quot;</span>
+<dl>
+<dt>Default</dt><dd><p>Redirect to the <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> log out page</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/pun/sys/dashboard/logout&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Using OpenID Connect Apache module</dt>
-<dd><p class="first">Redirect to the mod_auth_oidc logout location:</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/oidc?logout=https%3A%2F%2Fondemand.my-center.edu&quot;</span>
+<dt>Using OpenID Connect Apache module</dt><dd><p>Redirect to the mod_auth_oidc logout location:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc?logout=https%3A%2F%2Fondemand.my-center.edu&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
-<dt>Using Shibboleth Apache module</dt>
-<dd><p class="first">If the Shibboleth IdP server deployed is at idp.my-center.edu, this is an example redirect with mod_auth_shib:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="s">&quot;/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout&quot;</span>
+<dt>Using Shibboleth Apache module</dt><dd><p>If the Shibboleth IdP server deployed is at idp.my-center.edu, this is an example redirect with mod_auth_shib:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout&quot;</span><span class="w"></span>
 </pre></div>
 </div>
-<p class="last">See <a class="reference internal" href="../shibboleth.html#authentication-shibboleth"><span class="std std-ref">Shibboleth</span></a> for more details regarding setting up authentication with the Shibboleth Apache module.</p>
+<p>See <a class="reference internal" href="../shibboleth.html#authentication-shibboleth"><span class="std std-ref">Shibboleth</span></a> for more details regarding setting up authentication with the Shibboleth Apache module.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -298,7 +297,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

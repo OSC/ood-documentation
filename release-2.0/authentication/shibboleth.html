@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shibboleth &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Shibboleth &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CAS" href="cas.html" />
@@ -118,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsf-access.html">NSF ACCESS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -242,56 +244,56 @@
 <span id="authentication-shibboleth"></span><h1>Shibboleth<a class="headerlink" href="#shibboleth" title="Permalink to this headline">¶</a></h1>
 <p>The following prerequisites need to be satisfied:</p>
 <ul class="simple">
-<li>A Shibboleth IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.my-center.edu</span></code> (outside of
-scope of this document)</li>
-<li>The <a class="reference external" href="https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig">Apache module for Shibboleth</a> installed on the OnDemand Server and
+<li><p>A Shibboleth IdP server deployed, e.g., <code class="docutils literal notranslate"><span class="pre">idp.my-center.edu</span></code> (outside of
+scope of this document)</p></li>
+<li><p>The <a class="reference external" href="https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig">Apache module for Shibboleth</a> installed on the OnDemand Server and
 properly configured with its own Apache config (outside of scope of this
-document)</li>
+document)</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>It is required you turn on <code class="docutils literal notranslate"><span class="pre">ShibCompatValidUser</span></code> in your Apache config
 when setting up the Shibboleth module for Apache above.</p>
-<div class="last highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="c"># /path/to/httpd/conf.d/auth_shib.conf</span>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="c"># /path/to/httpd/conf.d/auth_shib.conf</span><span class="w"></span>
 
-<span class="c">#</span>
-<span class="c"># Turn this on to support &quot;require valid-user&quot; rules from other</span>
-<span class="c"># mod_authn_* modules, and use &quot;require shib-session&quot; for anonymous</span>
-<span class="c"># session-based authorization in mod_shib.</span>
-<span class="c">#</span>
-<span class="nb">ShibCompatValidUser</span> <span class="k">On</span>
+<span class="c">#</span><span class="w"></span>
+<span class="c"># Turn this on to support &quot;require valid-user&quot; rules from other</span><span class="w"></span>
+<span class="c"># mod_authn_* modules, and use &quot;require shib-session&quot; for anonymous</span><span class="w"></span>
+<span class="c"># session-based authorization in mod_shib.</span><span class="w"></span>
+<span class="c">#</span><span class="w"></span>
+<span class="nb">ShibCompatValidUser</span><span class="w"> </span><span class="k">On</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <p>Then you can modify your <strong class="program">ood-portal-generator</strong> configuration file as
 such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
 
-<span class="c1"># Use Shibboleth authentication</span>
-<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">shibboleth&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;ShibRequestSetting</span><span class="nv"> </span><span class="s">requireSession</span><span class="nv"> </span><span class="s">1&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">edit*</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;(^_shibsession_[^;]*(;\\s*)?|;\\s*_shibsession_[^;]*)\&quot;</span><span class="nv"> </span><span class="s">\&quot;\&quot;&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;expr=-z</span><span class="nv"> </span><span class="s">%{req:Cookie}\&quot;&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span>
+<span class="c1"># Use Shibboleth authentication</span><span class="w"></span>
+<span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">shibboleth&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;ShibRequestSetting</span><span class="nv"> </span><span class="s">requireSession</span><span class="nv"> </span><span class="s">1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">edit*</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;(^_shibsession_[^;]*(;\\s*)?|;\\s*_shibsession_[^;]*)\&quot;</span><span class="nv"> </span><span class="s">\&quot;\&quot;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;RequestHeader</span><span class="nv"> </span><span class="s">unset</span><span class="nv"> </span><span class="s">Cookie</span><span class="nv"> </span><span class="s">\&quot;expr=-z</span><span class="nv"> </span><span class="s">%{req:Cookie}\&quot;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span><span class="w"></span>
 
-<span class="c1"># Use Shibboleth logout</span>
-<span class="l l-Scalar l-Scalar-Plain">logout_redirect</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout</span>
+<span class="c1"># Use Shibboleth logout</span><span class="w"></span>
+<span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout</span><span class="w"></span>
 
-<span class="c1"># Capture system user name from authenticated user name</span>
-<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@my-center.edu&#39;&quot;</span>
+<span class="c1"># Capture system user name from authenticated user name</span><span class="w"></span>
+<span class="nt">user_map_cmd</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span><span class="nv"> </span><span class="s">--regex=&#39;^(\\w+)@my-center.edu&#39;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In the example above:</p>
 <ul class="simple">
-<li>The <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> uses regular expressions to map the authenticated user
-<code class="docutils literal notranslate"><span class="pre">bob&#64;my-center.edu</span></code> to their system user name <code class="docutils literal notranslate"><span class="pre">bob</span></code>.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">RequestHeader</span></code> settings are used to strip private session information
-from being sent to the backend web servers.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">logout_redirect</span></code> will first redirect the user to log out of the Open
+<li><p>The <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> uses regular expressions to map the authenticated user
+<code class="docutils literal notranslate"><span class="pre">bob&#64;my-center.edu</span></code> to their system user name <code class="docutils literal notranslate"><span class="pre">bob</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RequestHeader</span></code> settings are used to strip private session information
+from being sent to the backend web servers.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">logout_redirect</span></code> will first redirect the user to log out of the Open
 OnDemand portal followed by redirecting the user to log out of the Shibboleth
-IdP server.</li>
+IdP server.</p></li>
 </ul>
 <p>Remember, in order to apply modifications to the <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>
 you need to generate the new Apache configuration file with:</p>
@@ -320,7 +322,7 @@ you need to generate the new Apache configuration file with:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

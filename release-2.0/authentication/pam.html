@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Add PAM Authentication &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Add PAM Authentication &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,10 +36,11 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Add Cluster Configuration Files" href="../installation/add-cluster-config.html" />
-    <link rel="prev" title="SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon" href="adfs-with-auth-mellon.html" />
+    <link rel="prev" title="NSF ACCESS" href="nsf-access.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -118,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsf-access.html">NSF ACCESS</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -242,17 +244,17 @@
 <span id="authentication-pam"></span><h1>Add PAM Authentication<a class="headerlink" href="#add-pam-authentication" title="Permalink to this headline">¶</a></h1>
 <p>PAM can be used to authenticate users to OnDemand, for example if users only exist in <cite>/etc/passwd</cite> and <cite>/etc/shadow</cite>.</p>
 <ol class="arabic">
-<li><p class="first">Install the Apache PAM module</p>
+<li><p>Install the Apache PAM module</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install mod_authnz_pam
 </pre></div>
 </div>
 </li>
-<li><p class="first"><strong>RHEL/CentOS 7 only</strong> Copy PAM module into SCL Apache’s modules directory</p>
+<li><p><strong>RHEL/CentOS 7 only</strong> Copy PAM module into SCL Apache’s modules directory</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp /usr/lib64/httpd/modules/mod_authnz_pam.so /opt/rh/httpd24/root/usr/lib64/httpd/modules/
 </pre></div>
 </div>
 </li>
-<li><p class="first">Enable the PAM Apache module</p>
+<li><p>Enable the PAM Apache module</p>
 <p>RHEL/CentOS 7:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo <span class="nb">echo</span> <span class="s2">&quot;LoadModule authnz_pam_module modules/mod_authnz_pam.so&quot;</span> &gt; /opt/rh/httpd24/root/etc/httpd/conf.modules.d/55-authnz_pam.conf
 </pre></div>
@@ -262,30 +264,30 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Set the necessary PAM service. For simplicity you can start by copying SSH PAM service</p>
+<li><p>Set the necessary PAM service. For simplicity you can start by copying SSH PAM service</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp /etc/pam.d/sshd /etc/pam.d/ood
 </pre></div>
 </div>
 </li>
-<li><p class="first">Allow the Apache user to read <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code>.</p>
+<li><p>Allow the Apache user to read <code class="docutils literal notranslate"><span class="pre">/etc/shadow</span></code>.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod <span class="m">640</span> /etc/shadow
 sudo chgrp apache /etc/shadow
 </pre></div>
 </div>
 </li>
-<li><p class="first">Update <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> to use PAM authentication</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Basic&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthName</span><span class="nv"> </span><span class="s">&quot;Open</span><span class="nv"> </span><span class="s">OnDemand&quot;&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthBasicProvider</span><span class="nv"> </span><span class="s">PAM&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthPAMService</span><span class="nv"> </span><span class="s">ood&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
-<span class="c1"># Capture system user name from authenticated user name</span>
-<span class="l l-Scalar l-Scalar-Plain">user_map_cmd</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span>
+<li><p>Update <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> to use PAM authentication</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Basic&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;AuthName</span><span class="nv"> </span><span class="s">&quot;Open</span><span class="nv"> </span><span class="s">OnDemand&quot;&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;AuthBasicProvider</span><span class="nv"> </span><span class="s">PAM&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;AuthPAMService</span><span class="nv"> </span><span class="s">ood&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span><span class="w"></span>
+<span class="c1"># Capture system user name from authenticated user name</span><span class="w"></span>
+<span class="nt">user_map_cmd</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ood_auth_map/bin/ood_auth_map.regex&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Apply modifications to the <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code></p>
+<li><p>Apply modifications to the <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 </pre></div>
 </div>
@@ -304,7 +306,7 @@ sudo chgrp apache /etc/shadow
         <a href="../installation/add-cluster-config.html" class="btn btn-neutral float-right" title="Add Cluster Configuration Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="adfs-with-auth-mellon.html" class="btn btn-neutral float-left" title="SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="nsf-access.html" class="btn btn-neutral float-left" title="NSF ACCESS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,7 +315,7 @@ sudo chgrp apache /etc/shadow
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

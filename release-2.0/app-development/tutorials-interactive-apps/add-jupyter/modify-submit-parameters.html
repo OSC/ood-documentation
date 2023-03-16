@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Modify Submit Parameters &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>4. Modify Submit Parameters &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="5. Deploy Jupyter App" href="deploy.html" />
@@ -149,6 +150,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../add-rstudio.html">Add an RStudio App</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-matlab.html">Add a MATLAB App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k8s-jupyter.html">Add a Jupyter App on a Kubernetes Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k8s-like-hpc-jupyter.html">Add a Jupyter App on a Kubernetes Cluster that behaves like HPC compute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-custom-queue.html">Add Custom Queues/Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Interactive Apps</a></li>
 </ul>
@@ -228,7 +231,7 @@
         
           <li><a href="../add-jupyter.html">Add a Jupyter App</a> &raquo;</li>
         
-      <li>4. Modify Submit Parameters</li>
+      <li><span class="section-number">4. </span>Modify Submit Parameters</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -250,7 +253,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="modify-submit-parameters">
-<span id="app-development-tutorials-interactive-apps-add-jupyter-modify-submit-parameters"></span><h1>4. Modify Submit Parameters<a class="headerlink" href="#modify-submit-parameters" title="Permalink to this headline">¶</a></h1>
+<span id="app-development-tutorials-interactive-apps-add-jupyter-modify-submit-parameters"></span><h1><span class="section-number">4. </span>Modify Submit Parameters<a class="headerlink" href="#modify-submit-parameters" title="Permalink to this headline">¶</a></h1>
 <p>In some cases the Jupyter app batch job fails to submit to the given cluster or
 you are not happy with the default chosen submission parameters. This section
 explains how to modify the submission parameters.</p>
@@ -259,26 +262,26 @@ explains how to modify the submission parameters.</p>
 for modifying the underlying batch script that is generated from an internal
 template and its submission parameters.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">.erb</span></code> file extension will cause the YAML configuration file to be
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.erb</span></code> file extension will cause the YAML configuration file to be
 processed using the <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> templating system. This allows
 you to embed Ruby code into the YAML configuration file for flow control,
 variable substitution, and more.</p>
 </div>
 <p>The simplest <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> will look like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Which only describes which internal template to use when generating the batch
 script. From here we can add more options to the batch script, such as:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">set_host</span><span class="p p-Indicator">:</span> <span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$2}&#39;)&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">set_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;host=$(hostname</span><span class="nv"> </span><span class="s">-A</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">awk</span><span class="nv"> </span><span class="s">&#39;{print</span><span class="nv"> </span><span class="s">$2}&#39;)&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>where we override the <strong class="command">bash</strong> script used to determine the host name of
@@ -286,23 +289,23 @@ the compute node from within a running batch job.</p>
 <p>You can learn more about possible <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> options here:</p>
 <p><a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initialize">http://www.rubydoc.info/gems/ood_core/OodCore%2FBatchConnect%2FTemplate:initialize</a></p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>It is recommended any global <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> attributes be defined in the
 corresponding cluster configuration file under:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">clusters</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">my_cluster</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
-<p class="last">There is further discussion on this under
+<p>There is further discussion on this under
 <a class="reference internal" href="../../interactive/setup/modify-cluster-configuration.html#app-development-interactive-setup-modify-cluster-configuration"><span class="std std-ref">Modify Cluster Configuration</span></a>.</p>
 </div>
 <p>But in most cases you will want to change the actual job submission parameters
 (e.g., node type). These are defined under the <code class="docutils literal notranslate"><span class="pre">script</span></code> option as:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">...</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>You can read more about all the available <code class="docutils literal notranslate"><span class="pre">script</span></code> options here:</p>
@@ -310,38 +313,38 @@ corresponding cluster configuration file under:</p>
 <p>Although in most cases you will want to modify the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute, which
 is resource manager dependent. Some examples are given below.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>It is recommended you commit the changes you made to <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> to
 <a class="reference external" href="https://git-scm.com/">git</a>.</p>
-<div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>git commit submit.yml.erb -m <span class="s1">&#39;updated batch job options&#39;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git commit submit.yml.erb -m <span class="s1">&#39;updated batch job options&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="slurm">
 <span id="app-development-tutorials-interactive-apps-add-jupyter-modify-submit-parameters-slurm"></span><h2>Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h2>
 <p>For Slurm, you can choose the features on a requested node with:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-N&quot;</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-C&quot;</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;c12&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-N&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-C&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;c12&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>where we define the <strong class="command">sbatch</strong> parameters as an array under <code class="docutils literal notranslate"><span class="pre">script</span></code>
 and <code class="docutils literal notranslate"><span class="pre">native</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute is an array of command line arguments. So the above
 example is equivalent to appending to <strong class="command">sbatch</strong>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sbatch ... -N &lt;bc_num_slots&gt; -C c12
 </pre></div>
 </div>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
+<p>The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
 returned from web form for “Number of nodes”. We check if it is blank and
 return a valid number (since it wouldn’t make sense to return <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
 </div>
@@ -349,21 +352,21 @@ return a valid number (since it wouldn’t make sense to return <code class="doc
 <div class="section" id="torque">
 <h2>Torque<a class="headerlink" href="#torque" title="Permalink to this headline">¶</a></h2>
 <p>For Torque, you can choose processors-per-node with:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
-</span><span class="hll">      <span class="l l-Scalar l-Scalar-Plain">nodes</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ppn=28&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">nodes</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ppn=28&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>See <a class="reference external" href="http://www.rubydoc.info/gems/pbs/PBS%2FBatch:submit_script">http://www.rubydoc.info/gems/pbs/PBS%2FBatch:submit_script</a> for more
 information on possible values for the <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute.</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
+<p>The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
 returned from web form for “Number of nodes”. We check if it is blank and
 return a valid number (since it wouldn’t make sense to return <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
 </div>
@@ -374,14 +377,14 @@ return a valid number (since it wouldn’t make sense to return <code class="doc
 <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> (number of CPUs on a single node) is submitted to the batch
 server.</p>
 <p>This can be specified as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-l&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;select=1:ncpus=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>where we define the <strong class="command">qsub</strong> parameters as an array under <code class="docutils literal notranslate"><span class="pre">script</span></code> and
@@ -390,22 +393,22 @@ server.</p>
 <strong>nodes</strong>), then we will first need to change the form label of
 <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> that the user sees in the form. This can be done by adding to
 the form configuration file the highlighted lines:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;cluster1&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">attributes</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">modules</span><span class="p p-Indicator">:</span> <span class="s">&quot;python&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">label</span><span class="p p-Indicator">:</span> <span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span>
-</span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">modules</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cluster1&quot;</span><span class="w"></span>
+<span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">modules</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;python&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">extra_jupyter_args</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">bc_num_slots</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">nodes&quot;</span><span class="w"></span>
+</span><span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">modules</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extra_jupyter_args</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Now when we click <em>Launch Jupyter Notebook</em> from the app details view, the form
@@ -414,26 +417,26 @@ CPUs on a single node”.</p>
 <p>Next we will need to handle how we submit the <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> since it means
 something different now. So we modify the job submission configuration file as
 such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-</span><span class="hll">  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;-l&quot;</span>
-</span><span class="hll">    <span class="p p-Indicator">-</span> <span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="hll"><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-l&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;select=&lt;%=</span><span class="nv"> </span><span class="s">bc_num_slots.blank?</span><span class="nv"> </span><span class="s">?</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">bc_num_slots.to_i</span><span class="nv"> </span><span class="s">%&gt;:ncpus=28&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>where we replace <code class="docutils literal notranslate"><span class="pre">ncpus=28</span></code> with the correct number for your cluster. You can
 also append <code class="docutils literal notranslate"><span class="pre">mem=...gb</span></code> to the <code class="docutils literal notranslate"><span class="pre">select=...</span></code> statement if you’d like.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">native</span></code> attribute is an array of command line arguments. So the above
 example is equivalent to appending to <strong class="command">qsub</strong>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>qsub ... -l <span class="k">select</span><span class="o">=</span>&lt;bc_num_slots&gt;:ncpus<span class="o">=</span><span class="m">28</span>
 </pre></div>
 </div>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
+<p>The <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> shown above located within the ERB syntax is the value
 returned from web form for “Number of nodes”. We check if it is blank and
 return a valid number (since it wouldn’t make sense to return <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
 </div>
@@ -467,7 +470,7 @@ example above.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

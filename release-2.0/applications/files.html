@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Files App &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Files App &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="File Editor App" href="editor.html" />
@@ -245,7 +246,7 @@
 <p><a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/files">View on GitHub</a></p>
 <div class="figure align-center" id="id1">
 <img alt="../_images/files-app.png" src="../_images/files-app.png" />
-<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Example of the Files App viewing the contents of a directory.</span></p>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Example of the Files App viewing the contents of a directory.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>This Open OnDemand application provides a web-based file explorer that allows
 the user to remotely interact with the files on the HPC center’s local file
@@ -266,7 +267,7 @@ local file system:</p>
 <p>and can be accessed with the following browser request:</p>
 <dl class="get">
 <dt id="get--pun-sys-files-fs-(path)">
-<code class="descname">GET </code><code class="descname">/pun/sys/files/fs/</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--pun-sys-files-fs-(path)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">/pun/sys/files/fs/</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--pun-sys-files-fs-(path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches the Files App with a view of the directory for the specified
 <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
 <p><strong>Example request</strong>:</p>
@@ -283,25 +284,25 @@ directory.</p>
 <h2>How it Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>Requirements needed for the Files App to work on your local HPC network:</p>
 <ul class="simple">
-<li>OnDemand Server</li>
-<li>Shared File System</li>
+<li><p>OnDemand Server</p></li>
+<li><p>Shared File System</p></li>
 </ul>
 <div class="figure align-center" id="id2">
 <span id="files-diagram"></span><img alt="../_images/files-diagram.png" src="../_images/files-diagram.png" />
-<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Diagram detailing how the Files App interacts with the HPC infrastructure.</span></p>
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Diagram detailing how the Files App interacts with the HPC infrastructure.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p><a class="reference internal" href="#files-diagram"><span class="std std-numref">Fig. 15</span></a> details how the Files App works on a local HPC system.
 The user’s PUN running on the OnDemand Server launches the Node.js Files App
 through <a class="reference external" href="https://www.phusionpassenger.com/">Passenger</a> as the user. The Files App then utilizes the <a class="reference external" href="https://nodejs.org/docs/latest-v0.10.x/api/fs.html">Node.js File
 System</a> core library for interacting with the local and shared file systems.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>For File Uploads, <a class="reference external" href="https://nginx.org/en/">NGINX</a> will buffer the entire file under the following
 path:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ondemand</span><span class="o">-</span><span class="n">nginx</span><span class="o">/</span><span class="n">tmp</span><span class="o">/&lt;</span><span class="n">user</span><span class="o">&gt;/</span><span class="n">client_body</span>
 </pre></div>
 </div>
-<p class="last">before <a class="reference external" href="https://www.phusionpassenger.com/">Passenger</a> and subsequently the Files App can gain access to it. The
+<p>before <a class="reference external" href="https://www.phusionpassenger.com/">Passenger</a> and subsequently the Files App can gain access to it. The
 space allocated for this location is one of the limiting factors on the size
 of file uploads.</p>
 </div>
@@ -328,7 +329,7 @@ of file uploads.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

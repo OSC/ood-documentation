@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Modify System Security &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>2. Modify System Security &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,10 +36,11 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Start Services" href="start-apache.html" />
-    <link rel="prev" title="Finalizing From Source Installation" href="from-source/finalizing.html" />
+    <link rel="next" title="3. Start Services" href="start-apache.html" />
+    <link rel="prev" title="1. Install Software From Package" href="install-software.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -109,17 +110,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From RPM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Modify System Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From Package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Modify System Security</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#selinux">SELinux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#selinux-after-updates">SELinux after Updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#firewall">Firewall</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="start-apache.html">4. Start Services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">5. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">6. Add LDAP Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start-apache.html">3. Start Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">4. Add SSL Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">5. Add LDAP Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
@@ -219,7 +219,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>3. Modify System Security</li>
+      <li><span class="section-number">2. </span>Modify System Security</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -241,48 +241,48 @@
            <div itemprop="articleBody">
             
   <div class="section" id="modify-system-security">
-<span id="id1"></span><h1>3. Modify System Security<a class="headerlink" href="#modify-system-security" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1><span class="section-number">2. </span>Modify System Security<a class="headerlink" href="#modify-system-security" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="selinux">
 <span id="ood-selinux"></span><h2>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">If you plan to use <a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">SELinux</a> on the Open OnDemand host you must install the <cite>ondemand-selinux</cite> package.</p>
+<li><p>If you plan to use <a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">SELinux</a> on the Open OnDemand host you must install the <cite>ondemand-selinux</cite> package.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-selinux
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">OnDemand runs under the <cite>ood_pun_t</cite> context.</p>
+<p class="admonition-title">Note</p>
+<p>OnDemand runs under the <cite>ood_pun_t</cite> context.</p>
 </div>
 </li>
 </ol>
 <p>The OnDemand SELinux package makes several changes to allow OnDemand to run with SELinux enabled.</p>
 <ul class="simple">
-<li>Set contexts of several filesystem paths specific to OnDemand.</li>
-<li>Enable SELinux booleans.</li>
-<li>Apply a custom policy to allow actions to performed by <cite>ood_pun_t</cite> context.</li>
+<li><p>Set contexts of several filesystem paths specific to OnDemand.</p></li>
+<li><p>Enable SELinux booleans.</p></li>
+<li><p>Apply a custom policy to allow actions to performed by <cite>ood_pun_t</cite> context.</p></li>
 </ul>
 <p>The custom SELinux booleans provided by the OnDemand SELinux policy:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_manage_user_home_dir</span></code> (<strong>default=off</strong>): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_manage_vmblock</span></code> (<strong>default=off</strong>): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_nfs</span></code> (<strong>default=on</strong>): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code> (<strong>default=on</strong>): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> (<strong>default=off</strong>): <strong>DEPRECATED</strong> Replaced by <code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_sssd</span></code> (<strong>default=on</strong>): Allows OnDemand to access SSSD</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_slurm</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with SLURM and MUNGE.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_torque</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with Torque.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kubernetes.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_ldap</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with remote LDAP servers. This does not affect Apache LDAP authentication. This is only necessary if the PUN is interacting with LDAP ports.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ondemand_use_kerberos</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kerberos.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_user_home_dir</span></code> (<strong>default=off</strong>): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_vmblock</span></code> (<strong>default=off</strong>): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_nfs</span></code> (<strong>default=on</strong>): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> (<strong>default=off</strong>): <strong>DEPRECATED, see ondemand_use_ssh</strong> Adds necessary rules to allow the OnDemand Shell app to function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code> (<strong>default=on</strong>): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_sssd</span></code> (<strong>default=on</strong>): Allows OnDemand to access SSSD</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_slurm</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with SLURM and MUNGE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_torque</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with Torque.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kubernetes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ldap</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with remote LDAP servers. This does not affect Apache LDAP authentication. This is only necessary if the PUN is interacting with LDAP ports.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_kerberos</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kerberos.</p></li>
 </ul>
 <p>The following SELinux booleans are enabled by the <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> package:</p>
 <ul class="simple">
-<li>httpd_setrlimit</li>
-<li>httpd_mod_auth_pam</li>
-<li>httpd_run_stickshift</li>
-<li>httpd_can_network_connect</li>
-<li>daemons_use_tty</li>
-<li>use_nfs_home_dirs (can be disabled if the OnDemand web node is not using NFS for home directories)</li>
+<li><p>httpd_setrlimit</p></li>
+<li><p>httpd_mod_auth_pam</p></li>
+<li><p>httpd_run_stickshift</p></li>
+<li><p>httpd_can_network_connect</p></li>
+<li><p>daemons_use_tty</p></li>
+<li><p>use_nfs_home_dirs (can be disabled if the OnDemand web node is not using NFS for home directories)</p></li>
 </ul>
 <p>The following example disabled the OnDemand SSH SELinux boolean.</p>
 <blockquote>
@@ -304,11 +304,10 @@
 <div class="section" id="firewall">
 <span id="id2"></span><h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Open ports 80 (http) and 443 (https) in the firewall, typically done with
+<li><p>Open ports 80 (http) and 443 (https) in the firewall, typically done with
 <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_firewalls">firewalld</a> or <a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">iptables</a>.</p>
-<dl class="docutils">
-<dt>Firewalld example:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">80</span>/tcp --permanent
+<dl>
+<dt>Firewalld example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">80</span>/tcp --permanent
 $ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">443</span>/tcp --permanent
 $ sudo firewall-cmd --reload
 </pre></div>
@@ -318,9 +317,8 @@ $ sudo firewall-cmd --reload
 </li>
 </ol>
 <blockquote>
-<div><dl class="docutils">
-<dt>Iptables example:</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">80</span> -j ACCEPT
+<div><dl>
+<dt>Iptables example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">80</span> -j ACCEPT
 $ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">443</span> -j ACCEPT
 $ sudo iptables-save &gt; /etc/sysconfig/iptables
 </pre></div>
@@ -329,8 +327,8 @@ $ sudo iptables-save &gt; /etc/sysconfig/iptables
 </dl>
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If using Dex authentication the port used by Dex must also be opened.
+<p class="admonition-title">Note</p>
+<p>If using Dex authentication the port used by Dex must also be opened.
 See <a class="reference internal" href="../authentication/dex.html#id1"><span class="std std-ref">Dex Firewall</span></a> for details.</p>
 </div>
 </div>
@@ -344,10 +342,10 @@ See <a class="reference internal" href="../authentication/dex.html#id1"><span cl
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="start-apache.html" class="btn btn-neutral float-right" title="4. Start Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="start-apache.html" class="btn btn-neutral float-right" title="3. Start Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="from-source/finalizing.html" class="btn btn-neutral float-left" title="Finalizing From Source Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install-software.html" class="btn btn-neutral float-left" title="1. Install Software From Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -356,7 +354,7 @@ See <a class="reference internal" href="../authentication/dex.html#id1"><span cl
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

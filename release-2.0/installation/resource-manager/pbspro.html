@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configure PBS Professional &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Configure PBS Professional &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Configure Grid Engine" href="sge.html" />
@@ -119,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccq.html">Configure Cloudy Cluster (beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Configure Kuberenetes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
 </ul>
@@ -242,45 +244,44 @@
 <span id="resource-manager-pbspro"></span><h1>Configure PBS Professional<a class="headerlink" href="#configure-pbs-professional" title="Permalink to this headline">¶</a></h1>
 <p>A YAML cluster configuration file for a PBS Professional resource manager on an
 HPC cluster looks like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">v2</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">login</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster.my_center.edu&quot;</span>
-<span class="hll">  <span class="l l-Scalar l-Scalar-Plain">job</span><span class="p p-Indicator">:</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="s">&quot;pbspro&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster-batch.my_center.edu&quot;</span>
-</span><span class="hll">    <span class="l l-Scalar l-Scalar-Plain">exec</span><span class="p p-Indicator">:</span> <span class="s">&quot;/opt/pbs&quot;</span>
-</span><span class="hll">   <span class="c1"># bin_overrides:</span>
-</span><span class="hll">      <span class="c1"># qsub: &quot;/usr/local/bin/qsub&quot;</span>
-</span><span class="hll">      <span class="c1"># qselect: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qstat: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qhold: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qrls: &quot;&quot;</span>
-</span><span class="hll">      <span class="c1"># qdel: &quot;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pbspro&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster-batch.my_center.edu&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/pbs&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">   </span><span class="c1"># bin_overrides:</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qsub: &quot;/usr/local/bin/qsub&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qselect: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qstat: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qhold: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qrls: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="c1"># qdel: &quot;&quot;</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
-<dl class="docutils">
-<dt>adapter</dt>
-<dd>This is set to <code class="docutils literal notranslate"><span class="pre">pbspro</span></code>.</dd>
-<dt>host</dt>
-<dd>The host of the PBS Pro batch server.</dd>
-<dt>exec</dt>
-<dd>The installation path for the PBS Pro executables and libraries on the OnDemand
-host. For default installs from Github RPM releases this value should be <code class="docutils literal notranslate"><span class="pre">/opt/pbs</span></code>.</dd>
-<dt>bin_overrides</dt>
-<dd><p class="first">Replacements/wrappers for PBSPro’s job submission and control clients. <em>Optional</em></p>
+<dl>
+<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">pbspro</span></code>.</p>
+</dd>
+<dt>host</dt><dd><p>The host of the PBS Pro batch server.</p>
+</dd>
+<dt>exec</dt><dd><p>The installation path for the PBS Pro executables and libraries on the OnDemand
+host. For default installs from Github RPM releases this value should be <code class="docutils literal notranslate"><span class="pre">/opt/pbs</span></code>.</p>
+</dd>
+<dt>bin_overrides</dt><dd><p>Replacements/wrappers for PBSPro’s job submission and control clients. <em>Optional</em></p>
 <p>Supports the following clients:</p>
-<ul class="last simple">
-<li><cite>qsub</cite></li>
-<li><cite>qselect</cite></li>
-<li><cite>qstat</cite></li>
-<li><cite>qhold</cite></li>
-<li><cite>qrls</cite></li>
-<li><cite>qdel</cite></li>
+<ul class="simple">
+<li><p><cite>qsub</cite></p></li>
+<li><p><cite>qselect</cite></p></li>
+<li><p><cite>qstat</cite></p></li>
+<li><p><cite>qhold</cite></p></li>
+<li><p><cite>qrls</cite></p></li>
+<li><p><cite>qdel</cite></p></li>
 </ul>
 </dd>
 </dl>
@@ -306,7 +307,7 @@ host. For default installs from Github RPM releases this value should be <code c
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>v1.3 Release Notes &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>v1.3 Release Notes &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="v1.2 Release Notes" href="v1.2-release-notes.html" />
@@ -249,34 +250,34 @@
 <span id="id1"></span><h1>v1.3 Release Notes<a class="headerlink" href="#v1-3-release-notes" title="Permalink to this headline">¶</a></h1>
 <p>Highlights in 1.3:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#rpm-based-installation">RPM based installation</a></li>
-<li><a class="reference internal" href="#store-configuration-under-etc-instead-of-under-app-directories">Store configuration under /etc instead of under app directories</a></li>
-<li><a class="reference internal" href="#config-changes-no-longer-require-app-rebuilds">Config changes no longer require app rebuilds</a></li>
-<li><a class="reference internal" href="#xfce-support-interactive-desktops">Xfce support Interactive Desktops</a></li>
-<li><a class="reference internal" href="#cluster-config-verification-script">Cluster config verification script</a></li>
-<li><a class="reference internal" href="#ignore-apps-if-they-have-a-period-in-directory-name">Ignore apps if they have a period in directory name</a></li>
-<li><a class="reference internal" href="#enable-multiple-dashboard-announcements-with-embedded-html">Enable multiple Dashboard announcements with embedded HTML</a></li>
-<li><a class="reference internal" href="#open-help-links-in-new-window">Open “help” links in new window</a></li>
-<li><a class="reference internal" href="#make-interactive-sessions-link-top-level-item">Make “Interactive Sessions” link top level item</a></li>
-<li><a class="reference internal" href="#better-debugging-of-interactive-apps-by-logging-shell-commands">Better debugging of Interactive Apps by logging shell commands</a></li>
-<li><a class="reference internal" href="#job-composer-optionally-hide-account-field-in-job-options">Job Composer: Optionally hide Account field in Job Options</a></li>
-<li><a class="reference internal" href="#active-jobs-display-list-of-nodes-that-a-job-is-running-on">Active Jobs: display list of nodes that a job is running on</a></li>
+<li><p><a class="reference internal" href="#rpm-based-installation">RPM based installation</a></p></li>
+<li><p><a class="reference internal" href="#store-configuration-under-etc-instead-of-under-app-directories">Store configuration under /etc instead of under app directories</a></p></li>
+<li><p><a class="reference internal" href="#config-changes-no-longer-require-app-rebuilds">Config changes no longer require app rebuilds</a></p></li>
+<li><p><a class="reference internal" href="#xfce-support-interactive-desktops">Xfce support Interactive Desktops</a></p></li>
+<li><p><a class="reference internal" href="#cluster-config-verification-script">Cluster config verification script</a></p></li>
+<li><p><a class="reference internal" href="#ignore-apps-if-they-have-a-period-in-directory-name">Ignore apps if they have a period in directory name</a></p></li>
+<li><p><a class="reference internal" href="#enable-multiple-dashboard-announcements-with-embedded-html">Enable multiple Dashboard announcements with embedded HTML</a></p></li>
+<li><p><a class="reference internal" href="#open-help-links-in-new-window">Open “help” links in new window</a></p></li>
+<li><p><a class="reference internal" href="#make-interactive-sessions-link-top-level-item">Make “Interactive Sessions” link top level item</a></p></li>
+<li><p><a class="reference internal" href="#better-debugging-of-interactive-apps-by-logging-shell-commands">Better debugging of Interactive Apps by logging shell commands</a></p></li>
+<li><p><a class="reference internal" href="#job-composer-optionally-hide-account-field-in-job-options">Job Composer: Optionally hide Account field in Job Options</a></p></li>
+<li><p><a class="reference internal" href="#active-jobs-display-list-of-nodes-that-a-job-is-running-on">Active Jobs: display list of nodes that a job is running on</a></p></li>
 </ul>
 <div class="section" id="upgrading-from-v1-2">
 <h2>Upgrading from v1.2<a class="headerlink" href="#upgrading-from-v1-2" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As always please update the <em>development</em> or <em>test</em> instances of OnDemand
+<p class="admonition-title">Warning</p>
+<p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand
 installed at your center first before you modify the <em>production</em> instance.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The steps outlined below will only need to be done once when upgrading from
+<p class="admonition-title">Note</p>
+<p>The steps outlined below will only need to be done once when upgrading from
 versions &lt;= 1.2 to 1.3. Future updates will be handled through the RPM going
 forward.</p>
 </div>
 <ol class="arabic">
-<li><p class="first">This RPM installation will want to overwrite any local configuration or
+<li><p>This RPM installation will want to overwrite any local configuration or
 modifications you may have made in earlier versions of OnDemand, so we will
 first start by making backups of OnDemand and our apps:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo mv /opt/ood /opt/ood.bak
@@ -284,7 +285,7 @@ sudo mv /var/www/ood/apps/sys /var/www/ood/apps/sys.bak
 </pre></div>
 </div>
 </li>
-<li><p class="first">We have moved all configuration to be located underneath
+<li><p>We have moved all configuration to be located underneath
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config</span></code>. This includes the YAML configuration file used to
 generate the Apache configuration file, the YAML configuration file used to
 generate the per-user NGINX (PUN) configuration files, and any
@@ -296,8 +297,8 @@ results:</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This assumes you were using the <a class="reference internal" href="../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> to generate
+<p class="admonition-title">Warning</p>
+<p>This assumes you were using the <a class="reference internal" href="../reference/commands/ood-portal-generator.html#ood-portal-generator"><span class="std std-ref">ood-portal-generator</span></a> to generate
 the Apache configuration file under
 <code class="file docutils literal notranslate"><span class="pre">/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf</span></code>. If you
 haven’t been doing this before then now is a good time to start. Feel
@@ -375,53 +376,52 @@ free to contact us if you have trouble with this.</p>
 </div></blockquote>
 </div></blockquote>
 <ol class="arabic">
-<li><p class="first">Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
+<li><p>Add Open OnDemand’s repository hosted by the <a class="reference external" href="https://www.osc.edu/">Ohio Supercomputer Center</a>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install https://yum.osc.edu/ondemand/1.3/ondemand-release-web-1.3-1.el7.noarch.rpm
 </pre></div>
 </div>
 </li>
-<li><p class="first">Install OnDemand and all of its dependencies:</p>
+<li><p>Install OnDemand and all of its dependencies:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand
 </pre></div>
 </div>
 </li>
-<li><p class="first">Copy back any custom apps (e.g., Jupyter, RStudio, …) you installed
+<li><p>Copy back any custom apps (e.g., Jupyter, RStudio, …) you installed
 previously from our backup directory:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
 </pre></div>
 </div>
 </li>
-<li><p class="first">The installation will install all software and web apps. It will also
+<li><p>The installation will install all software and web apps. It will also
 generate a new Apache configuration file and restart Apache. So if all went
 well you should be able to access the OnDemand portal in your browser
-successfully.</p>
-</li>
+successfully.</p></li>
 </ol>
 </div>
 <div class="section" id="infrastructure-version-changes">
 <h2>Infrastructure Version Changes<a class="headerlink" href="#infrastructure-version-changes" title="Permalink to this headline">¶</a></h2>
-<span id="v1-3-infrastructure-versions"></span><table border="1" class="colwidths-auto docutils" id="id2">
+<span id="v1-3-infrastructure-versions"></span><table class="colwidths-auto docutils align-default" id="id2">
 <caption><span class="caption-number">Table 15 </span><span class="caption-text">Infrastructure Component Versions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">Component</th>
-<th class="head">Version</th>
+<thead>
+<tr class="row-odd"><th class="head stub"><p>Component</p></th>
+<th class="head"><p>Version</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-portal-generator">ood-portal-generator</a></th>
-<td>0.4.0 → <a class="reference external" href="https://github.com/OSC/ood-portal-generator/blob/v0.7.1/CHANGELOG.md">0.7.1</a>
-(<a class="reference external" href="https://github.com/OSC/ood-portal-generator/compare/v0.4.0...v0.7.1">diff</a>)</td>
+<tbody>
+<tr class="row-even"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-portal-generator">ood-portal-generator</a></p></th>
+<td><p>0.4.0 → <a class="reference external" href="https://github.com/OSC/ood-portal-generator/blob/v0.7.1/CHANGELOG.md">0.7.1</a>
+(<a class="reference external" href="https://github.com/OSC/ood-portal-generator/compare/v0.4.0...v0.7.1">diff</a>)</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/mod_ood_proxy">mod_ood_proxy</a></th>
-<td>0.3.1 → <a class="reference external" href="https://github.com/OSC/mod_ood_proxy/blob/v0.5.0/CHANGELOG.md">0.5.0</a>
-(<a class="reference external" href="https://github.com/OSC/mod_ood_proxy/compare/v0.3.1...v0.5.0">diff</a>)</td>
+<tr class="row-odd"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/mod_ood_proxy">mod_ood_proxy</a></p></th>
+<td><p>0.3.1 → <a class="reference external" href="https://github.com/OSC/mod_ood_proxy/blob/v0.5.0/CHANGELOG.md">0.5.0</a>
+(<a class="reference external" href="https://github.com/OSC/mod_ood_proxy/compare/v0.3.1...v0.5.0">diff</a>)</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood_auth_map">ood_auth_map</a></th>
-<td><a class="reference external" href="https://github.com/OSC/ood_auth_map/blob/v0.0.3/CHANGELOG.md">0.0.3</a></td>
+<tr class="row-even"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood_auth_map">ood_auth_map</a></p></th>
+<td><p><a class="reference external" href="https://github.com/OSC/ood_auth_map/blob/v0.0.3/CHANGELOG.md">0.0.3</a></p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/nginx_stage">nginx_stage</a></th>
-<td>0.3.0 → <a class="reference external" href="https://github.com/OSC/nginx_stage/blob/v0.5.0/CHANGELOG.md">0.5.0</a>
-(<a class="reference external" href="https://github.com/OSC/nginx_stage/compare/v0.3.0...v0.5.0">diff</a>)</td>
+<tr class="row-odd"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/nginx_stage">nginx_stage</a></p></th>
+<td><p>0.3.0 → <a class="reference external" href="https://github.com/OSC/nginx_stage/blob/v0.5.0/CHANGELOG.md">0.5.0</a>
+(<a class="reference external" href="https://github.com/OSC/nginx_stage/compare/v0.3.0...v0.5.0">diff</a>)</p></td>
 </tr>
 </tbody>
 </table>
@@ -431,41 +431,41 @@ infrastructure for this release.</p>
 </div>
 <div class="section" id="application-version-changes">
 <h2>Application Version Changes<a class="headerlink" href="#application-version-changes" title="Permalink to this headline">¶</a></h2>
-<span id="v1-3-app-versions"></span><table border="1" class="colwidths-auto docutils" id="id3">
+<span id="v1-3-app-versions"></span><table class="colwidths-auto docutils align-default" id="id3">
 <caption><span class="caption-number">Table 16 </span><span class="caption-text">Application Versions</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">App</th>
-<th class="head">Version</th>
+<thead>
+<tr class="row-odd"><th class="head stub"><p>App</p></th>
+<th class="head"><p>Version</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-dashboard">Dashboard App</a></th>
-<td>1.18.0 → <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.26.2/CHANGELOG.md">1.26.2</a>
-(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.18.0...v1.26.2">diff</a>)</td>
+<tbody>
+<tr class="row-even"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-dashboard">Dashboard App</a></p></th>
+<td><p>1.18.0 → <a class="reference external" href="https://github.com/OSC/ood-dashboard/blob/v1.26.2/CHANGELOG.md">1.26.2</a>
+(<a class="reference external" href="https://github.com/OSC/ood-dashboard/compare/v1.18.0...v1.26.2">diff</a>)</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-shell">Shell App</a></th>
-<td>1.2.4 → <a class="reference external" href="https://github.com/OSC/ood-shell/blob/v1.3.1/CHANGELOG.md">1.3.1</a>
-(<a class="reference external" href="https://github.com/OSC/ood-shell/compare/v1.2.4...v1.3.1">diff</a>)</td>
+<tr class="row-odd"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-shell">Shell App</a></p></th>
+<td><p>1.2.4 → <a class="reference external" href="https://github.com/OSC/ood-shell/blob/v1.3.1/CHANGELOG.md">1.3.1</a>
+(<a class="reference external" href="https://github.com/OSC/ood-shell/compare/v1.2.4...v1.3.1">diff</a>)</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-fileexplorer">Files App</a></th>
-<td>1.3.6 → <a class="reference external" href="https://github.com/OSC/ood-fileexplorer/blob/v1.4.1/CHANGELOG.md">1.4.1</a>
-(<a class="reference external" href="https://github.com/OSC/ood-fileexplorer/compare/v1.3.6...v1.4.1">diff</a>)</td>
+<tr class="row-even"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-fileexplorer">Files App</a></p></th>
+<td><p>1.3.6 → <a class="reference external" href="https://github.com/OSC/ood-fileexplorer/blob/v1.4.1/CHANGELOG.md">1.4.1</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileexplorer/compare/v1.3.6...v1.4.1">diff</a>)</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-fileeditor">File Editor App</a></th>
-<td>1.3.1 → <a class="reference external" href="https://github.com/OSC/ood-fileeditor/blob/v1.3.3/CHANGELOG.md">1.3.3</a>
-(<a class="reference external" href="https://github.com/OSC/ood-fileeditor/compare/v1.3.1...v1.3.3">diff</a>)</td>
+<tr class="row-odd"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-fileeditor">File Editor App</a></p></th>
+<td><p>1.3.1 → <a class="reference external" href="https://github.com/OSC/ood-fileeditor/blob/v1.3.3/CHANGELOG.md">1.3.3</a>
+(<a class="reference external" href="https://github.com/OSC/ood-fileeditor/compare/v1.3.1...v1.3.3">diff</a>)</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-activejobs">Active Jobs App</a></th>
-<td>1.5.2 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.6.2/CHANGELOG.md">1.6.2</a>
-(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.5.2...v1.6.2">diff</a>)</td>
+<tr class="row-even"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-activejobs">Active Jobs App</a></p></th>
+<td><p>1.5.2 → <a class="reference external" href="https://github.com/OSC/ood-activejobs/blob/v1.6.2/CHANGELOG.md">1.6.2</a>
+(<a class="reference external" href="https://github.com/OSC/ood-activejobs/compare/v1.5.2...v1.6.2">diff</a>)</p></td>
 </tr>
-<tr class="row-odd"><th class="stub"><a class="reference external" href="https://github.com/OSC/ood-myjobs">Job Composer App</a></th>
-<td>2.6.1 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.8.3/CHANGELOG.md">2.8.3</a>
-(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.6.1...v2.8.3">diff</a>)</td>
+<tr class="row-odd"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/ood-myjobs">Job Composer App</a></p></th>
+<td><p>2.6.1 → <a class="reference external" href="https://github.com/OSC/ood-myjobs/blob/v2.8.3/CHANGELOG.md">2.8.3</a>
+(<a class="reference external" href="https://github.com/OSC/ood-myjobs/compare/v2.6.1...v2.8.3">diff</a>)</p></td>
 </tr>
-<tr class="row-even"><th class="stub"><a class="reference external" href="https://github.com/OSC/bc_desktop">Desktops App</a></th>
-<td>0.1.2 → <a class="reference external" href="https://github.com/OSC/bc_desktop/blob/v0.2.0/CHANGELOG.md">0.2.0</a>
-(<a class="reference external" href="https://github.com/OSC/bc_desktop/compare/v0.1.2...v0.2.0">diff</a>)</td>
+<tr class="row-even"><th class="stub"><p><a class="reference external" href="https://github.com/OSC/bc_desktop">Desktops App</a></p></th>
+<td><p>0.1.2 → <a class="reference external" href="https://github.com/OSC/bc_desktop/blob/v0.2.0/CHANGELOG.md">0.2.0</a>
+(<a class="reference external" href="https://github.com/OSC/bc_desktop/compare/v0.1.2...v0.2.0">diff</a>)</p></td>
 </tr>
 </tbody>
 </table>
@@ -488,10 +488,10 @@ in specific release version directories, such as
 <p>To enable RPM based installation, two modifications have been made to all
 configuration for OnDemand:</p>
 <ol class="arabic simple">
-<li>All configuration can be moved to files under /etc/ood</li>
-<li>Modifications to configuration only require Passenger app, Per User NINGX,
+<li><p>All configuration can be moved to files under /etc/ood</p></li>
+<li><p>Modifications to configuration only require Passenger app, Per User NINGX,
 or Apache server restart (with the exception of the ood-portal-generater
-config)</li>
+config)</p></li>
 </ol>
 <p>Since all configuration is stored under /etc/ood this directory can be easily
 managed by Puppet or versioned in a git repository.</p>
@@ -528,9 +528,9 @@ directory in the app deployment directory, e.g., <code class="file docutils lite
 <h3>Enable multiple Dashboard announcements with embedded HTML<a class="headerlink" href="#enable-multiple-dashboard-announcements-with-embedded-html" title="Permalink to this headline">¶</a></h3>
 <p>Site-wide dashboard announcement support in OnDemand has been expanded. Orinally we supported a file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.md</span></code> but now a YAML file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.yml</span></code> can be used. A collection of markdown and yaml announcements in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcements.d/</span></code> can be added. The yaml file provides extra benefits:</p>
 <ol class="arabic simple">
-<li>Pre process file using ERB so that ERB tags can provide per-request dynamic modification of the announcement</li>
-<li>Control the color of announcement with <code class="docutils literal notranslate"><span class="pre">:type</span></code> which is the Bootstrap alert name (<code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code>, or <code class="docutils literal notranslate"><span class="pre">danger</span></code>)</li>
-<li>Control whether announcement appears or not by setting <code class="docutils literal notranslate"><span class="pre">:msg</span></code> to a string or <code class="docutils literal notranslate"><span class="pre">nil</span></code></li>
+<li><p>Pre process file using ERB so that ERB tags can provide per-request dynamic modification of the announcement</p></li>
+<li><p>Control the color of announcement with <code class="docutils literal notranslate"><span class="pre">:type</span></code> which is the Bootstrap alert name (<code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code>, or <code class="docutils literal notranslate"><span class="pre">danger</span></code>)</p></li>
+<li><p>Control whether announcement appears or not by setting <code class="docutils literal notranslate"><span class="pre">:msg</span></code> to a string or <code class="docutils literal notranslate"><span class="pre">nil</span></code></p></li>
 </ol>
 <p>The ability to use ERB means we can set the msg to nil after a certain time period. For example:</p>
 <div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">type: warning</span>
@@ -607,7 +607,7 @@ running on will display in the details section of the job.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

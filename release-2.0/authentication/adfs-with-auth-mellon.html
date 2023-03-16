@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,9 +36,10 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Add PAM Authentication" href="pam.html" />
+    <link rel="next" title="NSF ACCESS" href="nsf-access.html" />
     <link rel="prev" title="Two Factor Auth using Duo with Keycloak" href="duo-2fa-with-keycloak.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -124,6 +125,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#configure-ood">Configure OOD</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="nsf-access.html">NSF ACCESS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -251,17 +253,16 @@
 <h2>Prepare the Host<a class="headerlink" href="#prepare-the-host" title="Permalink to this headline">¶</a></h2>
 <p>Before beginning, retrieve the following information from the ADFS administrator:</p>
 <ol class="arabic simple">
-<li>The SAML 2.0 service URL (e.g., <a class="reference external" href="https://adfs.organization.com/ADFS/ls">https://adfs.organization.com/ADFS/ls</a>)</li>
-<li>The IdP metadata URL (e.g., <a class="reference external" href="https://adfs.organization.com/ADFS/metadata.xml">https://adfs.organization.com/ADFS/metadata.xml</a>)</li>
-<li>Ensure SSL is properly configured and any organizational certificate authorities are properly integrated into the host’s trust store, see <a class="reference internal" href="../installation/add-ssl.html#add-ssl"><span class="std std-ref">Add SSL Support</span></a></li>
+<li><p>The SAML 2.0 service URL (e.g., <a class="reference external" href="https://adfs.organization.com/ADFS/ls">https://adfs.organization.com/ADFS/ls</a>)</p></li>
+<li><p>The IdP metadata URL (e.g., <a class="reference external" href="https://adfs.organization.com/ADFS/metadata.xml">https://adfs.organization.com/ADFS/metadata.xml</a>)</p></li>
+<li><p>Ensure SSL is properly configured and any organizational certificate authorities are properly integrated into the host’s trust store, see <a class="reference internal" href="../installation/add-ssl.html#add-ssl"><span class="std std-ref">Add SSL Support</span></a></p></li>
 </ol>
 </div>
 <div class="section" id="install-mod-auth-mellon">
 <h2>Install mod_auth_mellon<a class="headerlink" href="#install-mod-auth-mellon" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Ensure Software Collections is enabled on the system</p>
-</li>
-<li><p class="first">Install the mod_auth_mellon module:</p>
+<li><p>Ensure Software Collections is enabled on the system</p></li>
+<li><p>Install the mod_auth_mellon module:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yum install httpd24-mod_auth_mellon httpd24-mod_ssl
 </pre></div>
 </div>
@@ -272,27 +273,27 @@
 <h2>Configure mod_auth_mellon<a class="headerlink" href="#configure-mod-auth-mellon" title="Permalink to this headline">¶</a></h2>
 <p>Note that this configuration assumes that SAML has been configured such that the returned NameID directly maps to a Unix user on the OOD host. For more information, see <a class="reference external" href="https://jdennis.fedorapeople.org/doc/mellon-user-guide/mellon_user_guide.html">https://jdennis.fedorapeople.org/doc/mellon-user-guide/mellon_user_guide.html</a></p>
 <ol class="arabic">
-<li><p class="first">Download the IDP metadata file</p>
+<li><p>Download the IDP metadata file</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /etc/httpd/mellon/
 wget https://adfs.organization.com/ADFS/metadata.xml -O idpmetadata.xml
 </pre></div>
 </div>
 </li>
-<li><p class="first">Generate the mellon metadata</p>
+<li><p>Generate the mellon metadata</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">mellon_endpoint</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">/mellon&quot;</span>
-/usr/libexec/mod_auth_mellon/mellon_create_metadata.sh <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">/metadata&quot;</span>
+/usr/libexec/mod_auth_mellon/mellon_create_metadata.sh <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">/metadata&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">&quot;</span>
 mv *.cert ./mellon.cert
 mv *.key ./mellon.key
 mv *.xml ./mellon_metadata.xml
 </pre></div>
 </div>
 </li>
-<li><p class="first">Create a mellon configuration file</p>
+<li><p>Create a mellon configuration file</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vi /etc/httpd/conf.d/00-mellon.conf
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add the following to the <code class="docutils literal notranslate"><span class="pre">00-mellon.conf</span></code> file</p>
+<li><p>Add the following to the <code class="docutils literal notranslate"><span class="pre">00-mellon.conf</span></code> file</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Location</span> <span class="nt">/&gt;</span>
   MellonSPPrivateKeyFile /etc/httpd/mellon/mellon.key
   MellonSPCertFile /etc/httpd/mellon/mellon.cert
@@ -305,32 +306,31 @@ mv *.xml ./mellon_metadata.xml
 </pre></div>
 </div>
 </li>
-<li><p class="first">Convert the key and cert files into pfx format</p>
+<li><p>Convert the key and cert files into pfx format</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openssl pkcs12 -export -inkey /etc/httpd/mellon/mellon.key -in /etc/httpd/mellon/mellon.cert -out /etc/httpd/mellon/mellon.pfx
 </pre></div>
 </div>
 </li>
-<li><p class="first">Provide the <code class="docutils literal notranslate"><span class="pre">mellon.pfx</span></code> and <code class="docutils literal notranslate"><span class="pre">mellon_metadata.xml</span></code> files to your ADFS administrator. The files can then be imported into the ADFS system.</p>
-</li>
+<li><p>Provide the <code class="docutils literal notranslate"><span class="pre">mellon.pfx</span></code> and <code class="docutils literal notranslate"><span class="pre">mellon_metadata.xml</span></code> files to your ADFS administrator. The files can then be imported into the ADFS system.</p></li>
 </ol>
 </div>
 <div class="section" id="configure-ood">
 <h2>Configure OOD<a class="headerlink" href="#configure-ood" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Edit the <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> file to include the following:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
-<span class="nn">---</span>
-<span class="c1"># ...</span>
-<span class="c1"># Your other custom configuration options...</span>
-<span class="c1"># ...</span>
+<li><p>Edit the <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> file to include the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="c1"># ...</span><span class="w"></span>
+<span class="c1"># Your other custom configuration options...</span><span class="w"></span>
+<span class="c1"># ...</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Mellon&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span>
+<span class="nt">auth</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;AuthType</span><span class="nv"> </span><span class="s">Mellon&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;Require</span><span class="nv"> </span><span class="s">valid-user&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Restart the HTTPD</p>
+<li><p>Restart the HTTPD</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>systemctl restart httpd
 </pre></div>
 </div>
@@ -347,7 +347,7 @@ mv *.xml ./mellon_metadata.xml
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pam.html" class="btn btn-neutral float-right" title="Add PAM Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nsf-access.html" class="btn btn-neutral float-right" title="NSF ACCESS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="duo-2fa-with-keycloak.html" class="btn btn-neutral float-left" title="Two Factor Auth using Duo with Keycloak" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -359,7 +359,7 @@ mv *.xml ./mellon_metadata.xml
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

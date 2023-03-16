@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Install Keycloak &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>1. Install Keycloak &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2. Configure Keycloak" href="configure-keycloak-webui.html" />
@@ -131,6 +132,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nsf-access.html">NSF ACCESS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -232,7 +234,7 @@
         
           <li><a href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a> &raquo;</li>
         
-      <li>1. Install Keycloak</li>
+      <li><span class="section-number">1. </span>Install Keycloak</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -254,25 +256,25 @@
            <div itemprop="articleBody">
             
   <div class="section" id="install-keycloak">
-<span id="authentication-tutorial-oidc-keycloak-rhel7-install-keycloak"></span><h1>1. Install Keycloak<a class="headerlink" href="#install-keycloak" title="Permalink to this headline">¶</a></h1>
+<span id="authentication-tutorial-oidc-keycloak-rhel7-install-keycloak"></span><h1><span class="section-number">1. </span>Install Keycloak<a class="headerlink" href="#install-keycloak" title="Permalink to this headline">¶</a></h1>
 <p>We will install and launch Keycloak server behind Apache.</p>
 <p>Login to the host where you will install Keycloak. In this tutorial, we are
 installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">In production we recommend installing Keycloak on a separate host from OnDemand.</p>
+<p class="admonition-title">Warning</p>
+<p>In production we recommend installing Keycloak on a separate host from OnDemand.</p>
 </div>
 <div class="section" id="initial-installation-steps">
-<h2>1.1. Initial Installation Steps<a class="headerlink" href="#initial-installation-steps" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Initial Installation Steps<a class="headerlink" href="#initial-installation-steps" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Download and unpack Keycloak 9.0.0 (from <a class="reference external" href="https://www.keycloak.org/downloads.html">https://www.keycloak.org/downloads.html</a>)</p>
+<li><p>Download and unpack Keycloak 9.0.0 (from <a class="reference external" href="https://www.keycloak.org/downloads.html">https://www.keycloak.org/downloads.html</a>)</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt
 sudo wget https://downloads.jboss.org/keycloak/9.0.0/keycloak-9.0.0.tar.gz
 sudo tar xzf keycloak-9.0.0.tar.gz
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add keycloak user and change ownership of files</p>
+<li><p>Add keycloak user and change ownership of files</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo groupadd -r keycloak
 sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 </pre></div>
@@ -286,19 +288,19 @@ sudo useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 </pre></div>
 </div>
 </li>
-<li><p class="first">Restrict access to keycloak-9.0.0/standalone, which will contain
+<li><p>Restrict access to keycloak-9.0.0/standalone, which will contain
 sensitive data for the Keycloak server</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> keycloak-9.0.0
 sudo -u keycloak chmod <span class="m">700</span> standalone
 </pre></div>
 </div>
 </li>
-<li><p class="first">Install JDK 1.8.0</p>
+<li><p>Install JDK 1.8.0</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install java-1.8.0-openjdk-devel
 </pre></div>
 </div>
 </li>
-<li><p class="first">Added ‘admin’ to ‘/opt/keycloak-9.0.0/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
+<li><p>Added ‘admin’ to ‘/opt/keycloak-9.0.0/standalone/configuration/keycloak-add-user.json’, (re)start server to load user.</p>
 <p>If you are not already there:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/keycloak-9.0.0
 </pre></div>
@@ -310,7 +312,7 @@ sudo -u keycloak ./bin/add-user-keycloak.sh --user admin --password KEYCLOAKPASS
 </div>
 <p><strong>Replace KEYCLOAKPASS with a good password and save password for later use</strong></p>
 </li>
-<li><p class="first">Modify <code class="docutils literal notranslate"><span class="pre">standalone/configuration/standalone.xml</span></code> to enable proxying to Keycloak:</p>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">standalone/configuration/standalone.xml</span></code> to enable proxying to Keycloak:</p>
 <p>Simplest is to run these three commands:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)&#39;</span>
 sudo -u keycloak ./bin/jboss-cli.sh <span class="s1">&#39;embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)&#39;</span>
@@ -354,9 +356,9 @@ out so you can wget the file, edit as appropriate, and run via:</p>
 </ol>
 </div>
 <div class="section" id="start-keycloak-server">
-<h2>1.2. Start Keycloak Server<a class="headerlink" href="#start-keycloak-server" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Start Keycloak Server<a class="headerlink" href="#start-keycloak-server" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Create keycloak.service to start and stop the server:</p>
+<li><p>Create keycloak.service to start and stop the server:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cat &gt; /etc/systemd/system/keycloak.service <span class="s">&lt;&lt;EOF</span>
 
 <span class="s">[Unit]</span>
@@ -395,12 +397,12 @@ sudo systemctl start keycloak
 </ol>
 </div>
 <div class="section" id="place-apache-in-front-of-keycloak">
-<h2>1.3. Place Apache in front of Keycloak<a class="headerlink" href="#place-apache-in-front-of-keycloak" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Place Apache in front of Keycloak<a class="headerlink" href="#place-apache-in-front-of-keycloak" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Define apache config to proxy keycloak requests</p>
+<li><p>Define apache config to proxy keycloak requests</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This is the only step in the tutorial that differs significantly based on
+<p class="admonition-title">Note</p>
+<p>This is the only step in the tutorial that differs significantly based on
 whether you install Keycloak on a separate host from OnDemand or on the
 same host. See below for example differences.</p>
 </div>
@@ -437,8 +439,8 @@ port the Keycloak webserver runs as.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We can use the same host because Keycloak properly scopes all cookies it sets to the
+<p class="admonition-title">Note</p>
+<p>We can use the same host because Keycloak properly scopes all cookies it sets to the
 realm. For example, if I have a realm called “ondemand”, then the Keycloak login
 page will be at <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/protocol/openid-connect/auth</span></code>
 and cookies set during authentication will be set with the path <code class="docutils literal notranslate"><span class="pre">/auth/realms/ondemand</span></code>,
@@ -446,20 +448,19 @@ including <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_
 <code class="docutils literal notranslate"><span class="pre">KEYCLOAK_IDENTITY</span></code>, and <code class="docutils literal notranslate"><span class="pre">KC_RESTART</span></code>.</p>
 </div>
 </li>
-<li><p class="first">Now you should be able to access Keycloak: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code></p>
-</li>
+<li><p>Now you should be able to access Keycloak: <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code></p></li>
 </ol>
 </div>
 <div class="section" id="differences-if-installing-keycloak-on-separate-host">
-<h2>1.4. Differences if installing Keycloak on separate host<a class="headerlink" href="#differences-if-installing-keycloak-on-separate-host" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Differences if installing Keycloak on separate host<a class="headerlink" href="#differences-if-installing-keycloak-on-separate-host" title="Permalink to this headline">¶</a></h2>
 <p>When installing Keycloak on a separate host, the difference between this
 tutorial would be:</p>
 <ol class="arabic simple">
-<li>throughout the rest of the tutorial replace <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> with the keycloak host</li>
-<li>possibly use Apache 2.4 default distribution instead of software collections,
+<li><p>throughout the rest of the tutorial replace <code class="docutils literal notranslate"><span class="pre">https://ondemand-idpdev.hpc.osc.edu</span></code> with the keycloak host</p></li>
+<li><p>possibly use Apache 2.4 default distribution instead of software collections,
 meaning that configuration would be at /etc/httpd/conf.d/ instead of
 /opt/rh/httpd24/root/etc/httpd/conf.d/ and starting the
-service is likely <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd24-httpd</span></code></li>
+service is likely <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd24-httpd</span></code></p></li>
 </ol>
 <p>For example, if Keycloak were installed on a separate host idp.hpc.edu then the
 Apache config might look like:</p>
@@ -512,7 +513,7 @@ Apache config might look like:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

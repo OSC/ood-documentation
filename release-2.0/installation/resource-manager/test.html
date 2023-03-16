@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Test Configuration &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Test Configuration &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Customization Overview" href="../../customization_overview.html" />
@@ -119,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sge.html">Configure Grid Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">Configure LinuxHost Adapter (beta)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccq.html">Configure Cloudy Cluster (beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Configure Kuberenetes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Test Configuration</a></li>
 </ul>
@@ -241,8 +243,8 @@
   <div class="section" id="test-configuration">
 <span id="resource-manager-test"></span><h1>Test Configuration<a class="headerlink" href="#test-configuration" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This is an experimental feature right now that may change drastically in the
+<p class="admonition-title">Warning</p>
+<p>This is an experimental feature right now that may change drastically in the
 future. So always revisit this documentation after upgrading OnDemand and
 attempting to test your cluster configuration.</p>
 </div>
@@ -250,13 +252,13 @@ attempting to test your cluster configuration.</p>
 <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a> for testing your resource manager configuration in the cluster
 configuration files.</p>
 <ol class="arabic">
-<li><p class="first">For all <strong class="command">rake</strong> tasks we will need to be underneath the
+<li><p>For all <strong class="command">rake</strong> tasks we will need to be underneath the
 <a class="reference internal" href="../../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>’s root directory (<em>this will change in the future</em>):</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /var/www/ood/apps/sys/dashboard
 </pre></div>
 </div>
 </li>
-<li><p class="first">We will now list all available tasks that we can run:</p>
+<li><p>We will now list all available tasks that we can run:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scl <span class="nb">enable</span> ondemand -- bin/rake -T test:jobs
 <span class="c1"># rake test:jobs           # Test all clusters</span>
 <span class="c1"># rake test:jobs:cluster1  # Test the cluster: cluster1</span>
@@ -267,7 +269,7 @@ configuration files.</p>
 configuration files that reside under
 <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span><em><span class="pre">*</span></em><span class="pre">.yml</span></code>.</p>
 </li>
-<li><p class="first">For now let us test just a single cluster (in our example we use
+<li><p>For now let us test just a single cluster (in our example we use
 <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>, so you will need to replace it with the name of the cluster
 you configured):</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable ondemand -- bin/rake test:jobs:cluster1 RAILS_ENV=production&#39;</span>
@@ -291,10 +293,10 @@ you configured):</p>
 that doesn’t affect your OnDemand installation in any way. We are currently
 tracking this issue in GitHub at <a class="reference external" href="https://github.com/OSC/ood-dashboard/issues/364">OSC/dashboard#364</a>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<p class="admonition-title">Tip</p>
 <p>We actually launch the <strong class="command">rake</strong> task with <strong class="command">sudo</strong> to best
 mimic the environment that the OnDemand applications are run under.</p>
-<p class="last">You can run the <strong class="command">rake</strong> task as the current user, but it may lead
+<p>You can run the <strong class="command">rake</strong> task as the current user, but it may lead
 to a <em>false positive</em> as your user environment may have the correct
 libraries and paths loaded in it that may not necessarily exist in the
 cleaner OnDemand application environment.</p>
@@ -307,7 +309,7 @@ string. The test passes if it can find the string in the output file.</p>
 require you to make edits to the corresponding cluster configuration file
 under <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span></code> and run the test again.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>If your job fails to submit because you need to supply more submission
 arguments, e.g., a queue, memory requirements, an account, etc. You can
 provide these command line arguments as a string with the environment
@@ -315,7 +317,7 @@ variable <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARG
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo su <span class="nv">$USER</span> -c <span class="s1">&#39;scl enable ondemand-- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS=&quot;-A myaccount&quot;&#39;</span>
 </pre></div>
 </div>
-<p class="last">Note that the <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS=&quot;...&quot;</span></code> is defined at the end of the command.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARGS=&quot;...&quot;</span></code> is defined at the end of the command.</p>
 </div>
 </li>
 </ol>
@@ -341,7 +343,7 @@ variable <code class="docutils literal notranslate"><span class="pre">SUBMIT_ARG
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

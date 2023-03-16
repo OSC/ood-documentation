@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Authentication &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Authentication &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -36,10 +36,11 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Overview" href="authentication/overview.html" />
-    <link rel="prev" title="6. Add LDAP Support" href="installation/add-ldap.html" />
+    <link rel="prev" title="5. Add LDAP Support" href="installation/add-ldap.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -118,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html">NSF ACCESS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/pam.html">Add PAM Authentication</a></li>
 </ul>
 </li>
@@ -245,8 +247,8 @@ with an Open OnDemand installation. Tutorials will also be provided with the
 focus on setting up some of the more common authentication modules (e.g.,
 OpenID Connect with KeyCloak).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you managed to install an Apache authentication module at your center
+<p class="admonition-title">Note</p>
+<p>If you managed to install an Apache authentication module at your center
 that currently does not have a tutorial listed below we would greatly
 appreciate it if you could take the time to contribute a detailed
 walkthrough.</p>
@@ -266,6 +268,7 @@ walkthrough.</p>
 <li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#configuring-ondemand-dex">Configuring OnDemand Dex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#managing-the-ondemand-dex-service">Managing the OnDemand Dex service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#dex-firewall">Dex Firewall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#configuring-ondemand-dex-behind-apache-reverse-proxy">Configuring OnDemand Dex behind Apache reverse proxy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#configuring-ondemand-dex-for-ldap">Configuring OnDemand Dex for LDAP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#customizing-ondemand-dex">Customizing OnDemand Dex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#ondemand-dex-configuration-reference">OnDemand Dex configuration reference</a></li>
@@ -293,6 +296,12 @@ walkthrough.</p>
 <li class="toctree-l2"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html#configure-ood">Configure OOD</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="authentication/nsf-access.html">NSF ACCESS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html#oidc-client-registration">OIDC Client Registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html#shibboleth-and-incommon">Shibboleth and InCommon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html#mapping-users">Mapping Users</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="authentication/pam.html">Add PAM Authentication</a></li>
 </ul>
 </div>
@@ -309,7 +318,7 @@ walkthrough.</p>
         <a href="authentication/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation/add-ldap.html" class="btn btn-neutral float-left" title="6. Add LDAP Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="installation/add-ldap.html" class="btn btn-neutral float-left" title="5. Add LDAP Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -318,7 +327,7 @@ walkthrough.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Creating a Status App &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Creating a Status App &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="v2.0 Release Notes" href="../../release-notes/v2.0-release-notes.html" />
@@ -258,43 +259,44 @@ create a new status app that displays quota information in a table.</p>
 this app looks like:</p>
 <div class="figure align-center" id="id1">
 <img alt="../../_images/app-dev-tutorial-ps-to-quota-1.png" src="../../_images/app-dev-tutorial-ps-to-quota-1.png" />
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">What app looks like after cloning and launching.</span></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">What app looks like after cloning and launching.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>After this tutorial the resulting app will be:</p>
 <div class="figure align-center" id="id2">
 <img alt="../../_images/app-dev-tutorial-ps-to-quota-2.png" src="../../_images/app-dev-tutorial-ps-to-quota-2.png" />
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">What app looks like after modifying in this tutorial.</span></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">What app looks like after modifying in this tutorial.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>This assumes you have followed the directions to <a class="reference internal" href="../enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> on the
 Dashboard.</p>
 <ol class="arabic simple">
-<li>The app uses the custom branded Bootstrap 3 that Job Composer and Active Jobs apps
-use.</li>
-<li>The navbar contains a link back to the dashboard.</li>
-<li>On a request, the app runs a shell command, parses the output, and displays
-the result in a table.</li>
-<li>It is built in Ruby using the <a class="reference external" href="https://github.com/sinatra/sinatra">Sinatra framework</a>, a lightweight web framework
-similar to <a class="reference external" href="https://github.com/pallets/flask">Python’s Flask</a> and <a class="reference external" href="https://github.com/expressjs/express">Node.js’s Express</a></li>
+<li><p>The app uses the custom branded Bootstrap 3 that Job Composer and Active Jobs apps
+use.</p></li>
+<li><p>The navbar contains a link back to the dashboard.</p></li>
+<li><p>On a request, the app runs a shell command, parses the output, and displays
+the result in a table.</p></li>
+<li><p>It is built in Ruby using the <a class="reference external" href="https://github.com/sinatra/sinatra">Sinatra framework</a>, a lightweight web framework
+similar to <a class="reference external" href="https://github.com/pallets/flask">Python’s Flask</a> and <a class="reference external" href="https://github.com/expressjs/express">Node.js’s Express</a></p></li>
 </ol>
 <div class="section" id="benefits">
 <h3>Benefits<a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></h3>
 <p>This serves as a good starting point for any status app to build for OnDemand,
 because</p>
 <ol class="arabic simple">
-<li>the app has the branding matching other OnDemand apps</li>
-<li>all status apps will do something similar on a request to the app:<ol class="arabic">
-<li>get raw data from a shell command or http request</li>
-<li>parse the raw data into an intermediate object representation</li>
-<li>use that intermediate object representation to display the data formatted
-as a table or graph</li>
+<li><p>the app has the branding matching other OnDemand apps</p></li>
+<li><p>all status apps will do something similar on a request to the app:</p>
+<ol class="arabic simple">
+<li><p>get raw data from a shell command or http request</p></li>
+<li><p>parse the raw data into an intermediate object representation</p></li>
+<li><p>use that intermediate object representation to display the data formatted
+as a table or graph</p></li>
 </ol>
 </li>
-<li>the app can be deployed without requiring a build step because gem
+<li><p>the app can be deployed without requiring a build step because gem
 dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby and
-match those that are provided by the ondemand-gems rpm</li>
-<li>most of the app can be modified without requiring a restart due to proper use
-of Sinatra reloader extension</li>
-<li>app has a built in scaffold for unit testing using minitest</li>
+match those that are provided by the ondemand-gems rpm</p></li>
+<li><p>most of the app can be modified without requiring a restart due to proper use
+of Sinatra reloader extension</p></li>
+<li><p>app has a built in scaffold for unit testing using minitest</p></li>
 </ol>
 </div>
 <div class="section" id="ondemand-system-gems">
@@ -302,86 +304,86 @@ of Sinatra reloader extension</li>
 <p>This app is able to run in OnDemand 1.8+ without installing the gems specified in the Gemfile.</p>
 <p>All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps. These include gems used by this example app:</p>
 <ul class="simple">
-<li>sinatra</li>
-<li>sinatra-contrib</li>
-<li>erubi</li>
+<li><p>sinatra</p></li>
+<li><p>sinatra-contrib</p></li>
+<li><p>erubi</p></li>
 </ul>
 <p>On the OnDemand web host, you can execute the command <cite>source scl_source enable ondmeand</cite> and then <cite>gem list</cite> to see all available gems. These gems are provided by a separate <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> rpm that is installed when you do <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">ondemand</span></code>. The name of the RPM includes the OnDemand release version, such as <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm</span></code>. This ensures that if you do yum update this gem will not be removed - so apps can depend on the presence of these gems.</p>
 </div>
 <div class="section" id="files-and-their-purpose">
 <h3>Files and Their Purpose<a class="headerlink" href="#files-and-their-purpose" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils" id="id3">
+<table class="docutils align-default" id="id3">
 <caption><span class="caption-number">Table 9 </span><span class="caption-text">Main files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">File</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>config.ru</td>
-<td>entry point of the Passenger Ruby app</td>
+<tbody>
+<tr class="row-even"><td><p>config.ru</p></td>
+<td><p>entry point of the Passenger Ruby app</p></td>
 </tr>
-<tr class="row-odd"><td>app.rb</td>
-<td>Sinatra app config and routes; this in a separate file from config.ru so
-that code reloading will work</td>
+<tr class="row-odd"><td><p>app.rb</p></td>
+<td><p>Sinatra app config and routes; this in a separate file from config.ru so
+that code reloading will work</p></td>
 </tr>
-<tr class="row-even"><td>command.rb</td>
-<td>class that defines an AppProcess struct, executes ps, and parses the
-output of the ps command producing an array of structs</td>
+<tr class="row-even"><td><p>command.rb</p></td>
+<td><p>class that defines an AppProcess struct, executes ps, and parses the
+output of the ps command producing an array of structs</p></td>
 </tr>
-<tr class="row-odd"><td>test/test_command.rb</td>
-<td>a unit test of the parsing code</td>
+<tr class="row-odd"><td><p>test/test_command.rb</p></td>
+<td><p>a unit test of the parsing code</p></td>
 </tr>
-<tr class="row-even"><td>views/index.html</td>
-<td>the main section of the html page template using an implementation of <a class="reference external" href="https://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.html">ERB</a>
+<tr class="row-even"><td><p>views/index.html</p></td>
+<td><p>the main section of the html page template using an implementation of <a class="reference external" href="https://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.html">ERB</a>
 called <a class="reference external" href="https://github.com/jeremyevans/erubi">erubi</a>
-which auto-escapes output of ERB tags by default (for security)</td>
+which auto-escapes output of ERB tags by default (for security)</p></td>
 </tr>
-<tr class="row-odd"><td>views/layout.html</td>
-<td>the rendered HTML from views/index.html is inserted into this layout,
-where css and javascript files are included</td>
+<tr class="row-odd"><td><p>views/layout.html</p></td>
+<td><p>the rendered HTML from views/index.html is inserted into this layout,
+where css and javascript files are included</p></td>
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils" id="id4">
+<table class="docutils align-default" id="id4">
 <caption><span class="caption-number">Table 10 </span><span class="caption-text">Other files</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">File</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Gemfile, Gemfile.lock</td>
-<td>defines gem dependencies for the app (see <a class="reference external" href="http://bundler.io/rationale.html">Bundler’s Rationale</a>)</td>
+<tbody>
+<tr class="row-even"><td><p>Gemfile, Gemfile.lock</p></td>
+<td><p>defines gem dependencies for the app (see <a class="reference external" href="http://bundler.io/rationale.html">Bundler’s Rationale</a>)</p></td>
 </tr>
-<tr class="row-odd"><td>tmp/</td>
-<td>tmp directory is kept so its easier to <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
-want to force Passenger to restart an app</td>
+<tr class="row-odd"><td><p>tmp/</p></td>
+<td><p>tmp directory is kept so its easier to <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
+want to force Passenger to restart an app</p></td>
 </tr>
-<tr class="row-even"><td>public/</td>
-<td>serve up static assets like Bootstrap css; in OnDemand, NGINX auto-serves
+<tr class="row-even"><td><p>public/</p></td>
+<td><p>serve up static assets like Bootstrap css; in OnDemand, NGINX auto-serves
 all files under public/ directly, without going through the Passenger
 process, which makes this much faster; as a result, each static file is
 in a directory with an explicit version number, so if these files ever
-change we change the version, which is one cache busting strategy</td>
+change we change the version, which is one cache busting strategy</p></td>
 </tr>
-<tr class="row-odd"><td>Rakefile</td>
-<td>this provides a default Rake task for running the automated tests under
-test/, so you can run the tests by running the command <code class="docutils literal notranslate"><span class="pre">rake</span></code></td>
+<tr class="row-odd"><td><p>Rakefile</p></td>
+<td><p>this provides a default Rake task for running the automated tests under
+test/, so you can run the tests by running the command <code class="docutils literal notranslate"><span class="pre">rake</span></code></p></td>
 </tr>
-<tr class="row-even"><td>test/minitest_helper.rb</td>
-<td>contains setup code common between all tests</td>
+<tr class="row-even"><td><p>test/minitest_helper.rb</p></td>
+<td><p>contains setup code common between all tests</p></td>
 </tr>
-<tr class="row-odd"><td>vendor/bundle</td>
-<td>This directory is added if you execute <code class="docutils literal notranslate"><span class="pre">bin/bundle</span> <span class="pre">install</span> <span class="pre">--path</span> <span class="pre">vendor/bundle</span></code> to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.</td>
+<tr class="row-odd"><td><p>vendor/bundle</p></td>
+<td><p>This directory is added if you execute <code class="docutils literal notranslate"><span class="pre">bin/bundle</span> <span class="pre">install</span> <span class="pre">--path</span> <span class="pre">vendor/bundle</span></code> to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.</p></td>
 </tr>
 </tbody>
 </table>
@@ -390,20 +392,21 @@ test/, so you can run the tests by running the command <code class="docutils lit
 <div class="section" id="clone-and-setup">
 <h2>Clone and Setup<a class="headerlink" href="#clone-and-setup" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Login to Open OnDemand, click “Develop” dropdown menu and click the “My Sandbox Apps (Development)” option.</li>
-<li>Click “New Product” and “Clone Existing App”.</li>
-<li>Fill out the form:<ol class="arabic">
-<li>Directory name: <code class="docutils literal notranslate"><span class="pre">quota</span></code></li>
-<li>Git remote: <code class="docutils literal notranslate"><span class="pre">https://github.com/OSC/ood-example-ps</span></code></li>
-<li>Check “Create new Git Project from this?”</li>
-<li>Click Submit</li>
+<li><p>Login to Open OnDemand, click “Develop” dropdown menu and click the “My Sandbox Apps (Development)” option.</p></li>
+<li><p>Click “New Product” and “Clone Existing App”.</p></li>
+<li><p>Fill out the form:</p>
+<ol class="arabic simple">
+<li><p>Directory name: <code class="docutils literal notranslate"><span class="pre">quota</span></code></p></li>
+<li><p>Git remote: <code class="docutils literal notranslate"><span class="pre">https://github.com/OSC/ood-example-ps</span></code></p></li>
+<li><p>Check “Create new Git Project from this?”</p></li>
+<li><p>Click Submit</p></li>
 </ol>
 </li>
-<li>Launch the app by clicking the large blue Launch button. In a new browser
-window/tab you will see the output of a ps command filtered using grep.</li>
-<li>Switch browser tab/windows back to the dashboard Details view of the app and
+<li><p>Launch the app by clicking the large blue Launch button. In a new browser
+window/tab you will see the output of a ps command filtered using grep.</p></li>
+<li><p>Switch browser tab/windows back to the dashboard Details view of the app and
 click “Files” button on the right to open the app’s directory in the File
-Explorer.</li>
+Explorer.</p></li>
 </ol>
 </div>
 <div class="section" id="edit-to-run-and-parse-quota">
@@ -422,35 +425,35 @@ Explorer.</li>
 update the assertions to expect an array of “quotas” instead of “processes”
 with appropriate attributes.</p>
 <p>Diff:</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>  def test_command_output_parsing
-    output = &lt;&lt;-EOF
-<span class="gd">-</span>
-<span class="gd">-efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota</span>
-<span class="gd">-</span>
-<span class="gi">+Disk quotas for user efranz (uid 10851):</span>
-<span class="gi">+     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace</span>
-<span class="gi">+10.11.200.32:/PZS0562/  99616M    500G    500G       0    933k   1000k   1000k       0</span>
-EOF
-<span class="gd">-    processes = Command.new.parse(output)</span>
-<span class="gi">+    quotas = Command.new.parse(output)</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w"> </span> def test_command_output_parsing<span class="w"></span>
+<span class="w"> </span>   output = &lt;&lt;-EOF<span class="w"></span>
+<span class="gd">-</span><span class="w"></span>
+<span class="gd">-efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota</span><span class="w"></span>
+<span class="gd">-</span><span class="w"></span>
+<span class="gi">+Disk quotas for user efranz (uid 10851):</span><span class="w"></span>
+<span class="gi">+     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace</span><span class="w"></span>
+<span class="gi">+10.11.200.32:/PZS0562/  99616M    500G    500G       0    933k   1000k   1000k       0</span><span class="w"></span>
+<span class="w">EOF</span>
+<span class="gd">-    processes = Command.new.parse(output)</span><span class="w"></span>
+<span class="gi">+    quotas = Command.new.parse(output)</span><span class="w"></span>
 
-<span class="gd">-    assert_equal 1, processes.count</span>
-<span class="gi">+    assert_equal 1, quotas.count, &quot;number of structs parsed should equal 1&quot;</span>
+<span class="gd">-    assert_equal 1, processes.count</span><span class="w"></span>
+<span class="gi">+    assert_equal 1, quotas.count, &quot;number of structs parsed should equal 1&quot;</span><span class="w"></span>
 
-<span class="gd">-    p = processes.first</span>
-<span class="gi">+    q = quotas.first</span>
+<span class="gd">-    p = processes.first</span><span class="w"></span>
+<span class="gi">+    q = quotas.first</span><span class="w"></span>
 
-<span class="gd">-    assert_equal &quot;efranz&quot;, p.user</span>
-<span class="gd">-    assert_equal &quot;462148&quot;, p.vsz</span>
-<span class="gd">-    assert_equal &quot;28128&quot;, p.rss</span>
-<span class="gd">-    assert_equal &quot;0:00&quot;, p.time</span>
-<span class="gd">-    assert_equal &quot;Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota&quot;, p.command</span>
-<span class="gi">+    assert_equal &quot;10.11.200.32:/PZS0562/&quot;, q.filesystem, &quot;expected filesystem value not correct&quot;</span>
-<span class="gi">+    assert_equal &quot;99616M&quot;, q.blocks, &quot;expected blocks value not correct&quot;</span>
-<span class="gi">+    assert_equal &quot;500G&quot;, q.blocks_limit, &quot;expected blocks_limit value not correct&quot;</span>
-<span class="gi">+    assert_equal &quot;933k&quot;, q.files, &quot;expected files value not correct&quot;</span>
-<span class="gi">+    assert_equal &quot;0&quot;, q.files_grace, &quot;expected files_grace value not correct&quot;</span>
-  end
+<span class="gd">-    assert_equal &quot;efranz&quot;, p.user</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;462148&quot;, p.vsz</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;28128&quot;, p.rss</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;0:00&quot;, p.time</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota&quot;, p.command</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;10.11.200.32:/PZS0562/&quot;, q.filesystem, &quot;expected filesystem value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;99616M&quot;, q.blocks, &quot;expected blocks value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;500G&quot;, q.blocks_limit, &quot;expected blocks_limit value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;933k&quot;, q.files, &quot;expected files value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;0&quot;, q.files_grace, &quot;expected files_grace value not correct&quot;</span><span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
 </pre></div>
 </div>
 <p>Resulting test method:</p>
@@ -488,7 +491,7 @@ Run options: --seed <span class="m">58990</span>
 
 F
 
-Finished in <span class="m">0</span>.000943s, <span class="m">1060</span>.4569 runs/s, <span class="m">1060</span>.4569 assertions/s.
+Finished <span class="k">in</span> <span class="m">0</span>.000943s, <span class="m">1060</span>.4569 runs/s, <span class="m">1060</span>.4569 assertions/s.
 
   <span class="m">1</span><span class="o">)</span> Failure:
 TestCommand#test_command_output_parsing <span class="o">[</span>/users/PZS0562/efranz/ondemand/dev/quota/test/test_command.rb:14<span class="o">]</span>:
@@ -505,7 +508,7 @@ Tasks: <span class="nv">TOP</span> <span class="o">=</span>&gt; <span class="nv"
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>To run commands like rake through the shell you need to make sure you are on
 a host that has the correct version of Ruby installed. For OnDemand that likely
 means using Software Collections with the same packages used to install OnDemand.</p>
@@ -519,30 +522,30 @@ For example, in my .bash_profile I have:</p>
 <span class="k">fi</span>
 </pre></div>
 </div>
-<p class="last">This means when I login to the host webtest04.osc.edu the SCL packages will be enabled
+<p>This means when I login to the host webtest04.osc.edu the SCL packages will be enabled
 in a new bash session. If you did the same you would replace <code class="docutils literal notranslate"><span class="pre">webtest04</span></code> with the hostname
 of your development node.</p>
 </div>
 <p>Change the command we are using, fix the command output parsing, and fix the struct definition so the unit test passes.</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>class Command
-  def to_s
-<span class="gd">-    &quot;ps aux | grep &#39;[A]pp&#39;&quot;</span>
-<span class="gi">+    &quot;quota -spw&quot;</span>
-  end
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">class Command</span>
+<span class="w"> </span> def to_s<span class="w"></span>
+<span class="gd">-    &quot;ps aux | grep &#39;[A]pp&#39;&quot;</span><span class="w"></span>
+<span class="gi">+    &quot;quota -spw&quot;</span><span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
 
-<span class="gd">-  AppProcess = Struct.new(:user, :pid, :pct_cpu, :pct_mem, :vsz, :rss, :tty, :stat, :start, :time, :command)</span>
-<span class="gi">+  Quota = Struct.new(:filesystem, :blocks, :blocks_quota, :blocks_limit, :blocks_grace, :files, :files_quota, :files_limit, :fil</span>
+<span class="gd">-  AppProcess = Struct.new(:user, :pid, :pct_cpu, :pct_mem, :vsz, :rss, :tty, :stat, :start, :time, :command)</span><span class="w"></span>
+<span class="gi">+  Quota = Struct.new(:filesystem, :blocks, :blocks_quota, :blocks_limit, :blocks_grace, :files, :files_quota, :files_limit, :fil</span><span class="w"></span>
 
-  # Parse a string output from the `ps aux` command and return an array of
-  # AppProcess objects, one per process
-  def parse(output)
-    lines = output.strip.split(&quot;\n&quot;)
-<span class="gd">-    lines.map do |line|</span>
-<span class="gd">-      AppProcess.new(*(line.split(&quot; &quot;, 11)))</span>
-<span class="gi">+    lines.drop(2).map do |line|</span>
-<span class="gi">+      Quota.new(*(line.split))</span>
-    end
-  end
+<span class="w"> </span> # Parse a string output from the `ps aux` command and return an array of<span class="w"></span>
+<span class="w"> </span> # AppProcess objects, one per process<span class="w"></span>
+<span class="w"> </span> def parse(output)<span class="w"></span>
+<span class="w"> </span>   lines = output.strip.split(&quot;\n&quot;)<span class="w"></span>
+<span class="gd">-    lines.map do |line|</span><span class="w"></span>
+<span class="gd">-      AppProcess.new(*(line.split(&quot; &quot;, 11)))</span><span class="w"></span>
+<span class="gi">+    lines.drop(2).map do |line|</span><span class="w"></span>
+<span class="gi">+      Quota.new(*(line.split))</span><span class="w"></span>
+<span class="w"> </span>   end<span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
 </pre></div>
 </div>
 <p>After the changes part of the command.rb will look like this:</p>
@@ -571,7 +574,7 @@ Run options: --seed <span class="m">60317</span>
 
 .
 
-Finished in <span class="m">0</span>.000966s, <span class="m">1035</span>.1494 runs/s, <span class="m">6210</span>.8963 assertions/s.
+Finished <span class="k">in</span> <span class="m">0</span>.000966s, <span class="m">1035</span>.1494 runs/s, <span class="m">6210</span>.8963 assertions/s.
 
 <span class="m">1</span> runs, <span class="m">6</span> assertions, <span class="m">0</span> failures, <span class="m">0</span> errors, <span class="m">0</span> skips
 </pre></div>
@@ -580,22 +583,22 @@ Finished in <span class="m">0</span>.000966s, <span class="m">1035</span>.1494 r
 <div class="section" id="update-app-rb-and-view-index-html">
 <h3>Update app.rb and view/index.html<a class="headerlink" href="#update-app-rb-and-view-index-html" title="Permalink to this headline">¶</a></h3>
 <p>Update app.rb:</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>helpers do
-  def title
-<span class="gd">-    &quot;Passenger App Processes&quot;</span>
-<span class="gi">+    &quot;Quota&quot;</span>
-  end
-end
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">helpers do</span>
+<span class="w"> </span> def title<span class="w"></span>
+<span class="gd">-    &quot;Passenger App Processes&quot;</span><span class="w"></span>
+<span class="gi">+    &quot;Quota&quot;</span><span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
+<span class="w">end</span>
 
-# Define a route at the root &#39;/&#39; of the app.
-get &#39;/&#39; do
-  @command = Command.new
-<span class="gd">-  @processes, @error = @command.exec</span>
-<span class="gi">+  @quotas, @error = @command.exec</span>
+<span class="w"># Define a route at the root &#39;/&#39; of the app.</span>
+<span class="w">get &#39;/&#39; do</span>
+<span class="w"> </span> @command = Command.new<span class="w"></span>
+<span class="gd">-  @processes, @error = @command.exec</span><span class="w"></span>
+<span class="gi">+  @quotas, @error = @command.exec</span><span class="w"></span>
 
-  # Render the view
-  erb :index
-end
+<span class="w"> </span> # Render the view<span class="w"></span>
+<span class="w"> </span> erb :index<span class="w"></span>
+<span class="w">end</span>
 </pre></div>
 </div>
 <p>In view/index.html, replace the table with this:</p>
@@ -633,40 +636,40 @@ end
 <div class="section" id="brand-app">
 <h2>Brand App<a class="headerlink" href="#brand-app" title="Permalink to this headline">¶</a></h2>
 <p>The app is looking good, but the details page still shows the app title “Passenger App Processes”. To change this and the icon, edit the manifest.yml:</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-name: Passenger App Processes</span>
-<span class="gd">-description: Display your running Passenger app processes in a table</span>
-<span class="gi">+name: Quota</span>
-<span class="gi">+description: Display quotas</span>
-<span class="gi">+icon: fa://hdd-o</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-name: Passenger App Processes</span><span class="w"></span>
+<span class="gd">-description: Display your running Passenger app processes in a table</span><span class="w"></span>
+<span class="gi">+name: Quota</span><span class="w"></span>
+<span class="gi">+description: Display quotas</span><span class="w"></span>
+<span class="gi">+icon: fa://hdd-o</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>The icon follows format of <code class="docutils literal notranslate"><span class="pre">fa://{FONTAWESOMENAME}</span></code> where you replace <code class="docutils literal notranslate"><span class="pre">{FONTAWESOMENAME}</span></code> with an icon from <a class="reference external" href="https://fontawesome.com/icons/">https://fontawesome.com/icons/</a>.
+<li><p>The icon follows format of <code class="docutils literal notranslate"><span class="pre">fa://{FONTAWESOMENAME}</span></code> where you replace <code class="docutils literal notranslate"><span class="pre">{FONTAWESOMENAME}</span></code> with an icon from <a class="reference external" href="https://fontawesome.com/icons/">https://fontawesome.com/icons/</a>.
 In this case we are using <code class="docutils literal notranslate"><span class="pre">fa-hdd-o</span></code> which we write in the manifest as <code class="docutils literal notranslate"><span class="pre">fa://hdd-o</span></code>.
-You can see details on this icon at <a class="reference external" href="https://fontawesome.com/icons/hdd?style=regular">https://fontawesome.com/icons/hdd?style=regular</a></li>
+You can see details on this icon at <a class="reference external" href="https://fontawesome.com/icons/hdd?style=regular">https://fontawesome.com/icons/hdd?style=regular</a></p></li>
 </ul>
 </div>
 <div class="section" id="publish-app">
 <h2>Publish App<a class="headerlink" href="#publish-app" title="Permalink to this headline">¶</a></h2>
 <p>Publishing an app requires two steps:</p>
 <ol class="arabic simple">
-<li>Updating the manifest.yml to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.</li>
-<li>Having an administrator checkout a copy of the production version to a directory under /var/www/ood/apps/sys</li>
+<li><p>Updating the manifest.yml to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.</p></li>
+<li><p>Having an administrator checkout a copy of the production version to a directory under /var/www/ood/apps/sys</p></li>
 </ol>
 <p>Steps:</p>
 <ol class="arabic">
-<li><p class="first">Add category to manifest so app appears in Files menu:</p>
+<li><p>Add category to manifest so app appears in Files menu:</p>
 <blockquote>
-<div><div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>name: Quota
-description: Display quotas
-icon: fa://hdd-o
-<span class="gi">+category: Files</span>
-<span class="gi">+subcategory: Utilities</span>
+<div><div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">name: Quota</span>
+<span class="w">description: Display quotas</span>
+<span class="w">icon: fa://hdd-o</span>
+<span class="gi">+category: Files</span><span class="w"></span>
+<span class="gi">+subcategory: Utilities</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Version these changes. Click Shell button on app details view, and then commit the changes:</p>
+<li><p>Version these changes. Click Shell button on app details view, and then commit the changes:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git add .
 git commit -m <span class="s2">&quot;update manifest for production&quot;</span>
@@ -677,7 +680,7 @@ git push origin master
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">As the admin, sudo copy or clone this repo to production</p>
+<li><p>As the admin, sudo copy or clone this repo to production</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># as sudo on OnDemand host:</span>
 <span class="nb">cd</span> /var/www/ood/apps/sys
@@ -686,16 +689,15 @@ git clone /users/PZS0562/efranz/ondemand/dev/quota
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Reload the dashboard.</p>
-</li>
+<li><p>Reload the dashboard.</p></li>
 </ol>
 <div class="figure align-center" id="id5">
 <img alt="../../_images/app-dev-tutorial-ps-to-quota-published.png" src="../../_images/app-dev-tutorial-ps-to-quota-published.png" />
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Every user can now launch the Quota from the Files menu.</span></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Every user can now launch the Quota from the Files menu.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Accessing this new app for the first time will cause your NGINX server to restart,
+<p class="admonition-title">Warning</p>
+<p>Accessing this new app for the first time will cause your NGINX server to restart,
 killing all websocket connections, which means resetting your active web-based OnDemand Shell sessions.</p>
 </div>
 </div>
@@ -721,7 +723,7 @@ killing all websocket connections, which means resetting your active web-based O
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

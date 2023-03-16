@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customization Overview &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Customization Overview &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Customization" href="customization.html" />
@@ -231,24 +232,27 @@
 <p>These are three files that directly affect the environment or functionality of the Per-User NGINX (PUN) processes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><strong>/etc/ood/config/nginx_stage.yml</strong><ul>
-<li>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</li>
-<li>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</li>
+<li><p><strong>/etc/ood/config/nginx_stage.yml</strong></p>
+<ul>
+<li><p>YAML file to override default configuration for the PUN. You can set environment variables via key-value pairs in the mapping <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>. You can specify a list of environment variables set in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> to pass through to the PUN by defining the sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code>.</p></li>
+<li><p>An example of both of these uses may be found in <a class="reference external" href="https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43">nginx_stage_example.yml</a>. Variables set here are set for all OnDemand applications.</p></li>
 </ul>
 </li>
-<li><strong>/etc/ood/config/apps/$APP/env</strong><ul>
-<li>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></li>
-<li>Used to provide application specific config</li>
-<li><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</li>
+<li><p><strong>/etc/ood/config/apps/$APP/env</strong></p>
+<ul>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></p></li>
+<li><p>Used to provide application specific config</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</p></li>
 </ul>
 </li>
-<li><strong>/etc/ood/config/apps/$APP/initializers/ood.rb</strong><ul>
-<li>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></li>
-<li>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</li>
-<li>This method is specific to Ruby on Rails applications: Activejobs,
+<li><p><strong>/etc/ood/config/apps/$APP/initializers/ood.rb</strong></p>
+<ul>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></p></li>
+<li><p>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</p></li>
+<li><p>This method is specific to Ruby on Rails applications: Activejobs,
 Dashboard, and Job Composer. You can add multiple
 initializer files in this directory and they will be loaded in
-alphabetical order</li>
+alphabetical order</p></li>
 </ul>
 </li>
 </ul>
@@ -256,27 +260,24 @@ alphabetical order</li>
 <p>This file affects the starting of the PUN, and is the appropriate place to change the software collections loaded:</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><strong>/etc/ood/profile</strong></p>
+<li><p><strong>/etc/ood/profile</strong></p>
 <ul>
-<li><p class="first"><strong>Sourced as root prior to starting the PUN</strong></p>
-</li>
-<li><p class="first">If exists, this file is sourced <strong>instead</strong> of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</p>
-</li>
-<li><p class="first">You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</p>
-</li>
-<li><p class="first">Environment variables set here are not guarenteed to remain set in the PUNs unless those environment variables are added to the YAML sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>. Here is a list of environment variables guarenteed to be preserved when NGINX starts:</p>
+<li><p><strong>Sourced as root prior to starting the PUN</strong></p></li>
+<li><p>If exists, this file is sourced <strong>instead</strong> of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</p></li>
+<li><p>You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</p></li>
+<li><p>Environment variables set here are not guarenteed to remain set in the PUNs unless those environment variables are added to the YAML sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>. Here is a list of environment variables guarenteed to be preserved when NGINX starts:</p>
 <blockquote>
 <div><ul class="simple">
-<li>PATH</li>
-<li>LD_LIBRARY_PATH</li>
-<li>X_SCLS</li>
-<li>MANPATH</li>
-<li>PCP_DIR</li>
-<li>PERL5LIB</li>
-<li>PKG_CONFIG_PATH</li>
-<li>PYTHONPATH</li>
-<li>XDG_DATA_DIRS</li>
-<li>SCLS RUBYLIB</li>
+<li><p>PATH</p></li>
+<li><p>LD_LIBRARY_PATH</p></li>
+<li><p>X_SCLS</p></li>
+<li><p>MANPATH</p></li>
+<li><p>PCP_DIR</p></li>
+<li><p>PERL5LIB</p></li>
+<li><p>PKG_CONFIG_PATH</p></li>
+<li><p>PYTHONPATH</p></li>
+<li><p>XDG_DATA_DIRS</p></li>
+<li><p>SCLS RUBYLIB</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -306,7 +307,7 @@ alphabetical order</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Start Services &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>3. Start Services &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,10 +37,11 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Add SSL Support" href="add-ssl.html" />
-    <link rel="prev" title="3. Modify System Security" href="modify-system-security.html" />
+    <link rel="next" title="4. Add SSL Support" href="add-ssl.html" />
+    <link rel="prev" title="2. Modify System Security" href="modify-system-security.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -109,12 +111,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From RPM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="from-source.html">2. Install From Source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">3. Modify System Security</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Start Services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">5. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">6. Add LDAP Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Modify System Security</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Start Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">4. Add SSL Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">5. Add LDAP Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
@@ -214,7 +215,7 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li>4. Start Services</li>
+      <li><span class="section-number">3. </span>Start Services</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -236,49 +237,47 @@
            <div itemprop="articleBody">
             
   <div class="section" id="start-services">
-<span id="id1"></span><h1>4. Start Services<a class="headerlink" href="#start-services" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1><span class="section-number">3. </span>Start Services<a class="headerlink" href="#start-services" title="Permalink to this headline">¶</a></h1>
 <p>By default the Apache HTTP Server is disabled. In this section we will enable
 the Apache service.
 Please see section <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a> for a more advanced and recommended authentication method after this.</p>
 <ol class="arabic">
-<li><p class="first">Start the Apache HTTP Server:</p>
-<dl class="docutils">
-<dt>CentOS/RHEL 7</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
+<li><p>Start the Apache HTTP Server:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">RHEL/CentOS 7</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RHEL/Rocky 8</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd24-httpd
 sudo systemctl <span class="nb">enable</span> httpd24-httpd
 </pre></div>
 </div>
-</dd>
-<dt>CentOS/RHEL 8</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start httpd
 sudo systemctl <span class="nb">enable</span> httpd
 </pre></div>
 </div>
-</dd>
-</dl>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start apache2
+sudo systemctl <span class="nb">enable</span> apache2
+</pre></div>
+</div>
+</div></div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you access the OnDemand server that you just started, you will be
+<p class="admonition-title">Warning</p>
+<p>If you access the OnDemand server that you just started, you will be
 presented with a username/password dialog box.
 The default user must exist on the system before login is possible.</p>
 </div>
 </li>
-<li><p class="first">(Optional) Start the Dex server</p>
+<li><p>(Optional) Start the Dex server</p>
 <p>If using the default OnDemand authentication mechanism, you must start the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
-<dl class="docutils">
-<dt>CentOS/RHEL 7 &amp; 8</dt>
-<dd><div class="first last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start ondemand-dex
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start ondemand-dex
 sudo systemctl <span class="nb">enable</span> ondemand-dex
 </pre></div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 </li>
-<li><p class="first">(Optional) Configure default user</p>
+<li><p>(Optional) Configure default user</p>
 <p>If you wish to use the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> you must create that user on the OnDemand system.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Using the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> user is not recommended for production and is intended only for
+<p class="admonition-title">Warning</p>
+<p>Using the default <code class="docutils literal notranslate"><span class="pre">ood</span></code> user is not recommended for production and is intended only for
 evaluation and testing of OnDemand. The recommended approach is to configure LDAP, see <a class="reference internal" href="add-ldap.html#add-ldap"><span class="std std-ref">Add LDAP Support</span></a>,
 or some othe authentication mechanism in Apache such as OIDC or Shibboleth.</p>
 </div>
@@ -287,9 +286,8 @@ sudo useradd -d /home/ood -g ood -k /etc/skel -m ood
 </pre></div>
 </div>
 </li>
-<li><p class="first">Browse to your OnDemand server and login the username <code class="docutils literal notranslate"><span class="pre">ood&#64;localhost</span></code> and the password <code class="docutils literal notranslate"><span class="pre">password</span></code>.
-If everything worked you should be presented with the OnDemand <a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p>
-</li>
+<li><p>Browse to your OnDemand server and login the username <code class="docutils literal notranslate"><span class="pre">ood&#64;localhost</span></code> and the password <code class="docutils literal notranslate"><span class="pre">password</span></code>.
+If everything worked you should be presented with the OnDemand <a class="reference internal" href="../applications/dashboard.html#dashboard"><span class="std std-ref">Dashboard App</span></a>.</p></li>
 </ol>
 </div>
 
@@ -301,10 +299,10 @@ If everything worked you should be presented with the OnDemand <a class="referen
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="add-ssl.html" class="btn btn-neutral float-right" title="5. Add SSL Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="add-ssl.html" class="btn btn-neutral float-right" title="4. Add SSL Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="modify-system-security.html" class="btn btn-neutral float-left" title="3. Modify System Security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modify-system-security.html" class="btn btn-neutral float-left" title="2. Modify System Security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,7 +311,7 @@ If everything worked you should be presented with the OnDemand <a class="referen
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

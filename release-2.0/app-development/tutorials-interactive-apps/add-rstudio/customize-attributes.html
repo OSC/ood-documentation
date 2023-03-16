@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Customize Attributes &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>4. Customize Attributes &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="5. Deploy RStudio App" href="deploy.html" />
@@ -143,6 +144,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../add-matlab.html">Add a MATLAB App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k8s-jupyter.html">Add a Jupyter App on a Kubernetes Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k8s-like-hpc-jupyter.html">Add a Jupyter App on a Kubernetes Cluster that behaves like HPC compute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../add-custom-queue.html">Add Custom Queues/Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html">Troubleshooting Interactive Apps</a></li>
 </ul>
@@ -222,7 +225,7 @@
         
           <li><a href="../add-rstudio.html">Add an RStudio App</a> &raquo;</li>
         
-      <li>4. Customize Attributes</li>
+      <li><span class="section-number">4. </span>Customize Attributes</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -244,28 +247,28 @@
            <div itemprop="articleBody">
             
   <div class="section" id="customize-attributes">
-<span id="app-development-tutorials-interactive-apps-add-rstudio-customize-attributes"></span><h1>4. Customize Attributes<a class="headerlink" href="#customize-attributes" title="Permalink to this headline">¶</a></h1>
+<span id="app-development-tutorials-interactive-apps-add-rstudio-customize-attributes"></span><h1><span class="section-number">4. </span>Customize Attributes<a class="headerlink" href="#customize-attributes" title="Permalink to this headline">¶</a></h1>
 <p>Now we will customize the app to work on a given cluster. Be sure that you walk through <a class="reference internal" href="software-requirements.html#app-development-tutorials-interactive-apps-add-rstudio-software-requirements"><span class="std std-ref">Software Requirements</span></a> for the given cluster ahead of time.</p>
 <p>The main responsibility of the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> file (<a class="reference internal" href="../../interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a>) located in the root of the app is for defining the attributes (their values or HTML form elements) used when generating the batch script.</p>
 <ol class="arabic simple">
-<li>We will begin by adding a cluster for the RStudio app to use. You do this by editing the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> in your favorite editor as such:</li>
+<li><p>We will begin by adding a cluster for the RStudio app to use. You do this by editing the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> in your favorite editor as such:</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_example_rstudio/form.yml</span>
-<span class="nn">---</span>
-<span class="hll"><span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;my_cluster&quot;</span>
-</span><span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_account</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_queue</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/bc_example_rstudio/form.yml</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="hll"><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+</span><span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_account</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_queue</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_slots</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_email_on_started</span><span class="w"></span>
 </pre></div>
 </div>
 <p>where we replace <code class="docutils literal notranslate"><span class="pre">my_cluster</span></code> with a valid cluster that corresponds to a cluster configuration file located under <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/my_cluster.yml</span></code>.</p>
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Next we will modify the runtime environment to allow RStudio to launch inside a Singularity container. There are two ways to accomplish this, and both modify the file <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_example_rstudio/template/script.sh.erb</span></code>.</li>
+<li><p>Next we will modify the runtime environment to allow RStudio to launch inside a Singularity container. There are two ways to accomplish this, and both modify the file <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_example_rstudio/template/script.sh.erb</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><p>If you are not using LMod, then in the function <code class="docutils literal notranslate"><span class="pre">setup_env</span></code> replace the value for <code class="docutils literal notranslate"><span class="pre">RSTUDIO_SERVER_IMAGE</span></code> with the absolute path to the Singularity image, and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_BINDPATH</span></code> with all the directories that contain dependencies for RStudio server and R. Discovering those paths may benefit from using <code class="docutils literal notranslate"><span class="pre">ptrace</span></code> or <code class="docutils literal notranslate"><span class="pre">lsof</span></code>. Finally ensure that <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">rserver</span></code> are in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
@@ -303,16 +306,16 @@ setup_env
 </div>
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is possible to set the environment without using a module system, by setting the variables in <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_example_rstudio/template/script.sh.erb</span></code>.</p>
+<p class="admonition-title">Note</p>
+<p>It is possible to set the environment without using a module system, by setting the variables in <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/bc_example_rstudio/template/script.sh.erb</span></code>.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There was a breaking change between Singularity 2.x and 3.x with how a host <code class="docutils literal notranslate"><span class="pre">PATH</span></code> may be propagated to the guest. In version 2.x you must export <code class="docutils literal notranslate"><span class="pre">PATH</span></code> as <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_PATH</span></code> in order for the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> inside the container to include <code class="docutils literal notranslate"><span class="pre">rserver</span></code>. In version 3.x <code class="docutils literal notranslate"><span class="pre">PATH</span></code> alone is sufficient.</p>
+<p class="admonition-title">Warning</p>
+<p>There was a breaking change between Singularity 2.x and 3.x with how a host <code class="docutils literal notranslate"><span class="pre">PATH</span></code> may be propagated to the guest. In version 2.x you must export <code class="docutils literal notranslate"><span class="pre">PATH</span></code> as <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_PATH</span></code> in order for the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> inside the container to include <code class="docutils literal notranslate"><span class="pre">rserver</span></code>. In version 3.x <code class="docutils literal notranslate"><span class="pre">PATH</span></code> alone is sufficient.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">There was a breaking change between Singularity 3.4.x and 3.5.x with how a host <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> is propagated to the guest. In version 3.5.x you must export <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> as <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_LD_LIBRARY_PATH</span></code>.</p>
+<p class="admonition-title">Warning</p>
+<p>There was a breaking change between Singularity 3.4.x and 3.5.x with how a host <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> is propagated to the guest. In version 3.5.x you must export <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> as <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_LD_LIBRARY_PATH</span></code>.</p>
 </div>
 </div>
 
@@ -336,7 +339,7 @@ setup_env
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 

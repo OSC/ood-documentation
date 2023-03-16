@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Job Submission &mdash; Open OnDemand 2.0.13 documentation</title>
+  <title>Job Submission &mdash; Open OnDemand 2.0.20 documentation</title>
   
 
   
@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Connection View" href="view.html" />
@@ -136,6 +137,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest yml files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="form.html">User Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic-form-widgets.html">Dynamic Form Widgets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Job Submission</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
@@ -267,16 +269,15 @@ substitution, and more.</p>
 <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> file are given as:</p>
 <dl class="describe">
 <dt>
-<code class="descname">batch_connect (Hash)</code></dt>
+<code class="sig-name descname">batch_connect (Hash)</code></dt>
 <dd><p>the configuration describing the batch script content (see
 <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template">OodCore::BatchConnect::Template</a> for valid configuration options)</p>
-<dl class="docutils">
-<dt>Example</dt>
-<dd><p class="first">Use the default basic web server template</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<dl>
+<dt>Example</dt><dd><p>Use the default basic web server template</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -285,17 +286,16 @@ substitution, and more.</p>
 
 <dl class="describe">
 <dt>
-<code class="descname">script (Hash)</code></dt>
+<code class="sig-name descname">script (Hash)</code></dt>
 <dd><p>the configuration describing the job submission parameters for the batch
 script (see <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> for valid configuration options)</p>
-<dl class="docutils">
-<dt>Example</dt>
-<dd><p class="first">Set the job’s charged account and queue</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;PZS0001&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="s">&quot;parallel&quot;</span>
+<dl>
+<dt>Example</dt><dd><p>Set the job’s charged account and queue</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PZS0001&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">queue_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;parallel&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -304,29 +304,28 @@ script (see <a class="reference external" href="http://www.rubydoc.info/gems/ood
 
 <span class="target" id="configuring-cluster-in-submit-yml"></span><dl class="describe">
 <dt>
-<code class="descname">cluster (String) (Optional)</code></dt>
+<code class="sig-name descname">cluster (String) (Optional)</code></dt>
 <dd><p>the cluster to submit to</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Use this field when you need to choose the cluster in
+<p class="admonition-title">Tip</p>
+<p>Use this field when you need to choose the cluster in
 a more dynamic way than <a class="reference internal" href="form.html#configuring-cluster"><span class="std std-ref">what’s provided in the form.</span></a>
 Or when you want to choose the cluster for the user given some
 choices like the example below.</p>
 </div>
-<dl class="docutils">
-<dt>Example</dt>
-<dd><p class="first">Submit the job to the the large cluster if requesting more
+<dl>
+<dt>Example</dt><dd><p>Submit the job to the the large cluster if requesting more
 than 29 cores, else submit to the small cluster.</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;%-</span>
-  <span class="l l-Scalar l-Scalar-Plain">cluster = if num_cores &gt;= 29</span>
-              <span class="l l-Scalar l-Scalar-Plain">&quot;large_cluster&quot;</span>
-            <span class="l l-Scalar l-Scalar-Plain">else</span>
-               <span class="l l-Scalar l-Scalar-Plain">&quot;small_cluster&quot;</span>
-            <span class="l l-Scalar l-Scalar-Plain">end</span>
-<span class="l l-Scalar l-Scalar-Plain">-&gt;</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">cluster</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;%-</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">cluster = if num_cores &gt;= 29</span><span class="w"></span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">&quot;large_cluster&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">else</span><span class="w"></span>
+<span class="w">               </span><span class="l l-Scalar l-Scalar-Plain">&quot;small_cluster&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">end</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">-&gt;</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">cluster</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -341,17 +340,16 @@ options described below.</p>
 <code class="docutils literal notranslate"><span class="pre">vnc</span></code> template specified with the following configuration option:</p>
 <dl class="describe">
 <dt>
-<code class="descname">template (String)</code></dt>
+<code class="sig-name descname">template (String)</code></dt>
 <dd><p>the template used for rendering the batch script (<code class="docutils literal notranslate"><span class="pre">&quot;basic&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;vnc&quot;</span></code>)</p>
-<dl class="docutils">
-<dt>Default</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">&quot;basic&quot;</span></code></dd>
-<dt>Example</dt>
-<dd><p class="first">Render a batch script for a VNC Interactive Application</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<dl>
+<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">&quot;basic&quot;</span></code></p>
+</dd>
+<dt>Example</dt><dd><p>Render a batch script for a VNC Interactive Application</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vnc&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -362,8 +360,8 @@ options described below.</p>
 options for <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> can be found under the code documentation for
 <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template">OodCore::BatchConnect::Template</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The configuration <code class="docutils literal notranslate"><span class="pre">template:</span> <span class="pre">&quot;vnc&quot;</span></code> comes with more <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code>
+<p class="admonition-title">Note</p>
+<p>The configuration <code class="docutils literal notranslate"><span class="pre">template:</span> <span class="pre">&quot;vnc&quot;</span></code> comes with more <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code>
 configuration options which can be found under the code documentation for
 <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Templates/VNC">OodCore::BatchConnect::Templates::VNC</a>.</p>
 </div>
@@ -380,23 +378,23 @@ it would be best to use the respective option corresponding to the submission
 parameter if it is available.</p>
 <p>For example, if I want to specify the charged account for the job, it is
 recommended I use:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">accounting_id</span><span class="p p-Indicator">:</span> <span class="s">&quot;PZS0001&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PZS0001&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>as this is resource manager agnostic. But this can also be added for a Slurm
 resource manager as:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;-A&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;PZS0001&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;-A&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;PZS0001&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>but now this app may not work at a center with a different resource manager.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>Care must be taken when using the <code class="docutils literal notranslate"><span class="pre">native</span></code> option as this is resource
 manager specific. For all supported resource managers (e.g., Slurm, LSF,
 PBSPro, …) other than Torque, the <code class="docutils literal notranslate"><span class="pre">native</span></code> option is specified as an
@@ -405,10 +403,10 @@ submission tool (e.g., <strong class="command">sbatch</strong>, <strong class="c
 …)</p>
 <p>So for Slurm, the following configuration will submit a job to 5 nodes with
 feature <code class="docutils literal notranslate"><span class="pre">c12</span></code>:</p>
-<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;-N&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;5&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-C&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;c12&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;-N&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-C&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;c12&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -420,19 +418,19 @@ feature <code class="docutils literal notranslate"><span class="pre">c12</span><
 web server template using all the default options for the cluster’s batch job
 submission tool (e.g., <strong class="command">sbatch</strong>, <strong class="command">qsub</strong>, <strong class="command">bsub</strong>,
 …).</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="section" id="vnc-server">
 <h3>VNC Server<a class="headerlink" href="#vnc-server" title="Permalink to this headline">¶</a></h3>
 <p>To submit a batch script built from the VNC server template:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;vnc&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vnc&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -441,11 +439,11 @@ submission tool (e.g., <strong class="command">sbatch</strong>, <strong class="c
 <p>When the batch script is rendered from the template, one of the possible
 configuration options is specifying the executable command called for the main
 script it forks off into the background. This can be configured with:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">script_file</span><span class="p p-Indicator">:</span> <span class="s">&quot;./my_custom_script.sh&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">script_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./my_custom_script.sh&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -454,16 +452,16 @@ script it forks off into the background. This can be configured with:</p>
 <p>Cherry-picking some possible options from <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> gives a batch
 job built from the basic web server template submitted with the following
 parameters:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3600</span>
-  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="s">&quot;debug&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">email_on_started</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="l l-Scalar l-Scalar-Plain">job_environment</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">LICENSE_FILE</span><span class="p p-Indicator">:</span> <span class="s">&quot;1234@license.center.edu&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
+<span class="w">  </span><span class="nt">queue_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;debug&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">email_on_started</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job_environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">LICENSE_FILE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1234@license.center.edu&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -474,48 +472,48 @@ in the <code class="docutils literal notranslate"><span class="pre">submit.yml.e
 <a class="reference internal" href="form.html#app-development-interactive-form"><span class="std std-ref">User Form</span></a> attributes.</p>
 <p>For example, if you had a form attribute called <code class="docutils literal notranslate"><span class="pre">number_of_hours</span></code> that you
 had the user fill out. You can add this to the submission parameters as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= (number_of_hours.blank? ? 1</span> <span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">number_of_hours.to_i) * 3600 %&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= (number_of_hours.blank? ? 1</span><span class="w"> </span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number_of_hours.to_i) * 3600 %&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>We have to be careful here, because all form attributes are returned as <a class="reference external" href="https://ruby-doc.org/core-2.2.3/String.html">Ruby
 Strings</a>. So we need to:</p>
 <ol class="arabic simple">
-<li>First determine if the user filled in the attribute (check if it is
-<code class="docutils literal notranslate"><span class="pre">#blank?</span></code>).</li>
-<li>If they did, then we need to convert the string to an integer (<code class="docutils literal notranslate"><span class="pre">#to_i</span></code>)
-before performing arithmetic operations on it.</li>
-<li>Finally we convert hours to seconds.</li>
+<li><p>First determine if the user filled in the attribute (check if it is
+<code class="docutils literal notranslate"><span class="pre">#blank?</span></code>).</p></li>
+<li><p>If they did, then we need to convert the string to an integer (<code class="docutils literal notranslate"><span class="pre">#to_i</span></code>)
+before performing arithmetic operations on it.</p></li>
+<li><p>Finally we convert hours to seconds.</p></li>
 </ol>
 <p>Another scenario would be if the user specified the queue directly with a
 custom form attribute called <code class="docutils literal notranslate"><span class="pre">my_queue</span></code>. We can then add this user-supplied
 queue conditionally to the submission parameters as such:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span>
-<span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span> <span class="s">&quot;basic&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">wall_time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3600</span>
-  <span class="l l-Scalar l-Scalar-Plain">&lt;%- unless my_queue.blank? -%&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;%= my_queue %&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">email_on_started</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- unless my_queue.blank? -%&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">queue_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;%= my_queue %&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">&lt;%- end -%&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">email_on_started</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In this case, <code class="docutils literal notranslate"><span class="pre">queue_name</span></code> will only be added to the submission parameters if
 the user supplied a non-blank value to the form attribute <code class="docutils literal notranslate"><span class="pre">my_queue</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Most of the common form attributes that manipulate the job submission
 parameters are provided for you as
 <a class="reference internal" href="form.html#app-development-interactive-form-predefined-attributes"><span class="std std-ref">Predefined Attributes</span></a>. These
 special attributes fill-in the <code class="docutils literal notranslate"><span class="pre">script</span></code> configuration options internally,
 so you do not have to.</p>
-<p class="last">For example, if you used the predefined form attribute <code class="docutils literal notranslate"><span class="pre">bc_queue</span></code>, you do
+<p>For example, if you used the predefined form attribute <code class="docutils literal notranslate"><span class="pre">bc_queue</span></code>, you do
 not need to specify <code class="docutils literal notranslate"><span class="pre">queue_name:</span></code> in the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>.</p>
 </div>
 </div>
@@ -542,7 +540,7 @@ not need to specify <code class="docutils literal notranslate"><span class="pre"
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2021, Ohio Supercomputer Center
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
 
     </p>
   </div> 
