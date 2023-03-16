@@ -264,13 +264,17 @@ If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and 
 the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
 is used).
 
-Whitelist Directories
----------------------
+Block or Allow Directory Access
+-------------------------------
 
-By setting a colon delimited WHITELIST_PATH environment variable, the Job Composer, File Editor, and Files app respect the whitelist in the following manner:
+By default, all directories are open and accessible through Open OnDemand (barring POSIX file permissions. Open OnDemand
+can never read files the user cannot read).
 
-1. Users will be prevented from navigating to, uploading or downloading, viewing, editing files that is not an eventual child of the whitelisted paths
-2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the whitelisted paths
+By setting a colon delimited `OOD_ALLOWLIST_PATH` environment variable, the Job Composer, File Editor, and Files app
+respect the allowlist in the following manner:
+
+1. Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowlisted paths
+2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths
 3. Users should not be able to get around this using symlinks
 
 We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would whitelist home directories, project space, and scratch space at OSC:
@@ -278,11 +282,11 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 .. code:: yaml
 
    pun_custom_env:
-     WHITELIST_PATH: "/users:/fs/project:/fs/scratch"
+    OOD_ALLOWLIST_PATH: "/users:/fs/project:/fs/scratch"
 
 .. warning:: This is not yet used in production at OSC, so we consider this feature "experimental" for now.
 
-.. warning:: This whitelist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
+.. warning:: This allowlist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
 .. _set-default-ssh-host:
 
@@ -761,12 +765,8 @@ that lists all user quotas. The JSON schema for version `1` is given as:
      "version": 1,
      "timestamp": 1525361263,
      "quotas": [
-       {
-         ...
-       },
-       {
-         ...
-       }
+       {},
+       {}
      ]
    }
 
@@ -857,12 +857,8 @@ that lists all user balances. The JSON schema for version `1` is given as:
         "project_type": "project"
       },
       "balances": [
-        {
-          ...
-        },
-        {
-          ...
-        }
+        {},
+        {}
       ]
     }
 
@@ -1017,6 +1013,8 @@ The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by
 * The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
 * The ``cluster_override`` can override the cluster name used to make requests to Grafana if the Grafana cluster name varies from OnDemand cluster name.
 
+.. _disable-host-link-batch-connect:
+
 Disable Host Link in Batch Connect Session Card
 -----------------------------------------------
 
@@ -1036,6 +1034,15 @@ To disable this, simply set the environment variable in the dashboards' env file
   # don't show ssh link in batch connect card
   OOD_BC_SSH_TO_COMPUTE_NODE=off
 
+If you wish to disable on a per-cluster basis, you can set the following in your :ref:`cluster YAML configuration <cluster-config-schema>`.
+
+.. code-block:: yaml
+   :emphasize-lines: 3-
+
+   v2:
+      # ...
+      batch_connect:
+        ssh_allow: false
 
 .. _set-illegal-job-name-characters:
 

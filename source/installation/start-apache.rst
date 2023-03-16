@@ -9,17 +9,29 @@ Please see section :ref:`add-ldap` for a more advanced and recommended authentic
 
 #. Start the Apache HTTP Server:
 
-   CentOS/RHEL 7
-     .. code-block:: sh
+   .. tabs::
 
-        sudo systemctl start httpd24-httpd
-        sudo systemctl enable httpd24-httpd
+      .. tab:: RHEL/CentOS 7
 
-   CentOS/RHEL 8
-     .. code-block:: sh
+        .. code-block:: sh
 
-        sudo systemctl start httpd
-        sudo systemctl enable httpd
+          sudo systemctl start httpd24-httpd
+          sudo systemctl enable httpd24-httpd
+
+
+      .. tab:: RHEL/Rocky 8
+
+         .. code-block:: sh
+
+          sudo systemctl start httpd
+          sudo systemctl enable httpd
+
+      .. tab:: Ubuntu
+
+         .. code-block:: sh
+
+          sudo systemctl start apache2
+          sudo systemctl enable apache2
 
    .. warning::
 
@@ -31,7 +43,6 @@ Please see section :ref:`add-ldap` for a more advanced and recommended authentic
 
    If using the default OnDemand authentication mechanism, you must start the ``ondemand-dex`` service.
 
-   CentOS/RHEL 7 & 8
      .. code-block:: sh
 
         sudo systemctl start ondemand-dex

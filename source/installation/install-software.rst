@@ -1,7 +1,7 @@
 .. _install-software:
 
-Install Software From RPM
-=========================
+Install Software From Package
+=============================
 
 We will use `Software Collections`_ to satisfy majority of the following
 software requirements:
@@ -9,63 +9,94 @@ software requirements:
 - `Apache HTTP Server 2.4`_
 - Ruby 2.7 with :command:`rake`, :command:`bundler`, and development
   libraries
-- Node.js 12
+- Node.js 14
 
 .. note::
 
    This tutorial is run from the perspective of an account that has
    :command:`sudo` access but is not root.
 
-#. Enable the dependency repositories **on CentOS/RHEL 7 only**:
+.. warning::
 
-   CentOS 7
-     .. code-block:: sh
+   Be sure to check :ref:`Supported Operating Systems <os-support>` before proceeding with install to verify
+   you are on a supported operating system.
 
-        sudo yum install centos-release-scl epel-release
+..  warning::
 
-   RHEL 7
-     .. code-block:: sh
+  If you are an administrator responsible for Open OnDemand, you are now an administrator of
+  Apache Httpd as well.  As such, you should get comfortable with it as from time to time you will
+  have to troubleshoot it.
 
-        sudo yum install epel-release
-        sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
-        # Repository 'rhel-server-rhscl-7-rpms' is enabled for this system.
+1. Enable the dependency repositories:
 
-   .. warning::
+.. tabs::
 
-      For **RedHat** you may also need to enable the *Optional* channel and
-      attach a subscription providing access to RHSCL to be able to use this
-      repository.
+   .. tab:: CentOS 7
 
-#. Enable dnf modules and repositories for dependencies **on CentOS/RHEL 8 only**:
+      .. code-block:: sh
 
-    .. code-block:: sh
+         sudo yum install centos-release-scl epel-release
 
-       dnf module enable ruby:2.7
-       dnf module enable nodejs:12
 
-    **CentOS 8 only**
+   .. tab:: RockyLinux 8
 
-    .. code-block:: sh
+      .. code-block:: sh
 
-       sudo dnf config-manager --set-enabled powertools
+         sudo dnf config-manager --set-enabled powertools
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:2.7 nodejs:14
 
-    **RedHat 8 only**
+   .. tab:: RHEL 7
 
-    .. code-block:: sh
+      .. warning::
 
-       sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+         You may also need to enable the *Optional* channel and
+         attach a subscription providing access to RHSCL to be able to use this
+         repository.
 
-#. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
+      .. code-block:: sh
 
-     .. code-block:: sh
+         sudo yum install epel-release
+         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
 
-        sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
 
-#. Install OnDemand and all of its dependencies:
+   .. tab:: RHEL 8
 
-   .. code-block:: sh
+      .. warning::
 
-      sudo yum install ondemand
+         You may also need to enable the *Optional* channel and
+         attach a subscription providing access to RHSCL to be able to use this
+         repository.
+
+      .. code-block:: sh
+
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:2.7 nodejs:14
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+
+2. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_ and install:
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+
+            sudo yum install ondemand
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates wget
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.1_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.1_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.1_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
 
 #. (Optional) Install :ref:`authentication-dex` package
 
@@ -74,15 +105,34 @@ software requirements:
       If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
       See :ref:`add-ldap` for details on configuration of LDAP.
 
-   .. code-block:: sh
+   .. tabs::
 
-      sudo yum install ondemand-dex
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum install ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt install ondemand-dex
 
 #. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
 
-   .. code-block:: sh
+   .. tabs::
 
-      sudo yum install ondemand-selinux
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum install ondemand-selinux
+
+      .. tab:: apt
+
+          Not available for Debian systems.
 
 .. note::
 
@@ -105,6 +155,21 @@ software requirements:
       min_uid: 500
 
       # ...
+
+Building From Source
+--------------------
+
+Building from source is left as an exercise to the reader. 
+     
+It's not particularly difficult to build the code, but installing it with all the various files is. Should you be interested, 
+review the ``Dockerfile`` and packaging specs for what would be involved.
+
+- https://github.com/OSC/ondemand/blob/master/Dockerfile
+- https://github.com/OSC/ondemand/tree/master/packaging
+
+If you'd like a package built for a system that we don't currently support, feel free to open a ticket!
+
+- https://github.com/OSC/ondemand/issues/new
 
 .. _software collections: https://www.softwarecollections.org/en/
 .. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/

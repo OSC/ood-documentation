@@ -23,6 +23,45 @@ Highlights in 2.0:
 - `Memcached Ruby gem available for use in apps`_
 - `Dependency updates`_
 
+Upgrading to v2.0.29
+--------------------
+
+Major Changes
+.............
+
+Require NodeJS 14
+*****************
+
+NodeJS 14 is now required as NodeJS 12 is currently End-Of-Life.
+
+Upgrade directions
+..................
+
+.. tabs::
+
+   .. tab:: RHEL/CentOS 7
+
+      .. code-block:: sh
+
+         sudo yum update ondemand
+
+   .. tab:: RHEL/Rocky Linux 8
+
+      .. code-block:: sh
+
+         sudo dnf module reset nodejs
+         sudo dnf module enable nodejs:14
+         sudo dnf update ondemand
+
+   .. tab:: Ubuntu
+
+      .. code-block:: sh
+
+         wget -O /tmp/ondemand-release-web_2.0.1_all.deb https://apt.osc.edu/ondemand/2.0/ondemand-release-web_2.0.1_all.deb
+         sudo apt -o Dpkg::Options::="--force-confnew" install /tmp/ondemand-release-web_2.0.1_all.deb
+         sudo apt update
+         sudo apt install --only-upgrade ondemand
+
 Upgrading from v1.8
 -------------------
 
@@ -92,7 +131,7 @@ each other, so passenger apps will also need to update their bundler dependencie
 ActiveJobs configuration changes
 ********************************
 
-Because ActiveJobs now integrated with the Dashboard app, configuration files are no longer
+Because ActiveJobs is now integrated with the Dashboard app, configuration files are no longer
 being read from ``/etc/ood/config/apps/activejobs``.
 
 If you have initializers here in this directory, they need to move to
@@ -109,7 +148,7 @@ Because Files app is now integrated with the Dashboard app, configurations
 in ``/etc/ood/config/apps/files`` need to move to ``/etc/ood/config/apps/dashboard`` for
 them to take effect.
 
-The use of the environment variable ``OOD_SHELL`` to hide the Terminal button has been deprecated 
+The use of the environment variable ``OOD_SHELL`` to hide the Terminal button has been deprecated
 and can now be set with the ``files_enable_shell_button`` parameter in the ``/etc/ood/config/ondemand.d/*.yml`` file.
 
 Changes to the interactive cards
@@ -210,7 +249,7 @@ Upgrade directions
       sudo yum clean all
       sudo yum update ondemand
 
-#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+#. (Optional) If using Dex based authentication, update the ``ondemand-dex`` package.
 
    .. code-block:: sh
 
@@ -274,7 +313,7 @@ for a particular user.
 
 2.0 now allows sites to pin a grid of application icons to the dashboard for easy access
 and to a subset of apps that you want to feature. The grid layout of application icons
-is is meant to give users a desktop look and feel to the dashboard.
+is meant to give users a desktop look and feel to the dashboard.
 
 There are several strategies available to choose which apps to pin. For example, metadata
 in the app manifests could specify a field_of_science attribute, and then the pinned apps
@@ -295,13 +334,13 @@ See the :ref:`documentation on customizing dashboard layouts <dashboard_custom_l
 Adding metadata to app manifests
 ................................
 
-App manifest files now allow for metedata fields for grouping and diplay in the all apps table.
+App manifest files now allow for metadata fields for grouping and display in the all apps table.
 See :ref:`documentation on manifest files <app-development-manifest>` for more details.
 
 Shell app now has themes
 ........................
 
-The shell app now allows for users to choose a color themes than the default and ships with
+The shell app now allows for users to choose a color theme other than the default and ships with
 thirteen extra themes.
 
 
@@ -322,7 +361,7 @@ Passenger application processes. These are all now served by a single Passenger 
 
 This change has the following effects:
 
-- The URL has changed, but redirects from the old URLs should still work for backwards compatibilty.
+- The URL has changed, but redirects from the old URLs should still work for backwards compatibility.
 - The navbar and branding across the dashboard is visible in Active Jobs and File Editor
 - the Active Jobs and Files apps both load without opening a new window
 - the Active Jobs and Files apps load much faster than before

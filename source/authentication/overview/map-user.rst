@@ -3,100 +3,116 @@
 Setup User Mapping
 ==================
 
-Every HTTP request sent to the OnDemand portal triggers a call to the
-``user_map_cmd`` to map the remote authenticated user name to the
-local system user name. Mapping to the local system user not only restricts
-access of OnDemand to local users but it is also required by the OnDemand proxy
-to traffic the HTTP data to the user's corresponding per-user NGINX (PUN)
-server.
+Every authenticated HTTP request sent to the OnDemand portal has a ``REMOTE_USER``.
+This ``REMOTE_USER`` can be an email like ``annie.oakley@osc.edu`` and needs to be
+mapped to a Linux system user like ``aoakley``.
 
-The :ref:`ood-portal-generator` and its corresponding
-:ref:`ood-portal-generator-configuration` are used to configure both the system
-command that performs the mapping (:ref:`user_map_cmd
-<ood-portal-generator-user-map-cmd>`) and the argument fed to the system
-command (:ref:`user_env <ood-portal-generator-user-env>`). By default these
-configuration options are defined as:
+This is what we call user mapping.  Mapping apache's ``REMOTE_USER`` from an
+authenticated request to a Linux system user.
 
-.. code-block:: yaml
+Mapping to the local system user not only restricts access of OnDemand to local users
+but it is also required by the OnDemand proxy to traffic the HTTP data to the user's
+corresponding per-user NGINX (PUN) server.
 
-   # /etc/ood/config/ood_portal.yml
-   ---
-   # ...
-   user_map_cmd: '/opt/ood/ood_auth_map/bin/ood_auth_map.regex'
-   user_env: 'REMOTE_USER'
+Versions prior to 2.0 relied on :ref:`user_map_cmd <ood-portal-generator-user-map-cmd>` to do this.
+Since 2.0 you should use the simpler and faster `user_map_match`_.
 
-which uses regex user mapping for the mapping command and ``REMOTE_USER``
-(this variable holds the name of the authenticated user by the web server) as
-its command line argument.
+Both with variations will be discussed here.
 
-This is equivalent to calling from the command line:
 
-.. code-block:: sh
+Remote User
+-----------
 
-   /opt/ood/ood_auth_map/bin/ood_auth_map.regex "$REMOTE_USER"
+It's worth discussusing where ``REMOTE_USER`` is comfing from.  When apache
+has successfully authenticates a request it sets the variable ``REMOTE_USER``
+from, well, the remote.
 
-which just echos back the value of ``REMOTE_USER``.
+This is generally a return value from the authentication system like an
+:ref:`open id connect provider <authentication-oidc>`.  It's common for this
+to be an email address.
 
-.. note::
+You *can* configure `user_env`_ to use something other than ``REMOTE_USER``, but
+it's unlikely you should need to.
 
-   The default user mapping employed by an OnDemand portal **directly** maps
-   the remote authenticated user name to the local user name. So the Apache
-   authentication module used is expected to set the correct local user name in
-   ``REMOTE_USER``.
+If you're using an OpenID Connect provider you may need to set 
+`oidc_remote_user_claim`_ as this setting
+tells apache how to set ``REMOTE_USER`` from the claim response.
 
-Open OnDemand provides two facilities for user mapping. One through regular
-expressions (the default) and another through a lookup file.  Both of which
-are documented here.  As an alternative you can provide your own custom script
-and simply set the ``user_map_cmd`` to use it.
 
-Regex User Mapping
-------------------
+Reguluar Expression User Mapping
+--------------------------------
 
-Usage for the regular expression (regex) user mapping script is below.
+The simplest and fastest way to map a ``REMOTE_USER`` to a system user is through
+:ref:`user_map_match <ood-portal-generator-user-map-match>`.  It isn't directly
+regular expression matching, but it's close enough for most use cases.
+See it's documentation for examples and more.
 
-.. code-block:: sh
+Dex Automatic Configuration
+---------------------------
 
-   /opt/ood/ood_auth_map/bin/ood_auth_map.regex [options] <authenticated_user>
+When using the OpenId Connector `dex`_ and setting `oidc_remote_user_claim`_
+to ``email`` we automatically set `user_map_match`_ to ``^([^@]+)@.*$`` as
+a convienience.
 
-With the options:
+User Map Command for Advanced Mappings
+--------------------------------------
 
-.. option:: -r <regex>, --regex <regex>
+Versions prior to 2.0 provided a default `user_map_cmd`_ in
+``/opt/ood/ood_auth_map/bin/ood_auth_map.regex``.  We no longer distribute
+this file.
 
-   Default: ``^(.+)$``
+Sites instead need to write their own mapping script should they need
+this capability.  Set this custom mapping script in the `user_map_cmd`_ 
+configuration and be sure to make this mapping script executable.
 
-   The regular expression used to capture the local system username.
+.. warning::
+  Be aware, this script is executed on every request.
 
-Regex User Mapping Examples
-***************************
+Let's take a simple example.  It uses bash's builtin regular expression matching
+against ``([^@]+)@osc.edu`` - an osc dot edu email address.  If that matches against 
+``$1`` (the ``REMOTE_USER``), then we return an all lowercase version of the first part
+of an email address.
 
-Here are some examples of how to use the default regex mapping script.
-
-To echo back the username supplied (useful for LDAP authentication
-and the default behavior):
-
-.. code-block:: sh
-
-   $ /opt/ood/ood_auth_map/bin/ood_auth_map.regex 'bob'
-   bob
-   $
-
-To capture the local username from an email address.
+The contract this script has with ood is that ``REMOTE_USER`` is passed into it
+as the first arguement, ``$1``.  The script will return 0 and output the match if
+it can correctly map the user. Otherwise, if it fails, it will output nothing and
+exit 1.
 
 .. code-block:: sh
 
-   $ /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex '^(\w+)@center.edu$' 'bob@center.edu'
-   bob
-   $
+  #!/bin/bash
 
-If no match is found from the supplied regular expression and authenticated username
-that an empty string is returned instead:
+  REX="([^@]+)@osc.edu"
+  INPUT_USER="$1"
+
+  if [[ $INPUT_USER =~ $REX ]]; then
+    MATCH="${BASH_REMATCH[1]}"
+    echo "$MATCH" | tr '[:upper:]' '[:lower:]'
+  else
+    # can't write to standard out or error, so let's use syslog
+    logger -t 'ood-mapping' "cannot map $INPUT_USER"
+
+    # and exit 1
+    exit 1
+  fi
+
+If I were to run and test this script - it would return values like these:
 
 .. code-block:: sh
 
-   $ /opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex '^(\w+)@center.edu$' 'bob@mit.edu'
+  $ /opt/site/custom_mapping.sh Annie.Oakley@osc.edu
+  annie.oakley
+  $ /opt/site/custom_mapping.sh jessie@osc.edu
+  jessie
+  $ /opt/site/custom_mapping.sh jessie.owens@harvard.edu
+  $ echo $?
+  $ 1
+  $ journalctl -t ood-mapping
+  -- Journal begins at Tue 2020-06-02 06:45:03 EDT, ends at Wed 2022-01-19 15:11:37 EST. --
+  Jan 19 15:03:14 localhost.localdomain ood-mapping[149352]: cannot map jessie.owens@harvard.edu
+  $
 
-   $
-
+.. _gridmap_user_mapping:
 
 File User Mapping
 -----------------
@@ -107,10 +123,14 @@ This script parses a mapfile with each entry given in the following format:
 
    "authenticated_username" local_username
 
+
 and separated by newlines. The script will systematically parse each line in
 the mapfile looking for a match to the ``authenticated_username``. When a match
 is found it breaks from the scan and outputs the ``local_username`` to
 ``STDOUT``.
+
+.. warning::
+  Be aware, this script is executed and reads a user mapping file on every request.
 
 .. code-block:: sh
 
@@ -154,24 +174,26 @@ authenticated username that an empty string is returned instead:
 
    $
 
-Custom Mapping
---------------
+Debugging User Mapping
+----------------------
 
-As mentioned previously the :ref:`ood-portal-generator` configuration options
-of interest are:
+When debugging user mapping, it's always helpful to increase the `lua_log_level`_ to
+debug.
 
-- :ref:`user_map_cmd <ood-portal-generator-user-map-cmd>`
-- :ref:`user_env <ood-portal-generator-user-env>`
+In doing so you'll see messages like that detail the mapping input, output and 
+times like ``Mapped 'jeff@localhost' => 'jeff' [0.089 ms]``.
 
-Indeed if you need to use the options to the regex or file user mapping scripts
-that come with Open OnDemand you'll need to specify them in the ``user_map_cmd``.
-
-After modifying :file:`/etc/ood/config/ood_portal.yml` with the mapping you
-want you would then build and install the new Apache configuration file with:
+The full message would look like this.
 
 .. code-block:: sh
 
-   sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+  /var/log/httpd/error.log:[Wed Jan 19 20:45:36.955855 2022] [lua:debug] [pid 39:tid 140070995539712] @/opt/ood/mod_ood_proxy/lib/ood/user_map.lua(21): [client 10.0.2.100:40172] Mapped 'jeff@localhost' => 'jeff' [0.089 ms], referer: http://localhost:5556/
 
-Finally you will need to restart your Apache HTTP Server for the changes to
-take effect.
+
+
+.. _dex: authentication-dex
+.. _user_map_match: ood-portal-generator-user-map-match
+.. _user_map_cmd: ood-portal-generator-user-map-cmd
+.. _user_env: ood-portal-generator-user-env
+.. _oidc_remote_user_claim: ood-portal-generator-user-map-match
+.. _lua_log_level: ood-portal-generator-lua-log-level
