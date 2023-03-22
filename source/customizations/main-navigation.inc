@@ -58,7 +58,7 @@ use the :ref:`nav_categories configuration property <nav_categories>`.
 
 .. warning::
 
-  Prior to 2.1, controlling which categories appear in the navigation bar was controlled
+  Prior to 3.0, controlling which categories appear in the navigation bar was controlled
   by a Ruby initializer that you needed to modify. While the 2.x series will still support
   this scheme, Open OnDemand 3.0 will not.  3.0 will only support the ``nav_categories``
   property.
@@ -106,7 +106,7 @@ and create a `manifest.yml <app-development-manifest>`_.
 Fully customizing the navigation bar
 ....................................
 
-Since 2.1, Open OnDemand provides a way to completely control the navigation bar
+Since 3.0, Open OnDemand provides a way to completely control the navigation bar
 through the ``nav_bar`` and ``help_bar`` :ref:`ondemand-d-ymls` configuration properties.
 
 .. warning::
