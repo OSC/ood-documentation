@@ -37,7 +37,7 @@ cluster
   .. warning::
     Using the ``cluster`` option is discouraged. This is because maintenance
     outages on the Slurm DB will propogate to Open OnDemand.  Instead sites
-    should use different ``conf`` files for each cluster to limit maintanence outages.
+    should use different ``conf`` files for each cluster to limit maintenance outages.
 bin
   The path to the Slurm client installation binaries.
 conf
