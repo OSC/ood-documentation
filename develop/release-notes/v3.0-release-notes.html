@@ -130,6 +130,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">v3.0 Release Notes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#administrative-changes">Administrative changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thanks">Thanks!</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#details-of-administrative-changes">Details of administrative changes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#deprecations">Deprecations</a></li>
@@ -276,6 +277,29 @@
 <li><p><a class="reference internal" href="#submitting-help-tickets">Submitting help tickets</a></p></li>
 </ul>
 </div>
+<div class="section" id="thanks">
+<h2>Thanks!<a class="headerlink" href="#thanks" title="Permalink to this headline">¶</a></h2>
+<p>We’d like to thank a bunch of folks’ for contributing to this release.
+As we only know the github username, that’s what’s being referenced here.</p>
+<p>We’d like to thank Harvard for many contributions around layouts
+and navitation. Notably, <code class="docutils literal notranslate"><span class="pre">adaybujeda</span></code> and <code class="docutils literal notranslate"><span class="pre">whorka</span></code> to name a few.</p>
+<p>We’d like to thank CSC Finland for contributing remote file browsing.
+Specifically <code class="docutils literal notranslate"><span class="pre">robinkar</span></code> and <code class="docutils literal notranslate"><span class="pre">CSC-swesters</span></code>.</p>
+<p>We’d also like to give a big thanks to these folks’ for their first
+time contributing to Open OnDemand.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Micket</span></code> made their first contribution in #1426</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aebruno</span></code> made their first contribution in #1766</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mayank-agarwal-96</span></code> made their first contribution in #1776</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">whorka</span></code> made their first contribution in #1854</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SaumyaBhushan</span></code> made their first contribution in #1992</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">davidmonro</span></code> made their first contribution in #2091</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mnakao</span></code> made their first contribution in #2194</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">georgiastuart</span></code> made their first contribution in #2323</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">covert8</span></code> made their first contribution in #2327</p></li>
+</ul>
+<p>If we’ve missed listing anyone here, please let us know!</p>
+</div>
 <div class="section" id="details-of-administrative-changes">
 <h2>Details of administrative changes<a class="headerlink" href="#details-of-administrative-changes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="breaking-changes">
@@ -325,6 +349,18 @@ It affects initializers you may have written, for example to <a class="reference
 this, but sites should use the <code class="docutils literal notranslate"><span class="pre">nav_categories</span></code> property instead.</p>
 <p>See <a class="reference internal" href="../customizations.html#limit-auto-generated-menu-bars"><span class="std std-ref">Limit auto generated menu bars</span></a> and the
 <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a> for more details.</p>
+</div>
+<div class="section" id="whitelist-blacklist-configs-are-deprecated">
+<h4>whitelist &amp; blacklist configs are deprecated<a class="headerlink" href="#whitelist-blacklist-configs-are-deprecated" title="Permalink to this headline">¶</a></h4>
+<p>These configurations that have whitelist in the name have been deprecated
+and replaced with allowlist or blocklist.</p>
+<p>The configurations <code class="docutils literal notranslate"><span class="pre">maintenance_ip_whitelist</span></code> for configuring maintenance ips
+has been replaced by <code class="docutils literal notranslate"><span class="pre">maintenance_ip_allowlist</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">WHITELIST_PATH</span></code> environment variable for configuring inaccessible paths
+in the file browser has been replaced by <code class="docutils literal notranslate"><span class="pre">OOD_ALLOWLIST_PATH</span></code>.</p>
+<p>ACL configurations in <code class="docutils literal notranslate"><span class="pre">cluster.d</span></code> files now use  <code class="docutils literal notranslate"><span class="pre">allowlist</span></code> and <code class="docutils literal notranslate"><span class="pre">blocklist</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">whitelist</span></code> and <code class="docutils literal notranslate"><span class="pre">blacklist</span></code>, though sites should just use
+Linux FACLs to control these files instead of these configurations.</p>
 </div>
 </div>
 <div class="section" id="dependency-updates">
