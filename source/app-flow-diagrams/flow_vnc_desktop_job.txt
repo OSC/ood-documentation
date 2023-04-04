@@ -1,0 +1,52 @@
+@startuml
+
+title VNC Desktop Job
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant Dashboard
+participant "Scheduler Host"
+
+
+User -[#red]> "Apache Httpd": initial request
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+
+User -[#red]> "Apache Httpd": POST form
+"Apache Httpd" -[#blue]> Dashboard: proxy request
+Dashboard -[#olive]> "Scheduler Host": request resources
+"Scheduler Host" --[#olive]> Dashboard: scheduler response
+Dashboard --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+"Compute Node" -[#black]> "Compute Node": start VNC server
+"Compute Node" -[#black]> "Compute Node": start websockify
+"Compute Node" -[#black]> "Compute Node": start Desktop
+
+User -[#red]> "Apache Httpd": https request to noVNC
+"Apache Httpd" -[#blue]> Dashboard: proxy noVNC request
+Dashboard -[#blue]> "Compute Node": noVNC request to VNC Server
+"Compute Node" -[#black]> "Compute Node": authenticate request credentials
+"Compute Node" --[#blue]> Dashboard : VNC Server response
+"Dashboard" --[#blue]> "Apache Httpd": noVNC html response
+"Apache Httpd" --[#red]> User: https noVNC html response
+
+User -[#purple]> "Apache Httpd": connect to websockify
+"Apache Httpd" -[#dodgerblue]> "Compute Node": proxy websockify request
+"Compute Node" --[#dodgerblue]> "Apache Httpd": proxy websockify response
+"Apache Httpd" --[#purple]> "User": websockify response
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:blue>   </back>| http over unix socket |
+|<back:purple>   </back>| wss over tcp |
+|<back:dodgerblue>   </back>| ws over tcp |
+|<back:olive>   </back>| scheduler specific |
+|<back:black>   </back>| commands |
+endlegend
+
+@enduml

@@ -1,7 +1,7 @@
 .. _resource-manager-torque:
 
-Configure Torque
-================
+Torque
+======
 
 A YAML cluster configuration file for a Torque/PBS resource manager on an HPC
 cluster looks like:
@@ -34,6 +34,8 @@ lib
   The path to the Torque client libraries.
 bin
   The path to the Torque client binaries.
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 bin_overrides
   Replacements/wrappers for Torque's job submission and control clients. *Optional*
 
@@ -42,5 +44,4 @@ bin_overrides
 .. warning::
 
    The corresponding cluster's batch server will need to be configured with the
-   Open OnDemand server as a valid ``submit_host`` to allow the
-   :ref:`job-composer` to submit jobs to it.
+   Open OnDemand server as a valid ``submit_host`` to allow the jobs to be submitted.

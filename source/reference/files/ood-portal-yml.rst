@@ -35,6 +35,7 @@ Configure General Options
 
           listen_addr_port: "443"
 
+.. _ood-portal-generator-servername:
 .. describe:: servername (String, null)
 
      the host name used to access the Open OnDemand portal
@@ -223,24 +224,24 @@ Configure General Options
 
           use_maintenance: false
 
-.. describe:: maintenance_ip_whitelist (Array<String>)
+.. describe:: maintenance_ip_allowlist (Array<String>)
 
      List of IP regular expressions to be allowed to access OnDemand
      when maintenance is enabled
 
      Default
-       No IPs are whitelisted
+       No IPs are allowed.
 
        .. code-block:: yaml
 
-          maintenance_ip_whitelist: []
+          maintenance_ip_allowlist: []
 
      Example
        Allow 192.168.1.0/24 and 10.0.0.1 to access OnDemand during maintenance
 
        .. code-block:: yaml
 
-          maintenance_ip_whitelist:
+          maintenance_ip_allowlist:
             - '192.168.1..*'
             - '10.0.0.1'
 
@@ -432,27 +433,26 @@ Configure General Options
 
 .. describe:: auth (Array<String>)
 
-     the list of Apache directives defining how authentication is handled for
-     various protected resources on the website
+    The list of Apache directives defining how authentication is handled for
+    various protected resources on the website. See :ref:`authentication` for
+    more details.
 
-     Default
-       Use basic authentication with a plain-text password file.
+    Default
+      Empty. No authentication. Open OnDemand will not work at all without authentication
+      of some kind.
 
-       .. code-block:: yaml
+      .. code-block:: yaml
+
+          auth: []
+
+    Example
+      Open ID Connect authentication.
+
+      .. code-block:: yaml
 
           auth:
-            - "AuthType Basic"
-            - "AuthName \"private\""
-            - "AuthUserFile \"/opt/rh/httpd24/root/etc/httpd/.htpasswd\""
-            - "RequestHeader unset Authorization"
+            - "AuthType openid-connect"
             - "Require valid-user"
-
-     Example
-       See:
-
-       - :ref:`add-ldap`
-       - :ref:`authentication-shibboleth`
-       - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
 
 .. describe:: root_uri (String)
 
@@ -460,7 +460,7 @@ Configure General Options
      (e.g., ``https://www.example.com/``)
 
      Default
-       Redirect the user to the :ref:`dashboard`
+       Redirect the user to the dashboard
 
        .. code-block:: yaml
 
@@ -486,7 +486,7 @@ Configure General Options
           analytics: null
 
      Example
-       See :ref:`analytics`
+       See :ref:`google-analytics`
 
 Configure Public Assets
 -----------------------
@@ -535,11 +535,11 @@ public assets through the website.
 Configure Logout Redirect
 -------------------------
 
-The :ref:`dashboard` will send the user to this URI when they click the Logout
+The dashboard will send the user to this URI when they click the Logout
 button. This URI will then redirect the user to the logout mechanism for your
 corresponding authentication mechanism. If either of these properties are
 ``null`` then users will get an error when they try to logout from the
-:ref:`dashboard`.
+dashboard.
 
 .. describe:: logout_uri (String, null)
 
@@ -564,7 +564,7 @@ corresponding authentication mechanism. If either of these properties are
      the URI the user is redirected to when accessing the logout URI above
 
      Default
-       Fallback to the :ref:`dashboard` log out page
+       Fallback to the dashboard's log out page
 
        .. code-block:: yaml
 
@@ -634,8 +634,8 @@ assets and links supplied by the web server are relative and not absolute.
 
 .. describe:: host_regex (String)
 
-     the regular expression used as a whitelist for allowing a user to reverse
-     proxy to a given host
+     the regular expression used as a allowlist for allowing a user to reverse
+     proxy to a given host.
 
      Default
        Allow proxying to all hosts in the world (please change this if you
@@ -1138,18 +1138,18 @@ to ``null`` will disable this feature.
      as well as only using HTTP for proxied communication.
 
      Default
-       The default value is null
-
-       .. code-block:: yaml
-
-          dex_uri: null
-
-     Example
-       Enable Dex URI and Dex behind a reverse proxy
+       The default value is /dex
 
        .. code-block:: yaml
 
           dex_uri: /dex
+
+     Example
+       Disable Dex behind a reverse proxy
+
+       .. code-block:: yaml
+
+          dex_uri: false
 
 .. describe:: dex (Hash, null, false)
 

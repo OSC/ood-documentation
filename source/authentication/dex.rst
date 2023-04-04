@@ -21,7 +21,7 @@ Installing OnDemand Dex from source
 
 Requirements:
 
-- Go version 1.14.x with the ``go`` binary in ``PATH``
+- Go version 1.16.x with the ``go`` binary in ``PATH``
 - Git
 - Make
 
@@ -32,7 +32,7 @@ Build and install the ondemand-dex binary:
       GOPATH=$(go env GOPATH)
       go get github.com/dexidp/dex
       cd $GOPATH/src/github.com/dexidp/dex
-      make
+      make build
       sudo install -m 0755 bin/dex /usr/sbin/ondemand-dex
 
 Add the ``ondemand-dex`` user and group:
@@ -40,7 +40,7 @@ Add the ``ondemand-dex`` user and group:
    .. code-block:: sh
 
       sudo groupadd -r ondemand-dex
-      sudo useradd -r -d /var/lib/ondemand-dex -g ondemand-dex -s /sbin/nologin -c "OnDemand Dex"
+      sudo useradd -r -d /var/lib/ondemand-dex -g ondemand-dex -s /sbin/nologin -c "OnDemand Dex" ondemand-dex
 
 Get ``ondemand-dex`` repo and install web files and systemd unit file
 
@@ -59,11 +59,10 @@ OnDemand Dex is configured by modifying the Open OnDemand Portal :ref:`ood-porta
 
 The default location for Dex configurations is :file:`/etc/ood/dex/config.yaml`.
 
-When changes are needed for OnDemand Dex run the following command:
+When changes are needed for OnDemand Dex :ref:`restart-apache` and then restart Dex with:
 
    .. code-block:: sh
 
-      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
       sudo systemctl restart ondemand-dex
 
 .. warning::
@@ -83,10 +82,30 @@ The service for OnDemand Dex is ``ondemand-dex``:
       sudo systemctl enable ondemand-dex.service
       sudo systemctl start ondemand-dex.service
 
+OnDemand Dex behind Apache reverse proxy
+----------------------------------------
+
+By default Dex sits behing Apache and is accessed via a reverse proxy.
+OnDemand Dex behind the reverse proxy logic will force Dex to listen only on ``localhost`` and only
+via HTTP.
+
+To disable Dex behind a reverse proxy set ``dex_uri`` to ``false`` or ``null``
+
+   .. code-block:: yaml
+
+      dex_uri: false
+
+When Dex is not behind a reverse proxy firewall adjustments may be needed.
+See :ref:`Dex Firewall <dex-firewall>` for instructions on opening Dex ports through your firewall.
+
 Dex Firewall
 ------------
 
 .. _dex-firewall:
+
+.. note::
+
+   The Dex firewall changes are only needed when ``dex_uri`` is set to ``false`` or ``null``.
 
 By default when using SSL, Dex will use port ``5554`` for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is ``5556``.  The port being used by Dex must be externally accessible.
 
@@ -101,21 +120,6 @@ Iptables example:
 
       $ sudo iptables -I INPUT -p tcp -m tcp --dport 5554 -j ACCEPT
       $ sudo iptables-save > /etc/sysconfig/iptables
-
-Configuring OnDemand Dex behind Apache reverse proxy
-----------------------------------------------------
-
-The OnDemand Dex service can be proxied behind the Apache web service using a reverse proxy.
-This would mean port 5554 or 5556 would not need to be opened.
-
-Enabling the OnDemand Dex reverse proxy logic will force Dex to listen only on ``localhost`` and only
-via HTTP.
-
-Example of configuration change to put Dex behind the Apache reverse proxy
-
-   .. code-block:: yaml
-
-      dex_uri: /dex
 
 Configuring OnDemand Dex for LDAP
 ---------------------------------

@@ -77,10 +77,10 @@ installation.
      - File system path
    * - dev
      - :file:`/dev/{app_name}/\*`
-     - :file:`~{user}/ondemand/dev/{app_name}`
+     - :file:`/var/www/ood/apps/dev/{app_owner}/gateway/{app_name}`
    * - usr
      - :file:`/usr/{app_owner}/{app_name}/\*`
-     - :file:`/var/ww/ood/apps/usr/{app_owner}/gateway/{app_name}`
+     - :file:`/var/www/ood/apps/usr/{app_owner}/gateway/{app_name}`
    * - sys
      - :file:`/sys/{app_name}/\*`
      - :file:`/var/www/ood/apps/sys/{app_name}`

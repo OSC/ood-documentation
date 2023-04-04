@@ -1,0 +1,40 @@
+@startuml
+
+title Start Shell Session Flow
+autonumber "<b>[0]"
+
+participant User
+participant "Apache Httpd"
+participant "PUN Shell App"
+participant "SSH Session"
+
+
+User -[#red]> "Apache Httpd": initial request
+"Apache Httpd" -[#blue]> "PUN Shell App": proxy request
+"PUN Shell App" --[#blue]> "Apache Httpd": HTML response
+"Apache Httpd" --[#red]> User: HTML response
+
+
+User -[#red]> "Apache Httpd": HTTP request to initiate websocket connection
+"Apache Httpd" -[#blue]> "PUN Shell App": proxy request
+"PUN Shell App" --[#blue]> "Apache Httpd": response upgrade websocket connection
+"Apache Httpd" --[#red]> User: response
+
+
+User -> "Apache Httpd": websocket connection
+"Apache Httpd" -> "PUN Shell App" ++: proxy request
+"PUN Shell App" -> "SSH Session": start SSH session
+"PUN Shell App" -> "SSH Session": proxy traffic from browser as input to session
+"PUN Shell App" -> "Apache Httpd" --: proxy traffic from SSH session output to browser
+"Apache Httpd" --> User: response: proxy traffic from SSH session output to browser
+
+
+
+legend left
+|= |= Protocol |
+|<back:red>   </back>| https over tcp |
+|<back:green>   </back>| commands |
+|<back:blue>   </back>| http over unix socket |
+endlegend
+
+@enduml

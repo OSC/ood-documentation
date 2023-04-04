@@ -14,7 +14,6 @@ make up the Open OnDemand infrastructure.
    reference/files/ood-portal-yml
    reference/files/nginx-stage-yml
    reference/files/ondemand-d-ymls
-   reference/files/submit-yml-erb
 
 .. toctree::
    :maxdepth: 1
@@ -22,3 +21,9 @@ make up the Open OnDemand infrastructure.
 
    reference/commands/ood-portal-generator
    nginx-stage <reference/commands/nginx-stage/usage>
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Overviews
+
+   reference/pun-environment

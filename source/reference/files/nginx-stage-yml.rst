@@ -91,6 +91,52 @@ Configuration Options
       If this is not set then most apps will use the default title ``Open
       OnDemand``.
 
+.. describe:: pun_custom_env (Object, null)
+
+  Custom environment variables to set for the PUN environment.
+
+  Default
+    No new environment variables.
+
+    .. code-block:: yaml
+
+      pun_custom_env: {}
+
+  Example
+    Set some custom environment variables.
+
+    .. code-block:: yaml
+
+      pun_custom_env:
+         OOD_DASHBOARD_TITLE: "Open OnDemand"
+         OOD_BRAND_BG_COLOR: "#53565a"
+         OOD_BRAND_LINK_ACTIVE_BG_COLOR: "#fff"
+
+.. describe:: pun_custom_env_declarations (Array, null)
+
+  List of environment variables to pass onto PUN environment
+  from /etc/ood/profile. Example below shows some default
+  env vars that are declared.
+
+  Default
+    No declarations of new environment variables.
+
+    .. code-block:: yaml
+
+      pun_custom_env: {}
+
+  Example
+    Decleary several environment variables to pass to the PUN.
+
+    .. code-block:: yaml
+
+      pun_custom_env:
+        - PATH
+        - LD_LIBRARY_PATH
+        - MANPATH
+        - SCLS
+        - X_SCLS
+
 .. describe:: template_root (String)
 
    the root directory containing the ERB templates used in generating the NGINX
@@ -298,6 +344,24 @@ Configuration Options
         passenger_options:
           passenger_max_preloader_idle_time: 300
 
+.. describe:: nginx_file_upload_max (Integer, 10737420000)
+
+  Max file upload size in bytes (e.g., 10737420000)
+
+   Default
+      ~10 GB max upload.
+
+     .. code-block:: yaml
+
+        nginx_file_upload_max: 10737420000
+
+   Example
+      Double the max upload.
+
+     .. code-block:: yaml
+
+        nginx_file_upload_max: 21474840000
+
 .. describe:: pun_config_path (String)
 
    the interpolated path to the user's PUN config file
@@ -375,6 +439,43 @@ Configuration Options
      .. code-block:: yaml
 
         pun_error_log_path: "/custom/path/error-%{user}.log"
+
+.. describe:: pun_secret_key_base_path (String)
+
+  The secret key location. Note these are per user.
+
+   Default
+      Per User secret in var lib ondemand-nginx.
+
+      .. code-block:: yaml
+
+        pun_secret_key_base_path: "/var/lib/ondemand-nginx/config/puns/%{user}.secret_key_base.txt"
+
+   Example
+      Use a custom location for secret files.
+
+      .. code-block:: yaml
+
+        pun_secret_key_base_path: "/custom/secrets/%{user}.secret_key_base.txt"
+
+.. describe:: pun_log_format (String)
+
+  The format of the access and error logs.
+
+   Default
+      The default.
+
+      .. code-block:: yaml
+
+        pun_log_format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"'
+
+   Example
+      Use a custom log format.
+
+      .. code-block:: yaml
+
+        pun_log_format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent'
+
 
 .. describe:: pun_pid_path (String)
 
@@ -533,7 +634,7 @@ Configuration Options
      .. code-block:: yaml
 
         app_root:
-          dev: "~%{owner}/ondemand/dev/%{name}"
+          dev: "/var/www/ood/apps/dev/%{owner}/gateway/%{name}"
           usr: "/var/www/ood/apps/usr/%{owner}/gateway/%{name}"
           sys: "/var/www/ood/apps/sys/%{name}"
 
@@ -595,7 +696,7 @@ Configuration Options
    .. note::
 
       Modifying anything in this configuration option other than the
-      whitelisted characters will require you modify ``app_request_uri`` as
+      allowed characters will require you modify ``app_request_uri`` as
       well.
 
 .. describe:: app_token (Hash)
@@ -693,6 +794,27 @@ Configuration Options
       doesn't restrict the other administrative commands
       :ref:`nginx-stage-nginx` and :ref:`nginx-stage-nginx-clean` when manually
       starting and stopping the NGINX process.
+
+.. describe:: disable_bundle_user_config (Integer)
+
+    Set BUNDLE_USER_CONFIG to /dev/null in the PUN environment.
+    NB: This prevents a user's ~/.bundle/config from affecting
+    OnDemand applications.
+
+   Default
+      Disable bundle user configuration.
+
+      .. code-block:: yaml
+
+        disable_bundle_user_config: true
+
+   Example
+      Enable bundle user configuration. This may adversly affect
+      system deployed apps.
+
+      .. code-block:: yaml
+
+        disable_bundle_user_config: false
 
 .. _nginx command line: https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline/
 .. _sendfile: http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile

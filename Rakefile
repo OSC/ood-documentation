@@ -4,22 +4,6 @@ task :default do
   system "rake --tasks"
 end
 
-namespace :pipenv do
-  desc "Build docs using pipenv"
-  task :build do
-    exec 'WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make html'
-  end
-
-  task :clean do
-    exec 'WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv run make clean'
-  end
-
-  desc "Install pipenv dependencies"
-  task :install do
-    exec 'WORKDIR=/doc PIPENV_VENV_IN_PROJECT=1 pipenv install'
-  end
-end
-
 namespace :docker do
 
   desc "Build docs using docker"

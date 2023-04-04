@@ -1,7 +1,7 @@
 .. _resource-manager-lsf:
 
-Configure LSF
-=============
+LSF
+===
 
 A YAML cluster configuration file for an LSF resource manager on an HPC cluster
 looks like:
@@ -44,6 +44,8 @@ serverdir
   The path to the LSF client ``etc/`` directory.
 bin_overrides
   Replacements/wrappers for LSF's job submission and control clients. *Optional*
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 cluster
   The cluster to interact with when running LSF's multi-cluster mode. *Required to enable multi-cluster mode*
 
