@@ -1,15 +1,16 @@
 .. _install-software:
 
-Install Software From Package
-=============================
+Install Software
+================
 
-We will use `Software Collections`_ to satisfy majority of the following
-software requirements:
+Open OnDemand uses these packages, among many others.
 
 - `Apache HTTP Server 2.4`_
 - Ruby 2.7 with :command:`rake`, :command:`bundler`, and development
   libraries
 - Node.js 14
+
+Some operating systems use `Software Collections`_ to satisfy these.
 
 .. note::
 
@@ -27,7 +28,8 @@ software requirements:
   Apache Httpd as well.  As such, you should get comfortable with it as from time to time you will
   have to troubleshoot it.
 
-1. Enable the dependency repositories:
+1. Enable Dependencies
+----------------------
 
 .. tabs::
 
@@ -44,7 +46,14 @@ software requirements:
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7 nodejs:14
+         sudo dnf module enable ruby:3.0 nodejs:14
+
+   .. tab:: RockyLinux 9
+
+      .. code-block:: sh
+
+         sudo dnf config-manager --set-enabled crb
+         sudo dnf install epel-release
 
    .. tab:: RHEL 7
 
@@ -62,19 +71,23 @@ software requirements:
 
    .. tab:: RHEL 8
 
-      .. warning::
+      .. code-block:: sh
 
-         You may also need to enable the *Optional* channel and
-         attach a subscription providing access to RHSCL to be able to use this
-         repository.
+         sudo dnf install epel-release
+         sudo dnf module enable ruby:3.0 nodejs:14
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+
+
+   .. tab:: RHEL 9
 
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:2.7 nodejs:14
-         sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+         sudo dnf module enable ruby:3.0 nodejs:14
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
-2. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_ and install:
+2. Add repository and install
+-----------------------------
 
    .. tabs::
 
@@ -91,70 +104,50 @@ software requirements:
 
          .. code-block:: sh
 
-            sudo apt install apt-transport-https ca-certificates wget
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.1_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.1_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.1_all.deb
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
             sudo apt update
 
             sudo apt install ondemand
 
-#. (Optional) Install :ref:`authentication-dex` package
-
-   .. note::
-
-      If authenticating against LDAP or wishing to evaluate OnDemand using `ood` user, you must install `ondemand-dex`.
-      See :ref:`add-ldap` for details on configuration of LDAP.
+3. Start services
+-----------------
 
    .. tabs::
 
-      .. tab:: yum/dnf
+      .. tab:: RHEL/CentOS 7
+
+        .. code-block:: sh
+
+          sudo systemctl start httpd24-httpd
+          sudo systemctl enable httpd24-httpd
+
+
+      .. tab:: RHEL/Rocky 8 & 9
 
          .. code-block:: sh
 
-            sudo yum install ondemand-dex
+          sudo systemctl start httpd
+          sudo systemctl enable httpd
 
-
-      .. tab:: apt
-
-         .. code-block:: sh
-
-            sudo apt install ondemand-dex
-
-#. (Optional) Install OnDemand SELinux support if you have SELinux enabled. For details see :ref:`ood_selinux`
-
-   .. tabs::
-
-      .. tab:: yum/dnf
+      .. tab:: Ubuntu
 
          .. code-block:: sh
 
-            sudo yum install ondemand-selinux
+          sudo systemctl start apache2
+          sudo systemctl enable apache2
 
-      .. tab:: apt
+4. Verify installation
+----------------------
 
-          Not available for Debian systems.
+Now that Open OnDemand is installed and Apache is running, it should be serving
+a public page telling you to come back here and setup authentication.  If this
+is the case - then you should :ref:`secure your apache <add-ssl>` then :ref:`add authentication <authentication>`.
+You may also want to :ref:`enable SELinux <modify-system-security>`.
 
-.. note::
-
-   For some older systems, user ids (UID) may start at ``500`` and not the
-   expected ``1000``. If this true for your system, you will need to modify the
-   :file:`/etc/ood/config/nginx_stage.yml` configuration file to allow these
-   users access to OnDemand:
-
-   .. code-block:: yaml
-      :emphasize-lines: 9
-
-      # /etc/ood/config/nginx_stage.yml
-      ---
-
-      # ...
-
-      # Minimum user id required to generate per-user NGINX server as the requested
-      # user (default: 1000)
-      #
-      min_uid: 500
-
-      # ...
+If you're seeing the default apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
+and likely :ref:`configure a servername <ood-portal-generator-servername>`.
 
 Building From Source
 --------------------

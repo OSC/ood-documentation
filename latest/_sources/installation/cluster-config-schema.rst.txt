@@ -32,7 +32,7 @@ Below is the production configuration for OSC's Owens cluster.
       groups:
         - "cluster_users"
         - "other_users_of_the_cluster"
-      type: "whitelist"
+      type: "allowlist"
     custom:
       grafana:
             host: "https://grafana.osc.edu"
@@ -139,7 +139,14 @@ Adapter support for this feature is mixed. For example for Slurm `sbatch`, `scon
 acls:
 #####
 
-Access control lists provide a method to limit cluster access by group membership. ACLs are implicitly whitelists but may be set explicitly to either `whitelist` or `blacklist`.
+.. warning::
+
+  Sites should not use this OnDemand feature and instead just use Linux's base support for
+  File Access Control lists. This provides the same basic functionality but since permissions
+  are being handled in the Linux kernel, is much faster, simpler and frankly, safer.
+
+Access control lists provide a method to limit cluster access by group membership.
+ACLs are implicitly allowlists but may be set explicitly to either `allowlist` or `blocklist`.
 
 .. code-block :: yaml
 
@@ -148,7 +155,7 @@ Access control lists provide a method to limit cluster access by group membershi
     groups:
       - "cluster_users"
       - "other_users_of_the_cluster"
-    type: "whitelist"  # optional, one of "whitelist" or "blacklist"
+    type: "allowlist"  # optional, one of "allowlist" or "blocklist"
 
 Note that to look up group membership ood_core uses the ood_support library which uses ``id -G USERNAME``
 to get the list groups the user is in, and ``getgrgid`` to look up the name of the group.

@@ -1,7 +1,7 @@
 .. _modify-system-security:
 
-Modify System Security
-======================
+Add SELinux
+===========
 
 .. _ood_selinux:
 
@@ -29,7 +29,6 @@ The custom SELinux booleans provided by the OnDemand SELinux policy:
 * ``ondemand_manage_user_home_dir`` (**default=off**): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.
 * ``ondemand_manage_vmblock`` (**default=off**): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.
 * ``ondemand_use_nfs`` (**default=on**): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.
-* ``ondemand_use_shell_app`` (**default=off**): **DEPRECATED, see ondemand_use_ssh** Adds necessary rules to allow the OnDemand Shell app to function.
 * ``ondemand_use_ssh`` (**default=on**): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.
 * ``ondemand_use_sssd`` (**default=on**): Allows OnDemand to access SSSD
 * ``ondemand_use_slurm`` (**default=off**): Allows OnDemand to interact with SLURM and MUNGE.
@@ -58,6 +57,13 @@ If you experience denials when running SELinux with Open OnDemand please provide
    .. code-block:: sh
 
       cat /var/log/audit/audit.log | audit2allow -M ood
+
+.. _ood_selinux_updates:
+
+SELinux after Updates
+---------------------
+
+After OnDemand updates that include the ``ondemand-selinux`` package, some SELinux booleans may be turned back off if their default value is to be disabled.  It is required that after these updates, all SELinux booleans that are enabled should be checked that they are still enabled.
 
 .. _firewall:
 

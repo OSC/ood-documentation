@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Modify System Security &mdash; Open OnDemand 2.0.20 documentation</title>
+  <title>2. Add SELinux &mdash; Open OnDemand 3.0.0 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Start Services" href="start-apache.html" />
-    <link rel="prev" title="1. Install Software From Package" href="install-software.html" />
+    <link rel="next" title="3. Secure Apache httpd" href="add-ssl.html" />
+    <link rel="prev" title="1. Install Software" href="install-software.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -77,7 +77,7 @@
             
             
               <div class="version">
-                2.0
+                3.0
               </div>
             
           
@@ -101,76 +101,45 @@
               
             
             
-              <p class="caption"><span class="caption-text">General</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Install</span></p>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software From Package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Modify System Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Add SELinux</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#selinux">SELinux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selinux-after-updates">SELinux after Updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#firewall">Firewall</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="start-apache.html">3. Start Services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">4. Add SSL Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add-ldap.html">5. Add LDAP Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">3. Secure Apache httpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Add Cluster Configuration Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="resource-manager.html">Resource Manager Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customization_overview.html">Customization Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customization.html">Customization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analytics.html">Analytics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../monitoring.html">Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Extend</span></p>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging and Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../code-snippets.html">Code Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Deploy</span></p>
+<p class="caption"><span class="caption-text">More</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../app-authorization.html">App Authorization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Develop Interactive Apps</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Develop Passenger Apps</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../app-development/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Release Notes</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v2.0-release-notes.html">v2.0 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.8-release-notes.html">v1.8 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.7-release-notes.html">v1.7 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.6-release-notes.html">v1.6 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.5-release-notes.html">v1.5 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.4-release-notes.html">v1.4 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.3-release-notes.html">v1.3 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.2-release-notes.html">v1.2 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.1-release-notes.html">v1.1 Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes/v1.0-release-notes.html">v1.0 Release Notes</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Known Issues</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Legacy Docs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user-documentation.html">User Documentation</a></li>
 </ul>
 
             
@@ -218,14 +187,14 @@
         
           <li><a href="../installation.html">Installation</a> &raquo;</li>
         
-      <li><span class="section-number">2. </span>Modify System Security</li>
+      <li><span class="section-number">2. </span>Add SELinux</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/modify-system-security.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/modify-system-security.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -239,8 +208,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="modify-system-security">
-<span id="id1"></span><h1><span class="section-number">2. </span>Modify System Security<a class="headerlink" href="#modify-system-security" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="add-selinux">
+<span id="modify-system-security"></span><h1><span class="section-number">2. </span>Add SELinux<a class="headerlink" href="#add-selinux" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="selinux">
 <span id="ood-selinux"></span><h2>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
@@ -265,7 +234,6 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_user_home_dir</span></code> (<strong>default=off</strong>): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_vmblock</span></code> (<strong>default=off</strong>): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_nfs</span></code> (<strong>default=on</strong>): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_shell_app</span></code> (<strong>default=off</strong>): <strong>DEPRECATED, see ondemand_use_ssh</strong> Adds necessary rules to allow the OnDemand Shell app to function.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code> (<strong>default=on</strong>): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_sssd</span></code> (<strong>default=on</strong>): Allows OnDemand to access SSSD</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_slurm</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with SLURM and MUNGE.</p></li>
@@ -296,8 +264,12 @@
 </div>
 </div></blockquote>
 </div>
+<div class="section" id="selinux-after-updates">
+<span id="ood-selinux-updates"></span><h2>SELinux after Updates<a class="headerlink" href="#selinux-after-updates" title="Permalink to this headline">¶</a></h2>
+<p>After OnDemand updates that include the <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> package, some SELinux booleans may be turned back off if their default value is to be disabled.  It is required that after these updates, all SELinux booleans that are enabled should be checked that they are still enabled.</p>
+</div>
 <div class="section" id="firewall">
-<span id="id2"></span><h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Open ports 80 (http) and 443 (https) in the firewall, typically done with
 <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_firewalls">firewalld</a> or <a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">iptables</a>.</p>
@@ -337,10 +309,10 @@ See <a class="reference internal" href="../authentication/dex.html#id1"><span cl
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="start-apache.html" class="btn btn-neutral float-right" title="3. Start Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="add-ssl.html" class="btn btn-neutral float-right" title="3. Secure Apache httpd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install-software.html" class="btn btn-neutral float-left" title="1. Install Software From Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install-software.html" class="btn btn-neutral float-left" title="1. Install Software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

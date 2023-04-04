@@ -1,7 +1,7 @@
 .. _resource-manager-slurm:
 
-Configure Slurm
-===============
+Slurm
+=====
 
 A YAML cluster configuration file for a Slurm resource manager on an HPC
 cluster looks like:
@@ -33,10 +33,17 @@ adapter
   This is set to ``slurm``.
 cluster
   The Slurm cluster name. *Optional*, passed to SLURM as ``-M <cluster>``
+
+  .. warning::
+    Using the ``cluster`` option is discouraged. This is because maintenance
+    outages on the Slurm DB will propogate to Open OnDemand.  Instead sites
+    should use different ``conf`` files for each cluster to limit maintenance outages.
 bin
   The path to the Slurm client installation binaries.
 conf
   The path to the Slurm configuration file for this cluster. *Optional*
+submit_host
+  A different, optional host to ssh to and *then* issue commands. *Optional*
 bin_overrides
   Replacements/wrappers for Slurm's job submission and control clients. *Optional*
 

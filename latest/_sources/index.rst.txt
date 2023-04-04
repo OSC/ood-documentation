@@ -48,86 +48,44 @@ These are institutions who were early adopters or provided HPC resources for dev
 
 .. toctree::
    :maxdepth: 2
-   :caption: General
-
-   architecture
-   reference
-
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Install
+   :caption: Getting Started
 
    requirements
    installation
    authentication
    installation/add-cluster-config
-   installation/resource-manager
-   customization_overview
-   customization
-   analytics
-   monitoring
+   how-tos/app-development/interactive/setup
 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Extend
+  :maxdepth: 2
+  :caption: How-Tos
 
-   app-development/interactive/setup
-   enable-desktops
-   install-ihpc-apps
-   code-snippets
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Deploy
-
-   app-authorization
-   app-sharing
+  customizations
+  how-tos/debug
+  enable-desktops
+  how-tos/app-development
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Develop Interactive Apps
+  :maxdepth: 2
+  :caption: Tutorials
 
-   app-development
-   app-development/tutorials-interactive-apps
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Develop Passenger Apps
-
-   app-development/tutorials-passenger-apps
+  install-ihpc-apps
+  tutorials/tutorials-interactive-apps
+  tutorials/tutorials-passenger-apps
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Release Notes
+  :maxdepth: 2
+  :caption: More
 
-   release-notes/v2.0-release-notes
-   release-notes/v1.8-release-notes
-   release-notes/v1.7-release-notes
-   release-notes/v1.6-release-notes
-   release-notes/v1.5-release-notes
-   release-notes/v1.4-release-notes
-   release-notes/v1.3-release-notes
-   release-notes/v1.2-release-notes
-   release-notes/v1.1-release-notes
-   release-notes/v1.0-release-notes
+  architecture
+  reference
+  release-notes
+  glossary
+  issues/overview
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Known Issues
-
-   issues/overview
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Legacy Docs
-
-   applications
-   user-documentation
-
-
-.. _website: http://openondemand.org/
+.. _website: https://openondemand.org/
 .. _bowdoin: https://www.bowdoin.edu/it/resources/high-performance-computing.html
 .. _louthan: http://www.ou.edu/oscer/people
 .. _oregonstate: https://oregonstate.edu/
