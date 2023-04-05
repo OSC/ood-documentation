@@ -92,7 +92,7 @@ You can customize the logo, favicon, title, and navbar colors of OnDemand.
    :align: center
 
 
-We recommend setting these values using the `:ref:`OnDemand configuration properties <ondemand-d-ymls>`.`
+We recommend setting these values using the :ref:`OnDemand configuration properties <ondemand-d-ymls>`.
 Currently only the dashboard uses the colors in the navbar.
 
 .. list-table:: Branding
