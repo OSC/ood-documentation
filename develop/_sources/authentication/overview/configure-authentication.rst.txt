@@ -3,20 +3,6 @@
 Configure Apache Authentication
 ===============================
 
-Compile Authentication Module
------------------------------
-
-Open OnDemand uses `Apache HTTP Server 2.4`_ provided by Software Collections.
-This means that any Apache authentication module (``mod_auth_*``) used will
-need to be compiled against the ``apxs`` and ``apr`` tools that reside under:
-
-.. code-block:: text
-
-   /opt/rh/httpd24/root/usr/bin
-
-and **not** the versions that come with the default system version of Apache
-HTTP Server.
-
 Configure Authentication Module
 -------------------------------
 
