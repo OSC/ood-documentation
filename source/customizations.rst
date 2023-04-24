@@ -322,6 +322,27 @@ If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and 
 the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
 is used).
 
+Set Download Limits
+-------------------
+
+By default, the maximum file download size is 10.7 GB (10737418240 bytes). 
+If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` configuration environment 
+variable in the ``/etc/ood/config/apps/files/env`` file to the desired value in bytes.
+
+For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/files/env`` file:
+
+.. code-block:: 
+
+  OOD_DOWNLOAD_DIR_MAX=5368709120
+
+Note that this will limit the download size for all users of the Open OnDemand instance.
+
+.. warning::
+   This configuration value is expected to be numbers only (no characters)
+   and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10.0 Gib.
+
+   Values like ``1000M`` or ``20G`` will not be accepted and may cause errors.
+
 Block or Allow Directory Access
 -------------------------------
 
