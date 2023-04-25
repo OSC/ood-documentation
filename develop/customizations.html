@@ -143,6 +143,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#interactive-apps-menu">Interactive Apps Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-upload-limits">Set Upload Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-download-limits">Set Download Limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#block-or-allow-directory-access">Block or Allow Directory Access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-ssh-allowlist">Set SSH Allowlist</a></li>
@@ -1023,6 +1024,23 @@ and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10
 <p>If you want to disable file upload altogether, set <code class="docutils literal notranslate"><span class="pre">FILE_UPLOAD_MAX</span></code> to 0 and leave
 the <code class="docutils literal notranslate"><span class="pre">nginx_file_upload_max</span></code> configuration alone (or comment it out so the default
 is used).</p>
+</div>
+<div class="section" id="set-download-limits">
+<h2>Set Download Limits<a class="headerlink" href="#set-download-limits" title="Permalink to this headline">¶</a></h2>
+<p>By default, the maximum file download size is 10.7 GB (10737418240 bytes).
+If you wish to change this, you can set the <code class="docutils literal notranslate"><span class="pre">OOD_DOWNLOAD_DIR_MAX</span></code> configuration environment
+variable in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/files/env</span></code> file to the desired value in bytes.</p>
+<p>For example, to set the limit to 5 GB, you can add the following line to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/files/env</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OOD_DOWNLOAD_DIR_MAX</span><span class="o">=</span><span class="mi">5368709120</span>
+</pre></div>
+</div>
+<p>Note that this will limit the download size for all users of the Open OnDemand instance.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This configuration value is expected to be numbers only (no characters)
+and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10.0 Gib.</p>
+<p>Values like <code class="docutils literal notranslate"><span class="pre">1000M</span></code> or <code class="docutils literal notranslate"><span class="pre">20G</span></code> will not be accepted and may cause errors.</p>
+</div>
 </div>
 <div class="section" id="block-or-allow-directory-access">
 <h2>Block or Allow Directory Access<a class="headerlink" href="#block-or-allow-directory-access" title="Permalink to this headline">¶</a></h2>
