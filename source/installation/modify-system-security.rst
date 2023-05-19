@@ -36,6 +36,7 @@ The custom SELinux booleans provided by the OnDemand SELinux policy:
 * ``ondemand_use_kubernetes`` (**default=off**): Allow OnDemand to interact with Kubernetes.
 * ``ondemand_use_ldap`` (**default=off**): Allows OnDemand to interact with remote LDAP servers. This does not affect Apache LDAP authentication. This is only necessary if the PUN is interacting with LDAP ports.
 * ``ondemand_use_kerberos`` (**default=off**): Allow OnDemand to interact with Kerberos.
+* ``ondemand_use_smtp`` (**default=off**): Allow OnDemand to interact with SNMP for sending emails.
 
 The following SELinux booleans are enabled by the ``ondemand-selinux`` package:
 
