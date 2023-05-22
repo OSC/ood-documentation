@@ -22,8 +22,8 @@ The files which must be adjusted are::
   └── view.html.erb
 
 The primary purpose of this configuration is to utilize the ``before.sh.erb`` script 
-to generate a piece of data. This data is then passed to the ``submit.sh.erb`` which 
-then will hand off to the ``view.html.erb`` for rendering in the interactive apps page.
+to generate a piece of data. This data is then written to a ``connection.yml`` file which 
+the ``view.html.erb`` reads for rendering the button to connect to the application.
 
 Jupyter Notebook Example
 ------------------------
