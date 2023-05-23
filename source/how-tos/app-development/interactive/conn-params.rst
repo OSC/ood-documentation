@@ -1,14 +1,18 @@
 .. _app-development-interactive-conn-params:
 
-Connection Parameters (connections.yml)
-=======================================
+Connection Parameters ``conn_params``
+=====================================
 
-The `connections.yml` configuration file facilitates communication between 
-the backend server and an app, via the ``before.sh.erb``, ``submit.sh.erb``, 
-and ``view.html.erb`` files.
+App developers can use ``conn_params`` in the ``submit.yml.erb`` to pass runtime data generated
+in the ``before.sh.erb`` back to the ``view.html.erb``. 
 
-This configuration can be crucial when specific data, such as a ``csrf_token``, 
-is required for operations like logging into RStudio.
+This is helpful for:
+
+* Data that is only known **after** the job submits and starts running.
+* Data that needs to be used to connect to the application.
+
+This technique will generate a file in the app's root called ``connection.yml`` when the app launches 
+which will contain the defined variables and their associated values.
 
 Configuration
 -------------
@@ -21,9 +25,15 @@ The files which must be adjusted are::
   │   ├── before.sh.erb
   └── view.html.erb
 
-The primary purpose of this configuration is to utilize the ``before.sh.erb`` script 
-to generate a piece of data. This data is then written to a ``connection.yml`` file which 
-the ``view.html.erb`` reads for rendering the button to connect to the application.
+
+And the ``submit.yml.erb`` will use ``conn_params`` to set the custom variable::
+
+    ---
+    batch_connect:
+      template: "basic"
+      conn_params:
+        - custom_variable
+    ...
 
 Jupyter Notebook Example
 ------------------------
@@ -103,6 +113,3 @@ And finally to use the variables in the ``view.html.erb`` set::
       <input type="hidden" name="password" value="<%= password %>">
       ...
     </form>
-
-The thing to notice in this example is the ``RSTUDIO_PASSWORD`` had ``export`` used and the other 
-variables did not, such as ``port`` or ``password``. 
