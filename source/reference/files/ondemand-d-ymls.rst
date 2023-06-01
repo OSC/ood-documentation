@@ -728,3 +728,29 @@ Configuration Properties
     .. code-block:: yaml
 
       hide_app_version: true
+
+.. describe:: globus_endpoints (Object, null)
+
+  Add a Globus button to the user interface that opens a link to the Globus
+  transfer web app. The path will be determined based on your current working
+  directory, and the endpoint UUID will be determined from the values in this
+  setting.
+
+  Default
+    Null, do not enable the Globus button
+
+  Example
+    Example of a single endpoint for the entire filesystem
+
+    .. code-block:: yaml
+
+      globus_endpoints:
+        "/": "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+    Example with multiple endpoints associated with different directories
+
+    .. code-block:: yaml
+
+      globus_endpoints:
+        "/home": "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        "/project": "8c33758b-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
