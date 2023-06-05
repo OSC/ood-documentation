@@ -729,28 +729,42 @@ Configuration Properties
 
       hide_app_version: true
 
-.. describe:: globus_endpoints (Object, null)
+.. describe:: globus_endpoints (Array<Object>, null)
 
-  Add a Globus button to the user interface that opens a link to the Globus
-  transfer web app. The path will be determined based on your current working
-  directory, and the endpoint UUID will be determined from the values in this
-  setting.
+  Add a Globus button to the file browser that opens the current directory
+  in the Globus transfer web app.
 
   Default
     Null, do not enable the Globus button
 
-  Example
-    Example of a single endpoint for the entire filesystem
+  Example with a single endpoint for the whole filesystem
 
     .. code-block:: yaml
 
-      globus_endpoints:
-        "/": "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+       globus_endpoints:
+         - path "/"
+           endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path "/"
 
-    Example with multiple endpoints associated with different directories
+  Example with multiple endpoints
 
     .. code-block:: yaml
 
-      globus_endpoints:
-        "/home": "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-        "/project": "8c33758b-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+       globus_endpoints:
+         - path: "/home"
+           endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/home"
+
+         - path: "/project"
+           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/project"
+
+  Example where pathnames differ between the filesystem and endpoint
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path: "/project"
+           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/"
+
