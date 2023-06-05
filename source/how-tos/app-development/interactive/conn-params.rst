@@ -25,15 +25,32 @@ The files which must be adjusted are::
   │   ├── before.sh.erb
   └── view.html.erb
 
+The files which can be adjusted to::
 
-And the ``submit.yml.erb`` will use ``conn_params`` to set the custom variable::
+  my_app/
+  ├── submit.html.erb
+  ├── templates/
+  │   ├── before.sh.erb
+  │   └── dir
+  │       └── another_script.sh.erb
+  └── view.html.erb
+
+And the ``submit.yml.erb`` will use ``conn_params`` to set the custom variables to pass back to the ``view`` to 
+be rendered, but also it seems that is not true, Rstudio does not do so for ``port`` or ``host``. ....hmmmm::
 
     ---
     batch_connect:
       template: "basic"
       conn_params:
-        - custom_variable
+        - custom_variable_one
+        - custom_variable_two
+        ...
     ...
+
+.. warning::
+
+  The variables in ``before.sh.erb`` *must* be made available to the environment 
+  by using ``export``. 
 
 Jupyter Notebook Example
 ------------------------
@@ -75,41 +92,3 @@ you can access the value of this variable with::
 
 This configuration uses the value from ``jupyter_api`` to populate 
 the ``action`` attribute in the rendered page in the interactive sessions.
-
-Rstudio Example
----------------
-
-Suppose we need some authentication piece in the rendered card in interactive apps to allow 
-a user to connect to an Rstudio session with a password.
-
-First, open the ``template/before.sh.erb`` file and add the following::
-
-    password="$PASSWORD"
-    host="$HOST_CFG"
-    port="$PORT_CFG"
-    ...
-    # rstudio 1.4+ needs a csrf token
-    csrf_token=<%= SecureRandom.uuid %>
-    ...
-    # Define a password and export it for RStudio authentication
-    password="$(create_passwd 16)"
-    ...
-    export RSTUDIO_PASSWORD="${password}"
-
-Then, in the ``submit.sh.erb``::
-
-    ---
-    batch_connect:
-      template: "basic"
-      conn_params:
-        - csrf_token
-    ...
-
-And finally to use the variables in the ``view.html.erb`` set::
-
-    <form action="/rnode/<%= host %>/<%= port %>/auth-do-sign-in" method="post" target="_blank">
-      <input type="hidden" name="csrf-token" value="<%= csrf_token %>"/>
-      <input type="hidden" name="username" value="<%= ENV["USER"] %>">
-      <input type="hidden" name="password" value="<%= password %>">
-      ...
-    </form>
