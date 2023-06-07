@@ -36,7 +36,7 @@ The files which can be adjusted to::
   └── view.html.erb
 
 And the ``submit.yml.erb`` will use ``conn_params`` to set the custom variables to pass back to the ``view`` to 
-be rendered, but also it seems that is not true, Rstudio does not do so for ``port`` or ``host``. ....hmmmm::
+be rendered::
 
     ---
     batch_connect:
