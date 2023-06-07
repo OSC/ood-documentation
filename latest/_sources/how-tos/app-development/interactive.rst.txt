@@ -40,3 +40,4 @@ Each of these files/directories are described below in their respective stage.
    interactive/submit
    interactive/view
    interactive/sub-apps
+   interactive/conn-params
