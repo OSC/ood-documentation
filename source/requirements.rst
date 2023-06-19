@@ -8,13 +8,21 @@ Supported Operating Systems
 
 .. _os-support:
 
-At this time OnDemand only supports the following operating systems:
+At this time OnDemand only supports the following operating systems and architectures:
 
-- RedHat/CentOS 7
-- RedHat/Rocky Linux/AlmaLinux 8
-- RedHat/Rocky Linux/AlmaLinux 9
-- Ubuntu 20.04
-- Ubuntu 22.04
+.. role::  raw-html(raw)
+    :format: html
+
+.. csv-table:: Operating System and Architecture Support
+   :header: "","x86_64","aarch64","ppc64le"
+   :stub-columns: 1
+
+   "RedHat/CentOS 7",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
+   "RedHat/Rocky Linux/AlmaLinux 8",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
+   "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
+   "Ubuntu 20.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Ubuntu 22.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
 
 Software Requirements
 ---------------------

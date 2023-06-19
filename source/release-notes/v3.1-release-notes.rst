@@ -1,0 +1,180 @@
+.. _v3.1-release-notes:
+
+v3.1 Release Notes
+==================
+
+Administrative changes
+----------------------
+
+- `Deprecations`_
+- `Dependency updates`_
+- `Upgrade directions`_
+
+New Features
+------------
+
+- `aarch64 and ppc64le packages`_
+- `Amazon Linux 2023 packages`_
+
+Details of administrative changes
+---------------------------------
+
+Deprecations
+............
+
+RedHat/CentOS 7 packages deprecated
+***********************************
+
+OnDemand 3.1 will be the last OnDemand release to support RedHat/CentOS 7.
+
+Dependency updates
+..................
+
+This release updates the following dependencies:
+
+- Passenger 6.0.17
+- NGINX 1.22.1
+- ondemand-dex 2.36.0
+- mod_auth_openidc 2.4.14.1 (RHEL 7 & 8 only)
+
+Upgrade directions
+..................
+
+.. warning::
+
+   As always please update the *development* or *test* instances of OnDemand installed at your center first to test and verify before you modify the *production* instance.
+
+.. warning::
+
+   The OnDemand upgrade has only been tested going from 3.0.x to 3.1.x.
+
+#. Update OnDemand release RPM
+
+   .. tabs::
+
+      .. tab:: RedHat/CentOS 7
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/3.1/ondemand-release-web-3.1-1.el7.noarch.rpm
+
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/3.1/ondemand-release-web-3.1-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/3.1/ondemand-release-web-3.1-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 20.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_3.1.0-focal_all.deb https://apt.osc.edu/ondemand/3.1/ondemand-release-web_3.1.0-focal_all.deb
+            sudo apt install /tmp/ondemand-release-web_3.1.0-focal_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_3.1.0-jammy_all.deb https://apt.osc.edu/ondemand/3.1/ondemand-release-web_3.1.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_3.1.0-jammy_all.deb
+            sudo apt update
+
+#. Update OnDemand
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/CentOS 7
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd24-httpd.service
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 20.04 & 22.04
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+#. (Optional) If ``ondemand-dex`` was installed, restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (Optional) If ``ondemand-selinux`` was installed, see :ref:`ood_selinux_updates`
+
+#. Force all PUNs to restart
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+Details of new features
+-----------------------
+
+aarch64 and ppc64le packages
+............................
+
+Added aarch64 and ppc64le packages for some operation systems.
+See :ref:`Supported Operating Systems and Architectures <os-support>`
+for a full list of which operating systems support aarch64 and ppc64le.
+
+
+Amazon Linux 2023 packages
+..........................
+
+Added Amazon Linux 2023 packages.
+See :ref:`install-software` for installation instructions.

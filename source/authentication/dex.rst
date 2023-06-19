@@ -10,11 +10,22 @@ Installing OnDemand Dex package
 
 First the OnDemand yum repos must be enabled, see :ref:`install-software`.
 
-Install the ``ondemand-dex`` RPM:
+Install the ``ondemand-dex`` package:
 
-   .. code-block:: sh
+.. tabs::
 
-      sudo yum install ondemand-dex
+   .. tab:: yum/dnf
+
+      .. code-block:: sh
+
+         sudo yum install ondemand-dex
+
+
+   .. tab:: apt
+
+      .. code-block:: sh
+
+         sudo apt-get install ondemand-dex
 
 Installing OnDemand Dex from source
 -----------------------------------

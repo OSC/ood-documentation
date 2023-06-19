@@ -6,7 +6,7 @@ Install Software
 Open OnDemand uses these packages, among many others.
 
 - `Apache HTTP Server 2.4`_
-- Ruby 2.7 with :command:`rake`, :command:`bundler`, and development
+- Ruby 3.0 with :command:`rake`, :command:`bundler`, and development
   libraries
 - Node.js 14
 
@@ -19,8 +19,8 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
 .. warning::
 
-   Be sure to check :ref:`Supported Operating Systems <os-support>` before proceeding with install to verify
-   you are on a supported operating system.
+   Be sure to check :ref:`Supported Operating Systems and Architectures <os-support>` before proceeding with install to verify
+   you are on a supported operating system and architecture.
 
 ..  warning::
 
@@ -91,25 +91,59 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
    .. tabs::
 
-      .. tab:: yum/dnf
+      .. tab:: RedHat/CentOS 7
 
          .. code-block:: sh
 
-            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.noarch.rpm
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
 
             sudo yum install ondemand
 
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
 
-      .. tab:: apt
+         .. code-block:: sh
+
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el8.noarch.rpm
+
+            sudo yum install ondemand
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el9.noarch.rpm
+
+            sudo yum install ondemand
+
+      .. tab:: Ubuntu 20.04
 
          .. code-block:: sh
 
             sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
             sudo apt update
 
             sudo apt install ondemand
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.amzn2023.noarch.rpm
+
+            sudo yum install ondemand
 
 3. Start services
 -----------------
@@ -137,6 +171,13 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
           sudo systemctl start apache2
           sudo systemctl enable apache2
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+          sudo systemctl start httpd
+          sudo systemctl enable httpd
 
 4. Verify installation
 ----------------------

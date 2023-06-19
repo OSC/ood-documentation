@@ -6,7 +6,7 @@ Installation
 The OnDemand host machine needs to be setup *similarly* to a login node. This
 means that it will need:
 
-- RedHat/CentOS 7+ or Ubuntu 20.04-22.04
+- RedHat/CentOS 7+ or Ubuntu 20.04-22.04 or Amazon Linux 2023
 - the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
   libraries used by the batch servers installed
 - configuration on both OnDemand node **and batch servers** to be able to
