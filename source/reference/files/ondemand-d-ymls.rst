@@ -737,7 +737,8 @@ Configuration Properties
   Default
     Null, do not enable the Globus button
 
-  Example with a single endpoint for the whole filesystem
+  Example
+    Use a single endpoint for the whole filesystem.
 
     .. code-block:: yaml
 
@@ -746,7 +747,8 @@ Configuration Properties
            endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
            endpoint_path "/"
 
-  Example with multiple endpoints
+  Example
+    Use multiple endpoints.
 
     .. code-block:: yaml
 
@@ -759,7 +761,8 @@ Configuration Properties
            endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
            endpoint_path: "/project"
 
-  Example where pathnames differ between the filesystem and endpoint
+  Example
+    When pathnames differ between the filesystem and endpoint.
 
     .. code-block:: yaml
 
@@ -767,4 +770,14 @@ Configuration Properties
          - path: "/project"
            endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
            endpoint_path: "/"
+
+  Example
+    Reference the home directory of the current user.
+
+    .. code-block:: yaml
+
+      globus_endpoints:
+        - path: "<%= CurrentUser.home %>"
+          endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+          endpoint_path: "/"
 
