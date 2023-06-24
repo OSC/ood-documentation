@@ -25,7 +25,7 @@ Dependencies:
 Install via RPM
 --------------------------
 
-For RHEL/CentOS 7 and RHEL/Rocky 8 systems the `ondemand_exporter`_ can be installed via RPM.
+For yum/dnf based systems the `ondemand_exporter`_ can be installed via RPM.
 
 .. code-block:: sh
 
@@ -34,22 +34,24 @@ For RHEL/CentOS 7 and RHEL/Rocky 8 systems the `ondemand_exporter`_ can be insta
 The RPM will install the following files that should work out of the box:
 
 - **RHEL/CentOS 7 only**: /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
-- **RHEL/Rocky 8 only**: /etc/httpd/conf.d/ondemand_exporter.conf
+- **RHEL/Rocky/AlmaLinux 8 & 9 only**: /etc/httpd/conf.d/ondemand_exporter.conf
 - /etc/sudoers.d/ondemand_exporter
 
 Ensure that the new Apache configuration is loaded by restarting Apache
 
-RHEL/CentOS 7
+.. tabs::
 
- .. code-block:: sh
+   .. tab:: RHEL/CentOS 7
 
-    sudo systemctl restart httpd24-httpd
+      .. code-block:: sh
 
-RHEL/Rocky 8
+         sudo systemctl restart httpd24-httpd
 
- .. code-block:: sh
+   .. tab:: RHEL/Rocky/Alma Linux 8 & 9
 
-    sudo systemctl restart httpd
+      .. code-block:: sh
+
+         sudo systemctl restart httpd
 
 Start the service
 
@@ -69,7 +71,7 @@ Check for the `ondemand_exporter Latest Release`_ version number.  Replace ``VER
 
 .. code-block:: sh
 
-   VERSION="0.8.0"
+   VERSION="0.10.0"
    ARCHIVE="ondemand_exporter-${VERSION}.linux-amd64"
    wget -O /tmp/${ARCHIVE}.tar.gz https://github.com/OSC/ondemand_exporter/releases/download/v${VERSION}/${ARCHIVE}.tar.gz
    tar xf /tmp/${ARCHIVE}.tar.gz -C /tmp
@@ -78,19 +80,21 @@ Check for the `ondemand_exporter Latest Release`_ version number.  Replace ``VER
    sudo install -o root -g root -m 0644 /tmp/${ARCHIVE}/files/ondemand_exporter.service /etc/systemd/system/
    sudo systemctl daemon-reload
 
-RHEL/CentOS 7
+.. tabs::
 
-  .. code-block:: sh
+   .. tab:: RHEL/CentOS 7
 
-     sudo install -o root -g root -m 0440 /tmp/${ARCHIVE}/files/apache.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
-     sudo systemctl restart httpd24-httpd
+      .. code-block:: sh
 
-RHEL/Rocky 8
+         sudo install -o root -g root -m 0440 /tmp/${ARCHIVE}/files/apache.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
+         sudo systemctl restart httpd24-httpd
 
-  .. code-block:: sh
+   .. tab:: RHEL/Rocky/Alma Linux 8 & 9
 
-     sudo install -o root -g root -m 0440 /tmp/${ARCHIVE}/files/apache.conf /etc/httpd/conf.d/ondemand_exporter.conf
-     sudo systemctl restart httpd
+      .. code-block:: sh
+
+         sudo install -o root -g root -m 0440 /tmp/${ARCHIVE}/files/apache.conf /etc/httpd/conf.d/ondemand_exporter.conf
+         sudo systemctl restart httpd
 
 **(Optional)** If Passenger was not installed via ``ondemand-passenger`` RPM. Adjust the path to ``passenger-status`` as needed
 
@@ -101,6 +105,7 @@ RHEL/Rocky 8
      [Service]
      Environment="PASSENGER_STATUS=/usr/sbin/passenger-status"
      EOF
+     sudo systemctl daemon-reload
 
 Start the service
 
