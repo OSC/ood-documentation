@@ -14,7 +14,7 @@ At this time OnDemand only supports the following operating systems and architec
     :format: html
 
 .. csv-table:: Operating System and Architecture Support
-   :header: "","x86_64","aarch64","ppc64le"
+   :header: "","x86_64","aarch64/arm64","ppc64le"
    :stub-columns: 1
 
    "RedHat/CentOS 7",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`

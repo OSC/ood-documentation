@@ -40,20 +40,21 @@ Some operating systems use `Software Collections`_ to satisfy these.
          sudo yum install centos-release-scl epel-release
 
 
-   .. tab:: RockyLinux 8
+   .. tab:: RockyLinux/Alma Linux 8
 
       .. code-block:: sh
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.0 nodejs:14
+         sudo dnf module enable ruby:3.1 nodejs:18
 
-   .. tab:: RockyLinux 9
+   .. tab:: RockyLinux/Alma Linux 9
 
       .. code-block:: sh
 
          sudo dnf config-manager --set-enabled crb
          sudo dnf install epel-release
+         sudo dnf module enable ruby:3.1 nodejs:18
 
    .. tab:: RHEL 7
 
@@ -74,7 +75,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.0 nodejs:14
+         sudo dnf module enable ruby:3.1 nodejs:18
          sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
 
@@ -83,7 +84,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.0 nodejs:16
+         sudo dnf module enable ruby:3.1 nodejs:18
          sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
 2. Add repository and install
@@ -103,24 +104,24 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
          .. code-block:: sh
 
-            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el8.noarch.rpm
+            sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el8.noarch.rpm
 
-            sudo yum install ondemand
+            sudo dnf install ondemand
 
       .. tab:: RedHat/Rocky Linux/AlmaLinux 9
 
          .. code-block:: sh
 
-            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el9.noarch.rpm
+            sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el9.noarch.rpm
 
-            sudo yum install ondemand
+            sudo dnf install ondemand
 
       .. tab:: Ubuntu 20.04
 
          .. code-block:: sh
 
             sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
             sudo apt update
 
@@ -131,7 +132,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
          .. code-block:: sh
 
             sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
             sudo apt update
 
@@ -141,9 +142,9 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
          .. code-block:: sh
 
-            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.amzn2023.noarch.rpm
+            sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.amzn2023.noarch.rpm
 
-            sudo yum install ondemand
+            sudo dnf install ondemand
 
 3. Start services
 -----------------
