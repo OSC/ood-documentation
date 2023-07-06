@@ -169,9 +169,6 @@ These URLs can be specified, which will appear in the Help menu and on other loc
    * - Support URL
      - OOD_DASHBOARD_SUPPORT_URL
      - https://www.osc.edu/contact/supercomputing_support
-   * - Support Email
-     - OOD_DASHBOARD_SUPPORT_EMAIL
-     - oschelp@osc.edu
    * - User Documentation
      - OOD_DASHBOARD_DOCS_URL
      - https://www.osc.edu/ondemand
