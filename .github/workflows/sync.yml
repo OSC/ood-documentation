@@ -1,0 +1,36 @@
+name: Sync latest
+
+on:
+  push:
+    branches: [develop]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge Branches
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch
+          git checkout develop
+          git pull
+          git checkout latest
+          git pull
+          git merge develop
+
+      # note that this shouldn't run if 'merge branches' fails, which it will happen when
+      # there are merge conflicts.
+      - name: Sync latest
+        if: contains(github.event.pull_request.labels.*.name, 'sync-latest')
+        run: |
+          git push
