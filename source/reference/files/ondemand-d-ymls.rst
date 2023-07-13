@@ -777,7 +777,7 @@ Configuration Properties
     .. code-block:: yaml
 
       globus_endpoints:
-        - path: "<%= CurrentUser.home %>"
+        - path: "<%=  Etc.getpwnam(Etc.getlogin).dir %>"
           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
           endpoint_path: "/"
 
