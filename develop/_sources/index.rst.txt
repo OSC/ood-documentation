@@ -96,4 +96,4 @@ These are institutions who were early adopters or provided HPC resources for dev
 .. _ucla: https://idre.ucla.edu/resources/hpc
 .. _buffalo: http://www.buffalo.edu/ccr.html
 .. _utah: https://www.chpc.utah.edu/
-.. _arizona: https://it.arizona.edu/service/high-performance-computing
+.. _arizona: https://docs.hpc.arizona.edu
