@@ -939,6 +939,53 @@ available on all clusters.</p>
 </dl>
 </dd></dl>
 
+<dl class="describe">
+<dt>
+<code class="sig-name descname">globus_endpoints (Array&lt;Object&gt;, null)</code></dt>
+<dd><p>Add a Globus button to the file browser that opens the current directory
+in the Globus transfer web app.</p>
+<dl>
+<dt>Default</dt><dd><p>Null, do not enable the Globus button</p>
+</dd>
+<dt>Example</dt><dd><p>Use a single endpoint for the whole filesystem.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">globus_endpoints</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path &quot;/&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">endpoint</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">endpoint_path &quot;/&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use multiple endpoints.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">globus_endpoints</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home&quot;</span><span class="w"></span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/project&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/project&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>When pathnames differ between the filesystem and endpoint.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">globus_endpoints</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/project&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Reference the home directory of the current user.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">globus_endpoints</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv">  </span><span class="s">Etc.getpwnam(Etc.getlogin).dir</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 
