@@ -728,3 +728,56 @@ Configuration Properties
     .. code-block:: yaml
 
       hide_app_version: true
+
+.. describe:: globus_endpoints (Array<Object>, null)
+
+  Add a Globus button to the file browser that opens the current directory
+  in the Globus transfer web app.
+
+  Default
+    Null, do not enable the Globus button
+
+  Example
+    Use a single endpoint for the whole filesystem.
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path "/"
+           endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path "/"
+
+  Example
+    Use multiple endpoints.
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path: "/home"
+           endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/home"
+
+         - path: "/project"
+           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/project"
+
+  Example
+    When pathnames differ between the filesystem and endpoint.
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path: "/project"
+           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/"
+
+  Example
+    Reference the home directory of the current user.
+
+    .. code-block:: yaml
+
+      globus_endpoints:
+        - path: "<%=  Etc.getpwnam(Etc.getlogin).dir %>"
+          endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+          endpoint_path: "/"
+
