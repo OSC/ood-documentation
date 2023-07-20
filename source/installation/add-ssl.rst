@@ -7,15 +7,6 @@ The SSL protocol provides for a secure channel of communication between the
 user's browser and the Open OnDemand portal.  It is recommended that you secure
 your Apache server by adding these configurations.
 
-.. warning::
-
-    Open OnDemand expects secure (https) traffic by default. If you do
-    not add SSL to your Apache server you will have to follow FIXME-LINK-NEEDED
-    to enable some (if not most) functionality.
-
-    This is not recommended as someone on your network could see your traffic in
-    plain text, including passwords.
-
 Requirements:
 
 - A server name that points to the Open OnDemand server (``ondemand.my_center.edu``).
