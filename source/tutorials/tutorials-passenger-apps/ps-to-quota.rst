@@ -62,15 +62,20 @@ because
 OnDemand System Gems
 ....................
 
-This app is able to run in OnDemand 1.8+ without installing the gems specified in the Gemfile.
+This app is able to run in OnDemand 1.8+ without installing the gems specified in the ``Gemfile``.
 
-All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps. These include gems used by this example app:
+All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps. 
+These include gems used by this example app:
 
-- sinatra
-- sinatra-contrib
-- erubi
+- ``sinatra``
+- ``sinatra-contrib``
+- ``erubi``
 
-On the OnDemand web host, you can execute the command `source scl_source enable ondmeand` and then `gem list` to see all available gems. These gems are provided by a separate ``ondemand-gems`` rpm that is installed when you do ``yum install ondemand``. The name of the RPM includes the OnDemand release version, such as ``ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm``. This ensures that if you do yum update this gem will not be removed - so apps can depend on the presence of these gems.
+On the OnDemand web host, you can execute the command ``source scl_source enable ondemand`` and then ``gem list`` to 
+see all available gems. These gems are provided by a separate ``ondemand-gems`` rpm that is installed when 
+you do ``yum install ondemand``. The name of the RPM includes the OnDemand release version, such 
+as ``ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm``. This ensures that if you do ``yum update`` this gem will 
+not be removed - so apps can depend on the presence of these gems.
 
 
 
@@ -82,22 +87,22 @@ Files and Their Purpose
 
    * - File
      - Description
-   * - config.ru
+   * - ``config.ru``
      - entry point of the Passenger Ruby app
-   * - app.rb
-     - Sinatra app config and routes; this in a separate file from config.ru so
+   * - ``app.rb``
+     - Sinatra app config and routes; this in a separate file from ``config.ru`` so
        that code reloading will work
-   * - command.rb
-     - class that defines an AppProcess struct, executes ps, and parses the
+   * - ``command.rb``
+     - class that defines an AppProcess struct, executes ``ps``, and parses the
        output of the ps command producing an array of structs
-   * - test/test_command.rb
+   * - ``test/test_command.rb``
      - a unit test of the parsing code
-   * - views/index.html
+   * - ``views/index.html``
      - the main section of the html page template using an implementation of `ERB <https://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.html>`__
        called `erubi <https://github.com/jeremyevans/erubi>`__
        which auto-escapes output of ERB tags by default (for security)
-   * - views/layout.html
-     - the rendered HTML from views/index.html is inserted into this layout,
+   * - ``views/layout.html``
+     - the rendered HTML from ``views/index.html`` is inserted into this layout,
        where css and javascript files are included
 
 .. list-table:: Other files
@@ -105,23 +110,23 @@ Files and Their Purpose
 
    * - File
      - Description
-   * - Gemfile, Gemfile.lock
+   * - ``Gemfile``, ``Gemfile.lock``
      - defines gem dependencies for the app (see `Bundler's Rationale <http://bundler.io/rationale.html>`__)
-   * - tmp/
+   * - ``tmp/``
      - tmp directory is kept so its easier to ``touch tmp/restart.txt`` when you
        want to force Passenger to restart an app
-   * - public/
+   * - ``public/``
      - serve up static assets like Bootstrap css; in OnDemand, NGINX auto-serves
        all files under public/ directly, without going through the Passenger
        process, which makes this much faster; as a result, each static file is
        in a directory with an explicit version number, so if these files ever
        change we change the version, which is one cache busting strategy
-   * - Rakefile
-     - this provides a default Rake task for running the automated tests under
-       test/, so you can run the tests by running the command ``rake``
-   * - test/minitest_helper.rb
+   * - ``Rakefile``
+     - this provides a default ``rake`` task for running the automated tests under
+       ``test/``, so you can run the tests by running the command ``rake``
+   * - ``test/minitest_helper.rb``
      - contains setup code common between all tests
-   * - vendor/bundle
+   * - ``vendor/bundle``
      - This directory is added if you execute ``bin/bundle install --path vendor/bundle`` to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.
 
 Clone and Setup
@@ -133,14 +138,14 @@ Clone and Setup
 
    #. Directory name: ``quota``
    #. Git remote: ``https://github.com/OSC/ood-example-ps``
-   #. Check "Create new Git Project from this?"
-   #. Click Submit
+   #. Check *"Create new Git Project from this?"*
+   #. Click **Submit**
 
-#. Launch the app by clicking the large blue Launch button. In a new browser
-   window/tab you will see the output of a ps command filtered using grep.
+#. Launch the app by clicking the large blue **Launch** button. In a new browser
+   window/tab you will see the output of a ``ps`` command filtered using ``grep``.
 
 #. Switch browser tab/windows back to the dashboard Details view of the app and
-   click "Files" button on the right to open the app's directory in the File
+   click the **Files** button on the right to open the app's directory in the File
    Explorer.
 
 
@@ -159,8 +164,8 @@ We will change it to run and parse this command:
 
    quota -spw
 
-Update test/test_command.rb
-...........................
+Update ``test/test_command.rb``
+...............................
 
 Run the command to get example data. Copy and paste the output into the test, and
 update the assertions to expect an array of "quotas" instead of "processes"
@@ -227,10 +232,10 @@ Resulting test method:
       end
     end
 
-Update command.rb
-.................
+Update ``command.rb``
+.....................
 
-Run test by running `rake` command and you will see it fail:
+Run the test by running the ``rake`` command and you will see it fail:
 
 .. code-block:: sh
 
@@ -258,16 +263,16 @@ Run test by running `rake` command and you will see it fail:
 
 .. warning::
 
-   To run commands like rake through the shell you need to make sure you are on
+   To run commands like ``rake`` through the shell you need to make sure you are on
    a host that has the correct version of Ruby installed. For OnDemand that likely
    means using Software Collections with the same packages used to install OnDemand.
 
-   With SCL, running rake with ondemand SCL package looks like:
+   With SCL, running ``rake`` with ondemand SCL package looks like:
 
    ``scl enable ondemand -- rake``
 
-   You can avoid this by loading the SCL packages in your .bashrc or .bash_profile file.
-   For example, in my .bash_profile I have:
+   You can avoid this by loading the SCL packages in your ``.bashrc`` or ``.bash_profile`` file.
+   For example, in my ``.bash_profile`` I have:
 
    .. code-block:: sh
 
@@ -276,11 +281,17 @@ Run test by running `rake` command and you will see it fail:
         scl enable ondemand -- bash
       fi
 
-   This means when I login to the host webtest04.osc.edu the SCL packages will be enabled
+   This means when I login to the host ``webtest04.osc.edu`` the SCL packages will be enabled
    in a new bash session. If you did the same you would replace ``webtest04`` with the hostname
-   of your development node.
+   of the node you are developing on.
 
-Change the command we are using, fix the command output parsing, and fix the struct definition so the unit test passes.
+To get the unit test to pass we need to: 
+
+#. Change the command we are using.
+
+#. Fix the command output parsing.
+
+#. Fix the struct definition.
 
 .. code-block:: diff
 
@@ -304,7 +315,7 @@ Change the command we are using, fix the command output parsing, and fix the str
         end
       end
 
-After the changes part of the command.rb will look like this:
+After the changes part of the ``command.rb`` will look like this:
 
 .. code-block:: ruby
 
@@ -339,10 +350,10 @@ Now when we run the test they pass:
 
     1 runs, 6 assertions, 0 failures, 0 errors, 0 skips
 
-Update app.rb and view/index.html
-.................................
+Update ``app.rb`` and ``view/index.html``
+.........................................
 
-Update app.rb:
+Update ``app.rb``:
 
 .. code-block:: diff
 
@@ -364,7 +375,7 @@ Update app.rb:
     end
 
 
-In views/index.erb, replace the table with this:
+In ``views/index.erb``, replace the table with this:
 
 .. code-block:: erb
 
@@ -395,12 +406,14 @@ In views/index.erb, replace the table with this:
       <% end %>
     </table>
 
-These changes should not require an app restart. Go to the launched app and reload the page to see the changes.
+These changes *should not require an app restart.* Go to the launched app and **reload the page** 
+to see the changes.
 
 Brand App
 ---------
 
-The app is looking good, but the details page still shows the app title "Passenger App Processes". To change this and the icon, edit the manifest.yml:
+The app is looking good, but the details page still shows the app title "Passenger App 
+Processes". To change this and the icon, edit the ``manifest.yml``:
 
 .. code-block:: diff
 
@@ -419,13 +432,14 @@ Publish App
 
 Publishing an app requires two steps:
 
-#. Updating the manifest.yml to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.
-#. Having an administrator checkout a copy of the production version to a directory under /var/www/ood/apps/sys
+#. Updating the ``manifest.yml`` to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.
+
+#. Having an administrator checkout a copy of the production version to a directory under ``/var/www/ood/apps/sys``.
 
 
 Steps:
 
-#. Add category to manifest so app appears in Files menu:
+#. Add category to manifest so the app appears in the Files menu:
 
     .. code-block:: diff
 
@@ -435,7 +449,7 @@ Steps:
         +category: Files
         +subcategory: Utilities
 
-#. Version these changes. Click Shell button on app details view, and then commit the changes:
+#. Version these changes. Click **Shell** button on app details view, and then ``commit`` the changes:
 
     .. code-block:: sh
 
@@ -445,7 +459,7 @@ Steps:
        # if there is an external remote associated with this, push to that
        git push origin master
 
-#. As the admin, sudo copy or clone this repo to production
+#. As the admin, ``sudo copy`` or ``git clone`` this repo to production
 
     .. code-block:: sh
 
@@ -454,7 +468,7 @@ Steps:
        git clone /users/PZS0562/efranz/ondemand/dev/quota
 
 
-#. Reload the dashboard.
+#. **Reload** the dashboard.
 
 .. figure:: /images/app-dev-tutorial-ps-to-quota-published.png
    :align: center
