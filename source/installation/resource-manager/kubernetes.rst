@@ -1,7 +1,7 @@
 .. _resource-manager-kubernetes:
 
-Kuberenetes
-===========
+Kubernetes
+==========
 
 TODO table of contents
 
