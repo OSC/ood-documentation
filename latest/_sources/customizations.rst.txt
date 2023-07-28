@@ -300,7 +300,7 @@ Set Upload Limits
 By default, the file size upload limit is 10737420000 bytes (~10.7 GB).
 
 If you want set this to a lower value, set the ``FILE_UPLOAD_MAX`` configuration
-in the file apps' configuration file ``/etc/ood/config/apps/shell/env``.
+in the file apps' configuration file ``/etc/ood/config/apps/dashboard/env``.
 
 If you want to set it to a higher value set ``nginx_file_upload_max``
 in ``/etc/ood/config/nginx_stage.yml`` to the desired value. If you have
@@ -324,7 +324,7 @@ Set Download Limits
 
 By default, the maximum file download size is 10.7 GB (10737418240 bytes). 
 If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` configuration environment 
-variable in the ``/etc/ood/config/apps/files/env`` file to the desired value in bytes.
+variable in the ``/etc/ood/config/apps/dashboard/env`` file to the desired value in bytes.
 
 For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/files/env`` file:
 
