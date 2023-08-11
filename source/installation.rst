@@ -23,8 +23,9 @@ Sites may reconfigure their deployment to allow for plain text traffic see FIXME
    :numbered: 1
 
    installation/install-software
-   installation/modify-system-security
+   authentication
    installation/add-ssl
+   installation/modify-system-security
 
 Building From Source
 --------------------
