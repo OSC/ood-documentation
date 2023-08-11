@@ -142,8 +142,14 @@ Some operating systems use `Software Collections`_ to satisfy these.
 ----------------------
 
 Now that Open OnDemand is installed and Apache is running, it should be serving
-a public page telling you to come back here and setup authentication.  If this
-is the case - then you should :ref:`secure your apache <add-ssl>` then :ref:`add authentication <authentication>`.
+a public page telling you to come back here and setup authentication.
+
+If this is the case - then you need to :ref:`add authentication <authentication>`.
+The installation will not move forward with without adding authentication.
+
+After adding authentication, but before actually testing that it works, you should
+:ref:`secure your apache <add-ssl>`. This way you never send credentials over plain http.
+
 You may also want to :ref:`enable SELinux <modify-system-security>`.
 
 If you're seeing the default apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`

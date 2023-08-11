@@ -52,7 +52,6 @@ These are institutions who were early adopters or provided HPC resources for dev
 
    requirements
    installation
-   authentication
    installation/add-cluster-config
    how-tos/app-development/interactive/setup
 
