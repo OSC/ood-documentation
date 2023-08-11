@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Add SELinux" href="modify-system-security.html" />
+    <link rel="next" title="2. Authentication" href="../authentication.html" />
     <link rel="prev" title="Installation" href="../installation.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -114,12 +114,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#building-from-source">Building From Source</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">2. Add SELinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html">2. Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-ssl.html">3. Secure Apache httpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">4. Add SELinux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Cluster Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
 </ul>
@@ -317,9 +317,12 @@ sudo systemctl <span class="nb">enable</span> apache2
 <div class="section" id="verify-installation">
 <h2>4. Verify installation<a class="headerlink" href="#verify-installation" title="Permalink to this headline">¶</a></h2>
 <p>Now that Open OnDemand is installed and Apache is running, it should be serving
-a public page telling you to come back here and setup authentication.  If this
-is the case - then you should <a class="reference internal" href="add-ssl.html#add-ssl"><span class="std std-ref">secure your apache</span></a> then <a class="reference internal" href="../authentication.html#authentication"><span class="std std-ref">add authentication</span></a>.
-You may also want to <a class="reference internal" href="modify-system-security.html#modify-system-security"><span class="std std-ref">enable SELinux</span></a>.</p>
+a public page telling you to come back here and setup authentication.</p>
+<p>If this is the case - then you need to <a class="reference internal" href="../authentication.html#authentication"><span class="std std-ref">add authentication</span></a>.
+The installation will not move forward with without adding authentication.</p>
+<p>After adding authentication, but before actually testing that it works, you should
+<a class="reference internal" href="add-ssl.html#add-ssl"><span class="std std-ref">secure your apache</span></a>. This way you never send credentials over plain http.</p>
+<p>You may also want to <a class="reference internal" href="modify-system-security.html#modify-system-security"><span class="std std-ref">enable SELinux</span></a>.</p>
 <p>If you’re seeing the default apache page (Ubuntu users will) you will have to <a class="reference internal" href="../how-tos/debug/debug-apache.html#show-virtualhosts"><span class="std std-ref">debug virtualhosts</span></a>
 and likely <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-servername"><span class="std std-ref">configure a servername</span></a>.</p>
 </div>
@@ -347,7 +350,7 @@ review the <code class="docutils literal notranslate"><span class="pre">Dockerfi
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="modify-system-security.html" class="btn btn-neutral float-right" title="2. Add SELinux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../authentication.html" class="btn btn-neutral float-right" title="2. Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
