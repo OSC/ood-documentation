@@ -35,9 +35,10 @@ Configuration
 These are the most common configuration properties needed to enable and setup the support ticket feature:
 
 * ``description``: Text to customize the support ticket header.
-* ``from``: The email address to set the email from field when sending the email. It defaults to the email field set in the form.
+* ``email``: Section to configure how the email is sent to the support system.
+* ``to``: The destination email address of your Help Desk.
+* ``from``: The address to set in the from field when sending the email. It defaults to the email submitted in the support ticket form.
   This is useful to prevent the incoming emails being considered spam.
-* ``to``: The destination email address of your Help Desk. 
 * ``delivery_method``: Rails setting to set the transport mechanism to use. This is usually ``smtp``.
   For more information see the `Rails documentation on mailers <https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration>`_.
 * ``delivery_settings``: Rails settings object to set the transport configuration properties.
@@ -64,13 +65,18 @@ Sample configuration:
       # Text added to the page under the support ticket header
       description: |
         My optional description Text for the support ticket feture
+      
+      # email section is required and should always be present.
+      # It configures how the support ticket email is sent
       email:
-        # Optional.
-        # To set the email from field. Defaults to the email set in the form.
-        from: "config@example.com" 
         # Required.
         # Your support system email address. The email will be sent to this address
         to: "support@support.system.com"
+        # Optional.
+        # To set the email from field. Defaults to the email set in the form.
+        # The email set in the form will always be added to the reply-to email field
+        from: "config@example.com"
+
         # delivery_method and delivery_settings are Rails configuration items
         # that can be set in this file to simplify configuration.
         # If you prefer, you can configure Rails in the usual way.
@@ -95,7 +101,7 @@ the support ticket form fields can be arranged or changed as required.
 
 .. note::
   
-  Please note that an ``email`` field must be present in the form for the support ticket feature to be functional.
+  Please note that the ``email`` field must be present in the form for the support ticket feature to be functional.
 
 Custom fields can be added, but they will require a custom email template to make use of the provided values in the email body.
 Override the default email template with your own by dropping a file named ``_email.text.erb`` into the folder
@@ -106,6 +112,11 @@ The example below shows a custom form configuration with 3 fields and how to use
   .. code-block:: yaml
 
     support_ticket:
+      # email section is required and should always be present.
+      # It configures how the support ticket email is sent
+      email:
+        to: "support@support.system.com"
+
       attributes:
         email:
           required: true
