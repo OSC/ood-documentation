@@ -1911,9 +1911,10 @@ session to the body of the email to help troubleshoot the issue.</p>
 <p>These are the most common configuration properties needed to enable and setup the support ticket feature:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Text to customize the support ticket header.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: The email address to set the email from field when sending the email. It defaults to the email field set in the form.
-This is useful to prevent the incoming emails being considered spam.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: Section to configure how the email is sent to the support system.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: The destination email address of your Help Desk.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: The address to set in the from field when sending the email. It defaults to the email submitted in the support ticket form.
+This is useful to prevent the incoming emails being considered spam.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">delivery_method</span></code>: Rails setting to set the transport mechanism to use. This is usually <code class="docutils literal notranslate"><span class="pre">smtp</span></code>.
 For more information see the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">delivery_settings</span></code>: Rails settings object to set the transport configuration properties.
@@ -1938,13 +1939,18 @@ See example below or the <a class="reference external" href="https://guides.ruby
 <span class="w">  </span><span class="c1"># Text added to the page under the support ticket header</span><span class="w"></span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
 <span class="w">    </span><span class="no">My optional description Text for the support ticket feture</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1"># email section is required and should always be present.</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># It configures how the support ticket email is sent</span><span class="w"></span>
 <span class="w">  </span><span class="nt">email</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># Optional.</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># To set the email from field. Defaults to the email set in the form.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config@example.com&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># Required.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># Your support system email address. The email will be sent to this address</span><span class="w"></span>
 <span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;support@support.system.com&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Optional.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># To set the email from field. Defaults to the email set in the form.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># The email set in the form will always be added to the reply-to email field</span><span class="w"></span>
+<span class="w">    </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config@example.com&quot;</span><span class="w"></span>
+
 <span class="w">    </span><span class="c1"># delivery_method and delivery_settings are Rails configuration items</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># that can be set in this file to simplify configuration.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># If you prefer, you can configure Rails in the usual way.</span><span class="w"></span>
@@ -1970,7 +1976,7 @@ In the same way that you can configure the <a class="reference internal" href="e
 the support ticket form fields can be arranged or changed as required.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please note that an <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional.</p>
+<p>Please note that the <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional.</p>
 </div>
 <p>Custom fields can be added, but they will require a custom email template to make use of the provided values in the email body.
 Override the default email template with your own by dropping a file named <code class="docutils literal notranslate"><span class="pre">_email.text.erb</span></code> into the folder
@@ -1978,6 +1984,11 @@ Override the default email template with your own by dropping a file named <code
 <p>The example below shows a custom form configuration with 3 fields and how to use them in the template to generate the email body.</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># email section is required and should always be present.</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># It configures how the support ticket email is sent</span><span class="w"></span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;support@support.system.com&quot;</span><span class="w"></span>
+
 <span class="w">  </span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
