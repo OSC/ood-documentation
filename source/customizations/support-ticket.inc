@@ -44,6 +44,12 @@ These are the most common configuration properties needed to enable and setup th
 * ``delivery_settings``: Rails settings object to set the transport configuration properties.
   See example below or the `Rails documentation on mailers <https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration>`_.
 
+.. warning::
+
+  Use caution when supplying username and password in delivery_settings.  These files are readable by
+  unprivileged users and as such this information can be found by a sophsticated user without privilege
+  escelation.
+
 Sample configuration:
 
   .. code-block:: yaml
