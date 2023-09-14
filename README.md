@@ -37,20 +37,33 @@ There are two ways to build the documentation.
    package to use by python.org for dependency
    management](https://packaging.python.org/tutorials/managing-dependencies/)
 
-#### Docker
+### Default - Docker/Podman
 
 Currently all builds are generated using the
-[docker-sphinx](https://github.com/OSC/docker-sphinx/) Docker image. They are
-built using the following command from the root of this repo:
+[ood-documentation-build](https://github.com/OSC/ood-documentation-build/)
+container image. They are built using the following command from the root of this repo:
+
+Note that because we're using `rake`, you'll need to have `ruby` installed on your
+system as well as the `rake` gem.
 
 ```bash
-docker run --rm -i -t -v "${PWD}:/doc" -u "$(id -u):$(id -g)" ohiosupercomputer/ood-doc-build make html
+rake build
 ```
 
-Or use the rake task added:
+### Make with Pip/python
+
+The default way to build these files are to use the container (instructions above)
+that has all the dependencies sorted out.  If however you'd rather install all
+the dependencies through python's `pip` (or a different python package manager
+like `conda`, `venv` and so on) you can use the `requirements.txt` found in the
+[ood-documentation-build](https://github.com/OSC/ood-documentation-build/)
+repository.
+
+However this may be flaky and/or brittle way to manage this which is why using
+a container is the default mechanism for building these html files.
 
 ```bash
-rake docker:build
+make html
 ```
 
 ## Contributing
