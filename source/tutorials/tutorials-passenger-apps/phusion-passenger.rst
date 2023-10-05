@@ -312,7 +312,9 @@ To change this and the icon, edit the ``manifest.yml``:
 Publish App
 -----------
 
-Publishing an app requires two steps:
+Publishing an app requires three steps:
+
+#. Remove ``tmp/always_restart.txt`` since we are done developing.
 
 #. Updating the ``manifest.yml`` to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.
 
