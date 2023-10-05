@@ -347,7 +347,9 @@ Steps:
        git commit -m "update manifest for production"
 
        # if there is an external remote associated with this, push to that
-       git push origin master
+       git push origin <your working branch>
+
+#. If using a remote, go in and merge your request to the ``main`` or ``master`` branch.
 
 #. As the admin, ``sudo copy`` or ``git clone`` this repo to production
 
@@ -355,7 +357,7 @@ Steps:
 
        # as sudo on OnDemand host:
        cd /var/www/ood/apps/sys
-       git clone /users/PZS0714/travert/ondemand/dev/sciGatewayApp
+       git clone git@github.com:OSC/ood-example-sciGatewayApp.git
 
 #. **Reload** the dashboard.
 
