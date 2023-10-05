@@ -102,20 +102,6 @@ Files and Their Purpose
    * - ``tmp/always_restart.txt``
      - A Phusion Passenger convention to restart our server each request to see our code changes. The file should be empty.
 
-Build From Scratch
-------------------
-
-#. ``cd`` into you dev directory, which should have already been setup as per prereqs above.
-#. ``mkdir science_gateway_app`` and ``cd`` into it.
-#. Initialize our environment with ``python3 -m venv .venv``.
-#. ``touch passenger_wsgi.py``. Thise creates a WSGI file in the app's root directory. 
-#. ``touch app.py``
-#. ``mkdir -p tmp/always_restart.txt``. No content needed as this is a passenger convention to reload our changes each request.
-#. ``mkdir -p templates/index.html``
-
-While this is possible, the remainder of the tutorial will assume you've pulled down the ``initial_state``
-of the repo and work from there, but you are free to create these files and follow along.
-
 Build From GitHub
 -----------------
 There are going to be 2 branches for this repo. The ``completed`` branch has all the code we are going to write and the 
