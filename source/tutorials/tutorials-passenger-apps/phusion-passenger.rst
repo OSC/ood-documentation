@@ -143,7 +143,7 @@ If you already built from git above, please skip the first few steps:
    source .venv/bin/activate    # always when starting work back up
    pip install flask requests matplotlib
 
-At any time of development, if another package is needed, we are always feel free 
+At any time of development, if another package is needed, we are always free 
 to come back and do a ``pip install <package>``. Ensure the ``venv`` environment is 
 active when you do.
 
