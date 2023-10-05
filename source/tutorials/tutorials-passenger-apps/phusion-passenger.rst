@@ -20,7 +20,7 @@ this app at the start you should only see:
 
 And by the end of this tutorial the app will look like the following:
 
-.. figure:: /images/app-sharing-2.png
+.. figure:: /images/completed-python-passenger-app.png
    :align: center
 
    Final state of app after tutorial.
@@ -290,6 +290,9 @@ So, now we have two pages, but we need to go back into our ``app.py`` to build t
 Now we have added the route and variables needed to make the pages and their API calls work.
 
 The index should now appear as:
+
+.. figure:: /images/completed-python-passenger-app.png
+   :align: center
 
 Brand App
 ---------
