@@ -23,7 +23,12 @@ And by the end of this tutorial the app will look like the following:
 .. figure:: /images/completed-python-passenger-app.png
    :align: center
 
-   Final state of app after tutorial.
+   Final state of app's index after tutorial.
+
+.. figure:: /images/python-passenger-weather-graph.png
+   :align: center
+
+   Rendered graph with retrieved data from NWS and graphed with matplotlib.
 
 This **assumes** you have followed the directions to :ref:`enabling-development-mode` in the
 Dashboard.
