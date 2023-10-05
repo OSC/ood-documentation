@@ -294,6 +294,10 @@ The index should now appear as:
 .. figure:: /images/completed-python-passenger-app.png
    :align: center
 
+And the weather graph should appear as something like the following:
+
+
+
 Brand App
 ---------
 The app is looking good, but the details page still shows the app title "Science Gateway". 
