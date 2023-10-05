@@ -229,6 +229,11 @@ We will plan to use the ``static`` folder going forward for any data like this w
 Add Initial Views in ``template/``
 ..................................
 
+.. warning::
+   Because of technical reasons with our version of Sphinx, the below ``url_for`` calls will be missing a single 
+   '{' in order to get around Sphinx rendering issues. Make sure to add the extra '{' before each call to ''url_for'' 
+   in your own code.
+
 The ``templates`` directory will hold the files we intend to use for our ``html`` files. First let's edit the 
 ``index.html`` to look like the following:
 
