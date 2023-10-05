@@ -296,7 +296,8 @@ The index should now appear as:
 
 And the weather graph should appear as something like the following:
 
-
+.. figure:: /images/python-passenger-weather-graph.png
+   :align: center
 
 Brand App
 ---------
