@@ -19,9 +19,25 @@ Install mod_auth_mellon
 #. Ensure Software Collections is enabled on the system
 #. Install the mod_auth_mellon module:
 
-   .. code-block:: shell
+.. tabs::
+
+  .. tab:: EL7
+
+    .. code-block:: shell
 
       yum install httpd24-mod_auth_mellon httpd24-mod_ssl
+
+  .. tab:: EL8+
+
+    .. code-block:: shell
+
+      yum install mod_auth_mellon mod_ssl
+
+  .. tab:: Ubuntu
+    
+    .. code-block:: shell
+
+      apt install libapache2-mod-auth-mellon
 
 Configure mod_auth_mellon
 --------------------------------------------------
