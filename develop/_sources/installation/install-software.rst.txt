@@ -145,14 +145,14 @@ Now that Open OnDemand is installed and Apache is running, it should be serving
 a public page telling you to come back here and setup authentication.
 
 If this is the case - then you need to :ref:`add authentication <authentication>`.
-The installation will not move forward with without adding authentication.
+The installation will not move forward without adding authentication.
 
 After adding authentication, but before actually testing that it works, you should
-:ref:`secure your apache <add-ssl>`. This way you never send credentials over plain http.
+:ref:`secure your Apache <add-ssl>`. This way you never send credentials over plain HTTP.
 
 You may also want to :ref:`enable SELinux <modify-system-security>`.
 
-If you're seeing the default apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
+If you're seeing the default Apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
 and likely :ref:`configure a servername <ood-portal-generator-servername>`.
 
 Building From Source
