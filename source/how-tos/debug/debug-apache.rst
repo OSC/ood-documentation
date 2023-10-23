@@ -36,7 +36,7 @@ Restart services
 
           sudo systemctl try-restart httpd
 
-      .. tab:: Ubuntu
+      .. tab:: Ubuntu & Debian
 
          .. code-block:: sh
 
@@ -73,7 +73,7 @@ Or you're using the wrong hostname in your browser.
 
           sudo /sbin/httpd -S
 
-      .. tab:: Ubuntu
+      .. tab:: Ubuntu & Debian
 
          .. code-block:: sh
 

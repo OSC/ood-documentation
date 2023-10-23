@@ -22,6 +22,7 @@ At this time OnDemand only supports the following operating systems and architec
    "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "Ubuntu 20.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Ubuntu 22.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Debian 12",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
 
 Software Requirements

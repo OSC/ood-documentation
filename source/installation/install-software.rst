@@ -138,6 +138,17 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
             sudo apt install ondemand
 
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
+
       .. tab:: Amazon Linux 2023
 
          .. code-block:: sh
@@ -166,7 +177,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
           sudo systemctl start httpd
           sudo systemctl enable httpd
 
-      .. tab:: Ubuntu
+      .. tab:: Ubuntu & Debian
 
          .. code-block:: sh
 
@@ -194,7 +205,7 @@ After adding authentication, but before actually testing that it works, you shou
 
 You may also want to :ref:`enable SELinux <modify-system-security>`.
 
-If you're seeing the default Apache page (Ubuntu users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
+If you're seeing the default Apache page (Ubuntu & Debian users will) you will have to :ref:`debug virtualhosts <show-virtualhosts>`
 and likely :ref:`configure a servername <ood-portal-generator-servername>`.
 
 Building From Source
