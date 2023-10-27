@@ -213,5 +213,5 @@ An example config file in ``ondemand.d/pitzer_01_login.yml``:
     login:
         host: "pitzer-login01.hpc.osu.edu"
 
-Again, the thing to not here is we've left off the ``v2.job`` which renders the cluster useable only for logins, i.e.
+Again, the thing to note here is we've left off the ``v2.job`` which renders the cluster useable only for logins, i.e.
 *no jobs will be scheduleable on this cluster.*
