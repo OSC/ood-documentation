@@ -198,7 +198,7 @@ Login Cluster Only
 
 Suppose you need want to create a *login cluster that does not schedule or run jobs*. It is used purely as a login/shell cluster only.
 
-To accomplish this, you need to simply leave out the ``v2job`` stanza that associates a scheduler with the cluster.
+To accomplish this, you need to simply leave out the ``v2.job`` stanza that associates a scheduler with the cluster.
 
 An example config file in ``ondemand.d/pitzer_01_login.yml``:
 
