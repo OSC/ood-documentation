@@ -5,7 +5,6 @@ Cluster Config Schema v2
 
 The cluster config controls many OnDemand features including job submission, shell access, names in menus.
 
-*****************
 First an example:
 *****************
 
@@ -58,7 +57,6 @@ Below is the production configuration for OSC's Owens cluster.
 
 .. _the YAML spec: http://yaml.org/spec/1.2/spec.html#id2777534
 
-************
 A Break Down
 ************
 
@@ -191,8 +189,6 @@ See :ref:`Disable Host Link in Batch Connect Session Card <disable-host-link-bat
 
   The user is responsible for providing the `%s` that is used to place the script content. If a `script_wrapper` is provided without `%s` then batch connect applications are unlikely to work properly.
 
-
-******************
 Login Cluster Only
 ******************
 
