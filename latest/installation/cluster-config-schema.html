@@ -118,6 +118,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#batch-connect">batch_connect:</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#login-cluster-only">Login Cluster Only</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="resource-manager/torque.html">Torque</a></li>
@@ -388,6 +389,24 @@ See <a class="reference internal" href="../customizations.html#disable-host-link
 <p>The user is responsible for providing the <cite>%s</cite> that is used to place the script content. If a <cite>script_wrapper</cite> is provided without <cite>%s</cite> then batch connect applications are unlikely to work properly.</p>
 </div>
 </div>
+</div>
+<div class="section" id="login-cluster-only">
+<h2>Login Cluster Only<a class="headerlink" href="#login-cluster-only" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you need want to create a <em>login cluster that does not schedule or run jobs</em>. It is used purely as a login/shell cluster only.</p>
+<p>To accomplish this, you need to simply leave out the <code class="docutils literal notranslate"><span class="pre">v2.job</span></code> stanza that associates a scheduler with the cluster.</p>
+<p>An example config file in <code class="docutils literal notranslate"><span class="pre">ondemand.d/pitzer_01_login.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">v2</span><span class="p">:</span><span class="w"></span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Pitzer</span><span class="nv"> </span><span class="s">Login&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://www.osc.edu/supercomputing/computing/pitzer&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pitzer-login01.hpc.osu.edu&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Again, the thing to note here is we’ve left off the <code class="docutils literal notranslate"><span class="pre">v2.job</span></code> which renders the cluster useable only for logins, i.e.
+<em>no jobs will be scheduleable on this cluster.</em></p>
 </div>
 </div>
 
