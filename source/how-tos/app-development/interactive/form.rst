@@ -218,7 +218,7 @@ auto_modules_<MODULE>
     The form configuration is case sensitive. So there is a difference between
     ``auto_modules_R`` and ``auto_modules_r``.
 
-    Also - hyphens cause issues in templating the script files. So, for example,
+    Hyphens cause issues in templating the script files. For example,
     a form configuration like ``auto_modules_netcdf-serial`` would need to be
     referenced in the ``script.sh.erb`` as ``<%= auto_modules_netcdf_serial %>``
     replacing any hyphens (``-``) with underscores ``_``.
