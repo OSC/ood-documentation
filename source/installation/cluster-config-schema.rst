@@ -5,7 +5,6 @@ Cluster Config Schema v2
 
 The cluster config controls many OnDemand features including job submission, shell access, names in menus.
 
-*****************
 First an example:
 *****************
 
@@ -58,7 +57,6 @@ Below is the production configuration for OSC's Owens cluster.
 
 .. _the YAML spec: http://yaml.org/spec/1.2/spec.html#id2777534
 
-************
 A Break Down
 ************
 
@@ -190,3 +188,26 @@ See :ref:`Disable Host Link in Batch Connect Session Card <disable-host-link-bat
 .. note::
 
   The user is responsible for providing the `%s` that is used to place the script content. If a `script_wrapper` is provided without `%s` then batch connect applications are unlikely to work properly.
+
+Login Cluster Only
+******************
+
+Suppose you need want to create a *login cluster that does not schedule or run jobs*. It is used purely as a login/shell cluster only.
+
+To accomplish this, you need to simply leave out the ``v2.job`` stanza that associates a scheduler with the cluster.
+
+An example config file in ``ondemand.d/pitzer_01_login.yml``:
+
+.. code-block:: yaml
+
+    ---
+    v2:
+    metadata:
+        title: "Pitzer Login"
+        url: "https://www.osc.edu/supercomputing/computing/pitzer"
+        hidden: false
+    login:
+        host: "pitzer-login01.hpc.osu.edu"
+
+Again, the thing to note here is we've left off the ``v2.job`` which renders the cluster useable only for logins, i.e.
+*no jobs will be scheduleable on this cluster.*
