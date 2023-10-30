@@ -595,7 +595,7 @@ Configuration Properties
   that there be a file for each cluster because the system can then tie those
   modules to that specific cluster.
   
-  This directory should have module spider-json output **for each cluster** 
+  This directory should have ``module spider-json`` output **for each cluster** 
   as indicated by the command below. Open OnDemand will read these files and
   potentially show them in a from for a cluster called **my_cluster**.
 
