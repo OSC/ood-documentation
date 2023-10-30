@@ -1,7 +1,7 @@
 .. _version_policy:
 
-OOD Versioning Policy
-===============================
+Versioning Policy
+=================
 
 This policy can be seen in the `Open OnDemand Versioning Policy document <https://github.com/OSC/ondemand/blob/master/VERSIONING_POLICY.md>`_ on GitHub.
 

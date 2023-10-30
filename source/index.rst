@@ -76,7 +76,7 @@ These are institutions who were early adopters or provided HPC resources for dev
 
 .. toctree::
   :maxdepth: 2
-  :caption: More
+  :caption: Reference
 
   architecture
   reference
