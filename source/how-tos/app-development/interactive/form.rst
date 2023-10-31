@@ -213,6 +213,17 @@ auto_modules_<MODULE>
   Meaning only versions appropriate to a given cluster will be shown when that
   cluster is chosen.
 
+  .. note::
+
+    The form configuration is case sensitive. So there is a difference between
+    ``auto_modules_R`` and ``auto_modules_r``.
+
+    Hyphens cause issues in templating the script files. For example,
+    a form configuration like ``auto_modules_netcdf-serial`` would need to be
+    referenced in the ``script.sh.erb`` as ``<%= auto_modules_netcdf_serial %>``
+    replacing any hyphens (``-``) with underscores ``_``.
+
+
 auto_groups
   This will automatically generate a ``select`` widget populated with a list of the Unix
   groups the user is currently in. Administrators can configure :ref:`filter for autogroups <auto_groups_filter>`
