@@ -405,6 +405,15 @@ the cluster module files that need to be read.</p>
 <p>If you have dynamic form widgets enabled, the option list will be cluster aware.
 Meaning only versions appropriate to a given cluster will be shown when that
 cluster is chosen.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The form configuration is case sensitive. So there is a difference between
+<code class="docutils literal notranslate"><span class="pre">auto_modules_R</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_modules_r</span></code>.</p>
+<p>Hyphens cause issues in templating the script files. For example,
+a form configuration like <code class="docutils literal notranslate"><span class="pre">auto_modules_netcdf-serial</span></code> would need to be
+referenced in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">auto_modules_netcdf_serial</span> <span class="pre">%&gt;</span></code>
+replacing any hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>) with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
+</div>
 </dd>
 <dt>auto_groups</dt><dd><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget populated with a list of the Unix
 groups the user is currently in. Administrators can configure <a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#auto-groups-filter"><span class="std std-ref">filter for autogroups</span></a>
