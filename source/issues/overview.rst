@@ -175,7 +175,9 @@ Workarounds: At the time of writing the current version of Safari is version 12.
 RStudio and Upgrading Singularity 3 to minor version 5
 ------------------------------------------------------
 
-OnDemand RStudio implmentations using Singularity may break when upgrading to Singularity version 3.5 or above. There is an undocumented breaking change where ``LD_LIBRARY_PATH`` is no longer exported to the container by default. Instead the container will default to having ``LD_LIBRARY_PATH=/.singularity.d/libs``. Explicitly exporting the variable by using ``SINGULARITYENV_LD_LIBRARY_PATH="$LD_LIBRARY_PATH" singularity ...`` appears sufficient to fix the issue.
+OnDemand RStudio implementations using Singularity may break when upgrading to Singularity version 3.5 or above. There is an undocumented breaking change where ``LD_LIBRARY_PATH`` is no longer exported to the container by default. Instead the container will default to having ``LD_LIBRARY_PATH=/.singularity.d/libs``. 
+
+Workarounds: Explicitly exporting the variable by using ``SINGULARITYENV_LD_LIBRARY_PATH="$LD_LIBRARY_PATH" singularity ...`` appears sufficient to fix the issue.
 
 .. _Cyberduck: https://cyberduck.io
 .. _FileZilla: https://filezilla-project.org/
