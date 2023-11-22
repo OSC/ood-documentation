@@ -324,7 +324,8 @@
 </div>
 <div class="section" id="rstudio-and-upgrading-singularity-3-to-minor-version-5">
 <h2>RStudio and Upgrading Singularity 3 to minor version 5<a class="headerlink" href="#rstudio-and-upgrading-singularity-3-to-minor-version-5" title="Permalink to this headline">¶</a></h2>
-<p>OnDemand RStudio implmentations using Singularity may break when upgrading to Singularity version 3.5 or above. There is an undocumented breaking change where <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> is no longer exported to the container by default. Instead the container will default to having <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH=/.singularity.d/libs</span></code>. Explicitly exporting the variable by using <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_LD_LIBRARY_PATH=&quot;$LD_LIBRARY_PATH&quot;</span> <span class="pre">singularity</span> <span class="pre">...</span></code> appears sufficient to fix the issue.</p>
+<p>OnDemand RStudio implementations using Singularity may break when upgrading to Singularity version 3.5 or above. There is an undocumented breaking change where <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> is no longer exported to the container by default. Instead the container will default to having <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH=/.singularity.d/libs</span></code>.</p>
+<p>Workarounds: Explicitly exporting the variable by using <code class="docutils literal notranslate"><span class="pre">SINGULARITYENV_LD_LIBRARY_PATH=&quot;$LD_LIBRARY_PATH&quot;</span> <span class="pre">singularity</span> <span class="pre">...</span></code> appears sufficient to fix the issue.</p>
 </div>
 </div>
 
