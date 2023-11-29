@@ -634,8 +634,13 @@ assets and links supplied by the web server are relative and not absolute.
 
 .. describe:: host_regex (String)
 
-     the regular expression used as a allowlist for allowing a user to reverse
-     proxy to a given host.
+    .. warning::
+      Wildcards like ``.`` should be avoided because they cause issues in parsing.
+      ``host_regex`` should always have a domain name that your center owns (for security)
+      and should specify lists of character classes like ``[w.-]`` (for proper functionality).
+
+    The regular expression used as a allowlist for allowing a user to reverse
+    proxy to a given host.
 
      Default
        Allow proxying to all hosts in the world (please change this if you
