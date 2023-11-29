@@ -825,9 +825,16 @@ assets and links supplied by the web server are relative and not absolute.</p>
 <dl class="describe">
 <dt>
 <code class="sig-name descname">host_regex (String)</code></dt>
-<dd><p>the regular expression used as a allowlist for allowing a user to reverse
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Wildcards like <code class="docutils literal notranslate"><span class="pre">.</span></code> should be avoided because they cause issues in parsing.
+<code class="docutils literal notranslate"><span class="pre">host_regex</span></code> should always have a domain name that your center owns (for security)
+and should specify lists of character classes like <code class="docutils literal notranslate"><span class="pre">[w.-]</span></code> (for proper functionality).</p>
+</div>
+<p>The regular expression used as a allowlist for allowing a user to reverse
 proxy to a given host.</p>
-<dl>
+<blockquote>
+<div><dl>
 <dt>Default</dt><dd><p>Allow proxying to all hosts in the world (please change this if you
 enable this feature)</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host_regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[^/]+&quot;</span><span class="w"></span>
@@ -840,6 +847,7 @@ enable this feature)</p>
 </div>
 </dd>
 </dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="describe">
