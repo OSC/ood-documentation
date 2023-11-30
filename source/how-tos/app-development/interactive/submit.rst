@@ -7,6 +7,12 @@ The configuration file ``submit.yml.erb`` controls the content of the batch
 script as well as the submission arguments used when submitting the batch job.
 It is located in the root of the application directory.
 
+.. tip::
+  This page is an introduction to the ``submit.yml.erb``, it's contents
+  and it's use.
+
+  Reference documentation holds :ref:`all configuration items for submit.yml.erb <submit-yml-erb>`.
+
 Assuming we already have a sandbox Interactive App deployed under::
 
   ${HOME}/ondemand/dev/my_app
@@ -28,8 +34,8 @@ The three possible configuration options that can be used in the
 
 .. describe:: batch_connect (Hash)
 
-   the configuration describing the batch script content (see
-   `OodCore::BatchConnect::Template`_ for valid configuration options)
+   The configuration describing the batch script content.
+   Reference documentation holds :ref:`all configuration items for submit.yml.erb <submit-yml-erb>`.
 
    Example
      Use the default basic web server template
@@ -43,8 +49,9 @@ The three possible configuration options that can be used in the
 
 .. describe:: script (Hash)
 
-   the configuration describing the job submission parameters for the batch
-   script (see `OodCore::Job::Script`_ for valid configuration options)
+   The configuration describing the job submission parameters for the batch
+   script. Reference documentation holds
+   :ref:`all configuration items for submit.yml.erb <submit-yml-erb>`.
 
    Example
      Set the job's charged account and queue
@@ -112,22 +119,20 @@ All batch scripts are generated from either the ``basic`` template or the
         batch_connect:
           template: "vnc"
 
-Aside from the above configuration option, a list of all possible configuration
-options for ``batch_connect`` can be found under the code documentation for
-`OodCore::BatchConnect::Template`_.
+Reference documentation holds :ref:`all configuration items for submit.yml.erb <submit-yml-erb>`.
 
 .. note::
 
    The configuration ``template: "vnc"`` comes with more ``batch_connect``
    configuration options which can be found under the code documentation for
-   `OodCore::BatchConnect::Templates::VNC`_.
+   :ref:`vnc-bc-options`.
 
 Configure Script
 ````````````````
 
 The ``script`` configuration option defines the batch job submission parameters
 (e.g., number of nodes, wall time, queue, ...). The list of all possible
-options can be found under the code documentation for `OodCore::Job::Script`_.
+options can be found under the code documentation for :ref:`submit-script-options`.
 
 It is recommended to refrain from using the ``native`` option to best keep your
 Interactive App as portable as possible. Although we understand this may not be
@@ -221,7 +226,7 @@ script it forks off into the background. This can be configured with:
 Specify Job Submission Parameters
 `````````````````````````````````
 
-Cherry-picking some possible options from `OodCore::Job::Script`_ gives a batch
+Cherry-picking some possible options from :ref:`submit-script-options` gives a batch
 job built from the basic web server template submitted with the following
 parameters:
 
@@ -299,27 +304,7 @@ the user supplied a non-blank value to the form attribute ``my_queue``.
 
 .. _global-bc-settings:
 
-Setting Batch Connect Options Globally
-``````````````````````````````````````
-
-All of these configuration items can also be applied globally to the entire cluster
-in the cluster definition files under ``/etc/ood/config/clusters.d/``. If set globally,
-the option is applied to all applications in that cluster.
-
-Here's an example of how to set the ``header`` configuration for both vnc and basic
-templates.
-
-  .. code-block:: yaml
-
-    v2:
-      batch_connect:
-        basic:
-          header: "#!/bin/bash"
-        vnc:
-          header: "#!/bin/bash"
+.. include:: global-submit.inc
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby
-.. _`oodcore::batchconnect::template`: http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template
-.. _`oodcore::batchconnect::templates::vnc`: http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Templates/VNC
-.. _`oodcore::job::script`: http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
 .. _ruby strings: https://ruby-doc.org/core-2.2.3/String.html
