@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Batch Connect Script Options &mdash; Open OnDemand 3.1.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ood-portal-generator" href="../../commands/ood-portal-generator.html" />
+    <link rel="prev" title="Batch Connect VNC Options" href="vnc-bc-options.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Configuration Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ood-portal-yml.html">ood_portal.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx-stage-yml.html">nginx_stage.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ondemand-d-ymls.html">ondemand.d/*.yml files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../submit-yml-erb.html">submit.yml.erb</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="basic-bc-options.html">Basic Batch Connect Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vnc-bc-options.html">Batch Connect VNC Options</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Batch Connect Script Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submit-yml-erb.html#simple-example">Simple Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submit-yml-erb.html#setting-batch-connect-options-globally">Setting Batch Connect Options Globally</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../commands/ood-portal-generator.html">ood-portal-generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../commands/nginx-stage/usage.html">nginx-stage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pun-environment.html">PUN environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../reference.html">Configuration Reference</a> &raquo;</li>
+        
+          <li><a href="../submit-yml-erb.html">submit.yml.erb</a> &raquo;</li>
+        
+      <li>Batch Connect Script Options</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/reference/files/submit-yml/script.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="batch-connect-script-options">
+<span id="submit-script-options"></span><h1>Batch Connect Script Options<a class="headerlink" href="#batch-connect-script-options" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">script</span></code> section of the <a class="reference internal" href="../submit-yml-erb.html#submit-yml-erb"><span class="std std-ref">submit.yml.erb</span></a> file defines
+the arguments you’re passing to the scheduler when you submit the
+script.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These options are documented here for completeness. Some may not
+be available to override in batch connect applications.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">workdir</span></code> is set by the OnDemand system in batch
+connect applications, and cannot be overidden.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you’re using the <code class="docutils literal notranslate"><span class="pre">ood_core</span></code> gem (where all these are defined and used)
+you should refer to <a class="reference external" href="https://osc.github.io/ood_core/OodCore/Job/Script.html">ood_core gem Ruby docs</a>.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">submit_as_hold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">rerunnable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job_environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">workdir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">email_on_started</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">email_on_terminated</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">shell_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">error_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">input_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">reservation_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">queue_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">start_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">native</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+<span class="w">  </span><span class="nt">copy_environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note the use of ERB templates throughout these examples.</p>
+<dl class="describe">
+<dt>
+<code class="sig-name descname">content (String, nil)</code></dt>
+<dd><p>The content of the script being submitted.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set initially, but specified by OnDemand system automatically.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users cannot specify this in batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">args (Array&lt;String&gt;, nil)</code></dt>
+<dd><p>Extra arguments to pass to the schedulers’ submit command.</p>
+<dl>
+<dt>Default</dt><dd><p>Empty, no extra arguments.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Pass arguments <code class="docutils literal notranslate"><span class="pre">--foo</span></code> and <code class="docutils literal notranslate"><span class="pre">--bar</span></code> into the submit command.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--foo&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--bar&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">submit_as_hold (Boolean, nil)</code></dt>
+<dd><p>Hold the job after submitting.</p>
+<dl>
+<dt>Default</dt><dd><p>Empty, do not hold the job.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">submit_as_hold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Always hold the job.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">submit_as_hold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">rerunnable (Boolean, nil)</code></dt>
+<dd><p>Indicate whether the job is rerunnable.</p>
+<dl>
+<dt>Default</dt><dd><p>Empty, it is not rerunnable.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">rerunnable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>The job is rerunnable.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">rerunnable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">job_environment (Hash&lt;String, String&gt;, nil)</code></dt>
+<dd><p>Extra environment variables to pass into the schedulers’ submit command.</p>
+<dl>
+<dt>Default</dt><dd><p>Empty, no extra environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">job_environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Set the <code class="docutils literal notranslate"><span class="pre">SINGULARTITY_BIND_PATH</span></code> environment variable to <code class="docutils literal notranslate"><span class="pre">/etc,/tmp,/home</span></code> and
+<code class="docutils literal notranslate"><span class="pre">MY_APP_IMAGE</span></code> to <code class="docutils literal notranslate"><span class="pre">/opt/app.img</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">job_environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">SINGULARTITY_BIND_PATH</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc,/tmp/home&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">MY_APP_IMG</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/app.img&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">workdir (String, nil)</code></dt>
+<dd><p>The working directory of the job.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set initially, but specified by OnDemand system automatically.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">workdir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users cannot specify this in batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">email (Array&lt;String&gt;, nil)</code></dt>
+<dd><p>Addresses to send emails to when the job starts or stops.</p>
+<dl>
+<dt>Default</dt><dd><p>Empty, uses the schedulers’ default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a specific email address.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">email</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">ENV[&#39;USER&#39;]</span><span class="nv"> </span><span class="s">%&gt;@the-real-domain-I-want.edu&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">email_on_started (Boolean, nil)</code></dt>
+<dd><p>Have the scheduler send an email when the job has started.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set, uses the schedulers’ default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">email_on_started</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users should use :ref:`bc_email_on_started` instead
+of supplying it here</strong>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">email_on_terminated (Boolean, nil)</code></dt>
+<dd><p>Have the scheduler send an email when the job has finished.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set, uses the schedulers’ default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">email_on_terminated</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Given the form checkbox option <code class="docutils literal notranslate"><span class="pre">email_on_terminated</span></code>, set this attribute.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">email_on_terminated</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">email_on_terminated</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">job_name (String, nil)</code></dt>
+<dd><p>The name of the job.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set initially, but specified by OnDemand system automatically.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users cannot specify this in batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">shell_path (String, nil)</code></dt>
+<dd><p>The login shell path of the script.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set initially, but specified by OnDemand system automatically.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">shell_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users cannot specify this in batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">error_path (String, nil)</code></dt>
+<dd><p>The path for the standard error of the job.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set initially, but specified by OnDemand system automatically.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">error_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users cannot specify this in batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">input_path (String, nil)</code></dt>
+<dd><p>Use this file for standard input for the job’s script.
+Batch connect applications do not expect to read anything
+from standard in.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">input_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because this is likely to break batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">output_path (String, nil)</code></dt>
+<dd><p>The path for the standard output of the job.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set initially, but specified by OnDemand system automatically.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p><strong>None given because users cannot specify this in batch connect applications.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">reservation_id (String, nil)</code></dt>
+<dd><p>The reservation id the job will submit to.</p>
+<dl>
+<dt>Default</dt><dd><p>Not specified.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">reservation_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Submit jobs to the <code class="docutils literal notranslate"><span class="pre">next.may.2020</span></code> reservation.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">reservation_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;next.may.2020&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">queue_name (String, nil)</code></dt>
+<dd><p>The queue the job will submit to.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Users can use <a class="reference internal" href="../../../how-tos/app-development/interactive/form.html#bc-queue"><span class="std std-ref">bc_queue</span></a> for a text field and
+<a class="reference internal" href="../../../how-tos/app-development/interactive/form.html#auto-queues"><span class="std std-ref">auto_queues</span></a> for a select widget.  Both of these
+form fields know how to submit to schedulers, removing
+the need to use this field in this file.</p>
+</div>
+<dl>
+<dt>Default</dt><dd><p>Not specified.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">queue_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Submit jobs to the <code class="docutils literal notranslate"><span class="pre">debug</span></code> queue.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">queue_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;debug&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">priority (String, nil)</code></dt>
+<dd><p>The priority the job has.</p>
+<dl>
+<dt>Default</dt><dd><p>Not specified.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Submit jobs with <code class="docutils literal notranslate"><span class="pre">TOP</span></code> priority.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TOP&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">start_time (String, nil)</code></dt>
+<dd><p>The start time of the job.</p>
+<dl>
+<dt>Default</dt><dd><p>Not set, which schedulers generally interpret as now or as soon as possible.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">start_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Start at midnight.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">start_time</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;00:00:00&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">wall_time (Integer, nil)</code></dt>
+<dd><p>The wall time of the job in seconds.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Users can use <a class="reference internal" href="../../../how-tos/app-development/interactive/form.html#bc-num-hours"><span class="std std-ref">bc_num_hours</span></a> for a number field
+that knows how to submit to schedulers, removing
+the need to use this field in this file.</p>
+</div>
+<dl>
+<dt>Default</dt><dd><p>Not specified.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Always limit this job to one hour.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">wall_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">accounting_id (String, nil)</code></dt>
+<dd><p>The accounting id the job should be charged to.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Users can use <a class="reference internal" href="../../../how-tos/app-development/interactive/form.html#bc-account"><span class="std std-ref">bc_account</span></a> for a text field and
+<a class="reference internal" href="../../../how-tos/app-development/interactive/form.html#auto-accounts"><span class="std std-ref">auto_accounts</span></a> or <a class="reference internal" href="../../../how-tos/app-development/interactive/form.html#auto-groups"><span class="std std-ref">auto_accounts</span></a>
+for a select widget.</p>
+<p>All of these form fields know how to submit to schedulers, removing
+the need to use this field in this file.</p>
+</div>
+<dl>
+<dt>Default</dt><dd><p>Not specified, uses the schedulers’ default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>All jobs to use the <code class="docutils literal notranslate"><span class="pre">rstudio-class-account</span></code> accounting id.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">accounting_id</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rstudio-class-account&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">native (Object, nil)</code></dt>
+<dd><p>Native arguments to pass to the schedulers’ submit command.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All schedulers use Array&lt;String&gt; for native attributes except for Torque.
+Torque schedulers use Hash&lt;String, String&gt;.</p>
+</div>
+<dl>
+<dt>Default</dt><dd><p>not specified</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">native</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Submit the job with SLURM requests for one node, <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> (a form variable)
+cores and <code class="docutils literal notranslate"><span class="pre">memory</span></code> (another form variable) amount of memory.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">native</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-N&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;-n&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">num_cores</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--mem&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">%&gt;&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">copy_environment (Boolean, nil)</code></dt>
+<dd><p>Have the scheduler to copy the environment. SLURM uses
+<code class="docutils literal notranslate"><span class="pre">--export=ALL</span></code> (OnDemand’s default is NONE). PBS/Torque and LSF
+set the <code class="docutils literal notranslate"><span class="pre">-V</span></code> flag.</p>
+<dl>
+<dt>Default</dt><dd><p>not specified</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">native</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Copy the environment</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">copy_environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../commands/ood-portal-generator.html" class="btn btn-neutral float-right" title="ood-portal-generator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vnc-bc-options.html" class="btn btn-neutral float-left" title="Batch Connect VNC Options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2023, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/reference/files/submit-yml/script.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/reference/files/submit-yml/script.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/reference/files/submit-yml/script.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/reference/files/submit-yml/script.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/reference/files/submit-yml/script.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/reference/files/submit-yml/script.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/reference/files/submit-yml/script.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/reference/files/submit-yml/script.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/reference/files/submit-yml/script.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/reference/files/submit-yml/script.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/reference/files/submit-yml/script.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/reference/files/submit-yml/script.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

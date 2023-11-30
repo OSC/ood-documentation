@@ -132,17 +132,23 @@ part of the app developer can look like:
 
 The most commonly used predefined attributes are given as:
 
+.. _bc_account:
+
 bc_account
   This adds a ``text_field`` to the HTML form that will be used as the charged
   account for the submitted job.
 
   This attribute gets directly set on `OodCore::Job::Script#accounting_id`_.
 
+.. _bc_queue:
+
 bc_queue
   This adds a ``text_field`` to the HTML form that will supply the name of the
   queue that the batch job is submitted to.
 
   This attribute gets directly set on `OodCore::Job::Script#queue_name`_.
+
+.. _bc_num_hours:
 
 bc_num_hours
   This adds a ``number_field`` to the HTML form that describes the maximum
@@ -166,6 +172,8 @@ bc_num_slots
      customization (see
      :ref:`interactive-development-form-customizing-attributes`) to work at
      your center.
+
+.. _bc_email_on_started:
 
 bc_email_on_started
   This adds a ``check_box`` to the HTML form that determines whether the user
@@ -223,11 +231,14 @@ auto_modules_<MODULE>
     referenced in the ``script.sh.erb`` as ``<%= auto_modules_netcdf_serial %>``
     replacing any hyphens (``-``) with underscores ``_``.
 
+.. _auto_groups:
 
 auto_groups
   This will automatically generate a ``select`` widget populated with a list of the Unix
   groups the user is currently in. Administrators can configure :ref:`filter for autogroups <auto_groups_filter>`
   to limit the groups shown.
+
+.. _auto_queues:
 
 auto_queues
   This will generate a ``select`` widget list of all the queues available to the user.
@@ -237,6 +248,8 @@ auto_queues
 
   .. warning::
     We only have support for Slurm queues (partitions) at this time.
+
+.. _auto_accounts:
 
 auto_accounts
   This will generate a ``select`` widget list of all the accounts available to the user.
