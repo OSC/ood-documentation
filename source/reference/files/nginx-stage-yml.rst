@@ -776,16 +776,25 @@ Configuration Options
 
       For RHEL6 and CentOS 6 the user id's begin at ``500``.
 
+.. _disabled_shell:
+
 .. describe:: disabled_shell (String)
 
-   restrict starting a per-user NGINX process as a user with the given shell
+   Restrict starting a per-user NGINX process as a user with the given shell.
 
-   Default
-     For OSC restrictions
+    Default
+      Do not start a per-user NGINX for anyone with ``/access/denied`` shell.
 
-     .. code-block:: yaml
+      .. code-block:: yaml
 
         disabled_shell: "/access/denied"
+
+    Example
+      Do not start a per-user NGINX for anyone with ``/usr/bin/false`` shell.
+
+      .. code-block:: yaml
+
+        disabeled_shell: "/usr/bin/false"
 
    .. note::
 
