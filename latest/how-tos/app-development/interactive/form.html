@@ -343,15 +343,19 @@ part of the app developer can look like:</p>
 </pre></div>
 </div>
 <p>The most commonly used predefined attributes are given as:</p>
-<dl>
+<dl id="bc-account">
 <dt>bc_account</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will be used as the charged
 account for the submitted job.</p>
 <p>This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id">OodCore::Job::Script#accounting_id</a>.</p>
 </dd>
+</dl>
+<dl id="bc-queue">
 <dt>bc_queue</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will supply the name of the
 queue that the batch job is submitted to.</p>
 <p>This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name">OodCore::Job::Script#queue_name</a>.</p>
 </dd>
+</dl>
+<dl id="bc-num-hours">
 <dt>bc_num_hours</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the maximum
 amount of hours the submitted batch job may run.</p>
 <p>This attribute gets converted to seconds and then set on
@@ -371,6 +375,8 @@ customization (see
 your center.</p>
 </div>
 </dd>
+</dl>
+<dl id="bc-email-on-started">
 <dt>bc_email_on_started</dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">check_box</span></code> to the HTML form that determines whether the user
 should be notified by email when the batch job starts.</p>
 <p>This attribute sets value of <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:email_on_started">OodCore::Job::Script#email_on_started</a>
@@ -415,10 +421,14 @@ referenced in the <code class="docutils literal notranslate"><span class="pre">s
 replacing any hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>) with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
 </div>
 </dd>
+</dl>
+<dl class="simple" id="auto-groups">
 <dt>auto_groups</dt><dd><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget populated with a list of the Unix
 groups the user is currently in. Administrators can configure <a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#auto-groups-filter"><span class="std std-ref">filter for autogroups</span></a>
 to limit the groups shown.</p>
 </dd>
+</dl>
+<dl id="auto-queues">
 <dt>auto_queues</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the queues available to the user.
 These queues will be cluster if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
 enabled. That is, they’ll show or hide relevant lists given the currently selected
@@ -428,6 +438,8 @@ enabled. That is, they’ll show or hide relevant lists given the currently sele
 <p>We only have support for Slurm queues (partitions) at this time.</p>
 </div>
 </dd>
+</dl>
+<dl id="auto-accounts">
 <dt>auto_accounts</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the accounts available to the user.</p>
 <p><code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code> will generate cluster aware lists if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
 enabled.  This means it will only show a list of accounts available for the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> that’s

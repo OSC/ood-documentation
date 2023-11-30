@@ -124,6 +124,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Job Submission (submit.yml.erb)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-batch-connect-options-globally">Setting Batch Connect Options Globally</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
@@ -224,6 +225,12 @@
 <p>The configuration file <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> controls the content of the batch
 script as well as the submission arguments used when submitting the batch job.
 It is located in the root of the application directory.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This page is an introduction to the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>, it’s contents
+and it’s use.</p>
+<p>Reference documentation holds <a class="reference internal" href="../../../reference/files/submit-yml-erb.html#submit-yml-erb"><span class="std std-ref">all configuration items for submit.yml.erb</span></a>.</p>
+</div>
 <p>Assuming we already have a sandbox Interactive App deployed under:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${HOME}/ondemand/dev/my_app
 </pre></div>
@@ -243,8 +250,8 @@ substitution, and more.</p>
 <dl class="describe">
 <dt>
 <code class="sig-name descname">batch_connect (Hash)</code></dt>
-<dd><p>the configuration describing the batch script content (see
-<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template">OodCore::BatchConnect::Template</a> for valid configuration options)</p>
+<dd><p>The configuration describing the batch script content.
+Reference documentation holds <a class="reference internal" href="../../../reference/files/submit-yml-erb.html#submit-yml-erb"><span class="std std-ref">all configuration items for submit.yml.erb</span></a>.</p>
 <dl>
 <dt>Example</dt><dd><p>Use the default basic web server template</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
@@ -260,8 +267,9 @@ substitution, and more.</p>
 <dl class="describe">
 <dt>
 <code class="sig-name descname">script (Hash)</code></dt>
-<dd><p>the configuration describing the job submission parameters for the batch
-script (see <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> for valid configuration options)</p>
+<dd><p>The configuration describing the job submission parameters for the batch
+script. Reference documentation holds
+<a class="reference internal" href="../../../reference/files/submit-yml-erb.html#submit-yml-erb"><span class="std std-ref">all configuration items for submit.yml.erb</span></a>.</p>
 <dl>
 <dt>Example</dt><dd><p>Set the job’s charged account and queue</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
@@ -329,21 +337,19 @@ options described below.</p>
 </dl>
 </dd></dl>
 
-<p>Aside from the above configuration option, a list of all possible configuration
-options for <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> can be found under the code documentation for
-<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template">OodCore::BatchConnect::Template</a>.</p>
+<p>Reference documentation holds <a class="reference internal" href="../../../reference/files/submit-yml-erb.html#submit-yml-erb"><span class="std std-ref">all configuration items for submit.yml.erb</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The configuration <code class="docutils literal notranslate"><span class="pre">template:</span> <span class="pre">&quot;vnc&quot;</span></code> comes with more <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code>
 configuration options which can be found under the code documentation for
-<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Templates/VNC">OodCore::BatchConnect::Templates::VNC</a>.</p>
+<a class="reference internal" href="../../../reference/files/submit-yml/vnc-bc-options.html#vnc-bc-options"><span class="std std-ref">Batch Connect VNC Options</span></a>.</p>
 </div>
 </div>
 <div class="section" id="configure-script">
 <h3>Configure Script<a class="headerlink" href="#configure-script" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">script</span></code> configuration option defines the batch job submission parameters
 (e.g., number of nodes, wall time, queue, …). The list of all possible
-options can be found under the code documentation for <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a>.</p>
+options can be found under the code documentation for <a class="reference internal" href="../../../reference/files/submit-yml/script.html#submit-script-options"><span class="std std-ref">Batch Connect Script Options</span></a>.</p>
 <p>It is recommended to refrain from using the <code class="docutils literal notranslate"><span class="pre">native</span></code> option to best keep your
 Interactive App as portable as possible. Although we understand this may not be
 possible for all job submission parameters (e.g., number of nodes, memory, GPU)
@@ -422,7 +428,7 @@ script it forks off into the background. This can be configured with:</p>
 </div>
 <div class="section" id="specify-job-submission-parameters">
 <h3>Specify Job Submission Parameters<a class="headerlink" href="#specify-job-submission-parameters" title="Permalink to this headline">¶</a></h3>
-<p>Cherry-picking some possible options from <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">OodCore::Job::Script</a> gives a batch
+<p>Cherry-picking some possible options from <a class="reference internal" href="../../../reference/files/submit-yml/script.html#submit-script-options"><span class="std std-ref">Batch Connect Script Options</span></a> gives a batch
 job built from the basic web server template submitted with the following
 parameters:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
@@ -490,8 +496,9 @@ so you do not have to.</p>
 not need to specify <code class="docutils literal notranslate"><span class="pre">queue_name:</span></code> in the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>.</p>
 </div>
 </div>
+</div>
 <div class="section" id="setting-batch-connect-options-globally">
-<span id="global-bc-settings"></span><h3>Setting Batch Connect Options Globally<a class="headerlink" href="#setting-batch-connect-options-globally" title="Permalink to this headline">¶</a></h3>
+<span id="global-bc-settings"></span><h2>Setting Batch Connect Options Globally<a class="headerlink" href="#setting-batch-connect-options-globally" title="Permalink to this headline">¶</a></h2>
 <p>All of these configuration items can also be applied globally to the entire cluster
 in the cluster definition files under <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span></code>. If set globally,
 the option is applied to all applications in that cluster.</p>
@@ -507,7 +514,6 @@ templates.</p>
 </pre></div>
 </div>
 </div></blockquote>
-</div>
 </div>
 </div>
 
