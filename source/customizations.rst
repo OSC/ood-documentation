@@ -362,6 +362,8 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
 
 .. warning:: This allowlist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
+.. include:: customizations/disabling-users.inc
+
 .. _set-default-ssh-host:
 
 Set Default SSH Host
