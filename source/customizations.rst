@@ -360,8 +360,6 @@ We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.
    pun_custom_env:
     OOD_ALLOWLIST_PATH: "/users:/fs/project:/fs/scratch"
 
-.. warning:: This is not yet used in production at OSC, so we consider this feature "experimental" for now.
-
 .. warning:: This allowlist is not enforced across every action a user can take in an app (including the developer views in the Dashboard). Also, it is enforced via the apps themselves, which is not as robust as using cgroups on the PUN.
 
 .. _set-default-ssh-host:
