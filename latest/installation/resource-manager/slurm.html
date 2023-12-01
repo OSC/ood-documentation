@@ -215,23 +215,34 @@
 <span id="resource-manager-slurm"></span><h1>Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h1>
 <p>A YAML cluster configuration file for a Slurm resource manager on an HPC
 cluster looks like:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Open OnDemand’s Slurm support defaults to issuing CLI commands with
+the <code class="docutils literal notranslate"><span class="pre">--export</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">NONE</span></code>, when Slurms default is <code class="docutils literal notranslate"><span class="pre">ALL</span></code>.
+This can cause issues with jobs that require <code class="docutils literal notranslate"><span class="pre">srun</span></code>.</p>
+<p>Work arounds are currently to <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SLURM_EXPORT_ENV=ALL</span></code>
+in a <a class="reference internal" href="../../reference/files/submit-yml/basic-bc-options.html#script-wrapper"><span class="std std-ref">script_wrapper</span></a> before any job scripts run.</p>
+<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">copy_enviornment</span></code> below with the caveat
+that the PUNs environment is very different from regular shell sessions.</p>
+</div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
 <span class="nn">---</span><span class="w"></span>
 <span class="nt">v2</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
-<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
-</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">    </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/slurm/bin&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">    </span><span class="nt">conf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/slurm.conf&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">    </span><span class="c1"># bin_overrides:</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="c1"># sbatch: &quot;/usr/local/bin/sbatch&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="c1"># squeue: &quot;&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="c1"># scontrol: &quot;&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="c1"># scancel: &quot;&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">     </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Cluster&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="nt">login</span><span class="p">:</span><span class="w"></span>
+<span class="w">     </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster.my_center.edu&quot;</span><span class="w"></span>
+<span class="hll"><span class="w">   </span><span class="nt">job</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/slurm/bin&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="nt">conf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/slurm.conf&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="c1"># bin_overrides:</span><span class="w"></span>
+</span><span class="hll"><span class="w">       </span><span class="c1"># sbatch: &quot;/usr/local/bin/sbatch&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">       </span><span class="c1"># squeue: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">       </span><span class="c1"># scontrol: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">       </span><span class="c1"># scancel: &quot;&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="nt">copy_enviornment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
@@ -242,7 +253,7 @@ cluster looks like:</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> option is discouraged. This is because maintenance
-outages on the Slurm DB will propogate to Open OnDemand.  Instead sites
+outages on the Slurm database will propogate to Open OnDemand.  Instead sites
 should use different <code class="docutils literal notranslate"><span class="pre">conf</span></code> files for each cluster to limit maintenance outages.</p>
 </div>
 </dd>
@@ -260,6 +271,11 @@ should use different <code class="docutils literal notranslate"><span class="pre
 <li><p><cite>scontrol</cite></p></li>
 <li><p><cite>scancel</cite></p></li>
 </ul>
+</dd>
+<dt>copy_enviornment</dt><dd><p>Copies the enviornment of the PUN when issuing CLI commands. Default behaviour
+for Open OnDemand is to use <code class="docutils literal notranslate"><span class="pre">--export=NONE</span></code> flag. Setting this to true will
+cause Open OnDemand to issue CLI commands with <code class="docutils literal notranslate"><span class="pre">--export=ALL</span></code>. Though this may
+cause issues as the PUN’s environment is very different than a regular shell session.</p>
 </dd>
 </dl>
 <div class="admonition note">

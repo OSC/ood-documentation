@@ -119,20 +119,22 @@ Basic Batch Connect Options
 
         header: 'echo "all done at $(date)"'
 
+.. _script_wrapper:
+
 .. describe:: script_wrapper (String, "%s")
 
-    wrap the script ('%s' being the script content) with commands before
-    and after
+    Wrap the script (``%s`` being the script content) with commands before
+    and after.
 
     Default
-      the script has no wrapper
+      The script has no wrapper.
 
       .. code-block:: yaml
 
         script_wrapper: "%s"
 
     Example
-      load a module before the script and echo a statement after it
+      Load a module before the script and echo a statement after it.
 
       .. code-block:: yaml
 
