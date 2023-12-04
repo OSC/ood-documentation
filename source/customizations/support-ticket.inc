@@ -113,6 +113,50 @@ Custom fields can be added, but they will require a custom email template to mak
 Override the default email template with your own by dropping a file named ``_email.text.erb`` into the folder
 ``/etc/ood/config/apps/dashboard/views/support_ticket/email/``
 
+This is the default form for submitting support tickets. You can use this YAML as a starting
+place for removing and/or adding fields.
+
+  .. code-block:: yaml
+
+    support_ticket:
+      email: must supplied by you
+
+      attributes:
+        username:
+          value: "<%= CurrentUser.name %>"
+          readonly: true
+        email:
+          widget: email_field
+          required: true
+        cc:
+          widget: email_field
+        subject:
+          required: true
+        session_id:
+          widget: hidden_field
+        session_description:
+          hide_when_empty: true
+          disabled: true
+        attachments:
+          widget: file_attachments
+        description:
+          widget: text_area
+          required: true
+          rows: 10
+        queue:
+          widget: hidden_field
+
+      form:
+        - username
+        - email
+        - cc
+        - subject
+        - session_id
+        - session_description
+        - attachments
+        - description
+        - queue
+
 The example below shows a custom form configuration with 3 fields and how to use them in the template to generate the email body.
 
   .. code-block:: yaml
