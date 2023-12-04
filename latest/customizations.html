@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#custom-css-files">Custom CSS files</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#overriding-pages">Overriding Pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-urls-to-help-menu">Add URLs to Help Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-shortcuts-to-files-menu">Add Shortcuts to Files Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration-profiles">Configuration Profiles</a><ul>
@@ -438,8 +439,36 @@ This will result in a CSS tag added to all dashboard pages with the path: <code 
 </div>
 </div>
 </div>
+<div class="section" id="overriding-pages">
+<span id="overriding-partials"></span><span id="help-menu-guide"></span><h2>Overriding Pages<a class="headerlink" href="#overriding-pages" title="Permalink to this headline">¶</a></h2>
+<p>Open OnDemand is built with Ruby on Rails which uses <code class="docutils literal notranslate"><span class="pre">partials</span></code>
+to build the web pages that are ultimately served to the clients.</p>
+<p>All partials are held within <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views">dashboard’s views folder</a>.  These
+are the default <code class="docutils literal notranslate"><span class="pre">partials</span></code> that get distributed when you install
+the package.</p>
+<p>Open OnDemand provides a facility to override any of these partial
+pages by supplying new files in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views</span></code>.</p>
+<p>Let’s look at an example where a center can provide a different,
+specialized, footer for the bottom of the page. Overriding the
+<code class="docutils literal notranslate"><span class="pre">partial</span></code> that has been distributed.</p>
+<p>First, you would need to find the original <code class="docutils literal notranslate"><span class="pre">partial</span></code> that is being
+distributed.</p>
+<p>We can find this file’s location at <code class="docutils literal notranslate"><span class="pre">layouts/_footer.html.erb</span></code>
+(relative to the <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views">dashboard’s views folder</a>).</p>
+<p>To override it, we simply provide a new file of the same name
+and path in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views</span></code> folder.</p>
+<p>So, the full file path would be <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/layouts/_footer.html.erb</span></code>.
+By providing a simple html file like the one below, placed in the location in the
+previous sentence, your center has now provided a different footer than the one
+distributed by the Open OnDemand package.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center h-5 my-3&quot;</span> <span class="p">&gt;</span>
+  My center&#39;s custom footer.
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="add-urls-to-help-menu">
-<span id="help-menu-guide"></span><h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
+<h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
 <p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 <table class="docutils align-default" id="id27">
 <caption><span class="caption-number">Table 3 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id27" title="Permalink to this table">¶</a></caption>
