@@ -154,6 +154,8 @@ This will result in a CSS tag added to all dashboard pages with the path: ``/pub
 
 .. _help_menu_guide:
 
+.. include:: customizations/overriding-partials.inc
+
 Add URLs to Help Menu
 ---------------------
 
