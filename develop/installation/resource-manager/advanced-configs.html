@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Systemd &mdash; Open OnDemand 3.1.0 documentation</title>
+  <title>Advanced Resource Manager Configrations &mdash; Open OnDemand 3.1.0 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="A Working Example of a bin_overrides Script" href="bin-override-example.html" />
-    <link rel="prev" title="Kubernetes" href="kubernetes.html" />
+    <link rel="next" title="Setup Interactive Apps" href="../../how-tos/app-development/interactive/setup.html" />
+    <link rel="prev" title="Test Configuration" href="test.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -115,10 +115,13 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccq.html">Cloudy Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Kubernetes</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced-configs.html">Advanced Resource Manager Configrations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Advanced Resource Manager Configrations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#visualization-nodes">Visualization Nodes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
@@ -191,14 +194,14 @@
         
           <li><a href="../add-cluster-config.html">Cluster Configuration</a> &raquo;</li>
         
-      <li>Systemd</li>
+      <li>Advanced Resource Manager Configrations</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/systemd.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/advanced-configs.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -212,11 +215,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="systemd">
-<span id="resource-manager-systemd"></span><h1>Systemd<a class="headerlink" href="#systemd" title="Permalink to this headline">¶</a></h1>
-<p>Coming in 2.1!</p>
-<p>Open OnDemand can use SystemD timers to schedule a ‘job’.  Sites can use this adapter for short
-lived jobs or to use resources outside of your compute pool (like login nodes).</p>
+  <div class="section" id="advanced-resource-manager-configrations">
+<span id="advanced-resource-manager-configs"></span><h1>Advanced Resource Manager Configrations<a class="headerlink" href="#advanced-resource-manager-configrations" title="Permalink to this headline">¶</a></h1>
+<p>This page details advanced settings for any resource manager
+that could be helpful in using Open OnDemand.</p>
+<div class="section" id="visualization-nodes">
+<h2>Visualization Nodes<a class="headerlink" href="#visualization-nodes" title="Permalink to this headline">¶</a></h2>
+<p>At OSC we offer <code class="docutils literal notranslate"><span class="pre">visualization</span></code> nodes that attach the X11 session
+to a GPU so that any rendering can occur on the GPU itself.</p>
+<p>We’ve defined <code class="docutils literal notranslate"><span class="pre">vis</span></code> as a <a class="reference external" href="https://slurm.schedmd.com/gres.html">Slurm GRES</a> that jobs can request (i.e.,
+some batch connect applications request this <a class="reference external" href="https://slurm.schedmd.com/gres.html">Slurm GRES</a>).</p>
+<p>We use a <a class="reference external" href="https://slurm.schedmd.com/prolog_epilog.html">Slurm prolog</a> to do the actual work of attaching the X11
+session to the GPU.</p>
+<p>Other resource managers may have a similar facility for doing work
+just before the job starts running.</p>
+<p>This is an example of that <a class="reference external" href="https://slurm.schedmd.com/prolog_epilog.html">Slurm prolog</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$SLURM_LOCALID</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span> <span class="o">&amp;&amp;</span> <span class="s2">&quot;</span><span class="nv">$SLURM_JOB_GRES</span><span class="s2">&quot;</span> <span class="o">==</span> *<span class="s2">&quot;vis&quot;</span>* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$CUDA_VISIBLE_DEVICES</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">FIRSTGPU</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$CUDA_VISIBLE_DEVICES</span> <span class="p">|</span> tr <span class="s1">&#39;,&#39;</span> <span class="s2">&quot;\n&quot;</span> <span class="p">|</span> head -1<span class="k">)</span>
+    setsid /usr/bin/X :<span class="si">${</span><span class="nv">FIRSTGPU</span><span class="si">}</span> -noreset &gt;<span class="p">&amp;</span> /dev/null <span class="p">&amp;</span>
+    sleep <span class="m">2</span>
+    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$DISPLAY</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+      <span class="nb">echo</span> <span class="s2">&quot;export OLDDISPLAY=</span><span class="nv">$DISPLAY</span><span class="s2">&quot;</span>
+    <span class="k">fi</span>
+    <span class="nb">echo</span> <span class="s2">&quot;export DISPLAY=:</span><span class="nv">$FIRSTGPU</span><span class="s2">&quot;</span>
+  <span class="k">fi</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -227,10 +254,10 @@ lived jobs or to use resources outside of your compute pool (like login nodes).<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bin-override-example.html" class="btn btn-neutral float-right" title="A Working Example of a bin_overrides Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../how-tos/app-development/interactive/setup.html" class="btn btn-neutral float-right" title="Setup Interactive Apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="kubernetes.html" class="btn btn-neutral float-left" title="Kubernetes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="test.html" class="btn btn-neutral float-left" title="Test Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -262,29 +289,29 @@ lived jobs or to use resources outside of your compute pool (like login nodes).<
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/resource-manager/systemd.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/resource-manager/advanced-configs.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/resource-manager/systemd.html">2.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/resource-manager/advanced-configs.html">2.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/resource-manager/systemd.html">1.8</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/resource-manager/advanced-configs.html">1.8</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/resource-manager/systemd.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/resource-manager/advanced-configs.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager/systemd.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager/advanced-configs.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/systemd.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/advanced-configs.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/systemd.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/advanced-configs.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/systemd.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/advanced-configs.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager/systemd.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager/advanced-configs.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager/systemd.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager/advanced-configs.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager/systemd.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager/advanced-configs.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager/systemd.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager/advanced-configs.html">develop</a></dd>
       
     </dl>
     <dl>
