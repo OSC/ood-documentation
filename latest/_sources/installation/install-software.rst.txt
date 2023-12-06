@@ -83,7 +83,6 @@ Some operating systems use `Software Collections`_ to satisfy these.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.0 nodejs:16
          sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
 2. Add repository and install
