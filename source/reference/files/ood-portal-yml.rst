@@ -54,6 +54,27 @@ Configure General Options
 
           servername: "www.example.com"
 
+.. describe:: server_aliases (Array<String>, [])
+
+    Aliases for this server. These will result in the apache
+    ``ServerAlias`` configuration allowing one server to respond
+    to multiple hostnames.
+
+     Default
+        There ar no server aliases.
+
+        .. code-block:: yaml
+
+          server_aliases: []
+
+     Example
+        Along with the ``servername`` also respond to
+        the hostname ``class.my-cool-site.example.edu``.
+
+        .. code-block:: yaml
+
+          servername: "class.my-cool-site.example.edu"
+
 .. describe:: proxy_server (String, null)
 
   The proxy server, if one exists. Used when you have a proxy
