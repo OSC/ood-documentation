@@ -56,3 +56,30 @@ cluster
   - `bstop`
   - `bresume`
   - `bkill`
+
+Advanced LSF settings
+---------------------
+
+
+Performance Settings
+********************
+
+Given these settings in ``lsf.conf``:
+
+.. code-block:: shell
+  
+  LSB_QUERY_PORT=688X
+  LSB_QUERY_ENH=y
+
+It's recommented that you set ``LSB_MBD_PORT`` to the same value
+as ``LSB_QUERY_PORT``
+
+It has also been observed that setting these values in ``lsb.params``
+helps with the performance of the cluster and in turn Open OnDemand's
+usage.
+
+.. code-block:: shell
+  
+  JOB_INFO_MEMORY_CACHE_SIZE=2048
+  MBD_REFRESH_TIME=5
+  NEWJOB_REFRESH=Y

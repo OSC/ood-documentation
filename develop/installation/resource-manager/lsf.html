@@ -109,7 +109,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="torque.html">Torque</a></li>
 <li class="toctree-l2"><a class="reference internal" href="slurm.html">Slurm</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">LSF</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LSF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-lsf-settings">Advanced LSF settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#performance-settings">Performance Settings</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="pbspro.html">PBS Professional</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sge.html">Grid Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost</a></li>
@@ -265,6 +271,27 @@ looks like:</p>
 </ul>
 </dd>
 </dl>
+<div class="section" id="advanced-lsf-settings">
+<h2>Advanced LSF settings<a class="headerlink" href="#advanced-lsf-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="performance-settings">
+<h3>Performance Settings<a class="headerlink" href="#performance-settings" title="Permalink to this headline">¶</a></h3>
+<p>Given these settings in <code class="docutils literal notranslate"><span class="pre">lsf.conf</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">LSB_QUERY_PORT</span><span class="o">=</span>688X
+<span class="nv">LSB_QUERY_ENH</span><span class="o">=</span>y
+</pre></div>
+</div>
+<p>It’s recommented that you set <code class="docutils literal notranslate"><span class="pre">LSB_MBD_PORT</span></code> to the same value
+as <code class="docutils literal notranslate"><span class="pre">LSB_QUERY_PORT</span></code></p>
+<p>It has also been observed that setting these values in <code class="docutils literal notranslate"><span class="pre">lsb.params</span></code>
+helps with the performance of the cluster and in turn Open OnDemand’s
+usage.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">JOB_INFO_MEMORY_CACHE_SIZE</span><span class="o">=</span><span class="m">2048</span>
+<span class="nv">MBD_REFRESH_TIME</span><span class="o">=</span><span class="m">5</span>
+<span class="nv">NEWJOB_REFRESH</span><span class="o">=</span>Y
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 
