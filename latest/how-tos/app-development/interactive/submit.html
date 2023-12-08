@@ -315,18 +315,33 @@ than 29 cores, else submit to the small cluster.</p>
 
 <p>Each of these configuration options take a set of their own configuration
 options described below.</p>
-<div class="section" id="configure-batch-connect">
-<h3>Configure Batch Connect<a class="headerlink" href="#configure-batch-connect" title="Permalink to this headline">¶</a></h3>
-<p>All batch scripts are generated from either the <code class="docutils literal notranslate"><span class="pre">basic</span></code> template or the
-<code class="docutils literal notranslate"><span class="pre">vnc</span></code> template specified with the following configuration option:</p>
+<div class="section" id="batch-connect-template-types">
+<h3>Batch Connect Template types<a class="headerlink" href="#batch-connect-template-types" title="Permalink to this headline">¶</a></h3>
+<p>Open OnDemand has three distinct batch connect template types.
+These template types determine the resulting shell scripts that wrap
+your batch connect application.</p>
+<p>For example the <code class="docutils literal notranslate"><span class="pre">vnc</span></code> type will provide a script that boots up a
+VNC server, exports a <code class="docutils literal notranslate"><span class="pre">DISPLAY</span></code> variable and other utilities to
+ensure that the job has been bootstrapped appropriately to
+start GUI applications.</p>
+<p>The options available are <code class="docutils literal notranslate"><span class="pre">basic</span></code>, <code class="docutils literal notranslate"><span class="pre">vnc</span></code> or <code class="docutils literal notranslate"><span class="pre">vnc_container</span></code>.
+<code class="docutils literal notranslate"><span class="pre">vnc_container</span></code> is basically just like <code class="docutils literal notranslate"><span class="pre">vnc</span></code> only in that it
+boostraps the VNC programs inside a container instead of on the
+host machine.</p>
 <dl class="describe">
 <dt>
 <code class="sig-name descname">template (String)</code></dt>
-<dd><p>the template used for rendering the batch script (<code class="docutils literal notranslate"><span class="pre">&quot;basic&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;vnc&quot;</span></code>)</p>
+<dd><p>The template used to create the wrapper script for your batch connect
+application.</p>
 <dl>
-<dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">&quot;basic&quot;</span></code></p>
+<dt>Default</dt><dd><p>Generate a basic wrapper script for HTTP applications.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
-<dt>Example</dt><dd><p>Render a batch script for a VNC Interactive Application</p>
+<dt>Example</dt><dd><p>Generate a wrapper script for a VNC interactive application.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/submit.yml.erb</span><span class="w"></span>
 <span class="nn">---</span><span class="w"></span>
 <span class="nt">batch_connect</span><span class="p">:</span><span class="w"></span>
