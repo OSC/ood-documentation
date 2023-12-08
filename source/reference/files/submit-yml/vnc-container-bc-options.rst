@@ -108,6 +108,16 @@ Starter def file
 This is a ``.def`` file that we've tested this feature with.
 You can use this as an example to start and update as required.
 
+
+.. note::
+  Note that we're installing turbovnc and websockify *inside*
+  the container. This is important as all processes will run
+  inside the contianer and not on the host.
+
+  You can still install these on the host machine, but they will
+  need to be mounted inside the container as the processes are
+  expected to be ran *inside* the container.
+
 .. code-block:: singularity
 
   Bootstrap: docker
