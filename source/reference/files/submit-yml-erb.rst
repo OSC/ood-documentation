@@ -16,6 +16,7 @@ These are reference pages, you can see
 
    submit-yml/basic-bc-options
    submit-yml/vnc-bc-options
+   submit-yml/vnc-container-bc-options
    submit-yml/script
 
 Simple Example
