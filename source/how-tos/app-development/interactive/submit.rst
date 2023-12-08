@@ -96,23 +96,41 @@ The three possible configuration options that can be used in the
 Each of these configuration options take a set of their own configuration
 options described below.
 
-Configure Batch Connect
-```````````````````````
+Batch Connect Template types
+````````````````````````````
 
-All batch scripts are generated from either the ``basic`` template or the
-``vnc`` template specified with the following configuration option:
+Open OnDemand has three distinct batch connect template types.
+These template types determine the resulting shell scripts that wrap
+your batch connect application.
+
+For example the ``vnc`` type will provide a script that boots up a
+VNC server, exports a ``DISPLAY`` variable and other utilities to
+ensure that the job has been bootstrapped appropriately to
+start GUI applications.
+
+The options available are ``basic``, ``vnc`` or ``vnc_container``.
+``vnc_container`` is basically just like ``vnc`` only in that it
+boostraps the VNC programs inside a container instead of on the
+host machine.
 
 .. describe:: template (String)
 
-   the template used for rendering the batch script (``"basic"`` or ``"vnc"``)
+    The template used to create the wrapper script for your batch connect
+    application.
 
-   Default
-     ``"basic"``
+    Default
+      Generate a basic wrapper script for HTTP applications.
 
-   Example
-     Render a batch script for a VNC Interactive Application
+      .. code-block:: yaml
 
-     .. code-block:: yaml
+        ---
+        batch_connect:
+          template: "basic"
+
+    Example
+      Generate a wrapper script for a VNC interactive application.
+
+      .. code-block:: yaml
 
         # ${HOME}/ondemand/dev/my_app/submit.yml.erb
         ---
