@@ -38,6 +38,7 @@ will ensure you do not end up in the wrong tab issuing commands.
 Use an editor or IDE and do the following:
 
 .. code-block:: sh
+
     cd ~/ondemand/dev/dashboard
     touch .env.local
     vim .env.local
@@ -48,6 +49,7 @@ browser to know which dashboard we are in.
 So, inside this ``.env.local`` we can add an environment variable to change the color of the dev dashboard like so:
 
 .. code-block:: sh
+
     OOD_BRAND_BG_COLOR='grey'
 
 Now click the Develop dropdown menu on the upper right corner and click ``Restart Web Server``. After a few moments 
@@ -62,6 +64,7 @@ If we go back into our ``.env.local`` file we can set a new path for the dev das
 configurations* using the ``OOD_CONFIG_D_DIRECTORY`` environment variable like so: 
 
 .. code-block:: sh
+
     vim .env.local
     OOD_CONFIG_D_DIRECTORY="~/ondemand/dev/dashboard/config/ondemand.d/"
 
@@ -79,6 +82,7 @@ Create a file in the ``~/ondemand/dev/dashboard/config/ondemand.d/`` directory n
 open the file and add the following:
 
 .. code-block:: yaml
+    
     pinned_apps:
       - sys/*           # pin the sys apps
 
