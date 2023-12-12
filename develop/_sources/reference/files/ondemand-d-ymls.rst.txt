@@ -806,3 +806,23 @@ Configuration Properties
           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
           endpoint_path: "/"
 
+.. _google_analytics_tag_id:
+
+.. describe:: google_analytics_tag_id (String, nil)
+
+  Configure Google Analytics by supplying a tag id.
+
+  Default
+    Google Analytics is disabled.
+
+    .. code-block:: yaml
+
+      google_analytics_tag_id: nil
+
+  Example
+    Google Analytics is enabled and will upload data to the
+    tag id ``abc123``.
+
+    .. code-block:: yaml
+
+      google_analytics_tag_id: 'abc123'
