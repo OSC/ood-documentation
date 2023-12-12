@@ -245,6 +245,27 @@ Configuration Properties with profile support
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
 
+.. describe:: custom_javascript_files (Array<String>, [])
+
+  List of relative URLs to custom javascript files to include in all Dashboard pages.
+  These javascript files can be used to customize the behavior of the Dashboard.
+
+  The relative path will be prefixed with the value of the ``public_url`` property.
+
+  Default
+    Empty list, no custom javascript files will be included.
+
+    .. code-block:: yaml
+
+      custom_javascript_files: []
+
+  Example
+    Add two custom Javascript files: ``/myfolder/navigation.js`` and ``/myfolder/pinned_apps.js`` to the Dashboard.
+
+    .. code-block:: yaml
+
+      custom_javascript_files: ["/myfolder/navigation.js", "/myfolder/pinned_apps.js"]
+
 .. describe:: dashboard_title (String, 'Open OnDemand')
 
     The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
