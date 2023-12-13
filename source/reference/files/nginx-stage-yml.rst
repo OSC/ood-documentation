@@ -324,6 +324,28 @@ Configuration Options
 
         passenger_pool_idle_time: 900
 
+.. describe:: passenger_log_file (String)
+
+  The log file that passenger will write standard out and standard
+  error to.
+
+  .. note::
+    You may use the variable ``%{user}`` to write user specific files.
+
+  Default
+    Write to a per user location in ``/var/log/ondemand-nginx/``.
+
+    .. code-block:: yaml
+
+      passenger_log_file: '/var/log/ondemand-nginx/%{user}/error.log'
+
+  Example
+    Write to a per user location in ``/some/other/location/``.
+
+    .. code-block:: yaml
+
+      passenger_log_file: '/some/other/location/%{user}/error.log'
+
 .. describe:: passenger_options (Hash)
 
    A Hash of additional Passenger options
