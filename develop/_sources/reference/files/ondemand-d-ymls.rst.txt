@@ -736,6 +736,26 @@ Configuration Properties
 
       remote_files_enabled: true
 
+
+.. describe:: remote_files_validation (Boolean, false)
+
+  Enable validating remote files on startup.
+
+  Default
+    Remote file systems will not be validated on startup.
+
+    .. code-block:: yaml
+
+      remote_files_validation: false
+
+  Example
+    Remote file systems will be validated on startup.
+
+    .. code-block:: yaml
+
+      remote_files_validation: true
+
+
 .. describe:: hide_app_version (Boolean, false)
 
   Hide the interactive application's version.
