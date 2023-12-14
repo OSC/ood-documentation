@@ -95,6 +95,24 @@ instructs the webpage to hide the ``cuda_version`` when the ``standard``
         - 'gpu'
 
 
+Additionally, you can use ``check_box`` widgets to hide elements.
+Here we have a checkbox ``enable_cuda_version`` that will show
+``cuda_version`` when checked and hide it when it's not checked.
+
+.. tip::
+  Checkboxes respond to ``when-checked: true`` and ``when-unchecked: true``
+  for hiding elements when checked or unchecked.
+
+.. code-block:: yaml
+  :emphasize-lines: 6
+
+  attributes:
+    enable_cuda_version:
+      widget: 'check_box'
+      html_options:
+        data:
+          hide-cuda-version-when-unchecked: true
+
 Dynamic Min and Maxes
 *********************
 
@@ -149,22 +167,31 @@ account automatically based on the selection of node type.
 In this example, when ``standard`` ``node_type`` is chosen, the ``charge_account`` element
 will be automatically set to ``standard-charge-code``.
 
+In addition to setting strings, option choices can also set check boxes.
+You will see in this example that when you change the ``node_type`` selection
+the ``enable_gpu`` check box will either be checked or unchecked.
+
 .. code-block:: yaml
 
   form:
+    - enable_gpu
     - charge_account
     - node_type
   attributes:
+    enable_gpu:
+      widget: check_box
     node_type:
       widget: select
       options:
         - [ 
             'standard', 'standard',
-            data-set-charge-account: 'standard-charge-code'
+            data-set-charge-account: 'standard-charge-code',
+            data-set-enable-gpu: 0
           ]
         - [
             'gpu', 'gpu',
             data-set-charge-account: 'gpu-charge-code',
+            data-set-enable-gpu: 1
           ]
 
 
