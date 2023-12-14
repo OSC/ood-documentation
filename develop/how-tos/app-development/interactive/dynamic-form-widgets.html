@@ -297,6 +297,22 @@ instructs the webpage to hide the <code class="docutils literal notranslate"><sp
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="w"></span>
 </pre></div>
 </div>
+<p>Additionally, you can use <code class="docutils literal notranslate"><span class="pre">check_box</span></code> widgets to hide elements.
+Here we have a checkbox <code class="docutils literal notranslate"><span class="pre">enable_cuda_version</span></code> that will show
+<code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when checked and hide it when it’s not checked.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Checkboxes respond to <code class="docutils literal notranslate"><span class="pre">when-checked:</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">when-unchecked:</span> <span class="pre">true</span></code>
+for hiding elements when checked or unchecked.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enable_cuda_version</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;check_box&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">html_options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="hll"><span class="w">        </span><span class="nt">hide-cuda-version-when-unchecked</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</span></pre></div>
+</div>
 </div>
 <div class="section" id="dynamic-min-and-maxes">
 <h2>Dynamic Min and Maxes<a class="headerlink" href="#dynamic-min-and-maxes" title="Permalink to this headline">¶</a></h2>
@@ -340,20 +356,28 @@ on the current value of a select element.</p>
 account automatically based on the selection of node type.</p>
 <p>In this example, when <code class="docutils literal notranslate"><span class="pre">standard</span></code> <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is chosen, the <code class="docutils literal notranslate"><span class="pre">charge_account</span></code> element
 will be automatically set to <code class="docutils literal notranslate"><span class="pre">standard-charge-code</span></code>.</p>
+<p>In addition to setting strings, option choices can also set check boxes.
+You will see in this example that when you change the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> selection
+the <code class="docutils literal notranslate"><span class="pre">enable_gpu</span></code> check box will either be checked or unchecked.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">form</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enable_gpu</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">charge_account</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span><span class="w"></span>
 <span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enable_gpu</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check_box</span><span class="w"></span>
 <span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
 <span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
 <span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
-<span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;standard-charge-code&#39;</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;standard-charge-code&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-set-enable-gpu</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0</span><span class="w"></span>
 <span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
 <span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
 <span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;gpu-charge-code&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">          </span><span class="nv">data-set-enable-gpu</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">1</span><span class="w"></span>
 <span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
