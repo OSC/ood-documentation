@@ -846,3 +846,25 @@ Configuration Properties
     .. code-block:: yaml
 
       google_analytics_tag_id: 'abc123'
+
+
+.. _motd_render_html:
+.. describe:: motd_render_html (Boolean, false)
+
+  Render HTML in the Message of the Day (MOTD).  This
+  configuration was added because some MOTD formats like
+  RSS can generate HTML that is potentially unsafe.
+
+  Default
+    The Message of the day will not render HTML.
+
+    .. code-block:: yaml
+
+      motd_render_html: false
+
+  Example
+    The Message of the day will render HTML.
+
+    .. code-block:: yaml
+
+      motd_render_html: true
