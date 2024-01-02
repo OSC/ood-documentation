@@ -905,7 +905,7 @@ resources used by the user alone. This is the default type of quota object and
 is given in the following format:
 
 
-.. warning:: A block must be equal to 1 KB for proper conversions.
+.. warning:: A block must be equal to 1 KiB for proper conversions.
 
 
 Individual Fileset Quota
