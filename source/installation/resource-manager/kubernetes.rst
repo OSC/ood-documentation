@@ -130,7 +130,7 @@ Replace ``$VERSION`` with the version of the Kubernetes controller, eg. ``1.21.5
 Tokens for Bootstrapping
 ------------------------
 
-The ``root`` user on the OnDemand web node needs a kubernetes token to bootstrap users.
+The ``root`` user on the OnDemand web node needs a Kubernetes token to bootstrap users.
 Specifically to create user namespaces and give the users sufficient privileges in their
 namespace.
 
