@@ -117,7 +117,10 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Kubernetes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#per-user-kubernetes">Per User Kubernetes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bootstrapping-the-kuberenetes-cluster">Bootstrapping the Kuberenetes cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bootstrapping-ondemand-web-node-to-communicate-with-kubernetes">Bootstrapping OnDemand web node to communicate with Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bootstrapping-ondemand-web-node-to-communicate-with-kubernetes">Bootstrapping OnDemand web node to communicate with Kubernetes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tokens-for-bootstrapping">Tokens for Bootstrapping</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#deploy-hooks-to-bootstrap-users-kubernetes-configuration">Deploy Hooks to bootstrap users Kubernetes configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#managed-authentication">Managed Authentication</a></li>
@@ -339,9 +342,57 @@ Replace <code class="docutils literal notranslate"><span class="pre">$VERSION</s
 chmod +x /usr/local/bin/kubectl
 </pre></div>
 </div>
+<div class="section" id="tokens-for-bootstrapping">
+<h3>Tokens for Bootstrapping<a class="headerlink" href="#tokens-for-bootstrapping" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">root</span></code> user on the OnDemand web node needs a Kubernetes token to bootstrap users.
+Specifically to create user namespaces and give the users sufficient privileges in their
+namespace.</p>
+<p>Service account tokens are not generated automatically since Kubernetes 1.24.  You have two
+options here: You can either create a non-expiring token for the service account and save it
+as a secret or you can create a crontab entry to refresh the <code class="docutils literal notranslate"><span class="pre">root</span></code> users token.  Both are
+described here.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Kubernetes recommends that you use rotating tokens, so we recommend the same.</p>
+</div>
+<p>To do use rotating tokens, you can use the <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">create</span> <span class="pre">token</span></code> API to create  a token
+and save it in a crontab entry. Here’s an example of what you could use to create new tokens
+for the <code class="docutils literal notranslate"><span class="pre">root</span></code> user.  The tokens last 9 hours, so you can set a crontab entry for every 8 hours
+to refresh your tokens before they expire.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">set</span> -e
+
+<span class="k">if</span> <span class="nb">command</span> -v kubectl &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span>
+<span class="k">then</span>
+  <span class="nv">CMD_USER</span><span class="o">=</span><span class="k">$(</span>whoami<span class="k">)</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$CMD_USER</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;root&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>kubectl create token ondemand --namespace<span class="o">=</span>ondemand --duration 9h<span class="k">)</span>
+    kubectl config set-credentials ondemand@kubernetes --token<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$TOKEN</span><span class="s2">&quot;</span>
+  <span class="k">else</span>
+    &gt;<span class="p">&amp;</span><span class="m">2</span> <span class="nb">echo</span> <span class="s2">&quot;this program needs to run as &#39;root&#39; and you are </span><span class="nv">$CMD_USER</span><span class="s2">.&quot;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+  <span class="k">fi</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>If you wish to create a non-expiring token, you will need to create the secret through a
+<code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">apply</span></code> command on the yaml below.</p>
 <p>Next extract the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> ServiceAccount token.  Here is an example command to extract
 the token using an account that has ClusterAdmin privileges:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>kubectl describe serviceaccount ondemand -n ondemand <span class="p">|</span> grep Tokens <span class="p">|</span> awk <span class="s1">&#39;{ print $2 }&#39;</span><span class="k">)</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># token.yml</span><span class="w"></span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span><span class="w"></span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span><span class="w"></span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes.io/service-account-token</span><span class="w"></span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">token</span><span class="w"></span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand</span><span class="w"></span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">kubernetes.io/service-account.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kubectl apply -f token.yml
+<span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>kubectl describe serviceaccount ondemand -n ondemand <span class="p">|</span> grep Tokens <span class="p">|</span> awk <span class="s1">&#39;{ print $2 }&#39;</span><span class="k">)</span>
 kubectl describe secret <span class="nv">$TOKEN</span> -n ondemand <span class="p">|</span> grep <span class="s2">&quot;token:&quot;</span>
 </pre></div>
 </div>
@@ -362,6 +413,7 @@ kubectl config use-context ondemand@kubernetes
 <p>Below is an example of verifying the kubeconfig is valid:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kubectl cluster-info
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="deploy-hooks-to-bootstrap-users-kubernetes-configuration">
