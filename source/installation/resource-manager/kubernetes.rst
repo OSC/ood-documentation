@@ -126,11 +126,67 @@ Replace ``$VERSION`` with the version of the Kubernetes controller, eg. ``1.21.5
   wget -O /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v$VERSION/bin/linux/amd64/kubectl
   chmod +x /usr/local/bin/kubectl
 
-Next extract the ``ondemand`` ServiceAccount token.  Here is an example command to extract
-the token using an account that has ClusterAdmin privileges:
+
+Tokens for Bootstrapping
+------------------------
+
+The ``root`` user on the OnDemand web node needs a Kubernetes token to bootstrap users.
+Specifically to create user namespaces and give the users sufficient privileges in their
+namespace.
+
+Service account tokens are not generated automatically since Kubernetes 1.24.  You have two
+options here: You can either create a non-expiring token for the service account and save it
+as a secret or you can create a crontab entry to refresh the ``root`` users token.  Both are
+described here.
+
+.. tip::
+  Kubernetes recommends that you use rotating tokens, so we recommend the same.
+
+To do use rotating tokens, you can use the ``kubectl create token`` API to create  a token
+and save it in a crontab entry. Here's an example of what you could use to create new tokens
+for the ``root`` user.  The tokens last 9 hours, so you can set a crontab entry for every 8 hours
+to refresh your tokens before they expire.
 
 .. code-block:: sh
 
+  #!/bin/bash
+
+  set -e
+
+  if command -v kubectl >/dev/null 2>&1;
+  then
+    CMD_USER=$(whoami)
+    if [ "$CMD_USER" == "root" ]; then
+      TOKEN=$(kubectl create token ondemand --namespace=ondemand --duration 9h)
+      kubectl config set-credentials ondemand@kubernetes --token="$TOKEN"
+    else
+      >&2 echo "this program needs to run as 'root' and you are $CMD_USER."
+      exit 1
+    fi
+  fi
+
+
+If you wish to create a non-expiring token, you will need to create the secret through a
+``kubectl apply`` command on the yaml below.
+
+Next extract the ``ondemand`` ServiceAccount token.  Here is an example command to extract
+the token using an account that has ClusterAdmin privileges:
+
+.. code-block:: yaml
+
+  # token.yml
+  apiVersion: v1
+  kind: Secret
+  type: kubernetes.io/service-account-token
+  metadata:
+    name: token
+    namespace: ondemand
+    annotations:
+      kubernetes.io/service-account.name: ondemand
+
+.. code-block:: sh
+
+  kubectl apply -f token.yml
   TOKEN=$(kubectl describe serviceaccount ondemand -n ondemand | grep Tokens | awk '{ print $2 }')
   kubectl describe secret $TOKEN -n ondemand | grep "token:"
 
