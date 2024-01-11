@@ -245,6 +245,7 @@ Configuration Properties with profile support
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
 
+.. _custom_javascript_files:
 .. describe:: custom_javascript_files (Array<String>, [])
 
   List of relative URLs to custom javascript files to include in all Dashboard pages.
