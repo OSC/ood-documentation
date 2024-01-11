@@ -774,6 +774,7 @@ Configuration Properties
 
       hide_app_version: true
 
+.. _globus_endpoints:
 .. describe:: globus_endpoints (Array<Object>, null)
 
   Add a Globus button to the file browser that opens the current directory
