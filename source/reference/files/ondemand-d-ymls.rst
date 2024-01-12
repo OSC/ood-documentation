@@ -245,6 +245,7 @@ Configuration Properties with profile support
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
 
+.. _custom_javascript_files:
 .. describe:: custom_javascript_files (Array<String>, [])
 
   List of relative URLs to custom javascript files to include in all Dashboard pages.
@@ -755,6 +756,45 @@ Configuration Properties
 
       remote_files_validation: true
 
+.. _upload_enabled:
+.. describe:: upload_enabled (Boolean, true)
+
+  Enable uploading files.
+
+  Default
+    File uploads are enabled.
+
+    .. code-block:: yaml
+
+      upload_enabled: true
+
+  Example
+    File uploads are disabled. Users will not be able to upload
+    files through Open OnDemand.
+
+    .. code-block:: yaml
+
+      upload_enabled: false
+
+.. _downlad_enabled:
+.. describe:: download_enabled (Boolean, true)
+
+  Enable downloading files.
+
+  Default
+    File downloads are enabled.
+
+    .. code-block:: yaml
+
+      download_enabled: true
+
+  Example
+    File downloads are disabled. Users will not be able to download
+    files through Open OnDemand.
+
+    .. code-block:: yaml
+
+      download_enabled: false
 
 .. describe:: hide_app_version (Boolean, false)
 
@@ -774,6 +814,7 @@ Configuration Properties
 
       hide_app_version: true
 
+.. _globus_endpoints:
 .. describe:: globus_endpoints (Array<Object>, null)
 
   Add a Globus button to the file browser that opens the current directory

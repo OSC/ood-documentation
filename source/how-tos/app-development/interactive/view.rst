@@ -189,30 +189,6 @@ In this example, the password is stored in a hidden input field that the user
 doesn't see and it gets communicated to the Jupyter server in the ``POST``
 request.
 
-.. _bc_info_html_md_erb:
-
-Adding Additional Information to the panel
-------------------------------------------
-
-It's possible for you to add additional information to this connection view.
-
-You can do so by creating a Markdown file ``info.md.erb`` or an html file
-``info.html.erb`` in the applications folder.  Markdown files get generated
-into html with # turning into an <h1> and ## turning into an <h2> and so on.
-
-Again, they're `eRuby (Embedded Ruby)`_ files so you can add some dynamic behavior
-to them. Along with any library you may choose to use you can also access these
-variables directly.
-
-id
-  The session UUID of the job
-cluster_id
-  The cluster the job was submitted to
-job_id
-  The job id from the scheduler
-created_at
-  The time the session was created
-
 .. _bc_native_vnc_view:
 
 Adding Native VNC instructions to the panel
