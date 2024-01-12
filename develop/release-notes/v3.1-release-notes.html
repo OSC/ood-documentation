@@ -137,6 +137,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#details-of-new-features">Details of new features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#globus-integration">Globus integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#path-selector-widget">Path Selector widget</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#google-analytics-4-support">Google Analytics 4 support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-checkboxes">Dynamic Checkboxes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-uploads-and-downloads">Disabling uploads and downloads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-javascript-files">Custom Javascript files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-added-for-completed-md-html-erb">Support added for completed.{md,html}.erb</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#aarch64-arm64-and-ppc64le-packages">aarch64/arm64 and ppc64le packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#amazon-linux-2023-packages">Amazon Linux 2023 packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#debian-12-packages">Debian 12 packages</a></li>
@@ -241,6 +248,12 @@
 <div class="section" id="new-features">
 <h2>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="#globus-integration">Globus integration</a></p></li>
+<li><p><a class="reference internal" href="#path-selector-widget">Path Selector widget</a></p></li>
+<li><p><a class="reference internal" href="#google-analytics-4-support">Google Analytics 4 support</a></p></li>
+<li><p><a class="reference internal" href="#dynamic-checkboxes">Dynamic Checkboxes</a></p></li>
+<li><p><a class="reference internal" href="#disabling-uploads-and-downloads">Disabling uploads and downloads</a></p></li>
+<li><p><a class="reference internal" href="#custom-javascript-files">Custom Javascript files</a></p></li>
 <li><p><a class="reference internal" href="#aarch64-arm64-and-ppc64le-packages">aarch64/arm64 and ppc64le packages</a></p></li>
 <li><p><a class="reference internal" href="#amazon-linux-2023-packages">Amazon Linux 2023 packages</a></p></li>
 <li><p><a class="reference internal" href="#debian-12-packages">Debian 12 packages</a></p></li>
@@ -373,6 +386,53 @@ sudo yum update ondemand
 </div>
 <div class="section" id="details-of-new-features">
 <h2>Details of new features<a class="headerlink" href="#details-of-new-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="globus-integration">
+<h3>Globus integration<a class="headerlink" href="#globus-integration" title="Permalink to this headline">¶</a></h3>
+<p>The files application will now provide a link to Globus endpoints
+when users navigate to a directory that is within that endpoint.</p>
+<p>Administrators need to configure OnDemand to map directories
+to Globus endpoints.  Refer to the
+<a class="reference internal" href="../reference/files/ondemand-d-ymls.html#globus-endpoints"><span class="std std-ref">configuration entry for enabling globus endpoints</span></a>.</p>
+</div>
+<div class="section" id="path-selector-widget">
+<h3>Path Selector widget<a class="headerlink" href="#path-selector-widget" title="Permalink to this headline">¶</a></h3>
+<p>Open OnDemand now ships it’s own <code class="docutils literal notranslate"><span class="pre">path_selector</span></code> form widet.
+This replaces the library at <a class="reference external" href="https://github.com/osc/bc_js_filepicker">https://github.com/osc/bc_js_filepicker</a>
+for centers that have or do use this library.</p>
+<p>You can go here to find <a class="reference internal" href="../how-tos/app-development/interactive/form-widgets.html#path-selector"><span class="std std-ref">details on the path selector</span></a>.</p>
+</div>
+<div class="section" id="google-analytics-4-support">
+<h3>Google Analytics 4 support<a class="headerlink" href="#google-analytics-4-support" title="Permalink to this headline">¶</a></h3>
+<p>Google Analytics has updated since version 3.0 and 3.1 has support now for
+this update.</p>
+<p>Refer to the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#google-analytics-tag-id"><span class="std std-ref">google analytics configuration</span></a>
+for how to configure this.</p>
+</div>
+<div class="section" id="dynamic-checkboxes">
+<h3>Dynamic Checkboxes<a class="headerlink" href="#dynamic-checkboxes" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">check_box</span></code> form widgets can now be used with dynamic <code class="docutils literal notranslate"><span class="pre">data-set</span></code> and
+<code class="docutils literal notranslate"><span class="pre">data-hide</span></code> directives.</p>
+<p>Refer to <a class="reference internal" href="../how-tos/app-development/interactive/dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">Dynamic Form Widgets</span></a> for more details.</p>
+</div>
+<div class="section" id="disabling-uploads-and-downloads">
+<h3>Disabling uploads and downloads<a class="headerlink" href="#disabling-uploads-and-downloads" title="Permalink to this headline">¶</a></h3>
+<p>Sites can now disable uploads and downloads through the file
+browser.  See the configuration for <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#downlad-enabled"><span class="std std-ref">disabling downloads</span></a>
+and <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#upload-enabled"><span class="std std-ref">disabling uploads</span></a> for how to configure this.</p>
+</div>
+<div class="section" id="custom-javascript-files">
+<h3>Custom Javascript files<a class="headerlink" href="#custom-javascript-files" title="Permalink to this headline">¶</a></h3>
+<p>Sites can now add custom javascript files that will get loaded on every
+page of the dashboard application.  Refer to the
+<a class="reference internal" href="../reference/files/ondemand-d-ymls.html#custom-javascript-files"><span class="std std-ref">custom_javascript_files configuration property</span></a>
+for more information.</p>
+</div>
+<div class="section" id="support-added-for-completed-md-html-erb">
+<h3>Support added for completed.{md,html}.erb<a class="headerlink" href="#support-added-for-completed-md-html-erb" title="Permalink to this headline">¶</a></h3>
+<p>Sites can now add a <code class="docutils literal notranslate"><span class="pre">completed.{md,html}.erb</span></code> to interactive applications
+to display information on the session’s card when the job has completed.</p>
+<p>See <a class="reference internal" href="../how-tos/app-development/interactive/additional-info.html#bc-completed-html-md-erb"><span class="std std-ref">completed.{md,html}.erb</span></a> for more information.</p>
+</div>
 <div class="section" id="aarch64-arm64-and-ppc64le-packages">
 <h3>aarch64/arm64 and ppc64le packages<a class="headerlink" href="#aarch64-arm64-and-ppc64le-packages" title="Permalink to this headline">¶</a></h3>
 <p>Added aarch64/arm64 and ppc64le packages for some operating systems.

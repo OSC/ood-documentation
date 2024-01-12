@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Manifest yml files &mdash; Open OnDemand 3.1.0 documentation</title>
+  <title>Adding Additional Information to the session cards &mdash; Open OnDemand 3.1.0 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="User Form (form.yml.erb)" href="form.html" />
-    <link rel="prev" title="Interactive Apps" href="../interactive.html" />
+    <link rel="next" title="App Sharing" href="../app-sharing.html" />
+    <link rel="prev" title="Connection Parameters conn_params" href="conn-params.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -116,7 +116,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Manifest yml files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest yml files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="form.html">User Form (form.yml.erb)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="form-widgets.html">Form Widgets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dynamic-form-widgets.html">Dynamic Form Widgets</a></li>
@@ -125,7 +125,11 @@
 <li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Reconfiguring exsting apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conn-params.html">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="additional-info.html">Adding Additional Information to the session cards</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Adding Additional Information to the session cards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#info-md-html-erb">info.{md,html}.erb</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#completed-md-html-erb">completed.{md,html}.erb</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
@@ -195,14 +199,14 @@
         
           <li><a href="../interactive.html">Interactive Apps</a> &raquo;</li>
         
-      <li>Manifest yml files</li>
+      <li>Adding Additional Information to the session cards</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/how-tos/app-development/interactive/manifest.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/how-tos/app-development/interactive/additional-info.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -216,49 +220,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="manifest-yml-files">
-<span id="app-development-manifest"></span><h1>Manifest yml files<a class="headerlink" href="#manifest-yml-files" title="Permalink to this headline">¶</a></h1>
-<p>Every app (interactive and passenger) needs a <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> file to describe it
-to the Open OnDemand platform.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
-<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My Cool Biology App</span><span class="w"></span>
-<span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Interactive Apps</span><span class="w"></span>
-<span class="nt">subcategory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Biology</span><span class="w"></span>
-<span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch_connect</span><span class="w"></span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
-<span class="w">  </span><span class="no">This is a multi-line description that will be shown throughout the</span><span class="w"></span>
-<span class="w">  </span><span class="no">dashboard.</span><span class="w"></span>
-<span class="c1"># metadata:</span><span class="w"></span>
-<span class="c1">#   field_of_science: botany</span><span class="w"></span>
-</pre></div>
-</div>
+  <div class="section" id="adding-additional-information-to-the-session-cards">
+<span id="app-development-interactive-additional-info"></span><h1>Adding Additional Information to the session cards<a class="headerlink" href="#adding-additional-information-to-the-session-cards" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="info-md-html-erb">
+<span id="bc-info-html-md-erb"></span><h2>info.{md,html}.erb<a class="headerlink" href="#info-md-html-erb" title="Permalink to this headline">¶</a></h2>
+<p>It’s possible for you to add additional information to this session’s card.</p>
+<p>You can do so by creating a Markdown file <code class="docutils literal notranslate"><span class="pre">info.md.erb</span></code> or an html file
+<code class="docutils literal notranslate"><span class="pre">info.html.erb</span></code> in the applications folder.  Markdown files get generated
+into html with # turning into an &lt;h1&gt; and ## turning into an &lt;h2&gt; and so on.</p>
+<p>Again, they’re <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a> files so you can add some dynamic behavior
+to them. Along with any library you may choose to use you can also access these
+variables directly.</p>
 <dl class="simple">
-<dt>name</dt><dd><p>The name of the app. This will be shown in menu bars and on icons.</p>
+<dt>id</dt><dd><p>The session UUID of the job</p>
 </dd>
-<dt>category</dt><dd><p>The category of the app. This is used to group apps in navigation menus.</p>
+<dt>cluster_id</dt><dd><p>The cluster the job was submitted to</p>
 </dd>
-<dt>subcategory</dt><dd><p>The subcategory of the app. This is used to group apps within the
-navigation menu lists.</p>
+<dt>job_id</dt><dd><p>The job id from the scheduler</p>
 </dd>
-<dt>role</dt><dd><p>The role of the app. Here <code class="docutils literal notranslate"><span class="pre">batch_connect</span></code> has special meaning to Open
-OnDemand and is required to indicate it’s a batch connect app. Otherwise
-it’s assumed to be a Passenger app.</p>
-</dd>
-<dt>description</dt><dd><p>The description of the app. This will be used for additional text when hovering
-over icons.</p>
-</dd>
-<dt>icon (Optional)</dt><dd><p>Apps default to look for an icon.png or icon.svg in their root directory,
-but this overrides that to specify the icon.</p>
-</dd>
-<dt>url (Optional)</dt><dd><p>The url of the application. By default this is generated dynamically but
-can be overridden.</p>
-</dd>
-<dt>metadata (Optional)</dt><dd><p>These are key value pairs you can add to apps for extra grouping capabilities.</p>
-</dd>
-<dt>new_window (Optional)</dt><dd><p>A boolean (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>) flag to toggle if the app should open a new
-window when clicked.</p>
+<dt>created_at</dt><dd><p>The time the session was created</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="completed-md-html-erb">
+<span id="bc-completed-html-md-erb"></span><h2>completed.{md,html}.erb<a class="headerlink" href="#completed-md-html-erb" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#bc-info-html-md-erb"><span class="std std-ref">info.{md,html}.erb</span></a> above will display on the session’s card
+regardless of the state of the job - it will always be displayed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">completed.{md,html}.erb</span></code> on the other hand, will only display
+once the job has reached the <code class="docutils literal notranslate"><span class="pre">completed</span></code> state.</p>
+<p>You may want to add this to the session’s card to display information
+to the user when the job is completed. Again, as it’s <a class="reference external" href="https://en.wikipedia.org/wiki/ERuby">eRuby (Embedded Ruby)</a>
+files so you can add some dynamic behavior to them.</p>
+</div>
 </div>
 
 
@@ -269,10 +262,10 @@ window when clicked.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="form.html" class="btn btn-neutral float-right" title="User Form (form.yml.erb)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../app-sharing.html" class="btn btn-neutral float-right" title="App Sharing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../interactive.html" class="btn btn-neutral float-left" title="Interactive Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="conn-params.html" class="btn btn-neutral float-left" title="Connection Parameters conn_params" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -304,29 +297,29 @@ window when clicked.</p>
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/manifest.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/additional-info.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/app-development/interactive/manifest.html">2.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/app-development/interactive/additional-info.html">2.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/app-development/interactive/manifest.html">1.8</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/app-development/interactive/additional-info.html">1.8</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/app-development/interactive/manifest.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/app-development/interactive/additional-info.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/app-development/interactive/manifest.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/app-development/interactive/additional-info.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/app-development/interactive/manifest.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/app-development/interactive/additional-info.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/app-development/interactive/manifest.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/app-development/interactive/additional-info.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/app-development/interactive/manifest.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/app-development/interactive/additional-info.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/app-development/interactive/manifest.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/app-development/interactive/additional-info.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/app-development/interactive/manifest.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/app-development/interactive/additional-info.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/app-development/interactive/manifest.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/app-development/interactive/additional-info.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/app-development/interactive/manifest.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/app-development/interactive/additional-info.html">develop</a></dd>
       
     </dl>
     <dl>

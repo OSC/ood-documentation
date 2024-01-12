@@ -121,8 +121,37 @@ Form Widgets
           help: |
             Your help message
 
+.. _path_selector:
+
 ==================================================================
 
+  Path Selector (path_selector)
+    A Path Selector. This is a special OnDemand feature that is not
+    directly an HTML input type. It builds a ``text_field`` input
+    type, but also provides a button that will provide a modal that
+    allows users to navigate through directories to select a path.
+
+    This is useful in forms where a path must be selected and you
+    want to allow your users to choose an arbirary path.
+
+    ``directory`` is the initial directory the path selector will open
+    to when the users opens the modal. This defaults to the users' HOME.
+
+    ``show_hidden`` is a boolean flag to show hidden files or not. This
+    defaults to false - it will not show hidden files.
+
+    ``show_files`` is a boolean flag to show files or not. This defaults
+    to true - it will show files.
+
+      .. code-block:: yaml
+
+        path:
+          widget: "path_selector"
+          directory: "/fs/ess/project"
+          show_hidden: true
+          show_files: false
+
+==================================================================
 
 
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
