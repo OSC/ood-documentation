@@ -1,7 +1,7 @@
 .. _app-development-tutorials-dashboard-apps-dashboard:
 
-Developing the Dashboard App
-============================
+Developing the OOD Dashboard App
+================================
 
 .. warning::
     You muse have followed :ref:`enabling-development-mode` for any part of this tutorial to work.
@@ -9,31 +9,30 @@ Developing the Dashboard App
 Strategy
 --------
 
-#. Ensure :ref:`enabling-development-mode` is completed
-#. Make a symlink in our ``dev`` space back to the home directory's ``~/ondemand/misc/ondemand/<app>`` 
-#. ``git branch`` from that symlinked directory for the app and do your work
-#. Create a ``.env.local`` file in the app root to override system ``ENV`` variables
-#. Rebuild the app with your changes using the ``bin/setup`` binary
-#. Use the Sandbox to launch your app for testing
-
-This will serve for the template in the following work on both the ``dashboard`` app and 
-the ``shell`` app.
+#. Start by completing the :ref:`enabling-development-mode` steps.
+#. Create a symlink named ``dev`` in the ``~/ondemand/misc/ondemand/<app>``. 
+#. In the app's symlinked directory, use ``git branch`` to start your development work.
+#. Create a ``.env.local`` file in the development dashboard app root to customize environment variables.
+#. Rebuild the ``dashboard`` app using ``bin/setup`` out of the app's root.
+#. Use the Sandbox to launch and iterate on your work.
 
 Create a Dev Dashboard
 ----------------------
-#. pull down ondemand in ``~/ondemand/misc``: ``cd ~/ondemand/misc`` then ``git clone git@github.com:OSC/ondemand.git``
-#. ``cd ~/ondemand/dev/``
-#. create the symlink for your shell app: ``ln -s ../misc/ondemand/apps/dashboard/dashboard/ dev_dashboard``
-#. run ``git checkout -b your_branch`` 
-#. now make a branch with your changes and use ``bin/setup`` to rebuild if needed
-#. navigate to the Sandbox and launch your ``dev_dashboard`` app
+#. ``clone`` the OOD repo into: ``cd ~/ondemand/misc`` then ``git clone git@github.com:OSC/ondemand.git``
+#. Work out of the ``dev`` directory/space: ``cd ~/ondemand/dev/``.
+#. Symlink to the ``dashboard`` app in the cloned repo: ``ln -s ../misc/ondemand/apps/dashboard/dashboard/ dashboard``
+#. Make a branch and to begin word on your dev dashboard: ``git checkout -b dev_work`` 
+#. Rebuild the ood dashboard app:  ``bin/setup``.
+#. Navigate to the Sandbox and launch your ``dashboard`` app to use the ``dev_work``.
 
-Notice the ``url`` for this app. No longer do you  see ``*/sys/dashboard/dashboard`` but instead ``*/dev/dashboard/dashboard``. 
+Notice the ``url`` for this ``dev_dashboard`` app. No longer do 
+you  see ``*/sys/dashboard/`` but instead ``*/dev/dashboard/``. 
 
-Add ``.end.local`` File
+Add ``.env.local`` File
 -----------------------
-Now that we have a our dev dashboard running, a good first step is to next ensure it *look different from prod.* This 
-will ensure you do not end up in the wrong tab issuing commands.
+Now that we have a our dev dashboard running, a good first step is to next ensure it 
+looks different from the production dashboard. This will help ensure not ending up in the wrong tab, 
+using ``sys/dashboard`` instead of ``dev/dashboard``, and possibly causing confusion.
 
 Use an editor or IDE and do the following:
 
@@ -43,40 +42,48 @@ Use an editor or IDE and do the following:
     touch .env.local
     vim .env.local
 
-Now, the idea here is to make sure the dev dashboard *looks* different so we don't have to check that ``url`` in the 
+The idea here is to make sure the dev dashboard *looks* different so we don't have to check that ``url`` in the 
 browser to know which dashboard we are in.
 
-So, inside this ``.env.local`` we can add an environment variable to change the color of the dev dashboard like so:
+Inside the ``.env.local`` we can add an environment variable to change the color of the dev dashboard like so:
 
 .. code-block:: sh
 
+    # .env.local file
     OOD_BRAND_BG_COLOR='grey'
 
-Now click the Develop dropdown menu on the upper right corner and click ``Restart Web Server``. After a few moments 
+Now click the ``Develop`` dropdown menu on the upper right corner and click ``Restart Web Server``. After a few moments 
 you should now see the dashboard with a grey background in the banner. This will help to distinguish your dev 
 environment from the production.
+
+
+.. figure:: ../../images/develop_dashboard_grey_background.png
+    :align: center
+
+    Different banner color for the dev dashboard
+
 
 Set Dev Configuration Directory
 -------------------------------
 Our dev dashboard is still using the same configuration files as the system dashboard, but we can change this.
 
-If we go back into our ``.env.local`` file we can set a new path for the dev dashboard to pick up its *own 
+Go back into ``.env.local`` and set a new path for *the dev dashboard to pick up its own 
 configurations* using the ``OOD_CONFIG_D_DIRECTORY`` environment variable like so: 
 
 .. code-block:: sh
 
-    vim .env.local
+    # .env.local file
     OOD_CONFIG_D_DIRECTORY="~/ondemand/dev/dashboard/config/ondemand.d/"
 
-As usual, we need to restart the PUN when we add or change an environment variable. 
-
-Now, we can begin to set our own configurations in our new ``ondemand.d`` for the dev dashboard and see the changes.
+We need to *restart the PUN when we add or change environment variables* with ``bin/setup``. 
 
 Add Dev Configurations
 ----------------------
-Let's add some configs to our dev dashboard to get an idea what can be done and play with the layout.
+Now, we can begin to set our own configurations in our new ``ondemand.d`` directory for 
+the dev dashboard and see the changes. Let's add some configs to our dev dashboard to get 
+an idea what can be done and play with the layout.
 
-We will add ``pinned_apps`` to our dev dashboard to see how this works.
+We will add ``pinned_apps`` to our dev dashboard as an example to see how this works.
 
 Create a file in the ``~/ondemand/dev/dashboard/config/ondemand.d/`` directory named ``ondemand.yml`` then 
 open the file and add the following:
@@ -84,7 +91,52 @@ open the file and add the following:
 .. code-block:: yaml
     
     pinned_apps:
-      - sys/*           # pin the sys apps
+      - sys/*
+    pinned_apps_menu_length: 4
+    pinned_apps_group_by: category
 
-Now restart the PUN. You should be presented with a view of all the system apps in your home screen, pinned.
+Assuming youre restarted the PUN when you set the new config directory above, you *should* be able to simply 
+refresh the browser and see the new pinned apps layout take effect. If not though, simply restart the PUN 
+as usual to force the changes.
+
+.. figure:: ../../images/develop_dashboard_pinned_apps.png
+    :align: center
+
+    Dev dashboard with its own pinned apps configuration
+
+Now, we can begin to add other configurations to this new ``ondemand.yml`` and keep restarting 
+the PUN to see our changes.
+
+This is a great way to test out new features, or play with any features you may be interested in with OOD before 
+making the changes in production or spinning up a whole dev environment with a VM.
+
+At this point you have all the pieces needed to use the :ref:`customizations` page and play with those changes 
+in your dev dashboard.
+
+But, what if we want to add something to Open OnDemand?
+
+Develop OOD in OOD
+------------------
+With all the above in place, you can also begin to add features and functionality to OOD in this development 
+setting to then see how this will actually run and work.
+
+Suppose you see a feature being worked on in the OOD repo on the branch ``new_feature``. How could you pull 
+this work down and see its current state while also trying to build it out?
+
+First, launch the ``shell`` and go into your dev ``dashboard`` root then:
+
+#. ``git pull``
+#. ``git checkout new_feature``
+#. ``bin/setup``
+
+After the build you now have the feature ready to be worked right there in your dev dashboard.
+
+Go ahead and enter you Sandbox and launch the dev dashboard. What you are in once that is done is the current 
+state the feature is in. 
+
+If you are not making any changes to the configurations, as the steps above mostly do, then each change to the code 
+simply requires page refreshes to see the feature work.
+
+
+
 

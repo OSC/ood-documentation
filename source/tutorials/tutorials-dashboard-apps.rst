@@ -1,17 +1,16 @@
 .. _app-development-tutorials-dashboard-apps:
 
-Tutorials: Dashboard Apps
-=========================
+Developing The OOD Dashboard
+============================
 
 .. warning::
-    You muse have followed :ref:`enabling-development-mode` for any part of this tutorial to work.
+    :ref:`enabling-development-mode` must be completed first for this tutorial to work.
 
-The OOD Dashboard is composed of several apps, one of which is the Dashboard app itself.
+Open OnDemand is composed of several apps, one of which is the ``dashboard`` app. 
+You can see some of the other apps that make up OOD `here. <https://github.com/OSC/ondemand/tree/master/apps>`__
 
-You can see `the various apps that make up OOD here. <https://github.com/OSC/ondemand/tree/master/apps>`__
-
-This tutorial is intended to give you the knowledge and configurations to do your own 
-development on these apps from *within* the production OnDemand instance itself.
+This tutorial aims to equip admins with the knowledge and tools for developing the Open OnDemand 
+``dashboard`` and ``shell`` apps directly from *within* OnDemand itself.
 
 .. toctree::
    :maxdepth: 2
