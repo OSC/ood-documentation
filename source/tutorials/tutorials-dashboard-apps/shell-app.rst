@@ -3,20 +3,19 @@
 Developing the Shell App
 ========================
 
-The ``shell`` app is different from the other OOD apps. For starters, it is purely a ``node.js`` app. This means that 
-we only need to use ``npm`` to build and work with this app.
+The ``shell`` app is significantly different from the dashboard app. It is purely a ``node.js`` app. 
+This means that we only need to use ``npm`` to build and do dev work.
 
-Building You Own Shell
-......................
+Create a Dev Shell
+------------------
+#. ``clone`` the OOD repo into: ``cd ~/ondemand/misc`` then ``git clone git@github.com:OSC/ondemand.git``
+#. Work out of the ``dev`` directory/space: ``cd ~/ondemand/dev/``.
+#. Symlink to the ``shell`` app in the cloned repo: ``ln -s ../misc/ondemand/apps/dashboard/shell/ shell``
+#. Make a branch and to begin word on your dev dashboard: ``git checkout -b dev_work`` 
+#. Rebuild the ``shell`` app:  ``bin/setup``.
+#. Navigate to the Sandbox and launch your dev ``shell`` app to use the ``dev_work`` branch.
 
-#. pull down ondemand in ``cd ~/ondemand/misc`` then ``git clone git@github.com:OSC/ondemand.git``
-#. ``cd ~/ondemand/dev/``
-#. create the symlink for your shell app: ``ln -s ../misc/ondemand/apps/dashboard/shell/ dev_shell``
-#. run ``git checkout -b your_branch`` 
-#. now make a branch with your changes and use ``bin/setup`` to rebuild if needed
-#. navigate to the Sandbox and launch your ``dev_shell`` app
-
-Notice the ``url`` for this app. No longer do you  see ``*/sys/dashboard/shell`` but instead ``*/dev/dashboard/shell``. 
+Notice the ``url`` for this app. No longer do you  see ``*/sys/shell`` but instead ``*/dev/shell``. 
 
 Build Old Version of Shell
 ..........................
@@ -34,10 +33,16 @@ Then for the **shell app** from a login terminal run:
 And then step into that symlinked directory and run:
 #. ``bin/setup`` 
 
-If you go start this app from sandbox you'll notice a different url than before, showing you are in a dev shell: ``pun/dev/shell-1.8``
+If you go start this app from sandbox you'll notice a different url than before, 
+showing you are in a dev shell: ``pun/dev/shell-1.8``
 
 Issues and Errors
 .................
 **If above fails** try to purge the modules with ``module purge`` on the login node first, 
 then ensure the *correct ruby version* with ``module load ruby/3.0.2`` then rebuild with ``bin/setup`` as above.
 
+Develop the Shell
+-----------------
+
+At this point we have a working dev ``shell`` and can start to make changes to this code and issue rebuilds 
+for ``npm`` with ``bin/setup`` when needed.
