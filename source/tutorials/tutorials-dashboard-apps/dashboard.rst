@@ -1,7 +1,7 @@
 .. _app-development-tutorials-dashboard-apps-dashboard:
 
-Developing the OOD Dashboard App
-================================
+Developing the Dashboard App
+============================
 
 .. warning::
     You muse have followed :ref:`enabling-development-mode` for any part of this tutorial to work.
