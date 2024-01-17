@@ -13,7 +13,7 @@ Strategy
 #. Create a symlink named ``dev`` in the ``~/ondemand/misc/ondemand/<app>``. 
 #. In the app's symlinked directory, use ``git branch`` to start your development work.
 #. Create a ``.env.local`` file in the development dashboard app root to customize environment variables.
-#. Rebuild the ``dashboard`` app using ``bin/setup`` out of the app's root.
+#. Rebuild the ``dashboard`` app using ``bin/setup`` out of the app's root for configuration changes.
 #. Use the Sandbox to launch and iterate on your work.
 
 Create a Dev Dashboard
