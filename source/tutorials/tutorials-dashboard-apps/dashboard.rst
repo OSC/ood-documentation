@@ -25,8 +25,8 @@ Create a Dev Dashboard
 #. Rebuild the ood dashboard app:  ``bin/setup``.
 #. Navigate to the Sandbox and launch your ``dashboard`` app to use the ``dev_work``.
 
-Notice the ``url`` for this ``dev_dashboard`` app. No longer do 
-you  see ``*/sys/dashboard/`` but instead ``*/dev/dashboard/``. 
+Notice the ``url`` for this ``/pun/dev/dashboard`` app. No longer do 
+you  see ``/pun/sys/dashboard/`` but instead ``/pun/dev/dashboard/``. 
 
 Add ``.env.local`` File
 -----------------------
