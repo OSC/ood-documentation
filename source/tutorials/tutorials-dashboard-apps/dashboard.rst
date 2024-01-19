@@ -6,15 +6,18 @@ Developing the Dashboard App
 .. warning::
     You muse have followed :ref:`enabling-development-mode` for any part of this tutorial to work.
 
-Strategy
---------
+Things To Know
+--------------
 
-#. Start by completing the :ref:`enabling-development-mode` steps.
-#. Create a symlink named ``dev`` in the ``~/ondemand/misc/ondemand/<app>``. 
-#. In the app's symlinked directory, use ``git branch`` to start your development work.
-#. Create a ``.env.local`` file in the development dashboard app root to customize environment variables.
-#. Rebuild the ``dashboard`` app using ``bin/setup`` out of the app's root for configuration changes.
-#. Use the Sandbox to launch and iterate on your work.
+We are going to be using ``bundler`` through a script which comes with OOD located in the root of the 
+dashboard at ``bin/setup``. What this will do for us is essentially run ``bundler`` and ``npm`` to ensure 
+are environment is correct. This is all being pulled from the dashboard ``Gemfile``. You could, in theory, 
+add whatever you like to this ``Gemfile`` and rebuild OOD with that new gem for development work, as an 
+example.
+
+Also, it is recommended to set this to your local app environment so that ``bundler`` does not try and install 
+the gems on the system, as unlike ``npm`` which starts builds locally by default, ``bundler`` attempts 
+system installs by default.
 
 Create a Dev Dashboard
 ----------------------
