@@ -38,8 +38,10 @@ showing you are in a dev shell: ``pun/dev/shell-1.8``
 
 Issues and Errors
 .................
-**If above fails** try to purge the modules with ``module purge`` on the login node first, 
-then ensure the *correct ruby version* with ``module load ruby/3.0.2`` then rebuild with ``bin/setup`` as above.
+Ensure you are using the correct version of Node when you go to build using ``nvm`` if possible. Sometimes 
+this can be set automatically for you in your ``.bashrc`` so just ensure you are on the version you should 
+be when you run ``bin/setup``.
+
 
 Develop the Shell
 -----------------
