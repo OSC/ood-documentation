@@ -73,6 +73,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   install-ihpc-apps
   tutorials/tutorials-interactive-apps
   tutorials/tutorials-passenger-apps
+  tutorials/tutorials-dashboard-apps
 
 .. toctree::
   :maxdepth: 2
