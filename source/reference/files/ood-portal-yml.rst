@@ -126,6 +126,7 @@ Configure General Options
           ssl: null
 
      Example
+      Supply ssl information.
        
        .. code-block:: yaml
 
@@ -134,6 +135,27 @@ Configure General Options
             - SSLCertificateKeyFile /etc/letsencrypt/live/change-me/privkey.pem
             - SSLCertificateChainFile /etc/letsencrypt/live/change-me/chain.pem
 
+
+.. _disable_logs:
+.. describe:: disable_logs (Boolean, false)
+
+  Disable logs in favor of supplying log directives in some other
+  configuration file.
+
+  Default
+    Logs are enabled and defined in this virtual host.
+
+    .. code-block:: yaml
+
+        disable_logs: false
+
+  Example
+    Disable logs in favor of supplying log directives in some other
+    configuration file.
+
+    .. code-block:: yaml
+
+      disable_logs: true
 
 .. describe:: logroot (String)
 
@@ -474,6 +496,48 @@ Configure General Options
           auth:
             - "AuthType openid-connect"
             - "Require valid-user"
+
+.. _custom_vhost_directives:
+.. describe:: custom_vhost_directives (Array<String>, [])
+
+  Supply custom directives at the virtual host level.
+
+  Default
+    No custom virtual host directives.
+
+    .. code-block:: yaml
+
+        custom_vhost_directives: []
+
+  Example
+    Add a single custom virutal host directive
+    to set an environment variable.
+
+    .. code-block:: yaml
+
+      custom_vhost_directives:
+        - SetEnv FOO BAR
+
+.. _custom_location_directives:
+.. describe:: custom_location_directives (Array<String>, [])
+
+  Supply custom directives for every ``Location`` in the virtual host.
+
+  Default
+    No custom location directives.
+
+    .. code-block:: yaml
+
+        custom_location_directives: []
+
+  Example
+    Add a single custom location directive
+    to set an environment variable.
+
+    .. code-block:: yaml
+
+      custom_location_directives:
+        - SetEnv FOO BAR
 
 .. describe:: root_uri (String)
 
