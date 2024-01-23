@@ -335,8 +335,7 @@ or <code class="docutils literal notranslate"><span class="pre">443</span></code
 </pre></div>
 </div>
 </dd>
-</dl>
-<p>Example</p>
+<dt>Example</dt><dd><p>Supply ssl information.</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ssl</span><span class="p">:</span><span class="w"></span>
 <span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SSLCertificateFile /etc/letsencrypt/live/change-me/cert.pem</span><span class="w"></span>
@@ -345,6 +344,28 @@ or <code class="docutils literal notranslate"><span class="pre">443</span></code
 </pre></div>
 </div>
 </div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="disable-logs"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">disable_logs (Boolean, false)</code></dt>
+<dd><p>Disable logs in favor of supplying log directives in some other
+configuration file.</p>
+<dl>
+<dt>Default</dt><dd><p>Logs are enabled and defined in this virtual host.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Disable logs in favor of supplying log directives in some other
+configuration file.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="describe">
@@ -675,6 +696,46 @@ of some kind.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auth</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;AuthType</span><span class="nv"> </span><span class="s">openid-connect&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Require</span><span class="nv"> </span><span class="s">valid-user&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="custom-vhost-directives"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">custom_vhost_directives (Array&lt;String&gt;, [])</code></dt>
+<dd><p>Supply custom directives at the virtual host level.</p>
+<dl>
+<dt>Default</dt><dd><p>No custom virtual host directives.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_vhost_directives</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Add a single custom virutal host directive
+to set an environment variable.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_vhost_directives</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SetEnv FOO BAR</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="custom-location-directives"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">custom_location_directives (Array&lt;String&gt;, [])</code></dt>
+<dd><p>Supply custom directives for every <code class="docutils literal notranslate"><span class="pre">Location</span></code> in the virtual host.</p>
+<dl>
+<dt>Default</dt><dd><p>No custom location directives.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_location_directives</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Add a single custom location directive
+to set an environment variable.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_location_directives</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SetEnv FOO BAR</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>

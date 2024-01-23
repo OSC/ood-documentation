@@ -820,6 +820,9 @@ Configuration Properties
   Add a Globus button to the file browser that opens the current directory
   in the Globus transfer web app.
 
+  Note that ``endpoint_path`` is the path that Globus will initialize to
+  and is very likely to be ``/`` regardless of the actual storage path.
+
   Default
     Null, do not enable the Globus button
 
@@ -829,9 +832,9 @@ Configuration Properties
     .. code-block:: yaml
 
        globus_endpoints:
-         - path "/"
+         - path: "/"
            endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-           endpoint_path "/"
+           endpoint_path: "/"
 
   Example
     Use multiple endpoints.
