@@ -1325,3 +1325,17 @@ For completed sessions, the system will only show the delete button.
 
 .. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
 .. _2.0 documentation for controling the navbar: https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar
+
+Preventing VNC from timing out when inactive
+--------------------------------------------
+
+After a configurable period, the Apache reverse proxy will time out connections. This can cause the in-browser noVNC client to lose contact with running sessions, since the websocket will close.
+To prevent this, you can simply reconfigure the mod_proxy `ProxyTimeout` parameter (or, if you wish, the Apache `Timeout` parameter, which is what `ProxyTimeout` will be set to by default.
+
+Create a new .conf file in Apache's conf.d setting the value, for example:
+
+```
+echo "ProxyTimeout 3600" > /etc/httpd/conf.d/proxytimeout.conf
+```
+
+This will set the timeout to 1 hour, instead of the default 1 minute.
