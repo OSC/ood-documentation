@@ -14,7 +14,7 @@ cluster looks like:
   Work arounds are currently to ``export SLURM_EXPORT_ENV=ALL``
   in a :ref:`script_wrapper <script_wrapper>` before any job scripts run.
 
-  Alternatively, you can use ``copy_enviornment`` below with the caveat
+  Alternatively, you can use ``copy_environment`` below with the caveat
   that the PUNs environment is very different from regular shell sessions.
 
 .. code-block:: yaml
@@ -37,7 +37,7 @@ cluster looks like:
           # squeue: ""
           # scontrol: ""
           # scancel: ""
-        copy_enviornment: false
+        copy_environment: false
 
 with the following configuration options:
 
@@ -66,7 +66,7 @@ bin_overrides
   - `scontrol`
   - `scancel`
 
-copy_enviornment
+copy_environment
   Copies the enviornment of the PUN when issuing CLI commands. Default behaviour
   for Open OnDemand is to use ``--export=NONE`` flag. Setting this to true will
   cause Open OnDemand to issue CLI commands with ``--export=ALL``. Though this may
