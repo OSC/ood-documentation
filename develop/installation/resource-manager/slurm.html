@@ -224,7 +224,7 @@ the <code class="docutils literal notranslate"><span class="pre">--export</span>
 This can cause issues with jobs that require <code class="docutils literal notranslate"><span class="pre">srun</span></code>.</p>
 <p>Work arounds are currently to <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SLURM_EXPORT_ENV=ALL</span></code>
 in a <a class="reference internal" href="../../reference/files/submit-yml/basic-bc-options.html#script-wrapper"><span class="std std-ref">script_wrapper</span></a> before any job scripts run.</p>
-<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">copy_enviornment</span></code> below with the caveat
+<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">copy_environment</span></code> below with the caveat
 that the PUNs environment is very different from regular shell sessions.</p>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span><span class="w"></span>
@@ -244,7 +244,7 @@ that the PUNs environment is very different from regular shell sessions.</p>
 </span><span class="hll"><span class="w">       </span><span class="c1"># squeue: &quot;&quot;</span><span class="w"></span>
 </span><span class="hll"><span class="w">       </span><span class="c1"># scontrol: &quot;&quot;</span><span class="w"></span>
 </span><span class="hll"><span class="w">       </span><span class="c1"># scancel: &quot;&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">     </span><span class="nt">copy_enviornment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</span><span class="hll"><span class="w">     </span><span class="nt">copy_environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </span></pre></div>
 </div>
 <p>with the following configuration options:</p>
@@ -274,7 +274,7 @@ should use different <code class="docutils literal notranslate"><span class="pre
 <li><p><cite>scancel</cite></p></li>
 </ul>
 </dd>
-<dt>copy_enviornment</dt><dd><p>Copies the enviornment of the PUN when issuing CLI commands. Default behaviour
+<dt>copy_environment</dt><dd><p>Copies the enviornment of the PUN when issuing CLI commands. Default behaviour
 for Open OnDemand is to use <code class="docutils literal notranslate"><span class="pre">--export=NONE</span></code> flag. Setting this to true will
 cause Open OnDemand to issue CLI commands with <code class="docutils literal notranslate"><span class="pre">--export=ALL</span></code>. Though this may
 cause issues as the PUN’s environment is very different than a regular shell session.</p>
