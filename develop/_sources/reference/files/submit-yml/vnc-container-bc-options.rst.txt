@@ -6,18 +6,6 @@ Batch Connect VNC Container Options
 
 All the options in :ref:`vnc-bc-options` apply in addition to what's listed below.
 
-        # @option context [#to_s] :container_path ("vnc_container.sif") the path
-        #   to the container with VNC
-        # @option context [#to_s] :container_bindpath ("") paths to bind into
-        #   the container with VNC
-        # @option context [#to_s] :container_module ("singularity") the module
-        #   that loads Singularity or Apptainer with Lmod. Supports versions (i.e.
-        #   apptainer/1.10). If Singularity or Apptainer are installed at a 
-        #   system level (i.e., no module loaded to activate), set this to an
-        #   empty string.
-        # @option context [#to_s] :container_command ("singularity") the 
-        #   singularity or apptainer execution command
-
   .. code-block:: yaml
   
     batch_connect:
