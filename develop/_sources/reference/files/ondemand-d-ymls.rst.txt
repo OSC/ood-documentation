@@ -637,25 +637,26 @@ Configuration Properties
 
       module_file_dir: "/etc/reporting/modules"
 
+.. _user_settings_file:
 .. describe:: user_settings_file (String, '.ood')
 
-  The name of the file to store user settings. This file is used to store the selected profile.
-  The path to the file is managed by the configuration variable ``Configuration.dataroot``.
-  This is usually: ``~/ondemand/data/sys/dashboard``
+  The full path of the file to store user settings. This file is used to store
+  any user defined settings.
 
   Default
     A file called '.ood'.
 
     .. code-block:: yaml
 
-      user_settings_file: ".ood"
+      user_settings_file: "~/.config/ondemand/settings.yml"
 
   Example
-    Use ``user_settings.txt`` as the file name for user settings.
+    Use ``user_settings.txt`` as the file name for user settings
+    and change the path slightly.
 
     .. code-block:: yaml
 
-      user_settings_file: "user_settings.txt"
+      user_settings_file: "~/.config/local/open-ondemand/user_settings.txt"
 
 .. describe:: facl_domain (String, null)
 

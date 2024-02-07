@@ -132,6 +132,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#administrative-changes">Administrative changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#details-of-administrative-changes">Details of administrative changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#deprecations">Deprecations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
@@ -242,6 +243,7 @@
 <div class="section" id="administrative-changes">
 <h2>Administrative changes<a class="headerlink" href="#administrative-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="#breaking-changes">Breaking Changes</a></p></li>
 <li><p><a class="reference internal" href="#deprecations">Deprecations</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates">Dependency updates</a></p></li>
 <li><p><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></p></li>
@@ -264,6 +266,21 @@
 </div>
 <div class="section" id="details-of-administrative-changes">
 <h2>Details of administrative changes<a class="headerlink" href="#details-of-administrative-changes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="breaking-changes">
+<h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="user-settings-file-change">
+<h4>User Settings File Change<a class="headerlink" href="#user-settings-file-change" title="Permalink to this headline">¶</a></h4>
+<p>We had to change the location of the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#user-settings-file"><span class="std std-ref">user settings file</span></a>
+off of the <code class="docutils literal notranslate"><span class="pre">DATAROOT</span></code> which is cluster specific and problematic for sites that
+have separate HOME directories for each cluster.</p>
+<p>The new default location is under the <code class="docutils literal notranslate"><span class="pre">XDG_CONFIG_HOME</span></code>. This change was made
+to accomidate sites that have separate HOME directories for each cluster.</p>
+<p>Sites who have never used this configuration do not need to do anything.</p>
+<p>Sites that have reconfigured the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#user-settings-file"><span class="std std-ref">user settings file</span></a>
+need to provide the full path for this file.  It’s recommended that you do not
+use a path in the <code class="docutils literal notranslate"><span class="pre">DATAROOT</span></code> as that is cluster specific.</p>
+</div>
+</div>
 <div class="section" id="deprecations">
 <h3>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="redhat-centos-7-packages-deprecated">

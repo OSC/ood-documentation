@@ -6,6 +6,7 @@ v3.1 Release Notes
 Administrative changes
 ----------------------
 
+- `Breaking Changes`_
 - `Deprecations`_
 - `Dependency updates`_
 - `Upgrade directions`_
@@ -26,6 +27,25 @@ New Features
 
 Details of administrative changes
 ---------------------------------
+
+Breaking Changes
+................
+
+User Settings File Change
+*************************
+
+We had to change the location of the :ref:`user settings file <user_settings_file>`
+off of the ``DATAROOT`` which is cluster specific and problematic for sites that
+have separate HOME directories for each cluster.
+
+The new default location is under the ``XDG_CONFIG_HOME``. This change was made
+to accomidate sites that have separate HOME directories for each cluster.
+
+Sites who have never used this configuration do not need to do anything.
+
+Sites that have reconfigured the :ref:`user settings file <user_settings_file>`
+need to provide the full path for this file.  It's recommended that you do not
+use a path in the ``DATAROOT`` as that is cluster specific.
 
 Deprecations
 ............
