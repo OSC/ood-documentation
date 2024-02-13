@@ -1165,7 +1165,7 @@ To resolve this set ``OOD_JOB_NAME_ILLEGAL_CHARS`` to ``/`` for all OOD applicat
 
   # /etc/ood/config/nginx_stage.yml
   pun_custom_env:
-    - OOD_JOB_NAME_ILLEGAL_CHARS: "/"
+    OOD_JOB_NAME_ILLEGAL_CHARS: "/"
 
 .. _customize_dex_theme:
 
