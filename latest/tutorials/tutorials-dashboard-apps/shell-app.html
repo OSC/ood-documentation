@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developing the Shell App &mdash; Open OnDemand 3.1.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Architecture" href="../../architecture.html" />
+    <link rel="prev" title="Developing the Dashboard App" href="dashboard.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials-dashboard-apps.html">Developing The OOD Dashboard</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dashboard.html">Developing the Dashboard App</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developing the Shell App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-dev-shell">Create a Dev Shell</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-old-version-of-shell">Build Old Version of Shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#issues-and-errors">Issues and Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#develop-the-shell">Develop the Shell</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials-dashboard-apps.html">Developing The OOD Dashboard</a> &raquo;</li>
+        
+      <li>Developing the Shell App</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/tutorials/tutorials-dashboard-apps/shell-app.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developing-the-shell-app">
+<span id="app-development-tutorials-dashboard-apps-shell-app"></span><h1>Developing the Shell App<a class="headerlink" href="#developing-the-shell-app" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">shell</span></code> app is significantly different from the dashboard app. It is purely a <code class="docutils literal notranslate"><span class="pre">node.js</span></code> app.
+This means that we only need to use <code class="docutils literal notranslate"><span class="pre">npm</span></code> to build and do dev work.</p>
+<div class="section" id="create-a-dev-shell">
+<h2>Create a Dev Shell<a class="headerlink" href="#create-a-dev-shell" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">clone</span></code> the OOD repo into: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/ondemand/misc</span></code> then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:OSC/ondemand.git</span></code></p></li>
+<li><p>Work out of the <code class="docutils literal notranslate"><span class="pre">dev</span></code> directory/space: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/ondemand/dev/</span></code>.</p></li>
+<li><p>Symlink to the <code class="docutils literal notranslate"><span class="pre">shell</span></code> app in the cloned repo: <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">../misc/ondemand/apps/dashboard/shell/</span> <span class="pre">shell</span></code></p></li>
+<li><p>Make a branch and to begin word on your dev dashboard: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">dev_work</span></code></p></li>
+<li><p>Rebuild the <code class="docutils literal notranslate"><span class="pre">shell</span></code> app:  <code class="docutils literal notranslate"><span class="pre">bin/setup</span></code>.</p></li>
+<li><p>Navigate to the Sandbox and launch your dev <code class="docutils literal notranslate"><span class="pre">shell</span></code> app to use the <code class="docutils literal notranslate"><span class="pre">dev_work</span></code> branch.</p></li>
+</ol>
+<p>Notice the <code class="docutils literal notranslate"><span class="pre">url</span></code> for this app. No longer do you  see <code class="docutils literal notranslate"><span class="pre">*/sys/shell</span></code> but instead <code class="docutils literal notranslate"><span class="pre">*/dev/shell</span></code>.</p>
+<div class="section" id="build-old-version-of-shell">
+<h3>Build Old Version of Shell<a class="headerlink" href="#build-old-version-of-shell" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>pull down ondemand in <code class="docutils literal notranslate"><span class="pre">~/ondemand/misc</span></code></p></li>
+<li><p>then list versions with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tags</span></code></p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;version&gt;</span></code></p></li>
+<li><p>now make a branch with your changes and use <code class="docutils literal notranslate"><span class="pre">bin/setup</span></code> to rebuild if needed</p></li>
+</ol>
+<p>Then for the <strong>shell app</strong> from a login terminal run:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">dev</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">../misc/ondemand/apps/dashboard/shell/</span> <span class="pre">shell-18</span></code></p></li>
+</ol>
+<p>And then step into that symlinked directory and run:
+#. <code class="docutils literal notranslate"><span class="pre">bin/setup</span></code></p>
+<p>If you go start this app from sandbox you’ll notice a different url than before,
+showing you are in a dev shell: <code class="docutils literal notranslate"><span class="pre">pun/dev/shell-1.8</span></code></p>
+</div>
+<div class="section" id="issues-and-errors">
+<h3>Issues and Errors<a class="headerlink" href="#issues-and-errors" title="Permalink to this headline">¶</a></h3>
+<p>Ensure you are using the correct version of Node when you go to build using <code class="docutils literal notranslate"><span class="pre">nvm</span></code> if possible. Sometimes
+this can be set automatically for you in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> so just ensure you are on the version you should
+be when you run <code class="docutils literal notranslate"><span class="pre">bin/setup</span></code>.</p>
+</div>
+</div>
+<div class="section" id="develop-the-shell">
+<h2>Develop the Shell<a class="headerlink" href="#develop-the-shell" title="Permalink to this headline">¶</a></h2>
+<p>At this point we have a working dev <code class="docutils literal notranslate"><span class="pre">shell</span></code> and can start to make changes to this code and issue rebuilds
+for <code class="docutils literal notranslate"><span class="pre">npm</span></code> with <code class="docutils literal notranslate"><span class="pre">bin/setup</span></code> when needed.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dashboard.html" class="btn btn-neutral float-left" title="Developing the Dashboard App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/tutorials/tutorials-dashboard-apps/shell-app.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/tutorials/tutorials-dashboard-apps/shell-app.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/tutorials/tutorials-dashboard-apps/shell-app.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/tutorials/tutorials-dashboard-apps/shell-app.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/tutorials/tutorials-dashboard-apps/shell-app.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/tutorials/tutorials-dashboard-apps/shell-app.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/tutorials/tutorials-dashboard-apps/shell-app.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/tutorials/tutorials-dashboard-apps/shell-app.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/tutorials/tutorials-dashboard-apps/shell-app.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/tutorials/tutorials-dashboard-apps/shell-app.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/tutorials/tutorials-dashboard-apps/shell-app.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/tutorials/tutorials-dashboard-apps/shell-app.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

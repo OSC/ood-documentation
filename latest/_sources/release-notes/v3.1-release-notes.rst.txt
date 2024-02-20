@@ -1,0 +1,305 @@
+.. _v3.1-release-notes:
+
+v3.1 Release Notes
+==================
+
+Administrative changes
+----------------------
+
+- `Breaking Changes`_
+- `Deprecations`_
+- `Dependency updates`_
+- `Upgrade directions`_
+
+New Features
+------------
+
+- `Globus integration`_
+- `Path Selector widget`_
+- `Google Analytics 4 support`_
+- `Dynamic Checkboxes`_
+- `Disabling uploads and downloads`_
+- `Custom Javascript files`_
+- `Updated Apache options`_
+- `aarch64/arm64 and ppc64le packages`_
+- `Amazon Linux 2023 packages`_
+- `Debian 12 packages`_
+
+Details of administrative changes
+---------------------------------
+
+Breaking Changes
+................
+
+User Settings File Change
+*************************
+
+We had to change the location of the :ref:`user settings file <user_settings_file>`
+off of the ``DATAROOT`` which is cluster specific and problematic for sites that
+have separate HOME directories for each cluster.
+
+The new default location is under the ``XDG_CONFIG_HOME``. This change was made
+to accomidate sites that have separate HOME directories for each cluster.
+
+Sites who have never used this configuration do not need to do anything.
+
+Sites that have reconfigured the :ref:`user settings file <user_settings_file>`
+need to provide the full path for this file.  It's recommended that you do not
+use a path in the ``DATAROOT`` as that is cluster specific.
+
+Deprecations
+............
+
+RedHat/CentOS 7 packages deprecated
+***********************************
+
+OnDemand 3.1 will be the last OnDemand release to support RedHat/CentOS 7.
+
+Dependency updates
+..................
+
+This release updates the following dependencies:
+
+- Ruby 3.1 **(RHEL 8 & 9 only)**
+
+  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of ruby.
+
+- NodeJS 18 **(All OSes except RHEL 7)**
+
+  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
+
+- Passenger 6.0.17
+- NGINX 1.22.1
+- ondemand-dex 2.36.0
+- mod_auth_openidc 2.4.14.1 (RHEL 7 & 8 only)
+
+Upgrade directions
+..................
+
+.. warning::
+
+   As always please update the *development* or *test* instances of OnDemand installed at your center first to test and verify before you modify the *production* instance.
+
+.. warning::
+
+   The OnDemand upgrade has only been tested going from 3.0.x to 3.1.x.
+
+#. Update OnDemand release RPM
+
+   .. tabs::
+
+      .. tab:: RedHat/CentOS 7
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/3.1/ondemand-release-web-3.1-1.el7.noarch.rpm
+
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/3.1/ondemand-release-web-3.1-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/3.1/ondemand-release-web-3.1-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 20.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_3.1.0-focal_all.deb https://apt.osc.edu/ondemand/3.1/ondemand-release-web_3.1.0-focal_all.deb
+            sudo apt install /tmp/ondemand-release-web_3.1.0-focal_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_3.1.0-jammy_all.deb https://apt.osc.edu/ondemand/3.1/ondemand-release-web_3.1.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_3.1.0-jammy_all.deb
+            sudo apt update
+
+#. Enable dependencies
+
+   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+
+   .. code-block:: sh
+
+      sudo dnf module reset nodejs
+      sudo dnf module enable nodejs:18
+      sudo dnf module reset ruby
+      sudo dnf module enable ruby:3.1
+
+#. Update OnDemand
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/CentOS 7
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd24-httpd.service
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 20.04 & 22.04
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+#. (Optional) If ``ondemand-dex`` was installed, restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (Optional) If ``ondemand-selinux`` was installed, see :ref:`ood_selinux_updates`
+
+#. Force all PUNs to restart
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+Details of new features
+-----------------------
+
+Globus integration
+..................
+
+The files application will now provide a link to Globus endpoints
+when users navigate to a directory that is within that endpoint.
+
+Administrators need to configure OnDemand to map directories
+to Globus endpoints.  Refer to the
+:ref:`configuration entry for enabling globus endpoints <globus_endpoints>`.
+
+Path Selector widget
+....................
+
+Open OnDemand now ships it's own ``path_selector`` form widet.
+This replaces the library at https://github.com/osc/bc_js_filepicker
+for centers that have or do use this library.
+
+You can go here to find :ref:`details on the path selector <path_selector>`.
+
+Google Analytics 4 support
+..........................
+
+Google Analytics has updated since version 3.0 and 3.1 has support now for
+this update.
+
+Refer to the :ref:`google analytics configuration <google_analytics_tag_id>`
+for how to configure this.
+
+Dynamic Checkboxes
+..................
+
+``check_box`` form widgets can now be used with dynamic ``data-set`` and
+``data-hide`` directives.
+
+Refer to :ref:`dynamic-bc-apps` for more details.
+
+Disabling uploads and downloads
+...............................
+
+Sites can now disable uploads and downloads through the file
+browser.  See the configuration for :ref:`disabling downloads <downlad_enabled>`
+and :ref:`disabling uploads <upload_enabled>` for how to configure this.
+
+Custom Javascript files
+.......................
+
+Sites can now add custom javascript files that will get loaded on every
+page of the dashboard application.  Refer to the
+:ref:`custom_javascript_files configuration property <custom_javascript_files>`
+for more information.
+
+Support added for completed.{md,html}.erb
+.........................................
+
+Sites can now add a ``completed.{md,html}.erb`` to interactive applications
+to display information on the session's card when the job has completed.
+
+See :ref:`bc_completed_html_md_erb` for more information.
+
+Updated Apache options
+......................
+
+We've updated ``ood_portal.yml`` for two common apache configurations
+sites may wish to enable.
+
+The first is to :ref:`disable apache logging <disable_logs>` in favor of
+supplying a global log configuration in a seperate file.
+
+The second is to alllow for custom directives.  You can now supply
+:ref:`custom location directives <custom_location_directives>`
+and :ref:`custom virtual host directives <custom_vhost_directives>`.
+
+aarch64/arm64 and ppc64le packages
+..................................
+
+Added aarch64/arm64 and ppc64le packages for some operating systems.
+See :ref:`Supported Operating Systems and Architectures <os-support>`
+for a full list of which operating systems support aarch64 and ppc64le.
+
+
+Amazon Linux 2023 packages
+..........................
+
+Added Amazon Linux 2023 packages.
+See :ref:`install-software` for installation instructions.
+
+Debian 12 packages
+..................
+
+Added Debian 12 packages.
+See :ref:`install-software` for installation instructions.

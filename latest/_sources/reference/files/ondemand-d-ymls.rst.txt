@@ -245,6 +245,28 @@ Configuration Properties with profile support
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
 
+.. _custom_javascript_files:
+.. describe:: custom_javascript_files (Array<String>, [])
+
+  List of relative URLs to custom javascript files to include in all Dashboard pages.
+  These javascript files can be used to customize the behavior of the Dashboard.
+
+  The relative path will be prefixed with the value of the ``public_url`` property.
+
+  Default
+    Empty list, no custom javascript files will be included.
+
+    .. code-block:: yaml
+
+      custom_javascript_files: []
+
+  Example
+    Add two custom Javascript files: ``/myfolder/navigation.js`` and ``/myfolder/pinned_apps.js`` to the Dashboard.
+
+    .. code-block:: yaml
+
+      custom_javascript_files: ["/myfolder/navigation.js", "/myfolder/pinned_apps.js"]
+
 .. describe:: dashboard_title (String, 'Open OnDemand')
 
     The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
@@ -615,25 +637,26 @@ Configuration Properties
 
       module_file_dir: "/etc/reporting/modules"
 
+.. _user_settings_file:
 .. describe:: user_settings_file (String, '.ood')
 
-  The name of the file to store user settings. This file is used to store the selected profile.
-  The path to the file is managed by the configuration variable ``Configuration.dataroot``.
-  This is usually: ``~/ondemand/data/sys/dashboard``
+  The full path of the file to store user settings. This file is used to store
+  any user defined settings.
 
   Default
     A file called '.ood'.
 
     .. code-block:: yaml
 
-      user_settings_file: ".ood"
+      user_settings_file: "~/.config/ondemand/settings.yml"
 
   Example
-    Use ``user_settings.txt`` as the file name for user settings.
+    Use ``user_settings.txt`` as the file name for user settings
+    and change the path slightly.
 
     .. code-block:: yaml
 
-      user_settings_file: "user_settings.txt"
+      user_settings_file: "~/.config/local/open-ondemand/user_settings.txt"
 
 .. describe:: facl_domain (String, null)
 
@@ -715,6 +738,65 @@ Configuration Properties
 
       remote_files_enabled: true
 
+
+.. describe:: remote_files_validation (Boolean, false)
+
+  Enable validating remote files on startup.
+
+  Default
+    Remote file systems will not be validated on startup.
+
+    .. code-block:: yaml
+
+      remote_files_validation: false
+
+  Example
+    Remote file systems will be validated on startup.
+
+    .. code-block:: yaml
+
+      remote_files_validation: true
+
+.. _upload_enabled:
+.. describe:: upload_enabled (Boolean, true)
+
+  Enable uploading files.
+
+  Default
+    File uploads are enabled.
+
+    .. code-block:: yaml
+
+      upload_enabled: true
+
+  Example
+    File uploads are disabled. Users will not be able to upload
+    files through Open OnDemand.
+
+    .. code-block:: yaml
+
+      upload_enabled: false
+
+.. _downlad_enabled:
+.. describe:: download_enabled (Boolean, true)
+
+  Enable downloading files.
+
+  Default
+    File downloads are enabled.
+
+    .. code-block:: yaml
+
+      download_enabled: true
+
+  Example
+    File downloads are disabled. Users will not be able to download
+    files through Open OnDemand.
+
+    .. code-block:: yaml
+
+      download_enabled: false
+
 .. describe:: hide_app_version (Boolean, false)
 
   Hide the interactive application's version.
@@ -732,3 +814,102 @@ Configuration Properties
     .. code-block:: yaml
 
       hide_app_version: true
+
+.. _globus_endpoints:
+.. describe:: globus_endpoints (Array<Object>, null)
+
+  Add a Globus button to the file browser that opens the current directory
+  in the Globus transfer web app.
+
+  Note that ``endpoint_path`` is the path that Globus will initialize to
+  and is very likely to be ``/`` regardless of the actual storage path.
+
+  Default
+    Null, do not enable the Globus button
+
+  Example
+    Use a single endpoint for the whole filesystem.
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path: "/"
+           endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/"
+
+  Example
+    Use multiple endpoints.
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path: "/home"
+           endpoint: "716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/home"
+
+         - path: "/project"
+           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/project"
+
+  Example
+    When pathnames differ between the filesystem and endpoint.
+
+    .. code-block:: yaml
+
+       globus_endpoints:
+         - path: "/project"
+           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+           endpoint_path: "/"
+
+  Example
+    Reference the home directory of the current user.
+
+    .. code-block:: yaml
+
+      globus_endpoints:
+        - path: "<%=  Etc.getpwnam(Etc.getlogin).dir %>"
+          endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+          endpoint_path: "/"
+
+.. _google_analytics_tag_id:
+
+.. describe:: google_analytics_tag_id (String, nil)
+
+  Configure Google Analytics by supplying a tag id.
+
+  Default
+    Google Analytics is disabled.
+
+    .. code-block:: yaml
+
+      google_analytics_tag_id: nil
+
+  Example
+    Google Analytics is enabled and will upload data to the
+    tag id ``abc123``.
+
+    .. code-block:: yaml
+
+      google_analytics_tag_id: 'abc123'
+
+
+.. _motd_render_html:
+.. describe:: motd_render_html (Boolean, false)
+
+  Render HTML in the Message of the Day (MOTD).  This
+  configuration was added because some MOTD formats like
+  RSS can generate HTML that is potentially unsafe.
+
+  Default
+    The Message of the day will not render HTML.
+
+    .. code-block:: yaml
+
+      motd_render_html: false
+
+  Example
+    The Message of the day will render HTML.
+
+    .. code-block:: yaml
+
+      motd_render_html: true

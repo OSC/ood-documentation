@@ -76,7 +76,7 @@ authority.
 
       sudo yum update ca-certificates
 
-  .. tab:: Ubuntu
+  .. tab:: Ubuntu & Debian
 
     .. code:: sh
 
@@ -96,7 +96,7 @@ authority you're using and run these commands to copy it to the appropriate plac
       sudo cp <CA CERT location> /etc/pki/ca-trust/source/anchors/
       sudo update-ca-trust
 
-  .. tab:: Ubuntu
+  .. tab:: Ubuntu & Debian
 
     .. code:: sh
 
