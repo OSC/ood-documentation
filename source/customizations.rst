@@ -73,6 +73,12 @@ To display a MOTD file on the Dashboard ensure that the environment variables ``
 .. tip::
     The ``_erb`` formats support ERB rendering to generate more dynamic messages.
 
+.. warning::
+  Some MOTD formats like ``rss``, ``markdown`` and ``markdown_erb`` can contain malicous
+  HTML content. For your safety, by default, the Open OnDemand system will not render
+  HTML.  We provide :ref:`a configuration to enable HTML rendering in MOTD <motd_render_html>`
+  should you need to render HTML.
+
 .. figure:: /images/dashboard_motd.png
    :align: center
 

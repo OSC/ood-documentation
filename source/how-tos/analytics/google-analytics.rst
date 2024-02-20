@@ -20,75 +20,20 @@ If you wish you can setup your Open-OnDemand instance to send usage data to Goog
 
 Configure Open OnDemand
 --------------------------
-Add your google analytics id your ood_portal.yml file.
 
-.. code-block:: yaml
+Refer to the :ref:`ondemand.d configuration property google_analytics_tag_id <google_analytics_tag_id>`
+on how to configure this feature.
 
-  # /etc/ood/config/ood_portal.yml
-  ---
-
-  analytics:
-    # the id will be specific to your account, but url is likely the same
-    id: UA-99999999-1
-    url: "http://www.google-analytics.com/collect"
-
-This configuration will generate a block similar to this in your apache's 
-``ood-portal.conf`` file (after running the ood-portal-generator). 
-
-.. code-block:: apache
-
-  <Location "/pun">
-    ...
-
-    SetEnv OOD_ANALYTICS_TRACKING_URL "http://www.google-analytics.com/collect"
-    SetEnv OOD_ANALYTICS_TRACKING_ID  "UA-99999999-1"
-    LuaHookLog analytics.lua analytics_handler
-  </Location>
-
-Configure Google Analytics
-------------------------------
-
-You'll need to create all of these custom dimensions and custom metrics in the appropriate GA
-account(s). 
-
-.. warning::
-
-  Order matters here! Index numbers are given to ensure you create and define these
-  items in the correct order.  Otherwise Google Analytics will be incorrectly indexing
-  these metrics.
-
-  As an example say Username gets index 3 instead of index 1. Now when you query for 
-  `dimension3` thinking it's timestamps, you'll get back usernames instead!
-
-.. table:: GA custom dimensions
-   :widths: auto
-
-   =================== ======== ============
-    Name                 Index    Scope
-   =================== ======== ============
-   Username                1        User
-   Session ID              2        Session
-   Timestamp               3        Hit
-   Remote Username         4        Hit
-   Request Method          5        Hit
-   Request Status          6        Hit
-   Document Referrer       7        Hit
-   =================== ======== ============
-
-.. table:: GA custom metrics
-   :widths: auto
-
-   =================== ======== ============ ================
-    Name                 Index    Scope      Formatting Type
-   =================== ======== ============ ================
-   Proxy Time             1        Hit            Integer
-   User Map Time          2        Hit            Integer
-   =================== ======== ============ ================
 
 Querying Google Analytics
 ---------------------------
 
 .. _GA client libraries: https://developers.google.com/analytics/devguides/reporting/core/v3/libraries
+
+.. warning::
+  This documentation is for GA version 3. With the newer versions of GA this may not
+  work as intended. As OSC does not use GA we're unable to update these examples
+  ourselves, but would accept updates for the same.
 
 Now that you have Open-OnDemand sending information to GA and it's all configured correctly,
 you can now query GA for this information, parse it and present it in any fashion you like. 
