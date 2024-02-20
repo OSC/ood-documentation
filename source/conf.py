@@ -154,6 +154,7 @@ html_context = {
     'conf_py_path': '/source/',
     'versions' : [
         ['latest', '/latest/'],
+        ['3.0', '/release-3.0/'],
         ['2.0', '/release-2.0/'],
         ['1.8', '/release-1.8/'],
         ['1.7', '/release-1.7/'],
