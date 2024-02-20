@@ -1,0 +1,781 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating a Status App &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Architecture" href="../../architecture.html" />
+    <link rel="prev" title="Tutorials: Passenger Apps" href="../tutorials-passenger-apps.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating a Status App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview-of-app">Overview of App</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#benefits">Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ondemand-system-gems">OnDemand System Gems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#files-and-their-purpose">Files and Their Purpose</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-and-setup">Clone and Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-to-run-and-parse-quota">Edit to Run and Parse Quota</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#update-test-test-command-rb">Update <code class="docutils literal notranslate"><span class="pre">test/test_command.rb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-command-rb">Update <code class="docutils literal notranslate"><span class="pre">command.rb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-app-rb-and-view-index-html">Update <code class="docutils literal notranslate"><span class="pre">app.rb</span></code> and <code class="docutils literal notranslate"><span class="pre">view/index.html</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#brand-app">Brand App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#publish-app">Publish App</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a> &raquo;</li>
+        
+      <li>Creating a Status App</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/tutorials/tutorials-passenger-apps/ps-to-quota.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-a-status-app">
+<span id="app-development-tutorials-passenger-apps-ps-to-quota"></span><h1>Creating a Status App<a class="headerlink" href="#creating-a-status-app" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview-of-app">
+<h2>Overview of App<a class="headerlink" href="#overview-of-app" title="Permalink to this headline">¶</a></h2>
+<p>We will make a copy of a status app that displays the running Passenger
+processes on the OnDemand host. We will use this as a starting point to
+create a new status app that displays quota information in a table.</p>
+<p>The app we will be copying is: <a class="reference external" href="https://github.com/OSC/ood-example-ps">https://github.com/OSC/ood-example-ps</a>. Running
+this app looks like:</p>
+<div class="figure align-center" id="id1">
+<img alt="../../_images/app-dev-tutorial-ps-to-quota-1.png" src="../../_images/app-dev-tutorial-ps-to-quota-1.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">What app looks like after cloning and launching.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>After this tutorial the resulting app will be:</p>
+<div class="figure align-center" id="id2">
+<img alt="../../_images/app-dev-tutorial-ps-to-quota-2.png" src="../../_images/app-dev-tutorial-ps-to-quota-2.png" />
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">What app looks like after modifying in this tutorial.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>This assumes you have followed the directions to <a class="reference internal" href="../../how-tos/app-development/enabling-development-mode.html#enabling-development-mode"><span class="std std-ref">Enabling App Development</span></a> on the
+Dashboard.</p>
+<ol class="arabic simple">
+<li><p>The app uses the custom branded Bootstrap 3 that Job Composer and Active Jobs apps
+use.</p></li>
+<li><p>The navbar contains a link back to the dashboard.</p></li>
+<li><p>On a request, the app runs a shell command, parses the output, and displays
+the result in a table.</p></li>
+<li><p>It is built in Ruby using the <a class="reference external" href="https://github.com/sinatra/sinatra">Sinatra framework</a>, a lightweight web framework
+similar to <a class="reference external" href="https://github.com/pallets/flask">Python’s Flask</a> and <a class="reference external" href="https://github.com/expressjs/express">Node.js’s Express</a></p></li>
+</ol>
+<div class="section" id="benefits">
+<h3>Benefits<a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></h3>
+<p>This serves as a good starting point for any status app to build for OnDemand,
+because</p>
+<ol class="arabic simple">
+<li><p>the app has the branding matching other OnDemand apps</p></li>
+<li><p>all status apps will do something similar on a request to the app:</p>
+<ol class="arabic simple">
+<li><p>get raw data from a shell command or http request</p></li>
+<li><p>parse the raw data into an intermediate object representation</p></li>
+<li><p>use that intermediate object representation to display the data formatted
+as a table or graph</p></li>
+</ol>
+</li>
+<li><p>the app can be deployed without requiring a build step because gem
+dependencies (specified in <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code>) are pure ruby and
+match those that are provided by the ondemand-gems rpm</p></li>
+<li><p>most of the app can be modified without requiring a restart due to proper use
+of Sinatra reloader extension</p></li>
+<li><p>app has a built in scaffold for unit testing using minitest</p></li>
+</ol>
+</div>
+<div class="section" id="ondemand-system-gems">
+<h3>OnDemand System Gems<a class="headerlink" href="#ondemand-system-gems" title="Permalink to this headline">¶</a></h3>
+<p>This app is able to run in OnDemand 1.8+ without installing the gems specified in the <code class="docutils literal notranslate"><span class="pre">Gemfile</span></code>.</p>
+<p>All pre-installed Ruby gems used by OnDemand are available to make it easier to develop simple apps.
+These include gems used by this example app:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sinatra</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sinatra-contrib</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">erubi</span></code></p></li>
+</ul>
+<p>On the OnDemand web host, you can execute the command <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">scl_source</span> <span class="pre">enable</span> <span class="pre">ondemand</span></code> and then <code class="docutils literal notranslate"><span class="pre">gem</span> <span class="pre">list</span></code> to
+see all available gems. These gems are provided by a separate <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> rpm that is installed when
+you do <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">ondemand</span></code>. The name of the RPM includes the OnDemand release version, such
+as <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.12-1.7.12-1.el7.x86_64.rpm</span></code>. This ensures that if you do <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">update</span></code> this gem will
+not be removed - so apps can depend on the presence of these gems.</p>
+</div>
+<div class="section" id="files-and-their-purpose">
+<h3>Files and Their Purpose<a class="headerlink" href="#files-and-their-purpose" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">Main files</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">config.ru</span></code></p></td>
+<td><p>entry point of the Passenger Ruby app</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">app.rb</span></code></p></td>
+<td><p>Sinatra app config and routes; this in a separate file from <code class="docutils literal notranslate"><span class="pre">config.ru</span></code> so
+that code reloading will work</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">command.rb</span></code></p></td>
+<td><p>class that defines an AppProcess struct, executes <code class="docutils literal notranslate"><span class="pre">ps</span></code>, and parses the
+output of the ps command producing an array of structs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">test/test_command.rb</span></code></p></td>
+<td><p>a unit test of the parsing code</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">views/index.html</span></code></p></td>
+<td><p>the main section of the html page template using an implementation of <a class="reference external" href="https://ruby-doc.org/stdlib-2.2.0/libdoc/erb/rdoc/ERB.html">ERB</a>
+called <a class="reference external" href="https://github.com/jeremyevans/erubi">erubi</a>
+which auto-escapes output of ERB tags by default (for security)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">views/layout.html</span></code></p></td>
+<td><p>the rendered HTML from <code class="docutils literal notranslate"><span class="pre">views/index.html</span></code> is inserted into this layout,
+where css and javascript files are included</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 10 </span><span class="caption-text">Other files</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Gemfile</span></code>, <code class="docutils literal notranslate"><span class="pre">Gemfile.lock</span></code></p></td>
+<td><p>defines gem dependencies for the app (see <a class="reference external" href="http://bundler.io/rationale.html">Bundler’s Rationale</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tmp/</span></code></p></td>
+<td><p>tmp directory is kept so its easier to <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">tmp/restart.txt</span></code> when you
+want to force Passenger to restart an app</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">public/</span></code></p></td>
+<td><p>serve up static assets like Bootstrap css; in OnDemand, NGINX auto-serves
+all files under public/ directly, without going through the Passenger
+process, which makes this much faster; as a result, each static file is
+in a directory with an explicit version number, so if these files ever
+change we change the version, which is one cache busting strategy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Rakefile</span></code></p></td>
+<td><p>this provides a default <code class="docutils literal notranslate"><span class="pre">rake</span></code> task for running the automated tests under
+<code class="docutils literal notranslate"><span class="pre">test/</span></code>, so you can run the tests by running the command <code class="docutils literal notranslate"><span class="pre">rake</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test/minitest_helper.rb</span></code></p></td>
+<td><p>contains setup code common between all tests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vendor/bundle</span></code></p></td>
+<td><p>This directory is added if you execute <code class="docutils literal notranslate"><span class="pre">bin/bundle</span> <span class="pre">install</span> <span class="pre">--path</span> <span class="pre">vendor/bundle</span></code> to store app specific gems. This is necessary if you want to add gems or specify specific gem versions used by the app that deviate from those provided by system gemset, or if you are using OnDemand 1.7 or earlier.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="clone-and-setup">
+<h2>Clone and Setup<a class="headerlink" href="#clone-and-setup" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Login to Open OnDemand, click “Develop” dropdown menu and click the “My Sandbox Apps (Development)” option.</p></li>
+<li><p>Click “New App” and “Clone Existing App”.</p></li>
+<li><p>Fill out the form:</p>
+<ol class="arabic simple">
+<li><p>Directory name: <code class="docutils literal notranslate"><span class="pre">quota</span></code></p></li>
+<li><p>Git remote: <code class="docutils literal notranslate"><span class="pre">https://github.com/OSC/ood-example-ps</span></code></p></li>
+<li><p>Check <em>“Create new Git Project from this?”</em></p></li>
+<li><p>Click <strong>Submit</strong></p></li>
+</ol>
+</li>
+<li><p>Launch the app by clicking the large blue <strong>Launch</strong> button. In a new browser
+window/tab you will see the output of a <code class="docutils literal notranslate"><span class="pre">ps</span></code> command filtered using <code class="docutils literal notranslate"><span class="pre">grep</span></code>.</p></li>
+<li><p>Switch browser tab/windows back to the dashboard Details view of the app and
+click the <strong>Files</strong> button on the right to open the app’s directory in the File
+Explorer.</p></li>
+</ol>
+</div>
+<div class="section" id="edit-to-run-and-parse-quota">
+<h2>Edit to Run and Parse Quota<a class="headerlink" href="#edit-to-run-and-parse-quota" title="Permalink to this headline">¶</a></h2>
+<p>The app runs and parses this command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ps aux <span class="p">|</span> grep <span class="s1">&#39;[A]pp&#39;</span>
+</pre></div>
+</div>
+<p>We will change it to run and parse this command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>quota -spw
+</pre></div>
+</div>
+<div class="section" id="update-test-test-command-rb">
+<h3>Update <code class="docutils literal notranslate"><span class="pre">test/test_command.rb</span></code><a class="headerlink" href="#update-test-test-command-rb" title="Permalink to this headline">¶</a></h3>
+<p>Run the command to get example data. Copy and paste the output into the test, and
+update the assertions to expect an array of “quotas” instead of “processes”
+with appropriate attributes.</p>
+<p>Diff:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w"> </span> def test_command_output_parsing<span class="w"></span>
+<span class="w"> </span>   output = &lt;&lt;-EOF<span class="w"></span>
+<span class="gd">-</span><span class="w"></span>
+<span class="gd">-efranz    30328  0.1  0.1 462148 28128 ?        Sl   20:28   0:00 Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota</span><span class="w"></span>
+<span class="gd">-</span><span class="w"></span>
+<span class="gi">+Disk quotas for user efranz (uid 10851):</span><span class="w"></span>
+<span class="gi">+     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace</span><span class="w"></span>
+<span class="gi">+10.11.200.32:/PZS0562/  99616M    500G    500G       0    933k   1000k   1000k       0</span><span class="w"></span>
+<span class="w">EOF</span>
+<span class="gd">-    processes = Command.new.parse(output)</span><span class="w"></span>
+<span class="gi">+    quotas = Command.new.parse(output)</span><span class="w"></span>
+
+<span class="gd">-    assert_equal 1, processes.count</span><span class="w"></span>
+<span class="gi">+    assert_equal 1, quotas.count, &quot;number of structs parsed should equal 1&quot;</span><span class="w"></span>
+
+<span class="gd">-    p = processes.first</span><span class="w"></span>
+<span class="gi">+    q = quotas.first</span><span class="w"></span>
+
+<span class="gd">-    assert_equal &quot;efranz&quot;, p.user</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;462148&quot;, p.vsz</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;28128&quot;, p.rss</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;0:00&quot;, p.time</span><span class="w"></span>
+<span class="gd">-    assert_equal &quot;Passenger RackApp: /users/PZS0562/efranz/ondemand/dev/quota&quot;, p.command</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;10.11.200.32:/PZS0562/&quot;, q.filesystem, &quot;expected filesystem value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;99616M&quot;, q.blocks, &quot;expected blocks value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;500G&quot;, q.blocks_limit, &quot;expected blocks_limit value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;933k&quot;, q.files, &quot;expected files value not correct&quot;</span><span class="w"></span>
+<span class="gi">+    assert_equal &quot;0&quot;, q.files_grace, &quot;expected files_grace value not correct&quot;</span><span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
+</pre></div>
+</div>
+<p>Resulting test method:</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestCommand</span> <span class="o">&lt;</span> <span class="no">Minitest</span><span class="o">::</span><span class="no">Test</span>
+
+  <span class="k">def</span> <span class="nf">test_command_output_parsing</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="dl">EOF</span>
+<span class="sh">Disk quotas for user efranz (uid 10851):</span>
+<span class="sh">    Filesystem  blocks   quota   limit   grace   files   quota   limit   grace</span>
+<span class="sh">10.11.200.32:/PZS0562/  99616M    500G    500G       0    933k   1000k   1000k       0</span>
+<span class="dl">EOF</span>
+    <span class="n">quotas</span> <span class="o">=</span> <span class="no">Command</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="n">assert_equal</span> <span class="mi">1</span><span class="p">,</span> <span class="n">quotas</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;number of structs parsed should equal 1&quot;</span>
+
+    <span class="n">q</span> <span class="o">=</span> <span class="n">quotas</span><span class="o">.</span><span class="n">first</span>
+
+    <span class="n">assert_equal</span> <span class="s2">&quot;10.11.200.32:/PZS0562/&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">filesystem</span><span class="p">,</span> <span class="s2">&quot;expected filesystem value not correct&quot;</span>
+    <span class="n">assert_equal</span> <span class="s2">&quot;99616M&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">blocks</span><span class="p">,</span> <span class="s2">&quot;expected blocks value not correct&quot;</span>
+    <span class="n">assert_equal</span> <span class="s2">&quot;500G&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">blocks_limit</span><span class="p">,</span> <span class="s2">&quot;expected blocks_limit value not correct&quot;</span>
+    <span class="n">assert_equal</span> <span class="s2">&quot;933k&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">files</span><span class="p">,</span> <span class="s2">&quot;expected files value not correct&quot;</span>
+    <span class="n">assert_equal</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">files_grace</span><span class="p">,</span> <span class="s2">&quot;expected files_grace value not correct&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-command-rb">
+<h3>Update <code class="docutils literal notranslate"><span class="pre">command.rb</span></code><a class="headerlink" href="#update-command-rb" title="Permalink to this headline">¶</a></h3>
+<p>Run the test by running the <code class="docutils literal notranslate"><span class="pre">rake</span></code> command and you will see it fail:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ rake
+Run options: --seed <span class="m">58990</span>
+
+<span class="c1"># Running:</span>
+
+F
+
+Finished <span class="k">in</span> <span class="m">0</span>.000943s, <span class="m">1060</span>.4569 runs/s, <span class="m">1060</span>.4569 assertions/s.
+
+  <span class="m">1</span><span class="o">)</span> Failure:
+TestCommand#test_command_output_parsing <span class="o">[</span>/users/PZS0562/efranz/ondemand/dev/quota/test/test_command.rb:14<span class="o">]</span>:
+number of structs parsed should equal <span class="m">1</span>.
+Expected: <span class="m">1</span>
+  Actual: <span class="m">3</span>
+
+<span class="m">1</span> runs, <span class="m">1</span> assertions, <span class="m">1</span> failures, <span class="m">0</span> errors, <span class="m">0</span> skips
+rake aborted!
+Command failed with status <span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+Tasks: <span class="nv">TOP</span> <span class="o">=</span>&gt; <span class="nv">default</span> <span class="o">=</span>&gt; <span class="nb">test</span>
+<span class="o">(</span>See full trace by running task with --trace<span class="o">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To run commands like <code class="docutils literal notranslate"><span class="pre">rake</span></code> through the shell you need to make sure you are on
+a host that has the correct version of Ruby installed. For OnDemand that likely
+means using Software Collections with the same packages used to install OnDemand.</p>
+<p>With SCL, running <code class="docutils literal notranslate"><span class="pre">rake</span></code> with ondemand SCL package looks like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">ondemand</span> <span class="pre">--</span> <span class="pre">rake</span></code></p>
+<p>You can avoid this by loading the SCL packages in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> file.
+For example, in my <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> I have:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">HOSTNAME</span><span class="p">%%.*</span><span class="si">}</span> <span class="o">==</span> webtest04*  <span class="o">]]</span>
+<span class="k">then</span>
+  scl <span class="nb">enable</span> ondemand -- bash
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>This means when I login to the host <code class="docutils literal notranslate"><span class="pre">webtest04.osc.edu</span></code> the SCL packages will be enabled
+in a new bash session. If you did the same you would replace <code class="docutils literal notranslate"><span class="pre">webtest04</span></code> with the hostname
+of the node you are developing on.</p>
+</div>
+<p>To get the unit test to pass we need to:</p>
+<ol class="arabic simple">
+<li><p>Change the command we are using.</p></li>
+<li><p>Fix the command output parsing.</p></li>
+<li><p>Fix the struct definition.</p></li>
+</ol>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">class Command</span>
+<span class="w"> </span> def to_s<span class="w"></span>
+<span class="gd">-    &quot;ps aux | grep &#39;[A]pp&#39;&quot;</span><span class="w"></span>
+<span class="gi">+    &quot;quota -spw&quot;</span><span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
+
+<span class="gd">-  AppProcess = Struct.new(:user, :pid, :pct_cpu, :pct_mem, :vsz, :rss, :tty, :stat, :start, :time, :command)</span><span class="w"></span>
+<span class="gi">+  Quota = Struct.new(:filesystem, :blocks, :blocks_quota, :blocks_limit, :blocks_grace, :files, :files_quota, :files_limit, :fil</span><span class="w"></span>
+
+<span class="w"> </span> # Parse a string output from the `ps aux` command and return an array of<span class="w"></span>
+<span class="w"> </span> # AppProcess objects, one per process<span class="w"></span>
+<span class="w"> </span> def parse(output)<span class="w"></span>
+<span class="w"> </span>   lines = output.strip.split(&quot;\n&quot;)<span class="w"></span>
+<span class="gd">-    lines.map do |line|</span><span class="w"></span>
+<span class="gd">-      AppProcess.new(*(line.split(&quot; &quot;, 11)))</span><span class="w"></span>
+<span class="gi">+    lines.drop(2).map do |line|</span><span class="w"></span>
+<span class="gi">+      Quota.new(*(line.split))</span><span class="w"></span>
+<span class="w"> </span>   end<span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
+</pre></div>
+</div>
+<p>After the changes part of the <code class="docutils literal notranslate"><span class="pre">command.rb</span></code> will look like this:</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Command</span>
+  <span class="k">def</span> <span class="nf">to_s</span>
+    <span class="s2">&quot;quota -spw&quot;</span>
+  <span class="k">end</span>
+
+  <span class="no">Quota</span> <span class="o">=</span> <span class="no">Struct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:filesystem</span><span class="p">,</span> <span class="ss">:blocks</span><span class="p">,</span> <span class="ss">:blocks_quota</span><span class="p">,</span> <span class="ss">:blocks_limit</span><span class="p">,</span> <span class="ss">:blocks_grace</span><span class="p">,</span> <span class="ss">:files</span><span class="p">,</span> <span class="ss">:files_quota</span><span class="p">,</span> <span class="ss">:files_limit</span><span class="p">,</span> <span class="ss">:files_grace</span><span class="p">)</span>
+
+  <span class="c1"># Parse a string output from the `ps aux` command and return an array of</span>
+  <span class="c1"># AppProcess objects, one per process</span>
+  <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+      <span class="no">Quota</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">))</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</pre></div>
+</div>
+<p>Now when we run the test they pass:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ rake
+Run options: --seed <span class="m">60317</span>
+
+<span class="c1"># Running:</span>
+
+.
+
+Finished <span class="k">in</span> <span class="m">0</span>.000966s, <span class="m">1035</span>.1494 runs/s, <span class="m">6210</span>.8963 assertions/s.
+
+<span class="m">1</span> runs, <span class="m">6</span> assertions, <span class="m">0</span> failures, <span class="m">0</span> errors, <span class="m">0</span> skips
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-app-rb-and-view-index-html">
+<h3>Update <code class="docutils literal notranslate"><span class="pre">app.rb</span></code> and <code class="docutils literal notranslate"><span class="pre">view/index.html</span></code><a class="headerlink" href="#update-app-rb-and-view-index-html" title="Permalink to this headline">¶</a></h3>
+<p>Update <code class="docutils literal notranslate"><span class="pre">app.rb</span></code>:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">helpers do</span>
+<span class="w"> </span> def title<span class="w"></span>
+<span class="gd">-    &quot;Passenger App Processes&quot;</span><span class="w"></span>
+<span class="gi">+    &quot;Quota&quot;</span><span class="w"></span>
+<span class="w"> </span> end<span class="w"></span>
+<span class="w">end</span>
+
+<span class="w"># Define a route at the root &#39;/&#39; of the app.</span>
+<span class="w">get &#39;/&#39; do</span>
+<span class="w"> </span> @command = Command.new<span class="w"></span>
+<span class="gd">-  @processes, @error = @command.exec</span><span class="w"></span>
+<span class="gi">+  @quotas, @error = @command.exec</span><span class="w"></span>
+
+<span class="w"> </span> # Render the view<span class="w"></span>
+<span class="w"> </span> erb :index<span class="w"></span>
+<span class="w">end</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">views/index.erb</span></code>, replace the table with this:</p>
+<div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;table class=&quot;table table-bordered&quot;&gt;</span>
+<span class="x">  &lt;tr&gt;</span>
+<span class="x">    &lt;th&gt;Filesystem&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Blocks&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Blocks Quota&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Blocks Limit&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Blocks Grace&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Files&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Files Quota&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Files Limit&lt;/th&gt;</span>
+<span class="x">    &lt;th&gt;Files Grace&lt;/th&gt;</span>
+<span class="x">  &lt;/tr&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%</span> <span class="vi">@quotas</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">quota</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;tr&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">filesystem</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">blocks</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">blocks_quota</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">blocks_limit</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">blocks_grace</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">files</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">files_quota</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">files_limit</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">quota</span><span class="o">.</span><span class="n">files_grace</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">  &lt;/tr&gt;</span>
+<span class="x">  </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">&lt;/table&gt;</span>
+</pre></div>
+</div>
+<p>These changes <em>should not require an app restart.</em> Go to the launched app and <strong>reload the page</strong>
+to see the changes.</p>
+</div>
+</div>
+<div class="section" id="brand-app">
+<h2>Brand App<a class="headerlink" href="#brand-app" title="Permalink to this headline">¶</a></h2>
+<p>The app is looking good, but the details page still shows the app title “Passenger App
+Processes”. To change this and the icon, edit the <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code>:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-name: Passenger App Processes</span><span class="w"></span>
+<span class="gd">-description: Display your running Passenger app processes in a table</span><span class="w"></span>
+<span class="gi">+name: Quota</span><span class="w"></span>
+<span class="gi">+description: Display quotas</span><span class="w"></span>
+<span class="gi">+icon: fa://hdd-o</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The icon follows format of <code class="docutils literal notranslate"><span class="pre">fa://{FONTAWESOMENAME}</span></code> where you replace <code class="docutils literal notranslate"><span class="pre">{FONTAWESOMENAME}</span></code> with an icon from <a class="reference external" href="https://fontawesome.com/icons/">https://fontawesome.com/icons/</a>.
+In this case we are using <code class="docutils literal notranslate"><span class="pre">fa-hdd-o</span></code> which we write in the manifest as <code class="docutils literal notranslate"><span class="pre">fa://hdd-o</span></code>.
+You can see details on this icon at <a class="reference external" href="https://fontawesome.com/icons/hdd?style=regular">https://fontawesome.com/icons/hdd?style=regular</a></p></li>
+</ul>
+</div>
+<div class="section" id="publish-app">
+<h2>Publish App<a class="headerlink" href="#publish-app" title="Permalink to this headline">¶</a></h2>
+<p>Publishing an app requires two steps:</p>
+<ol class="arabic simple">
+<li><p>Updating the <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.</p></li>
+<li><p>Having an administrator checkout a copy of the production version to a directory under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code>.</p></li>
+</ol>
+<p>Steps:</p>
+<ol class="arabic">
+<li><p>Add category to manifest so the app appears in the Files menu:</p>
+<blockquote>
+<div><div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">name: Quota</span>
+<span class="w">description: Display quotas</span>
+<span class="w">icon: fa://hdd-o</span>
+<span class="gi">+category: Files</span><span class="w"></span>
+<span class="gi">+subcategory: Utilities</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Version these changes. Click <strong>Shell</strong> button on app details view, and then <code class="docutils literal notranslate"><span class="pre">commit</span></code> the changes:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git add .
+git commit -m <span class="s2">&quot;update manifest for production&quot;</span>
+
+<span class="c1"># if there is an external remote associated with this, push to that</span>
+git push origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>As the admin, <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">copy</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> this repo to production</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># as sudo on OnDemand host:</span>
+<span class="nb">cd</span> /var/www/ood/apps/sys
+git clone /users/PZS0562/efranz/ondemand/dev/quota
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Reload</strong> the dashboard.</p></li>
+</ol>
+<div class="figure align-center" id="id5">
+<img alt="../../_images/app-dev-tutorial-ps-to-quota-published.png" src="../../_images/app-dev-tutorial-ps-to-quota-published.png" />
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Every user can now launch the Quota from the Files menu.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Accessing this new app for the first time will cause your NGINX server to restart,
+killing all websocket connections, which means resetting your active web-based OnDemand Shell sessions.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tutorials-passenger-apps.html" class="btn btn-neutral float-left" title="Tutorials: Passenger Apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/tutorials/tutorials-passenger-apps/ps-to-quota.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/tutorials/tutorials-passenger-apps/ps-to-quota.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/tutorials/tutorials-passenger-apps/ps-to-quota.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/tutorials/tutorials-passenger-apps/ps-to-quota.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

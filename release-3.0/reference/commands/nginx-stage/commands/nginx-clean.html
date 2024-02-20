@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nginx_stage nginx_clean &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="PUN environment" href="../../../pun-environment.html" />
+    <link rel="prev" title="nginx_stage nginx_list" href="nginx-list.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../reference.html">Configuration Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../files/ood-portal-yml.html">ood_portal.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../files/nginx-stage-yml.html">nginx_stage.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../files/ondemand-d-ymls.html">ondemand.d/*.yml files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../files/submit-yml-erb.html">submit.yml.erb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ood-portal-generator.html">ood-portal-generator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../usage.html">nginx-stage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pun.html">nginx_stage pun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html">nginx_stage app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app-reset.html">nginx_stage app_reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app-list.html">nginx_stage app_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app-clean.html">nginx_stage app_clean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nginx.html">nginx_stage nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nginx-show.html">nginx_stage nginx_show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nginx-list.html">nginx_stage nginx_list</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">nginx_stage nginx_clean</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-options">General Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pun-environment.html">PUN environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../reference.html">Configuration Reference</a> &raquo;</li>
+        
+          <li><a href="../usage.html">Usage</a> &raquo;</li>
+        
+      <li>nginx_stage nginx_clean</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/reference/commands/nginx-stage/commands/nginx-clean.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nginx-stage-nginx-clean">
+<span id="id1"></span><h1>nginx_stage nginx_clean<a class="headerlink" href="#nginx-stage-nginx-clean" title="Permalink to this headline">¶</a></h1>
+<p>This command will kill all per-user NGINX (PUN) processes that do not have
+active connections.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<div class="section" id="general-options">
+<h2>General Options<a class="headerlink" href="#general-options" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cmdoption-nginx-stage-nginx-clean-f">
+<code class="sig-name descname">-f</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--force</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-clean-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force clean <strong>all</strong> of the per-user NGINX processes including ones with
+active connections.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-nginx-stage-nginx-clean-n">
+<code class="sig-name descname">-N</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--skip-nginx</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-nginx-stage-nginx-clean-n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skip the execution of the per-user NGINX process.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>To kill all PUN processes with no active connections:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean
+</pre></div>
+</div>
+<p>This also displays the users who had their PUN processes killed.</p>
+<p>To kill <strong>all</strong> PUN processes irrespective of the number of active connections:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean --force
+</pre></div>
+</div>
+<p>To <strong>only</strong> display the users with PUN processes that have no active
+connections:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo nginx_stage nginx_clean --skip-nginx
+</pre></div>
+</div>
+<p>This will not kill the PUN processes.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../pun-environment.html" class="btn btn-neutral float-right" title="PUN environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nginx-list.html" class="btn btn-neutral float-left" title="nginx_stage nginx_list" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/reference/commands/nginx-stage/commands/nginx-clean.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/reference/commands/nginx-stage/commands/nginx-clean.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/reference/commands/nginx-stage/commands/nginx-clean.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/reference/commands/nginx-stage/commands/nginx-clean.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/reference/commands/nginx-stage/commands/nginx-clean.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/reference/commands/nginx-stage/commands/nginx-clean.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/reference/commands/nginx-stage/commands/nginx-clean.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/reference/commands/nginx-stage/commands/nginx-clean.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/reference/commands/nginx-stage/commands/nginx-clean.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/reference/commands/nginx-stage/commands/nginx-clean.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/reference/commands/nginx-stage/commands/nginx-clean.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/reference/commands/nginx-stage/commands/nginx-clean.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

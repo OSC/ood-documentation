@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Add SELinux &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cluster Configuration" href="add-cluster-config.html" />
+    <link rel="prev" title="3. Secure Apache httpd" href="add-ssl.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html">2. Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-ssl.html">3. Secure Apache httpd</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Add SELinux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#selinux">SELinux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selinux-after-updates">SELinux after Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firewall">Firewall</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../installation.html">Installation</a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>Add SELinux</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/installation/modify-system-security.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="add-selinux">
+<span id="modify-system-security"></span><h1><span class="section-number">4. </span>Add SELinux<a class="headerlink" href="#add-selinux" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="selinux">
+<span id="ood-selinux"></span><h2>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>If you plan to use <a class="reference external" href="https://wiki.centos.org/HowTos/SELinux">SELinux</a> on the Open OnDemand host you must install the <cite>ondemand-selinux</cite> package.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-selinux
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OnDemand runs under the <cite>ood_pun_t</cite> context.</p>
+</div>
+</li>
+</ol>
+<p>The OnDemand SELinux package makes several changes to allow OnDemand to run with SELinux enabled.</p>
+<ul class="simple">
+<li><p>Set contexts of several filesystem paths specific to OnDemand.</p></li>
+<li><p>Enable SELinux booleans.</p></li>
+<li><p>Apply a custom policy to allow actions to performed by <cite>ood_pun_t</cite> context.</p></li>
+</ul>
+<p>The custom SELinux booleans provided by the OnDemand SELinux policy:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_user_home_dir</span></code> (<strong>default=off</strong>): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_manage_vmblock</span></code> (<strong>default=off</strong>): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_nfs</span></code> (<strong>default=on</strong>): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ssh</span></code> (<strong>default=on</strong>): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_sssd</span></code> (<strong>default=on</strong>): Allows OnDemand to access SSSD</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_slurm</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with SLURM and MUNGE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_torque</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with Torque.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_kubernetes</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kubernetes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_ldap</span></code> (<strong>default=off</strong>): Allows OnDemand to interact with remote LDAP servers. This does not affect Apache LDAP authentication. This is only necessary if the PUN is interacting with LDAP ports.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand_use_kerberos</span></code> (<strong>default=off</strong>): Allow OnDemand to interact with Kerberos.</p></li>
+</ul>
+<p>The following SELinux booleans are enabled by the <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> package:</p>
+<ul class="simple">
+<li><p>httpd_setrlimit</p></li>
+<li><p>httpd_mod_auth_pam</p></li>
+<li><p>httpd_run_stickshift</p></li>
+<li><p>httpd_can_network_connect</p></li>
+<li><p>daemons_use_tty</p></li>
+<li><p>use_nfs_home_dirs (can be disabled if the OnDemand web node is not using NFS for home directories)</p></li>
+</ul>
+<p>The following example disabled the OnDemand SSH SELinux boolean.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo setsebool -P <span class="nv">ondemand_use_ssh</span><span class="o">=</span>off
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you experience denials when running SELinux with Open OnDemand please provide denial details by generating a <cite>ood.te</cite> file and posting that to <a class="reference external" href="https://discourse.osc.edu/c/open-ondemand">Discourse</a>. It would also help to post the <cite>audit.log</cite> lines that correspond to the OnDemand specific denials.</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cat /var/log/audit/audit.log <span class="p">|</span> audit2allow -M ood
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="selinux-after-updates">
+<span id="ood-selinux-updates"></span><h2>SELinux after Updates<a class="headerlink" href="#selinux-after-updates" title="Permalink to this headline">¶</a></h2>
+<p>After OnDemand updates that include the <code class="docutils literal notranslate"><span class="pre">ondemand-selinux</span></code> package, some SELinux booleans may be turned back off if their default value is to be disabled.  It is required that after these updates, all SELinux booleans that are enabled should be checked that they are still enabled.</p>
+</div>
+<div class="section" id="firewall">
+<span id="id1"></span><h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Open ports 80 (http) and 443 (https) in the firewall, typically done with
+<a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_firewalls">firewalld</a> or <a class="reference external" href="https://wiki.centos.org/HowTos/Network/IPTables">iptables</a>.</p>
+<dl>
+<dt>Firewalld example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">80</span>/tcp --permanent
+$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">443</span>/tcp --permanent
+$ sudo firewall-cmd --reload
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+<blockquote>
+<div><dl>
+<dt>Iptables example:</dt><dd><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">80</span> -j ACCEPT
+$ sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">443</span> -j ACCEPT
+$ sudo iptables-save &gt; /etc/sysconfig/iptables
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If using Dex authentication the port used by Dex must also be opened.
+See <a class="reference internal" href="../authentication/dex.html#id1"><span class="std std-ref">Dex Firewall</span></a> for details.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="add-cluster-config.html" class="btn btn-neutral float-right" title="Cluster Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="add-ssl.html" class="btn btn-neutral float-left" title="3. Secure Apache httpd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/modify-system-security.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/modify-system-security.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/modify-system-security.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/modify-system-security.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/modify-system-security.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/modify-system-security.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/modify-system-security.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/modify-system-security.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/modify-system-security.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/modify-system-security.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/modify-system-security.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/modify-system-security.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

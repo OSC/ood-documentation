@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Connection Parameters conn_params &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="App Sharing" href="../app-sharing.html" />
+    <link rel="prev" title="Sub-Apps and Reconfiguring exsting apps" href="sub-apps.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest yml files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form (form.yml.erb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form-widgets.html">Form Widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic-form-widgets.html">Dynamic Form Widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (submit.yml.erb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Reconfiguring exsting apps</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook-example">Jupyter Notebook Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../app-development.html">App Development</a> &raquo;</li>
+        
+          <li><a href="../interactive.html">Interactive Apps</a> &raquo;</li>
+        
+      <li>Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/how-tos/app-development/interactive/conn-params.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="connection-parameters-conn-params">
+<span id="app-development-interactive-conn-params"></span><h1>Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code><a class="headerlink" href="#connection-parameters-conn-params" title="Permalink to this headline">¶</a></h1>
+<p>App developers can use <code class="docutils literal notranslate"><span class="pre">conn_params</span></code> in the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> to pass runtime data generated
+in the <code class="docutils literal notranslate"><span class="pre">before.sh.erb</span></code> back to the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>.</p>
+<p>This is helpful for:</p>
+<ul class="simple">
+<li><p>Data that is only known <strong>after</strong> the job submits and starts running.</p></li>
+<li><p>Data that needs to be used to connect to the application.</p></li>
+</ul>
+<p>This technique will generate a file in the app’s root called <code class="docutils literal notranslate"><span class="pre">connection.yml</span></code> when the app launches
+which will contain the defined variables and their associated values.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The files which must be adjusted are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my_app/
+├── submit.html.erb
+├── templates/
+│   ├── before.sh.erb
+└── view.html.erb
+</pre></div>
+</div>
+<p>The files which can be adjusted to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my_app/
+├── submit.html.erb
+├── templates/
+│   ├── before.sh.erb
+│   └── dir
+│       └── another_script.sh.erb
+└── view.html.erb
+</pre></div>
+</div>
+<p>And the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> will use <code class="docutils literal notranslate"><span class="pre">conn_params</span></code> to set the custom variables to pass back to the <code class="docutils literal notranslate"><span class="pre">view</span></code> to
+be rendered:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">batch_connect</span><span class="p">:</span>
+  <span class="n">template</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span>
+  <span class="n">conn_params</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">custom_variable_one</span>
+    <span class="o">-</span> <span class="n">custom_variable_two</span>
+    <span class="o">...</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The variables in <code class="docutils literal notranslate"><span class="pre">before.sh.erb</span></code> <em>must</em> be made available to the environment
+by using <code class="docutils literal notranslate"><span class="pre">export</span></code>.</p>
+</div>
+</div>
+<div class="section" id="jupyter-notebook-example">
+<h2>Jupyter Notebook Example<a class="headerlink" href="#jupyter-notebook-example" title="Permalink to this headline">¶</a></h2>
+<p>Here’s an example using the <code class="docutils literal notranslate"><span class="pre">bc_osc_jupypter</span></code> app which needs
+information from the server to then pass on to the submission before it renders
+in the browser for the app’s launch card.</p>
+<p>Within the <code class="docutils literal notranslate"><span class="pre">template/before.sh.erb</span></code>, observe the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JUPYTER_API</span><span class="o">=</span><span class="s2">&quot;&lt;%= context.jupyterlab_switch == &quot;</span><span class="mi">1</span><span class="s2">&quot; ? &quot;</span><span class="n">lab</span><span class="s2">&quot; : &quot;</span><span class="n">tree</span><span class="s2">&quot; %&gt;&quot;</span>
+<span class="o">...</span>
+<span class="n">export</span> <span class="n">jupyter_api</span><span class="o">=</span><span class="s2">&quot;$JUPYTER_API&quot;</span>
+</pre></div>
+</div>
+<p>Now take this exported variable and include it in the <code class="docutils literal notranslate"><span class="pre">submit.html.erb</span></code>.
+Ensure that the syntax aligns with the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">batch_connect</span><span class="p">:</span>
+  <span class="n">template</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span>
+  <span class="n">conn_params</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">jupyter_api</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>, which renders after the submission in the interactive apps page,
+you can access the value of this variable with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;%-</span>
+  <span class="o">...</span>
+  <span class="n">next_url</span>  <span class="o">=</span> <span class="s2">&quot;#</span><span class="si">{base_url}</span><span class="s2">/#</span><span class="si">{jupyter_api}</span><span class="s2">&quot;</span>
+
+  <span class="n">full_url</span><span class="o">=</span><span class="s2">&quot;#</span><span class="si">{login_url}</span><span class="s2">?next=#{CGI.escape(next_url)}&quot;</span>
+  <span class="o">...</span>
+<span class="o">%&gt;</span>
+
+<span class="o">...</span>
+
+<span class="o">&lt;</span><span class="n">form</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&lt;%= form_id %&gt;&quot;</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&lt;%= full_url %&gt;&quot;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;_blank&quot;</span> <span class="n">onsubmit</span><span class="o">=</span><span class="s2">&quot;changeTarget()&quot;</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This configuration uses the value from <code class="docutils literal notranslate"><span class="pre">jupyter_api</span></code> to populate
+the <code class="docutils literal notranslate"><span class="pre">action</span></code> attribute in the rendered page in the interactive sessions.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../app-sharing.html" class="btn btn-neutral float-right" title="App Sharing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sub-apps.html" class="btn btn-neutral float-left" title="Sub-Apps and Reconfiguring exsting apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/conn-params.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/app-development/interactive/conn-params.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/app-development/interactive/conn-params.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/app-development/interactive/conn-params.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/app-development/interactive/conn-params.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/app-development/interactive/conn-params.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/app-development/interactive/conn-params.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/app-development/interactive/conn-params.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/app-development/interactive/conn-params.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/app-development/interactive/conn-params.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/app-development/interactive/conn-params.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/app-development/interactive/conn-params.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

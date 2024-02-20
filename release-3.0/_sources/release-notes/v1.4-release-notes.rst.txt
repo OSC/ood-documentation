@@ -1,0 +1,242 @@
+.. _v1.4-release-notes:
+
+v1.4 Release Notes
+==================
+
+Highlights in 1.4:
+
+- `Upgrade to Ruby 2.4, NodeJS 6, Passenger 5`_
+- `Security Enhancement - PUN autogenerates secret key base if none is set`_
+- `Security Enhancement: App development mode is disabled by default`_
+- `Security Enhancement: Enable whitelisting of directories in several core apps`_
+- `Security Enhancement: Require SSH for all hosts in Shell app`_
+- `Add ability to include Javascript in Batch Connect apps`_
+- `Better environment setting`_
+- `Customizable error pages for missing home dirs`_
+- `Experimental SGE/UGE support`_
+- `Fixed copy and paste issues in the Shell app for Firefox`_
+- `Improve default discoverability of apps in the Dashboard's navbar`_
+- `Optional Quota warnings on dashboard`_
+- `Slurm 18 support`_
+
+
+Upgrading from v1.3
+-------------------
+
+#. Enable EPEL and update OnDemand release RPM
+
+   CentOS/RHEL 6
+
+   .. code-block:: sh
+
+      sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+      sudo yum install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el6.noarch.rpm
+
+   CentOS/RHEL 7
+
+   .. code-block:: sh
+
+      sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      sudo yum install -y https://yum.osc.edu/ondemand/1.4/ondemand-release-web-1.4-1.el7.noarch.rpm
+
+#. Update OnDemand
+
+   .. code-block:: sh
+
+       sudo yum clean all
+       sudo yum update ondemand
+
+.. warning::
+
+   The nginx RPM used by ondemand will upgrade the nginx RPMs provided by EPEL, if they are installed.
+
+#. Rebuild any custom Node.js or Ruby apps
+
+   Since we upgraded to Ruby 2.4 from 2.2 and NodeJS 0.10 to NodeJS 6 any custom
+   Passenger apps in Ruby or NodeJS that have their dependencies installed in
+   vendor/bundle or node_modules will need to be reinstalled. Some code may have
+   to be updated or dependency versions changed to work with the latest Ruby version.
+
+   For NodeJS apps:
+
+   .. code-block: sh
+
+      cd /var/www/ood/apps/sys/custom_nodejs_app
+      sudo rm -rf node_modules
+      sudo scl enable rh-nodejs6 -- npm install
+
+   For Ruby apps:
+
+   .. code-block: sh
+
+      cd /var/www/ood/apps/sys/custom_nodejs_app
+      sudo rm -rf vendor/bundle
+      sudo scl enable rh-nodejs6 rh-ruby24 -- bundle install --path vendor/bundle
+
+   If you need a way to continue to still use Ruby 2.2 or a different version of
+   NodeJS `please post a question on our Discourse instance <https://discourse.osc.edu>`_.
+
+#. Verify Navbar contains all the apps you want.
+
+   The behavior changed from 1.3 to 1.4 so by default all categories of any sys
+   app found appear as dropdown menus without the need for configuration changes.
+
+
+   As a result menus may appear that you do not expect, if previously you were relying
+   on the "whitelist" functionality of the ``NavConfig.categories``.
+
+   See `Control which apps appear in the Dashboard Navbar <1-4-dashboard-navbar-config>`_ for details.
+
+#. Verify Developer mode is configured how you want it
+
+   See :ref:`enabling-development-mode` for an explanation of how developer mode has changed
+   between 1.3 and 1.4 and how to configure things properly. For sites that have active
+   developers, this will either be adding configuration to revert to 1.3's functionality,
+   or creating some directories and symlinks to enable specific app developers.
+
+#. Optionally remove dependencies from prior versions of OOD
+
+   .. code-block:: sh
+
+       sudo yum remove nodejs010\* rh-passenger40\* rh-ruby22\* nginx16\* git19\* v8314\*
+
+
+.. warning::
+
+  As always please update the *development* or *test* instances of OnDemand installed at your center first before you modify the *production* instance. Remember, Ruby and Node have been upgraded, so existing custom apps may need to be re-built.
+
+
+Infrastructure Version Changes
+------------------------------
+
+OnDemand's infrastructure components have been merged into a monolithic repository. Component changelogs have been frozen and the parent repository will now track all infrastructure changes: `OnDemand 1.4.9 <https://github.com/OSC/ondemand/blob/v1.4.9/CHANGELOG.md>`__. `Diff with 1.3.7 <https://github.com/OSC/ondemand/compare/v1.3.7...v1.4.9>`__
+
+
+Application Version Changes
+----------------------------
+
+.. _v1.4-app-versions:
+.. list-table:: Application Versions
+   :widths: auto
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - App
+     - Version
+   * - `Dashboard App`
+     - 1.26.2 → `1.30.2 <https://github.com/OSC/ood-dashboard/blob/v1.30.2/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-dashboard/compare/v1.26.2...v1.30.2>`__)
+   * - `Shell App`
+     - 1.3.1 → `1.4.2 <https://github.com/OSC/ood-shell/blob/v1.4.2/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-shell/compare/v1.3.1...v1.4.2>`__)
+   * - `Files App`
+     - 1.4.1 → `1.5.0 <https://github.com/OSC/ood-fileexplorer/blob/v1.5.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileexplorer/compare/v1.4.1...v1.5.0>`__)
+   * - `File Editor App`
+     - 1.3.3 → `1.4.0 <https://github.com/OSC/ood-fileeditor/blob/v1.4.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileeditor/compare/v1.3.3...v1.4.0>`__)
+   * - `Active Jobs App`
+     - 1.6.2 → `1.6.8 <https://github.com/OSC/ood-activejobs/blob/v1.6.8/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-activejobs/compare/v1.6.2...v1.6.8>`__)
+   * - `Job Composer App`
+     - 2.8.3 → `2.10.1 <https://github.com/OSC/ood-myjobs/blob/v2.10.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-myjobs/compare/v2.8.3...v2.10.1>`__)
+   * - `Desktops App`
+     - Unchanged
+
+:numref:`v1.4-app-versions` lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.
+
+
+Details
+-------
+
+Upgrade to Ruby 2.4, NodeJS 6, Passenger 5
+..........................................
+
+This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJS 6. Passenger is also seeing an upgrade to version 5, but until Passenger 5 is supported by SCL OSC will host the Passenger 5 and NGINX 1.14 RPMs which are built based on the `Passenger RPM automation repo <https://github.com/phusion/passenger_rpm_automation>`__. A side effect of these dependency changes is that custom applications may need to be rebuilt before they will work.
+
+.. warning::
+
+  The Per User NGINX temporary directory has been moved from ``/var/lib/nginx`` to ``/var/tmp/nginx`` due to an issue with more restrictive permissions with NGINX 1.14.
+
+  A consequence of this NGINX 1.14 upgrade is that NGINX directories like
+  ``/var/log/nginx``  have become more restrictive - owned by the nginx user and set by
+  default to 700.
+
+Security Enhancement - PUN autogenerates secret key base if none is set
+.......................................................................
+
+The PUN will autogenerate its own unique per-user secret key base string which is generated at first launch if it doesn't exist. This is used by Rails apps to encrypt cookies and overrides the default one set in `env.production <https://github.com/OSC/ood-dashboard/blob/a20cae91fb0f636c8a7e3fc8dfe508d9afa34d50/.env.production#L1>`__.
+
+Security Enhancement: App development mode is disabled by default
+.................................................................
+
+Development mode disabled by default: application development gives increased access to a system (e.g. allowing the user to open an interactive shell on the web node), and should only be enabled for trusted users. For details, see :ref:`enabling-development-mode`.
+
+Security Enhancement: Enable whitelisting of directories in several core apps
+.............................................................................
+
+The file editor, file browser and job composer now support an optional whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``pun_custom_env`` map.
+
+Security Enhancement: Require SSH for all hosts in Shell app
+.............................................................
+
+Prior to this release it was possible for OOD users to change the URL in the shell application and connect directly to the web node by starting a Bash shell on localhost. Given that this ability for arbitrary user access is counter intuitive to how web servers are typically managed, the exemption for localhost has been removed; users will always use SSH to connect to any host, allowing SSH access controls to work.
+
+Add ability to include Javascript in Batch Connect apps
+.......................................................
+
+Batch Connect applications may now define a Javascript file to add interactive frontend functionality. `Github OSC/ood-dashboard#426 <https://github.com/OSC/ood-dashboard/pull/426>`_.
+The contents of this JavaScript file will be embedded in ``<script>`` tags at the bottom
+of the form below the Launch button.
+
+- For apps like `the example Jupyter <https://github.com/OSC/bc_example_jupyter>`_ app whose
+  form is defined in the form.yml, you can add a ``form.js`` file alongside the ``form.yml``.
+- For "subapps" like bc_desktop where you have overrides defined in a ``custom_name.yml``
+  you can add a ``custom_name.js`` for that JavaScript file to be loaded by that app.
+
+So for example, OSC has a Pitzer interactive desktop defined in
+`this directory <https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/bc_desktop>`_
+as ``pitzer.yml`` so we could add a ``pitzer.js`` file.
+
+Better environment setting
+..........................
+
+The file ``/etc/ood/config/nginx_stage.yml`` now includes two methods to set the PUN environment. Populating the mapping ``pun_custom_env`` allows sites to define OOD specific environment variables that will be added to the PUN environment. Defining the sequence ``pun_custom_env_declarations`` confers the ability to define an arbitrary list of env vars to declare in the PUN config (so they are retained from whatever is set in /etc/ood/profile).
+
+For example: `nginx_stage_example.yml. <https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43>`__
+
+Customizable error pages for missing home dirs
+..............................................
+
+Customizable error pages for missing home directory during the first login flow for sites using ``pam_mkhomedir.so``. `OOD Discourse: launching ondemand when home directory does not exist <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53>`__.
+
+Experimental SGE/UGE support
+............................
+
+A `job adapter has been written </installation/resource-manager/sge.html>`__ that supports Sun Grid Engine derivatives. The adapter is known to be compatible with SGE 6.2u5 and Univa GE 8.0.1. Thanks to UCLA for donating access to Hoffman2 to aid in development of the adapter.
+
+Fixed copy and paste issues in the Shell app for Firefox
+........................................................
+
+Resolved a pair of issues (`#48 <https://github.com/OSC/ood-shell/issues/48>`_, `#55 <https://github.com/OSC/ood-shell/issues/55>`_) that caused problems with copy and paste in the Shell application.
+
+Improve default discoverability of apps in the Dashboard's navbar
+.................................................................
+
+Introduction of a whitelist mode for the Dashboard navbar which is disabled by default. This change means that by default, when deploying a new app, if properly configured it will appear in the Dashboard's navigation menu without the need for changing configuration. `OSC/ood-dashboard#295 <https://github.com/OSC/ood-dashboard/issues/295>`__
+
+For details please see `Release 1.4 navbar config`_.
+
+Optional Quota warnings on dashboard
+....................................
+
+The Dashboard can now display a configurable disk usage warning to the user if they approach a certain usage threshold. This feature is enabled by defining the environment variable ``OOD_QUOTA_PATH`` which can take a colon delimited path, and may be defined in ``/etc/ood/config/nginx_stage.yml`` under the ``custom_env`` map. The version 1 format for quota files is defined in the `Dashboard README <https://github.com/OSC/ood-dashboard/blob/v1.30.2/README.md#disk-quota-warnings>`__.
+
+Slurm 18 Support
+................
+
+Slurm 18.x introduced `a bug <https://bugs.schedmd.com/show_bug.cgi?id=6120>`__ with the fields `gres` or `tres` in `squeue` output which `broke prior versions <https://github.com/OSC/ood-activejobs/issues/169>`__ of the Slurm adapter. The OOD team has both updated the OOD Slurm adapter to function normally despite the bug, and submitted a fix which Slurm will be releasing in a future version.
+
+.. _Release 1.4 navbar config: https://osc.github.io/ood-documentation/release-1.4/customization.html#dashboard-navbar-config

@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>v1.8 Release Notes &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="v1.7 Release Notes" href="v1.7-release-notes.html" />
+    <link rel="prev" title="v2.0 Release Notes" href="v2.0-release-notes.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../release-notes.html">Release Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="v3.0-release-notes.html">v3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0-release-notes.html">v2.0 Release Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">v1.8 Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#special-thanks">Special thanks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-from-v1-7">Upgrading from v1.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-from-v1-6">Upgrading from v1.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMoD integration in the dashboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-authentication-is-now-handled-by-dex">Default authentication is now handled by Dex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator">Support mod_auth_openidc configuration via ood-portal-generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beta-ccq-scheduler-support">Beta CCQ Scheduler support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#retain-completed-jobs-panel-for-debugging">Retain completed jobs panel for debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque-and-slurm-schedulers-now-support-qos-fields">Torque and Slurm schedulers now support QoS fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chinese-localization">Chinese localization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-svg-dashboard-logos">Support for SVG dashboard logos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-new-native-vnc-views">Support for new Native VNC views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#better-max-file-upload-support">Better max file upload support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drop-ie-11-support">Drop IE 11 support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#added-sinatra-ruby-gems-into-ondemand-gems-for-other-apps-to-use">Added Sinatra Ruby Gems into ondemand-gems for other apps to use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#streamlined-copy-and-paste-in-novnc-for-chrome">Streamlined copy and paste in noVNC for Chrome</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="v1.7-release-notes.html">v1.7 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.6-release-notes.html">v1.6 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5-release-notes.html">v1.5 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4-release-notes.html">v1.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3-release-notes.html">v1.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2-release-notes.html">v1.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1-release-notes.html">v1.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0-release-notes.html">v1.0 Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../release-notes.html">Release Notes</a> &raquo;</li>
+        
+      <li>v1.8 Release Notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/release-notes/v1.8-release-notes.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="v1-8-release-notes">
+<span id="id1"></span><h1>v1.8 Release Notes<a class="headerlink" href="#v1-8-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>Highlights in 1.8:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMoD integration in the dashboard</a></p></li>
+<li><p><a class="reference internal" href="#default-authentication-is-now-handled-by-dex">Default authentication is now handled by Dex</a></p></li>
+<li><p><a class="reference internal" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator">Support mod_auth_openidc configuration via ood-portal-generator</a></p></li>
+<li><p><a class="reference internal" href="#beta-ccq-scheduler-support">Beta CCQ Scheduler support</a></p></li>
+<li><p><a class="reference internal" href="#retain-completed-jobs-panel-for-debugging">Retain completed jobs panel for debugging</a></p></li>
+<li><p><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></p></li>
+<li><p><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></p></li>
+<li><p><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></p></li>
+<li><p><a class="reference internal" href="#torque-and-slurm-schedulers-now-support-qos-fields">Torque and Slurm schedulers now support QoS fields</a></p></li>
+<li><p><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></p></li>
+<li><p><a class="reference internal" href="#chinese-localization">Chinese localization</a></p></li>
+<li><p><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></p></li>
+<li><p><a class="reference internal" href="#support-for-svg-dashboard-logos">Support for SVG dashboard logos</a></p></li>
+<li><p><a class="reference internal" href="#support-for-new-native-vnc-views">Support for new Native VNC views</a></p></li>
+<li><p><a class="reference internal" href="#better-max-file-upload-support">Better max file upload support</a></p></li>
+<li><p><a class="reference internal" href="#drop-ie-11-support">Drop IE 11 support</a></p></li>
+<li><p><a class="reference internal" href="#added-sinatra-ruby-gems-into-ondemand-gems-for-other-apps-to-use">Added Sinatra Ruby Gems into ondemand-gems for other apps to use</a></p></li>
+<li><p><a class="reference internal" href="#streamlined-copy-and-paste-in-novnc-for-chrome">Streamlined copy and paste in noVNC for Chrome</a></p></li>
+</ul>
+<div class="section" id="special-thanks">
+<h2>Special thanks<a class="headerlink" href="#special-thanks" title="Permalink to this headline">¶</a></h2>
+<p>Special thanks to <a class="reference external" href="https://github.com/374365283">https://github.com/374365283</a> and <a class="reference external" href="https://github.com/flybirdkh">https://github.com/flybirdkh</a>
+of Shanghai Jiao Tong University (<a class="reference external" href="https://hpc.sjtu.edu.cn/">https://hpc.sjtu.edu.cn/</a>) for <a class="reference internal" href="#chinese-localization">Chinese localization</a>!</p>
+<p>Thanks to <a class="reference external" href="https://github.com/plessbd">Ben Plessinger</a> and the whole
+<a class="reference external" href="https://github.com/ubccr">University of Buffalo Center for Computational Research</a> team for help in XDMoD
+integration.</p>
+</div>
+<div class="section" id="upgrading-from-v1-7">
+<h2>Upgrading from v1.7<a class="headerlink" href="#upgrading-from-v1-7" title="Permalink to this headline">¶</a></h2>
+<p>Before upgrading to v1.8, please consider the following:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Shell hosts are now protected behind allowlists.  After upgrading, you may need to
+set a default SSH host and add the compute nodes to the allowlists, as well as any other hosts
+you want to enable access to through the Shell app that are not already specified in the cluster config.
+<a class="reference external" href="#shell-hosts-are-now-protected-behind-allowlists">See the entry in the release notes for more information.</a></p>
+</div>
+<ul class="simple">
+<li><p>If upgrading from OnDemand 1.5.x or older <strong>you must upgrade to 1.6.x before upgrading to 1.7</strong>. See directions for upgrading from 1.4 to 1.5 (<a class="reference internal" href="v1.5-release-notes.html#v1-5-release-notes"><span class="std std-ref">v1.5 Release Notes</span></a>) and from 1.5 to 1.6 (<a class="reference internal" href="v1.6-release-notes.html#v1-6-release-notes"><span class="std std-ref">v1.6 Release Notes</span></a>).</p></li>
+<li><p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Update OnDemand release RPM</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install -y https://yum.osc.edu/ondemand/1.8/ondemand-release-web-1.8-1.noarch.rpm
+</pre></div>
+</div>
+</li>
+<li><p>Update OnDemand</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum clean all
+sudo yum update ondemand
+</pre></div>
+</div>
+</li>
+<li><p>(Optional) If previously using Apache’s Basic Auth, for example with LDAP, it is recommended to switch to <a class="reference internal" href="../authentication/dex.html#authentication-dex"><span class="std std-ref">Dex Authentication</span></a> by installing the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> package.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo yum install ondemand-dex
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The configuration for Dex will need to be made to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> with your needed LDAP configuration and updates to both Dex and Apache configurations.
+See <a class="reference internal" href="../authentication/dex.html#dex-ldap"><span class="std std-ref">Configuring OnDemand Dex for LDAP</span></a> for details on configuration of LDAP.</p>
+</div>
+</li>
+<li><p>Update Apache configuration and restart Apache.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+sudo systemctl try-restart httpd24-httpd.service httpd24-htcacheclean.service
+</pre></div>
+</div>
+</li>
+<li><p>(Optional) If <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> was installed, you must enable and start the <code class="docutils literal notranslate"><span class="pre">ondemand-dex</span></code> service.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> ondemand-dex.service
+sudo systemctl start ondemand-dex.service
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="upgrading-from-v1-6">
+<h2>Upgrading from v1.6<a class="headerlink" href="#upgrading-from-v1-6" title="Permalink to this headline">¶</a></h2>
+<p>Due to changes with <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code> it is necessary to run <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> with <code class="docutils literal notranslate"><span class="pre">--force</span></code> flag
+if upgrading from v1.6 of OnDemand to v1.8.</p>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="beta-xdmod-integration-in-the-dashboard">
+<h3>Beta XDMoD integration in the dashboard<a class="headerlink" href="#beta-xdmod-integration-in-the-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>If your site also uses <a class="reference external" href="https://open.xdmod.org/">XDMoD</a> with the Job Performance module (formerlly called SUPReMM) for job performance analysis,
+you can configure OnDemandOpen OnDemand to display the Job Efficiency reports from XDMoD on the OnDemand dashboard.</p>
+<p>See the <a class="reference internal" href="../customizations.html#xdmod-integration"><span class="std std-ref">documentation on enabling XDMoD integration</span></a> for more details.</p>
+</div>
+<div class="section" id="default-authentication-is-now-handled-by-dex">
+<h3>Default authentication is now handled by Dex<a class="headerlink" href="#default-authentication-is-now-handled-by-dex" title="Permalink to this headline">¶</a></h3>
+<p>The default authentication mechanism for OnDemand is now using the OIDC provider <a class="reference external" href="https://github.com/dexidp/dex">Dex</a>.  The Dex authentication will replace Apache’s Basic Auth.  Sites wishing to continue using LDAP authentication or other forms of Basic Auth are recommended to configure Dex.
+See <a class="reference internal" href="../authentication/dex.html#authentication-dex"><span class="std std-ref">Dex Authentication</span></a> for details on OnDemand Dex.</p>
+<p>You no longer need to do <code class="docutils literal notranslate"><span class="pre">DISABLE_SAFARI_BASIC_AUTH_WARNING=1</span></code> and you can safely remove this from the configuration as this ENV var will be ignored.</p>
+</div>
+<div class="section" id="support-mod-auth-openidc-configuration-via-ood-portal-generator">
+<h3>Support mod_auth_openidc configuration via ood-portal-generator<a class="headerlink" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator" title="Permalink to this headline">¶</a></h3>
+<p>The Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file now supports defining <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> configurations directly.</p>
+</div>
+<div class="section" id="beta-ccq-scheduler-support">
+<h3>Beta CCQ Scheduler support<a class="headerlink" href="#beta-ccq-scheduler-support" title="Permalink to this headline">¶</a></h3>
+<p>We now have beta <a class="reference external" href="http://cloudycluster.com/">Cloudy Cluster</a> support for their ccq scheduler.  You can find
+<a class="reference internal" href="../installation/resource-manager/ccq.html#resource-manager-cloudy-cluster"><span class="std std-ref">documentation on how to configure the cluster here</span></a>.</p>
+</div>
+<div class="section" id="retain-completed-jobs-panel-for-debugging">
+<h3>Retain completed jobs panel for debugging<a class="headerlink" href="#retain-completed-jobs-panel-for-debugging" title="Permalink to this headline">¶</a></h3>
+<p>When an interactive job completes, its panel will now remain in the view. This is to
+allow users and administrators to debug failed jobs by keeping the session id links
+in view.</p>
+</div>
+<div class="section" id="batch-connect-apps-now-support-multiple-clusters">
+<h3>Batch Connect apps now support multiple clusters<a class="headerlink" href="#batch-connect-apps-now-support-multiple-clusters" title="Permalink to this headline">¶</a></h3>
+<p>Batch connect applications now support multiple clusters in their configuration
+instead of just one.</p>
+<p>Where previous configuration look like this, with only a single cluster.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Configurations will now accept an array like the example below.  This will create a
+dropdown select menu item at the top of the form where users can choose between
+the two options.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cluster</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;my_other_cluster&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../how-tos/app-development/interactive/form.html#configuring-cluster"><span class="std std-ref">See the documentation on all the ways to configure which cluster to submit to.</span></a></p>
+</div>
+<div class="section" id="batch-connect-apps-now-support-disabling-caching-on-fields">
+<h3>Batch Connect apps now support disabling caching on fields<a class="headerlink" href="#batch-connect-apps-now-support-disabling-caching-on-fields" title="Permalink to this headline">¶</a></h3>
+<p>When a user submits the web form for an interactive app (batch connect) the form
+values the user set are stored in a cache file that is used to pre-populate the web
+form in the future. In some cases, setting the default value of the form field to a
+previously used value is undesirable. You can now disable this caching feature for
+every app, on a per app basis, or on a per field basis.</p>
+<p><a class="reference internal" href="../how-tos/app-development/interactive/form.html#caching-form-items"><span class="std std-ref">See the documentation on attribute cache enabling for more details.</span></a></p>
+</div>
+<div class="section" id="extended-view-support-for-gridengine-clusters">
+<h3>Extended view support for GridEngine clusters<a class="headerlink" href="#extended-view-support-for-gridengine-clusters" title="Permalink to this headline">¶</a></h3>
+<p>In the Active Jobs app, similar to Torque and Slurm jobs, SGE jobs will now have a details
+view available where the user can see various details about their job such as walltime, Total
+CPUs, etc. The view is made visible by clicking on the arrow on the far left of the table row
+corresponding to the job.</p>
+<p>The data seen in extended view is extracted from the command <code class="docutils literal notranslate"><span class="pre">qstat</span> <span class="pre">-j</span> <span class="pre">-r</span> <span class="pre">-xml</span></code>.</p>
+</div>
+<div class="section" id="torque-and-slurm-schedulers-now-support-qos-fields">
+<h3>Torque and Slurm schedulers now support QoS fields<a class="headerlink" href="#torque-and-slurm-schedulers-now-support-qos-fields" title="Permalink to this headline">¶</a></h3>
+<p>Torque and Slurm schedulers now support the quality of service (QoS) fields.</p>
+<p><code class="docutils literal notranslate"><span class="pre">qos</span></code> is now an acceptable script attribute like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">script</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">qos</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;best&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In Torque this translates to <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">qos=best</span></code> and in Slurm it is <code class="docutils literal notranslate"><span class="pre">--qos</span> <span class="pre">best</span></code>.</p>
+</div>
+<div class="section" id="shell-hosts-are-now-protected-behind-allowlists">
+<h3>Shell hosts are now protected behind allowlists<a class="headerlink" href="#shell-hosts-are-now-protected-behind-allowlists" title="Permalink to this headline">¶</a></h3>
+<p>Shell hosts are now protected behind allowlists. This means administrators now need
+to explicitly add hosts to an allowlist for users to be able to access them through
+the shell app.</p>
+<p>Any login host of a cluster config will be allowed, assuming that cluster is not
+configured as “hidden” in the metadata section of the cluster config.
+However, administrators will need to add a configuration for compute nodes and any
+additional hosts they wish to allow access to.</p>
+<p>Administrators should also configure the default ssh host if they’ve not already done
+so because ‘localhost’ is no longer the out of the box default.</p>
+<p><a class="reference internal" href="../customizations.html#set-default-ssh-host"><span class="std std-ref">See the documentation for setting the default ssh host</span></a>
+and <a class="reference internal" href="../customizations.html#set-ssh-allowlist"><span class="std std-ref">the documentation for setting the allowlist for more details</span></a>.</p>
+</div>
+<div class="section" id="chinese-localization">
+<h3>Chinese localization<a class="headerlink" href="#chinese-localization" title="Permalink to this headline">¶</a></h3>
+<p>The Chinese localization <code class="docutils literal notranslate"><span class="pre">zh-CN</span></code> is now available in the dashboard and
+job composer applications for sites who wish to use it.</p>
+<p>To enable it, simply set the <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE</span></code> environment variable globally
+in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_LOCALE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;zh-CN&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ability-to-add-additional-info-to-batch-connect-app">
+<h3>Ability to add additional info to batch connect app<a class="headerlink" href="#ability-to-add-additional-info-to-batch-connect-app" title="Permalink to this headline">¶</a></h3>
+<p>You can now add an info.html.erb file to an interactive app (batch connect)
+directory and it will render and display in the job panel. This is useful for
+providing documentation links for an app.q
+<a class="reference internal" href="../how-tos/app-development/interactive/view.html#bc-info-html-md-erb"><span class="std std-ref">See the documentation on info.html.erb for more details.</span></a></p>
+</div>
+<div class="section" id="support-for-svg-dashboard-logos">
+<h3>Support for SVG dashboard logos<a class="headerlink" href="#support-for-svg-dashboard-logos" title="Permalink to this headline">¶</a></h3>
+<p>Logos can now be SVG images and controlled through the <code class="docutils literal notranslate"><span class="pre">OOD_DASHBOARD_LOGO_HEIGHT</span></code>
+configuration to resize them. <a class="reference internal" href="../customizations.html#id2"><span class="std std-ref">See documentation on branding for form information.</span></a></p>
+</div>
+<div class="section" id="support-for-new-native-vnc-views">
+<h3>Support for new Native VNC views<a class="headerlink" href="#support-for-new-native-vnc-views" title="Permalink to this headline">¶</a></h3>
+<p>Sites can now define instructions for connecting to VNC interactive jobs using a native
+VNC client instead of using NoVNC through the browser.</p>
+<p><a class="reference internal" href="../how-tos/app-development/interactive/view.html#bc-native-vnc-view"><span class="std std-ref">More details on this feature can be found here.</span></a></p>
+</div>
+<div class="section" id="better-max-file-upload-support">
+<h3>Better max file upload support<a class="headerlink" href="#better-max-file-upload-support" title="Permalink to this headline">¶</a></h3>
+<p>While FILE_UPLOAD_MAX configuration has existed for some time, 1.8 adds the corresponding
+nginx configuration so that sites can set the upload max to settings larger than 10 GiB.</p>
+<p><a class="reference internal" href="../customizations.html#set-upload-limits"><span class="std std-ref">See the section in the customization page for more details.</span></a></p>
+</div>
+<div class="section" id="drop-ie-11-support">
+<h3>Drop IE 11 support<a class="headerlink" href="#drop-ie-11-support" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.</p>
+</div>
+<p>IE 11 support was officially dropped. See <a class="reference internal" href="../requirements.html#id2"><span class="std std-ref">Browser Requirements</span></a>.</p>
+</div>
+<div class="section" id="added-sinatra-ruby-gems-into-ondemand-gems-for-other-apps-to-use">
+<h3>Added Sinatra Ruby Gems into ondemand-gems for other apps to use<a class="headerlink" href="#added-sinatra-ruby-gems-into-ondemand-gems-for-other-apps-to-use" title="Permalink to this headline">¶</a></h3>
+<p>Related Ruby gems for the micro-webframework “Sinatra” were added to the Dashboard Gemfile to ensure they are included in the <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> RPM.
+Simple applications like the Passenger status app featured in the <a class="reference internal" href="../tutorials/tutorials-passenger-apps/ps-to-quota.html#app-development-tutorials-passenger-apps-ps-to-quota"><span class="std std-ref">Passenger app development tutorial</span></a> can now be run without needing to install gem dependencies into the application directory. The following gems were added for this purpose:</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="n">gem</span> <span class="s2">&quot;sinatra&quot;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+<span class="n">gem</span> <span class="s2">&quot;sinatra-contrib&quot;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+<span class="n">gem</span> <span class="s2">&quot;erubi&quot;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="streamlined-copy-and-paste-in-novnc-for-chrome">
+<h3>Streamlined copy and paste in noVNC for Chrome<a class="headerlink" href="#streamlined-copy-and-paste-in-novnc-for-chrome" title="Permalink to this headline">¶</a></h3>
+<p>Copy and pasting now works out of the box in Chrome. An issue with copy and pasting large clipboard buffers into noVNC applications on Chrome was fixed in version 1.8.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="v1.7-release-notes.html" class="btn btn-neutral float-right" title="v1.7 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="v2.0-release-notes.html" class="btn btn-neutral float-left" title="v2.0 Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/release-notes/v1.8-release-notes.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/release-notes/v1.8-release-notes.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/release-notes/v1.8-release-notes.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/release-notes/v1.8-release-notes.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/release-notes/v1.8-release-notes.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/release-notes/v1.8-release-notes.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/release-notes/v1.8-release-notes.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/release-notes/v1.8-release-notes.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/release-notes/v1.8-release-notes.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/release-notes/v1.8-release-notes.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/release-notes/v1.8-release-notes.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/release-notes/v1.8-release-notes.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

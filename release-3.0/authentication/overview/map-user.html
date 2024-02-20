@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Setup User Mapping &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Configure Logout" href="configure-logout.html" />
+    <link rel="prev" title="1. Configure Apache Authentication" href="configure-authentication.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../installation.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install-software.html">1. Install Software</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../authentication.html">2. Authentication</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="configure-authentication.html">1. Configure Apache Authentication</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">2. Setup User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure-logout.html">3. Configure Logout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../oidc.html">OpenID Connect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dex.html">OpenID Connect with Dex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shibboleth.html">Shibboleth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cas.html">CAS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nsf-access.html">NSF ACCESS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../insecure.html">Other Insecure Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/add-ssl.html">3. Secure Apache httpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/modify-system-security.html">4. Add SELinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#building-from-source">Building From Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../installation.html">Installation</a> &raquo;</li>
+        
+          <li><a href="../../authentication.html"><span class="section-number">2. </span>Authentication</a> &raquo;</li>
+        
+          <li><a href="../overview.html">Overview</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Setup User Mapping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/authentication/overview/map-user.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setup-user-mapping">
+<span id="authentication-overview-map-user"></span><h1><span class="section-number">2. </span>Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Permalink to this headline">¶</a></h1>
+<p>Every authenticated HTTP request sent to the OnDemand portal has a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.
+This <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> can be an email like <code class="docutils literal notranslate"><span class="pre">annie.oakley&#64;osc.edu</span></code> and needs to be
+mapped to a Linux system user like <code class="docutils literal notranslate"><span class="pre">aoakley</span></code>.</p>
+<p>This is what we call user mapping.  Mapping apache’s <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from an
+authenticated request to a Linux system user.</p>
+<p>Mapping to the local system user not only restricts access of OnDemand to local users
+but it is also required by the OnDemand proxy to traffic the HTTP data to the user’s
+corresponding per-user NGINX (PUN) server.</p>
+<p>Versions prior to 2.0 relied on <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a> to do this.
+Since 2.0 you should use the simpler and faster <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a>.</p>
+<p>Both with variations will be discussed here.</p>
+<div class="section" id="remote-user">
+<h2><span class="section-number">2.1. </span>Remote User<a class="headerlink" href="#remote-user" title="Permalink to this headline">¶</a></h2>
+<p>It’s worth discussusing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is comfing from.  When apache
+has successfully authenticates a request it sets the variable <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
+from, well, the remote.</p>
+<p>This is generally a return value from the authentication system like an
+<a class="reference internal" href="../oidc.html#authentication-oidc"><span class="std std-ref">open id connect provider</span></a>.  It’s common for this
+to be an email address.</p>
+<p>You <em>can</em> configure <a class="reference external" href="ood-portal-generator-user-env">user_env</a> to use something other than <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>, but
+it’s unlikely you should need to.</p>
+<p>If you’re using an OpenID Connect provider you may need to set
+<a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a> as this setting
+tells apache how to set <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from the claim response.</p>
+</div>
+<div class="section" id="reguluar-expression-user-mapping">
+<h2><span class="section-number">2.2. </span>Reguluar Expression User Mapping<a class="headerlink" href="#reguluar-expression-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>The simplest and fastest way to map a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> to a system user is through
+<a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.  It isn’t directly
+regular expression matching, but it’s close enough for most use cases.
+See it’s documentation for examples and more.</p>
+</div>
+<div class="section" id="dex-automatic-configuration">
+<h2><span class="section-number">2.3. </span>Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Permalink to this headline">¶</a></h2>
+<p>When using the OpenId Connector <a class="reference external" href="authentication-dex">dex</a> and setting <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a>
+to <code class="docutils literal notranslate"><span class="pre">email</span></code> we automatically set <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a> to <code class="docutils literal notranslate"><span class="pre">^([^&#64;]+)&#64;.*$</span></code> as
+a convienience.</p>
+</div>
+<div class="section" id="user-map-command-for-advanced-mappings">
+<h2><span class="section-number">2.4. </span>User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Permalink to this headline">¶</a></h2>
+<p>Versions prior to 2.0 provided a default <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a> in
+<code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code>.  We no longer distribute
+this file.</p>
+<p>Sites instead need to write their own mapping script should they need
+this capability.  Set this custom mapping script in the <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a>
+configuration and be sure to make this mapping script executable.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be aware, this script is executed on every request.</p>
+</div>
+<p>Let’s take a simple example.  It uses bash’s builtin regular expression matching
+against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an osc dot edu email address.  If that matches against
+<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) after it’s url-decoded, then we return an all lowercase
+version of the first part of an email address.</p>
+<p>The contract this script has with ood is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is url-encoded and
+passed into it as the first arguement, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.</p>
+<p>The script will return 0 and output the match if it can correctly map the user.
+Otherwise, if it fails, it will output nothing and exit 1.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="k">function</span> urldecode<span class="o">()</span> <span class="o">{</span> : <span class="s2">&quot;</span><span class="si">${</span><span class="p">*//+/ </span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="nb">echo</span> -e <span class="s2">&quot;</span><span class="si">${</span><span class="nv">_</span><span class="p">//%/</span><span class="se">\\</span><span class="nv">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="o">}</span>
+
+<span class="nv">REX</span><span class="o">=</span><span class="s2">&quot;([^@]+)@osc.edu&quot;</span>
+<span class="nv">INPUT_USER</span><span class="o">=</span><span class="k">$(</span>urldecode <span class="nv">$1</span><span class="k">)</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$INPUT_USER</span> <span class="o">=</span>~ <span class="nv">$REX</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nv">MATCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_REMATCH</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$MATCH</span><span class="s2">&quot;</span> <span class="p">|</span> tr <span class="s1">&#39;[:upper:]&#39;</span> <span class="s1">&#39;[:lower:]&#39;</span>
+<span class="k">else</span>
+  <span class="c1"># can&#39;t write to standard out or error, so let&#39;s use syslog</span>
+  logger -t <span class="s1">&#39;ood-mapping&#39;</span> <span class="s2">&quot;cannot map </span><span class="nv">$INPUT_USER</span><span class="s2">&quot;</span>
+
+  <span class="c1"># and exit 1</span>
+  <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>If I were to run and test this script - it would return values like these:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/site/custom_mapping.sh <span class="s1">&#39;Annie.Oakley%40osc.edu&#39;</span>
+annie.oakley
+$ /opt/site/custom_mapping.sh <span class="s1">&#39;jessie%40osc.edu&#39;</span>
+jessie
+$ /opt/site/custom_mapping.sh <span class="s1">&#39;jessie.owens%40harvard.edu&#39;</span>
+$ <span class="nb">echo</span> <span class="nv">$?</span>
+$ <span class="m">1</span>
+$ journalctl -t ood-mapping
+-- Journal begins at Tue <span class="m">2020</span>-06-02 <span class="m">06</span>:45:03 EDT, ends at Wed <span class="m">2022</span>-01-19 <span class="m">15</span>:11:37 EST. --
+Jan <span class="m">19</span> <span class="m">15</span>:03:14 localhost.localdomain ood-mapping<span class="o">[</span><span class="m">149352</span><span class="o">]</span>: cannot map jessie.owens@harvard.edu
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-user-mapping">
+<span id="gridmap-user-mapping"></span><h2><span class="section-number">2.5. </span>File User Mapping<a class="headerlink" href="#file-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>This script parses a mapfile with each entry given in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;authenticated_username&quot;</span> <span class="n">local_username</span>
+</pre></div>
+</div>
+<p>and separated by newlines. The script will systematically parse each line in
+the mapfile looking for a match to the <code class="docutils literal notranslate"><span class="pre">authenticated_username</span></code>. When a match
+is found it breaks from the scan and outputs the <code class="docutils literal notranslate"><span class="pre">local_username</span></code> to
+<code class="docutils literal notranslate"><span class="pre">STDOUT</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be aware, this script is executed and reads a user mapping file on every request.</p>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="o">[</span>OPTIONS<span class="o">]</span> &lt;REMOTE_USER&gt;
+</pre></div>
+</div>
+<p>The options for this script are:</p>
+<dl class="option">
+<dt id="cmdoption-ood-auth-map-mapfile-f">
+<code class="sig-name descname">-f</code><code class="sig-prename descclassname"> &lt;file&gt;</code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--file</code><code class="sig-prename descclassname"> &lt;file&gt;</code><a class="headerlink" href="#cmdoption-ood-auth-map-mapfile-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default: <code class="docutils literal notranslate"><span class="pre">/etc/grid-security/grid-mapfile</span></code></p>
+<p>File used to scan for matches.</p>
+</dd></dl>
+
+<div class="section" id="examples-for-the-mapfile-script">
+<h3><span class="section-number">2.5.1. </span>Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Permalink to this headline">¶</a></h3>
+<p>To scan the default grid-mapfile using a URL-encoded authenticated username:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="s1">&#39;http%3A%2F%2Fcilogon.org%2FserverA%2Fusers%2F58606%40cilogon.org&#39;</span>
+bob
+$
+</pre></div>
+</div>
+<p>To scan a custom mapfile using an authenticated username:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile --file <span class="s1">&#39;/path/to/mapfile&#39;</span> <span class="s1">&#39;opaque_remote_username&#39;</span>
+bob
+$
+</pre></div>
+</div>
+<p>If no match is found within the mapfile for the supplied
+authenticated username that an empty string is returned instead:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /opt/ood/ood_auth_map/bin/ood_auth_map.mapfile <span class="s1">&#39;this_remote_username_does_not_exist&#39;</span>
+
+$
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="debugging-user-mapping">
+<h2><span class="section-number">2.6. </span>Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Permalink to this headline">¶</a></h2>
+<p>When debugging user mapping, it’s always helpful to increase the <a class="reference external" href="ood-portal-generator-lua-log-level">lua_log_level</a> to
+debug.</p>
+<p>In doing so you’ll see messages like that detail the mapping input, output and
+times like <code class="docutils literal notranslate"><span class="pre">Mapped</span> <span class="pre">'jeff&#64;localhost'</span> <span class="pre">=&gt;</span> <span class="pre">'jeff'</span> <span class="pre">[0.089</span> <span class="pre">ms]</span></code>.</p>
+<p>The full message would look like this.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/var/log/httpd/error.log:<span class="o">[</span>Wed Jan <span class="m">19</span> <span class="m">20</span>:45:36.955855 <span class="m">2022</span><span class="o">]</span> <span class="o">[</span>lua:debug<span class="o">]</span> <span class="o">[</span>pid <span class="m">39</span>:tid <span class="m">140070995539712</span><span class="o">]</span> @/opt/ood/mod_ood_proxy/lib/ood/user_map.lua<span class="o">(</span><span class="m">21</span><span class="o">)</span>: <span class="o">[</span>client <span class="m">10</span>.0.2.100:40172<span class="o">]</span> Mapped <span class="s1">&#39;jeff@localhost&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;jeff&#39;</span> <span class="o">[</span><span class="m">0</span>.089 ms<span class="o">]</span>, referer: http://localhost:5556/
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configure-logout.html" class="btn btn-neutral float-right" title="3. Configure Logout" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configure-authentication.html" class="btn btn-neutral float-left" title="1. Configure Apache Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/authentication/overview/map-user.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/authentication/overview/map-user.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/authentication/overview/map-user.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/authentication/overview/map-user.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/authentication/overview/map-user.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/authentication/overview/map-user.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/authentication/overview/map-user.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/authentication/overview/map-user.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/authentication/overview/map-user.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/authentication/overview/map-user.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/authentication/overview/map-user.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/authentication/overview/map-user.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

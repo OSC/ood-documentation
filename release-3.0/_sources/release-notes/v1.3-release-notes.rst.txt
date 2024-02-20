@@ -1,0 +1,368 @@
+.. _v1.3-release-notes:
+
+v1.3 Release Notes
+==================
+
+Highlights in 1.3:
+
+- `RPM based installation`_
+- `Store configuration under /etc instead of under app directories`_
+- `Config changes no longer require app rebuilds`_
+- `Xfce support Interactive Desktops`_
+- `Cluster config verification script`_
+- `Ignore apps if they have a period in directory name`_
+- `Enable multiple Dashboard announcements with embedded HTML`_
+- `Open "help" links in new window`_
+- `Make "Interactive Sessions" link top level item`_
+- `Better debugging of Interactive Apps by logging shell commands`_
+- `Job Composer: Optionally hide Account field in Job Options`_
+- `Active Jobs: display list of nodes that a job is running on`_
+
+
+Upgrading from v1.2
+-------------------
+
+.. warning::
+
+   As always please update the *development* or *test* instances of OnDemand
+   installed at your center first before you modify the *production* instance.
+
+.. note::
+
+   The steps outlined below will only need to be done once when upgrading from
+   versions <= 1.2 to 1.3. Future updates will be handled through the RPM going
+   forward.
+
+#. This RPM installation will want to overwrite any local configuration or
+   modifications you may have made in earlier versions of OnDemand, so we will
+   first start by making backups of OnDemand and our apps:
+
+   .. code-block:: sh
+
+      sudo mv /opt/ood /opt/ood.bak
+      sudo mv /var/www/ood/apps/sys /var/www/ood/apps/sys.bak
+
+#. We have moved all configuration to be located underneath
+   :file:`/etc/ood/config`. This includes the YAML configuration file used to
+   generate the Apache configuration file, the YAML configuration file used to
+   generate the per-user NGINX (PUN) configuration files, and any
+   configuration/customization files used for the individual OnDemand core
+   apps.
+
+   So you will want to copy over the configuration files ahead of time for best
+   results:
+
+   .. code-block:: sh
+
+      sudo cp $HOME/ood/src/ood-portal-generator/config.yml /etc/ood/config/ood_portal.yml
+
+   .. warning::
+
+      This assumes you were using the :ref:`ood-portal-generator` to generate
+      the Apache configuration file under
+      :file:`/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf`. If you
+      haven't been doing this before then now is a good time to start. Feel
+      free to contact us if you have trouble with this.
+
+  Copy over our app configuration (if they exist).
+
+  .. code-block:: sh
+
+      mkdir -p /etc/ood/config/apps
+      [[ -e "/var/www/ood/apps/sys.bak/dashboard/.env.local" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/dashboard \
+        && sudo cp /var/www/ood/apps/sys.bak/dashboard/.env.local /etc/ood/config/apps/dashboard/env
+      [[ -e "/var/www/ood/apps/sys.bak/activejobs/.env.local" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/activejobs \
+        && sudo cp /var/www/ood/apps/sys.bak/activejobs/.env.local /etc/ood/config/apps/activejobs/env
+      [[ -e "/var/www/ood/apps/sys.bak/myjobs/.env.local" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/myjobs \
+        && sudo cp /var/www/ood/apps/sys.bak/myjobs/.env.local /etc/ood/config/apps/myjobs/env
+      [[ -e "/var/www/ood/apps/sys.bak/file-editor/.env.local" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/file-editor \
+        && sudo cp /var/www/ood/apps/sys.bak/file-editor/.env.local /etc/ood/config/apps/file-editor/env
+      [[ -e "/var/www/ood/apps/sys.bak/shell/.env.local" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/shell \
+        && sudo cp /var/www/ood/apps/sys.bak/shell/.env /etc/ood/config/apps/shell/env
+      [[ -e "/var/www/ood/apps/sys.bak/files/.env.local" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/files \
+        && sudo cp /var/www/ood/apps/sys.bak/files/.env /etc/ood/config/apps/files/env
+
+  Copy over any custom initializers you may have created (if they exist)
+
+  .. code-block:: sh
+
+      [[ -e "/var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/dashboard/initializers \
+        && sudo cp /var/www/ood/apps/sys.bak/dashboard/config/initializers/ood.rb /etc/ood/config/apps/dashboard/initializers/ood.rb
+      [[ -e "/var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/activejobs/initializers \
+        && sudo cp /var/www/ood/apps/sys.bak/activejobs/config/initializers/filter.rb /etc/ood/config/apps/activejobs/initializers/filter.rb
+
+  Copy over your Job Composer templates (if they exist)
+
+  .. code-block:: sh
+
+      [[ -e "/var/www/ood/apps/sys.bak/myjobs/templates" ]] \
+        && sudo mkdir -p /etc/ood/config/apps/myjobs \
+        && sudo cp -r /var/www/ood/apps/sys.bak/myjobs/templates /etc/ood/config/apps/myjobs/.
+
+  Copy over your local Interactive Desktop apps (if they exist)
+
+  .. code-block:: sh
+
+      [[ -e "/var/www/ood/apps/sys.bak/bc_desktop/local" ]] \
+          && sudo cp -r /var/www/ood/apps/sys.bak/bc_desktop/local /etc/ood/config/apps/bc_desktop
+
+  If all went well, you should have a directory structure that looks *similar* to:
+
+   .. code-block:: sh
+
+      tree /etc/ood/config
+      # /etc/ood/config
+      # ├── apps
+      # │   ├── activejobs
+      # │   │   └── ...
+      # │   ├── bc_desktop
+      # │   │   └── ...
+      # │   ├── dashboard
+      # │   │   └── ...
+      # │   ├── files
+      # │   │   └── ...
+      # │   ├── myjobs
+      # │   │   └── ...
+      # │   └── shell
+      # │       └── ...
+      # ├── clusters.d
+      # │   ├── my_cluster.yml
+      # │   └── ...
+      # ├── nginx_stage.yml
+      # └── ood_portal.yml
+
+#. Add Open OnDemand's repository hosted by the `Ohio Supercomputer Center`_:
+
+   .. code-block:: sh
+
+      sudo yum install https://yum.osc.edu/ondemand/1.3/ondemand-release-web-1.3-1.el7.noarch.rpm
+
+#. Install OnDemand and all of its dependencies:
+
+   .. code-block:: sh
+
+      sudo yum install ondemand
+
+#. Copy back any custom apps (e.g., Jupyter, RStudio, ...) you installed
+   previously from our backup directory:
+
+   .. code-block:: sh
+
+      sudo cp -r /var/www/ood/apps/sys.bak/CUSTOM_APP /var/www/ood/apps/sys/.
+
+#. The installation will install all software and web apps. It will also
+   generate a new Apache configuration file and restart Apache. So if all went
+   well you should be able to access the OnDemand portal in your browser
+   successfully.
+
+Infrastructure Version Changes
+------------------------------
+
+.. _v1.3-infrastructure-versions:
+.. list-table:: Infrastructure Component Versions
+   :widths: auto
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Component
+     - Version
+   * - `ood-portal-generator`_
+     - 0.4.0 → `0.7.1 <https://github.com/OSC/ood-portal-generator/blob/v0.7.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-portal-generator/compare/v0.4.0...v0.7.1>`__)
+   * - `mod_ood_proxy`_
+     - 0.3.1 → `0.5.0 <https://github.com/OSC/mod_ood_proxy/blob/v0.5.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/mod_ood_proxy/compare/v0.3.1...v0.5.0>`__)
+   * - `ood_auth_map`_
+     - `0.0.3 <https://github.com/OSC/ood_auth_map/blob/v0.0.3/CHANGELOG.md>`__
+   * - `nginx_stage`_
+     - 0.3.0 → `0.5.0 <https://github.com/OSC/nginx_stage/blob/v0.5.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/nginx_stage/compare/v0.3.0...v0.5.0>`__)
+
+:numref:`v1.3-infrastructure-versions` lists the versions as well as the
+previous version it was updated from for each component that make up the
+infrastructure for this release.
+
+Application Version Changes
+----------------------------
+
+.. _v1.3-app-versions:
+.. list-table:: Application Versions
+   :widths: auto
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - App
+     - Version
+   * - `Dashboard App`_
+     - 1.18.0 → `1.26.2 <https://github.com/OSC/ood-dashboard/blob/v1.26.2/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-dashboard/compare/v1.18.0...v1.26.2>`__)
+   * - `Shell App`_
+     - 1.2.4 → `1.3.1 <https://github.com/OSC/ood-shell/blob/v1.3.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-shell/compare/v1.2.4...v1.3.1>`__)
+   * - `Files App`_
+     - 1.3.6 → `1.4.1 <https://github.com/OSC/ood-fileexplorer/blob/v1.4.1/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileexplorer/compare/v1.3.6...v1.4.1>`__)
+   * - `File Editor App`_
+     - 1.3.1 → `1.3.3 <https://github.com/OSC/ood-fileeditor/blob/v1.3.3/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-fileeditor/compare/v1.3.1...v1.3.3>`__)
+   * - `Active Jobs App`_
+     - 1.5.2 → `1.6.2 <https://github.com/OSC/ood-activejobs/blob/v1.6.2/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-activejobs/compare/v1.5.2...v1.6.2>`__)
+   * - `Job Composer App`_
+     - 2.6.1 → `2.8.3 <https://github.com/OSC/ood-myjobs/blob/v2.8.3/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/ood-myjobs/compare/v2.6.1...v2.8.3>`__)
+   * - `Desktops App`_
+     - 0.1.2 → `0.2.0 <https://github.com/OSC/bc_desktop/blob/v0.2.0/CHANGELOG.md>`__
+       (`diff <https://github.com/OSC/bc_desktop/compare/v0.1.2...v0.2.0>`__)
+
+:numref:`v1.3-app-versions` lists the versions as well as the previous version
+it was updated from for each of the system web applications in this release.
+
+
+Details
+-------
+
+RPM based installation
+......................
+
+This is the biggest change and constitutes the bulk of this release's work. RPM
+based installation will now be the default and documented way to install and
+update OnDemand. The latest rpms that are in use at OSC can be accessed from
+https://yum.osc.edu/ondemand/latest/ and the stable releases will be available
+in specific release version directories, such as
+https://yum.osc.edu/ondemand/1.3/.
+
+Store configuration under /etc instead of under app directories
+..................................................................
+
+To enable RPM based installation, two modifications have been made to all
+configuration for OnDemand:
+
+1. All configuration can be moved to files under /etc/ood
+2. Modifications to configuration only require Passenger app, Per User NINGX,
+   or Apache server restart (with the exception of the ood-portal-generater
+   config)
+
+Since all configuration is stored under /etc/ood this directory can be easily
+managed by Puppet or versioned in a git repository.
+
+Config changes no longer require app rebuilds
+..................................................................
+
+It is now much faster to make and test configuration changes. For most
+configuration changes, you can make the change and then select "Restart Web
+Server" from the "Help" or "Develop" dropdown to see the change.
+
+Xfce support Interactive Desktops
+..................................................................
+
+We now have documentation for enabling Xfce 4+ as the desktop environment for
+OnDemand Interactive Desktops. Xfce is the desktop environment we now use
+internally at OSC. See :ref:`enable-desktops-modify-form-attributes` for
+documentation on how to use Xfce in OnDemand.
+
+Cluster config verification script
+..................................................................
+
+A Rake task has been added to the Dashboard app that will submit and check the
+status of jobs for each cluster specified in the cluster config. This provides
+a quick way to verify that OnDemand has been properly configured for a new
+cluster and should speed up installation. See :ref:`resource-manager-test` in
+the cluster configuration documentation for more details.
+
+Ignore apps if they have a period in directory name
+..................................................................
+
+You can effectively hide apps from being displayed in the Dashboard by adding a
+period in the app's directory name. This is useful if you want to make a backup
+of an app, e.g., :file:`../myapp.bak/`. Or just want to include a hidden
+directory in the app deployment directory, e.g., :file:`../.hidden-app/`.
+
+Enable multiple Dashboard announcements with embedded HTML
+..................................................................
+
+Site-wide dashboard announcement support in OnDemand has been expanded. Orinally we supported a file ``/etc/ood/config/announcement.md`` but now a YAML file ``/etc/ood/config/announcement.yml`` can be used. A collection of markdown and yaml announcements in ``/etc/ood/config/announcements.d/`` can be added. The yaml file provides extra benefits:
+
+#. Pre process file using ERB so that ERB tags can provide per-request dynamic modification of the announcement
+#. Control the color of announcement with ``:type`` which is the Bootstrap alert name (``warning``, ``info``, ``success``, or ``danger``)
+#. Control whether announcement appears or not by setting ``:msg`` to a string or ``nil``
+
+The ability to use ERB means we can set the msg to nil after a certain time period. For example:
+
+.. code-block:: erb
+
+   type: warning
+   msg: |
+     <%- if Time.now < Time.new(2018, 1, 23, 15, 0, 0) -%>
+     **NOTICE:** The Ruby nodes on the Quick cluster will go down on Tuesday
+     January 23, 2018 from 1 - 3 pm for scheduled maintenance. This will affect
+     only **Ruby VDI** sessions scheduled to run during this time period. These
+     sessions will be put on hold until after the maintenance period is complete.
+     <%- end -%>
+
+In this example, the announcement appears on the dashboard until Jan 23 at 3:00. We'll add more documentation for this soon. If you want to take advantage of this now just ask a question on the ood-users mailing list.
+
+Open "help" links in new window
+..................................................................
+
+Currently, any app that is served by a separate Passenger process, external to
+the Dashboard app, is opened in a new window. Thus, Shell Access, Files, Active
+Jobs, and Job Composer all open in new windows. Interactive App Plugins are
+managed by the Dashboard so they open in the same window. We fixed the external
+links in the Help menu to follow this convention.
+
+Make "Interactive Sessions" link top level item
+..................................................................
+
+The Interactive Sessions link was moved from the first item in the Interactive
+Apps menu to a top level item on the navbar. Since these apps are one of the
+primary ways users use OnDemand this makes access to active sessions require
+one less click. Also, this frees us to place links to Interactive Apps anywhere
+in the navigation hierarchy without having to provide an associated sessions
+link in the same place.
+
+Better debugging of Interactive Apps by logging shell commands
+..................................................................
+
+Whenever an Interactive Session is started from the Dashboard, the shell
+command used to submit the job is logged to the user's NGINX config to help
+with debugging Interactive Apps.
+
+Job Composer: Optionally hide Account field in Job Options
+..................................................................
+
+The Job Composer provides a field in the Job Options form to set the Account,
+which when the job is submitted uses the appropriate account flag for the
+resource manager (whether it is ``-A`` or ``-P`` or ``--account``, etc.). However, some
+sites do not use this, and others use different mechanisms for accounting. Long
+term we want to support flexible configuration of this web form, but for now we
+have added the ability to hide this Account field from the web form. This field
+is hidden by adding to the Job Composer's env file:
+``OOD_SHOW_JOB_OPTIONS_ACCOUNT_FIELD=0``
+
+Active Jobs: display list of nodes that a job is running on
+..................................................................
+
+In Active Jobs, if the resource manager provides it, the list of nodes a job is
+running on will display in the details section of the job.
+
+.. _ood-portal-generator: https://github.com/OSC/ood-portal-generator
+.. _mod_ood_proxy: https://github.com/OSC/mod_ood_proxy
+.. _ood_auth_map: https://github.com/OSC/ood_auth_map
+.. _nginx_stage: https://github.com/OSC/nginx_stage
+.. _Dashboard App: https://github.com/OSC/ood-dashboard
+.. _Shell App: https://github.com/OSC/ood-shell
+.. _Files App: https://github.com/OSC/ood-fileexplorer
+.. _File Editor App: https://github.com/OSC/ood-fileeditor
+.. _Active Jobs App: https://github.com/OSC/ood-activejobs
+.. _Job Composer App: https://github.com/OSC/ood-myjobs
+.. _Desktops App: https://github.com/OSC/bc_desktop
+.. _ohio supercomputer center: https://www.osc.edu/

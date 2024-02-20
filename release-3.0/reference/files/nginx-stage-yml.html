@@ -1,0 +1,1154 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nginx_stage.yml &mdash; Open OnDemand 3.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ondemand.d/*.yml files" href="ondemand-d-ymls.html" />
+    <link rel="prev" title="ood_portal.yml" href="ood-portal-yml.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Configuration Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ood-portal-yml.html">ood_portal.yml</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nginx_stage.yml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ondemand-d-ymls.html">ondemand.d/*.yml files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="submit-yml-erb.html">submit.yml.erb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/ood-portal-generator.html">ood-portal-generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/nginx-stage/usage.html">nginx-stage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pun-environment.html">PUN environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../issues/overview.html">OnDemand’s Known Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../reference.html">Configuration Reference</a> &raquo;</li>
+        
+      <li>nginx_stage.yml</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/release-3.0/source/reference/files/nginx-stage-yml.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nginx-stage-yml">
+<span id="nginx-stage-configuration"></span><h1>nginx_stage.yml<a class="headerlink" href="#nginx-stage-yml" title="Permalink to this headline">¶</a></h1>
+<p>Many of the options in the per-user NGINX staging and configuration can be
+configured within <strong class="program">nginx_stage</strong>. In a default installation this
+YAML configuration file is located at:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>On a fresh installation you may need to create this file or copy the default
+file from:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">nginx_stage</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx_stage_example</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>In most cases it is recommended that you don’t edit this file as the chosen
+defaults should work out of the box for most scenarios.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Modifying application specific configuration options or URI options can have
+unintended consequences for some of the Open OnDemand applications, so be
+sure you know what you are doing.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<dl class="describe">
+<dt>
+<code class="sig-name descname">ondemand_version_path (String)</code></dt>
+<dd><p>path to the OnDemand version file</p>
+<dl>
+<dt>Default</dt><dd><p>Set to default path</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ondemand_version_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/VERSION&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Supply a custom version file with a different version in it</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ondemand_version_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/VERSION&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">ondemand_portal (String, null)</code></dt>
+<dd><p>unique name of this OnDemand portal used to namespace multiple hosted
+portals</p>
+<dl>
+<dt>Default</dt><dd><p>Do not set a custom namespace for this portal</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ondemand_portal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom namespace for this portal</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ondemand_portal</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If this is not set then most apps will use the default namespace
+<code class="docutils literal notranslate"><span class="pre">ondemand</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">ondemand_title (String, null)</code></dt>
+<dd><p>title of this OnDemand portal that apps <em>should</em> display in their navbar</p>
+<dl>
+<dt>Default</dt><dd><p>Do not set a custom title for this portal</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ondemand_title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom title for this portal</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ondemand_title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Custom</span><span class="nv"> </span><span class="s">Portal&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If this is not set then most apps will use the default title <code class="docutils literal notranslate"><span class="pre">Open</span>
+<span class="pre">OnDemand</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_custom_env (Object, null)</code></dt>
+<dd><p>Custom environment variables to set for the PUN environment.</p>
+<dl>
+<dt>Default</dt><dd><p>No new environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Set some custom environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_DASHBOARD_TITLE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Open</span><span class="nv"> </span><span class="s">OnDemand&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_BRAND_BG_COLOR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#53565a&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="nt">OOD_BRAND_LINK_ACTIVE_BG_COLOR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#fff&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_custom_env_declarations (Array, null)</code></dt>
+<dd><p>List of environment variables to pass onto PUN environment
+from /etc/ood/profile. Example below shows some default
+env vars that are declared.</p>
+<dl>
+<dt>Default</dt><dd><p>No declarations of new environment variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Decleary several environment variables to pass to the PUN.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PATH</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LD_LIBRARY_PATH</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MANPATH</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCLS</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">X_SCLS</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">template_root (String)</code></dt>
+<dd><p>the root directory containing the ERB templates used in generating the NGINX
+configuration files</p>
+<dl>
+<dt>Default</dt><dd><p>Set to default installation location</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">template_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/nginx_stage/templates&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use custom templates</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">template_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/my/templates&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">proxy_user (String)</code></dt>
+<dd><p>the user name that the Apache proxy runs as so permissions can be added to
+the Unix domain sockets</p>
+<dl>
+<dt>Default</dt><dd><p>Set to the typical apache user</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">proxy_user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;apache&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a different user for the Apache proxy</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">proxy_user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;proxy_user&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">nginx_bin (String)</code></dt>
+<dd><p>the path to the NGINX binary</p>
+<dl>
+<dt>Default</dt><dd><p>Use NGINX installed by OnDemand Software Collections</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ondemand/root/usr/sbin/nginx&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>NGINX is installed in a different directory</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/sbin/nginx&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">nginx_signals (Array&lt;String&gt;)</code></dt>
+<dd><p>valid signals that can be sent to the NGINX process</p>
+<dl>
+<dt>Default</dt><dd><p>Supported NGINX signals</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_signals</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">stop</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quit</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">reopen</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">reload</span><span class="p p-Indicator">]</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Further restrict valid signals</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_signals</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">stop</span><span class="p p-Indicator">]</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This option is sent as <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">signal</span></code> to the <a class="reference external" href="https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline/">NGINX command line</a>.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">mime_types_path (String)</code></dt>
+<dd><p>the path to the system-installed NGINX <code class="docutils literal notranslate"><span class="pre">mime.types</span></code> file</p>
+<dl>
+<dt>Default</dt><dd><p>Use the NGINX installed by OnDemand Software Collections file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mime_types_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ondemand/root/etc/nginx/mime.types&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom mime file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mime_types_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/custom/mime.types&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">passenger_root (String)</code></dt>
+<dd><p>the <code class="docutils literal notranslate"><span class="pre">locations.ini</span></code> file that describes Passenger installation</p>
+<dl>
+<dt>Default</dt><dd><p>Use the file supplied by Passenger from OnDemand Software Collections</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/ondemand/root/usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/custom/locations.ini&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">passenger_ruby (String)</code></dt>
+<dd><p>the path to the Ruby binary that Passenger uses for itself and web apps</p>
+<dl>
+<dt>Default</dt><dd><p>Use the Ruby wrapper script supplied by this code</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_ruby</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/nginx_stage/bin/ruby&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use the binary supplied by Ruby 2.4 installed by Software Collections</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_ruby</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/rh/rh-ruby25/root/usr/bin/ruby&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">passenger_nodejs (String, null)</code></dt>
+<dd><p>the path to the Node.js binary that Passenger uses for web apps</p>
+<dl>
+<dt>Default</dt><dd><p>Use the Node.js wrapper script supplied by this code</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_nodejs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/nginx_stage/bin/node&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use the binary supplied by Node.js installed by Software Collections</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_nodejs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/rh/rh-nodejs6/root/usr/bin/node&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">passenger_python (String, null)</code></dt>
+<dd><p>the path to the Python binary that Passenger uses for web apps</p>
+<dl>
+<dt>Default</dt><dd><p>Use the Python wrapper script supplied by this code</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_python</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/ood/nginx_stage/bin/python&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use the system-installed Python binary</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_python</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/bin/python&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">passenger_pool_idle_time (Integer)</code></dt>
+<dd><p>The maximum number of seconds that an application process may be idle.
+Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> if you don’t want this specified in the nginx config</p>
+<dl>
+<dt>Default</dt><dd><p>Set idle time to 300</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_pool_idle_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Increase idle time</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_pool_idle_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">passenger_options (Hash)</code></dt>
+<dd><p>A Hash of additional Passenger options
+Keys without <code class="docutils literal notranslate"><span class="pre">passenger_</span></code> prefix will be ignored</p>
+<dl>
+<dt>Default</dt><dd><p>No additional Passenger options defined</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Define custom Passenger options</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">passenger_options</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">passenger_max_preloader_idle_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">nginx_file_upload_max (Integer, 10737420000)</code></dt>
+<dd><p>Max file upload size in bytes (e.g., 10737420000)</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><blockquote>
+<div><p>~10 GB max upload.</p>
+</div></blockquote>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_file_upload_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10737420000</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><blockquote>
+<div><p>Double the max upload.</p>
+</div></blockquote>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx_file_upload_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21474840000</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_config_path (String)</code></dt>
+<dd><p>the interpolated path to the user’s PUN config file</p>
+<dl>
+<dt>Default</dt><dd><p>Namespace the user config files by their user name</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_config_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/puns/%{user}.conf&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Namespace configs under user directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_config_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/puns/%{user}/nginx.conf&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_tmp_root (String)</code></dt>
+<dd><p>the interpolated root directory used for NGINX tmp directories</p>
+<dl>
+<dt>Default</dt><dd><p>Namespace under user directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_tmp_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/tmp/%{user}&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom namespace for root directory</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_tmp_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/%{user}-tmp&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>NGINX will store the full request body in this location before sending it
+to the Passenger app. The size of the disk partition this directory
+resides in will limit the maximum file upload size.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_access_log_path (String)</code></dt>
+<dd><p>the interpolated path to the NGINX access log</p>
+<dl>
+<dt>Default</dt><dd><p>Namespace access logs under user directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_access_log_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/log/ondemand-nginx/%{user}/access.log&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom location for the access log file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_access_log_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/path/access-%{user}.log&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_error_log_path (String)</code></dt>
+<dd><p>the interpolated path to the NGINX error log</p>
+<dl>
+<dt>Default</dt><dd><p>Namespace error logs under user directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_error_log_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/log/ondemand-nginx/%{user}/error.log&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom location for the error log file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_error_log_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/path/error-%{user}.log&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_secret_key_base_path (String)</code></dt>
+<dd><p>The secret key location. Note these are per user.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>Per User secret in var lib ondemand-nginx.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_secret_key_base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/puns/%{user}.secret_key_base.txt&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom location for secret files.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_secret_key_base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/secrets/%{user}.secret_key_base.txt&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_log_format (String)</code></dt>
+<dd><p>The format of the access and error logs.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>The default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_log_format</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$remote_addr</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">$remote_user</span><span class="nv"> </span><span class="s">[$time_local]</span><span class="nv"> </span><span class="s">&quot;$request&quot;</span><span class="nv"> </span><span class="s">$status</span><span class="nv"> </span><span class="s">$body_bytes_sent</span><span class="nv"> </span><span class="s">&quot;$http_referer&quot;</span><span class="nv"> </span><span class="s">&quot;$http_user_agent&quot;</span><span class="nv"> </span><span class="s">&quot;$http_x_forwarded_for&quot;&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom log format.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_log_format</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$remote_addr</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">$remote_user</span><span class="nv"> </span><span class="s">[$time_local]</span><span class="nv"> </span><span class="s">&quot;$request&quot;</span><span class="nv"> </span><span class="s">$status</span><span class="nv"> </span><span class="s">$body_bytes_sent&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_pid_path (String)</code></dt>
+<dd><p>the interpolated path to the NGINX pid file</p>
+<dl>
+<dt>Default</dt><dd><p>Namespace pid files under user directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_pid_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/run/ondemand-nginx/%{user}/passenger.pid&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom location for the pid files</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_pid_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/path/pid-%{user}.pid&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_socket_path (String)</code></dt>
+<dd><p>the interpolated path to the NGINX socket file</p>
+<dl>
+<dt>Default</dt><dd><p>Namespace socket files under user directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_pid_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/run/ondemand-nginx/%{user}/passenger.sock&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use a custom location for the socket files</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_pid_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/path/socket-%{user}.sock&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The root directory containing the Unix domain socket file will have
+restricted permissions so that only the Apache proxy user can access this
+socket file.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Currently the proxy will only look for socket files following the
+format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$OOD_PUN_SOCKET_ROOT/&lt;user&gt;/passenger.sock
+</pre></div>
+</div>
+<p>It is not recommended to alter <code class="docutils literal notranslate"><span class="pre">pun_pid_path</span></code> unless you know what you
+are doing.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_sendfile_root (String)</code></dt>
+<dd><p>the root directory that NGINX serves files from using <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile">sendfile</a></p>
+<dl>
+<dt>Default</dt><dd><p>Serve all files on file system</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_sendfile_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Only serve files under home directories</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_sendfile_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All URL requests to <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile">sendfile</a> will be relative to the
+<code class="docutils literal notranslate"><span class="pre">pun_sendfile_root</span></code>. If you alter this configuration option you may
+break certain web applications that expect it under <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_sendfile_uri (String)</code></dt>
+<dd><p>the internal URL path used by NGINX to serve files from using <a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile">sendfile</a> (not
+directly accessible by the client browser)</p>
+<dl>
+<dt>Default</dt><dd><p>Serve files under a unique path</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_sendfile_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/sendfile&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Server files under a custom URL path</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_sendfile_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/custom/files&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">pun_app_configs (Array&lt;Hash&gt;)</code></dt>
+<dd><p>a list of interpolated hashes that define what wildcard app config file
+paths to include in a user’s NGINX config (the hashes are arguments for
+<code class="docutils literal notranslate"><span class="pre">app_config_path</span></code>)</p>
+<dl>
+<dt>Default</dt><dd><p>Serve a user’s dev apps, all shared apps, all system apps through NGINX</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_app_configs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%{user}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usr</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sys</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Serve only system apps through NGINX</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_app_configs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%{user}&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">app_config_path (Hash)</code></dt>
+<dd><p>an interpolated hash detailing the path to the NGINX app configs for each
+app type</p>
+<dl>
+<dt>Default</dt><dd><p>A recommended solution for app config locations</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">app_config_path</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/apps/dev/%{owner}/%{name}.conf&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/apps/usr/%{owner}/%{name}.conf&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/ondemand-nginx/config/apps/sys/%{name}.conf&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">app_root (Hash)</code></dt>
+<dd><p>an interpolated hash detailing the root directory where the app is installed
+for each app type</p>
+<dl>
+<dt>Default</dt><dd><p>A recommended solution for app deployment locations</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">app_root</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/www/ood/apps/dev/%{owner}/gateway/%{name}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/www/ood/apps/usr/%{owner}/gateway/%{name}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/www/ood/apps/sys/%{name}&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A common solution is to map the user shared app location as a symlink to
+the user’s home directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">ood</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">usr</span><span class="o">/&lt;</span><span class="n">owner</span><span class="o">&gt;/</span><span class="n">gateway</span> <span class="o">=&gt;</span> <span class="o">~&lt;</span><span class="n">owner</span><span class="o">&gt;/</span><span class="n">ondemand</span><span class="o">/</span><span class="n">share</span>
+</pre></div>
+</div>
+<p>This allows the owner of the app to update the app in real time as well
+as maintain file permissions.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Modifying this configuration option may break how the Dashboard app
+searches for apps.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">app_request_uri (Hash)</code></dt>
+<dd><p>an interpolated hash detailing the URL path used to access the given type of
+app (not including the base-URI)</p>
+<dl>
+<dt>Default</dt><dd><p>A recommended solution for app request URL’s</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">app_request_uri</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/dev/%{name}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/%{owner}/%{name}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/sys/%{name}&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Modifying this will require you also modify <code class="docutils literal notranslate"><span class="pre">app_request_regex</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Modifying this configuration option may break how the various apps link
+to each other.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">app_request_regex (Hash)</code></dt>
+<dd><p>a hash detailing the regular expressions used to determine the type of app
+and its corresponding parameters from a URL request (this should match what
+you used in <code class="docutils literal notranslate"><span class="pre">app_request_uri</span></code>)</p>
+<dl>
+<dt>Default</dt><dd><p>A recommended solution for app request URL regular expressions</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">app_request_regex</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;^/dev/(?&lt;name&gt;[-\\w.]+)&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;^/usr/(?&lt;owner&gt;[\\w]+)/(?&lt;name&gt;[-\\w.]+)&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;^/sys/(?&lt;name&gt;[-\\w.]+)&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Modifying anything in this configuration option other than the
+allowed characters will require you modify <code class="docutils literal notranslate"><span class="pre">app_request_uri</span></code> as
+well.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">app_token (Hash)</code></dt>
+<dd><p>an interpolated hash detailing a uniquely identifiable string for each app</p>
+<dl>
+<dt>Default</dt><dd><p>A recommended solution for generating app tokens</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">app_token</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;dev/%{owner}/%{name}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;usr/%{owner}/%{name}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sys/%{name}&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not currently used and may be deprecated in the future.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">app_passenger_env (Hash)</code></dt>
+<dd><p>a hash detailing the <a class="reference external" href="https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_app_env">Passenger environment</a> to run the type of app under</p>
+<dl>
+<dt>Default</dt><dd><p>A recommended solution for setting Passenger environments</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">app_passenger_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;development&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">usr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;production&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;production&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Modifying this configuration option can lead to unintended consequences
+for web apps such as issues with serving their assets.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">user_regex (String)</code></dt>
+<dd><p>regular expression used to validate a given user name</p>
+<dl>
+<dt>Default</dt><dd><p>Username can consist of any characters typically found in an email address</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">user_regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[\w@\.\-]+&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Restrict user name to just alphanumeric characters</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">user_regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;\w+&#39;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">min_uid (Integer)</code></dt>
+<dd><p>the minimum user id required to start a per-user NGINX process as</p>
+<dl>
+<dt>Default</dt><dd><p>User id’s typically start at <code class="docutils literal notranslate"><span class="pre">1000</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min_uid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Using CentOS 6</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min_uid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For RHEL6 and CentOS 6 the user id’s begin at <code class="docutils literal notranslate"><span class="pre">500</span></code>.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="disabled-shell"></span><dl class="describe">
+<dt>
+<code class="sig-name descname">disabled_shell (String)</code></dt>
+<dd><p>Restrict starting a per-user NGINX process as a user with the given shell.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>Do not start a per-user NGINX for anyone with <code class="docutils literal notranslate"><span class="pre">/access/denied</span></code> shell.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disabled_shell</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/access/denied&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Do not start a per-user NGINX for anyone with <code class="docutils literal notranslate"><span class="pre">/usr/bin/false</span></code> shell.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disabeled_shell</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/bin/false&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will only restrict access to a per-user NGINX process started with
+the <a class="reference internal" href="../commands/nginx-stage/commands/pun.html#nginx-stage-pun"><span class="std std-ref">nginx_stage pun</span></a> command (used by the Apache proxy). This
+doesn’t restrict the other administrative commands
+<a class="reference internal" href="../commands/nginx-stage/commands/nginx.html#nginx-stage-nginx"><span class="std std-ref">nginx_stage nginx</span></a> and <a class="reference internal" href="../commands/nginx-stage/commands/nginx-clean.html#nginx-stage-nginx-clean"><span class="std std-ref">nginx_stage nginx_clean</span></a> when manually
+starting and stopping the NGINX process.</p>
+</div>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">disable_bundle_user_config (Integer)</code></dt>
+<dd><blockquote>
+<div><p>Set BUNDLE_USER_CONFIG to /dev/null in the PUN environment.
+NB: This prevents a user’s ~/.bundle/config from affecting
+OnDemand applications.</p>
+</div></blockquote>
+<dl>
+<dt>Default</dt><dd><p>Disable bundle user configuration.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_bundle_user_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Enable bundle user configuration. This may adversly affect
+system deployed apps.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disable_bundle_user_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ondemand-d-ymls.html" class="btn btn-neutral float-right" title="ondemand.d/*.yml files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ood-portal-yml.html" class="btn btn-neutral float-left" title="ood_portal.yml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/reference/files/nginx-stage-yml.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/reference/files/nginx-stage-yml.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/reference/files/nginx-stage-yml.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/reference/files/nginx-stage-yml.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/reference/files/nginx-stage-yml.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/reference/files/nginx-stage-yml.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/reference/files/nginx-stage-yml.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/reference/files/nginx-stage-yml.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/reference/files/nginx-stage-yml.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/reference/files/nginx-stage-yml.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/reference/files/nginx-stage-yml.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/reference/files/nginx-stage-yml.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
