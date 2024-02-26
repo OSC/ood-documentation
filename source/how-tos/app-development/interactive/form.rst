@@ -200,10 +200,10 @@ They must be added to the `form` list.
 
 EX:
 
-```
-form:
-  - auto_modules_<MODULE>
-```
+.. code-block:: yaml
+
+  form:
+    - auto_modules_<MODULE>
 
 auto_primary_group
   This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
