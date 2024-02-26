@@ -196,6 +196,15 @@ input the queue name themselves.
 for the user to choose from without intervention from the administrator
 or the user.
 
+They must be added to the `form` list.
+
+EX:
+
+.. code-block:: yaml
+
+  form:
+    - auto_modules_<MODULE>
+
 auto_primary_group
   This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
   primary group of the user.  No choice will be given to the user.
