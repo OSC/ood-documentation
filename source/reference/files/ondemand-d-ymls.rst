@@ -498,7 +498,7 @@ Configuration Properties
 
     .. code-block:: yaml
 
-      bc_dynamic_js: true
+      bc_dynamic_js: false
 
   Example
     Interactive app forms will be dynamic.
