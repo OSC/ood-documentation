@@ -15,6 +15,7 @@ All the options in :ref:`vnc-bc-options` apply in addition to what's listed belo
       container_bindpath: ""
       container_module: "singularity"
       container_command: "singularity"
+      container_start_args: []
 
 
 .. describe:: container_path (String, "vnc_container.sif")
@@ -89,6 +90,24 @@ All the options in :ref:`vnc-bc-options` apply in addition to what's listed belo
 
         container_module: "apptainer"
 
+.. describe:: container_start_args (String, [])
+
+    Arguments to pass to the container start command.
+
+    Default
+      Pass no additional arguments.
+
+      .. code-block:: yaml
+
+        container_start_args: []
+
+    Example
+      Pass ``--fakeroot`` to the container ``start`` command.
+
+      .. code-block:: yaml
+
+        container_start_args:
+          - "--fakeroot"
 
 Starter def file
 ................
