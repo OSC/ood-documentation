@@ -121,8 +121,8 @@ Some operating systems use `Software Collections`_ to satisfy these.
          .. code-block:: sh
 
             sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.1-focal_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.1-focal_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.1-focal_all.deb
             sudo apt update
 
             sudo apt install ondemand
@@ -132,8 +132,8 @@ Some operating systems use `Software Collections`_ to satisfy these.
          .. code-block:: sh
 
             sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.1-jammy_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.1-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.1-jammy_all.deb
             sudo apt update
 
             sudo apt install ondemand
@@ -143,8 +143,8 @@ Some operating systems use `Software Collections`_ to satisfy these.
          .. code-block:: sh
 
             sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.1-bookworm_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.1-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.1-bookworm_all.deb
             sudo apt update
 
             sudo apt install ondemand
