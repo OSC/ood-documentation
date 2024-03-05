@@ -160,15 +160,16 @@ but not limited to:
 There exists some helpful Bash functions that can be used in this sourced
 script:
 
-.. describe:: find_port [MIN_PORT] [MAX_PORT]
+.. describe:: find_port [HOSTNAME] [MIN_PORT] [MAX_PORT]
 
-   Finds an available port within the specified range [MIN_PORT..MAX_PORT].
+   Finds an available port within the specified range [MIN_PORT..MAX_PORT]
+   on the [HOSTNAME].
 
    Default
-     [2000..65535]
+      localhost 2000 65535
 
    Example
-     Find a random port that is available within the default range
+     Find a random port that is available within the default range on the ``localhost``.
 
      .. code-block:: sh
 
