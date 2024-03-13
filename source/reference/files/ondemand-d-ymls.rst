@@ -818,7 +818,7 @@ Configuration Properties
 .. _globus_endpoints:
 .. describe:: globus_endpoints (Array<Object>, null)
 
-  Add a Globus button to the file browser that opens the current directory
+  Add a Globus button to the file browser. The button opens the current directory
   in the Globus transfer web app.
 
   Note that ``endpoint_path`` is the path that Globus will initialize to
@@ -850,6 +850,16 @@ Configuration Properties
          - path: "/project"
            endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
            endpoint_path: "/project"
+
+    In this example with multiple endpoints, suppose you use the file browser to look at your file system. 
+    If you were to select the ``/home`` path to see the contents and then click the Globus button, you would 
+    see the endpoint associated with ``path: "/home"`` in the Globus interface.
+
+    If you then go back to the OOD file browser and select the ``/project`` path and then click the Globus button, 
+    you would now see the endpoint associated with the ``path: "/project"`` endpoint in the Globus interface.
+
+    The gist here is you *select the path on the filesystem in the file browser app first* then 
+    click the Globus button to show the corresponding endpoint in the Globus interface in a newly opened tab.
 
   Example
     When pathnames differ between the filesystem and endpoint.
