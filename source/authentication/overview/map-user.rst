@@ -15,7 +15,7 @@ but it is also required by the OnDemand proxy to traffic the HTTP data to the us
 corresponding per-user NGINX (PUN) server.
 
 Versions prior to 2.0 relied on :ref:`user_map_cmd <ood-portal-generator-user-map-cmd>` to do this.
-Since 2.0 you should use the simpler and faster `user_map_match`_.
+Since 2.0 you should use the simpler and faster :ref:`user_map_match <ood-portal-generator-user-map-match>`.
 
 Both with variations will be discussed here.
 
