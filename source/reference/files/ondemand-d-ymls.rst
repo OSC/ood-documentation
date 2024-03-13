@@ -821,15 +821,17 @@ Configuration Properties
   Add a Globus button to the file browser. The button opens the current directory
   in the Globus transfer web app.
 
-  In the example with multiple endpoints, suppose you use the file browser to look at your file system. 
-  If you were to select the ``/home`` path to see the contents and then click the Globus button, you would 
-  see the endpoint associated with ``path: "/home"`` in the Globus interface.
+  In the example with multiple endpoints, suppose you use the local file browser to look at your local file system. 
+  If you were to navigate to your local ``/home`` and then click the Globus button, you would 
+  see a new tab open with the endpoint associated to that local path in the Globus interface.
 
-  If you then go back to the OOD file browser and select the ``/project`` path and then click the Globus button, 
-  you would now see the endpoint associated with the ``path: "/project"`` endpoint in the Globus interface.
+  If you then go back to the localfile browser and navigate to ``/project`` and then click the Globus button, 
+  you would now see the endpoint associated with that local ``/project`` directory open in the Globus interface 
+  in a new tab.
 
-  The gist here is you *select the path on the filesystem in the file browser app first* then 
-  click the Globus button to show the corresponding endpoint in the Globus interface in a newly opened tab.
+  The gist here is you *navigate to the desired directory using the local filebrowser* then 
+  click the Globus button to show the corresponding endpoint in the Globus interface 
+  which opens in a new tab.
 
   Note that ``endpoint_path`` is the path that Globus will initialize to
   and is very likely to be ``/`` regardless of the actual storage path.
