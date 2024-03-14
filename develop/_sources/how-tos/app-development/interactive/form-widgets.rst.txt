@@ -143,6 +143,9 @@ Form Widgets
     ``show_files`` is a boolean flag to show files or not. This defaults
     to true - it will show files.
 
+    ``favorites`` allows you to override the :ref:`favorite paths you've added
+    in files menu <add-shortcuts-to-files-menu>`.
+
       .. code-block:: yaml
 
         path:
@@ -150,6 +153,9 @@ Form Widgets
           directory: "/fs/ess/project"
           show_hidden: true
           show_files: false
+          favorites:
+            - /fs/ess
+            - /fs/scratch
 
 ==================================================================
 
