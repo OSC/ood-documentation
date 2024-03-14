@@ -19,14 +19,14 @@ To customize job submission we will need to first edit our custom desktop app
    # /etc/ood/config/apps/bc_desktop/my_cluster.yml
    ---
    title: "My Cluster Desktop"
-   cluster: "my_cluster"
+   cluster: "my_cluster"  # Overriden by submit below
    submit: "submit/my_submit.yml.erb"
 
 Notice we included the configuration option ``submit`` that points to our
-custom :ref:`app-development-interactive-submit` YAML configuration file. This
-can be an absolute file path or a relative file path with respect to the
-:file:`/etc/ood/config/apps/bc_desktop/` directory. It is important to notice  
-you must use this or some other directory outside the app's root.
+custom :ref:`app-development-interactive-submit` YAML configuration file. This will
+override our ``cluster`` setting and use what is found in ``my_submit.yml.erb``. 
+The ``submit`` file path can be an absolute file path or a relative file path 
+with respect to the :file:`/etc/ood/config/apps/bc_desktop/` directory. 
 
 .. note::
 
