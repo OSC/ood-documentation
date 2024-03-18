@@ -144,7 +144,8 @@ Form Widgets
     to true - it will show files.
 
     ``favorites`` allows you to override the :ref:`favorite paths you've added
-    in files menu <add-shortcuts-to-files-menu>`.
+    in files menu <add-shortcuts-to-files-menu>`.  Provide an array of new favorites
+    or set to ``false`` to disable showing favorites altogether.
 
       .. code-block:: yaml
 
