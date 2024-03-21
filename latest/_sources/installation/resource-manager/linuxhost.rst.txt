@@ -3,8 +3,6 @@
 LinuxHost
 =========
 
-.. warning:: While we have tested this at OSC, we do not currently use it in a production capacity nor do any other centers as of April 23, 2020. If you are an early adopter of this feature, please let us know on Discourse or by email about your experience and any improvements we can make.
-
 The LinuxHost adapter facilitates launching jobs immediately without using a batch scheduler or resource manager. Use cases for this non-traditional job adapter include:
 
 - Interactive work on login nodes, such as remote desktop or IDE
