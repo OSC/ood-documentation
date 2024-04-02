@@ -56,19 +56,6 @@ Some operating systems use `Software Collections`_ to satisfy these.
          sudo dnf install epel-release
          sudo dnf module enable ruby:3.1 nodejs:18
 
-   .. tab:: RHEL 7
-
-      .. warning::
-
-         You may also need to enable the *Optional* channel and
-         attach a subscription providing access to RHSCL to be able to use this
-         repository.
-
-      .. code-block:: sh
-
-         sudo yum install epel-release
-         sudo subscription-manager repos --enable=rhel-server-rhscl-7-rpms
-
 
    .. tab:: RHEL 8
 
