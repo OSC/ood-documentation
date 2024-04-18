@@ -1300,7 +1300,7 @@ Accessing Remote File Systems
 
 Since 2.1 you can use ``rclone`` to interact with remote file systems.  Since
 every command in Open OnDemand is issued *as the user*, the user themselves
-are required to setup their ``rclone`` remomtes.
+are required to setup their ``rclone`` remotes.
 
 You can refer to the `OSC's rclone documentation`_ on how to configure rclone
 remotes.
