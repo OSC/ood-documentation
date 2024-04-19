@@ -1205,8 +1205,8 @@ The default ``ondemand`` theme can also be configured using the following config
      frontend:
        issuer: "MyCenter OnDemand"
        extra:
-         navLogo: "/path/to/custom/nav-logo.png"
-         loginLogo: "/path/to/custom/logo.png"
+         navLogo: "/public/nav-logo.png"
+         loginLogo: "/public/logo.png"
          loginTitle: "Log in with your Center username and password"
          loginButtonText: "Log in with your Center account"
          usernamePlaceholder: "center-username"
