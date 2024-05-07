@@ -240,6 +240,7 @@
 <span class="w">  </span><span class="nt">idle</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">extra_args</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">vnc_clean</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">websockify_heartbeat_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -435,12 +436,29 @@ errors if overridden.</p>
 <dt>Example</dt><dd><p>The API to connect to can change in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> based off of
 something that can only be determined during the job (for example an
 environment variable in a module).</p>
-<dl class="simple">
-<dt>conn_params:</dt><dd><ul class="simple">
-<li><p>the_connect_api</p></li>
-</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">conn_params</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the_connect_api</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="sig-name descname">websockify_heartbeat_seconds (Integer, 30)</code></dt>
+<dd><p>The duration in seconds websockify will wait to send heartbeats
+to the client.</p>
+<dl>
+<dt>Default</dt><dd><p>Websockify will send heartbeats every 30 seconds.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">websockify_heartbeat_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Have websockfiy send heartbeats every 10 seconds.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">websockify_heartbeat_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
