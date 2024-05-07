@@ -27,6 +27,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       idle: ""
       extra_args: ""
       vnc_clean: "..."
+      websockify_heartbeat_seconds: 30
 
 
 .. describe:: websockfiy_cmd (String, "/opt/websockify/run")
@@ -222,5 +223,26 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       something that can only be determined during the job (for example an
       environment variable in a module).
 
-      conn_params:
-        - the_connect_api
+      .. code-block:: yaml
+        
+        conn_params:
+          - the_connect_api
+
+.. describe:: websockify_heartbeat_seconds (Integer, 30)
+
+  The duration in seconds websockify will wait to send heartbeats
+  to the client.
+
+  Default
+    Websockify will send heartbeats every 30 seconds.
+
+    .. code-block:: yaml
+
+      websockify_heartbeat_seconds: 30
+
+  Example
+    Have websockfiy send heartbeats every 10 seconds.
+
+    .. code-block:: yaml
+
+      websockify_heartbeat_seconds: 10
