@@ -904,6 +904,18 @@ If the quota is defined as a ``user`` quota, then it applies to only disk
 resources used by the user alone. This is the default type of quota object and
 is given in the following format:
 
+.. code:: json
+
+   {
+     "type": "user",
+     "block_limit": 5000000, 
+     "file_limit": 1000000, 
+     "path": "/path/to/volume2", 
+     "total_block_usage": 400000, 
+     "total_file_usage": 1000, 
+     "user": "user1"
+   }
+
 
 .. warning:: A block must be equal to 1 KiB for proper conversions.
 
