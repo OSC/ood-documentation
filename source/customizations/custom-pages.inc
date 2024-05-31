@@ -10,10 +10,10 @@ These new pages are configured using layouts and widgets, in the same way as
 To create a custom page, add a layout under a new ``page_code`` to the ``custom_pages`` property object.
 For more information on how to setup dashboard properties, see :ref:`OnDemand configuration files <ondemand-d-ymls>`
 
-Custom pages have their own URL based on their ``page_code``: ``/sys/pun/dashboard/custom/page_code``.
+Custom pages have their own URL based on their ``page_code``: ``/pun/sys/dashboard/custom/page_code``.
 
 The example configuration below creates a custom page with the page_code: ``documentation``.
-It will render a layout with the ``pinned_apps`` widget under the URL: ``/sys/pun/dashboard/custom/documentation``.
+It will render a layout with the ``pinned_apps`` widget under the URL: ``/pun/sys/dashboard/custom/documentation``.
 
 .. code-block:: yaml
 
