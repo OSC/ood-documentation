@@ -123,14 +123,14 @@ Configuration Options
 
     .. code-block:: yaml
 
-      pun_custom_env: {}
+      pun_custom_env_declarations: []
 
   Example
     Decleary several environment variables to pass to the PUN.
 
     .. code-block:: yaml
 
-      pun_custom_env:
+      pun_custom_env_declarations:
         - PATH
         - LD_LIBRARY_PATH
         - MANPATH
