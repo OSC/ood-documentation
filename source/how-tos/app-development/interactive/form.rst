@@ -228,12 +228,15 @@ auto_modules_<MODULE>
 
   Regex:
   .. code-block:: yaml
+
     attributes:
       auto_modules_matlab:
         filter: (intel|gnu)\d*
 
   String:
+
   .. code-block:: yaml
+    
     attributes:
       auto_modules_matlab:
         filter: intel
