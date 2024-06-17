@@ -113,6 +113,29 @@ Here we have a checkbox ``enable_cuda_version`` that will show
         data:
           hide-cuda-version-when-unchecked: true
 
+Dynamic Element Labels
+**********************
+
+The ``data-label-*`` directive allows you to change the label of another
+form element based on the selected option in a select widget.
+
+.. code-block:: yaml
+  attributes:
+    node_type:
+      widget: select
+      options:
+        - [ 'small',  'small',  data-label-cores: 'Number of Cores (1-4)'  ]
+        - [ 'medium', 'medium', data-label-cores: 'Number of Cores (1-8)'  ]
+        - [ 'large',  'large',  data-label-cores: 'Number of Cores (1-16)' ]
+
+    cores:
+      widget: "number_field"
+      required: true
+      value: 1
+
+In this case, selecting Node Type 'small' will change the label of Cores to
+'Number of Cores (1-4)'.
+
 Dynamic Min and Maxes
 *********************
 
