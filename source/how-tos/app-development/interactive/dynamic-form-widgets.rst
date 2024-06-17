@@ -120,6 +120,7 @@ The ``data-label-*`` directive allows you to change the label of another
 form element based on the selected option in a select widget.
 
 .. code-block:: yaml
+  
   attributes:
     node_type:
       widget: select
