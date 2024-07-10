@@ -1,6 +1,6 @@
 .. _advanced-resource-manager-configs:
 
-Advanced Resource Manager Configrations
+Advanced Resource Manager Configurations
 =======================================
 
 This page details advanced settings for any resource manager
