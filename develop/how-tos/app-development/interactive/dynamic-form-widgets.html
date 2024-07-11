@@ -123,6 +123,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#your-own-form-js">Your own <code class="docutils literal notranslate"><span class="pre">form.js</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hiding-select-options">Hiding select options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hiding-entire-elements">Hiding entire elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-element-labels">Dynamic Element Labels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-min-and-maxes">Dynamic Min and Maxes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#setting-values-based-on-other-elements">Setting values based on other elements</a></li>
 </ul>
@@ -315,6 +316,27 @@ for hiding elements when checked or unchecked.</p>
 <span class="hll"><span class="w">        </span><span class="nt">hide-cuda-version-when-unchecked</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </span></pre></div>
 </div>
+</div>
+<div class="section" id="dynamic-element-labels">
+<h2>Dynamic Element Labels<a class="headerlink" href="#dynamic-element-labels" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-label-*</span></code> directive allows you to change the label of another
+form element based on the selected option in a select widget.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;small&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="s">&#39;small&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">data-label-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Cores</span><span class="nv"> </span><span class="s">(1-4)&#39;</span><span class="w">  </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;medium&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;medium&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">data-label-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Cores</span><span class="nv"> </span><span class="s">(1-8)&#39;</span><span class="w">  </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;large&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="s">&#39;large&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">data-label-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Cores</span><span class="nv"> </span><span class="s">(1-16)&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+
+<span class="w">  </span><span class="nt">cores</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number_field&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this case, selecting Node Type ‘small’ will change the label of Cores to
+‘Number of Cores (1-4)’.</p>
 </div>
 <div class="section" id="dynamic-min-and-maxes">
 <h2>Dynamic Min and Maxes<a class="headerlink" href="#dynamic-min-and-maxes" title="Permalink to this headline">¶</a></h2>
