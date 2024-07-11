@@ -23,7 +23,7 @@ Both with variations will be discussed here.
 Remote User
 -----------
 
-It's worth discussusing where ``REMOTE_USER`` is comfing from.  When apache
+It's worth discussusing where ``REMOTE_USER`` is coming from.  When apache
 has successfully authenticates a request it sets the variable ``REMOTE_USER``
 from, well, the remote.
 
