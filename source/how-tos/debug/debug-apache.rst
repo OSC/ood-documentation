@@ -77,7 +77,7 @@ Or you're using the wrong hostname in your browser.
 
          .. code-block:: sh
 
-          sudo /sbin/apache2 -S
+          . /etc/apache2/envvars; sudo -E /sbin/apache2 -S
 
 Performance Tuning
 ------------------
