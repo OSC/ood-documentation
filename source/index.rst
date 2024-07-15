@@ -81,6 +81,7 @@ These are institutions who were early adopters or provided HPC resources for dev
 
   architecture
   reference
+  security
   release-notes
   version-policy
   glossary
