@@ -1,6 +1,6 @@
 .. _authentication-overview:
 
-Authenticaion Overview
+Authentication Overview
 ======================
 
 Configuring Open OnDemand to work with an Apache authentication module can be
