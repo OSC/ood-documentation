@@ -281,47 +281,48 @@ The following example adds all directories within the specified base directories
 
 
 .. code-block:: ruby
-# /etc/ood/config/apps/dashboard/initializers/ood.rb
 
-Rails.application.config.after_initialize do
-  OodFilesApp.candidate_favorite_paths.tap do |paths|
+  # /etc/ood/config/apps/dashboard/initializers/ood.rb
 
-    # Hash of base paths to check for additional directories with titles
-    # location => Title
-    base_paths = {
-      '/home/share/' => 'Shared home',
-      '/srv/scratch/shares/' => 'Shared scratch',
-      '/srv/scratch/groups/' => 'Group scratch',
-      '/srv/fast/users/' => 'Fast user'
-      # Add more paths and titles here if needed
-    }
+  Rails.application.config.after_initialize do
+    OodFilesApp.candidate_favorite_paths.tap do |paths|
 
-    base_paths.each do |base_path, title|
+      # Hash of base paths to check for additional directories with titles
+      # location => Title
+      base_paths = {
+        '/home/share/' => 'Shared home',
+        '/srv/scratch/shares/' => 'Shared scratch',
+        '/srv/scratch/groups/' => 'Group scratch',
+        '/srv/fast/users/' => 'Fast user'
+        # Add more paths and titles here if needed
+      }
 
-      # Check if the base path exists and is a directory,  to avoid error
-      next unless Dir.exist?(base_path)
+      base_paths.each do |base_path, title|
 
-      # Get all entries in the current base path
-      Dir.entries(base_path).each do |entry|
-        # Construct the full path for the current entry
-        full_path = File.join(base_path, entry)
+        # Check if the base path exists and is a directory,  to avoid error
+        next unless Dir.exist?(base_path)
 
-        # Skip if it's not a directory or if it's a special entry like '.' or '..'
-        next unless File.directory?(full_path) && !['.', '..'].include?(entry)
+        # Get all entries in the current base path
+        Dir.entries(base_path).each do |entry|
+          # Construct the full path for the current entry
+          full_path = File.join(base_path, entry)
 
-        # Check if the directory is readable and executable
-        if File.readable?(full_path) && File.executable?(full_path)
-          # Access the value of the current base_path using the `title` variable
-          paths << FavoritePath.new(full_path, title: "#{title}: #{File.basename(full_path)}")
+          # Skip if it's not a directory or if it's a special entry like '.' or '..'
+          next unless File.directory?(full_path) && !['.', '..'].include?(entry)
+
+          # Check if the directory is readable and executable
+          if File.readable?(full_path) && File.executable?(full_path)
+            # Access the value of the current base_path using the `title` variable
+            paths << FavoritePath.new(full_path, title: "#{title}: #{File.basename(full_path)}")
+          end
         end
       end
     end
   end
-end
 
-- The variable ``base_paths`` is an hash (``dirname`` => ``Title``) of all directories you want to parse. For the directory ``OSC_test`` in ``/srv/scratch/groups/``;  the favorite path will be display as following 
-
-|Group scratch OSC_test: /srv/scratch/groups/OSC_test
+- The variable ``base_paths`` is an hash (``dirname`` => ``Title``) of all directories you want to parse. 
+  For the directory ``OSC_test`` in ``/srv/scratch/groups/``;  the favorite path will be display as following 
+  ``Group scratch OSC_test: /srv/scratch/groups/OSC_test``
 
 
 On each request, the Dashboard will check for the existence of the directories
