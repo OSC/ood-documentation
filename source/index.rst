@@ -81,10 +81,12 @@ These are institutions who were early adopters or provided HPC resources for dev
 
   architecture
   reference
+  security
   release-notes
   version-policy
   glossary
   issues/overview
+  
 
 .. _website: https://openondemand.org/
 .. _bowdoin: https://www.bowdoin.edu/it/resources/high-performance-computing.html
