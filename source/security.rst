@@ -23,14 +23,27 @@ Limitations
 
 - **HTTP Traffic to Origin Servers**: Traffic to backend services, including computational resources like Jupyter servers, is currently over HTTP, which is unencrypted. Plans are underway to upgrade this to HTTPS to ensure encryption of data in transit, thereby bolstering security.
 
-Security Controls
------------------
+Controls
+^^^^^^^^
 
-- **Monitoring and Logging**: Comprehensive logging mechanisms are integral for security audits and incident response. Detailed guidelines and settings for these features can be found at :ref:`logging`.
+These are things the the out of the box OnDemand installation will provide
+that some centers may want to change or disable altogether.
+
+- **File Access**: OnDemand lets users navigate the file system. While file permissions
+  limit what a user can view and navigate to, some centers may want to limit this even further.
+  One option is to :ref:`set-file-allowlist` to limit what directories users may navigate to.
+
+
+Additional Information
+----------------------
+
+- **Monitoring and Logging**: Comprehensive logging mechanisms are integral for security audits and incident response. 
+  Detailed guidelines and settings for these features can be found at :ref:`logging`.
 
 - **Vulnerability Management**: Active management of security weaknesses includes regular updates and patches. Detailed processes and current security advisories are available at :ref:`vulnerability-management`.
 
-- **Security Audits**: The platform undergoes periodic security audits by Trusted CI, the NSF Cybersecurity Center of Excellence. Summaries of these audits are available, with the latest report accessible `here <https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf>`_.
+- **Security Audits**: The platform undergoes periodic security audits by Trusted CI, the NSF Cybersecurity Center of Excellence. 
+  Summaries of these audits are available, with the latest report accessible `here <https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf>`_.
 
 Conclusion
 ----------
