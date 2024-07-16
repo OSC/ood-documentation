@@ -8,8 +8,8 @@ Introduction
 
 This document provides an overview of the security framework implemented in Open OnDemand, focusing on practical security concerns administrators need to consider when installing and managing the platform.
 
-Security Concerns
------------------
+Considerations
+--------------
 
 **The Good:**
 
