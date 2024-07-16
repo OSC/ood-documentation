@@ -1,39 +1,44 @@
 .. _security:
 
-Security
+Security Overview
 =================
 
 Introduction
 ------------
-
-This document provides an overview of the security framework implemented in Open OnDemand, focusing on practical security concerns administrators need to consider when installing and managing the platform.
+This document details the security framework for Open OnDemand, providing essential information that administrators need to know for secure deployment and operation.
 
 Considerations
 --------------
+This section outlines key security advantages and areas for vigilance within the Open OnDemand environment.
 
-**The Good:**
+Advantages
+^^^^^^^^^^
 
-- **PUN Architecture**: The Per-user Nginx (PUN) architecture underpins the security model where web servers, run by individual users rather than the root, handle user requests. This ensures that all actions, including file accesses, are executed under non-root user privileges, enhancing security by isolating user processes.
+- **Per-user Nginx (PUN) Architecture**: By running individual Nginx instances per user, Open OnDemand ensures that actions such as file access are conducted under user-specific non-root privileges, which isolates processes and enhances security.
 
-- **Apache Authentication**: Authentication is mandatory, with the type of scheme being adjustable per site. Open OnDemand discourages and does not document insecure basic authentication mechanisms such as Basic or LDAP to promote stronger security measures.
+- **Robust Authentication**: Open OnDemand supports various authentication methods. It particularly emphasizes secure protocols over less secure options like Basic or LDAP authentication, reinforcing its commitment to high security standards.
 
-**The Bad:**
+Limitations
+^^^^^^^^^^^
 
-- **HTTP Traffic to Origin Servers**: Currently, traffic to origin servers (like compute nodes running applications such as Jupyter) is handled via HTTP. This presents a risk as it is not encrypted. Efforts are ongoing to shift this traffic to HTTPS to secure all data in transit.
+- **HTTP Traffic to Origin Servers**: Traffic to backend services, including computational resources like Jupyter servers, is currently over HTTP, which is unencrypted. Plans are underway to upgrade this to HTTPS to ensure encryption of data in transit, thereby bolstering security.
 
-Security Features
+Security Controls
 -----------------
+Open OnDemand allows customization of security features to fit different operational environments:
 
-- **Monitoring and Logging**: Extensive monitoring and logging are in place, providing crucial tools for security auditing and incident response. For more information, see :ref:`logging`.
+- **File Browsing Restrictions**: Administrators can configure file access restrictions to prevent users from browsing sensitive parts of the file system. This is managed through an allowlist, or it can be disabled entirely. For more information, see :ref:`file-access-controls`.
 
-- **Vulnerability Management**: Vulnerabilities within Open OnDemand are diligently identified, reported, and managed. For more details on this process, see :ref:`vulnerability-management`.
+- **Monitoring and Logging**: Comprehensive logging mechanisms are integral for security audits and incident response. Detailed guidelines and settings for these features can be found at :ref:`logging`.
 
-- **Security Audits**: Open OnDemand has undergone several security audits by Trusted CI, the NSF Cybersecurity Center of Excellence. The latest audit report is available `here <https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf>`__.
+- **Vulnerability Management**: Active management of security weaknesses includes regular updates and patches. Detailed processes and current security advisories are available at :ref:`vulnerability-management`.
+
+- **Security Audits**: The platform undergoes periodic security audits by Trusted CI, the NSF Cybersecurity Center of Excellence. Summaries of these audits are available, with the latest report accessible `here <https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf>`_.
 
 Conclusion
 ----------
+Maintaining a secure and robust operational environment is critical for the success of Open OnDemand. Administrators are encouraged to implement the security practices recommended in this guide and to regularly review security settings and updates.
 
-Maintaining robust security is pivotal for the operation of Open OnDemand. Ongoing efforts are dedicated to strengthening the security measures in place. Users and administrators are encouraged to adhere to the outlined best practices and security guidelines to ensure a secure operational environment.
 
 Relevant References
 -------------------
