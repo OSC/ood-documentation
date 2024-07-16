@@ -37,8 +37,6 @@ that some centers may want to change or disable altogether.
 Additional Information
 ----------------------
 
-- **Monitoring and Logging**: Comprehensive logging mechanisms are integral for security audits and incident response. Detailed guidelines and settings for these features can be found at :ref:`logging`.
-
 - **Vulnerability Management**: Active management of security weaknesses includes regular updates and patches. Detailed processes and current security advisories are available at :ref:`vulnerability-management`.
 
 - **Security Audits**: The platform undergoes periodic security audits by Trusted CI, the NSF Cybersecurity Center of Excellence. Summaries of these audits are available, with the latest report accessible `here <https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf>`_.
