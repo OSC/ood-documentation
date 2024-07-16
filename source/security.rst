@@ -1,7 +1,7 @@
 .. _security:
 
-Security Overview
-=================
+Security
+========
 
 Introduction
 ------------
@@ -25,9 +25,6 @@ Limitations
 
 Security Controls
 -----------------
-Open OnDemand allows customization of security features to fit different operational environments:
-
-- **File Browsing Restrictions**: Administrators can configure file access restrictions to prevent users from browsing sensitive parts of the file system. This is managed through an allowlist, or it can be disabled entirely. For more information, see :ref:`file-access-controls`.
 
 - **Monitoring and Logging**: Comprehensive logging mechanisms are integral for security audits and incident response. Detailed guidelines and settings for these features can be found at :ref:`logging`.
 
