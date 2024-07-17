@@ -7,6 +7,9 @@ Introduction
 ------------
 This document details the security framework for Open OnDemand, providing essential information that administrators need to know for secure deployment and operation.
 
+.. note::
+  If you're here to report a vulerability, you may refer to :ref:`vulnerability-management`.
+
 Considerations
 --------------
 This section outlines key security advantages and areas for vigilance within the Open OnDemand environment.
@@ -33,13 +36,6 @@ that some centers may want to change or disable altogether.
   limit what a user can view and navigate to, some centers may want to limit this even further.
   One option is to :ref:`set-file-allowlist` to limit what directories users may navigate to.
 
-
-Additional Information
-----------------------
-
-- **Vulnerability Management**: Active management of security weaknesses includes regular updates and patches. Detailed processes and current security advisories are available at :ref:`vulnerability-management`.
-
-- **Security Audits**: The platform undergoes periodic security audits by Trusted CI, the NSF Cybersecurity Center of Excellence. Summaries of these audits are available, with the latest report accessible `here <https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf>`_.
 
 Conclusion
 ----------
