@@ -7,6 +7,37 @@ Customizations
   Check out the :ref:`pun-environment` for an overview of how environment variables can be
   added.
 
+.. _disabling_applications:
+
+Disabling applications
+----------------------
+
+OnDemand is comprised of a few components. Each of which you can disable or limit
+access by simply changing the file permissions of the application.
+
+All the applications OnDemand installs are located in `/var/www/ood/apps/sys`.
+So, for example, if you wished to disable the file browser you would simply
+change it's directory to 700 so it's unreadable by regular users.
+
+When this directory is unreadable by regular users, the functionality
+it provides will be disabeled.
+
+.. code-block:: sh
+
+  sudo chmod 700 /var/www/ood/apps/sys/files
+
+Alternatively, if you wished to limit acess you can do so through group
+permissions. For example, if you wanted to limit access to the file browser
+to only memebers in the Unix group ``staff``, you would simply apply the
+applicable file permission such that anonymous users cannot access the
+directory while members of the ``staff`` Unix group can.
+
+.. code-block:: sh
+
+  sudo chmod 750 /var/www/ood/apps/sys/files
+  sudo chown root:staff /var/www/ood/apps/sys/files
+
+
 Announcements
 -------------
 
