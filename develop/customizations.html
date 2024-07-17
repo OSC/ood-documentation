@@ -111,6 +111,7 @@
 <p class="caption"><span class="caption-text">How-Tos</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Customizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#disabling-applications">Disabling applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#announcements">Announcements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#message-of-the-day-motd">Message of the Day (MOTD)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#branding">Branding</a><ul>
@@ -191,7 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#custom-pages">Custom Pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-tickets">Support Tickets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">Customizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Customizations</a></li>
 </ul>
 </li>
 </ul>
@@ -220,6 +221,7 @@
 <li class="toctree-l3"><a class="reference internal" href="authentication/overview.html">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="how-tos/monitoring/logging.html">Logging</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Customizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-applications">Disabling applications</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#announcements">Announcements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#message-of-the-day-motd">Message of the Day (MOTD)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#branding">Branding</a></li>
@@ -339,6 +341,28 @@
 <p>Check out the <a class="reference internal" href="reference/pun-environment.html#pun-environment"><span class="std std-ref">PUN environment</span></a> for an overview of how environment variables can be
 added.</p>
 </div>
+<div class="section" id="disabling-applications">
+<span id="id2"></span><h2>Disabling applications<a class="headerlink" href="#disabling-applications" title="Permalink to this headline">¶</a></h2>
+<p>OnDemand is comprised of a few components. Each of which you can disable or limit
+access by simply changing the file permissions of the application.</p>
+<p>All the applications OnDemand installs are located in <cite>/var/www/ood/apps/sys</cite>.
+So, for example, if you wished to disable the file browser you would simply
+change it’s directory to 700 so it’s unreadable by regular users.</p>
+<p>When this directory is unreadable by regular users, the functionality
+it provides will be disabeled.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod <span class="m">700</span> /var/www/ood/apps/sys/files
+</pre></div>
+</div>
+<p>Alternatively, if you wished to limit acess you can do so through group
+permissions. For example, if you wanted to limit access to the file browser
+to only memebers in the Unix group <code class="docutils literal notranslate"><span class="pre">staff</span></code>, you would simply apply the
+applicable file permission such that anonymous users cannot access the
+directory while members of the <code class="docutils literal notranslate"><span class="pre">staff</span></code> Unix group can.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chmod <span class="m">750</span> /var/www/ood/apps/sys/files
+sudo chown root:staff /var/www/ood/apps/sys/files
+</pre></div>
+</div>
+</div>
 <div class="section" id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Permalink to this headline">¶</a></h2>
 <p>To add an announcement message that appears at the top of the dashboard you can create a file at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.(md|yml)</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcements.d/any_file_name.(md|yml)</span></code>.</p>
@@ -352,13 +376,13 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 </div></blockquote>
 <p>the user would see this message at the top of the dashboard:</p>
-<div class="figure align-center" id="id22">
+<div class="figure align-center" id="id23">
 <img alt="_images/dashboard-announcement.png" src="_images/dashboard-announcement.png" />
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
 </div>
 <p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
-<table class="docutils align-default" id="id23">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id23" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id24">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Config Files</span><a class="headerlink" href="#id24" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -413,22 +437,22 @@ HTML content. For your safety, by default, the Open OnDemand system will not ren
 HTML.  We provide <a class="reference internal" href="reference/files/ondemand-d-ymls.html#motd-render-html"><span class="std std-ref">a configuration to enable HTML rendering in MOTD</span></a>
 should you need to render HTML.</p>
 </div>
-<div class="figure align-center" id="id24">
+<div class="figure align-center" id="id25">
 <img alt="_images/dashboard_motd.png" src="_images/dashboard_motd.png" />
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
 </div>
 <p>We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 </div>
 <div class="section" id="branding">
 <h2>Branding<a class="headerlink" href="#branding" title="Permalink to this headline">¶</a></h2>
-<p id="id2">You can customize the logo, favicon, title, and navbar colors of OnDemand.</p>
+<p id="id3">You can customize the logo, favicon, title, and navbar colors of OnDemand.</p>
 <div class="figure align-center">
 <img alt="_images/dashboard_branding_logo_and_colors.png" src="_images/dashboard_branding_logo_and_colors.png" />
 </div>
 <p>We recommend setting these values using the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration properties</span></a>.
 Currently only the dashboard uses the colors in the navbar.</p>
-<table class="docutils align-default" id="id25">
-<caption><span class="caption-number">Table 3 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id25" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id26">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id26" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -480,9 +504,9 @@ Currently only the dashboard uses the colors in the navbar.</p>
 <p>It is possible to configure these settings using environment variables, although this is deprecated.
 For information about the properties and environment variables, see the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
 </div>
-<div class="figure align-center" id="id26">
+<div class="figure align-center" id="id27">
 <img alt="_images/dashboard_navbar_branding_bluered.png" src="_images/dashboard_navbar_branding_bluered.png" />
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
 </div>
 <div class="section" id="custom-css-files">
 <h3>Custom CSS files<a class="headerlink" href="#custom-css-files" title="Permalink to this headline">¶</a></h3>
@@ -529,8 +553,8 @@ distributed by the Open OnDemand package.</p>
 <div class="section" id="add-urls-to-help-menu">
 <h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Permalink to this headline">¶</a></h2>
 <p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
-<table class="docutils align-default" id="id27">
-<caption><span class="caption-number">Table 4 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id27" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id28">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id28" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -593,7 +617,7 @@ For more information on how to create custom links, see for example <a class="re
 </div>
 </div>
 <div class="section" id="add-shortcuts-to-files-menu">
-<span id="id3"></span><h2>Add Shortcuts to Files Menu<a class="headerlink" href="#add-shortcuts-to-files-menu" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2>Add Shortcuts to Files Menu<a class="headerlink" href="#add-shortcuts-to-files-menu" title="Permalink to this headline">¶</a></h2>
 <p>The Files menu by default has a single link to open the Files app in the user’s
 Home Directory. More links can be added to this menu, for Scratch space and
 Project space directories.</p>
@@ -690,9 +714,9 @@ with in the dropdown with both the title and the path.</p></li>
 <span class="n">the</span> <span class="no">Home</span> <span class="no">Directory</span> <span class="n">link</span><span class="o">.</span>
 </pre></div>
 </div>
-<div class="figure align-center" id="id28">
+<div class="figure align-center" id="id29">
 <img alt="_images/files_menu_shortcuts_osc.png" src="_images/files_menu_shortcuts_osc.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
 </div>
 <ul class="simple">
 <li><p>You must restart the Dashboard app to see a configuration change take effect.
@@ -838,7 +862,7 @@ it encounters.  Within each dropdown menu it will add seperators for each
 <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> it encounters.</p>
 </div>
 <div class="section" id="limit-auto-generated-menu-bars">
-<span id="id4"></span><h3>Limit auto generated menu bars<a class="headerlink" href="#limit-auto-generated-menu-bars" title="Permalink to this headline">¶</a></h3>
+<span id="id5"></span><h3>Limit auto generated menu bars<a class="headerlink" href="#limit-auto-generated-menu-bars" title="Permalink to this headline">¶</a></h3>
 <p>As described in the previous section, the system will generate new dropdown
 menus for every <code class="docutils literal notranslate"><span class="pre">category</span></code> it discovers.</p>
 <p>If you wish to add or remove which categories create dropdown menus
@@ -983,7 +1007,7 @@ are several pre-defined navigation menus that you can use.</p>
 </div>
 </div>
 <div class="section" id="menus-based-on-applications">
-<span id="id6"></span><h4>Menus based on applications<a class="headerlink" href="#menus-based-on-applications" title="Permalink to this headline">¶</a></h4>
+<span id="id7"></span><h4>Menus based on applications<a class="headerlink" href="#menus-based-on-applications" title="Permalink to this headline">¶</a></h4>
 <p>You can create dropdown menus based on applications the system can discover.</p>
 <p>Menu items are automatically grouped based on the applications <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>.
 Use the <code class="docutils literal notranslate"><span class="pre">apps</span></code> array to define the app tokens for this navigation menu.</p>
@@ -1001,7 +1025,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">apps</span>
 </div>
 </div>
 <div class="section" id="menus-based-on-links">
-<span id="id7"></span><h4>Menus based on links<a class="headerlink" href="#menus-based-on-links" title="Permalink to this headline">¶</a></h4>
+<span id="id8"></span><h4>Menus based on links<a class="headerlink" href="#menus-based-on-links" title="Permalink to this headline">¶</a></h4>
 <p>Menus based on links provide even more granular control on how the dropdown menu is generated.</p>
 <p>As seen in the previous sections, using an <code class="docutils literal notranslate"><span class="pre">apps</span></code> array will automatically generate
 submenus based on the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> of the applications that have been discovered.</p>
@@ -1047,7 +1071,7 @@ of the applications in the list.</p>
 </div>
 </div>
 <div class="section" id="menus-for-profile-links">
-<span id="id8"></span><h4>Menus for profile links<a class="headerlink" href="#menus-for-profile-links" title="Permalink to this headline">¶</a></h4>
+<span id="id9"></span><h4>Menus for profile links<a class="headerlink" href="#menus-for-profile-links" title="Permalink to this headline">¶</a></h4>
 <p>If you’ve enabled <cite>Profiles &lt;profiles_guide&gt;</cite> you can create navigation bar menus and
 links to those profiles through the <code class="docutils literal notranslate"><span class="pre">profile</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
@@ -1068,7 +1092,7 @@ links to those profiles through the <code class="docutils literal notranslate"><
 </div>
 </div>
 <div class="section" id="menus-for-custom-pages">
-<span id="id9"></span><h4>Menus for custom pages<a class="headerlink" href="#menus-for-custom-pages" title="Permalink to this headline">¶</a></h4>
+<span id="id10"></span><h4>Menus for custom pages<a class="headerlink" href="#menus-for-custom-pages" title="Permalink to this headline">¶</a></h4>
 <p>If you’ve enabled <a class="reference internal" href="#custom-pages-guide">custom_pages_guide</a> you can create navigation menus
 or single links directly to those pages through the the <code class="docutils literal notranslate"><span class="pre">page</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
@@ -1089,7 +1113,7 @@ or single links directly to those pages through the the <code class="docutils li
 </div>
 </div>
 <div class="section" id="menus-for-urls">
-<span id="id10"></span><h4>Menus for URLs<a class="headerlink" href="#menus-for-urls" title="Permalink to this headline">¶</a></h4>
+<span id="id11"></span><h4>Menus for URLs<a class="headerlink" href="#menus-for-urls" title="Permalink to this headline">¶</a></h4>
 <p>You can even create menu items for relative and absolute URLs to link anywhere
 through the <code class="docutils literal notranslate"><span class="pre">url</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span><span class="w"></span>
@@ -1135,7 +1159,7 @@ The custom menu will replace the <code class="docutils literal notranslate"><spa
 </div>
 </div>
 <div class="section" id="set-upload-limits">
-<span id="id11"></span><h2>Set Upload Limits<a class="headerlink" href="#set-upload-limits" title="Permalink to this headline">¶</a></h2>
+<span id="id12"></span><h2>Set Upload Limits<a class="headerlink" href="#set-upload-limits" title="Permalink to this headline">¶</a></h2>
 <p>By default, the file size upload limit is 10737420000 bytes (~10.7 GB).</p>
 <p>If you want set this to a lower value, set the <code class="docutils literal notranslate"><span class="pre">FILE_UPLOAD_MAX</span></code> configuration
 in the file apps’ configuration file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
@@ -1200,7 +1224,7 @@ to disable access to specific users based on the users’ default <code class="d
 default shell.</p>
 </div>
 <div class="section" id="set-default-ssh-host">
-<span id="id12"></span><h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
+<span id="id13"></span><h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The shell app does not work out of the box because all SSH hosts have to be explicitly allowed
@@ -1224,7 +1248,7 @@ default=true attribute to the login section like the example below.</p>
 </div>
 </div>
 <div class="section" id="set-ssh-allowlist">
-<span id="id13"></span><h2>Set SSH Allowlist<a class="headerlink" href="#set-ssh-allowlist" title="Permalink to this headline">¶</a></h2>
+<span id="id14"></span><h2>Set SSH Allowlist<a class="headerlink" href="#set-ssh-allowlist" title="Permalink to this headline">¶</a></h2>
 <p>In 1.8 and above we stopped allowing ssh access by default.  Now you have explicitly set
 what hosts users will be allowed to connect to in the shell application.</p>
 <p>Every cluster configuration with <code class="docutils literal notranslate"><span class="pre">v2.login.host</span></code> that is not hidden (it has
@@ -1526,8 +1550,8 @@ is an array of existing or newly added widgets to render in that column.</p>
 <li><p>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</p></li>
 </ol>
 <p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
-<table class="docutils align-default" id="id29">
-<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id29" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id30">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id30" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1683,7 +1707,7 @@ the specified user only.</p>
 </div>
 </div>
 <div class="section" id="balance-warnings-on-dashboard">
-<span id="id14"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
+<span id="id15"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Permalink to this headline">¶</a></h2>
 <p>You can display warnings to users on the Dashboard if their
 resource balance is nearing its limit. This requires an auto-updated (it is
 recommended to update this file daily with a cronjob) JSON file
@@ -1748,7 +1772,7 @@ can be changed with the environment variable <code class="docutils literal notra
 </div>
 </div>
 <div class="section" id="maintenance-mode">
-<span id="id15"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
+<span id="id16"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h2>
 <p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.</p>
 <p>You can do this by setting Open OnDemand in ‘Maintenance Mode’.
@@ -1781,7 +1805,7 @@ mode, not it’s content, so you will not need to restart apache or modify it’
 take affect.</p>
 </div>
 <div class="section" id="grafana-support">
-<span id="id16"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Permalink to this headline">¶</a></h2>
+<span id="id17"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Permalink to this headline">¶</a></h2>
 <p>It’s possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.</p>
 <p>Grafana must be configured to support embedded panels and at this time it is also required to have a anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust <cite>org_name</cite> to match whatever organization you wish to be anonymous.</p>
 <div class="admonition warning">
@@ -1852,7 +1876,7 @@ nodes.</p>
 </div>
 </div>
 <div class="section" id="set-illegal-job-name-characters">
-<span id="id17"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Permalink to this headline">¶</a></h2>
+<span id="id18"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Permalink to this headline">¶</a></h2>
 <p>If you encounter an issue in running batch connect applications complaining about invalid
 job names like the error below.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">read</span> <span class="pre">script</span> <span class="pre">file</span> <span class="pre">because</span> <span class="pre">of</span> <span class="pre">error:</span> <span class="pre">ERROR!</span> <span class="pre">argument</span> <span class="pre">to</span> <span class="pre">-N</span> <span class="pre">option</span> <span class="pre">must</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">/</span></code></p>
@@ -1865,7 +1889,7 @@ job names like the error below.</p>
 </div>
 </div>
 <div class="section" id="customize-dex-theme">
-<span id="id18"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Permalink to this headline">¶</a></h2>
+<span id="id19"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Permalink to this headline">¶</a></h2>
 <p>It’s possible to use a customized theme when authenticating with Dex when using OnDemand’s default authentication.
 Refer to the upstream <a class="reference external" href="https://dexidp.io/docs/templates/">Dex template docs</a> for additional information on templating Dex.</p>
 <p>The simplest approach is to copy the OnDemand theme and make changes.  This is idea if you wish to make the following changes:</p>
@@ -1907,11 +1931,11 @@ sudo systemctl restart ondemand-dex.service
 </div>
 </div>
 <div class="section" id="xdmod-integration">
-<span id="id19"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Permalink to this headline">¶</a></h2>
+<span id="id20"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Permalink to this headline">¶</a></h2>
 <p>XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.</p>
-<div class="figure align-center" id="id30">
+<div class="figure align-center" id="id31">
 <img alt="_images/customization_xdmod.png" src="_images/customization_xdmod.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id31" title="Permalink to this image">¶</a></p>
 </div>
 <p>Steps to enable the XDMoD reports in the OnDemand Dashboard:</p>
 <ol class="arabic">
@@ -2122,8 +2146,8 @@ escelation.</p>
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="id21">
-<h3>Customizations<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id22">
+<h3>Customizations<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <p>The support ticket form can be customized using the <code class="docutils literal notranslate"><span class="pre">form</span></code> and <code class="docutils literal notranslate"><span class="pre">attributes</span></code> configuration properties.
 In the same way that you can configure the <a class="reference internal" href="enable-desktops/modify-form-attributes.html#enable-desktops-modify-form-attributes"><span class="std std-ref">form for interactive applications</span></a>,
 the support ticket form fields can be arranged or changed as required.</p>
