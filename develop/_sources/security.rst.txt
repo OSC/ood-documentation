@@ -23,10 +23,19 @@ Limitations
 
 - **HTTP Traffic to Origin Servers**: Traffic to backend services, including computational resources like Jupyter servers, is currently over HTTP, which is unencrypted. Plans are underway to upgrade this to HTTPS to ensure encryption of data in transit, thereby bolstering security.
 
-Security Controls
------------------
+Controls
+^^^^^^^^
 
-- **Monitoring and Logging**: Comprehensive logging mechanisms are integral for security audits and incident response. Detailed guidelines and settings for these features can be found at :ref:`logging`.
+These are things the the out of the box OnDemand installation will provide
+that some centers may want to change or disable altogether.
+
+- **File Access**: OnDemand lets users navigate the file system. While file permissions
+  limit what a user can view and navigate to, some centers may want to limit this even further.
+  One option is to :ref:`set-file-allowlist` to limit what directories users may navigate to.
+
+
+Additional Information
+----------------------
 
 - **Vulnerability Management**: Active management of security weaknesses includes regular updates and patches. Detailed processes and current security advisories are available at :ref:`vulnerability-management`.
 
