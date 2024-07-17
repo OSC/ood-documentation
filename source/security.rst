@@ -32,7 +32,8 @@ that some centers may want to change or disable altogether.
 - **File Access**: OnDemand lets users navigate the file system. While file permissions
   limit what a user can view and navigate to, some centers may want to limit this even further.
   One option is to :ref:`set-file-allowlist` to limit what directories users may navigate to.
-
+  Additionally, you may want to disable or limit access to the application. You can do this
+  through :ref:`disabling_applications`.
 
 Additional Information
 ----------------------
