@@ -395,6 +395,8 @@ Note that this will limit the download size for all users of the Open OnDemand i
 
    Values like ``1000M`` or ``20G`` will not be accepted and may cause errors.
 
+.. _set-file-allowlist:
+
 Block or Allow Directory Access
 -------------------------------
 
