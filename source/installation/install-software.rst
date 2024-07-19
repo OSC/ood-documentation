@@ -110,6 +110,17 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
             sudo apt install ondemand
 
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.2-noble_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.2-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.2-noble_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
+
       .. tab:: Debian 12
 
          .. code-block:: sh
