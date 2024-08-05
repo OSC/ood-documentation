@@ -47,12 +47,12 @@ such:
    logout_redirect: /Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout
 
    # Capture system user name from authenticated user name
-   user_map_cmd: "/opt/ood/ood_auth_map/bin/ood_auth_map.regex --regex='^(\\w+)@my-center.edu'"
+   user_map_match: '([^@]+)@my-center.edu'
 
 
 In the example above:
 
-- The ``user_map_cmd`` uses regular expressions to map the authenticated user
+- The ``user_map_match`` uses regular expressions to map the authenticated user
   ``bob@my-center.edu`` to their system user name ``bob``.
 - The ``RequestHeader`` settings are used to strip private session information
   from being sent to the backend web servers.
