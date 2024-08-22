@@ -73,7 +73,8 @@ Configure General Options
 
         .. code-block:: yaml
 
-          servername: "class.my-cool-site.example.edu"
+          server_aliases: 
+             - "class.my-cool-site.example.edu"
 
 .. describe:: proxy_server (String, null)
 
