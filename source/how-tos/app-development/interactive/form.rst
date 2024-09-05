@@ -222,6 +222,24 @@ auto_modules_<MODULE>
      attributes:
        auto_modules_matlab:
          default: false
+
+  To filter versions that show up in the drop-down list, you can use a Ruby regex (https://rubular.com/)
+  (without the wrapping `//`) or a string:
+
+  Regex:
+  .. code-block:: yaml
+
+    attributes:
+      auto_modules_matlab:
+        filter: (intel|gnu)\d*
+
+  String:
+
+  .. code-block:: yaml
+    
+    attributes:
+      auto_modules_matlab:
+        filter: intel
   
   See :ref:`the module directory configuration <module_file_dir>` on how to enable
   the cluster module files that need to be read.
