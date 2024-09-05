@@ -23,13 +23,6 @@ Restart services
 
    .. tabs::
 
-      .. tab:: RHEL/CentOS 7
-
-        .. code-block:: sh
-
-          sudo systemctl try-restart httpd24-httpd
-
-
       .. tab:: RHEL/Rocky 8 & 9
 
          .. code-block:: sh
@@ -60,12 +53,6 @@ which corresponds directly to `Apache's ServerName configuration`_ (and restart 
 Or you're using the wrong hostname in your browser.
 
    .. tabs::
-
-      .. tab:: RHEL/CentOS 7
-
-        .. code-block:: sh
-
-          sudo /opt/rh/httpd24/root/sbin/httpd -S
 
       .. tab:: RHEL/Rocky 8 & 9
 
