@@ -33,13 +33,6 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
 .. tabs::
 
-   .. tab:: CentOS 7
-
-      .. code-block:: sh
-
-         sudo yum install centos-release-scl epel-release
-
-
    .. tab:: RockyLinux/Alma Linux 8
 
       .. code-block:: sh
@@ -78,14 +71,6 @@ Some operating systems use `Software Collections`_ to satisfy these.
 -----------------------------
 
    .. tabs::
-
-      .. tab:: RedHat/CentOS 7
-
-         .. code-block:: sh
-
-            sudo yum install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el7.noarch.rpm
-
-            sudo yum install ondemand
 
       .. tab:: RedHat/Rocky Linux/AlmaLinux 8
 
@@ -148,14 +133,6 @@ Some operating systems use `Software Collections`_ to satisfy these.
 -----------------
 
    .. tabs::
-
-      .. tab:: RHEL/CentOS 7
-
-        .. code-block:: sh
-
-          sudo systemctl start httpd24-httpd
-          sudo systemctl enable httpd24-httpd
-
 
       .. tab:: RHEL/Rocky 8 & 9
 

@@ -17,7 +17,6 @@ At this time OnDemand only supports the following operating systems and architec
    :header: "","x86_64","aarch64/arm64","ppc64le"
    :stub-columns: 1
 
-   "RedHat/CentOS 7",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "RedHat/Rocky Linux/AlmaLinux 8",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "Ubuntu 20.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
