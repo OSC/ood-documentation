@@ -33,19 +33,12 @@ For yum/dnf based systems the `ondemand_exporter`_ can be installed via RPM.
 
 The RPM will install the following files that should work out of the box:
 
-- **RHEL/CentOS 7 only**: /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
 - **RHEL/Rocky/AlmaLinux 8 & 9 only**: /etc/httpd/conf.d/ondemand_exporter.conf
 - /etc/sudoers.d/ondemand_exporter
 
 Ensure that the new Apache configuration is loaded by restarting Apache
 
 .. tabs::
-
-   .. tab:: RHEL/CentOS 7
-
-      .. code-block:: sh
-
-         sudo systemctl restart httpd24-httpd
 
    .. tab:: RHEL/Rocky/Alma Linux 8 & 9
 
@@ -81,13 +74,6 @@ Check for the `ondemand_exporter Latest Release`_ version number.  Replace ``VER
    sudo systemctl daemon-reload
 
 .. tabs::
-
-   .. tab:: RHEL/CentOS 7
-
-      .. code-block:: sh
-
-         sudo install -o root -g root -m 0440 /tmp/${ARCHIVE}/files/apache.conf /opt/rh/httpd24/root/etc/httpd/conf.d/ondemand_exporter.conf
-         sudo systemctl restart httpd24-httpd
 
    .. tab:: RHEL/Rocky/Alma Linux 8 & 9
 

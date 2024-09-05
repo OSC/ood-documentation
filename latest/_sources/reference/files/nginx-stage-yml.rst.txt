@@ -788,15 +788,11 @@ Configuration Options
         min_uid: 1000
 
    Example
-     Using CentOS 6
+     Define new minimum UID
 
      .. code-block:: yaml
 
         min_uid: 500
-
-   .. note::
-
-      For RHEL6 and CentOS 6 the user id's begin at ``500``.
 
 .. _disabled_shell:
 

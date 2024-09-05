@@ -22,18 +22,6 @@ configuration files.
 
 #. We will now list all available tasks that we can run:
 
-   .. rubric:: If your operating system is CentOS 7 or RHEL 7, run this command:
-
-   .. code-block:: sh
-
-      scl enable ondemand -- bin/rake -T test:jobs
-      # rake test:jobs           # Test all clusters
-      # rake test:jobs:cluster1  # Test the cluster: cluster1
-      # rake test:jobs:cluster2  # Test the cluster: cluster2
-
-
-   .. rubric:: Otherwise, run this command:
-
    .. code-block:: sh
 
       source /opt/ood/ondemand/enable
