@@ -235,7 +235,7 @@ Basic Batch Connect Options
           # careful now, we can't override run_file or we have to
           # change it here too!  This also doesn't account for timeout,
           # if it's provided.
-          IMAGE=/opt/images/centos7.sif
+          IMAGE=/opt/images/el9.sif
           singularity exec -p $IMAGE /bin/bash script.sh
 
 .. describe:: script_file (String, "./script.sh")
