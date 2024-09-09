@@ -55,7 +55,7 @@ for the ``ruby`` cluster.  It will then hide it every time the cluster ``ruby`` 
       widget: select
       options:
         - 'standard'
-        - [ 
+        - [
             'gpu', 'gpu',
             data-option-for-cluster-ruby: false
           ]
@@ -78,7 +78,7 @@ But using Nvidia's `CUDA`_ libraries only makes sense when the user is requestin
 So, we want to hide the ``cuda_version`` element when a users chooses standard ``node_type``.
 
 Here's the example YAML for this app with two select widgets.  This
-instructs the webpage to hide the ``cuda_version`` when the ``standard`` 
+instructs the webpage to hide the ``cuda_version`` when the ``standard``
 ``node_type`` is selected.
 
 .. code-block:: yaml
@@ -88,7 +88,7 @@ instructs the webpage to hide the ``cuda_version`` when the ``standard``
     node_type:
       widget: select
       options:
-        - [ 
+        - [
             'standard', 'standard',
             data-hide-cuda-version: true
           ]
@@ -100,7 +100,7 @@ Here we have a checkbox ``enable_cuda_version`` that will show
 ``cuda_version`` when checked and hide it when it's not checked.
 
 .. tip::
-  Checkboxes respond to ``when-checked: true`` and ``when-unchecked: true``
+  Checkboxes respond to ``when-checked: true`` and ``when-un-checked: true``
   for hiding elements when checked or unchecked.
 
 .. code-block:: yaml
@@ -111,7 +111,7 @@ Here we have a checkbox ``enable_cuda_version`` that will show
       widget: 'check_box'
       html_options:
         data:
-          hide-cuda-version-when-unchecked: true
+          hide-cuda-version-when-un-checked: true
 
 Dynamic Element Labels
 **********************
@@ -154,7 +154,7 @@ different sizes. In the ``oakley`` cluster nodes have a total 28 cores and in th
 ``ruby`` cluster they have 40.
 
 In this example ``data-max-num-cores-for-cluster-oakley`` is attached to the standard
-node type. This config is saying, when the ``node_type`` is ``standard`` 
+node type. This config is saying, when the ``node_type`` is ``standard``
 and the ``cluster`` is ``oakley`` set maximum ``num_cores`` to 28.
 
 .. code-block:: yaml
@@ -163,7 +163,7 @@ and the ``cluster`` is ``oakley`` set maximum ``num_cores`` to 28.
     node_type:
       widget: select
       options:
-        - [ 
+        - [
             'standard', 'standard',
             data-max-num-cores-for-cluster-oakley: 28,
             data-max-num-cores-for-cluster-ruby: 40,
@@ -174,7 +174,7 @@ and the ``cluster`` is ``oakley`` set maximum ``num_cores`` to 28.
             data-min-num-cores: 1,
           ]
 
-This example also illustrates a simpler variant of this directive attached to ``gpu``. 
+This example also illustrates a simpler variant of this directive attached to ``gpu``.
 This configuration doesn't have a for clause, so it will set the minimum and maximum
 values for ``num_cores`` when ``gpu`` is selected, regardless of which cluster is selected.
 
@@ -207,7 +207,7 @@ the ``enable_gpu`` check box will either be checked or unchecked.
     node_type:
       widget: select
       options:
-        - [ 
+        - [
             'standard', 'standard',
             data-set-charge-account: 'standard-charge-code',
             data-set-enable-gpu: 0
