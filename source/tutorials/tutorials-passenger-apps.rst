@@ -12,4 +12,4 @@ At the bottom of the page is a list of tutorials for developing Passenger apps f
    :caption: Tutorials
 
    tutorials-passenger-apps/ps-to-quota
-   nodejs/nodejs-starter-app
+   tutorials-passenger-apps/nodejs-starter-app
