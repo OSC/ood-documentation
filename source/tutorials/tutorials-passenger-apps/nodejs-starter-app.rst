@@ -81,7 +81,6 @@ string.
 Boot the application
 --------------------
 
-
 Now that the app's all setup and implemented, you should be able to
 boot it up.  To do so, simply navigate to ``My Sandbox Apps (Development)``
 in the ``Develop`` menu of your OnDemand installation.
