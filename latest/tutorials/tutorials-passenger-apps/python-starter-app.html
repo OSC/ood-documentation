@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Starter Python Application &mdash; Open OnDemand 3.1.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Developing The OOD Dashboard" href="../tutorials-dashboard-apps.html" />
+    <link rel="prev" title="Starter NodeJS Application" href="nodejs-starter-app.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ps-to-quota.html">Creating a Status App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nodejs-starter-app.html">Starter NodeJS Application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Starter Python Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-application">Basic application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boot-the-application">Boot the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-using-flask-and-a-virtual-environment">Application using Flask and a virtual environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-the-virtual-environmet">Create the virtual environmet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-the-python-files">Create the python files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-virtual-environment">Using the virtual environment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a> &raquo;</li>
+        
+      <li>Starter Python Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/tutorials/tutorials-passenger-apps/python-starter-app.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="starter-python-application">
+<span id="app-development-tutorials-python"></span><h1>Starter Python Application<a class="headerlink" href="#starter-python-application" title="Permalink to this headline">¶</a></h1>
+<p>This document describes how to start a Passenger application
+in <a class="reference external" href="https://www.python.org/">Python</a> language.</p>
+<div class="section" id="basic-application">
+<h2>Basic application<a class="headerlink" href="#basic-application" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> is the entrypoint for any python application.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/ondemand/dev
+mkdir python-hello-world
+<span class="nb">cd</span> python-hello-world
+touch passenger_wsgi.py
+</pre></div>
+</div>
+<p>Now with the <code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> file created, we can add this content to
+serve a response to a request.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># passenger_wsgi.py</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s1">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;Hello World from Open OnDemand (Python WSGI)!</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="boot-the-application">
+<h2>Boot the application<a class="headerlink" href="#boot-the-application" title="Permalink to this headline">¶</a></h2>
+<p>Now that the app’s all setup and implemented, you should be able to
+boot it up.  To do so, simply navigate to <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Sandbox</span> <span class="pre">Apps</span> <span class="pre">(Development)</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">Develop</span></code> menu of your OnDemand installation.</p>
+<p>There you should see this application at the top of the list.  Clicking
+<code class="docutils literal notranslate"><span class="pre">Launch</span> <span class="pre">Python</span> <span class="pre">Hello</span> <span class="pre">World</span></code> will launch this application in a new tab.</p>
+<p>When the new tab opens you should see a blank page with the text <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>
+with some extra text about the system. This is your new <a class="reference external" href="https://www.python.org/">Python</a> application!</p>
+</div>
+<div class="section" id="application-using-flask-and-a-virtual-environment">
+<h2>Application using Flask and a virtual environment<a class="headerlink" href="#application-using-flask-and-a-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>The basic application above is fine, but you’ll likely need to add
+more dependencies and load those dependencies at runtime.</p>
+<p>So this section goes over adding the <a class="reference external" href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> web framework and having
+the application load the virtual environment that has your dependencies in
+it.</p>
+<div class="section" id="create-the-virtual-environmet">
+<h3>Create the virtual environmet<a class="headerlink" href="#create-the-virtual-environmet" title="Permalink to this headline">¶</a></h3>
+<p>First, we need to create the virtual environment. Issue this command below
+to create one. This will create a subdirectory <code class="docutils literal notranslate"><span class="pre">python-hello-world</span></code> with a
+<code class="docutils literal notranslate"><span class="pre">bin/activate</span></code> file you can use to activate the environment.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv python-hello-world
+</pre></div>
+</div>
+<p>Now, let’s create the <code class="docutils literal notranslate"><span class="pre">requriements.txt</span></code> file where we’ll add the application’s
+required libraries. Here, we’re only adding <code class="docutils literal notranslate"><span class="pre">flask</span></code> of any version.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># requirements.txt
+flask
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> python-hello-world/bin/activate
+python3 -m pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-python-files">
+<h3>Create the python files<a class="headerlink" href="#create-the-python-files" title="Permalink to this headline">¶</a></h3>
+<p>In the basic example above, the entire implementation is held within a <code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code>.
+This project is more advanced, so it will include two files. <code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> and
+<code class="docutils literal notranslate"><span class="pre">app.py</span></code>.  <code class="docutils literal notranslate"><span class="pre">app.py</span></code> will hold the logic for the application.</p>
+<p><code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> simply imports the app from the <code class="docutils literal notranslate"><span class="pre">app.py</span></code> file. This is all that’s required
+for this file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># passenger_wsgi.py</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">MyApp</span> <span class="k">as</span> <span class="n">application</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">app.py</span></code> on the other hand, has logic associcated with the web application in it.
+It imports the <a class="reference external" href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> libraries, configures the routes and starts the flask server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># app.py</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">MyApp</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;python_hello_world&#39;</span><span class="p">)</span>
+
+<span class="nd">@MyApp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+  <span class="k">return</span> <span class="s1">&#39;Hello World!&lt;br&gt;&#39;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+  <span class="n">MyApp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-virtual-environment">
+<h3>Using the virtual environment<a class="headerlink" href="#using-the-virtual-environment" title="Permalink to this headline">¶</a></h3>
+<p>At this point, the app is basically done, but won’t boot up because it
+can’t find <a class="reference external" href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> libraries. We created a virtual environment in a previous
+step, now we have to get OnDemand to recognize this environment.</p>
+<p>To do this, we need to create a <cite>bin/python</cite> wrapper file to load the appropriate
+virtual environment.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">SCRIPT_DIR</span><span class="o">=</span><span class="k">$(</span> <span class="nb">cd</span> -- <span class="s2">&quot;</span><span class="k">$(</span> dirname -- <span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_SOURCE</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">)</span><span class="s2">&quot;</span> <span class="p">&amp;</span>&gt; /dev/null <span class="o">&amp;&amp;</span> <span class="nb">pwd</span> <span class="k">)</span>
+<span class="nb">source</span> <span class="nv">$SCRIPT_DIR</span>/../python-hello-world/bin/activate
+
+<span class="nb">exec</span> /bin/env python3 <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure that this <code class="docutils literal notranslate"><span class="pre">bin/python</span></code> file has executable permissons on it.
+Issue the command <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">bin.python</span></code> to give it executable permissions.</p>
+</div>
+<p>Now, with the python wrapper script to load the environment for your application,
+it should boot up correctly.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tutorials-dashboard-apps.html" class="btn btn-neutral float-right" title="Developing The OOD Dashboard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nodejs-starter-app.html" class="btn btn-neutral float-left" title="Starter NodeJS Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2024, Ohio Supercomputer Center
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/tutorials/tutorials-passenger-apps/python-starter-app.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/tutorials/tutorials-passenger-apps/python-starter-app.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/tutorials/tutorials-passenger-apps/python-starter-app.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/tutorials/tutorials-passenger-apps/python-starter-app.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/tutorials/tutorials-passenger-apps/python-starter-app.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/tutorials/tutorials-passenger-apps/python-starter-app.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/tutorials/tutorials-passenger-apps/python-starter-app.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/tutorials/tutorials-passenger-apps/python-starter-app.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/tutorials/tutorials-passenger-apps/python-starter-app.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/tutorials/tutorials-passenger-apps/python-starter-app.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/tutorials/tutorials-passenger-apps/python-starter-app.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/tutorials/tutorials-passenger-apps/python-starter-app.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/tutorials/tutorials-passenger-apps/python-starter-app.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
