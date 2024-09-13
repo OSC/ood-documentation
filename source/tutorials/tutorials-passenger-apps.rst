@@ -12,3 +12,5 @@ At the bottom of the page is a list of tutorials for developing Passenger apps f
    :caption: Tutorials
 
    tutorials-passenger-apps/ps-to-quota
+   tutorials-passenger-apps/nodejs-starter-app
+   tutorials-passenger-apps/python-starter-app
