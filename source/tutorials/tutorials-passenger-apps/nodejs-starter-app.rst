@@ -91,5 +91,7 @@ There you should see this application at the top of the list.  Clicking
 When the new tab opens you should see a blank page with the text ``Hello World``.
 This is your new `NodeJs`_ application!
 
+.. include:: deploy-to-production.inc
+
 .. _NodeJs: https://nodejs.org/en
 .. _Express: https://expressjs.com/
