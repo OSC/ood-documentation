@@ -138,5 +138,7 @@ virtual environment.
 Now, with the python wrapper script to load the environment for your application,
 it should boot up correctly.
 
+.. include:: deploy-to-production.inc
+
 .. _Python: https://www.python.org/
 .. _Flask: https://flask.palletsprojects.com/en/3.0.x/
