@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Starter Python Application" href="python-starter-app.html" />
-    <link rel="prev" title="Creating a Status App" href="ps-to-quota.html" />
+    <link rel="prev" title="Starter Ruby Application" href="ruby-starter-app.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -120,12 +120,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials-passenger-apps.html">Tutorials: Passenger Apps</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ps-to-quota.html">Creating a Status App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ruby-starter-app.html">Starter Ruby Application</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Starter NodeJS Application</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#initialize-the-application">Initialize the application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-web-framework">Add Web Framework</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-and-edit-app-js">Add and edit app.js</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#boot-the-application">Boot the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#publish-app">Publish App</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="python-starter-app.html">Starter Python Application</a></li>
@@ -286,6 +287,58 @@ in the <code class="docutils literal notranslate"><span class="pre">Develop</spa
 <p>When the new tab opens you should see a blank page with the text <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>.
 This is your new <a class="reference external" href="https://nodejs.org/en">NodeJs</a> application!</p>
 </div>
+<div class="section" id="publish-app">
+<h2>Publish App<a class="headerlink" href="#publish-app" title="Permalink to this headline">¶</a></h2>
+<p>Publishing an app requires two steps:</p>
+<ol class="arabic simple">
+<li><p>Updating the <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> to specify the category and optionally subcategory, which indicates where in the dashboard menu the app appears.</p></li>
+<li><p>Having an administrator checkout a copy of the production version to a directory under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code>.</p></li>
+</ol>
+<p>Steps:</p>
+<ol class="arabic">
+<li><p>Add category to manifest so the app appears in the Files menu:</p>
+<blockquote>
+<div><div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">name: Quota</span>
+<span class="w">description: Display quotas</span>
+<span class="w">icon: fa://hdd-o</span>
+<span class="gi">+category: Files</span><span class="w"></span>
+<span class="gi">+subcategory: Utilities</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Version these changes. Click <strong>Shell</strong> button on app details view, and then <code class="docutils literal notranslate"><span class="pre">commit</span></code> the changes:</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git add .
+git commit -m <span class="s2">&quot;update manifest for production&quot;</span>
+
+<span class="c1"># if there is an external remote associated with this, push to that</span>
+git push origin master
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>As the admin, <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">copy</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> this repo to production</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># as sudo on OnDemand host:</span>
+<span class="nb">cd</span> /var/www/ood/apps/sys
+git clone /users/PZS0562/efranz/ondemand/dev/quota
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Reload</strong> the dashboard.</p></li>
+</ol>
+<div class="figure align-center" id="id1">
+<img alt="../../_images/app-dev-tutorial-ps-to-quota-published.png" src="../../_images/app-dev-tutorial-ps-to-quota-published.png" />
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Every user can now launch the Quota from the Files menu.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Accessing this new app for the first time will cause your NGINX server to restart,
+killing all websocket connections, which means resetting your active web-based OnDemand Shell sessions.</p>
+</div>
+</div>
 </div>
 
 
@@ -299,7 +352,7 @@ This is your new <a class="reference external" href="https://nodejs.org/en">Node
         <a href="python-starter-app.html" class="btn btn-neutral float-right" title="Starter Python Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ps-to-quota.html" class="btn btn-neutral float-left" title="Creating a Status App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ruby-starter-app.html" class="btn btn-neutral float-left" title="Starter Ruby Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
