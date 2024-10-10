@@ -506,6 +506,48 @@ access into any compute node in our three clusters.
   # /etc/ood/config/apps/shell/env
   OOD_SSHHOST_ALLOWLIST="r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu"
 
+.. _enable-shell-ping-pong:
+
+Enable and configure Shell Ping Pong
+------------------------------------
+
+Version 3.1 added the ability for the shell application to send and receive ping pong
+messages to keep the connection alive, and thus the terminal session alive.
+
+The drawback to this is that these persistant connections can actually outlive your
+authentication timeout settings. Meaning users can have active shell sessions for much
+longer than your authentication systems would normally allow.  This is because the
+connection was made while you were authenticated and it persists after your session
+has expired.
+
+So, to keep a conservative security posture, Open OnDemand disables ping pongs by
+default letting apache timeout these connections more freely.
+
+In addition to enabling or disabling ping pongs, there are other settings you may wish
+to change.
+
+All of these configurations are environment variables to be place in 
+``/etc/ood/config/apps/shell/env``.
+
+Setting ``OOD_SHELL_PING_PONG`` to anything will enable ping pongs. Removing it or
+commenting it out will disable ping pongs (it's disabled by default).
+
+``OOD_SHELL_INACTIVE_TIMEOUT_MS`` controls how long a connection can be inactive
+for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5 minutes).
+
+``OOD_SHELL_MAX_DURATION_MS`` controls how long a connection can exist regardless
+of activity (in milliseconds). After this duration, the connection will be closed
+regardless of activity. It's default is 3600000 milliseconds (1 hour).
+
+.. code:: shell
+
+  # /etc/ood/config/apps/shell/env
+
+  OOD_SHELL_INACTIVE_TIMEOUT_MS=300000
+  OOD_SHELL_MAX_DURATION_MS=3600000
+  # OOD_SHELL_PING_PONG=false
+
+
 Set OOD SSH Port
 -----------------
 
