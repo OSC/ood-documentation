@@ -526,7 +526,7 @@ default letting apache timeout these connections more freely.
 In addition to enabling or disabling ping pongs, there are other settings you may wish
 to change.
 
-All of these configurations are environment variables to be place in 
+All of these configurations are environment variables are to be placed in
 ``/etc/ood/config/apps/shell/env``.
 
 Setting ``OOD_SHELL_PING_PONG`` to anything will enable ping pongs. Removing it or
