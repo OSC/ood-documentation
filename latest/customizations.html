@@ -149,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#disabling-users">Disabling Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-ssh-allowlist">Set SSH Allowlist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-and-configure-shell-ping-pong">Enable and configure Shell Ping Pong</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-ood-ssh-port">Set OOD SSH Port</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shell-app-ssh-command-wrapper">Shell App SSH Command Wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fix-unauthorized-websocket-connection-in-shell-app">Fix Unauthorized WebSocket Connection in Shell App</a></li>
@@ -237,6 +238,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#disabling-users">Disabling Users</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#set-default-ssh-host">Set Default SSH Host</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#set-ssh-allowlist">Set SSH Allowlist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enable-and-configure-shell-ping-pong">Enable and configure Shell Ping Pong</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#set-ood-ssh-port">Set OOD SSH Port</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#shell-app-ssh-command-wrapper">Shell App SSH Command Wrapper</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fix-unauthorized-websocket-connection-in-shell-app">Fix Unauthorized WebSocket Connection in Shell App</a></li>
@@ -1260,6 +1262,36 @@ what hosts users will be allowed to connect to in the shell application.</p>
 access into any compute node in our three clusters.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
 <span class="nv">OOD_SSHHOST_ALLOWLIST</span><span class="o">=</span><span class="s2">&quot;r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enable-and-configure-shell-ping-pong">
+<span id="enable-shell-ping-pong"></span><h2>Enable and configure Shell Ping Pong<a class="headerlink" href="#enable-and-configure-shell-ping-pong" title="Permalink to this headline">¶</a></h2>
+<p>Version 3.1 added the ability for the shell application to send and receive ping pong
+messages to keep the connection alive, and thus the terminal session alive.</p>
+<p>The drawback to this is that these persistant connections can actually outlive your
+authentication timeout settings. Meaning users can have active shell sessions for much
+longer than your authentication systems would normally allow.  This is because the
+connection was made while you were authenticated and it persists after your session
+has expired.</p>
+<p>So, to keep a conservative security posture, Open OnDemand disables ping pongs by
+default letting apache timeout these connections more freely.</p>
+<p>In addition to enabling or disabling ping pongs, there are other settings you may wish
+to change.</p>
+<p>All of these configurations are environment variables are to be placed in
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code>.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_PING_PONG</span></code> to anything will enable ping pongs. Removing it or
+commenting it out will disable ping pongs (it’s disabled by default).</p>
+<p><code class="docutils literal notranslate"><span class="pre">OOD_SHELL_INACTIVE_TIMEOUT_MS</span></code> controls how long a connection can be inactive
+for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5 minutes).</p>
+<p><code class="docutils literal notranslate"><span class="pre">OOD_SHELL_MAX_DURATION_MS</span></code> controls how long a connection can exist regardless
+of activity (in milliseconds). After this duration, the connection will be closed
+regardless of activity. It’s default is 3600000 milliseconds (1 hour).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
+
+<span class="nv">OOD_SHELL_INACTIVE_TIMEOUT_MS</span><span class="o">=</span><span class="m">300000</span>
+<span class="nv">OOD_SHELL_MAX_DURATION_MS</span><span class="o">=</span><span class="m">3600000</span>
+<span class="c1"># OOD_SHELL_PING_PONG=false</span>
 </pre></div>
 </div>
 </div>
