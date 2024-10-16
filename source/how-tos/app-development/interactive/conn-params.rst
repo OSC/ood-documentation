@@ -11,69 +11,45 @@ This is helpful for:
 * Data that is only known **after** the job submits and starts running.
 * Data that needs to be used to connect to the application.
 
-This technique will generate a file in the app's root called ``connection.yml`` when the app launches 
-which will contain the defined variables and their associated values.
+This technique will generate a file in the jobs working directory called ``connection.yml``
+when the app launches which will contain the defined variables and their associated values.
 
-Configuration
--------------
-
-The files which must be adjusted are::
-
-  my_app/
-  ├── submit.html.erb
-  ├── templates/
-  │   ├── before.sh.erb
-  └── view.html.erb
-
-The files which can be adjusted to::
-
-  my_app/
-  ├── submit.html.erb
-  ├── templates/
-  │   ├── before.sh.erb
-  │   └── dir
-  │       └── another_script.sh.erb
-  └── view.html.erb
-
-And the ``submit.yml.erb`` will use ``conn_params`` to set the custom variables to pass back to the ``view`` to 
-be rendered::
-
-    ---
-    batch_connect:
-      template: "basic"
-      conn_params:
-        - custom_variable_one
-        - custom_variable_two
-        ...
-    ...
-
-.. warning::
-
-  The variables in ``before.sh.erb`` *must* be made available to the environment 
-  by using ``export``. 
 
 Jupyter Notebook Example
 ------------------------
 
-Here's an example using the ``bc_osc_jupypter`` app which needs 
-information from the server to then pass on to the submission before it renders 
-in the browser for the app's launch card.
+Here's an example using a Jupyter application which needs
+needs to know the exact API to connect to. We can either connect to
+JuypterLab at ``/lab`` or Juypter Notebook at ``/tree``, but this
+information is not known until the job has been submitted.
 
-Within the ``template/before.sh.erb``, observe the following lines::
+So once the job is submitted, we need to export the ``jupyter_api``
+environment variable that can then be written to ``connection.yml``
+which OnDemand will consume and use in the ``view.html.erb``.
 
-    JUPYTER_API="<%= context.jupyterlab_switch == "1" ? "lab" : "tree" %>"
-    ...
-    export jupyter_api="$JUPYTER_API"
+.. warning::
 
-Now take this exported variable and include it in the ``submit.html.erb``. 
-Ensure that the syntax aligns with the following::
+  The environment variables in ``before.sh.erb`` *must* be lowercase and
+  exported through the *export* function.
 
-    ---
-    batch_connect:
-      template: "basic"
-      conn_params:
-        - jupyter_api
-    ...
+.. code:: shell
+  
+  # within template/before.sh.erb
+
+  JUPYTER_API="<%= context.jupyterlab_switch == "1" ? "lab" : "tree" %>"
+    
+  export jupyter_api="$JUPYTER_API"
+
+
+Now with that variable exported, you need to add it to ``conn_params`` in
+``submit.html.erb`` to ensure that OnDemand makes use of it.
+
+.. code::yaml
+
+  batch_connect:
+    template: "basic"
+    conn_params:
+      - jupyter_api
 
 In the ``view.html.erb``, which renders after the submission in the interactive apps page, 
 you can access the value of this variable with::
