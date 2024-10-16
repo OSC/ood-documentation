@@ -81,6 +81,15 @@ Here's the example YAML for this app with two select widgets.  This
 instructs the webpage to hide the ``cuda_version`` when the ``standard``
 ``node_type`` is selected.
 
+.. warning::
+  In addition to hiding form fields like this example shows, one should
+  also use a ``data-set`` directive to set the value because the field
+  is no longer visible to the user. While it's hidden, it will still retain
+  the current value, if any has been supplied.
+
+  By forcing a value after hiding it you can ensure that the correct values
+  are being passed to the server.
+
 .. code-block:: yaml
   :emphasize-lines: 7
 
@@ -90,7 +99,8 @@ instructs the webpage to hide the ``cuda_version`` when the ``standard``
       options:
         - [
             'standard', 'standard',
-            data-hide-cuda-version: true
+            data-hide-cuda-version: true,
+            data-set-cuda-version: 'none'
           ]
         - 'gpu'
 
