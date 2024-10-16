@@ -125,7 +125,6 @@
 <li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Reconfiguring exsting apps</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook-example">Jupyter Notebook Example</a></li>
 </ul>
 </li>
@@ -230,67 +229,31 @@ in the <code class="docutils literal notranslate"><span class="pre">before.sh.er
 <li><p>Data that is only known <strong>after</strong> the job submits and starts running.</p></li>
 <li><p>Data that needs to be used to connect to the application.</p></li>
 </ul>
-<p>This technique will generate a file in the app’s root called <code class="docutils literal notranslate"><span class="pre">connection.yml</span></code> when the app launches
-which will contain the defined variables and their associated values.</p>
-<div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>The files which must be adjusted are:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my_app/
-├── submit.html.erb
-├── templates/
-│   ├── before.sh.erb
-└── view.html.erb
-</pre></div>
-</div>
-<p>The files which can be adjusted to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my_app/
-├── submit.html.erb
-├── templates/
-│   ├── before.sh.erb
-│   └── dir
-│       └── another_script.sh.erb
-└── view.html.erb
-</pre></div>
-</div>
-<p>And the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> will use <code class="docutils literal notranslate"><span class="pre">conn_params</span></code> to set the custom variables to pass back to the <code class="docutils literal notranslate"><span class="pre">view</span></code> to
-be rendered:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
-<span class="n">batch_connect</span><span class="p">:</span>
-  <span class="n">template</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span>
-  <span class="n">conn_params</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">custom_variable_one</span>
-    <span class="o">-</span> <span class="n">custom_variable_two</span>
-    <span class="o">...</span>
-<span class="o">...</span>
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The variables in <code class="docutils literal notranslate"><span class="pre">before.sh.erb</span></code> <em>must</em> be made available to the environment
-by using <code class="docutils literal notranslate"><span class="pre">export</span></code>.</p>
-</div>
-</div>
+<p>This technique will generate a file in the jobs working directory called <code class="docutils literal notranslate"><span class="pre">connection.yml</span></code>
+when the app launches which will contain the defined variables and their associated values.</p>
 <div class="section" id="jupyter-notebook-example">
 <h2>Jupyter Notebook Example<a class="headerlink" href="#jupyter-notebook-example" title="Permalink to this headline">¶</a></h2>
-<p>Here’s an example using the <code class="docutils literal notranslate"><span class="pre">bc_osc_jupypter</span></code> app which needs
-information from the server to then pass on to the submission before it renders
-in the browser for the app’s launch card.</p>
-<p>Within the <code class="docutils literal notranslate"><span class="pre">template/before.sh.erb</span></code>, observe the following lines:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JUPYTER_API</span><span class="o">=</span><span class="s2">&quot;&lt;%= context.jupyterlab_switch == &quot;</span><span class="mi">1</span><span class="s2">&quot; ? &quot;</span><span class="n">lab</span><span class="s2">&quot; : &quot;</span><span class="n">tree</span><span class="s2">&quot; %&gt;&quot;</span>
-<span class="o">...</span>
-<span class="n">export</span> <span class="n">jupyter_api</span><span class="o">=</span><span class="s2">&quot;$JUPYTER_API&quot;</span>
+<p>Here’s an example using a Jupyter application which needs
+needs to know the exact API to connect to. We can either connect to
+JuypterLab at <code class="docutils literal notranslate"><span class="pre">/lab</span></code> or Juypter Notebook at <code class="docutils literal notranslate"><span class="pre">/tree</span></code>, but this
+information is not known until the job has been submitted.</p>
+<p>So once the job is submitted, we need to export the <code class="docutils literal notranslate"><span class="pre">jupyter_api</span></code>
+environment variable that can then be written to <code class="docutils literal notranslate"><span class="pre">connection.yml</span></code>
+which OnDemand will consume and use in the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The environment variables in <code class="docutils literal notranslate"><span class="pre">before.sh.erb</span></code> <em>must</em> be lowercase and
+exported through the <em>export</em> function.</p>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># within template/before.sh.erb</span>
+
+<span class="nv">JUPYTER_API</span><span class="o">=</span><span class="s2">&quot;&lt;%= context.jupyterlab_switch == &quot;</span><span class="m">1</span><span class="s2">&quot; ? &quot;</span>lab<span class="s2">&quot; : &quot;</span>tree<span class="s2">&quot; %&gt;&quot;</span>
+
+<span class="nb">export</span> <span class="nv">jupyter_api</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$JUPYTER_API</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
-<p>Now take this exported variable and include it in the <code class="docutils literal notranslate"><span class="pre">submit.html.erb</span></code>.
-Ensure that the syntax aligns with the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
-<span class="n">batch_connect</span><span class="p">:</span>
-  <span class="n">template</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span>
-  <span class="n">conn_params</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">jupyter_api</span>
-<span class="o">...</span>
-</pre></div>
-</div>
+<p>Now with that variable exported, you need to add it to <code class="docutils literal notranslate"><span class="pre">conn_params</span></code> in
+<code class="docutils literal notranslate"><span class="pre">submit.html.erb</span></code> to ensure that OnDemand makes use of it.</p>
 <p>In the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>, which renders after the submission in the interactive apps page,
 you can access the value of this variable with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;%-</span>
