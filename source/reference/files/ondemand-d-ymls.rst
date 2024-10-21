@@ -777,7 +777,7 @@ Configuration Properties
 
       upload_enabled: false
 
-.. _downlad_enabled:
+.. _download_enabled:
 .. describe:: download_enabled (Boolean, true)
 
   Enable downloading files.
