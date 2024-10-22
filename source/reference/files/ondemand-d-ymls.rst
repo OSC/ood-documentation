@@ -760,6 +760,8 @@ Configuration Properties
 .. _upload_enabled:
 .. describe:: upload_enabled (Boolean, true)
 
+  .. versionadded:: 3.1
+
   Enable uploading files.
 
   Default
@@ -779,6 +781,8 @@ Configuration Properties
 
 .. _download_enabled:
 .. describe:: download_enabled (Boolean, true)
+
+  .. versionadded:: 3.1
 
   Enable downloading files.
 
