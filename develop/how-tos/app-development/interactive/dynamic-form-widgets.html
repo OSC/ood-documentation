@@ -289,14 +289,24 @@ So, we want to hide the <code class="docutils literal notranslate"><span class="
 <p>Here’s the example YAML for this app with two select widgets.  This
 instructs the webpage to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when the <code class="docutils literal notranslate"><span class="pre">standard</span></code>
 <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is selected.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In addition to hiding form fields like this example shows, one should
+also use a <code class="docutils literal notranslate"><span class="pre">data-set</span></code> directive to set the value because the field
+is no longer visible to the user. While it’s hidden, it will still retain
+the current value, if any has been supplied.</p>
+<p>By forcing a value after hiding it you can ensure that the correct values
+are being passed to the server.</p>
+</div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">node_type</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span><span class="w"></span>
 <span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"></span>
 <span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"></span>
-<span class="hll"><span class="w">          </span><span class="nv">data-hide-cuda-version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span><span class="w"></span>
-</span><span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="hll"><span class="w">          </span><span class="nv">data-hide-cuda-version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="w"></span>
+</span><span class="w">          </span><span class="nv">data-set-cuda-version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;none&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">]</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="w"></span>
 </pre></div>
 </div>

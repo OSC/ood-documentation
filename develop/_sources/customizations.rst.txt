@@ -378,6 +378,20 @@ app.
 .. include:: customizations/main-navigation.inc
 .. include:: customizations/interactive-apps-menu.inc
 
+
+Disable uploads or downloads
+----------------------------
+
+By default, Open OnDemand will allow users to upload and download files.
+Both can be disabled through configuration.
+
+Use :ref:`download_enabled for disabling downloads <download_enabled>`
+and :ref:`upload_enabled for disabling uploads <upload_enabled>`.
+
+.. tip::
+  Use File Access Controls (FACLs) on the ondemand.d files to enable
+  or disable uploads or downloads based on group permissions.
+
 .. _set-upload-limits:
 
 Set Upload Limits
