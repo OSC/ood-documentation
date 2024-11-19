@@ -1478,4 +1478,4 @@ For completed sessions, the system will only show the delete button.
 .. include:: customizations/support-ticket.inc
 
 .. _OSC's rclone documentation: https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data
-.. _2.0 documentation for controling the navbar: https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar
+.. _2.0 documentation for controlling the navbar: https://osc.github.io/ood-documentation/release-2.0/customization.html#control-which-apps-appear-in-the-dashboard-navbar
