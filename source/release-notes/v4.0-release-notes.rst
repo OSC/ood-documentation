@@ -53,6 +53,29 @@ themselves are ``dismissable`` by default.
 
 The documentation for :ref:`configure_announcements` has been updated with this new feature.
 
+Batch connect form ids are now lowercase.
+*****************************************
+
+To resolve some bugs with :ref:`dynamic-bc-apps`, batch connect form
+items will now force lowercase HTML IDs.  This may break some javascript
+at centers expecting the HTML id of the form item to be a mix of uppercase
+and lowercase.
+
+This is an example of defining a form item with uppercase keys like ``My_Cool_Form_Item``.
+
+.. code-block:: yaml
+
+  ---
+  form:
+    My_Cool_Form_Item
+
+In this example ``My_Cool_Form_Item`` has uppercase characters, however the HTML
+id of the form item will be lowercase as shown below.
+
+.. code-block:: html
+
+  id="batch_connect_session_context_my_cool_form_item"
+
 Dependency updates
 ..................
 

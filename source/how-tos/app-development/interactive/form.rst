@@ -51,6 +51,17 @@ My App* from the list of sandbox apps.
 You should now see the HTML form used to gather the user-defined attributes for
 building and launching the ``my_app`` Interactive App session.
 
+.. warning::
+
+  Since 4.0 HTML IDs of the form items are always lowercase. The examples above
+  show lowercase configurations of ``account``.  Specifying ``Account``,
+  or ``ACCOUNT`` or any variation of uppercase and lowercase will result in
+  the same behhavior as specifying ``account`` (all lower case).
+
+  If you write your own ``form.js`` take care to note that HTML IDs of these
+  form items will **always** be lowercase regardless of how they're defined in
+  the YAML file.
+
 .. tip::
 
    You can include dynamically generated content in the form by renaming the
