@@ -227,6 +227,7 @@ auto_modules_<MODULE>
   (without the wrapping `//`) or a string:
 
   Regex:
+
   .. code-block:: yaml
 
     attributes:
