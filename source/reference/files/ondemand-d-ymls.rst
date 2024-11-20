@@ -929,3 +929,43 @@ Configuration Properties
     .. code-block:: yaml
 
       motd_render_html: true
+
+.. _novnc_default_compression:
+.. describe:: novnc_default_compression (Integer, 6)
+
+  The default compression value for noVNC batch connect
+  applications.
+
+  Default
+    The default compression of 6.
+
+    .. code-block:: yaml
+
+      novnc_default_compression: 6
+
+  Example
+    Increase the default compression to 9.
+
+    .. code-block:: yaml
+
+      novnc_default_compression: 9
+
+.. _novnc_default_quality:
+.. describe:: novnc_default_quality (Integer, 2)
+
+  The default quality value for noVNC batch connect
+  applications.
+
+  Default
+    The default quality of 2.
+
+    .. code-block:: yaml
+
+      novnc_default_quality: 2
+
+  Example
+    Increas the default quality setting to 9.
+
+    .. code-block:: yaml
+
+      novnc_default_quality: 9
