@@ -108,6 +108,8 @@ This is the full list of items with details, you may supply to this yaml file to
 
        whether or not the application is cacheable or not. Defaults to true.
 
+.. _bc_form_attributes:
+
 Attributes
 ----------
 
@@ -810,6 +812,48 @@ different text than the default.
 The last option is to :ref:`configure the cluster in the submit file <configuring-cluster-in-submit-yml>`.
 When using this option, there's no need to add any cluster configuration to the
 form.yml.
+
+.. _global_bc_form_items:
+
+Global Batch Connect Form Items
+-------------------------------
+
+Since version 4.0, you can define form items once in an ``ondemand.d`` file
+that can be used in all batch connect applications.
+
+.. warning::
+
+  Global batch connect items need to have the prefix ``global_`` otherwise
+  OnDemand won't recognize it as a global configuration.
+
+
+Defining a global batch connect form item is just like specifying :ref:`bc_form_attributes`
+above. Only the location is in an ``ondemand.d`` file in ``/etc/ood/config/ondemand.d``
+under the ``global_bc_form_items`` key.
+
+Here's an example of defining a select widget with options called ``global_queues``.
+Note the appropriate previx of ``global``.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/ondemand.d/global_bc_items.yml
+
+  global_bc_form_items:
+    global_queues:
+      widget: select
+      options:
+        - [ 'any', 'any' ]
+        - [ 'gpu', 'gpu' ]
+        - [ 'special', 'special', data-option-for-cluster-not-special: false ]
+
+Then to use this form item, one simply needs to specify it in the ``form`` section
+of the file and it will display the select widget defined above.
+
+.. code-block:: yaml
+
+  # form.yml
+  form:
+    - global_queues
 
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
 .. _html form: https://en.wikipedia.org/wiki/Form_(HTML)
