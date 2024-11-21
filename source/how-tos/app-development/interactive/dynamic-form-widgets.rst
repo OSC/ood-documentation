@@ -90,6 +90,11 @@ instructs the webpage to hide the ``cuda_version`` when the ``standard``
   By forcing a value after hiding it you can ensure that the correct values
   are being passed to the server.
 
+.. tip::
+
+  In addition to setting the value to ``true`` to hide the form item, in 4.0
+  you can also specify ``false`` to show the form item.
+
 .. code-block:: yaml
   :emphasize-lines: 7
 
