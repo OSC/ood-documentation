@@ -964,8 +964,28 @@ Configuration Properties
       novnc_default_quality: 2
 
   Example
-    Increas the default quality setting to 9.
+    Increase the default quality setting to 9.
 
     .. code-block:: yaml
 
       novnc_default_quality: 9
+
+.. _bc_sessions_poll_delay:
+.. describe:: bc_sessions_poll_delay (Integer, 10000)
+
+  How long the client browser should wait, in milliseconds,
+  to update the batch connect sessions page.
+
+  Default
+    The default poll delay of 10000 (10 seconds).
+
+    .. code-block:: yaml
+
+      bc_sessions_poll_delay: 10000
+
+  Example
+    Increase the poll delay to 30000 (30 seconds).
+
+    .. code-block:: yaml
+
+      bc_sessions_poll_delay: 30000
