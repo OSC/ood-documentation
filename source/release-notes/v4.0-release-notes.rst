@@ -13,6 +13,8 @@ New Features
 
 - `Global Batch Connect items`_
 - `noVNC quality and compression defaults`_
+- `Batch connect sessions poll delay`_
+- `System Status application`_
 
 Thanks!
 -------
@@ -136,3 +138,24 @@ variable ``POLL_DELAY``.
 In 4.0 this is a documented configuration with ``POLL_DELAY`` being
 deprecated. See :ref:`the bc_sessions_poll_delay documentation <bc_sessions_poll_delay>`
 for more details.
+
+System Status application
+.........................
+
+Your center may have deployed OSC's system status application:
+https://github.com/osc/osc-systemstatus.
+
+4.0 now ships with this application natively, though it
+only supports Slurm clusters in this release.
+
+Here's an example image from OSC detailing the system status of
+our clusters.
+
+.. figure:: /images/system-status.png
+    :alt: An image showing the system status application. There are 4 panels for each cluster. Each panel shows the number of nodes available, cores available, GPUs available jobs running and jobs queued. It also shows percentages available for nodes, cores and GPUs.
+
+This application will poll for updates at regular intervals to automatically
+update the page. The default is 10 seconds. See :ref:`the documentation on status_poll_dela <status_poll_delay>`
+for more details.
+
+Visit :ref:`disabling_applications` to disable this application.

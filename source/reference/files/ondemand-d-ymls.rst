@@ -989,3 +989,24 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_sessions_poll_delay: 30000
+
+.. _status_poll_delay:
+
+.. describe:: status_poll_delay (Integer, 10000)
+
+  How long the client browser should wait, in milliseconds,
+  to update the system status page.
+
+  Default
+    The default poll delay of 10000 (10 seconds).
+
+    .. code-block:: yaml
+
+      status_poll_delay: 10000
+
+  Example
+    Increase the poll delay to 30000 (30 seconds).
+
+    .. code-block:: yaml
+
+      status_poll_delay: 30000
