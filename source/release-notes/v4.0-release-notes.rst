@@ -7,6 +7,8 @@ Administrative changes
 ----------------------
 
 - `Breaking Changes`_
+- `Dependency updates`_
+- `Upgrade directions`_
 
 New Features
 ------------
@@ -16,6 +18,7 @@ New Features
 - `Batch connect sessions poll delay`_
 - `System Status application`_
 - `User mapping now accepts UIDs`
+- `Remove runtime dependency on SCL`
 
 Thanks!
 -------
@@ -95,7 +98,21 @@ for more details.
 Dependency updates
 ..................
 
+This release updates the following dependencies:
 
+- Ruby 3.3 **(RHEL 8 & 9 only)**
+
+  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of ruby.
+
+- NodeJS 20 **(All OSes)**
+
+  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
+
+  .. warning:: Ubuntu 24.04 and Debian 12 are no longer support on ppc64le due to NodeJS 20 not being available on that architecture.
+
+- Passenger 6.0.23
+- NGINX 1.26.1
+- ondemand-dex 2.41.1
 
 SELinux changes
 ...............
@@ -104,7 +121,160 @@ SELinux changes
 Upgrade directions
 ..................
 
+.. warning::
 
+   **Update** the **development** or **test** instances of OnDemand installed at your center **first** before you modify the *production* instance.
+
+.. warning::
+
+   The OnDemand upgrade has only been tested going from 3.1.x to 4.0.x.
+
+#. Update OnDemand repository
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 20.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-focal_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-focal_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-focal_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-jammy_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-jammy_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-noble_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-noble_all.deb
+            sudo apt update
+
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-bookworm_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-bookworm_all.deb
+            sudo apt update
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo dnf install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.amzn2023.noarch.rpm
+
+#. Enable dependency repos
+
+   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+
+   .. code-block:: sh
+
+      sudo dnf module reset nodejs
+      sudo dnf module enable nodejs:20
+      sudo dnf module reset ruby
+      sudo dnf module enable ruby:3.3
+
+#. Update OnDemand
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 20.04 & 22.04 & Debian 12
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+      .. tab:: Amazon 2023
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+#. (Optional) If ``ondemand-dex`` was installed, restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (Optional) If ``ondemand-selinux`` was installed, see :ref:`ood_selinux_updates`
+
+#. Force all PUNs to restart
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+#. (Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.
+
+   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+
+   .. code-block:: sh
+
+      sudo dnf remove environment-modules scl-utils
 
 Details of new features
 -----------------------
@@ -167,3 +337,11 @@ User mapping now accepts UIDs
 User mapping scripts can now return a UID instead of a username.
 This can be helpful for centers that have multiple domains and possible
 username collisions.
+
+Remove runtime dependency on SCL
+................................
+
+OnDemand no longer requires SCL on RHEL based systems.
+OnDemand also no longer has an indirect dependency on the TCL environment module packages.
+This removal of the SCL dependency should make it possible to install OnDemand on hosts such
+as a head node where the Lmod environment modules are setup.
