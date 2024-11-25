@@ -21,8 +21,8 @@ At this time OnDemand only supports the following operating systems and architec
    "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "Ubuntu 20.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Ubuntu 22.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
-   "Ubuntu 24.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
-   "Debian 12",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
+   "Ubuntu 24.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Debian 12",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
 
 Software Requirements
@@ -30,13 +30,11 @@ Software Requirements
 
 On the Web node serving OnDemand itself:
 
-- `Software Collections repositories`_
 - `lsof`_
 - `sudo`_
 - `OnDemand repository`_:
     - ondemand-{{ondemand_version}}-1.el7.x86_64.rpm
 
-.. _Software Collections repositories: https://www.softwarecollections.org/en/
 .. _lsof: https://en.wikipedia.org/wiki/Lsof
 .. _OnDemand repository: https://openondemand.org/
 .. _sudo: https://www.sudo.ws/

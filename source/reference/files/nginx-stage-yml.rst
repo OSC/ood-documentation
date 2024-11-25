@@ -180,7 +180,7 @@ Configuration Options
    the path to the NGINX binary
 
    Default
-     Use NGINX installed by OnDemand Software Collections
+     Use NGINX installed by OnDemand
 
      .. code-block:: yaml
 
@@ -220,7 +220,7 @@ Configuration Options
    the path to the system-installed NGINX ``mime.types`` file
 
    Default
-     Use the NGINX installed by OnDemand Software Collections file
+     Use the NGINX installed by OnDemand
 
      .. code-block:: yaml
 
@@ -238,7 +238,7 @@ Configuration Options
    the ``locations.ini`` file that describes Passenger installation
 
    Default
-     Use the file supplied by Passenger from OnDemand Software Collections
+     Use the file supplied by Passenger from OnDemand
 
      .. code-block:: yaml
 
@@ -263,11 +263,11 @@ Configuration Options
         passenger_ruby: "/opt/ood/nginx_stage/bin/ruby"
 
    Example
-     Use the binary supplied by Ruby 2.4 installed by Software Collections
+     Use the system installed Ruby
 
      .. code-block:: yaml
 
-        passenger_ruby: "/opt/rh/rh-ruby25/root/usr/bin/ruby"
+        passenger_ruby: "/usr/bin/ruby"
 
 .. describe:: passenger_nodejs (String, null)
 
@@ -281,11 +281,11 @@ Configuration Options
         passenger_nodejs: "/opt/ood/nginx_stage/bin/node"
 
    Example
-     Use the binary supplied by Node.js installed by Software Collections
+     Use the system installed Node.js
 
      .. code-block:: yaml
 
-        passenger_nodejs: "/opt/rh/rh-nodejs6/root/usr/bin/node"
+        passenger_nodejs: "/usr/bin/node"
 
 .. describe:: passenger_python (String, null)
 
