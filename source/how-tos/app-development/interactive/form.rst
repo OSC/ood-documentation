@@ -108,6 +108,14 @@ This is the full list of items with details, you may supply to this yaml file to
 
        whether or not the application is cacheable or not. Defaults to true.
 
+.. _bc_form_header:
+.. describe:: form_header (String)
+
+    New in 4.0.
+
+    Add a text header to the form. Note this is different from the
+    manifest's description as it does not appear as hoverover text.
+
 .. _bc_form_attributes:
 
 Attributes

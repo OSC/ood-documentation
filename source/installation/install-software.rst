@@ -5,12 +5,10 @@ Install Software
 
 Open OnDemand uses these packages, among many others.
 
-- `Apache HTTP Server 2.4`_
-- Ruby 3.0 with :command:`rake`, :command:`bundler`, and development
+- Apache HTTP Server 2.4
+- Ruby 3.3 with :command:`rake`, :command:`bundler`, and development
   libraries
-- Node.js 18
-
-Some operating systems use `Software Collections`_ to satisfy these.
+- Node.js 20
 
 .. note::
 
@@ -39,7 +37,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.1 nodejs:18
+         sudo dnf module enable ruby:3.3 nodejs:20
 
    .. tab:: RockyLinux/Alma Linux 9
 
@@ -47,7 +45,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
 
          sudo dnf config-manager --set-enabled crb
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.1 nodejs:18
+         sudo dnf module enable ruby:3.3 nodejs:20
 
 
    .. tab:: RHEL 8
@@ -55,7 +53,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.1 nodejs:18
+         sudo dnf module enable ruby:3.3 nodejs:20
          sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
 
@@ -64,7 +62,7 @@ Some operating systems use `Software Collections`_ to satisfy these.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.1 nodejs:18
+         sudo dnf module enable ruby:3.3 nodejs:20
          sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
 2. Add repository and install
@@ -198,6 +196,4 @@ If you'd like a package built for a system that we don't currently support, feel
 
 - https://github.com/OSC/ondemand/issues/new
 
-.. _software collections: https://www.softwarecollections.org/en/
-.. _apache http server 2.4: https://www.softwarecollections.org/en/scls/rhscl/httpd24/
 .. _ohio supercomputer center: https://www.osc.edu/
