@@ -116,6 +116,8 @@ This release updates the following dependencies:
 - NGINX 1.26.1
 - ondemand-dex 2.41.1
 
+.. warning:: OnDemand repos no longer provide mod_auth_openidc or cjose.
+
 SELinux changes
 ...............
 
@@ -277,6 +279,14 @@ Upgrade directions
    .. code-block:: sh
 
       sudo dnf remove environment-modules scl-utils
+
+#. Set mod_auth_openidc and cjose to the OS packaged version
+
+  **RHEL/Rocky/AlmaLinux 8 only**
+
+  .. code-block:: sh
+
+      sudo dnf downgrade mod_auth_openidc
 
 Details of new features
 -----------------------
