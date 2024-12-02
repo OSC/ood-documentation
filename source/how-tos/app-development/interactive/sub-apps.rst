@@ -1,6 +1,6 @@
 
 Sub-Apps and Reconfiguring existing apps
-=======================================
+========================================
 
 Sub-Apps are a term we use for providing variants of existing apps.
 They act as a child to the existing parent application.  That is,
