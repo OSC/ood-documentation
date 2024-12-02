@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Connection Parameters conn_params &mdash; Open OnDemand 3.1.0 documentation</title>
+  <title>Saving interactive application settings &mdash; Open OnDemand 3.1.0 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Adding Additional Information to the session cards" href="additional-info.html" />
-    <link rel="prev" title="Sub-Apps and Reconfiguring exsting apps" href="sub-apps.html" />
+    <link rel="next" title="App Sharing" href="../app-sharing.html" />
+    <link rel="prev" title="Adding Additional Information to the session cards" href="additional-info.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -124,12 +124,13 @@
 <li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (submit.yml.erb)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Reconfiguring exsting apps</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook-example">Jupyter Notebook Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conn-params.html">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="additional-info.html">Adding Additional Information to the session cards</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Saving interactive application settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enabling">Enabling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#demonstration">Demonstration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="additional-info.html">Adding Additional Information to the session cards</a></li>
-<li class="toctree-l3"><a class="reference internal" href="saved-settings.html">Saving interactive application settings</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
@@ -200,14 +201,14 @@
         
           <li><a href="../interactive.html">Interactive Apps</a> &raquo;</li>
         
-      <li>Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></li>
+      <li>Saving interactive application settings</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/how-tos/app-development/interactive/conn-params.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/how-tos/app-development/interactive/saved-settings.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -221,57 +222,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="connection-parameters-conn-params">
-<span id="app-development-interactive-conn-params"></span><h1>Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code><a class="headerlink" href="#connection-parameters-conn-params" title="Permalink to this headline">¶</a></h1>
-<p>App developers can use <code class="docutils literal notranslate"><span class="pre">conn_params</span></code> in the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> to pass runtime data generated
-in the <code class="docutils literal notranslate"><span class="pre">before.sh.erb</span></code> back to the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>.</p>
-<p>This is helpful for:</p>
-<ul class="simple">
-<li><p>Data that is only known <strong>after</strong> the job submits and starts running.</p></li>
-<li><p>Data that needs to be used to connect to the application.</p></li>
-</ul>
-<p>This technique will generate a file in the jobs working directory called <code class="docutils literal notranslate"><span class="pre">connection.yml</span></code>
-when the app launches which will contain the defined variables and their associated values.</p>
-<div class="section" id="jupyter-notebook-example">
-<h2>Jupyter Notebook Example<a class="headerlink" href="#jupyter-notebook-example" title="Permalink to this headline">¶</a></h2>
-<p>Here’s an example using a Jupyter application which needs
-needs to know the exact API to connect to. We can either connect to
-JuypterLab at <code class="docutils literal notranslate"><span class="pre">/lab</span></code> or Juypter Notebook at <code class="docutils literal notranslate"><span class="pre">/tree</span></code>, but this
-information is not known until the job has been submitted.</p>
-<p>So once the job is submitted, we need to export the <code class="docutils literal notranslate"><span class="pre">jupyter_api</span></code>
-environment variable that can then be written to <code class="docutils literal notranslate"><span class="pre">connection.yml</span></code>
-which OnDemand will consume and use in the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The environment variables in <code class="docutils literal notranslate"><span class="pre">before.sh.erb</span></code> <em>must</em> be lowercase and
-exported through the <em>export</em> function.</p>
+  <div class="section" id="saving-interactive-application-settings">
+<span id="interactive-app-saved-settings"></span><h1>Saving interactive application settings<a class="headerlink" href="#saving-interactive-application-settings" title="Permalink to this headline">¶</a></h1>
+<p>If enabled, users can save and manage saved settings for their
+interactive applications.</p>
+<div class="section" id="enabling">
+<h2>Enabling<a class="headerlink" href="#enabling" title="Permalink to this headline">¶</a></h2>
+<p>This feature is controlled by the <a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#bc-saved-settings"><span class="std std-ref">ondemand.d configuration bc_saved_settings</span></a>.
+Set it to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable this feature.</p>
+<p>It is disabled by default.</p>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># within template/before.sh.erb</span>
-
-<span class="nv">JUPYTER_API</span><span class="o">=</span><span class="s2">&quot;&lt;%= context.jupyterlab_switch == &quot;</span><span class="m">1</span><span class="s2">&quot; ? &quot;</span>lab<span class="s2">&quot; : &quot;</span>tree<span class="s2">&quot; %&gt;&quot;</span>
-
-<span class="nb">export</span> <span class="nv">jupyter_api</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$JUPYTER_API</span><span class="s2">&quot;</span>
-</pre></div>
+<div class="section" id="demonstration">
+<h2>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h2>
+<p>Here’s a demonstration of how this feature works and what it will do.</p>
+<div class="section" id="saving-settings">
+<h3>Saving Settings<a class="headerlink" href="#saving-settings" title="Permalink to this headline">¶</a></h3>
+<p>When this feature is enabled, users will begin to see this checkbox above
+the <code class="docutils literal notranslate"><span class="pre">Launch</span></code> button to save these choices currently in the form.</p>
+<div class="figure align-default">
+<img alt="../../../_images/bc_saved_settings_select.png" src="../../../_images/bc_saved_settings_select.png" />
 </div>
-<p>Now with that variable exported, you need to add it to <code class="docutils literal notranslate"><span class="pre">conn_params</span></code> in
-<code class="docutils literal notranslate"><span class="pre">submit.html.erb</span></code> to ensure that OnDemand makes use of it.</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code>, which renders after the submission in the interactive apps page,
-you can access the value of this variable with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;%-</span>
-  <span class="o">...</span>
-  <span class="n">next_url</span>  <span class="o">=</span> <span class="s2">&quot;#</span><span class="si">{base_url}</span><span class="s2">/#</span><span class="si">{jupyter_api}</span><span class="s2">&quot;</span>
-
-  <span class="n">full_url</span><span class="o">=</span><span class="s2">&quot;#</span><span class="si">{login_url}</span><span class="s2">?next=#{CGI.escape(next_url)}&quot;</span>
-  <span class="o">...</span>
-<span class="o">%&gt;</span>
-
-<span class="o">...</span>
-
-<span class="o">&lt;</span><span class="n">form</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&lt;%= form_id %&gt;&quot;</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&lt;%= full_url %&gt;&quot;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;_blank&quot;</span> <span class="n">onsubmit</span><span class="o">=</span><span class="s2">&quot;changeTarget()&quot;</span> <span class="o">&gt;</span>
-</pre></div>
+<p>Checking this checkbox will open a modal where the user can give these
+settings a name.</p>
+<p>Once the name is specified users can <code class="docutils literal notranslate"><span class="pre">Launch</span></code> and that will
+save the settings along with launching the job. They can also choose
+to simply save the settings and close.</p>
 </div>
-<p>This configuration uses the value from <code class="docutils literal notranslate"><span class="pre">jupyter_api</span></code> to populate
-the <code class="docutils literal notranslate"><span class="pre">action</span></code> attribute in the rendered page in the interactive sessions.</p>
+<div class="section" id="using-settings">
+<h3>Using Settings<a class="headerlink" href="#using-settings" title="Permalink to this headline">¶</a></h3>
+<p>When a user has saved settings for a given interactive application,
+they’ll now see a dropdown menu to choose those settings. Note that
+when a given saved setting is chosen, the form updates the values
+automatically.</p>
+<div class="figure align-default">
+<img alt="../../../_images/bc_saved_settings_form.png" src="../../../_images/bc_saved_settings_form.png" />
+</div>
+</div>
+<div class="section" id="editing-and-deleting-settings">
+<span id="edit-save-interactive-app-saved-settings"></span><h3>Editing and deleting settings<a class="headerlink" href="#editing-and-deleting-settings" title="Permalink to this headline">¶</a></h3>
+<p>You may have seen in the image above that there’s a new section
+on the left panel entitled <code class="docutils literal notranslate"><span class="pre">Saved</span> <span class="pre">Settings</span></code>.</p>
+<p>Clicking on the icons in this panel will open a page much like the
+image below.</p>
+<p>Here you can delete the saved setting by pressing the Delete button.
+You can also edit the settings by pressing the pencil icon at the top
+right of the card. You can also submit a job using these settings
+with the play icon.</p>
+<div class="figure align-default">
+<img alt="../../../_images/bc_saved_settings_edit.png" src="../../../_images/bc_saved_settings_edit.png" />
+</div>
+</div>
 </div>
 </div>
 
@@ -283,10 +283,10 @@ the <code class="docutils literal notranslate"><span class="pre">action</span></
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="additional-info.html" class="btn btn-neutral float-right" title="Adding Additional Information to the session cards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../app-sharing.html" class="btn btn-neutral float-right" title="App Sharing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sub-apps.html" class="btn btn-neutral float-left" title="Sub-Apps and Reconfiguring exsting apps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="additional-info.html" class="btn btn-neutral float-left" title="Adding Additional Information to the session cards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -318,31 +318,31 @@ the <code class="docutils literal notranslate"><span class="pre">action</span></
     <dl>
       <dt>Versions</dt>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/conn-params.html">latest</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/saved-settings.html">latest</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/how-tos/app-development/interactive/conn-params.html">3.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/how-tos/app-development/interactive/saved-settings.html">3.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/app-development/interactive/conn-params.html">2.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/app-development/interactive/saved-settings.html">2.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/app-development/interactive/conn-params.html">1.8</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/app-development/interactive/saved-settings.html">1.8</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/app-development/interactive/conn-params.html">1.7</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/app-development/interactive/saved-settings.html">1.7</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/app-development/interactive/conn-params.html">1.6</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/app-development/interactive/saved-settings.html">1.6</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/app-development/interactive/conn-params.html">1.5</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/app-development/interactive/saved-settings.html">1.5</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/app-development/interactive/conn-params.html">1.4</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/app-development/interactive/saved-settings.html">1.4</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/app-development/interactive/conn-params.html">1.3</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/app-development/interactive/saved-settings.html">1.3</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/app-development/interactive/conn-params.html">1.2</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/app-development/interactive/saved-settings.html">1.2</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/app-development/interactive/conn-params.html">1.1</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/app-development/interactive/saved-settings.html">1.1</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/app-development/interactive/conn-params.html">1.0</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/app-development/interactive/saved-settings.html">1.0</a></dd>
       
-        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/app-development/interactive/conn-params.html">develop</a></dd>
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/app-development/interactive/saved-settings.html">develop</a></dd>
       
     </dl>
     <dl>

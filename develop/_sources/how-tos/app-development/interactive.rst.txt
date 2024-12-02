@@ -46,3 +46,4 @@ Each of these files/directories are described below in their respective stage.
    interactive/sub-apps
    interactive/conn-params
    interactive/additional-info
+   interactive/saved-settings

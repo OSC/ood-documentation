@@ -1010,3 +1010,25 @@ Configuration Properties
     .. code-block:: yaml
 
       status_poll_delay: 30000
+
+.. _bc_saved_settings:
+
+.. describe:: bc_saved_settings (Boolean, false)
+
+  Enabled or disable saving batch connect settings.
+  When users fill out a form for an interactive application,
+  they can choose to save those settings to easily reuse later.
+
+  Default
+    Disabled by default.
+
+    .. code-block:: yaml
+
+      bc_saved_settings: false
+
+  Example
+    Enable saving batch connect settings.
+
+    .. code-block:: yaml
+
+      bc_saved_settings: true
