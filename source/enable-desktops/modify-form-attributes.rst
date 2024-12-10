@@ -310,3 +310,21 @@ really have any meaning in the LinuxHost Adapter.
 
 .. _ruby string: https://ruby-doc.org/core-2.2.0/String.html
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
+   
+Show Form Attribute in Session Card
+-----------------------------------
+
+If you want to show a form attribute in the session card, you can set the
+``display`` option to ``true``. For example, to show the version of R selected
+edit ``form.yml`` with:
+
+.. code-block:: yaml
+   :emphasize-lines: 5-
+
+   attributes:
+     r_version:
+       display: true # Shows the choice in the card
+       widget: "select"
+       options:
+         - "4.2"
+         - "4.1"
