@@ -57,6 +57,24 @@ Typically these attributes are used to construct links or forms within the
 ``view.html.erb`` file. See the various
 :ref:`app-development-interactive-view-examples` below.
 
+Show Form Attribute in Session Card
+-----------------------------------
+
+If you want to show a form attribute in the session card, you can set the
+:ref:`display <display_option>` option to ``true``. For example, to show the 
+version of R selected edit ``form.yml`` with:
+
+.. code-block:: yaml
+   :emphasize-lines: 5-
+
+   attributes:
+     r_version:
+       display: true # Shows the choice in the card
+       widget: "select"
+       options:
+         - "4.2"
+         - "4.1"
+
 Reverse Proxy
 -------------
 
