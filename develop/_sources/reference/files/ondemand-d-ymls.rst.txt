@@ -24,6 +24,10 @@ These properties support profile based configuration, see the :ref:`profile conf
              i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
 
 
+.. warning::
+  OnDemand will only respond to root owned files. Configuration files
+  that are not owned by the root user (uid 0) will not be read.
+
 .. _profile_properties:
 
 Configuration Properties with profile support
