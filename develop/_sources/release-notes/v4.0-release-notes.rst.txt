@@ -23,6 +23,7 @@ New Features
 - `Remove runtime dependency on SCL`_
 - `XDMoD efficiency widget update`_
 - `Edit and delete interactive application saved settings`_
+- `nginx_clean now cleans PUNs of disabled users`_
 
 Thanks!
 -------
@@ -407,3 +408,16 @@ these saved settings.
 
 See :ref:`edit-save-interactive-app-saved-settings` for more
 details.
+
+nginx_clean now cleans PUNs of disabled users
+.............................................
+
+The helper method ``nginx_clean`` in the ``nginx_stage``
+library will now remove PUNs and related files for users
+that have been disabled.
+
+Disabled users have been deleted from LDAP and are no longer
+valid users on that system.
+
+This means that centers that delete users (remove them from LDAP)
+will also now start to clean those processes on the OnDemand machine.
