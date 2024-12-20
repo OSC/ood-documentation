@@ -12,6 +12,11 @@ active connections.
 
 .. program:: nginx_stage nginx_clean
 
+
+..  note::
+  Since 4.0 ``nginx_clean`` also cleans per-user NGINX (PUN) processes
+  for users that have been disabled (removed from LDAP).
+
 General Options
 ---------------
 

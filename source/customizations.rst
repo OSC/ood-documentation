@@ -38,6 +38,8 @@ directory while members of the ``staff`` Unix group can.
   sudo chown root:staff /var/www/ood/apps/sys/files
 
 
+.. _configure_announcements:
+
 Announcements
 -------------
 
@@ -62,15 +64,25 @@ the user would see this message at the top of the dashboard:
 
 If the announcement file has the extension ``yml`` and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
 
-.. list-table:: Config Files
-   :stub-columns: 1
+.. list-table:: Announcement configuration keys.
 
+   * - Key
+     - Description
    * - type
-     - warning, info, success, or danger
-     - this is the Bootstrap alert style
+     - The type of announcment. Values can be ``warning``, ``info``, ``success``, or ``danger``.
    * - msg
-     - string containing markdown formatted message
-     - if this is a blank string (only whitespace), the alert will not display
+     - The announcement's message.
+   * - dismissable
+     - Specify if the announcment is dismissable or not with ``true`` or ``false``.
+       Defaults to ``true``.
+   * - required
+     - Specify if the announcment is required or not with ``true`` or ``false``.
+       Defaults to ``false``. When this is set to ``true``, the user will not be
+       do anything until the announcment has been accepted.
+
+.. tip::
+  You can use ``required`` announcements to present users with a ToS (terms of service),
+  EULA (end user license agreement) or similar.
 
 Because the announcement is rendered via ERB you can do some interesting things, like stop showing the announcement past a specified date:
 

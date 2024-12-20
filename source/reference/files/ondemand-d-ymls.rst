@@ -24,6 +24,10 @@ These properties support profile based configuration, see the :ref:`profile conf
              i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
 
 
+.. warning::
+  OnDemand will only respond to root owned files. Configuration files
+  that are not owned by the root user (uid 0) will not be read.
+
 .. _profile_properties:
 
 Configuration Properties with profile support
@@ -929,3 +933,106 @@ Configuration Properties
     .. code-block:: yaml
 
       motd_render_html: true
+
+.. _novnc_default_compression:
+.. describe:: novnc_default_compression (Integer, 6)
+
+  The default compression value for noVNC batch connect
+  applications.
+
+  Default
+    The default compression of 6.
+
+    .. code-block:: yaml
+
+      novnc_default_compression: 6
+
+  Example
+    Increase the default compression to 9.
+
+    .. code-block:: yaml
+
+      novnc_default_compression: 9
+
+.. _novnc_default_quality:
+.. describe:: novnc_default_quality (Integer, 2)
+
+  The default quality value for noVNC batch connect
+  applications.
+
+  Default
+    The default quality of 2.
+
+    .. code-block:: yaml
+
+      novnc_default_quality: 2
+
+  Example
+    Increase the default quality setting to 9.
+
+    .. code-block:: yaml
+
+      novnc_default_quality: 9
+
+.. _bc_sessions_poll_delay:
+.. describe:: bc_sessions_poll_delay (Integer, 10000)
+
+  How long the client browser should wait, in milliseconds,
+  to update the batch connect sessions page.
+
+  Default
+    The default poll delay of 10000 (10 seconds).
+
+    .. code-block:: yaml
+
+      bc_sessions_poll_delay: 10000
+
+  Example
+    Increase the poll delay to 30000 (30 seconds).
+
+    .. code-block:: yaml
+
+      bc_sessions_poll_delay: 30000
+
+.. _status_poll_delay:
+
+.. describe:: status_poll_delay (Integer, 10000)
+
+  How long the client browser should wait, in milliseconds,
+  to update the system status page.
+
+  Default
+    The default poll delay of 10000 (10 seconds).
+
+    .. code-block:: yaml
+
+      status_poll_delay: 10000
+
+  Example
+    Increase the poll delay to 30000 (30 seconds).
+
+    .. code-block:: yaml
+
+      status_poll_delay: 30000
+
+.. _bc_saved_settings:
+
+.. describe:: bc_saved_settings (Boolean, false)
+
+  Enabled or disable saving batch connect settings.
+  When users fill out a form for an interactive application,
+  they can choose to save those settings to easily reuse later.
+
+  Default
+    Disabled by default.
+
+    .. code-block:: yaml
+
+      bc_saved_settings: false
+
+  Example
+    Enable saving batch connect settings.
+
+    .. code-block:: yaml
+
+      bc_saved_settings: true

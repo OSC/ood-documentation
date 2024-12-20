@@ -1,0 +1,423 @@
+.. _v4.0-release-notes:
+
+v4.0 Release Notes
+==================
+
+Administrative changes
+----------------------
+
+- `Breaking Changes`_
+- `Dependency updates`_
+- `Upgrade directions`_
+
+New Features
+------------
+
+- `Global Batch Connect items`_
+- `noVNC quality and compression defaults`_
+- `Batch connect sessions poll delay`_
+- `System Status application`_
+- `data-hide directives now respond to false`_
+- `User mapping now accepts UIDs`_
+- `Interactive apps can have a text header`_
+- `Remove runtime dependency on SCL`_
+- `XDMoD efficiency widget update`_
+- `Edit and delete interactive application saved settings`_
+- `nginx_clean now cleans PUNs of disabled users`_
+
+Thanks!
+-------
+
+We'd like to thank a bunch of folks' for contributing to this release.
+As we only know the github username, that's what's being referenced here.
+
+
+
+Details of administrative changes
+---------------------------------
+
+Breaking Changes
+................
+
+Autoloading during initialization has been removed.
+***************************************************
+
+.. include:: autoload.inc
+
+NavConfig has been removed.
+***************************
+
+.. include:: navconfig.inc
+
+whitelist & blacklist configs have been removed.
+************************************************
+
+.. include:: allowlist.inc
+
+Announcements are dismissable by default.
+*****************************************
+
+In 4.0 :ref:`configure_announcements` now have the ability to be ``dismissable``.
+Meaning users can press ``OK`` on the announment and it will no longer appear
+on the pages.
+
+In prior versions of Open OnDemand there was no way to dismiss or get rid of announcements.
+Now in version 4.0, not only is there a way to dismiss announcements, announcements
+themselves are ``dismissable`` by default.
+
+The documentation for :ref:`configure_announcements` has been updated with this new feature.
+
+Batch connect form ids are now lowercase.
+*****************************************
+
+To resolve some bugs with :ref:`dynamic-bc-apps`, batch connect form
+items will now force lowercase HTML IDs.  This may break some javascript
+at centers expecting the HTML id of the form item to be a mix of uppercase
+and lowercase.
+
+This is an example of defining a form item with uppercase keys like ``My_Cool_Form_Item``.
+
+.. code-block:: yaml
+
+  ---
+  form:
+    My_Cool_Form_Item
+
+In this example ``My_Cool_Form_Item`` has uppercase characters, however the HTML
+id of the form item will be lowercase as shown below.
+
+.. code-block:: html
+
+  id="batch_connect_session_context_my_cool_form_item"
+
+Root owned configuration files
+******************************
+
+In an effort to increase the security of the Open OnDemand platform,
+the system will now start to only respond to root owned configuration
+files.
+
+This will mean that all configfuration files in ``/etc/ood/config``
+will need to be owned by the ``root`` user (uid 0) in order to be used.
+
+While these files need to be root owned, they can continue to have any
+group ownership.
+
+Deprecations
+............
+
+POLL_DELAY is deprecated
+************************
+
+``POLL_DELAY`` is deprecated in 4.0 and being replaced
+by documented configurations. See `Batch connect sessions poll delay`_
+for more details.
+
+Dependency updates
+..................
+
+This release updates the following dependencies:
+
+- Ruby 3.3 **(RHEL 8 & 9 only)**
+
+  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of ruby.
+
+- NodeJS 20 **(All OSes)**
+
+  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
+
+  .. warning:: Ubuntu 24.04 and Debian 12 are no longer support on ppc64le due to NodeJS 20 not being available on that architecture.
+
+- Passenger 6.0.23
+- NGINX 1.26.1
+- ondemand-dex 2.41.1
+
+.. warning:: OnDemand repos no longer provide mod_auth_openidc or cjose.
+
+SELinux changes
+...............
+
+
+Upgrade directions
+..................
+
+.. warning::
+
+   **Update** the **development** or **test** instances of OnDemand installed at your center **first** before you modify the *production* instance.
+
+.. warning::
+
+   The OnDemand upgrade has only been tested going from 3.1.x to 4.0.x.
+
+#. Update OnDemand repository
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 20.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-focal_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-focal_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-focal_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-jammy_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-jammy_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-noble_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-noble_all.deb
+            sudo apt update
+
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.0.0-bookworm_all.deb https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.0.0-bookworm_all.deb
+            sudo apt update
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo dnf install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.amzn2023.noarch.rpm
+
+#. Enable dependency repos
+
+   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+
+   .. code-block:: sh
+
+      sudo dnf module reset nodejs
+      sudo dnf module enable nodejs:20
+      sudo dnf module reset ruby
+      sudo dnf module enable ruby:3.3
+
+#. Update OnDemand
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 20.04 & 22.04 & Debian 12
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+      .. tab:: Amazon 2023
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+#. (Optional) If ``ondemand-dex`` was installed, restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (Optional) If ``ondemand-selinux`` was installed, see :ref:`ood_selinux_updates`
+
+#. Force all PUNs to restart
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+#. (Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.
+
+   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+
+   .. code-block:: sh
+
+      sudo dnf remove environment-modules scl-utils
+
+#. Set mod_auth_openidc and cjose to the OS packaged version
+
+  **RHEL/Rocky/AlmaLinux 8 only**
+
+  .. code-block:: sh
+
+      sudo dnf downgrade mod_auth_openidc
+
+Details of new features
+-----------------------
+
+Global Batch Connect items
+..........................
+
+In 4.0 you can now define batch connect form items
+in ondemand.d files to be used in any batch connect
+application.
+
+See :ref:`global_bc_form_items` for more details.
+
+noVNC quality and compression defaults
+......................................
+
+Sites can now set the default compression and quality values
+for noVNC batch connect applications through the two ``ondemand.d``
+properties :ref:`novnc_default_compression <novnc_default_compression>`
+and :ref:`novnc_default_quality <novnc_default_quality>`.
+
+Batch connect sessions poll delay
+.................................
+
+When a user lands on ``My Interactive Sessions`` page,
+the client browswer will request updates by default
+every 10 seconds.
+
+Sites wanting to change this had do use the hidden environment
+variable ``POLL_DELAY``.
+
+In 4.0 this is a documented configuration with ``POLL_DELAY`` being
+deprecated. See :ref:`the bc_sessions_poll_delay documentation <bc_sessions_poll_delay>`
+for more details.
+
+System Status application
+.........................
+
+Your center may have deployed OSC's system status application:
+https://github.com/osc/osc-systemstatus.
+
+4.0 now ships with this application natively, though it
+only supports Slurm clusters in this release.
+
+Here's an example image from OSC detailing the system status of
+our clusters.
+
+.. figure:: /images/system-status.png
+    :alt: An image showing the system status application. There are 4 panels for each cluster. Each panel shows the number of nodes available, cores available, GPUs available jobs running and jobs queued. It also shows percentages available for nodes, cores and GPUs.
+
+This application will poll for updates at regular intervals to automatically
+update the page. The default is 10 seconds. See :ref:`the documentation on status_poll_dela <status_poll_delay>`
+for more details.
+
+Visit :ref:`disabling_applications` to disable this application.
+
+data-hide directives now respond to false
+.........................................
+
+``data-hide`` directives now respond to both ``true`` to hide
+the form item or ``false`` to show the form item.
+
+Responding to ``false`` is new in 4.0.
+
+User mapping now accepts UIDs
+.............................
+
+User mapping scripts can now return a UID instead of a username.
+This can be helpful for centers that have multiple domains and possible
+username collisions.
+
+Interactive apps can have a text header
+.......................................
+
+The item ``form_header`` can be added to intereactive applications
+to display additional text in the form. Note this is different from
+the ``manifest.yml``'s ``description`` field becuase it will not be
+displayed on hoverover.
+
+See the :ref:`form documentation for form_header <bc_form_header>`
+for more details.
+
+Remove runtime dependency on SCL
+................................
+
+OnDemand no longer requires SCL on RHEL based systems.
+OnDemand also no longer has an indirect dependency on the TCL environment module packages.
+This removal of the SCL dependency should make it possible to install OnDemand on hosts such
+as a head node where the Lmod environment modules are setup.
+
+XDMoD efficiency widget update
+..............................
+
+XDMoD job efficiency panels now show efficiency calculations
+for CPU usage, memory and time.
+
+Edit and delete interactive application saved settings
+......................................................
+
+Since launching saved settings for interactive applications
+in version 3.1, 4.0 now offers the ability to edit and delete
+these saved settings.
+
+See :ref:`edit-save-interactive-app-saved-settings` for more
+details.
+
+nginx_clean now cleans PUNs of disabled users
+.............................................
+
+The helper method ``nginx_clean`` in the ``nginx_stage``
+library will now remove PUNs and related files for users
+that have been disabled.
+
+Disabled users have been deleted from LDAP and are no longer
+valid users on that system.
+
+This means that centers that delete users (remove them from LDAP)
+will also now start to clean those processes on the OnDemand machine.

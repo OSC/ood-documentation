@@ -19,6 +19,11 @@ Since 2.0 you should use the simpler and faster :ref:`user_map_match <ood-portal
 
 Both with variations will be discussed here.
 
+.. tip::
+
+  Since 4.0 user mapping also accepts UIDs to be returned as well as usernames.
+  This can be helpful at centers where duplicate usernames and/or have multiple
+  domains.
 
 Remote User
 -----------
