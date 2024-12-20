@@ -592,6 +592,8 @@ are:
 
           cacheable: false
 
+.. _display_option:
+
 .. describe:: display (Boolean, false)
 
      whether the form item should be displayed in the session card after it was created.
