@@ -77,7 +77,7 @@ release = u'3.1.0'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -405,7 +405,7 @@ def rstjinja(app, docname, source):
 
 def setup(app):
     app.connect('source-read', rstjinja)
-    app.add_stylesheet('css/custom.css')
+    app.add_css_file('css/custom.css')
 
 # Context used for jinja template
 doc_context = {

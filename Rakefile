@@ -25,7 +25,7 @@ def user_group
 end
 
 def image
-  'ohiosupercomputer/ood-doc-build:v2.0.0'
+  'ohiosupercomputer/ood-doc-build:v3.0.0'
 end
 
 def docker?
