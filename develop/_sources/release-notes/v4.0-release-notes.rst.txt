@@ -3,27 +3,10 @@
 v4.0 Release Notes
 ==================
 
-Administrative changes
-----------------------
+.. contents::
+  :depth: 3
+  :local:
 
-- `Breaking Changes`_
-- `Dependency updates`_
-- `Upgrade directions`_
-
-New Features
-------------
-
-- `Global Batch Connect items`_
-- `noVNC quality and compression defaults`_
-- `Batch connect sessions poll delay`_
-- `System Status application`_
-- `data-hide directives now respond to false`_
-- `User mapping now accepts UIDs`_
-- `Interactive apps can have a text header`_
-- `Remove runtime dependency on SCL`_
-- `XDMoD efficiency widget update`_
-- `Edit and delete interactive application saved settings`_
-- `nginx_clean now cleans PUNs of disabled users`_
 
 Thanks!
 -------
@@ -32,30 +15,26 @@ We'd like to thank a bunch of folks' for contributing to this release.
 As we only know the github username, that's what's being referenced here.
 
 
-
-Details of administrative changes
----------------------------------
-
 Breaking Changes
-................
+----------------
 
-Autoloading during initialization has been removed.
-***************************************************
+Autoloading During Initialization has been Removed.
+...................................................
 
 .. include:: autoload.inc
 
-NavConfig has been removed.
-***************************
+NavConfig has been Removed.
+...........................
 
 .. include:: navconfig.inc
 
-whitelist & blacklist configs have been removed.
-************************************************
+whitelist & blacklist Configs have been Removed.
+................................................
 
 .. include:: allowlist.inc
 
-Announcements are dismissable by default.
-*****************************************
+Announcements are Dismissable by Default.
+.........................................
 
 In 4.0 :ref:`configure_announcements` now have the ability to be ``dismissable``.
 Meaning users can press ``OK`` on the announment and it will no longer appear
@@ -67,8 +46,8 @@ themselves are ``dismissable`` by default.
 
 The documentation for :ref:`configure_announcements` has been updated with this new feature.
 
-Batch connect form ids are now lowercase.
-*****************************************
+Batch Connect Form IDs are now Lowercase.
+.........................................
 
 To resolve some bugs with :ref:`dynamic-bc-apps`, batch connect form
 items will now force lowercase HTML IDs.  This may break some javascript
@@ -90,8 +69,8 @@ id of the form item will be lowercase as shown below.
 
   id="batch_connect_session_context_my_cool_form_item"
 
-Root owned configuration files
-******************************
+Root Owned Configuration Files.
+...............................
 
 In an effort to increase the security of the Open OnDemand platform,
 the system will now start to only respond to root owned configuration
@@ -104,17 +83,17 @@ While these files need to be root owned, they can continue to have any
 group ownership.
 
 Deprecations
-............
+------------
 
-POLL_DELAY is deprecated
-************************
+POLL_DELAY is Deprecated.
+.........................
 
 ``POLL_DELAY`` is deprecated in 4.0 and being replaced
 by documented configurations. See `Batch connect sessions poll delay`_
 for more details.
 
-Dependency updates
-..................
+Dependency Updates
+------------------
 
 This release updates the following dependencies:
 
@@ -134,12 +113,12 @@ This release updates the following dependencies:
 
 .. warning:: OnDemand repos no longer provide mod_auth_openidc or cjose.
 
-SELinux changes
-...............
+SELinux Changes
+---------------
 
 
-Upgrade directions
-..................
+Upgrade Directions
+------------------
 
 .. warning::
 
@@ -304,10 +283,10 @@ Upgrade directions
 
       sudo dnf downgrade mod_auth_openidc
 
-Details of new features
+Details of New Features
 -----------------------
 
-Global Batch Connect items
+Global Batch Connect Items
 ..........................
 
 In 4.0 you can now define batch connect form items
@@ -316,7 +295,7 @@ application.
 
 See :ref:`global_bc_form_items` for more details.
 
-noVNC quality and compression defaults
+noVNC Quality and Compression Defaults
 ......................................
 
 Sites can now set the default compression and quality values
@@ -324,7 +303,7 @@ for noVNC batch connect applications through the two ``ondemand.d``
 properties :ref:`novnc_default_compression <novnc_default_compression>`
 and :ref:`novnc_default_quality <novnc_default_quality>`.
 
-Batch connect sessions poll delay
+Batch Connect Sessions Poll Delay
 .................................
 
 When a user lands on ``My Interactive Sessions`` page,
@@ -338,7 +317,7 @@ In 4.0 this is a documented configuration with ``POLL_DELAY`` being
 deprecated. See :ref:`the bc_sessions_poll_delay documentation <bc_sessions_poll_delay>`
 for more details.
 
-System Status application
+System Status Application
 .........................
 
 Your center may have deployed OSC's system status application:
@@ -359,7 +338,7 @@ for more details.
 
 Visit :ref:`disabling_applications` to disable this application.
 
-data-hide directives now respond to false
+data-hide Directives now Respond to False
 .........................................
 
 ``data-hide`` directives now respond to both ``true`` to hide
@@ -367,14 +346,14 @@ the form item or ``false`` to show the form item.
 
 Responding to ``false`` is new in 4.0.
 
-User mapping now accepts UIDs
+User Mapping now Accepts UIDs
 .............................
 
 User mapping scripts can now return a UID instead of a username.
 This can be helpful for centers that have multiple domains and possible
 username collisions.
 
-Interactive apps can have a text header
+Interactive Apps can have a Text Header
 .......................................
 
 The item ``form_header`` can be added to intereactive applications
@@ -385,7 +364,7 @@ displayed on hoverover.
 See the :ref:`form documentation for form_header <bc_form_header>`
 for more details.
 
-Remove runtime dependency on SCL
+Remove Runtime Dependency on SCL
 ................................
 
 OnDemand no longer requires SCL on RHEL based systems.
@@ -393,13 +372,13 @@ OnDemand also no longer has an indirect dependency on the TCL environment module
 This removal of the SCL dependency should make it possible to install OnDemand on hosts such
 as a head node where the Lmod environment modules are setup.
 
-XDMoD efficiency widget update
+XDMoD Efficiency Widget Update
 ..............................
 
 XDMoD job efficiency panels now show efficiency calculations
 for CPU usage, memory and time.
 
-Edit and delete interactive application saved settings
+Edit and Delete Interactive Application Saved Settings
 ......................................................
 
 Since launching saved settings for interactive applications
@@ -409,7 +388,7 @@ these saved settings.
 See :ref:`edit-save-interactive-app-saved-settings` for more
 details.
 
-nginx_clean now cleans PUNs of disabled users
+nginx_clean now Cleans PUNs of Disabled Users
 .............................................
 
 The helper method ``nginx_clean`` in the ``nginx_stage``
