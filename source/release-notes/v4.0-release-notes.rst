@@ -299,9 +299,7 @@ Upgrade Instructions
 
             sudo dnf install -y https://yum.osc.edu/ondemand/4.0/ondemand-release-web-4.0-1.amzn2023.noarch.rpm
 
-#. Enable dependency repos
-
-   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+#. (**RHEL/Rocky/AlmaLinux 8 & 9 only**) Enable dependency repos
 
    .. code-block:: sh
 
@@ -327,7 +325,7 @@ Upgrade Instructions
 
             sudo apt-get --only-upgrade install ondemand
 
-#. (Optional) If using Dex based authentiction, update the ``ondemand-dex`` package.
+#. (**Dex users only**) Update the ``ondemand-dex`` package.
 
    .. tabs::
 
@@ -370,13 +368,13 @@ Upgrade Instructions
 
             sudo systemctl try-restart httpd
 
-#. (Optional) If ``ondemand-dex`` was installed, restart the ``ondemand-dex`` service.
+#. (**Dex users only**) Restart the ``ondemand-dex`` service.
 
    .. code-block:: sh
 
       sudo systemctl try-restart ondemand-dex.service
 
-#. (Optional) If ``ondemand-selinux`` was installed, see :ref:`ood_selinux_updates`
+#. (**Dex users only**) See :ref:`ood_selinux_updates`.
 
 #. Force all PUNs to restart
 
@@ -384,17 +382,13 @@ Upgrade Instructions
 
       sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 
-#. (Optional) Remove old dependencies from prior versions of OOD if they are not used by other applications.
-
-   **RHEL/Rocky/AlmaLinux 8 & 9 only**
+#. (**RHEL/Rocky/AlmaLinux 8 & 9 only**) Remove old dependencies from prior versions of OOD if they are not used by other applications.
 
    .. code-block:: sh
 
       sudo dnf remove environment-modules scl-utils
 
-#. Set mod_auth_openidc and cjose to the OS packaged version
-
-  **RHEL/Rocky/AlmaLinux 8 only**
+#. (**RHEL/Rocky/AlmaLinux OIDC 8 only**) Set mod_auth_openidc and cjose to the OS packaged version
 
   .. code-block:: sh
 
