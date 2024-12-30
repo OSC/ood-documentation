@@ -38,7 +38,8 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinxcontrib.httpdomain',
     'sphinxcontrib.plantuml',
-    'sphinx_tabs.tabs'
+    'sphinx_tabs.tabs',
+    'sphinxcontrib.spelling'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -411,3 +412,6 @@ def setup(app):
 doc_context = {
     'ondemand_version':              version,
 }
+
+# spelling configurations
+spelling_ignore_contributor_names = False

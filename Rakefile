@@ -8,6 +8,11 @@ task :build do
   exec "#{run_cmd} make html"
 end
 
+desc "Spellcheck"
+task :spellcheck do
+  exec "#{run_cmd} make spellcheck"
+end
+
 desc "Open built documentation in browser"
 task :open do
   exec '(command -v xdg-open >/dev/null 2>&1 && xdg-open build/html/index.html) || open build/html/index.html'
@@ -19,7 +24,7 @@ def user_group
 end
 
 def image
-  'ohiosupercomputer/ood-doc-build:v3.0.0'
+  'ohiosupercomputer/ood-doc-build:v3.1.0'
 end
 
 def docker?
