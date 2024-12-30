@@ -5,13 +5,7 @@ end
 
 desc "Build docs using docker"
 task :build do
-  if podman?
-    exec "podman run --rm -it -v #{__dir__}:/doc #{image} make html"
-  elsif docker?
-    exec "docker run --rm -it -v '#{__dir__}:/doc' -u '#{user_group}' #{image} make html"
-  else
-    raise StandardError, "Cannot find any suitable container runtime to build. Need 'podman' or 'docker' installed."
-  end
+  exec "#{run_cmd} make html"
 end
 
 desc "Open built documentation in browser"
@@ -36,4 +30,14 @@ end
 def podman?
   `which podman 2>/dev/null 2>&1`
   $?.success?
+end
+
+def run_cmd
+  if podman?
+    "podman run --rm -it -v #{__dir__}:/doc #{image}"
+  elsif docker?
+    "docker run --rm -it -v '#{__dir__}:/doc' -u '#{user_group}' #{image}"
+  else
+    raise StandardError, "Cannot find any suitable container runtime to build. Need 'podman' or 'docker' installed."
+  end
 end
