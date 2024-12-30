@@ -96,7 +96,7 @@ The service for OnDemand Dex is ``ondemand-dex``:
 OnDemand Dex behind Apache reverse proxy
 ----------------------------------------
 
-By default Dex sits behing Apache and is accessed via a reverse proxy.
+By default Dex sits behind Apache and is accessed via a reverse proxy.
 OnDemand Dex behind the reverse proxy logic will force Dex to listen only on ``localhost`` and only
 via HTTP.
 

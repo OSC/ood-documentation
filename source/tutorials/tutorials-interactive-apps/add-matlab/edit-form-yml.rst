@@ -106,7 +106,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
       ---
       cluster: "owens"
       form:
-        - version               # <-- OSC supports multiple versions of MATLAB via LMod 
+        - version               # <-- OSC supports multiple versions of MATLAB via Lmod 
         - bc_account            # <-- the charge account
         - bc_num_hours          # <-- the number of user requested hours that the job run
         - bc_num_slots          # <-- the number of nodes

@@ -21,7 +21,7 @@ You may want to rename this directory to something more appropriate.
   npm init
 
 .. warning::
-  ``npm init`` will initialize the ``main`` script as ``index.js``.  For OnDemand to recognzie
+  ``npm init`` will initialize the ``main`` script as ``index.js``.  For OnDemand to recognize
   this application, the ``main`` attribute in ``package.json`` should be ``app.js`` not
   ``index.js``.
 
@@ -52,7 +52,7 @@ to the file.
 
 This ``app.js`` imports the `Express`_ framework and sets up the ``router``
 to route requests to the functions that can serve that request. This starter
-file only has one route to the root url ``/`` and returns a simple ``Hello World``
+file only has one route to the root URL ``/`` and returns a simple ``Hello World``
 string.
 
 .. code:: javascript

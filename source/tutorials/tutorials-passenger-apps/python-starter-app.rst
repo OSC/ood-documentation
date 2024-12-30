@@ -55,8 +55,8 @@ So this section goes over adding the `Flask`_ web framework and having
 the application load the virtual environment that has your dependencies in
 it.
 
-Create the virtual environmet
-`````````````````````````````
+Create the virtual environment
+``````````````````````````````
 
 First, we need to create the virtual environment. Issue this command below
 to create one. This will create a subdirectory ``python-hello-world`` with a
@@ -94,7 +94,7 @@ for this file.
   # passenger_wsgi.py
   from app import MyApp as application
 
-``app.py`` on the other hand, has logic associcated with the web application in it.
+``app.py`` on the other hand, has logic associated with the web application in it.
 It imports the `Flask`_ libraries, configures the routes and starts the flask server.
 
 .. code:: python
@@ -132,7 +132,7 @@ virtual environment.
   exec /bin/env python3 "$@"
 
 .. warning::
-  Ensure that this ``bin/python`` file has executable permissons on it.
+  Ensure that this ``bin/python`` file has executable permissions on it.
   Issue the command ``chmod +x bin.python`` to give it executable permissions.
 
 Now, with the python wrapper script to load the environment for your application,
