@@ -93,5 +93,25 @@ This is your new `NodeJs`_ application!
 
 .. include:: deploy-to-production.inc
 
+.. _nodejs_starter_app_wrapper:
+
+Node Wrapper
+------------
+
+Applications can provide a ``bin/node`` file within their project
+to use a different version of NodeJs. Here's an example of such a file.
+
+.. warning::
+  Ensure this file is executable permissions, otherwise it will not work.
+
+.. code:: shell
+
+  #!/bin/bash
+
+  # OnDemand uses NodeJs 20, but this application uses 22.
+
+  module load nodejs/22
+  exec /bin/env node "$@"
+
 .. _NodeJs: https://nodejs.org/en
 .. _Express: https://expressjs.com/
