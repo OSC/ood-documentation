@@ -137,9 +137,9 @@
   <section id="add-a-jupyter-app-on-a-kubernetes-cluster">
 <span id="app-development-tutorials-interactive-apps-k8s-jupyter"></span><h1>Add a Jupyter App on a Kubernetes Cluster<a class="headerlink" href="#add-a-jupyter-app-on-a-kubernetes-cluster" title="Link to this heading"></a></h1>
 <p>This tutorial will walk you through creating an interactive Jupyter app that
-your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> in a kubernetes cluster.</p>
+your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> in a Kubernetes cluster.</p>
 <p>It assumes you have a working understanding of app development already. The purpose of
-this document is to describe how to write apps specifically for a kubernetes cluster,
+this document is to describe how to write apps specifically for a Kubernetes cluster,
 so it skips a lot of important details about app development that may be found in
 other tutorials like <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a>.</p>
 <p>We’re going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_k8s_jupyter">bc k8s jupyter</a> app which you can fork, clone
@@ -181,7 +181,7 @@ KUBECONFIG: &#39;/dev/null&#39;
 <section id="resource-requests">
 <h2>resource requests<a class="headerlink" href="#resource-requests" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">port</span></code> is is the port the container is going to listen on.  <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">memory</span></code>
-are the cpu and memory request. Note that memory here has <code class="docutils literal notranslate"><span class="pre">Gi</span></code> which is the unit.</p>
+are the CPU and memory request. Note that memory here has <code class="docutils literal notranslate"><span class="pre">Gi</span></code> which is the unit.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">container</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># ...</span>
 <span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8080&quot;</span>
@@ -191,7 +191,7 @@ are the cpu and memory request. Note that memory here has <code class="docutils 
 </div>
 <p>Kubernetes has some flexibility in requests. One can make _requests_ and _limits_
 which are like hard and soft limits. In the example above, they’re both the same.</p>
-<p>Here’s an example utilizing requests and limits for both memory and cpu. Note that
+<p>Here’s an example utilizing requests and limits for both memory and CPU. Note that
 we’re using millicores in <code class="docutils literal notranslate"><span class="pre">cpu_request</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">container</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># ...</span>
@@ -202,7 +202,7 @@ we’re using millicores in <code class="docutils literal notranslate"><span cla
 <span class="w">  </span><span class="nt">memory_limit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4Gi&quot;</span>
 </pre></div>
 </div>
-<p>See <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/">kubernetes pod memory</a> and <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/">kubernetes pod cpu</a> for more details.</p>
+<p>See <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/">Kubernetes pod memory</a> and <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/">Kubernetes pod CPU</a> for more details.</p>
 </section>
 <section id="configmap">
 <h2>configmap<a class="headerlink" href="#configmap" title="Link to this heading"></a></h2>
@@ -233,7 +233,7 @@ files to a single configmap.</p>
 Even though these are containers, users often want to persist
 the files they work on.  This example mounts the home directory,
 but could mount any project or scratch space just the same.</p>
-<p>When mounting a host directory <code class="docutils literal notranslate"><span class="pre">host_type</span></code> must alwasy be Directory.
+<p>When mounting a host directory <code class="docutils literal notranslate"><span class="pre">host_type</span></code> must always be Directory.
 This example shows how to mount host directories and nfs storage locations.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mounts</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
@@ -272,7 +272,7 @@ where you’re not mounting the users <code class="docutils literal notranslate"
 does both because it is just an example.</p>
 </div>
 <p>Let’s walk through these init containers and what they’re doing.</p>
-<p><code class="docutils literal notranslate"><span class="pre">init-secret</span></code> does just that. It initialzies a <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/secret/">kubernetes secret</a>.
+<p><code class="docutils literal notranslate"><span class="pre">init-secret</span></code> does just that. It initialzies a <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes secret</a>.
 <code class="docutils literal notranslate"><span class="pre">add-passwd-to-cfg</span></code> then reads that secret and creates a salt and
 sha1 of this secret (these are needed specifically for Jupyter).  Lastly
 it adds a single line to our configmap, which is the <code class="docutils literal notranslate"><span class="pre">c.NotebookApp.password</span></code>.

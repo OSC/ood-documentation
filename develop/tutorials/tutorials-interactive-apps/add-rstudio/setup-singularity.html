@@ -142,7 +142,7 @@
 <span id="app-development-tutorials-rstudio-setup-singularity"></span><h1><span class="section-number">3. </span>Setup Singularity<a class="headerlink" href="#setup-singularity" title="Link to this heading"></a></h1>
 <section id="download-the-singularity-image">
 <h2>Download The Singularity Image<a class="headerlink" href="#download-the-singularity-image" title="Link to this heading"></a></h2>
-<p>The Singularity image may be downloaded from Singularity Hub by users without sudoer rights by running the following:</p>
+<p>The Singularity image may be downloaded from Singularity Hub by users without sudo rights by running the following:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>pull<span class="w"> </span>--name<span class="w"> </span>rserver-launcher-centos7.simg<span class="w"> </span>shub://OSC/centos7-launcher
 </pre></div>
@@ -158,9 +158,9 @@
 </section>
 <section id="alternatively-build-the-singularity-image">
 <h2>Alternatively, Build The Singularity Image<a class="headerlink" href="#alternatively-build-the-singularity-image" title="Link to this heading"></a></h2>
-<p>Running a build is trivial but does require sudoer access to the build host.</p>
+<p>Running a build is trivial but does require sudo access to the build host.</p>
 <p>Where <code class="docutils literal notranslate"><span class="pre">Singularity</span></code> is the file that defines the image. The image is just the base CentOS 7 packages plus a run script. This simplicity is because the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host. By bind-mounting executables and libaries from the host system we are able to swap RStudio versions at launch time without having to update the Singuarlity image.</p>
-<p>Likewise the runscript defined in the image uses the host <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> which is propagated into the guest’s environment as <code class="docutils literal notranslate"><span class="pre">$USER_PATH</span></code>.</p>
+<p>Likewise the <code class="docutils literal notranslate"><span class="pre">runscript</span></code> defined in the image uses the host <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> which is propagated into the guest’s environment as <code class="docutils literal notranslate"><span class="pre">$USER_PATH</span></code>.</p>
 <p>An example Singularity file for running RStudio:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure that the guest is the same OS type as the compute hosts that it will run on</span>
