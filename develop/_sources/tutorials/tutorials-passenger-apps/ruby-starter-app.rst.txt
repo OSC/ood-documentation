@@ -83,5 +83,25 @@ Here's the simplest version of this file returning Hello World on the root URL.
 
 .. include:: deploy-to-production.inc
 
+.. _ruby_starter_app_wrapper:
+
+Ruby Wrapper
+------------
+
+Applications can provide a ``bin/ruby`` file within their project
+to use a different version of ruby. Here's an example of such a file.
+
+.. warning::
+  Ensure this file is executable permissions, otherwise it will not work.
+
+.. code:: shell
+
+  #!/bin/bash
+
+  # OnDemand uses ruby 3.3, but this application uses 3.0.
+
+  module load ruby/3.0
+  exec /bin/env ruby "$@"
+
 .. _Sinatra: https://sinatrarb.com/
 .. _Ruby on Rails: https://rubyonrails.org/

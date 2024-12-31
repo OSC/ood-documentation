@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#add-and-edit-app-js">Add and edit app.js</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#boot-the-application">Boot the application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#publish-app">Publish App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#node-wrapper">Node Wrapper</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="python-starter-app.html">Starter Python Application</a></li>
@@ -258,6 +259,23 @@ git<span class="w"> </span>clone<span class="w"> </span>/users/PZS0562/efranz/on
 <p class="admonition-title">Warning</p>
 <p>Accessing this new app for the first time will cause your NGINX server to restart,
 killing all websocket connections, which means resetting your active web-based OnDemand Shell sessions.</p>
+</div>
+</section>
+<section id="node-wrapper">
+<span id="nodejs-starter-app-wrapper"></span><h2>Node Wrapper<a class="headerlink" href="#node-wrapper" title="Link to this heading"></a></h2>
+<p>Applications can provide a <code class="docutils literal notranslate"><span class="pre">bin/node</span></code> file within their project
+to use a different version of NodeJs. Here’s an example of such a file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure this file is executable permissions, otherwise it will not work.</p>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># OnDemand uses NodeJs 20, but this application uses 22.</span>
+
+module<span class="w"> </span>load<span class="w"> </span>nodejs/22
+<span class="nb">exec</span><span class="w"> </span>/bin/env<span class="w"> </span>node<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</pre></div>
 </div>
 </section>
 </section>

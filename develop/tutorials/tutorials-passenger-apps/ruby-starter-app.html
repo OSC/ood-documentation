@@ -86,6 +86,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-dependencies">Install dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#write-the-app-rb-file">Write the app.rb file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#publish-app">Publish App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ruby-wrapper">Ruby Wrapper</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="nodejs-starter-app.html">Starter NodeJS Application</a></li>
@@ -246,6 +247,23 @@ git<span class="w"> </span>clone<span class="w"> </span>/users/PZS0562/efranz/on
 <p class="admonition-title">Warning</p>
 <p>Accessing this new app for the first time will cause your NGINX server to restart,
 killing all websocket connections, which means resetting your active web-based OnDemand Shell sessions.</p>
+</div>
+</section>
+<section id="ruby-wrapper">
+<span id="ruby-starter-app-wrapper"></span><h2>Ruby Wrapper<a class="headerlink" href="#ruby-wrapper" title="Link to this heading"></a></h2>
+<p>Applications can provide a <code class="docutils literal notranslate"><span class="pre">bin/ruby</span></code> file within their project
+to use a different version of ruby. Here’s an example of such a file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure this file is executable permissions, otherwise it will not work.</p>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># OnDemand uses ruby 3.3, but this application uses 3.0.</span>
+
+module<span class="w"> </span>load<span class="w"> </span>ruby/3.0
+<span class="nb">exec</span><span class="w"> </span>/bin/env<span class="w"> </span>ruby<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</pre></div>
 </div>
 </section>
 </section>
