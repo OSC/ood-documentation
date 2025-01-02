@@ -15,7 +15,7 @@ instance as an Open ID Connect (OIDC) client.
 ACCESS uses `CILogon`_ to provide a bridge from campus authentication, via the InCommon Federation,
 to OAuth/OIDC-based research cyberinfrastructure (CI).
 
-Once you've registered your Open OnDemand instance, you can then configure it accordingly.
+Once you have registered your Open OnDemand instance, you can then configure it accordingly.
 Since `ACCESS`_ uses Open ID Connect (OIDC) you can see our :ref:`oidc documentation <authentication-oidc>`
 for more details on how to configure Open OnDemand with what CILogon has provided in
 registering your application.
