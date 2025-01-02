@@ -69,16 +69,22 @@ If the announcement file has the extension ``yml`` and is a yaml file it is firs
    * - Key
      - Description
    * - type
-     - The type of announcment. Values can be ``warning``, ``info``, ``success``, or ``danger``.
+     - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
    * - msg
      - The announcement's message.
-   * - dismissable
-     - Specify if the announcment is dismissable or not with ``true`` or ``false``.
+   * - id
+     - Optional unique identifier for the announcement. This is useful for managing changes to announcements that are used as ToS or EULA that users need to agree to.
+       When provided, it will be used to validate if the announcement has been dismissed regardless of the content. Changing the ``id`` will make the announcement appear again.
+   * - dismissible
+     - Specify if the announcement is dismissible or not with ``true`` or ``false``.
        Defaults to ``true``.
    * - required
-     - Specify if the announcment is required or not with ``true`` or ``false``.
-       Defaults to ``false``. When this is set to ``true``, the user will not be
-       do anything until the announcment has been accepted.
+     - Specify if the announcement is required or not with ``true`` or ``false``.
+       Defaults to ``false``. When this is set to ``true``, the OOD UI will only render the announcement and the user will not be able
+       to submit jobs until the announcement has been accepted.
+   * - button_text
+     - Optional parameter to customize the text content for the button to dismiss the announcement.
+       Defaults to ``Accept`` for required and ``OK`` for dismissible.
 
 .. tip::
   You can use ``required`` announcements to present users with a ToS (terms of service),
