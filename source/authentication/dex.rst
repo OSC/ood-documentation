@@ -8,7 +8,7 @@ OpenID Connect with Dex
 Installing OnDemand Dex package
 -------------------------------
 
-First the OnDemand yum repos must be enabled, see :ref:`install-software`.
+First the OnDemand yum repositories must be enabled, see :ref:`install-software`.
 
 Install the ``ondemand-dex`` package:
 
@@ -36,7 +36,7 @@ Requirements:
 - Git
 - Make
 
-Build and install the ondemand-dex binary:
+Build and install the ``ondemand-dex`` binary:
 
    .. code-block:: sh
 
@@ -53,7 +53,7 @@ Add the ``ondemand-dex`` user and group:
       sudo groupadd -r ondemand-dex
       sudo useradd -r -d /var/lib/ondemand-dex -g ondemand-dex -s /sbin/nologin -c "OnDemand Dex" ondemand-dex
 
-Get ``ondemand-dex`` repo and install web files and systemd unit file
+Get the ``ondemand-dex`` repository and install web files and systemd unit file
 
    .. code-block:: sh
 
@@ -120,13 +120,13 @@ Dex Firewall
 
 By default when using SSL, Dex will use port ``5554`` for the communication between OnDemand and Dex as well as login interactions with users accessing OnDemand.  The port used for non-SSL is ``5556``.  The port being used by Dex must be externally accessible.
 
-Firewalld example:
+firewalld example:
    .. code-block:: sh
 
       $ sudo firewall-cmd --zone=public --add-port=5554/tcp --permanent
       $ sudo firewall-cmd --reload
 
-Iptables example:
+iptables example:
    .. code-block:: sh
 
       $ sudo iptables -I INPUT -p tcp -m tcp --dport 5554 -j ACCEPT

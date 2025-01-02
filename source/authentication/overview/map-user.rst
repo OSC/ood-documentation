@@ -28,7 +28,7 @@ Both with variations will be discussed here.
 Remote User
 -----------
 
-It's worth discussusing where ``REMOTE_USER`` is coming from.  When apache
+It's worth discussing where ``REMOTE_USER`` is coming from.  When apache
 has successfully authenticates a request it sets the variable ``REMOTE_USER``
 from, well, the remote.
 
@@ -44,8 +44,8 @@ If you're using an OpenID Connect provider you may need to set
 tells apache how to set ``REMOTE_USER`` from the claim response.
 
 
-Reguluar Expression User Mapping
---------------------------------
+Regular Expression User Mapping
+-------------------------------
 
 The simplest and fastest way to map a ``REMOTE_USER`` to a system user is through
 :ref:`user_map_match <ood-portal-generator-user-map-match>`.  It isn't directly
@@ -57,7 +57,7 @@ Dex Automatic Configuration
 
 When using the OpenId Connector `dex`_ and setting `oidc_remote_user_claim`_
 to ``email`` we automatically set `user_map_match`_ to ``^([^@]+)@.*$`` as
-a convienience.
+a convenience.
 
 User Map Command for Advanced Mappings
 --------------------------------------
@@ -74,12 +74,12 @@ configuration and be sure to make this mapping script executable.
   Be aware, this script is executed on every request.
 
 Let's take a simple example.  It uses bash's builtin regular expression matching
-against ``([^@]+)@osc.edu`` - an osc dot edu email address.  If that matches against 
-``$1`` (the ``REMOTE_USER``) after it's url-decoded, then we return an all lowercase
+against ``([^@]+)@osc.edu`` - an ``osc.edu`` email address.  If that matches against 
+``$1`` (the ``REMOTE_USER``) after it's URL decoded, then we return an all lowercase
 version of the first part of an email address.
 
-The contract this script has with ood is that ``REMOTE_USER`` is url-encoded and
-passed into it as the first arguement, ``$1``.
+The contract this script has with Open OnDemand is that ``REMOTE_USER`` is URL encoded and
+passed into it as the first argument, ``$1``.
 
 The script will return 0 and output the match if it can correctly map the user.
 Otherwise, if it fails, it will output nothing and exit 1.

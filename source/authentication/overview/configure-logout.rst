@@ -3,9 +3,9 @@
 Configure Logout
 ================
 
-The logout link on the dashboard is ``/logout``. OnDemand's Apache config has a separate directive to handle ``/logout``, which by default redirects the user to ``/pun/sys/dashboard/logout``, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.
+The logout link on the dashboard is ``/logout``. OnDemand's Apache configuration has a separate directive to handle ``/logout``, which by default redirects the user to ``/pun/sys/dashboard/logout``, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.
 
-To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOUT/USER"`` in the ood-portal-generator config at ``/etc/ood/config/ood_portal.yml`` and regenerate the config.
+To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOUT/USER"`` in the ``ood-portal-generator`` configuration at ``/etc/ood/config/ood_portal.yml`` and regenerate the configuration.
 
 
 .. describe:: logout_redirect (String, null)
@@ -20,14 +20,14 @@ To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOU
           logout_redirect: "/pun/sys/dashboard/logout"
 
      Using OpenID Connect Apache module
-       Redirect to the mod_auth_oidc logout location:
+       Redirect to the ``mod_auth_oidc`` logout location:
 
        .. code-block:: yaml
 
           logout_redirect: "/oidc?logout=https%3A%2F%2Fondemand.my-center.edu"
 
      Using Shibboleth Apache module
-       If the Shibboleth IdP server deployed is at idp.my-center.edu, this is an example redirect with mod_auth_shib:
+       If the Shibboleth IdP server deployed is at ``idp.my-center.edu``, this is an example redirect with ``mod_auth_shib``:
 
        .. code-block:: yaml
 
