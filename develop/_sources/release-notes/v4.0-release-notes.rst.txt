@@ -18,22 +18,22 @@ As we only know the github username, that's what's being referenced here.
 Breaking Changes
 ----------------
 
-Autoloading During Initialization has been Removed.
+Autoloading During Initialization Has Been Removed.
 ...................................................
 
 .. include:: autoload.inc
 
-NavConfig has been Removed.
+NavConfig Has Been Removed.
 ...........................
 
 .. include:: navconfig.inc
 
-Configurations whitelist & blacklist have been Removed.
+Configurations whitelist & blacklist Have Been Removed.
 .......................................................
 
 .. include:: allowlist.inc
 
-Announcements are Dismissible by Default.
+Announcements Are Dismissible by Default.
 .........................................
 
 In 4.0, :ref:`configure_announcements` now have the ability to be ``dismissible``.
@@ -46,11 +46,11 @@ themselves are ``dismissible`` by default.
 
 The documentation for :ref:`configure_announcements` has been updated with this new feature.
 
-Batch Connect Form IDs are now Lowercase.
-.........................................
+Batch Connect Form Identifiers Are Now Lowercase.
+.................................................
 
 To resolve bugs with :ref:`dynamic-bc-apps`, batch connect form
-items will now force lowercase HTML IDs.  This may break some javascript
+items will now force lowercase HTML IDs.  This may break some JavaScript
 at centers expecting the HTML ID of the form item to be a mix of uppercase
 and lowercase.
 
@@ -62,8 +62,8 @@ Below is an example of defining a form item with uppercase keys like ``My_Cool_F
   form:
     My_Cool_Form_Item
 
-In this example, ``My_Cool_Form_Item`` has uppercase characters, however the HTML
-ID of the form item will be lowercase as shown below.
+In this example, ``My_Cool_Form_Item`` has uppercase characters, but the HTML
+ID of the form item will be lowercase, as shown below.
 
 .. code-block:: html
 
@@ -131,8 +131,8 @@ New Features and Enhancements
 Global Batch Connect Items
 ..........................
 
-In 4.0 you can now define batch connect form items
-in ondemand.d files to be used in any batch connect
+In version 4.0, you can now define batch connect form items
+in ondemand.d files to be used across any batch connect
 application.
 
 See :ref:`global_bc_form_items` for more details.
@@ -141,7 +141,7 @@ noVNC Quality and Compression Defaults
 ......................................
 
 Sites can now set the default compression and quality values
-for noVNC batch connect applications through the two ``ondemand.d``
+for noVNC batch connect applications using the two ``ondemand.d``
 properties :ref:`novnc_default_compression <novnc_default_compression>`
 and :ref:`novnc_default_quality <novnc_default_quality>`.
 
@@ -149,13 +149,13 @@ Batch Connect Sessions Poll Delay
 .................................
 
 When a user lands on ``My Interactive Sessions`` page,
-the client browser will request updates by default
-every 10 seconds.
+the client browser will request updates
+every 10 seconds by default.
 
-Sites wanting to change this had do use the hidden environment
+Sites that wish to change this behavior must use the hidden environment
 variable ``POLL_DELAY``.
 
-In 4.0 this is a documented configuration with ``POLL_DELAY`` being
+In version 4.0, this setting is now a documented configuration, with ``POLL_DELAY`` being
 deprecated. See :ref:`the bc_sessions_poll_delay documentation <bc_sessions_poll_delay>`
 for more details.
 
@@ -165,83 +165,82 @@ System Status Application
 Your center may have deployed OSC's system status application:
 https://github.com/osc/osc-systemstatus.
 
-4.0 now ships with this application natively, though it
-only supports Slurm clusters in this release.
+Version 4.0 now includes this application natively, though it
+currently supports only Slurm clusters.
 
 Here's an example image from OSC detailing the system status of
 our clusters.
 
 .. figure:: /images/system-status.png
-    :alt: An image showing the system status application. There are 4 panels for each cluster. Each panel shows the number of nodes available, cores available, GPUs available jobs running and jobs queued. It also shows percentages available for nodes, cores and GPUs.
+    :alt: An image showing the system status application with four panels, each for a different cluster. Each panel displays the number of available nodes, cores, GPUs, running jobs and queued jobs. It also shows the available percentages for nodes, cores, and GPUs.
 
 This application will poll for updates at regular intervals to automatically
-update the page. The default is 10 seconds. See :ref:`the documentation on status_poll_dela <status_poll_delay>`
-for more details.
+update the page. The default polling interval is 10 seconds. See :ref:`the documentation on status_poll_delay <status_poll_delay>` for more details.
 
 Visit :ref:`disabling_applications` to disable this application.
 
-data-hide Directives now Respond to False
+data-hide Directives Now Respond to False
 .........................................
 
 ``data-hide`` directives now respond to both ``true`` to hide
 the form item or ``false`` to show the form item.
 
-Responding to ``false`` is new in 4.0.
+Responding to ``false`` is new feature in version 4.0.
 
-User Mapping now Accepts UIDs
-.............................
+User Mapping Now Accepts User Identifiers
+.........................................
 
 User mapping scripts can now return a UID instead of a username.
-This can be helpful for centers that have multiple domains and possible
-username collisions.
+This is particularly useful for centers that have multiple domains where
+username collisions may occur.
 
-Interactive Apps can have a Text Header
+Interactive Apps Can Have a Text Header
 .......................................
 
-The item ``form_header`` can be added to interactive applications
-to display additional text in the form. Note this is different from
-the ``manifest.yml``'s ``description`` field because it will not be
-displayed on hoverover.
+The ``form_header`` item can be added to interactive applications
+to display additional text within the form. Note this is different from
+the ``description`` field in the ``manifest.yml``, as the ``form_header`` text will not appear
+on hover.
 
 See the :ref:`form documentation for form_header <bc_form_header>`
 for more details.
 
-Remove Runtime Dependency on SCL
-................................
+Removed Runtime Dependency on Software Collections
+..................................................
 
-OnDemand no longer requires SCL on RHEL based systems.
+OnDemand no longer requires Software Collections, SCL, on RHEL-based systems. 
 OnDemand also no longer has an indirect dependency on the TCL environment module packages.
 This removal of the SCL dependency should make it possible to install OnDemand on hosts such
-as a head node where the Lmod environment modules are setup.
+as head nodes, where the Lmod environment modules are set up.
 
 XDMoD Efficiency Widget Update
 ..............................
 
-XDMoD job details widget now show job efficiency calculations
-for CPU usage, memory and time.
+XDMoD job details widget now displays job efficiency calculations
+for CPU usage, memory usage and elapsed time.
 
 Edit and Delete Interactive Application Saved Settings
 ......................................................
 
 Since launching saved settings for interactive applications
-in version 3.1, 4.0 now offers the ability to edit and delete
+in version 3.1, version 4.0 now offers the ability to edit and delete
 these saved settings.
 
 See :ref:`edit-save-interactive-app-saved-settings` for more
 details.
 
-nginx_clean now Cleans PUNs of Disabled Users
-.............................................
+nginx_clean Now Cleans PUNs for Disabled Users
+..............................................
 
 The helper method ``nginx_clean`` in the ``nginx_stage``
-library will now remove PUNs and related files for users
-that have been disabled.
+library will now remove PUNs and associated files for users
+who have been disabled.
 
-Disabled users have been deleted from LDAP and are no longer
+Disabled users are those who have been removed from LDAP and are no longer
 valid users on that system.
 
-This means that centers that delete users (remove them from LDAP)
-will also now start to clean those processes on the OnDemand machine.
+This change ensures that centers that delete users (by removing them from LDAP)
+will also clean up related processes on the OnDemand machine.
 
 Upgrade Instructions
 --------------------
@@ -371,7 +370,7 @@ Upgrade Instructions
 
             sudo systemctl try-restart apache2
 
-      .. tab:: Amazon 2023
+      .. tab:: Amazon Linux 2023
 
          .. code-block:: sh
 
