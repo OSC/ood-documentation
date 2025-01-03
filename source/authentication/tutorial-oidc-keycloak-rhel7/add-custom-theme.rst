@@ -28,9 +28,3 @@ Here are two links to get started with a custom theme:
 Remember after adding a theme you still need to configure your realm in the
 Keycloak admin UI to use the theme for the login pages.
 
-.. note::
-
-   Soon we will offer an ood-keycloak base theme that be easier to extended to
-   provide most of the common themeing a site might like to perform. It will
-   also work well for OTP views.
-
