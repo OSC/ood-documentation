@@ -128,6 +128,8 @@ Here we have a checkbox ``enable_cuda_version`` that will show
         data:
           hide-cuda-version-when-un-checked: true
 
+.. _dynamic-bc-apps-data-label:
+
 Dynamic Element Labels
 **********************
 
