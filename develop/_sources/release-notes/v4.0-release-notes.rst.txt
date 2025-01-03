@@ -19,6 +19,16 @@ Additionally, we want to thank Robin Karlsson at CSC - IT Center for Science for
 
 We'd also like to give a big thank you to those listed below for their first time contributing to this release:
 
+* ``NucciTheBoss`` made their first contribution in #3371
+* ``codecat555`` made their first contribution in #3424
+* ``avivkeller`` made their first contribution in #3544
+* ``ashton22305`` made their first contribution in #3549
+* ``TheGamer1002`` made their first contribution in #3619
+* ``ryanbcox`` made their first contribution in #3677
+* ``giuliolibrando`` made their first contribution in #3776
+* ``guruevi`` made their first contribution in #3795
+* ``euler-room`` made their first contribution in #3866
+* ``ahmed-mgd`` made their first contribution in #3973
 
 
 Breaking Changes
@@ -134,6 +144,20 @@ SELinux Changes
 New Features and Enhancements
 -----------------------------
 
+Requied Announcements.
+......................
+
+:ref:`configure_announcements` have been updated in 4.0 as seen in `Announcements Are Dismissible by Default.`_
+breaking change above.
+
+Along with that breaking change, there is also a very exciting feature you now use:
+*required* announcements.
+
+*Required* annoucments must be accepted before any page can be loaded. This is useful
+to present users with a Terms of Service (TOS) or End User License Agreement (EULA)
+or similar.  The users will not be able to do anything with Open OnDemand until they've
+accepted this annoucments.
+
 Global Batch Connect Items
 ..........................
 
@@ -151,6 +175,10 @@ for noVNC batch connect applications using the two ``ondemand.d``
 properties :ref:`novnc_default_compression <novnc_default_compression>`
 and :ref:`novnc_default_quality <novnc_default_quality>`.
 
+Prior versions of Open OnDemand had these default values hard coded.
+Now sites can set these defaults if they wish to provide their users
+with higher quality defaults, for example.
+
 Batch Connect Sessions Poll Delay
 .................................
 
@@ -161,15 +189,15 @@ every 10 seconds by default.
 Sites that wish to change this behavior must use the hidden environment
 variable ``POLL_DELAY``.
 
-In version 4.0, this setting is now a documented configuration, with ``POLL_DELAY`` being
-deprecated. See :ref:`the bc_sessions_poll_delay documentation <bc_sessions_poll_delay>`
+In version 4.0, this setting is now a documented configuration, with the
+hidden environment variable ``POLL_DELAY`` being deprecated.
+See :ref:`the bc_sessions_poll_delay documentation <bc_sessions_poll_delay>`
 for more details.
 
 System Status Application
 .........................
 
-Your center may have deployed OSC's system status application:
-https://github.com/osc/osc-systemstatus.
+Your center may have deployed the `OSC System Status Application`_.
 
 Version 4.0 now includes this application natively, though it
 currently supports only Slurm clusters.
@@ -193,12 +221,31 @@ the form item or ``false`` to show the form item.
 
 Responding to ``false`` is new feature in version 4.0.
 
+This was added as a convenience for some forms 
+
+New data-label Directive.
+.........................
+
+Version 4.0 adds the ``data-label`` directive.  This is used to update
+the help text on a given form when certain choices are made. An example of
+may be a ``node_type`` select widget that can change it's help text based
+on which node type the user has selected.
+
+:ref:`dynamic-bc-apps-data-label` is the complete documentation for this
+feature.
+
 User Mapping Now Accepts User Identifiers.
 ..........................................
 
 User mapping scripts can now return a UID instead of a username.
 This is particularly useful for centers that have multiple domains where
 username collisions may occur.
+
+For example if the two users ``annie.oakley@osc.edu`` and ``annie.oakley@caltech.edu``
+both *incorrectly* map to the user ``annie.oakley``, you will now be able to return
+the unique number that is their UID (User Identifier) and therefore have
+no collisions.
+
 
 Interactive Apps Can Have a Text Header.
 ........................................
@@ -225,12 +272,17 @@ XDMoD Efficiency Widget Update
 XDMoD job details widget now displays job efficiency calculations
 for CPU usage, memory usage and elapsed time.
 
+Prior versions of Open OnDemand only showed efficiency calculations
+for CPU.
+
 Edit and Delete Interactive Application Saved Settings
 ......................................................
 
 Since launching saved settings for interactive applications
 in version 3.1, version 4.0 now offers the ability to edit and delete
-these saved settings.
+these saved settings. This gives your users the ability to maintain
+their saved settings whereas in prior releases they could only create
+them, not edit or delete them.
 
 See :ref:`edit-save-interactive-app-saved-settings` for more
 details.
@@ -247,6 +299,18 @@ valid users on that system.
 
 This change ensures that centers that delete users (by removing them from LDAP)
 will also clean up related processes on the OnDemand machine.
+
+File Editor Interface Update.
+.............................
+
+The interface for the file editor has been updated. Users will note
+that this page now has the navigation bar.  The previous navigation
+bar entires have been moved to the left.
+
+The figure below is an image of how the file editor appears in 4.0.
+
+.. figure:: /images/4.0_file_editor.png
+   :alt: An image showing the file editor as it appears in 4.0 with the Open OnDemand navigation bar and a new panel to the left for saving and other file editor specific options.
 
 Upgrade Instructions
 --------------------
@@ -409,3 +473,5 @@ Upgrade Instructions
   .. code-block:: sh
 
       sudo dnf downgrade mod_auth_openidc
+
+.. _OSC System Status application: https://github.com/osc/osc-systemstatus.
