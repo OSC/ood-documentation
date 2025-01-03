@@ -1,5 +1,5 @@
 The initializers used to modify the navigation bar and the class
-``NavConfig`` is deprecated in 3.0 and will be removed in 4.0.
+``NavConfig`` are deprecated in version 3.0 and will be removed in version 4.0.
 The 3.x series will continue to support this, but sites should use the
 ``nav_categories`` property instead.
 
