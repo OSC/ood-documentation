@@ -8,7 +8,7 @@ These are the steps to setup two factor authentication with Duo using Keycloak.
 Install Keycloak Duo SPI
 --------------------------------------------------
 
-#. Clone the Keycloak Duo SPI repo
+#. Clone the Keycloak Duo SPI repository.
 
    .. code::
 
@@ -50,11 +50,11 @@ Configure Duo SPI
 --------------------------------------------------
 
 #. Log into your Keycloak instance
-#. Choose the realm to configure in upper left corner, eg ``ondemand``
+#. Choose the realm to configure in upper left corner, e.g., ``ondemand``
 #. Choose ``Realm Settings`` in the left menu then ``Security Defenses`` tab
 #. Add ``frame-src https://*.duosecurity.com/ 'self';`` to the beginning of the value for ``Content-Security-Policy``
 #. Choose ``Authentication`` in the left menu
-#. While on ``Flows`` tab ensure the dropdown for the flow name is ``Browser`` and click ``Copy``
+#. While on ``Flows`` tab ensure the drop-down for the flow name is ``Browser`` and click ``Copy``
 #. Name the new flow ``browser-with-duo``
 #. For all items below ``Username Password Form`` delete them by choosing ``Actions`` then ``Delete``
 #. Choose ``Actions`` for ``Browser-with-duo Forms`` and choose ``Add Execution``

@@ -4,7 +4,7 @@ NSF ACCESS
 ----------
 
 If your site is a part of the `National Science Foundation`_'s (NSF)
-`ACCESS`_ program (formerley `XSEDE`_) you can use their Identity Provider (IDP)
+`ACCESS`_ program (formerly `XSEDE`_) you can use their Identity Provider (IDP)
 to authenticate users for your Open OnDemand instance.
 
 OIDC Client Registration
@@ -15,7 +15,7 @@ instance as an Open ID Connect (OIDC) client.
 ACCESS uses `CILogon`_ to provide a bridge from campus authentication, via the InCommon Federation,
 to OAuth/OIDC-based research cyberinfrastructure (CI).
 
-Once you've registered your Open OnDemand instance, you can then configure it accordingly.
+Once you have registered your Open OnDemand instance, you can then configure it accordingly.
 Since `ACCESS`_ uses Open ID Connect (OIDC) you can see our :ref:`oidc documentation <authentication-oidc>`
 for more details on how to configure Open OnDemand with what CILogon has provided in
 registering your application.
@@ -49,7 +49,7 @@ Shibboleth and InCommon
 If your campus already runs Shibboleth authentication, you have an alternative to the Open ID Connect
 configuration above.
 
-The SAML metadata for idp.access-ci.org is published by InCommon and can be downloaded using the 
+The SAML metadata for ``idp.access-ci.org`` is published by InCommon and can be downloaded using the 
 Metadata Query (MDQ) Service from https://mdq.incommon.org/entities/https%3A%2F%2Faccess-ci.org%2Fidp . 
 Alternatively, you can download the metadata from https://identity.access-ci.org/access-metadata.xml 
 and configure it in a local file.

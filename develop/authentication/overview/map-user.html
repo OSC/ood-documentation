@@ -164,7 +164,7 @@ domains.</p>
 </div>
 <section id="remote-user">
 <h2><span class="section-number">2.1. </span>Remote User<a class="headerlink" href="#remote-user" title="Link to this heading"></a></h2>
-<p>It’s worth discussusing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is coming from.  When apache
+<p>It’s worth discussing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is coming from.  When apache
 has successfully authenticates a request it sets the variable <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
 from, well, the remote.</p>
 <p>This is generally a return value from the authentication system like an
@@ -176,8 +176,8 @@ it’s unlikely you should need to.</p>
 <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a> as this setting
 tells apache how to set <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from the claim response.</p>
 </section>
-<section id="reguluar-expression-user-mapping">
-<h2><span class="section-number">2.2. </span>Reguluar Expression User Mapping<a class="headerlink" href="#reguluar-expression-user-mapping" title="Link to this heading"></a></h2>
+<section id="regular-expression-user-mapping">
+<h2><span class="section-number">2.2. </span>Regular Expression User Mapping<a class="headerlink" href="#regular-expression-user-mapping" title="Link to this heading"></a></h2>
 <p>The simplest and fastest way to map a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> to a system user is through
 <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.  It isn’t directly
 regular expression matching, but it’s close enough for most use cases.
@@ -187,7 +187,7 @@ See it’s documentation for examples and more.</p>
 <h2><span class="section-number">2.3. </span>Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Link to this heading"></a></h2>
 <p>When using the OpenId Connector <a class="reference external" href="authentication-dex">dex</a> and setting <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a>
 to <code class="docutils literal notranslate"><span class="pre">email</span></code> we automatically set <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a> to <code class="docutils literal notranslate"><span class="pre">^([^&#64;]+)&#64;.*$</span></code> as
-a convienience.</p>
+a convenience.</p>
 </section>
 <section id="user-map-command-for-advanced-mappings">
 <h2><span class="section-number">2.4. </span>User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Link to this heading"></a></h2>
@@ -202,11 +202,11 @@ configuration and be sure to make this mapping script executable.</p>
 <p>Be aware, this script is executed on every request.</p>
 </div>
 <p>Let’s take a simple example.  It uses bash’s builtin regular expression matching
-against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an osc dot edu email address.  If that matches against
-<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) after it’s url-decoded, then we return an all lowercase
+against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an <code class="docutils literal notranslate"><span class="pre">osc.edu</span></code> email address.  If that matches against
+<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) after it’s URL decoded, then we return an all lowercase
 version of the first part of an email address.</p>
-<p>The contract this script has with ood is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is url-encoded and
-passed into it as the first arguement, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.</p>
+<p>The contract this script has with Open OnDemand is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is URL encoded and
+passed into it as the first argument, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.</p>
 <p>The script will return 0 and output the match if it can correctly map the user.
 Otherwise, if it fails, it will output nothing and exit 1.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>

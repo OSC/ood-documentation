@@ -68,19 +68,19 @@ After OnDemand updates that include the ``ondemand-selinux`` package, some SELin
 
 .. _firewall:
 
-Firewall
+firewalld
 ---------
 #. Open ports 80 (http) and 443 (https) in the firewall, typically done with
    `firewalld`_ or `iptables`_.
 
-   Firewalld example:
+   firewalld example:
      .. code-block:: sh
 
         $ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
         $ sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
         $ sudo firewall-cmd --reload
 
-  Iptables example:
+  iptables example:
      .. code-block:: sh
 
         $ sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT

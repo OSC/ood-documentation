@@ -145,8 +145,8 @@
              
   <section id="configure-logout">
 <span id="authentication-overview-configure-logout"></span><h1><span class="section-number">3. </span>Configure Logout<a class="headerlink" href="#configure-logout" title="Link to this heading"></a></h1>
-<p>The logout link on the dashboard is <code class="docutils literal notranslate"><span class="pre">/logout</span></code>. OnDemand’s Apache config has a separate directive to handle <code class="docutils literal notranslate"><span class="pre">/logout</span></code>, which by default redirects the user to <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard/logout</span></code>, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.</p>
-<p>To change the logout_redirect URL, set <code class="docutils literal notranslate"><span class="pre">logout_redirect:</span> <span class="pre">&quot;https:://URL/TO/LOGOUT/USER&quot;</span></code> in the ood-portal-generator config at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> and regenerate the config.</p>
+<p>The logout link on the dashboard is <code class="docutils literal notranslate"><span class="pre">/logout</span></code>. OnDemand’s Apache configuration has a separate directive to handle <code class="docutils literal notranslate"><span class="pre">/logout</span></code>, which by default redirects the user to <code class="docutils literal notranslate"><span class="pre">/pun/sys/dashboard/logout</span></code>, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.</p>
+<p>To change the logout_redirect URL, set <code class="docutils literal notranslate"><span class="pre">logout_redirect:</span> <span class="pre">&quot;https:://URL/TO/LOGOUT/USER&quot;</span></code> in the <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code> configuration at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> and regenerate the configuration.</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">logout_redirect</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
@@ -157,12 +157,12 @@
 </pre></div>
 </div>
 </dd>
-<dt>Using OpenID Connect Apache module</dt><dd><p>Redirect to the mod_auth_oidc logout location:</p>
+<dt>Using OpenID Connect Apache module</dt><dd><p>Redirect to the <code class="docutils literal notranslate"><span class="pre">mod_auth_oidc</span></code> logout location:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oidc?logout=https%3A%2F%2Fondemand.my-center.edu&quot;</span>
 </pre></div>
 </div>
 </dd>
-<dt>Using Shibboleth Apache module</dt><dd><p>If the Shibboleth IdP server deployed is at idp.my-center.edu, this is an example redirect with mod_auth_shib:</p>
+<dt>Using Shibboleth Apache module</dt><dd><p>If the Shibboleth IdP server deployed is at <code class="docutils literal notranslate"><span class="pre">idp.my-center.edu</span></code>, this is an example redirect with <code class="docutils literal notranslate"><span class="pre">mod_auth_shib</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">logout_redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout&quot;</span>
 </pre></div>
 </div>

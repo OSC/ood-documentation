@@ -8,12 +8,12 @@ The following prerequisites need to be satisfied:
 - A Shibboleth IdP server deployed, e.g., ``idp.my-center.edu`` (outside of
   scope of this document)
 - The `Apache module for Shibboleth`_ installed on the OnDemand Server and
-  properly configured with its own Apache config (outside of scope of this
+  properly configured with its own Apache configuration (outside of scope of this
   document)
 
 .. warning::
 
-   It is required you turn on ``ShibCompatValidUser`` in your Apache config
+   It is required you turn on ``ShibCompatValidUser`` in your Apache configuration
    when setting up the Shibboleth module for Apache above.
 
    .. code-block:: apache
