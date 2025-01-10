@@ -34,7 +34,7 @@ modify.
       :file:`/etc/ood/config/clusters.d/`.
 
 #. Navigate to your OnDemand site, in particular the Dashboard App, and you
-   should see in the top dropdown menu "Interactive Apps" ⇒ "Oakley Desktop"
+   should see in the top drop-down menu "Interactive Apps" ⇒ "Oakley Desktop"
    (or whatever you set as the ``title``).
 
    After choosing "Oakley Desktop" from the menu, you should be presented with
