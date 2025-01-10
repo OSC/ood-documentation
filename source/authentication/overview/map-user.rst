@@ -48,7 +48,7 @@ Regular Expression User Mapping
 -------------------------------
 
 The simplest and fastest way to map a ``REMOTE_USER`` to a system user is through
-:ref:`user_map_match <ood-portal-generator-user-map-match>`.  It isn't directly
+:ref:`user_map_match <ood-portal-generator-user-map-match>`.  This is not directly
 regular expression matching, but it's close enough for most use cases.
 See it's documentation for examples and more.
 
