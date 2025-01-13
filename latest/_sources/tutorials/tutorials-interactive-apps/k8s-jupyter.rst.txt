@@ -4,10 +4,10 @@ Add a Jupyter App on a Kubernetes Cluster
 =========================================
 
 This tutorial will walk you through creating an interactive Jupyter app that
-your users will use to launch a `Jupyter Notebook Server`_ in a kubernetes cluster.
+your users will use to launch a `Jupyter Notebook Server`_ in a Kubernetes cluster.
 
 It assumes you have a working understanding of app development already. The purpose of
-this document is to describe how to write apps specifically for a kubernetes cluster,
+this document is to describe how to write apps specifically for a Kubernetes cluster,
 so it skips a lot of important details about app development that may be found in
 other tutorials like :ref:`app-development-tutorials-interactive-apps-add-jupyter`.
 
@@ -62,7 +62,7 @@ resource requests
 -----------------
 
 ``port`` is is the port the container is going to listen on.  ``cpu`` and ``memory``
-are the cpu and memory request. Note that memory here has ``Gi`` which is the unit.
+are the CPU and memory request. Note that memory here has ``Gi`` which is the unit.
 
 .. code-block:: yaml
 
@@ -75,7 +75,7 @@ are the cpu and memory request. Note that memory here has ``Gi`` which is the un
 Kubernetes has some flexibility in requests. One can make _requests_ and _limits_
 which are like hard and soft limits. In the example above, they're both the same.
 
-Here's an example utilizing requests and limits for both memory and cpu. Note that
+Here's an example utilizing requests and limits for both memory and CPU. Note that
 we're using millicores in ``cpu_request``.
 
 .. code-block:: yaml
@@ -88,7 +88,7 @@ we're using millicores in ``cpu_request``.
       memory_request: "500Mi"
       memory_limit: "4Gi"
 
-See `kubernetes pod memory`_ and `kubernetes pod cpu`_ for more details.
+See `Kubernetes pod memory`_ and `Kubernetes pod CPU`_ for more details.
 
 configmap
 ---------
@@ -126,7 +126,7 @@ Even though these are containers, users often want to persist
 the files they work on.  This example mounts the home directory,
 but could mount any project or scratch space just the same.
 
-When mounting a host directory ``host_type`` must alwasy be Directory.
+When mounting a host directory ``host_type`` must always be Directory.
 This example shows how to mount host directories and nfs storage locations.
 
 .. code-block:: yaml
@@ -172,7 +172,7 @@ You must specify a ``name``, an ``image`` and the ``command`` to be run.
 
 Let's walk through these init containers and what they're doing.
 
-``init-secret`` does just that. It initialzies a `kubernetes secret`_.
+``init-secret`` does just that. It initialzies a `Kubernetes secret`_.
 ``add-passwd-to-cfg`` then reads that secret and creates a salt and
 sha1 of this secret (these are needed specifically for Jupyter).  Lastly
 it adds a single line to our configmap, which is the ``c.NotebookApp.password``.
@@ -253,7 +253,7 @@ submit yml in full
 
 .. _jupyter notebook server: http://jupyter.readthedocs.io/en/latest/
 .. _bc k8s jupyter: https://github.com/OSC/bc_k8s_jupyter
-.. _kubernetes pod memory: https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
-.. _kubernetes pod cpu: https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
-.. _kubernetes configmap: https://kubernetes.io/docs/concepts/configuration/configmap/\
-.. _kubernetes secret: https://kubernetes.io/docs/concepts/configuration/secret/
+.. _Kubernetes pod memory: https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
+.. _Kubernetes pod CPU: https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
+.. _Kubernetes configmap: https://kubernetes.io/docs/concepts/configuration/configmap/\
+.. _Kubernetes secret: https://kubernetes.io/docs/concepts/configuration/secret/

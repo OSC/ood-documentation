@@ -21,7 +21,7 @@ No Open OnDemand functionality is available without authentication.
    If you managed to install an Apache authentication module at your center
    that currently does not have a tutorial listed below we would greatly
    appreciate it if you could take the time to contribute a detailed
-   walkthrough.
+   walk-through.
 
 
 .. tip::

@@ -81,7 +81,7 @@ Note that this configuration assumes that SAML has been configured such that the
         MellonEnable "auth"
       </Location>
 
-#. Convert the key and cert files into pfx format
+#. Convert the key and cert files into PFX format
 
    .. code-block:: shell
 

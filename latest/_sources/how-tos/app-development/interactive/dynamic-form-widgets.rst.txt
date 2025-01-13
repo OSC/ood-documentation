@@ -90,6 +90,11 @@ instructs the webpage to hide the ``cuda_version`` when the ``standard``
   By forcing a value after hiding it you can ensure that the correct values
   are being passed to the server.
 
+.. tip::
+
+  In addition to setting the value to ``true`` to hide the form item, in 4.0
+  you can also specify ``false`` to show the form item.
+
 .. code-block:: yaml
   :emphasize-lines: 7
 
@@ -122,6 +127,32 @@ Here we have a checkbox ``enable_cuda_version`` that will show
       html_options:
         data:
           hide-cuda-version-when-un-checked: true
+
+.. _dynamic-bc-apps-data-label:
+
+Dynamic Element Labels
+**********************
+
+The ``data-label-*`` directive allows you to change the label of another
+form element based on the selected option in a select widget.
+
+.. code-block:: yaml
+  
+  attributes:
+    node_type:
+      widget: select
+      options:
+        - [ 'small',  'small',  data-label-cores: 'Number of Cores (1-4)'  ]
+        - [ 'medium', 'medium', data-label-cores: 'Number of Cores (1-8)'  ]
+        - [ 'large',  'large',  data-label-cores: 'Number of Cores (1-16)' ]
+
+    cores:
+      widget: "number_field"
+      required: true
+      value: 1
+
+In this case, selecting Node Type 'small' will change the label of Cores to
+'Number of Cores (1-4)'.
 
 Dynamic Min and Maxes
 *********************

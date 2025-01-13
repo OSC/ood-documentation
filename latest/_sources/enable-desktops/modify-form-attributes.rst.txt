@@ -6,7 +6,7 @@ Modify Form Attributes
 In some cases you may want to modify the form presented to the user as well as
 any other configurable options. Some examples:
 
-- Use an Xfce desktop instead of Mate desktop.
+- Use an XFCE desktop instead of Mate desktop.
 - Remove the "Queue" form field as your scheduler will auto select the correct
   queue.
 - Hard-code the "Number of nodes" to just 1, so that users can't launch
@@ -75,7 +75,7 @@ above options.
    option. As this is an array, you can't simply prepend or append, you will
    need to completely redefine it with your included modifications.
 
-Change to Xfce Desktop
+Change to XFCE Desktop
 ----------------------
 
 The default installation has the ``desktop`` attribute hard-coded to the value
@@ -92,7 +92,7 @@ following edits to your custom YAML configuration file:
    attributes:
      desktop: "xfce"
 
-And all Desktops will attempt to launch the Xfce desktop.
+And all Desktops will attempt to launch the XFCE desktop.
 
 .. note::
 
@@ -288,7 +288,7 @@ Because the :ref:`resource-manager-linuxhost` is not like a traditional schedule
 there are very few form items you'll need to add or have your users choose from.
 
 This is a minimal configuration to launch an XFCE desktop environment on a cluster
-we call owens_login.  You'll notice a lot of entries are null because they don't
+we call ``owens_login``.  You'll notice a lot of entries are null because they don't
 really have any meaning in the LinuxHost Adapter.
 
 .. code-block:: yaml
@@ -310,3 +310,5 @@ really have any meaning in the LinuxHost Adapter.
 
 .. _ruby string: https://ruby-doc.org/core-2.2.0/String.html
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
+   
+

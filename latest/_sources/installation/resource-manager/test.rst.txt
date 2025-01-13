@@ -39,13 +39,7 @@ configuration files.
    ``cluster1``, so you will need to replace it with the name of the cluster
    you configured):
 
-      .. rubric:: If your operating system is CentOS 7 or RHEL 7, run this command:
-
-      .. code-block:: sh
-
-         sudo su $USER -c 'scl enable ondemand -- bin/rake test:jobs:cluster1 RAILS_ENV=production'
-
-      .. rubric:: Otherwise, run this command:
+      .. rubric:: Run this command:
 
       .. code-block:: sh
 
@@ -101,13 +95,7 @@ configuration files.
       provide these command line arguments as a string with the environment
       variable ``SUBMIT_ARGS`` as:
 
-      .. rubric:: If your operating system is CentOS 7 or RHEL 7, run this command:
-
-      .. code-block:: sh
-
-         sudo su $USER -c 'scl enable ondemand-- bin/rake test:jobs:cluster1 RAILS_ENV=production SUBMIT_ARGS="-A myaccount"'
-         
-      .. rubric:: Otherwise, run this command:
+      .. rubric:: Run this command:
 
       .. code-block:: sh
 

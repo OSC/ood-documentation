@@ -43,10 +43,10 @@ Thanks!
 -------
 
 We'd like to thank a bunch of folks' for contributing to this release.
-As we only know the github username, that's what's being referenced here.
+As we only know the Github username, that's what's being referenced here.
 
 We'd like to thank Harvard for many contributions around layouts
-and navitation. Notably, ``adaybujeda`` and ``whorka`` to name a few.
+and navigation. Notably, ``adaybujeda`` and ``whorka`` to name a few.
 
 We'd like to thank CSC Finland for contributing remote file browsing.
 Specifically ``robinkar`` and ``CSC-swesters``.
@@ -64,7 +64,7 @@ time contributing to Open OnDemand.
 * ``georgiastuart`` made their first contribution in #2323
 * ``covert8`` made their first contribution in #2327
 
-If we've missed listing anyone here, please let us know!
+If we have missed listing anyone here, please let us know!
 
 Security Fixes
 --------------
@@ -72,7 +72,7 @@ Security Fixes
 Versions prior to 3.0 are vulnerable to these security related issues:
 
 * ``OOD_ALLOWLIST_PATH`` can be circumvented in several scenarios.
-* Users may inject malicous Ruby code into certian user owned ERB files
+* Users may inject malicious Ruby code into certain user owned ERB files
   that the system reads.
 
 These have been fixed in version 3.0.2 and up. Thank you to the
@@ -92,8 +92,8 @@ Support for Ubuntu 18.04 has been dropped because the platform has
 upgraded to Ruby on Rails 6.1. This version  is not compatible with
 Ruby 2.5 which is what Ubuntu 18.04 has.
 
-context.json file locations have changed
-****************************************
+``context.json`` file locations have changed
+********************************************
 
 This is an internal item to Open OnDemand and not likely to really affect you at all.
 
@@ -107,63 +107,20 @@ Version 3.0 now writes files like ``~/ondemand/data/sys/dashboard/batch_connect/
 Deprecations
 ............
 
-Autoloading during initialization is deprecated.
-************************************************
+Auto-loading during initialization is deprecated.
+*************************************************
 
-This comes from the Ruby on Rails framework that Open OnDemand utilizes.
-It affects initializers you may have written, for example to :ref:`add-shortcuts-to-files-menu`.
-
-To resolve this, wrap your code in a  ``Rails.application.config.after_initialize`` block.
-
-For example, if you have:
-
-.. code-block:: ruby
-
-  # /etc/ood/config/apps/dashboard/initializers/ood.rb
-
-    OodFilesApp.candidate_favorite_paths.tap do |paths|
-      # add User project space directory
-      paths << FavoritePath.new("/fs/project/#{User.new.name}")
-    end
-
-You will need to modify that file like so:
-
-.. code-block:: ruby
-
-  # /etc/ood/config/apps/dashboard/initializers/ood.rb
-
-    Rails.application.config.after_initialize do
-      OodFilesApp.candidate_favorite_paths.tap do |paths|
-        # add User project space directory
-        paths << FavoritePath.new("/fs/project/#{User.new.name}")
-      end
-    end
+.. include:: autoload.inc
 
 NavConfig is deprecated
 ***********************
 
-The initializers used to modify the navigation bar and the class
-``NavConfig`` is deprecated.  The 2.x series will continue to support
-this, but sites should use the ``nav_categories`` property instead.
+.. include:: navconfig.inc
 
-See :ref:`limit-auto-generated-menu-bars` and the
-:ref:`nav_categories configuration property <nav_categories>` for more details.
+whitelist & blacklist configurations are deprecated
+***************************************************
 
-whitelist & blacklist configs are deprecated
-********************************************
-
-These configurations that have whitelist in the name have been deprecated
-and replaced with allowlist or blocklist.
-
-The configurations ``maintenance_ip_whitelist`` for configuring maintenance ips
-has been replaced by ``maintenance_ip_allowlist``.
-
-The ``WHITELIST_PATH`` environment variable for configuring inaccessible paths
-in the file browser has been replaced by ``OOD_ALLOWLIST_PATH``.
-
-ACL configurations in ``cluster.d`` files now use  ``allowlist`` and ``blocklist``
-instead of ``whitelist`` and ``blacklist``, though sites should just use
-Linux FACLs to control these files instead of these configurations.
+.. include:: allowlist.inc
 
 Dependency updates
 ..................
@@ -239,7 +196,7 @@ Upgrade directions
 
       sudo yum install -y https://yum.osc.edu/ondemand/3.0/ondemand-release-web-3.0-1.noarch.rpm
 
-#. Enable dependency repos
+#. Enable dependency repositories
 
    **RHEL/Rocky 8 only**
 

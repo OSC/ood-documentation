@@ -27,9 +27,9 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
 
 2. Next we will modify the runtime environment to allow RStudio to launch inside a Singularity container. There are two ways to accomplish this, and both modify the file ``~/ondemand/dev/bc_example_rstudio/template/script.sh.erb``.
 
-  If you are not using LMod, then in the function ``setup_env`` replace the value for ``RSTUDIO_SERVER_IMAGE`` with the absolute path to the Singularity image, and ``SINGULARITY_BINDPATH`` with all the directories that contain dependencies for RStudio server and R. Discovering those paths may benefit from using ``ptrace`` or ``lsof``. Finally ensure that ``R`` and ``rserver`` are in the ``PATH``. 
+  If you are not using Lmod, then in the function ``setup_env`` replace the value for ``RSTUDIO_SERVER_IMAGE`` with the absolute path to the Singularity image, and ``SINGULARITY_BINDPATH`` with all the directories that contain dependencies for RStudio server and R. Discovering those paths may benefit from using ``ptrace`` or ``lsof``. Finally ensure that ``R`` and ``rserver`` are in the ``PATH``. 
 
-  If you are using LMod then create a module like the following:
+  If you are using Lmod then create a module like the following:
 
   .. code-block:: lua
     :emphasize-lines: 4,5,6

@@ -21,7 +21,7 @@ You may want to rename this directory to something more appropriate.
   npm init
 
 .. warning::
-  ``npm init`` will initialize the ``main`` script as ``index.js``.  For OnDemand to recognzie
+  ``npm init`` will initialize the ``main`` script as ``index.js``.  For OnDemand to recognize
   this application, the ``main`` attribute in ``package.json`` should be ``app.js`` not
   ``index.js``.
 
@@ -52,7 +52,7 @@ to the file.
 
 This ``app.js`` imports the `Express`_ framework and sets up the ``router``
 to route requests to the functions that can serve that request. This starter
-file only has one route to the root url ``/`` and returns a simple ``Hello World``
+file only has one route to the root URL ``/`` and returns a simple ``Hello World``
 string.
 
 .. code:: javascript
@@ -92,6 +92,26 @@ When the new tab opens you should see a blank page with the text ``Hello World``
 This is your new `NodeJs`_ application!
 
 .. include:: deploy-to-production.inc
+
+.. _nodejs_starter_app_wrapper:
+
+Node Wrapper
+------------
+
+Applications can provide a ``bin/node`` file within their project
+to use a different version of NodeJs. Here's an example of such a file.
+
+.. warning::
+  Ensure this file is executable permissions, otherwise it will not work.
+
+.. code:: shell
+
+  #!/bin/bash
+
+  # OnDemand uses NodeJs 20, but this application uses 22.
+
+  module load nodejs/22
+  exec /bin/env node "$@"
 
 .. _NodeJs: https://nodejs.org/en
 .. _Express: https://expressjs.com/

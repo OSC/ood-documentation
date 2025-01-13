@@ -16,8 +16,8 @@ Highlights in 1.6:
 - `Changed 'Open in Terminal' button to offer multiple options when OOD_SSH_HOSTS is set`_
 - `Enable BatchConnect applications to raise errors after form submission`_
 - `Added version strings to Dashboard`_
-- `Changed ngnix_stage to always remove stale PID files`_
-- `Add ability to disable RewriteEngine in Apache config`_
+- `Changed nginx_stage to always remove stale PID files`_
+- `Add ability to disable RewriteEngine in Apache configuration`_
 - `Many bug fixes`_
 
 Upgrading from v1.5
@@ -43,8 +43,8 @@ Upgrading from v1.5
 Infrastructure Changes
 ----------------------
 
-- `Changed ngnix_stage to always remove stale PID files`_
-- `Add ability to disable RewriteEngine in Apache config`_
+- `Changed nginx_stage to always remove stale PID files`_
+- `Add ability to disable RewriteEngine in Apache configuration`_
 
 Application Version Changes
 ----------------------------
@@ -90,7 +90,7 @@ OnDemand passed a security audit
 
 At the end of 2018 `TrustedCI`_ completed a security audit of OnDemand and quoting the major findings of the audit: "No major issues were found in a comprehensive evaluation of the architecture and critical resources in Open OnDemand, and analysis of potential code weaknesses in critical components."
 
-Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the audit! The full report is available as a PDF at `openondemand.org`_.
+Thanks to ``Elisa Heymann``, ``Joel Atkins`` and ``Barton P. Miller`` for performing the audit! The full report is available as a PDF at `openondemand.org`_.
 
 .. _openondemand.org: https://openondemand.org/documents/Open%20OnDemand%20Trusted%20CI%20Engagement%20Report.pdf
 
@@ -124,7 +124,7 @@ See :ref:`customization_localization` for details.
 Added rendering of HTML or Markdown in Job Composer template manifests
 ......................................................................
 
-If the environment variable ``RENDER_TEMPLATE_NOTES_AS_MARKDOWN`` is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be run through the RedCarpet renderer. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (`ood-mjobs#291`_)
+If the environment variable ``RENDER_TEMPLATE_NOTES_AS_MARKDOWN`` is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be rendered through the RedCarpet library. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (`ood-mjobs#291`_)
 
 .. _ood-mjobs#291: https://github.com/OSC/ood-myjobs/issues/278
 
@@ -132,7 +132,7 @@ If the environment variable ``RENDER_TEMPLATE_NOTES_AS_MARKDOWN`` is set to a tr
 Added support for fetching quota from a URL
 ...........................................
 
-File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to Dan Dietz at Purdue for the initial work on this feature.
+File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to ``Dan Dietz`` at Purdue for the initial work on this feature.
 
 
 Added VNC quality and compression controls
@@ -158,12 +158,12 @@ For running interactive sessions, the host name becomes a clickable link to open
 Changed 'Open in Terminal' button to offer multiple options when OOD_SSH_HOSTS is set
 .....................................................................................
 
-In the Files app, if the environment variable ``OOD_SSH_HOSTS`` is set to a comma delimited value of ``host:title``, then the Open in Terminal button will display a dropdown of hosts to ssh to, instead of ssh-ing to the default host. For example, in the image below I set ``OOD_SSH_HOSTS="owens.osc.edu:Owens,pitzer.osc.edu:Pitzer,ruby.osc.edu:Ruby"``:
+In the Files app, if the environment variable ``OOD_SSH_HOSTS`` is set to a comma delimited value of ``host:title``, then the Open in Terminal button will display a drop-down of hosts to ssh to, instead of shelling to the default host. For example, in the image below I set ``OOD_SSH_HOSTS="owens.osc.edu:Owens,pitzer.osc.edu:Pitzer,ruby.osc.edu:Ruby"``:
 
 .. figure:: /images/files-open-in-terminal.png
    :align: center
 
-.. note:: In a future version of OnDemand we will change this app to load the hosts from the cluster configs.
+.. note:: In a future version of OnDemand we will change this app to load the hosts from the cluster configurations.
 
 
 Enable BatchConnect applications to raise errors after form submission
@@ -178,18 +178,18 @@ Added version strings to Dashboard
 The Dashboard will now display the version of OnDemand and the Dashboard in the footer. Interactive applications will display their versions next to their title on their launch page.
 
 
-Changed ngnix_stage to always remove stale PID files
-....................................................
+Changed ``nginx_stage`` to always remove stale PID files
+.........................................................
 
 ``nginx_stage clean`` will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on ``stderr``. (`ondemand#11`_)
 
 .. _ondemand#11: https://github.com/OSC/ondemand/issues/11
 
 
-Add ability to disable RewriteEngine in Apache config
-.....................................................
+Add ability to disable RewriteEngine in Apache configuration
+............................................................
 
-You can now omit enabling the RewriteEngine by adding ``use_rewrites: false`` to the ``/etc/ood/config/ood_portal.yml`` config file and re-running the ``sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal`` to update the ood-portal.conf Apache config.
+You can now omit enabling the RewriteEngine by adding ``use_rewrites: false`` to the ``/etc/ood/config/ood_portal.yml`` configuration file and re-running the ``sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal`` to update the ood-portal.conf Apache configuration.
 
 
 Many bug fixes

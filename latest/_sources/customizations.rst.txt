@@ -38,6 +38,8 @@ directory while members of the ``staff`` Unix group can.
   sudo chown root:staff /var/www/ood/apps/sys/files
 
 
+.. _configure_announcements:
+
 Announcements
 -------------
 
@@ -62,15 +64,31 @@ the user would see this message at the top of the dashboard:
 
 If the announcement file has the extension ``yml`` and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
 
-.. list-table:: Config Files
-   :stub-columns: 1
+.. list-table:: Announcement configuration keys.
 
+   * - Key
+     - Description
    * - type
-     - warning, info, success, or danger
-     - this is the Bootstrap alert style
+     - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
    * - msg
-     - string containing markdown formatted message
-     - if this is a blank string (only whitespace), the alert will not display
+     - The announcement's message.
+   * - id
+     - Optional unique identifier for the announcement. This is useful for managing changes to announcements that are used as ToS or EULA that users need to agree to.
+       When provided, it will be used to validate if the announcement has been dismissed regardless of the content. Changing the ``id`` will make the announcement appear again.
+   * - dismissible
+     - Specify if the announcement is dismissible or not with ``true`` or ``false``.
+       Defaults to ``true``.
+   * - required
+     - Specify if the announcement is required or not with ``true`` or ``false``.
+       Defaults to ``false``. When this is set to ``true``, the OOD UI will only render the announcement and the user will not be able
+       to submit jobs until the announcement has been accepted.
+   * - button_text
+     - Optional parameter to customize the text content for the button to dismiss the announcement.
+       Defaults to ``Accept`` for required and ``OK`` for dismissible.
+
+.. tip::
+  You can use ``required`` announcements to present users with a ToS (terms of service),
+  EULA (end user license agreement) or similar.
 
 Because the announcement is rendered via ERB you can do some interesting things, like stop showing the announcement past a specified date:
 

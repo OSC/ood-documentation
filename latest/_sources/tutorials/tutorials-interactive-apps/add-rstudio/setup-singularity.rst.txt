@@ -6,7 +6,7 @@ Setup Singularity
 Download The Singularity Image
 ------------------------------
 
-The Singularity image may be downloaded from Singularity Hub by users without sudoer rights by running the following:
+The Singularity image may be downloaded from Singularity Hub by users without sudo rights by running the following:
 
   .. code-block:: sh
 
@@ -21,11 +21,11 @@ This will download the pre-built image to the current working directory.
 Alternatively, Build The Singularity Image
 ------------------------------------------
 
-Running a build is trivial but does require sudoer access to the build host.
+Running a build is trivial but does require sudo access to the build host.
 
 Where ``Singularity`` is the file that defines the image. The image is just the base CentOS 7 packages plus a run script. This simplicity is because the actual executables and libraries must be bound and mounted into the container/guest at runtime from the host. By bind-mounting executables and libaries from the host system we are able to swap RStudio versions at launch time without having to update the Singuarlity image.
 
-Likewise the runscript defined in the image uses the host ``$PATH`` which is propagated into the guest's environment as ``$USER_PATH``.
+Likewise the ``runscript`` defined in the image uses the host ``$PATH`` which is propagated into the guest's environment as ``$USER_PATH``.
 
 An example Singularity file for running RStudio:
 

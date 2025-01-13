@@ -5,9 +5,9 @@ Architecture
 
 Below are some diagrams of OnDemand's architecture:
 
-#. Overview is a high level visual generated from Powerpoint.
+#. Overview is a high level visual generated from PowerPoint.
 #. System context and Container context diagrams below follow the `C4 <https://c4model.com/>`_.
-   model for software diagrams, are more technically detailed and are built using draw.io
+   model for software diagrams, are more technically detailed and are built using ``draw.io``
 #. Request flow diagram is a sequence diagram built using plantuml.
 
 Overview
@@ -97,7 +97,7 @@ Linux Host Adapter
 .. figure:: /app-flow-diagrams/flow_linux_host_adapter.png
 
 ===========
-Rstudio Job
+RStudio Job
 ===========
 
 .. figure:: /app-flow-diagrams/flow_rstudio_job.png

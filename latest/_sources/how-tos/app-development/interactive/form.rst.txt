@@ -51,6 +51,17 @@ My App* from the list of sandbox apps.
 You should now see the HTML form used to gather the user-defined attributes for
 building and launching the ``my_app`` Interactive App session.
 
+.. warning::
+
+  Since 4.0 HTML IDs of the form items are always lowercase. The examples above
+  show lowercase configurations of ``account``.  Specifying ``Account``,
+  or ``ACCOUNT`` or any variation of uppercase and lowercase will result in
+  the same behhavior as specifying ``account`` (all lower case).
+
+  If you write your own ``form.js`` take care to note that HTML IDs of these
+  form items will **always** be lowercase regardless of how they're defined in
+  the YAML file.
+
 .. tip::
 
    You can include dynamically generated content in the form by renaming the
@@ -96,6 +107,16 @@ This is the full list of items with details, you may supply to this yaml file to
 .. describe:: cacheable (Boolean)
 
        whether or not the application is cacheable or not. Defaults to true.
+
+.. _bc_form_header:
+.. describe:: form_header (String)
+
+    New in 4.0.
+
+    Add a text header to the form. Note this is different from the
+    manifest's description as it does not appear as hoverover text.
+
+.. _bc_form_attributes:
 
 Attributes
 ----------
@@ -222,6 +243,25 @@ auto_modules_<MODULE>
      attributes:
        auto_modules_matlab:
          default: false
+
+  To filter versions that show up in the drop-down list, you can use a Ruby regex (https://rubular.com/)
+  (without the wrapping `//`) or a string:
+
+  Regex:
+
+  .. code-block:: yaml
+
+    attributes:
+      auto_modules_matlab:
+        filter: (intel|gnu)\d*
+
+  String:
+
+  .. code-block:: yaml
+    
+    attributes:
+      auto_modules_matlab:
+        filter: intel
   
   See :ref:`the module directory configuration <module_file_dir>` on how to enable
   the cluster module files that need to be read.
@@ -552,6 +592,8 @@ are:
 
           cacheable: false
 
+.. _display_option:
+
 .. describe:: display (Boolean, false)
 
      whether the form item should be displayed in the session card after it was created.
@@ -799,6 +841,48 @@ different text than the default.
 The last option is to :ref:`configure the cluster in the submit file <configuring-cluster-in-submit-yml>`.
 When using this option, there's no need to add any cluster configuration to the
 form.yml.
+
+.. _global_bc_form_items:
+
+Global Batch Connect Form Items
+-------------------------------
+
+Since version 4.0, you can define form items once in an ``ondemand.d`` file
+that can be used in all batch connect applications.
+
+.. warning::
+
+  Global batch connect items need to have the prefix ``global_`` otherwise
+  OnDemand won't recognize it as a global configuration.
+
+
+Defining a global batch connect form item is just like specifying :ref:`bc_form_attributes`
+above. Only the location is in an ``ondemand.d`` file in ``/etc/ood/config/ondemand.d``
+under the ``global_bc_form_items`` key.
+
+Here's an example of defining a select widget with options called ``global_queues``.
+Note the appropriate previx of ``global``.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/ondemand.d/global_bc_items.yml
+
+  global_bc_form_items:
+    global_queues:
+      widget: select
+      options:
+        - [ 'any', 'any' ]
+        - [ 'gpu', 'gpu' ]
+        - [ 'special', 'special', data-option-for-cluster-not-special: false ]
+
+Then to use this form item, one simply needs to specify it in the ``form`` section
+of the file and it will display the select widget defined above.
+
+.. code-block:: yaml
+
+  # form.yml
+  form:
+    - global_queues
 
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
 .. _html form: https://en.wikipedia.org/wiki/Form_(HTML)
