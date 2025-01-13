@@ -110,8 +110,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set">Changed ‘Open in Terminal’ button to offer multiple options when OOD_SSH_HOSTS is set</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#enable-batchconnect-applications-to-raise-errors-after-form-submission">Enable BatchConnect applications to raise errors after form submission</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#added-version-strings-to-dashboard">Added version strings to Dashboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-config">Add ability to disable RewriteEngine in Apache config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changed-nginx-stage-to-always-remove-stale-pid-files">Changed <code class="docutils literal notranslate"><span class="pre">nginx_stage</span></code> to always remove stale PID files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-configuration">Add ability to disable RewriteEngine in Apache configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#many-bug-fixes">Many bug fixes</a></li>
 </ul>
 </li>
@@ -169,8 +169,8 @@
 <li><p><a class="reference internal" href="#changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set">Changed ‘Open in Terminal’ button to offer multiple options when OOD_SSH_HOSTS is set</a></p></li>
 <li><p><a class="reference internal" href="#enable-batchconnect-applications-to-raise-errors-after-form-submission">Enable BatchConnect applications to raise errors after form submission</a></p></li>
 <li><p><a class="reference internal" href="#added-version-strings-to-dashboard">Added version strings to Dashboard</a></p></li>
-<li><p><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></p></li>
-<li><p><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-config">Add ability to disable RewriteEngine in Apache config</a></p></li>
+<li><p><a class="reference internal" href="#changed-nginx-stage-to-always-remove-stale-pid-files">Changed nginx_stage to always remove stale PID files</a></p></li>
+<li><p><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-configuration">Add ability to disable RewriteEngine in Apache configuration</a></p></li>
 <li><p><a class="reference internal" href="#many-bug-fixes">Many bug fixes</a></p></li>
 </ul>
 <section id="upgrading-from-v1-5">
@@ -196,8 +196,8 @@ sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </
 <section id="infrastructure-changes">
 <h2>Infrastructure Changes<a class="headerlink" href="#infrastructure-changes" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#changed-ngnix-stage-to-always-remove-stale-pid-files">Changed ngnix_stage to always remove stale PID files</a></p></li>
-<li><p><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-config">Add ability to disable RewriteEngine in Apache config</a></p></li>
+<li><p><a class="reference internal" href="#changed-nginx-stage-to-always-remove-stale-pid-files">Changed nginx_stage to always remove stale PID files</a></p></li>
+<li><p><a class="reference internal" href="#add-ability-to-disable-rewriteengine-in-apache-configuration">Add ability to disable RewriteEngine in Apache configuration</a></p></li>
 </ul>
 </section>
 <section id="application-version-changes">
@@ -247,7 +247,7 @@ sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </
 <section id="ondemand-passed-a-security-audit">
 <h3>OnDemand passed a security audit<a class="headerlink" href="#ondemand-passed-a-security-audit" title="Link to this heading"></a></h3>
 <p>At the end of 2018 <a class="reference external" href="https://trustedci.org/">TrustedCI</a> completed a security audit of OnDemand and quoting the major findings of the audit: “No major issues were found in a comprehensive evaluation of the architecture and critical resources in Open OnDemand, and analysis of potential code weaknesses in critical components.”</p>
-<p>Thanks to Elisa Heymann, Joel Atkins and Barton P. Miller for performing the audit! The full report is available as a PDF at <a class="reference external" href="https://openondemand.org/documents/Open%20OnDemand%20Trusted%20CI%20Engagement%20Report.pdf">openondemand.org</a>.</p>
+<p>Thanks to <code class="docutils literal notranslate"><span class="pre">Elisa</span> <span class="pre">Heymann</span></code>, <code class="docutils literal notranslate"><span class="pre">Joel</span> <span class="pre">Atkins</span></code> and <code class="docutils literal notranslate"><span class="pre">Barton</span> <span class="pre">P.</span> <span class="pre">Miller</span></code> for performing the audit! The full report is available as a PDF at <a class="reference external" href="https://openondemand.org/documents/Open%20OnDemand%20Trusted%20CI%20Engagement%20Report.pdf">openondemand.org</a>.</p>
 </section>
 <section id="added-job-array-support-for-lsf-and-pbspro-adapters">
 <h3>Added job array support for LSF and PBSPro adapters<a class="headerlink" href="#added-job-array-support-for-lsf-and-pbspro-adapters" title="Link to this heading"></a></h3>
@@ -265,11 +265,11 @@ sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </
 </section>
 <section id="added-rendering-of-html-or-markdown-in-job-composer-template-manifests">
 <h3>Added rendering of HTML or Markdown in Job Composer template manifests<a class="headerlink" href="#added-rendering-of-html-or-markdown-in-job-composer-template-manifests" title="Link to this heading"></a></h3>
-<p>If the environment variable <code class="docutils literal notranslate"><span class="pre">RENDER_TEMPLATE_NOTES_AS_MARKDOWN</span></code> is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be run through the RedCarpet renderer. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (<a class="reference external" href="https://github.com/OSC/ood-myjobs/issues/278">ood-mjobs#291</a>)</p>
+<p>If the environment variable <code class="docutils literal notranslate"><span class="pre">RENDER_TEMPLATE_NOTES_AS_MARKDOWN</span></code> is set to a truthy value then job template manifests displayed in the Job Composer that are written in Markdown will be rendered through the RedCarpet library. HTML values will always be rendered as HTML. This will allow sites to embed images or links to documentation in their templates. (<a class="reference external" href="https://github.com/OSC/ood-myjobs/issues/278">ood-mjobs#291</a>)</p>
 </section>
 <section id="added-support-for-fetching-quota-from-a-url">
 <h3>Added support for fetching quota from a URL<a class="headerlink" href="#added-support-for-fetching-quota-from-a-url" title="Link to this heading"></a></h3>
-<p>File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to Dan Dietz at Purdue for the initial work on this feature.</p>
+<p>File usage quota warnings displayed on the Dashboard may now use a URL as their data source. Thanks to <code class="docutils literal notranslate"><span class="pre">Dan</span> <span class="pre">Dietz</span></code> at Purdue for the initial work on this feature.</p>
 </section>
 <section id="added-vnc-quality-and-compression-controls">
 <h3>Added VNC quality and compression controls<a class="headerlink" href="#added-vnc-quality-and-compression-controls" title="Link to this heading"></a></h3>
@@ -288,13 +288,13 @@ sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </
 </section>
 <section id="changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set">
 <h3>Changed ‘Open in Terminal’ button to offer multiple options when OOD_SSH_HOSTS is set<a class="headerlink" href="#changed-open-in-terminal-button-to-offer-multiple-options-when-ood-ssh-hosts-is-set" title="Link to this heading"></a></h3>
-<p>In the Files app, if the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_SSH_HOSTS</span></code> is set to a comma delimited value of <code class="docutils literal notranslate"><span class="pre">host:title</span></code>, then the Open in Terminal button will display a dropdown of hosts to ssh to, instead of ssh-ing to the default host. For example, in the image below I set <code class="docutils literal notranslate"><span class="pre">OOD_SSH_HOSTS=&quot;owens.osc.edu:Owens,pitzer.osc.edu:Pitzer,ruby.osc.edu:Ruby&quot;</span></code>:</p>
+<p>In the Files app, if the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_SSH_HOSTS</span></code> is set to a comma delimited value of <code class="docutils literal notranslate"><span class="pre">host:title</span></code>, then the Open in Terminal button will display a drop-down of hosts to ssh to, instead of shelling to the default host. For example, in the image below I set <code class="docutils literal notranslate"><span class="pre">OOD_SSH_HOSTS=&quot;owens.osc.edu:Owens,pitzer.osc.edu:Pitzer,ruby.osc.edu:Ruby&quot;</span></code>:</p>
 <figure class="align-center">
 <img alt="../_images/files-open-in-terminal.png" src="../_images/files-open-in-terminal.png" />
 </figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In a future version of OnDemand we will change this app to load the hosts from the cluster configs.</p>
+<p>In a future version of OnDemand we will change this app to load the hosts from the cluster configurations.</p>
 </div>
 </section>
 <section id="enable-batchconnect-applications-to-raise-errors-after-form-submission">
@@ -305,13 +305,13 @@ sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </
 <h3>Added version strings to Dashboard<a class="headerlink" href="#added-version-strings-to-dashboard" title="Link to this heading"></a></h3>
 <p>The Dashboard will now display the version of OnDemand and the Dashboard in the footer. Interactive applications will display their versions next to their title on their launch page.</p>
 </section>
-<section id="changed-ngnix-stage-to-always-remove-stale-pid-files">
-<h3>Changed ngnix_stage to always remove stale PID files<a class="headerlink" href="#changed-ngnix-stage-to-always-remove-stale-pid-files" title="Link to this heading"></a></h3>
+<section id="changed-nginx-stage-to-always-remove-stale-pid-files">
+<h3>Changed <code class="docutils literal notranslate"><span class="pre">nginx_stage</span></code> to always remove stale PID files<a class="headerlink" href="#changed-nginx-stage-to-always-remove-stale-pid-files" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">nginx_stage</span> <span class="pre">clean</span></code> will now remove PID and socket files for processes that are not longer running. Whenever a stale PID files is deleted its removal is reported on <code class="docutils literal notranslate"><span class="pre">stderr</span></code>. (<a class="reference external" href="https://github.com/OSC/ondemand/issues/11">ondemand#11</a>)</p>
 </section>
-<section id="add-ability-to-disable-rewriteengine-in-apache-config">
-<h3>Add ability to disable RewriteEngine in Apache config<a class="headerlink" href="#add-ability-to-disable-rewriteengine-in-apache-config" title="Link to this heading"></a></h3>
-<p>You can now omit enabling the RewriteEngine by adding <code class="docutils literal notranslate"><span class="pre">use_rewrites:</span> <span class="pre">false</span></code> to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> config file and re-running the <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">/opt/ood/ood-portal-generator/sbin/update_ood_portal</span></code> to update the ood-portal.conf Apache config.</p>
+<section id="add-ability-to-disable-rewriteengine-in-apache-configuration">
+<h3>Add ability to disable RewriteEngine in Apache configuration<a class="headerlink" href="#add-ability-to-disable-rewriteengine-in-apache-configuration" title="Link to this heading"></a></h3>
+<p>You can now omit enabling the RewriteEngine by adding <code class="docutils literal notranslate"><span class="pre">use_rewrites:</span> <span class="pre">false</span></code> to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> configuration file and re-running the <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">/opt/ood/ood-portal-generator/sbin/update_ood_portal</span></code> to update the ood-portal.conf Apache configuration.</p>
 </section>
 <section id="many-bug-fixes">
 <h3>Many bug fixes<a class="headerlink" href="#many-bug-fixes" title="Link to this heading"></a></h3>

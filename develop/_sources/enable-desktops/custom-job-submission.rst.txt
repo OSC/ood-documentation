@@ -55,39 +55,39 @@ Since it has the extension ``.erb`` we can take advantage of the Ruby language
 to make the configuration file dynamic. In particular, you will now have access
 to the user-submitted form arguments defined as:
 
-bc_num_hours
+``bc_num_hours``
   *Default:* ``"1"``
 
   A Ruby ``String`` containing the number of hours a user requested for the
   Desktop batch job to run.
 
-bc_num_slots
+``bc_num_slots``
   *Default:* ``"1"``
 
   A Ruby ``String`` containing either the number of nodes or processors
   (depending on the type of resource manager the cluster uses) a user
   requested.
 
-bc_account
+``bc_account``
   *Default:* ``""``
 
   A Ruby ``String`` that holds the account the user supplied to charge the job
   against.
 
-bc_queue
+``bc_queue``
   *Default:* ``""``
 
   A Ruby ``String`` that holds the queue the user requested for the job to run
   on.
 
-bc_email_on_started
+``bc_email_on_started``
   *Default:* ``"0"``
 
   A Ruby ``String`` that can either be ``"0"`` (do not send the user an email
   when the job starts) or ``"1"`` (send an email to the user when the job
   starts).
 
-node_type
+``node_type``
   *Default:* ``""``
 
   A Ruby ``String`` that can be used for more advanced job submission. This is
@@ -172,7 +172,7 @@ This can be handled in your custom job submission configuration file as such:
        - "select=1:ncpus=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
 
 All `batch script options`_ are underneath the ``script`` configuration option.
-In particular since there is no option to modify number of nodes/cpus, we need
+In particular since there is no option to modify number of nodes or CPUs, we need
 to directly interact with the ``native`` command line arguments. This is
 specified as an array of :command:`qsub` arguments.
 
@@ -224,7 +224,7 @@ LinuxHost Adapter
 --------------------
 
 If you're using the :ref:`resource-manager-linuxhost` you actually don't *need* a specialized
-submit.yml.erb. There is no need to specify resources like the other adapters above.
+``submit.yml.erb``. There is no need to specify resources like the other adapters above.
 
 You can however, use it to override the adapter's global fields for mount binding and specifying
 which container use.

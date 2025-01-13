@@ -131,9 +131,9 @@
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Operating System and Architecture Support</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head stub"></th>
-<th class="head"><p>x86_64</p></th>
-<th class="head"><p>aarch64/arm64</p></th>
-<th class="head"><p>ppc64le</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">x86_64</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">aarch64/arm64</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">ppc64le</span></code></p></th>
 </tr>
 </thead>
 <tbody>
@@ -183,7 +183,7 @@
 <li><p><a class="reference external" href="https://www.sudo.ws/">sudo</a></p></li>
 <li><dl class="simple">
 <dt><a class="reference external" href="https://openondemand.org/">OnDemand repository</a>:</dt><dd><ul>
-<li><p>ondemand-4.0-1.el7.x86_64.rpm</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ondemand-4.0-1.el9.x86_64.rpm</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -203,7 +203,7 @@
 <section id="hardware-requirements">
 <h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
 <p>At <a class="reference external" href="https://osc.edu">OSC</a> we have not quantified the minimum hardware requirements for OnDemand. The VMs that run OnDemand have 16 cores and 64GB RAM. According to our Ganglia metrics that is over powered for our normal utilization. We average 150MB memory per PUN and the average CPU percentage per Per User NGINX (PUN) is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time usually has 60-100 PUN processes running.</p>
-<p>The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache is proxying these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.</p>
+<p>The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache proxies these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.</p>
 <p>Another sizing factor that has impacted us in the past is the size of the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> partition.  We have had incidents where <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is exhausted and so have increased the size from 20GB to 50GB.</p>
 </section>
 <section id="browser-requirements">

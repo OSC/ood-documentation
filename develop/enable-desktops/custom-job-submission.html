@@ -176,29 +176,29 @@ configuration file at:</p>
 to make the configuration file dynamic. In particular, you will now have access
 to the user-submitted form arguments defined as:</p>
 <dl>
-<dt>bc_num_hours</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bc_num_hours</span></code></dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
 <p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> containing the number of hours a user requested for the
 Desktop batch job to run.</p>
 </dd>
-<dt>bc_num_slots</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code></dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code></p>
 <p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> containing either the number of nodes or processors
 (depending on the type of resource manager the cluster uses) a user
 requested.</p>
 </dd>
-<dt>bc_account</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bc_account</span></code></dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 <p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that holds the account the user supplied to charge the job
 against.</p>
 </dd>
-<dt>bc_queue</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bc_queue</span></code></dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 <p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that holds the queue the user requested for the job to run
 on.</p>
 </dd>
-<dt>bc_email_on_started</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bc_email_on_started</span></code></dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code></p>
 <p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that can either be <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code> (do not send the user an email
 when the job starts) or <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code> (send an email to the user when the job
 starts).</p>
 </dd>
-<dt>node_type</dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">node_type</span></code></dt><dd><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 <p>A Ruby <code class="docutils literal notranslate"><span class="pre">String</span></code> that can be used for more advanced job submission. This is
 an advanced option that is disabled by default and does nothing if you do
 enable it, unless you add it to a custom job submission configuration file.</p>
@@ -268,7 +268,7 @@ server.</p>
 </pre></div>
 </div>
 <p>All <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script">batch script options</a> are underneath the <code class="docutils literal notranslate"><span class="pre">script</span></code> configuration option.
-In particular since there is no option to modify number of nodes/cpus, we need
+In particular since there is no option to modify number of nodes or CPUs, we need
 to directly interact with the <code class="docutils literal notranslate"><span class="pre">native</span></code> command line arguments. This is
 specified as an array of <strong class="command">qsub</strong> arguments.</p>
 <p>If you would like to mimic how Torque handles <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> (number of
@@ -309,7 +309,7 @@ using the <code class="docutils literal notranslate"><span class="pre">native</s
 <section id="linuxhost-adapter">
 <h2>LinuxHost Adapter<a class="headerlink" href="#linuxhost-adapter" title="Link to this heading"></a></h2>
 <p>If you’re using the <a class="reference internal" href="../installation/resource-manager/linuxhost.html#resource-manager-linuxhost"><span class="std std-ref">LinuxHost</span></a> you actually don’t <em>need</em> a specialized
-submit.yml.erb. There is no need to specify resources like the other adapters above.</p>
+<code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>. There is no need to specify resources like the other adapters above.</p>
 <p>You can however, use it to override the adapter’s global fields for mount binding and specifying
 which container use.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/bc_desktop/submit/linuxhost_submit.yml.erb</span>
