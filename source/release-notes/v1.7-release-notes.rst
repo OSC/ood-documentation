@@ -19,7 +19,7 @@ Highlights in 1.7:
 - `Regenerate ood-portal.conf with every apache restart`_
 - `Support sanitizing job names`_
 - `nginx_clean support for a specific user`_
-- `Dashboard now alerts on malformed cluster configs`_
+- `Dashboard now alerts on malformed cluster configurations`_
 - `Job composer now shows suggested scripts`_
 - `Add ability to disable SSH to compute node link in batch connect session card`_
 - `Reduced installation size by 30 percent`_
@@ -193,7 +193,7 @@ See :ref:`these docs <maintenance-mode>` on how to configure and enable this fea
 Titles for Files menu entries
 .............................
 
-The shortcuts in the files dropdown menu can now show an optional title along with the
+The shortcuts in the files drop-down menu can now show an optional title along with the
 directory path. The :ref:`original documentation <add-shortcuts-to-files-menu>` on this
 feature has been updated to reflect the new options.
 
@@ -231,10 +231,10 @@ Regenerate ood-portal.conf with every apache restart
 ....................................................
 
 Systemd will now regenerate the ood-portal.conf before every apache restart.  This means
-administrators can now edit the ``ood_portal.yml`` configuration and then restart httpd
+administrators can now edit the ``ood_portal.yml`` configuration and then restart ``httpd``
 directly without having to do the additional step of running the ``ood-portal-generator``.
 
-Apache httpd will read the new configuration, because a new ood-portal.conf will have
+Apache ``httpd`` will read the new configuration, because a new ood-portal.conf will have
 been written just before restarting.
 
 However you will have to follow the upgrade  instructions (above), and then this will
@@ -253,18 +253,18 @@ characters from being used in job names.  For example if you do not want to use 
 names (as is the case with some :ref:`Grid Engine <resource-manager-sge>` versions) you would
 set ``OOD_JOB_NAME_ILLEGAL_CHARS: '/'`` in the ``pun_custom_env`` attribute of ``nginx_stage.yml``.
 
-nginx_clean support for a specific user
-.......................................
+``nginx_clean`` support for a specific user
+............................................
 
 The ``nginx_stage nginx_clean`` command now supports a ``-u`` or ``--user`` option so it may
-kill a specific users' PUN. For example ``nginx_stage nginx_clean -u johndoe`` would only
-kill johndoe's PUN and disregard all the others.
+kill a specific users' PUN. For example ``nginx_stage nginx_clean -u john`` would only
+kill john's PUN and disregard all the others.
 
-Dashboard now alerts on malformed cluster configs
-.................................................
+Dashboard now alerts on malformed cluster configurations
+........................................................
 
 Prior to 1.7 the dashboard would not start if there was a cluster cluster definition file
-(the files in ``/etc/ood/config/clusters.d/``) that had invalid yaml.
+(the files in ``/etc/ood/config/clusters.d/``) that had invalid YAML.
 
 The dashboard now handles this gracefully and shows an error message to the user stating that
 this file is unusable and should indicate the line of the file that is problematic.
@@ -272,17 +272,17 @@ this file is unusable and should indicate the line of the file that is problemat
 Job composer now shows suggested scripts
 ........................................
 
-When changing the job script in the job composer the user is now presented with a dropdown of
+When changing the job script in the job composer the user is now presented with a drop-down of
 'Suggested Files' first along with 'Other valid files'.
 
 Files in folder will be suggested if they match any of these criteria:
 
-1. Have one of these extensions: ".sh", ".job", ".slurm", ".batch", ".qsub", ".sbatch", ".srun", ".bsub"
+1. Have one of these extensions: ``.sh``, ``.job``, ``.slurm``, ``.batch``, ``.qsub``, ``.sbatch``, ``.srun``, and ``.bsub``.
 2. The file starts with a shebang line (#!)
 3. Has a resource manager's directive (#PBS, #SBATCH, #BSUB or #$) in the first 1000 characters.
 
 Other valid files only have to meet a size requirement of less than ``OOD_MAX_SCRIPT_SIZE_KB`` which
-defaults to 65 (meaning 65 kb).
+defaults to 65 (meaning 65 kilobytes).
 
 Add ability to disable SSH to compute node link in batch connect session card
 .............................................................................
@@ -298,9 +298,9 @@ Reduced installation size by 30 percent
 
 We reduced the size of the main OnDemand RPM by nearly 40%.
 
-The 1.6 ondemand-1.6.22-1.el7.x86_64.rpm was 162M and in 1.7 this has been reduced by 63M to a total of 99M, split between two RPMs: ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm with 68M, and ondemand-1.7.10-2.el7.x86_64.rpm with 31M. This is in part due to switching to a monorepo at https://github.com/osc/ondemand and installing all the gems into a central shared location, installed using the new ondemand-gems RPM.
+The 1.6 ``ondemand-1.6.22-1.el7.x86_64.rpm`` was 162M and in 1.7 this has been reduced by 63M to a total of 99M, split between two RPMs: ``ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm`` with 68M, and ``ondemand-1.7.10-2.el7.x86_64.rpm`` with 31M. This is in part due to switching to a single repository at https://github.com/osc/ondemand and installing all the gems into a central shared location, installed using the new ondemand-gems RPM.
 
-The resulting sizes of the two main install directories, /opt/ood and /var/www/ood/apps/sys, were in total reduced by 181M:
+The resulting sizes of the two main install directories, ``/opt/ood`` and ``/var/www/ood/apps/sys``, were in total reduced by 181M:
 
 .. code-block:: sh
 
@@ -325,6 +325,6 @@ New shared OnDemand gem sets
 
 The new ondemand-gems RPMs allow other Passenger apps to be developed using the same gems that the core OnDemand apps use. If you do ``scl enable ondemand`` and then ``gem list`` you can see all the gems available.
 
-Because the ondemand-gems RPMs will include the version in the RPM name, it is possible to install multiple versions of these RPMs on the same system. For example, "ondemand-gems-1.7.10" is the name and "1.7.10-2.el7.x86_64.rpm" is the version of ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm. That way you can upgrade to newer versions of OnDemand but still have the ability to provide apps access to older gems by installing the older gem sets.
+Because the ondemand-gems RPMs will include the version in the RPM name, it is possible to install multiple versions of these RPMs on the same system. For example, ``ondemand-gems-1.7.10`` is the name and ``1.7.10-2.el7.x86_64.rpm`` is the version of ``ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm``. That way you can upgrade to newer versions of OnDemand but still have the ability to provide apps access to older gems by installing the older gem sets.
 
 Having multiple versions of ondemand-gems RPMs ensure that any custom apps relying on gems provided by OnDemand will not break as OnDemand is upgraded as previous installs of ondemand-gems will remain installed when OnDemand is upgraded.
