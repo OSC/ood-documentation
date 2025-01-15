@@ -7,9 +7,9 @@ Highlights in 1.3:
 
 - `RPM based installation`_
 - `Store configuration under /etc instead of under app directories`_
-- `Config changes no longer require app rebuilds`_
-- `Xfce support Interactive Desktops`_
-- `Cluster config verification script`_
+- `Configuration changes no longer require app rebuilds`_
+- `XFCE support Interactive Desktops`_
+- `Cluster configuration verification script`_
 - `Ignore apps if they have a period in directory name`_
 - `Enable multiple Dashboard announcements with embedded HTML`_
 - `Open "help" links in new window`_
@@ -235,7 +235,7 @@ RPM based installation
 
 This is the biggest change and constitutes the bulk of this release's work. RPM
 based installation will now be the default and documented way to install and
-update OnDemand. The latest rpms that are in use at OSC can be accessed from
+update OnDemand. The latest RPMs that are in use at OSC can be accessed from
 https://yum.osc.edu/ondemand/latest/ and the stable releases will be available
 in specific release version directories, such as
 https://yum.osc.edu/ondemand/1.3/.
@@ -248,32 +248,32 @@ configuration for OnDemand:
 
 1. All configuration can be moved to files under /etc/ood
 2. Modifications to configuration only require Passenger app, Per User NINGX,
-   or Apache server restart (with the exception of the ood-portal-generater
-   config)
+   or Apache server restart (with the exception of the ood-portal-generator
+   configuration)
 
 Since all configuration is stored under /etc/ood this directory can be easily
 managed by Puppet or versioned in a git repository.
 
-Config changes no longer require app rebuilds
+Configuration changes no longer require app rebuilds
 ..................................................................
 
 It is now much faster to make and test configuration changes. For most
 configuration changes, you can make the change and then select "Restart Web
-Server" from the "Help" or "Develop" dropdown to see the change.
+Server" from the "Help" or "Develop" drop-down to see the change.
 
-Xfce support Interactive Desktops
+XFCE support Interactive Desktops
 ..................................................................
 
-We now have documentation for enabling Xfce 4+ as the desktop environment for
-OnDemand Interactive Desktops. Xfce is the desktop environment we now use
+We now have documentation for enabling XFCE 4+ as the desktop environment for
+OnDemand Interactive Desktops. XFCE is the desktop environment we now use
 internally at OSC. See :ref:`enable-desktops-modify-form-attributes` for
-documentation on how to use Xfce in OnDemand.
+documentation on how to use XFCE in OnDemand.
 
-Cluster config verification script
+Cluster configuration verification script
 ..................................................................
 
 A Rake task has been added to the Dashboard app that will submit and check the
-status of jobs for each cluster specified in the cluster config. This provides
+status of jobs for each cluster specified in the cluster configuration. This provides
 a quick way to verify that OnDemand has been properly configured for a new
 cluster and should speed up installation. See :ref:`resource-manager-test` in
 the cluster configuration documentation for more details.
@@ -289,13 +289,13 @@ directory in the app deployment directory, e.g., :file:`../.hidden-app/`.
 Enable multiple Dashboard announcements with embedded HTML
 ..................................................................
 
-Site-wide dashboard announcement support in OnDemand has been expanded. Orinally we supported a file ``/etc/ood/config/announcement.md`` but now a YAML file ``/etc/ood/config/announcement.yml`` can be used. A collection of markdown and yaml announcements in ``/etc/ood/config/announcements.d/`` can be added. The yaml file provides extra benefits:
+Site-wide dashboard announcement support in OnDemand has been expanded. Originally we supported a file ``/etc/ood/config/announcement.md`` but now a YAML file ``/etc/ood/config/announcement.yml`` can be used. A collection of markdown and YAML announcements in ``/etc/ood/config/announcements.d/`` can be added. The YAML file provides extra benefits:
 
-#. Pre process file using ERB so that ERB tags can provide per-request dynamic modification of the announcement
+#. Preprocess file using ERB so that ERB tags can provide per-request dynamic modification of the announcement
 #. Control the color of announcement with ``:type`` which is the Bootstrap alert name (``warning``, ``info``, ``success``, or ``danger``)
 #. Control whether announcement appears or not by setting ``:msg`` to a string or ``nil``
 
-The ability to use ERB means we can set the msg to nil after a certain time period. For example:
+The ability to use ERB means we can set the ``msg`` to nil after a certain time period. For example:
 
 .. code-block:: erb
 
@@ -333,7 +333,7 @@ Better debugging of Interactive Apps by logging shell commands
 ..................................................................
 
 Whenever an Interactive Session is started from the Dashboard, the shell
-command used to submit the job is logged to the user's NGINX config to help
+command used to submit the job is logged to the user's NGINX configuration to help
 with debugging Interactive Apps.
 
 Job Composer: Optionally hide Account field in Job Options
@@ -345,7 +345,7 @@ resource manager (whether it is ``-A`` or ``-P`` or ``--account``, etc.). Howeve
 sites do not use this, and others use different mechanisms for accounting. Long
 term we want to support flexible configuration of this web form, but for now we
 have added the ability to hide this Account field from the web form. This field
-is hidden by adding to the Job Composer's env file:
+is hidden by adding to the Job Composer's ``env`` file:
 ``OOD_SHOW_JOB_OPTIONS_ACCOUNT_FIELD=0``
 
 Active Jobs: display list of nodes that a job is running on
