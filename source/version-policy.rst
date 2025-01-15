@@ -39,7 +39,7 @@ Nightly packages (.rpm and .deb) are built every night from of the current commi
 Dependency Updates
 -------------------
 
-Dependency updates may come anywhere in the release cycle. For example even in a patch release. Dependencies (like ruby or nodejs) updates are largely driven by the operating systems we support.
+Dependency updates may come anywhere in the release cycle. For example even in a patch release. Dependencies (like ruby or NodeJs) updates are largely driven by the operating systems we support.
 
 If a dependency has reached its end of life for support from an operating system, we may update that dependency even in a patch release.
 
@@ -48,7 +48,7 @@ Minor, major and patch versions may all include dependency updates should a depe
 Tagging
 -------
 
-We create two types of tags. The first are regular tags like v3.0.0 which is a real production version. The other are release candidates like v3.0.0-rc8. Release candidates are created for testing purposes by OSC, though they're freely available to anyone to also test. Release candidates are considered stable, but could contain bugs.
+We create two types of tags. The first are regular tags like v3.0.0 which is a real production version. The other are release candidates like ``v3.0.0-rc8``. Release candidates are created for testing purposes by OSC, though they're freely available to anyone to also test. Release candidates are considered stable, but could contain bugs.
 
 Version Timing
 --------------
