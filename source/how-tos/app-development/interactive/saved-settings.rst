@@ -38,7 +38,7 @@ Using Settings
 ..............
 
 When a user has saved settings for a given interactive application,
-they'll now see a dropdown menu to choose those settings. Note that
+they'll now see a drop-down menu to choose those settings. Note that
 when a given saved setting is chosen, the form updates the values
 automatically.
 
