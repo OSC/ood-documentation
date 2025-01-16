@@ -1,7 +1,7 @@
 .. _nginx-stage-app-clean:
 
-nginx_stage app_clean
-=====================
+``nginx_stage app_clean``
+=========================
 
 This command will remove any deployed web application NGINX
 configuration files for applications that don't exist anymore on the
@@ -16,10 +16,10 @@ file system.
 Examples
 --------
 
-To clean up all the stale app configs:
+To clean up all the stale app configurations:
 
 .. code-block:: sh
 
    sudo nginx_stage app_clean
 
-This displays the paths to all the app configs that were deleted.
+This displays the paths to all the app configurations that were deleted.
