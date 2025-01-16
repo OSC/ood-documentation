@@ -155,7 +155,7 @@ PATH the bin directory of another user.</p></li>
 </section>
 <section id="system-installed-apps">
 <span id="app-sharing-system-installed-apps"></span><h2>System Installed Apps<a class="headerlink" href="#system-installed-apps" title="Link to this heading"></a></h2>
-<p>Admins may install apps to the system by copying the application directory to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code>. Default directory permissions (<code class="docutils literal notranslate"><span class="pre">755</span></code>) will allow all users with access to OnDemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to un-licensed users they might do the following:</p>
+<p>Admins may install apps to the system by copying the application directory to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code>. Default directory permissions (<code class="docutils literal notranslate"><span class="pre">755</span></code>) will allow all users with access to OnDemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to unlicensed users they might do the following:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Given:</span>
 <span class="c1"># - an app named $NEW_APP</span>
@@ -223,7 +223,7 @@ drwxr-xr-x.<span class="w">  </span><span class="m">7</span><span class="w"> </s
 </section>
 <section id="code-sharing">
 <h2>Code Sharing<a class="headerlink" href="#code-sharing" title="Link to this heading"></a></h2>
-<p>Code sharing is when an application’s source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing Zip’d app directories, or a group readable directory symlinked to each user’s <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/</span></code> directory.</p>
+<p>Code sharing is when an application’s source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing zipped app directories, or a group readable directory symlinked to each user’s <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/</span></code> directory.</p>
 <p>For an example of the later consider:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># As user mrodgers</span>
@@ -264,7 +264,7 @@ you enable to do share apps using executable sharing.</p>
 for finding an app.</p></li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">OOD_APP_CATALOG_URL=https://link.to.online/app/catalog</span></code> to link
 externally to an advertised listing of apps available.</p></li>
-<li><p>Pin usr apps to the dashboard and group them by category.</p></li>
+<li><p>Pin user (<code class="docutils literal notranslate"><span class="pre">usr</span></code>) apps to the dashboard and group them by category.</p></li>
 </ol>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
 <span class="nt">pinned_apps</span><span class="p">:</span>
@@ -304,7 +304,7 @@ directories like <code class="docutils literal notranslate"><span class="pre">/v
 <li><p>The admin controls who can access that user’s shared apps by setting
 permissions on this directory. Thus by setting <code class="docutils literal notranslate"><span class="pre">750</span></code> on
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047</span></code> this ensures that an0047 can only share
-apps with users in his primary group. At times we have created a supplemental group (shinyusr) and chgrp the share directory to this group so
+apps with users in his primary group. At times we have created a supplemental group (<code class="docutils literal notranslate"><span class="pre">shinyusr</span></code>) and chgrp the share directory to this group so
 that the developer can share apps with every user in this group.</p></li>
 <li><p>The developer who can share apps can modify permissions on the app
 directories themselves i.e.
@@ -323,8 +323,8 @@ ln<span class="w"> </span>-s<span class="w"> </span>~efranz/ondemand/share<span 
 </section>
 <section id="example-of-executable-sharing">
 <h3>Example of Executable Sharing<a class="headerlink" href="#example-of-executable-sharing" title="Link to this heading"></a></h3>
-<p>This is with two users Eric (efranz) and Bob (an0047).</p>
-<p>Eric has a dev app “MATLAB”, and interactive plugin app. Eric can</p>
+<p>This is with two users Eric (<code class="docutils literal notranslate"><span class="pre">efranz</span></code>) and Bob (<code class="docutils literal notranslate"><span class="pre">an0047</span></code>).</p>
+<p>Eric has a development app “MATLAB”, and interactive plugin app. Eric can</p>
 <ol class="arabic simple">
 <li><p>Launch MATLAB</p></li>
 <li><p>View and Edit the code</p></li>
@@ -337,10 +337,10 @@ i.e. <code class="docutils literal notranslate"><span class="pre">~efranz/ondema
 <figure class="align-center">
 <img alt="../../_images/app-sharing-2.png" src="../../_images/app-sharing-2.png" />
 </figure>
-<p>If Eric shares the git repo path or URL with Bob, Bob can clone this into his
+<p>If Eric shares the git repository path or URL with Bob, Bob can clone this into his
 home directory if he is enabled as a developer. This is called “Source Code Sharing”.</p>
 <p>Eric can share this app with Bob by selecting “My Shared Apps” and cloning the MATLAB
-repo to deploy <code class="docutils literal notranslate"><span class="pre">~efranz/ondemand/share/matlab</span></code></p>
+repository to deploy <code class="docutils literal notranslate"><span class="pre">~efranz/ondemand/share/matlab</span></code></p>
 <figure class="align-center">
 <img alt="../../_images/app-sharing-3.png" src="../../_images/app-sharing-3.png" />
 </figure>

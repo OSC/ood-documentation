@@ -99,14 +99,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#beta-xdmod-integration-in-the-dashboard">Beta XDMoD integration in the dashboard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#default-authentication-is-now-handled-by-dex">Default authentication is now handled by Dex</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator">Support mod_auth_openidc configuration via ood-portal-generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator">Support <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> configuration via ood-portal-generator</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#beta-ccq-scheduler-support">Beta CCQ Scheduler support</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#retain-completed-jobs-panel-for-debugging">Retain completed jobs panel for debugging</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#batch-connect-apps-now-support-multiple-clusters">Batch Connect apps now support multiple clusters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#torque-and-slurm-schedulers-now-support-qos-fields">Torque and Slurm schedulers now support QoS fields</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allow-lists">Shell hosts are now protected behind allow-lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chinese-localization">Chinese localization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#support-for-svg-dashboard-logos">Support for SVG dashboard logos</a></li>
@@ -171,7 +171,7 @@
 <li><p><a class="reference internal" href="#batch-connect-apps-now-support-disabling-caching-on-fields">Batch Connect apps now support disabling caching on fields</a></p></li>
 <li><p><a class="reference internal" href="#extended-view-support-for-gridengine-clusters">Extended view support for GridEngine clusters</a></p></li>
 <li><p><a class="reference internal" href="#torque-and-slurm-schedulers-now-support-qos-fields">Torque and Slurm schedulers now support QoS fields</a></p></li>
-<li><p><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allowlists">Shell hosts are now protected behind allowlists</a></p></li>
+<li><p><a class="reference internal" href="#shell-hosts-are-now-protected-behind-allow-lists">Shell hosts are now protected behind allow-lists</a></p></li>
 <li><p><a class="reference internal" href="#chinese-localization">Chinese localization</a></p></li>
 <li><p><a class="reference internal" href="#ability-to-add-additional-info-to-batch-connect-app">Ability to add additional info to batch connect app</a></p></li>
 <li><p><a class="reference internal" href="#support-for-svg-dashboard-logos">Support for SVG dashboard logos</a></p></li>
@@ -184,7 +184,7 @@
 <section id="special-thanks">
 <h2>Special thanks<a class="headerlink" href="#special-thanks" title="Link to this heading"></a></h2>
 <p>Special thanks to <a class="reference external" href="https://github.com/374365283">https://github.com/374365283</a> and <a class="reference external" href="https://github.com/flybirdkh">https://github.com/flybirdkh</a>
-of Shanghai Jiao Tong University (<a class="reference external" href="https://hpc.sjtu.edu.cn/">https://hpc.sjtu.edu.cn/</a>) for <a class="reference internal" href="#chinese-localization">Chinese localization</a>!</p>
+of <code class="docutils literal notranslate"><span class="pre">Shanghai</span> <span class="pre">Jiao</span> <span class="pre">Tong</span> <span class="pre">University</span></code> (<a class="reference external" href="https://hpc.sjtu.edu.cn/">https://hpc.sjtu.edu.cn/</a>) for <a class="reference internal" href="#chinese-localization">Chinese localization</a>!</p>
 <p>Thanks to <a class="reference external" href="https://github.com/plessbd">Ben Plessinger</a> and the whole
 <a class="reference external" href="https://github.com/ubccr">University of Buffalo Center for Computational Research</a> team for help in XDMoD
 integration.</p>
@@ -194,9 +194,9 @@ integration.</p>
 <p>Before upgrading to v1.8, please consider the following:</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Shell hosts are now protected behind allowlists.  After upgrading, you may need to
-set a default SSH host and add the compute nodes to the allowlists, as well as any other hosts
-you want to enable access to through the Shell app that are not already specified in the cluster config.
+<p>Shell hosts are now protected behind allow-lists.  After upgrading, you may need to
+set a default SSH host and add the compute nodes to the allow-lists, as well as any other hosts
+you want to enable access to through the Shell app that are not already specified in the cluster configuration.
 <a class="reference external" href="#shell-hosts-are-now-protected-behind-allowlists">See the entry in the release notes for more information.</a></p>
 </div>
 <ul class="simple">
@@ -248,7 +248,7 @@ if upgrading from v1.6 of OnDemand to v1.8.</p>
 <h2>Details<a class="headerlink" href="#details" title="Link to this heading"></a></h2>
 <section id="beta-xdmod-integration-in-the-dashboard">
 <h3>Beta XDMoD integration in the dashboard<a class="headerlink" href="#beta-xdmod-integration-in-the-dashboard" title="Link to this heading"></a></h3>
-<p>If your site also uses <a class="reference external" href="https://open.xdmod.org/">XDMoD</a> with the Job Performance module (formerlly called SUPReMM) for job performance analysis,
+<p>If your site also uses <a class="reference external" href="https://open.xdmod.org/">XDMoD</a> with the Job Performance module (formerly called SUPReMM) for job performance analysis,
 you can configure OnDemandOpen OnDemand to display the Job Efficiency reports from XDMoD on the OnDemand dashboard.</p>
 <p>See the <a class="reference internal" href="../customizations.html#xdmod-integration"><span class="std std-ref">documentation on enabling XDMoD integration</span></a> for more details.</p>
 </section>
@@ -259,12 +259,12 @@ See <a class="reference internal" href="../authentication/dex.html#authenticatio
 <p>You no longer need to do <code class="docutils literal notranslate"><span class="pre">DISABLE_SAFARI_BASIC_AUTH_WARNING=1</span></code> and you can safely remove this from the configuration as this ENV var will be ignored.</p>
 </section>
 <section id="support-mod-auth-openidc-configuration-via-ood-portal-generator">
-<h3>Support mod_auth_openidc configuration via ood-portal-generator<a class="headerlink" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator" title="Link to this heading"></a></h3>
+<h3>Support <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> configuration via ood-portal-generator<a class="headerlink" href="#support-mod-auth-openidc-configuration-via-ood-portal-generator" title="Link to this heading"></a></h3>
 <p>The Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file now supports defining <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> configurations directly.</p>
 </section>
 <section id="beta-ccq-scheduler-support">
 <h3>Beta CCQ Scheduler support<a class="headerlink" href="#beta-ccq-scheduler-support" title="Link to this heading"></a></h3>
-<p>We now have beta <a class="reference external" href="http://cloudycluster.com/">Cloudy Cluster</a> support for their ccq scheduler.  You can find
+<p>We now have beta <a class="reference external" href="http://cloudycluster.com/">Cloudy Cluster</a> support for their <code class="docutils literal notranslate"><span class="pre">ccq</span></code> scheduler.  You can find
 <a class="reference internal" href="../installation/resource-manager/ccq.html#resource-manager-cloudy-cluster"><span class="std std-ref">documentation on how to configure the cluster here</span></a>.</p>
 </section>
 <section id="retain-completed-jobs-panel-for-debugging">
@@ -282,7 +282,7 @@ instead of just one.</p>
 </pre></div>
 </div>
 <p>Configurations will now accept an array like the example below.  This will create a
-dropdown select menu item at the top of the form where users can choose between
+drop-down select menu item at the top of the form where users can choose between
 the two options.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cluster</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;my_cluster&quot;</span>
@@ -294,7 +294,7 @@ the two options.</p>
 <section id="batch-connect-apps-now-support-disabling-caching-on-fields">
 <h3>Batch Connect apps now support disabling caching on fields<a class="headerlink" href="#batch-connect-apps-now-support-disabling-caching-on-fields" title="Link to this heading"></a></h3>
 <p>When a user submits the web form for an interactive app (batch connect) the form
-values the user set are stored in a cache file that is used to pre-populate the web
+values the user set are stored in a cache file that is used to prepopulate the web
 form in the future. In some cases, setting the default value of the form field to a
 previously used value is undesirable. You can now disable this caching feature for
 every app, on a per app basis, or on a per field basis.</p>
@@ -318,13 +318,13 @@ corresponding to the job.</p>
 </div>
 <p>In Torque this translates to <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">qos=best</span></code> and in Slurm it is <code class="docutils literal notranslate"><span class="pre">--qos</span> <span class="pre">best</span></code>.</p>
 </section>
-<section id="shell-hosts-are-now-protected-behind-allowlists">
-<h3>Shell hosts are now protected behind allowlists<a class="headerlink" href="#shell-hosts-are-now-protected-behind-allowlists" title="Link to this heading"></a></h3>
-<p>Shell hosts are now protected behind allowlists. This means administrators now need
-to explicitly add hosts to an allowlist for users to be able to access them through
+<section id="shell-hosts-are-now-protected-behind-allow-lists">
+<h3>Shell hosts are now protected behind allow-lists<a class="headerlink" href="#shell-hosts-are-now-protected-behind-allow-lists" title="Link to this heading"></a></h3>
+<p>Shell hosts are now protected behind allow-lists. This means administrators now need
+to explicitly add hosts to an allow-list for users to be able to access them through
 the shell app.</p>
-<p>Any login host of a cluster config will be allowed, assuming that cluster is not
-configured as “hidden” in the metadata section of the cluster config.
+<p>Any login host of a cluster configuration will be allowed, assuming that cluster is not
+configured as “hidden” in the metadata section of the cluster configuration.
 However, administrators will need to add a configuration for compute nodes and any
 additional hosts they wish to allow access to.</p>
 <p>Administrators should also configure the default ssh host if they’ve not already done
@@ -345,7 +345,7 @@ in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/
 </section>
 <section id="ability-to-add-additional-info-to-batch-connect-app">
 <h3>Ability to add additional info to batch connect app<a class="headerlink" href="#ability-to-add-additional-info-to-batch-connect-app" title="Link to this heading"></a></h3>
-<p>You can now add an info.html.erb file to an interactive app (batch connect)
+<p>You can now add an <code class="docutils literal notranslate"><span class="pre">info.html.erb</span></code> file to an interactive app (batch connect)
 directory and it will render and display in the job panel. This is useful for
 providing documentation links for an app.q
 <a class="reference internal" href="../how-tos/app-development/interactive/additional-info.html#bc-info-html-md-erb"><span class="std std-ref">See the documentation on info.html.erb for more details.</span></a></p>
@@ -364,7 +364,7 @@ VNC client instead of using NoVNC through the browser.</p>
 <section id="better-max-file-upload-support">
 <h3>Better max file upload support<a class="headerlink" href="#better-max-file-upload-support" title="Link to this heading"></a></h3>
 <p>While FILE_UPLOAD_MAX configuration has existed for some time, 1.8 adds the corresponding
-nginx configuration so that sites can set the upload max to settings larger than 10 GiB.</p>
+Nginx configuration so that sites can set the upload max to settings larger than 10 GiB.</p>
 <p><a class="reference internal" href="../customizations.html#set-upload-limits"><span class="std std-ref">See the section in the customization page for more details.</span></a></p>
 </section>
 <section id="drop-ie-11-support">
@@ -377,7 +377,7 @@ nginx configuration so that sites can set the upload max to settings larger than
 </section>
 <section id="added-sinatra-ruby-gems-into-ondemand-gems-for-other-apps-to-use">
 <h3>Added Sinatra Ruby Gems into ondemand-gems for other apps to use<a class="headerlink" href="#added-sinatra-ruby-gems-into-ondemand-gems-for-other-apps-to-use" title="Link to this heading"></a></h3>
-<p>Related Ruby gems for the micro-webframework “Sinatra” were added to the Dashboard Gemfile to ensure they are included in the <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> RPM.
+<p>Related Ruby gems for the micro-web-framework “Sinatra” were added to the Dashboard Gemfile to ensure they are included in the <code class="docutils literal notranslate"><span class="pre">ondemand-gems</span></code> RPM.
 Simple applications like the Passenger status app featured in the <a class="reference internal" href="../tutorials/tutorials-passenger-apps/ruby-starter-app.html#app-development-tutorials-passenger-apps-starter-ruby-app"><span class="std std-ref">Ruby Starter application</span></a> can now be run without needing to install gem dependencies into the application directory. The following gems were added for this purpose:</p>
 <div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="n">gem</span><span class="w"> </span><span class="s2">&quot;sinatra&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">require</span><span class="p">:</span><span class="w"> </span><span class="kp">false</span>
 <span class="n">gem</span><span class="w"> </span><span class="s2">&quot;sinatra-contrib&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">require</span><span class="p">:</span><span class="w"> </span><span class="kp">false</span>

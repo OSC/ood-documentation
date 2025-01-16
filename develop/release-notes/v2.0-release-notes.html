@@ -236,7 +236,7 @@ for more information on it.</p>
 of Ruby.  This means that Ruby 2.7 is unavailable to apache and consequently any <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>
 you employ.</p>
 <p>Should you need Ruby 2.7 in any commands or scripts that apache calls, the best mitigation is
-to employ a wrapper script that can load rh-ruby27.</p>
+to employ a wrapper script that can load <code class="docutils literal notranslate"><span class="pre">rh-ruby27</span></code>.</p>
 </section>
 <section id="app-sharing-landing-page">
 <h4>App sharing landing page<a class="headerlink" href="#app-sharing-landing-page" title="Link to this heading"></a></h4>
@@ -284,8 +284,8 @@ and can now be set with the <code class="docutils literal notranslate"><span cla
 uses complex logic in your <cite>view.html.erb</cite> you may have to change that.  Here are
 the two changes that may affect your site.</p>
 <ol class="arabic simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">panel</span></code> css classes no longer exist. These have been replaced by <code class="docutils literal notranslate"><span class="pre">card</span></code>.
-Here are examples in both plain javascript and jquery of what you may have and how
+<li><p>The <code class="docutils literal notranslate"><span class="pre">panel</span></code> CSS classes no longer exist. These have been replaced by <code class="docutils literal notranslate"><span class="pre">card</span></code>.
+Here are examples in both plain JavaScript and jQuery of what you may have and how
 it would need to change.</p></li>
 </ol>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// there is no closes panel to this element anymore. This won&#39;t work, because</span>
@@ -342,7 +342,7 @@ for it to be usable in this view.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Enable dependency repos</p>
+<li><p>Enable dependency repositories</p>
 <p><strong>CentOS/RHEL 8 only</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>module<span class="w"> </span>reset<span class="w"> </span>ruby
 sudo<span class="w"> </span>dnf<span class="w"> </span>module<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ruby:2.7
@@ -474,9 +474,9 @@ See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> 
 <p>New features:</p>
 <ul class="simple">
 <li><p>Modified at column now shows date and time</p></li>
-<li><p>Columns are sortable by size, date, name, type, etc.</p></li>
+<li><p>Columns are sort-able by size, date, name, type, etc.</p></li>
 <li><p>Owner column displays the actual username instead of just the UID</p></li>
-<li><p>Uploads now managed with Uppy.js which provides a preview window prior to uploading files</p></li>
+<li><p>Uploads now managed with <code class="docutils literal notranslate"><span class="pre">Uppy.js</span></code> which provides a preview window prior to uploading files</p></li>
 <li><p>Copy path button provides easy way to copy the current directory path to clipboard</p></li>
 <li><p>Copy, Move, and Delete events now log details of the action requested in the per user NGINX logs</p></li>
 <li><p>Copy, Move workflow includes a new visual display of the files selected to copy or move</p></li>
@@ -486,9 +486,9 @@ See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> 
 <ul class="simple">
 <li><p>The left hand navigation tree is replaced with a list of the file location shortcuts</p></li>
 <li><p>Instead of a “..” row to navigate up, there is an “up” button to the left of the path</p></li>
-<li><p>Buttons that apply to only one file or directory were moved to a button dropdown to the right of each filename</p></li>
+<li><p>Buttons that apply to only one file or directory were moved to a button drop-down to the right of each filename</p></li>
 <li><p>“Change directory” button replaced “Go to” button</p></li>
-<li><p>Open in Terminal now displays split dropdown button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS env var</p></li>
+<li><p>Open in Terminal now displays split drop-down button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS environment variable.</p></li>
 </ul>
 <p>See the <a class="reference internal" href="#files-app-configuration-changes">files app configuration changes</a> for any changes you’ll need to update to the
 configurations of this new app.</p>
@@ -511,14 +511,14 @@ for more information.</p>
 <h3>Control whether an app link opens in a new window using manifest attribute<a class="headerlink" href="#control-whether-an-app-link-opens-in-a-new-window-using-manifest-attribute" title="Link to this heading"></a></h3>
 <p>In 1.8, all links to apps that are separate Passenger processes open in a new window or tab. The rationale for this
 was that these apps do not share the navigational context with the Dashboard app - in particular the navbar is not present.</p>
-<p>By adding to the manifest.yml <code class="docutils literal notranslate"><span class="pre">new_window:</span> <span class="pre">false</span></code> the app is indicating it provides enough navigational context for the user
+<p>By adding to the <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> <code class="docutils literal notranslate"><span class="pre">new_window:</span> <span class="pre">false</span></code> the app is indicating it provides enough navigational context for the user
 to not get lost and the Dashboard will not open in new window.</p>
 <p>This feature is used by the Files and Active Jobs apps in 2.0.</p>
 </section>
 <section id="memcached-ruby-gem-available-for-use-in-apps">
 <h3>Memcached Ruby gem available for use in apps<a class="headerlink" href="#memcached-ruby-gem-available-for-use-in-apps" title="Link to this heading"></a></h3>
-<p>The “dalli” Ruby gem for interfacing with memcached can now be used in batch connect apps though it needs
-to be explicitly required using a custom initializer or in the form or submit erb files.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">dalli</span></code> Ruby gem for interfacing with <code class="docutils literal notranslate"><span class="pre">memcached</span></code> can now be used in batch connect apps though it needs
+to be explicitly required using a custom initializer or in the form or <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> files.</p>
 </section>
 <section id="dependency-updates">
 <h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Link to this heading"></a></h3>

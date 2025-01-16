@@ -164,7 +164,7 @@ requests based off of the hostname in the request to different VirtualHosts
 and the ServerName you may have configured.</p>
 <p>Showing virtualhosts can help debug Apache request routing.  The output from these
 commands will show you how Apache is routing based off of the ServerName in the VirtualHost.</p>
-<p>If you’re seeing the default Apache webpage you likely have to <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-servername"><span class="std std-ref">configure the ServerName</span></a>
+<p>If you’re seeing the default Apache web-page you likely have to <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-servername"><span class="std std-ref">configure the ServerName</span></a>
 which corresponds directly to <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/core.html#servername">Apache’s ServerName configuration</a> (and restart Apache).</p>
 <p>Or you’re using the wrong hostname in your browser.</p>
 <blockquote>
@@ -182,7 +182,7 @@ which corresponds directly to <a class="reference external" href="https://httpd.
 <h2>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading"></a></h2>
 <p>If you’re servicing many clients at time (more than 50) you will likely need to change the
 <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mpm_common.html">Apache Httpd’s MPM configuration</a>. The default configuration may degrade service when
-Httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).</p>
+httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).</p>
 <p>We suggest configurations similar to this.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -192,7 +192,7 @@ the value for <cite>MaxRequestWorkers</cite>.</p>
 <p>It’s best to keep <cite>ServerLimit</cite> at or below the number of cores for the OnDemand web host.</p>
 <p>The example configuration below can handle about 256 simultaneous requests.
 Use this as an example and increase or decrease <cite>MaxRequestWorkers</cite> accordingly
-(based on your resources, cpus &amp; memory and how much traffic you anticipate) then recalculate
+(based on your resources, CPUs &amp; memory and how much traffic you anticipate) then recalculate
 <cite>ServerLimit</cite>, <cite>ThreadsPerChild</cite> and whatever else you may want to change.</p>
 </div>
 <div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="c"># conf.modules.d will vary depending on the platform and version.</span>

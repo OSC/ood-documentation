@@ -14,7 +14,7 @@ Glossary
      Runs on the cluster but is not a compute-node.
 
    Web-node
-     A term used for when a site or institution has enough funds/personel to run the OOD login on a dedicated server and not on a login-node. 
+     A term used for when a site or institution has enough funds/personnel to run the OOD login on a dedicated server and not on a login-node. 
 
    PUN
     The Per User Nginx. An Nginx instance running as the user.

@@ -47,7 +47,7 @@ and the ServerName you may have configured.
 Showing virtualhosts can help debug Apache request routing.  The output from these
 commands will show you how Apache is routing based off of the ServerName in the VirtualHost.
 
-If you're seeing the default Apache webpage you likely have to :ref:`configure the ServerName <ood-portal-generator-servername>`
+If you're seeing the default Apache web-page you likely have to :ref:`configure the ServerName <ood-portal-generator-servername>`
 which corresponds directly to `Apache's ServerName configuration`_ (and restart Apache).
 
 Or you're using the wrong hostname in your browser.
@@ -71,7 +71,7 @@ Performance Tuning
 
 If you're servicing many clients at time (more than 50) you will likely need to change the
 `Apache Httpd's MPM configuration`_. The default configuration may degrade service when
-Httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).
+httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).
 
 We suggest configurations similar to this. 
 
@@ -84,7 +84,7 @@ We suggest configurations similar to this.
 
   The example configuration below can handle about 256 simultaneous requests.
   Use this as an example and increase or decrease `MaxRequestWorkers` accordingly
-  (based on your resources, cpus & memory and how much traffic you anticipate) then recalculate
+  (based on your resources, CPUs & memory and how much traffic you anticipate) then recalculate
   `ServerLimit`, `ThreadsPerChild` and whatever else you may want to change.
    
 

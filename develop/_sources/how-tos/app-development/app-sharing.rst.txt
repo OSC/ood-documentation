@@ -23,7 +23,7 @@ Apps may be shared via a variety of methods including:
 System Installed Apps
 ---------------------
 
-Admins may install apps to the system by copying the application directory to ``/var/www/ood/apps/sys``. Default directory permissions (``755``) will allow all users with access to OnDemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to un-licensed users they might do the following:
+Admins may install apps to the system by copying the application directory to ``/var/www/ood/apps/sys``. Default directory permissions (``755``) will allow all users with access to OnDemand to see and run that app. Apps may have their access restricted by changing the permissions on individual application directories. For example if a site does not wish to show licensed software to unlicensed users they might do the following:
 
   .. code-block:: sh
 
@@ -95,7 +95,7 @@ These changes take effect immediately, although when a user is added or removed 
 Code Sharing
 ------------
 
-Code sharing is when an application's source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing Zip'd app directories, or a group readable directory symlinked to each user's ``~/ondemand/dev/`` directory.
+Code sharing is when an application's source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing zipped app directories, or a group readable directory symlinked to each user's ``~/ondemand/dev/`` directory.
 
 For an example of the later consider:
 
@@ -138,7 +138,7 @@ Enabling The App Sharing Dashboard
    for finding an app.
 #. Set ``OOD_APP_CATALOG_URL=https://link.to.online/app/catalog`` to link
    externally to an advertised listing of apps available.
-#. Pin usr apps to the dashboard and group them by category.
+#. Pin user (``usr``) apps to the dashboard and group them by category.
 
 .. code:: yaml
 
@@ -185,7 +185,7 @@ approach has these benefits (assuming users named ``efranz`` and ``an0047``:
    permissions on this directory. Thus by setting ``750`` on
    ``/var/www/ood/apps/usr/an0047`` this ensures that an0047 can only share
    apps with users in his primary group. At times we have created a \
-   supplemental group (shinyusr) and chgrp the share directory to this group so
+   supplemental group (``shinyusr``) and chgrp the share directory to this group so
    that the developer can share apps with every user in this group.
 #. The developer who can share apps can modify permissions on the app
    directories themselves i.e.
@@ -206,9 +206,9 @@ In summary, to enable a new user to create shared apps, run these commands:
 Example of Executable Sharing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is with two users Eric (efranz) and Bob (an0047).
+This is with two users Eric (``efranz``) and Bob (``an0047``).
 
-Eric has a dev app "MATLAB", and interactive plugin app. Eric can
+Eric has a development app "MATLAB", and interactive plugin app. Eric can
 
 1. Launch MATLAB
 2. View and Edit the code
@@ -224,11 +224,11 @@ i.e. ``~efranz/ondemand/dev/matlab``:
 .. figure:: /images/app-sharing-2.png
    :align: center
 
-If Eric shares the git repo path or URL with Bob, Bob can clone this into his
+If Eric shares the git repository path or URL with Bob, Bob can clone this into his
 home directory if he is enabled as a developer. This is called "Source Code Sharing".
 
 Eric can share this app with Bob by selecting "My Shared Apps" and cloning the MATLAB
-repo to deploy ``~efranz/ondemand/share/matlab``
+repository to deploy ``~efranz/ondemand/share/matlab``
 
 .. figure:: /images/app-sharing-3.png
    :align: center

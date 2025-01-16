@@ -6,13 +6,13 @@ v1.4 Release Notes
 Highlights in 1.4:
 
 - `Upgrade to Ruby 2.4, NodeJS 6, Passenger 5`_
-- `Security Enhancement - PUN autogenerates secret key base if none is set`_
+- `Security Enhancement - PUN auto-generates secret key base if none is set`_
 - `Security Enhancement: App development mode is disabled by default`_
 - `Security Enhancement: Enable whitelisting of directories in several core apps`_
 - `Security Enhancement: Require SSH for all hosts in Shell app`_
-- `Add ability to include Javascript in Batch Connect apps`_
+- `Add ability to include JavaScript in Batch Connect apps`_
 - `Better environment setting`_
-- `Customizable error pages for missing home dirs`_
+- `Customizable error pages for missing home directories`_
 - `Experimental SGE/UGE support`_
 - `Fixed copy and paste issues in the Shell app for Firefox`_
 - `Improve default discoverability of apps in the Dashboard's navbar`_
@@ -48,9 +48,9 @@ Upgrading from v1.3
 
 .. warning::
 
-   The nginx RPM used by ondemand will upgrade the nginx RPMs provided by EPEL, if they are installed.
+   The Nginx RPM used by ondemand will upgrade the Nginx RPMs provided by EPEL, if they are installed.
 
-#. Rebuild any custom Node.js or Ruby apps
+#. Rebuild any custom NodeJs or Ruby apps
 
    Since we upgraded to Ruby 2.4 from 2.2 and NodeJS 0.10 to NodeJS 6 any custom
    Passenger apps in Ruby or NodeJS that have their dependencies installed in
@@ -79,7 +79,7 @@ Upgrading from v1.3
 #. Verify Navbar contains all the apps you want.
 
    The behavior changed from 1.3 to 1.4 so by default all categories of any sys
-   app found appear as dropdown menus without the need for configuration changes.
+   app found appear as drop-down menus without the need for configuration changes.
 
 
    As a result menus may appear that you do not expect, if previously you were relying
@@ -158,16 +158,16 @@ This upgrade updates our dependencies to Software Collections Ruby 2.4 and NodeJ
 
 .. warning::
 
-  The Per User NGINX temporary directory has been moved from ``/var/lib/nginx`` to ``/var/tmp/nginx`` due to an issue with more restrictive permissions with NGINX 1.14.
+  The Per User Nginx temporary directory has been moved from ``/var/lib/nginx`` to ``/var/tmp/nginx`` due to an issue with more restrictive permissions with Nginx 1.14.
 
-  A consequence of this NGINX 1.14 upgrade is that NGINX directories like
-  ``/var/log/nginx``  have become more restrictive - owned by the nginx user and set by
+  A consequence of this Nginx 1.14 upgrade is that Nginx directories like
+  ``/var/log/nginx``  have become more restrictive - owned by the ``nginx`` user and set by
   default to 700.
 
-Security Enhancement - PUN autogenerates secret key base if none is set
-.......................................................................
+Security Enhancement - PUN auto-generates secret key base if none is set
+........................................................................
 
-The PUN will autogenerate its own unique per-user secret key base string which is generated at first launch if it doesn't exist. This is used by Rails apps to encrypt cookies and overrides the default one set in `env.production <https://github.com/OSC/ood-dashboard/blob/a20cae91fb0f636c8a7e3fc8dfe508d9afa34d50/.env.production#L1>`__.
+The PUN will auto-generate its own unique per-user secret key base string which is generated at first launch if it doesn't exist. This is used by Rails apps to encrypt cookies and overrides the default one set in `env.production <https://github.com/OSC/ood-dashboard/blob/a20cae91fb0f636c8a7e3fc8dfe508d9afa34d50/.env.production#L1>`__.
 
 Security Enhancement: App development mode is disabled by default
 .................................................................
@@ -177,23 +177,23 @@ Development mode disabled by default: application development gives increased ac
 Security Enhancement: Enable whitelisting of directories in several core apps
 .............................................................................
 
-The file editor, file browser and job composer now support an optional whitelist of browseable/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``pun_custom_env`` map.
+The file editor, file browser and job composer now support an optional whitelist of browse-able/editable directories. Directories and files not in the whitelist will never be forbidden to users. The whitelist is controlled by the environment variable ``WHITELIST_PATH``, which is best be defined by editing ``/etc/ood/config/nginx_stage.yml`` under the ``pun_custom_env`` map.
 
 Security Enhancement: Require SSH for all hosts in Shell app
 .............................................................
 
 Prior to this release it was possible for OOD users to change the URL in the shell application and connect directly to the web node by starting a Bash shell on localhost. Given that this ability for arbitrary user access is counter intuitive to how web servers are typically managed, the exemption for localhost has been removed; users will always use SSH to connect to any host, allowing SSH access controls to work.
 
-Add ability to include Javascript in Batch Connect apps
+Add ability to include JavaScript in Batch Connect apps
 .......................................................
 
-Batch Connect applications may now define a Javascript file to add interactive frontend functionality. `Github OSC/ood-dashboard#426 <https://github.com/OSC/ood-dashboard/pull/426>`_.
+Batch Connect applications may now define a JavaScript file to add interactive frontend functionality. `Github OSC/ood-dashboard#426 <https://github.com/OSC/ood-dashboard/pull/426>`_.
 The contents of this JavaScript file will be embedded in ``<script>`` tags at the bottom
 of the form below the Launch button.
 
 - For apps like `the example Jupyter <https://github.com/OSC/bc_example_jupyter>`_ app whose
-  form is defined in the form.yml, you can add a ``form.js`` file alongside the ``form.yml``.
-- For "subapps" like bc_desktop where you have overrides defined in a ``custom_name.yml``
+  form is defined in the ``form.yml``, you can add a ``form.js`` file alongside the ``form.yml``.
+- For "sub-apps" like ``bc_desktop`` where you have overrides defined in a ``custom_name.yml``
   you can add a ``custom_name.js`` for that JavaScript file to be loaded by that app.
 
 So for example, OSC has a Pitzer interactive desktop defined in
@@ -203,12 +203,12 @@ as ``pitzer.yml`` so we could add a ``pitzer.js`` file.
 Better environment setting
 ..........................
 
-The file ``/etc/ood/config/nginx_stage.yml`` now includes two methods to set the PUN environment. Populating the mapping ``pun_custom_env`` allows sites to define OOD specific environment variables that will be added to the PUN environment. Defining the sequence ``pun_custom_env_declarations`` confers the ability to define an arbitrary list of env vars to declare in the PUN config (so they are retained from whatever is set in /etc/ood/profile).
+The file ``/etc/ood/config/nginx_stage.yml`` now includes two methods to set the PUN environment. Populating the mapping ``pun_custom_env`` allows sites to define OOD specific environment variables that will be added to the PUN environment. Defining the sequence ``pun_custom_env_declarations`` confers the ability to define an arbitrary list of environment vars to declare in the PUN configuration (so they are retained from whatever is set in /etc/ood/profile).
 
 For example: `nginx_stage_example.yml. <https://github.com/OSC/ondemand/blob/d85a3982d69746144d12bb808d2419b42ccc97a1/nginx_stage/share/nginx_stage_example.yml#L26-L43>`__
 
-Customizable error pages for missing home dirs
-..............................................
+Customizable error pages for missing home directories
+.....................................................
 
 Customizable error pages for missing home directory during the first login flow for sites using ``pam_mkhomedir.so``. `OOD Discourse: launching ondemand when home directory does not exist <https://discourse.osc.edu/t/launching-ondemand-when-home-directory-does-not-exist/53>`__.
 
