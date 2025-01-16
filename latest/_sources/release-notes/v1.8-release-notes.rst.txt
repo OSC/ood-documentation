@@ -14,7 +14,7 @@ Highlights in 1.8:
 - `Batch Connect apps now support disabling caching on fields`_
 - `Extended view support for GridEngine clusters`_
 - `Torque and Slurm schedulers now support QoS fields`_
-- `Shell hosts are now protected behind allowlists`_
+- `Shell hosts are now protected behind allow-lists`_
 - `Chinese localization`_
 - `Ability to add additional info to batch connect app`_
 - `Support for SVG dashboard logos`_
@@ -28,7 +28,7 @@ Special thanks
 --------------
 
 Special thanks to https://github.com/374365283 and https://github.com/flybirdkh
-of Shanghai Jiao Tong University (https://hpc.sjtu.edu.cn/) for `Chinese localization`_!
+of ``Shanghai Jiao Tong University`` (https://hpc.sjtu.edu.cn/) for `Chinese localization`_!
 
 Thanks to `Ben Plessinger`_ and the whole
 `University of Buffalo Center for Computational Research`_ team for help in XDMoD
@@ -39,9 +39,9 @@ Upgrading from v1.7
 
 Before upgrading to v1.8, please consider the following:
 
-.. warning:: Shell hosts are now protected behind allowlists.  After upgrading, you may need to
-    set a default SSH host and add the compute nodes to the allowlists, as well as any other hosts
-    you want to enable access to through the Shell app that are not already specified in the cluster config.
+.. warning:: Shell hosts are now protected behind allow-lists.  After upgrading, you may need to
+    set a default SSH host and add the compute nodes to the allow-lists, as well as any other hosts
+    you want to enable access to through the Shell app that are not already specified in the cluster configuration.
     `See the entry in the release notes for more information. <#shell-hosts-are-now-protected-behind-allowlists>`_
 
 
@@ -101,7 +101,7 @@ Details
 Beta XDMoD integration in the dashboard
 .......................................
 
-If your site also uses `XDMoD`_ with the Job Performance module (formerlly called SUPReMM) for job performance analysis,
+If your site also uses `XDMoD`_ with the Job Performance module (formerly called SUPReMM) for job performance analysis,
 you can configure OnDemandOpen OnDemand to display the Job Efficiency reports from XDMoD on the OnDemand dashboard.
 
 See the :ref:`documentation on enabling XDMoD integration <xdmod_integration>` for more details.
@@ -114,15 +114,15 @@ See :ref:`Dex Authentication <authentication-dex>` for details on OnDemand Dex.
 
 You no longer need to do ``DISABLE_SAFARI_BASIC_AUTH_WARNING=1`` and you can safely remove this from the configuration as this ENV var will be ignored.
 
-Support mod_auth_openidc configuration via ood-portal-generator
-...............................................................
+Support ``mod_auth_openidc`` configuration via ood-portal-generator
+...................................................................
 
 The Open OnDemand Portal :ref:`ood-portal-generator-configuration` file now supports defining `mod_auth_openidc`_ configurations directly.
 
 Beta CCQ Scheduler support
 ..........................
 
-We now have beta `Cloudy Cluster`_ support for their ccq scheduler.  You can find
+We now have beta `Cloudy Cluster`_ support for their ``ccq`` scheduler.  You can find
 :ref:`documentation on how to configure the cluster here <resource-manager-cloudy-cluster>`.
 
 Retain completed jobs panel for debugging
@@ -145,7 +145,7 @@ Where previous configuration look like this, with only a single cluster.
    cluster: "my_cluster"
 
 Configurations will now accept an array like the example below.  This will create a
-dropdown select menu item at the top of the form where users can choose between
+drop-down select menu item at the top of the form where users can choose between
 the two options.
 
 .. code-block:: yaml
@@ -161,7 +161,7 @@ Batch Connect apps now support disabling caching on fields
 ..........................................................
 
 When a user submits the web form for an interactive app (batch connect) the form
-values the user set are stored in a cache file that is used to pre-populate the web
+values the user set are stored in a cache file that is used to prepopulate the web
 form in the future. In some cases, setting the default value of the form field to a
 previously used value is undesirable. You can now disable this caching feature for
 every app, on a per app basis, or on a per field basis.
@@ -192,15 +192,15 @@ Torque and Slurm schedulers now support the quality of service (QoS) fields.
 
 In Torque this translates to ``-l qos=best`` and in Slurm it is ``--qos best``.
 
-Shell hosts are now protected behind allowlists
-...............................................
+Shell hosts are now protected behind allow-lists
+................................................
 
-Shell hosts are now protected behind allowlists. This means administrators now need
-to explicitly add hosts to an allowlist for users to be able to access them through
+Shell hosts are now protected behind allow-lists. This means administrators now need
+to explicitly add hosts to an allow-list for users to be able to access them through
 the shell app.
 
-Any login host of a cluster config will be allowed, assuming that cluster is not
-configured as "hidden" in the metadata section of the cluster config.
+Any login host of a cluster configuration will be allowed, assuming that cluster is not
+configured as "hidden" in the metadata section of the cluster configuration.
 However, administrators will need to add a configuration for compute nodes and any
 additional hosts they wish to allow access to.
 
@@ -229,7 +229,7 @@ in ``/etc/ood/config/nginx_stage.yml``
 Ability to add additional info to batch connect app
 ...................................................
 
-You can now add an info.html.erb file to an interactive app (batch connect)
+You can now add an ``info.html.erb`` file to an interactive app (batch connect)
 directory and it will render and display in the job panel. This is useful for
 providing documentation links for an app.q
 :ref:`See the documentation on info.html.erb for more details. <bc_info_html_md_erb>`
@@ -252,7 +252,7 @@ Better max file upload support
 ..............................
 
 While FILE_UPLOAD_MAX configuration has existed for some time, 1.8 adds the corresponding
-nginx configuration so that sites can set the upload max to settings larger than 10 GiB.
+Nginx configuration so that sites can set the upload max to settings larger than 10 GiB.
 
 :ref:`See the section in the customization page for more details. <set-upload-limits>`
 
@@ -267,7 +267,7 @@ IE 11 support was officially dropped. See :ref:`Browser Requirements <browser-re
 Added Sinatra Ruby Gems into ondemand-gems for other apps to use
 ................................................................
 
-Related Ruby gems for the micro-webframework "Sinatra" were added to the Dashboard Gemfile to ensure they are included in the ``ondemand-gems`` RPM.
+Related Ruby gems for the micro-web-framework "Sinatra" were added to the Dashboard Gemfile to ensure they are included in the ``ondemand-gems`` RPM.
 Simple applications like the Passenger status app featured in the :ref:`Ruby Starter application <app-development-tutorials-passenger-apps-starter-ruby-app>` can now be run without needing to install gem dependencies into the application directory. The following gems were added for this purpose:
 
 .. code-block:: ruby

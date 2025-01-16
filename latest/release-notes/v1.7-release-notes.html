@@ -112,8 +112,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#add-an-ssh-wrapper-to-the-shell-app">Add an ssh wrapper to the shell app</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#regenerate-ood-portal-conf-with-every-apache-restart">Regenerate ood-portal.conf with every apache restart</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#support-sanitizing-job-names">Support sanitizing job names</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#nginx-clean-support-for-a-specific-user">nginx_clean support for a specific user</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dashboard-now-alerts-on-malformed-cluster-configs">Dashboard now alerts on malformed cluster configs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nginx-clean-support-for-a-specific-user"><code class="docutils literal notranslate"><span class="pre">nginx_clean</span></code> support for a specific user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dashboard-now-alerts-on-malformed-cluster-configurations">Dashboard now alerts on malformed cluster configurations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#job-composer-now-shows-suggested-scripts">Job composer now shows suggested scripts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#add-ability-to-disable-ssh-to-compute-node-link-in-batch-connect-session-card">Add ability to disable SSH to compute node link in batch connect session card</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reduced-installation-size-by-30-percent">Reduced installation size by 30 percent</a></li>
@@ -178,7 +178,7 @@
 <li><p><a class="reference internal" href="#regenerate-ood-portal-conf-with-every-apache-restart">Regenerate ood-portal.conf with every apache restart</a></p></li>
 <li><p><a class="reference internal" href="#support-sanitizing-job-names">Support sanitizing job names</a></p></li>
 <li><p><a class="reference internal" href="#nginx-clean-support-for-a-specific-user">nginx_clean support for a specific user</a></p></li>
-<li><p><a class="reference internal" href="#dashboard-now-alerts-on-malformed-cluster-configs">Dashboard now alerts on malformed cluster configs</a></p></li>
+<li><p><a class="reference internal" href="#dashboard-now-alerts-on-malformed-cluster-configurations">Dashboard now alerts on malformed cluster configurations</a></p></li>
 <li><p><a class="reference internal" href="#job-composer-now-shows-suggested-scripts">Job composer now shows suggested scripts</a></p></li>
 <li><p><a class="reference internal" href="#add-ability-to-disable-ssh-to-compute-node-link-in-batch-connect-session-card">Add ability to disable SSH to compute node link in batch connect session card</a></p></li>
 <li><p><a class="reference internal" href="#reduced-installation-size-by-30-percent">Reduced installation size by 30 percent</a></p></li>
@@ -340,7 +340,7 @@ that maintenance is underway while administrators perform disruptive tasks.</p>
 </section>
 <section id="titles-for-files-menu-entries">
 <h3>Titles for Files menu entries<a class="headerlink" href="#titles-for-files-menu-entries" title="Link to this heading"></a></h3>
-<p>The shortcuts in the files dropdown menu can now show an optional title along with the
+<p>The shortcuts in the files drop-down menu can now show an optional title along with the
 directory path. The <a class="reference internal" href="../customizations.html#add-shortcuts-to-files-menu"><span class="std std-ref">original documentation</span></a> on this
 feature has been updated to reflect the new options.</p>
 </section>
@@ -370,9 +370,9 @@ shell app.  See how to configure this <a class="reference internal" href="../cus
 <section id="regenerate-ood-portal-conf-with-every-apache-restart">
 <h3>Regenerate ood-portal.conf with every apache restart<a class="headerlink" href="#regenerate-ood-portal-conf-with-every-apache-restart" title="Link to this heading"></a></h3>
 <p>Systemd will now regenerate the ood-portal.conf before every apache restart.  This means
-administrators can now edit the <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> configuration and then restart httpd
+administrators can now edit the <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> configuration and then restart <code class="docutils literal notranslate"><span class="pre">httpd</span></code>
 directly without having to do the additional step of running the <code class="docutils literal notranslate"><span class="pre">ood-portal-generator</span></code>.</p>
-<p>Apache httpd will read the new configuration, because a new ood-portal.conf will have
+<p>Apache <code class="docutils literal notranslate"><span class="pre">httpd</span></code> will read the new configuration, because a new ood-portal.conf will have
 been written just before restarting.</p>
 <p>However you will have to follow the upgrade  instructions (above), and then this will
 be available.  Specifically updating the ood portal through
@@ -389,30 +389,30 @@ names (as is the case with some <a class="reference internal" href="../installat
 set <code class="docutils literal notranslate"><span class="pre">OOD_JOB_NAME_ILLEGAL_CHARS:</span> <span class="pre">'/'</span></code> in the <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">nginx_stage.yml</span></code>.</p>
 </section>
 <section id="nginx-clean-support-for-a-specific-user">
-<h3>nginx_clean support for a specific user<a class="headerlink" href="#nginx-clean-support-for-a-specific-user" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">nginx_clean</span></code> support for a specific user<a class="headerlink" href="#nginx-clean-support-for-a-specific-user" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">nginx_stage</span> <span class="pre">nginx_clean</span></code> command now supports a <code class="docutils literal notranslate"><span class="pre">-u</span></code> or <code class="docutils literal notranslate"><span class="pre">--user</span></code> option so it may
-kill a specific users’ PUN. For example <code class="docutils literal notranslate"><span class="pre">nginx_stage</span> <span class="pre">nginx_clean</span> <span class="pre">-u</span> <span class="pre">johndoe</span></code> would only
-kill johndoe’s PUN and disregard all the others.</p>
+kill a specific users’ PUN. For example <code class="docutils literal notranslate"><span class="pre">nginx_stage</span> <span class="pre">nginx_clean</span> <span class="pre">-u</span> <span class="pre">john</span></code> would only
+kill john’s PUN and disregard all the others.</p>
 </section>
-<section id="dashboard-now-alerts-on-malformed-cluster-configs">
-<h3>Dashboard now alerts on malformed cluster configs<a class="headerlink" href="#dashboard-now-alerts-on-malformed-cluster-configs" title="Link to this heading"></a></h3>
+<section id="dashboard-now-alerts-on-malformed-cluster-configurations">
+<h3>Dashboard now alerts on malformed cluster configurations<a class="headerlink" href="#dashboard-now-alerts-on-malformed-cluster-configurations" title="Link to this heading"></a></h3>
 <p>Prior to 1.7 the dashboard would not start if there was a cluster cluster definition file
-(the files in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span></code>) that had invalid yaml.</p>
+(the files in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/</span></code>) that had invalid YAML.</p>
 <p>The dashboard now handles this gracefully and shows an error message to the user stating that
 this file is unusable and should indicate the line of the file that is problematic.</p>
 </section>
 <section id="job-composer-now-shows-suggested-scripts">
 <h3>Job composer now shows suggested scripts<a class="headerlink" href="#job-composer-now-shows-suggested-scripts" title="Link to this heading"></a></h3>
-<p>When changing the job script in the job composer the user is now presented with a dropdown of
+<p>When changing the job script in the job composer the user is now presented with a drop-down of
 ‘Suggested Files’ first along with ‘Other valid files’.</p>
 <p>Files in folder will be suggested if they match any of these criteria:</p>
 <ol class="arabic simple">
-<li><p>Have one of these extensions: “.sh”, “.job”, “.slurm”, “.batch”, “.qsub”, “.sbatch”, “.srun”, “.bsub”</p></li>
+<li><p>Have one of these extensions: <code class="docutils literal notranslate"><span class="pre">.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">.job</span></code>, <code class="docutils literal notranslate"><span class="pre">.slurm</span></code>, <code class="docutils literal notranslate"><span class="pre">.batch</span></code>, <code class="docutils literal notranslate"><span class="pre">.qsub</span></code>, <code class="docutils literal notranslate"><span class="pre">.sbatch</span></code>, <code class="docutils literal notranslate"><span class="pre">.srun</span></code>, and <code class="docutils literal notranslate"><span class="pre">.bsub</span></code>.</p></li>
 <li><p>The file starts with a shebang line (#!)</p></li>
 <li><p>Has a resource manager’s directive (#PBS, #SBATCH, #BSUB or #$) in the first 1000 characters.</p></li>
 </ol>
 <p>Other valid files only have to meet a size requirement of less than <code class="docutils literal notranslate"><span class="pre">OOD_MAX_SCRIPT_SIZE_KB</span></code> which
-defaults to 65 (meaning 65 kb).</p>
+defaults to 65 (meaning 65 kilobytes).</p>
 </section>
 <section id="add-ability-to-disable-ssh-to-compute-node-link-in-batch-connect-session-card">
 <h3>Add ability to disable SSH to compute node link in batch connect session card<a class="headerlink" href="#add-ability-to-disable-ssh-to-compute-node-link-in-batch-connect-session-card" title="Link to this heading"></a></h3>
@@ -424,8 +424,8 @@ compute nodes.</p>
 <section id="reduced-installation-size-by-30-percent">
 <h3>Reduced installation size by 30 percent<a class="headerlink" href="#reduced-installation-size-by-30-percent" title="Link to this heading"></a></h3>
 <p>We reduced the size of the main OnDemand RPM by nearly 40%.</p>
-<p>The 1.6 ondemand-1.6.22-1.el7.x86_64.rpm was 162M and in 1.7 this has been reduced by 63M to a total of 99M, split between two RPMs: ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm with 68M, and ondemand-1.7.10-2.el7.x86_64.rpm with 31M. This is in part due to switching to a monorepo at <a class="reference external" href="https://github.com/osc/ondemand">https://github.com/osc/ondemand</a> and installing all the gems into a central shared location, installed using the new ondemand-gems RPM.</p>
-<p>The resulting sizes of the two main install directories, /opt/ood and /var/www/ood/apps/sys, were in total reduced by 181M:</p>
+<p>The 1.6 <code class="docutils literal notranslate"><span class="pre">ondemand-1.6.22-1.el7.x86_64.rpm</span></code> was 162M and in 1.7 this has been reduced by 63M to a total of 99M, split between two RPMs: <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm</span></code> with 68M, and <code class="docutils literal notranslate"><span class="pre">ondemand-1.7.10-2.el7.x86_64.rpm</span></code> with 31M. This is in part due to switching to a single repository at <a class="reference external" href="https://github.com/osc/ondemand">https://github.com/osc/ondemand</a> and installing all the gems into a central shared location, installed using the new ondemand-gems RPM.</p>
+<p>The resulting sizes of the two main install directories, <code class="docutils literal notranslate"><span class="pre">/opt/ood</span></code> and <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code>, were in total reduced by 181M:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>/opt/ood/VERSION
 v1.6.22
 $<span class="w"> </span>sudo<span class="w"> </span>du<span class="w"> </span>-h<span class="w"> </span>-s<span class="w">  </span>-x<span class="w"> </span>/var/www/ood/apps/sys<span class="w"> </span>/opt/ood
@@ -445,7 +445,7 @@ $<span class="w"> </span>sudo<span class="w"> </span>du<span class="w"> </span>-
 <section id="new-shared-ondemand-gem-sets">
 <h3>New shared OnDemand gem sets<a class="headerlink" href="#new-shared-ondemand-gem-sets" title="Link to this heading"></a></h3>
 <p>The new ondemand-gems RPMs allow other Passenger apps to be developed using the same gems that the core OnDemand apps use. If you do <code class="docutils literal notranslate"><span class="pre">scl</span> <span class="pre">enable</span> <span class="pre">ondemand</span></code> and then <code class="docutils literal notranslate"><span class="pre">gem</span> <span class="pre">list</span></code> you can see all the gems available.</p>
-<p>Because the ondemand-gems RPMs will include the version in the RPM name, it is possible to install multiple versions of these RPMs on the same system. For example, “ondemand-gems-1.7.10” is the name and “1.7.10-2.el7.x86_64.rpm” is the version of ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm. That way you can upgrade to newer versions of OnDemand but still have the ability to provide apps access to older gems by installing the older gem sets.</p>
+<p>Because the ondemand-gems RPMs will include the version in the RPM name, it is possible to install multiple versions of these RPMs on the same system. For example, <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.10</span></code> is the name and <code class="docutils literal notranslate"><span class="pre">1.7.10-2.el7.x86_64.rpm</span></code> is the version of <code class="docutils literal notranslate"><span class="pre">ondemand-gems-1.7.10-1.7.10-2.el7.x86_64.rpm</span></code>. That way you can upgrade to newer versions of OnDemand but still have the ability to provide apps access to older gems by installing the older gem sets.</p>
 <p>Having multiple versions of ondemand-gems RPMs ensure that any custom apps relying on gems provided by OnDemand will not break as OnDemand is upgraded as previous installs of ondemand-gems will remain installed when OnDemand is upgraded.</p>
 </section>
 </section>

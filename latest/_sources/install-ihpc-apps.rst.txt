@@ -131,8 +131,8 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - https://github.com/OSC/bc_osc_qgis
      - yes
      - noVNC
-   * - RELION (for REgularised LIkelihood OptimisatioN)
-     - Shanghai Jiao Tong University (SJTU)
+   * - RELION (for ``REgularised LIkelihood OptimisatioN``)
+     - Shanghai ``Jiao Tong University (SJTU)``
      - https://github.com/SJTU-HPC/bc_relion
      - yes
      - 
