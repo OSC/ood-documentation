@@ -1,10 +1,10 @@
 
-Sub-Apps and Reconfiguring existing apps
-========================================
+Sub-Apps and Re-configuring existing apps
+=========================================
 
 Sub-Apps are a term we use for providing variants of existing apps.
 They act as a child to the existing parent application.  That is,
-they inheret all the options and scripts from the existing application
+they inherit all the options and scripts from the existing application
 and override some or all of options.
 
 You may want to do this to provide variants of existing apps.
@@ -20,8 +20,8 @@ You have 2 options for supplying sub-app overrides.
   * Place new ``form.yml`` files in ``/etc/ood/config/apps/my_app``.
   * OR provide new ``form.yml`` files in  ``/var/www/ood/apps/sys/my_app/local``.
 
-There are pros and cons to each scheme. With the former, you sperate the overriedes (the sub-apps)
-and the actuall app. The subapps residing in ``/etc/ood`` and the actual apps residing in ``/var/www``.
+There are pros and cons to each scheme. With the former, you separate the overrides (the sub-apps)
+and the actual app. The sub-apps residing in ``/etc/ood`` and the actual apps residing in ``/var/www``.
 This would allow you to update one without having to update the other.
 
 With latter scheme you keep the overrides with the main application itself. This has the benefit
