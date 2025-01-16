@@ -1,7 +1,7 @@
 .. _nginx-stage-nginx:
 
-nginx_stage nginx
-=================
+``nginx_stage nginx``
+=====================
 
 This command will start an NGINX process as the user as well as
 control this process.

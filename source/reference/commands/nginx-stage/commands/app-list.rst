@@ -1,6 +1,6 @@
 .. _nginx-stage-app-list:
 
-``nginx_stage`` app_list
+``nginx_stage app_list``
 ========================
 
 This command lists all the deployed web application NGINX
