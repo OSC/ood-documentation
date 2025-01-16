@@ -5,8 +5,8 @@ Adding Additional Information to the session cards
 
 .. _bc_info_html_md_erb:
 
-info.{md,html}.erb
-------------------
+``info.{md,html}.erb``
+----------------------
 
 It's possible for you to add additional information to this session's card.
 
@@ -30,8 +30,8 @@ created_at
 
 .. _bc_completed_html_md_erb:
 
-completed.{md,html}.erb
-------------------------
+``completed.{md,html}.erb``
+---------------------------
 
 :ref:`bc_info_html_md_erb` above will display on the session's card
 regardless of the state of the job - it will always be displayed.
