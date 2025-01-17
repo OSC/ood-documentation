@@ -1,7 +1,7 @@
 .. _app-development-tutorials-interactive-apps-add-matlab-edit-form-js:
 
-Edit Form.js
-============
+Edit ``form.js``
+================
 
 OnDemand supports dynamic interactive forms using a file named ``~/ondemand/dev/bc_my_center_matlab/form.js``. This file is free-form; anything that can be done with client-side JavaScript may be done in this file. OSC has used this file to:
 
