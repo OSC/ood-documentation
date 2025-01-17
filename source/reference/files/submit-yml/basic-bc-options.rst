@@ -368,7 +368,7 @@ Basic Batch Connect Options
     the file all the connection data will be written to
 
     Default
-      a file named 'connection.yml'
+      A file named ``connection.yml``.
 
       .. code-block:: yaml
 
