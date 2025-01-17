@@ -28,7 +28,7 @@ We will begin by first copying over a pre-built MATLAB app in production at OSC.
 
       system apps
         These are apps that all users have access to and appear in the
-        Dashboard dropdown menus. They are installed on the local disk with
+        Dashboard drop-down menus. They are installed on the local disk with
         very permissive file permissions.
 
         Located on the file system under::
@@ -72,10 +72,10 @@ We will begin by first copying over a pre-built MATLAB app in production at OSC.
 
      https://ondemand.my_center.edu/
 
-   You should now see a *Develop* dropdown menu option in the top right of the
+   You should now see a *Develop* drop-down menu option in the top right of the
    dashboard.
 
-#. Open up the *Develop* menu dropdown and click the link *My Sandbox Apps
+#. Open up the *Develop* menu drop-down and click the link *My Sandbox Apps
    (Development)*.
 
 #. You will navigate to a page that lists all of your sandbox apps (all the
@@ -91,9 +91,9 @@ We will begin by first copying over a pre-built MATLAB app in production at OSC.
        this is the directory that the app will be cloned to in our sandbox
        directory (must be unique)
      Git remote
-       this is the link to the git repo that is cloned
+       this is the link to the git repository that is cloned
      Create a new Git Project from this?
-       whether we want to create a new app from this git repo
+       whether we want to create a new app from this git repository
 
    For now fill in the form with the following values:
 
@@ -120,5 +120,5 @@ We will begin by first copying over a pre-built MATLAB app in production at OSC.
    Launch button in the developer views. This `was fixed in 1.5 <https://github.com/OSC/ood-dashboard/pull/435>`_.
 
    A work around is to manually enter the URL to the batch connect app. In this
-   MATLAB tutorial, if the directory name is "bc_my_center_matlab" then the URL will be
+   MATLAB tutorial, if the directory name is ``bc_my_center_matlab`` then the URL will be
    ``/pun/sys/dashboard/batch_connect/dev/bc_my_center_matlab``.
