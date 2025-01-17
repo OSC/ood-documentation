@@ -22,7 +22,7 @@ A remedy for MATLAB throwing Java errors when its window is resized, moved, or d
 Job finishes instantly because, desktop app backgrounds itself
 **************************************************************
 
-Many apps are convenient in that their launch command blocks instead of backgrounding itself. By blocking the process our script is prevented from ending immediately, which in turn would prevent the user from accomplishing anything useful. Some GUI applications like Stata put themselves into the background. For apps like Stata it is necessary to perform the blocking ourselves:
+Many apps are convenient in that their launch command blocks instead of going into the background. By blocking the process our script is prevented from ending immediately, which in turn would prevent the user from accomplishing anything useful. Some GUI applications like Stata put themselves into the background. For apps like Stata it is necessary to perform the blocking ourselves:
 
   .. code-block:: shell
 
