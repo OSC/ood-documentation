@@ -1,7 +1,7 @@
 .. _submit-yml-erb:
 
-submit.yml.erb
-==============
+``submit.yml.erb``
+==================
 
 This is the file that is submitted to a batch connect job. It is comprised
 of a ``script`` and a ``batch_connect`` attribute.  The ``batch_connect``
