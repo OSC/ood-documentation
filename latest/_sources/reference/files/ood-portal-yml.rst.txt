@@ -1,7 +1,7 @@
 .. _ood-portal-generator-configuration:
 
-ood_portal.yml
-==============
+``ood_portal.yml``
+==================
 
 Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by default
@@ -21,8 +21,8 @@ Configure General Options
      the address and port server listens on for connections
 
      Default
-       Don't add a ``Listen`` directive in this Apache config (typically it
-       exists in another config)
+       Don't add a ``Listen`` directive in this Apache configuration (typically it
+       exists in another configuration)
 
        .. code-block:: yaml
 
@@ -61,7 +61,7 @@ Configure General Options
     to multiple hostnames.
 
      Default
-        There ar no server aliases.
+        There are no server aliases.
 
         .. code-block:: yaml
 
@@ -294,7 +294,7 @@ Configure General Options
      Set Header Content-Security-Policy frame-ancestors.
 
      Default
-       Set Content-Security-Policy frame-ancestors to servername
+       Set Content-Security-Policy frame-ancestors to ``servername``.
 
        .. code-block:: yaml
 
@@ -511,7 +511,7 @@ Configure General Options
         custom_vhost_directives: []
 
   Example
-    Add a single custom virutal host directive
+    Add a single custom virtual host directive
     to set an environment variable.
 
     .. code-block:: yaml
@@ -864,13 +864,13 @@ properties are ``null`` then PUN access will be disabled.
 
 .. _ood-portal-generator-pun-pre-hook:
 
-PUN Pre Hook command is functionality to initialize things as root before
+PUN pre hook command is functionality to initialize things as root before
 the PUN starts up.
 
 Authentication information like OIDC tokens are not passed to OnDemand apps like
 the dashboard.  This feature is useful when you need to use things like OIDC tokens
 in some initialization process before the PUN starts.  For example, you can
-configure your ~/.kube/config with OIDC information with this feature.
+configure your ``~/.kube/config`` with OIDC information with this feature.
 
 There is currently only one thing passed into this command and that is the
 username. It's passed as a named argument like so: ``--user USERNAME``.
@@ -903,8 +903,8 @@ for your test and production environments.
 
 .. describe:: pun_pre_hook_exports (String, null)
 
-  A comma seperated list of environment variables to export to the
-  pun_pre_hook_root_cmd.
+  A comma separated list of environment variables to export to the
+  ``pun_pre_hook_root_cmd``.
 
   Default
     Don't pass any environment variables.
@@ -915,7 +915,7 @@ for your test and production environments.
 
   Example
     Export OIDC_ACCESS_TOKEN and OIDC_CLAIM_EMAIL environment variables
-    to the pun_pre_hook_root_cmd.
+    to the ``pun_pre_hook_root_cmd``.
 
     .. code-block:: yaml
 

@@ -132,7 +132,7 @@ Form Widgets
     allows users to navigate through directories to select a path.
 
     This is useful in forms where a path must be selected and you
-    want to allow your users to choose an arbirary path.
+    want to allow your users to choose an arbitrary path.
 
     ``directory`` is the initial directory the path selector will open
     to when the users opens the modal. This defaults to the users' HOME.

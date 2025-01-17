@@ -1,7 +1,7 @@
 .. _nginx-stage-nginx-show:
 
-nginx_stage nginx_show
-======================
+``nginx_stage nginx_show``
+==========================
 
 This command will show the relevant details of a running per-user NGINX (PUN)
 process for a given user.

@@ -8,7 +8,7 @@ Dynamic Form Widgets
 
 Prior to version 2.0, sites would have to make their own custom `form.js` to
 add dynamic behavior for batch connect forms.  While sites can still have their
-own custom javascript, 2.0 added out of the box support for common use cases based
+own custom JavaScript, 2.0 added out of the box support for common use cases based
 on configuration.
 
 .. warning::
@@ -23,7 +23,7 @@ Your own ``form.js``
 ********************
 
 If we don't support what you need for your application to be dynamic, then you can add your
-own ``form.js`` in the root of the project. It is free form javascript, so most anything is
+own ``form.js`` in the root of the project. It is free form JavaScript, so most anything is
 allowed. `jQuery`_ is available to interact with elements.
 
 
@@ -78,7 +78,7 @@ But using Nvidia's `CUDA`_ libraries only makes sense when the user is requestin
 So, we want to hide the ``cuda_version`` element when a users chooses standard ``node_type``.
 
 Here's the example YAML for this app with two select widgets.  This
-instructs the webpage to hide the ``cuda_version`` when the ``standard``
+instructs the web-page to hide the ``cuda_version`` when the ``standard``
 ``node_type`` is selected.
 
 .. warning::
@@ -115,7 +115,7 @@ Here we have a checkbox ``enable_cuda_version`` that will show
 ``cuda_version`` when checked and hide it when it's not checked.
 
 .. tip::
-  Checkboxes respond to ``when-checked: true`` and ``when-un-checked: true``
+  Check-boxes respond to ``when-checked: true`` and ``when-un-checked: true``
   for hiding elements when checked or unchecked.
 
 .. code-block:: yaml
@@ -161,7 +161,7 @@ The ``data-min`` and ``data-max`` directives allow you to set the minimum and
 maximum values of another element based on the current value of a select element.
 
 Sites have node types of all shapes and sizes. Some sites even have
-heterogenous clusters where there are different node types in the cluster.
+heterogeneous clusters where there are different node types in the cluster.
 
 This feature allows for setting the minimum and maximum values for input
 fields like the number of cores to request.
@@ -171,7 +171,7 @@ different sizes. In the ``oakley`` cluster nodes have a total 28 cores and in th
 ``ruby`` cluster they have 40.
 
 In this example ``data-max-num-cores-for-cluster-oakley`` is attached to the standard
-node type. This config is saying, when the ``node_type`` is ``standard``
+node type. This configuration is saying, when the ``node_type`` is ``standard``
 and the ``cluster`` is ``oakley`` set maximum ``num_cores`` to 28.
 
 .. code-block:: yaml

@@ -1,9 +1,9 @@
 .. _ondemand-d-ymls:
 
-ondemand.d/\*.yml files
-=======================
+``ondemand.d/*.yml files``
+==========================
 
-Most of the configurations are now held within yml files in the ``/etc/ood/config/ondemand.d/`` directory.
+Most of the configurations are now held within YAML files in the ``/etc/ood/config/ondemand.d/`` directory.
 Open OnDemand will read all the ``.yml`` and ``.yml.erb`` files within this directory for
 configurations.
 
@@ -13,12 +13,12 @@ in the ``/etc/ood/config/apps/dashboard/env`` file.
 These properties support profile based configuration, see the :ref:`profile configuration documentation. <profiles_guide>`
 
 .. note:: Simple properties (strings and booleans) can be configured using environment variables as well.
-          The name of the environment variable will be the property name in capitals prepended with ``OOD_``.
-          eg: property ``brand_bg_color`` will be ``OOD_BRAND_BG_COLOR`` enviroment variable.
+          The name of the environment variable will be the property name in capitals prefixed with ``OOD_``.
+          e.g., property ``brand_bg_color`` will be ``OOD_BRAND_BG_COLOR`` environment variable.
 
           We recommend setting environment variables in ``/etc/ood/config/nginx_stage.yml``
           as YAML mappings (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env``.
-          Alternatively you can set these in the env files of the dashboard and the apps.
+          Alternatively you can set these in the ``env`` files of the dashboard and the apps.
 
 .. warning:: When using environment variables with ``nginx_stage.yml`` file, be careful to set the value using quotes
              i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
@@ -35,7 +35,7 @@ Configuration Properties with profile support
 
 .. describe:: dashboard_header_img_logo (String, null)
 
-    The url to the logo image for the main navigation. If no logo is configured, the ``dashboard_title``
+    The URL to the logo image for the main navigation. If no logo is configured, the ``dashboard_title``
     property will be used as text.
       
     Default
@@ -72,7 +72,7 @@ Configuration Properties with profile support
 
 .. describe:: dashboard_logo (String, null)
 
-  The url to the logo image for the homepage welcome message. If no logo is configured, the ``dashboard_title``
+  The URL to the logo image for the homepage welcome message. If no logo is configured, the ``dashboard_title``
   property will be used as text.
 
   Default
@@ -91,7 +91,7 @@ Configuration Properties with profile support
 
 .. describe:: dashboard_logo_height (Integer, null)
 
-    HTML image overide for the height of the welcome message logo image configured with ``dashboard_logo``
+    HTML image override for the height of the welcome message logo image configured with ``dashboard_logo``
 
     Default
       ``null``, no override will be applied and the original image height will be used.
@@ -236,7 +236,7 @@ Configuration Properties with profile support
   The relative path will be prefixed with the value of the ``public_url`` property.
 
   Default
-    Empty list, no custom css files will be included.
+    Empty list, no custom CSS files will be included.
 
     .. code-block:: yaml
 
@@ -252,20 +252,20 @@ Configuration Properties with profile support
 .. _custom_javascript_files:
 .. describe:: custom_javascript_files (Array<String>, [])
 
-  List of relative URLs to custom javascript files to include in all Dashboard pages.
-  These javascript files can be used to customize the behavior of the Dashboard.
+  List of relative URLs to custom JavaScript files to include in all Dashboard pages.
+  These JavaScript files can be used to customize the behavior of the Dashboard.
 
   The relative path will be prefixed with the value of the ``public_url`` property.
 
   Default
-    Empty list, no custom javascript files will be included.
+    Empty list, no custom JavaScript files will be included.
 
     .. code-block:: yaml
 
       custom_javascript_files: []
 
   Example
-    Add two custom Javascript files: ``/myfolder/navigation.js`` and ``/myfolder/pinned_apps.js`` to the Dashboard.
+    Add two custom JavaScript files: ``/myfolder/navigation.js`` and ``/myfolder/pinned_apps.js`` to the Dashboard.
 
     .. code-block:: yaml
 
@@ -335,8 +335,8 @@ Configuration Properties with profile support
 
 .. describe:: help_menu (Array<Object>, [])
 
-  A single navigation item to add links to the Help dropdown menu.
-  This property adds navigation items at the end of any exisiting links in the menu.
+  A single navigation item to add links to the Help drop-down menu.
+  This property adds navigation items at the end of any existing links in the menu.
 
   See the :ref:`documentation on adding urls to the Help menu <help_menu_guide>` for details and examples.
 
@@ -402,10 +402,10 @@ Configuration Properties with profile support
 
 .. describe:: public_url (String, '/public')
 
-  The prefix url used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
+  The prefix URL used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
 
   Default
-    '/public' prefix url.
+    '/public' prefix URL.
 
     .. code-block:: yaml
 
@@ -443,14 +443,14 @@ Configuration Properties with profile support
 .. _nav_categories:
 .. describe:: nav_categories (Array<String>, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])
 
-  By default Open OnDemand will create dropdown menus on the navigation bar for certain
+  By default Open OnDemand will create drop-down menus on the navigation bar for certain
   categories listed below.
 
-  Use this property to add or remove which application categories will create dropdown menus
+  Use this property to add or remove which application categories will create drop-down menus
   on the navigation bar.
 
   Default
-    Create dropdown menus on the navigation bar items for the categories ``Apps``, ``Files``, ``Jobs``,
+    Create drop-down menus on the navigation bar items for the categories ``Apps``, ``Files``, ``Jobs``,
     ``Clusters`` and ``Interactive Apps``.
 
     .. code-block:: yaml
@@ -458,7 +458,7 @@ Configuration Properties with profile support
       nav_categories: ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps']
 
   Example
-    Only create dropdown menus on the navigation bar for the categories ``Apps``,
+    Only create drop-down menus on the navigation bar for the categories ``Apps``,
     ``Files`` and ``Jobs``.
 
     .. code-block:: yaml
@@ -474,7 +474,7 @@ Configuration Properties
 
   While browsing files, by default, Open OnDemand will show a button to
   shell into that directory location. Use this configuration to disable that
-  behaviour.
+  behavior.
 
   Default
     True. Files App has will show a button to open a shell to that location.
@@ -578,7 +578,7 @@ Configuration Properties
 
 .. describe:: disable_bc_shell (Bool, false)
 
-  Some schedulers like :ref:`resource-manager-lsf` use the the ``-L`` flag to bsub
+  Some schedulers like :ref:`resource-manager-lsf` use the the ``-L`` flag to ``bsub``
   for purposes other than setting the shell path. Interactive apps set the shell path
   to ``/bin/bash`` by default using various flags or editing scripts.
 
@@ -668,7 +668,7 @@ Configuration Properties
   on files or directories.
 
   Default
-    No facl domain given.
+    No FACL domain given.
 
     .. code-block:: yaml
 
@@ -736,7 +736,7 @@ Configuration Properties
       remote_files_enabled: false
 
   Example
-    Enable remote filesystems through ``rclone``.
+    Enable remote file-systems through ``rclone``.
 
     .. code-block:: yaml
 
@@ -833,7 +833,7 @@ Configuration Properties
   If you were to navigate to your local ``/home`` and then click the Globus button, you would 
   see a new tab open with the endpoint associated to that local path in the Globus interface.
 
-  If you then go back to the localfile browser and navigate to ``/project`` and then click the Globus button, 
+  If you then go back to the local file browser and navigate to ``/project`` and then click the Globus button, 
   you would now see the endpoint associated with that local ``/project`` directory open in the Globus interface 
   in a new tab.
 
@@ -848,7 +848,7 @@ Configuration Properties
     Null, do not enable the Globus button
 
   Example
-    Use a single endpoint for the whole filesystem.
+    Use a single endpoint for the whole file-system.
 
     .. code-block:: yaml
 
@@ -872,7 +872,7 @@ Configuration Properties
            endpoint_path: "/project"
 
   Example
-    When pathnames differ between the filesystem and endpoint.
+    When path names differ between the file-system and endpoint.
 
     .. code-block:: yaml
 

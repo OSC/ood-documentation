@@ -1,7 +1,7 @@
 .. _app-development-interactive-form:
 
-User Form (form.yml.erb)
-========================
+User Form (``form.yml.erb``)
+============================
 
 The configuration file ``form.yml`` creates the `html form`_ your customers will use
 to start the interactive application.
@@ -56,7 +56,7 @@ building and launching the ``my_app`` Interactive App session.
   Since 4.0 HTML IDs of the form items are always lowercase. The examples above
   show lowercase configurations of ``account``.  Specifying ``Account``,
   or ``ACCOUNT`` or any variation of uppercase and lowercase will result in
-  the same behhavior as specifying ``account`` (all lower case).
+  the same behavior as specifying ``account`` (all lower case).
 
   If you write your own ``form.js`` take care to note that HTML IDs of these
   form items will **always** be lowercase regardless of how they're defined in
@@ -70,7 +70,7 @@ building and launching the ``my_app`` Interactive App session.
 Configuration
 -------------
 
-This is the full list of items with details, you may supply to this yaml file to configure this application.
+This is the full list of items with details, you may supply to this YAML file to configure this application.
 
 .. describe:: cluster (Array<String> or String)
 
@@ -106,7 +106,7 @@ This is the full list of items with details, you may supply to this yaml file to
 
 .. describe:: cacheable (Boolean)
 
-       whether or not the application is cacheable or not. Defaults to true.
+       whether or not the application is cache-able or not. Defaults to true.
 
 .. _bc_form_header:
 .. describe:: form_header (String)
@@ -114,7 +114,7 @@ This is the full list of items with details, you may supply to this yaml file to
     New in 4.0.
 
     Add a text header to the form. Note this is different from the
-    manifest's description as it does not appear as hoverover text.
+    manifest's description as it does not appear as hover-over text.
 
 .. _bc_form_attributes:
 
@@ -155,7 +155,7 @@ The most commonly used predefined attributes are given as:
 
 .. _bc_account:
 
-bc_account
+``bc_account``
   This adds a ``text_field`` to the HTML form that will be used as the charged
   account for the submitted job.
 
@@ -163,7 +163,7 @@ bc_account
 
 .. _bc_queue:
 
-bc_queue
+``bc_queue``
   This adds a ``text_field`` to the HTML form that will supply the name of the
   queue that the batch job is submitted to.
 
@@ -171,14 +171,14 @@ bc_queue
 
 .. _bc_num_hours:
 
-bc_num_hours
+``bc_num_hours``
   This adds a ``number_field`` to the HTML form that describes the maximum
   amount of hours the submitted batch job may run.
 
   This attribute gets converted to seconds and then set on
   `OodCore::Job::Script#wall_time`_.
 
-bc_num_slots
+``bc_num_slots``
   This adds a ``number_field`` to the HTML form that describes the number of
   processors, CPUs on a single node, or nodes that the submitted job may use
   (depends on the resource manager used, e.g., Torque, Slurm, ...).
@@ -196,7 +196,7 @@ bc_num_slots
 
 .. _bc_email_on_started:
 
-bc_email_on_started
+``bc_email_on_started``
   This adds a ``check_box`` to the HTML form that determines whether the user
   should be notified by email when the batch job starts.
 
@@ -232,7 +232,7 @@ auto_primary_group
 
 auto_modules_<MODULE>
   This will generate a list of modules in a ``select`` widget.
-  For example ``auto_modules_matlab`` will automatically populate a dropdown
+  For example ``auto_modules_matlab`` will automatically populate a drop-down
   list of every single ``matlab`` version available, including the default
   version.
   
@@ -320,7 +320,7 @@ auto_accounts
   .. warning::
     We only have support for Slurm accounts at this time.
 
-auto_qos
+``auto_qos``
   This will automatically generate a ``select`` widget populated with a list of all the QoS
   (Quality of Service) values available.  These are cluster aware if you have
   :ref:`dynamic options <dynamic-bc-apps>` enabled.
@@ -550,7 +550,7 @@ are:
     that will be sent to the server and used.
 
     Lastly you can also set extra ``data`` HTML attributes like the
-    example ``Toyota`` below. These extra attributes can be used by javascript
+    example ``Toyota`` below. These extra attributes can be used by JavaScript
     or options for :ref:`dynamic options <dynamic-bc-apps>`.
 
      Default
@@ -576,17 +576,17 @@ are:
 
 .. describe:: cacheable (Boolean, true)
 
-     whether the form item is cacheable or not
+     Whether the form item is cache-able or not.
 
      Default
-       cacheable
+        The item is cache-able.
 
        .. code-block:: yaml
 
           cacheable: true
 
      Example
-       The item is not cacheable
+       The item is not cache-able.
 
        .. code-block:: yaml
 
@@ -722,7 +722,7 @@ Caching form items
 ``````````````````
 
 Since 1.8 caching form items is configurable. By default all form items are
-cacheable. As seen above you can enable or disable caching for the entire app
+cache-able. As seen above you can enable or disable caching for the entire app
 when using the top level ``cacheable`` configuration. You can also configure
 on a per item basis through attributes.
 
@@ -741,9 +741,9 @@ dashboard's environment file ``/etc/ood/config/apps/dashboard/env``.
 
 Let's see an example.  Here, we've disabled caching for the app and did not
 set OOD_BATCH_CONNECT_CACHE_ATTR_VALUES, so the site-wide configuration is set
-to true by default.  So, ``bc_num_slots`` and ``python_version`` are not cacheable,
+to true by default.  So, ``bc_num_slots`` and ``python_version`` are not cache-able,
 meaning the user will have to fill those form entries out every time they submit
-the job. But since ``bc_queue``'s attribute is set to true, it is cacheable.
+the job. But since ``bc_queue``'s attribute is set to true, it is cache-able.
 
 .. code-block:: yaml
 
@@ -796,13 +796,13 @@ In 1.8 there are now several ways to configure what cluster to submit to.
 
 The easiest way is to use the the top level ``cluster`` configuration. If you've
 configured just one item, then the form UI does not change for the user. If
-you configure an array of two or more options then a select dropdown will
+you configure an array of two or more options then a select drop-down will
 automatically be added to the top of the form.
 
 .. code-block:: yaml
 
    # ${HOME}/ondemand/dev/my_app/form.yml
-   # which will generate a dropdown select automatically
+   # which will generate a drop-down select automatically
    ---
    cluster:
      - "cluster1"
@@ -822,7 +822,7 @@ shown in the UI you can configure a cluster form item and specify it's attribute
 This gives you some flexibility in the form UI instead of the default select
 widget that shows all lowercase cluster names.
 
-Here's an example were the user will be shown a select dropdown menu item with
+Here's an example were the user will be shown a select drop-down menu item with
 different text than the default.
 
 .. code-block:: yaml
@@ -840,7 +840,7 @@ different text than the default.
 
 The last option is to :ref:`configure the cluster in the submit file <configuring-cluster-in-submit-yml>`.
 When using this option, there's no need to add any cluster configuration to the
-form.yml.
+``form.yml``.
 
 .. _global_bc_form_items:
 
@@ -861,7 +861,7 @@ above. Only the location is in an ``ondemand.d`` file in ``/etc/ood/config/ondem
 under the ``global_bc_form_items`` key.
 
 Here's an example of defining a select widget with options called ``global_queues``.
-Note the appropriate previx of ``global``.
+Note the appropriate prefix of ``global``.
 
 .. code-block:: yaml
 

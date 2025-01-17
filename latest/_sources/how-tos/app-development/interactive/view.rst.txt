@@ -140,7 +140,7 @@ can do:
      <i class="fa fa-eye"></i> Connect to My App
    </a>
 
-All stylization is handled through the HTML `class global attribute`_ using
+All styles are handled through the HTML `class global attribute`_ using
 predefined Bootstrap and Font Awesome classes.
 
 .. _app-development-interactive-view-examples:
@@ -186,7 +186,7 @@ login page.
    </form>
 
 In this example, the password is stored in a hidden input field that the user
-doesn't see and it gets communicated to the Jupyter server in the ``POST``
+does not see and it gets communicated to the Jupyter server in the ``POST``
 request.
 
 .. _bc_native_vnc_view:
@@ -214,15 +214,15 @@ variables and objects you may need to create helpful instructions. You can also
 `refer to the original files for help in creating new panels
 <https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views/batch_connect/sessions/connections>`_.
 
-Configuration.native_vnc_login_host
+``Configuration.native_vnc_login_host``
   The OOD_NATIVE_VNC_LOGIN_HOST configuration if given.
-connect.host
+``connect.host``
   The compute node host the interactive job is on
-connect.port
+``connect.port``
   The compute node port the interactive job has opened
-connect.password
+``connect.password``
   The VNC password for the interactive job
-ENV["USER"]
+``ENV["USER"]``
   The USER environment variable
 
 .. _eruby (embedded ruby): https://en.wikipedia.org/wiki/ERuby

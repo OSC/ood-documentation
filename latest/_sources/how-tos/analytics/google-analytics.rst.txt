@@ -7,7 +7,7 @@ Adding Google Analytics
 .. _Google IAM roles: https://cloud.google.com/iam/docs/understanding-roles
 .. _Google Analytics: https://analytics.google.com/analytics/web
 
-If you wish you can setup your Open-OnDemand instance to send usage data to Google Analytics
+If you wish you can setup your Open OnDemand instance to send usage data to Google Analytics
 (GA) that you can then query and report on, this page walks through how to do just that.
 
 .. note::
@@ -35,7 +35,7 @@ Querying Google Analytics
   work as intended. As OSC does not use GA we're unable to update these examples
   ourselves, but would accept updates for the same.
 
-Now that you have Open-OnDemand sending information to GA and it's all configured correctly,
+Now that you have Open OnDemand sending information to GA and it's all configured correctly,
 you can now query GA for this information, parse it and present it in any fashion you like. 
 
 Here's a small portion of how we query GA in ruby, but there are many `GA client libraries`_ 

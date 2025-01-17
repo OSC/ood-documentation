@@ -28,7 +28,7 @@ Requirements
 
      If the :command:`hostname` command gives you a value that cannot be used
      to connect to the compute node from the OnDemand host, then you can
-     override it in the cluster config with a :command:`bash` command that will
+     override it in the cluster configuration with a :command:`bash` command that will
      work, e.g.:
 
      .. code-block:: yaml
@@ -78,7 +78,7 @@ Steps to Enable in Apache
 
    .. tip::
 
-      What if my site foregos the FQDN in the host names for compute nodes, and
+      What if my site foregoes the FQDN in the host names for compute nodes, and
       we have compute names that give their hosts as:
 
       - ``ab001`` ... ``ab100`` (for the AB cluster)

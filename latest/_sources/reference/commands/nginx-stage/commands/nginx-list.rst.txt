@@ -1,7 +1,7 @@
 .. _nginx-stage-nginx-list:
 
-nginx_stage nginx_list
-======================
+``nginx_stage nginx_list``
+==========================
 
 This command will list all the users with running per-user NGINX (PUN)
 processes.

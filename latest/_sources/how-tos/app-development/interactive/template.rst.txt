@@ -18,7 +18,7 @@ The ``template/`` directory can be found at::
 When an Interactive App session is first "Launched" by the user, the
 ``template/`` directory is:
 
-#. Copied to the user's home directory under an appropriately namespaced data
+#. Copied to the user's home directory under an appropriately name-spaced data
    root directory::
 
      ${HOME}/ondemand/data/sys/dashboard/batch_connect/dev/my_app/output/<session_id>/

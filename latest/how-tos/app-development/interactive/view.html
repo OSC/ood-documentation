@@ -24,7 +24,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Sub-Apps and Reconfiguring existing apps" href="sub-apps.html" />
+    <link rel="next" title="Sub-Apps and Re-configuring existing apps" href="sub-apps.html" />
     <link rel="prev" title="Job Submission (submit.yml.erb)" href="submit.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -76,12 +76,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest yml files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="form.html">User Form (form.yml.erb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest YAML files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form (<code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="form-widgets.html">Form Widgets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dynamic-form-widgets.html">Dynamic Form Widgets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (submit.yml.erb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (<code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Connection View</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#session-information">Session Information</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reverse-proxy">Reverse Proxy</a></li>
@@ -90,7 +90,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#adding-native-vnc-instructions-to-the-panel">Adding Native VNC instructions to the panel</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Reconfiguring existing apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Re-configuring existing apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conn-params.html">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="additional-info.html">Adding Additional Information to the session cards</a></li>
 <li class="toctree-l3"><a class="reference internal" href="saved-settings.html">Saving interactive application settings</a></li>
@@ -277,7 +277,7 @@ can do:</p>
 <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>All stylization is handled through the HTML <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class">class global attribute</a> using
+<p>All styles are handled through the HTML <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class">class global attribute</a> using
 predefined Bootstrap and Font Awesome classes.</p>
 </section>
 <section id="examples">
@@ -313,7 +313,7 @@ login page.</p>
 </pre></div>
 </div>
 <p>In this example, the password is stored in a hidden input field that the user
-doesn’t see and it gets communicated to the Jupyter server in the <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+does not see and it gets communicated to the Jupyter server in the <code class="docutils literal notranslate"><span class="pre">POST</span></code>
 request.</p>
 </section>
 </section>
@@ -335,15 +335,15 @@ directory to override the default instructions for a given platform.</p>
 variables and objects you may need to create helpful instructions. You can also
 <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views/batch_connect/sessions/connections">refer to the original files for help in creating new panels</a>.</p>
 <dl class="simple">
-<dt>Configuration.native_vnc_login_host</dt><dd><p>The OOD_NATIVE_VNC_LOGIN_HOST configuration if given.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">Configuration.native_vnc_login_host</span></code></dt><dd><p>The OOD_NATIVE_VNC_LOGIN_HOST configuration if given.</p>
 </dd>
-<dt>connect.host</dt><dd><p>The compute node host the interactive job is on</p>
+<dt><code class="docutils literal notranslate"><span class="pre">connect.host</span></code></dt><dd><p>The compute node host the interactive job is on</p>
 </dd>
-<dt>connect.port</dt><dd><p>The compute node port the interactive job has opened</p>
+<dt><code class="docutils literal notranslate"><span class="pre">connect.port</span></code></dt><dd><p>The compute node port the interactive job has opened</p>
 </dd>
-<dt>connect.password</dt><dd><p>The VNC password for the interactive job</p>
+<dt><code class="docutils literal notranslate"><span class="pre">connect.password</span></code></dt><dd><p>The VNC password for the interactive job</p>
 </dd>
-<dt>ENV[“USER”]</dt><dd><p>The USER environment variable</p>
+<dt><code class="docutils literal notranslate"><span class="pre">ENV[&quot;USER&quot;]</span></code></dt><dd><p>The USER environment variable</p>
 </dd>
 </dl>
 </section>
@@ -354,7 +354,7 @@ variables and objects you may need to create helpful instructions. You can also
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="submit.html" class="btn btn-neutral float-left" title="Job Submission (submit.yml.erb)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sub-apps.html" class="btn btn-neutral float-right" title="Sub-Apps and Reconfiguring existing apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sub-apps.html" class="btn btn-neutral float-right" title="Sub-Apps and Re-configuring existing apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

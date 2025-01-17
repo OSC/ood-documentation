@@ -76,8 +76,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest yml files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="form.html">User Form (form.yml.erb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest YAML files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form (<code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="form-widgets.html">Form Widgets</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Dynamic Form Widgets</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#your-own-form-js">Your own <code class="docutils literal notranslate"><span class="pre">form.js</span></code></a></li>
@@ -89,9 +89,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (submit.yml.erb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (<code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Reconfiguring existing apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Re-configuring existing apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conn-params.html">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="additional-info.html">Adding Additional Information to the session cards</a></li>
 <li class="toctree-l3"><a class="reference internal" href="saved-settings.html">Saving interactive application settings</a></li>
@@ -153,7 +153,7 @@
 </div>
 <p>Prior to version 2.0, sites would have to make their own custom <cite>form.js</cite> to
 add dynamic behavior for batch connect forms.  While sites can still have their
-own custom javascript, 2.0 added out of the box support for common use cases based
+own custom JavaScript, 2.0 added out of the box support for common use cases based
 on configuration.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -165,7 +165,7 @@ set the <a class="reference internal" href="../../../reference/files/ondemand-d-
 <section id="your-own-form-js">
 <h2>Your own <code class="docutils literal notranslate"><span class="pre">form.js</span></code><a class="headerlink" href="#your-own-form-js" title="Link to this heading"></a></h2>
 <p>If we don’t support what you need for your application to be dynamic, then you can add your
-own <code class="docutils literal notranslate"><span class="pre">form.js</span></code> in the root of the project. It is free form javascript, so most anything is
+own <code class="docutils literal notranslate"><span class="pre">form.js</span></code> in the root of the project. It is free form JavaScript, so most anything is
 allowed. <a class="reference external" href="https://jquery.com/">jQuery</a> is available to interact with elements.</p>
 </section>
 <section id="hiding-select-options">
@@ -207,7 +207,7 @@ with options for <a class="reference external" href="https://developer.nvidia.co
 <p>But using Nvidia’s <a class="reference external" href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> libraries only makes sense when the user is requesting GPUs.
 So, we want to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> element when a users chooses standard <code class="docutils literal notranslate"><span class="pre">node_type</span></code>.</p>
 <p>Here’s the example YAML for this app with two select widgets.  This
-instructs the webpage to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when the <code class="docutils literal notranslate"><span class="pre">standard</span></code>
+instructs the web-page to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when the <code class="docutils literal notranslate"><span class="pre">standard</span></code>
 <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is selected.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -240,7 +240,7 @@ Here we have a checkbox <code class="docutils literal notranslate"><span class="
 <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when checked and hide it when it’s not checked.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Checkboxes respond to <code class="docutils literal notranslate"><span class="pre">when-checked:</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">when-un-checked:</span> <span class="pre">true</span></code>
+<p>Check-boxes respond to <code class="docutils literal notranslate"><span class="pre">when-checked:</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">when-un-checked:</span> <span class="pre">true</span></code>
 for hiding elements when checked or unchecked.</p>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
@@ -278,14 +278,14 @@ form element based on the selected option in a select widget.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">data-min</span></code> and <code class="docutils literal notranslate"><span class="pre">data-max</span></code> directives allow you to set the minimum and
 maximum values of another element based on the current value of a select element.</p>
 <p>Sites have node types of all shapes and sizes. Some sites even have
-heterogenous clusters where there are different node types in the cluster.</p>
+heterogeneous clusters where there are different node types in the cluster.</p>
 <p>This feature allows for setting the minimum and maximum values for input
 fields like the number of cores to request.</p>
 <p>Let’s see an example. We have <cite>standard`</cite> nodes in both clusters, but they’re
 different sizes. In the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> cluster nodes have a total 28 cores and in the
 <code class="docutils literal notranslate"><span class="pre">ruby</span></code> cluster they have 40.</p>
 <p>In this example <code class="docutils literal notranslate"><span class="pre">data-max-num-cores-for-cluster-oakley</span></code> is attached to the standard
-node type. This config is saying, when the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is <code class="docutils literal notranslate"><span class="pre">standard</span></code>
+node type. This configuration is saying, when the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is <code class="docutils literal notranslate"><span class="pre">standard</span></code>
 and the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> is <code class="docutils literal notranslate"><span class="pre">oakley</span></code> set maximum <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> to 28.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
