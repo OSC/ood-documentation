@@ -23,7 +23,7 @@ All the options in :ref:`vnc-bc-options` apply in addition to what's listed belo
     The full path to the container image you wish to boot.
 
     Default
-      Load the vnc_container.sif image.
+      Load the ``vnc_container.sif`` image.
 
       .. code-block:: yaml
 
@@ -38,7 +38,7 @@ All the options in :ref:`vnc-bc-options` apply in addition to what's listed belo
 
 .. describe:: container_bindpath (String, "")
 
-    A comma seperated list of mountpoints you wish to bind into the container.
+    A comma separated list of mount-points you wish to bind into the container.
 
     Default
       Do not bind any paths into the container.
@@ -48,7 +48,7 @@ All the options in :ref:`vnc-bc-options` apply in addition to what's listed belo
         container_bindpath: ""
 
     Example
-      Bind /etc, /dev and /usr into the container.
+      Bind ``/etc``, ``/dev`` and ``/usr`` into the container.
 
       .. code-block:: yaml
 
@@ -117,9 +117,9 @@ You can use this as an example to start and update as required.
 
 
 .. note::
-  Note that we're installing turbovnc and websockify *inside*
+  Note that we're installing ``turbovnc`` and ``websockify`` *inside*
   the container. This is important as all processes will run
-  inside the contianer and not on the host.
+  inside the container and not on the host.
 
   You can still install these on the host machine, but they will
   need to be mounted inside the container as the processes are
