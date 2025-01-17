@@ -20,7 +20,7 @@ Jupyter Notebook Example
 
 Here's an example using a Jupyter application which needs
 needs to know the exact API to connect to. We can either connect to
-JuypterLab at ``/lab`` or Juypter Notebook at ``/tree``, but this
+JupyterLab at ``/lab`` or Jupyter Notebook at ``/tree``, but this
 information is not known until the job has been submitted.
 
 So once the job is submitted, we need to export the ``jupyter_api``

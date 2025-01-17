@@ -25,7 +25,7 @@ Dependencies:
 Install via RPM
 --------------------------
 
-For yum/dnf based systems the `ondemand_exporter`_ can be installed via RPM.
+For ``yum`` or ``dnf`` based systems the `ondemand_exporter`_ can be installed via RPM.
 
 .. code-block:: sh
 
@@ -33,8 +33,8 @@ For yum/dnf based systems the `ondemand_exporter`_ can be installed via RPM.
 
 The RPM will install the following files that should work out of the box:
 
-- **RHEL/Rocky/AlmaLinux 8 & 9 only**: /etc/httpd/conf.d/ondemand_exporter.conf
-- /etc/sudoers.d/ondemand_exporter
+- **RHEL/Rocky/AlmaLinux 8 & 9 only**: ``/etc/httpd/conf.d/ondemand_exporter.conf``
+- ``/etc/sudoers.d/ondemand_exporter``
 
 Ensure that the new Apache configuration is loaded by restarting Apache
 

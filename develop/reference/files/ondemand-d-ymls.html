@@ -86,9 +86,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Configuration Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ood-portal-yml.html">ood_portal.yml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nginx-stage-yml.html">nginx_stage.yml</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ondemand.d/*.yml files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ood-portal-yml.html"><code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nginx-stage-yml.html"><code class="docutils literal notranslate"><span class="pre">nginx_stage.yml</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ondemand.d/*.yml</span> <span class="pre">files</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configuration-properties-with-profile-support">Configuration Properties with profile support</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration-properties">Configuration Properties</a></li>
 </ul>
@@ -120,7 +120,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../reference.html">Configuration Reference</a></li>
-      <li class="breadcrumb-item active">ondemand.d/*.yml files</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ondemand.d/*.yml</span> <span class="pre">files</span></code></li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/OSC/ood-documentation/blob/develop/source/reference/files/ondemand-d-ymls.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -131,8 +131,8 @@
            <div itemprop="articleBody">
              
   <section id="ondemand-d-yml-files">
-<span id="ondemand-d-ymls"></span><h1>ondemand.d/*.yml files<a class="headerlink" href="#ondemand-d-yml-files" title="Link to this heading"></a></h1>
-<p>Most of the configurations are now held within yml files in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ondemand.d/</span></code> directory.
+<span id="ondemand-d-ymls"></span><h1><code class="docutils literal notranslate"><span class="pre">ondemand.d/*.yml</span> <span class="pre">files</span></code><a class="headerlink" href="#ondemand-d-yml-files" title="Link to this heading"></a></h1>
+<p>Most of the configurations are now held within YAML files in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ondemand.d/</span></code> directory.
 Open OnDemand will read all the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">.yml.erb</span></code> files within this directory for
 configurations.</p>
 <p>To use a different directory other than this use the <code class="docutils literal notranslate"><span class="pre">OOD_CONFIG_D_DIRECTORY</span></code> environment variable
@@ -141,11 +141,11 @@ in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/con
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Simple properties (strings and booleans) can be configured using environment variables as well.
-The name of the environment variable will be the property name in capitals prepended with <code class="docutils literal notranslate"><span class="pre">OOD_</span></code>.
-eg: property <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> will be <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR</span></code> enviroment variable.</p>
+The name of the environment variable will be the property name in capitals prefixed with <code class="docutils literal notranslate"><span class="pre">OOD_</span></code>.
+e.g., property <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> will be <code class="docutils literal notranslate"><span class="pre">OOD_BRAND_BG_COLOR</span></code> environment variable.</p>
 <p>We recommend setting environment variables in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>
 as YAML mappings (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code>.
-Alternatively you can set these in the env files of the dashboard and the apps.</p>
+Alternatively you can set these in the <code class="docutils literal notranslate"><span class="pre">env</span></code> files of the dashboard and the apps.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -162,7 +162,7 @@ that are not owned by the root user (uid 0) will not be read.</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">dashboard_header_img_logo</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
-<dd><p>The url to the logo image for the main navigation. If no logo is configured, the <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code>
+<dd><p>The URL to the logo image for the main navigation. If no logo is configured, the <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code>
 property will be used as text.</p>
 <dl>
 <dt>Default</dt><dd><p>No logo image will be shown, just the <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> text.</p>
@@ -199,7 +199,7 @@ property will be used as text.</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">dashboard_logo</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
-<dd><p>The url to the logo image for the homepage welcome message. If no logo is configured, the <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code>
+<dd><p>The URL to the logo image for the homepage welcome message. If no logo is configured, the <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code>
 property will be used as text.</p>
 <dl>
 <dt>Default</dt><dd><p>No logo image will be shown with the welcome message.</p>
@@ -218,7 +218,7 @@ property will be used as text.</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">dashboard_logo_height</span> <span class="pre">(Integer,</span> <span class="pre">null)</span></span></dt>
-<dd><p>HTML image overide for the height of the welcome message logo image configured with <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code></p>
+<dd><p>HTML image override for the height of the welcome message logo image configured with <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code></p>
 <dl>
 <dt>Default</dt><dd><p><code class="docutils literal notranslate"><span class="pre">null</span></code>, no override will be applied and the original image height will be used.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dashboard_logo_height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
@@ -367,7 +367,7 @@ For more information see the <a class="reference internal" href="../../customiza
 These CSS files can be used to customize the look and feel of the Dashboard.</p>
 <p>The relative path will be prefixed with the value of the <code class="docutils literal notranslate"><span class="pre">public_url</span></code> property.</p>
 <dl>
-<dt>Default</dt><dd><p>Empty list, no custom css files will be included.</p>
+<dt>Default</dt><dd><p>Empty list, no custom CSS files will be included.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_css_files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 </pre></div>
 </div>
@@ -383,16 +383,16 @@ These CSS files can be used to customize the look and feel of the Dashboard.</p>
 <dl class="describe" id="custom-javascript-files">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">custom_javascript_files</span> <span class="pre">(Array&lt;String&gt;,</span> <span class="pre">[])</span></span></dt>
-<dd><p>List of relative URLs to custom javascript files to include in all Dashboard pages.
-These javascript files can be used to customize the behavior of the Dashboard.</p>
+<dd><p>List of relative URLs to custom JavaScript files to include in all Dashboard pages.
+These JavaScript files can be used to customize the behavior of the Dashboard.</p>
 <p>The relative path will be prefixed with the value of the <code class="docutils literal notranslate"><span class="pre">public_url</span></code> property.</p>
 <dl>
-<dt>Default</dt><dd><p>Empty list, no custom javascript files will be included.</p>
+<dt>Default</dt><dd><p>Empty list, no custom JavaScript files will be included.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_javascript_files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt><dd><p>Add two custom Javascript files: <code class="docutils literal notranslate"><span class="pre">/myfolder/navigation.js</span></code> and <code class="docutils literal notranslate"><span class="pre">/myfolder/pinned_apps.js</span></code> to the Dashboard.</p>
+<dt>Example</dt><dd><p>Add two custom JavaScript files: <code class="docutils literal notranslate"><span class="pre">/myfolder/navigation.js</span></code> and <code class="docutils literal notranslate"><span class="pre">/myfolder/pinned_apps.js</span></code> to the Dashboard.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom_javascript_files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/myfolder/navigation.js&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;/myfolder/pinned_apps.js&quot;</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
@@ -469,8 +469,8 @@ This property sets the navigation items for the right hand side navigation menu 
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">help_menu</span> <span class="pre">(Array&lt;Object&gt;,</span> <span class="pre">[])</span></span></dt>
-<dd><p>A single navigation item to add links to the Help dropdown menu.
-This property adds navigation items at the end of any exisiting links in the menu.</p>
+<dd><p>A single navigation item to add links to the Help drop-down menu.
+This property adds navigation items at the end of any existing links in the menu.</p>
 <p>See the <a class="reference internal" href="../../customizations.html#help-menu-guide"><span class="std std-ref">documentation on adding urls to the Help menu</span></a> for details and examples.</p>
 <dl class="simple">
 <dt>Default</dt><dd><p>Empty array, no additional links will be added to the Help menu.</p>
@@ -544,9 +544,9 @@ The selected theme will update the colors of the navbar.</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">public_url</span> <span class="pre">(String,</span> <span class="pre">'/public')</span></span></dt>
-<dd><p>The prefix url used to load the <code class="docutils literal notranslate"><span class="pre">favicon.ico</span></code> and custom CSS files configured with the <code class="docutils literal notranslate"><span class="pre">custom_css_files</span></code> property.</p>
+<dd><p>The prefix URL used to load the <code class="docutils literal notranslate"><span class="pre">favicon.ico</span></code> and custom CSS files configured with the <code class="docutils literal notranslate"><span class="pre">custom_css_files</span></code> property.</p>
 <dl>
-<dt>Default</dt><dd><p>‘/public’ prefix url.</p>
+<dt>Default</dt><dd><p>‘/public’ prefix URL.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">public_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/public&quot;</span>
 </pre></div>
 </div>
@@ -583,18 +583,18 @@ The selected theme will update the colors of the navbar.</p>
 <dl class="describe" id="nav-categories">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">nav_categories</span> <span class="pre">(Array&lt;String&gt;,</span> <span class="pre">['Apps',</span> <span class="pre">'Files',</span> <span class="pre">'Jobs',</span> <span class="pre">'Clusters',</span> <span class="pre">'Interactive</span> <span class="pre">Apps'])</span></span></dt>
-<dd><p>By default Open OnDemand will create dropdown menus on the navigation bar for certain
+<dd><p>By default Open OnDemand will create drop-down menus on the navigation bar for certain
 categories listed below.</p>
-<p>Use this property to add or remove which application categories will create dropdown menus
+<p>Use this property to add or remove which application categories will create drop-down menus
 on the navigation bar.</p>
 <dl>
-<dt>Default</dt><dd><p>Create dropdown menus on the navigation bar items for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>, <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>,
+<dt>Default</dt><dd><p>Create drop-down menus on the navigation bar items for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>, <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">Interactive</span> <span class="pre">Apps</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_categories</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Apps&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Files&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Jobs&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Clusters&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Interactive</span><span class="nv"> </span><span class="s">Apps&#39;</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt><dd><p>Only create dropdown menus on the navigation bar for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>,
+<dt>Example</dt><dd><p>Only create drop-down menus on the navigation bar for the categories <code class="docutils literal notranslate"><span class="pre">Apps</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Files</span></code> and <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_categories</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Apps&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Files&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Jobs&#39;</span><span class="p p-Indicator">]</span>
 </pre></div>
@@ -611,7 +611,7 @@ on the navigation bar.</p>
 <span class="sig-name descname"><span class="pre">files_enable_shell_button</span> <span class="pre">(Bool,</span> <span class="pre">true)</span></span></dt>
 <dd><p>While browsing files, by default, Open OnDemand will show a button to
 shell into that directory location. Use this configuration to disable that
-behaviour.</p>
+behavior.</p>
 <dl>
 <dt>Default</dt><dd><p>True. Files App has will show a button to open a shell to that location.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">files_enable_shell_button</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -710,7 +710,7 @@ be removed.</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">disable_bc_shell</span> <span class="pre">(Bool,</span> <span class="pre">false)</span></span></dt>
-<dd><p>Some schedulers like <a class="reference internal" href="../../installation/resource-manager/lsf.html#resource-manager-lsf"><span class="std std-ref">LSF</span></a> use the the <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag to bsub
+<dd><p>Some schedulers like <a class="reference internal" href="../../installation/resource-manager/lsf.html#resource-manager-lsf"><span class="std std-ref">LSF</span></a> use the the <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag to <code class="docutils literal notranslate"><span class="pre">bsub</span></code>
 for purposes other than setting the shell path. Interactive apps set the shell path
 to <code class="docutils literal notranslate"><span class="pre">/bin/bash</span></code> by default using various flags or editing scripts.</p>
 <dl>
@@ -795,7 +795,7 @@ and change the path slightly.</p>
 <dd><p>The File Access Control List (FACL) domain to use when setting FACLs
 on files or directories.</p>
 <dl>
-<dt>Default</dt><dd><p>No facl domain given.</p>
+<dt>Default</dt><dd><p>No FACL domain given.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">facl_domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
@@ -861,7 +861,7 @@ available on all clusters.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt><dd><p>Enable remote filesystems through <code class="docutils literal notranslate"><span class="pre">rclone</span></code>.</p>
+<dt>Example</dt><dd><p>Enable remote file-systems through <code class="docutils literal notranslate"><span class="pre">rclone</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_files_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
@@ -957,7 +957,7 @@ in the Globus transfer web app.</p>
 <p>In the example with multiple endpoints, suppose you use the local file browser to look at your local file system.
 If you were to navigate to your local <code class="docutils literal notranslate"><span class="pre">/home</span></code> and then click the Globus button, you would
 see a new tab open with the endpoint associated to that local path in the Globus interface.</p>
-<p>If you then go back to the localfile browser and navigate to <code class="docutils literal notranslate"><span class="pre">/project</span></code> and then click the Globus button,
+<p>If you then go back to the local file browser and navigate to <code class="docutils literal notranslate"><span class="pre">/project</span></code> and then click the Globus button,
 you would now see the endpoint associated with that local <code class="docutils literal notranslate"><span class="pre">/project</span></code> directory open in the Globus interface
 in a new tab.</p>
 <p>The gist here is you <em>navigate to the desired directory using the local filebrowser</em> then
@@ -968,7 +968,7 @@ and is very likely to be <code class="docutils literal notranslate"><span class=
 <dl>
 <dt>Default</dt><dd><p>Null, do not enable the Globus button</p>
 </dd>
-<dt>Example</dt><dd><p>Use a single endpoint for the whole filesystem.</p>
+<dt>Example</dt><dd><p>Use a single endpoint for the whole file-system.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">globus_endpoints</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span>
 <span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;716de4ac-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
@@ -988,7 +988,7 @@ and is very likely to be <code class="docutils literal notranslate"><span class=
 </pre></div>
 </div>
 </dd>
-<dt>Example</dt><dd><p>When pathnames differ between the filesystem and endpoint.</p>
+<dt>Example</dt><dd><p>When path names differ between the file-system and endpoint.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">globus_endpoints</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/project&quot;</span>
 <span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>

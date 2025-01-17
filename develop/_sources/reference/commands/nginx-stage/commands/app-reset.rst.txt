@@ -1,7 +1,7 @@
 .. _nginx-stage-app-reset:
 
-nginx_stage app_reset
-=====================
+``nginx_stage app_reset``
+=========================
 
 This command will update all the deployed application NGINX
 configuration files using the current template.
@@ -27,11 +27,11 @@ General Options
 Examples
 --------
 
-To update all the deployed app configs using the currently available
+To update all the deployed app configurations using the currently available
 template:
 
 .. code-block:: sh
 
    sudo nginx_stage app_reset --sub-uri '/pun'
 
-This will return the paths to the newly generated app configs.
+This will return the paths to the newly generated app configurations.

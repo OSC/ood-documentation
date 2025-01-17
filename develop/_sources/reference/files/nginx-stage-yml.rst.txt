@@ -1,7 +1,7 @@
 .. _nginx-stage-configuration:
 
-nginx_stage.yml
-===============
+``nginx_stage.yml``
+===================
 
 Many of the options in the per-user NGINX staging and configuration can be
 configured within :program:`nginx_stage`. In a default installation this
@@ -116,7 +116,7 @@ Configuration Options
 
   List of environment variables to pass onto PUN environment
   from /etc/ood/profile. Example below shows some default
-  env vars that are declared.
+  environment variables that are declared.
 
   Default
     No declarations of new environment variables.
@@ -126,7 +126,7 @@ Configuration Options
       pun_custom_env_declarations: []
 
   Example
-    Decleary several environment variables to pass to the PUN.
+    Declare several environment variables to pass to the PUN.
 
     .. code-block:: yaml
 
@@ -271,17 +271,17 @@ Configuration Options
 
 .. describe:: passenger_nodejs (String, null)
 
-   the path to the Node.js binary that Passenger uses for web apps
+   the path to the NodeJs binary that Passenger uses for web apps
 
    Default
-     Use the Node.js wrapper script supplied by this code
+     Use the NodeJs wrapper script supplied by this code
 
      .. code-block:: yaml
 
         passenger_nodejs: "/opt/ood/nginx_stage/bin/node"
 
    Example
-     Use the system installed Node.js
+     Use the system installed NodeJs
 
      .. code-block:: yaml
 
@@ -308,7 +308,7 @@ Configuration Options
 .. describe:: passenger_pool_idle_time (Integer)
 
    The maximum number of seconds that an application process may be idle.
-   Set to ``false`` if you don't want this specified in the nginx config
+   Set to ``false`` if you don't want this specified in the Nginx configuration.
 
    Default
      Set idle time to 300
@@ -386,17 +386,17 @@ Configuration Options
 
 .. describe:: pun_config_path (String)
 
-   the interpolated path to the user's PUN config file
+   the interpolated path to the user's PUN configuration file
 
    Default
-     Namespace the user config files by their user name
+     Namespace the user configuration files by their user name
 
      .. code-block:: yaml
 
         pun_config_path: "/var/lib/ondemand-nginx/config/puns/%{user}.conf"
 
    Example
-     Namespace configs under user directories
+     Namespace configurations under user directories
 
      .. code-block:: yaml
 
@@ -404,7 +404,7 @@ Configuration Options
 
 .. describe:: pun_tmp_root (String)
 
-   the interpolated root directory used for NGINX tmp directories
+   the interpolated root directory used for NGINX temporary directories.
 
    Default
      Namespace under user directories
@@ -467,7 +467,7 @@ Configuration Options
   The secret key location. Note these are per user.
 
    Default
-      Per User secret in var lib ondemand-nginx.
+      Per User secret in var lib ``ondemand-nginx``.
 
       .. code-block:: yaml
 
@@ -501,17 +501,17 @@ Configuration Options
 
 .. describe:: pun_pid_path (String)
 
-   the interpolated path to the NGINX pid file
+   the interpolated path to the NGINX PID file
 
    Default
-     Namespace pid files under user directories
+     Namespace PID files under user directories
 
      .. code-block:: yaml
 
         pun_pid_path: "/var/run/ondemand-nginx/%{user}/passenger.pid"
 
    Example
-     Use a custom location for the pid files
+     Use a custom location for the PID files
 
      .. code-block:: yaml
 
@@ -596,12 +596,12 @@ Configuration Options
 
 .. describe:: pun_app_configs (Array<Hash>)
 
-   a list of interpolated hashes that define what wildcard app config file
-   paths to include in a user's NGINX config (the hashes are arguments for
+   a list of interpolated hashes that define what wildcard app configuration file
+   paths to include in a user's NGINX configuration (the hashes are arguments for
    ``app_config_path``)
 
    Default
-     Serve a user's dev apps, all shared apps, all system apps through NGINX
+     Serve a user's development apps, all shared apps, all system apps through NGINX
 
      .. code-block:: yaml
 
@@ -632,11 +632,11 @@ Configuration Options
 
 .. describe:: app_config_path (Hash)
 
-   an interpolated hash detailing the path to the NGINX app configs for each
+   an interpolated hash detailing the path to the NGINX app configurations for each
    app type
 
    Default
-     A recommended solution for app config locations
+     A recommended solution for app configuration locations
 
      .. code-block:: yaml
 
@@ -824,8 +824,8 @@ Configuration Options
 
 .. describe:: disable_bundle_user_config (Integer)
 
-    Set BUNDLE_USER_CONFIG to /dev/null in the PUN environment.
-    NB: This prevents a user's ~/.bundle/config from affecting
+    Set BUNDLE_USER_CONFIG to ``/dev/null`` in the PUN environment.
+    NB: This prevents a user's ``~/.bundle/config`` from affecting
     OnDemand applications.
 
    Default
@@ -836,7 +836,7 @@ Configuration Options
         disable_bundle_user_config: true
 
    Example
-      Enable bundle user configuration. This may adversly affect
+      Enable bundle user configuration. This may adversely affect
       system deployed apps.
 
       .. code-block:: yaml

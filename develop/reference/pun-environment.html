@@ -86,9 +86,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Configuration Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="files/ood-portal-yml.html">ood_portal.yml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="files/nginx-stage-yml.html">nginx_stage.yml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="files/ondemand-d-ymls.html">ondemand.d/*.yml files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files/ood-portal-yml.html"><code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files/nginx-stage-yml.html"><code class="docutils literal notranslate"><span class="pre">nginx_stage.yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files/ondemand-d-ymls.html"><code class="docutils literal notranslate"><span class="pre">ondemand.d/*.yml</span> <span class="pre">files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="files/submit-yml-erb.html">submit.yml.erb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commands/ood-portal-generator.html">ood-portal-generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commands/nginx-stage/usage.html">nginx-stage</a></li>
@@ -128,7 +128,7 @@
              
   <section id="pun-environment">
 <span id="id1"></span><h1>PUN environment<a class="headerlink" href="#pun-environment" title="Link to this heading"></a></h1>
-<p>OnDemand’s configuration is stored in the environment, which can be modified using a hierarchy of config files. Configuration files are rooted in <code class="docutils literal notranslate"><span class="pre">/etc/ood</span></code>. Assets that should be publicly available (such as a favicon or logo image) are placed under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public</span></code>.</p>
+<p>OnDemand’s configuration is stored in the environment, which can be modified using a hierarchy of configuration files. Configuration files are rooted in <code class="docutils literal notranslate"><span class="pre">/etc/ood</span></code>. Assets that should be publicly available (such as a favicon or logo image) are placed under <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public</span></code>.</p>
 <p>These are three files that directly affect the environment or functionality of the Per-User NGINX (PUN) processes:</p>
 <blockquote>
 <div><ul class="simple">
@@ -141,7 +141,7 @@
 <li><p><strong>/etc/ood/config/apps/$APP/env</strong></p>
 <ul>
 <li><p>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></p></li>
-<li><p>Used to provide application specific config</p></li>
+<li><p>Used to provide application specific configuration.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">env</span></code> files do not override values set by prior methods.</p></li>
 </ul>
 </li>
@@ -149,7 +149,7 @@
 <ul>
 <li><p>replace <code class="docutils literal notranslate"><span class="pre">$APP</span></code> above with the name of the app directory deployed to <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys</span></code></p></li>
 <li><p>Modify Rails application behavior <a class="reference external" href="https://guides.rubyonrails.org/configuring.html#using-initializer-files">using Ruby code</a>. Since this is application code environment variables can be set, removed.</p></li>
-<li><p>This method is specific to Ruby on Rails applications: Activejobs,
+<li><p>This method is specific to Ruby on Rails applications: Active Jobs,
 Dashboard, and Job Composer. You can add multiple
 initializer files in this directory and they will be loaded in
 alphabetical order</p></li>
@@ -165,7 +165,7 @@ alphabetical order</p></li>
 <li><p><strong>Sourced as root prior to starting the PUN</strong></p></li>
 <li><p>If exists, this file is sourced <strong>instead</strong> of the default at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> by <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/sbin/nginx_stage</span></code> script when running as root, prior to launching the PUN.</p></li>
 <li><p>You should source <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/etc/profile</span></code> in your custom <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> if you add one to load the correct software collections.</p></li>
-<li><p>Environment variables set here are not guarenteed to remain set in the PUNs unless those environment variables are added to the YAML sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>. Here is a list of environment variables guarenteed to be preserved when NGINX starts:</p>
+<li><p>Environment variables set here are not guaranteed to remain set in the PUNs unless those environment variables are added to the YAML sequence <code class="docutils literal notranslate"><span class="pre">pun_custom_env_declarations</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>. Here is a list of environment variables guaranteed to be preserved when NGINX starts:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>PATH</p></li>

@@ -1,7 +1,7 @@
 .. _app-development-interactive-submit:
 
-Job Submission (submit.yml.erb)
-===============================
+Job Submission (``submit.yml.erb``)
+===================================
 
 The configuration file ``submit.yml.erb`` controls the content of the batch
 script as well as the submission arguments used when submitting the batch job.
@@ -110,7 +110,7 @@ start GUI applications.
 
 The options available are ``basic``, ``vnc`` or ``vnc_container``.
 ``vnc_container`` is basically just like ``vnc`` only in that it
-boostraps the VNC programs inside a container instead of on the
+bootstraps the VNC programs inside a container instead of on the
 host machine.
 
 .. describe:: template (String)

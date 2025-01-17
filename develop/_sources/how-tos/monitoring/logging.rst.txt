@@ -9,7 +9,7 @@ provides context around these locations.
 In general administrators will want to note whether they need to see:
 
 - System type logs for authentication to the :ref:`web-node <glossary>` itself or OOD's own configuration.
-- Session data for things like connecting to interactive apps (Jupyter, Rstudio, Codeserver, etc.) from 
+- Session data for things like connecting to interactive apps (Jupyter, RStudio, CodeServer, etc.) from 
   the user's PUN, which is already running on the web-node.
 
 System Logs
@@ -75,7 +75,7 @@ information they may need there as well for connections and errors.
     able to substitute user or escalate to root in order to see these files.
 
 In general the session data or job submission files for apps across the dashboard, such as the Job Composer, 
-Batch Connect, or Frame-renderer, all start from the root of:
+Batch Connect, and so on, all start from the root of:
 
 :file:`~/ondemand/data/sys/`
 
@@ -96,12 +96,12 @@ used to connect to the batch connect app.
     page you can match the Session ID you see there to the directory with the desired ``output.log`` to 
     debug.
 
-One important thing to note is if trying to launch a Jupyter or Rstudio session and encountering failures, the 
+One important thing to note is if trying to launch a Jupyter or RStudio session and encountering failures, the 
 ``output.log`` would show you things like what modules are being loaded and what kernels are available.
 
 **Example**
 
-Suppose a user is having trouble connecting to a Codeserver session they created. 
+Suppose a user is having trouble connecting to a CodeServer session they created. 
 To see what data is being used by this batch connect app for the connection, look in:
 
 .. code-block:: sh

@@ -1,7 +1,7 @@
 .. _nginx-stage-app:
 
-nginx_stage app
-===============
+``nginx_stage app``
+===================
 
 This command will generate a web application NGINX configuration file
 and subsequently restart the NGINX process as the user.
@@ -42,7 +42,7 @@ General Options
 Examples
 --------
 
-To generate an app config from the request::
+To generate an app configuration from the request::
 
   http://ondemand.center.edu/pun/usr/jim/myapp/session/1
 
@@ -52,20 +52,20 @@ and subsequently restart the per-user NGINX process:
 
    sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/usr/jim/myapp/session/1'
 
-To generate **only** the app config:
+To generate **only** the app configuration:
 
 .. code-block:: sh
 
    sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/sys/dashboard' --skip-nginx
 
-This will return the path to the app config and will not restart the
+This will return the path to the app configuration and will not restart the
 NGINX process.
 
 Default Installation
 ....................
 
 :numref:`app-mapping-table` details the mapping between the requested URL path
-to the app root directory for in the NGINX app config under a default
+to the app root directory for in the NGINX app configuration under a default
 installation.
 
 .. _app-mapping-table:
@@ -75,12 +75,12 @@ installation.
    * - App type
      - URL path
      - File system path
-   * - dev
+   * - ``dev``
      - :file:`/dev/{app_name}/\*`
      - :file:`/var/www/ood/apps/dev/{app_owner}/gateway/{app_name}`
-   * - usr
+   * - ``usr``
      - :file:`/usr/{app_owner}/{app_name}/\*`
      - :file:`/var/www/ood/apps/usr/{app_owner}/gateway/{app_name}`
-   * - sys
+   * - ``sys``
      - :file:`/sys/{app_name}/\*`
      - :file:`/var/www/ood/apps/sys/{app_name}`

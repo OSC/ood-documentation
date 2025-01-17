@@ -1,7 +1,7 @@
 .. _nginx-stage-pun:
 
-nginx_stage pun
-===============
+``nginx_stage pun``
+===================
 
 This command will generate a per-user NGINX (PUN) configuration file for the
 given user and subsequently launch the NGINX process as the user.

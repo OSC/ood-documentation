@@ -1,7 +1,7 @@
 .. _app-development-manifest:
 
-Manifest yml files
-==================
+Manifest YAML files
+===================
 
 Every app (interactive and passenger) needs a ``manifest.yml`` file to describe it
 to the Open OnDemand platform.
@@ -19,29 +19,29 @@ to the Open OnDemand platform.
   # metadata:
   #   field_of_science: botany
 
-name
+``name``
   The name of the app. This will be shown in menu bars and on icons.
-category
+``category``
   The category of the app. This is used to group apps in navigation menus.
-subcategory
+``subcategory``
   The subcategory of the app. This is used to group apps within the 
   navigation menu lists.
-role
+``role``
   The role of the app. Here ``batch_connect`` has special meaning to Open
   OnDemand and is required to indicate it's a batch connect app. Otherwise
   it's assumed to be a Passenger app.
-description
+``description``
   The description of the app. This will be used for additional text when hovering
   over icons.
-icon (Optional)
-  Apps default to look for an icon.png or icon.svg in their root directory,
+``icon`` (Optional)
+  Apps default to look for an ``icon.png`` or ``icon.svg`` in their root directory,
   but this overrides that to specify the icon.
-url (Optional)
-  The url of the application. By default this is generated dynamically but
+``url`` (Optional)
+  The URL of the application. By default this is generated dynamically but
   can be overridden.
-metadata (Optional)
+``metadata`` (Optional)
   These are key value pairs you can add to apps for extra grouping capabilities.
-new_window (Optional)
+``new_window`` (Optional)
   A boolean (``true`` or ``false``) flag to toggle if the app should open a new
   window when clicked.
 

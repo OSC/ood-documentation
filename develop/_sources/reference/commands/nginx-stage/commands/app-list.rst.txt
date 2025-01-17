@@ -1,7 +1,7 @@
 .. _nginx-stage-app-list:
 
-nginx_stage app_list
-====================
+``nginx_stage app_list``
+========================
 
 This command lists all the deployed web application NGINX
 configuration files.
@@ -15,10 +15,10 @@ configuration files.
 Examples
 --------
 
-To list all the deployed app configs:
+To list all the deployed app configurations:
 
 .. code-block:: sh
 
    sudo nginx_stage app_list
 
-This will return the paths to all the deployed app configs.
+This will return the paths to all the deployed app configurations.
