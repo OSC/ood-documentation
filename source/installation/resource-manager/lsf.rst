@@ -32,21 +32,21 @@ looks like:
 
 with the following configuration options:
 
-adapter
+``adapter``
   This is set to ``lsf``.
-bindir
+``bindir``
   The path to the LSF client ``bin/`` directory.
-libdir
+``libdir``
   The path to the LSF client ``lib/`` directory.
-envdir
+``envdir``
   The path to the LSF client ``conf/`` directory.
-serverdir
+``serverdir``
   The path to the LSF client ``etc/`` directory.
-bin_overrides
+``bin_overrides``
   Replacements/wrappers for LSF's job submission and control clients. *Optional*
-submit_host
+``submit_host``
   A different, optional host to ssh to and *then* issue commands. *Optional*
-cluster
+``cluster``
   The cluster to interact with when running LSF's multi-cluster mode. *Required to enable multi-cluster mode*
 
   Supports the following clients:
@@ -71,7 +71,7 @@ Given these settings in ``lsf.conf``:
   LSB_QUERY_PORT=688X
   LSB_QUERY_ENH=y
 
-It's recommented that you set ``LSB_MBD_PORT`` to the same value
+It's recommended that you set ``LSB_MBD_PORT`` to the same value
 as ``LSB_QUERY_PORT``
 
 It has also been observed that setting these values in ``lsb.params``
