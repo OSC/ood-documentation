@@ -107,7 +107,7 @@ We want to **replace** the ``bc_queue`` form attribute with a custom HTML
 
       The user will see a list of options: "Volvo", "Ford", and "Toyota" to
       choose from in the HTML form, but the backend will process a value of
-      either "volvo", "ford", or "toyota" depending on what the user chose.
+      either ``volvo``, ``ford``, or ``toyota`` depending on what the user chose.
 
 .. _app-development-tutorials-interactive-apps-add-custom-queue-local-static-list-handle-custom-attribute:
 

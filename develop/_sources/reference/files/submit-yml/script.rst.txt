@@ -12,7 +12,7 @@ script.
   be available to override in batch connect applications.
   
   For example, ``workdir`` is set by the OnDemand system in batch
-  connect applications, and cannot be overidden.
+  connect applications, and cannot be overridden.
 
 .. tip::
   If you're using the ``ood_core`` gem (where all these are defined and used)
@@ -101,17 +101,17 @@ Note the use of ERB templates throughout these examples.
 
 .. describe:: rerunnable (Boolean, nil)
 
-    Indicate whether the job is rerunnable.
+    Indicate whether the job is re-runnable.
 
     Default
-      Empty, it is not rerunnable.
+      Empty, it is not re-runnable.
 
       .. code-block:: yaml
 
         rerunnable: nil
 
     Example
-      The job is rerunnable.
+      The job is re-runnable.
 
       .. code-block:: yaml
 

@@ -43,8 +43,8 @@ Issue these commands to add and install the package.
   While this example uses `Express`_, you can choose any `NodeJs`_ web framework
   available.
 
-Add and edit app.js
--------------------
+Add and edit ``app.js``
+-----------------------
 
 Now we need the ``app.js`` file that's the entrypoint for this application.
 After creating this file, we've provided this starter content for you add

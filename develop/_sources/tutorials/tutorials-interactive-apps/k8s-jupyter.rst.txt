@@ -13,7 +13,7 @@ other tutorials like :ref:`app-development-tutorials-interactive-apps-add-jupyte
 
 
 We're going to be looking at the `bc k8s jupyter`_ app which you can fork, clone
-and modify for your site.  This page also holds the `submit yml in full`_ for reference.
+and modify for your site.  This page also holds the `submit.yml in full`_ for reference.
 
 Refer to :ref:`interactive K8s Jupyter using HPC-like containers <app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter>`
 for details on running Jupyter on Kubernetes with containers that behave more like traditional
@@ -94,7 +94,7 @@ configmap
 ---------
 
 A `Kubernetes configmap`_ is a way to apply configurations to a container.
-In this example, we're using a configmap to generate the config file for
+In this example, we're using a configmap to generate the configuration file for
 Jupyter.  We'll see later how we use init containers to update it, but let's
 see how we initialize it.
 
@@ -127,7 +127,7 @@ the files they work on.  This example mounts the home directory,
 but could mount any project or scratch space just the same.
 
 When mounting a host directory ``host_type`` must always be Directory.
-This example shows how to mount host directories and nfs storage locations.
+This example shows how to mount host directories and NFS storage locations.
 
 .. code-block:: yaml
 
@@ -172,15 +172,15 @@ You must specify a ``name``, an ``image`` and the ``command`` to be run.
 
 Let's walk through these init containers and what they're doing.
 
-``init-secret`` does just that. It initialzies a `Kubernetes secret`_.
+``init-secret`` does just that. It initializes a `Kubernetes secret`_.
 ``add-passwd-to-cfg`` then reads that secret and creates a salt and
-sha1 of this secret (these are needed specifically for Jupyter).  Lastly
+``sha1`` of this secret (these are needed specifically for Jupyter).  Lastly
 it adds a single line to our configmap, which is the ``c.NotebookApp.password``.
 ``add-hostport-to-cfg`` does something similar, reading the host and port
 of the pod and sets the ``c.NotebookApp.base_url`` of the same configmap.
 
-submit yml in full
-------------------
+``submit.yml`` in full
+----------------------
 
 .. code-block:: yaml
 

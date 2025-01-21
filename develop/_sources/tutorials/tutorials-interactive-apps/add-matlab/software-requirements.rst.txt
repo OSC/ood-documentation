@@ -32,7 +32,7 @@ node:
 .. note::
 
    We believe that the desktop based approach is superior, but are aware that
-   other sites may prefer an implemenation that does not require a full desktop
+   other sites may prefer an implementation that does not require a full desktop
    be installed. `Fluxbox`_ is a window manager that has been used in place of
    XFCE/Mate. An example of OSC's deprecated `Fluxbox based implementation`_ is
    available on Github.
