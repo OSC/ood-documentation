@@ -20,7 +20,7 @@ SELinux
 
 The OnDemand SELinux package makes several changes to allow OnDemand to run with SELinux enabled.
 
-* Set contexts of several filesystem paths specific to OnDemand.
+* Set contexts of several file-system paths specific to OnDemand.
 * Enable SELinux booleans.
 * Apply a custom policy to allow actions to performed by `ood_pun_t` context.
 
@@ -40,12 +40,12 @@ The custom SELinux booleans provided by the OnDemand SELinux policy:
 
 The following SELinux booleans are enabled by the ``ondemand-selinux`` package:
 
-* httpd_setrlimit
-* httpd_mod_auth_pam
-* httpd_run_stickshift
-* httpd_can_network_connect
-* daemons_use_tty
-* use_nfs_home_dirs (can be disabled if the OnDemand web node is not using NFS for home directories)
+* ``httpd_setrlimit``
+* ``httpd_mod_auth_pam``
+* ``httpd_run_stickshift``
+* ``httpd_can_network_connect``
+* ``daemons_use_tty``
+* ``use_nfs_home_dirs`` (can be disabled if the OnDemand web node is not using NFS for home directories)
 
 The following example disabled the OnDemand SSH SELinux boolean.
 
