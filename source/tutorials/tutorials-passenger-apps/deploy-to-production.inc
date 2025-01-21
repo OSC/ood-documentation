@@ -30,7 +30,7 @@ Steps:
        # if there is an external remote associated with this, push to that
        git push origin master
 
-#. As the admin, ``sudo copy`` or ``git clone`` this repo to production
+#. As the admin, ``sudo copy`` or ``git clone`` this repository to production.
 
     .. code-block:: sh
 

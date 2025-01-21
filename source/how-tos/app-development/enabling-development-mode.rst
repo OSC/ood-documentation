@@ -43,7 +43,7 @@ Enable in OnDemand v1.3:
 Here are example steps to enable a user ``efranz``, assuming ``efranz``'s home directory is at ``/home/efranz``:
 
 #. Create ``dev`` directory ``/home/efranz/ondemand/dev`` where ``efranz``'s development apps will go (or ask ``efranz`` to do that).
-#. Have ``efranz`` access the Dashboard, and they will see the Develop drop-down. (if this doesn't happen, )
+#. Have ``efranz`` access the Dashboard, and they will see the Develop drop-down. (if this does not happen)
 
 .. note::
 

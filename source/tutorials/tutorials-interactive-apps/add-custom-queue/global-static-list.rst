@@ -51,7 +51,7 @@ desires) with a list of available queues/partitions:
 
 .. warning::
 
-   Be sure to click "Restart Web Server" on the Dashboard everytime you edit
+   Be sure to click "Restart Web Server" on the Dashboard every time you edit
    the Cluster Configuration file for changes to take effect within the app.
 
 .. _app-development-tutorials-interactive-apps-add-custom-queue-global-static-list-add-custom-attribute:
@@ -188,7 +188,7 @@ options read from the corresponding cluster configuration file.
 
       The user will see a list of options: "Volvo", "Ford", and "Toyota" to
       choose from in the HTML form, but the backend will process a value of
-      either "volvo", "ford", or "toyota" depending on what the user chose.
+      either ``volvo``, ``ford``, or ``toyota`` depending on what the user chose.
 
 .. _app-development-tutorials-interactive-apps-add-custom-queue-global-static-list-handle-custom-attribute:
 

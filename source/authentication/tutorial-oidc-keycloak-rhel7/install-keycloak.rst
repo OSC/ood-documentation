@@ -6,7 +6,7 @@ Install Keycloak
 We will install and launch Keycloak server behind Apache.
 
 Login to the host where you will install Keycloak. In this tutorial, we are
-installing Keycloak on the same host as OnDemand, which is webdev07.hpc.osc.edu.
+installing Keycloak on the same host as OnDemand, which is ``webdev07.hpc.osc.edu``.
 
 .. warning::
 
@@ -25,7 +25,7 @@ Initial Installation Steps
       sudo tar xzf keycloak-9.0.0.tar.gz
 
 
-#. Add keycloak user and change ownership of files
+#. Add ``keycloak`` user and change ownership of files
 
    .. code-block:: sh
 
@@ -38,13 +38,13 @@ Initial Installation Steps
 
       sudo install -d -o keycloak -g keycloak /var/lib/keycloak
 
-   This makes a home directory, which is needed when running API calls as keycloak user. Finally we set proper permissions:
+   This makes a home directory, which is needed when running API calls as ``keycloak`` user. Finally we set proper permissions:
 
    .. code-block:: sh
 
       sudo chown keycloak: -R keycloak-9.0.0
 
-#. Restrict access to keycloak-9.0.0/standalone, which will contain
+#. Restrict access to ``keycloak-9.0.0/standalone``, which will contain
    sensitive data for the Keycloak server
 
    .. code-block:: sh
@@ -60,7 +60,7 @@ Initial Installation Steps
       sudo yum install java-1.8.0-openjdk-devel
 
 
-#. Added 'admin' to '/opt/keycloak-9.0.0/standalone/configuration/keycloak-add-user.json', (re)start server to load user.
+#. Added 'admin' to ``/opt/keycloak-9.0.0/standalone/configuration/keycloak-add-user.json``, (re)start server to load user.
 
    If you are not already there:
 
@@ -87,22 +87,22 @@ Initial Installation Steps
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
       sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
 
-   Or you can use a config.cli file that contains these commands. We have
+   Or you can use a ``config.cli`` file that contains these commands. We have
    provided an example file to make use of in this gist, with blocks commented
-   out so you can wget the file, edit as appropriate, and run via:
+   out so you can ``wget`` the file, edit as appropriate, and run via:
 
    .. code-block:: sh
 
       sudo -u keycloak ./bin/jboss-cli.sh --file=config.cli
 
-   Where the config.cli looks like:
+   Where the ``config.cli`` looks like:
 
    .. literalinclude:: example-keycloak-jboss-config.cli
 
 Start Keycloak Server
 -------------------------
 
-#. Create keycloak.service to start and stop the server:
+#. Create ``keycloak.service`` to start and stop the server:
 
    .. code-block:: sh
 
@@ -125,7 +125,7 @@ Start Keycloak Server
       EOF
 
 
-   Then start keycloak:
+   Then start ``keycloak``:
 
    .. code-block:: sh
 
@@ -148,7 +148,7 @@ Start Keycloak Server
 Place Apache in front of Keycloak
 ---------------------------------
 
-#. Define apache config to proxy keycloak requests
+#. Define apache configuration to proxy Keycloak requests.
 
    .. note::
 
@@ -164,7 +164,7 @@ Place Apache in front of Keycloak
    Add ``/opt/rh/httpd24/root/etc/httpd/conf.d/ood-keycloak.conf``, making changes
    for the appropriate SSL certificate locations. Notice we are proxying
    ``https://ondemand-idpdev.hpc.osc.edu`` to ``http://localhost:8080`` which is the default
-   port the Keycloak webserver runs as.
+   port the Keycloak web-server runs as.
 
    .. literalinclude:: example-keycloak-apache.conf
 
@@ -185,13 +185,13 @@ Differences if installing Keycloak on separate host
 When installing Keycloak on a separate host, the difference between this
 tutorial would be:
 
-#. throughout the rest of the tutorial replace ``https://ondemand-idpdev.hpc.osc.edu`` with the keycloak host
+#. throughout the rest of the tutorial replace ``https://ondemand-idpdev.hpc.osc.edu`` with the Keycloak host
 #. possibly use Apache 2.4 default distribution instead of software collections,
-   meaning that configuration would be at /etc/httpd/conf.d/ instead of
-   /opt/rh/httpd24/root/etc/httpd/conf.d/ and starting the
+   meaning that configuration would be at ``/etc/httpd/conf.d/`` instead of
+   ``/opt/rh/httpd24/root/etc/httpd/conf.d/`` and starting the
    service is likely ``sudo systemctl start httpd`` instead of ``sudo systemctl start httpd24-httpd``
 
-For example, if Keycloak were installed on a separate host idp.hpc.edu then the
-Apache config might look like:
+For example, if Keycloak were installed on a separate host ``idp.hpc.edu`` then the
+Apache configuration might look like:
 
 .. literalinclude:: example-keycloak-apache-separate-host.conf
