@@ -68,7 +68,7 @@ client binaries.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Cluster Config
+   :caption: Cluster Configuration
 
    cluster-config-schema
    resource-manager/torque

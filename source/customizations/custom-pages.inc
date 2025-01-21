@@ -28,7 +28,7 @@ It will render a layout with the ``pinned_apps`` widget under the URL: ``/pun/sy
 .. figure:: /images/custom-pages-documentation.png
    :align: center
 
-Links to the custom pages can be added the Help dropdown menu.
+Links to the custom pages can be added the Help drop-down menu.
 To add links to the Help menu use the configuration property ``help_menu``.
 See the :ref:`documentation on adding urls to the Help menu <help_menu_guide>` for details and examples.
 
