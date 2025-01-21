@@ -30,21 +30,21 @@ cluster looks like:
 
 with the following configuration options:
 
-adapter
+``adapter``
   This is set to ``ccq``.
-image
+``image``
   The default cloud image to use when launching jobs. There is no default.
-cloud
+``cloud``
   The cloud provider being used. Valid options are ``gcp`` or ``aws``. Defaults to ``gcp``.
-scheduler
+``scheduler``
   The name of the scheduler being used. There is no default.
-bin
+``bin``
   The path to the CCQ client installation binaries. Defaults to ``/opt/CloudyCluster/srv/CCQ``.
-jobid_regex
-  The regular expression to extract the job id from the ccqstat output. Defaults to ``job id is: (?<job_id>\\d+) you``.
-  You should only need this if the ccqstat output changes format. If you are required to reconfigure, you'll need to
+``jobid_regex``
+  The regular expression to extract the job id from the ``ccqstat`` output. Defaults to ``job id is: (?<job_id>\\d+) you``.
+  You should only need this if the ``ccqstat`` output changes format. If you are required to reconfigure, you'll need to
   extract the named group ``job_id`` as the default does.
-bin_overrides
+``bin_overrides``
     Replacements/wrappers for CCQ's job submission and control clients. *Optional*
 
   Supports the following clients:
@@ -64,7 +64,7 @@ You may see this error when you initially try to start a job.
 .. code-block:: text
 
   The /opt/CloudyCluster/srv/CCQ/ccqsub command was prompted. You need 
-  to generate the certificate manually in a shell by running 'ccqstat'
+  to generate the certificate manually in a shell by running ``ccqstat``
   and entering your username/password
 
 This is because CCQ libraries require a certificate to be generated to communicate with the 
