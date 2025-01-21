@@ -51,7 +51,7 @@ The selection of a profile can be done manually by updating the user settings pr
 Profile selection can be done using configurable navigation links.
 These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard. 
 
-To add profile links to the Help navigation dropdown menu use the configuration property ``profile_links``.
+To add profile links to the Help navigation drop-down menu use the configuration property ``profile_links``.
 For more information on how to add profile links to the navigation bar in various places, see
 :ref:`menus for profile links <menus-for-profile-links>`.
 
@@ -100,7 +100,7 @@ Automatic Profile Selection
 
 .. tip::
     If you have a need to create multiple profile definitions that have the same configuration, you could use aliases.
-    This is a feaure of YAML files. You can use YAML ``anchors`` and ``aliases`` to set the same profile configuration
+    This is a feature of YAML files. You can use YAML ``anchors`` and ``aliases`` to set the same profile configuration
     to more than one definition without duplication. This YAML feature only works when defined and used within the same file.
 
     The example below creates 4 profiles all with the same configuration:

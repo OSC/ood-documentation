@@ -18,7 +18,7 @@ Understanding the default navigation bar
 ........................................
 
 Some navigation menus and links are built-in to the system. The system
-will generate dropdown menus for ``Files``, ``Jobs``, ``Clusters`` and
+will generate drop-down menus for ``Files``, ``Jobs``, ``Clusters`` and
 ``Interactive Apps`` automatically. It will also generate the link for
 ``My Interactive Sessions`` by default.
 
@@ -26,7 +26,7 @@ Here's an image of you'd expect to see by default.
 
 .. figure:: /images/main-navigation-menu.png
     :align: center
-    :alt: An image of the default navigation bar showing dropdown menus for files, jobs, clusters, interactive apps, and my interactive apps.
+    :alt: An image of the default navigation bar showing drop-down menus for files, jobs, clusters, interactive apps, and my interactive apps.
 
 Open OnDemand is a platform for other applications, like Jupyter & RStudio.
 As such, the default navigation bar builds itself based on what applications
@@ -34,11 +34,11 @@ it has discovered.  The system will search ``/var/www/ood/apps/sys/`` for these
 applications.
 
 Every application should have :ref:`app-development-manifest`.  The system reads
-these manifests files and builds additional dropdown menus (or adds to existing menus)
+these manifests files and builds additional drop-down menus (or adds to existing menus)
 based on the ``category`` field.
 
-By default, the system will generate a new dropdown menu for every ``category``
-it encounters.  Within each dropdown menu it will add separators for each
+By default, the system will generate a new drop-down menu for every ``category``
+it encounters.  Within each drop-down menu it will add separators for each
 ``subcategory`` it encounters.
 
 .. _limit-auto-generated-menu-bars:
@@ -46,10 +46,10 @@ it encounters.  Within each dropdown menu it will add separators for each
 Limit auto generated menu bars
 ..............................
 
-As described in the previous section, the system will generate new dropdown
+As described in the previous section, the system will generate new drop-down
 menus for every ``category`` it discovers.
 
-If you wish to add or remove which categories create dropdown menus
+If you wish to add or remove which categories create drop-down menus
 use the :ref:`nav_categories configuration property <nav_categories>`.
 
 .. tip::
@@ -69,24 +69,24 @@ Using manifests to create menu items
 ....................................
 
 As described in :ref:`understanding-default-nav-bar`, the system automatically
-creates dropdown menus based on the applications it encounters.
+creates drop-down menus based on the applications it encounters.
 
-So, with that knowledge, one can create or add to dropdown menus by creating
+So, with that knowledge, one can create or add to drop-down menus by creating
 applications with the correct information in their `manifest.yml <app-development-manifest>`_.
 
 It's fairly simple to make this application. Simply create the directory in the correct location
 and create a `manifest.yml <app-development-manifest>`_.
 
-* sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>
-* sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml
+* ``sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>``
+* ``sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml``
 
   .. code-block:: yaml
 
     ---
-    # This is the text that will show up in the dropdown menu.
+    # This is the text that will show up in the drop-down menu.
     name: Add Menu Items to the navbar
 
-    # This will create the 'Links' dropdown menu if it doesn't already exist.
+    # This will create the 'Links' drop-down menu if it doesn't already exist.
     category: Links
     description: |-
       A description of what the menu item does.
@@ -111,7 +111,7 @@ through the ``nav_bar`` and ``help_bar`` :ref:`ondemand-d-ymls` configuration pr
 
 .. warning::
   As described in :ref:`understanding-default-nav-bar`, the system auto-generates
-  dropdown menus based on the applications it discovers.  If the ``nav_bar`` or
+  drop-down menus based on the applications it discovers.  If the ``nav_bar`` or
   ``help_bar`` configurations are set, the system will **only** show what you've defined.
 
 Before we look at how to modify it in detail, let's look at what the default
@@ -121,7 +121,7 @@ configuration would be (without showing any discovered apps).
 
     # 'nav_bar' is the left side of the navigation bar.
     nav_bar:
-      # 'apps' dropdown menu is shown if you've set 'pinned_apps'.
+      # 'apps' drop-down menu is shown if you've set 'pinned_apps'.
       - apps
       - files
       - jobs
@@ -157,12 +157,12 @@ Menus by Application category
 One of the easiest ways to create menus is to create them based off of
 the applications categories.
 
-The title of the dropdown menu will be the ``category`` itself, and menu items
+The title of the drop-down menu will be the ``category`` itself, and menu items
 (applications) will be grouped by their ``subcategory``. It is not possible to
 set an icon. The ``category`` matching is case insensitive.
 
 Here's an example using the ``interactive apps`` ``category``. Just like the default
-navigation bar, this will generate a dropdown menu of all the applications the system
+navigation bar, this will generate a drop-down menu of all the applications the system
 has discovered in that ``category``.
 
 As you can see from the image, the system has discovered eight applications in two
@@ -175,7 +175,7 @@ subcategories.
 
 .. figure:: /images/def-category-menu.png
     :align: center
-    :alt: An open dropdown menu titled "Interactive Apps". The first submenu is titled "Desktops" and has two list items. The second submenu is titled "Servers" and has six list items.
+    :alt: An open drop-down menu titled "Interactive Apps". The first sub-menu is titled "Desktops" and has two list items. The second sub-menu is titled "Servers" and has six list items.
 
 Predefined templates
 *********************
@@ -188,8 +188,8 @@ A complete list of predefined templates is:
 * ``all_apps`` - The link to the all applications page.
 * ``apps`` - A drop down menu of ``pinned_apps``. Note that you need to set ``pinned_apps`` for this to show up.
 *  ``sessions`` - The link to "My Interactive Sessions" page.
-* ``develop`` - The dropdown menu for developers, titled "Develop".
-* ``help`` - The "Help" dropdown menu.
+* ``develop`` - The drop-down menu for developers, titled "Develop".
+* ``help`` - The "Help" drop-down menu.
 * ``log_out`` - The link to logout, titled "Logout".
 * ``user`` - The "Logged in as <user>" text.
 
@@ -208,14 +208,14 @@ Here's an example of defining all of them and what that would look like.
 
 .. figure:: /images/def-templates-menu.png
     :align: center
-    :alt: An image of the navigation bar. From left to right the items are "All Apps" link, "Apps" dropdown menu, "My Interactive Sessions" link, "Develop" drop down menu, "Help" drop down menu, "Logout" link and 'logged in as ood' text.
+    :alt: An image of the navigation bar. From left to right the items are "All Apps" link, "Apps" drop-down menu, "My Interactive Sessions" link, "Develop" drop down menu, "Help" drop down menu, "Logout" link and 'logged in as ood' text.
 
 .. _menus-based-on-applications:
 
 Menus based on applications
 ***************************
 
-You can create dropdown menus based on applications the system can discover.
+You can create drop-down menus based on applications the system can discover.
 
 Menu items are automatically grouped based on the applications ``subcategory``.
 Use the ``apps`` array to define the app tokens for this navigation menu.
@@ -233,7 +233,7 @@ The order of the menu items is based on the order you've defined.
 
 .. figure:: /images/def-apps-menu.png
     :align: center
-    :alt: An open dropdown menu titled "My Apps". The menu shows two submenus. The first is titled "Servers" and has five list items for all the discovered through the "sys/Rstudio/*" configuration. The second submenu is titled "Desktops" and has one list item for the discovered through the "sys/bc_desktop" configuration.
+    :alt: An open drop-down menu titled "My Apps". The menu shows two sub-menus. The first is titled "Servers" and has five list items for all the discovered through the "sys/Rstudio/*" configuration. The second sub-menu is titled "Desktops" and has one list item for the discovered through the "sys/bc_desktop" configuration.
 
 
 .. _menus-based-on-links:
@@ -241,17 +241,17 @@ The order of the menu items is based on the order you've defined.
 Menus based on links
 ********************
 
-Menus based on links provide even more granular control on how the dropdown menu is generated.
+Menus based on links provide even more granular control on how the drop-down menu is generated.
 
 As seen in the previous sections, using an ``apps`` array will automatically generate
-submenus based on the ``subcategory`` of the applications that have been discovered.
+sub-menus based on the ``subcategory`` of the applications that have been discovered.
 
-When using links, we can override this behaviour to provide different titles to
-the submenus, or with no submenus and subtitles at all.
+When using links, we can override this behavior to provide different titles to
+the sub-menus, or with no sub-menus and subtitles at all.
 
 Let's look at this example using the same application tokens, but using ``links`` instead
 of ``apps``. The system will discover and generate list items for the same eight applications,
-only without **any** submenus.  It is simply a list of all the discovered applications with
+only without **any** sub-menus.  It is simply a list of all the discovered applications with
 no further grouping.
 
 .. code-block:: yaml
@@ -265,15 +265,15 @@ no further grouping.
 
 .. figure:: /images/app-links-no-group.png
     :align: center
-    :alt: An open dropdown menu titled "My Apps". The menu has no submenus. It simply lists all eight the apps.
+    :alt: An open drop-down menu titled "My Apps". The menu has no sub-menus. It simply lists all eight the apps.
 
-To add submenus, simply use the ``group`` attribute.
+To add sub-menus, simply use the ``group`` attribute.
 
 When ``links`` are used with the ``group`` attribute, the discovered applications
-will now be grouped and submenu titles created based on the configuration provided.
+will now be grouped and sub-menu titles created based on the configuration provided.
 
 This will look and feel similar to `menus-based-on-applications`_ with the exception
-being that submenus are defined by the ``group`` configuration instead of the ``subcategory``
+being that sub-menus are defined by the ``group`` configuration instead of the ``subcategory``
 of the applications in the list.
 
 .. code-block:: yaml
@@ -289,7 +289,7 @@ of the applications in the list.
 
 .. figure:: /images/def-full-menu.png
     :align: center
-    :alt: An image showing one open drop down menu titled "My Apps". The first submenu, titled "Rstudio" has five list items that have been discovered through the "sys/Rstudio/*" configuration. The second submenu, titled "Remote" has one list item that has been discovered through the "sys/bc_desktop" configuration.
+    :alt: An image showing one open drop down menu titled "My Apps". The first sub-menu, titled "Rstudio" has five list items that have been discovered through the "sys/Rstudio/*" configuration. The second sub-menu, titled "Remote" has one list item that has been discovered through the "sys/bc_desktop" configuration.
 
 .. tip::
   You can also used predefined links (described above) in the ``links`` section here.
@@ -372,4 +372,4 @@ through the ``url`` attribute.
 
 .. figure:: /images/def-navigation-link.png
     :align: center
-    :alt: An image of the navigation bar with a single link "Title" and an open dropdown menu titled "Menu Item". The dropdown menu has one list item titled "Title".
+    :alt: An image of the navigation bar with a single link "Title" and an open drop-down menu titled "Menu Item". The drop-down menu has one list item titled "Title".
