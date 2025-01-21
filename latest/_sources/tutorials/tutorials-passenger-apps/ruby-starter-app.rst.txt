@@ -6,8 +6,8 @@ Starter Ruby Application
 This document walks through creating a hello world application in Ruby
 with the `Sinatra`_ web framework.
 
-config.ru for Sinatra
----------------------
+``config.ru`` for Sinatra
+-------------------------
 
 The first thing we need for OnDemand to recognize this directory is a ``config.ru`` file.
 For `Sinatra`_ this is the ``config.ru`` that you need.
@@ -19,8 +19,8 @@ For `Sinatra`_ this is the ``config.ru`` that you need.
   require_relative 'app'
   run App
 
-config.ru for Ruby on Rails
----------------------------
+``config.ru`` for Ruby on Rails
+-------------------------------
 
 This document does not cover `Ruby on Rails`_, but
 this ``config.ru`` is given nonetheless for readers interested
@@ -61,8 +61,8 @@ into ``vendor/bundle``. Issue these commands to do that.
   bundle install
 
 
-Write the app.rb file
----------------------
+Write the ``app.rb`` file
+-------------------------
 
 Still, the app will not boot at this point. The ``config.ru`` is looking
 to load the ``app.rb`` file which does not exist yet.

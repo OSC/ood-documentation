@@ -4,17 +4,17 @@ Add a Jupyter App on a Kubernetes Cluster that behaves like HPC compute
 =======================================================================
 
 This tutorial will walk you through creating an interactive Jupyter app that
-your users will use to launch a `Jupyter Notebook Server`_ in a kubernetes cluster.
+your users will use to launch a `Jupyter Notebook Server`_ in a Kubernetes cluster.
 The container will behave much like a HPC compute node. This has the benefit that
 a single app can serve both traditional HPC as well as Kubernetes.
 
 It assumes you have a working understanding of app development already. The purpose of
-this document is to describe how to write apps specifically for a kubernetes cluster,
+this document is to describe how to write apps specifically for a Kubernetes cluster,
 so it skips a lot of important details about app development that may be found in
 other tutorials like :ref:`app-development-tutorials-interactive-apps-add-jupyter`.
 
 We're going to be looking at the `bc osc jupyter`_ app which is OSC's production Jupyter app. You can fork, clone
-and modify for your site.  This page also holds the `submit yml in full`_ for reference.
+and modify for your site.  This page also holds the `submit.yml in full`_ for reference.
 
 Refer to :ref:`the interactive K8s Jupyter app <app-development-tutorials-interactive-apps-k8s-jupyter>` for
 additional details on items defined in ``submit.yml.erb`` as well as a more traditional container approach.
@@ -176,8 +176,8 @@ Additional mounts are needed to make the pod behave like a HPC compute node. Fol
         destination_path: <%= apps_path %>
 
 
-submit yml in full
-------------------
+``submit.yml`` in full
+----------------------
 
 .. code-block:: yaml
 

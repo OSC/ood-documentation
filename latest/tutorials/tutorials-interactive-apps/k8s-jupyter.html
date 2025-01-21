@@ -88,7 +88,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#configmap">configmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mounts">mounts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#init-containers">init containers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#submit-yml-in-full">submit yml in full</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#submit-yml-in-full"><code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> in full</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="k8s-like-hpc-jupyter.html">Add a Jupyter App on a Kubernetes Cluster that behaves like HPC compute</a></li>
@@ -143,7 +143,7 @@ this document is to describe how to write apps specifically for a Kubernetes clu
 so it skips a lot of important details about app development that may be found in
 other tutorials like <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a>.</p>
 <p>We’re going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_k8s_jupyter">bc k8s jupyter</a> app which you can fork, clone
-and modify for your site.  This page also holds the <a class="reference internal" href="#submit-yml-in-full">submit yml in full</a> for reference.</p>
+and modify for your site.  This page also holds the <a class="reference internal" href="#submit-yml-in-full">submit.yml in full</a> for reference.</p>
 <p>Refer to <a class="reference internal" href="k8s-like-hpc-jupyter.html#app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter"><span class="std std-ref">interactive K8s Jupyter using HPC-like containers</span></a>
 for details on running Jupyter on Kubernetes with containers that behave more like traditional
 HPC jobs.</p>
@@ -207,7 +207,7 @@ we’re using millicores in <code class="docutils literal notranslate"><span cla
 <section id="configmap">
 <h2>configmap<a class="headerlink" href="#configmap" title="Link to this heading"></a></h2>
 <p>A <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/configmap/">Kubernetes configmap</a> is a way to apply configurations to a container.
-In this example, we’re using a configmap to generate the config file for
+In this example, we’re using a configmap to generate the configuration file for
 Jupyter.  We’ll see later how we use init containers to update it, but let’s
 see how we initialize it.</p>
 <p>You need to specify <code class="docutils literal notranslate"><span class="pre">filename</span></code> which is the name of the file. <code class="docutils literal notranslate"><span class="pre">data</span></code> is
@@ -234,7 +234,7 @@ Even though these are containers, users often want to persist
 the files they work on.  This example mounts the home directory,
 but could mount any project or scratch space just the same.</p>
 <p>When mounting a host directory <code class="docutils literal notranslate"><span class="pre">host_type</span></code> must always be Directory.
-This example shows how to mount host directories and nfs storage locations.</p>
+This example shows how to mount host directories and NFS storage locations.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mounts</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">home</span>
@@ -272,15 +272,15 @@ where you’re not mounting the users <code class="docutils literal notranslate"
 does both because it is just an example.</p>
 </div>
 <p>Let’s walk through these init containers and what they’re doing.</p>
-<p><code class="docutils literal notranslate"><span class="pre">init-secret</span></code> does just that. It initialzies a <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes secret</a>.
+<p><code class="docutils literal notranslate"><span class="pre">init-secret</span></code> does just that. It initializes a <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes secret</a>.
 <code class="docutils literal notranslate"><span class="pre">add-passwd-to-cfg</span></code> then reads that secret and creates a salt and
-sha1 of this secret (these are needed specifically for Jupyter).  Lastly
+<code class="docutils literal notranslate"><span class="pre">sha1</span></code> of this secret (these are needed specifically for Jupyter).  Lastly
 it adds a single line to our configmap, which is the <code class="docutils literal notranslate"><span class="pre">c.NotebookApp.password</span></code>.
 <code class="docutils literal notranslate"><span class="pre">add-hostport-to-cfg</span></code> does something similar, reading the host and port
 of the pod and sets the <code class="docutils literal notranslate"><span class="pre">c.NotebookApp.base_url</span></code> of the same configmap.</p>
 </section>
 <section id="submit-yml-in-full">
-<h2>submit yml in full<a class="headerlink" href="#submit-yml-in-full" title="Link to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> in full<a class="headerlink" href="#submit-yml-in-full" title="Link to this heading"></a></h2>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
 <span class="l l-Scalar l-Scalar-Plain">&lt;%</span>
 <span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pwd_cfg = &quot;c.NotebookApp.password=u\&#39;sha1:${SALT}:${PASSWORD_SHA1}\&#39;&quot;</span>

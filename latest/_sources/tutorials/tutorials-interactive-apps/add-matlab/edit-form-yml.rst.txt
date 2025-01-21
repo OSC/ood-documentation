@@ -135,7 +135,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
             step: 1
             id: 'num_cores'
 
-   ``bc_num_slots`` is hardcoded to 1 and is not user editable because OSC does not support MPI work from the Batch Connect app. The value for ``bc_vnc_resolution`` should be copied verbatim. ``bc_account`` is the charge account for the batch work.
+   ``bc_num_slots`` is hard-coded to 1 and is not user editable because OSC does not support MPI work from the Batch Connect app. The value for ``bc_vnc_resolution`` should be copied verbatim. ``bc_account`` is the charge account for the batch work.
 
       .. code-block:: yaml
 

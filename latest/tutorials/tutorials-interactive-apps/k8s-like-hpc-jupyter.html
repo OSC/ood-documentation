@@ -88,7 +88,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#switch-between-slurm-and-kubernetes">Switch between SLURM and Kubernetes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#container-spec">container spec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mounts">mounts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#submit-yml-in-full">submit yml in full</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#submit-yml-in-full"><code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> in full</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="add-custom-queue.html">Add Custom Queues/Partitions</a></li>
@@ -136,15 +136,15 @@
   <section id="add-a-jupyter-app-on-a-kubernetes-cluster-that-behaves-like-hpc-compute">
 <span id="app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter"></span><h1>Add a Jupyter App on a Kubernetes Cluster that behaves like HPC compute<a class="headerlink" href="#add-a-jupyter-app-on-a-kubernetes-cluster-that-behaves-like-hpc-compute" title="Link to this heading"></a></h1>
 <p>This tutorial will walk you through creating an interactive Jupyter app that
-your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> in a kubernetes cluster.
+your users will use to launch a <a class="reference external" href="http://jupyter.readthedocs.io/en/latest/">Jupyter Notebook Server</a> in a Kubernetes cluster.
 The container will behave much like a HPC compute node. This has the benefit that
 a single app can serve both traditional HPC as well as Kubernetes.</p>
 <p>It assumes you have a working understanding of app development already. The purpose of
-this document is to describe how to write apps specifically for a kubernetes cluster,
+this document is to describe how to write apps specifically for a Kubernetes cluster,
 so it skips a lot of important details about app development that may be found in
 other tutorials like <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a>.</p>
 <p>We’re going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_osc_jupyter">bc osc jupyter</a> app which is OSC’s production Jupyter app. You can fork, clone
-and modify for your site.  This page also holds the <a class="reference internal" href="#submit-yml-in-full">submit yml in full</a> for reference.</p>
+and modify for your site.  This page also holds the <a class="reference internal" href="#submit-yml-in-full">submit.yml in full</a> for reference.</p>
 <p>Refer to <a class="reference internal" href="k8s-jupyter.html#app-development-tutorials-interactive-apps-k8s-jupyter"><span class="std std-ref">the interactive K8s Jupyter app</span></a> for
 additional details on items defined in <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> as well as a more traditional container approach.</p>
 <section id="the-container">
@@ -283,7 +283,7 @@ the container is the same as the path inside the container:</p>
 </div>
 </section>
 <section id="submit-yml-in-full">
-<h2>submit yml in full<a class="headerlink" href="#submit-yml-in-full" title="Link to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> in full<a class="headerlink" href="#submit-yml-in-full" title="Link to this heading"></a></h2>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># submit.yml.erb</span>
 <span class="l l-Scalar l-Scalar-Plain">&lt;%-</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">cores = num_cores.to_i</span>

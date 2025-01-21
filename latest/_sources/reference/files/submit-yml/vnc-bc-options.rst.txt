@@ -32,17 +32,17 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
 .. describe:: websockfiy_cmd (String, "/opt/websockify/run")
 
-    the command to start websockify
+    the command to start ``websockify``.
 
     Default
-      the '/opt/websockify/run' command
+      The ``/opt/websockify/run`` command.
 
       .. code-block:: yaml
 
         websockfiy_cmd: "/opt/websockify/run"
 
     Example
-      the '/usr/bin/websockify' command
+      The ``/usr/bin/websockify`` command.
 
       .. code-block:: yaml
 
@@ -50,17 +50,17 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
 .. describe:: vnc_passwd (String, "vnc.passwd")
 
-    the file vncserver will read for a password
+    the file ``vncserver`` will read for a password
 
     Default
-      a file named 'vnc.passwd'
+      a file named ``vnc.passwd``.
 
       .. code-block:: yaml
 
         vnc_passwd: "vnc.passwd"
 
     Example
-      a file named 'my-other-vnc.passwd'
+      a file named ``my-other-vnc.passwd``.
 
       .. code-block:: yaml
 
@@ -68,7 +68,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
 .. describe:: vnc_args (String, "")
 
-    vnc arguments to use instead of the specific options
+    VNC arguments to use instead of the specific options
     ``name``, ``geometry``, ``dpi``, ``fonts``, ``idle`` and
     ``extra_args``.
 
@@ -80,7 +80,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
         vnc_args: ""
 
     Example
-      only specify the xstartup option
+      Only specify the ``xstartup`` option.
 
       .. code-block:: yaml
 
@@ -91,14 +91,14 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
     the desktop name
 
     Default
-      do not specify name, vncserver defaults to ``host:display# (username)``
+      do not specify name, ``vncserver`` defaults to ``host:display# (username)``
 
       .. code-block:: yaml
 
         name: ""
 
     Example
-      boot vncserver with ``-name ood-$USER-$DISPLAY`` argument
+      boot ``vncserver`` with ``-name ood-$USER-$DISPLAY`` argument.
 
       .. code-block:: yaml
 
@@ -109,14 +109,14 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
     the geometry size of the VNC desktop
 
     Default
-      do not specify geometry, turbovnc defaults to ``1240x900``
+      do not specify geometry, TurboVNC defaults to ``1240x900``
 
       .. code-block:: yaml
 
         geometry: ""
 
     Example
-      boot vncserver with ``-geometry 1920x1080`` argument
+      boot ``vncserver`` with ``-geometry 1920x1080`` argument.
 
       .. code-block:: yaml
 
@@ -134,7 +134,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
         dpi: ""
 
     Example
-      boot vncserver with ``-dpi 96`` argument
+      boot ``vncserver`` with ``-dpi 96`` argument
 
       .. code-block:: yaml
 
@@ -145,14 +145,14 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
     the font path for X11 fonts
 
     Default
-      do not specify -fp option
+      do not specify ``-fp`` option
 
       .. code-block:: yaml
 
         fonts: ""
 
     Example
-      boot vncserver with ``-fp unix/:7100`` argument
+      boot ``vncserver`` with the ``-fp unix/:7100`` argument.
 
       .. code-block:: yaml
 
@@ -160,17 +160,17 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
 .. describe:: idle (String, "")
 
-    the idle timeout setting for the vncserver
+    the idle timeout setting for the ``vncserver``.
 
     Default
-      do not specify -idletimeout option
+      do not specify ``-idletimeout`` option
 
       .. code-block:: yaml
 
         idle: ""
 
     Example
-      boot vncserver with ``-idletimeout 3600`` argument
+      boot ``vncserver`` with ``-idletimeout 3600`` argument
 
       .. code-block:: yaml
 
@@ -178,7 +178,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
 .. describe:: extra_args (String, "")
 
-    any extra arguments to pass into vncserver
+    any extra arguments to pass into ``vncserver``.
 
     Default
       do not specify extra arguments
@@ -188,7 +188,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
         idle: ""
 
     Example
-      set the color depth of the vncserver to 32, in addition to any
+      set the color depth of the ``vncserver`` to 32, in addition to any
       other specific argument given above
 
       .. code-block:: yaml
@@ -206,7 +206,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
     the connection parameters that will be written to the ``conn_file``
 
     Default
-      'host', 'port', 'password', 'spassword', 'display' and 'websocket'
+      ``host``, ``port``, ``password``, ``spassword``, ``display`` and ``websocket``.
 
       .. code-block:: yaml
 
@@ -230,18 +230,18 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
 .. describe:: websockify_heartbeat_seconds (Integer, 30)
 
-  The duration in seconds websockify will wait to send heartbeats
+  The duration in seconds ``websockify`` will wait to send heartbeats
   to the client.
 
   Default
-    Websockify will send heartbeats every 30 seconds.
+    ``websockify`` will send heartbeats every 30 seconds.
 
     .. code-block:: yaml
 
       websockify_heartbeat_seconds: 30
 
   Example
-    Have websockfiy send heartbeats every 10 seconds.
+    Have ``websockfiy`` send heartbeats every 10 seconds.
 
     .. code-block:: yaml
 

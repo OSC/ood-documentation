@@ -5,7 +5,7 @@ Edit Launch Script
 
 Here we will look at the script that actually launches MATLAB ``~/ondemand/dev/bc_my_center_matlab/template/script.sh.erb``.
 
-By now you should have selected your prefered window manager. Examples of using XFCE, Mate, and Fluxbox:
+By now you should have selected your preferred window manager. Examples of using XFCE, Mate, and Fluxbox:
 
 - :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-xfce`
 - :ref:`app-development-tutorials-interactive-apps-add-matlab-wm-mate`
@@ -47,7 +47,7 @@ Invoking MATLAB without a Window Manager
 Use XFCE for the Window Manager
 -------------------------------
 
-XFCE is OSC's prefered desktop environment for launching VNC applications. The code for starting XFCE in the background looks like this (see highlighted lines 1-20):
+XFCE is OSC's preferred desktop environment for launching VNC applications. The code for starting XFCE in the background looks like this (see highlighted lines 1-20):
 
     .. code-block:: shell
       :emphasize-lines: 1-20
@@ -138,7 +138,7 @@ The code for starting Mate in the background looks like this (see highlighted li
 
 .. note::
 
-    `According to the developers`_ the correct pronunciation of Mate is "mah-tay" like the drink, and not matey like pirates, or mate like a friend.
+    `According to the developers`_ the correct pronunciation of Mate is ``mah-tay`` like the drink, and not matey like pirates, or mate like a friend.
 
 .. _app-development-tutorials-interactive-apps-add-matlab-wm-fluxbox:
 
@@ -147,7 +147,7 @@ Use Fluxbox for the Window Manager
 
 .. warning::
 
-  Fluxbox has been replaced by XFCE as OSC's prefered window manager / desktop environment.
+  Fluxbox has been replaced by XFCE as OSC's preferred window manager / desktop environment.
 
 The code for starting Fluxbox in the background looks like this (see highlighted lines 1-36):
 
