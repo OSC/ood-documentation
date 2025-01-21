@@ -223,7 +223,7 @@ drwxr-xr-x.<span class="w">  </span><span class="m">7</span><span class="w"> </s
 </section>
 <section id="code-sharing">
 <h2>Code Sharing<a class="headerlink" href="#code-sharing" title="Link to this heading"></a></h2>
-<p>Code sharing is when an application’s source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing zipped app directories, or a group readable directory symlinked to each user’s <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/</span></code> directory.</p>
+<p>Code sharing is when an application's source code is shared between two or more users who run it as a personal development application. Models for this sharing can include using a web-based file repository such as Github, emailing zipped app directories, or a group readable directory symlinked to each user's <code class="docutils literal notranslate"><span class="pre">~/ondemand/dev/</span></code> directory.</p>
 <p>For an example of the later consider:</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># As user mrodgers</span>
@@ -245,14 +245,14 @@ owens-login01:johrstrom<span class="w"> </span>johrstrom$<span class="w"> </span
 </section>
 <section id="peer-to-peer-executable-sharing">
 <h2>Peer to Peer Executable Sharing<a class="headerlink" href="#peer-to-peer-executable-sharing" title="Link to this heading"></a></h2>
-<p>By setting a few environment variables it is possible to enable a more polished peer to peer app sharing experience. There are two reasons why this mode is not always enabled: the first is that app permissions are the only thing that prevents all a site’s OnDemand users from seeing a shared app, so it is important to get the permissions correct, and only to deploy apps that are production ready. The other reason to be careful with app sharing is that requires greater trust placed in app developers.</p>
+<p>By setting a few environment variables it is possible to enable a more polished peer to peer app sharing experience. There are two reasons why this mode is not always enabled: the first is that app permissions are the only thing that prevents all a site's OnDemand users from seeing a shared app, so it is important to get the permissions correct, and only to deploy apps that are production ready. The other reason to be careful with app sharing is that requires greater trust placed in app developers.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Executable sharing means the app and all its code runs as the user
-executing it, like everything else in OnDemand. User’s might not
+executing it, like everything else in OnDemand. User's might not
 realize this. We currently do not provide an opt in screen warning
-users that this app “will have permission to do everything on their
-behalf and act as them”. As a result, you should fully trust whoever
+users that this app &quot;will have permission to do everything on their
+behalf and act as them&quot;. As a result, you should fully trust whoever
 you enable to do share apps using executable sharing.</p>
 </div>
 <section id="enabling-the-app-sharing-dashboard">
@@ -294,14 +294,14 @@ and text.</p>
 <h3>Controlling Who Can Share and Access Apps<a class="headerlink" href="#controlling-who-can-share-and-access-apps" title="Link to this heading"></a></h3>
 <p>Shared apps are deployed to
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/$USER/gateway/$APPNAME</span></code>. We recommend <code class="docutils literal notranslate"><span class="pre">gateway</span></code>
-be a symlink to the user’s home directory at <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/share</span></code> and
+be a symlink to the user's home directory at <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/share</span></code> and
 by default set <code class="docutils literal notranslate"><span class="pre">750</span></code> permissions on <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/$USER</span></code>. This
 approach has these benefits (assuming users named <code class="docutils literal notranslate"><span class="pre">efranz</span></code> and <code class="docutils literal notranslate"><span class="pre">an0047</span></code>:</p>
 <ol class="arabic simple">
 <li><p>The admin as root controls who can share apps by creating root owned
 directories like <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/efranz</span></code> and
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047</span></code>.</p></li>
-<li><p>The admin controls who can access that user’s shared apps by setting
+<li><p>The admin controls who can access that user's shared apps by setting
 permissions on this directory. Thus by setting <code class="docutils literal notranslate"><span class="pre">750</span></code> on
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/usr/an0047</span></code> this ensures that an0047 can only share
 apps with users in his primary group. At times we have created a supplemental group (<code class="docutils literal notranslate"><span class="pre">shinyusr</span></code>) and chgrp the share directory to this group so
@@ -324,7 +324,7 @@ ln<span class="w"> </span>-s<span class="w"> </span>~efranz/ondemand/share<span 
 <section id="example-of-executable-sharing">
 <h3>Example of Executable Sharing<a class="headerlink" href="#example-of-executable-sharing" title="Link to this heading"></a></h3>
 <p>This is with two users Eric (<code class="docutils literal notranslate"><span class="pre">efranz</span></code>) and Bob (<code class="docutils literal notranslate"><span class="pre">an0047</span></code>).</p>
-<p>Eric has a development app “MATLAB”, and interactive plugin app. Eric can</p>
+<p>Eric has a development app &quot;MATLAB&quot;, and interactive plugin app. Eric can</p>
 <ol class="arabic simple">
 <li><p>Launch MATLAB</p></li>
 <li><p>View and Edit the code</p></li>
@@ -332,14 +332,14 @@ ln<span class="w"> </span>-s<span class="w"> </span>~efranz/ondemand/share<span 
 <figure class="align-center">
 <img alt="../../_images/app-sharing-1.png" src="../../_images/app-sharing-1.png" />
 </figure>
-<p>Bob (an0047) cannot see this app because it is isolated in Eric’s “Sandbox”
+<p>Bob (an0047) cannot see this app because it is isolated in Eric's &quot;Sandbox&quot;
 i.e. <code class="docutils literal notranslate"><span class="pre">~efranz/ondemand/dev/matlab</span></code>:</p>
 <figure class="align-center">
 <img alt="../../_images/app-sharing-2.png" src="../../_images/app-sharing-2.png" />
 </figure>
 <p>If Eric shares the git repository path or URL with Bob, Bob can clone this into his
-home directory if he is enabled as a developer. This is called “Source Code Sharing”.</p>
-<p>Eric can share this app with Bob by selecting “My Shared Apps” and cloning the MATLAB
+home directory if he is enabled as a developer. This is called &quot;Source Code Sharing&quot;.</p>
+<p>Eric can share this app with Bob by selecting &quot;My Shared Apps&quot; and cloning the MATLAB
 repository to deploy <code class="docutils literal notranslate"><span class="pre">~efranz/ondemand/share/matlab</span></code></p>
 <figure class="align-center">
 <img alt="../../_images/app-sharing-3.png" src="../../_images/app-sharing-3.png" />
@@ -350,7 +350,7 @@ repository to deploy <code class="docutils literal notranslate"><span class="pre
 <figure class="align-center">
 <img alt="../../_images/app-sharing-5.png" src="../../_images/app-sharing-5.png" />
 </figure>
-<p>Now when Bob accesses the OnDemand home page he sees Eric’s MATLAB app and can
+<p>Now when Bob accesses the OnDemand home page he sees Eric's MATLAB app and can
 launch it:</p>
 <figure class="align-center">
 <img alt="../../_images/app-sharing-6.png" src="../../_images/app-sharing-6.png" />

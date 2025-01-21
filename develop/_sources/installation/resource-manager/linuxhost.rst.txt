@@ -12,15 +12,15 @@ The LinuxHost adapter facilitates launching jobs immediately without using a bat
 The adapter pieces together several tools to achieve behavior similar to what a scheduler offers:
 
 
-ssh
+``ssh``
   connects from the web node to a configured host such as a login node.
-tmux
+``tmux``
   Specially named ``tmux`` sessions offer the ability to rediscover running jobs
-timeout
+``timeout``
   is used to set a 'walltime' after which the job is killed
-pstree
+``pstree``
   is used to detect the job's parent ``sinit`` process so that it can be killed
-singularity
+``singularity``
   containerization provides a PID namespace without requiring elevated privileges that ensures that all child processes are cleaned up when the job either times out or is killed
 
 .. note:: There are many recipes for managing processes on arbitrary Linux hosts, and we will be exploring others in future development of this adapter.
@@ -97,25 +97,25 @@ A YAML cluster configuration file for a Linux host looks like:
 
 with the following configuration options:
 
-adapter
+``adapter``
   This is set to ``linux_host``.
-submit_host
+``submit_host``
   The target execution host for jobs. May be the head for a login round robin. May also be "localhost".
-ssh_hosts
+``ssh_hosts``
  All nodes the submit_host can DNS resolve to.
-site_timeout
+``site_timeout``
   The number of seconds that a user's job is allowed to run. Distinct from the length of time that a user selects.
-debug
+``debug``
   When set to ``true`` job scripts are written to ``$HOME/tmp.UUID_tmux`` and ``$HOME/tmp.UUID_sing`` for debugging purposes. When ``false`` those files are written to ``/tmp`` and deleted as soon as they have been read.
-singularity_bin
+``singularity_bin``
   The absolute path to the ``singularity`` executable on the execution host(s).
-singularity_bindpath
+``singularity_bindpath``
   The comma delimited list of paths to bind mount into the host; cannot simply be ``/`` because Singularity expects certain dot files in its containers' root; defaults to: ``/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/users``.
-singularity_image
-  The absolute path to the Singularity image used when simply PID namespacing jobs; expected to be a base distribution image with no customizations.
-strict_host_checking
+``singularity_image``
+  The absolute path to the Singularity image used to create PID namespaces; expected to be a base distribution image with no customizations.
+``strict_host_checking``
   When ``false`` the SSH options include ``StrictHostKeyChecking=no`` and ``UserKnownHostsFile=/dev/null`` this prevents jobs from failing to launch.
-tmux_bin
+``tmux_bin``
   The absolute path to the ``tmux`` executable on the execution host(s).
 
 
@@ -125,14 +125,14 @@ tmux_bin
    software on the target host, not launching specific application containers.
    As a result, even if your use of this adapter is reserved to launching
    specific application containers, you currently must specify a value in the
-   cluster config for ``singularity_bindpath`` and ``singularity_image``, even
+   cluster configuration for ``singularity_bindpath`` and ``singularity_image``, even
    if these will be specified in each interactive app plugin.
 
 .. note::
 
   In order to communicate with the execution hosts the adapter uses SSH in
   ``BatchMode``. The adapter does not take a position on whether authentication
-  is performed by user owned passwordless keys, or host-based authentication;
+  is performed by user owned password-less keys, or host-based authentication;
   however OSC has chosen to provide `host based authentication
   <https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication>`_
   to its users.
@@ -155,7 +155,7 @@ First update the PAM stack to include the following line:
 
    session     required      pam_exec.so type=open_session /etc/security/limits.sh
 
-This goes into a file used by the ``sshd`` PAM configs which on CentOS/RHEL default to ``/etc/pam.d/password-auth-ac`` and needs to be included in the proper position, after ``pam_systemd.so``. Also set ``pam_systemd.so`` to ``required``:
+This goes into a file used by the ``sshd`` PAM configurations which on CentOS/RHEL default to ``/etc/pam.d/password-auth-ac`` and needs to be included in the proper position, after ``pam_systemd.so``. Also set ``pam_systemd.so`` to ``required``:
 
 .. code-block:: none
    :emphasize-lines: 3,4
@@ -185,10 +185,10 @@ The following example of ``/etc/security/limits.sh`` is used by OSC on interacti
                    CPUQuota=700%
    fi
 
-Approach #2: libcgroup cgroups
-..............................
+Approach #2: ``libcgroup`` cgroups
+...................................
 
-The libcgroup cgroups rules and configurations are a per-group resource limit where the group is defined in the examples at ``/etc/cgconfig.d/limits.conf``. The following examples limit resources of all tmux processes launched for the LinuxHost Adapter so they all share 700 CPU shares and 64GB of RAM. This requires setting ``tmux_bin`` to a wrapper script that in this example will be ``/usr/local/bin/ondemand_tmux``.
+The ``libcgroup`` cgroups rules and configurations are a per-group resource limit where the group is defined in the examples at ``/etc/cgconfig.d/limits.conf``. The following examples limit resources of all ``tmux`` processes launched for the LinuxHost Adapter so they all share 700 CPU shares and 64GB of RAM. This requires setting ``tmux_bin`` to a wrapper script that in this example will be ``/usr/local/bin/ondemand_tmux``.
 
 Example of ``/usr/local/bin/ondemand_tmux``:
 
@@ -260,7 +260,7 @@ error while loading shared libraries
 ....................................
 
 The default mounts for singularity are ``'/etc,/media,/mnt,/opt,/srv,/usr,/var,/users'``.  It's likely
-either you've overwritten this with too few mounts (like /lib, /opt or /usr) or your container lacks
+either you've overwritten this with too few mounts (like ``/lib``, ``/opt`` or ``/usr``) or your container lacks
 the library in question.
 
 If the library exists on the host, consider mounting it into the container. Otherwise install it in
@@ -285,7 +285,7 @@ Enable this, and you'll see the two shell scripts that ran during this job. Open
 
 Export the SINGULARITY_BINDPATH so you're sure to have the same mounts, and run this
 ``/usr/bin/singularity exec ... tmp.73S0QFxC5e_sing`` command manually on one of the ssh hosts.  This will
-emulate what the linuxhost adapter is doing and you should be able to modify and rerun until you fix
+emulate what the ``linuxhost`` adapter is doing and you should be able to modify and rerun until you fix
 the issue.
 
 
@@ -310,7 +310,7 @@ Again, mounting ``var`` fixed this error too.
 
 .. note::
 
-   Subsequent versions of the adapter are expected to use `unshare <http://man7.org/linux/man-pages/man1/unshare.1.html>`_ for PID namespacing as the default method instead of Singularity. Singularity will continue to be supported.
+   Subsequent versions of the adapter are expected to use `unshare <http://man7.org/linux/man-pages/man1/unshare.1.html>`_ for PID namespaces as the default method instead of Singularity. Singularity will continue to be supported.
 
 
 

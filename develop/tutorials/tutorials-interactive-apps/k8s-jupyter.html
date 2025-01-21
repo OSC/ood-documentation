@@ -142,14 +142,14 @@ your users will use to launch a <a class="reference external" href="http://jupyt
 this document is to describe how to write apps specifically for a Kubernetes cluster,
 so it skips a lot of important details about app development that may be found in
 other tutorials like <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a>.</p>
-<p>We’re going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_k8s_jupyter">bc k8s jupyter</a> app which you can fork, clone
+<p>We're going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_k8s_jupyter">bc k8s jupyter</a> app which you can fork, clone
 and modify for your site.  This page also holds the <a class="reference internal" href="#submit-yml-in-full">submit.yml in full</a> for reference.</p>
 <p>Refer to <a class="reference internal" href="k8s-like-hpc-jupyter.html#app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter"><span class="std std-ref">interactive K8s Jupyter using HPC-like containers</span></a>
 for details on running Jupyter on Kubernetes with containers that behave more like traditional
 HPC jobs.</p>
 <section id="container-spec">
 <h2>container spec<a class="headerlink" href="#container-spec" title="Link to this heading"></a></h2>
-<p>Let’s look at this section first.  Here you must specify the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">image</span></code>
+<p>Let's look at this section first.  Here you must specify the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">image</span></code>
 and <code class="docutils literal notranslate"><span class="pre">command</span></code>.  The name determines the Pod Id (the job name in HPC parlance).</p>
 <p><code class="docutils literal notranslate"><span class="pre">working_dir</span></code> is the working directory of the container. This is optional as
 a container may specify this.  <code class="docutils literal notranslate"><span class="pre">restart_policy</span></code> is also optional and is Never
@@ -190,9 +190,9 @@ are the CPU and memory request. Note that memory here has <code class="docutils 
 </pre></div>
 </div>
 <p>Kubernetes has some flexibility in requests. One can make _requests_ and _limits_
-which are like hard and soft limits. In the example above, they’re both the same.</p>
-<p>Here’s an example utilizing requests and limits for both memory and CPU. Note that
-we’re using millicores in <code class="docutils literal notranslate"><span class="pre">cpu_request</span></code>.</p>
+which are like hard and soft limits. In the example above, they're both the same.</p>
+<p>Here's an example utilizing requests and limits for both memory and CPU. Note that
+we're using millicores in <code class="docutils literal notranslate"><span class="pre">cpu_request</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">container</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># ...</span>
 <span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8080&quot;</span>
@@ -207,8 +207,8 @@ we’re using millicores in <code class="docutils literal notranslate"><span cla
 <section id="configmap">
 <h2>configmap<a class="headerlink" href="#configmap" title="Link to this heading"></a></h2>
 <p>A <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/configmap/">Kubernetes configmap</a> is a way to apply configurations to a container.
-In this example, we’re using a configmap to generate the configuration file for
-Jupyter.  We’ll see later how we use init containers to update it, but let’s
+In this example, we're using a configmap to generate the configuration file for
+Jupyter.  We'll see later how we use init containers to update it, but let's
 see how we initialize it.</p>
 <p>You need to specify <code class="docutils literal notranslate"><span class="pre">filename</span></code> which is the name of the file. <code class="docutils literal notranslate"><span class="pre">data</span></code> is
 the contents of the file.  <code class="docutils literal notranslate"><span class="pre">mount_path</span></code> is the directory in the container
@@ -229,7 +229,7 @@ files to a single configmap.</p>
 </section>
 <section id="mounts">
 <span id="kubernetes-mounts"></span><h2>mounts<a class="headerlink" href="#mounts" title="Link to this heading"></a></h2>
-<p>This example mounts the host’s directory into the container.
+<p>This example mounts the host's directory into the container.
 Even though these are containers, users often want to persist
 the files they work on.  This example mounts the home directory,
 but could mount any project or scratch space just the same.</p>
@@ -251,7 +251,7 @@ This example shows how to mount host directories and NFS storage locations.</p>
 </section>
 <section id="init-containers">
 <h2>init containers<a class="headerlink" href="#init-containers" title="Link to this heading"></a></h2>
-<p>If you’re app needs some work to be done before the app itself
+<p>If you're app needs some work to be done before the app itself
 (the container) starts up, we provide a way to specify init containers.</p>
 <p>We provide <code class="docutils literal notranslate"><span class="pre">docker.io/ohiosupercomputer/ood-k8s-utils</span></code> for some simple
 reusable functionality.</p>
@@ -266,12 +266,12 @@ reusable functionality.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you’re mounting a users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory into the container, you
-likely don’t need init containers.  They’re provided for sites &amp; use cases
-where you’re not mounting the users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.  This example
+<p>If you're mounting a users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory into the container, you
+likely don't need init containers.  They're provided for sites &amp; use cases
+where you're not mounting the users <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.  This example
 does both because it is just an example.</p>
 </div>
-<p>Let’s walk through these init containers and what they’re doing.</p>
+<p>Let's walk through these init containers and what they're doing.</p>
 <p><code class="docutils literal notranslate"><span class="pre">init-secret</span></code> does just that. It initializes a <a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes secret</a>.
 <code class="docutils literal notranslate"><span class="pre">add-passwd-to-cfg</span></code> then reads that secret and creates a salt and
 <code class="docutils literal notranslate"><span class="pre">sha1</span></code> of this secret (these are needed specifically for Jupyter).  Lastly

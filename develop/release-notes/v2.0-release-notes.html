@@ -219,7 +219,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <p>2.0 no longer provides <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code>, the 1.8- default
 <code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code> in <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code>.</p>
 <p>Most sites should be able to use <code class="docutils literal notranslate"><span class="pre">user_map_match</span></code> instead.  You can still use
-<code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>, only you’ll have to write your own in a language of your choice.</p>
+<code class="docutils literal notranslate"><span class="pre">user_map_cmd</span></code>, only you'll have to write your own in a language of your choice.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>lua patterns may not be sufficient because they are not regular expressions. For example
@@ -240,10 +240,10 @@ to employ a wrapper script that can load <code class="docutils literal notransla
 </section>
 <section id="app-sharing-landing-page">
 <h4>App sharing landing page<a class="headerlink" href="#app-sharing-landing-page" title="Link to this heading"></a></h4>
-<p>If your site has enabled app sharing through <code class="docutils literal notranslate"><span class="pre">OOD_APP_SHARING</span></code> the dashboard’s landing page will
+<p>If your site has enabled app sharing through <code class="docutils literal notranslate"><span class="pre">OOD_APP_SHARING</span></code> the dashboard's landing page will
 no longer show these app icons by default.</p>
 <p>Your site will need to use the pinned apps feature to have the same look as 1.8.20-.  Here is the relevant
-configuration you’ll need to provide to have a comparable landing page layout.</p>
+configuration you'll need to provide to have a comparable landing page layout.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
 <span class="nt">pinned_apps</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;usr/*&#39;</span>
@@ -305,7 +305,7 @@ So if you use <code class="docutils literal notranslate"><span class="pre">&lt;%
 or change the query to look for the <code class="docutils literal notranslate"><span class="pre">data-id</span></code> attribute of a div.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> doesn’t work directly. You would need to pass it back through the <code class="docutils literal notranslate"><span class="pre">conn_params</span></code>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">session_id</span> <span class="pre">&gt;</span></code> doesn't work directly. You would need to pass it back through the <code class="docutils literal notranslate"><span class="pre">conn_params</span></code>
 for it to be usable in this view.</p>
 </div>
 </li>
@@ -424,7 +424,7 @@ and to a subset of apps that you want to feature. The grid layout of application
 is meant to give users a desktop look and feel to the dashboard.</p>
 <p>There are several strategies available to choose which apps to pin. For example, metadata
 in the app manifests could specify a field_of_science attribute, and then the pinned apps
-could be configured to display all apps with the field_of_science being “Biology”. The
+could be configured to display all apps with the field_of_science being &quot;Biology&quot;. The
 configuration for pinned apps can be made dynamic using ERB so it can be changed based on
 which user or group is accessing the dashboard. Pinned apps can also further be grouped by
 a particular attribute.</p>
@@ -446,7 +446,7 @@ thirteen extra themes.</p>
 </section>
 <section id="configurations-in-an-ondemand-d-directory">
 <h3>Configurations in an ondemand.d directory<a class="headerlink" href="#configurations-in-an-ondemand-d-directory" title="Link to this heading"></a></h3>
-<p>We’ve added an ondemand.d directory to start moving configurations there. Some new features for
+<p>We've added an ondemand.d directory to start moving configurations there. Some new features for
 2.0 rely on configurations read from files in this directory.</p>
 <p>See <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">the documentation for the ondemand.d configurations</span></a> for all the
 available configurations.</p>
@@ -485,12 +485,12 @@ See <a class="reference internal" href="#breaking-changes">Breaking Changes</a> 
 <p>Changes:</p>
 <ul class="simple">
 <li><p>The left hand navigation tree is replaced with a list of the file location shortcuts</p></li>
-<li><p>Instead of a “..” row to navigate up, there is an “up” button to the left of the path</p></li>
+<li><p>Instead of a &quot;..&quot; row to navigate up, there is an &quot;up&quot; button to the left of the path</p></li>
 <li><p>Buttons that apply to only one file or directory were moved to a button drop-down to the right of each filename</p></li>
-<li><p>“Change directory” button replaced “Go to” button</p></li>
+<li><p>&quot;Change directory&quot; button replaced &quot;Go to&quot; button</p></li>
 <li><p>Open in Terminal now displays split drop-down button to ssh to any available login host without any extra configuration required. Previously this was done by setting an SSH_HOSTS environment variable.</p></li>
 </ul>
-<p>See the <a class="reference internal" href="#files-app-configuration-changes">files app configuration changes</a> for any changes you’ll need to update to the
+<p>See the <a class="reference internal" href="#files-app-configuration-changes">files app configuration changes</a> for any changes you'll need to update to the
 configurations of this new app.</p>
 <figure class="align-default">
 <img alt="../_images/2.0_files_app.png" src="../_images/2.0_files_app.png" />
@@ -498,7 +498,7 @@ configurations of this new app.</p>
 </section>
 <section id="changes-in-all-apps-page-layout">
 <h3>Changes in All Apps page layout<a class="headerlink" href="#changes-in-all-apps-page-layout" title="Link to this heading"></a></h3>
-<p>The ‘All Apps’ page is now a filterable table instead of cards.  Note that new columns will
+<p>The 'All Apps' page is now a filterable table instead of cards.  Note that new columns will
 be dynamically added by <a class="reference internal" href="#adding-metadata-to-app-manifests">adding metadata to app manifests</a>.</p>
 </section>
 <section id="erb-formats-for-message-of-the-day">

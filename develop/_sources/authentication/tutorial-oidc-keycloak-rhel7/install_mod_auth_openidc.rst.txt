@@ -3,21 +3,21 @@
 Configure OnDemand to authenticate with Keycloak
 ================================================
 
-OnDemand's Apache needs to use mod_auth_openidc to be able to act as an OpenID
-Connect client to Keycloak. We will install mod_auth_openidc and modify
-OnDemand's Apache configs to enable authentication via Keycloak.
+OnDemand's Apache needs to use ``mod_auth_openidc`` to be able to act as an OpenID
+Connect client to Keycloak. We will install ``mod_auth_openidc`` and modify
+OnDemand's Apache configurations to enable authentication via Keycloak.
 
-Install mod_auth_openidc
-------------------------
+Install ``mod_auth_openidc``
+----------------------------
 
-#. Install httpd24-mod_auth_openidc from ondemand-web repo
+#. Install ``httpd24-mod_auth_openidc`` from ondemand-web repository.
 
    .. code-block:: sh
 
       sudo yum install httpd24-mod_auth_openidc
 
 
-Re-generate main config using ood-portal-generator
+Re-generate main configuration using ood-portal-generator
 -----------------------------------------------------------
 
 #. Edit the YAML configuration file for the :ref:`ood-portal-generator` located
@@ -49,12 +49,12 @@ Re-generate main config using ood-portal-generator
 
    Notice that we are
 
-    * changing the Authentication directives for openid-connect
-    * specifying /oidc to be the sub-uri used by mod_auth_openidc
-    * specifying that /logout should redirect to this /oidc sub-uri to handle logout
+    * changing the Authentication directives for ``openid-connect``
+    * specifying ``/oidc`` to be the URI used by ``mod_auth_openidc``
+    * specifying that /logout should redirect to this ``/oidc`` URI to handle logout
       and specifying after logout, the user should be redirected back to OnDemand
       (which in this tutorial's case is ``https%3A%2F%2Fondemand-dev.hpc.osc.edu``,
-      the query param escaped format of ``https://ondemand-dev.hpc.osc.edu``)
+      the query parameter escaped format of ``https://ondemand-dev.hpc.osc.edu``)
 
 #. Then build and install the new Apache configuration file with:
 
@@ -62,7 +62,7 @@ Re-generate main config using ood-portal-generator
 
       sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
-   The effect of this change in the Apache config (in case you want to apply the changes manually) are:
+   The effect of this change in the Apache configuration (in case you want to apply the changes manually) are:
 
    #. Change the authentication directives for all of the Locations that require authentication i.e.:
 
@@ -100,10 +100,10 @@ Re-generate main config using ood-portal-generator
            Require valid-user
          </Location>
 
-Add Keycloak config to OnDemand Apache for mod_auth_openidc
------------------------------------------------------------
+Add Keycloak configuration to OnDemand Apache for ``mod_auth_openidc``
+----------------------------------------------------------------------
 
-#. Add the file /opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf with the contents:
+#. Add the file ``/opt/rh/httpd24/root/etc/httpd/conf.d/auth_openidc.conf`` with the contents:
 
    .. code-block:: none
 
@@ -140,7 +140,7 @@ Add Keycloak config to OnDemand Apache for mod_auth_openidc
 
 #. Then restart OnDemand's Apache. OnDemand should now be authenticating using KeyCloak.
 
-  Stop both servives:
+  Stop both services:
 
    .. code-block:: sh
 

@@ -130,12 +130,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#customize-text-in-ondemand">Customize Text in OnDemand</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#change-the-dashboard-tagline">Change the Dashboard Tagline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#change-quota-messages-in-the-dashboard">Change quota messages in the Dashboard</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#customize-text-in-the-job-composer-s-options-form">Customize Text in the Job Composer’s options form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customize-text-in-the-job-composer-s-options-form">Customize Text in the Job Composer's options form</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#disk-quota-warnings-on-dashboard">Disk Quota Warnings on Dashboard</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#individual-user-quota">Individual User Quota</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#individual-fileset-quota">Individual Fileset Quota</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#individual-file-set-quota">Individual File-set Quota</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#balance-warnings-on-dashboard">Balance Warnings on Dashboard</a><ul>
@@ -217,7 +217,7 @@ added.</p>
 access by simply changing the file permissions of the application.</p>
 <p>All the applications OnDemand installs are located in <cite>/var/www/ood/apps/sys</cite>.
 So, for example, if you wished to disable the file browser you would simply
-change it’s directory to 700 so it’s unreadable by regular users.</p>
+change it's directory to 700 so it's unreadable by regular users.</p>
 <p>When this directory is unreadable by regular users, the functionality
 it provides will be disabled.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/var/www/ood/apps/sys/files
@@ -237,7 +237,7 @@ sudo<span class="w"> </span>chown<span class="w"> </span>root:staff<span class="
 <span id="configure-announcements"></span><h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading"></a></h2>
 <p>To add an announcement message that appears at the top of the dashboard you can create a file at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcement.(md|yml)</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/announcements.d/any_file_name.(md|yml)</span></code>.</p>
 <p>On each request the dashboard will check for the existence of this file. If it exists, the contents will be converted using markdown converter to HTML and displayed inside a bootstrap alert.</p>
-<p>For example, if I create an announcement.md file with the contents:</p>
+<p>For example, if I create an <code class="docutils literal notranslate"><span class="pre">announcement.md</span></code> file with the contents:</p>
 <blockquote>
 <div><div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gs">**NOTICE:**</span> There will be a two day downtime on February 21-22, 2017. OSC
 OnDemand will be unavailable during this period. For details, please visit
@@ -252,7 +252,7 @@ OnDemand will be unavailable during this period. For details, please visit
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
+<p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a YAML file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
 <table class="docutils align-default" id="id24">
 <caption><span class="caption-number">Table 2 </span><span class="caption-text">Announcement configuration keys.</span><a class="headerlink" href="#id24" title="Link to this table"></a></caption>
 <tbody>
@@ -262,23 +262,23 @@ OnDemand will be unavailable during this period. For details, please visit
 <tr class="row-even"><td><p>type</p></td>
 <td><p>The type of announcement. Values can be <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code>, or <code class="docutils literal notranslate"><span class="pre">danger</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>msg</p></td>
-<td><p>The announcement’s message.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">msg</span></code></p></td>
+<td><p>The announcement's message.</p></td>
 </tr>
-<tr class="row-even"><td><p>id</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
 <td><p>Optional unique identifier for the announcement. This is useful for managing changes to announcements that are used as ToS or EULA that users need to agree to.
 When provided, it will be used to validate if the announcement has been dismissed regardless of the content. Changing the <code class="docutils literal notranslate"><span class="pre">id</span></code> will make the announcement appear again.</p></td>
 </tr>
-<tr class="row-odd"><td><p>dismissible</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dismissible</span></code></p></td>
 <td><p>Specify if the announcement is dismissible or not with <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.
 Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p>required</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">required</span></code></p></td>
 <td><p>Specify if the announcement is required or not with <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.
 Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>. When this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the OOD UI will only render the announcement and the user will not be able
 to submit jobs until the announcement has been accepted.</p></td>
 </tr>
-<tr class="row-odd"><td><p>button_text</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">button_text</span></code></p></td>
 <td><p>Optional parameter to customize the text content for the button to dismiss the announcement.
 Defaults to <code class="docutils literal notranslate"><span class="pre">Accept</span></code> for required and <code class="docutils literal notranslate"><span class="pre">OK</span></code> for dismissible.</p></td>
 </tr>
@@ -302,13 +302,13 @@ EULA (end user license agreement) or similar.</p>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Warnings about the announcement file being missing may be present in users’ nginx logs. Despite the warning the Dashboard will still function normally without those files being present.</p>
+<p>Warnings about the announcement file being missing may be present in users' Nginx logs. Despite the warning the Dashboard will still function normally without those files being present.</p>
 <p>The file path for the announcement message can be customize using configuration properties, see <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
 </div>
 </section>
 <section id="message-of-the-day-motd">
 <span id="motd-customization"></span><h2>Message of the Day (MOTD)<a class="headerlink" href="#message-of-the-day-motd" title="Link to this heading"></a></h2>
-<p>You can configure the Dashboard to display the /etc/motd file on the front page - the same file that is displayed when ssh-ing to a login node.</p>
+<p>You can configure the Dashboard to display the <code class="docutils literal notranslate"><span class="pre">/etc/motd</span></code> file on the front page - the same file that is displayed when logging into to a login node.</p>
 <p>To display a MOTD file on the Dashboard ensure that the environment variables <code class="docutils literal notranslate"><span class="pre">$MOTD_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">$MOTD_FORMAT</span></code> are set, where</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">MOTD_PATH</span><span class="o">=</span><span class="s2">&quot;/etc/motd&quot;</span><span class="w"> </span><span class="c1"># this supports both file and RSS feed URIs</span>
@@ -353,36 +353,36 @@ Currently only the dashboard uses the colors in the navbar.</p>
 </thead>
 <tbody>
 <tr class="row-even"><th class="stub"><p>Title</p></th>
-<td><p>dashboard_title</p></td>
-<td><p>The title appears in the navbar and is controlled by the property <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code>. The default value is “Open OnDemand”.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code></p></td>
+<td><p>The title appears in the navbar and is controlled by the property <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code>. The default value is &quot;Open OnDemand&quot;.</p></td>
 </tr>
 <tr class="row-odd"><th class="stub"><p>Logo</p></th>
-<td><p>dashboard_logo</p></td>
-<td><p>The default value for <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code> is <code class="docutils literal notranslate"><span class="pre">/public/logo.png</span></code> and this should be the URL to the logo. By default if you place a logo.png at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/logo.png</span></code> it will be accessible via the URL <code class="docutils literal notranslate"><span class="pre">https://your.ondemand.institution.edu/public/logo.png</span></code>.  SVG logo format is also supported.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code></p></td>
+<td><p>The default value for <code class="docutils literal notranslate"><span class="pre">dashboard_logo</span></code> is <code class="docutils literal notranslate"><span class="pre">/public/logo.png</span></code> and this should be the URL to the logo. By default if you place a <code class="docutils literal notranslate"><span class="pre">logo.png</span></code> at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/logo.png</span></code> it will be accessible via the URL <code class="docutils literal notranslate"><span class="pre">https://your.ondemand.institution.edu/public/logo.png</span></code>.  SVG logo format is also supported.</p></td>
 </tr>
 <tr class="row-even"><th class="stub"><p>Logo height</p></th>
-<td><p>dashboard_logo_height</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dashboard_logo_height</span></code></p></td>
 <td><p>The CSS height of the dashboard logo.</p></td>
 </tr>
 <tr class="row-odd"><th class="stub"><p>Favicon</p></th>
-<td><p>public_url</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">public_url</span></code></p></td>
 <td><p>The favicon is expected to exist at the path <code class="docutils literal notranslate"><span class="pre">$public_url/favicon.ico</span></code>. For a default OOD installation the favicon will be located at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/favicon.ico</span></code>.</p></td>
 </tr>
 <tr class="row-even"><th class="stub"><p>Brand background color</p></th>
-<td><p>brand_bg_color</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code></p></td>
 <td><p>Controls the background color of the navbar in the dashboard</p></td>
 </tr>
 <tr class="row-odd"><th class="stub"><p>Brand foreground color</p></th>
-<td><p>brand_link_active_bg_color</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code></p></td>
 <td><p>Controls the background color the active link in the navbar in the dashboard</p></td>
 </tr>
 <tr class="row-even"><th class="stub"><p>Replace header title with logo</p></th>
-<td><p>dashboard_header_img_logo</p></td>
-<td><p>Value should be url to logo i.e. <code class="docutils literal notranslate"><span class="pre">/public/logo.png</span></code>.  the background color the active link in the navbar in the dashboard</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dashboard_header_img_logo</span></code></p></td>
+<td><p>Value should be URL to logo i.e. <code class="docutils literal notranslate"><span class="pre">/public/logo.png</span></code>.  the background color the active link in the navbar in the dashboard</p></td>
 </tr>
 <tr class="row-odd"><th class="stub"><p>Use white text on black background for navbar.</p></th>
-<td><p>navbar_type</p></td>
-<td><p>By default we use <code class="docutils literal notranslate"><span class="pre">inverse</span></code> for this value, which specifies to use <a class="reference external" href="https://getbootstrap.com/docs/3.3/components/#navbar-inverted">Bootstrap 3’s inverted navbar</a> where text is white and background is black (or dark grey). You can set this to <code class="docutils literal notranslate"><span class="pre">default</span></code> to use black text on light grey background if it fits your branding better.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">navbar_type</span></code></p></td>
+<td><p>By default we use <code class="docutils literal notranslate"><span class="pre">inverse</span></code> for this value, which specifies to use <a class="reference external" href="https://getbootstrap.com/docs/3.3/components/#navbar-inverted">Bootstrap 3's inverted navbar</a> where text is white and background is black (or dark grey). You can set this to <code class="docutils literal notranslate"><span class="pre">default</span></code> to use black text on light grey background if it fits your branding better.</p></td>
 </tr>
 </tbody>
 </table>
@@ -394,7 +394,7 @@ For information about the properties and environment variables, see the <a class
 <figure class="align-center" id="id27">
 <img alt="_images/dashboard_navbar_branding_bluered.png" src="_images/dashboard_navbar_branding_bluered.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Nav bar if I set <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> to <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> to <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code></span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Navigation bar when <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> is <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> is <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> is <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code>.</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="custom-css-files">
@@ -415,18 +415,18 @@ This will result in a CSS tag added to all dashboard pages with the path: <code 
 <span id="overriding-partials"></span><span id="help-menu-guide"></span><h2>Overriding Pages<a class="headerlink" href="#overriding-pages" title="Link to this heading"></a></h2>
 <p>Open OnDemand is built with Ruby on Rails which uses <code class="docutils literal notranslate"><span class="pre">partials</span></code>
 to build the web pages that are ultimately served to the clients.</p>
-<p>All partials are held within <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views">dashboard’s views folder</a>.  These
+<p>All partials are held within <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views">dashboard's views folder</a>.  These
 are the default <code class="docutils literal notranslate"><span class="pre">partials</span></code> that get distributed when you install
 the package.</p>
 <p>Open OnDemand provides a facility to override any of these partial
 pages by supplying new files in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views</span></code>.</p>
-<p>Let’s look at an example where a center can provide a different,
+<p>Let's look at an example where a center can provide a different,
 specialized, footer for the bottom of the page. Overriding the
 <code class="docutils literal notranslate"><span class="pre">partial</span></code> that has been distributed.</p>
 <p>First, you would need to find the original <code class="docutils literal notranslate"><span class="pre">partial</span></code> that is being
 distributed.</p>
-<p>We can find this file’s location at <code class="docutils literal notranslate"><span class="pre">layouts/_footer.html.erb</span></code>
-(relative to the <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views">dashboard’s views folder</a>).</p>
+<p>We can find this file's location at <code class="docutils literal notranslate"><span class="pre">layouts/_footer.html.erb</span></code>
+(relative to the <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views">dashboard's views folder</a>).</p>
 <p>To override it, we simply provide a new file of the same name
 and path in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views</span></code> folder.</p>
 <p>So, the full file path would be <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/layouts/_footer.html.erb</span></code>.
@@ -461,7 +461,7 @@ distributed by the Open OnDemand package.</p>
 </tr>
 <tr class="row-even"><th class="stub"><p>Developer Documentation</p></th>
 <td><p>OOD_DASHBOARD_DEV_DOCS_URL</p></td>
-<td><p><a class="reference external" href="https://osc.github.io/ood-documentation/master/app-development.html">https://osc.github.io/ood-documentation/master/app-development.html</a> (link appears in Develop dropdown if developer mode enabled for user)</p></td>
+<td><p><a class="reference external" href="https://osc.github.io/ood-documentation/master/app-development.html">https://osc.github.io/ood-documentation/master/app-development.html</a> (link appears in Develop drop-down if developer mode enabled for user)</p></td>
 </tr>
 <tr class="row-odd"><th class="stub"><p>Change Password URL</p></th>
 <td><p>OOD_DASHBOARD_PASSWD_URL</p></td>
@@ -474,7 +474,7 @@ distributed by the Open OnDemand package.</p>
 </tbody>
 </table>
 <p>Since OnDemand 2.1, custom links can be added to the Help menu using the configuration property <code class="docutils literal notranslate"><span class="pre">help_menu</span></code>.
-Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.</p>
+Links will be inserted at the end of the core links already included in the menu by the OnDemand code-base.</p>
 <p><code class="docutils literal notranslate"><span class="pre">help_menu</span></code> supports all the link definitions developed for the custom navigation configuration.
 For more information on how to create custom links, see for example <a class="reference internal" href="#menus-for-urls"><span class="std std-ref">adding urls to menus</span></a>.</p>
 <p>For information about how to configure properties, see the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
@@ -502,7 +502,7 @@ For more information on how to create custom links, see for example <a class="re
 </section>
 <section id="add-shortcuts-to-files-menu">
 <span id="id4"></span><h2>Add Shortcuts to Files Menu<a class="headerlink" href="#add-shortcuts-to-files-menu" title="Link to this heading"></a></h2>
-<p>The Files menu by default has a single link to open the Files app in the user’s
+<p>The Files menu by default has a single link to open the Files app in the user's
 Home Directory. More links can be added to this menu, for Scratch space and
 Project space directories.</p>
 <p>Adding more links currently requires adding a custom initializer to the
@@ -537,9 +537,9 @@ of what will appear in the Dashboard menu for Files</p></li>
 <li><p>At OSC, the pattern for project paths follows
 <code class="file docutils literal notranslate"><span class="pre">/fs/project/</span><em><span class="pre">project_name</span></em></code>. So above we:</p>
 <ol class="arabic simple">
-<li><p>get an array of all user’s groups by name</p></li>
+<li><p>get an array of all user's groups by name</p></li>
 <li><p>filter that array for groups that start with <code class="docutils literal notranslate"><span class="pre">P</span></code> (i.e., <code class="docutils literal notranslate"><span class="pre">PZS0002</span></code>,
-<code class="docutils literal notranslate"><span class="pre">PAW0003</span></code>, …)</p></li>
+<code class="docutils literal notranslate"><span class="pre">PAW0003</span></code>, ...)</p></li>
 <li><p>using <code class="docutils literal notranslate"><span class="pre">map</span></code> we turn this array into an array of <code class="docutils literal notranslate"><span class="pre">FavoritePath</span></code> objects to
 all the possible project directories the user could have.</p></li>
 <li><p>extend the paths array with this list of paths</p></li>
@@ -547,8 +547,8 @@ all the possible project directories the user could have.</p></li>
 </li>
 <li><p>For possible scratch space directories, we look for either
 <code class="file docutils literal notranslate"><span class="pre">/fs/scratch/</span><em><span class="pre">project_name</span></em></code> or <code class="file docutils literal notranslate"><span class="pre">/fs/scratch/</span><em><span class="pre">user_name</span></em></code></p></li>
-<li><p>Additionally project scratch directories have a ‘title’ attribute and will
-with in the dropdown with both the title and the path.</p></li>
+<li><p>Additionally project scratch directories have a 'title' attribute and will
+with in the drop-down with both the title and the path.</p></li>
 </ul>
 <p>The following example adds all directories within the specified base directories to the favorite paths. This approach is ideal when there is no specific directory naming logic to follow. It also appropriately handles Access Control Lists (ACLs). If a directory does not exist, no error is raised, making this configuration easily exportable to different clusters.</p>
 <div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/initializers/ood.rb</span>
@@ -652,7 +652,7 @@ and overrides the value for <code class="docutils literal notranslate"><span cla
 <p>The selection of a profile can be done manually by updating the user settings profile. By default the root profile is selected.
 Profile selection can be done using configurable navigation links.
 These links will update the profile, save the newly selected profile in the user settings file and reload the Dashboard.</p>
-<p>To add profile links to the Help navigation dropdown menu use the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.
+<p>To add profile links to the Help navigation drop-down menu use the configuration property <code class="docutils literal notranslate"><span class="pre">profile_links</span></code>.
 For more information on how to add profile links to the navigation bar in various places, see
 <a class="reference internal" href="#menus-for-profile-links"><span class="std std-ref">menus for profile links</span></a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profile_links</span><span class="p">:</span>
@@ -701,7 +701,7 @@ A request to <code class="docutils literal notranslate"><span class="pre">https:
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you have a need to create multiple profile definitions that have the same configuration, you could use aliases.
-This is a feaure of YAML files. You can use YAML <code class="docutils literal notranslate"><span class="pre">anchors</span></code> and <code class="docutils literal notranslate"><span class="pre">aliases</span></code> to set the same profile configuration
+This is a feature of YAML files. You can use YAML <code class="docutils literal notranslate"><span class="pre">anchors</span></code> and <code class="docutils literal notranslate"><span class="pre">aliases</span></code> to set the same profile configuration
 to more than one definition without duplication. This YAML feature only works when defined and used within the same file.</p>
 <p>The example below creates 4 profiles all with the same configuration:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">profiles</span><span class="p">:</span>
@@ -729,29 +729,29 @@ you can take steps to customize it as you see fit.</p>
 <section id="understanding-the-default-navigation-bar">
 <span id="understanding-default-nav-bar"></span><h3>Understanding the default navigation bar<a class="headerlink" href="#understanding-the-default-navigation-bar" title="Link to this heading"></a></h3>
 <p>Some navigation menus and links are built-in to the system. The system
-will generate dropdown menus for <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>, <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> and
+will generate drop-down menus for <code class="docutils literal notranslate"><span class="pre">Files</span></code>, <code class="docutils literal notranslate"><span class="pre">Jobs</span></code>, <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> and
 <code class="docutils literal notranslate"><span class="pre">Interactive</span> <span class="pre">Apps</span></code> automatically. It will also generate the link for
 <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Interactive</span> <span class="pre">Sessions</span></code> by default.</p>
-<p>Here’s an image of you’d expect to see by default.</p>
+<p>Here's an image of you'd expect to see by default.</p>
 <figure class="align-center">
-<img alt="An image of the default navigation bar showing dropdown menus for files, jobs, clusters, interactive apps, and my interactive apps." src="_images/main-navigation-menu.png" />
+<img alt="An image of the default navigation bar showing drop-down menus for files, jobs, clusters, interactive apps, and my interactive apps." src="_images/main-navigation-menu.png" />
 </figure>
 <p>Open OnDemand is a platform for other applications, like Jupyter &amp; RStudio.
 As such, the default navigation bar builds itself based on what applications
 it has discovered.  The system will search <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/</span></code> for these
 applications.</p>
 <p>Every application should have <a class="reference internal" href="how-tos/app-development/interactive/manifest.html#app-development-manifest"><span class="std std-ref">Manifest YAML files</span></a>.  The system reads
-these manifests files and builds additional dropdown menus (or adds to existing menus)
+these manifests files and builds additional drop-down menus (or adds to existing menus)
 based on the <code class="docutils literal notranslate"><span class="pre">category</span></code> field.</p>
-<p>By default, the system will generate a new dropdown menu for every <code class="docutils literal notranslate"><span class="pre">category</span></code>
-it encounters.  Within each dropdown menu it will add separators for each
+<p>By default, the system will generate a new drop-down menu for every <code class="docutils literal notranslate"><span class="pre">category</span></code>
+it encounters.  Within each drop-down menu it will add separators for each
 <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> it encounters.</p>
 </section>
 <section id="limit-auto-generated-menu-bars">
 <span id="id5"></span><h3>Limit auto generated menu bars<a class="headerlink" href="#limit-auto-generated-menu-bars" title="Link to this heading"></a></h3>
-<p>As described in the previous section, the system will generate new dropdown
+<p>As described in the previous section, the system will generate new drop-down
 menus for every <code class="docutils literal notranslate"><span class="pre">category</span></code> it discovers.</p>
-<p>If you wish to add or remove which categories create dropdown menus
+<p>If you wish to add or remove which categories create drop-down menus
 use the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#nav-categories"><span class="std std-ref">nav_categories configuration property</span></a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -770,19 +770,19 @@ property.</p>
 <section id="using-manifests-to-create-menu-items">
 <h3>Using manifests to create menu items<a class="headerlink" href="#using-manifests-to-create-menu-items" title="Link to this heading"></a></h3>
 <p>As described in <a class="reference internal" href="#understanding-default-nav-bar"><span class="std std-ref">Understanding the default navigation bar</span></a>, the system automatically
-creates dropdown menus based on the applications it encounters.</p>
-<p>So, with that knowledge, one can create or add to dropdown menus by creating
+creates drop-down menus based on the applications it encounters.</p>
+<p>So, with that knowledge, one can create or add to drop-down menus by creating
 applications with the correct information in their <a class="reference external" href="app-development-manifest">manifest.yml</a>.</p>
-<p>It’s fairly simple to make this application. Simply create the directory in the correct location
+<p>It's fairly simple to make this application. Simply create the directory in the correct location
 and create a <a class="reference external" href="app-development-manifest">manifest.yml</a>.</p>
 <ul>
-<li><p>sudo mkdir /var/www/ood/apps/sys/&lt;NEW MENU ITEM&gt;</p></li>
-<li><p>sudo vi /var/www/ood/apps/sys/&lt;NEW MENU ITEM&gt;/manifest.yml</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/var/www/ood/apps/sys/&lt;NEW</span> <span class="pre">MENU</span> <span class="pre">ITEM&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">vi</span> <span class="pre">/var/www/ood/apps/sys/&lt;NEW</span> <span class="pre">MENU</span> <span class="pre">ITEM&gt;/manifest.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="c1"># This is the text that will show up in the dropdown menu.</span>
+<span class="c1"># This is the text that will show up in the drop-down menu.</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add Menu Items to the navbar</span>
 
-<span class="c1"># This will create the &#39;Links&#39; dropdown menu if it doesn&#39;t already exist.</span>
+<span class="c1"># This will create the &#39;Links&#39; drop-down menu if it doesn&#39;t already exist.</span>
 <span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Links</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
 <span class="w">  </span><span class="no">A description of what the menu item does.</span>
@@ -809,14 +809,14 @@ through the <code class="docutils literal notranslate"><span class="pre">nav_bar
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As described in <a class="reference internal" href="#understanding-default-nav-bar"><span class="std std-ref">Understanding the default navigation bar</span></a>, the system auto-generates
-dropdown menus based on the applications it discovers.  If the <code class="docutils literal notranslate"><span class="pre">nav_bar</span></code> or
-<code class="docutils literal notranslate"><span class="pre">help_bar</span></code> configurations are set, the system will <strong>only</strong> show what you’ve defined.</p>
+drop-down menus based on the applications it discovers.  If the <code class="docutils literal notranslate"><span class="pre">nav_bar</span></code> or
+<code class="docutils literal notranslate"><span class="pre">help_bar</span></code> configurations are set, the system will <strong>only</strong> show what you've defined.</p>
 </div>
-<p>Before we look at how to modify it in detail, let’s look at what the default
+<p>Before we look at how to modify it in detail, let's look at what the default
 configuration would be (without showing any discovered apps).</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;nav_bar&#39; is the left side of the navigation bar.</span>
 <span class="nt">nav_bar</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># &#39;apps&#39; dropdown menu is shown if you&#39;ve set &#39;pinned_apps&#39;.</span>
+<span class="w">  </span><span class="c1"># &#39;apps&#39; drop-down menu is shown if you&#39;ve set &#39;pinned_apps&#39;.</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobs</span>
@@ -847,11 +847,11 @@ A navigation menu contains a list of navigation links with optional link groups.
 <h4>Menus by Application category<a class="headerlink" href="#menus-by-application-category" title="Link to this heading"></a></h4>
 <p>One of the easiest ways to create menus is to create them based off of
 the applications categories.</p>
-<p>The title of the dropdown menu will be the <code class="docutils literal notranslate"><span class="pre">category</span></code> itself, and menu items
+<p>The title of the drop-down menu will be the <code class="docutils literal notranslate"><span class="pre">category</span></code> itself, and menu items
 (applications) will be grouped by their <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>. It is not possible to
 set an icon. The <code class="docutils literal notranslate"><span class="pre">category</span></code> matching is case insensitive.</p>
-<p>Here’s an example using the <code class="docutils literal notranslate"><span class="pre">interactive</span> <span class="pre">apps</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>. Just like the default
-navigation bar, this will generate a dropdown menu of all the applications the system
+<p>Here's an example using the <code class="docutils literal notranslate"><span class="pre">interactive</span> <span class="pre">apps</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>. Just like the default
+navigation bar, this will generate a drop-down menu of all the applications the system
 has discovered in that <code class="docutils literal notranslate"><span class="pre">category</span></code>.</p>
 <p>As you can see from the image, the system has discovered eight applications in two
 subcategories.</p>
@@ -860,7 +860,7 @@ subcategories.</p>
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="An open dropdown menu titled &quot;Interactive Apps&quot;. The first submenu is titled &quot;Desktops&quot; and has two list items. The second submenu is titled &quot;Servers&quot; and has six list items." src="_images/def-category-menu.png" />
+<img alt="An open drop-down menu titled &quot;Interactive Apps&quot;. The first sub-menu is titled &quot;Desktops&quot; and has two list items. The second sub-menu is titled &quot;Servers&quot; and has six list items." src="_images/def-category-menu.png" />
 </figure>
 </section>
 <section id="predefined-templates">
@@ -871,13 +871,13 @@ are several pre-defined navigation menus that you can use.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">all_apps</span></code> - The link to the all applications page.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">apps</span></code> - A drop down menu of <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code>. Note that you need to set <code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> for this to show up.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sessions</span></code> - The link to “My Interactive Sessions” page.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">develop</span></code> - The dropdown menu for developers, titled “Develop”.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code> - The “Help” dropdown menu.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">log_out</span></code> - The link to logout, titled “Logout”.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code> - The “Logged in as &lt;user&gt;” text.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sessions</span></code> - The link to &quot;My Interactive Sessions&quot; page.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">develop</span></code> - The drop-down menu for developers, titled &quot;Develop&quot;.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code> - The &quot;Help&quot; drop-down menu.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log_out</span></code> - The link to logout, titled &quot;Logout&quot;.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code> - The &quot;Logged in as &lt;user&gt;&quot; text.</p></li>
 </ul>
-<p>Here’s an example of defining all of them and what that would look like.</p>
+<p>Here's an example of defining all of them and what that would look like.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;all_apps&quot;</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;apps&quot;</span>
@@ -889,15 +889,15 @@ are several pre-defined navigation menus that you can use.</p>
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="An image of the navigation bar. From left to right the items are &quot;All Apps&quot; link, &quot;Apps&quot; dropdown menu, &quot;My Interactive Sessions&quot; link, &quot;Develop&quot; drop down menu, &quot;Help&quot; drop down menu, &quot;Logout&quot; link and 'logged in as ood' text." src="_images/def-templates-menu.png" />
+<img alt="An image of the navigation bar. From left to right the items are &quot;All Apps&quot; link, &quot;Apps&quot; drop-down menu, &quot;My Interactive Sessions&quot; link, &quot;Develop&quot; drop down menu, &quot;Help&quot; drop down menu, &quot;Logout&quot; link and 'logged in as ood' text." src="_images/def-templates-menu.png" />
 </figure>
 </section>
 <section id="menus-based-on-applications">
 <span id="id7"></span><h4>Menus based on applications<a class="headerlink" href="#menus-based-on-applications" title="Link to this heading"></a></h4>
-<p>You can create dropdown menus based on applications the system can discover.</p>
+<p>You can create drop-down menus based on applications the system can discover.</p>
 <p>Menu items are automatically grouped based on the applications <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>.
 Use the <code class="docutils literal notranslate"><span class="pre">apps</span></code> array to define the app tokens for this navigation menu.</p>
-<p>The order of the menu items is based on the order you’ve defined.</p>
+<p>The order of the menu items is based on the order you've defined.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span>
 <span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fas://window-restore&quot;</span>
@@ -907,19 +907,19 @@ Use the <code class="docutils literal notranslate"><span class="pre">apps</span>
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="An open dropdown menu titled &quot;My Apps&quot;. The menu shows two submenus. The first is titled &quot;Servers&quot; and has five list items for all the discovered through the &quot;sys/Rstudio/*&quot; configuration. The second submenu is titled &quot;Desktops&quot; and has one list item for the discovered through the &quot;sys/bc_desktop&quot; configuration." src="_images/def-apps-menu.png" />
+<img alt="An open drop-down menu titled &quot;My Apps&quot;. The menu shows two sub-menus. The first is titled &quot;Servers&quot; and has five list items for all the discovered through the &quot;sys/Rstudio/*&quot; configuration. The second sub-menu is titled &quot;Desktops&quot; and has one list item for the discovered through the &quot;sys/bc_desktop&quot; configuration." src="_images/def-apps-menu.png" />
 </figure>
 </section>
 <section id="menus-based-on-links">
 <span id="id8"></span><h4>Menus based on links<a class="headerlink" href="#menus-based-on-links" title="Link to this heading"></a></h4>
-<p>Menus based on links provide even more granular control on how the dropdown menu is generated.</p>
+<p>Menus based on links provide even more granular control on how the drop-down menu is generated.</p>
 <p>As seen in the previous sections, using an <code class="docutils literal notranslate"><span class="pre">apps</span></code> array will automatically generate
-submenus based on the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> of the applications that have been discovered.</p>
-<p>When using links, we can override this behaviour to provide different titles to
-the submenus, or with no submenus and subtitles at all.</p>
-<p>Let’s look at this example using the same application tokens, but using <code class="docutils literal notranslate"><span class="pre">links</span></code> instead
+sub-menus based on the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code> of the applications that have been discovered.</p>
+<p>When using links, we can override this behavior to provide different titles to
+the sub-menus, or with no sub-menus and subtitles at all.</p>
+<p>Let's look at this example using the same application tokens, but using <code class="docutils literal notranslate"><span class="pre">links</span></code> instead
 of <code class="docutils literal notranslate"><span class="pre">apps</span></code>. The system will discover and generate list items for the same eight applications,
-only without <strong>any</strong> submenus.  It is simply a list of all the discovered applications with
+only without <strong>any</strong> sub-menus.  It is simply a list of all the discovered applications with
 no further grouping.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span>
@@ -930,13 +930,13 @@ no further grouping.</p>
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="An open dropdown menu titled &quot;My Apps&quot;. The menu has no submenus. It simply lists all eight the apps." src="_images/app-links-no-group.png" />
+<img alt="An open drop-down menu titled &quot;My Apps&quot;. The menu has no sub-menus. It simply lists all eight the apps." src="_images/app-links-no-group.png" />
 </figure>
-<p>To add submenus, simply use the <code class="docutils literal notranslate"><span class="pre">group</span></code> attribute.</p>
+<p>To add sub-menus, simply use the <code class="docutils literal notranslate"><span class="pre">group</span></code> attribute.</p>
 <p>When <code class="docutils literal notranslate"><span class="pre">links</span></code> are used with the <code class="docutils literal notranslate"><span class="pre">group</span></code> attribute, the discovered applications
-will now be grouped and submenu titles created based on the configuration provided.</p>
+will now be grouped and sub-menu titles created based on the configuration provided.</p>
 <p>This will look and feel similar to <a class="reference internal" href="#menus-based-on-applications">menus-based-on-applications</a> with the exception
-being that submenus are defined by the <code class="docutils literal notranslate"><span class="pre">group</span></code> configuration instead of the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>
+being that sub-menus are defined by the <code class="docutils literal notranslate"><span class="pre">group</span></code> configuration instead of the <code class="docutils literal notranslate"><span class="pre">subcategory</span></code>
 of the applications in the list.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Apps&quot;</span>
@@ -949,7 +949,7 @@ of the applications in the list.</p>
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="An image showing one open drop down menu titled &quot;My Apps&quot;. The first submenu, titled &quot;Rstudio&quot; has five list items that have been discovered through the &quot;sys/Rstudio/*&quot; configuration. The second submenu, titled &quot;Remote&quot; has one list item that has been discovered through the &quot;sys/bc_desktop&quot; configuration." src="_images/def-full-menu.png" />
+<img alt="An image showing one open drop down menu titled &quot;My Apps&quot;. The first sub-menu, titled &quot;Rstudio&quot; has five list items that have been discovered through the &quot;sys/Rstudio/*&quot; configuration. The second sub-menu, titled &quot;Remote&quot; has one list item that has been discovered through the &quot;sys/bc_desktop&quot; configuration." src="_images/def-full-menu.png" />
 </figure>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -958,7 +958,7 @@ of the applications in the list.</p>
 </section>
 <section id="menus-for-profile-links">
 <span id="id9"></span><h4>Menus for profile links<a class="headerlink" href="#menus-for-profile-links" title="Link to this heading"></a></h4>
-<p>If you’ve enabled <cite>Profiles &lt;profiles_guide&gt;</cite> you can create navigation bar menus and
+<p>If you've enabled <cite>Profiles &lt;profiles_guide&gt;</cite> you can create navigation bar menus and
 links to those profiles through the <code class="docutils literal notranslate"><span class="pre">profile</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Single top level link</span>
@@ -979,7 +979,7 @@ links to those profiles through the <code class="docutils literal notranslate"><
 </section>
 <section id="menus-for-custom-pages">
 <span id="id10"></span><h4>Menus for custom pages<a class="headerlink" href="#menus-for-custom-pages" title="Link to this heading"></a></h4>
-<p>If you’ve enabled <a class="reference internal" href="#custom-pages-guide">custom_pages_guide</a> you can create navigation menus
+<p>If you've enabled <a class="reference internal" href="#custom-pages-guide">custom_pages_guide</a> you can create navigation menus
 or single links directly to those pages through the <code class="docutils literal notranslate"><span class="pre">page</span></code> attribute.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nav_bar</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Single top level link</span>
@@ -1019,7 +1019,7 @@ through the <code class="docutils literal notranslate"><span class="pre">url</sp
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="An image of the navigation bar with a single link &quot;Title&quot; and an open dropdown menu titled &quot;Menu Item&quot;. The dropdown menu has one list item titled &quot;Title&quot;." src="_images/def-navigation-link.png" />
+<img alt="An image of the navigation bar with a single link &quot;Title&quot; and an open drop-down menu titled &quot;Menu Item&quot;. The drop-down menu has one list item titled &quot;Title&quot;." src="_images/def-navigation-link.png" />
 </figure>
 </section>
 </section>
@@ -1060,7 +1060,7 @@ or disable uploads or downloads based on group permissions.</p>
 <span id="id12"></span><h2>Set Upload Limits<a class="headerlink" href="#set-upload-limits" title="Link to this heading"></a></h2>
 <p>By default, the file size upload limit is 10737420000 bytes (~10.7 GB).</p>
 <p>If you want set this to a lower value, set the <code class="docutils literal notranslate"><span class="pre">FILE_UPLOAD_MAX</span></code> configuration
-in the file apps’ configuration file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
+in the file apps' configuration file <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
 <p>If you want to set it to a higher value set <code class="docutils literal notranslate"><span class="pre">nginx_file_upload_max</span></code>
 in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> to the desired value. If you have
 <code class="docutils literal notranslate"><span class="pre">FILE_UPLOAD_MAX</span></code> set from above, unset it.</p>
@@ -1100,8 +1100,8 @@ can never read files the user cannot read).</p>
 <p>By setting a colon delimited <cite>OOD_ALLOWLIST_PATH</cite> environment variable, the Job Composer, File Editor, and Files app
 respect the allowlist in the following manner:</p>
 <ol class="arabic simple">
-<li><p>Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowlisted paths</p></li>
-<li><p>Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths</p></li>
+<li><p>Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowed paths.</p></li>
+<li><p>Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowed paths.</p></li>
 <li><p>Users should not be able to get around this using symlinks</p></li>
 </ol>
 <p>We recommend setting this environment variable in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code> as a YAML mapping (key value pairs) in the mapping (hash/dictionary) <code class="docutils literal notranslate"><span class="pre">pun_custom_env</span></code> i.e. below would a list that allows access to home directories, project space, and scratch space at OSC:</p>
@@ -1117,7 +1117,7 @@ respect the allowlist in the following manner:</p>
 <section id="disabling-users">
 <span id="disabling-users-guide"></span><h2>Disabling Users<a class="headerlink" href="#disabling-users" title="Link to this heading"></a></h2>
 <p>You can use the <a class="reference internal" href="reference/files/nginx-stage-yml.html#disabled-shell"><span class="std std-ref">nginx stage configuration for disabling users</span></a>
-to disable access to specific users based on the users’ default <code class="docutils literal notranslate"><span class="pre">shell</span></code>.</p>
+to disable access to specific users based on the users' default <code class="docutils literal notranslate"><span class="pre">shell</span></code>.</p>
 <p>For example you could disable access to Open OnDemand for any user with the <code class="docutils literal notranslate"><span class="pre">/usr/bin/false</span></code>
 default shell.</p>
 </section>
@@ -1129,9 +1129,9 @@ default shell.</p>
 through the allowlist (see the section below).</p>
 <p>Because there are no hosts configured, no hosts are allowed.</p>
 </div>
-<p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the env var <code class="docutils literal notranslate"><span class="pre">OOD_DEFAULT_SSHHOST</span></code> to change the default ssh host.
-Since 1.8, there is no out of the box default (in previous versions it was ‘localhost’, but this has been removed).</p>
-<p>This will control what host the shell app ssh’s to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> set the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_DEFAULT_SSHHOST</span></code> to change the default ssh host.
+Since 1.8, there is no out of the box default (in previous versions it was 'localhost', but this has been removed).</p>
+<p>This will control what host the shell app ssh's to when the URL accessed is <code class="docutils literal notranslate"><span class="pre">/pun/sys/shell/ssh/default</span></code> which is the URL other apps will use (unless there is context to specify the cluster to ssh to).</p>
 <p>Since 1.8 you can also set the default ssh host in the cluster configuration as well. Simply add
 default=true attribute to the login section like the example below.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
@@ -1154,7 +1154,7 @@ what hosts users will be allowed to connect to in the shell application.</p>
 <p>To add other hosts into the allow list (for example compute nodes) add the configuration
 <code class="docutils literal notranslate"><span class="pre">OOD_SSHHOST_ALLOWLIST</span></code> to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> file.</p>
 <p>This configuration is expected to be a colon (:) separated list of GLOBs.</p>
-<p>Here’s an example of of this configuration with three such GLOBs that allow for shell
+<p>Here's an example of of this configuration with three such GLOBs that allow for shell
 access into any compute node in our three clusters.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
 <span class="nv">OOD_SSHHOST_ALLOWLIST</span><span class="o">=</span><span class="s2">&quot;r[0-1][0-9][0-9][0-9].ten.osc.edu:o[0-1][0-9][0-9][0-9].ten.osc.edu:p[0-1][0-9][0-9][0-9].ten.osc.edu&quot;</span>
@@ -1165,7 +1165,7 @@ access into any compute node in our three clusters.</p>
 <span id="enable-shell-ping-pong"></span><h2>Enable and configure Shell Ping Pong<a class="headerlink" href="#enable-and-configure-shell-ping-pong" title="Link to this heading"></a></h2>
 <p>Version 3.1 added the ability for the shell application to send and receive ping pong
 messages to keep the connection alive, and thus the terminal session alive.</p>
-<p>The drawback to this is that these persistant connections can actually outlive your
+<p>The drawback to this is that these persistent connections can actually outlive your
 authentication timeout settings. Meaning users can have active shell sessions for much
 longer than your authentication systems would normally allow.  This is because the
 connection was made while you were authenticated and it persists after your session
@@ -1177,12 +1177,12 @@ to change.</p>
 <p>All of these configurations are environment variables are to be placed in
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code>.</p>
 <p>Setting <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_PING_PONG</span></code> to anything will enable ping pongs. Removing it or
-commenting it out will disable ping pongs (it’s disabled by default).</p>
+commenting it out will disable ping pongs (it's disabled by default).</p>
 <p><code class="docutils literal notranslate"><span class="pre">OOD_SHELL_INACTIVE_TIMEOUT_MS</span></code> controls how long a connection can be inactive
 for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5 minutes).</p>
 <p><code class="docutils literal notranslate"><span class="pre">OOD_SHELL_MAX_DURATION_MS</span></code> controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
-regardless of activity. It’s default is 3600000 milliseconds (1 hour).</p>
+regardless of activity. It's default is 3600000 milliseconds (1 hour).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
 
 <span class="nv">OOD_SHELL_INACTIVE_TIMEOUT_MS</span><span class="o">=</span><span class="m">300000</span>
@@ -1196,7 +1196,7 @@ regardless of activity. It’s default is 3600000 milliseconds (1 hour).</p>
 <p>As of version 2.1 you are allowed to configure a non-standard ssh port.</p>
 <p>To change the ssh port for submitting jobs in OOD, you need to add the configuration
 <code class="docutils literal notranslate"><span class="pre">OOD_SSH_PORT</span></code> to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file.</p>
-<p>Here’s an example of of this configuration.</p>
+<p>Here's an example of of this configuration.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/dashboard/env</span>
 <span class="nv">OOD_SSH_PORT</span><span class="o">=</span><span class="s2">&quot;2222&quot;</span>
 </pre></div>
@@ -1207,7 +1207,7 @@ regardless of activity. It’s default is 3600000 milliseconds (1 hour).</p>
 <p id="ssh-wrapper">Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.</p>
 <p>This is helpful when you pass add additional environment variable through ssh (<code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">SendEnv=MY_ENV_VAR</span></code>) or ensure some ssh command options be used.</p>
 <p>To use your ssh wrapper configure <code class="docutils literal notranslate"><span class="pre">OOD_SSH_WRAPPER=/usr/bin/changeme</span></code> to point to your script in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code>. Also be sure to make your script executable.</p>
-<p>Here’s a simple example of what a wrapper script could look like.</p>
+<p>Here's a simple example of what a wrapper script could look like.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="nv">args</span><span class="o">=</span><span class="s2">&quot;-o SendEnv=MY_ENV_VAR&quot;</span>
@@ -1218,10 +1218,10 @@ regardless of activity. It’s default is 3600000 milliseconds (1 hour).</p>
 </section>
 <section id="fix-unauthorized-websocket-connection-in-shell-app">
 <h2>Fix Unauthorized WebSocket Connection in Shell App<a class="headerlink" href="#fix-unauthorized-websocket-connection-in-shell-app" title="Link to this heading"></a></h2>
-<p>If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with wss:// and the response header includes <code class="docutils literal notranslate"><span class="pre">X-OOD-Failure-Reason:</span> <span class="pre">invalid</span> <span class="pre">origin</span></code>, you may need to set the <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> configuration option.</p>
+<p>If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with <code class="docutils literal notranslate"><span class="pre">wss://</span></code> and the response header includes <code class="docutils literal notranslate"><span class="pre">X-OOD-Failure-Reason:</span> <span class="pre">invalid</span> <span class="pre">origin</span></code>, you may need to set the <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> configuration option.</p>
 <p>There is a security feature that adds proper <a class="reference external" href="https://owasp.org/www-community/attacks/csrf">CSRF</a> protection using both the Origin request header check and a <a class="reference external" href="https://owasp.org/www-community/attacks/csrf">CSRF</a> token check.</p>
 <p>The Origin check uses <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto">X-Forwarded-Proto</a> and <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host">X-Forwarded-Host</a> that Apache <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_proxy.html">mod_proxy</a> sets to build the string that is used to compare with the Origin request header the browser sends in the WebSocket upgrade request.</p>
-<p>In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> env var to the correct https string, or disable the origin check altogether by setting <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK=off</span></code> (or any other value that does not start with “http”) in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> file.</p>
+<p>In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK</span></code> environment variable to the correct https string, or disable the origin check altogether by setting <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_ORIGIN_CHECK=off</span></code> (or any other value that does not start with &quot;http&quot;) in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code> file.</p>
 <p>Either way the CSRF token will still provide protection from this vulnerability.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># /etc/ood/config/apps/shell/env
 # to disable it, just configure it with something that doesn&#39;t start with http
@@ -1237,20 +1237,20 @@ OOD_SHELL_ORIGIN_CHECK=&#39;https://my.other.origin&#39;
 <p>Below explains how job templates work for the Job Composer and how you can add your own. <a class="reference external" href="https://github.com/OSC/osc-ood-config/tree/5440c0c2f3e3d337df1b0306c9e9d5b80f97a7e4/ondemand.osc.edu/apps/myjobs/templates">Here is an example of the templates we use at OSC for the various clusters we have</a></p>
 <section id="job-templates-overview">
 <h3>Job Templates Overview<a class="headerlink" href="#job-templates-overview" title="Link to this heading"></a></h3>
-<p>“Job Composer” attempts to model a simple but common workflow. When creating a new batch job to run a simulation a user may:</p>
+<p>&quot;Job Composer&quot; attempts to model a simple but common workflow. When creating a new batch job to run a simulation a user may:</p>
 <ol class="arabic simple">
 <li><p>copy the directory of a job they already ran or an example job</p></li>
 <li><p>edit the files</p></li>
 <li><p>submit a new job</p></li>
 </ol>
-<p>“Job Composer” implements these steps by providing the user job template directories and the ability to make copies of them: (1) Copy a directory, (2) Edit the files, and (3) Submit a new job.</p>
+<p>&quot;Job Composer&quot; implements these steps by providing the user job template directories and the ability to make copies of them: (1) Copy a directory, (2) Edit the files, and (3) Submit a new job.</p>
 <ol class="arabic simple">
 <li><p>Copy a directory of a job already ran or an example job</p>
 <ol class="arabic simple">
-<li><p>User can create a new job from a “default” template. A custom default template can be defined at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/templates/default</span></code> or under the app deployment directory at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/templates/default</span></code>. If no default template is specified, the default is <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/example_templates/torque</span></code></p></li>
-<li><p>user can select a directory to copy from a list of “System” templates the admin copied to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/templates</span></code> or under the app deployment directory at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/templates</span></code> during installation</p></li>
-<li><p>user can select a directory to copy from a list of “User” templates that the user has copied to <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/templates</span></code></p></li>
-<li><p>user can select a job directory to copy that they already created through “Job Composer” from <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/projects/default</span></code></p></li>
+<li><p>User can create a new job from a &quot;default&quot; template. A custom default template can be defined at <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/templates/default</span></code> or under the app deployment directory at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/templates/default</span></code>. If no default template is specified, the default is <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/example_templates/torque</span></code></p></li>
+<li><p>user can select a directory to copy from a list of &quot;System&quot; templates the admin copied to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/templates</span></code> or under the app deployment directory at <code class="docutils literal notranslate"><span class="pre">/var/www/ood/apps/sys/myjobs/templates</span></code> during installation</p></li>
+<li><p>user can select a directory to copy from a list of &quot;User&quot; templates that the user has copied to <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/templates</span></code></p></li>
+<li><p>user can select a job directory to copy that they already created through &quot;Job Composer&quot; from <code class="docutils literal notranslate"><span class="pre">$HOME/ondemand/data/sys/myjobs/projects/default</span></code></p></li>
 </ol>
 </li>
 <li><p>Edit the files</p>
@@ -1278,10 +1278,10 @@ OOD_SHELL_ORIGIN_CHECK=&#39;https://my.other.origin&#39;
 <span class="nt">notes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notes about the template, such as content and function.</span>
 </pre></div>
 </div>
-<p>In the event that a job is created from a template that is missing from the <cite>manifest.yml</cite>, “Job Composer” will assign the following default values:</p>
+<p>In the event that a job is created from a template that is missing from the <cite>manifest.yml</cite>, &quot;Job Composer&quot; will assign the following default values:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> The name of the template folder.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code> The cluster id of the first cluster with a valid resource_mgr listed in the OOD cluster config</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code> The cluster id of the first cluster with a valid resource_mgr listed in the OOD cluster configuration.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">script</span></code> The first <code class="docutils literal notranslate"><span class="pre">.sh</span></code> file appearing in the template folder.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">notes</span></code> The path to the location where a template manifest should be located.</p></li>
 </ul>
@@ -1289,9 +1289,9 @@ OOD_SHELL_ORIGIN_CHECK=&#39;https://my.other.origin&#39;
 </section>
 <section id="job-composer-script-size-limit">
 <h2>Job Composer Script Size Limit<a class="headerlink" href="#job-composer-script-size-limit" title="Link to this heading"></a></h2>
-<p>Since 1.7 the Job composer shows users ‘Suggested file(s)’ and ‘Other valid file(s)’. Other valid files are
+<p>Since 1.7 the Job composer shows users 'Suggested file(s)' and 'Other valid file(s)'. Other valid files are
 _any_ files less than <code class="docutils literal notranslate"><span class="pre">OOD_MAX_SCRIPT_SIZE_KB</span></code> which defaults to 65 (meaning 65kb).</p>
-<p>To reconfigure this, simply set the environment variable in the job composers’ env file
+<p>To reconfigure this, simply set the environment variable in the job composers' environment file
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/env</span></code> like so:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># show any file less than or equal to 15 kb</span>
 <span class="nv">OOD_MAX_SCRIPT_SIZE_KB</span><span class="o">=</span><span class="m">15</span>
@@ -1302,7 +1302,7 @@ _any_ files less than <code class="docutils literal notranslate"><span class="pr
 <h2>Hiding Job Arrays<a class="headerlink" href="#hiding-job-arrays" title="Link to this heading"></a></h2>
 <p>When composing a new job, the job arrays field is shown on supported clusters. To Hide this field even on
 supported clusters, an option was added.</p>
-<p>To reconfigure this, simply set the environment variable in the job composers’ env file
+<p>To reconfigure this, simply set the environment variable in the job composers' environment file
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/myjobs/env</span></code> like so:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t show job arrays field even on supported clusters</span>
 <span class="nv">OOD_HIDE_JOB_ARRAYS</span><span class="o">=</span>True
@@ -1314,14 +1314,14 @@ supported clusters, an option was added.</p>
 <p>Some sites have the home directory auto-create on first ssh login, for example
 via <code class="docutils literal notranslate"><span class="pre">pam_mkhomedir.so</span></code>. This introduces a problem if users first access the system
 through OnDemand, which expects the existence of a user’s home directory.</p>
-<p>In OnDemand &lt;= 1.3 if the user’s home directory was missing a non-helpful single
+<p>In OnDemand &lt;= 1.3 if the user's home directory was missing a non-helpful single
 string error would display. Now a friendly error page displays. This error page
 can be customized by adding a custom one to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/pun/html/missing_home_directory.html</span></code>.</p>
 <p>The default error page looks like this:</p>
 <figure class="align-center">
 <img alt="_images/customization_homedirmissing_default.png" src="_images/customization_homedirmissing_default.png" />
 </figure>
-<p>An example of a custom error page has been provided at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/html/missing_home_directory.html.example.pam_mkhomedir</span></code> and can be copied to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/pun/html/missing_home_directory.html</span></code>. This example directs the user to first click a link to open the shell app which will create the home directory. The shell app’s default host must be configured to be a host that is appropriate for this purpose. The custom error page looks like this:</p>
+<p>An example of a custom error page has been provided at <code class="docutils literal notranslate"><span class="pre">/opt/ood/nginx_stage/html/missing_home_directory.html.example.pam_mkhomedir</span></code> and can be copied to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/pun/html/missing_home_directory.html</span></code>. This example directs the user to first click a link to open the shell app which will create the home directory. The shell app's default host must be configured to be a host that is appropriate for this purpose. The custom error page looks like this:</p>
 <figure class="align-center">
 <img alt="_images/customization_homedirmissing_pammkdir.png" src="_images/customization_homedirmissing_pammkdir.png" />
 </figure>
@@ -1330,15 +1330,15 @@ can be customized by adding a custom one to <code class="docutils literal notran
 <section id="pinning-applications-to-the-dashboard">
 <span id="dashboard-pinned-apps"></span><h2>Pinning Applications to the Dashboard<a class="headerlink" href="#pinning-applications-to-the-dashboard" title="Link to this heading"></a></h2>
 <p>In version 2.0 you can now pin app Icons to the dashboard that link to the application form.</p>
-<p>When configured a widget like the one below will appear on the dashboard’s landing page.</p>
+<p>When configured a widget like the one below will appear on the dashboard's landing page.</p>
 <figure class="align-default">
 <img alt="_images/pinned_apps.png" src="_images/pinned_apps.png" />
 </figure>
 <p>The configuration for what apps to pin allows for three variants.</p>
 <p>You can configure specific apps with a string of the type <code class="docutils literal notranslate"><span class="pre">router/app_name</span></code>.
-For example <code class="docutils literal notranslate"><span class="pre">sys/jupyter</span></code> is the system installed app named jupyter.</p>
+For example <code class="docutils literal notranslate"><span class="pre">sys/jupyter</span></code> is the system installed app named <code class="docutils literal notranslate"><span class="pre">jupyter</span></code>.</p>
 <p>Secondly you can configure globs like <code class="docutils literal notranslate"><span class="pre">sys/*</span></code> to pin all system installed apps. Or
-Maybe <code class="docutils literal notranslate"><span class="pre">sys/minimal_*</span></code> to pin all system installed apps that begin with ‘minimal’.</p>
+Maybe <code class="docutils literal notranslate"><span class="pre">sys/minimal_*</span></code> to pin all system installed apps that begin with 'minimal'.</p>
 <p>Lastly you can choose to pin apps based off of fields in their <code class="docutils literal notranslate"><span class="pre">manifest.yml</span></code> file.
 You can match by type, category, subcategory and metadata fields.  These matches are
 cumulative. Meaning an app has to match <em>all</em> of these to be pinned.  In the examples below
@@ -1388,11 +1388,11 @@ from grouping by category):</p>
 <figure class="align-default">
 <img alt="_images/grouped_pinned_apps.png" src="_images/grouped_pinned_apps.png" />
 </figure>
-<p>One can also change the menu length in the ‘App’s menu item. If you’ve
-pinned more than 6 apps and you want to them to show up in this dropdown
+<p>One can also change the menu length in the 'App's menu item. If you've
+pinned more than 6 apps and you want to them to show up in this drop-down
 list, simply increase the length with the option below.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
-<span class="nt">pinned_apps_menu_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span><span class="w">        </span><span class="c1"># the default number of items in the dropdown menu list</span>
+<span class="nt">pinned_apps_menu_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span><span class="w">        </span><span class="c1"># the default number of items in the drop-down menu list</span>
 <span class="nt">pinned_apps_group_by</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">category</span><span class="w">    </span><span class="c1"># defaults to nil, no grouping</span>
 </pre></div>
 </div>
@@ -1412,7 +1412,7 @@ All the values are optional and any set will override the default from the appli
 <span class="w">    </span><span class="no">Text Line 3</span>
 </pre></div>
 </div>
-<p>The CSS for the pinned app tiles has been optimized to support upto three lines of text for the <code class="docutils literal notranslate"><span class="pre">sub_caption</span></code> property.</p>
+<p>The CSS for the pinned app tiles has been optimized to support up to three lines of text for the <code class="docutils literal notranslate"><span class="pre">sub_caption</span></code> property.</p>
 <figure class="align-default">
 <img alt="_images/custom_pinned_apps.png" src="_images/custom_pinned_apps.png" />
 </figure>
@@ -1420,9 +1420,9 @@ All the values are optional and any set will override the default from the appli
 </section>
 <section id="custom-layouts-in-the-dashboard">
 <span id="dashboard-custom-layout"></span><h2>Custom layouts in the dashboard<a class="headerlink" href="#custom-layouts-in-the-dashboard" title="Link to this heading"></a></h2>
-<p>Administrators can now customize what widgets appear on the dashboard and how they’re
+<p>Administrators can now customize what widgets appear on the dashboard and how they're
 laid out on the page.</p>
-<p>In it’s simplest form this feature allows for a rearrangement of existing widgets. As
+<p>In it's simplest form this feature allows for a rearrangement of existing widgets. As
 of 2.1 the existing widgets are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> - Pinned Apps described above</p></li>
@@ -1437,7 +1437,7 @@ Launching these applications will start a new interactive session with the previ
 Simply drop new files into <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/widgets</span></code> and reference them
 in the configuration. These partial files can be any format Rails recognizes, notably <code class="docutils literal notranslate"><span class="pre">.html</span></code> or
 <code class="docutils literal notranslate"><span class="pre">.html.erb</span></code> extensions.</p>
-<p>Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
+<p>Also if you use sub-directories under widgets, they can be referenced by relative paths. For example
 <code class="docutils literal notranslate"><span class="pre">views/widgets/cluster/_my_cluster_widget.html.erb</span></code> would be referenced in the configuration
 as <code class="docutils literal notranslate"><span class="pre">cluster/my_cluster_widget</span></code>.</p>
 <div class="admonition warning">
@@ -1448,7 +1448,7 @@ the filename should be <code class="docutils literal notranslate"><span class="p
 <p>Without setting this configuration, the dashboard will arrange itself depending on what features are
 enabled. For example if both pinned apps and XDMoD features are enabled it will arrange itself accordingly
 based on a default layout.</p>
-<p>Here’s the default configuration when all of these features are enabled.</p>
+<p>Here's the default configuration when all of these features are enabled.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/ondemand.yml</span>
 <span class="nt">dashboard_layout</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">rows</span><span class="p">:</span>
@@ -1475,7 +1475,7 @@ is an array of existing or newly added widgets to render in that column.</p>
 <ol class="arabic simple">
 <li><p>Copy the translation dictionary file (or create a new file with the same structure of the keys you want to modify) to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> and modify that copy.</p></li>
 <li><p>If you want apps to look for these dictionary files in a different location than <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code> you can change the location by defining <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> environment variable.</p></li>
-<li><p>The default locale is “en”. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.</p></li>
+<li><p>The default locale is &quot;en&quot;. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the <code class="docutils literal notranslate"><span class="pre">nginx_stage</span></code> configuration or in the Dashboard and Job Composer environment configuration file.</p></li>
 </ol>
 <p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
 <table class="docutils align-default" id="id30">
@@ -1496,7 +1496,7 @@ is an array of existing or newly added widgets to render in that column.</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">jobcomposer</span></code></p></td>
 </tr>
 <tr class="row-even"><th class="stub"><p><code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/en.yml</span></code></p></th>
-<td><p>All localizable apps will check this path, unless <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> is set.</p></td>
+<td><p>All localize-able apps will check this path, unless <code class="docutils literal notranslate"><span class="pre">OOD_LOCALES_ROOT</span></code> is set.</p></td>
 <td><p>Any</p></td>
 </tr>
 </tbody>
@@ -1538,8 +1538,8 @@ logo, or the logo specified by the environment variable <code class="docutils li
 </div></blockquote>
 </section>
 <section id="customize-text-in-the-job-composer-s-options-form">
-<h3>Customize Text in the Job Composer’s options form<a class="headerlink" href="#customize-text-in-the-job-composer-s-options-form" title="Link to this heading"></a></h3>
-<p>The OSC-default value for <code class="docutils literal notranslate"><span class="pre">options_account_help</span></code> says that the account field is optional unless a user is a member of multiple projects.</p>
+<h3>Customize Text in the Job Composer's options form<a class="headerlink" href="#customize-text-in-the-job-composer-s-options-form" title="Link to this heading"></a></h3>
+<p>The OSC default value for <code class="docutils literal notranslate"><span class="pre">options_account_help</span></code> says that the account field is optional unless a user is a member of multiple projects.</p>
 <p>Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string <code class="docutils literal notranslate"><span class="pre">options_account_help</span></code>.</p>
 </section>
 </section>
@@ -1602,8 +1602,8 @@ is given in the following format:</p>
 <p>A block must be equal to 1 KiB for proper conversions.</p>
 </div>
 </section>
-<section id="individual-fileset-quota">
-<h3>Individual Fileset Quota<a class="headerlink" href="#individual-fileset-quota" title="Link to this heading"></a></h3>
+<section id="individual-file-set-quota">
+<h3>Individual File-set Quota<a class="headerlink" href="#individual-file-set-quota" title="Link to this heading"></a></h3>
 <p>If the quota is defined as a <code class="docutils literal notranslate"><span class="pre">fileset</span></code> quota, then it applies to all disk
 resources used underneath a given volume. This requires the object to be
 repeated for <strong>each user</strong> that uses disk resources under this given volume.
@@ -1625,7 +1625,7 @@ The format is given as:</p>
 the specified user only.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For each user with resources under this fileset, the above object will be repeated with just <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">block_usage</span></code>, and <code class="docutils literal notranslate"><span class="pre">file_usage</span></code> changing.</p>
+<p>For each user with resources under this <code class="docutils literal notranslate"><span class="pre">fileset</span></code>, the above object will be repeated with just <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">block_usage</span></code>, and <code class="docutils literal notranslate"><span class="pre">file_usage</span></code> changing.</p>
 </div>
 </section>
 </section>
@@ -1698,11 +1698,11 @@ can be changed with the environment variable <code class="docutils literal notra
 <span id="id16"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Link to this heading"></a></h2>
 <p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.</p>
-<p>You can do this by setting Open OnDemand in ‘Maintenance Mode’.
+<p>You can do this by setting Open OnDemand in 'Maintenance Mode'.
 While Maintenance mode is active, Apache will not serve requests for paths outside the
 <code class="docutils literal notranslate"><span class="pre">/public/maintenance/*</span></code> wildcard. Instead, it will serve the <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/index.html</span></code>
 file, which you can change or brand to be your own. Changes to this file will persist through upgrades.
-Any assets (e.g., images, stylesheets, or javascript) needed by the HTML file should be placed
+Any assets (e.g., images, stylesheets, or JavaScript) needed by the HTML file should be placed
 in the <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/</span></code> directory. You can also put symbolic links into the
 <code class="docutils literal notranslate"><span class="pre">/var/www/ood/public/maintenance/</span></code> directory, if you want to reuse assets located elsewhere in your
 file system.</p>
@@ -1710,8 +1710,8 @@ file system.</p>
 IP does not match one of the configured allowlist regular expressions.
 The allowlist is to allow staff, localhost or a subset of your users access while restricting others.</p>
 <p>In this example we allow access to anyone from <code class="docutils literal notranslate"><span class="pre">192.168.1..*</span></code> which is the 192.168.1.0/24 CIDR and
-the single IP ‘10.0.0.1’.</p>
-<p>These are the settings you’ll need for this functionality.</p>
+the single IP '10.0.0.1'.</p>
+<p>These are the settings you'll need for this functionality.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nt">use_rewrites</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">use_maintenance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -1724,17 +1724,17 @@ the single IP ‘10.0.0.1’.</p>
 <p>To start maintenance mode (and thus start serving this page) simply <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">/etc/ood/maintenance.enable</span></code>
 to create the necessary file. When your downtime is complete just remove the file and all the
 traffic will be served normally again.  The existence of this file is what starts or stops maintenance
-mode, not it’s content, so you will not need to restart apache or modify it’s config files for this to
+mode, not it's content, so you will not need to restart apache or modify it's configuration files for this to
 take affect.</p>
 </section>
 <section id="grafana-support">
 <span id="id17"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Link to this heading"></a></h2>
-<p>It’s possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.</p>
+<p>It's possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.</p>
 <p>Grafana must be configured to support embedded panels and at this time it is also required to have an anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust <cite>org_name</cite> to match whatever organization you wish to be anonymous.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Changing a Grafana install to support anonymous access can cause unintended consequences for how authenticated users interact with Grafana.
-It’s recommended to test anonymous access on a non-production Grafana install if you do not already support anonymous access.</p>
+It's recommended to test anonymous access on a non-production Grafana install if you do not already support anonymous access.</p>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>auth.anonymous<span class="o">]</span>
 <span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
@@ -1746,7 +1746,7 @@ It’s recommended to test anonymous access on a non-production Grafana install 
 </pre></div>
 </div>
 <p>The dashboard used by OSC is the <a class="reference external" href="https://grafana.com/grafana/dashboards/12093">OnDemand Clusters</a> dashboard.</p>
-<p>Settings used to access Grafana are configured in the cluster config.  The following is an example from OSC:</p>
+<p>Settings used to access Grafana are configured in the cluster configuration.  The following is an example from OSC:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">custom</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://grafana.osc.edu&quot;</span>
@@ -1764,9 +1764,9 @@ It’s recommended to test anonymous access on a non-production Grafana install 
 <span class="w">    </span><span class="nt">cluster_override</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mysite&quot;</span>
 </pre></div>
 </div>
-<p>When viewing a dashboard in Grafana choose the panel you’d wish to display and select <cite>Share</cite>.
+<p>When viewing a dashboard in Grafana choose the panel you'd wish to display and select <cite>Share</cite>.
 Then choose the <cite>Embed</cite> tab which will provide you with the iframe URL that will need to be generated within OnDemand.
-The time ranges and values for labels (eg: <cite>var-cluster=</cite>) will be autofilled by OnDemand.</p>
+The time ranges and values for labels (e.g.: <cite>var-cluster=</cite>) will be auto-filled by OnDemand.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">orgId</span></code> is the <code class="docutils literal notranslate"><span class="pre">orgId</span></code> query parameter</p></li>
 <li><p>The dashboard <code class="docutils literal notranslate"><span class="pre">name</span></code> is the last segment of the URI before query parameters</p></li>
@@ -1784,7 +1784,7 @@ The time ranges and values for labels (eg: <cite>var-cluster=</cite>) will be au
 </figure>
 <p>However, some sites may want to disable this feature because they do not allow ssh sessions on the compute
 nodes.</p>
-<p>To disable this, simply set the environment variable in the dashboards’ env file
+<p>To disable this, simply set the environment variable in the dashboards' environment file
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> to a falsy value (0, false, off).</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># don&#39;t show ssh link in batch connect card</span>
 <span class="nv">OOD_BC_SSH_TO_COMPUTE_NODE</span><span class="o">=</span>off
@@ -1813,7 +1813,7 @@ job names like the error below.</p>
 </section>
 <section id="customize-dex-theme">
 <span id="id19"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Link to this heading"></a></h2>
-<p>It’s possible to use a customized theme when authenticating with Dex when using OnDemand’s default authentication.
+<p>It's possible to use a customized theme when authenticating with Dex when using OnDemand's default authentication.
 Refer to the upstream <a class="reference external" href="https://dexidp.io/docs/templates/">Dex template docs</a> for additional information on templating Dex.</p>
 <p>The simplest approach is to copy the OnDemand theme and make changes.  This is idea if you wish to make the following changes:</p>
 <ul class="simple">
@@ -1864,23 +1864,23 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 </figure>
 <p>Steps to enable the XDMoD reports in the OnDemand Dashboard:</p>
 <ol class="arabic">
-<li><p>Configure OnDemand with XDMoD host URL in PUN /etc/ood/config/nginx_stage.yml</p>
+<li><p>Configure OnDemand with XDMoD host URL in PUN <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/nginx_stage.yml</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pun_custom_env</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">OOD_XDMOD_HOST</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://xdmod.osc.edu&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p>Add OnDemand host as domain to XDMoD portal settings for CORS /etc/xdmod/portal_settings.ini</p>
+<li><p>Add OnDemand host as domain to XDMoD portal settings for CORS <code class="docutils literal notranslate"><span class="pre">/etc/xdmod/portal_settings.ini</span></code>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>domains = &quot;https://ondemand.osc.edu&quot;
 </pre></div>
 </div>
 </li>
-<li><p>Configure identity provider to include OnDemand host in HTTP <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors">Content-Security-Policy for frame-ancestors</a> since OnDemand uses iFrames to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:</p>
+<li><p>Configure identity provider to include OnDemand host in HTTP <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors">Content-Security-Policy for frame-ancestors</a> since OnDemand uses an iframe to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>frame-ancestors https://*.osc.edu &#39;self&#39;
 </pre></div>
 </div>
 </li>
-<li><p>If you want the XDMoD links in the OnDemand Job Composer you also need to configure OnDemand with XDMoD resource id in each cluster config. For example, in the hpctoolset the resource_id for the hpc cluster is 1 in XDMoD, so we modify /etc/ood/config/clusters.d/hpc.yml to add a xdmod map to the custom map at the bottom of the file:</p>
+<li><p>If you want the XDMoD links in the OnDemand Job Composer you also need to configure OnDemand with XDMoD resource id in each cluster configuration. For example, in the <code class="docutils literal notranslate"><span class="pre">hpctoolset</span></code> the resource_id for the HPC cluster is 1 in XDMoD, so we modify <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/clusters.d/hpc.yml</span></code> to add a XDMoD map to the custom map at the bottom of the file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">v2</span><span class="p">:</span>
 <span class="w"> </span><span class="nt">metadata</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;HPC</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
@@ -1918,7 +1918,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 <p>Since 2.1 you can use <code class="docutils literal notranslate"><span class="pre">rclone</span></code> to interact with remote file systems.  Since
 every command in Open OnDemand is issued <em>as the user</em>, the user themselves
 are required to setup their <code class="docutils literal notranslate"><span class="pre">rclone</span></code> remotes.</p>
-<p>You can refer to the <a class="reference external" href="https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data">OSC’s rclone documentation</a> on how to configure rclone
+<p>You can refer to the <a class="reference external" href="https://www.osc.edu/resources/getting_started/howto/howto_use_rclone_to_upload_data">OSC's rclone documentation</a> on how to configure rclone
 remotes.</p>
 <p>To enable this feature ensure that <code class="docutils literal notranslate"><span class="pre">rclone</span></code> is installed on the same machine
 that Open OnDemand is installed. You also have to enable the feature through
@@ -1931,7 +1931,7 @@ This functionality will allow users to remove the job from the scheduler and kee
 <p>This feature is disabled behind a feature toggle. To enable it, set the configuration property <code class="docutils literal notranslate"><span class="pre">cancel_session_enabled:</span> <span class="pre">true</span></code>.
 For more information on how to configure properties, see <a class="reference internal" href="reference/files/ondemand-d-ymls.html#configuration-properties"><span class="std std-ref">configuration documentation</span></a>.</p>
 <p>When enabled, the cancel button will appear for active sessions.
-When the session is cancelled, the job will be cancelled in the scheduler,
+When the session is canceled, the job will be canceled in the scheduler,
 the status will change to <code class="docutils literal notranslate"><span class="pre">completed</span></code>, and the session card will be kept.
 For completed sessions, the system will only show the delete button.</p>
 <figure class="align-center">
@@ -1960,7 +1960,7 @@ It will render a layout with the <code class="docutils literal notranslate"><spa
 <figure class="align-center">
 <img alt="_images/custom-pages-documentation.png" src="_images/custom-pages-documentation.png" />
 </figure>
-<p>Links to the custom pages can be added the Help dropdown menu.
+<p>Links to the custom pages can be added the Help drop-down menu.
 To add links to the Help menu use the configuration property <code class="docutils literal notranslate"><span class="pre">help_menu</span></code>.
 See the <a class="reference internal" href="#help-menu-guide"><span class="std std-ref">documentation on adding urls to the Help menu</span></a> for details and examples.</p>
 <p>Adding custom pages links uses the same notation and attributes as when created for the custom Dashboard navbar.

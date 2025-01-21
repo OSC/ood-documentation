@@ -47,7 +47,7 @@ To add an announcement message that appears at the top of the dashboard you can 
 
 On each request the dashboard will check for the existence of this file. If it exists, the contents will be converted using markdown converter to HTML and displayed inside a bootstrap alert.
 
-For example, if I create an announcement.md file with the contents:
+For example, if I create an ``announcement.md`` file with the contents:
 
    .. code-block:: md
 
@@ -62,7 +62,7 @@ the user would see this message at the top of the dashboard:
 
    Example of the Dashboard announcement.
 
-If the announcement file has the extension ``yml`` and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
+If the announcement file has the extension ``yml`` and is a YAML file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
 
 .. list-table:: Announcement configuration keys.
 
@@ -70,19 +70,19 @@ If the announcement file has the extension ``yml`` and is a yaml file it is firs
      - Description
    * - type
      - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
-   * - msg
+   * - ``msg``
      - The announcement's message.
-   * - id
+   * - ``id``
      - Optional unique identifier for the announcement. This is useful for managing changes to announcements that are used as ToS or EULA that users need to agree to.
        When provided, it will be used to validate if the announcement has been dismissed regardless of the content. Changing the ``id`` will make the announcement appear again.
-   * - dismissible
+   * - ``dismissible``
      - Specify if the announcement is dismissible or not with ``true`` or ``false``.
        Defaults to ``true``.
-   * - required
+   * - ``required``
      - Specify if the announcement is required or not with ``true`` or ``false``.
        Defaults to ``false``. When this is set to ``true``, the OOD UI will only render the announcement and the user will not be able
        to submit jobs until the announcement has been accepted.
-   * - button_text
+   * - ``button_text``
      - Optional parameter to customize the text content for the button to dismiss the announcement.
        Defaults to ``Accept`` for required and ``OK`` for dismissible.
 
@@ -101,7 +101,7 @@ Because the announcement is rendered via ERB you can do some interesting things,
         will prevent SSH login to Ruby nodes and Ruby VDI sessions.
         <% end %>
 
-.. note:: Warnings about the announcement file being missing may be present in users' nginx logs. Despite the warning the Dashboard will still function normally without those files being present.
+.. note:: Warnings about the announcement file being missing may be present in users' Nginx logs. Despite the warning the Dashboard will still function normally without those files being present.
 
    The file path for the announcement message can be customize using configuration properties, see :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
 
@@ -110,7 +110,7 @@ Because the announcement is rendered via ERB you can do some interesting things,
 Message of the Day (MOTD)
 -------------------------
 
-You can configure the Dashboard to display the /etc/motd file on the front page - the same file that is displayed when ssh-ing to a login node.
+You can configure the Dashboard to display the ``/etc/motd`` file on the front page - the same file that is displayed when logging into to a login node.
 
 To display a MOTD file on the Dashboard ensure that the environment variables ``$MOTD_PATH`` and ``$MOTD_FORMAT`` are set, where
 
@@ -158,28 +158,28 @@ Currently only the dashboard uses the colors in the navbar.
      - Property
      - Details
    * - Title
-     - dashboard_title
+     - ``dashboard_title``
      - The title appears in the navbar and is controlled by the property ``dashboard_title``. The default value is "Open OnDemand".
    * - Logo
-     - dashboard_logo
-     - The default value for ``dashboard_logo`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a logo.png at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.  SVG logo format is also supported.
+     - ``dashboard_logo``
+     - The default value for ``dashboard_logo`` is ``/public/logo.png`` and this should be the URL to the logo. By default if you place a ``logo.png`` at ``/var/www/ood/public/logo.png`` it will be accessible via the URL ``https://your.ondemand.institution.edu/public/logo.png``.  SVG logo format is also supported.
    * - Logo height
-     - dashboard_logo_height
+     - ``dashboard_logo_height``
      - The CSS height of the dashboard logo.
    * - Favicon
-     - public_url
+     - ``public_url``
      - The favicon is expected to exist at the path ``$public_url/favicon.ico``. For a default OOD installation the favicon will be located at ``/var/www/ood/public/favicon.ico``.
    * - Brand background color
-     - brand_bg_color
+     - ``brand_bg_color``
      - Controls the background color of the navbar in the dashboard
    * - Brand foreground color
-     - brand_link_active_bg_color
+     - ``brand_link_active_bg_color``
      - Controls the background color the active link in the navbar in the dashboard
    * - Replace header title with logo
-     - dashboard_header_img_logo
-     - Value should be url to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
+     - ``dashboard_header_img_logo``
+     - Value should be URL to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
    * - Use white text on black background for navbar.
-     - navbar_type
+     - ``navbar_type``
      - By default we use ``inverse`` for this value, which specifies to use `Bootstrap 3's inverted navbar <https://getbootstrap.com/docs/3.3/components/#navbar-inverted>`_ where text is white and background is black (or dark grey). You can set this to ``default`` to use black text on light grey background if it fits your branding better.
 
 .. note:: It is possible to configure these settings using environment variables, although this is deprecated.
@@ -188,7 +188,7 @@ Currently only the dashboard uses the colors in the navbar.
 .. figure:: /images/dashboard_navbar_branding_bluered.png
    :align: center
 
-   Nav bar if I set ``brand_bg_color`` to ``#0000ff`` and ``brand_link_active_bg_color`` to ``#ff0000`` and ``dashboard_title`` to ``OSC OnDemand``
+   Navigation bar when ``brand_bg_color`` is ``#0000ff`` and ``brand_link_active_bg_color`` is ``#ff0000`` and ``dashboard_title`` is ``OSC OnDemand``.
 
 Custom CSS files
 ................
@@ -231,7 +231,7 @@ These URLs can be specified, which will appear in the Help menu and on other loc
      - https://www.osc.edu/ondemand
    * - Developer Documentation
      - OOD_DASHBOARD_DEV_DOCS_URL
-     - https://osc.github.io/ood-documentation/master/app-development.html (link appears in Develop dropdown if developer mode enabled for user)
+     - https://osc.github.io/ood-documentation/master/app-development.html (link appears in Develop drop-down if developer mode enabled for user)
    * - Change Password URL
      - OOD_DASHBOARD_PASSWD_URL
      - https://my.osc.edu
@@ -240,7 +240,7 @@ These URLs can be specified, which will appear in the Help menu and on other loc
      - https://idp.osc.edu/auth/realms/osc/account/identity
 
 Since OnDemand 2.1, custom links can be added to the Help menu using the configuration property ``help_menu``.
-Links will be inserted at the end of the core links already included in the menu by the OnDemand codebase.
+Links will be inserted at the end of the core links already included in the menu by the OnDemand code-base.
 
 ``help_menu`` supports all the link definitions developed for the custom navigation configuration.
 For more information on how to create custom links, see for example :ref:`adding urls to menus <menus-for-urls>`.
@@ -324,7 +324,7 @@ Start by creating the file
 - For possible scratch space directories, we look for either
   :file:`/fs/scratch/{project_name}` or :file:`/fs/scratch/{user_name}`
 - Additionally project scratch directories have a 'title' attribute and will
-  with in the dropdown with both the title and the path.
+  with in the drop-down with both the title and the path.
 
 The following example adds all directories within the specified base directories to the favorite paths. This approach is ideal when there is no specific directory naming logic to follow. It also appropriately handles Access Control Lists (ACLs). If a directory does not exist, no error is raised, making this configuration easily exportable to different clusters.
 
@@ -469,8 +469,8 @@ can never read files the user cannot read).
 By setting a colon delimited `OOD_ALLOWLIST_PATH` environment variable, the Job Composer, File Editor, and Files app
 respect the allowlist in the following manner:
 
-1. Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowlisted paths
-2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowlisted paths
+1. Users will be prevented from navigating to, uploading, downloading, viewing, or editing files that are not an eventual child of the allowed paths.
+2. Users will be prevented from copying a template directory from an arbitrary path in the Job Composer if the arbitrary path that is not an eventual child of the allowed paths.
 3. Users should not be able to get around this using symlinks
 
 We recommend setting this environment variable in ``/etc/ood/config/nginx_stage.yml`` as a YAML mapping (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env`` i.e. below would a list that allows access to home directories, project space, and scratch space at OSC:
@@ -495,7 +495,7 @@ Set Default SSH Host
 
    Because there are no hosts configured, no hosts are allowed.
 
-In ``/etc/ood/config/apps/shell/env`` set the env var ``OOD_DEFAULT_SSHHOST`` to change the default ssh host.
+In ``/etc/ood/config/apps/shell/env`` set the environment variable ``OOD_DEFAULT_SSHHOST`` to change the default ssh host.
 Since 1.8, there is no out of the box default (in previous versions it was 'localhost', but this has been removed).
 
 This will control what host the shell app ssh's to when the URL accessed is ``/pun/sys/shell/ssh/default`` which is the URL other apps will use (unless there is context to specify the cluster to ssh to).
@@ -546,7 +546,7 @@ Enable and configure Shell Ping Pong
 Version 3.1 added the ability for the shell application to send and receive ping pong
 messages to keep the connection alive, and thus the terminal session alive.
 
-The drawback to this is that these persistant connections can actually outlive your
+The drawback to this is that these persistent connections can actually outlive your
 authentication timeout settings. Meaning users can have active shell sessions for much
 longer than your authentication systems would normally allow.  This is because the
 connection was made while you were authenticated and it persists after your session
@@ -620,13 +620,13 @@ Here's a simple example of what a wrapper script could look like.
 Fix Unauthorized WebSocket Connection in Shell App
 --------------------------------------------------
 
-If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with wss:// and the response header includes ``X-OOD-Failure-Reason: invalid origin``, you may need to set the ``OOD_SHELL_ORIGIN_CHECK`` configuration option.
+If you see a 401 error when attempting to launch a Shell app session, where the request URL starts with ``wss://`` and the response header includes ``X-OOD-Failure-Reason: invalid origin``, you may need to set the ``OOD_SHELL_ORIGIN_CHECK`` configuration option.
 
 There is a security feature that adds proper CSRF_ protection using both the Origin request header check and a CSRF_ token check.
 
 The Origin check uses X-Forwarded-Proto_ and X-Forwarded-Host_ that Apache mod_proxy_ sets to build the string that is used to compare with the Origin request header the browser sends in the WebSocket upgrade request.
 
-In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set ``OOD_SHELL_ORIGIN_CHECK`` env var to the correct https string, or disable the origin check altogether by setting ``OOD_SHELL_ORIGIN_CHECK=off`` (or any other value that does not start with "http") in the ``/etc/ood/config/apps/shell/env`` file.
+In some edge cases this string may not be correct, and as a result valid WebSocket connections will be denied. In this case you can either set ``OOD_SHELL_ORIGIN_CHECK`` environment variable to the correct https string, or disable the origin check altogether by setting ``OOD_SHELL_ORIGIN_CHECK=off`` (or any other value that does not start with "http") in the ``/etc/ood/config/apps/shell/env`` file.
 
 Either way the CSRF token will still provide protection from this vulnerability.
 
@@ -697,7 +697,7 @@ The manifest contains additional metadata about a job, such as a name, the defau
 In the event that a job is created from a template that is missing from the `manifest.yml`, "Job Composer" will assign the following default values:
 
 - ``name`` The name of the template folder.
-- ``host`` The cluster id of the first cluster with a valid resource_mgr listed in the OOD cluster config
+- ``host`` The cluster id of the first cluster with a valid resource_mgr listed in the OOD cluster configuration.
 - ``script`` The first ``.sh`` file appearing in the template folder.
 - ``notes`` The path to the location where a template manifest should be located.
 
@@ -707,7 +707,7 @@ Job Composer Script Size Limit
 Since 1.7 the Job composer shows users 'Suggested file(s)' and 'Other valid file(s)'. Other valid files are
 _any_ files less than ``OOD_MAX_SCRIPT_SIZE_KB`` which defaults to 65 (meaning 65kb).
 
-To reconfigure this, simply set the environment variable in the job composers' env file
+To reconfigure this, simply set the environment variable in the job composers' environment file
 ``/etc/ood/config/apps/myjobs/env`` like so:
 
 .. code:: sh
@@ -721,7 +721,7 @@ Hiding Job Arrays
 When composing a new job, the job arrays field is shown on supported clusters. To Hide this field even on 
 supported clusters, an option was added.
 
-To reconfigure this, simply set the environment variable in the job composers' env file
+To reconfigure this, simply set the environment variable in the job composers' environment file
 ``/etc/ood/config/apps/myjobs/env`` like so:
 
 .. code:: sh
@@ -768,7 +768,7 @@ When configured a widget like the one below will appear on the dashboard's landi
 The configuration for what apps to pin allows for three variants.
 
 You can configure specific apps with a string of the type ``router/app_name``. 
-For example ``sys/jupyter`` is the system installed app named jupyter.
+For example ``sys/jupyter`` is the system installed app named ``jupyter``.
 
 Secondly you can configure globs like ``sys/*`` to pin all system installed apps. Or
 Maybe ``sys/minimal_*`` to pin all system installed apps that begin with 'minimal'.
@@ -829,13 +829,13 @@ from grouping by category):
 .. figure:: /images/grouped_pinned_apps.png
 
 One can also change the menu length in the 'App's menu item. If you've
-pinned more than 6 apps and you want to them to show up in this dropdown
+pinned more than 6 apps and you want to them to show up in this drop-down
 list, simply increase the length with the option below.
 
 .. code:: yaml
 
   # /etc/ood/config/ondemand.d/ondemand.yml
-  pinned_apps_menu_length: 6        # the default number of items in the dropdown menu list
+  pinned_apps_menu_length: 6        # the default number of items in the drop-down menu list
   pinned_apps_group_by: category    # defaults to nil, no grouping
 
 Pinned Apps customizations
@@ -857,7 +857,7 @@ All the values are optional and any set will override the default from the appli
       Text Line 2
       Text Line 3
 
-The CSS for the pinned app tiles has been optimized to support upto three lines of text for the ``sub_caption`` property.
+The CSS for the pinned app tiles has been optimized to support up to three lines of text for the ``sub_caption`` property.
 
 .. figure:: /images/custom_pinned_apps.png
 
@@ -885,7 +885,7 @@ Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` and 
 in the configuration. These partial files can be any format Rails recognizes, notably ``.html`` or
 ``.html.erb`` extensions.
 
-Also if you use subdirectories under widgets, they can be referenced by relative paths. For example
+Also if you use sub-directories under widgets, they can be referenced by relative paths. For example
 ``views/widgets/cluster/_my_cluster_widget.html.erb`` would be referenced in the configuration
 as ``cluster/my_cluster_widget``.
 
@@ -933,7 +933,7 @@ Initial translation dictionary files with defaults that work well for OSC and us
 
 #. Copy the translation dictionary file (or create a new file with the same structure of the keys you want to modify) to ``/etc/ood/config/locales/en.yml`` and modify that copy.
 #. If you want apps to look for these dictionary files in a different location than ``/etc/ood/config/locales/en.yml`` you can change the location by defining ``OOD_LOCALES_ROOT`` environment variable.
-#. The default locale is "en". You can use a custom locale. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the nginx_stage config or in the Dashboard and Job Composer env config file.
+#. The default locale is "en". You can use a custom locale. For example, if you want the locale to be French, you can create a ``/etc/ood/config/locales/fr.yml`` and then configure the Dashboard to use this locale by setting the environment variable ``OOD_LOCALE=fr`` where the locale is just the name of the file without the extension. Do this in either the ``nginx_stage`` configuration or in the Dashboard and Job Composer environment configuration file.
 
 In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.
 
@@ -951,7 +951,7 @@ In each default translation dictionary file the values that are most site-specif
     - `Job Composer`_
     - ``jobcomposer``
   * - ``/etc/ood/config/locales/en.yml``
-    - All localizable apps will check this path, unless ``OOD_LOCALES_ROOT`` is set.
+    - All localize-able apps will check this path, unless ``OOD_LOCALES_ROOT`` is set.
     - Any
 
 .. warning::
@@ -1000,7 +1000,7 @@ Two messages related to file system usage that sites may want to change:
 Customize Text in the Job Composer's options form
 .................................................
 
-The OSC-default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects.
+The OSC default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects.
 
 Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string ``options_account_help``.
 
@@ -1074,8 +1074,8 @@ is given in the following format:
 .. warning:: A block must be equal to 1 KiB for proper conversions.
 
 
-Individual Fileset Quota
-........................
+Individual File-set Quota
+.........................
 
 If the quota is defined as a ``fileset`` quota, then it applies to all disk
 resources used underneath a given volume. This requires the object to be
@@ -1099,7 +1099,7 @@ The format is given as:
 Where ``block_usage`` and ``file_usage`` are the disk resource usages attributed to
 the specified user only.
 
-.. note:: For each user with resources under this fileset, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
+.. note:: For each user with resources under this ``fileset``, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
 
 
 .. _balance-warnings-on-dashboard:
@@ -1195,7 +1195,7 @@ You can do this by setting Open OnDemand in 'Maintenance Mode'.
 While Maintenance mode is active, Apache will not serve requests for paths outside the
 ``/public/maintenance/*`` wildcard. Instead, it will serve the ``/var/www/ood/public/maintenance/index.html``
 file, which you can change or brand to be your own. Changes to this file will persist through upgrades.
-Any assets (e.g., images, stylesheets, or javascript) needed by the HTML file should be placed
+Any assets (e.g., images, stylesheets, or JavaScript) needed by the HTML file should be placed
 in the ``/var/www/ood/public/maintenance/`` directory. You can also put symbolic links into the
 ``/var/www/ood/public/maintenance/`` directory, if you want to reuse assets located elsewhere in your
 file system.
@@ -1222,7 +1222,7 @@ These are the settings you'll need for this functionality.
 To start maintenance mode (and thus start serving this page) simply ``touch /etc/ood/maintenance.enable``
 to create the necessary file. When your downtime is complete just remove the file and all the
 traffic will be served normally again.  The existence of this file is what starts or stops maintenance
-mode, not it's content, so you will not need to restart apache or modify it's config files for this to
+mode, not it's content, so you will not need to restart apache or modify it's configuration files for this to
 take affect.
 
 
@@ -1252,7 +1252,7 @@ Grafana must be configured to support embedded panels and at this time it is als
 
 The dashboard used by OSC is the `OnDemand Clusters <https://grafana.com/grafana/dashboards/12093>`_ dashboard.
 
-Settings used to access Grafana are configured in the cluster config.  The following is an example from OSC:
+Settings used to access Grafana are configured in the cluster configuration.  The following is an example from OSC:
 
 .. code:: yaml
 
@@ -1274,7 +1274,7 @@ Settings used to access Grafana are configured in the cluster config.  The follo
 
 When viewing a dashboard in Grafana choose the panel you'd wish to display and select `Share`.
 Then choose the `Embed` tab which will provide you with the iframe URL that will need to be generated within OnDemand.
-The time ranges and values for labels (eg: `var-cluster=`) will be autofilled by OnDemand.
+The time ranges and values for labels (e.g.: `var-cluster=`) will be auto-filled by OnDemand.
 
 * ``orgId`` is the ``orgId`` query parameter
 * The dashboard ``name`` is the last segment of the URI before query parameters
@@ -1296,7 +1296,7 @@ Batch connect session cards like this have links to the compute node on which th
 However, some sites may want to disable this feature because they do not allow ssh sessions on the compute
 nodes.
 
-To disable this, simply set the environment variable in the dashboards' env file
+To disable this, simply set the environment variable in the dashboards' environment file
 ``/etc/ood/config/apps/dashboard/env`` to a falsy value (0, false, off).
 
 .. code:: sh
@@ -1404,26 +1404,26 @@ XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitat
 
 Steps to enable the XDMoD reports in the OnDemand Dashboard:
 
-#. Configure OnDemand with XDMoD host URL in PUN /etc/ood/config/nginx_stage.yml
+#. Configure OnDemand with XDMoD host URL in PUN ``/etc/ood/config/nginx_stage.yml``.
 
    .. code-block:: yaml
 
       pun_custom_env:
         OOD_XDMOD_HOST: "https://xdmod.osc.edu"
 
-#. Add OnDemand host as domain to XDMoD portal settings for CORS /etc/xdmod/portal_settings.ini
+#. Add OnDemand host as domain to XDMoD portal settings for CORS ``/etc/xdmod/portal_settings.ini``.
 
    .. code-block:: none
 
       domains = "https://ondemand.osc.edu"
 
-#. Configure identity provider to include OnDemand host in HTTP `Content-Security-Policy for frame-ancestors <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors>`_ since OnDemand uses iFrames to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:
+#. Configure identity provider to include OnDemand host in HTTP `Content-Security-Policy for frame-ancestors <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors>`_ since OnDemand uses an iframe to trigger SSO with XDMoD when a user logs in. Below is what we ensured Content-Security-Policy header for frame-ancestors was set to when configuring Keycloak:
 
    .. code-block:: none
 
       frame-ancestors https://*.osc.edu 'self'
 
-#. If you want the XDMoD links in the OnDemand Job Composer you also need to configure OnDemand with XDMoD resource id in each cluster config. For example, in the hpctoolset the resource_id for the hpc cluster is 1 in XDMoD, so we modify /etc/ood/config/clusters.d/hpc.yml to add a xdmod map to the custom map at the bottom of the file:
+#. If you want the XDMoD links in the OnDemand Job Composer you also need to configure OnDemand with XDMoD resource id in each cluster configuration. For example, in the ``hpctoolset`` the resource_id for the HPC cluster is 1 in XDMoD, so we modify ``/etc/ood/config/clusters.d/hpc.yml`` to add a XDMoD map to the custom map at the bottom of the file:
 
    .. code-block:: yaml
       :emphasize-lines: 10-
@@ -1485,7 +1485,7 @@ This feature is disabled behind a feature toggle. To enable it, set the configur
 For more information on how to configure properties, see :ref:`configuration documentation <configuration_properties>`.
 
 When enabled, the cancel button will appear for active sessions.
-When the session is cancelled, the job will be cancelled in the scheduler,
+When the session is canceled, the job will be canceled in the scheduler,
 the status will change to ``completed``, and the session card will be kept.
 For completed sessions, the system will only show the delete button.
 

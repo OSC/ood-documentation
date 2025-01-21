@@ -148,10 +148,10 @@
 <p>Every authenticated HTTP request sent to the OnDemand portal has a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.
 This <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> can be an email like <code class="docutils literal notranslate"><span class="pre">annie.oakley&#64;osc.edu</span></code> and needs to be
 mapped to a Linux system user like <code class="docutils literal notranslate"><span class="pre">aoakley</span></code>.</p>
-<p>This is what we call user mapping.  Mapping apache’s <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from an
+<p>This is what we call user mapping.  Mapping apache's <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from an
 authenticated request to a Linux system user.</p>
 <p>Mapping to the local system user not only restricts access of OnDemand to local users
-but it is also required by the OnDemand proxy to traffic the HTTP data to the user’s
+but it is also required by the OnDemand proxy to traffic the HTTP data to the user's
 corresponding per-user NGINX (PUN) server.</p>
 <p>Versions prior to 2.0 relied on <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-cmd"><span class="std std-ref">user_map_cmd</span></a> to do this.
 Since 2.0 you should use the simpler and faster <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.</p>
@@ -164,15 +164,15 @@ domains.</p>
 </div>
 <section id="remote-user">
 <h2><span class="section-number">2.1. </span>Remote User<a class="headerlink" href="#remote-user" title="Link to this heading"></a></h2>
-<p>It’s worth discussing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is coming from.  When apache
+<p>It's worth discussing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is coming from.  When apache
 has successfully authenticates a request it sets the variable <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
 from, well, the remote.</p>
 <p>This is generally a return value from the authentication system like an
-<a class="reference internal" href="../oidc.html#authentication-oidc"><span class="std std-ref">open id connect provider</span></a>.  It’s common for this
+<a class="reference internal" href="../oidc.html#authentication-oidc"><span class="std std-ref">open id connect provider</span></a>.  It's common for this
 to be an email address.</p>
 <p>You <em>can</em> configure <a class="reference external" href="ood-portal-generator-user-env">user_env</a> to use something other than <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>, but
-it’s unlikely you should need to.</p>
-<p>If you’re using an OpenID Connect provider you may need to set
+it's unlikely you should need to.</p>
+<p>If you're using an OpenID Connect provider you may need to set
 <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a> as this setting
 tells apache how to set <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from the claim response.</p>
 </section>
@@ -180,8 +180,8 @@ tells apache how to set <code class="docutils literal notranslate"><span class="
 <h2><span class="section-number">2.2. </span>Regular Expression User Mapping<a class="headerlink" href="#regular-expression-user-mapping" title="Link to this heading"></a></h2>
 <p>The simplest and fastest way to map a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> to a system user is through
 <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.  This is not directly
-regular expression matching, but it’s close enough for most use cases.
-See it’s documentation for examples and more.</p>
+regular expression matching, but it's close enough for most use cases.
+See it's documentation for examples and more.</p>
 </section>
 <section id="dex-automatic-configuration">
 <h2><span class="section-number">2.3. </span>Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Link to this heading"></a></h2>
@@ -201,9 +201,9 @@ configuration and be sure to make this mapping script executable.</p>
 <p class="admonition-title">Warning</p>
 <p>Be aware, this script is executed on every request.</p>
 </div>
-<p>Let’s take a simple example.  It uses bash’s builtin regular expression matching
+<p>Let's take a simple example.  It uses bash's builtin regular expression matching
 against <code class="docutils literal notranslate"><span class="pre">([^&#64;]+)&#64;osc.edu</span></code> - an <code class="docutils literal notranslate"><span class="pre">osc.edu</span></code> email address.  If that matches against
-<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) after it’s URL decoded, then we return an all lowercase
+<code class="docutils literal notranslate"><span class="pre">$1</span></code> (the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) after it's URL decoded, then we return an all lowercase
 version of the first part of an email address.</p>
 <p>The contract this script has with Open OnDemand is that <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is URL encoded and
 passed into it as the first argument, <code class="docutils literal notranslate"><span class="pre">$1</span></code>.</p>
@@ -293,9 +293,9 @@ $
 </section>
 <section id="debugging-user-mapping">
 <h2><span class="section-number">2.6. </span>Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Link to this heading"></a></h2>
-<p>When debugging user mapping, it’s always helpful to increase the <a class="reference external" href="ood-portal-generator-lua-log-level">lua_log_level</a> to
+<p>When debugging user mapping, it's always helpful to increase the <a class="reference external" href="ood-portal-generator-lua-log-level">lua_log_level</a> to
 debug.</p>
-<p>In doing so you’ll see messages like that detail the mapping input, output and
+<p>In doing so you'll see messages like that detail the mapping input, output and
 times like <code class="docutils literal notranslate"><span class="pre">Mapped</span> <span class="pre">'jeff&#64;localhost'</span> <span class="pre">=&gt;</span> <span class="pre">'jeff'</span> <span class="pre">[0.089</span> <span class="pre">ms]</span></code>.</p>
 <p>The full message would look like this.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/var/log/httpd/error.log:<span class="o">[</span>Wed<span class="w"> </span>Jan<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">20</span>:45:36.955855<span class="w"> </span><span class="m">2022</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>lua:debug<span class="o">]</span><span class="w"> </span><span class="o">[</span>pid<span class="w"> </span><span class="m">39</span>:tid<span class="w"> </span><span class="m">140070995539712</span><span class="o">]</span><span class="w"> </span>@/opt/ood/mod_ood_proxy/lib/ood/user_map.lua<span class="o">(</span><span class="m">21</span><span class="o">)</span>:<span class="w"> </span><span class="o">[</span>client<span class="w"> </span><span class="m">10</span>.0.2.100:40172<span class="o">]</span><span class="w"> </span>Mapped<span class="w"> </span><span class="s1">&#39;jeff@localhost&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="s1">&#39;jeff&#39;</span><span class="w"> </span><span class="o">[</span><span class="m">0</span>.089<span class="w"> </span>ms<span class="o">]</span>,<span class="w"> </span>referer:<span class="w"> </span>http://localhost:5556/

@@ -143,7 +143,7 @@ a single app can serve both traditional HPC as well as Kubernetes.</p>
 this document is to describe how to write apps specifically for a Kubernetes cluster,
 so it skips a lot of important details about app development that may be found in
 other tutorials like <a class="reference internal" href="add-jupyter.html#app-development-tutorials-interactive-apps-add-jupyter"><span class="std std-ref">Add a Jupyter App</span></a>.</p>
-<p>We’re going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_osc_jupyter">bc osc jupyter</a> app which is OSC’s production Jupyter app. You can fork, clone
+<p>We're going to be looking at the <a class="reference external" href="https://github.com/OSC/bc_osc_jupyter">bc osc jupyter</a> app which is OSC's production Jupyter app. You can fork, clone
 and modify for your site.  This page also holds the <a class="reference internal" href="#submit-yml-in-full">submit.yml in full</a> for reference.</p>
 <p>Refer to <a class="reference internal" href="k8s-jupyter.html#app-development-tutorials-interactive-apps-k8s-jupyter"><span class="std std-ref">the interactive K8s Jupyter app</span></a> for
 additional details on items defined in <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> as well as a more traditional container approach.</p>
@@ -153,7 +153,7 @@ additional details on items defined in <code class="docutils literal notranslate
 the OS packages present on the HPC environment.  The OS of the container itself would also
 need to compatible with packages installed on HPC environment so if you run RHEL 8 on HPC
 you would also need to run RHEL 8 inside the container.</p>
-<p>Things like Lmod and HPC applications will need to be run inside the Pod’s container just like
+<p>Things like Lmod and HPC applications will need to be run inside the Pod's container just like
 if a job was spawned in a traditional HPC resource manager.</p>
 </section>
 <section id="switch-between-slurm-and-kubernetes">
@@ -181,14 +181,14 @@ script:
 </section>
 <section id="container-spec">
 <h2>container spec<a class="headerlink" href="#container-spec" title="Link to this heading"></a></h2>
-<p>Let’s look at this section first of the Kubernetes block.  Here you must specify the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">image</span></code>
+<p>Let's look at this section first of the Kubernetes block.  Here you must specify the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">image</span></code>
 and <code class="docutils literal notranslate"><span class="pre">command</span></code>.  The name determines the Pod Id (the job name in HPC parlance).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">image</span></code> should be the HPC container image and <code class="docutils literal notranslate"><span class="pre">command</span></code> will be the job script that has been adapted to
-work with both SLURM and Kubernetes.  The <code class="docutils literal notranslate"><span class="pre">command</span></code> will be run from the user’s home directory and will cover mount
+work with both SLURM and Kubernetes.  The <code class="docutils literal notranslate"><span class="pre">command</span></code> will be run from the user's home directory and will cover mount
 requirements in <a class="reference internal" href="#kubernetes-mount-requirements"><span class="std std-ref">mount requirements</span></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>These examples use images from the Ohio SuperComputer Center’s private registry. They will
+<p>These examples use images from the Ohio SuperComputer Center's private registry. They will
 not work at your site as this registry requires authentication.</p>
 </div>
 <p>One important aspect of the <code class="docutils literal notranslate"><span class="pre">command</span></code> is that the job script executed is built using the standard <code class="docutils literal notranslate"><span class="pre">before.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">script.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">after.sh</span></code> that one would normally use to build the job script for interactive apps running
