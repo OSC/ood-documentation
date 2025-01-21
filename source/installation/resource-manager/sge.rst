@@ -32,21 +32,21 @@ cluster looks like:
 
 with the following configuration options:
 
-adapter
+``adapter``
   This is set to ``sge``.
-cluster
+``cluster``
   The Grid Engine cluster name. *Optional*
-bin
+``bin``
   The path to the Grid Engine client installation binaries.
-sge_root
+``sge_root``
   The path to the root directory of the Grid Engine installation. *Default:* ``/var/lib/gridengine``
-conf
+``conf``
   The path to the Grid Engine configuration file for this cluster. *Optional*
-libdrmaa_path
-  The full path to libdrmaa.so. Provide this to enable use of libdrmaa for more precise job status reporting.  *Optional*
-submit_host
+``libdrmaa_path``
+  The full path to ``libdrmaa.so``. Provide this to enable use of ``libdrmaa`` for more precise job status reporting.  *Optional*
+``submit_host``
   A different, optional host to ssh to and *then* issue commands. *Optional*
-bin_overrides
+``bin_overrides``
   Replacements/wrappers for Grid Engine's job submission and control clients. *Optional*
 
   Supports the following clients:
@@ -59,7 +59,7 @@ bin_overrides
 
 .. tip::
 
-   DRMAA improves OnDemand's ability to report on the precise status of jobs. To use this feature ensure that libdrmaa.so for Grid Engine is installed or built and set the config value for ``libdrmaa_path`` and ``sge_root``. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.
+   DRMAA improves OnDemand's ability to report on the precise status of jobs. To use this feature ensure that ``libdrmaa.so`` for Grid Engine is installed or built and set the configuration value for ``libdrmaa_path`` and ``sge_root``. If DRMAA is not installed then OnDemand is unable to get a precise job status for single jobs and will only return either queued or complete.
 
 Common Issues
 -------------
@@ -76,7 +76,7 @@ substitution and there's a syntax error.
     line 156: done < <(tail -f --pid=${SCRIPT_PID} “vnc.log”) &’
 
 What you'll need to do is add a ``script_wrapper`` element to your clusters' configuration like below.
-This sets the sh shell to behave like bash and ensures you've sourced your users' bashrc file.
+This sets the sh shell to behave like bash and ensures you've sourced your users' ``.bashrc`` file.
 
   .. code-block:: yaml
 
