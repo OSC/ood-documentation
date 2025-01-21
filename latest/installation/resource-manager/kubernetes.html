@@ -66,7 +66,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../add-cluster-config.html">Cluster Configuration</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Configuration Schema v2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="torque.html">Torque</a></li>
 <li class="toctree-l2"><a class="reference internal" href="slurm.html">Slurm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lsf.html">LSF</a></li>
@@ -188,36 +188,36 @@ cluster looks like:</p>
 </pre></div>
 </div>
 <dl class="simple">
-<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">adapter</span></code></dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code>.</p>
 </dd>
-<dt>config_file</dt><dd><p>The KUBECONFIG file. <em>Optional</em>. Defaults to ~/.kube/config. Sites can also
-set the KUBECONFIG environment varaible, but this configuration has precedence.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">config_file</span></code></dt><dd><p>The KUBECONFIG file. <em>Optional</em>. Defaults to <code class="docutils literal notranslate"><span class="pre">~/.kube/config</span></code>. Sites can also
+set the KUBECONFIG environment variable, but this configuration has precedence.</p>
 </dd>
-<dt>cluster</dt><dd><p>The cluster name. Saved to and referenced from your KUBECONFIG.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The cluster name. Saved to and referenced from your KUBECONFIG.</p>
 </dd>
-<dt>context</dt><dd><p>The context to use when issuing kubectl commands. <em>Optional</em>. Defaults to cluster
+<dt><code class="docutils literal notranslate"><span class="pre">context</span></code></dt><dd><p>The context to use when issuing kubectl commands. <em>Optional</em>. Defaults to cluster
 when using OIDC authentication. Saved to and referenced from your KUBECONFIG.</p>
 </dd>
-<dt>username_prefix</dt><dd><p>The prefix to your users in your KUBECONFIG. Use this prefix to differentiate between
+<dt><code class="docutils literal notranslate"><span class="pre">username_prefix</span></code></dt><dd><p>The prefix to your users in your KUBECONFIG. Use this prefix to differentiate between
 different clusters (like test and production).</p>
 </dd>
-<dt>namespace_prefix</dt><dd><p>The prefix to your namespace. Use this prefix if you have assertions on what namespaces
+<dt><code class="docutils literal notranslate"><span class="pre">namespace_prefix</span></code></dt><dd><p>The prefix to your namespace. Use this prefix if you have assertions on what namespaces
 are available. I.e., a Kyverno policy that ensures all namespaces are <code class="docutils literal notranslate"><span class="pre">user-\w+</span></code>.</p>
 </dd>
-<dt>all_namespaces</dt><dd><p>A boolean to determine if the user will query for pods in other namespaces.  When false
+<dt><code class="docutils literal notranslate"><span class="pre">all_namespaces</span></code></dt><dd><p>A boolean to determine if the user will query for pods in other namespaces.  When false
 users will only query in their namespace. If true they will query and display pods from
 all namespaces.</p>
 </dd>
-<dt>auto_supplemental_groups:</dt><dd><p>Automatically populate a container’s <code class="docutils literal notranslate"><span class="pre">securityContext.supplementalGroups</span></code> with the users
+<dt><code class="docutils literal notranslate"><span class="pre">auto_supplemental_groups</span></code></dt><dd><p>Automatically populate a container's <code class="docutils literal notranslate"><span class="pre">securityContext.supplementalGroups</span></code> with the users
 supplemental groups.</p>
 </dd>
-<dt>server</dt><dd><p>The kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
+<dt><code class="docutils literal notranslate"><span class="pre">`server</span></code></dt><dd><p>The Kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
 <code class="docutils literal notranslate"><span class="pre">cert_authority_file</span></code> keys.</p>
 </dd>
-<dt>auth:</dt><dd><p>See the notes on <a class="reference internal" href="#authentication">Authentication</a> below.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">auth</span></code></dt><dd><p>See the notes on <a class="reference internal" href="#authentication">Authentication</a> below.</p>
 </dd>
-<dt>mounts:</dt><dd><p>Site wide mount points for all kubernetes jobs. See the
-<a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-jupyter.html#kubernetes-mounts"><span class="std std-ref">documentation on kubernetes mounts</span></a> for more details.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">mounts</span></code></dt><dd><p>Site wide mount points for all Kubernetes jobs. See the
+<a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-jupyter.html#kubernetes-mounts"><span class="std std-ref">documentation on Kubernetes mounts</span></a> for more details.</p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -227,7 +227,7 @@ Kubernetes worker nodes when Batch Connect apps are running.</p>
 </div>
 <section id="per-user-kubernetes">
 <h2>Per User Kubernetes<a class="headerlink" href="#per-user-kubernetes" title="Link to this heading"></a></h2>
-<p>To get kubernetes to act like a Per User resource there are some conventions
+<p>To get Kubernetes to act like a Per User resource there are some conventions
 we put in place. Users only schedule pods in their own namespaces
 and they always run those pods as themselves.</p>
 <p>At most users could be allow to read pods from other namespaces (have sufficient
@@ -236,16 +236,16 @@ Being able to view pods in other namespaces is only applicable to a feature like
 viewing active jobs and seeing pods from other namespaces in that view.</p>
 <p>Second is that we specify the <a class="reference external" href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context">Kubernetes security context</a> such that pods have
 the same UID and GID as the actual user.</p>
-<p>Open OnDemand will always use the users UID and GID as the runAsUser and runAsGroup.
-fsGroup is always the same as runAsGroup. runAsNonRoot is always set to true.
-supplementalGroups are empty by default. One can automatically populate them with a
+<p>Open OnDemand will always use the users UID and GID as the <code class="docutils literal notranslate"><span class="pre">runAsUser</span></code> and <code class="docutils literal notranslate"><span class="pre">runAsGroup</span></code>.
+<code class="docutils literal notranslate"><span class="pre">fsGroup</span></code> is always the same as <code class="docutils literal notranslate"><span class="pre">runAsGroup</span></code>. <code class="docutils literal notranslate"><span class="pre">runAsNonRoot</span></code> is always set to true.
+<code class="docutils literal notranslate"><span class="pre">supplementalGroups</span></code> are empty by default. One can automatically populate them with a
 cluster configuration above or specify them for each app individually.</p>
 <p>You should have policies in place to enforce these.</p>
 </section>
 <section id="bootstrapping-the-kuberenetes-cluster">
 <h2>Bootstrapping the Kuberenetes cluster<a class="headerlink" href="#bootstrapping-the-kuberenetes-cluster" title="Link to this heading"></a></h2>
-<p>Before anyone can use your Kubernetes cluster from Open OnDemand, you’ll need
-to create the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand kubernetes resources</a> on your cluster.</p>
+<p>Before anyone can use your Kubernetes cluster from Open OnDemand, you'll need
+to create the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand Kubernetes resources</a> on your cluster.</p>
 <p>Below is an example of adding the necessary resources:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/OSC/ondemand/master/hooks/k8s-bootstrap/ondemand.yaml
 </pre></div>
@@ -254,10 +254,10 @@ to create the <a class="reference external" href="https://github.com/OSC/ondeman
 <section id="bootstrapping-ondemand-web-node-to-communicate-with-kubernetes">
 <h2>Bootstrapping OnDemand web node to communicate with Kubernetes<a class="headerlink" href="#bootstrapping-ondemand-web-node-to-communicate-with-kubernetes" title="Link to this heading"></a></h2>
 <p>The OnDemand web node <code class="docutils literal notranslate"><span class="pre">root</span></code> user must be configured
-to use the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> service account deployed by the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand kubernetes resources</a> and
+to use the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> service account deployed by the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand Kubernetes resources</a> and
 be able to execute <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> commands.</p>
 <p>First deploy <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> to the OnDemand web node.
-Replace <code class="docutils literal notranslate"><span class="pre">$VERSION</span></code> with the version of the Kubernetes controller, eg. <code class="docutils literal notranslate"><span class="pre">1.21.5</span></code>.</p>
+Replace <code class="docutils literal notranslate"><span class="pre">$VERSION</span></code> with the version of the Kubernetes controller, e.g., <code class="docutils literal notranslate"><span class="pre">1.21.5</span></code>.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-O<span class="w"> </span>/usr/local/bin/kubectl<span class="w"> </span>https://storage.googleapis.com/kubernetes-release/release/v<span class="nv">$VERSION</span>/bin/linux/amd64/kubectl
 chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/kubectl
 </pre></div>
@@ -276,7 +276,7 @@ described here.</p>
 <p>Kubernetes recommends that you use rotating tokens, so we recommend the same.</p>
 </div>
 <p>To do use rotating tokens, you can use the <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">create</span> <span class="pre">token</span></code> API to create  a token
-and save it in a crontab entry. Here’s an example of what you could use to create new tokens
+and save it in a crontab entry. Here's an example of what you could use to create new tokens
 for the <code class="docutils literal notranslate"><span class="pre">root</span></code> user.  The tokens last 9 hours, so you can set a crontab entry for every 8 hours
 to refresh your tokens before they expire.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
@@ -297,7 +297,7 @@ to refresh your tokens before they expire.</p>
 </pre></div>
 </div>
 <p>If you wish to create a non-expiring token, you will need to create the secret through a
-<code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">apply</span></code> command on the yaml below.</p>
+<code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">apply</span></code> command on the YAML below.</p>
 <p>Next extract the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> ServiceAccount token.  Here is an example command to extract
 the token using an account that has ClusterAdmin privileges:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># token.yml</span>
@@ -316,7 +316,7 @@ the token using an account that has ClusterAdmin privileges:</p>
 kubectl<span class="w"> </span>describe<span class="w"> </span>secret<span class="w"> </span><span class="nv">$TOKEN</span><span class="w"> </span>-n<span class="w"> </span>ondemand<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;token:&quot;</span>
 </pre></div>
 </div>
-<p>Below are example commands to bootstrap the kubeconfig for <code class="docutils literal notranslate"><span class="pre">root</span></code> user on the OnDemand web node
+<p>Below are example commands to bootstrap the Kubernetes configuration for <code class="docutils literal notranslate"><span class="pre">root</span></code> user on the OnDemand web node
 using the token from above.  Run these commands as <code class="docutils literal notranslate"><span class="pre">root</span></code> on the OnDemand web node.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes<span class="w"> </span>--server<span class="o">=</span>https://<span class="nv">$CONTROLLER</span>:6443<span class="w"> </span>--certificate-authority<span class="o">=</span><span class="nv">$CACERT</span>
 kubectl<span class="w"> </span>config<span class="w"> </span>set-credentials<span class="w"> </span>ondemand@kubernetes<span class="w"> </span>--token<span class="o">=</span><span class="nv">$TOKEN</span>
@@ -330,7 +330,7 @@ kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span cl
 <li><p><code class="docutils literal notranslate"><span class="pre">$CACERT</span></code> the path to Kubernetes cluster CA cert</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">$TOKEN</span></code> the token for <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> ServiceAccount</p></li>
 </ul>
-<p>Below is an example of verifying the kubeconfig is valid:</p>
+<p>Below is an example of verifying the Kubernetes configuration is valid:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>cluster-info
 </pre></div>
 </div>
@@ -340,18 +340,18 @@ kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span cl
 <h2>Deploy Hooks to bootstrap users Kubernetes configuration<a class="headerlink" href="#deploy-hooks-to-bootstrap-users-kubernetes-configuration" title="Link to this heading"></a></h2>
 <p>We ship with <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/hooks">open ondemand provided hooks</a> to bootstrap users when the login
 to Open OnDemand. These scripts will create their namespace, a networking policy,
-and rolebindings for user and the service accounts in their namespace.</p>
-<p>A user <code class="docutils literal notranslate"><span class="pre">oakley</span></code> would create the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> namespace. If you’ve configured
+and role-bindings for user and the service accounts in their namespace.</p>
+<p>A user <code class="docutils literal notranslate"><span class="pre">oakley</span></code> would create the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> namespace. If you've configured
 to use prefix <code class="docutils literal notranslate"><span class="pre">user-</span></code>, then the namespace would be <code class="docutils literal notranslate"><span class="pre">user-oakley</span></code>.</p>
 <p>The networking policy ensures that pods cannot communicate inbetween namespaces.</p>
 <p>The RoleBindings give user, <code class="docutils literal notranslate"><span class="pre">oakley</span></code> in this case, sufficient privileges
-to the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> namespace.  Refer to the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand kubernetes resources</a>
+to the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> namespace.  Refer to the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand Kubernetes resources</a>
 for details on the roles and privileges created.</p>
-<p>You’ll need to employ <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-pun-pre-hook"><span class="std std-ref">PUN pre hooks</span></a>
+<p>You'll need to employ <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-pun-pre-hook"><span class="std std-ref">PUN pre hooks</span></a>
 to bootstrap your users to this cluster.</p>
-<p>You’ll also have to modify <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/hooks.env</span></code> because <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/hooks">open ondemand provided hooks</a>
+<p>You'll also have to modify <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/hooks.env</span></code> because <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/hooks">open ondemand provided hooks</a>
 require a <code class="docutils literal notranslate"><span class="pre">HOOKENV</span></code> environment variable.</p>
-<p>Here’s what you’ll have to edit in the <code class="docutils literal notranslate"><span class="pre">hook.env.example</span></code> file we ship.</p>
+<p>Here's what you'll have to edit in the <code class="docutils literal notranslate"><span class="pre">hook.env.example</span></code> file we ship.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># /etc/ood/config/hook.env
 
 # required if you changed the items in the cluster.d file
@@ -375,10 +375,10 @@ REGISTRY_DOCKER_CONFIG_JSON=&quot;/some/path/to/docker/config.json&quot;
 USE_JOB_POD_REAPER=false
 </pre></div>
 </div>
-<p>You can refer to <a class="reference external" href="https://github.com/OSC/osc-ood-config/blob/master/hooks/pre-hook.sh">osc’s prehook</a> but we’ll also provide this example.
+<p>You can refer to <a class="reference external" href="https://github.com/OSC/osc-ood-config/blob/master/hooks/pre-hook.sh">osc's prehook</a> but we'll also provide this example.
 As you can see in this pre hook, the username is passed in to the script
 which then defines the <code class="docutils literal notranslate"><span class="pre">HOOKENV</span></code> and calls two <a class="reference external" href="https://github.com/OSC/ondemand/tree/master/hooks">open ondemand provided hooks</a>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">k8s-bootstrap-ondemand.sh</span></code> boostraps the user in the kubernetes cluster as described
+<p><code class="docutils literal notranslate"><span class="pre">k8s-bootstrap-ondemand.sh</span></code> boostraps the user in the Kubernetes cluster as described
 above.</p>
 <p>Since we use OIDC at OSC we use <code class="docutils literal notranslate"><span class="pre">set-k8s-creds.sh</span></code> to add or update the user in their
 <code class="docutils literal notranslate"><span class="pre">~/.kube/config</span></code> with the relevant OIDC credentials.</p>
@@ -427,7 +427,7 @@ authentication.</p>
 is managed outside of Open OnDemand. We will not <code class="docutils literal notranslate"><span class="pre">set-context</span></code>
 or <code class="docutils literal notranslate"><span class="pre">set-cluster</span></code>.</p>
 <p>We will pass <code class="docutils literal notranslate"><span class="pre">--context</span></code> to kubectl commands if you have it configured
-in the cluster config (above). Otherwise, it’s assumed that the current context
+in the cluster configuration (above). Otherwise, it's assumed that the current context
 is set out of bounds.</p>
 </section>
 <section id="oidc-authentication">
@@ -435,7 +435,7 @@ is set out of bounds.</p>
 <p>For OIDC authentication the tokens provided to OnDemand users must be seen as valid for Kubernetes in order for that
 token to be used to authenticate with Kubernetes.
 First both OnDemand and Kubernetes must be using the same OIDC provider.
-In order for the OnDemand token to work with Kubernetes, it’s simplest to
+In order for the OnDemand token to work with Kubernetes, it's simplest to
 configure an <a class="reference internal" href="#oidc-k8-audience"><span class="std std-ref">audience</span></a> on the OnDemand OIDC client.
 An alternative approach would be to update the pre-PUN hooks to perform a <a class="reference internal" href="#oidc-k8-token-exchange"><span class="std std-ref">token exchange</span></a>.
 Another approach would be to use the same OIDC client configuration for OnDemand and Kubernetes.</p>
@@ -448,9 +448,9 @@ Another approach would be to use the same OIDC client configuration for OnDemand
 <span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;odic&#39;</span>
 </pre></div>
 </div>
-<p>This uses the OIDC credentails that you’ve logged in with.  When
+<p>This uses the OIDC credentials that you've logged in with.  When
 the dashboard starts up it will <code class="docutils literal notranslate"><span class="pre">set-context</span></code> and <code class="docutils literal notranslate"><span class="pre">set-cluster</span></code>
-to what you’ve configured.</p>
+to what you've configured.</p>
 <p>We will pass <code class="docutils literal notranslate"><span class="pre">--context</span></code> to kubectl commands. This defaults to
 the cluster but can be something different if you configure it so.</p>
 </section>
@@ -466,12 +466,12 @@ the cluster but can be something different if you configure it so.</p>
 <span class="w">      </span><span class="nt">svc_acct_file</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;~/.gke/my-service-account-file&#39;</span>
 </pre></div>
 </div>
-<p>It’s expected that you have a service account that can then manipulate
-the cluster you’re interacting with. Every user should have a cooresponding
+<p>It's expected that you have a service account that can then manipulate
+the cluster you're interacting with. Every user should have a corresponding
 service account to interact with GKE.</p>
-<p>When the dasbhoard starts up, we use <code class="docutils literal notranslate"><span class="pre">gcloud</span></code> to configure your KUBECONFIG.</p>
-<p>Google Cloud’s Goolge Kubernetes Engine (GKE) needs some more documentation
-on what privileges this serivce account is setup with and how one may bootstrap
+<p>When the dashboard starts up, we use <code class="docutils literal notranslate"><span class="pre">gcloud</span></code> to configure your KUBECONFIG.</p>
+<p>Google Cloud's Google Kubernetes Engine (GKE) needs some more documentation
+on what privileges this service account is setup with and how one may bootstrap
 it.</p>
 </section>
 <section id="oidc-audience">
@@ -505,20 +505,20 @@ client configuration to include the audience of the Kubernetes client.</p>
 <section id="open-ondemand-apps-in-a-kuberenetes-cluster">
 <h2>Open OnDemand apps in a Kuberenetes cluster<a class="headerlink" href="#open-ondemand-apps-in-a-kuberenetes-cluster" title="Link to this heading"></a></h2>
 <p>Kuberenetes is so different from other HPC clusters that the interface we have for
-other schedulers didn’t quite fit.  So Open OnDemand apps developed for kubernetes
-clusters look quite different from other schedulers.  Essentially most things we’ll
+other schedulers didn't quite fit.  So Open OnDemand apps developed for Kubernetes
+clusters look quite different from other schedulers.  Essentially most things we'll
 need are packed into the <code class="docutils literal notranslate"><span class="pre">native</span></code> key of the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> files.</p>
-<p>See the <a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-like-hpc-jupyter.html#app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter"><span class="std std-ref">tutorial for a kubernetes app that behaves like HPC compute</span></a> as well as
-the <a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-jupyter.html#app-development-tutorials-interactive-apps-k8s-jupyter"><span class="std std-ref">tutorial for a kubernetes app</span></a>
+<p>See the <a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-like-hpc-jupyter.html#app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter"><span class="std std-ref">tutorial for a Kubernetes app that behaves like HPC compute</span></a> as well as
+the <a class="reference internal" href="../../tutorials/tutorials-interactive-apps/k8s-jupyter.html#app-development-tutorials-interactive-apps-k8s-jupyter"><span class="std std-ref">tutorial for a Kubernetes app</span></a>
 for more details.</p>
 </section>
 <section id="kyverno-policies">
 <h2>Kyverno Policies<a class="headerlink" href="#kyverno-policies" title="Link to this heading"></a></h2>
-<p>Once Kubernetes is available to OnDemand, it’s possible for users to use <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> to submit arbirary pods to
+<p>Once Kubernetes is available to OnDemand, it's possible for users to use <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> to submit arbitrary pods to
 Kubernetes. To ensure proper security with Kubernetes a policy engine such as <a class="reference external" href="https://kyverno.io">Kyverno</a> can be used to ensure certain
 security standards.</p>
 <p>For OnDemand, many of the <a class="reference external" href="https://github.com/kyverno/kyverno/tree/main/charts/kyverno-policies/templates">Kyverno baseline and restricted sescurity policies</a> will work.  There are also policies that
-can be deployed to ensure the UID/GID of user pods match that user’s UID/GID on the HPC clusters.
+can be deployed to ensure the UID/GID of user pods match that user's UID/GID on the HPC clusters.
 Some <a class="reference external" href="https://github.com/OSC/osc-helm-charts/tree/main/charts/kyverno-policies/templates">example policies</a> do things such as enforce UID/GID and other security standards for OnDemand.
 These policies rely heavily on the fact that OnDemand usage in Kubernetes using a namespace prefix.</p>
 <p>The policies enforcing UID/GID and supplemental groups are using data supplied by
@@ -527,9 +527,9 @@ This tool runs as a deployment inside the Kubernetes cluster.</p>
 </section>
 <section id="enforcing-walltimes">
 <h2>Enforcing Walltimes<a class="headerlink" href="#enforcing-walltimes" title="Link to this heading"></a></h2>
-<p>In order to enforce that OnDemand pods are shut down after so much time, it’s necessary to deploy a service that can
+<p>In order to enforce that OnDemand pods are shut down after so much time, it's necessary to deploy a service that can
 cleanup pods that have run past their walltime.  Also because OnDemand is bootstrapping
-a namespace per user it’s useful to cleanup unused namespaces.</p>
+a namespace per user it's useful to cleanup unused namespaces.</p>
 <p>The OnDemand pods will have the <code class="docutils literal notranslate"><span class="pre">pod.kubernetes.io/lifetime</span></code> annotation set that
 is read by <a class="reference external" href="https://github.com/OSC/job-pod-reaper">job-pod-reaper</a> that will kill pods that have reached their walltime.
 The <a class="reference external" href="https://github.com/OSC/job-pod-reaper">job-pod-reaper</a> service runs as a Deployment inside Kubernetes and will kill
@@ -566,7 +566,7 @@ This tool will delete a namespace based on several factors:</p>
 </section>
 <section id="using-a-private-image-registry">
 <h2>Using a private image registry<a class="headerlink" href="#using-a-private-image-registry" title="Link to this heading"></a></h2>
-<p>OnDemand’s Kubernetes integration can be setup to pull images from a private registry
+<p>OnDemand's Kubernetes integration can be setup to pull images from a private registry
 like <a class="reference external" href="https://goharbor.io/">Harbor</a>.</p>
 <p>In order to pull images from a private registry that requires authentication,
 OnDemand can be configured to setup <a class="reference external" href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/">Image Pull Secrets</a>.
@@ -574,8 +574,8 @@ The OnDemand web node will need a JSON file setup that includes the username and
 to pull images used by OnDemand apps.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Once the OnDemand user’s namespace is given the registry auth secret, it will be readable by the user.
-It’s recommended to use a read-only auth token that has limited to access just images used by OnDemand.</p>
+<p>Once the OnDemand user's namespace is given the registry auth secret, it will be readable by the user.
+It's recommended to use a read-only auth token that has limited to access just images used by OnDemand.</p>
 </div>
 <p>In the following example you can set the following values:</p>
 <ul class="simple">
@@ -597,7 +597,7 @@ chmod<span class="w"> </span><span class="m">0600</span><span class="w"> </span>
 </pre></div>
 </div>
 <p>Once the registry JSON is created you must configure <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/hooks.env</span></code> so OnDemand knows how to bootstrap
-a user’s namespaces with the ability to pull from this registry:</p>
+a user's namespaces with the ability to pull from this registry:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">IMAGE_PULL_SECRET</span><span class="o">=</span><span class="s2">&quot;private-docker-registry&quot;</span>
 <span class="nv">REGISTRY_DOCKER_CONFIG_JSON</span><span class="o">=</span><span class="s2">&quot;/etc/ood/config/image-registry.json&quot;</span>
 </pre></div>

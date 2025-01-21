@@ -161,7 +161,7 @@ configured Interactive Apps. This is accomplished by:</p>
 <p>This assumes you have walked through <a class="reference internal" href="../../../installation/add-cluster-config.html#add-cluster-config"><span class="std std-ref">Cluster Configuration</span></a> for the
 cluster you intend on submitting the Interactive App to.</p>
 </div>
-<p>We will add a <code class="docutils literal notranslate"><span class="pre">custom:</span></code> field to our cluster configuration file if it doesn’t
+<p>We will add a <code class="docutils literal notranslate"><span class="pre">custom:</span></code> field to our cluster configuration file if it doesn't
 already exist and then introduce a custom field (named anything your heart
 desires) with a list of available queues/partitions:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
@@ -181,7 +181,7 @@ desires) with a list of available queues/partitions:</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Be sure to click “Restart Web Server” on the Dashboard every time you edit
+<p>Be sure to click &quot;Restart Web Server&quot; on the Dashboard every time you edit
 the Cluster Configuration file for changes to take effect within the app.</p>
 </div>
 </section>
@@ -231,8 +231,8 @@ Interactive App by removing the following line from this file:</p>
 </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bc_num_hours</span>
 </pre></div>
 </div>
-<p>Now when we refresh the web page for our sandbox Jupyter App we won’t see
-the “Queue” form element anymore.</p>
+<p>Now when we refresh the web page for our sandbox Jupyter App we won't see
+the &quot;Queue&quot; form element anymore.</p>
 </li>
 <li><p>We now add in code that reads in the list of available queues/partitions
 from the cluster configuration file and generates a custom drop-down
@@ -282,7 +282,7 @@ match the cluster defined on the line:</p>
 this list of queues/partitions in the local variable <code class="docutils literal notranslate"><span class="pre">queues</span></code>. It uses a
 pair of <em>expression tags</em> to output a YAML pair list (see the note below).</p>
 <p>Now when we refresh the web page for our sandbox Jupyter App we will see a
-“Queue” form element with a drop-down that lists “queue1” and “queue2”.
+&quot;Queue&quot; form element with a drop-down that lists &quot;queue1&quot; and &quot;queue2&quot;.
 Underneath this will be our custom help message defined above.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -297,7 +297,7 @@ text and the second string in the pair is the option value.</p>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;Toyota&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;toyota&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
-<p>The user will see a list of options: “Volvo”, “Ford”, and “Toyota” to
+<p>The user will see a list of options: &quot;Volvo&quot;, &quot;Ford&quot;, and &quot;Toyota&quot; to
 choose from in the HTML form, but the backend will process a value of
 either <code class="docutils literal notranslate"><span class="pre">volvo</span></code>, <code class="docutils literal notranslate"><span class="pre">ford</span></code>, or <code class="docutils literal notranslate"><span class="pre">toyota</span></code> depending on what the user chose.</p>
 </div>
@@ -308,7 +308,7 @@ either <code class="docutils literal notranslate"><span class="pre">volvo</span>
 <span id="app-development-tutorials-interactive-apps-add-custom-queue-global-static-list-handle-custom-attribute"></span><h2>Handle Custom Attribute in Job Submission<a class="headerlink" href="#handle-custom-attribute-in-job-submission" title="Link to this heading"></a></h2>
 <p>Now that we have our custom form attribute called <code class="docutils literal notranslate"><span class="pre">custom_queue</span></code>, we need to
 tell our app how to handle it when submitting the job. As of right now our app
-has no idea what to do with this value when the user clicks “Launch” after
+has no idea what to do with this value when the user clicks &quot;Launch&quot; after
 filling out the form.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -326,7 +326,7 @@ Interactive App:</p>
 </pre></div>
 </div>
 </li>
-<li><p>We now create a <code class="docutils literal notranslate"><span class="pre">script:</span></code> section if it doesn’t already exist and handle
+<li><p>We now create a <code class="docutils literal notranslate"><span class="pre">script:</span></code> section if it doesn't already exist and handle
 the value of the <code class="docutils literal notranslate"><span class="pre">custom_queue</span></code> attribute submitted by the user:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/ondemand/dev/jupyter/submit.yml.erb</span>
 <span class="nn">---</span>
@@ -337,7 +337,7 @@ the value of the <code class="docutils literal notranslate"><span class="pre">cu
 </span></pre></div>
 </div>
 <p>Where we take advantage of the generic <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script#queue_name-instance_method">OodCore::Job::Script#queue_name</a> method to supply a queue/partition that is resource manager
-(e.g., Slurm, Torque, …) agnostic.</p>
+(e.g., Slurm, Torque, ...) agnostic.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For the queue/partition we do not need to use the <code class="docutils literal notranslate"><span class="pre">native:</span></code> field which

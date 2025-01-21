@@ -159,7 +159,7 @@ serve a response to a request.</p>
 </section>
 <section id="boot-the-application">
 <h2>Boot the application<a class="headerlink" href="#boot-the-application" title="Link to this heading"></a></h2>
-<p>Now that the app’s all setup and implemented, you should be able to
+<p>Now that the app's all setup and implemented, you should be able to
 boot it up.  To do so, simply navigate to <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Sandbox</span> <span class="pre">Apps</span> <span class="pre">(Development)</span></code>
 in the <code class="docutils literal notranslate"><span class="pre">Develop</span></code> menu of your OnDemand installation.</p>
 <p>There you should see this application at the top of the list.  Clicking
@@ -169,7 +169,7 @@ with some extra text about the system. This is your new <a class="reference exte
 </section>
 <section id="application-using-flask-and-a-virtual-environment">
 <h2>Application using Flask and a virtual environment<a class="headerlink" href="#application-using-flask-and-a-virtual-environment" title="Link to this heading"></a></h2>
-<p>The basic application above is fine, but you’ll likely need to add
+<p>The basic application above is fine, but you'll likely need to add
 more dependencies and load those dependencies at runtime.</p>
 <p>So this section goes over adding the <a class="reference external" href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> web framework and having
 the application load the virtual environment that has your dependencies in
@@ -182,8 +182,8 @@ to create one. This will create a subdirectory <code class="docutils literal not
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>python-hello-world
 </pre></div>
 </div>
-<p>Now, let’s create the <code class="docutils literal notranslate"><span class="pre">requriements.txt</span></code> file where we’ll add the application’s
-required libraries. Here, we’re only adding <code class="docutils literal notranslate"><span class="pre">flask</span></code> of any version.</p>
+<p>Now, let's create the <code class="docutils literal notranslate"><span class="pre">requriements.txt</span></code> file where we'll add the application's
+required libraries. Here, we're only adding <code class="docutils literal notranslate"><span class="pre">flask</span></code> of any version.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># requirements.txt
 flask
 </pre></div>
@@ -198,7 +198,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
 <p>In the basic example above, the entire implementation is held within a <code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code>.
 This project is more advanced, so it will include two files. <code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> and
 <code class="docutils literal notranslate"><span class="pre">app.py</span></code>.  <code class="docutils literal notranslate"><span class="pre">app.py</span></code> will hold the logic for the application.</p>
-<p><code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> simply imports the app from the <code class="docutils literal notranslate"><span class="pre">app.py</span></code> file. This is all that’s required
+<p><code class="docutils literal notranslate"><span class="pre">passenger_wsgi.py</span></code> simply imports the app from the <code class="docutils literal notranslate"><span class="pre">app.py</span></code> file. This is all that's required
 for this file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># passenger_wsgi.py</span>
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">MyApp</span> <span class="k">as</span> <span class="n">application</span>
@@ -223,8 +223,8 @@ It imports the <a class="reference external" href="https://flask.palletsprojects
 </section>
 <section id="using-the-virtual-environment">
 <h3>Using the virtual environment<a class="headerlink" href="#using-the-virtual-environment" title="Link to this heading"></a></h3>
-<p>At this point, the app is basically done, but won’t boot up because it
-can’t find <a class="reference external" href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> libraries. We created a virtual environment in a previous
+<p>At this point, the app is basically done, but won't boot up because it
+can't find <a class="reference external" href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> libraries. We created a virtual environment in a previous
 step, now we have to get OnDemand to recognize this environment.</p>
 <p>To do this, we need to create a <cite>bin/python</cite> wrapper file to load the appropriate
 virtual environment.</p>

@@ -164,7 +164,7 @@ given user and subsequently launch the NGINX process as the user.</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-nginx_stage-pun-a">
 <span id="cmdoption-nginx_stage-pun-app-init-url"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;app_init_url&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--app-init-url</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;app_init_url&gt;</span></span><a class="headerlink" href="#cmdoption-nginx_stage-pun-a" title="Link to this definition"></a></dt>
-<dd><p>The URL the user is redirected to if app doesn’t exist.</p>
+<dd><p>The URL the user is redirected to if app doesn't exist.</p>
 </dd></dl>
 
 <dl class="std option">
@@ -177,7 +177,7 @@ given user and subsequently launch the NGINX process as the user.</p>
 <p class="admonition-title">Warning</p>
 <p>If <a class="reference internal" href="#cmdoption-nginx_stage-pun-a"><code class="xref std std-option docutils literal notranslate"><span class="pre">nginx_stage</span> <span class="pre">pun</span> <span class="pre">--app-init-url</span></code></a> is not specified, then the
 server will return a 503 status code when a user requests an app that
-doesn’t have a corresponding NGINX configuration file.</p>
+doesn't have a corresponding NGINX configuration file.</p>
 </div>
 </section>
 <section id="examples">
@@ -187,14 +187,14 @@ process:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nginx_stage<span class="w"> </span>pun<span class="w"> </span>--user<span class="w"> </span><span class="s1">&#39;bob&#39;</span><span class="w"> </span>--app-init-url<span class="w"> </span><span class="s1">&#39;https://ondemand.center.edu/nginx/init?redir=$http_x_forwarded_escaped_uri&#39;</span>
 </pre></div>
 </div>
-<p>This will add a redirect URL if the user accesses an app that doesn’t have a
+<p>This will add a redirect URL if the user accesses an app that doesn't have a
 respective NGINX configuration file.</p>
 <p>To generate <strong>only</strong> the per-user NGINX environment:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nginx_stage<span class="w"> </span>pun<span class="w"> </span>--user<span class="w"> </span><span class="s1">&#39;bob&#39;</span><span class="w"> </span>--skip-nginx
 </pre></div>
 </div>
 <p>This will return the path to the generated PUN configuration file and will not
-run the NGINX process. In addition it won’t add a redirect URL.</p>
+run the NGINX process. In addition it won't add a redirect URL.</p>
 <section id="default-installation">
 <h3>Default Installation<a class="headerlink" href="#default-installation" title="Link to this heading"></a></h3>
 <p>The directory structure that is created when a per-user NGINX process is staged

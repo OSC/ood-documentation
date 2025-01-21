@@ -41,22 +41,22 @@ cluster looks like:
 
 with the following configuration options:
 
-adapter
+``adapter``
   This is set to ``slurm``.
-cluster
+``cluster``
   The Slurm cluster name. *Optional*, passed to SLURM as ``-M <cluster>``
 
   .. warning::
     Using the ``cluster`` option is discouraged. This is because maintenance
     outages on the Slurm database will propagate to Open OnDemand.  Instead sites
     should use different ``conf`` files for each cluster to limit maintenance outages.
-bin
+``bin``
   The path to the Slurm client installation binaries.
-conf
+``conf``
   The path to the Slurm configuration file for this cluster. *Optional*
-submit_host
+``submit_host``
   A different, optional host to ssh to and *then* issue commands. *Optional*
-bin_overrides
+``bin_overrides``
   Replacements/wrappers for Slurm's job submission and control clients. *Optional*
 
   Supports the following clients:
@@ -66,8 +66,8 @@ bin_overrides
   - `scontrol`
   - `scancel`
 
-copy_environment
-  Copies the environment of the PUN when issuing CLI commands. Default behaviour
+``copy_environment``
+  Copies the environment of the PUN when issuing CLI commands. Default behavior
   for Open OnDemand is to use ``--export=NONE`` flag. Setting this to true will
   cause Open OnDemand to issue CLI commands with ``--export=ALL``. Though this may
   cause issues as the PUN's environment is very different than a regular shell session.

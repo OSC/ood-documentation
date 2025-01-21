@@ -8,7 +8,7 @@ Open OnDemand uses these packages, among many others.
 - Apache HTTP Server 2.4
 - Ruby 3.3 with :command:`rake`, :command:`bundler`, and development
   libraries
-- Node.js 20
+- NodeJs 20
 
 .. note::
 

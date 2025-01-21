@@ -39,37 +39,37 @@ cluster looks like:
       ssh_allow: false
 
 
-adapter
+``adapter``
   This is set to ``kubernetes``.
-config_file
-  The KUBECONFIG file. *Optional*. Defaults to ~/.kube/config. Sites can also
-  set the KUBECONFIG environment varaible, but this configuration has precedence.
-cluster
+``config_file``
+  The KUBECONFIG file. *Optional*. Defaults to ``~/.kube/config``. Sites can also
+  set the KUBECONFIG environment variable, but this configuration has precedence.
+``cluster``
   The cluster name. Saved to and referenced from your KUBECONFIG.
-context
+``context``
   The context to use when issuing kubectl commands. *Optional*. Defaults to cluster
   when using OIDC authentication. Saved to and referenced from your KUBECONFIG.
-username_prefix
+``username_prefix``
   The prefix to your users in your KUBECONFIG. Use this prefix to differentiate between
   different clusters (like test and production).
-namespace_prefix
+``namespace_prefix``
   The prefix to your namespace. Use this prefix if you have assertions on what namespaces
   are available. I.e., a Kyverno policy that ensures all namespaces are ``user-\w+``.
-all_namespaces
+``all_namespaces``
   A boolean to determine if the user will query for pods in other namespaces.  When false
   users will only query in their namespace. If true they will query and display pods from
   all namespaces.
-auto_supplemental_groups:
+``auto_supplemental_groups``
   Automatically populate a container's ``securityContext.supplementalGroups`` with the users
   supplemental groups.
-server
-  The kubernetes server to communicate with.  This field is a map with ``endpoint`` and
+```server``
+  The Kubernetes server to communicate with.  This field is a map with ``endpoint`` and
   ``cert_authority_file`` keys.
-auth:
+``auth``
   See the notes on `Authentication`_ below.
-mounts:
-  Site wide mount points for all kubernetes jobs. See the 
-  :ref:`documentation on kubernetes mounts <kubernetes-mounts>` for more details.
+``mounts``
+  Site wide mount points for all Kubernetes jobs. See the 
+  :ref:`documentation on Kubernetes mounts <kubernetes-mounts>` for more details.
 
 .. note::
 
@@ -79,7 +79,7 @@ mounts:
 Per User Kubernetes
 *******************
 
-To get kubernetes to act like a Per User resource there are some conventions
+To get Kubernetes to act like a Per User resource there are some conventions
 we put in place. Users only schedule pods in their own namespaces
 and they always run those pods as themselves.
 
@@ -91,9 +91,9 @@ viewing active jobs and seeing pods from other namespaces in that view.
 Second is that we specify the `Kubernetes security context`_ such that pods have
 the same UID and GID as the actual user.
 
-Open OnDemand will always use the users UID and GID as the runAsUser and runAsGroup.
-fsGroup is always the same as runAsGroup. runAsNonRoot is always set to true.
-supplementalGroups are empty by default. One can automatically populate them with a
+Open OnDemand will always use the users UID and GID as the ``runAsUser`` and ``runAsGroup``.
+``fsGroup`` is always the same as ``runAsGroup``. ``runAsNonRoot`` is always set to true.
+``supplementalGroups`` are empty by default. One can automatically populate them with a
 cluster configuration above or specify them for each app individually.
 
 You should have policies in place to enforce these.
@@ -102,7 +102,7 @@ Bootstrapping the Kuberenetes cluster
 *************************************
 
 Before anyone can use your Kubernetes cluster from Open OnDemand, you'll need
-to create the `open ondemand kubernetes resources`_ on your cluster.
+to create the `open ondemand Kubernetes resources`_ on your cluster.
 
 Below is an example of adding the necessary resources:
 
@@ -115,11 +115,11 @@ Bootstrapping OnDemand web node to communicate with Kubernetes
 **************************************************************
 
 The OnDemand web node ``root`` user must be configured
-to use the ``ondemand`` service account deployed by the `open ondemand kubernetes resources`_ and
+to use the ``ondemand`` service account deployed by the `open ondemand Kubernetes resources`_ and
 be able to execute ``kubectl`` commands.
 
 First deploy ``kubectl`` to the OnDemand web node.
-Replace ``$VERSION`` with the version of the Kubernetes controller, eg. ``1.21.5``.
+Replace ``$VERSION`` with the version of the Kubernetes controller, e.g., ``1.21.5``.
 
 .. code-block:: sh
 
@@ -167,7 +167,7 @@ to refresh your tokens before they expire.
 
 
 If you wish to create a non-expiring token, you will need to create the secret through a
-``kubectl apply`` command on the yaml below.
+``kubectl apply`` command on the YAML below.
 
 Next extract the ``ondemand`` ServiceAccount token.  Here is an example command to extract
 the token using an account that has ClusterAdmin privileges:
@@ -190,7 +190,7 @@ the token using an account that has ClusterAdmin privileges:
   TOKEN=$(kubectl describe serviceaccount ondemand -n ondemand | grep Tokens | awk '{ print $2 }')
   kubectl describe secret $TOKEN -n ondemand | grep "token:"
 
-Below are example commands to bootstrap the kubeconfig for ``root`` user on the OnDemand web node
+Below are example commands to bootstrap the Kubernetes configuration for ``root`` user on the OnDemand web node
 using the token from above.  Run these commands as ``root`` on the OnDemand web node.
 
 .. code-block:: sh
@@ -206,7 +206,7 @@ Replace the following values:
 - ``$CACERT`` the path to Kubernetes cluster CA cert
 - ``$TOKEN`` the token for ``ondemand`` ServiceAccount
 
-Below is an example of verifying the kubeconfig is valid:
+Below is an example of verifying the Kubernetes configuration is valid:
 
 .. code-block:: sh
 
@@ -217,7 +217,7 @@ Deploy Hooks to bootstrap users Kubernetes configuration
 
 We ship with `open ondemand provided hooks`_ to bootstrap users when the login
 to Open OnDemand. These scripts will create their namespace, a networking policy,
-and rolebindings for user and the service accounts in their namespace.
+and role-bindings for user and the service accounts in their namespace.
 
 A user ``oakley`` would create the ``oakley`` namespace. If you've configured
 to use prefix ``user-``, then the namespace would be ``user-oakley``.
@@ -225,7 +225,7 @@ to use prefix ``user-``, then the namespace would be ``user-oakley``.
 The networking policy ensures that pods cannot communicate inbetween namespaces.
 
 The RoleBindings give user, ``oakley`` in this case, sufficient privileges
-to the ``oakley`` namespace.  Refer to the `open ondemand kubernetes resources`_
+to the ``oakley`` namespace.  Refer to the `open ondemand Kubernetes resources`_
 for details on the roles and privileges created.
 
 You'll need to employ :ref:`PUN pre hooks <ood-portal-generator-pun-pre-hook>`
@@ -264,7 +264,7 @@ You can refer to `osc's prehook`_ but we'll also provide this example.
 As you can see in this pre hook, the username is passed in to the script
 which then defines the ``HOOKENV`` and calls two `open ondemand provided hooks`_.
 
-``k8s-bootstrap-ondemand.sh`` boostraps the user in the kubernetes cluster as described
+``k8s-bootstrap-ondemand.sh`` boostraps the user in the Kubernetes cluster as described
 above.
 
 Since we use OIDC at OSC we use ``set-k8s-creds.sh`` to add or update the user in their
@@ -321,7 +321,7 @@ is managed outside of Open OnDemand. We will not ``set-context``
 or ``set-cluster``.
 
 We will pass ``--context`` to kubectl commands if you have it configured
-in the cluster config (above). Otherwise, it's assumed that the current context
+in the cluster configuration (above). Otherwise, it's assumed that the current context
 is set out of bounds.
 
 OIDC Authentication
@@ -345,7 +345,7 @@ Another approach would be to use the same OIDC client configuration for OnDemand
       auth:
         type: 'odic'
 
-This uses the OIDC credentails that you've logged in with.  When
+This uses the OIDC credentials that you've logged in with.  When
 the dashboard starts up it will ``set-context`` and ``set-cluster``
 to what you've configured.
 
@@ -367,13 +367,13 @@ GKE Authentication
         svc_acct_file: '~/.gke/my-service-account-file'
 
 It's expected that you have a service account that can then manipulate
-the cluster you're interacting with. Every user should have a cooresponding
+the cluster you're interacting with. Every user should have a corresponding
 service account to interact with GKE. 
 
-When the dasbhoard starts up, we use ``gcloud`` to configure your KUBECONFIG.
+When the dashboard starts up, we use ``gcloud`` to configure your KUBECONFIG.
 
-Google Cloud's Goolge Kubernetes Engine (GKE) needs some more documentation
-on what privileges this serivce account is setup with and how one may bootstrap
+Google Cloud's Google Kubernetes Engine (GKE) needs some more documentation
+on what privileges this service account is setup with and how one may bootstrap
 it.
 
 .. _oidc_k8_audience:
@@ -412,19 +412,19 @@ Open OnDemand apps in a Kuberenetes cluster
 *******************************************
 
 Kuberenetes is so different from other HPC clusters that the interface we have for
-other schedulers didn't quite fit.  So Open OnDemand apps developed for kubernetes
+other schedulers didn't quite fit.  So Open OnDemand apps developed for Kubernetes
 clusters look quite different from other schedulers.  Essentially most things we'll
 need are packed into the ``native`` key of the ``submit.yml.erb`` files.
 
-See the :ref:`tutorial for a kubernetes app that behaves like HPC compute <app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter>` as well as
-the :ref:`tutorial for a kubernetes app <app-development-tutorials-interactive-apps-k8s-jupyter>`
+See the :ref:`tutorial for a Kubernetes app that behaves like HPC compute <app-development-tutorials-interactive-apps-k8s-like-hpc-jupyter>` as well as
+the :ref:`tutorial for a Kubernetes app <app-development-tutorials-interactive-apps-k8s-jupyter>`
 for more details.
 
 
 Kyverno Policies
 ****************
 
-Once Kubernetes is available to OnDemand, it's possible for users to use ``kubectl`` to submit arbirary pods to
+Once Kubernetes is available to OnDemand, it's possible for users to use ``kubectl`` to submit arbitrary pods to
 Kubernetes. To ensure proper security with Kubernetes a policy engine such as `Kyverno`_ can be used to ensure certain
 security standards.
 
@@ -529,7 +529,7 @@ a user's namespaces with the ability to pull from this registry:
 
 .. _kubernetes security context: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context
 .. _open ondemand provided hooks: https://github.com/OSC/ondemand/tree/master/hooks
-.. _open ondemand kubernetes resources: https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml
+.. _open ondemand Kubernetes resources: https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml
 .. _osc's prehook: https://github.com/OSC/osc-ood-config/blob/master/hooks/pre-hook.sh
 .. _kyverno: https://kyverno.io
 .. _kyverno baseline and restricted sescurity policies: https://github.com/kyverno/kyverno/tree/main/charts/kyverno-policies/templates

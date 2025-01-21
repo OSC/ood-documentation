@@ -66,7 +66,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../add-cluster-config.html">Cluster Configuration</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Config Schema v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Configuration Schema v2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="torque.html">Torque</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Slurm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lsf.html">LSF</a></li>
@@ -138,8 +138,8 @@
 cluster looks like:</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Open OnDemand’s Slurm support defaults to issuing CLI commands with
-the <code class="docutils literal notranslate"><span class="pre">--export</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">NONE</span></code>, when Slurm’s default is <code class="docutils literal notranslate"><span class="pre">ALL</span></code>.
+<p>Open OnDemand's Slurm support defaults to issuing CLI commands with
+the <code class="docutils literal notranslate"><span class="pre">--export</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">NONE</span></code>, when Slurm's default is <code class="docutils literal notranslate"><span class="pre">ALL</span></code>.
 This can cause issues with jobs that require <code class="docutils literal notranslate"><span class="pre">srun</span></code>.</p>
 <p>Workarounds are currently to <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SLURM_EXPORT_ENV=ALL</span></code>
 in a <a class="reference internal" href="../../reference/files/submit-yml/basic-bc-options.html#script-wrapper"><span class="std std-ref">script_wrapper</span></a> before any job scripts run.</p>
@@ -168,9 +168,9 @@ that the PUNs environment is very different from regular shell sessions.</p>
 </div>
 <p>with the following configuration options:</p>
 <dl>
-<dt>adapter</dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">adapter</span></code></dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</p>
 </dd>
-<dt>cluster</dt><dd><p>The Slurm cluster name. <em>Optional</em>, passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The Slurm cluster name. <em>Optional</em>, passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> option is discouraged. This is because maintenance
@@ -178,13 +178,13 @@ outages on the Slurm database will propagate to Open OnDemand.  Instead sites
 should use different <code class="docutils literal notranslate"><span class="pre">conf</span></code> files for each cluster to limit maintenance outages.</p>
 </div>
 </dd>
-<dt>bin</dt><dd><p>The path to the Slurm client installation binaries.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">bin</span></code></dt><dd><p>The path to the Slurm client installation binaries.</p>
 </dd>
-<dt>conf</dt><dd><p>The path to the Slurm configuration file for this cluster. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">conf</span></code></dt><dd><p>The path to the Slurm configuration file for this cluster. <em>Optional</em></p>
 </dd>
-<dt>submit_host</dt><dd><p>A different, optional host to ssh to and <em>then</em> issue commands. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">submit_host</span></code></dt><dd><p>A different, optional host to ssh to and <em>then</em> issue commands. <em>Optional</em></p>
 </dd>
-<dt>bin_overrides</dt><dd><p>Replacements/wrappers for Slurm’s job submission and control clients. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code></dt><dd><p>Replacements/wrappers for Slurm's job submission and control clients. <em>Optional</em></p>
 <p>Supports the following clients:</p>
 <ul class="simple">
 <li><p><cite>sbatch</cite></p></li>
@@ -193,10 +193,10 @@ should use different <code class="docutils literal notranslate"><span class="pre
 <li><p><cite>scancel</cite></p></li>
 </ul>
 </dd>
-<dt>copy_environment</dt><dd><p>Copies the environment of the PUN when issuing CLI commands. Default behaviour
+<dt><code class="docutils literal notranslate"><span class="pre">copy_environment</span></code></dt><dd><p>Copies the environment of the PUN when issuing CLI commands. Default behavior
 for Open OnDemand is to use <code class="docutils literal notranslate"><span class="pre">--export=NONE</span></code> flag. Setting this to true will
 cause Open OnDemand to issue CLI commands with <code class="docutils literal notranslate"><span class="pre">--export=ALL</span></code>. Though this may
-cause issues as the PUN’s environment is very different than a regular shell session.</p>
+cause issues as the PUN's environment is very different than a regular shell session.</p>
 </dd>
 </dl>
 <div class="admonition note">

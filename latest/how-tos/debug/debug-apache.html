@@ -135,7 +135,7 @@
 <span id="apache-extra"></span><h1>Apache httpd tips<a class="headerlink" href="#apache-httpd-tips" title="Link to this heading"></a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>While this page is helpful it is no replacement for <a class="reference external" href="https://httpd.apache.org/docs/current/getting-started.html">Apache Httpd’s documentation</a>. If
+<p>While this page is helpful it is no replacement for <a class="reference external" href="https://httpd.apache.org/docs/current/getting-started.html">Apache Httpd's documentation</a>. If
 you are an administrator responsible for Open OnDemand, you are now an administrator of
 Apache Httpd as well.  As such, you should get comfortable with it as from time to time you will
 have to troubleshoot it.</p>
@@ -159,14 +159,14 @@ have to troubleshoot it.</p>
 </section>
 <section id="show-virtualhosts">
 <span id="id1"></span><h2>Show VirtualHosts<a class="headerlink" href="#show-virtualhosts" title="Link to this heading"></a></h2>
-<p>OpenOnDemand creates it’s own <a class="reference external" href="https://httpd.apache.org/docs/2.4/vhosts/">VirtualHost</a> in Apache.  Apache will route
+<p>OpenOnDemand creates it's own <a class="reference external" href="https://httpd.apache.org/docs/2.4/vhosts/">VirtualHost</a> in Apache.  Apache will route
 requests based off of the hostname in the request to different VirtualHosts
 and the ServerName you may have configured.</p>
 <p>Showing virtualhosts can help debug Apache request routing.  The output from these
 commands will show you how Apache is routing based off of the ServerName in the VirtualHost.</p>
-<p>If you’re seeing the default Apache web-page you likely have to <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-servername"><span class="std std-ref">configure the ServerName</span></a>
-which corresponds directly to <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/core.html#servername">Apache’s ServerName configuration</a> (and restart Apache).</p>
-<p>Or you’re using the wrong hostname in your browser.</p>
+<p>If you're seeing the default Apache web-page you likely have to <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-servername"><span class="std std-ref">configure the ServerName</span></a>
+which corresponds directly to <a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/core.html#servername">Apache's ServerName configuration</a> (and restart Apache).</p>
+<p>Or you're using the wrong hostname in your browser.</p>
 <blockquote>
 <div><div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">RHEL/Rocky 8 &amp; 9</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Ubuntu &amp; Debian</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>/sbin/httpd<span class="w"> </span>-S
@@ -180,8 +180,8 @@ which corresponds directly to <a class="reference external" href="https://httpd.
 </section>
 <section id="performance-tuning">
 <h2>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading"></a></h2>
-<p>If you’re servicing many clients at time (more than 50) you will likely need to change the
-<a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mpm_common.html">Apache Httpd’s MPM configuration</a>. The default configuration may degrade service when
+<p>If you're servicing many clients at time (more than 50) you will likely need to change the
+<a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mpm_common.html">Apache Httpd's MPM configuration</a>. The default configuration may degrade service when
 httpd has to serve many clients (I.e., when you have a lot of customers using Open OnDemand).</p>
 <p>We suggest configurations similar to this.</p>
 <div class="admonition note">
@@ -189,7 +189,7 @@ httpd has to serve many clients (I.e., when you have a lot of customers using Op
 <p>The most important directives are <cite>MaxRequestWorkers</cite>, which controls the number of simultaneous
 requests and <cite>ServerLimit</cite> combined with <cite>ThreadsPerChild</cite>, which when multiplied must be at least as big as
 the value for <cite>MaxRequestWorkers</cite>.</p>
-<p>It’s best to keep <cite>ServerLimit</cite> at or below the number of cores for the OnDemand web host.</p>
+<p>It's best to keep <cite>ServerLimit</cite> at or below the number of cores for the OnDemand web host.</p>
 <p>The example configuration below can handle about 256 simultaneous requests.
 Use this as an example and increase or decrease <cite>MaxRequestWorkers</cite> accordingly
 (based on your resources, CPUs &amp; memory and how much traffic you anticipate) then recalculate
