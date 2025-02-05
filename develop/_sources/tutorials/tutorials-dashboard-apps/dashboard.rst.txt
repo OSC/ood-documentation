@@ -23,7 +23,7 @@ Create a Development Dashboard
 ------------------------------
 #. ``clone`` the OOD repository into: ``cd ~/ondemand/misc`` then ``git clone git@github.com:OSC/ondemand.git``
 #. Work out of the ``dev`` directory/space: ``cd ~/ondemand/dev/``.
-#. Symlink to the ``dashboard`` app in the cloned repository: ``ln -s ../misc/ondemand/apps/dashboard/dashboard/ dashboard``
+#. Symlink to the ``dashboard`` app in the cloned repository: ``ln -s ../misc/ondemand/apps/dashboard/ dashboard``
 #. Make a branch and to begin word on your development dashboard: ``git checkout -b dev_work`` 
 #. Rebuild the ood dashboard app:  ``bin/setup``.
 #. Navigate to the Sandbox and launch your ``dashboard`` app to use the ``dev_work``.
