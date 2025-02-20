@@ -625,7 +625,7 @@ Configuration Properties
   as indicated by the command below. Open OnDemand will read these files and
   potentially show them in a from for a cluster called **my_cluster**.
 
-  ``$LMOD_DIR/spider -o spider-json $MODULEPATH > /some/directory/my_cluster.json``
+  ``$LMOD_DIR/spider -o spider-json $MODULEPATH | sponge /some/directory/my_cluster.json``
 
   Default
     Null. No directory given.
