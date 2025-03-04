@@ -7,13 +7,13 @@ Open OnDemand can use SystemD timers to schedule a 'job'.  Sites can use this ad
 lived jobs or to use resources outside of your compute pool (like login nodes).
 
 
-The adapter is similar to the linuxhost adaptor with the following options:
+The adapter is similar to the ``linuxhost`` adapter with the following options:
 
 
 ``submit_host``
   The address to submit to.
 ``ssh_hosts``
-  System names that are connected to via ssh (list all posabilities if the above is a RR-DNS name).
+  System names that are connected to via ssh (list all possibilities if the above is a RR-DNS name).
 ``timeout``
   is used to set a 'walltime' after which the job is killed.
 ``debug``
@@ -24,7 +24,7 @@ The adapter is similar to the linuxhost adaptor with the following options:
   If you want to provide a non-standard ssh identify file (equivalent to the -i option in SSH).
 
 Example Cluster Configuration
----------------------
+-----------------------------
 
 A YAML cluster configuration file for a Linux host might look like:
 
