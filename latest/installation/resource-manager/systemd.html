@@ -75,7 +75,10 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccq.html">Cloudy Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Kubernetes</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Systemd</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Systemd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-cluster-configuration">Example Cluster Configuration</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-configs.html">Advanced Resource Manager Configurations</a></li>
@@ -134,9 +137,50 @@
              
   <section id="systemd">
 <span id="resource-manager-systemd"></span><h1>Systemd<a class="headerlink" href="#systemd" title="Link to this heading"></a></h1>
-<p>Coming in 2.1!</p>
 <p>Open OnDemand can use SystemD timers to schedule a 'job'.  Sites can use this adapter for short
 lived jobs or to use resources outside of your compute pool (like login nodes).</p>
+<p>The adapter is similar to the <code class="docutils literal notranslate"><span class="pre">linuxhost</span></code> adapter with the following options:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">submit_host</span></code></dt><dd><p>The address to submit to.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssh_hosts</span></code></dt><dd><p>System names that are connected to via ssh (list all possibilities if the above is a RR-DNS name).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">timeout</span></code></dt><dd><p>is used to set a 'walltime' after which the job is killed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug</span></code></dt><dd><p>enable debugging for the cluster.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">strict_host_checking</span></code></dt><dd><p>will force SSH to use strict host checking.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssh_keyfile</span></code></dt><dd><p>If you want to provide a non-standard ssh identify file (equivalent to the -i option in SSH).</p>
+</dd>
+</dl>
+<section id="example-cluster-configuration">
+<h2>Example Cluster Configuration<a class="headerlink" href="#example-cluster-configuration" title="Link to this heading"></a></h2>
+<p>A YAML cluster configuration file for a Linux host might look like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/owens_login.yml</span>
+<span class="nn">---</span>
+<span class="nt">v2</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Owens&quot;</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span>
+<span class="w">    </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span>
+<span class="hll"><span class="w">  </span><span class="nt">job</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;systemd&quot;</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">submit_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span><span class="w">  </span><span class="c1"># This is the head for a login round robin</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">ssh_hosts</span><span class="p">:</span><span class="w"> </span><span class="c1"># These are the actual login nodes</span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login01.hpc.osc.edu</span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login02.hpc.osc.edu</span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owens-login03.hpc.osc.edu</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">site_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span class="hll"><span class="w">    </span><span class="c1"># Enabling strict host checking may cause the adapter to fail if the user&#39;s known_hosts does not have all the roundrobin hosts</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">strict_host_checking</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">ssh_keyfile</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;~/.ssh/non_standard_key_location.pem&quot;</span>
+</span></pre></div>
+</div>
+</section>
 </section>
 
 
