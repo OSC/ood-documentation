@@ -23,8 +23,6 @@ The adapter is similar to the linuxhost adaptor with the following options:
 ``ssh_keyfile``
   If you want to provide a non-standard ssh identify file (equivalent to the -i option in SSH).
 
-.. note:: There are many recipes for managing processes on arbitrary Linux hosts, and we will be exploring others in future development of this adapter.
-
 Example Cluster Configuration
 ---------------------
 
