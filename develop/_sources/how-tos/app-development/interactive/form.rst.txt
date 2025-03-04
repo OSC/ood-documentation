@@ -486,7 +486,7 @@ are:
 .. describe:: min (Integer, null)
 
      specifies minimum value for this item, which must not be greater than its
-     maximum value (only applies to widget: ``number_field``)
+     maximum value (only applies to widget: ``number_field``) - Client side validation only.
 
      Default
        No minimum value
@@ -505,7 +505,7 @@ are:
 .. describe:: max (Integer, null)
 
      specifies maximum value for this item, which must not be less than its
-     minimum value (only applies to widget: ``number_field``)
+     minimum value (only applies to widget: ``number_field``) - Client side validation only.
 
      Default
        No maximum value
