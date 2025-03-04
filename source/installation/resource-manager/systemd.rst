@@ -24,7 +24,7 @@ The adapter is similar to the linuxhost adaptor with the following options:
   If you want to provide a non-standard ssh identify file (equivalent to the -i option in SSH).
 
 Example Cluster Configuration
----------------------
+-----------------------------
 
 A YAML cluster configuration file for a Linux host might look like:
 
