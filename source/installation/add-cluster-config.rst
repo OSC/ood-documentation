@@ -81,8 +81,10 @@ client binaries.
    resource-manager/kubernetes
    resource-manager/systemd
    resource-manager/bin-override-example
+   resource-manager/coder
    resource-manager/test
    resource-manager/advanced-configs
+
 
 .. _puppet module: https://forge.puppet.com/modules/osc/openondemand
 .. _ansible role: https://galaxy.ansible.com/osc/open_ondemand
