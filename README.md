@@ -5,19 +5,20 @@
 [![Documentation License](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0)
 
 - Website: http://openondemand.org/
-- Documentation: https://osc.github.io/ood-documentation/master/
+- Documentation: https://osc.github.io/ood-documentation/latest/
 - Main code repo: https://github.com/OSC/ondemand
 - Core library repo: https://github.com/OSC/ood_core
 - Original repo with JOSS publication: https://github.com/OSC/Open-OnDemand
 
 ## Usage
 
-Go to https://osc.github.io/ood-documentation/master/ to see the latest published release version.
+Visit the [latest Open OnDemand documentation](https://osc.github.io/ood-documentation/latest/) 
+to see the most recently published release.
 
-Or select your version:
+To view changes that have not yet been released, see the [development documentation](https://osc.github.io/ood-documentation/develop/).
 
-- [Development](https://osc.github.io/ood-documentation/develop/)
-- [Latest Stable](https://osc.github.io/ood-documentation/latest/)
+Open OnDemand also maintains documentation for past versions. To access them, navigate 
+to the bottom of the sidebar menu in the documentation.  
 
 
 ## Development
