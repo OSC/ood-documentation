@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Form Widgets &mdash; Open OnDemand 4.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=3304f9e4"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Render Template" href="template.html" />
+    <link rel="prev" title="Form Widgets" href="form-widgets.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app-development.html">App Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../enabling-development-mode.html">Enabling App Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../interactive.html">Interactive Apps</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="manifest.html">Manifest YAML files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">User Form (<code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form-widgets.html">Form Widgets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Dynamic Form Widgets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#your-own-form-js">Your own <code class="docutils literal notranslate"><span class="pre">form.js</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hiding-select-options">Hiding select options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hiding-entire-elements">Hiding entire elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-element-labels">Dynamic Element Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-min-and-maxes">Dynamic Min and Maxes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-values-based-on-other-elements">Setting values based on other elements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="template.html">Render Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Job Submission (<code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="view.html">Connection View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sub-apps.html">Sub-Apps and Re-configuring existing apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conn-params.html">Connection Parameters <code class="docutils literal notranslate"><span class="pre">conn_params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="additional-info.html">Adding Additional Information to the session cards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="saved-settings.html">Saving interactive application settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html">Advanced Interactive Application Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../app-sharing.html">App Sharing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app-development.html">App Development</a></li>
+          <li class="breadcrumb-item"><a href="../interactive.html">Interactive Apps</a></li>
+      <li class="breadcrumb-item active">Dynamic Form Widgets</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/how-tos/app-development/interactive/dynamic-form-widgets.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dynamic-form-widgets">
+<span id="dynamic-bc-apps"></span><h1>Dynamic Form Widgets<a class="headerlink" href="#dynamic-form-widgets" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature was added in version 2.0.</p>
+</div>
+<p>Prior to version 2.0, sites would have to make their own custom <cite>form.js</cite> to
+add dynamic behavior for batch connect forms.  While sites can still have their
+own custom JavaScript, 2.0 added out of the box support for common use cases based
+on configuration.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Form fields use underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) as a word separator and these directives use hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>).
+So when referencing the element <code class="docutils literal notranslate"><span class="pre">node_type</span></code> you will need to reference it as <code class="docutils literal notranslate"><span class="pre">node-type</span></code>.</p>
+</div>
+<p>To enable any of the dynamic batch connect capabilities described in this page,
+set the <a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#bc-dynamic-js"><span class="std std-ref">dynamic batch connect setting</span></a>.</p>
+<section id="your-own-form-js">
+<h2>Your own <code class="docutils literal notranslate"><span class="pre">form.js</span></code><a class="headerlink" href="#your-own-form-js" title="Link to this heading"></a></h2>
+<p>If we don't support what you need for your application to be dynamic, then you can add your
+own <code class="docutils literal notranslate"><span class="pre">form.js</span></code> in the root of the project. It is free form JavaScript, so most anything is
+allowed. <a class="reference external" href="https://jquery.com/">jQuery</a> is available to interact with elements.</p>
+</section>
+<section id="hiding-select-options">
+<h2>Hiding select options<a class="headerlink" href="#hiding-select-options" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-option-for</span></code> directive allows you to hide select choices of an element based on
+the current value of a different select element.</p>
+<p>Let's use this example: We have two clusters, <code class="docutils literal notranslate"><span class="pre">oakley</span></code> and <code class="docutils literal notranslate"><span class="pre">ruby</span></code>. The <code class="docutils literal notranslate"><span class="pre">oakley</span></code> cluster
+has GPUs but <code class="docutils literal notranslate"><span class="pre">ruby</span></code> does not.</p>
+<p>So, we'd like to give the choice of <code class="docutils literal notranslate"><span class="pre">node_type</span></code> to show <code class="docutils literal notranslate"><span class="pre">gpu</span></code> when the user has
+the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> cluster selected, but not when <code class="docutils literal notranslate"><span class="pre">ruby</span></code> is selected.</p>
+<p>Everything is shown by default so we need to configure the app such that
+<code class="docutils literal notranslate"><span class="pre">gpu</span></code> option is hidden when the <code class="docutils literal notranslate"><span class="pre">ruby</span></code> cluster is chosen.</p>
+<p>Open OnDemand provides <code class="docutils literal notranslate"><span class="pre">data-option-for</span></code> directive for this use case.</p>
+<p>With this one configuration we're telling the OnDemand system that <code class="docutils literal notranslate"><span class="pre">gpu</span></code> is not an option
+for the <code class="docutils literal notranslate"><span class="pre">ruby</span></code> cluster.  It will then hide it every time the cluster <code class="docutils literal notranslate"><span class="pre">ruby</span></code> is chosen.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;standard&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span>
+<span class="hll"><span class="w">          </span><span class="nv">data-option-for-cluster-ruby</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">false</span>
+</span><span class="w">        </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This example shows toggling options based on the cluster, but this feature
+generically support any field and value.</p>
+</div>
+</section>
+<section id="hiding-entire-elements">
+<h2>Hiding entire elements<a class="headerlink" href="#hiding-entire-elements" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-hide</span></code> directive allows you to hide another element based on
+the current value of a select element.</p>
+<p>Let's continue examples involving GPUs. We'd like to provide users
+with options for <a class="reference external" href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> versions.</p>
+<p>But using Nvidia's <a class="reference external" href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> libraries only makes sense when the user is requesting GPUs.
+So, we want to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> element when a users chooses standard <code class="docutils literal notranslate"><span class="pre">node_type</span></code>.</p>
+<p>Here's the example YAML for this app with two select widgets.  This
+instructs the web-page to hide the <code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when the <code class="docutils literal notranslate"><span class="pre">standard</span></code>
+<code class="docutils literal notranslate"><span class="pre">node_type</span></code> is selected.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In addition to hiding form fields like this example shows, one should
+also use a <code class="docutils literal notranslate"><span class="pre">data-set</span></code> directive to set the value because the field
+is no longer visible to the user. While it's hidden, it will still retain
+the current value, if any has been supplied.</p>
+<p>By forcing a value after hiding it you can ensure that the correct values
+are being passed to the server.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In addition to setting the value to <code class="docutils literal notranslate"><span class="pre">true</span></code> to hide the form item, in 4.0
+you can also specify <code class="docutils literal notranslate"><span class="pre">false</span></code> to show the form item.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span>
+<span class="hll"><span class="w">          </span><span class="nv">data-hide-cuda-version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span>
+</span><span class="w">          </span><span class="nv">data-set-cuda-version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;none&#39;</span>
+<span class="w">        </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span>
+</pre></div>
+</div>
+<p>Additionally, you can use <code class="docutils literal notranslate"><span class="pre">check_box</span></code> widgets to hide elements.
+Here we have a checkbox <code class="docutils literal notranslate"><span class="pre">enable_cuda_version</span></code> that will show
+<code class="docutils literal notranslate"><span class="pre">cuda_version</span></code> when checked and hide it when it's not checked.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Check-boxes respond to <code class="docutils literal notranslate"><span class="pre">when-checked:</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">when-un-checked:</span> <span class="pre">true</span></code>
+for hiding elements when checked or unchecked.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enable_cuda_version</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;check_box&#39;</span>
+<span class="w">    </span><span class="nt">html_options</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span>
+<span class="hll"><span class="w">        </span><span class="nt">hide-cuda-version-when-un-checked</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></pre></div>
+</div>
+</section>
+<section id="dynamic-element-labels">
+<span id="dynamic-bc-apps-data-label"></span><h2>Dynamic Element Labels<a class="headerlink" href="#dynamic-element-labels" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-label-*</span></code> directive allows you to change the label of another
+form element based on the selected option in a select widget.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;small&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="s">&#39;small&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">data-label-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Cores</span><span class="nv"> </span><span class="s">(1-4)&#39;</span><span class="w">  </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;medium&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;medium&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">data-label-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Cores</span><span class="nv"> </span><span class="s">(1-8)&#39;</span><span class="w">  </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;large&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="s">&#39;large&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">data-label-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Cores</span><span class="nv"> </span><span class="s">(1-16)&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">cores</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;number_field&quot;</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<p>In this case, selecting Node Type 'small' will change the label of Cores to
+'Number of Cores (1-4)'.</p>
+</section>
+<section id="dynamic-min-and-maxes">
+<h2>Dynamic Min and Maxes<a class="headerlink" href="#dynamic-min-and-maxes" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-min</span></code> and <code class="docutils literal notranslate"><span class="pre">data-max</span></code> directives allow you to set the minimum and
+maximum values of another element based on the current value of a select element.</p>
+<p>Sites have node types of all shapes and sizes. Some sites even have
+heterogeneous clusters where there are different node types in the cluster.</p>
+<p>This feature allows for setting the minimum and maximum values for input
+fields like the number of cores to request.</p>
+<p>Let's see an example. We have <cite>standard`</cite> nodes in both clusters, but they're
+different sizes. In the <code class="docutils literal notranslate"><span class="pre">oakley</span></code> cluster nodes have a total 28 cores and in the
+<code class="docutils literal notranslate"><span class="pre">ruby</span></code> cluster they have 40.</p>
+<p>In this example <code class="docutils literal notranslate"><span class="pre">data-max-num-cores-for-cluster-oakley</span></code> is attached to the standard
+node type. This configuration is saying, when the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is <code class="docutils literal notranslate"><span class="pre">standard</span></code>
+and the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> is <code class="docutils literal notranslate"><span class="pre">oakley</span></code> set maximum <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> to 28.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-max-num-cores-for-cluster-oakley</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">28</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-max-num-cores-for-cluster-ruby</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">40</span><span class="p p-Indicator">,</span>
+<span class="w">        </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-max-num-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-min-num-cores</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span>
+<span class="w">        </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>This example also illustrates a simpler variant of this directive attached to <code class="docutils literal notranslate"><span class="pre">gpu</span></code>.
+This configuration doesn't have a for clause, so it will set the minimum and maximum
+values for <code class="docutils literal notranslate"><span class="pre">num_cores</span></code> when <code class="docutils literal notranslate"><span class="pre">gpu</span></code> is selected, regardless of which cluster is selected.</p>
+</section>
+<section id="setting-values-based-on-other-elements">
+<h2>Setting values based on other elements<a class="headerlink" href="#setting-values-based-on-other-elements" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-set</span></code> directive allows you to set a value on a different element based
+on the current value of a select element.</p>
+<p>Let's use charge-back accounts as an example.  Let's imagine we want to set the charge-back
+account automatically based on the selection of node type.</p>
+<p>In this example, when <code class="docutils literal notranslate"><span class="pre">standard</span></code> <code class="docutils literal notranslate"><span class="pre">node_type</span></code> is chosen, the <code class="docutils literal notranslate"><span class="pre">charge_account</span></code> element
+will be automatically set to <code class="docutils literal notranslate"><span class="pre">standard-charge-code</span></code>.</p>
+<p>In addition to setting strings, option choices can also set check boxes.
+You will see in this example that when you change the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> selection
+the <code class="docutils literal notranslate"><span class="pre">enable_gpu</span></code> check box will either be checked or unchecked.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">form</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enable_gpu</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">charge_account</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enable_gpu</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check_box</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;standard&#39;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;standard-charge-code&#39;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-set-enable-gpu</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0</span>
+<span class="w">        </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;gpu&#39;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-set-charge-account</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;gpu-charge-code&#39;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="nv">data-set-enable-gpu</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">1</span>
+<span class="w">        </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="form-widgets.html" class="btn btn-neutral float-left" title="Form Widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="template.html" class="btn btn-neutral float-right" title="Render Template" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2025, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/dynamic-form-widgets.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/how-tos/app-development/interactive/dynamic-form-widgets.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/app-development/interactive/dynamic-form-widgets.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/app-development/interactive/dynamic-form-widgets.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/app-development/interactive/dynamic-form-widgets.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/app-development/interactive/dynamic-form-widgets.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/app-development/interactive/dynamic-form-widgets.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/app-development/interactive/dynamic-form-widgets.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/app-development/interactive/dynamic-form-widgets.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/app-development/interactive/dynamic-form-widgets.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/app-development/interactive/dynamic-form-widgets.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/app-development/interactive/dynamic-form-widgets.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/app-development/interactive/dynamic-form-widgets.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
