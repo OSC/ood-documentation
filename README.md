@@ -17,7 +17,7 @@ Go to https://osc.github.io/ood-documentation/master/ to see the latest publishe
 Or select your version:
 
 - [Development](https://osc.github.io/ood-documentation/develop/)
-- [Latest Stable](https://osc.github.io/ood-documentation/master/)
+- [Latest Stable](https://osc.github.io/ood-documentation/latest/)
 
 
 ## Development
