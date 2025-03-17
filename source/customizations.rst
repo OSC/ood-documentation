@@ -68,7 +68,7 @@ If the announcement file has the extension ``yml`` and is a YAML file it is firs
 
    * - Key
      - Description
-   * - type
+   * - ``type``
      - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
    * - ``msg``
      - The announcement's message.
