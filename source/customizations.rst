@@ -569,7 +569,7 @@ for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5
 
 ``OOD_SHELL_MAX_DURATION_MS`` controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
-regardless of activity. It's default is 3600000 milliseconds (1 hour).
+regardless of activity. Its default is 3600000 milliseconds (1 hour).
 
 .. code:: shell
 
