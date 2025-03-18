@@ -68,7 +68,7 @@ If the announcement file has the extension ``yml`` and is a YAML file it is firs
 
    * - Key
      - Description
-   * - type
+   * - ``type``
      - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
    * - ``msg``
      - The announcement's message.
@@ -530,7 +530,7 @@ To add other hosts into the allow list (for example compute nodes) add the confi
 
 This configuration is expected to be a colon (:) separated list of GLOBs.
 
-Here's an example of of this configuration with three such GLOBs that allow for shell
+Here's an example of this configuration with three such GLOBs that allow for shell
 access into any compute node in our three clusters.
 
 .. code:: shell
@@ -569,7 +569,7 @@ for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5
 
 ``OOD_SHELL_MAX_DURATION_MS`` controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
-regardless of activity. It's default is 3600000 milliseconds (1 hour).
+regardless of activity. Its default is 3600000 milliseconds (1 hour).
 
 .. code:: shell
 
@@ -588,7 +588,7 @@ As of version 2.1 you are allowed to configure a non-standard ssh port.
 To change the ssh port for submitting jobs in OOD, you need to add the configuration
 ``OOD_SSH_PORT`` to the ``/etc/ood/config/apps/dashboard/env`` file.
 
-Here's an example of of this configuration.
+Here's an example of this configuration.
 
 .. code:: shell
 

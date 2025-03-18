@@ -153,6 +153,7 @@ html_context = {
     'github_repo': 'ood-documentation',
     'github_version': os.environ.get('OOD_BRANCH', 'develop'),
     'conf_py_path': '/source/',
+    'current_version': release,
     'versions' : [
         ['latest', '/latest/'],
         ['3.0', '/release-3.0/'],
