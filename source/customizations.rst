@@ -178,7 +178,7 @@ Currently only the dashboard uses the colors in the navbar.
    * - Replace header title with logo
      - ``dashboard_header_img_logo``
      - Value should be URL to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
-   * - Use white text on black background for navbar.
+   * -Navigation bar theme
      - ``navbar_type``
      - By default we use ``inverse`` for this value, which specifies to use `Bootstrap 3's inverted navbar <https://getbootstrap.com/docs/3.3/components/#navbar-inverted>`_ where text is white and background is black (or dark grey). You can set this to ``default`` to use black text on light grey background if it fits your branding better.
 
