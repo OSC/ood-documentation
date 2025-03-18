@@ -530,7 +530,7 @@ To add other hosts into the allow list (for example compute nodes) add the confi
 
 This configuration is expected to be a colon (:) separated list of GLOBs.
 
-Here's an example of of this configuration with three such GLOBs that allow for shell
+Here's an example of this configuration with three such GLOBs that allow for shell
 access into any compute node in our three clusters.
 
 .. code:: shell
@@ -588,7 +588,7 @@ As of version 2.1 you are allowed to configure a non-standard ssh port.
 To change the ssh port for submitting jobs in OOD, you need to add the configuration
 ``OOD_SSH_PORT`` to the ``/etc/ood/config/apps/dashboard/env`` file.
 
-Here's an example of of this configuration.
+Here's an example of this configuration.
 
 .. code:: shell
 
