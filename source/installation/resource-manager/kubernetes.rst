@@ -3,8 +3,6 @@
 Kubernetes
 ==========
 
-TODO table of contents
-
 A YAML cluster configuration file for a Kubernetes resource manager on an HPC
 cluster looks like:
 
