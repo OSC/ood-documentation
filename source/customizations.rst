@@ -398,7 +398,7 @@ app.
 .. include:: customizations/interactive-apps-menu.inc
 
 
-Disable uploads or downloads
+Disable Uploads or Downloads
 ----------------------------
 
 By default, Open OnDemand will allow users to upload and download files.
