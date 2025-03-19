@@ -9,15 +9,15 @@ Customizations
 
 .. _disabling_applications:
 
-Disabling applications
+Disabling Applications
 ----------------------
 
 OnDemand is comprised of a few components. Each of which you can disable or limit
 access by simply changing the file permissions of the application.
 
-All the applications OnDemand installs are located in `/var/www/ood/apps/sys`.
+All the applications OnDemand installs are located in ``/var/www/ood/apps/sys``.
 So, for example, if you wished to disable the file browser you would simply
-change it's directory to 700 so it's unreadable by regular users.
+change its directory to 700 so it's unreadable by regular users.
 
 When this directory is unreadable by regular users, the functionality
 it provides will be disabled.
