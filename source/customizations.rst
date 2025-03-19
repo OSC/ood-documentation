@@ -65,6 +65,7 @@ the user would see this message at the top of the dashboard:
 If the announcement file has the extension ``yml`` and is a YAML file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
 
 .. list-table:: Announcement configuration keys.
+   :header-rows: 1
 
    * - Key
      - Description
