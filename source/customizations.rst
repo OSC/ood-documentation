@@ -180,7 +180,7 @@ Currently only the dashboard uses the colors in the navbar.
      - Value should be URL to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
    * - Navigation bar theme
      - ``navbar_type``
-     - By default we use ``inverse`` for this value, which specifies to use `Bootstrap 3's inverted navbar <https://getbootstrap.com/docs/3.3/components/#navbar-inverted>`_ where text is white and background is black (or dark grey). You can set this to ``default`` to use black text on light grey background if it fits your branding better.
+     - By default we use ``dark`` for this value, where text is white and background is black (or dark grey). You can set this to ``light`` to use black text on light grey background if it fits your branding better.
 
 .. note:: It is possible to configure these settings using environment variables, although this is deprecated.
           For information about the properties and environment variables, see the :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
