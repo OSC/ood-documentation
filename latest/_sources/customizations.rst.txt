@@ -455,7 +455,7 @@ Note that this will limit the download size for all users of the Open OnDemand i
 
 .. warning::
    This configuration value is expected to be numbers only (no characters)
-   and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10.0 Gib.
+   and in units of bytes. The default value of 10737418240 bytes is ~10.7 GB or ~10.0 Gib.
 
    Values like ``1000M`` or ``20G`` will not be accepted and may cause errors.
 
