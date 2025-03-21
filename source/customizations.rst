@@ -604,9 +604,9 @@ Shell App SSH Command Wrapper
 
 Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.
 
-This is helpful when you pass add additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
+This is helpful when you pass additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
 
-To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` to point to your script in ``/etc/ood/config/apps/shell/env``. Also be sure to make your script executable.
+To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` in ``/etc/ood/config/apps/shell/env`` to point to your script. Also be sure to make your script executable.
 
 Here's a simple example of what a wrapper script could look like.
 
