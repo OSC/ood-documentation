@@ -14,7 +14,7 @@ cluster looks like:
     metadata:
       title: "My K8s Cluster"
     # you may not want a login section. There may not be a login node
-    # for your kubernetes cluster
+    # for your Kubernetes cluster
     login:
       host: "my_k8s_cluster.my_center.edu"
     job:
