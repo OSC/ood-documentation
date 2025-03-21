@@ -300,7 +300,7 @@ of the applications in the list.
 Menus for profile links
 ***********************
 
-If you've enabled `Profiles <profiles_guide>` you can create navigation bar menus and
+If you've enabled :ref:`profiles_guide` you can create navigation bar menus and
 links to those profiles through the ``profile`` attribute.
 
 .. code-block:: yaml
