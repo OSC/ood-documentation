@@ -445,7 +445,7 @@ By default, the maximum file download size is 10.7 GB (10737418240 bytes).
 If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` configuration environment 
 variable in the ``/etc/ood/config/apps/dashboard/env`` file to the desired value in bytes.
 
-For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/files/env`` file:
+For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/dashboard/env`` file:
 
 .. code-block:: 
 
