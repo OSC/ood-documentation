@@ -84,7 +84,7 @@ user on the OOD host. For more information, see https://jdennis.fedorapeople.org
 
         .. tab:: Ubuntu
 
-            There is a known problem on mellon_create_metadata in ubuntu. If the xml generation fails silently try to apply the solution described at https://bugs.launchpad.net/ubuntu/+source/ssl-cert/+bug/1945774/comments/8
+            There is a known problem on mellon_create_metadata in Ubuntu. If the xml generation fails silently try to apply the solution described at https://bugs.launchpad.net/ubuntu/+source/ssl-cert/+bug/1945774/comments/8
 
             .. code-block:: shell
 
