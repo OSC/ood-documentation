@@ -96,7 +96,7 @@ cluster configuration above or specify them for each app individually.
 
 You should have policies in place to enforce these.
 
-Bootstrapping the Kuberenetes cluster
+Bootstrapping the Kubernetes cluster
 *************************************
 
 Before anyone can use your Kubernetes cluster from Open OnDemand, you'll need
@@ -406,10 +406,10 @@ Keycloak
 
 Refer to the `Keycloak token exchange documentation <https://www.keycloak.org/docs/latest/securing_apps/#_token-exchange>`_
 
-Open OnDemand apps in a Kuberenetes cluster
+Open OnDemand apps in a Kubernetes cluster
 *******************************************
 
-Kuberenetes is so different from other HPC clusters that the interface we have for
+Kubernetes is so different from other HPC clusters that the interface we have for
 other schedulers didn't quite fit.  So Open OnDemand apps developed for Kubernetes
 clusters look quite different from other schedulers.  Essentially most things we'll
 need are packed into the ``native`` key of the ``submit.yml.erb`` files.
