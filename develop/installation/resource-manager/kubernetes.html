@@ -76,7 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ccq.html">Cloudy Cluster</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Kubernetes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#per-user-kubernetes">Per User Kubernetes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bootstrapping-the-kuberenetes-cluster">Bootstrapping the Kuberenetes cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bootstrapping-the-kubernetes-cluster">Bootstrapping the Kubernetes cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bootstrapping-ondemand-web-node-to-communicate-with-kubernetes">Bootstrapping OnDemand web node to communicate with Kubernetes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tokens-for-bootstrapping">Tokens for Bootstrapping</a></li>
 </ul>
@@ -90,7 +90,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#oidc-token-exchange">OIDC Token Exchange</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#open-ondemand-apps-in-a-kuberenetes-cluster">Open OnDemand apps in a Kuberenetes cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-ondemand-apps-in-a-kubernetes-cluster">Open OnDemand apps in a Kubernetes cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#kyverno-policies">Kyverno Policies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enforcing-walltimes">Enforcing Walltimes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-a-private-image-registry">Using a private image registry</a></li>
@@ -163,7 +163,7 @@ cluster looks like:</p>
 <span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">K8s</span><span class="nv"> </span><span class="s">Cluster&quot;</span>
 <span class="w">  </span><span class="c1"># you may not want a login section. There may not be a login node</span>
-<span class="w">  </span><span class="c1"># for your kuberenetes cluster</span>
+<span class="w">  </span><span class="c1"># for your Kubernetes cluster</span>
 <span class="w">  </span><span class="nt">login</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_k8s_cluster.my_center.edu&quot;</span>
 <span class="w">  </span><span class="nt">job</span><span class="p">:</span>
@@ -210,7 +210,7 @@ all namespaces.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">auto_supplemental_groups</span></code></dt><dd><p>Automatically populate a container's <code class="docutils literal notranslate"><span class="pre">securityContext.supplementalGroups</span></code> with the users
 supplemental groups.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">`server</span></code></dt><dd><p>The Kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
+<dt><code class="docutils literal notranslate"><span class="pre">server</span></code></dt><dd><p>The Kubernetes server to communicate with.  This field is a map with <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> and
 <code class="docutils literal notranslate"><span class="pre">cert_authority_file</span></code> keys.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">auth</span></code></dt><dd><p>See the notes on <a class="reference internal" href="#authentication">Authentication</a> below.</p>
@@ -241,8 +241,8 @@ the same UID and GID as the actual user.</p>
 cluster configuration above or specify them for each app individually.</p>
 <p>You should have policies in place to enforce these.</p>
 </section>
-<section id="bootstrapping-the-kuberenetes-cluster">
-<h2>Bootstrapping the Kuberenetes cluster<a class="headerlink" href="#bootstrapping-the-kuberenetes-cluster" title="Link to this heading"></a></h2>
+<section id="bootstrapping-the-kubernetes-cluster">
+<h2>Bootstrapping the Kubernetes cluster<a class="headerlink" href="#bootstrapping-the-kubernetes-cluster" title="Link to this heading"></a></h2>
 <p>Before anyone can use your Kubernetes cluster from Open OnDemand, you'll need
 to create the <a class="reference external" href="https://github.com/OSC/ondemand/blob/master/hooks/k8s-bootstrap/ondemand.yaml">open ondemand Kubernetes resources</a> on your cluster.</p>
 <p>Below is an example of adding the necessary resources:</p>
@@ -444,7 +444,7 @@ Another approach would be to use the same OIDC client configuration for OnDemand
 <span class="w">  </span><span class="nt">job</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># ...</span>
 <span class="w">    </span><span class="nt">auth</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;odic&#39;</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;oidc&#39;</span>
 </pre></div>
 </div>
 <p>This uses the OIDC credentials that you've logged in with.  When
@@ -501,9 +501,9 @@ client configuration to include the audience of the Kubernetes client.</p>
 </section>
 </section>
 </section>
-<section id="open-ondemand-apps-in-a-kuberenetes-cluster">
-<h2>Open OnDemand apps in a Kuberenetes cluster<a class="headerlink" href="#open-ondemand-apps-in-a-kuberenetes-cluster" title="Link to this heading"></a></h2>
-<p>Kuberenetes is so different from other HPC clusters that the interface we have for
+<section id="open-ondemand-apps-in-a-kubernetes-cluster">
+<h2>Open OnDemand apps in a Kubernetes cluster<a class="headerlink" href="#open-ondemand-apps-in-a-kubernetes-cluster" title="Link to this heading"></a></h2>
+<p>Kubernetes is so different from other HPC clusters that the interface we have for
 other schedulers didn't quite fit.  So Open OnDemand apps developed for Kubernetes
 clusters look quite different from other schedulers.  Essentially most things we'll
 need are packed into the <code class="docutils literal notranslate"><span class="pre">native</span></code> key of the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code> files.</p>

@@ -86,17 +86,6 @@ Open OnDemand uses these packages, among many others.
 
             sudo dnf install ondemand
 
-      .. tab:: Ubuntu 20.04
-
-         .. code-block:: sh
-
-            sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
-            sudo apt update
-
-            sudo apt install ondemand
-
       .. tab:: Ubuntu 22.04
 
          .. code-block:: sh

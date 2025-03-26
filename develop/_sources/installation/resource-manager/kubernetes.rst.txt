@@ -14,7 +14,7 @@ cluster looks like:
     metadata:
       title: "My K8s Cluster"
     # you may not want a login section. There may not be a login node
-    # for your kuberenetes cluster
+    # for your Kubernetes cluster
     login:
       host: "my_k8s_cluster.my_center.edu"
     job:
@@ -60,7 +60,7 @@ cluster looks like:
 ``auto_supplemental_groups``
   Automatically populate a container's ``securityContext.supplementalGroups`` with the users
   supplemental groups.
-```server``
+``server``
   The Kubernetes server to communicate with.  This field is a map with ``endpoint`` and
   ``cert_authority_file`` keys.
 ``auth``
@@ -96,7 +96,7 @@ cluster configuration above or specify them for each app individually.
 
 You should have policies in place to enforce these.
 
-Bootstrapping the Kuberenetes cluster
+Bootstrapping the Kubernetes cluster
 *************************************
 
 Before anyone can use your Kubernetes cluster from Open OnDemand, you'll need
@@ -341,7 +341,7 @@ Another approach would be to use the same OIDC client configuration for OnDemand
     job:
       # ...
       auth:
-        type: 'odic'
+        type: 'oidc'
 
 This uses the OIDC credentials that you've logged in with.  When
 the dashboard starts up it will ``set-context`` and ``set-cluster``
@@ -406,10 +406,10 @@ Keycloak
 
 Refer to the `Keycloak token exchange documentation <https://www.keycloak.org/docs/latest/securing_apps/#_token-exchange>`_
 
-Open OnDemand apps in a Kuberenetes cluster
+Open OnDemand apps in a Kubernetes cluster
 *******************************************
 
-Kuberenetes is so different from other HPC clusters that the interface we have for
+Kubernetes is so different from other HPC clusters that the interface we have for
 other schedulers didn't quite fit.  So Open OnDemand apps developed for Kubernetes
 clusters look quite different from other schedulers.  Essentially most things we'll
 need are packed into the ``native`` key of the ``submit.yml.erb`` files.
