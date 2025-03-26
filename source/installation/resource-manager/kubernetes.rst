@@ -60,7 +60,7 @@ cluster looks like:
 ``auto_supplemental_groups``
   Automatically populate a container's ``securityContext.supplementalGroups`` with the users
   supplemental groups.
-```server``
+``server``
   The Kubernetes server to communicate with.  This field is a map with ``endpoint`` and
   ``cert_authority_file`` keys.
 ``auth``
@@ -341,7 +341,7 @@ Another approach would be to use the same OIDC client configuration for OnDemand
     job:
       # ...
       auth:
-        type: 'odic'
+        type: 'oidc'
 
 This uses the OIDC credentials that you've logged in with.  When
 the dashboard starts up it will ``set-context`` and ``set-cluster``
