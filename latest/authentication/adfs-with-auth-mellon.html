@@ -176,30 +176,64 @@
 </section>
 <section id="configure-mod-auth-mellon">
 <h2>Configure mod_auth_mellon<a class="headerlink" href="#configure-mod-auth-mellon" title="Link to this heading"></a></h2>
-<p>Note that this configuration assumes that SAML has been configured such that the returned NameID directly maps to a Unix user on the OOD host. For more information, see <a class="reference external" href="https://jdennis.fedorapeople.org/doc/mellon-user-guide/mellon_user_guide.html">https://jdennis.fedorapeople.org/doc/mellon-user-guide/mellon_user_guide.html</a></p>
+<p>Note that this configuration assumes that SAML has been configured such that the returned NameID directly maps to a Unix
+user on the OOD host. For more information, see <a class="reference external" href="https://jdennis.fedorapeople.org/doc/mellon-user-guide/mellon_user_guide.html">https://jdennis.fedorapeople.org/doc/mellon-user-guide/mellon_user_guide.html</a></p>
 <ol class="arabic">
+<li><p>Change to apache's etc directory</p>
+<blockquote>
+<div><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">EL7/EL8+</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/httpd/mellon/
+<span class="nb">cd</span><span class="w"> </span>/etc/httpd/mellon/
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/apache2/mellon/
+<span class="nb">cd</span><span class="w"> </span>/etc/apache2/mellon/
+</pre></div>
+</div>
+</div></div>
+</div></blockquote>
+</li>
 <li><p>Download the IDP metadata file</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/httpd/mellon/
-wget<span class="w"> </span>https://adfs.organization.com/ADFS/metadata.xml<span class="w"> </span>-O<span class="w"> </span>idpmetadata.xml
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://adfs.organization.com/ADFS/metadata.xml<span class="w"> </span>-O<span class="w"> </span>idpmetadata.xml
 </pre></div>
 </div>
 </li>
 <li><p>Generate the mellon metadata</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">mellon_endpoint</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">/mellon&quot;</span>
+<blockquote>
+<div><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">EL7/EL8+</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">mellon_endpoint</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">/mellon&quot;</span>
 /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">/metadata&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">&quot;</span>
 mv<span class="w"> </span>*.cert<span class="w"> </span>./mellon.cert
 mv<span class="w"> </span>*.key<span class="w"> </span>./mellon.key
 mv<span class="w"> </span>*.xml<span class="w"> </span>./mellon_metadata.xml
 </pre></div>
 </div>
-</li>
-<li><p>Create a mellon configuration file</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>/etc/httpd/conf.d/00-mellon.conf
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>There is a known problem on mellon_create_metadata in Ubuntu. If the xml generation fails silently try to apply the solution described at <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/ssl-cert/+bug/1945774/comments/8">https://bugs.launchpad.net/ubuntu/+source/ssl-cert/+bug/1945774/comments/8</a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">mellon_endpoint</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">/mellon&quot;</span>
+/usr/sbin/mellon_create_metadata<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">/metadata&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mellon_endpoint</span><span class="si">}</span><span class="s2">&quot;</span>
+mv<span class="w"> </span>*.cert<span class="w"> </span>./mellon.cert
+mv<span class="w"> </span>*.key<span class="w"> </span>./mellon.key
+mv<span class="w"> </span>*.xml<span class="w"> </span>./mellon_metadata.xml
 </pre></div>
 </div>
+</div></div>
+</div></blockquote>
 </li>
-<li><p>Add the following to the <code class="docutils literal notranslate"><span class="pre">00-mellon.conf</span></code> file</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Location</span><span class="w"> </span><span class="nt">/&gt;</span>
+<li><dl>
+<dt>Create a mellon configuration file</dt><dd><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">EL7/EL8+</button><button aria-controls="panel-3-3-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-1" name="3-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>/etc/httpd/conf.d/00-mellon.conf
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-3-1" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-1" name="3-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vi<span class="w"> </span>/etc/apache2/conf-available/mellon.conf
+</pre></div>
+</div>
+</div></div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Add the following to the apache mellon's configuration file</dt><dd><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-4-4-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-4-4-0" name="4-0" role="tab" tabindex="0">EL7/EL8+</button><button aria-controls="panel-4-4-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-4-4-1" name="4-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-4-4-0" class="sphinx-tabs-panel" id="panel-4-4-0" name="4-0" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Location</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">  </span>MellonSPPrivateKeyFile<span class="w"> </span>/etc/httpd/mellon/mellon.key
 <span class="w">  </span>MellonSPCertFile<span class="w"> </span>/etc/httpd/mellon/mellon.cert
 <span class="w">  </span>MellonSPMetadataFile<span class="w"> </span>/etc/httpd/mellon/mellon_metadata.xml
@@ -210,11 +244,32 @@ mv<span class="w"> </span>*.xml<span class="w"> </span>./mellon_metadata.xml
 <span class="nt">&lt;/Location&gt;</span>
 </pre></div>
 </div>
-</li>
-<li><p>Convert the key and cert files into PFX format</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openssl<span class="w"> </span>pkcs12<span class="w"> </span>-export<span class="w"> </span>-inkey<span class="w"> </span>/etc/httpd/mellon/mellon.key<span class="w"> </span>-in<span class="w"> </span>/etc/httpd/mellon/mellon.cert<span class="w"> </span>-out<span class="w"> </span>/etc/httpd/mellon/mellon.pfx
+</div><div aria-labelledby="tab-4-4-1" class="sphinx-tabs-panel" hidden="true" id="panel-4-4-1" name="4-1" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Location</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">  </span>MellonSPPrivateKeyFile<span class="w"> </span>/etc/apache2/mellon/mellon.key
+<span class="w">  </span>MellonSPCertFile<span class="w"> </span>/etc/apache2/mellon/mellon.cert
+<span class="w">  </span>MellonSPMetadataFile<span class="w"> </span>/etc/apache2/mellon/mellon_metadata.xml
+<span class="w">  </span>MellonIdPMetadataFile<span class="w"> </span>/etc/apache2/mellon/idpmetadata.xml
+
+<span class="w">  </span>MellonEndpointPath<span class="w"> </span>/mellon
+<span class="w">  </span>MellonEnable<span class="w"> </span>&quot;auth&quot;
+<span class="nt">&lt;/Location&gt;</span>
 </pre></div>
 </div>
+</div></div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Convert the key and cert files into PFX format</dt><dd><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-5-5-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-5-5-0" name="5-0" role="tab" tabindex="0">EL7/EL8+</button><button aria-controls="panel-5-5-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-5-5-1" name="5-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-5-5-0" class="sphinx-tabs-panel" id="panel-5-5-0" name="5-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openssl<span class="w"> </span>pkcs12<span class="w"> </span>-export<span class="w"> </span>-inkey<span class="w"> </span>/etc/httpd/mellon/mellon.key<span class="w"> </span>-in<span class="w"> </span>/etc/httpd/mellon/mellon.cert<span class="w"> </span>-out<span class="w"> </span>/etc/httpd/mellon/mellon.pfx
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-5-1" class="sphinx-tabs-panel" hidden="true" id="panel-5-5-1" name="5-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openssl<span class="w"> </span>pkcs12<span class="w"> </span>-export<span class="w"> </span>-inkey<span class="w"> </span>/etc/apache2/mellon/mellon.key<span class="w"> </span>-in<span class="w"> </span>/etc/apache2/mellon/mellon.cert<span class="w"> </span>-out<span class="w"> </span>/etc/apache2/mellon/mellon.pfx
+</pre></div>
+</div>
+</div></div>
+</dd>
+</dl>
 </li>
 <li><p>Provide the <code class="docutils literal notranslate"><span class="pre">mellon.pfx</span></code> and <code class="docutils literal notranslate"><span class="pre">mellon_metadata.xml</span></code> files to your ADFS administrator. The files can then be imported into the ADFS system.</p></li>
 </ol>
@@ -235,10 +290,17 @@ mv<span class="w"> </span>*.xml<span class="w"> </span>./mellon_metadata.xml
 </pre></div>
 </div>
 </li>
-<li><p>Restart the HTTPD</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>restart<span class="w"> </span>httpd
+<li><dl>
+<dt>Restart the HTTPD</dt><dd><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-6-6-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-6-6-0" name="6-0" role="tab" tabindex="0">EL7/EL8+</button><button aria-controls="panel-6-6-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-6-6-1" name="6-1" role="tab" tabindex="-1">Ubuntu</button></div><div aria-labelledby="tab-6-6-0" class="sphinx-tabs-panel" id="panel-6-6-0" name="6-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>restart<span class="w"> </span>httpd
 </pre></div>
 </div>
+</div><div aria-labelledby="tab-6-6-1" class="sphinx-tabs-panel" hidden="true" id="panel-6-6-1" name="6-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+</pre></div>
+</div>
+</div></div>
+</dd>
+</dl>
 </li>
 </ol>
 </section>
