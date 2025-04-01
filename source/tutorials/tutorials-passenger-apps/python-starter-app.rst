@@ -79,8 +79,8 @@ required libraries. Here, we're only adding ``flask`` of any version.
   source python-hello-world/bin/activate
   python3 -m pip install -r requirements.txt
 
-Create the python files
-```````````````````````
+Create application files
+````````````````````````
 
 In the basic example above, the entire implementation is held within a ``passenger_wsgi.py``.
 This project is more advanced, so it will include two files. ``passenger_wsgi.py`` and
