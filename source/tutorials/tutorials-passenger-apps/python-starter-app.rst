@@ -41,8 +41,17 @@ in the ``Develop`` menu of your OnDemand installation.
 There you should see this application at the top of the list.  Clicking
 ``Launch Python Hello World`` will launch this application in a new tab.
 
-When the new tab opens you should see a blank page with the text ``Hello World``
-with some extra text about the system. This is your new `Python`_ application!
+When the new tab opens you should see a mostly blank page with the something
+like the following:
+
+.. code:: shell
+
+  Hello World from Open OnDemand (Python WSGI)!
+
+  3.9.21 (main, Dec  5 2024, 00:00:00) 
+  [GCC 11.5.0 20240719 (Red Hat 11.5.0-2)]
+
+This is your new `Python`_ application!
 
 
 Application using Flask and a virtual environment
@@ -66,6 +75,17 @@ to create one. This will create a subdirectory ``python-hello-world`` with a
 
   python3 -m venv python-hello-world
 
+You can also use other Python virtual environment managers such as ``uv``. If you
+have ``uv`` installed, the following command will create a virtual environment 
+subdirectory ``.venv``.
+
+.. code:: shell
+
+  uv venv
+
+Install required packages
+``````````````````````````````
+
 Now, let's create the ``requriements.txt`` file where we'll add the application's
 required libraries. Here, we're only adding ``flask`` of any version.
 
@@ -74,20 +94,21 @@ required libraries. Here, we're only adding ``flask`` of any version.
   # requirements.txt
   flask
 
+Activate and install requirements.txt
+
 .. code:: shell
 
   source python-hello-world/bin/activate
   python3 -m pip install -r requirements.txt
 
-Create the python files
+Create application files
 ```````````````````````
 
 In the basic example above, the entire implementation is held within a ``passenger_wsgi.py``.
-This project is more advanced, so it will include two files. ``passenger_wsgi.py`` and
-``app.py``.  ``app.py`` will hold the logic for the application.
+This project is more advanced, so it will include three files. ``passenger_wsgi.py``,
+``app.py``, and ``bin/python``.  ``app.py`` will hold the logic for the application.
 
-``passenger_wsgi.py`` simply imports the app from the ``app.py`` file. This is all that's required
-for this file.
+``passenger_wsgi.py`` simply imports the app from the ``app.py`` file. 
 
 .. code:: python
 
@@ -112,15 +133,7 @@ It imports the `Flask`_ libraries, configures the routes and starts the flask se
   if __name__ == "__main__":
     MyApp.run()
 
-Using the virtual environment
-`````````````````````````````
-
-At this point, the app is basically done, but won't boot up because it
-can't find `Flask`_ libraries. We created a virtual environment in a previous
-step, now we have to get OnDemand to recognize this environment.
-
-To do this, we need to create a `bin/python` wrapper file to load the appropriate
-virtual environment.
+``bin/python`` is a wrapper file to load the appropriate virtual environment.
 
 .. code:: shell
 
@@ -133,10 +146,19 @@ virtual environment.
 
 .. warning::
   Ensure that this ``bin/python`` file has executable permissions on it.
-  Issue the command ``chmod +x bin.python`` to give it executable permissions.
+  Issue the command ``chmod +x bin/python`` to give it executable permissions.
+
+.. warning::
+  The command in``bin/python`` will need to be updated if you gave your python environment 
+  a different name than the example.
 
 Now, with the python wrapper script to load the environment for your application,
-it should boot up correctly.
+it should boot up correctly and you should see something similar to the following:
+
+.. code:: shell
+
+  Hello World!
+  3.13.0 (main, Oct 8 2024, 01:04:00) [Clang 18.1.8 ]
 
 .. include:: deploy-to-production.inc
 
