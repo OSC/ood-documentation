@@ -79,6 +79,7 @@ have ``uv`` installed, the following command will create a virtual environment
 subdirectory ``.venv``.
 
 .. code:: shell
+
   uv venv
 
 Install required packages
@@ -92,7 +93,7 @@ required libraries. Here, we're only adding ``flask`` of any version.
   # requirements.txt
   flask
 
-Activate environment and install requirements.txt
+Activate environment and install ``requirements.txt``.
 
 .. code:: shell
 
