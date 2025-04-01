@@ -93,7 +93,7 @@ required libraries. Here, we're only adding ``flask`` of any version.
   # requirements.txt
   flask
 
-Activate environment and install requirements.txt
+Activate environment and install ``requirements.txt``.
 
 .. code:: shell
 
