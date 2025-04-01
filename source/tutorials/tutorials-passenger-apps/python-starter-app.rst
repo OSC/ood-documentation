@@ -41,8 +41,15 @@ in the ``Develop`` menu of your OnDemand installation.
 There you should see this application at the top of the list.  Clicking
 ``Launch Python Hello World`` will launch this application in a new tab.
 
-When the new tab opens you should see a blank page with the text ``Hello World``
-with some extra text about the system. This is your new `Python`_ application!
+When the new tab opens you should see a mostly blank page with the something
+like the following:
+
+.. code:: shell
+  Hello World from Open OnDemand (Python WSGI)!
+  3.9.21 (main, Dec  5 2024, 00:00:00) 
+  [GCC 11.5.0 20240719 (Red Hat 11.5.0-2)]
+
+This is your new `Python`_ application!
 
 
 Application using Flask and a virtual environment
@@ -66,13 +73,25 @@ to create one. This will create a subdirectory ``python-hello-world`` with a
 
   python3 -m venv python-hello-world
 
-Now, let's create the ``requriements.txt`` file where we'll add the application's
+You can also use other Python virtual environment managers such as ``uv``. If you
+have ``uv`` installed, the following command will create a virtual environment 
+subdirectory ``.venv``.
+
+.. code:: shell
+  uv venv
+
+Install required packages
+`````````````````````````
+
+Now, let's create the ``requirements.txt`` file where we'll add the application's
 required libraries. Here, we're only adding ``flask`` of any version.
 
 .. code:: text
 
   # requirements.txt
   flask
+
+Activate environment and install requirements.txt
 
 .. code:: shell
 
