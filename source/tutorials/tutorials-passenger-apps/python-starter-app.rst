@@ -79,6 +79,7 @@ have ``uv`` installed, the following command will create a virtual environment
 subdirectory ``.venv``.
 
 .. code:: shell
+
   uv venv
 
 Install required packages
