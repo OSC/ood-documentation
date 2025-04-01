@@ -45,6 +45,7 @@ When the new tab opens you should see a mostly blank page with the something
 like the following:
 
 .. code:: shell
+    
   Hello World from Open OnDemand (Python WSGI)!
   3.9.21 (main, Dec  5 2024, 00:00:00) 
   [GCC 11.5.0 20240719 (Red Hat 11.5.0-2)]
