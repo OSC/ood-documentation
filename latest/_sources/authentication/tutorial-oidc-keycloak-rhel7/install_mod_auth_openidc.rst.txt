@@ -107,7 +107,7 @@ Add Keycloak configuration to OnDemand Apache for ``mod_auth_openidc``
 
    .. code-block:: none
 
-     OIDCProviderMetadataURL https://ondemand-idpdev.hpc.osc.edu/auth/realms/ondemand/.well-known/openid-configuration
+     OIDCProviderMetadataURL https://ondemand-idpdev.hpc.osc.edu/realms/ondemand/.well-known/openid-configuration
      OIDCClientID        "ondemand-dev.hpc.osc.edu"
      OIDCClientSecret    "1111111-1111-1111-1111-111111111111"
      OIDCRedirectURI      https://ondemand-dev.hpc.osc.edu/oidc
