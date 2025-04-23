@@ -44,5 +44,6 @@ to the Open OnDemand platform.
 ``new_window`` (Optional)
   A boolean (``true`` or ``false``) flag to toggle if the app should open a new
   window when clicked.
-
+``caption`` (Optional)
+  A short caption for the app. Setting this overrides the default. This will be shown on the Dashboard within the app launcher button. If not set the caption will default to "System Installed App".
 
