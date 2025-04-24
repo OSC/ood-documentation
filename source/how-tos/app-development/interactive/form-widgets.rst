@@ -134,6 +134,9 @@ Form Widgets
     This is useful in forms where a path must be selected and you
     want to allow your users to choose an arbitrary path.
 
+    In order to add, remove, or edit the Path Selector, navigate to 
+    its form.yml file to make any appropriate changes. 
+
     ``directory`` is the initial directory the path selector will open
     to when the users opens the modal. This defaults to the users' HOME.
 
