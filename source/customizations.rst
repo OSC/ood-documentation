@@ -32,6 +32,9 @@ to only members in the Unix group ``staff``, you would simply apply the
 applicable file permission such that anonymous users cannot access the
 directory while members of the ``staff`` Unix group can.
 
+Conversley, if the directory is already ``700`` just reverse the process to
+enable the application. Set the diretory to ``755`` to *enable* it for all users.
+
 .. code-block:: sh
 
   sudo chmod 750 /var/www/ood/apps/sys/files
