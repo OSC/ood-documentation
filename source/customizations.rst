@@ -12,8 +12,10 @@ Customizations
 Disabling Applications
 ----------------------
 
-OnDemand is comprised of a few components. Each of which you can disable or limit
-access by simply changing the file permissions of the application.
+OnDemand is comprised of a few components. Each one you can disable or limit
+access by simply changing the file permissions of the application.  The application
+will only be available if regular users can read the files. When they cannot
+read the files, the application is disabled. When they can, it is enabled.
 
 All the applications OnDemand installs are located in ``/var/www/ood/apps/sys``.
 So, for example, if you wished to disable the file browser you would simply
