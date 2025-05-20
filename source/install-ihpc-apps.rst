@@ -109,7 +109,7 @@ interactive apps that are currently deployed at OSC and other contributing insti
    * - RStudio Server
      - OSC
      - https://github.com/OSC/bc_osc_rstudio_server
-     - BubbleWrap
+     - hybrid (Bubblewrap)
      - rnode
    * - 
      - University of Utah
