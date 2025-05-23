@@ -1036,3 +1036,19 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_saved_settings: true
+
+.. describe:: global_bc_form_items (Hash<String, Object>, {})
+
+  Define batch connect form items globally to be used in any
+  batch connect application.
+
+  Default
+    Nothing provided.
+
+    .. code-block:: yaml
+
+      global_bc_form_items: {}
+
+  Example
+
+    See :ref:`global_bc_form_items` for more details.
