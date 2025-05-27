@@ -9,15 +9,21 @@ Customizations
 
 .. _disabling_applications:
 
-Disabling Applications
-----------------------
+Enabling and Disabling Applications
+-----------------------------------
 
-OnDemand is comprised of a few components. Each of which you can disable or limit
-access by simply changing the file permissions of the application.
+OnDemand is comprised of a few components. Each one you can disable or limit
+access by simply changing the file permissions of the application.  The application
+will only be available if regular users can read the files. When they cannot
+read the files, the application is disabled. When they can, it is enabled.
 
 All the applications OnDemand installs are located in ``/var/www/ood/apps/sys``.
-So, for example, if you wished to disable the file browser you would simply
-change its directory to 700 so it's unreadable by regular users.
+
+Disabling Applications
+......................
+
+So, for example, if you wished to disable the file browser for all users
+you would simply change its directory to 700 so it's unreadable by regular users.
 
 When this directory is unreadable by regular users, the functionality
 it provides will be disabled.
@@ -25,6 +31,9 @@ it provides will be disabled.
 .. code-block:: sh
 
   sudo chmod 700 /var/www/ood/apps/sys/files
+
+Enabling Applications for a limited number of users
+...................................................
 
 Alternatively, if you wished to limit access you can do so through group
 permissions. For example, if you wanted to limit access to the file browser
@@ -37,6 +46,22 @@ directory while members of the ``staff`` Unix group can.
   sudo chmod 750 /var/www/ood/apps/sys/files
   sudo chown root:staff /var/www/ood/apps/sys/files
 
+This ensures:
+
+  * The application is readable and executable by the staff group.
+  * All other users not in staff group will not see or access it.
+
+.. _enabling_applications:
+
+Enabling Applications 
+.....................
+
+Conversely, if the directory is already ``700`` just reverse the process to
+enable the application. Set the directory to ``755`` to *enable* it for all users.
+
+.. code-block:: sh
+
+  sudo chmod 755 /var/www/ood/apps/sys/projects
 
 .. _configure_announcements:
 
