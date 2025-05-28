@@ -592,6 +592,8 @@ commenting it out will disable ping pongs (it's disabled by default).
 
 ``OOD_SHELL_INACTIVE_TIMEOUT_MS`` controls how long a connection can be inactive
 for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5 minutes).
+Activity here is counted as actual user activity. Automatic ping pong activity to keep the TCP
+connection alive is not factored into this.
 
 ``OOD_SHELL_MAX_DURATION_MS`` controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
