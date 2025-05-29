@@ -74,6 +74,7 @@ Open OnDemand uses these packages, among many others.
 
          .. code-block:: sh
 
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el8.noarch.rpm
 
             sudo dnf install ondemand
@@ -82,6 +83,7 @@ Open OnDemand uses these packages, among many others.
 
          .. code-block:: sh
 
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el9.noarch.rpm
 
             sudo dnf install ondemand
@@ -123,6 +125,7 @@ Open OnDemand uses these packages, among many others.
 
          .. code-block:: sh
 
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.amzn2023.noarch.rpm
 
             sudo dnf install ondemand
