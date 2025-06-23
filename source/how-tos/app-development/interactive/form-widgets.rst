@@ -146,6 +146,9 @@ Form Widgets
     ``show_files`` is a boolean flag to show files or not. This defaults
     to true - it will show files.
 
+    ``popup_title`` is the title displayed in the modal. Default is 
+    "Select Your Working Directory".
+
     ``favorites`` allows you to override the :ref:`favorite paths you've added
     in files menu <add-shortcuts-to-files-menu>`.  Provide an array of new favorites
     or set to ``false`` to disable showing favorites altogether.
@@ -157,6 +160,7 @@ Form Widgets
           directory: "/fs/ess/project"
           show_hidden: true
           show_files: false
+          popup_title: "Select the Folder"
           favorites:
             - /fs/ess
             - /fs/scratch
