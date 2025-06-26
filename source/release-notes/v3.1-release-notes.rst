@@ -26,7 +26,7 @@ New Features
 - `Amazon Linux 2023 packages`_
 - `Debian 12 packages`_
 
-Details of administrative changes
+Details of Administrative Changes
 ---------------------------------
 
 Breaking Changes
@@ -35,19 +35,19 @@ Breaking Changes
 Advanced ``httpd`` support
 **************************
 
-In an effort to support higher versions of ``apache httpd`` an
+In an effort to support higher versions of ``apache httpd``, an
 update was made in ``3.1.9`` that broke some older versions of ``apache httpd``.
 
 RHEL compatible systems specifically need the highest version available
-to work correctly with OnDemand 3.1.9 or higher. At the time of writing
+to work correctly with OnDemand 3.1.9 or higher. As of February 2024,
 the required version of ``apache httpd`` is ``2.4.37-65`` for EL8 and
 ``2.4.57-11`` for EL9.
 
 User Settings File Change
 *************************
 
-We had to change the location of the :ref:`user settings file <user_settings_file>`
-off of the ``DATAROOT`` which is cluster specific and problematic for sites that
+We implemented changes the location of the :ref:`user settings file <user_settings_file>`
+off of the ``DATAROOT`` ,which is cluster specific and problematic for sites that
 have separate HOME directories for each cluster.
 
 The new default location is under the ``XDG_CONFIG_HOME``. This change was made
@@ -65,29 +65,29 @@ Deprecations
 RedHat/CentOS 7 packages deprecated
 ***********************************
 
-OnDemand 3.0 was the last OnDemand release to support RedHat/CentOS 7.
+Open OnDemand version 3.0 was the last release to support RedHat/CentOS 7.
 
-3.1 does not support RedHat/CentOS 7.
+Open OnDemand versions 3.1 and above do not support RedHat/CentOS 7.
 
-Dependency updates
+Dependency Updates
 ..................
 
 This release updates the following dependencies:
 
 - Ruby 3.1 **(RHEL 8 & 9 only)**
 
-  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of ruby.
+  .. warning:: The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own ``bin/ruby`` to use the older version of Ruby.
 
 - NodeJS 18 **(All OSes except RHEL 7)**
 
-  .. warning:: The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.
+  .. warning:: The change in Node version means any Node-based apps that are not provided by the OnDemand RPM must be rebuilt.
 
 - Passenger 6.0.17
 - Nginx 1.22.1
 - ondemand-dex 2.36.0
 - ``mod_auth_openidc`` 2.4.14.1 (RHEL 7 & 8 only)
 
-Upgrade directions
+Upgrade Directions
 ..................
 
 .. warning::
@@ -231,7 +231,7 @@ Upgrade directions
 
       sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
 
-Details of new features
+Details of New Features
 -----------------------
 
 Globus integration
