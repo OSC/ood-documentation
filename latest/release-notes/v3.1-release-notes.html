@@ -93,14 +93,14 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">v3.1 Release Notes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#administrative-changes">Administrative changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#details-of-administrative-changes">Details of administrative changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#details-of-administrative-changes">Details of Administrative Changes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#deprecations">Deprecations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency updates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade directions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependency-updates">Dependency Updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-directions">Upgrade Directions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#details-of-new-features">Details of new features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#details-of-new-features">Details of New Features</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#globus-integration">Globus integration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#path-selector-widget">Path Selector widget</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#google-analytics-4-support">Google Analytics 4 support</a></li>
@@ -187,22 +187,22 @@
 </ul>
 </section>
 <section id="details-of-administrative-changes">
-<h2>Details of administrative changes<a class="headerlink" href="#details-of-administrative-changes" title="Link to this heading"></a></h2>
+<h2>Details of Administrative Changes<a class="headerlink" href="#details-of-administrative-changes" title="Link to this heading"></a></h2>
 <section id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Link to this heading"></a></h3>
 <section id="advanced-httpd-support">
 <h4>Advanced <code class="docutils literal notranslate"><span class="pre">httpd</span></code> support<a class="headerlink" href="#advanced-httpd-support" title="Link to this heading"></a></h4>
-<p>In an effort to support higher versions of <code class="docutils literal notranslate"><span class="pre">apache</span> <span class="pre">httpd</span></code> an
+<p>In an effort to support higher versions of <code class="docutils literal notranslate"><span class="pre">apache</span> <span class="pre">httpd</span></code>, an
 update was made in <code class="docutils literal notranslate"><span class="pre">3.1.9</span></code> that broke some older versions of <code class="docutils literal notranslate"><span class="pre">apache</span> <span class="pre">httpd</span></code>.</p>
 <p>RHEL compatible systems specifically need the highest version available
-to work correctly with OnDemand 3.1.9 or higher. At the time of writing
+to work correctly with OnDemand 3.1.9 or higher. As of February 2024,
 the required version of <code class="docutils literal notranslate"><span class="pre">apache</span> <span class="pre">httpd</span></code> is <code class="docutils literal notranslate"><span class="pre">2.4.37-65</span></code> for EL8 and
 <code class="docutils literal notranslate"><span class="pre">2.4.57-11</span></code> for EL9.</p>
 </section>
 <section id="user-settings-file-change">
 <h4>User Settings File Change<a class="headerlink" href="#user-settings-file-change" title="Link to this heading"></a></h4>
-<p>We had to change the location of the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#user-settings-file"><span class="std std-ref">user settings file</span></a>
-off of the <code class="docutils literal notranslate"><span class="pre">DATAROOT</span></code> which is cluster specific and problematic for sites that
+<p>We implemented changes the location of the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#user-settings-file"><span class="std std-ref">user settings file</span></a>
+off of the <code class="docutils literal notranslate"><span class="pre">DATAROOT</span></code>, which is cluster specific and problematic for sites that
 have separate HOME directories for each cluster.</p>
 <p>The new default location is under the <code class="docutils literal notranslate"><span class="pre">XDG_CONFIG_HOME</span></code>. This change was made
 to accommodate sites that have separate HOME directories for each cluster.</p>
@@ -216,24 +216,24 @@ use a path in the <code class="docutils literal notranslate"><span class="pre">D
 <h3>Deprecations<a class="headerlink" href="#deprecations" title="Link to this heading"></a></h3>
 <section id="redhat-centos-7-packages-deprecated">
 <h4>RedHat/CentOS 7 packages deprecated<a class="headerlink" href="#redhat-centos-7-packages-deprecated" title="Link to this heading"></a></h4>
-<p>OnDemand 3.0 was the last OnDemand release to support RedHat/CentOS 7.</p>
-<p>3.1 does not support RedHat/CentOS 7.</p>
+<p>Open OnDemand version 3.0 was the last release to support RedHat/CentOS 7.</p>
+<p>Open OnDemand versions 3.1 and above do not support RedHat/CentOS 7.</p>
 </section>
 </section>
 <section id="dependency-updates">
-<h3>Dependency updates<a class="headerlink" href="#dependency-updates" title="Link to this heading"></a></h3>
+<h3>Dependency Updates<a class="headerlink" href="#dependency-updates" title="Link to this heading"></a></h3>
 <p>This release updates the following dependencies:</p>
 <ul>
 <li><p>Ruby 3.1 <strong>(RHEL 8 &amp; 9 only)</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own <code class="docutils literal notranslate"><span class="pre">bin/ruby</span></code> to use the older version of ruby.</p>
+<p>The change in Ruby version means any Ruby based apps that are not provided by the OnDemand RPM must be rebuilt or supply their own <code class="docutils literal notranslate"><span class="pre">bin/ruby</span></code> to use the older version of Ruby.</p>
 </div>
 </li>
 <li><p>NodeJS 18 <strong>(All OSes except RHEL 7)</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The change in Node version means any Node based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
+<p>The change in Node version means any Node-based apps that are not provided by the OnDemand RPM must be rebuilt.</p>
 </div>
 </li>
 <li><p>Passenger 6.0.17</p></li>
@@ -243,7 +243,7 @@ use a path in the <code class="docutils literal notranslate"><span class="pre">D
 </ul>
 </section>
 <section id="upgrade-directions">
-<h3>Upgrade directions<a class="headerlink" href="#upgrade-directions" title="Link to this heading"></a></h3>
+<h3>Upgrade Directions<a class="headerlink" href="#upgrade-directions" title="Link to this heading"></a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As always please update the <em>development</em> or <em>test</em> instances of OnDemand installed at your center first to test and verify before you modify the <em>production</em> instance.</p>
@@ -342,7 +342,7 @@ sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </
 </section>
 </section>
 <section id="details-of-new-features">
-<h2>Details of new features<a class="headerlink" href="#details-of-new-features" title="Link to this heading"></a></h2>
+<h2>Details of New Features<a class="headerlink" href="#details-of-new-features" title="Link to this heading"></a></h2>
 <section id="globus-integration">
 <h3>Globus integration<a class="headerlink" href="#globus-integration" title="Link to this heading"></a></h3>
 <p>The files application will now provide a link to Globus endpoints
