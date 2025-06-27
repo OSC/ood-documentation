@@ -55,9 +55,9 @@ Version Timing
 
 Patch versions are released as needed. Major and minor versions are released as time permits the team to develop features.
 
-All versions are typically tested first in production for at least a week at OSC and other early adopter sites prior to being marked as an official release.
+All versions are tested first in production for at least one week on Ohio Supercomputer Systems prior to general release.
 
 Backporting and Support
 -----------------------
 
-The Open OnDemand team will only provide general support / backporting for a major/minor version for a period of 3 months after the next major/minor version is released (i.e. version 2.0 will only be supported for 3 months after the release of 3.0). This includes providing concurrent patch versions for relevant security / bug fixes where possible (i.e. the developers would release a 2.0.1 version alongside a 3.0.1 version if released within 3 months of the 3.0 release). The Open OnDemand community is welcome to generate pull requests for additional backport code changes outside of that time frame.
+The Open OnDemand team will only provide general support and/or backporting for a major or minor version for a period of 3 months after the next major or minor version is released. For example, Open OnDemand version 2.0 will only be supported for 3 months after the release of version 3.0. This includes providing concurrent patch versions for relevant security and/or bug fixes where possible. For example, the Open OnDemand developers would release a version 2.0.1 alongside a version 3.0.1 if released within 3 months of the 3.0 release. The Open OnDemand community is welcome to generate pull requests for additional backport code changes outside of that time frame.
