@@ -1,7 +1,7 @@
 .. _authentication-overview-configure-authentication:
 
-Configure Apache Authentication
-===============================
+Apache Modules and the OOD Portal Generator
+===========================================
 
 Configure Authentication Module
 -------------------------------

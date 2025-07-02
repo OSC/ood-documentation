@@ -1,7 +1,7 @@
 .. _authentication-overview:
 
-Overview
-========
+Configuring OOD Authentication
+==============================
 
 Configuring Open OnDemand to work with an Apache authentication module can be
 broken down into three procedures:
@@ -13,9 +13,8 @@ broken down into three procedures:
 These are discussed in more detail in the following sections.
 
 .. toctree::
-   :maxdepth: 2
-   :numbered:
-   :caption: Setup Authentication Module
+   :maxdepth: 3
+   :caption: Setup Authentication Module and User Map
 
    overview/configure-authentication
    overview/map-user
