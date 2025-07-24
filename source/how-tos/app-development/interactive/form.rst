@@ -463,6 +463,24 @@ are:
             - `blue`
             - `green`
 
+.. describe:: placeholder (String, null)
+
+     help text that appears inside the field when it is empty
+
+     Default
+       No help text appears in input field
+
+       .. code-block:: yaml
+
+          placeholder: null
+
+     Example
+       Display default value in placeholder
+
+       .. code-block:: yaml
+
+          pattern: "Default: 4"
+
 .. describe:: pattern (String, null)
 
      a regular expression that the control's value is checked against (only
