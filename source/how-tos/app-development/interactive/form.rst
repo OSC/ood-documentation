@@ -479,7 +479,7 @@ are:
 
        .. code-block:: yaml
 
-          pattern: "Default: 4"
+          placeholder: "Default: 4"
 
 .. describe:: pattern (String, null)
 
