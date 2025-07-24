@@ -9,6 +9,15 @@ OnDemand supports dynamic interactive forms using a file named ``~/ondemand/dev/
 - Show or hide a license field based on whether the user is permitted to use the OSC academic license or if they are required to use a different license provider (`OSC ANSYS JavaScript`_)
 - Implement a file picker using the File Explorer's API, `Webpack`_, and `VueJS`_ (`bc_js_filepicker`_)
 
+Other site have used this file to:
+
+- Enable popups for invalid field values right away instead of waiting until the `submit` button is pressed:
+
+  .. code-block:: js
+
+    form = document.getElementById("new_batch_connect_session_context");
+    form.addEventListener("change", () => form.reportValidity(););
+
 .. warning::
 
     Be aware that client side validation provided by JavaScript is not perfect and any critical values should be validated / sanitized server side in ``script.sh.erb`` or ``submit.yml.erb``.
