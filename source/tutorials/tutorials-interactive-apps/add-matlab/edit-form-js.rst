@@ -11,23 +11,29 @@ OnDemand supports dynamic interactive forms using a file named ``~/ondemand/dev/
 
 Other site have used this file to:
 
-- Mark fields as invalid for site-specific reasons:
-
-  .. code-block:: js
-
-    auto_queues_field = document.getElementById("new_batch_connect_session_auto_queues");
-    gpus_field = document.getElementById("new_batch_connect_session_gpus");
-    if ((auto_queues_field.value == "cpu") && (parseInt(gpus_field.value) > 0)) {
-      gpus_field.setCustomValidity("You cannot use a GPU in the CPU queue!");
-    }
-    
-
 - Enable popups for invalid field values right away instead of waiting until the `submit` button is pressed:
 
   .. code-block:: js
 
     form = document.getElementById("new_batch_connect_session_context");
     form.addEventListener("change", () => form.reportValidity());
+
+- Mark fields as invalid for site-specific reasons:
+
+  .. code-block:: js
+
+    // example: no GPUs in the CPU partition
+    auto_queues_field = document.getElementById("new_batch_connect_session_auto_queues");
+    gpus_field = document.getElementById("new_batch_connect_session_gpus");
+    function validate_gpu_against_partition() {
+      if ((auto_queues_field.value == "cpu") && (parseInt(gpus_field.value) > 0)) {
+        gpus_field.setCustomValidity("You cannot use a GPU in the CPU queue!");
+      } else {
+        gpus_field.setCustomValidity(""); // valid
+      }
+    }
+    gpus_field.addEventListener("change", validate_gpu_against_partition);
+    auto_queues_field.addEventListener("change", validate_gpu_against_partition);
 
 .. warning::
 
