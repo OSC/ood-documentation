@@ -358,12 +358,12 @@ are:
 
      - ``check_box``
      - ``hidden_field``
-     - ``number_field`` - can use ``min``, ``max``, ``step``
+     - ``number_field`` - can use ``min``, ``max``, ``step``, ``placeholder``
      - ``radio_button``    
      - ``resolution_field`` (used for specifying resolution dimensions necessary for VNC)
      - ``select`` - can use ``options``
-     - ``text_area``
-     - ``text_field``
+     - ``text_area`` - can use ``placeholder``
+     - ``text_field`` - can use ``pattern``, ``placeholder``
 
      Some other fields that have varying support across different browsers
      include: ``range_field``, ``date_field``, ``search_field``,
@@ -462,6 +462,24 @@ are:
             - `red`
             - `blue`
             - `green`
+
+.. describe:: placeholder (String, null)
+
+     Example or hint text that is shown inside the field with low contrast when it is empty.
+
+     Default
+       No help text appears in input field
+
+       .. code-block:: yaml
+
+          placeholder: null
+
+     Example
+       Display recommended value in placeholder
+
+       .. code-block:: yaml
+
+          placeholder: "Recommended: 4"
 
 .. describe:: pattern (String, null)
 
