@@ -465,7 +465,7 @@ are:
 
 .. describe:: placeholder (String, null)
 
-     help text that appears inside the field when it is empty
+     Example or hint text that is shown inside the field with low contrast when it is empty.
 
      Default
        No help text appears in input field
