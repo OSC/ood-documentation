@@ -358,12 +358,12 @@ are:
 
      - ``check_box``
      - ``hidden_field``
-     - ``number_field`` - can use ``min``, ``max``, ``step``
+     - ``number_field`` - can use ``min``, ``max``, ``step``, ``placeholder``
      - ``radio_button``    
      - ``resolution_field`` (used for specifying resolution dimensions necessary for VNC)
      - ``select`` - can use ``options``
-     - ``text_area``
-     - ``text_field``
+     - ``text_area`` - can use ``placeholder``
+     - ``text_field`` - can use ``pattern``, ``placeholder``
 
      Some other fields that have varying support across different browsers
      include: ``range_field``, ``date_field``, ``search_field``,
