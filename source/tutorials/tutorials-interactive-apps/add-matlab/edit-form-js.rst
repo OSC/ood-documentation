@@ -23,8 +23,8 @@ Other site have used this file to:
   .. code-block:: js
 
     // example: no GPUs in the CPU partition
-    auto_queues_field = document.getElementById("new_batch_connect_session_auto_queues");
-    gpus_field = document.getElementById("new_batch_connect_session_gpus");
+    auto_queues_field = document.getElementById("new_batch_connect_session_context_auto_queues");
+    gpus_field = document.getElementById("new_batch_connect_session_context_gpus");
     function validate_gpu_against_partition() {
       if ((auto_queues_field.value == "cpu") && (parseInt(gpus_field.value) > 0)) {
         gpus_field.setCustomValidity("You cannot use a GPU in the CPU queue!");
