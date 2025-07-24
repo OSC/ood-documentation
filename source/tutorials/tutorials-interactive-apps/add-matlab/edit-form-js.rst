@@ -16,7 +16,7 @@ Other site have used this file to:
   .. code-block:: js
 
     form = document.getElementById("new_batch_connect_session_context");
-    form.addEventListener("change", () => form.reportValidity(););
+    form.addEventListener("change", () => form.reportValidity());
 
 .. warning::
 
