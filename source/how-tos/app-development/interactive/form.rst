@@ -475,11 +475,11 @@ are:
           placeholder: null
 
      Example
-       Display default value in placeholder
+       Display recommended value in placeholder
 
        .. code-block:: yaml
 
-          placeholder: "Default: 4"
+          placeholder: "Recommended: 4"
 
 .. describe:: pattern (String, null)
 
