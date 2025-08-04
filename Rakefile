@@ -54,11 +54,7 @@ def run_cmd
   if podman?
     "podman run --rm -it -v #{__dir__}:/doc #{image}"
   elsif docker?
-    user_section = ''
-    current_dir = '.'
-    if !windows?
-      user_section = "-u '#{user_group}'"
-    end
+    user_section = windows? ? nil : "-u '#{user_group}'"
     "docker run --rm -it -v \"#{__dir__}:/doc\" #{user_section} #{image}"
   else
     raise StandardError, "Cannot find any suitable container runtime to build. Need 'podman' or 'docker' installed."
