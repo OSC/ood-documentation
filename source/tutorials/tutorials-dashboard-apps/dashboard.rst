@@ -4,7 +4,7 @@ Developing the Dashboard App
 ============================
 
 .. warning::
-    You muse have followed :ref:`enabling-development-mode` for any part of this tutorial to work.
+    You must have followed :ref:`enabling-development-mode` for any part of this tutorial to work.
 
 Things To Know
 --------------
