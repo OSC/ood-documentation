@@ -32,7 +32,7 @@ This is a simple example that ensures modules are always being purged and
        vnc:
          script_wrapper: |
            module purge
-           export PATH="/usr/local/turbovnc/bin:$PATH"
+           export PATH="/opt/TurboVNC/bin:$PATH"
            export WEBSOCKIFY_CMD="/usr/local/websockify/run"
            %s
 
