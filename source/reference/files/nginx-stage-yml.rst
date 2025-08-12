@@ -842,8 +842,8 @@ Configuration Options
 
 .. describe:: show_nginx_stage_help_message (Boolean)
 
-   Hide the stderr "Run 'nginx_stage --help' to see a full list of available 
-   command line options." message when calling nginx_stage
+   Hide the standard error ``Run 'nginx_stage --help' to see a full list of available 
+   command line options.`` message when calling ``nginx_stage``.
 
     Default
       Show the help message.
