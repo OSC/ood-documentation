@@ -273,11 +273,15 @@ auto_modules_<MODULE>
   .. note::
 
     The form configuration is case sensitive. So there is a difference between
-    ``auto_modules_R`` and ``auto_modules_r``.
+    ``auto_modules_R`` and ``auto_modules_r``. The case in ``form.yml`` must match
+    the case in the cluster module files. However, the case when referenced later
+    must be lowercase. For example, if your module is called ``ParaView``, the form
+    configuration would be ``auto_modules_ParaView``, but referenced in ``script.sh.erb``
+    as ``<%= context.auto_modules_paraview %>``.
 
     Hyphens cause issues in templating the script files. For example,
     a form configuration like ``auto_modules_netcdf-serial`` would need to be
-    referenced in the ``script.sh.erb`` as ``<%= auto_modules_netcdf_serial %>``
+    referenced in the ``script.sh.erb`` as ``<%= context.auto_modules_netcdf_serial %>``
     replacing any hyphens (``-``) with underscores ``_``.
 
 .. _auto_groups:

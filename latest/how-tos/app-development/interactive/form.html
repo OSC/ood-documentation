@@ -375,10 +375,14 @@ cluster is chosen.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The form configuration is case sensitive. So there is a difference between
-<code class="docutils literal notranslate"><span class="pre">auto_modules_R</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_modules_r</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">auto_modules_R</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_modules_r</span></code>. The case in <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> must match
+the case in the cluster module files. However, the case when referenced later
+must be lowercase. For example, if your module is called <code class="docutils literal notranslate"><span class="pre">ParaView</span></code>, the form
+configuration would be <code class="docutils literal notranslate"><span class="pre">auto_modules_ParaView</span></code>, but referenced in <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code>
+as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">context.auto_modules_paraview</span> <span class="pre">%&gt;</span></code>.</p>
 <p>Hyphens cause issues in templating the script files. For example,
 a form configuration like <code class="docutils literal notranslate"><span class="pre">auto_modules_netcdf-serial</span></code> would need to be
-referenced in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">auto_modules_netcdf_serial</span> <span class="pre">%&gt;</span></code>
+referenced in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">context.auto_modules_netcdf_serial</span> <span class="pre">%&gt;</span></code>
 replacing any hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>) with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
 </div>
 </dd>
