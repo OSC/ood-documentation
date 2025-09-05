@@ -3,6 +3,8 @@
 LSF
 ===
 
+.. include:: limited-support.inc
+
 A YAML cluster configuration file for an LSF resource manager on an HPC cluster
 looks like:
 
