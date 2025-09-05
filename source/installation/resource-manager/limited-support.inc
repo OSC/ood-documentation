@@ -1,11 +1,6 @@
 
 .. note::
-  This resource manager has limited support from the Open OnDemand
-  developers.  This is because it was either contributed by the
-  community or the developers no longer have access to a live system
-  to test against.
-
-  Due to this lack of access, the developers may not be able to fix bugs or
-  issues.
-
-  However, community patches are always welcome.
+  This resource manager is not actively maintained by the Open OnDemand developers,
+  either because it was community-contributed or we no longer have access to a test
+  system. As a result, bug fixes from the core team may be limited, but community
+  patches are encouraged.
