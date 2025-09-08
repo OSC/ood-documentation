@@ -9,15 +9,21 @@ Customizations
 
 .. _disabling_applications:
 
-Disabling applications
-----------------------
+Enabling and Disabling Applications
+-----------------------------------
 
-OnDemand is comprised of a few components. Each of which you can disable or limit
-access by simply changing the file permissions of the application.
+OnDemand is comprised of a few components. Each one you can disable or limit
+access by simply changing the file permissions of the application.  The application
+will only be available if regular users can read the files. When they cannot
+read the files, the application is disabled. When they can, it is enabled.
 
-All the applications OnDemand installs are located in `/var/www/ood/apps/sys`.
-So, for example, if you wished to disable the file browser you would simply
-change it's directory to 700 so it's unreadable by regular users.
+All the applications OnDemand installs are located in ``/var/www/ood/apps/sys``.
+
+Disabling Applications
+......................
+
+So, for example, if you wished to disable the file browser for all users
+you would simply change its directory to 700 so it's unreadable by regular users.
 
 When this directory is unreadable by regular users, the functionality
 it provides will be disabled.
@@ -25,6 +31,9 @@ it provides will be disabled.
 .. code-block:: sh
 
   sudo chmod 700 /var/www/ood/apps/sys/files
+
+Enabling Applications for a limited number of users
+...................................................
 
 Alternatively, if you wished to limit access you can do so through group
 permissions. For example, if you wanted to limit access to the file browser
@@ -37,6 +46,22 @@ directory while members of the ``staff`` Unix group can.
   sudo chmod 750 /var/www/ood/apps/sys/files
   sudo chown root:staff /var/www/ood/apps/sys/files
 
+This ensures:
+
+  * The application is readable and executable by the staff group.
+  * All other users not in staff group will not see or access it.
+
+.. _enabling_applications:
+
+Enabling Applications 
+.....................
+
+Conversely, if the directory is already ``700`` just reverse the process to
+enable the application. Set the directory to ``755`` to *enable* it for all users.
+
+.. code-block:: sh
+
+  sudo chmod 755 /var/www/ood/apps/sys/projects
 
 .. _configure_announcements:
 
@@ -65,10 +90,11 @@ the user would see this message at the top of the dashboard:
 If the announcement file has the extension ``yml`` and is a YAML file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
 
 .. list-table:: Announcement configuration keys.
+   :header-rows: 1
 
    * - Key
      - Description
-   * - type
+   * - ``type``
      - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
    * - ``msg``
      - The announcement's message.
@@ -178,9 +204,9 @@ Currently only the dashboard uses the colors in the navbar.
    * - Replace header title with logo
      - ``dashboard_header_img_logo``
      - Value should be URL to logo i.e. ``/public/logo.png``.  the background color the active link in the navbar in the dashboard
-   * - Use white text on black background for navbar.
+   * - Navigation bar theme
      - ``navbar_type``
-     - By default we use ``inverse`` for this value, which specifies to use `Bootstrap 3's inverted navbar <https://getbootstrap.com/docs/3.3/components/#navbar-inverted>`_ where text is white and background is black (or dark grey). You can set this to ``default`` to use black text on light grey background if it fits your branding better.
+     - By default we use ``dark`` for this value, where text is white and background is black (or dark grey). You can set this to ``light`` to use black text on light grey background if it fits your branding better.
 
 .. note:: It is possible to configure these settings using environment variables, although this is deprecated.
           For information about the properties and environment variables, see the :ref:`OnDemand configuration documentation <ondemand-d-ymls>`.
@@ -397,7 +423,7 @@ app.
 .. include:: customizations/interactive-apps-menu.inc
 
 
-Disable uploads or downloads
+Disable Uploads or Downloads
 ----------------------------
 
 By default, Open OnDemand will allow users to upload and download files.
@@ -444,7 +470,7 @@ By default, the maximum file download size is 10.7 GB (10737418240 bytes).
 If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` configuration environment 
 variable in the ``/etc/ood/config/apps/dashboard/env`` file to the desired value in bytes.
 
-For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/files/env`` file:
+For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/dashboard/env`` file:
 
 .. code-block:: 
 
@@ -454,7 +480,7 @@ Note that this will limit the download size for all users of the Open OnDemand i
 
 .. warning::
    This configuration value is expected to be numbers only (no characters)
-   and in units of bytes. The default value of 10737420000 bytes is ~10.7 GB or ~10.0 Gib.
+   and in units of bytes. The default value of 10737418240 bytes is ~10.7 GB or ~10.0 Gib.
 
    Values like ``1000M`` or ``20G`` will not be accepted and may cause errors.
 
@@ -530,7 +556,7 @@ To add other hosts into the allow list (for example compute nodes) add the confi
 
 This configuration is expected to be a colon (:) separated list of GLOBs.
 
-Here's an example of of this configuration with three such GLOBs that allow for shell
+Here's an example of this configuration with three such GLOBs that allow for shell
 access into any compute node in our three clusters.
 
 .. code:: shell
@@ -566,10 +592,12 @@ commenting it out will disable ping pongs (it's disabled by default).
 
 ``OOD_SHELL_INACTIVE_TIMEOUT_MS`` controls how long a connection can be inactive
 for (in milliseconds) before being closed. It defaults to 300000 milliseconds (5 minutes).
+Activity here is counted as actual user activity. Automatic ping pong activity to keep the TCP
+connection alive is not factored into this.
 
 ``OOD_SHELL_MAX_DURATION_MS`` controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
-regardless of activity. It's default is 3600000 milliseconds (1 hour).
+regardless of activity. Its default is 3600000 milliseconds (1 hour).
 
 .. code:: shell
 
@@ -588,7 +616,7 @@ As of version 2.1 you are allowed to configure a non-standard ssh port.
 To change the ssh port for submitting jobs in OOD, you need to add the configuration
 ``OOD_SSH_PORT`` to the ``/etc/ood/config/apps/dashboard/env`` file.
 
-Here's an example of of this configuration.
+Here's an example of this configuration.
 
 .. code:: shell
 
@@ -603,9 +631,9 @@ Shell App SSH Command Wrapper
 
 Since OOD 1.7 you can use an ssh wrapper script in the shell application instead of just the ssh command.
 
-This is helpful when you pass add additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
+This is helpful when you pass additional environment variable through ssh (``-o SendEnv=MY_ENV_VAR``) or ensure some ssh command options be used.
 
-To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` to point to your script in ``/etc/ood/config/apps/shell/env``. Also be sure to make your script executable.
+To use your ssh wrapper configure ``OOD_SSH_WRAPPER=/usr/bin/changeme`` in ``/etc/ood/config/apps/shell/env`` to point to your script. Also be sure to make your script executable.
 
 Here's a simple example of what a wrapper script could look like.
 

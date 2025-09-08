@@ -60,10 +60,38 @@ for the ``ruby`` cluster.  It will then hide it every time the cluster ``ruby`` 
             data-option-for-cluster-ruby: false
           ]
 
+Exclusive options
+.................
+
+Because all form items are shown by default, generally you're setting
+``data-option-for-cluster-ruby`` to ``false``, signaling that this is **not**
+a valid select option when the ``ruby`` cluster is chosen.
+
+OnDemand also provides the inverse through ``data-exclusive-option-for``
+directives. You'll be setting exclusive options to ``true`` to signal
+this is **only** a valid option when the ``ruby`` cluster is chosen just
+for example.
+
+Following this example, the ``gpu`` option will **only** be available when
+the cluster ``ruby`` is chosen.  It is an option exclusively for the ``ruby``
+cluster.
+
+.. code-block:: yaml
+  :emphasize-lines: 8
+
+  attributes:
+    node_type:
+      widget: select
+      options:
+        - 'standard'
+        - [
+            'gpu', 'gpu',
+            data-exclusive-option-for-cluster-ruby: true
+          ]
+
 .. tip::
   This example shows toggling options based on the cluster, but this feature
   generically support any field and value.
-
 
 Hiding entire elements
 **********************

@@ -155,8 +155,8 @@ ACLs are implicitly allow-lists but may be set explicitly to either `allowlist` 
       - "other_users_of_the_cluster"
     type: "allowlist"  # optional, one of "allowlist" or "blocklist"
 
-Note that to look up group membership ood_core uses the ood_support library which uses ``id -G USERNAME``
-to get the list groups the user is in, and ``getgrgid`` to look up the name of the group.
+Note that to look up group membership, ood_core uses the ood_support library which uses ``id -G USERNAME``
+to get the list of groups the user is in and ``getgrgid`` to look up the name of each group.
 
 custom:
 #######
