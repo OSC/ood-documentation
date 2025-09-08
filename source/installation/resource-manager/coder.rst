@@ -3,9 +3,6 @@
 Coder
 ==========
 
-
-Coder
-
 The Coder adapter allows launching virtual machines from Open OnDemand using Coder as a middleman. Coder is an open-source project that allows users to create and control
 developer workspaces on their preferred clouds and servers via GUI, CLI and API. The latter is used here. Currently OpenStack is supported as a cloud provider.
 
@@ -52,7 +49,7 @@ A YAML cluster configuration file for a Coder is defined by:
   Time in seconds between attempts to delete credentials after the VM is destroyed. Default is 10s.
 
 Authentication (OpenStack)
-**************
+--------------------------
 
 Similiar to kubernetes, Cpder adapter relies on hooks to handle authentication. Currently only openstack application credentials are supported. In this case the hook is responsible for issuing OpenStack token and then storing it in user's home directory as a JSON file. This is later used by the adapter to create application credentials. These credentials are then destroyed when the instance is destroyed.
 The mechanism relies on the OIDC token exchange and the ability of the access token to create unrestricted application credentials. Consult this with your OIDC expert.
@@ -64,7 +61,8 @@ openstack_hook.sh needs to be sourced from the main hook.
   source /etc/ood/config/openstack_hook.sh
 
 
-openstack hook
+OpenStack hook
+**************
 
 .. code-block:: bash
   
@@ -97,21 +95,23 @@ openstack hook
   fi
 
 .. warning::
-  In order to use differenc cloud provider, the hook needs to be modified accordingly and a credential class needs to be implemented. Use this [https://github.com/OSC/ood_core/pull/897](pull request) as a reference.
-
-
+  In order to use different cloud provider, the hook needs to be modified accordingly and a credential class needs to be implemented. Use this [https://github.com/OSC/ood_core/pull/897](pull request) as a reference.
 
 Example OpenStack VM
+********************
 
 An example interactive application that can be launched using this adapter can be found this link https://github.com/andrejcermak/bc_openstack_vm
 Its coder counterpart can be found here https://github.com/andrejcermak/coder_template_os_vm
 
 How to setup coder server
+*************************
+
 - follow the official documentation https://coder.com/docs/install
 - create a service user
 - issue a token via UI or cli https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens
 
 How to publish a new template in Coder
+**************************************
 
 #. have a coder server (standalone, docker ...)
 #. have terraform.tfvars in ~/terraform.tfvars
