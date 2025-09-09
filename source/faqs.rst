@@ -41,11 +41,11 @@ patches for all supported releases.
 How are CVEs detected, handled, and reported to the community?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-GitHub automatically scans our codebase (how often?) and warns about potential
- risks, which are evaluated by our development team. Based on this evaluation 
- we then make appropriate patches and publish the full report—detailing the 
- issue, severity, versions affected, and what patches were made for which 
- releases at the following URL:
+GitHub automatically scans our codebase (how often?) and warns about potential 
+risks, which are evaluated by our development team. Based on this evaluation 
+we then make appropriate patches and publish the full report—detailing the 
+issue, severity, versions affected, and what patches were made for which 
+releases at the following URL:
 
 - `Security advisories <https://github.com/OSC/ondemand/security/advisories?state=published>`_
 
