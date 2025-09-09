@@ -1,6 +1,6 @@
-.. _open-ondemand-faq:
+.. _faq:
 
-Open OnDemand FAQ
+FAQ
 ==================
 
 .. contents:: On this page
