@@ -41,7 +41,7 @@ patches for all supported releases.
 How are CVEs detected, handled, and reported to the community?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-GitHub automatically scans our codebase (how often?) and warns about potential 
+GitHub automatically scans our codebase and warns about potential 
 risks, which are evaluated by our development team. Based on this evaluation 
 we then make appropriate patches and publish the full report—detailing the 
 issue, severity, versions affected, and what patches were made for which 
@@ -60,7 +60,7 @@ walks you through supported operating systems, required dependencies, and
 integration with authenticators and schedulers. Open OnDemand maintains RPM 
 distributions to build the production instance and upgrading, so most of 
 the setup work is integration with the institutional services you already 
-use and is generally a “one and done” process. {Is this true?}
+use.
 
 Will OnDemand be able to run my custom tools?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -104,5 +104,4 @@ Institutions typically find that OnDemand configuration and maintenance is easil
 single system administrator without significant impact on other duties they may have. While the 
 initial setup can require some time and troubleshooting, future updates and continued maintenance are generally
 light work. Scaling issues could arise if the login node hosting your OnDemand instance is overloaded, and may 
-require moving the instance to a new machine or allocating more resources towards it. Some large institutions 
-host OnDemand through load balancers and proxies, as discussed in `this discourse thread <https://discourse.openondemand.org/t/scaling-best-practice/4209>`_.
+require moving the instance to a new machine or allocating more resources towards it.
