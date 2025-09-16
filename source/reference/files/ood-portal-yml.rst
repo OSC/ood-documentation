@@ -948,7 +948,7 @@ on mod_auth_openidc_.
 
 .. describe:: oidc_redirect_uri (String, null)
 
-     Sub-uri used by mod_auth_openidc_ to populate OIDCRedirectURI.
+     Sub URI used by mod_auth_openidc_ to populate OIDCRedirectURI
 
      Default
        This defaults to: 
