@@ -599,6 +599,11 @@ connection alive is not factored into this.
 of activity (in milliseconds). After this duration, the connection will be closed
 regardless of activity. Its default is 3600000 milliseconds (1 hour).
 
+``OOD_SHELL_TERM`` allows the default ``TERM=xterm-16color`` to be overriden. Should only
+be set to ones whose escape codes are fully supported by the underlying
+`hterm library <https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ControlSequences.md>`__.
+Some other common ones that are include ``xterm``, ``xterm-256color``, and ``xterm-direct``.
+
 .. code:: shell
 
   # /etc/ood/config/apps/shell/env
