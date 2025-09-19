@@ -3,9 +3,7 @@
 Coder
 ==========
 
-The Coder adapter allows launching virtual machines from Open OnDemand using Coder as a middleman. Coder is an open-source project that allows users to create and control
-developer workspaces on their preferred clouds and servers via GUI, CLI and API. The latter is used here. Currently OpenStack is supported as a cloud provider.
-
+The Coder adapter enables launching virtual machines from Open OnDemand using Coder as a middleware solution. Coder is an open-source platform that allows users to create and manage developer workspaces by executing Terraform/OpenTofu code, serving as a bridge between Open OnDemand and cloud providers. Currently, OpenStack is the supported cloud provider.
 
 A YAML cluster configuration file for a Coder is defined by:
 
@@ -51,8 +49,8 @@ A YAML cluster configuration file for a Coder is defined by:
 Authentication (OpenStack)
 --------------------------
 
-Similiar to kubernetes, Cpder adapter relies on hooks to handle authentication. Currently only openstack application credentials are supported. In this case the hook is responsible for issuing OpenStack token and then storing it in user's home directory as a JSON file. This is later used by the adapter to create application credentials. These credentials are then destroyed when the instance is destroyed.
-The mechanism relies on the OIDC token exchange and the ability of the access token to create unrestricted application credentials. Consult this with your OIDC expert.
+Similar to Kubernetes, the Coder adapter relies on hooks to handle authentication. Currently, only OpenStack application credentials are supported. In this case, the hook is responsible for issuing an OpenStack token and then storing it in the user's home directory as a JSON file. This is later used by the adapter to create application credentials. These credentials are then destroyed when the instance is terminated. 
+The mechanism relies on OIDC token exchange and the ability of the access token to create unrestricted application credentials. Consult with your OIDC expert regarding this requirement. 
 
 openstack_hook.sh needs to be sourced from the main hook.
 
@@ -99,9 +97,7 @@ OpenStack hook
 
 Example OpenStack VM
 ********************
-
-An example interactive application that can be launched using this adapter can be found this link https://github.com/andrejcermak/bc_openstack_vm
-Its coder counterpart can be found here https://github.com/andrejcermak/coder_template_os_vm
+An example interactive application that can be launched using this adapter can be found at this link: https://github.com/andrejcermak/bc_openstack_vm . Its Coder counterpart can be found here: https://github.com/andrejcermak/coder_template_os_vm .
 
 How to setup coder server
 *************************
@@ -114,7 +110,17 @@ How to publish a new template in Coder
 **************************************
 
 #. have a coder server (standalone, docker ...)
-#. have terraform.tfvars in ~/terraform.tfvars
+#. have terraform.tfvars in ~/terraform.tfvars with
+
+.. code-block:: bash
+  application_credential_id     = "your-application-credential-id"
+  application_credential_name   = "your-application-credential-name"
+  application_credential_secret = "your-application-credential-secret"
+  openstack_region             = "your-region-name"
+  openstack_identity_provider  = "your-identity-provider"
+  project_id                   = "your-project-id"
+
+
 #. ``git clone _your_coder_template_``
 #. ``cd _your_coder_template_``
 #. ``terraform init``
