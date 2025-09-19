@@ -68,10 +68,10 @@ OpenStack hook
   export OS_INTERFACE="public"
   export OS_IDENTITY_API_VERSION=3
   export OS_AUTH_TYPE="v3oidcaccesstoken"
-  export OS_AUTH_URL=https://identity.brno.openstack.cloud.e-infra.cz/v3
-  export OS_IDENTITY_PROVIDER="login.e-infra.cz"
+  export OS_AUTH_URL=https://identity.<YOUR_OPENSTACK_DEPLOYMENT>/v3
+  export OS_IDENTITY_PROVIDER=<"YOUR_IDENTITY_PROVIDER">
   export OS_PROTOCOL="openid"
-  export OS_PROJECT_DOMAIN_ID="3b5cb406d60249508d0ddab2a80502b5"
+  export OS_PROJECT_DOMAIN_ID=<"YOUR_PROJECT_DOMAIN_ID">
   export OS_ACCESS_TOKEN=$OOD_OIDC_ACCESS_TOKEN
   echo $OOD_OIDC_ACCESS_TOKEN 
 
@@ -110,20 +110,11 @@ How to publish a new template in Coder
 **************************************
 
 #. have a coder server (standalone, docker ...)
-#. have terraform.tfvars in ~/terraform.tfvars with
-
-.. code-block:: bash
-  application_credential_id     = "your-application-credential-id"
-  application_credential_name   = "your-application-credential-name"
-  application_credential_secret = "your-application-credential-secret"
-  openstack_region             = "your-region-name"
-  openstack_identity_provider  = "your-identity-provider"
-  project_id                   = "your-project-id"
-
-
-#. ``git clone _your_coder_template_``
-#. ``cd _your_coder_template_``
-#. ``terraform init``
-#. ``coder template push os-vm --variables-file="~/terraform.tfvars" -y``
+#. ``git clone <YOUR TEMPLATE REPO>``
+#. ``cd <YOUR TEMPLATE REPO>``
+#.  fill in the variables in ``terraform.tfvars`` (you might need to create credentials first, but they are only required for the ``coder template push`` command to work)
+#. ``terraform init`` or ``tofu init``
+#. ``coder login``
+#. ``coder template push <YOUR TEMPLATE NAME> -y``
 #. ``coder template list -c name -c "organization id" -c "active version id"``
-#. fill in the organization and template version ids in submit.yml.erb 
+#. fill in the organization and template version ids in submit.yml.erb  
