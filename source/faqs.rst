@@ -91,7 +91,9 @@ The first place to bring any issue you encounter with OnDemand is our community
 with a large OnDemand community that can give advice and share solutions to 
 many common problems or questions. Our full-time developers are also very 
 active on discourse, investigating problems and offering individualized 
-solutions and expert advice. 
+solutions and expert advice. For more dedicated support, consider our 
+`support subscription <https://openondemand.org/subscribe>` and find us at conferences 
+like SC, ISC, PEARC, and our very own GOOD conference. 
 
 We also offer 
 `Open OnDemand Office Hours <https://discourse.openondemand.org/t/open-ondemand-monthly-open-office-hours/1728>`_, 
