@@ -9,19 +9,19 @@ A YAML cluster configuration file for a Coder is defined by:
 
 .. code-block:: yaml
 
-  # /etc/ood/config/clusters.d/my_coder.yml
+  # /etc/ood/config/clusters.d/coder_cluster.yml
   ---
   v2:
     metadata:
       title: "VMs from OOD"
     job:
       adapter: "coder"
-      host: "https://my.coder.deployment.com"
-      cluster: "my_coder"
-      token: "my_coder_token"
+      host: "https://<YOUR_CODER_INSTANCE>"
+      cluster: "coder_cluster" # same as the filename
+      token: "<YOUR_CODER_API_TOKEN>"
       auth: 
         cloud: "openstack"
-        url: "https://identity.openstack.my_instance.com/v3"
+        url: "https://identity.<YOUR_OPENSTACK_DEPLOYMENT>/v3"
         region: "RegionOne"
       service_user: "service"
       credential_deletion_max_attempts: 5
@@ -73,7 +73,6 @@ OpenStack hook
   export OS_PROTOCOL="openid"
   export OS_PROJECT_DOMAIN_ID=<"YOUR_PROJECT_DOMAIN_ID">
   export OS_ACCESS_TOKEN=$OOD_OIDC_ACCESS_TOKEN
-  echo $OOD_OIDC_ACCESS_TOKEN 
 
   start_time=$(date +%s)
   OUTPUT=$(timeout 5s openstack token issue -f json)
@@ -84,7 +83,6 @@ OpenStack hook
   if [ $exit_code -eq 0 ]; then
     echo "$OUTPUT" > /home/$USER/token.json
     chown $USER /home/$USER/token.json
-    echo "$OUTPUT"
     echo "openstack token issued in $elapsed_time seconds"
   elif [ $exit_code -eq 124 ]; then
       echo "Command timed out - OpenStack might be unreachable"
@@ -99,22 +97,22 @@ Example OpenStack VM
 ********************
 An example interactive application that can be launched using this adapter can be found at this link: https://github.com/andrejcermak/bc_openstack_vm . Its Coder counterpart can be found here: https://github.com/andrejcermak/coder_template_os_vm .
 
-How to setup coder server
-*************************
+How to setup a Coder server
+--------------------------
 
-- follow the official documentation https://coder.com/docs/install
-- create a service user
-- issue a token via UI or cli https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens
+#. Follow the official documentation https://coder.com/docs/install
+#. Create a service user
+#. Issue a token via UI or cli https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens
 
 How to publish a new template in Coder
-**************************************
+--------------------------
 
-#. have a coder server (standalone, docker ...)
-#. ``git clone <YOUR TEMPLATE REPO>``
-#. ``cd <YOUR TEMPLATE REPO>``
-#.  fill in the variables in ``terraform.tfvars`` (you might need to create credentials first, but they are only required for the ``coder template push`` command to work)
-#. ``terraform init`` or ``tofu init``
-#. ``coder login``
-#. ``coder template push <YOUR TEMPLATE NAME> -y``
-#. ``coder template list -c name -c "organization id" -c "active version id"``
-#. fill in the organization and template version ids in submit.yml.erb  
+#. Have a Coder server (standalone, docker ...)
+#. Run ``git clone <YOUR TEMPLATE REPO>``
+#. Run ``cd <YOUR TEMPLATE REPO>``
+#. Fill in the variables in ``terraform.tfvars`` (you might need to create credentials first, but they are only required for the ``coder template push`` command to work)
+#. Run ``terraform init`` or ``tofu init``
+#. Run ``coder login``
+#. Run ``coder template push <YOUR TEMPLATE NAME> -y``
+#. Run ``coder template list -c name -c "organization id" -c "active version id"``
+#. Fill in the organization and active template version ids in submit.yml.erb  
