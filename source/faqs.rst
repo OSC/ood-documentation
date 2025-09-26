@@ -20,10 +20,10 @@ OnDemand allows system administrators to quickly and easily connect many
 researchers to institutional compute resources and provides an accessible 
 platform for researchers to run common software without computing expertise.
 
-Who funds/supports OnDemand?
+Who funds/supports Open OnDemand?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-While being open source and community supported, OnDemand has also been the 
+While being open source and community supported, Open OnDemand has also been the 
 recipient of over $10 million of `NSF grants <https://openondemand.org/about-us#our-history-vision>`_ that 
 has enabled teams at the Ohio Supercomputer Center (OSC), the Massachusetts Green High Performance Computing 
 Center (MGHPCC), Texas A&M University, and the University of Maryland to 
@@ -89,7 +89,7 @@ Where do I go for help if I have problems with my OnDemand instance?
 
 The first place to bring any issue you encounter with OnDemand is our community 
 `Discourse <https://discourse.openondemand.org/>`_, which connects you 
-with a large OnDemand community that can give advice and share solutions to 
+with a large Open OnDemand community that can give advice and share solutions to 
 many common problems or questions. Our full-time developers are also very 
 active on Discourse, investigating problems and offering individualized 
 solutions and expert advice. For more dedicated support, consider our 
