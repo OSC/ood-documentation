@@ -25,7 +25,8 @@ Who funds/supports OnDemand?
 
 While being open source and community supported, OnDemand has also been the 
 recipient of over $10 million of `NSF grants <https://openondemand.org/about-us#our-history-vision>`_ that 
-has enabled teams at OSC, MGHPCC, TAMU, and the University of Maryland to 
+has enabled teams at the Ohio Supercomputer Center (OSC), the Massachusetts Green High Performance Computing 
+Center (MGHPCC), Texas A&M University, and the University of Maryland to 
 dedicate full time staff towards enhancing and maintaining the project.
 
 How secure is OnDemand?
@@ -34,7 +35,7 @@ How secure is OnDemand?
 OnDemand integrates seamlessly with common institutional authorization methods 
 and utilizes the security and permissions capability of the underlying operating 
 system to manage user groups and levels of access. OnDemand is trusted and used 
-by U.S. Federal agencies and cutting-edge technology enterprises alike, and we 
+by U.S. federal agencies and cutting-edge technology enterprises alike, and we 
 regularly test against known attacks, scan dependencies, and release security 
 patches for all supported releases.
 
@@ -87,12 +88,12 @@ Where do I go for help if I have problems with my OnDemand instance?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The first place to bring any issue you encounter with OnDemand is our community 
-`Discourse <https://discourse.openondemand.org/>`_. The discourse connects you 
+`Discourse <https://discourse.openondemand.org/>`_, which connects you 
 with a large OnDemand community that can give advice and share solutions to 
 many common problems or questions. Our full-time developers are also very 
-active on discourse, investigating problems and offering individualized 
+active on Discourse, investigating problems and offering individualized 
 solutions and expert advice. For more dedicated support, consider our 
-`support subscription <https://openondemand.org/subscribe>` and find us at conferences 
+`support plan <https://openondemand.org/subscribe>` and find us at conferences 
 like SC, ISC, PEARC, and our very own GOOD conference. 
 
 We also offer 
