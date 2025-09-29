@@ -82,7 +82,8 @@ OpenStack hook
 
   if [ $exit_code -eq 0 ]; then
     echo "$OUTPUT" > /home/$USER/token.json
-    chown $USER /home/$USER/token.json
+    chown $USER:$USER /home/$USER/token.json
+    chmod 600 /home/$USER/token.json
     echo "openstack token issued in $elapsed_time seconds"
   elif [ $exit_code -eq 124 ]; then
       echo "Command timed out - OpenStack might be unreachable"
