@@ -79,9 +79,9 @@ client binaries.
    resource-manager/linuxhost
    resource-manager/ccq
    resource-manager/kubernetes
+   resource-manager/coder
    resource-manager/systemd
    resource-manager/bin-override-example
-   resource-manager/coder
    resource-manager/test
    resource-manager/advanced-configs
 
