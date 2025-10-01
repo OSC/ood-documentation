@@ -99,14 +99,14 @@ Example OpenStack VM
 An example interactive application that can be launched using this adapter can be found at this link: https://github.com/andrejcermak/bc_openstack_vm . Its Coder counterpart can be found here: https://github.com/andrejcermak/coder_template_os_vm .
 
 How to setup a Coder server
---------------------------
+---------------------------
 
 #. Follow the official documentation https://coder.com/docs/install
 #. Create a service user
 #. Issue a token via UI or cli https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens
 
 How to publish a new template in Coder
---------------------------
+--------------------------------------
 
 #. Have a Coder server (standalone, docker ...)
 #. Run ``git clone <YOUR TEMPLATE REPO>``
