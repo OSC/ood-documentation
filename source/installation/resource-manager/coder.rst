@@ -52,7 +52,7 @@ Authentication (OpenStack)
 Similar to Kubernetes, the Coder adapter relies on hooks to handle authentication. Currently, only OpenStack application credentials are supported. In this case, the hook is responsible for issuing an OpenStack token and then storing it in the user's home directory as a JSON file. This is later used by the adapter to create application credentials. These credentials are then destroyed when the instance is terminated. 
 The mechanism relies on OIDC token exchange and the ability of the access token to create unrestricted application credentials. Consult with your OIDC expert regarding this requirement. 
 
-openstack_hook.sh needs to be sourced from the main hook.
+``openstack_hook.sh`` needs to be sourced from the main hook.
 
 .. code-block:: bash
   
@@ -99,14 +99,14 @@ Example OpenStack VM
 An example interactive application that can be launched using this adapter can be found at this link: https://github.com/andrejcermak/bc_openstack_vm . Its Coder counterpart can be found here: https://github.com/andrejcermak/coder_template_os_vm .
 
 How to setup a Coder server
---------------------------
+---------------------------
 
 #. Follow the official documentation https://coder.com/docs/install
 #. Create a service user
-#. Issue a token via UI or cli https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens
+#. Issue a token via UI or CLI https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens
 
 How to publish a new template in Coder
---------------------------
+--------------------------------------
 
 #. Have a Coder server (standalone, docker ...)
 #. Run ``git clone <YOUR TEMPLATE REPO>``
@@ -116,4 +116,4 @@ How to publish a new template in Coder
 #. Run ``coder login``
 #. Run ``coder template push <YOUR TEMPLATE NAME> -y``
 #. Run ``coder template list -c name -c "organization id" -c "active version id"``
-#. Fill in the organization and active template version ids in submit.yml.erb  
+#. Fill in the organization and active template version ids in ``submit.yml.erb`` 
