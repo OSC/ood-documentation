@@ -1,7 +1,7 @@
 .. _faq:
 
 FAQ
-==================
+===
 
 .. contents:: On this page
    :local:
@@ -21,7 +21,7 @@ researchers to institutional compute resources and provides an accessible
 platform for researchers to run common software without computing expertise.
 
 Who funds/supports Open OnDemand?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While being open source and community supported, Open OnDemand has also been the 
 recipient of over $10 million of `NSF grants <https://openondemand.org/about-us#our-history-vision>`_ that 
