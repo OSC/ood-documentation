@@ -30,7 +30,7 @@ Center (MGHPCC), Texas A&M University, and the University of Maryland to
 dedicate full time staff towards enhancing and maintaining the project.
 
 How secure is Open OnDemand?
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open OnDemand integrates seamlessly with common institutional authorization methods 
 and utilizes the security and permissions capability of the underlying operating 
@@ -54,7 +54,7 @@ Resources
 ---------
 
 How do I start using Open OnDemand at my institution?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We publish and maintain our :ref:`installation guide <installation>`, which 
 walks you through supported operating systems, required dependencies, and 
@@ -64,7 +64,7 @@ the setup work is integration with the institutional services you already
 use.
 
 Will Open OnDemand be able to run my custom tools?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open OnDemand is designed to be a platform for all varieties of HPC applications, 
 seen in the wide variety of applications that users across the community have 
@@ -78,14 +78,14 @@ well as tutorials for developing both Passenger and interactive apps—can be
 found in the :ref:`app development how-tos <app-development>`.
 
 How customizable is Open OnDemand?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open OnDemand is highly customizable, giving you full control over layout and 
 appearance wherever possible. A detailed analysis of customizable features 
 can be found in the :ref:`customizations overview <customizations>`.
 
 Where do I go for help if I have problems with my Open OnDemand instance?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The first place to bring any issue you encounter with Open OnDemand is our community 
 `Discourse <https://discourse.openondemand.org/>`_, which connects you 
