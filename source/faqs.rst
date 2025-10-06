@@ -46,9 +46,7 @@ GitHub automatically scans our codebase and warns about potential
 risks, which are evaluated by our development team. Based on this evaluation 
 we then make appropriate patches and publish the full report—detailing the 
 issue, severity, versions affected, and what patches were made for which 
-releases at the following URL:
-
-- `Security advisories <https://github.com/OSC/ondemand/security/advisories?state=published>`_
+releases in our `Security advisories <https://github.com/OSC/ondemand/security/advisories?state=published>`_.
 
 Resources
 ---------
@@ -93,7 +91,7 @@ with a large Open OnDemand community that can give advice and share solutions to
 many common problems or questions. Our full-time developers are also very 
 active on Discourse, investigating problems and offering individualized 
 solutions and expert advice. For more dedicated support, consider our 
-`support plan <https://openondemand.org/subscribe>` and find us at conferences 
+`support plan <https://openondemand.org/subscribe>_` and find us at conferences 
 like SC, ISC, PEARC, and our very own GOOD conference. 
 
 We also offer 
