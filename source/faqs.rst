@@ -91,7 +91,7 @@ with a large Open OnDemand community that can give advice and share solutions to
 many common problems or questions. Our full-time developers are also very 
 active on Discourse, investigating problems and offering individualized 
 solutions and expert advice. For more dedicated support, consider our 
-`support plan <https://openondemand.org/subscribe>_` and find us at conferences 
+`support plan <https://openondemand.org/subscribe>`_ and find us at conferences 
 like SC, ISC, PEARC, and our very own GOOD conference. 
 
 We also offer 
