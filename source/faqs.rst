@@ -46,7 +46,7 @@ GitHub automatically scans our codebase and warns about potential
 risks, which are evaluated by our development team. Based on this evaluation 
 we then make appropriate patches and publish the full report—detailing the 
 issue, severity, versions affected, and what patches were made for which 
-releases in our `Security advisories <https://github.com/OSC/ondemand/security/advisories?state=published>`_.
+releases in our `security advisories <https://github.com/OSC/ondemand/security/advisories?state=published>`_.
 
 Resources
 ---------
