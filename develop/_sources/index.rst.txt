@@ -50,6 +50,7 @@ These are institutions who were early adopters or provided HPC resources for dev
    :maxdepth: 2
    :caption: Getting Started
 
+   faqs
    requirements
    installation
    installation/add-cluster-config
