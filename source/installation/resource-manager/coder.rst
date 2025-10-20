@@ -3,6 +3,8 @@
 Coder
 ==========
 
+.. include:: limited-support.inc
+
 The Coder adapter enables launching virtual machines from Open OnDemand using Coder as a middleware solution. Coder is an open-source platform that allows users to create and manage developer workspaces by executing Terraform/OpenTofu code, serving as a bridge between Open OnDemand and cloud providers. Currently, OpenStack is the supported cloud provider.
 
 A YAML cluster configuration file for a Coder is defined by:
