@@ -81,6 +81,8 @@ client binaries.
    resource-manager/kubernetes
    resource-manager/coder
    resource-manager/systemd
+   resource-manager/ht-condor
+   resource-manager/psi-j
    resource-manager/bin-override-example
    resource-manager/test
    resource-manager/advanced-configs
