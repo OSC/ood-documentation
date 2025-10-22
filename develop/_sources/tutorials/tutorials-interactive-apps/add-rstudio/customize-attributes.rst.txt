@@ -39,7 +39,7 @@ The main responsibility of the ``form.yml`` file (:ref:`app-development-interact
     whatis("loads rstudio with singularity environment for ondemand")
     setenv("RSTUDIO_SERVER_IMAGE","/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg")
     setenv("SINGULARITY_BINDPATH","/etc,/media,/mnt,/opt,/srv,/usr,/var")
-    append_path("PATH", "/usr/lib/rstudio-server/bin)
+    append_path("PATH", "/usr/lib/rstudio-server/bin")
 
   Then replace the exports in the function ``setup_env`` with the appropriate ``module use $module_path`` and ``module load rstudio_container/v0.0.1``.
 
