@@ -159,8 +159,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#cancel-interactive-sessions">Cancel Interactive Sessions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-pages">Custom Pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-tickets">Support Tickets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-delivery-mechanisms">Supported Delivery Mechanisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-form-fields">Default Form Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#email">Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id23">Customizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request-tracker-api">Request Tracker API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#servicenow-api">ServiceNow API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#profile-based-configuration">Profile-Based Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-templates">Custom Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delivery-mechanism-precedence">Delivery Mechanism Precedence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
 </ul>
 </li>
 </ul>
@@ -2016,50 +2025,110 @@ See <a class="reference internal" href="#menus-for-custom-pages"><span class="st
 </section>
 <section id="support-tickets">
 <span id="support-ticket-guide"></span><h2>Support Tickets<a class="headerlink" href="#support-tickets" title="Link to this heading"></a></h2>
-<p>The Dashboard now supports sending a support ticket to your institution Help Desk system.
-The feature uses email as the delivery mechanism, but it could be extended to support others.</p>
+<p>The Dashboard enables users to easily submit support requests directly to your institution's Help Desk system.
+This feature provides a customizable form that collects user input and sends the information to the designated support system.</p>
 <p>To enable this feature, define the settings needed using the configuration property <code class="docutils literal notranslate"><span class="pre">support_ticket</span></code>.
 Once this configuration object is defined, the <code class="docutils literal notranslate"><span class="pre">Submit</span> <span class="pre">Support</span> <span class="pre">Ticket</span></code> link will be shown in the <code class="docutils literal notranslate"><span class="pre">Help</span></code> navigation menu
 and in all interactive session cards.</p>
+<section id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h3>
+<p>The simplest configuration to get started with email-based support tickets:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/support_ticket.yml</span>
+<span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;support@example.edu&quot;</span>
+</pre></div>
+</div>
+<p>This minimal configuration will:</p>
+<ul class="simple">
+<li><p>Enable the support ticket feature</p></li>
+<li><p>Display the default form with all standard fields</p></li>
+<li><p>Send tickets via email to the specified address</p></li>
+<li><p>Use the default SMTP configuration from Rails</p></li>
+</ul>
+<p>For production use, you'll likely want to customize the form, add SMTP settings, and possibly use a different delivery mechanism. See the sections below for detailed configuration options.</p>
 <figure class="align-center">
 <img alt="_images/support_ticket_menu.png" src="_images/support_ticket_menu.png" />
 </figure>
-<p>The support ticket page has a simple form to gather information that will be submitted to the support system via email.
-If triggered from a session card, the system will automatically add information about the selected
-session to the body of the email to help troubleshoot the issue.</p>
+<p></p><p>The support ticket page has a simple form to gather information that will be submitted to the support system.
+The form can be pre-populated with contextual information in two ways:</p>
+<ol class="arabic simple">
+<li><p><strong>From Interactive Session Cards</strong>: When triggered from a BatchConnect session card, the system automatically includes session details (session ID, title, status, creation time) to help troubleshoot the issue.</p></li>
+<li><p><strong>From Job Information</strong>: When triggered with job context, the system can include job details (job ID, cluster, status, submission time).</p></li>
+</ol>
+<p>The support ticket URL accepts these optional query parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">session_id</span></code>: UUID of a BatchConnect session to include in the ticket</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">job_id</span></code>: Job ID to include in the ticket (requires <code class="docutils literal notranslate"><span class="pre">cluster</span></code> parameter)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cluster</span></code>: Cluster name where the job is running</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">queue</span></code>: Pre-select a specific queue for Request Tracker systems</p></li>
+</ul>
+<p>Example URLs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># With session context</span>
+https://ondemand.example.edu/support?session_id<span class="o">=</span>abc-123-def
+
+<span class="c1"># With job context</span>
+https://ondemand.example.edu/support?job_id<span class="o">=</span><span class="m">12345</span><span class="p">&amp;</span><span class="nv">cluster</span><span class="o">=</span>owens
+
+<span class="c1"># With queue selection</span>
+https://ondemand.example.edu/support?queue<span class="o">=</span>General
+</pre></div>
+</div>
 <figure class="align-center">
 <img alt="_images/support_ticket_form.png" src="_images/support_ticket_form.png" />
 </figure>
-<p>A brief description of the default form fields used in the support ticket form:</p>
+<div style="margin-top: 1rem;"></div></section>
+<section id="supported-delivery-mechanisms">
+<h3>Supported Delivery Mechanisms<a class="headerlink" href="#supported-delivery-mechanisms" title="Link to this heading"></a></h3>
+<p>Open OnDemand supports the following delivery mechanisms for support tickets:</p>
 <ul class="simple">
-<li><p><strong>Username:</strong> Logged in user. Username will be added to the support ticket body for reference.</p></li>
-<li><p><strong>Email:</strong> Email address to communicate regarding this support ticket. A single email address is supported.</p></li>
-<li><p><strong>CC:</strong> Additional email address to communicate regarding this ticket. A single email address is supported.</p></li>
-<li><p><strong>Subject:</strong> Brief description of the problem.</p></li>
-<li><p><strong>Attachments:</strong> Add screenshots of the problem to help with debugging and troubleshooting.</p></li>
-<li><p><strong>Description:</strong> Detail description of the problem.</p></li>
+<li><p><strong>Email</strong> - Uses SMTP to send tickets via email to your help desk system</p></li>
+<li><p><strong>Request Tracker API</strong> - Creates tickets directly in Request Tracker systems</p></li>
+<li><p><strong>ServiceNow API</strong> - Creates incidents directly in ServiceNow systems</p></li>
 </ul>
-<section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
-<p>These are the most common configuration properties needed to enable and setup the support ticket feature:</p>
+</section>
+<section id="default-form-fields">
+<h3>Default Form Fields<a class="headerlink" href="#default-form-fields" title="Link to this heading"></a></h3>
+<p>The support ticket form includes these default fields:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Text to customize the support ticket header.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: Section to configure how the email is sent to the support system.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: The destination email address of your Help Desk.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: The address to set in the from field when sending the email. It defaults to the email submitted in the support ticket form.
-This is useful to prevent the incoming emails being considered spam.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">delivery_method</span></code>: Rails setting to set the transport mechanism to use. This is usually <code class="docutils literal notranslate"><span class="pre">smtp</span></code>.
-For more information see the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">delivery_settings</span></code>: Rails settings object to set the transport configuration properties.
-See example below or the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
+<li><p><strong>Username:</strong> The logged-in username (read-only). Added to the ticket body for reference.</p></li>
+<li><p><strong>Email:</strong> Required. Email address for communication about this ticket. A single email address is supported.</p></li>
+<li><p><strong>CC:</strong> Optional. Additional email address to copy on ticket communications. A single email address is supported.</p></li>
+<li><p><strong>Subject:</strong> Required. Brief description of the problem.</p></li>
+<li><p><strong>Attachments:</strong> Optional. Upload files (e.g., screenshots) to help with debugging and troubleshooting. Default limits: 4 files, 6MB per file.</p></li>
+<li><p><strong>Description:</strong> Required. Detailed description of the problem.</p></li>
+<li><p><strong>Session ID:</strong> Hidden field. Automatically populated when launched from a session card.</p></li>
+<li><p><strong>Session Description:</strong> Read-only field. Displays session information when a session ID is present.</p></li>
+<li><p><strong>Job ID:</strong> Hidden field. Automatically populated when job context is provided.</p></li>
+<li><p><strong>Cluster:</strong> Hidden field. Automatically populated when job context is provided.</p></li>
+<li><p><strong>Job Description:</strong> Read-only field. Displays job information when job context is present.</p></li>
+<li><p><strong>Queue:</strong> Hidden field. For Request Tracker systems to pre-select a queue.</p></li>
+</ul>
+</section>
+<section id="email">
+<h3>Email<a class="headerlink" href="#email" title="Link to this heading"></a></h3>
+<p>The Email delivery mechanism uses SMTP to send support tickets to your help desk system. This was the first implementation and requires email configuration.</p>
+<p>These are the configuration properties for email delivery:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Optional. Text to customize the support ticket header.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui_template</span></code>: Optional. Custom view template name. Defaults to <code class="docutils literal notranslate"><span class="pre">email_service_template</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: Required section to configure how the email is sent to the support system.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: Required. The destination email address of your Help Desk.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: Optional. The address to set in the from field when sending the email. Defaults to the email submitted in the support ticket form. This is useful to prevent the incoming emails being considered spam.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delivery_method</span></code>: Optional. Rails setting to set the transport mechanism to use. This is usually <code class="docutils literal notranslate"><span class="pre">smtp</span></code>. For more information see the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delivery_settings</span></code>: Optional. Rails settings object to set the transport configuration properties. See example below or the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success_message</span></code>: Optional. Custom message to display when ticket is successfully created. Defaults to a message showing the recipient address.</p></li>
+</ul>
+</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Use caution when supplying username and password in delivery_settings.  These files are readable by
+<p>Use caution when supplying username and password in delivery_settings. These files are readable by
 unprivileged users and as such this information can be found by a sophisticated user without privilege
 escalation.</p>
 </div>
-<p>Sample configuration:</p>
+<p>Sample email configuration:</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Optional.</span>
@@ -2115,8 +2184,19 @@ In the same way that you can configure the <a class="reference internal" href="e
 the support ticket form fields can be arranged or changed as required.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please note that the <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional, as it is used for communication with the user.</p>
 </div>
+<p>Available field attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">required</span></code>: Boolean. Mark field as required for validation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readonly</span></code>: Boolean. Display field value but prevent editing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code>: Boolean. Disable the field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hide_when_empty</span></code>: Boolean. Hide field when it has no value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">widget</span></code>: String. Specify the field type (<code class="docutils literal notranslate"><span class="pre">email_field</span></code>, <code class="docutils literal notranslate"><span class="pre">text_area</span></code>, <code class="docutils literal notranslate"><span class="pre">hidden_field</span></code>, <code class="docutils literal notranslate"><span class="pre">file_attachments</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: Set a default or fixed value for the field. Supports ERB templating (e.g., <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">CurrentUser.name</span> <span class="pre">%&gt;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed</span></code>: Boolean. When combined with <code class="docutils literal notranslate"><span class="pre">value</span></code>, makes the value unchangeable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rows</span></code>: Integer. For text areas, specify the number of rows.</p></li>
+</ul>
 <p>Custom fields can be added, but they will require a custom email template to make use of the provided values in the email body.
 Override the default email template with your own by dropping a file named <code class="docutils literal notranslate"><span class="pre">_email.text.erb</span></code> into the folder
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/support_ticket/email/</span></code></p>
@@ -2128,7 +2208,7 @@ place for removing and/or adding fields.</p>
 
 <span class="w">  </span><span class="nt">attributes</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">username</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">CurrentUser.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">email</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">email_field</span>
@@ -2140,6 +2220,13 @@ place for removing and/or adding fields.</p>
 <span class="w">    </span><span class="nt">session_id</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hidden_field</span>
 <span class="w">    </span><span class="nt">session_description</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">hide_when_empty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">job_id</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hidden_field</span>
+<span class="w">    </span><span class="nt">cluster</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hidden_field</span>
+<span class="w">    </span><span class="nt">job_description</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">hide_when_empty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">attachments</span><span class="p">:</span>
@@ -2158,6 +2245,9 @@ place for removing and/or adding fields.</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">session_id</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">session_description</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job_id</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job_description</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attachments</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue</span>
@@ -2195,6 +2285,288 @@ place for removing and/or adding fields.</p>
 <figure class="align-center">
 <img alt="_images/support_ticket_custom_form.png" src="_images/support_ticket_custom_form.png" />
 </figure>
+</section>
+<section id="request-tracker-api">
+<h3>Request Tracker API<a class="headerlink" href="#request-tracker-api" title="Link to this heading"></a></h3>
+<p>The Request Tracker API delivery mechanism creates tickets directly in Request Tracker systems.</p>
+<p>These are the supported configuration options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Optional. Text to customize the support ticket header.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui_template</span></code>: Optional. Custom view template name. Defaults to <code class="docutils literal notranslate"><span class="pre">email_service_template</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rt_api</span></code>: Required section for Request Tracker configuration.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">server</span></code>: Required. The URL of the Request Tracker server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_token</span></code>: The value for the API authentication token. Required when <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Token</span> <span class="pre">&lt;value&gt;</span></code> is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass</span></code>: The password value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">priority</span></code>: Required. The priority value for all tickets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">queues</span></code>: Required. Array of allowed queues to submit tickets. By default, the first queue in the array will be used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template</span></code>: Optional. Custom ERB template for ticket content. Defaults to <code class="docutils literal notranslate"><span class="pre">rt_ticket_content.text.erb</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success_message</span></code>: Optional. Custom message to display when ticket is successfully created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Optional. The maximum time in seconds that the client should wait for responses from the server. Defaults to <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code>: Optional. Whether to verify SSL certificates.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rt_api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://rt:34000&quot;</span>
+<span class="w">    </span><span class="nt">auth_token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;auth_token&quot;</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="nt">pass</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;password&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">    </span><span class="nt">queues</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;General&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Support&quot;</span>
+<span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom_rt_template.text.erb&quot;</span>
+<span class="w">    </span><span class="nt">success_message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Your</span><span class="nv"> </span><span class="s">ticket</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">created</span><span class="nv"> </span><span class="s">successfully.&quot;</span>
+<span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="servicenow-api">
+<h3>ServiceNow API<a class="headerlink" href="#servicenow-api" title="Link to this heading"></a></h3>
+<p>The ServiceNow API delivery mechanism creates incidents directly in ServiceNow systems.</p>
+<p>These are the supported configuration options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Optional. Text to customize the support ticket header.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui_template</span></code>: Optional. Custom view template name. Defaults to <code class="docutils literal notranslate"><span class="pre">email_service_template</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">servicenow_api</span></code>: Required section for ServiceNow configuration.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">server</span></code>: Required. The URL of the ServiceNow server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_header</span></code>: Optional. The name for the API authentication header. Defaults to <code class="docutils literal notranslate"><span class="pre">x-sn-apikey</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_token</span></code>: The value for the API authentication key. Required when API key authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_token_env</span></code>: Optional. Environment variable name containing the API authentication key. Takes precedence over <code class="docutils literal notranslate"><span class="pre">auth_token</span></code> if set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass</span></code>: The password value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass_env</span></code>: Optional. Environment variable name containing the password. Takes precedence over <code class="docutils literal notranslate"><span class="pre">pass</span></code> if set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Optional. The maximum time in seconds that the client should wait for responses from the server. Defaults to <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code>: Optional. Whether to verify SSL certificates. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">proxy</span></code>: Optional. Proxy server URL to use for the connection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code>: Optional. Map of ServiceNow incident fields to support ticket form field names. The value can be a single field name or an array of field names (values will be concatenated with commas).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">payload</span></code>: Optional. Map of ServiceNow incident fields to static values. Use <code class="docutils literal notranslate"><span class="pre">nil</span></code> as the value to dynamically pull from the form field with the same name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template</span></code>: Optional. Custom ERB template for incident description. Defaults to <code class="docutils literal notranslate"><span class="pre">servicenow_content.text.erb</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success_message</span></code>: Optional. Custom message to display when ticket is successfully created.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For security, use <code class="docutils literal notranslate"><span class="pre">auth_token_env</span></code> and <code class="docutils literal notranslate"><span class="pre">pass_env</span></code> to store credentials in environment variables rather than directly in configuration files.</p>
+</div>
+<p><strong>ServiceNow Field Mapping</strong></p>
+<p>The ServiceNow implementation builds the incident payload in three stages:</p>
+<ol class="arabic">
+<li><p><strong>Default mappings</strong> (always included):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code> → <code class="docutils literal notranslate"><span class="pre">caller_id</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cc</span></code> → <code class="docutils literal notranslate"><span class="pre">watch_list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subject</span></code> → <code class="docutils literal notranslate"><span class="pre">short_description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> → <code class="docutils literal notranslate"><span class="pre">description</span></code> (formatted using template)</p></li>
+</ul>
+</li>
+<li><p><strong>Custom mappings via</strong> <code class="docutils literal notranslate"><span class="pre">map</span></code> (adds to or overrides default mappings):</p>
+<p>Maps form field values to ServiceNow incident fields. The configuration key is the ServiceNow field name, and the value is either:</p>
+<ul class="simple">
+<li><p>A single form field name (string)</p></li>
+<li><p>An array of form field names (values will be joined with commas)</p></li>
+</ul>
+</li>
+<li><p><strong>Static/dynamic values via</strong> <code class="docutils literal notranslate"><span class="pre">payload</span></code> (final stage, highest precedence):</p>
+<p>Sets ServiceNow incident fields to specific values. For each key-value pair:</p>
+<ul class="simple">
+<li><p>If the value is NOT <code class="docutils literal notranslate"><span class="pre">nil</span></code>: uses the static value provided</p></li>
+<li><p>If the value IS <code class="docutils literal notranslate"><span class="pre">nil</span></code>: dynamically pulls the value from the form field matching the key name</p></li>
+</ul>
+</li>
+</ol>
+<p>Example showing all three stages:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servicenow_api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://servicenow.server.com&quot;</span>
+<span class="w">    </span><span class="nt">auth_header</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;x-sn-apikey&quot;</span>
+<span class="w">    </span><span class="nt">auth_token_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SERVICENOW_API_KEY&quot;</span>
+
+<span class="w">    </span><span class="c1"># Stage 2: Map form fields to ServiceNow incident fields</span>
+<span class="w">    </span><span class="c1"># These add to or override the default mappings</span>
+<span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Override default caller_id mapping (normally uses &#39;email&#39;)</span>
+<span class="w">      </span><span class="nt">caller_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;username&quot;</span>
+<span class="w">      </span><span class="c1"># Map a single form field</span>
+<span class="w">      </span><span class="nt">u_email_source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;email&quot;</span>
+<span class="w">      </span><span class="c1"># Map multiple form fields - values joined with commas</span>
+<span class="w">      </span><span class="nt">u_affected_users</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;username&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># Stage 3: Set static or dynamic values</span>
+<span class="w">    </span><span class="c1"># These have the highest precedence</span>
+<span class="w">    </span><span class="nt">payload</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Static values: always use these exact values</span>
+<span class="w">      </span><span class="nt">u_category</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;troubleshooting&quot;</span>
+<span class="w">      </span><span class="nt">contact_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;External</span><span class="nv"> </span><span class="s">System&quot;</span>
+<span class="w">      </span><span class="nt">assignment_group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IT</span><span class="nv"> </span><span class="s">Support</span><span class="nv"> </span><span class="s">Team&quot;</span>
+<span class="w">      </span><span class="nt">u_business_service</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Research</span><span class="nv"> </span><span class="s">Computing&quot;</span>
+
+<span class="w">      </span><span class="c1"># Dynamic values: use nil to pull from form field with same name</span>
+<span class="w">      </span><span class="c1"># This would use support_ticket.priority if that field exists</span>
+<span class="w">      </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span>
+
+<span class="w">      </span><span class="c1"># You can also override default mappings here with static values</span>
+<span class="w">      </span><span class="c1"># This would ignore the user&#39;s email and always use this value</span>
+<span class="w">      </span><span class="c1"># caller_id: &quot;system@example.edu&quot;</span>
+
+<span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom_servicenow_template.text.erb&quot;</span>
+<span class="w">    </span><span class="nt">success_message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Your</span><span class="nv"> </span><span class="s">ServiceNow</span><span class="nv"> </span><span class="s">incident</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">created.&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The resulting ServiceNow incident would have:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_id</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">username</span></code> form field (overridden by <code class="docutils literal notranslate"><span class="pre">map</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">watch_list</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">cc</span></code> form field (default mapping)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">short_description</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">subject</span></code> form field (default mapping)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Formatted using template (default mapping)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_email_source</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">email</span></code> form field (added by <code class="docutils literal notranslate"><span class="pre">map</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_affected_users</span></code>: &quot;username,email&quot; (added by <code class="docutils literal notranslate"><span class="pre">map</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_category</span></code>: &quot;troubleshooting&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contact_type</span></code>: &quot;External System&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assignment_group</span></code>: &quot;IT Support Team&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_business_service</span></code>: &quot;Research Computing&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">priority</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">priority</span></code> form field if it exists (dynamic from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+</ul>
+</section>
+<section id="profile-based-configuration">
+<h3>Profile-Based Configuration<a class="headerlink" href="#profile-based-configuration" title="Link to this heading"></a></h3>
+<p>Support tickets can be configured differently based on user profiles. This is useful for multi-tenant environments where different groups need tickets routed to different support teams.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Global default configuration</span>
+<span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;general-support@example.edu&quot;</span>
+
+<span class="c1"># Profile-specific configurations</span>
+<span class="nt">profiles</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">research_team</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">email</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;research-support@example.edu&quot;</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Contact</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Research</span><span class="nv"> </span><span class="s">Computing</span><span class="nv"> </span><span class="s">support</span><span class="nv"> </span><span class="s">team&quot;</span>
+
+<span class="w">  </span><span class="nt">teaching_team</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">servicenow_api</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://teaching.service-now.com&quot;</span>
+<span class="w">        </span><span class="nt">auth_token_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TEACHING_SNOW_TOKEN&quot;</span>
+<span class="w">        </span><span class="nt">payload</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">assignment_group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Teaching</span><span class="nv"> </span><span class="s">Support&quot;</span>
+</pre></div>
+</div>
+<p>Users will use the profile-specific configuration if they have selected that profile or if hostname-based profile matching is enabled.</p>
+</section>
+<section id="custom-templates">
+<h3>Custom Templates<a class="headerlink" href="#custom-templates" title="Link to this heading"></a></h3>
+<p>All delivery mechanisms support custom ERB templates for formatting ticket content:</p>
+<p><strong>Email Templates</strong></p>
+<p>Override the default email template by creating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/ood/config/apps/dashboard/views/support_ticket/email/_email.text.erb
+</pre></div>
+</div>
+<p><strong>Request Tracker Templates</strong></p>
+<p>Customize RT ticket content by creating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/ood/config/apps/dashboard/views/support_ticket/rt/rt_ticket_content.text.erb
+</pre></div>
+</div>
+<p><strong>ServiceNow Templates</strong></p>
+<p>Customize ServiceNow incident description by creating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/ood/config/apps/dashboard/views/support_ticket/servicenow/servicenow_content.text.erb
+</pre></div>
+</div>
+<p>Templates have access to a <code class="docutils literal notranslate"><span class="pre">context</span></code> object containing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">context.support_ticket</span></code>: The support ticket form data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context.session</span></code>: BatchConnect session object (if applicable)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context.job</span></code>: Job information object (if applicable)</p></li>
+</ul>
+<p>Example custom template:</p>
+<div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">Problem Report from </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">username</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="x">Email: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">email</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">Subject: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">subject</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="x">Description:</span>
+<span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">description</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">Session Information:</span>
+<span class="x">- Title: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">title</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Job ID: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">job_id</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Status: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">Job Information:</span>
+<span class="x">- Job ID: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Cluster: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">cluster</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Status: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">%&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="delivery-mechanism-precedence">
+<h3>Delivery Mechanism Precedence<a class="headerlink" href="#delivery-mechanism-precedence" title="Link to this heading"></a></h3>
+<p>When multiple delivery mechanisms are configured, Open OnDemand follows a specific precedence order:</p>
+<ol class="arabic simple">
+<li><p><strong>Email</strong> (highest precedence)</p></li>
+<li><p><strong>Request Tracker API</strong></p></li>
+<li><p><strong>ServiceNow API</strong> (lowest precedence)</p></li>
+</ol>
+<p>The system will use the first available mechanism in this order. For example, if both Email and ServiceNow are configured, Email will be used.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only configure one delivery mechanism per profile to avoid confusion. The precedence order exists for backward compatibility but is not recommended for production use.</p>
+</div>
+</section>
+<section id="security-considerations">
+<h3>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h3>
+<p>When configuring support tickets, keep these security best practices in mind:</p>
+<p><strong>Credential Management</strong></p>
+<ul class="simple">
+<li><p><strong>Use environment variables for secrets</strong>: Always use <code class="docutils literal notranslate"><span class="pre">auth_token_env</span></code> and <code class="docutils literal notranslate"><span class="pre">pass_env</span></code> instead of storing credentials directly in configuration files.</p></li>
+<li><p><strong>File permissions</strong>: Configuration files in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config</span></code> are readable by all users. Never store sensitive credentials directly in these files.</p></li>
+<li><p><strong>Environment variables</strong>: Set sensitive credentials in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> or Apache configuration where they are not accessible to users.</p></li>
+</ul>
+<p>Example secure configuration:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/support_ticket.yml</span>
+<span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servicenow_api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://servicenow.example.edu&quot;</span>
+<span class="w">    </span><span class="nt">auth_token_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SERVICENOW_API_TOKEN&quot;</span><span class="w">  </span><span class="c1"># Secure</span>
+<span class="w">    </span><span class="c1"># auth_token: &quot;secret123&quot;                # INSECURE - Do not do this!</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/profile</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SERVICENOW_API_TOKEN</span><span class="o">=</span><span class="s2">&quot;actual-secret-token-here&quot;</span>
+</pre></div>
+</div>
+<p><strong>SSL/TLS Verification</strong></p>
+<ul class="simple">
+<li><p>Always use <code class="docutils literal notranslate"><span class="pre">verify_ssl:</span> <span class="pre">true</span></code> (the default) in production environments</p></li>
+<li><p>Only disable SSL verification for testing/development environments</p></li>
+<li><p>Use proper SSL certificates from trusted certificate authorities</p></li>
+</ul>
+<p><strong>Input Validation</strong></p>
+<ul class="simple">
+<li><p>The system automatically validates email addresses using standard RFC patterns</p></li>
+<li><p>File upload sizes are limited by default (6MB per file, 4 files maximum)</p></li>
+<li><p>Adjust <code class="docutils literal notranslate"><span class="pre">attachments.max_size</span></code> and <code class="docutils literal notranslate"><span class="pre">attachments.max_items</span></code> based on your environment's needs</p></li>
+</ul>
+<p><strong>Session Data Filtering</strong></p>
+<ul class="simple">
+<li><p>The system automatically filters sensitive session parameters (like <code class="docutils literal notranslate"><span class="pre">ood_connection_info</span></code>)</p></li>
+<li><p>Custom templates should avoid exposing sensitive information</p></li>
+<li><p>Review custom templates to ensure they don't inadvertently include passwords or tokens</p></li>
+</ul>
+<p>Community contributions for new delivery mechanisms are welcome!</p>
 </section>
 </section>
 </section>
