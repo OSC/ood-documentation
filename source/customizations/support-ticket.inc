@@ -36,7 +36,7 @@ For production use, you'll likely want to customize the form, add SMTP settings,
 
 .. raw:: html
 
-   <div style="margin-top: 1.5rem;"></div>
+   <p></p>
 
 The support ticket page has a simple form to gather information that will be submitted to the support system.
 The form can be pre-populated with contextual information in two ways:
