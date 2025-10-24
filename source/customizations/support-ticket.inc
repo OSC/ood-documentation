@@ -4,7 +4,7 @@ Support Tickets
 ---------------
 
 The Dashboard enables users to easily submit support requests directly to your institution's Help Desk system.
-This feature provides a customizable form that collects user input and sends the information to the configured system.
+This feature provides a customizable form that collects user input and sends the information to the designated support system.
 
 To enable this feature, define the settings needed using the configuration property ``support_ticket``.
 Once this configuration object is defined, the ``Submit Support Ticket`` link will be shown in the ``Help`` navigation menu
