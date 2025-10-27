@@ -150,6 +150,12 @@ in a <a class="reference internal" href="../../reference/files/submit-yml/basic-
 <p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">copy_environment</span></code> below with the caveat
 that the PUNs environment is very different from regular shell sessions.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The name of this YAML file should be equivalent to <code class="docutils literal notranslate"><span class="pre">ClusterName</span></code> in your
+cluster's <code class="docutils literal notranslate"><span class="pre">.conf</span></code> file.  This is important for the OnDemand system to automatically
+discover information from <code class="docutils literal notranslate"><span class="pre">sacctmgr</span></code>.</p>
+</div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
 <span class="nn">---</span>
 <span class="nt">v2</span><span class="p">:</span>
@@ -174,7 +180,7 @@ that the PUNs environment is very different from regular shell sessions.</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">adapter</span></code></dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The Slurm cluster name. <em>Optional</em>, passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The Slurm cluster name. <strong>Optional</strong>. This is passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code> for some commands.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> option is discouraged. This is because maintenance
@@ -184,11 +190,11 @@ should use different <code class="docutils literal notranslate"><span class="pre
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">bin</span></code></dt><dd><p>The path to the Slurm client installation binaries.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">conf</span></code></dt><dd><p>The path to the Slurm configuration file for this cluster. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">conf</span></code></dt><dd><p>The path to the Slurm configuration file for this cluster. <strong>Optional</strong>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">submit_host</span></code></dt><dd><p>A different, optional host to ssh to and <em>then</em> issue commands. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">submit_host</span></code></dt><dd><p>A different, optional host to ssh to and <em>then</em> issue commands. <strong>Optional</strong>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code></dt><dd><p>Replacements/wrappers for Slurm's job submission and control clients. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code></dt><dd><p>Replacements/wrappers for Slurm's job submission and control clients. <strong>Optional</strong>.</p>
 <p>Supports the following clients:</p>
 <ul class="simple">
 <li><p><cite>sbatch</cite></p></li>
