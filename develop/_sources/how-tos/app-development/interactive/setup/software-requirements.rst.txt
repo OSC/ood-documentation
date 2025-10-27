@@ -12,7 +12,7 @@ For VNC server support:
 
 - `nmap-ncat`_
 - `TurboVNC`_ 2.1+
-- `websockify`_ 0.8.0+
+- `websockify`_ 0.13.0+
 
 .. warning::
 
