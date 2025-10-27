@@ -17,6 +17,11 @@ cluster looks like:
   Alternatively, you can use ``copy_environment`` below with the caveat
   that the PUNs environment is very different from regular shell sessions.
 
+.. important::
+  The name of this YAML file should be equivalent to ``ClusterName`` in your
+  cluster's ``.conf`` file.  This is important for the OnDemand system to automatically
+  discover information from ``sacctmgr``.
+
 .. code-block:: yaml
    :emphasize-lines: 8-
 
@@ -44,7 +49,7 @@ with the following configuration options:
 ``adapter``
   This is set to ``slurm``.
 ``cluster``
-  The Slurm cluster name. *Optional*, passed to SLURM as ``-M <cluster>``
+  The Slurm cluster name. **Optional**. This is passed to SLURM as ``-M <cluster>`` for some commands.
 
   .. warning::
     Using the ``cluster`` option is discouraged. This is because maintenance
@@ -53,11 +58,11 @@ with the following configuration options:
 ``bin``
   The path to the Slurm client installation binaries.
 ``conf``
-  The path to the Slurm configuration file for this cluster. *Optional*
+  The path to the Slurm configuration file for this cluster. **Optional**.
 ``submit_host``
-  A different, optional host to ssh to and *then* issue commands. *Optional*
+  A different, optional host to ssh to and *then* issue commands. **Optional**.
 ``bin_overrides``
-  Replacements/wrappers for Slurm's job submission and control clients. *Optional*
+  Replacements/wrappers for Slurm's job submission and control clients. **Optional**.
 
   Supports the following clients:
 
