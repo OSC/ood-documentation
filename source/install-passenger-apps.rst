@@ -11,8 +11,10 @@ https://discourse.openondemand.org.
 In order to submit the code of an passenger app that you developed to the GitHub repository, it should be available on the developer’s GitHub and 
 well commented. The comments need to include, but not limited to, mentioning if there are parts of the app that are site-specific. Also, the 
 following files must be included:
-  - **LICENSE** – an open source license (MIT License is used by Open OnDemand if unsure).
-  - **README.md** – detailing dependencies and cluster-specific instructions.
+
+- LICENSE file - the license should be open source. If you are not sure what to choose, OnDemand uses MIT License.
+
+- README.md file - which specifies all the dependencies as well as cluster specific instructions
 
 .. list-table:: Community Passenger Apps
    :header-rows: 1
