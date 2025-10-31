@@ -3,7 +3,7 @@
 Install Passenger Apps
 =======================
 
-This page lists community-developed **Open OnDemand Passenger Apps** that are available for installation.
+This page lists community-developed Open OnDemand Passenger Apps that are available for installation.
 
 If you have developed your own Passenger App and would like to contribute it to the community, please post a description and link to your app on  
 https://discourse.openondemand.org.
