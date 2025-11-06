@@ -23,6 +23,7 @@ Open OnDemand, by default, expects Apache to have SSL enabled by :ref:`securing 
 
    installation/install-software
    authentication
+   integrated-authentication-solutions
    installation/add-ssl
    installation/modify-system-security
 

@@ -90,6 +90,6 @@ recommended in this guide and to regularly review security settings and updates.
 Relevant References
 -------------------
 
-- :ref:`Authentication Overview <authentication-overview>`
+- :ref:`Authentication Overview <authentication-overview-configure-authentication>`
 - :ref:`Logging <logging>`
 - :ref:`Customizations <customizations>`
