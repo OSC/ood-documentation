@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Other Insecure Options &mdash; Open OnDemand 4.0.0 documentation</title>
+  <title>Insecure Options &mdash; Open OnDemand 4.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c48163e2" />
@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Secure Apache httpd" href="../installation/add-ssl.html" />
+    <link rel="next" title="4. Secure Apache httpd" href="../installation/add-ssl.html" />
     <link rel="prev" title="NSF ACCESS" href="nsf-access.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -67,8 +67,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/install-software.html">1. Install Software</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../authentication.html">2. Authentication</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html">2. OOD Authentication</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../integrated-authentication-solutions.html">3. Authentication Solutions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="oidc.html">OpenID Connect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dex.html">OpenID Connect with Dex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="shibboleth.html">Shibboleth</a></li>
@@ -77,11 +77,11 @@
 <li class="toctree-l3"><a class="reference internal" href="duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
 <li class="toctree-l3"><a class="reference internal" href="adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nsf-access.html">NSF ACCESS</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Other Insecure Options</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Insecure Options</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../installation/add-ssl.html">3. Secure Apache httpd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation/modify-system-security.html">4. Add SELinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/add-ssl.html">4. Secure Apache httpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/modify-system-security.html">5. Add SELinux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
@@ -127,8 +127,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../installation.html">Installation</a></li>
-          <li class="breadcrumb-item"><a href="../authentication.html"><span class="section-number">2. </span>Authentication</a></li>
-      <li class="breadcrumb-item active">Other Insecure Options</li>
+          <li class="breadcrumb-item"><a href="../integrated-authentication-solutions.html"><span class="section-number">3. </span>Authentication Solutions</a></li>
+      <li class="breadcrumb-item active">Insecure Options</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/OSC/ood-documentation/blob/latest/source/authentication/insecure.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -138,12 +138,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="other-insecure-options">
-<span id="authentication-insecure"></span><h1>Other Insecure Options<a class="headerlink" href="#other-insecure-options" title="Link to this heading"></a></h1>
-<p>There are other insecure options that you may find Apache supports.</p>
-<p>It's left to the reader to try those out. Open OnDemand developers
-highly discourage users attempting to authenticate with Apache's
-BASIC auth like PAM and LDAP as they are really quite insecure.</p>
+  <section id="insecure-options">
+<span id="authentication-insecure"></span><h1>Insecure Options<a class="headerlink" href="#insecure-options" title="Link to this heading"></a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><strong>Never</strong> allow a production Open OnDemand installation to accept
+credentials over unencrypted connections.</p>
+</div>
+<p>There are other insecure options Apache still ships modules for
+such as <code class="docutils literal notranslate"><span class="pre">mod_auth_basic</span></code>. With Basic auth, the user’s password is
+Base-64-encoded and sent on <em>every</em> HTTP request, so even behind TLS the
+credential is exposed far more often than with modern single-sign-on
+solutions.</p>
+<p>For these reasons, Open OnDemand strongly discourages enabling Basic auth,
+even when it is backed by PAM, LDAP, or any other password store.</p>
 <p>Questions on these topics will be linked back to this page.</p>
 </section>
 
@@ -152,7 +160,7 @@ BASIC auth like PAM and LDAP as they are really quite insecure.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="nsf-access.html" class="btn btn-neutral float-left" title="NSF ACCESS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../installation/add-ssl.html" class="btn btn-neutral float-right" title="3. Secure Apache httpd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../installation/add-ssl.html" class="btn btn-neutral float-right" title="4. Secure Apache httpd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

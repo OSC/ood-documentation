@@ -37,7 +37,6 @@ please let us know by contacting us on the OnDemand Discourse at https://discour
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
    :caption: Tutorial
 
    tutorial-oidc-keycloak-rhel7/install-keycloak

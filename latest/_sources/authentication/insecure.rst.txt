@@ -1,12 +1,19 @@
 .. _authentication-insecure:
 
-Other Insecure Options
-======================
+Insecure Options
+================
+.. danger::
 
-There are other insecure options that you may find Apache supports.
+    **Never** allow a production Open OnDemand installation to accept 
+    credentials over unencrypted connections.
 
-It's left to the reader to try those out. Open OnDemand developers
-highly discourage users attempting to authenticate with Apache's
-BASIC auth like PAM and LDAP as they are really quite insecure.
+There are other insecure options Apache still ships modules for 
+such as ``mod_auth_basic``. With Basic auth, the user’s password is
+Base-64-encoded and sent on *every* HTTP request, so even behind TLS the
+credential is exposed far more often than with modern single-sign-on
+solutions.
+
+For these reasons, Open OnDemand strongly discourages enabling Basic auth, 
+even when it is backed by PAM, LDAP, or any other password store. 
 
 Questions on these topics will be linked back to this page.
