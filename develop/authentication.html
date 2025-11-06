@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. Authentication &mdash; Open OnDemand 4.0.0 documentation</title>
+  <title>2. OOD Authentication &mdash; Open OnDemand 4.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c48163e2" />
@@ -24,7 +24,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="authentication/overview.html" />
+    <link rel="next" title="Apache Modules and the OOD Portal Generator" href="authentication/overview/configure-authentication.html" />
     <link rel="prev" title="1. Install Software" href="installation/install-software.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
@@ -67,21 +67,15 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="installation.html">Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation/install-software.html">1. Install Software</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Authentication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="authentication/overview.html">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/oidc.html">OpenID Connect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/dex.html">OpenID Connect with Dex</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/shibboleth.html">Shibboleth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/cas.html">CAS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/nsf-access.html">NSF ACCESS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="authentication/insecure.html">Other Insecure Options</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. OOD Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="authentication/overview/configure-authentication.html">Apache Modules and the OOD Portal Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication/overview/map-user.html">Setup User Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication/overview/configure-logout.html">Configure Logout</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="installation/add-ssl.html">3. Secure Apache httpd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation/modify-system-security.html">4. Add SELinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrated-authentication-solutions.html">3. Authentication Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/add-ssl.html">4. Secure Apache httpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/modify-system-security.html">5. Add SELinux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
@@ -127,7 +121,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="installation.html">Installation</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2. </span>Authentication</li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>OOD Authentication</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/OSC/ood-documentation/blob/latest/source/authentication.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -137,80 +131,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="authentication">
-<span id="id1"></span><h1><span class="section-number">2. </span>Authentication<a class="headerlink" href="#authentication" title="Link to this heading"></a></h1>
+  <section id="ood-authentication">
+<span id="authentication"></span><h1><span class="section-number">2. </span>OOD Authentication<a class="headerlink" href="#ood-authentication" title="Link to this heading"></a></h1>
+<p>After installing Open OnDemand you must:</p>
+<ul class="simple">
+<li><p><strong>Configure OOD to work with an apache module</strong> which will connect to your center's authentication solution to generate the correct Apache configuration.</p></li>
+<li><p><strong>Setup user mapping</strong> to map the remote authenticated user to the corresponding local system user.</p></li>
+<li><p><strong>Configure logout</strong>.</p></li>
+</ul>
+<p>Each of these steps is covered in detail below.</p>
 <p>Open OnDemand supports most authentication modules that work with Apache HTTP
-Server version 2.4. The following <a class="reference internal" href="authentication/overview.html#authentication-overview"><span class="std std-ref">Overview</span></a> section
-provides an introduction to setting up these generic authentication modules
-with an Open OnDemand installation. Tutorials will also be provided with the
-focus on setting up some of the more common authentication modules (e.g.,
-OpenID Connect with KeyCloak).</p>
-<p>After installing Open OnDemand you <strong>must</strong> add authentication of some kind
-to generate the correct Apache configuration.  When no authentication is
-supplied Apache will only serve a static page that directs you here.</p>
-<p>No Open OnDemand functionality is available without authentication.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you managed to install an Apache authentication module at your center
-that currently does not have a tutorial listed below we would greatly
-appreciate it if you could take the time to contribute a detailed
-walk-through.</p>
-</div>
+Server version 2.4.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><a class="reference internal" href="authentication/dex.html#authentication-dex"><span class="std std-ref">Dex</span></a> is a very good starting option if you can connect
 to LDAP or Active Directory and not an institutional Single Sign-On service.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No Open OnDemand functionality is available without an Apache module and user mapping
+configured. When no authentication is supplied Apache will only serve a static page that
+directs you to this page.</p>
+</div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Setup Authentication Module, User Map, and Logout</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="authentication/overview.html">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/overview/configure-authentication.html">1. Configure Apache Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html">2. Setup User Mapping</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/overview/configure-logout.html">3. Configure Logout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication/overview/configure-authentication.html">Apache Modules and the OOD Portal Generator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/configure-authentication.html#configure-authentication-module">Configure Authentication Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/configure-authentication.html#add-to-ondemand-portal">Add to OnDemand Portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/configure-authentication.html#sanitize-session-information">Sanitize Session Information</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/oidc.html">OpenID Connect</a></li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/dex.html">OpenID Connect with Dex</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#installing-ondemand-dex-package">Installing OnDemand Dex package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#installing-ondemand-dex-from-source">Installing OnDemand Dex from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#configuring-ondemand-dex">Configuring OnDemand Dex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#managing-the-ondemand-dex-service">Managing the OnDemand Dex service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#ondemand-dex-behind-apache-reverse-proxy">OnDemand Dex behind Apache reverse proxy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#dex-firewall">Dex Firewall</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#configuring-ondemand-dex-for-ldap">Configuring OnDemand Dex for LDAP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#customizing-ondemand-dex">Customizing OnDemand Dex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/dex.html#ondemand-dex-configuration-reference">OnDemand Dex configuration reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication/overview/map-user.html">Setup User Mapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html#remote-user">Remote User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html#regular-expression-user-mapping">Regular Expression User Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html#dex-automatic-configuration">Dex Automatic Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html#user-map-command-for-advanced-mappings">User Map Command for Advanced Mappings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html#file-user-mapping">File User Mapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="authentication/overview/map-user.html#examples-for-the-mapfile-script">Examples for the MapFile script</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/shibboleth.html">Shibboleth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/cas.html">CAS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/install-keycloak.html">1. Install Keycloak</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/configure-keycloak-webui.html">2. Configure Keycloak</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/install_mod_auth_openidc.html">3. Configure OnDemand to authenticate with Keycloak</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/add-custom-theme.html">4. Add Custom Theme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/tutorial-oidc-keycloak-rhel7/configure-cilogon.html">5. Configure Keycloak with CILogon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication/overview/map-user.html#debugging-user-mapping">Debugging User Mapping</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/duo-2fa-with-keycloak.html#install-keycloak-duo-spi">Install Keycloak Duo SPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/duo-2fa-with-keycloak.html#configure-duo-spi">Configure Duo SPI</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html#prepare-the-host">Prepare the Host</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html#install-mod-auth-mellon">Install mod_auth_mellon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html#configure-mod-auth-mellon">Configure mod_auth_mellon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/adfs-with-auth-mellon.html#configure-ood">Configure OOD</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/nsf-access.html">NSF ACCESS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html#oidc-client-registration">OIDC Client Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html#shibboleth-and-incommon">Shibboleth and InCommon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="authentication/nsf-access.html#mapping-users">Mapping Users</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="authentication/insecure.html">Other Insecure Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication/overview/configure-logout.html">Configure Logout</a></li>
 </ul>
 </div>
 </section>
@@ -220,7 +184,7 @@ to LDAP or Active Directory and not an institutional Single Sign-On service.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation/install-software.html" class="btn btn-neutral float-left" title="1. Install Software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="authentication/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="authentication/overview/configure-authentication.html" class="btn btn-neutral float-right" title="Apache Modules and the OOD Portal Generator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

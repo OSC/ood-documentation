@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. Setup User Mapping &mdash; Open OnDemand 4.0.0 documentation</title>
+  <title>Setup User Mapping &mdash; Open OnDemand 4.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c48163e2" />
@@ -24,8 +24,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3. Configure Logout" href="configure-logout.html" />
-    <link rel="prev" title="1. Configure Apache Authentication" href="configure-authentication.html" />
+    <link rel="next" title="Configure Logout" href="configure-logout.html" />
+    <link rel="prev" title="Apache Modules and the OOD Portal Generator" href="configure-authentication.html" />
  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
 <script>
@@ -67,26 +67,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../installation.html">Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install-software.html">1. Install Software</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../authentication.html">2. Authentication</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../overview.html">Overview</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="configure-authentication.html">1. Configure Apache Authentication</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">2. Setup User Mapping</a></li>
-<li class="toctree-l4"><a class="reference internal" href="configure-logout.html">3. Configure Logout</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../authentication.html">2. OOD Authentication</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configure-authentication.html">Apache Modules and the OOD Portal Generator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Setup User Mapping</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#remote-user">Remote User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regular-expression-user-mapping">Regular Expression User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dex-automatic-configuration">Dex Automatic Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-map-command-for-advanced-mappings">User Map Command for Advanced Mappings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-user-mapping">File User Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-user-mapping">Debugging User Mapping</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../oidc.html">OpenID Connect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dex.html">OpenID Connect with Dex</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../shibboleth.html">Shibboleth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../cas.html">CAS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorial-oidc-keycloak-rhel7.html">OpenID Connect with KeyCloak on RHEL7</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../duo-2fa-with-keycloak.html">Two Factor Auth using Duo with Keycloak</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../adfs-with-auth-mellon.html">SAML Authentication with Active Directory Federated Services (ADFS) and mod_auth_mellon</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../nsf-access.html">NSF ACCESS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../insecure.html">Other Insecure Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure-logout.html">Configure Logout</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../installation/add-ssl.html">3. Secure Apache httpd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../installation/modify-system-security.html">4. Add SELinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../integrated-authentication-solutions.html">3. Authentication Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/add-ssl.html">4. Secure Apache httpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/modify-system-security.html">5. Add SELinux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation.html#building-from-source">Building From Source</a></li>
 </ul>
 </li>
@@ -132,9 +129,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../installation.html">Installation</a></li>
-          <li class="breadcrumb-item"><a href="../../authentication.html"><span class="section-number">2. </span>Authentication</a></li>
-          <li class="breadcrumb-item"><a href="../overview.html">Overview</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2. </span>Setup User Mapping</li>
+          <li class="breadcrumb-item"><a href="../../authentication.html"><span class="section-number">2. </span>OOD Authentication</a></li>
+      <li class="breadcrumb-item active">Setup User Mapping</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/OSC/ood-documentation/blob/latest/source/authentication/overview/map-user.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -145,7 +141,7 @@
            <div itemprop="articleBody">
              
   <section id="setup-user-mapping">
-<span id="authentication-overview-map-user"></span><h1><span class="section-number">2. </span>Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Link to this heading"></a></h1>
+<span id="authentication-overview-map-user"></span><h1>Setup User Mapping<a class="headerlink" href="#setup-user-mapping" title="Link to this heading"></a></h1>
 <p>Every authenticated HTTP request sent to the OnDemand portal has a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>.
 This <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> can be an email like <code class="docutils literal notranslate"><span class="pre">annie.oakley&#64;osc.edu</span></code> and needs to be
 mapped to a Linux system user like <code class="docutils literal notranslate"><span class="pre">aoakley</span></code>.</p>
@@ -164,7 +160,7 @@ This can be helpful at centers where duplicate usernames and/or have multiple
 domains.</p>
 </div>
 <section id="remote-user">
-<h2><span class="section-number">2.1. </span>Remote User<a class="headerlink" href="#remote-user" title="Link to this heading"></a></h2>
+<h2>Remote User<a class="headerlink" href="#remote-user" title="Link to this heading"></a></h2>
 <p>It's worth discussing where <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> is coming from.  When apache
 has successfully authenticates a request it sets the variable <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>
 from, well, the remote.</p>
@@ -178,20 +174,20 @@ it's unlikely you should need to.</p>
 tells apache how to set <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> from the claim response.</p>
 </section>
 <section id="regular-expression-user-mapping">
-<h2><span class="section-number">2.2. </span>Regular Expression User Mapping<a class="headerlink" href="#regular-expression-user-mapping" title="Link to this heading"></a></h2>
+<h2>Regular Expression User Mapping<a class="headerlink" href="#regular-expression-user-mapping" title="Link to this heading"></a></h2>
 <p>The simplest and fastest way to map a <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> to a system user is through
 <a class="reference internal" href="../../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a>.  This is not directly
 regular expression matching, but it's close enough for most use cases.
 See it's documentation for examples and more.</p>
 </section>
 <section id="dex-automatic-configuration">
-<h2><span class="section-number">2.3. </span>Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Link to this heading"></a></h2>
+<h2>Dex Automatic Configuration<a class="headerlink" href="#dex-automatic-configuration" title="Link to this heading"></a></h2>
 <p>When using the OpenId Connector <a class="reference external" href="authentication-dex">dex</a> and setting <a class="reference external" href="ood-portal-generator-user-map-match">oidc_remote_user_claim</a>
 to <code class="docutils literal notranslate"><span class="pre">email</span></code> we automatically set <a class="reference external" href="ood-portal-generator-user-map-match">user_map_match</a> to <code class="docutils literal notranslate"><span class="pre">^([^&#64;]+)&#64;.*$</span></code> as
 a convenience.</p>
 </section>
 <section id="user-map-command-for-advanced-mappings">
-<h2><span class="section-number">2.4. </span>User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Link to this heading"></a></h2>
+<h2>User Map Command for Advanced Mappings<a class="headerlink" href="#user-map-command-for-advanced-mappings" title="Link to this heading"></a></h2>
 <p>Versions prior to 2.0 provided a default <a class="reference external" href="ood-portal-generator-user-map-cmd">user_map_cmd</a> in
 <code class="docutils literal notranslate"><span class="pre">/opt/ood/ood_auth_map/bin/ood_auth_map.regex</span></code>.  We no longer distribute
 this file.</p>
@@ -245,7 +241,7 @@ $
 </div>
 </section>
 <section id="file-user-mapping">
-<span id="gridmap-user-mapping"></span><h2><span class="section-number">2.5. </span>File User Mapping<a class="headerlink" href="#file-user-mapping" title="Link to this heading"></a></h2>
+<span id="gridmap-user-mapping"></span><h2>File User Mapping<a class="headerlink" href="#file-user-mapping" title="Link to this heading"></a></h2>
 <p>This script parses a mapfile with each entry given in the following format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;authenticated_username&quot;</span> <span class="n">local_username</span>
 </pre></div>
@@ -270,7 +266,7 @@ is found it breaks from the scan and outputs the <code class="docutils literal n
 </dd></dl>
 
 <section id="examples-for-the-mapfile-script">
-<h3><span class="section-number">2.5.1. </span>Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Link to this heading"></a></h3>
+<h3>Examples for the MapFile script<a class="headerlink" href="#examples-for-the-mapfile-script" title="Link to this heading"></a></h3>
 <p>To scan the default grid-mapfile using a URL-encoded authenticated username:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>/opt/ood/ood_auth_map/bin/ood_auth_map.mapfile<span class="w"> </span><span class="s1">&#39;http%3A%2F%2Fcilogon.org%2FserverA%2Fusers%2F58606%40cilogon.org&#39;</span>
 bob
@@ -293,7 +289,7 @@ $
 </section>
 </section>
 <section id="debugging-user-mapping">
-<h2><span class="section-number">2.6. </span>Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Link to this heading"></a></h2>
+<h2>Debugging User Mapping<a class="headerlink" href="#debugging-user-mapping" title="Link to this heading"></a></h2>
 <p>When debugging user mapping, it's always helpful to increase the <a class="reference external" href="ood-portal-generator-lua-log-level">lua_log_level</a> to
 debug.</p>
 <p>In doing so you'll see messages like that detail the mapping input, output and
@@ -309,8 +305,8 @@ times like <code class="docutils literal notranslate"><span class="pre">Mapped</
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="configure-authentication.html" class="btn btn-neutral float-left" title="1. Configure Apache Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="configure-logout.html" class="btn btn-neutral float-right" title="3. Configure Logout" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="configure-authentication.html" class="btn btn-neutral float-left" title="Apache Modules and the OOD Portal Generator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configure-logout.html" class="btn btn-neutral float-right" title="Configure Logout" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
