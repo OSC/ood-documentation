@@ -72,6 +72,7 @@ These are institutions who were early adopters or provided HPC resources for dev
 
 
   install-ihpc-apps
+  install-passenger-apps
   tutorials/tutorials-interactive-apps
   tutorials/tutorials-passenger-apps
   tutorials/tutorials-dashboard-apps
