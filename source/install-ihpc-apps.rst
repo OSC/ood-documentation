@@ -157,7 +157,7 @@ interactive apps that are currently deployed at OSC and other contributing insti
      - no
      - rnode
    * - EESSI_APP
-     - doitnow
+     - ``doitnow``
      - https://github.com/doitnowgroup/openondemand-app-collection/tree/main/EESSI_APP
      - no
      - noVNC

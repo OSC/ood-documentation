@@ -23,6 +23,6 @@ following files must be included:
      - Institution
      - GitHub URL
    * - EESSI_application_list
-     - doitnow
+     - ``doitnow``
      - https://github.com/doitnowgroup/openondemand-app-collection/tree/main/EESSI_application_list
 
