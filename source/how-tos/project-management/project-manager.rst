@@ -25,7 +25,7 @@ Collaborative projects need properly configured directories to exist in, which m
 vary on the types of collaboration you would like to enable. Like other actions in 
 Open OnDemand, it will operate as the logged in user and never exceed the UNIX 
 permissions of the directories and files it operates on. This means there are several
-different approaches you may want to take depending on your filesystem's account and 
+different approaches you may want to take depending on your file system's account and 
 permission management approach.
 
 .. _project_manager_shared_project_root:
