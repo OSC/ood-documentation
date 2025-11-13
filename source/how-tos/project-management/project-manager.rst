@@ -61,5 +61,5 @@ is important to ensure that your directory structure meets these minimum require
 #. Any directory in ``OOD_SHARED_PROJECT_ROOT`` and above must have at minimum ``r-x`` permissions
    for all potential collaborators.
 
-#. Any group directory directly below ``OOD_SHARED_PROJECT_ROOT`` should have ``rws`` permissions 
-   for the group, as well as a ``T`` sticky bit to prevent unwanted deletions. 
+#. Any group directory directly below ``OOD_SHARED_PROJECT_ROOT`` should have ``rwx`` permissions 
+   for the group
