@@ -34,10 +34,10 @@ distributed by the Open OnDemand package.
 
 .. code-block:: html
 
-  <div class="text-center p-4 my-3" >
+  <div class="text-center p-4 my-3 fs-5" >
     My center's custom footer.
   <div>
 
-The [utility classes](https://getbootstrap.com/docs/5.0/utilities/spacing/) for text alignment, padding, and margin in the sample are from Bootstrap, the front-end framework used in Open OnDemand. Using Bootstrap classes in custom overrides, widgets, and pages streamlines development and maintains a consistent user experience. The current installed version is Bootstrap 5.3.
+The [utility classes](https://getbootstrap.com/docs/5.0/utilities/spacing/) for text alignment, padding, margin, and font size in the sample are from Bootstrap, the front-end framework used in Open OnDemand. Using Bootstrap classes in custom overrides, widgets, and pages streamlines development and maintains a consistent user experience. The current installed version is Bootstrap 5.3.
 
 .. _dashboard's views folder: https://github.com/OSC/ondemand/tree/master/apps/dashboard/app/views
