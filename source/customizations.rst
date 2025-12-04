@@ -96,7 +96,7 @@ If the announcement file has the extension ``yml`` and is a YAML file it is firs
      - Description
    * - ``type``
      - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
-   * - ``msg``
+   * - ``message``
      - The announcement's message.
    * - ``id``
      - Optional unique identifier for the announcement. This is useful for managing changes to announcements that are used as ToS or EULA that users need to agree to.
@@ -121,7 +121,7 @@ Because the announcement is rendered via ERB you can do some interesting things,
    .. code-block:: erb
 
       type: warning
-      msg: |
+      message: |
         <% if Time.now < Time.new(2018, 9, 24, 12, 0, 0) %>
         A **Ruby Partial Downtime** for 4 hours on Monday, September 24 from 8:00am to 12:00pm
         will prevent SSH login to Ruby nodes and Ruby VDI sessions.
