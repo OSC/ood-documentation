@@ -1,0 +1,56 @@
+v4.1 Release Notes
+==================
+
+.. contents:: Table of Contents
+  :depth: 3
+  :local:
+
+
+Acknowledgments
+---------------
+
+Dependencies
+------------
+
+We now support and offer RPMs for RHEL10
+
+We no longer support Ubuntu 20.04 or Ruby 2.7
+
+Enhancements
+------------
+
+Download as zip button
+......................
+
+A button has been added to completed interactive session cards to allow users 
+to download the session's files as a zip file, making it easier to gather and
+include session details in support requests.
+
+App Caching
+...........
+
+App details are now cached to reduce load times on app menus. This cache can 
+be reset by clicking the "Restart web server" button in the navbar's help menu,
+which should be done whenever app manifests are updated.
+
+Data Help Directives
+....................
+
+The new data-help directive has been added to :ref:`dynamic-bc-apps`, allowing
+you to change the help text on any form widget using options of a select.
+
+Hide By Default for Form Items
+..............................
+
+Form items now accept the `hide_by_default: true` attribute, which will hide the item 
+on page load, revealing it when an option with `data-hide-widget: false` is selected.
+Note that a single form item cannot have both `data-hide-item: true` and `data-hide-item: false`
+acting upon it. Rather you should pick the most common behavior (hidden or shown), use
+that as the default, and toggle it as needed. See more in :ref:`dynamic-bc-apps` and :ref:`app-development-interactive-form`
+
+bc_num_nodes Smart Attribute
+............................
+
+In order to clear up confusion around `bc_num_slots`, which selects either nodes or cores
+dependent on the scheduler, we have added a new smart attribute `bc_num_nodes` which will
+consistently choose nodes on all schedulers.
