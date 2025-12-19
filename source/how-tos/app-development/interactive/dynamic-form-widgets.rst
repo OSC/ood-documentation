@@ -180,7 +180,46 @@ form element based on the selected option in a select widget.
       value: 1
 
 In this case, selecting Node Type 'small' will change the label of Cores to
-'Number of Cores (1-4)'.
+'Number of Cores (1-4)'. Note that options without directives will leave the
+label unchanged from it's last value, and will not restore the default label.
+
+.. _dynamic-bc-apps-data-help:
+
+Dynamic Help Text
+*****************
+
+The ``data-help-*`` directive allows you to change the help text of another
+form element based on the selected option in a select widget.
+
+.. code-block:: yaml
+  attributes:
+    group:
+      widget: 'select'
+      label: Membership group
+      help: 'you can find your group in your personal page'
+      options:
+        - ['First',  data-help-hard-choice: 'Choose Anything']
+        - ['Second', data-help-hard-choice: 'Choose No']
+        - ['Third',  data-help-hard-choice: 'Choose Yes']
+    hard_choice:
+      widget: 'radio_button'
+      label: 'Make your choice'
+      options:
+        - ["Yes",   "1"]
+        - ["No",    "0"]
+        - ["Maybe", "i"]
+
+In this case, the ``hard_choice`` radio button begins with help text reading 'Choose Anything' since 
+'First' is the default value of the ``group`` select. Choosing 'Second' or 'Third' from the group 
+select will change the help text of the ``hard_choice`` radio button to nudge the user one way or
+the other. If they choose 'First' again, it changes back to 'Choose Anything'.
+
+Note that ``data-help`` directives will override the help text provided in the attribute definition, and like 
+``data-label``, any options that do not have a ``data-help`` directive will not change the help text from it's 
+last value. This means that if we moved the 'Choose Anything' help text to the definition of ``hard_choice``,
+and left the ``First`` option without a directive, we would see the same 'Choose Anything' help text at the 
+start, but if you selected 'Second' and switch back to 'First', the help text will still read 'Choose No'.
+
 
 Dynamic Min and Maxes
 *********************
