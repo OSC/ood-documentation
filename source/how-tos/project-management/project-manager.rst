@@ -33,24 +33,24 @@ permission management approach.
 Shared Project Root
 -------------------
 
-The project manager provides the ``OOD_SHARED_PROJECT_ROOT`` environment variable to 
+The project manager provides the ``OOD_SHARED_PROJECT_PATH`` environment variable to 
 help potential collaborators discover potential projects to import. While this is 
 not necessary for collaboration, it is a recommended step to make it easier to locate.
-The ``OOD_SHARED_PROJECT_ROOT`` is a list of base locations for shared projects, allowing
+The ``OOD_SHARED_PROJECT_PATH`` is a list of base locations for shared projects, allowing
 you to add as many locations as you need for different types of users and projects. 
 The Project Manager will only allow users to import projects from locations that they
 have access to, so there is no danger in adding paths that are not accessible to certain 
 users.
 
 Because many centers use group-based permission schemes, the Project Manager expects that
-each directory in ``OOD_SHARED_PROJECT_ROOT`` has a set of subdirectories with finer permissions,
+each directory in ``OOD_SHARED_PROJECT_PATH`` has a set of subdirectories with finer permissions,
 and will only look for projects in these subdirectories. 
 
 For example, a center may have a shared project folder ``/fs/shared/projects``, and a series of subdirectories
 ``/fs/shared/projects/developers``, ``/fs/shared/projects/staff``, ``/fs/shared/projects/students``.
 
 
-In this example, they would set ``OOD_SHARED_PROJECT_ROOT=/fs/shared/projects``, allowing developers
+In this example, they would set ``OOD_SHARED_PROJECT_PATH=/fs/shared/projects``, allowing developers
 to create collaborative projects like ``/fs/shared/projects/developers/project1``, which are then 
 easily accessible to others in the ``developers`` group (likewise for ``staff`` and ``students``).
 
@@ -58,8 +58,8 @@ While the Project Manager automates the permissions settings on project-specific
 never exceed the permissions of the ``SHARED_PROJECT_ROOT`` or any group-level subdirectory, so it 
 is important to ensure that your directory structure meets these minimum requirements.
 
-#. Any directory in ``OOD_SHARED_PROJECT_ROOT`` and above must have at minimum ``r-x`` permissions
+#. Any directory in ``OOD_SHARED_PROJECT_PATH`` and above must have at minimum ``r-x`` permissions
    for all potential collaborators.
 
-#. Any group directory directly below ``OOD_SHARED_PROJECT_ROOT`` should have ``rwx`` permissions 
+#. Any group directory directly below ``OOD_SHARED_PROJECT_PATH`` should have ``rwx`` permissions 
    for the group
