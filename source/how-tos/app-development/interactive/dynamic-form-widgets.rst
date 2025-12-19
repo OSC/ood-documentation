@@ -192,6 +192,7 @@ The ``data-help-*`` directive allows you to change the help text of another
 form element based on the selected option in a select widget.
 
 .. code-block:: yaml
+
   attributes:
     group:
       widget: 'select'
