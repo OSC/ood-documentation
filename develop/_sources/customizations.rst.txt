@@ -903,7 +903,7 @@ Administrators can now customize what widgets appear on the dashboard and how th
 laid out on the page.
 
 In it's simplest form this feature allows for a rearrangement of existing widgets. As
-of 2.1 the existing widgets are:
+of 4.0.8 the existing widgets are:
 
 - ``pinned_apps`` - Pinned Apps described above
 - ``recently_used_apps`` - the four most recently used interactive applications.
@@ -912,6 +912,7 @@ of 2.1 the existing widgets are:
 - ``motd`` - the Message of the Day
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
+- ``saved_settings`` - all of the batch connect saved settings displayed as cards
 
 This feature also allows for administrators to *add* custom widgets.
 Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` and reference them
