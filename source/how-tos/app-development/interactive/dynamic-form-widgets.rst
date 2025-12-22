@@ -193,34 +193,27 @@ form element based on the selected option in a select widget.
 
 .. code-block:: yaml
 
-  attributes:
-    group:
-      widget: 'select'
-      label: Membership group
-      help: 'you can find your group in your personal page'
-      options:
-        - ['First',  data-help-hard-choice: 'Choose Anything']
-        - ['Second', data-help-hard-choice: 'Choose No']
-        - ['Third',  data-help-hard-choice: 'Choose Yes']
-    hard_choice:
-      widget: 'radio_button'
-      label: 'Make your choice'
-      options:
-        - ["Yes",   "1"]
-        - ["No",    "0"]
-        - ["Maybe", "i"]
+form:
+  - node_type
+attributes:
+  node_type:
+    widget: select
+    label: Node Type
+    options:
+      - [ 'Small',  'small',  data-help-node-type: 'Small machines have 10 cores and 100 GB of RAM' ]
+      - [ 'Medium', 'medium', data-help-node-type: 'Medium machines have 50 cores and 500 GB of RAM' ]
+      - [ 'Large',  'large',  data-help-node-type: 'Large machines have 100 cores and 1 TB of RAM' ]
 
-In this case, the ``hard_choice`` radio button begins with help text reading 'Choose Anything' since 
-'First' is the default value of the ``group`` select. Choosing 'Second' or 'Third' from the group 
-select will change the help text of the ``hard_choice`` radio button to nudge the user one way or
-the other. If they choose 'First' again, it changes back to 'Choose Anything'.
+In this case, the ``node_type`` form item begins with the help text 'Small machines ...', since this
+is the initial value of the select. As you select different options, the help text changes to provide
+details of the different choices. While we have the ``node-type`` select changing its own help text in 
+this example, you can modify the help text of any form item using the same ``data-help-attribute-name``
+syntax.
 
-Note that ``data-help`` directives will override the help text provided in the attribute definition, and like 
-``data-label``, any options that do not have a ``data-help`` directive will not change the help text from it's 
-last value. This means that if we moved the 'Choose Anything' help text to the definition of ``hard_choice``,
-and left the ``First`` option without a directive, we would see the same 'Choose Anything' help text at the 
-start, but if you selected 'Second' and switch back to 'First', the help text will still read 'Choose No'.
-
+Note that ``data-help`` directives will override the help text provided in the attribute definition, and 
+any options that do not have a ``data-help`` directive will not change the help text from it's last value. 
+This means that if we left out the data-help directive on the medium option, the help text will retain its 
+previous value (either 'Small machines...' or 'Large machines...') when medium is selected instead of clearing.
 
 Dynamic Min and Maxes
 *********************
