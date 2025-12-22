@@ -907,11 +907,7 @@ of 4.0.8 the existing widgets are:
 - ``motd`` - the Message of the Day
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
-- ``balances`` - the remaining balance
-- ``file_quotas`` - the user's quotas
-- ``nsf_accessevents`` - the National Science Foundation events
 - ``saved_settings`` - all of the batch connect saved settings displayed as cards
-- ``system_status`` - the current status of the system, functions like the app
 
 This feature also allows for administrators to *add* custom widgets.
 Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` and reference them
