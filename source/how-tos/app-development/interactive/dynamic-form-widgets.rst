@@ -180,8 +180,8 @@ form element based on the selected option in a select widget.
       value: 1
 
 In this case, selecting Node Type 'small' will change the label of Cores to
-'Number of Cores (1-4)'. Note that options without directives will leave the
-label unchanged from it's last value, and will not restore the default label.
+'Number of Cores (1-4)'. Note that you must define a ``data-label`` directive
+on each option of the select, as it does not keep a default value.
 
 .. _dynamic-bc-apps-data-help:
 
