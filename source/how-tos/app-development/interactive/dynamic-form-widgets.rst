@@ -193,16 +193,16 @@ form element based on the selected option in a select widget.
 
 .. code-block:: yaml
 
-form:
-  - node_type
-attributes:
-  node_type:
-    widget: select
-    label: Node Type
-    options:
-      - [ 'Small',  'small',  data-help-node-type: 'Small machines have 10 cores and 100 GB of RAM' ]
-      - [ 'Medium', 'medium', data-help-node-type: 'Medium machines have 50 cores and 500 GB of RAM' ]
-      - [ 'Large',  'large',  data-help-node-type: 'Large machines have 100 cores and 1 TB of RAM' ]
+  form:
+    - node_type
+  attributes:
+    node_type:
+      widget: select
+      label: Node Type
+      options:
+        - [ 'Small',  'small',  data-help-node-type: 'Small machines have 10 cores and 100 GB of RAM' ]
+        - [ 'Medium', 'medium', data-help-node-type: 'Medium machines have 50 cores and 500 GB of RAM' ]
+        - [ 'Large',  'large',  data-help-node-type: 'Large machines have 100 cores and 1 TB of RAM' ]
 
 In this case, the ``node_type`` form item begins with the help text 'Small machines ...', since this
 is the initial value of the select. As you select different options, the help text changes to provide
