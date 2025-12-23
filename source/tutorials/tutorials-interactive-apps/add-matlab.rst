@@ -26,7 +26,6 @@ within the batch job.
    add-matlab/edit-form-yml
    add-matlab/edit-script-sh
    add-matlab/edit-submit-yml
-   add-matlab/edit-form-js
    add-matlab/deploy
    add-matlab/known-issues
 
