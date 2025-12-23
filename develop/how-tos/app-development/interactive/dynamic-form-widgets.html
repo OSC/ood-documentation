@@ -85,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#hiding-select-options">Hiding select options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hiding-entire-elements">Hiding entire elements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-element-labels">Dynamic Element Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-help-text">Dynamic Help Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-min-and-maxes">Dynamic Min and Maxes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#setting-values-based-on-other-elements">Setting values based on other elements</a></li>
 </ul>
@@ -297,7 +298,34 @@ form element based on the selected option in a select widget.</p>
 </pre></div>
 </div>
 <p>In this case, selecting Node Type 'small' will change the label of Cores to
-'Number of Cores (1-4)'.</p>
+'Number of Cores (1-4)'. Note that you must define a <code class="docutils literal notranslate"><span class="pre">data-label</span></code> directive
+on each option of the select, as it does not keep a default value.</p>
+</section>
+<section id="dynamic-help-text">
+<span id="dynamic-bc-apps-data-help"></span><h2>Dynamic Help Text<a class="headerlink" href="#dynamic-help-text" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data-help-*</span></code> directive allows you to change the help text of another
+form element based on the selected option in a select widget.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">form</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_type</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Node Type</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;Small&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="s">&#39;small&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">data-help-node-type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Small</span><span class="nv"> </span><span class="s">machines</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">10</span><span class="nv"> </span><span class="s">cores</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">100</span><span class="nv"> </span><span class="s">GB</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">RAM&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;Medium&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;medium&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">data-help-node-type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Medium</span><span class="nv"> </span><span class="s">machines</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">50</span><span class="nv"> </span><span class="s">cores</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">500</span><span class="nv"> </span><span class="s">GB</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">RAM&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;Large&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="s">&#39;large&#39;</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">data-help-node-type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;Large</span><span class="nv"> </span><span class="s">machines</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">100</span><span class="nv"> </span><span class="s">cores</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">TB</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">RAM&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> form item begins with the help text 'Small machines ...', since this
+is the initial value of the select. As you select different options, the help text changes to provide
+details of the different choices. While we have the <code class="docutils literal notranslate"><span class="pre">node-type</span></code> select changing its own help text in
+this example, you can modify the help text of any form item using the same <code class="docutils literal notranslate"><span class="pre">data-help-attribute-name</span></code>
+syntax.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">data-help</span></code> directives will override the help text provided in the attribute definition, and
+any options that do not have a <code class="docutils literal notranslate"><span class="pre">data-help</span></code> directive will not change the help text from it's last value.
+This means that if we left out the data-help directive on the medium option, the help text will retain its
+previous value (either 'Small machines...' or 'Large machines...') when medium is selected instead of clearing.</p>
 </section>
 <section id="dynamic-min-and-maxes">
 <h2>Dynamic Min and Maxes<a class="headerlink" href="#dynamic-min-and-maxes" title="Link to this heading"></a></h2>
