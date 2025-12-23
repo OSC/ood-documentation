@@ -180,7 +180,40 @@ form element based on the selected option in a select widget.
       value: 1
 
 In this case, selecting Node Type 'small' will change the label of Cores to
-'Number of Cores (1-4)'.
+'Number of Cores (1-4)'. Note that you must define a ``data-label`` directive
+on each option of the select, as it does not keep a default value.
+
+.. _dynamic-bc-apps-data-help:
+
+Dynamic Help Text
+*****************
+
+The ``data-help-*`` directive allows you to change the help text of another
+form element based on the selected option in a select widget.
+
+.. code-block:: yaml
+
+  form:
+    - node_type
+  attributes:
+    node_type:
+      widget: select
+      label: Node Type
+      options:
+        - [ 'Small',  'small',  data-help-node-type: 'Small machines have 10 cores and 100 GB of RAM' ]
+        - [ 'Medium', 'medium', data-help-node-type: 'Medium machines have 50 cores and 500 GB of RAM' ]
+        - [ 'Large',  'large',  data-help-node-type: 'Large machines have 100 cores and 1 TB of RAM' ]
+
+In this case, the ``node_type`` form item begins with the help text 'Small machines ...', since this
+is the initial value of the select. As you select different options, the help text changes to provide
+details of the different choices. While we have the ``node-type`` select changing its own help text in 
+this example, you can modify the help text of any form item using the same ``data-help-attribute-name``
+syntax.
+
+Note that ``data-help`` directives will override the help text provided in the attribute definition, and 
+any options that do not have a ``data-help`` directive will not change the help text from it's last value. 
+This means that if we left out the data-help directive on the medium option, the help text will retain its 
+previous value (either 'Small machines...' or 'Large machines...') when medium is selected instead of clearing.
 
 Dynamic Min and Maxes
 *********************
