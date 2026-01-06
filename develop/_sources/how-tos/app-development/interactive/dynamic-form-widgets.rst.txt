@@ -93,13 +93,15 @@ cluster.
   This example shows toggling options based on the cluster, but this feature
   generically support any field and value.
 
+.. _dynamic-bc-apps-data-hide:
+
 Hiding entire elements
 **********************
 
 The ``data-hide`` directive allows you to hide another element based on
 the current value of a select element.
 
-Let's continue examples involving GPUs. We'd like to provide users
+Let's continue with examples involving GPUs. We'd like to provide users
 with options for `CUDA`_ versions.
 
 But using Nvidia's `CUDA`_ libraries only makes sense when the user is requesting GPUs.
@@ -108,20 +110,6 @@ So, we want to hide the ``cuda_version`` element when a users chooses standard `
 Here's the example YAML for this app with two select widgets.  This
 instructs the web-page to hide the ``cuda_version`` when the ``standard``
 ``node_type`` is selected.
-
-.. warning::
-  In addition to hiding form fields like this example shows, one should
-  also use a ``data-set`` directive to set the value because the field
-  is no longer visible to the user. While it's hidden, it will still retain
-  the current value, if any has been supplied.
-
-  By forcing a value after hiding it you can ensure that the correct values
-  are being passed to the server.
-
-.. tip::
-
-  In addition to setting the value to ``true`` to hide the form item, in 4.0
-  you can also specify ``false`` to show the form item.
 
 .. code-block:: yaml
   :emphasize-lines: 7
@@ -137,8 +125,39 @@ instructs the web-page to hide the ``cuda_version`` when the ``standard``
           ]
         - 'gpu'
 
+.. warning::
+  In addition to hiding form fields like this example shows, one should
+  also use a ``data-set`` directive to set the value because the field
+  is no longer visible to the user. While it's hidden, it will still retain
+  the current value, if any has been supplied.
 
-Additionally, you can use ``check_box`` widgets to hide elements.
+  By forcing a value after hiding it you can ensure that the correct values
+  are being passed to the server.
+
+If you have an item that is hidden for most options, you can include the 
+``hide_by_default: true`` attribute in the item's definition and use
+``data-hide-item: false`` on options that should reveal that item. For example,
+if only the ``gpu`` node type has access to GPU resources, then you can easily
+hide it for any other node type with the following form
+
+.. code-block:: yaml
+  :emphasize-lines: 6, 10
+
+  attributes:
+    node_type:
+      widget: select
+      options:
+        - ['Standard', 'standard']
+        - ['Small', 'small']
+        - ['Large', 'large']
+        - ['Gpu', 'gpu', data-hide-cuda-version: false]
+
+    cuda_version:
+      widget: select
+      hide_by_default: true
+      options:
+      
+Finally, you can also use ``check_box`` widgets to hide elements.
 Here we have a checkbox ``enable_cuda_version`` that will show
 ``cuda_version`` when checked and hide it when it's not checked.
 
