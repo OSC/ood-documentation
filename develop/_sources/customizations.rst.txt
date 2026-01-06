@@ -913,6 +913,12 @@ of 4.0.8 the existing widgets are:
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
 - ``saved_settings`` - all of the batch connect saved settings displayed as cards
+- ``balances`` - Current users' balances if you've configured :ref:`balance warnings on the dashboard <balance-warnings-on-dashboard>`.
+  Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current balances.
+- ``file_qoutas`` - Current users' file qoutas if you've configure :ref:`disk quota warnings on the dashboard <disk_quota_warnings>`.
+  Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current file quotas.
+- ``nsf_access_events`` - A list of upcoming NSF ACCESS events with registration links.
+- ``system_status`` - The system status page as a dashboard widget instead of a dedicated page.
 
 This feature also allows for administrators to *add* custom widgets.
 Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` and reference them
@@ -1037,6 +1043,8 @@ Customize Text in the Job Composer's options form
 The OSC default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects.
 
 Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string ``options_account_help``.
+
+.. _disk_quota_warnings:
 
 Disk Quota Warnings on Dashboard
 --------------------------------
