@@ -19,10 +19,16 @@ At this time OnDemand only supports the following operating systems and architec
 
    "RedHat/Rocky Linux/AlmaLinux 8",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
+   "RedHat/Rocky Linux/AlmaLinux 10",:raw-html:`&#9989;`,:raw-html:`&#10067;`,:raw-html:`&#9989;`
    "Ubuntu 22.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Ubuntu 24.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Debian 12",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
-   "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#10067;`,:raw-html:`&#10060;`
+
+.. note::
+
+    Items marked with :raw-html:`&#10067;` are available upon request.
+    Open a `Github Issue <https://github.com/OSC/ondemand/issues>`_ or post the request on `Discourse <https://discourse.openondemand.org/>`_
 
 Software Requirements
 ---------------------
