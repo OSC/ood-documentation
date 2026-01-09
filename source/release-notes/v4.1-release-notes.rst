@@ -15,10 +15,33 @@ Breaking Changes and Deprecations
 ---------------------------------
 * The important stuff!
 
-Packaging, SELinux, Dependencies
---------------------------------
-* Dependency lists
-* Operating system stuff
+Operating System Support
+------------------------
+
+OnDemand 4.1 adds support for RHEL/Rocky/AlmaLinux 10.
+
+OnDemand 4.1 drops support for Ubuntu 20.04.
+
+Dependency Updates
+------------------
+
+This release updates the following dependencies:
+
+- Passenger 6.1.0
+- NGINX 1.26.3
+- ondemand-dex 2.44.0
+- NodeJS 22 **(Every OS)**
+
+  .. warning::
+
+    The change in NodeJs version means any Node-based apps that are not
+    provided by the OnDemand RPM must be rebuilt or supply their own
+    :ref:`nodejs_starter_app_wrapper` to use the older version of NodeJs.
+
+SELinux Changes
+---------------
+
+Add `ondemand_manage_config_dir` boolean to allow OnDemand to manage `.config` directories labeled with `config_home_t`
 
 Authentication and Security
 ---------------------------
@@ -138,7 +161,141 @@ Help, Support and Institutional Integration
 * SerivceNow, ticketing things
 
 Upgrade Instructions
----------------------
-* We should review this list and improve upon it or ensure the info is up to date with the proper OS list
+--------------------
+
+.. warning::
+
+   **Update** the **development** or **test** instances of OnDemand installed at your center **first** before you modify the *production* instance.
+
+.. warning::
+
+  We have tested the upgrade from 4.0.8 to 4.1.0 at OSC's OnDemand instance.
+
+#. Update OnDemand repository.
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.1/ondemand-release-web-4.1-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.1/ondemand-release-web-4.1-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.1.0-jammy_all.deb https://apt.osc.edu/ondemand/4.1/ondemand-release-web_4.1.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.1.0-jammy_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.1.0-noble_all.deb https://apt.osc.edu/ondemand/4.1/ondemand-release-web_4.1.0-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.1.0-noble_all.deb
+            sudo apt update
+
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.1.0-bookworm_all.deb https://apt.osc.edu/ondemand/4.1/ondemand-release-web_4.1.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.1.0-bookworm_all.deb
+            sudo apt update
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo dnf install -y https://yum.osc.edu/ondemand/4.1/ondemand-release-web-4.1-1.amzn2023.noarch.rpm
+
+#. (**RHEL/Rocky/AlmaLinux 8 & 9 only**) Enable dependency repositories.
+
+   .. code-block:: sh
+
+      sudo dnf module reset nodejs
+      sudo dnf module enable nodejs:22
+
+#. Update OnDemand
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (**Dex users only**) Update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
 
 
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 22.04 & 24.04 & Debian 12
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+#. (**Dex users only**) Restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (**SELinux users only**) Update SELinux policies.
+
+   See :ref:`ood_selinux_updates`.
+
+#. Force all PUNs to restart.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
