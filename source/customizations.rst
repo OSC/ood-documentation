@@ -463,20 +463,33 @@ If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and 
 the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
 is used).
 
+.. _set_download_limits:
+
 Set Download Limits
 -------------------
 
-By default, the maximum file download size is 10.7 GB (10737418240 bytes). 
-If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` configuration environment 
-variable in the ``/etc/ood/config/apps/dashboard/env`` file to the desired value in bytes.
+By default, the maximum download size for files and directories is 10.7 GB (10737418240 bytes). 
+If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` and/or ``OOD_DOWNLOAD_FILE_MAX`` 
+configuration environment variables in the ``/etc/ood/config/apps/dashboard/env`` file to the desired
+value for directories and files, respectively. Both variables can also be set in your :ref:`ondemand-d-ymls`
+file as ``download_dir_max`` and ``download_file_max``.
 
-For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/dashboard/env`` file:
+For example, to set the directory limit to 8 GiB and the file limit to 5 GiB, you can add the following 
+lines to the ``/etc/ood/config/apps/dashboard/env`` file:
 
 .. code-block:: 
 
-  OOD_DOWNLOAD_DIR_MAX=5368709120
+  OOD_DOWNLOAD_DIR_MAX=8589934592
+  OOD_DOWNLOAD_FILE_MAX=5368709120
 
-Note that this will limit the download size for all users of the Open OnDemand instance.
+Note that this will limit the download size for all users of the Open OnDemand instance. If you want 
+to set it as part of your :ref:`profiles_guide` to affect only a subset of users, you can add the
+the following lines to a specific profile in your :ref:`ondemand-d-ymls`.
+
+.. code-block::
+
+  download_dir_max:8589934592
+  download_file_max:5368709120
 
 .. warning::
    This configuration value is expected to be numbers only (no characters)
