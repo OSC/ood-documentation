@@ -148,6 +148,50 @@
              
   <section id="user-form-form-yml-erb">
 <span id="app-development-interactive-form"></span><h1>User Form (<code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>)<a class="headerlink" href="#user-form-form-yml-erb" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration" id="id12">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#attributes" id="id13">Attributes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#predefined-attributes" id="id14">Predefined Attributes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bc-account" id="id15"><code class="docutils literal notranslate"><span class="pre">bc_account</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bc-queue" id="id16"><code class="docutils literal notranslate"><span class="pre">bc_queue</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bc-num-hours" id="id17"><code class="docutils literal notranslate"><span class="pre">bc_num_hours</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bc-num-nodes" id="id18"><code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bc-num-slots" id="id19"><code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bc-email-on-started" id="id20"><code class="docutils literal notranslate"><span class="pre">bc_email_on_started</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#automatic-predefined-attributes" id="id21">Automatic Predefined Attributes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#auto-primary-group" id="id22"><code class="docutils literal notranslate"><span class="pre">auto_primary_group</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-modules-module" id="id23"><code class="docutils literal notranslate"><span class="pre">auto_modules_&lt;MODULE&gt;</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-batch-clusters" id="id24"><code class="docutils literal notranslate"><span class="pre">auto_batch_clusters</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-cores" id="id25"><code class="docutils literal notranslate"><span class="pre">auto_cores</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-groups" id="id26"><code class="docutils literal notranslate"><span class="pre">auto_groups</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-queues" id="id27"><code class="docutils literal notranslate"><span class="pre">auto_queues</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-accounts" id="id28"><code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-qos" id="id29"><code class="docutils literal notranslate"><span class="pre">auto_qos</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#customizing-attributes" id="id30">Customizing Attributes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#examples" id="id31">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#user-defined-attributes" id="id32">User-defined Attributes</a></p></li>
+<li><p><a class="reference internal" href="#hard-coded-attributes" id="id33">Hard-coded Attributes</a></p></li>
+<li><p><a class="reference internal" href="#customize-user-defined-attributes" id="id34">Customize User-defined Attributes</a></p></li>
+<li><p><a class="reference internal" href="#caching-form-items" id="id35">Caching form items</a></p></li>
+<li><p><a class="reference internal" href="#displaying-form-items-in-the-session-card" id="id36">Displaying form items in the session card</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuring-which-cluster-to-submit-to" id="id37">Configuring which cluster to submit to</a></p></li>
+<li><p><a class="reference internal" href="#global-batch-connect-form-items" id="id38">Global Batch Connect Form Items</a></p></li>
+</ul>
+</nav>
 <p>The configuration file <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> creates the <a class="reference external" href="https://en.wikipedia.org/wiki/Form_(HTML)">html form</a> your customers will use
 to start the interactive application.</p>
 <p>Let's look at a simple example of how the main components <code class="docutils literal notranslate"><span class="pre">form</span></code> and <code class="docutils literal notranslate"><span class="pre">attributes</span></code> work.
@@ -204,7 +248,7 @@ the YAML file.</p>
 form file to <code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code> and incorporating ERB syntax.</p>
 </div>
 <section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Configuration</a><a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
 <p>This is the full list of items with details, you may supply to this YAML file to configure this application.</p>
 <dl class="describe">
 <dt class="sig sig-object">
@@ -261,7 +305,7 @@ manifest's description as it does not appear as hover-over text.</p>
 
 </section>
 <section id="attributes">
-<span id="bc-form-attributes"></span><h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<span id="bc-form-attributes"></span><h2><a class="toc-backref" href="#id13" role="doc-backlink">Attributes</a><a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
 <p>Attributes are <em>variables</em> whose values can be set either by the user from
 within an HTML form or hard-coded to a specific value in the form
 configuration. These attributes and their corresponding values are then made
@@ -269,7 +313,7 @@ available to the Interactive App through its intermediate steps:
 <a class="reference internal" href="template.html#app-development-interactive-template"><span class="std std-ref">Render Template</span></a> and
 <a class="reference internal" href="submit.html#app-development-interactive-submit"><span class="std std-ref">Job Submission (submit.yml.erb)</span></a>.</p>
 <section id="predefined-attributes">
-<span id="app-development-interactive-form-predefined-attributes"></span><h3>Predefined Attributes<a class="headerlink" href="#predefined-attributes" title="Link to this heading"></a></h3>
+<span id="app-development-interactive-form-predefined-attributes"></span><h3><a class="toc-backref" href="#id14" role="doc-backlink">Predefined Attributes</a><a class="headerlink" href="#predefined-attributes" title="Link to this heading"></a></h3>
 <p>The Dashboard that supports these plugins provides the plugins with some useful
 predefined attributes that can be included in the <code class="docutils literal notranslate"><span class="pre">form:</span></code> configuration list
 with very little or no modification on the part of the developer.</p>
@@ -286,25 +330,43 @@ part of the app developer can look like:</p>
 </pre></div>
 </div>
 <p>The most commonly used predefined attributes are given as:</p>
-<dl id="bc-account">
-<dt><code class="docutils literal notranslate"><span class="pre">bc_account</span></code></dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will be used as the charged
+<section id="bc-account">
+<span id="id1"></span><h4><a class="toc-backref" href="#id15" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bc_account</span></code></a><a class="headerlink" href="#bc-account" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will be used as the charged
 account for the submitted job.</p>
 <p>This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id">OodCore::Job::Script#accounting_id</a>.</p>
-</dd>
-</dl>
-<dl id="bc-queue">
-<dt><code class="docutils literal notranslate"><span class="pre">bc_queue</span></code></dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will supply the name of the
+</div></blockquote>
+</section>
+<section id="bc-queue">
+<span id="id2"></span><h4><a class="toc-backref" href="#id16" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bc_queue</span></code></a><a class="headerlink" href="#bc-queue" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This adds a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> to the HTML form that will supply the name of the
 queue that the batch job is submitted to.</p>
 <p>This attribute gets directly set on <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:queue_name">OodCore::Job::Script#queue_name</a>.</p>
-</dd>
-</dl>
-<dl id="bc-num-hours">
-<dt><code class="docutils literal notranslate"><span class="pre">bc_num_hours</span></code></dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the maximum
+</div></blockquote>
+</section>
+<section id="bc-num-hours">
+<span id="id3"></span><h4><a class="toc-backref" href="#id17" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bc_num_hours</span></code></a><a class="headerlink" href="#bc-num-hours" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the maximum
 amount of hours the submitted batch job may run.</p>
 <p>This attribute gets converted to seconds and then set on
 <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:wall_time">OodCore::Job::Script#wall_time</a>.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code></dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the number of
+</div></blockquote>
+</section>
+<section id="bc-num-nodes">
+<span id="id4"></span><h4><a class="toc-backref" href="#id18" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code></a><a class="headerlink" href="#bc-num-nodes" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This adds a number field to the html form that describes the number of nodes
+that a submitted job may use. This attribute then uses the proper value in
+<a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:native">OodCore::Job::Script#native</a> to reserve nodes with your scheduler.</p>
+</div></blockquote>
+</section>
+<section id="bc-num-slots">
+<h4><a class="toc-backref" href="#id19" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code></a><a class="headerlink" href="#bc-num-slots" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This adds a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> to the HTML form that describes the number of
 processors, CPUs on a single node, or nodes that the submitted job may use
 (depends on the resource manager used, e.g., Torque, Slurm, ...).</p>
 <p>This attribute manipulates the brittle <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:native">OodCore::Job::Script#native</a> field
@@ -312,40 +374,47 @@ with a value that depends on the given resource manager for the cluster.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This predefined attribute is very resource manager specific, and is the
-most brittle of all the other predefined attributes. May require
-customization (see
-<a class="reference internal" href="#interactive-development-form-customizing-attributes"><span class="std std-ref">Customizing Attributes</span></a>) to work at
-your center.</p>
+most brittle of all the other predefined attributes. It is recommended to
+use either <a class="reference internal" href="#bc-num-nodes">bc_num_nodes</a> or <a class="reference internal" href="#auto-cores">auto_cores</a> instead for
+consistent behavior across schedulers.</p>
 </div>
-</dd>
-</dl>
-<dl id="bc-email-on-started">
-<dt><code class="docutils literal notranslate"><span class="pre">bc_email_on_started</span></code></dt><dd><p>This adds a <code class="docutils literal notranslate"><span class="pre">check_box</span></code> to the HTML form that determines whether the user
+</div></blockquote>
+</section>
+<section id="bc-email-on-started">
+<span id="id5"></span><h4><a class="toc-backref" href="#id20" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bc_email_on_started</span></code></a><a class="headerlink" href="#bc-email-on-started" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This adds a <code class="docutils literal notranslate"><span class="pre">check_box</span></code> to the HTML form that determines whether the user
 should be notified by email when the batch job starts.</p>
 <p>This attribute sets value of <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:email_on_started">OodCore::Job::Script#email_on_started</a>
 depending on whether the user checked the box or not.</p>
-</dd>
-</dl>
+</div></blockquote>
+</section>
 </section>
 <section id="automatic-predefined-attributes">
-<span id="auto-bc-form-options"></span><h3>Automatic Predefined Attributes<a class="headerlink" href="#automatic-predefined-attributes" title="Link to this heading"></a></h3>
+<span id="auto-bc-form-options"></span><h3><a class="toc-backref" href="#id21" role="doc-backlink">Automatic Predefined Attributes</a><a class="headerlink" href="#automatic-predefined-attributes" title="Link to this heading"></a></h3>
 <p>Automatic attributes automatically generate lists or values.  For example
 <code class="docutils literal notranslate"><span class="pre">bc_queue</span></code> above will generate a <code class="docutils literal notranslate"><span class="pre">text_field</span></code> where the user has to
 input the queue name themselves.</p>
 <p><code class="docutils literal notranslate"><span class="pre">auto_queues</span></code> on the other hand will automatically build a list of queues
 for the user to choose from without intervention from the administrator
 or the user.</p>
-<p>They must be added to the <cite>form</cite> list.</p>
+<p>They must be added to the <code class="docutils literal notranslate"><span class="pre">form</span></code> list.</p>
 <p>EX:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">form</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto_modules_&lt;MODULE&gt;</span>
 </pre></div>
 </div>
-<dl>
-<dt>auto_primary_group</dt><dd><p>This will automatically set the <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id">OodCore::Job::Script#accounting_id</a> to the
+<section id="auto-primary-group">
+<h4><a class="toc-backref" href="#id22" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_primary_group</span></code></a><a class="headerlink" href="#auto-primary-group" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will automatically set the <a class="reference external" href="http://www.rubydoc.info/gems/ood_core/OodCore%2FJob%2FScript:accounting_id">OodCore::Job::Script#accounting_id</a> to the
 primary group of the user.  No choice will be given to the user.</p>
-</dd>
-<dt>auto_modules_&lt;MODULE&gt;</dt><dd><p>This will generate a list of modules in a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget.
+</div></blockquote>
+</section>
+<section id="auto-modules-module">
+<h4><a class="toc-backref" href="#id23" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_modules_&lt;MODULE&gt;</span></code></a><a class="headerlink" href="#auto-modules-module" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will generate a list of modules in a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget.
 For example <code class="docutils literal notranslate"><span class="pre">auto_modules_matlab</span></code> will automatically populate a drop-down
 list of every single <code class="docutils literal notranslate"><span class="pre">matlab</span></code> version available, including the default
 version.</p>
@@ -387,16 +456,40 @@ a form configuration like <code class="docutils literal notranslate"><span class
 referenced in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">context.auto_modules_netcdf_serial</span> <span class="pre">%&gt;</span></code>
 replacing any hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>) with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
 </div>
-</dd>
-</dl>
-<dl class="simple" id="auto-groups">
-<dt>auto_groups</dt><dd><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget populated with a list of the Unix
-groups the user is currently in. Administrators can configure <a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#auto-groups-filter"><span class="std std-ref">filter for autogroups</span></a>
-to limit the groups shown.</p>
-</dd>
-</dl>
-<dl id="auto-queues">
-<dt>auto_queues</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the queues available to the user.
+</div></blockquote>
+</section>
+<section id="auto-batch-clusters">
+<span id="id6"></span><h4><a class="toc-backref" href="#id24" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_batch_clusters</span></code></a><a class="headerlink" href="#auto-batch-clusters" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This automatically filters the list of clusters that the user can choose from to remove
+all clusters using <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code>, <code class="docutils literal notranslate"><span class="pre">linux_host</span></code>, or <code class="docutils literal notranslate"><span class="pre">systemd</span></code> as their adapter. It then
+retrieves information from the scheduler and automatically sets the maximum value of the
+<a class="reference internal" href="#auto-cores">auto_cores</a> field to the maximum number of cores available on the selected cluster. After
+this is added to your form you should remove any other <code class="docutils literal notranslate"><span class="pre">clusters:</span></code> value from the top of
+your <code class="docutils literal notranslate"><span class="pre">form.yml</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="auto-cores">
+<span id="id7"></span><h4><a class="toc-backref" href="#id25" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_cores</span></code></a><a class="headerlink" href="#auto-cores" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">number_field</span></code> widget with an initial value of 1. The maximum
+value is then automatically set by the <a class="reference internal" href="#auto-batch-clusters">auto_batch_clusters</a> selection so that the value falls
+within the acceptable range for that cluster. It is strongly suggested to always pair this with
+<a class="reference internal" href="#auto-batch-clusters">auto_batch_clusters</a>, as other cluster options, including fixed values, will not set the maximum cores.</p>
+</div></blockquote>
+</section>
+<section id="auto-groups">
+<span id="id8"></span><h4><a class="toc-backref" href="#id26" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_groups</span></code></a><a class="headerlink" href="#auto-groups" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget populated with a list of the Unix
+groups the user is currently in. Administrators can configure
+<a class="reference internal" href="../../../reference/files/ondemand-d-ymls.html#auto-groups-filter"><span class="std std-ref">filter for autogroups</span></a> to limit the groups shown.</p>
+</div></blockquote>
+</section>
+<section id="auto-queues">
+<span id="id9"></span><h4><a class="toc-backref" href="#id27" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_queues</span></code></a><a class="headerlink" href="#auto-queues" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the queues available to the user.
 These queues will be cluster if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
 enabled. That is, they'll show or hide relevant lists given the currently selected
 <code class="docutils literal notranslate"><span class="pre">cluster</span></code>.</p>
@@ -404,10 +497,12 @@ enabled. That is, they'll show or hide relevant lists given the currently select
 <p class="admonition-title">Warning</p>
 <p>We only have support for Slurm queues (partitions) at this time.</p>
 </div>
-</dd>
-</dl>
-<dl id="auto-accounts">
-<dt>auto_accounts</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the accounts available to the user.</p>
+</div></blockquote>
+</section>
+<section id="auto-accounts">
+<span id="id10"></span><h4><a class="toc-backref" href="#id28" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code></a><a class="headerlink" href="#auto-accounts" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the accounts available to the user.</p>
 <p><code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code> will generate cluster aware lists if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
 enabled.  This means it will only show a list of accounts available for the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> that's
 currently selected.  If this setting is not enabled, it will generate a list of all accounts
@@ -423,15 +518,19 @@ system will uppercase the accounts (set it to <code class="docutils literal notr
 <p class="admonition-title">Warning</p>
 <p>We only have support for Slurm accounts at this time.</p>
 </div>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">auto_qos</span></code></dt><dd><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget populated with a list of all the QoS
+</div></blockquote>
+</section>
+<section id="auto-qos">
+<h4><a class="toc-backref" href="#id29" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_qos</span></code></a><a class="headerlink" href="#auto-qos" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>This will automatically generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget populated with a list of all the QoS
 (Quality of Service) values available.  These are cluster aware if you have
 <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a> enabled.</p>
-</dd>
-</dl>
+</div></blockquote>
+</section>
 </section>
 <section id="customizing-attributes">
-<span id="interactive-development-form-customizing-attributes"></span><h3>Customizing Attributes<a class="headerlink" href="#customizing-attributes" title="Link to this heading"></a></h3>
+<span id="interactive-development-form-customizing-attributes"></span><h3><a class="toc-backref" href="#id30" role="doc-backlink">Customizing Attributes</a><a class="headerlink" href="#customizing-attributes" title="Link to this heading"></a></h3>
 <p>For each defined attribute in the <code class="docutils literal notranslate"><span class="pre">form:</span></code> configuration option, you can
 modify/override any component that makes up the HTML form element in the
 <code class="docutils literal notranslate"><span class="pre">attributes:</span></code> configuration option, e.g.:</p>
@@ -731,7 +830,7 @@ or options for <a class="reference internal" href="dynamic-form-widgets.html#dyn
 </section>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id31" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>The simplest example consists of only a cluster id</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
 <span class="nn">---</span>
@@ -747,7 +846,7 @@ cluster configuration file:</p>
 sandbox app list and you should be presented with <strong>ONLY</strong> a Launch button,
 since we didn't define <code class="docutils literal notranslate"><span class="pre">form:</span></code> or <code class="docutils literal notranslate"><span class="pre">attributes:</span></code>.</p>
 <section id="user-defined-attributes">
-<h3>User-defined Attributes<a class="headerlink" href="#user-defined-attributes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">User-defined Attributes</a><a class="headerlink" href="#user-defined-attributes" title="Link to this heading"></a></h3>
 <p>The following configuration file</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
 <span class="nn">---</span>
@@ -771,7 +870,7 @@ session. This value will be made available to the batch job script and
 submission parameters that are discussed in a later section.</p>
 </section>
 <section id="hard-coded-attributes">
-<h3>Hard-coded Attributes<a class="headerlink" href="#hard-coded-attributes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id33" role="doc-backlink">Hard-coded Attributes</a><a class="headerlink" href="#hard-coded-attributes" title="Link to this heading"></a></h3>
 <p>The following configuration file</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
 <span class="nn">---</span>
@@ -795,7 +894,7 @@ because the attribute <code class="docutils literal notranslate"><span class="pr
 for a input text box.</p>
 </section>
 <section id="customize-user-defined-attributes">
-<h3>Customize User-defined Attributes<a class="headerlink" href="#customize-user-defined-attributes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">Customize User-defined Attributes</a><a class="headerlink" href="#customize-user-defined-attributes" title="Link to this heading"></a></h3>
 <p>The following configuration file</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># ${HOME}/ondemand/dev/my_app/form.yml</span>
 <span class="nn">---</span>
@@ -822,7 +921,7 @@ attribute</p></li>
 </ul>
 </section>
 <section id="caching-form-items">
-<span id="id1"></span><h3>Caching form items<a class="headerlink" href="#caching-form-items" title="Link to this heading"></a></h3>
+<span id="id11"></span><h3><a class="toc-backref" href="#id35" role="doc-backlink">Caching form items</a><a class="headerlink" href="#caching-form-items" title="Link to this heading"></a></h3>
 <p>Since 1.8 caching form items is configurable. By default all form items are
 cache-able. As seen above you can enable or disable caching for the entire app
 when using the top level <code class="docutils literal notranslate"><span class="pre">cacheable</span></code> configuration. You can also configure
@@ -858,7 +957,7 @@ the job. But since <code class="docutils literal notranslate"><span class="pre">
 </div>
 </section>
 <section id="displaying-form-items-in-the-session-card">
-<span id="display-form-choices"></span><h3>Displaying form items in the session card<a class="headerlink" href="#displaying-form-items-in-the-session-card" title="Link to this heading"></a></h3>
+<span id="display-form-choices"></span><h3><a class="toc-backref" href="#id36" role="doc-backlink">Displaying form items in the session card</a><a class="headerlink" href="#displaying-form-items-in-the-session-card" title="Link to this heading"></a></h3>
 <p>Now, submitted form values can be displayed in the session card for users to see.
 By default, items will not be shown. Add the display property to the form attributes that you wish to show.
 Form values will be added after the default session card items. The order is driven from the <code class="docutils literal notranslate"><span class="pre">form</span></code> array.</p>
@@ -881,7 +980,7 @@ Form values will be added after the default session card items. The order is dri
 </section>
 </section>
 <section id="configuring-which-cluster-to-submit-to">
-<span id="configuring-cluster"></span><h2>Configuring which cluster to submit to<a class="headerlink" href="#configuring-which-cluster-to-submit-to" title="Link to this heading"></a></h2>
+<span id="configuring-cluster"></span><h2><a class="toc-backref" href="#id37" role="doc-backlink">Configuring which cluster to submit to</a><a class="headerlink" href="#configuring-which-cluster-to-submit-to" title="Link to this heading"></a></h2>
 <p>In 1.8 there are now several ways to configure what cluster to submit to.</p>
 <p>The easiest way is to use the the top level <code class="docutils literal notranslate"><span class="pre">cluster</span></code> configuration. If you've
 configured just one item, then the form UI does not change for the user. If
@@ -926,7 +1025,7 @@ When using this option, there's no need to add any cluster configuration to the
 <code class="docutils literal notranslate"><span class="pre">form.yml</span></code>.</p>
 </section>
 <section id="global-batch-connect-form-items">
-<span id="global-bc-form-items"></span><h2>Global Batch Connect Form Items<a class="headerlink" href="#global-batch-connect-form-items" title="Link to this heading"></a></h2>
+<span id="global-bc-form-items"></span><h2><a class="toc-backref" href="#id38" role="doc-backlink">Global Batch Connect Form Items</a><a class="headerlink" href="#global-batch-connect-form-items" title="Link to this heading"></a></h2>
 <p>Since version 4.0, you can define form items once in an <code class="docutils literal notranslate"><span class="pre">ondemand.d</span></code> file
 that can be used in all batch connect applications.</p>
 <div class="admonition warning">
