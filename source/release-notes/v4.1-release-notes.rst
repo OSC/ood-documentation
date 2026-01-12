@@ -160,14 +160,25 @@ to open and view HTML files directly. This is disabled by default due to securit
 concerns, but can be enabled by setting ``OOD_UNSAFE_RENDER_HTML=true`` in your 
 environment or including ``unsafe_render_html=true`` in your :ref:`ondemand-d-ymls`.
 
+File Downloads Have a Maximum Size
+..................................
+
+Version 4.1 adds a configurable maximum size for file downloads, which also applies to 
+opening files in the file browser. This can be configured with the ``OOD_DOWNLOAD_FILE_MAX`` 
+environment variable, or setting ``download_file_max`` in your :ref:`ondemand-d-ymls`. 
+This variable accepts plain integer values, and defaults to 10GiB. Note that size 
+configurations always accept an integer number of (binary) bytes, so the default 10GiB 
+would be represented as ``10737418240``. For more details on this configuration, as well 
+as a similar one for directory downloads, see :ref:`set_download_limits`.
 
 File Editor Has a Maximum Size
 ..............................
 
-As of v4.1 the file editor will not open files above a configurable maximum size. The default is 12MB,
+As of v4.1 the file editor will not open files above a configurable maximum size. The default is 12MiB,
 but this can be changed by setting the ``OOD_FILE_EDITOR_MAX_SIZE`` environment variable, or setting 
-``file_editor_max_size`` in your :ref:`ondemand-d-ymls`. Note that size configurations always accept an integer
-number of (binary) bytes, so the 12MB default would be represented as ``12582912``.
+``file_editor_max_size`` in your :ref:`ondemand-d-ymls`. This uses the same binary byte format as 
+``OOD_DOWNLOAD_FILE_MAX`` above, so the 12MiB default would be represented as ``12582912``.
+
 
 
 Help, Support and Institutional Integration
