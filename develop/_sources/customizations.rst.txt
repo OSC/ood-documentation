@@ -921,6 +921,7 @@ of 4.0.8 the existing widgets are:
 - ``pinned_apps`` - Pinned Apps described above
 - ``recently_used_apps`` - the four most recently used interactive applications.
   Launching these applications will start a new interactive session with the previously submitted parameters.
+  Hovering over the apps will show these parameters for attributes with the :ref:`display option <display_option>` set to true.
 - ``sessions`` - the three most recent active interactive sessions
 - ``motd`` - the Message of the Day
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
