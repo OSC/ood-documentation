@@ -676,6 +676,50 @@ are:
 
           display: true
 
+.. _item_header_option:
+
+.. describe:: header (String, null)
+     
+     Optional markdown header above the item's label that does not respond to dynamic actions on the item.
+
+     Default
+       No header is displayed.
+       
+       .. code-block:: yaml
+
+          header: null
+        
+     Example
+       Display a header to mark a section in the form.
+       
+       .. code-block:: yaml
+
+          header: |
+            ## Account and Queue Settings
+            - Accounts starting with `P` have access to priority queues.
+            - Priority queues lower wait times, but increase charge rates.
+
+.. describe:: hide_by_default (Boolean, false)
+
+     Determines whether the form item is initially shown in the form. If this is set
+     to ``true``, the form item will not be shown until a :ref:`data-hide action <dynamic-bc-apps-data-hide>`
+     reveals it.
+
+     Default
+       False. The form item will be shown until a data-hide action hides it.
+
+       .. code-block:: yaml
+            
+            hide_by_default: false
+
+     Example
+       Hide the form item on page load, since it is not needed unless a specific option is selected.
+
+       .. code-block:: yaml
+
+            hide_by_default: true
+
+
 Examples
 --------
 
