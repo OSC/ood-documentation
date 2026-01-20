@@ -32,17 +32,56 @@ There are two ways to build the documentation.
    package to use by python.org for dependency
    management](https://packaging.python.org/tutorials/managing-dependencies/)
 
-### Default - Docker/Podman
+### Default - Docker/Podman Container
 
 Currently all builds are generated using the
 [ood-documentation-build](https://github.com/OSC/ood-documentation-build/)
-container image. They are built using the following command from the root of this repo:
+container image. To use the helper methods provided below, you will have to
+have either ruby or python installed on your machine. All helper commands 
+should be run from the root of the repository.
 
-Note that because we're using `rake`, you'll need to have `ruby` installed on your
-system as well as the `rake` gem.
+#### Ruby
+The ruby helpers use `rake`, so you'll need to have `ruby` installed on your
+system as well as the `rake` gem. Then you can run
 
 ```bash
 rake build
+```
+to generate HTML from the local source files,
+
+```bash
+rake open
+```
+to open the HTML with your browser, and
+
+```bash
+rake spellcheck
+```
+
+to check spelling. Note that spellchecking is automatically executed on all pull requests.
+
+And you can run `rake` without arguments to see each of these tasks in the CLI.
+
+#### Python
+The python helpers use the `tasks.py` file, and only require `python` to be installed.
+
+The python commands have the same functions as the ruby ones above, but use the following syntax
+
+```bash
+python ./tasks.py build
+```
+
+```bash
+python ./tasks.py open
+```
+
+```bash
+python ./tasks.py spellcheck
+```
+
+And you can list these commands in the CLI with
+```bash
+python tasks.py --help
 ```
 
 ### Make with Pip/python
