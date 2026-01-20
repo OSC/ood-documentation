@@ -35,20 +35,6 @@ def podman_available() -> bool:
     return exists("podman")
 
 
-def user_group() -> str:
-    """Return current user's uid:gid for non-Windows to mirror Rakefile behavior."""
-    if is_windows():
-        return ""
-    try:
-        import os as _os
-
-        uid = _os.getuid()
-        gid = _os.getgid()
-        return f"{uid}:{gid}"
-    except Exception:
-        return ""
-
-
 def run_cmd() -> list:
     """Compose the container runtime command list analogous to Rakefile's run_cmd."""
     mount_arg = f"{PROJECT_DIR}:/doc"
@@ -72,10 +58,6 @@ def run_cmd() -> list:
             "-v",
             mount_arg,
         ]
-        if not is_windows():
-            ug = user_group()
-            if ug:
-                cmd.extend(["-u", ug])
         cmd.append(IMAGE)
         return cmd
 
