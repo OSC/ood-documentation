@@ -346,6 +346,8 @@ Configuration Options
 
       passenger_log_file: '/some/other/location/%{user}/error.log'
 
+.. _passenger_options:
+
 .. describe:: passenger_options (Hash)
 
    A Hash of additional Passenger options

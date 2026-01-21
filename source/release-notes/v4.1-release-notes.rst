@@ -1,0 +1,382 @@
+v4.1 Release Notes
+==================
+
+.. contents:: Table of Contents
+  :depth: 3
+  :local:
+
+
+Acknowledgments
+---------------
+* List of first time contributors
+* Call out specific folks that made a big difference to this release!
+
+Breaking Changes and Deprecations
+---------------------------------
+* The important stuff!
+
+Operating System Support
+------------------------
+
+OnDemand 4.1 adds support for RHEL/Rocky/AlmaLinux 10.
+
+OnDemand 4.1 drops support for Ubuntu 20.04.
+
+Dependency Updates
+------------------
+
+This release updates the following dependencies:
+
+- Passenger 6.1.0
+- NGINX 1.26.3
+- ondemand-dex 2.44.0
+- NodeJS 22 **(Every OS)**
+
+  .. warning::
+
+    The change in NodeJs version means any Node-based apps that are not
+    provided by the OnDemand RPM must be rebuilt or supply their own
+    :ref:`nodejs_starter_app_wrapper` to use the older version of NodeJs.
+
+SELinux Changes
+---------------
+
+Add ``ondemand_manage_config_dir`` boolean to allow OnDemand to manage ``.config`` directories labeled with ``config_home_t``
+
+Authentication and Security
+---------------------------
+* What the sysadmins care about :)
+
+Platform Configuration, Operations, and Observability
+-----------------------------------------------------
+* NGINX
+* Passenger
+* Shell?
+* Environment variables
+* Portal stuff
+
+Passenger Telemetry Now Disabled By Default
+...........................................
+
+`Passenger anonymous telemetry <https://www.phusionpassenger.com/docs/advanced_guides/in_depth/ruby/anonymous_telemetry_reporting.html>`__
+is now disabled by default in version 4.1. If you would like to override this default 
+and enable passenger telemetry, you can add ``passenger_disable_anonymous_telemetry: 'off'``
+to your :ref:`passenger_options hash <passenger_options>`. Note that this change has also been
+backported in the 4.0.4 and 3.1.12 releases.
+
+Shell Terminal is Now Configurable
+..................................
+
+The new ``OOD_SHELL_TERM`` environment variable allows the default ``TERM=xterm-16color`` 
+to be overridden. This variable can be set to any other terminal type whose escape codes are 
+fully supported by the underlying `hterm library <https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ControlSequences.md>`__.
+Some other common supported options include ``xterm``, ``xterm-256color``, and ``xterm-direct``.
+This environment variable can only be set from ``/etc/ood/config/apps/shell/env``.
+
+Accessibility and Usability
+---------------------------
+* Any UX or UI stuff
+* Accessibility improvements
+
+Dynamic Forms Announce to Screen Readers
+........................................
+
+Dynamic batch connect forms now alert screen readers when form items are changed, 
+allowing visually impaired users to better understand what is happening on the page.
+This is supported by all :ref:`dynamic form actions <dynamic-bc-apps>`.
+
+New Skip Navigation Button
+..........................
+
+Version 4.1 adds a new skip navigation button to the dashboard, which can be accessed
+through keyboard navigation at the top of the page, and is read directly after the 
+page title by screen readers. Clicking the button allows you to bypass the all navigation
+bar items and reliably skip to the main content of the page.
+
+New Dashboard Widgets
+.....................
+
+New dashboard widgets have been added in this release. They include ``balances``, ``file_quotas``,
+``nsf_access_events`` and ``system_status``.
+
+See :ref:`dashboard_custom_layout` for more details.
+
+New Canadian Internationalization Files
+.......................................
+
+Open OnDemand v4.1 will be the first to include Canadian internationalization 
+files for both English and French, thanks to Rahim Khoja of the University of 
+Alberta. This adds to pre-existing internationalization files for American 
+English, Chinese, and Japanese. It is easy to :ref:`customize or generate your 
+own localization files <customization_localization>`, and we greatly appreciate 
+community contributions for languages we do not include by default. In addition 
+to making it easier for others in your country or region to use Open OnDemand, 
+contributed localization files will also be automatically updated with new releases.
+
+Interactive Jobs and Applications
+---------------------------------
+* Batch Connect
+* Interactive sessions
+* Job cards, session information, submission things
+
+Session Cards Now Have 'Download as Zip' Button
+...............................................
+
+Interactive session cards now have a 'Download as Zip' button. This allows users
+to collect session details like logs, scripts, and user-defined parameters in a 
+single zip file so that this context can be easily included with support ticket requests. 
+To avoid accidentally downloading sensitive session information, this button is only
+available on completed sessions, and is hidden from users who do not have 
+:ref:`downloads enabled <download_enabled>`.
+
+Sessions Cards Show Cores and GPUs Requested
+............................................
+
+Session cards now have widgets to display cores and GPUs available to the job, making it
+easier to view the parameters of current or past jobs when re-running for your next session.
+Note that resource widgets will only appear when the quantity requested is greater than 0.
+
+Forms, Widgets, and User Input
+------------------------------
+* Dynamic forms
+* Widgets
+* Smart attributes
+* Form YAML stuff
+
+New ``bc_num_nodes`` Smart Attribute
+....................................
+
+Open OnDemand now offers the ``bc_num_nodes`` smart attribute, which allows you to request nodes
+consistently across schedulers. This replaces the ``bc_num_slots`` smart attribute, which selected
+either nodes or cores depending on the scheduler. For more details, see :ref:`bc_num_nodes`.
+
+New ``auto_cores`` Functionality
+................................
+
+Open OnDemand now offers the ``auto_cores`` smart attribute, which allows you to request cores across schedulers.
+When used alongside the ``auto_batch_cluster`` attribute, this ensures that the number of cores selected is valid
+for the cluster you are submitting to. For more details, see :ref:`auto_batch_clusters` and :ref:`auto_cores`.
+
+New data-help Directive
+.......................
+
+Version 4.1 adds the ``data-help`` directive, allowing you to dynamically change
+the help text below form items when certain select options are chosen. For example, 
+you may have a ``node_type`` select widget, where type ``basic`` has older GPUs than 
+``advanced``. The ``data-help`` directive can change the help text on the ``num_gpus`` 
+option for users who select ``advanced`` so that they can take that info into account
+when deciding how many GPUs to select. For full documentation, see :ref:`dynamic-bc-apps-data-help`.
+
+Form Items Can Be Hidden By Default
+.....................................
+
+Form items now accept a ``hide_by_default: true`` attribute, which will hide the form item
+until an option with a ``data-hide-item: false`` is selected. This is especially useful when
+certain items are only needed for a few options, as you no longer have to include ``data-hide-item: true``
+on all of those options, but instead only supply directives to options that will show the item.
+For more details and examples, see the :ref:`data-hide documentation <dynamic-bc-apps-data-hide>`.
+
+Form Items Accept Markdown Headers
+..................................
+
+Batch connect form items accept a ``header`` attribute, which can be used to render 
+markdown above the item's label. Headers can provide useful structure to forms, and 
+are not affected when the item is hidden, or by any other dynamic form actions. For 
+full documentation, see :ref:`Form Item Headers <item_header_option>`.
+
+Path Selectors Accept Custom Titles
+...................................
+
+The title on the path selector modal is now customizable, allowing you to accurately
+represent what the selected path will be used for. For more details, see the 
+:ref:`full path selector documentation <path_selector>`.
+
+Recently Used Apps Display Recent Settings
+..........................................
+
+A popup has been added to the ``recently_used_apps`` dashboard widget allowing you to 
+preview the settings that will be submitted by hovering over the app icon. Only attributes
+with ``display: true`` will appear in this popup, and passwords will never appear. For full 
+documentation on how to add ``recently_used_apps`` to your homepage and configure which 
+attributes to display, see :ref:`Dashboard Widgets <dashboard_custom_layout>` and 
+:ref:`Attribute Display Option <display_option>`. 
+
+Files, Projects, and Data Management
+------------------------------------
+* Files App
+* Project Manager
+* File Editor
+* File Browser?
+
+File Browser Can Now Render HTML Files
+......................................
+
+Open OnDemand v4.1 brings back HTML rendering within the files app, allowing users
+to open and view HTML files directly. This is disabled by default due to security 
+concerns, but can be enabled by setting ``OOD_UNSAFE_RENDER_HTML=true`` in your 
+environment or including ``unsafe_render_html=true`` in your :ref:`ondemand-d-ymls`.
+
+File Downloads Have a Maximum Size
+..................................
+
+Version 4.1 adds a configurable maximum size for file downloads, which also applies to 
+opening files in the file browser. This can be configured with the ``OOD_DOWNLOAD_FILE_MAX`` 
+environment variable, or setting ``download_file_max`` in your :ref:`ondemand-d-ymls`. 
+This variable accepts plain integer values, and defaults to 10GiB. Note that size 
+configurations always accept an integer number of (binary) bytes, so the default 10GiB 
+would be represented as ``10737418240``. For more details on this configuration, as well 
+as a similar one for directory downloads, see :ref:`set_download_limits`.
+
+File Editor Has a Maximum Size
+..............................
+
+As of v4.1 the file editor will not open files above a configurable maximum size. The default is 12MiB,
+but this can be changed by setting the ``OOD_FILE_EDITOR_MAX_SIZE`` environment variable, or setting 
+``file_editor_max_size`` in your :ref:`ondemand-d-ymls`. This uses the same binary byte format as 
+``OOD_DOWNLOAD_FILE_MAX`` above, so the 12MiB default would be represented as ``12582912``.
+
+
+
+Help, Support and Institutional Integration
+-------------------------------------------
+* SerivceNow, ticketing things
+
+Upgrade Instructions
+--------------------
+
+.. warning::
+
+   Update the **development** and/or **test** instances of OnDemand installed at your center **before** before you modify the **production** instance.
+
+.. warning::
+
+  We have tested the upgrade from 4.0.8 to 4.1.0 at OSC's OnDemand instance.
+
+#. Update OnDemand repository.
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.1/ondemand-release-web-4.1-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.1/ondemand-release-web-4.1-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 22.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.1.0-jammy_all.deb https://apt.osc.edu/ondemand/4.1/ondemand-release-web_4.1.0-jammy_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.1.0-jammy_all.deb
+            sudo apt update
+
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.1.0-noble_all.deb https://apt.osc.edu/ondemand/4.1/ondemand-release-web_4.1.0-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.1.0-noble_all.deb
+            sudo apt update
+
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.1.0-bookworm_all.deb https://apt.osc.edu/ondemand/4.1/ondemand-release-web_4.1.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.1.0-bookworm_all.deb
+            sudo apt update
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo dnf install -y https://yum.osc.edu/ondemand/4.1/ondemand-release-web-4.1-1.amzn2023.noarch.rpm
+
+#. (**RHEL/Rocky/AlmaLinux 8 & 9 only**) Enable dependency repositories.
+
+   .. code-block:: sh
+
+      sudo dnf module reset nodejs
+      sudo dnf module enable nodejs:22
+
+#. Update OnDemand
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (**Dex users only**) Update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 22.04 & 24.04 & Debian 12
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+#. (**Dex users only**) Restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (**SELinux users only**) Update SELinux policies.
+
+   See :ref:`ood_selinux_updates`.
+
+#. Force all PUNs to restart.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f

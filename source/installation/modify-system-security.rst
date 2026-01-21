@@ -27,6 +27,7 @@ The OnDemand SELinux package makes several changes to allow OnDemand to run with
 The custom SELinux booleans provided by the OnDemand SELinux policy:
 
 * ``ondemand_manage_user_home_dir`` (**default=off**): Necessary if user home directories are local disk and not NFS. This is useful when OnDemand is hosted on the system also acting as the NFS server for home directories.
+* ``ondemand_manage_config_dir`` (**default=off**): Allow management of ``.config`` directories labeled with ``config_home_t``.
 * ``ondemand_manage_vmblock`` (**default=off**): So far this has only proven necessary when running OnDemand inside of Vagrant when the home directory is a Virtualbox mount.
 * ``ondemand_use_nfs`` (**default=on**): Allow OnDemand to manage NFS home directories, which is necessary if home directories are accessible via NFS on the OnDemand web node.
 * ``ondemand_use_ssh`` (**default=on**): Allow OnDemand to use SSH for Shell app and Linux Host Adapter.

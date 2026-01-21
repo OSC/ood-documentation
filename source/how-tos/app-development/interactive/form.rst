@@ -3,6 +3,10 @@
 User Form (``form.yml.erb``)
 ============================
 
+.. contents:: Table of Contents
+  :depth: 3
+  :local:
+
 The configuration file ``form.yml`` creates the `html form`_ your customers will use
 to start the interactive application.
 
@@ -156,6 +160,7 @@ The most commonly used predefined attributes are given as:
 .. _bc_account:
 
 ``bc_account``
+..............
   This adds a ``text_field`` to the HTML form that will be used as the charged
   account for the submitted job.
 
@@ -164,6 +169,7 @@ The most commonly used predefined attributes are given as:
 .. _bc_queue:
 
 ``bc_queue``
+............
   This adds a ``text_field`` to the HTML form that will supply the name of the
   queue that the batch job is submitted to.
 
@@ -172,13 +178,23 @@ The most commonly used predefined attributes are given as:
 .. _bc_num_hours:
 
 ``bc_num_hours``
+................
   This adds a ``number_field`` to the HTML form that describes the maximum
   amount of hours the submitted batch job may run.
 
   This attribute gets converted to seconds and then set on
   `OodCore::Job::Script#wall_time`_.
 
+.. _bc_num_nodes:
+
+``bc_num_nodes``
+................
+  This adds a number field to the html form that describes the number of nodes 
+  that a submitted job may use. This attribute then uses the proper value in 
+  `OodCore::Job::Script#native`_ to reserve nodes with your scheduler.
+
 ``bc_num_slots``
+................
   This adds a ``number_field`` to the HTML form that describes the number of
   processors, CPUs on a single node, or nodes that the submitted job may use
   (depends on the resource manager used, e.g., Torque, Slurm, ...).
@@ -188,15 +204,15 @@ The most commonly used predefined attributes are given as:
 
   .. warning::
 
-     This predefined attribute is very resource manager specific, and is the
-     most brittle of all the other predefined attributes. May require
-     customization (see
-     :ref:`interactive-development-form-customizing-attributes`) to work at
-     your center.
+    This predefined attribute is very resource manager specific, and is the
+    most brittle of all the other predefined attributes. It is recommended to
+    use either `bc_num_nodes`_ or `auto_cores`_ instead for 
+    consistent behavior across schedulers.
 
 .. _bc_email_on_started:
 
 ``bc_email_on_started``
+.......................
   This adds a ``check_box`` to the HTML form that determines whether the user
   should be notified by email when the batch job starts.
 
@@ -217,7 +233,7 @@ input the queue name themselves.
 for the user to choose from without intervention from the administrator
 or the user.
 
-They must be added to the `form` list.
+They must be added to the ``form`` list.
 
 EX:
 
@@ -226,11 +242,13 @@ EX:
   form:
     - auto_modules_<MODULE>
 
-auto_primary_group
+``auto_primary_group``
+......................
   This will automatically set the `OodCore::Job::Script#accounting_id`_ to the
   primary group of the user.  No choice will be given to the user.
 
-auto_modules_<MODULE>
+``auto_modules_<MODULE>``
+.........................
   This will generate a list of modules in a ``select`` widget.
   For example ``auto_modules_matlab`` will automatically populate a drop-down
   list of every single ``matlab`` version available, including the default
@@ -284,16 +302,38 @@ auto_modules_<MODULE>
     referenced in the ``script.sh.erb`` as ``<%= context.auto_modules_netcdf_serial %>``
     replacing any hyphens (``-``) with underscores ``_``.
 
+.. _auto_batch_clusters:
+
+``auto_batch_clusters``
+.......................
+  This automatically filters the list of clusters that the user can choose from to remove
+  all clusters using ``kubernetes``, ``linux_host``, or ``systemd`` as their adapter. It then
+  retrieves information from the scheduler and automatically sets the maximum value of the 
+  `auto_cores`_ field to the maximum number of cores available on the selected cluster. After
+  this is added to your form you should remove any other ``clusters:`` value from the top of 
+  your ``form.yml``.
+  
+.. _auto_cores:
+
+``auto_cores``
+..............
+  This will automatically generate a ``number_field`` widget with an initial value of 1. The maximum
+  value is then automatically set by the `auto_batch_clusters`_ selection so that the value falls
+  within the acceptable range for that cluster. It is strongly suggested to always pair this with 
+  `auto_batch_clusters`_, as other cluster options, including fixed values, will not set the maximum cores.
+
 .. _auto_groups:
 
-auto_groups
+``auto_groups``
+...............
   This will automatically generate a ``select`` widget populated with a list of the Unix
-  groups the user is currently in. Administrators can configure :ref:`filter for autogroups <auto_groups_filter>`
-  to limit the groups shown.
+  groups the user is currently in. Administrators can configure 
+  :ref:`filter for autogroups <auto_groups_filter>` to limit the groups shown.
 
 .. _auto_queues:
 
-auto_queues
+``auto_queues``
+...............
   This will generate a ``select`` widget list of all the queues available to the user.
   These queues will be cluster if you have :ref:`dynamic options <dynamic-bc-apps>`
   enabled. That is, they'll show or hide relevant lists given the currently selected
@@ -304,7 +344,8 @@ auto_queues
 
 .. _auto_accounts:
 
-auto_accounts
+``auto_accounts``
+.................
   This will generate a ``select`` widget list of all the accounts available to the user.
 
   ``auto_accounts`` will generate cluster aware lists if you have :ref:`dynamic options <dynamic-bc-apps>`
@@ -325,6 +366,7 @@ auto_accounts
     We only have support for Slurm accounts at this time.
 
 ``auto_qos``
+............
   This will automatically generate a ``select`` widget populated with a list of all the QoS
   (Quality of Service) values available.  These are cluster aware if you have
   :ref:`dynamic options <dynamic-bc-apps>` enabled.
@@ -633,6 +675,50 @@ are:
        .. code-block:: yaml
 
           display: true
+
+.. _item_header_option:
+
+.. describe:: header (String, null)
+     
+     Optional markdown header above the item's label that does not respond to dynamic actions on the item.
+
+     Default
+       No header is displayed.
+       
+       .. code-block:: yaml
+
+          header: null
+        
+     Example
+       Display a header to mark a section in the form.
+       
+       .. code-block:: yaml
+
+          header: |
+            ## Account and Queue Settings
+            - Accounts starting with `P` have access to priority queues.
+            - Priority queues lower wait times, but increase charge rates.
+
+.. describe:: hide_by_default (Boolean, false)
+
+     Determines whether the form item is initially shown in the form. If this is set
+     to ``true``, the form item will not be shown until a :ref:`data-hide action <dynamic-bc-apps-data-hide>`
+     reveals it.
+
+     Default
+       False. The form item will be shown until a data-hide action hides it.
+
+       .. code-block:: yaml
+            
+            hide_by_default: false
+
+     Example
+       Hide the form item on page load, since it is not needed unless a specific option is selected.
+
+       .. code-block:: yaml
+
+            hide_by_default: true
+
 
 Examples
 --------
