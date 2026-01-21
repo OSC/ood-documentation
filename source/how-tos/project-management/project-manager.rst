@@ -3,9 +3,38 @@
 Project Manager
 ===============
 
+.. contents:: Table of Contents
+  :depth: 2
+  :local:
+
 Overview
 --------
 
+A new feature in version 4.1, the Project Manager provides a suite of tools to leverage
+the Open OnDemand features from batch connect apps for each user's own personal scripts, 
+track and organize their job history, assemble individual jobs into large-scale workflows,
+and easily share and collaborate on these projects with their team.
+
+The basic element of a project is the **launcher**, which is a paired form and script
+that can submit jobs to the scheduler. By selecting different options in the form, a user
+can change both scheduler parameters (account, resources, etc.), or change the behavior 
+of the script itself through environment variables.
+
+All of the scripts, input data, and output data for a project's launchers are stored in the 
+**project directory**. This directory can be freely organized according to individual
+needs, allowing users to customize for anything from large one-time jobs to long-term
+projects with jobs that are repeated many times.
+
+**Workflows** allow users to connect their launchers together with dependency relationships,
+enabling them to build self-contained systems that can be run with a single click. These
+systems can be as simple or intricate as needed, and are easily assembled through an 
+intuitive graphical interface.
+
+The single most important theme of all these features is **flexibility**. As the examples 
+demonstrate, there is no one way to structure scripts, organize directories, or
+manage complexity within a project. The Project Manager is designed to give users an 
+efficient and intuitive way to leverage the most powerful features of Open OnDemand in 
+whatever way works best for them and their needs.
 
 Setup
 -----
@@ -14,13 +43,14 @@ For individual projects, there is no setup required. Anybody with the permission
 to submit jobs to your scheduler will also be able to use all of the launcher and
 workflow tools of the Project Manager after updating to v4.1. In order for users 
 to collaborate together they will need a properly configured shared directory,
-meeting :ref:`these minimum permissions <project_manager_shared_project_root>` 
+meeting the minimum permissions described below.
 
 
 .. _project_manager_collaboration:
 
 Collaboration
--------------
+.............
+
 Collaborative projects need properly configured directories to exist in, which may 
 vary on the types of collaboration you would like to enable. Like other actions in 
 Open OnDemand, it will operate as the logged in user and never exceed the UNIX 
@@ -29,9 +59,6 @@ different approaches you may want to take depending on your file system's accoun
 permission management approach.
 
 .. _project_manager_shared_project_root:
-
-Shared Project Root
--------------------
 
 The project manager provides the ``OOD_SHARED_PROJECT_PATH`` environment variable to 
 help potential collaborators discover potential projects to import. While this is 
@@ -63,3 +90,8 @@ is important to ensure that your directory structure meets these minimum require
 
 #. Any group directory directly below ``OOD_SHARED_PROJECT_PATH`` should have ``rwx`` permissions 
    for the group
+
+Usage
+-----
+
+The project manager can be located under the 'Jobs' tab in the navbar. In the Project Manager 
