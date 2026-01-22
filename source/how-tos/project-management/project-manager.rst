@@ -51,7 +51,7 @@ meeting the minimum permissions described below.
 Collaboration
 .............
 
-Collaborative projects need properly configured directories to exist in, which may 
+Collaborative projects require properly configured directories to exist in, which may 
 vary on the types of collaboration you would like to enable. Like other actions in 
 Open OnDemand, it will operate as the logged in user and never exceed the UNIX 
 permissions of the directories and files it operates on. This means there are several
@@ -91,7 +91,58 @@ is important to ensure that your directory structure meets these minimum require
 #. Any group directory directly below ``OOD_SHARED_PROJECT_PATH`` should have ``rwx`` permissions 
    for the group
 
+Templates
+.........
+
+For specific applications, it can be helpful to create a project with basic scripts, launchers, 
+and workflows customized to that application. For this use case, administrators can copy any
+valid project directory to the ``OOD_PROJECT_TEMPLATE_DIR`` directory, which defaults to 
+``/etc/ood/config/apps/dashboard/projects``, or ``OOD_APP_CONFIG_ROOT/projects``, if 
+``OOD_APP_CONFIG_ROOT`` is defined in your environment. 
+
+Note that unlike ``OOD_APP_CONFIG_ROOT``, the template directory can also be set within profiles 
+to manage which templates a user can select by setting ``project_template_dir`` in the 
+:ref:`ondemand-d-ymls`. This allows you to organize your templates into directories for each 
+profile, in addition to limiting template visibility by restricting read permissions on the 
+individual template directories.
+
+Launchers
+.........
+
+All launchers are required to have a ``cluster`` and a ``script`` selection in their form by
+default. These fields cannot be removed by editing the launcher, as any launcher without these
+fields will be rejected by the scheduler. While these are sufficient for the general case,
+if your center requires additional parameters, these can be supplied with the ``launcher_default_items``
+key in your :ref:`ondemand-d-ymls`. 
+
+For example, OSC does not allow jobs to be submitted without the ``account`` field. To prevent
+support tickets from users attempting to run launchers without this field, we add the following
+line to ``/etc/ood/config/ondemand.d/ondemand.yml``
+
+.. code-block:: yaml
+
+   launcher_default_items: [ auto_accounts ]
+
+Which ensures that all new launchers begin with ``cluster``, ``script``, and ``account`` fields. 
+
+Note that this can be used to add any 
+:ref:`predefined attribute <app-development-interactive-form-predefined-attributes>` or 
+:ref:`automatic predefined attribute <auto-bc-form-options>`, and unlike ``cluster`` and ``script``,
+these additional default fields _can_ be removed by the user.
+
 Usage
 -----
 
-The project manager can be located under the 'Jobs' tab in the navbar. In the Project Manager 
+The project manager can be located under the 'Jobs' tab in the navbar. In the **Project Manager 
+dashboard**, you are presented with cards for each of your projects, as well as three action buttons.
+Each action button allows you to add projects to your dashboard, either creating them from scratch,
+creating from a predefined template, or importing a shared project. 
+
+Clicking a project card brings you to the **project dashboard**, where you can see all the launchers,
+workflows, and files in the project directory.
+
+Launchers
+.........
+
+On the top left of the **project dashboard**, you will see a list of all the launchers associated with
+that project. 
