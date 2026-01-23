@@ -992,5 +992,18 @@ of the file and it will display the select widget defined above.
   form:
     - global_queues
 
+As of version 4.1, you can use these global items to override predefined attributes in the form. This is done
+by specifying the attribute name prefixed with ``global_`` under your ``global_bc_form_items`` key, and only
+defining the options that you would like to override. For example, you could override ``bc_num_hours`` to
+have a maximum value of 100 using the following code in your ``ondemand.d`` file.
+
+.. code-block:: yaml
+
+  # /etc/ood/config/ondemand.d/global_bc_items.yml
+
+  global_bc_form_items:
+    global_bc_num_hours:
+      max: 100
+
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
 .. _html form: https://en.wikipedia.org/wiki/Form_(HTML)
