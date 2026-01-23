@@ -125,10 +125,12 @@ line to ``/etc/ood/config/ondemand.d/ondemand.yml``
 
 Which ensures that all new launchers begin with ``cluster``, ``script``, and ``account`` fields. 
 
-Note that this can be used to add any 
-:ref:`predefined attribute <app-development-interactive-form-predefined-attributes>` or 
-:ref:`automatic predefined attribute <auto-bc-form-options>`, and unlike ``cluster`` and ``script``,
-these additional default fields _can_ be removed by the user.
+This can be used to add any :ref:`predefined attribute <app-development-interactive-form-predefined-attributes>`,
+:ref:`automatic predefined attribute <auto-bc-form-options>`, or :ref:`global attribute <global_bc_form_items>`
+and unlike ``cluster`` and ``script``, these additional default fields _can_ be removed by the user. 
+
+Note that if you have predefined attributes or custom global attributes that are not present as options
+in the launcher editor, adding them as default items is the only way to use them in launcher forms.
 
 Usage
 -----
