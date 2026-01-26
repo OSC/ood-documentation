@@ -1,6 +1,6 @@
 .. _project-manager-tutorial:
 
-Project Manager Tutorial
+Tutorials: Project Manager
 ========================
 
 The project manager is designed to make it easy to submit scripts to your scheduler.
