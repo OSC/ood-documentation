@@ -106,6 +106,8 @@ to manage which templates a user can select by setting ``project_template_dir`` 
 profile, in addition to limiting template visibility by restricting read permissions on the 
 individual template directories.
 
+.. _launcher_default_items:
+
 Launchers
 .........
 
