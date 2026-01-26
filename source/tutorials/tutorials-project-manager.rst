@@ -98,7 +98,7 @@ see a confirmation message that the update was successful.
 
 This is enough already to submit the script, but if we run it as is, we are bound to get a ``$1: unbound variable``
 error. This is because we have the script configured to accept command line arguments, but these are not being passed
-by the scheduler. There are several ways of fixing this, but the most basic would be to hardcode the variables in 
+by the scheduler. There are several ways of fixing this, but the most basic would be to hard code the variables in 
 ``simulate_reservoir.sh`` so that it is able to run without arguments. To do this, let's create a copy of ``simulate_reservoir.sh``
 titled ``simulate_fixed_reservoir.sh``, and change the top of the file to read 
 
@@ -115,16 +115,16 @@ titled ``simulate_fixed_reservoir.sh``, and change the top of the file to read
 
 Now we can edit our launcher again, and see that the new script ``simulate_fixed_reservoir.sh`` is available in the 
 ``scripts`` selection. Since we know it will break if it runs with ``simulate_reservoir.sh``, we can edit the script
-option, select ``simulate_fixed_reservoir.sh`` from the dropdown, click 'Fixed Value' to prevent you from accidentally
+option, select ``simulate_fixed_reservoir.sh`` from the drop down, click 'Fixed Value' to prevent you from accidentally
 running a different script, and save the form. Now we can click the 'Show' button to fill out this form. Since we have
 already made sure the ``account`` and ``script`` fields were set correctly, the only thing we have to fill out is the 
-cluster to run it on. Once we do that and press 'Launch' at the botttom of the form, we will be redirected back to
+cluster to run it on. Once we do that and press 'Launch' at the bottom of the form, we will be redirected back to
 the project dashboard and see our job queued.
 
 Leveraging Launcher Forms
 .........................
 
-You may have noticed a slight problem with that initial approach. Hardcoding the values solves the immediate issue
+You may have noticed a slight problem with that initial approach. Hard coding the values solves the immediate issue
 of removing the need for arguments, but it means we have to go and edit the script each time to change these values.
 If we had to run this script for 20 different cities, for example, that is a lot of manual editing to prepare the next
 run. 
