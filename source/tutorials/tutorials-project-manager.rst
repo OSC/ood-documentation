@@ -14,7 +14,7 @@ Assume these scripts currently exist on your local machine with the following st
   ├── scripts
   │   ├── compute_volume.sh # USAGE: ./compute_volume.sh WEATHER_JSON DIAMETER -> NET_CHANGE
   │   ├── geocode.sh        # USAGE: ./geocode.sh CITY -> LAT_LONG_JSON
-  │   └── import_weather.sh # USAGE: ./import_weather.sh LATITUDE LONGITUDE -> WEATHER_JSON
+  │   └── import_weather.sh # USAGE: ./import_weather.sh LAT_LONG_JSON -> WEATHER_JSON
   |
   └── simulate_reservoir.sh # USAGE: ./simulate_reservoir.sh CITY DIAMETER -> NET_CHANGE
 
@@ -35,10 +35,8 @@ where ``simulate_reservoir.sh`` coordinates the smaller scripts as follows
     WEATHER_JSON="$TMPDIR/weather.json"
 
     ./scripts/geocode.sh "$CITY" > "$GEOCODE_JSON"
-    LAT=$(grep -oP '"lat"\s*:\s*"\K[0-9.-]+' "$GEOCODE_JSON" | head -n1)
-    LON=$(grep -oP '"lon"\s*:\s*"\K[0-9.-]+' "$GEOCODE_JSON" | head -n1)
 
-    ./scripts/import_weather.sh "$LAT" "$LON" > "$WEATHER_JSON"
+    ./scripts/import_weather.sh "$GEOCODE_JSON" > "$WEATHER_JSON"
 
     ./scripts/compute_volume.sh "$WEATHER_JSON" "$DIAMETER_M"
 
