@@ -161,7 +161,7 @@ Using Workflows
 We have just seen how launchers simplify the process of submitting to your scheduler. But what if our job grows beyond the limitations
 of a single job? For example, we could have a scenario where ``import_weather.sh`` has to wait several hours to make all the necessary
 API calls, and ``compute_volume.sh`` requires many cores to run efficiently. It is difficult for the scheduler to reserve lots of cores
-for such a long time, and we notice exceedimgly long queue times before our jobs can run. To address this, we can use workflows. 
+for such a long time, and we notice exceedingly long queue times before our jobs can run. To address this, we can use workflows. 
 
 Workflows are a way to chain together launchers, allowing you to break your job into smaller pieces that can be independently scheduled,
 but still wait for the output of one another. This will allow us to run our light compute, time intensive step with basic resources but 
