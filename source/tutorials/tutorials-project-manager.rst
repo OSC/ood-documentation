@@ -154,3 +154,76 @@ fields added, we can save the form and return to the project dashboard. Now we c
 and pass some non-default values for each environment variable. When we launch, the script will take the parameters from the form 
 and give a different simulation. By placing these parameters in the form, we are now able to run 10 different simulations with ease, 
 by filling out our form with different values.
+
+Using Workflows
+...............
+
+We have just seen how launchers simplify the process of submitting to your scheduler. But what if our job grows beyond the limitations
+of a single job? For example, we could have a scenario where ``import_weather.sh`` has to wait several hours to make all the necessary
+API calls, and ``compute_volume.sh`` requires many cores to run efficiently. It is difficult for the scheduler to reserve lots of cores
+for such a long time, and we notice exceedimgly long queue times before our jobs can run. To address this, we can use workflows. 
+
+Workflows are a way to chain together launchers, allowing you to break your job into smaller pieces that can be independently scheduled,
+but still wait for the output of one another. This will allow us to run our light compute, time intensive step with basic resources but 
+lots of walltime, and the short compute-heavy step with lots of resources and less walltime.
+
+The first step is to split up our controller script into two separate steps. For this example, we will have one step that performs all
+the API requests, and another that computes the results from that data. We can put these steps into ``collect_data.sh`` and ``compute_results.sh``
+as seen below.
+
+.. code-block:: bash
+
+    #!/usr/bin/env bash
+    # Usage: ./collect_data.sh
+    set -euo pipefail
+
+    mkdir -p 'data'
+
+    GEOCODE_JSON="data/geocode-$COUNT.json"
+    WEATHER_JSON="data/weather-$COUNT.json"
+
+    ./scripts/geocode.sh "$CITY_PARAM" > "$GEOCODE_JSON"
+
+    ./scripts/import_weather.sh "$GEOCODE_JSON" > "$WEATHER_JSON"
+
+.. code-block:: bash
+
+    #!/usr/bin/env bash
+    # Usage: ./compute_results.sh
+    set -euo pipefail
+
+    JSON_FILE="data/weather-$COUNT.json"
+
+    ./scripts/compute_volume.sh "$JSON_FILE" "$DIAMETER_PARAM"
+
+Note how we split our parameters between the two scripts to only pass what each script needs. We also add a ``COUNT`` variable
+so that we can control when data is overwritten, an essential consideration if you plan to have more than one instance
+of a workflow run simultaneously.
+
+The next step is to create the launchers for these scripts. Like above, we can copy the 'Variable Simulation' launcher into 
+two new ones, 'Collect Data' and 'Compute Results'. We can then edit the form for each launcher to include the appropriate
+environment variables. For the 'Collect Data' launcher, we will keep the ``CITY_PARAM`` variable and change the ``DIAMETER_PARAM``
+variable name to ``COUNT``. We then do an analogous change to the 'Compute Results' launcher, keeping ``DIAMETER_PARAM`` untouched
+and changing ``CITY_PARAM`` to ``COUNT``. There is no form to fill out for a workflow, so the default values provided here are 
+the values the launchers will use. Most importantly, we should ensure that the ``COUNT`` default is consistent between the two.
+Finally, we will want to set all our environment variable values to be fixed so that we do not use cached values in our workflows,
+which can be difficult to debug, which we can do by clicking 'Edit' and then selecting 'Fixed Value' before saving.
+
+With our launchers created, we can now create a new workflow. From the Project Manager, we click the 'New Workflow' button on the
+lower left of the project dashboard. We will give it the name 'Simulation Workflow' and select the 'Collect Data' and 'Compute Results'
+launchers, before saving the form.
+
+After being returned to the project dashboard, we then click the 'Show' button under 'Simulation Workflow' to open it. At the top of the
+page, there will be a select with one of your launchers selected. We can click the 'Add Launcher' button to place the launcher on the workflow.
+To add the other launcher, we simply change the selection and click 'Add Launcher' again. Once both launchers are on the canvas, we need to create
+the dependency that relates the two. We can do this by clicking 'Connect Launchers', then selecting the launchers in the order we want them to run,
+in this case 'Collect Data' first and 'Compute Results' second. This will create a directional arrow between the two, pointing in the direction that
+the execution will flow. Once we have all the dependencies created, we click 'Connect Launchers' again to stop adding dependencies. 
+
+We can now press 'Submit', and our workflow will save and begin scheduling. If we stay on the workflows page, we can observe
+the launchers move between queued, running, and completed states, with dependent launchers only running after their dependencies are completed.
+If we don't care to watch the workflow execute, we can press 'Back' from the workflows page to return to the project dashboard, where we can edit
+the launcher form defaults and run other workflows as needed, keeping in mind that the COUNT variable must be consistent for each run.
+
+The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, you can always design your own systems 
+and conventions that fit your specific situation.
