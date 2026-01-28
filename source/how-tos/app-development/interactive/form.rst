@@ -71,6 +71,12 @@ building and launching the ``my_app`` Interactive App session.
    You can include dynamically generated content in the form by renaming the
    form file to ``form.yml.erb`` and incorporating ERB syntax.
 
+.. warning::
+   Version 4.1 caches the form configuration, so you may not see changes to 
+   ``form.yml.erb`` take effect immediately. To get your most recent changes 
+   during app development, you can clear the cache by selecting 
+   *Help* → *Restart Web Server* from the top right of the navbar.
+
 Configuration
 -------------
 
