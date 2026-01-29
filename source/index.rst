@@ -41,8 +41,7 @@ These are institutions who were early adopters or provided HPC resources for dev
 - `University of Arizona HPC <arizona_>`_ for early adoption and help with the
   PBSPro adapter, platform feedback, and webinar participation.
 - `University at Buffalo Center for Computational Research <buffalo_>`_ for early adoption,
-  platform feedback, and collaboration on the next major version of Open
-  OnDemand, 2.0.
+  platform feedback, and collaboration on Open OnDemand 2.0.
 - `University of Utah <utah_>`_ for early adoption and help with the Slurm adapter, platform feedback,
   and webinar participation.
 
