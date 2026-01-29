@@ -341,7 +341,7 @@ EX:
 ``auto_queues``
 ...............
   This will generate a ``select`` widget list of all the queues available to the user.
-  These queues will be cluster if you have :ref:`dynamic options <dynamic-bc-apps>`
+  These queues will be cluster aware if you have :ref:`dynamic options <dynamic-bc-apps>`
   enabled. That is, they'll show or hide relevant lists given the currently selected
   ``cluster``.
 
