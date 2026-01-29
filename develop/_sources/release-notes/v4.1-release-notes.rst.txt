@@ -186,6 +186,15 @@ Open OnDemand now offers the ``auto_cores`` smart attribute, which allows you to
 When used alongside the ``auto_batch_cluster`` attribute, this ensures that the number of cores selected is valid
 for the cluster you are submitting to. For more details, see :ref:`auto_batch_clusters` and :ref:`auto_cores`.
 
+Automatic Attributes Support Accounts with Special Characters
+.............................................................
+
+The account aware ``auto_queues`` and ``auto_qos`` now support account names with special characters, widening their 
+compatibility to more centers. This was prioritized for account names as these are among the hardest to modify, but 
+the same special character support can be added to other automatic attributes like clusters or queues upon request.
+Note that in order to get the account-aware features from these attributes, they must be used along with 
+``auto_accounts``.
+
 Global Batch Connect Items Can Override Predefined Attributes
 .............................................................
 
@@ -194,8 +203,15 @@ using global definitions. This works similarly to other :ref:`global_bc_form_ite
 must be the predefined attribute name prefixed with ``global_``, and you only have to define attributes you want to change.
 See the full section on :ref:`global_bc_form_items` for more details.
 
-New data-help Directive
-.......................
+New ``data-alias`` Directive
+............................
+
+The new ``data-alias`` directive allows you to create conditional ``option-for`` and ``exclusive-option-for`` directives
+for values with special characters. It is recommended to use this for all conditional values that contain characters 
+outside the lowercase alphabet and digits. For more details, see :ref:`data-alias`.
+
+New ``data-help`` Directive
+...........................
 
 Version 4.1 adds the ``data-help`` directive, allowing you to dynamically change
 the help text below form items when certain select options are chosen. For example, 

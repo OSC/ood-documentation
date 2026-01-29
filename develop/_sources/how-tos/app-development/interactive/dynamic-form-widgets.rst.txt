@@ -60,7 +60,7 @@ for the ``ruby`` cluster.  It will then hide it every time the cluster ``ruby`` 
             data-option-for-cluster-ruby: false
           ]
 
-Exclusive options
+Exclusive Options
 .................
 
 Because all form items are shown by default, generally you're setting
@@ -90,8 +90,66 @@ cluster.
           ]
 
 .. tip::
-  This example shows toggling options based on the cluster, but this feature
-  generically support any field and value.
+  This example shows toggling options based on the cluster, but this feature generically 
+  support any field and value. If the value contains special characters outside the 
+  standard lowercase alphabet and digits, see the :ref:`data-alias` directive below.
+
+.. warning::
+  ``data-option-for`` and ``data-exclusive-option-for`` directives will conflict if used
+  within the same form item. It is therefore recommended to choose the one that will be 
+  most efficient and use it exclusively within each form item.
+
+.. _data-alias:
+
+Option Value Aliases
+....................
+
+Since the ``option-for`` and ``exclusive-option-for`` directives above require you to place
+the conditional value inside the directive itself, you can encounter issues if the value contains
+special characters and cannot easily be changed. ``data-alias`` fills this gap, allowing you to
+reference any incompatible value with a custom alias.
+
+For example, suppose you have to refer to the ``node_type`` value ``gpu:advanced`` in an ``option-for`` 
+directive. You can define the alias ``gpu-advanced`` using the directive ``data-alias-gpu-advanced: 'gpu:advanced'``,
+and refer to this value with the directive ``data-option-for-node-type-gpu-advanced: false``. 
+
+Aliases must be defined before they are used and can only be referenced within the form item 
+where they are defined. This form item scoping allows aliases to be freely used without 
+conflicting with aliases defined in global attributes. In the same way, global attributes 
+can use aliases without impacting existing user forms.
+
+For a larger example, suppose you have a custom ``account`` field, and by institutional convention all account names
+contain the ``@`` symbol. Using ``data-alias``, you can still selectively display ``node_type``
+options based on these accounts as follows:
+
+.. code-block:: yaml
+  :emphasize-lines: 13,14,18,19
+
+  attributes:
+    account:
+      widget: select
+      options:
+        - 'first_last@school.edu'
+        - 'first_last@organization.org'
+    node_type:
+      widget: select
+      options:
+        - 'standard'
+        - [ 
+            'academic',
+            data-alias-student: 'first_last@school.edu',
+            data-exclusive-option-for-account-student: true
+          ]
+        - [
+            'premium',
+            data-alias-professional: 'first_last@organization.org',
+            data-exclusive-option-for-account-professional: true
+          ]
+
+.. tip::
+  It is recommended to use an alias anytime the referenced value contains characters beyond
+  lowercase letters (a-z) and digits (0-9). Aliases you define should follow those same rules,
+  but can also use dashes.
 
 .. _dynamic-bc-apps-data-hide:
 

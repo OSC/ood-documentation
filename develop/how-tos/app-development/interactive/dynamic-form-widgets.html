@@ -196,7 +196,7 @@ for the <code class="docutils literal notranslate"><span class="pre">ruby</span>
 </pre></div>
 </div>
 <section id="exclusive-options">
-<h3>Exclusive options<a class="headerlink" href="#exclusive-options" title="Link to this heading"></a></h3>
+<h3>Exclusive Options<a class="headerlink" href="#exclusive-options" title="Link to this heading"></a></h3>
 <p>Because all form items are shown by default, generally you're setting
 <code class="docutils literal notranslate"><span class="pre">data-option-for-cluster-ruby</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>, signaling that this is <strong>not</strong>
 a valid select option when the <code class="docutils literal notranslate"><span class="pre">ruby</span></code> cluster is chosen.</p>
@@ -220,8 +220,60 @@ cluster.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This example shows toggling options based on the cluster, but this feature
-generically support any field and value.</p>
+<p>This example shows toggling options based on the cluster, but this feature generically
+support any field and value. If the value contains special characters outside the
+standard lowercase alphabet and digits, see the <a class="reference internal" href="#data-alias"><span class="std std-ref">Option Value Aliases</span></a> directive below.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">data-option-for</span></code> and <code class="docutils literal notranslate"><span class="pre">data-exclusive-option-for</span></code> directives will conflict if used
+within the same form item. It is therefore recommended to choose the one that will be
+most efficient and use it exclusively within each form item.</p>
+</div>
+</section>
+<section id="option-value-aliases">
+<span id="data-alias"></span><h3>Option Value Aliases<a class="headerlink" href="#option-value-aliases" title="Link to this heading"></a></h3>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">option-for</span></code> and <code class="docutils literal notranslate"><span class="pre">exclusive-option-for</span></code> directives above require you to place
+the conditional value inside the directive itself, you can encounter issues if the value contains
+special characters and cannot easily be changed. <code class="docutils literal notranslate"><span class="pre">data-alias</span></code> fills this gap, allowing you to
+reference any incompatible value with a custom alias.</p>
+<p>For example, suppose you have to refer to the <code class="docutils literal notranslate"><span class="pre">node_type</span></code> value <code class="docutils literal notranslate"><span class="pre">gpu:advanced</span></code> in an <code class="docutils literal notranslate"><span class="pre">option-for</span></code>
+directive. You can define the alias <code class="docutils literal notranslate"><span class="pre">gpu-advanced</span></code> using the directive <code class="docutils literal notranslate"><span class="pre">data-alias-gpu-advanced:</span> <span class="pre">'gpu:advanced'</span></code>,
+and refer to this value with the directive <code class="docutils literal notranslate"><span class="pre">data-option-for-node-type-gpu-advanced:</span> <span class="pre">false</span></code>.</p>
+<p>Aliases must be defined before they are used and can only be referenced within the form item
+where they are defined. This form item scoping allows aliases to be freely used without
+conflicting with aliases defined in global attributes. In the same way, global attributes
+can use aliases without impacting existing user forms.</p>
+<p>For a larger example, suppose you have a custom <code class="docutils literal notranslate"><span class="pre">account</span></code> field, and by institutional convention all account names
+contain the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol. Using <code class="docutils literal notranslate"><span class="pre">data-alias</span></code>, you can still selectively display <code class="docutils literal notranslate"><span class="pre">node_type</span></code>
+options based on these accounts as follows:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">account</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;first_last@school.edu&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;first_last@organization.org&#39;</span>
+<span class="w">  </span><span class="nt">node_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select</span>
+<span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;standard&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;academic&#39;</span><span class="p p-Indicator">,</span>
+<span class="hll"><span class="w">          </span><span class="nv">data-alias-student</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;first_last@school.edu&#39;</span><span class="p p-Indicator">,</span>
+</span><span class="hll"><span class="w">          </span><span class="nv">data-exclusive-option-for-account-student</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span>
+</span><span class="w">        </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">          </span><span class="s">&#39;premium&#39;</span><span class="p p-Indicator">,</span>
+<span class="hll"><span class="w">          </span><span class="nv">data-alias-professional</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;first_last@organization.org&#39;</span><span class="p p-Indicator">,</span>
+</span><span class="hll"><span class="w">          </span><span class="nv">data-exclusive-option-for-account-professional</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span>
+</span><span class="w">        </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is recommended to use an alias anytime the referenced value contains characters beyond
+lowercase letters (a-z) and digits (0-9). Aliases you define should follow those same rules,
+but can also use dashes.</p>
 </div>
 </section>
 </section>
