@@ -320,6 +320,8 @@ These are the supported configuration options:
         timeout: 10
         verify_ssl: true
 
+.. _servicenow_support_ticket:
+
 ServiceNow API
 ..............
 
