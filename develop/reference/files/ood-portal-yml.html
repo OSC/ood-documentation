@@ -903,6 +903,68 @@ and port that knows the <strong>relative</strong> URI path</p>
 </dl>
 </dd></dl>
 
+<dl class="describe" id="ood-portal-generator-configuration-secure-proxy">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">secure_node_uri</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
+<dd><p>Introduced in 4.1. Similar to <code class="docutils literal notranslate"><span class="pre">node_uri</span></code> above, only in that
+it will proxy to origin servers using the https protocol instead
+of plain text http.</p>
+<dl>
+<dt>Default</dt><dd><p>This feature is disabled by default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">secure_node_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Enable this feature.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">secure_node_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/secure-node&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">secure_rnode_uri</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
+<dd><p>Introduced in 4.1. Similar to <code class="docutils literal notranslate"><span class="pre">rnode_uri</span></code> above, only in that it will
+proxy to origin  servers using the https protocol instead of plain text http.</p>
+<dl>
+<dt>Default</dt><dd><p>This feature is disabled by default.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">secure_rnode_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Enable this feature.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">secure_rnode_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/secure-rnode&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">ssl_proxy</span> <span class="pre">(Array,</span> <span class="pre">[])</span></span></dt>
+<dd><p>When enabling SSL/TLS origins above, centers may need to provide
+apache SSL directives to successfully communicate with the origin
+servers. Centers can use this configuration to provide such directives.</p>
+<dl>
+<dt>Default</dt><dd><p>Do not supply any <code class="docutils literal notranslate"><span class="pre">SSLProxy</span></code> directives.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ssl_proxy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Do not check the origin server's certificate CN field or name when
+proxying to origins over https.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ssl_proxy</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLProxyCheckPeerCN</span><span class="nv"> </span><span class="s">Off&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLProxyCheckPeerName</span><span class="nv"> </span><span class="s">Off&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="configure-per-user-nginx">
 <h2>Configure per-user NGINX<a class="headerlink" href="#configure-per-user-nginx" title="Link to this heading"></a></h2>
