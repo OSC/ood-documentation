@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorials: Project Manager &mdash; Open OnDemand 4.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Architecture" href="../architecture.html" />
+    <link rel="prev" title="Developing the Shell App" href="tutorials-dashboard-apps/shell-app.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/project-management/project-manager.html">Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-passenger-apps.html">Install Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials: Project Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#initializing-a-project">Initializing a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-launcher">Adding a Launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#leveraging-launcher-forms">Leveraging Launcher Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-workflows">Using Workflows</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorials: Project Manager</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/tutorials/tutorials-project-manager.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorials-project-manager">
+<span id="project-manager-tutorial"></span><h1>Tutorials: Project Manager<a class="headerlink" href="#tutorials-project-manager" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#initializing-a-project" id="id1">Initializing a Project</a></p></li>
+<li><p><a class="reference internal" href="#adding-a-launcher" id="id2">Adding a Launcher</a></p></li>
+<li><p><a class="reference internal" href="#leveraging-launcher-forms" id="id3">Leveraging Launcher Forms</a></p></li>
+<li><p><a class="reference internal" href="#using-workflows" id="id4">Using Workflows</a></p></li>
+</ul>
+</nav>
+<p>The project manager is designed to make it easy to submit scripts to your scheduler.
+For this example, let's assume you have a system of shell scripts that simulate the
+net change in an ideal reservoir over the last seven days, given a city and diameter
+of the reservoir.</p>
+<p>Assume these scripts currently exist on your local machine with the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>demo_project/
+├── scripts
+│   ├── compute_volume.sh # USAGE: ./compute_volume.sh WEATHER_JSON DIAMETER -&gt; NET_CHANGE
+│   ├── geocode.sh        # USAGE: ./geocode.sh CITY -&gt; LAT_LONG_JSON
+│   └── import_weather.sh # USAGE: ./import_weather.sh LAT_LONG_JSON -&gt; WEATHER_JSON
+|
+└── simulate_reservoir.sh # USAGE: ./simulate_reservoir.sh CITY DIAMETER -&gt; NET_CHANGE
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">simulate_reservoir.sh</span></code> coordinates the smaller scripts as follows</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Usage: ./simulate_reservoir.sh &quot;City Name&quot; DIAMETER_M</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">CITY</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">DIAMETER_M</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>mktemp<span class="w"> </span>-d<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;rm -rf &quot;$TMPDIR&quot;&#39;</span><span class="w"> </span>EXIT
+
+<span class="nv">GEOCODE_JSON</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$TMPDIR</span><span class="s2">/geocode.json&quot;</span>
+<span class="nv">WEATHER_JSON</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$TMPDIR</span><span class="s2">/weather.json&quot;</span>
+
+./scripts/geocode.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CITY</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GEOCODE_JSON</span><span class="s2">&quot;</span>
+
+./scripts/import_weather.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GEOCODE_JSON</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WEATHER_JSON</span><span class="s2">&quot;</span>
+
+./scripts/compute_volume.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WEATHER_JSON</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DIAMETER_M</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">compute_volume.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">geocode.sh</span></code>, and <code class="docutils literal notranslate"><span class="pre">import_weather.sh</span></code> are left
+as an exercise for the reader.</p>
+<section id="initializing-a-project">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Initializing a Project</a><a class="headerlink" href="#initializing-a-project" title="Link to this heading"></a></h2>
+<p>Now let's say we want to submit these jobs to the scheduler. We begin by opening the Project Manager,
+the third item under the 'Jobs' tab in the navigation bar. From the Project Manager, we select the
+'Create a new project' button on the upper right. Since this will be a personal project, we only need
+to provide a name and icon for the new project, and press 'Save'.</p>
+<p>Saving your new project will return you to the Project Manager, where you will see your new project listed.
+Clicking on the new project's title will open its project dashboard, showing a blank project.</p>
+<p>To add our existing scripts into the project, we first click on the 'Open in files app' button below the
+project directory. This takes us to the file browser, where there is a button to upload from our machine.</p>
+<p>After uploading the scripts, we can return to the project dashboard and see a similar file structure
+in the project directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PROJECT_DIRECTORY/
+├── .ondemand/
+├── scripts/
+│   ├── compute_volume.sh
+│   ├── geocode.sh
+│   └── import_weather.sh
+|
+└── simulate_reservoir.sh
+</pre></div>
+</div>
+<p>Before continuing, you should make sure that the files in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory are all executable,
+so they can be called directly from your controller script. <code class="docutils literal notranslate"><span class="pre">simulate_reservoir.sh</span></code>, and any other scripts
+we want to submit, do not need to be executable to be submitted to the scheduler.</p>
+</section>
+<section id="adding-a-launcher">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Adding a Launcher</a><a class="headerlink" href="#adding-a-launcher" title="Link to this heading"></a></h2>
+<p>To submit these scripts to the scheduler, we start by clicking the 'New Launcher' button on the left side of
+the project dashboard. We will give this launcher the name 'Fixed Simulation', and press 'Save'.</p>
+<p>After saving the launcher, it will appear in the list of launchers on the left side of the dashboard. We can
+customize the form for the launcher by pressing the 'Edit' button on the launcher card. This takes you to an
+interactive form builder, where you can add form choices. All new launchers will be created with at minimum
+<code class="docutils literal notranslate"><span class="pre">cluster</span></code> and <code class="docutils literal notranslate"><span class="pre">script</span></code> fields, as well as any others your center may have defined as
+<a class="reference internal" href="../how-tos/project-management/project-manager.html#launcher-default-items"><span class="std std-ref">default launcher items</span></a>.</p>
+<p>For the purpose of this example, let's assume that the blank launcher only has those two fields. We can add
+an 'Account' field by pressing 'Add new option' in the launcher editor, selecting 'Account' for the new field,
+and pressing 'Add' to include it on the form. This creates a form item labeled 'Account' that should default
+to your primary account. If you want the script to run with a different account, you can press the 'Edit' button
+beneath the field to change the available options or keep it fixed to a single account.</p>
+<p>Once the account field is correctly configured, we can press 'Save' at the bottom of the launcher editor, and
+see a confirmation message that the update was successful.</p>
+<p>This is enough already to submit the script, but if we run it as is, we are bound to get a <code class="docutils literal notranslate"><span class="pre">$1:</span> <span class="pre">unbound</span> <span class="pre">variable</span></code>
+error. This is because we have the script configured to accept command line arguments, but these are not being passed
+by the scheduler. There are several ways of fixing this, but the most basic would be to hard code the variables in
+<code class="docutils literal notranslate"><span class="pre">simulate_reservoir.sh</span></code> so that it is able to run without arguments. To do this, let's create a copy of
+<code class="docutils literal notranslate"><span class="pre">simulate_reservoir.sh</span></code> titled <code class="docutils literal notranslate"><span class="pre">simulate_fixed_reservoir.sh</span></code>, and change the top of the file to read</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Usage: ./simulate_fixed_reservoir.sh</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">CITY</span><span class="o">=</span><span class="s2">&quot;New York&quot;</span>
+<span class="nv">DIAMETER_M</span><span class="o">=</span><span class="s2">&quot;50&quot;</span>
+<span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>mktemp<span class="w"> </span>-d<span class="k">)</span><span class="s2">&quot;</span>
+...
+</pre></div>
+</div>
+<p>Now we can edit our launcher again, and see that the new script <code class="docutils literal notranslate"><span class="pre">simulate_fixed_reservoir.sh</span></code> is available
+in the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> selection. Since we know it will break if it runs with <code class="docutils literal notranslate"><span class="pre">simulate_reservoir.sh</span></code>, we can
+edit the script option, select <code class="docutils literal notranslate"><span class="pre">simulate_fixed_reservoir.sh</span></code> from the drop down, click 'Fixed Value' to
+prevent you from accidentally running a different script, and save the form. Now we can click the 'Show'
+button to fill out this form. Since we have already made sure the <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">script</span></code> fields were set
+correctly, the only thing we have to fill out is the cluster to run it on. Once we do that and press 'Launch'
+at the bottom of the form, we will be redirected back to the project dashboard and see our job queued.</p>
+</section>
+<section id="leveraging-launcher-forms">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Leveraging Launcher Forms</a><a class="headerlink" href="#leveraging-launcher-forms" title="Link to this heading"></a></h2>
+<p>You may have noticed a slight problem with that initial approach. Hard coding the values solves the immediate
+issue of removing the need for arguments, but it means we have to go and edit the script each time to change
+these values. If we had to run this script for 20 different cities, for example, that is a lot of manual
+editing to prepare the next run.</p>
+<p>To make this more efficient, we can use launcher forms to set environment variables that will be available to
+the script we run. First, we will make another copy of <code class="docutils literal notranslate"><span class="pre">simulate_reservoir.sh</span></code>, titled
+<code class="docutils literal notranslate"><span class="pre">simulate_reservoir_from_env.sh</span></code>, and change the start of the file to read</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Usage: ./simulate_reservoir_from_env.sh</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">CITY</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$CITY_PARAM</span><span class="s2">&quot;</span>
+<span class="nv">DIAMETER_M</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DIAMETER_PARAM</span><span class="s2">&quot;</span>
+<span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>mktemp<span class="w"> </span>-d<span class="k">)</span><span class="s2">&quot;</span>
+...
+</pre></div>
+</div>
+<p>This time, let's create a new launcher. Instead of creating from scratch and re-doing all the work of adding
+the account field again, we can use the 'Copy Launcher' button in the top right corner of the launcher card.
+This will prompt us for a new name, which we will fill in as 'Variable Simulation' and press 'Save'. If we
+edit this launcher to see the form, we will see the same form from 'Fixed Simulation' has been copied over.
+After editing the <code class="docutils literal notranslate"><span class="pre">script</span></code> field to use <code class="docutils literal notranslate"><span class="pre">simulate_reservoir_from_env.sh</span></code>, we then click 'Add new option'
+and select 'Environment Variable' for the new field. Pressing 'Add' below the select will create a new item,
+with options for the name and default value of our variable. For the first one, we will name it <code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code>
+and set the default value to <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">York</span></code>, ensuring that even if you leave the field blank, you won't get an
+<code class="docutils literal notranslate"><span class="pre">unbound</span> <span class="pre">variable</span></code> error. We can then add another environment variable field named <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> and
+set the default value to <code class="docutils literal notranslate"><span class="pre">50</span></code>. With both fields added, we can save the form and return to the project
+dashboard. Now we can click the 'Show' button to see the updated form, and pass some non-default values for
+each environment variable. When we launch, the script will take the parameters from the form and give a
+different simulation. By placing these parameters in the form, we are now able to run 10 different
+simulations with ease by filling out our form with different values.</p>
+</section>
+<section id="using-workflows">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Using Workflows</a><a class="headerlink" href="#using-workflows" title="Link to this heading"></a></h2>
+<p>We have just seen how launchers simplify the process of submitting to your scheduler. But what if our job
+grows beyond the limitations of a single job? For example, we could have a scenario where
+<code class="docutils literal notranslate"><span class="pre">import_weather.sh</span></code> has to wait several hours to make all the necessary API calls, and <code class="docutils literal notranslate"><span class="pre">compute_volume.sh</span></code>
+requires many cores to run efficiently. It is difficult for the scheduler to reserve lots of cores for such a
+long time, and we notice exceedingly long queue times before our jobs can run. To address this, we can use workflows.</p>
+<p>Workflows are a way to chain together launchers, allowing you to break your job into smaller pieces that can
+be independently scheduled, but still wait for the output of one another. This will allow us to run our light
+compute, time intensive step with basic resources but lots of walltime, and the short compute-heavy step with
+lots of resources and less walltime.</p>
+<p>The first step is to split up our controller script into two separate steps. For this example, we will have
+one step that performs all the API requests, and another that computes the results from that data. We can put
+these steps into <code class="docutils literal notranslate"><span class="pre">collect_data.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">compute_results.sh</span></code> as seen below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Usage: ./collect_data.sh</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;data&#39;</span>
+
+<span class="nv">GEOCODE_JSON</span><span class="o">=</span><span class="s2">&quot;data/geocode-</span><span class="nv">$COUNT</span><span class="s2">.json&quot;</span>
+<span class="nv">WEATHER_JSON</span><span class="o">=</span><span class="s2">&quot;data/weather-</span><span class="nv">$COUNT</span><span class="s2">.json&quot;</span>
+
+./scripts/geocode.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CITY_PARAM</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GEOCODE_JSON</span><span class="s2">&quot;</span>
+
+./scripts/import_weather.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GEOCODE_JSON</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WEATHER_JSON</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Usage: ./compute_results.sh</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">JSON_FILE</span><span class="o">=</span><span class="s2">&quot;data/weather-</span><span class="nv">$COUNT</span><span class="s2">.json&quot;</span>
+
+./scripts/compute_volume.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JSON_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DIAMETER_PARAM</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Note how we split our parameters between the two scripts to only pass what each script needs. We also add a
+<code class="docutils literal notranslate"><span class="pre">COUNT</span></code> variable so that we can control when data is overwritten, an essential consideration if you plan
+to have more than one instance of a workflow run simultaneously.</p>
+<p>The next step is to create the launchers for these scripts. Like above, we can copy the 'Variable Simulation'
+launcher into two new ones, 'Collect Data' and 'Compute Results'. We can then edit the form for each launcher
+to include the appropriate environment variables. For the 'Collect Data' launcher, we will keep the
+<code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code> variable and change the <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> variable name to <code class="docutils literal notranslate"><span class="pre">COUNT</span></code>. We then do an analogous
+change to the 'Compute Results' launcher, keeping <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> untouched and changing <code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code> to
+<code class="docutils literal notranslate"><span class="pre">COUNT</span></code>. There is no form to fill out for a workflow, so the default values provided here are the values the
+launchers will use. Most importantly, we should ensure that the <code class="docutils literal notranslate"><span class="pre">COUNT</span></code> default is consistent between the
+two. Finally, because we want these launchers to be used in workflows, we ensure every field has 'Fixed Value'
+selected, which we can do by clicking 'Edit' and then selecting 'Fixed Value' on each item before saving. This
+will prevent the workflows from using any cached launcher parameters, which can be difficult to debug.</p>
+<p>With our launchers created, we can now create a new workflow. From the Project Manager, we click the
+'New Workflow' button on the lower left of the project dashboard. We will give it the name 'Simulation
+Workflow' and select the 'Collect Data' and 'Compute Results' launchers, before saving the form.</p>
+<p>After being returned to the project dashboard, we then click the 'Show' button under 'Simulation Workflow' to
+open it. At the top of the page, there will be a select with one of your launchers selected. We can click the
+'Add Launcher' button to place the launcher on the workflow. To add the other launcher, we simply change the
+selection and click 'Add Launcher' again. Once both launchers are on the canvas, we need to create the
+dependency that relates the two. We can do this by clicking 'Connect Launchers', then selecting the launchers
+in the order we want them to run, in this case 'Collect Data' first and 'Compute Results' second. This will
+create a directional arrow between the two, pointing in the direction that the execution will flow. Once we
+have all the dependencies created, we click 'Connect Launchers' again to stop adding dependencies.</p>
+<p>We can now press 'Submit', and our workflow will save and begin scheduling. If we stay on the workflows page,
+we can observe the launchers move between queued, running, and completed states, with dependent launchers only
+running after their dependencies are completed. If we don't care to watch the workflow execute, we can press
+'Back' from the workflows page to return to the project dashboard, where we can edit the launcher form defaults
+and run other workflows as needed, keeping in mind that the COUNT variable must be consistent for each run.</p>
+<p>The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs,
+you can always design your own systems and conventions that fit your specific situation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorials-dashboard-apps/shell-app.html" class="btn btn-neutral float-left" title="Developing the Shell App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 4.1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/tutorials/tutorials-project-manager.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/tutorials/tutorials-project-manager.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/tutorials/tutorials-project-manager.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/tutorials/tutorials-project-manager.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/tutorials/tutorials-project-manager.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/tutorials/tutorials-project-manager.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/tutorials/tutorials-project-manager.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/tutorials/tutorials-project-manager.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/tutorials/tutorials-project-manager.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/tutorials/tutorials-project-manager.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/tutorials/tutorials-project-manager.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/tutorials/tutorials-project-manager.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/tutorials/tutorials-project-manager.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
