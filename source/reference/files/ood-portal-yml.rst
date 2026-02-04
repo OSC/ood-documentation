@@ -403,6 +403,13 @@ Configure General Options
       > string.match('ktrout@example.edu', '^([^@]+)@example.edu$')
       ktrout
 
+   In addition to lua patterns, you can append ``:lower`` to the pattern to
+   automatically lowercase the matched string. An example configuration may be
+   something like ``.*:lower`` to match anything then lowercase it or
+   ``^([^@]+)@example.edu$:lower`` to match the email addres with the domain
+   example.edu then lowercase it.
+
+
    Default
       Match any characters 0 or more times.
 
