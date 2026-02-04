@@ -929,7 +929,7 @@ of 4.0.8 the existing widgets are:
 - ``saved_settings`` - all of the batch connect saved settings displayed as cards
 - ``balances`` - Current users' balances if you've configured :ref:`balance warnings on the dashboard <balance-warnings-on-dashboard>`.
   Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current balances.
-- ``file_qoutas`` - Current users' file qoutas if you've configure :ref:`disk quota warnings on the dashboard <disk_quota_warnings>`.
+- ``file_quotas`` - Current users' file quotas if you've configure :ref:`disk quota warnings on the dashboard <disk_quota_warnings>`.
   Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current file quotas.
 - ``nsf_access_events`` - A list of upcoming NSF ACCESS events with registration links.
 - ``system_status`` - The system status page as a dashboard widget instead of a dedicated page.
