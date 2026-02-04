@@ -406,8 +406,8 @@ Configure General Options
    In addition to lua patterns, you can append ``:lower`` to the pattern to
    automatically lowercase the matched string. An example configuration may be
    something like ``.*:lower`` to match anything then lowercase it or
-   ``^([^@]+)@example.edu$:lower`` to match the email addres with the domain
-   example.edu then lowercase it.
+   ``^([^@]+)@example.edu$:lower`` to match the email address with the domain
+   ``example.edu`` then lowercase it.
 
 
    Default
