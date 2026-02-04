@@ -788,6 +788,72 @@ assets and links supplied by the web server are relative and not absolute.
 
           rnode_uri: "/rnode"
 
+.. _ood-portal-generator-configuration-secure-proxy:
+
+.. describe:: secure_node_uri (String, null)
+
+  Introduced in 4.1. Similar to ``node_uri`` above, only in that
+  it will proxy to origin servers using the https protocol instead
+  of plain text http.
+
+  Default
+    This feature is disabled by default.
+
+    .. code-block:: yaml
+
+      secure_node_uri: null
+
+  Example
+    Enable this feature.
+
+    .. code-block:: yaml
+
+      secure_node_uri: "/secure-node"
+
+.. describe:: secure_rnode_uri (String, null)
+
+
+  Introduced in 4.1. Similar to ``rnode_uri`` above, only in that it will
+  proxy to origin  servers using the https protocol instead of plain text http.
+
+  Default
+    This feature is disabled by default.
+
+    .. code-block:: yaml
+
+      secure_rnode_uri: null
+
+  Example
+    Enable this feature.
+
+    .. code-block:: yaml
+
+      secure_rnode_uri: "/secure-rnode"
+
+.. describe:: ssl_proxy (Array, [])
+
+  When enabling SSL/TLS origins above, centers may need to provide
+  apache SSL directives to successfully communicate with the origin
+  servers. Centers can use this configuration to provide such directives.
+
+  Default
+    Do not supply any ``SSLProxy`` directives.
+
+    .. code-block:: yaml
+
+      ssl_proxy: []
+
+  Example
+    Do not check the origin server's certificate CN field or name when
+    proxying to origins over https.
+
+    .. code-block:: yaml
+
+      ssl_proxy:
+        - 'SSLProxyCheckPeerCN Off'
+        - 'SSLProxyCheckPeerName Off'
+
+
 Configure per-user NGINX
 ------------------------
 
