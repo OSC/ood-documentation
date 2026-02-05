@@ -58,6 +58,172 @@ And on the Compute node(s):
 .. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify
 
+Software Bill of Materials
+--------------------------
+The following is a list of OS level software dependencies for Open OnDemand. For application dependencies please see paragraph below. 
+.. tabs::
+
+    .. tab:: RockyLinux 8
+
+        .. code-block:: sh
+
+            sh
+            cronie
+            curl
+            diffutils
+            file
+            git
+            libxml2
+            libxslt
+            lsof
+            lua-posix
+            make
+            ondemand-apache = 4.0.3-1.el8
+            ondemand-gems-4.0.0-1
+            ondemand-gems-4.0.1-1
+            ondemand-gems-4.0.2-1
+            ondemand-gems-4.0.3-1
+            ondemand-gems-4.0.5-1
+            ondemand-gems-4.0.6-1
+            ondemand-gems-4.0.7-1
+            ondemand-gems-4.0.8-1
+            ondemand-nginx = 1.26.1-1.p6.0.23.ood4.0.3.el8
+            ondemand-nginx = 1.26.1-2.p6.0.23.ood4.0.3.el8
+            ondemand-nginx = 1.26.1-3.p6.0.23.ood4.0.3.el8
+            ondemand-nodejs = 4.0.3-1.el8
+            ondemand-passenger = 6.0.23-1.ood4.0.3.el8
+            ondemand-passenger = 6.0.23-2.ood4.0.3.el8
+            ondemand-passenger = 6.0.23-3.ood4.0.3.el8
+            ondemand-ruby = 4.0.3-1.el8
+            ondemand-runtime = 4.0.3-1.el8
+            python3
+            rclone
+            rsync
+            sudo
+            systemd
+            wget
+            zlib
+
+
+    .. tab:: RockyLinux 9
+
+        .. code-block:: sh
+
+            sh
+            cronie
+            curl
+            diffutils
+            file
+            git
+            libxml2
+            libxslt
+            lsof
+            lua-posix
+            make
+            ondemand-apache = 4.0.3-1.el9
+            ondemand-gems-4.0.0-1
+            ondemand-gems-4.0.1-1
+            ondemand-gems-4.0.2-1
+            ondemand-gems-4.0.3-1
+            ondemand-gems-4.0.5-1
+            ondemand-gems-4.0.6-1
+            ondemand-gems-4.0.7-1
+            ondemand-gems-4.0.8-1
+            ondemand-nginx = 1.26.1-1.p6.0.23.ood4.0.3.el9
+            ondemand-nginx = 1.26.1-2.p6.0.23.ood4.0.3.el9
+            ondemand-nginx = 1.26.1-3.p6.0.23.ood4.0.3.el9
+            ondemand-nodejs = 4.0.3-1.el9
+            ondemand-passenger = 6.0.23-1.ood4.0.3.el9
+            ondemand-passenger = 6.0.23-2.ood4.0.3.el9
+            ondemand-passenger = 6.0.23-3.ood4.0.3.el9
+            ondemand-ruby = 4.0.3-1.el9
+            ondemand-runtime = 4.0.3-1.el9
+            python3
+            rclone
+            rsync
+            sudo
+            systemd
+            wget
+            zlib
+
+    .. tab:: Ubuntu 20.04
+
+        .. code-block:: sh
+
+            libc6 (>= 2.29)
+            libgcc-s1 (>= 3.0)
+            libruby2.7 (>= 2.7.0)
+            libsqlite3-0 (>= 3.7.10)
+            libstdc++6 (>= 9)
+            ruby  
+            apache2  
+            sudo  
+            lsof  
+            lua-posix  
+            tzdata  
+            file  
+            nodejs (>= 20.0)
+            nodejs (<< 21.0)
+            ondemand-nginx (>= 1.26.1.p6.0.23.ood4.0.3)
+            ondemand-nginx (<< 1.27)
+            ondemand-passenger (>= 6.0.23.ood4.0.3)
+            ondemand-passenger (<< 6.0.24)
+
+    .. tab:: Ubuntu 22.04
+
+        .. code-block:: sh
+
+            libc6 (>= 2.34)
+            libgcc-s1 (>= 3.0)
+            libruby3.0 (>= 3.0.0~preview2)
+            libsqlite3-0 (>= 3.7.10)
+            libstdc++6 (>= 11)
+            ruby  
+            apache2  
+            sudo  
+            lsof  
+            lua-posix  
+            tzdata  
+            file  
+            nodejs (>= 20.0)
+            nodejs (<< 21.0)
+            ondemand-nginx (>= 1.26.1.p6.0.23.ood4.0.3)
+            ondemand-nginx (<< 1.27)
+            ondemand-passenger (>= 6.0.23.ood4.0.3)
+            ondemand-passenger (<< 6.0.24)
+
+    .. tab:: Ubuntu 24.04
+
+        .. code-block:: sh
+
+            libc6 (>= 2.38)
+            libgcc-s1 (>= 3.0)
+            libruby3.2 (>= 3.2.2)
+            libsqlite3-0 (>= 3.7.10)
+            libstdc++6 (>= 13.1)
+            ruby  
+            apache2  
+            sudo  
+            lsof  
+            lua-posix  
+            tzdata  
+            file  
+            nodejs (>= 20.0)
+            nodejs (<< 21.0)
+            ondemand-nginx (>= 1.26.1.p6.0.23.ood4.0.3)
+            ondemand-nginx (<< 1.27)
+            ondemand-passenger (>= 6.0.23.ood4.0.3)
+            ondemand-passenger (<< 6.0.24)
+
+Along with the listed operating system dependencies, Open OnDemand also requires various Ruby gems and Node.js packages for its application layer. 
+These application dependencies are managed by Bundler and Yarn respectively, and are installed automatically when Open OnDemand is built from source or 
+installed via the provided packages. For a complete list of application dependencies, please refer to the top-level `Gemfile`_, the dashboard `Gemfile.lock`_, 
+and `package.json`_ files in the Open OnDemand source repository.
+
+.. _Gemfile: https://github.com/OSC/ondemand/blob/master/Gemfile
+.. _Gemfile.lock: https://github.com/OSC/ondemand/blob/master/apps/dashboard/Gemfile.lock
+.. _package.json: https://github.com/OSC/ondemand/blob/master/apps/dashboard/package.json
+
 Hardware Requirements
 ---------------------
 
