@@ -216,18 +216,6 @@ A complete and up to date Software Bill of Materials (SBOM) for OnDemand can be 
             ondemand-passenger (>= 6.0.23.ood4.0.3)
             ondemand-passenger (<< 6.0.24)
 
-    .. tab:: Debian 12
-
-        .. code-block:: sh
-
-            content to come
-
-    .. tab:: Amazon Linux 2023
-
-        .. code-block:: sh
-
-            content to come
-
 Along with the listed operating system dependencies, Open OnDemand also requires various Ruby gems and Node.js packages for its application layer. 
 These application dependencies are managed by Bundler and Yarn respectively, and are installed automatically when Open OnDemand is built from source or 
 installed via the provided packages. For a complete list of application dependencies, please refer to the top-level `Gemfile`_, the dashboard `Gemfile.lock`_, 
