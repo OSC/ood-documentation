@@ -1078,6 +1078,8 @@ on mod_auth_openidc_.
 
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
 
+.. _ood-portal-generator-user-registration:
+
 Configure User Registration
 ---------------------------
 
@@ -1128,6 +1130,62 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           register_root: "/var/www/ood/register"
+
+.. describe:: register_path (String, register_root)
+
+  The filesystem path that the ``register_uri`` can map to.
+
+  Default
+    Same value as ``register_root`` if it's been set.
+
+    .. code-block:: yaml
+
+      register_path: '< the same value as register_root >'
+
+  Example
+    Enable it to ``/var/www/ood_register``.
+
+    .. code-block:: yaml
+
+      register_root: "/var/www/ood_register"
+
+.. describe:: register_method (String, 'Alias')
+
+  The apache method to which ``register_uri`` will map to ``register_path``.
+
+  Default
+    Use the apache directive ``Alias`` to map ``register_uri`` to ``register_path``.
+
+    .. code-block:: yaml
+
+      register_method: 'Alias'
+
+  Example
+    Use the apache directive ``ScriptAlias`` to map ``register_uri`` to ``register_path``.
+
+    .. code-block:: yaml
+
+      register_root: 'ScriptAlias'
+
+.. describe:: register_method_options (Array, null)
+
+  Additional apache directives you may need to supply to register users.
+
+  Default
+    None provided.
+
+    .. code-block:: yaml
+
+      register_method_options: null
+
+  Example
+    Provide a ``WSGIDaemonProcess`` directive with some arguments to help register users.
+
+    .. code-block:: yaml
+
+      register_method_options:
+        - 'WSGIDaemonProcess register user=www-data group=www-data threads=5 home=/var/www/flask-apps/register'
+
 
 .. describe:: oidc_provider_metadata_url (String, null)
 
