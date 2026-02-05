@@ -58,7 +58,7 @@ And on the Compute node(s):
 .. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify
 
-Sofware Bill of Materials
+Software Bill of Materials
 -------------------------
 A complete and up to date Software Bill of Materials (SBOM) for OnDemand can be found at `SBOM for OnDemand <https://osc.github.io/ondemand-sbom/>`_.
 
