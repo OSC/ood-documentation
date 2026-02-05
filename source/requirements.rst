@@ -60,8 +60,7 @@ And on the Compute node(s):
 
 Software Bill of Materials
 --------------------------
-A complete and up to date Software Bill of Materials (SBOM) for OnDemand can be found at `SBOM for OnDemand <https://osc.github.io/ondemand-sbom/>`_.
-
+The following is a list of OS level software dependencies for Open OnDemand. For application dependencies please see paragraph below. 
 .. tabs::
 
     .. tab:: RockyLinux 8
