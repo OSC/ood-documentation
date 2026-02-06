@@ -1180,7 +1180,7 @@ the discovery page</p>
 
 </section>
 <section id="configure-user-registration">
-<h2>Configure User Registration<a class="headerlink" href="#configure-user-registration" title="Link to this heading"></a></h2>
+<span id="ood-portal-generator-user-registration"></span><h2>Configure User Registration<a class="headerlink" href="#configure-user-registration" title="Link to this heading"></a></h2>
 <p>If you are using a <strong class="program">grid-mapfile</strong> to map the authenticated user name
 to a system user name, then this will be used to generate mappings in the file
 for a user's first time accessing your website. Setting either property below
@@ -1222,6 +1222,61 @@ the registration page</p>
 </dd>
 <dt>Example</dt><dd><p>Enable it to the recommended path</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/www/ood/register&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">register_path</span> <span class="pre">(String,</span> <span class="pre">register_root)</span></span></dt>
+<dd><p>Added in 4.1. The file-system path that the <code class="docutils literal notranslate"><span class="pre">register_uri</span></code> can map to.</p>
+<dl>
+<dt>Default</dt><dd><p>Same value as <code class="docutils literal notranslate"><span class="pre">register_root</span></code> if it's been set.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">register_root</span><span class="nv"> </span><span class="s">&gt;&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Enable it to <code class="docutils literal notranslate"><span class="pre">/var/www/ood_register</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_root</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/www/ood_register&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">register_method</span> <span class="pre">(String,</span> <span class="pre">'Alias')</span></span></dt>
+<dd><p>Added in 4.1. The apache method to which <code class="docutils literal notranslate"><span class="pre">register_uri</span></code> will map to <code class="docutils literal notranslate"><span class="pre">register_path</span></code>.</p>
+<dl>
+<dt>Default</dt><dd><p>Use the apache directive <code class="docutils literal notranslate"><span class="pre">Alias</span></code> to map <code class="docutils literal notranslate"><span class="pre">register_uri</span></code> to <code class="docutils literal notranslate"><span class="pre">register_path</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Alias&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Use the apache directive <code class="docutils literal notranslate"><span class="pre">ScriptAlias</span></code> to map <code class="docutils literal notranslate"><span class="pre">register_uri</span></code> to <code class="docutils literal notranslate"><span class="pre">register_path</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_root</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ScriptAlias&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">register_method_options</span> <span class="pre">(Array,</span> <span class="pre">null)</span></span></dt>
+<dd><p>Added in 4.1. Additional apache directives you may need to supply to register users.</p>
+<dl>
+<dt>Default</dt><dd><p>None provided.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_method_options</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Provide a <code class="docutils literal notranslate"><span class="pre">WSGIDaemonProcess</span></code> directive with some arguments to help register users.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">register_method_options</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;WSGIDaemonProcess</span><span class="nv"> </span><span class="s">register</span><span class="nv"> </span><span class="s">user=www-data</span><span class="nv"> </span><span class="s">group=www-data</span><span class="nv"> </span><span class="s">threads=5</span><span class="nv"> </span><span class="s">home=/var/www/flask-apps/register&#39;</span>
 </pre></div>
 </div>
 </dd>
