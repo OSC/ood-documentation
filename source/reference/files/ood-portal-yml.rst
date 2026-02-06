@@ -1133,7 +1133,7 @@ to ``null`` will disable this feature.
 
 .. describe:: register_path (String, register_root)
 
-  The file-system path that the ``register_uri`` can map to.
+  New in 4.1. The file-system path that the ``register_uri`` can map to.
 
   Default
     Same value as ``register_root`` if it's been set.
@@ -1151,7 +1151,7 @@ to ``null`` will disable this feature.
 
 .. describe:: register_method (String, 'Alias')
 
-  The apache method to which ``register_uri`` will map to ``register_path``.
+  New in 4.1. The apache method to which ``register_uri`` will map to ``register_path``.
 
   Default
     Use the apache directive ``Alias`` to map ``register_uri`` to ``register_path``.
@@ -1169,7 +1169,7 @@ to ``null`` will disable this feature.
 
 .. describe:: register_method_options (Array, null)
 
-  Additional apache directives you may need to supply to register users.
+  New in 4.1. Additional apache directives you may need to supply to register users.
 
   Default
     None provided.
