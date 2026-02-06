@@ -1133,7 +1133,7 @@ to ``null`` will disable this feature.
 
 .. describe:: register_path (String, register_root)
 
-  The filesystem path that the ``register_uri`` can map to.
+  The file-system path that the ``register_uri`` can map to.
 
   Default
     Same value as ``register_root`` if it's been set.
