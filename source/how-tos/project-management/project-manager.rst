@@ -134,19 +134,4 @@ and unlike ``cluster`` and ``script``, these additional default fields _can_ be 
 Note that if you have predefined attributes or custom global attributes that are not present as options
 in the launcher editor, adding them as default items is the only way to use them in launcher forms.
 
-Usage
------
-
-The project manager can be located under the 'Jobs' tab in the navbar. In the **Project Manager 
-dashboard**, you are presented with cards for each of your projects, as well as three action buttons.
-Each action button allows you to add projects to your dashboard, either creating them from scratch,
-creating from a predefined template, or importing a shared project. 
-
-Clicking a project card brings you to the **project dashboard**, where you can see all the launchers,
-workflows, and files in the project directory.
-
-Launchers
-.........
-
-On the top left of the **project dashboard**, you will see a list of all the launchers associated with
-that project. 
+For user-focused details of the Project Manager, see :ref:`project-manager-tutorial`.
