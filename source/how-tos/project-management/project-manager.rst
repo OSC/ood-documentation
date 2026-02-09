@@ -133,3 +133,5 @@ and unlike ``cluster`` and ``script``, these additional default fields _can_ be 
 
 Note that if you have predefined attributes or custom global attributes that are not present as options
 in the launcher editor, adding them as default items is the only way to use them in launcher forms.
+
+For user-focused details of the Project Manager, see :ref:`project-manager-tutorial`.
