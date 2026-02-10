@@ -157,7 +157,12 @@ and set the default value to ``New York``, ensuring that even if you leave the f
 ``unbound variable`` error. We can then add another environment variable field named ``DIAMETER_PARAM`` and 
 set the default value to ``50``. With both fields added, we can save the form and return to the project 
 dashboard. Now we can click the 'Show' button to see the updated form, and pass some non-default values for 
-each environment variable. When we launch, the script will take the parameters from the form and give a 
+each environment variable. 
+
+.. figure:: /images/launcher-form.png
+   :alt: The launcher form filled out, showing how to pass non-default values for environment variables
+
+When we launch, the script will take the parameters from the form and give a 
 different simulation. By placing these parameters in the form, we are now able to run 10 different 
 simulations with ease by filling out our form with different values.
 
@@ -230,7 +235,11 @@ selection and click 'Add Launcher' again. Once both launchers are on the canvas,
 dependency that relates the two. We can do this by clicking 'Connect Launchers', then selecting the launchers 
 in the order we want them to run, in this case 'Collect Data' first and 'Compute Results' second. This will 
 create a directional arrow between the two, pointing in the direction that the execution will flow. Once we 
-have all the dependencies created, we click 'Connect Launchers' again to stop adding dependencies. 
+have all the dependencies created, we click 'Connect Launchers' again to stop adding dependencies. At this point
+the workflow should look something like 
+
+.. figure:: /images/workflow-ui.png
+   :alt: The workflow management ui, showing a simple example with two launchers. There is an arrow pointing from 'Collect Data' to 'Compute Results'.
 
 We can now press 'Submit', and our workflow will save and begin scheduling. If we stay on the workflows page, 
 we can observe the launchers move between queued, running, and completed states, with dependent launchers only 
