@@ -58,6 +58,8 @@ And on the Compute node(s):
 .. _turbovnc: https://turbovnc.org/
 .. _websockify: https://github.com/novnc/websockify
 
+.. _software-bom:
+
 Software Bill of Materials
 --------------------------
 The following is a list of OS level software dependencies for Open OnDemand. For application dependencies please see paragraph below. 
