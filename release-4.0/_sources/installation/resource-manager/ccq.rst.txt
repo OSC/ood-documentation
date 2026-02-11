@@ -3,6 +3,8 @@
 Cloudy Cluster
 ==============
 
+.. include:: limited-support.inc
+
 A YAML cluster configuration file for a Cloudy Cluster resource manager on an HPC
 cluster looks like:
 

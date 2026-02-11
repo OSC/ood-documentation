@@ -87,7 +87,7 @@ Then users can just create the directory ``~/ondemand/dev`` and the Develop drop
 
 .. warning:: If you do this, it is recommended that you treat the node that OnDemand is running on as a login node, as you are effectively giving those users shell access by letting them run arbitrary code on the OnDemand node (of course the UID of the processes are still their regular unprivileged user UID).
 
-If you do this, you still might want to restrict who sees the Develop drop-down in the Dashboard. To do that you can explicitly show or hide the drop-down in the Dashboard by setting ``Configuration.app_development_enabled`` to true based on one or more Ruby statements in the initializer ``/etc/ood/config/apps/dashboard/initializers/ood.rb``. Code in the initializer runs as the user. This code also has access to the `ood_support library <http://www.rubydoc.info/github/OSC/ood_support>`__ in which we provide some helper classes to work with User's and Groups. For example:
+If you do this, you still might want to restrict who sees the Develop drop-down in the Dashboard. To do that you can explicitly show or hide the drop-down in the Dashboard by setting ``Configuration.app_development_enabled`` to true based on one or more Ruby statements in the initializer ``/etc/ood/config/apps/dashboard/initializers/ood.rb``. Code in the initializer runs as the user. This code also has access to the `ood_support library <http://www.rubydoc.info/github/OSC/ood_support>`__ in which we provide some helper classes to work with Users and Groups. For example:
 
 
     .. code-block:: ruby

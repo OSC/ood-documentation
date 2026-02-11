@@ -53,7 +53,8 @@ Requirements
             vnc:
               script_wrapper: |
                 module purge
-                export PATH="/usr/local/turbovnc/bin:$PATH"
+                # Add the TurboVNC installation directory to the PATH (note: this may be different on your system)
+                export PATH="/opt/TurboVNC/bin:$PATH"
                 export WEBSOCKIFY_CMD="/usr/local/websockify/run"
                 %s
               set_host: "host=$(hostname -A | awk '{print $1}')"

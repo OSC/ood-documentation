@@ -3,6 +3,8 @@
 Torque
 ======
 
+.. include:: limited-support.inc
+
 A YAML cluster configuration file for a Torque/PBS resource manager on an HPC
 cluster looks like:
 

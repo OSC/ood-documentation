@@ -273,11 +273,15 @@ auto_modules_<MODULE>
   .. note::
 
     The form configuration is case sensitive. So there is a difference between
-    ``auto_modules_R`` and ``auto_modules_r``.
+    ``auto_modules_R`` and ``auto_modules_r``. The case in ``form.yml`` must match
+    the case in the cluster module files. However, the case when referenced later
+    must be lowercase. For example, if your module is called ``ParaView``, the form
+    configuration would be ``auto_modules_ParaView``, but referenced in ``script.sh.erb``
+    as ``<%= context.auto_modules_paraview %>``.
 
     Hyphens cause issues in templating the script files. For example,
     a form configuration like ``auto_modules_netcdf-serial`` would need to be
-    referenced in the ``script.sh.erb`` as ``<%= auto_modules_netcdf_serial %>``
+    referenced in the ``script.sh.erb`` as ``<%= context.auto_modules_netcdf_serial %>``
     replacing any hyphens (``-``) with underscores ``_``.
 
 .. _auto_groups:
@@ -291,7 +295,7 @@ auto_groups
 
 auto_queues
   This will generate a ``select`` widget list of all the queues available to the user.
-  These queues will be cluster if you have :ref:`dynamic options <dynamic-bc-apps>`
+  These queues will be cluster aware if you have :ref:`dynamic options <dynamic-bc-apps>`
   enabled. That is, they'll show or hide relevant lists given the currently selected
   ``cluster``.
 
@@ -358,12 +362,12 @@ are:
 
      - ``check_box``
      - ``hidden_field``
-     - ``number_field`` - can use ``min``, ``max``, ``step``
+     - ``number_field`` - can use ``min``, ``max``, ``step``, ``placeholder``
      - ``radio_button``    
      - ``resolution_field`` (used for specifying resolution dimensions necessary for VNC)
      - ``select`` - can use ``options``
-     - ``text_area``
-     - ``text_field``
+     - ``text_area`` - can use ``placeholder``
+     - ``text_field`` - can use ``pattern``, ``placeholder``
 
      Some other fields that have varying support across different browsers
      include: ``range_field``, ``date_field``, ``search_field``,
@@ -462,6 +466,24 @@ are:
             - `red`
             - `blue`
             - `green`
+
+.. describe:: placeholder (String, null)
+
+     Example or hint text that is shown inside the field with low contrast when it is empty.
+
+     Default
+       No help text appears in input field
+
+       .. code-block:: yaml
+
+          placeholder: null
+
+     Example
+       Display recommended value in placeholder
+
+       .. code-block:: yaml
+
+          placeholder: "Recommended: 4"
 
 .. describe:: pattern (String, null)
 

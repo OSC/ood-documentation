@@ -3,6 +3,8 @@
 PBS Professional
 ================
 
+.. include:: limited-support.inc
+
 A YAML cluster configuration file for a PBS Professional resource manager on an
 HPC cluster looks like:
 

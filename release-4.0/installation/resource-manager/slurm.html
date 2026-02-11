@@ -63,6 +63,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../faqs.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../add-cluster-config.html">Cluster Configuration</a><ul class="current">
@@ -75,7 +76,10 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccq.html">Cloudy Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coder.html">Coder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ht-condor.html">HT Condor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psi-j.html">PSI/J</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-configs.html">Advanced Resource Manager Configurations</a></li>
@@ -93,6 +97,7 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-passenger-apps.html">Install Passenger Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
@@ -124,7 +129,7 @@
           <li class="breadcrumb-item"><a href="../add-cluster-config.html">Cluster Configuration</a></li>
       <li class="breadcrumb-item active">Slurm</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/installation/resource-manager/slurm.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/resource-manager/slurm.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -145,6 +150,12 @@ This can cause issues with jobs that require <code class="docutils literal notra
 in a <a class="reference internal" href="../../reference/files/submit-yml/basic-bc-options.html#script-wrapper"><span class="std std-ref">script_wrapper</span></a> before any job scripts run.</p>
 <p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">copy_environment</span></code> below with the caveat
 that the PUNs environment is very different from regular shell sessions.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The name of this YAML file should be equivalent to <code class="docutils literal notranslate"><span class="pre">ClusterName</span></code> in your
+cluster's <code class="docutils literal notranslate"><span class="pre">.conf</span></code> file.  This is important for the OnDemand system to automatically
+discover information from <code class="docutils literal notranslate"><span class="pre">sacctmgr</span></code>.</p>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/my_cluster.yml</span>
 <span class="nn">---</span>
@@ -170,7 +181,7 @@ that the PUNs environment is very different from regular shell sessions.</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">adapter</span></code></dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">slurm</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The Slurm cluster name. <em>Optional</em>, passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The Slurm cluster name. <strong>Optional</strong>. This is passed to SLURM as <code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;cluster&gt;</span></code> for some commands.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">cluster</span></code> option is discouraged. This is because maintenance
@@ -180,11 +191,11 @@ should use different <code class="docutils literal notranslate"><span class="pre
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">bin</span></code></dt><dd><p>The path to the Slurm client installation binaries.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">conf</span></code></dt><dd><p>The path to the Slurm configuration file for this cluster. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">conf</span></code></dt><dd><p>The path to the Slurm configuration file for this cluster. <strong>Optional</strong>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">submit_host</span></code></dt><dd><p>A different, optional host to ssh to and <em>then</em> issue commands. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">submit_host</span></code></dt><dd><p>A different, optional host to ssh to and <em>then</em> issue commands. <strong>Optional</strong>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code></dt><dd><p>Replacements/wrappers for Slurm's job submission and control clients. <em>Optional</em></p>
+<dt><code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code></dt><dd><p>Replacements/wrappers for Slurm's job submission and control clients. <strong>Optional</strong>.</p>
 <p>Supports the following clients:</p>
 <ul class="simple">
 <li><p><cite>sbatch</cite></p></li>
@@ -221,7 +232,7 @@ cause issues as the PUN's environment is very different than a regular shell ses
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2017-2025, Ohio Supercomputer Center.</p>
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
   </div>
 
    
@@ -234,7 +245,7 @@ cause issues as the PUN's environment is very different than a regular shell ses
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Documentation Versions</span>
-    v: 
+    v: 4.0.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">

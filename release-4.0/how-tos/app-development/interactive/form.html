@@ -63,6 +63,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faqs.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation/add-cluster-config.html">Cluster Configuration</a></li>
@@ -104,6 +105,7 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install-passenger-apps.html">Install Passenger Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
@@ -136,7 +138,7 @@
           <li class="breadcrumb-item"><a href="../interactive.html">Interactive Apps</a></li>
       <li class="breadcrumb-item active">User Form (<code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code>)</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/OSC/ood-documentation/blob/develop/source/how-tos/app-development/interactive/form.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/how-tos/app-development/interactive/form.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -375,10 +377,14 @@ cluster is chosen.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The form configuration is case sensitive. So there is a difference between
-<code class="docutils literal notranslate"><span class="pre">auto_modules_R</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_modules_r</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">auto_modules_R</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_modules_r</span></code>. The case in <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> must match
+the case in the cluster module files. However, the case when referenced later
+must be lowercase. For example, if your module is called <code class="docutils literal notranslate"><span class="pre">ParaView</span></code>, the form
+configuration would be <code class="docutils literal notranslate"><span class="pre">auto_modules_ParaView</span></code>, but referenced in <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code>
+as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">context.auto_modules_paraview</span> <span class="pre">%&gt;</span></code>.</p>
 <p>Hyphens cause issues in templating the script files. For example,
 a form configuration like <code class="docutils literal notranslate"><span class="pre">auto_modules_netcdf-serial</span></code> would need to be
-referenced in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">auto_modules_netcdf_serial</span> <span class="pre">%&gt;</span></code>
+referenced in the <code class="docutils literal notranslate"><span class="pre">script.sh.erb</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">context.auto_modules_netcdf_serial</span> <span class="pre">%&gt;</span></code>
 replacing any hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>) with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
 </div>
 </dd>
@@ -391,7 +397,7 @@ to limit the groups shown.</p>
 </dl>
 <dl id="auto-queues">
 <dt>auto_queues</dt><dd><p>This will generate a <code class="docutils literal notranslate"><span class="pre">select</span></code> widget list of all the queues available to the user.
-These queues will be cluster if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
+These queues will be cluster aware if you have <a class="reference internal" href="dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic options</span></a>
 enabled. That is, they'll show or hide relevant lists given the currently selected
 <code class="docutils literal notranslate"><span class="pre">cluster</span></code>.</p>
 <div class="admonition warning">
@@ -446,12 +452,12 @@ are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">check_box</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hidden_field</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">number_field</span></code> - can use <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">step</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number_field</span></code> - can use <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">step</span></code>, <code class="docutils literal notranslate"><span class="pre">placeholder</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">radio_button</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">resolution_field</span></code> (used for specifying resolution dimensions necessary for VNC)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">select</span></code> - can use <code class="docutils literal notranslate"><span class="pre">options</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">text_area</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">text_field</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_area</span></code> - can use <code class="docutils literal notranslate"><span class="pre">placeholder</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_field</span></code> - can use <code class="docutils literal notranslate"><span class="pre">pattern</span></code>, <code class="docutils literal notranslate"><span class="pre">placeholder</span></code></p></li>
 </ul>
 <p>Some other fields that have varying support across different browsers
 include: <code class="docutils literal notranslate"><span class="pre">range_field</span></code>, <code class="docutils literal notranslate"><span class="pre">date_field</span></code>, <code class="docutils literal notranslate"><span class="pre">search_field</span></code>,
@@ -546,6 +552,24 @@ they have no cached value.</p>
 <span class="w">  </span><span class="no">- `red`</span>
 <span class="w">  </span><span class="no">- `blue`</span>
 <span class="w">  </span><span class="no">- `green`</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">placeholder</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
+<dd><p>Example or hint text that is shown inside the field with low contrast when it is empty.</p>
+<dl>
+<dt>Default</dt><dd><p>No help text appears in input field</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">placeholder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Display recommended value in placeholder</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">placeholder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Recommended:</span><span class="nv"> </span><span class="s">4&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -947,7 +971,7 @@ of the file and it will display the select widget defined above.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2017-2025, Ohio Supercomputer Center.</p>
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
   </div>
 
    
@@ -960,7 +984,7 @@ of the file and it will display the select widget defined above.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Documentation Versions</span>
-    v: 
+    v: 4.0.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
