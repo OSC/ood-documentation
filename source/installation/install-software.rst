@@ -8,7 +8,7 @@ Open OnDemand uses these packages, among many others.
 - Apache HTTP Server 2.4
 - Ruby 3.3 with :command:`rake`, :command:`bundler`, and development
   libraries
-- NodeJs 20
+- NodeJs 22
 
 .. note::
 
@@ -47,6 +47,12 @@ Open OnDemand uses these packages, among many others.
          sudo dnf install epel-release
          sudo dnf module enable ruby:3.3 nodejs:20
 
+   .. tab:: RockyLinux/Alma Linux 10
+
+      .. code-block:: sh
+
+         sudo dnf config-manager --set-enabled crb
+         sudo dnf install epel-release
 
    .. tab:: RHEL 8
 
@@ -65,6 +71,13 @@ Open OnDemand uses these packages, among many others.
          sudo dnf module enable ruby:3.3 nodejs:20
          sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
+   .. tab:: RHEL 10
+
+      .. code-block:: sh
+
+         sudo dnf install epel-release
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+
 2. Add repository and install
 -----------------------------
 
@@ -74,6 +87,7 @@ Open OnDemand uses these packages, among many others.
 
          .. code-block:: sh
 
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el8.noarch.rpm
 
             sudo dnf install ondemand
@@ -82,20 +96,19 @@ Open OnDemand uses these packages, among many others.
 
          .. code-block:: sh
 
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el9.noarch.rpm
 
             sudo dnf install ondemand
 
-      .. tab:: Ubuntu 20.04
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 10
 
          .. code-block:: sh
 
-            sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-focal_all.deb
-            sudo apt update
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
+            sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el10.noarch.rpm
 
-            sudo apt install ondemand
+            sudo dnf install ondemand
 
       .. tab:: Ubuntu 22.04
 
@@ -134,6 +147,7 @@ Open OnDemand uses these packages, among many others.
 
          .. code-block:: sh
 
+            sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.amzn2023.noarch.rpm
 
             sudo dnf install ondemand
@@ -143,7 +157,7 @@ Open OnDemand uses these packages, among many others.
 
    .. tabs::
 
-      .. tab:: RHEL/Rocky 8 & 9
+      .. tab:: RHEL/Rocky/AlmaLinux
 
          .. code-block:: sh
 

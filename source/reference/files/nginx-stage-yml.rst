@@ -346,6 +346,8 @@ Configuration Options
 
       passenger_log_file: '/some/other/location/%{user}/error.log'
 
+.. _passenger_options:
+
 .. describe:: passenger_options (Hash)
 
    A Hash of additional Passenger options
@@ -821,6 +823,43 @@ Configuration Options
       doesn't restrict the other administrative commands
       :ref:`nginx-stage-nginx` and :ref:`nginx-stage-nginx-clean` when manually
       starting and stopping the NGINX process.
+
+.. describe:: disabled_shell_message (String)
+
+   Define an error message that is displayed to users when they have a disabled_shell.
+
+    Default
+      Tell the user they have a restricted shell.
+
+      .. code-block:: yaml
+
+        disabled_shell_message: "user has a disabled shell: %s"
+
+    Example
+      Display a different message to the user.
+
+      .. code-block:: yaml
+
+        disabeled_shell_message: "This account has a disabled shell. Contact support."
+
+.. describe:: show_nginx_stage_help_message (Boolean)
+
+   Hide the standard error ``Run 'nginx_stage --help' to see a full list of available 
+   command line options.`` message when calling ``nginx_stage``.
+
+    Default
+      Show the help message.
+
+      .. code-block:: yaml
+
+        show_nginx_stage_help_message: true
+
+    Example
+      Hide the help message.
+
+      .. code-block:: yaml
+
+        show_nginx_stage_help_message: false
 
 .. describe:: disable_bundle_user_config (Integer)
 
