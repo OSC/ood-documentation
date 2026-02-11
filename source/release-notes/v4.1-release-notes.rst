@@ -9,8 +9,38 @@ v4.1 Release Notes
 Acknowledgments
 ---------------
 
-We'd like to thank all these Github users for making their first contributions
-to this project.
+Thank you to all of the community members who contributed code, documentation, suggestions, bug reports, and other 
+assistance across the project! We would like to recognize the following individuals and groups for their 
+significant contributions to the Open OnDemand 4.1 release.
+
+**University of Maryland**
+
+Alan Sussman and Harshit Soora contributed major enhancements to the Project Manager, expanding support for 
+managing composite job workflows within Open OnDemand. Their work improves how users organize, construct, 
+and execute multiple batch jobs all through the Project Manager.
+
+**Cendio AB**
+
+Robert Henschel, Mattias Reuterskiöld, William Sjöblom, and Jean Zagonel contributed to the development of the
+ThinLinc integration with Open OnDemand. This integration provides an additional option for delivering Linux 
+desktop sessions through Open OnDemand. Additionally, building on foundational work by **Jonathan Goodson (NIH)** 
+to support proxying to secure origins (interactive applications) over HTTPS, their efforts helped complete and 
+integrate this functionality for version 4.1. A beta version is available for testing here in the 
+`project repository <https://github.com/cendio/ood-thinlinc>`_. 
+
+**Harvard University IQSS and the Dataverse Team**
+
+Leonard Wisniewski, Phil Durbin, Aday Bujeda, William Horka, Michael Reekie, and colleagues from the IQSS and Dataverse
+teams contributed documentation and implementation support for the ServiceNow integration, along with various 
+bug fixes and enhancements across dismissible announcements, user home directories, shared app rendering, and a 
+configurable button in the Files app. They also created **OnDemand Loop**, a companion application that streamlines data movement 
+between HPC clusters and repositories like Dataverse or Zenodo. By replacing complex command-line workflows with an intuitive 
+interface, it lowers technical barriers and enables researchers to manage datasets directly within their computing environment. 
+More information is available here at the `OnDemand Loop documentation site <https://iqss.github.io/ondemand-loop>`_.
+
+We'd also like to extend a big thank you to those listed below for contributing to Open OnDemand for the 
+first time in this release. These contributions span the ``ondemand``, ``ood_core``, and
+``ood-documentation`` GitHub repositories and include **44** first-time contributors.  
 
 * ``wpoely86`` made their first contribution in `#4068 <https://github.com/OSC/ondemand/pull/4068>`_
 * ``harshit-soora`` made their first contribution in `#4069 <https://github.com/OSC/ondemand/pull/4069>`_
@@ -41,6 +71,22 @@ to this project.
 * ``honza801``  made their first contribution in `#4784 <https://github.com/OSC/ondemand/pull/4784>`_
 * ``fodinabor``  made their first contribution in `#4814 <https://github.com/OSC/ondemand/pull/4814>`_
 * ``Cinnamals``  made their first contribution in `#4839 <https://github.com/OSC/ondemand/pull/4839>`_
+* ``pddro-Vestas`` made their first contribution in `ood_core#865 <https://github.com/OSC/ood_core/pull/865>`_
+* ``andrejcermak`` made their first contribution in `ood_core#871 <https://github.com/OSC/ood_core/pull/871>`_
+* ``tat-ohmura`` made their first contribution in `ood_core#883 <https://github.com/OSC/ood_core/pull/883>`_
+* ``dev-sda1`` made their first contribution in `ood_core#914 <https://github.com/OSC/ood_core/pull/914>`_
+* ``kwkoepcke3`` made their first contribution in `ood_core#916 <https://github.com/OSC/ood_core/pull/916>`_
+* ``romulojales`` made their first contribution in `ood-documentation#980 <https://github.com/OSC/ood-documentation/pull/980>`_
+* ``rwxayheee`` made their first contribution in `ood-documentation#1097 <https://github.com/OSC/ood-documentation/pull/1097>`_
+* ``davidecarlson`` made their first contribution in `ood-documentation#1099 <https://github.com/OSC/ood-documentation/pull/1099>`_
+* ``jennyfothergill`` made their first contribution in `ood-documentation#1122 <https://github.com/OSC/ood-documentation/pull/1122>`_ 
+* ``ndjones`` made their first contribution in `ood-documentation#1128 <https://github.com/OSC/ood-documentation/pull/1128>`_
+* ``bpaynter`` made their first contribution in `ood-documentation#1167 <https://github.com/OSC/ood-documentation/pull/1167>`_
+* ``aharral`` made their first contribution in `ood-documentation#1187 <https://github.com/OSC/ood-documentation/pull/1187>`_
+* ``JinyuHan99`` made their first contribution in `ood-documentation#1193 <https://github.com/OSC/ood-documentation/pull/1193>`_
+* ``saracook`` made their first contribution in `ood-documentation#1198 <https://github.com/OSC/ood-documentation/pull/1198>`_
+* ``Pennswood`` made their first contribution in `ood-documentation#1203 <https://github.com/OSC/ood-documentation/pull/1203>`_
+
 
 Breaking Changes and Deprecations
 ---------------------------------
@@ -84,6 +130,14 @@ Add the ``ondemand_manage_config_dir`` boolean to allow Open OnDemand to manage 
 Authentication and Security
 ---------------------------
 
+Software Bill of Materials
+..........................
+
+Open OnDemand version 4.1 includes a Software Bill of Materials (SBOM) outlining the
+operating system-level software dependencies for Open OnDemand. For more information, 
+please see the :ref:`Requirements section <software-bom>` 
+of the documentation.
+
 Lower-casing in User Mapping
 ............................
 
@@ -94,7 +148,7 @@ against it.
 See :ref:`the user_map_match documentation <ood-portal-generator-user-map-match>`
 for more details.
 
-Proxying to Origins over HTTPS
+Proxying to Origins Over HTTPS
 ..............................
 
 Version 4.1 introduces the ability to proxy to origin servers over HTTPS protocol.
@@ -102,7 +156,7 @@ While continuing to support plain-text origins through ``node_uri`` and
 ``rnode_uri``, we've added ``secure_node_uri`` and ``secure_rnode_uri``
 configurations in ``ood_portal.yml``.
 
-See the :ref:`ood_portal.yml configuration for secure proxies<ood-portal-generator-configuration-secure-proxy>`
+See the :ref:`ood_portal.yml configuration for secure proxies <ood-portal-generator-configuration-secure-proxy>`
 for more information.
 
 Expanded Registration Options
@@ -142,6 +196,14 @@ allowing users and administrators to differentiate between log entries produced 
 
 Accessibility and Usability
 ---------------------------
+
+Accessibility Conformance Report (ACR)
+......................................
+
+Open OnDemand version 4.1 includes an Accessibility Conformance Report (ACR) and the project 
+plans to provide an updated report for each major and minor release. Findings from the version 4.1 
+ACR will inform ongoing accessibility improvements in future releases. The ACR is available on our 
+accessibility page at `openondemand.org/accessibility <https://www.openondemand.org/accessibility>`_.
 
 Dynamic Forms and Session Cards Announce to Screen Readers
 ..........................................................
