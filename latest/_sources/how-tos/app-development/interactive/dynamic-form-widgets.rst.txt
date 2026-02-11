@@ -60,7 +60,7 @@ for the ``ruby`` cluster.  It will then hide it every time the cluster ``ruby`` 
             data-option-for-cluster-ruby: false
           ]
 
-Exclusive options
+Exclusive Options
 .................
 
 Because all form items are shown by default, generally you're setting
@@ -90,8 +90,68 @@ cluster.
           ]
 
 .. tip::
-  This example shows toggling options based on the cluster, but this feature
-  generically support any field and value.
+  This example shows toggling options based on the cluster, but this feature generically 
+  support any field and value. If the value contains special characters outside the 
+  standard lowercase alphabet and digits, see the :ref:`data-alias` directive below.
+
+.. warning::
+  ``data-option-for`` and ``data-exclusive-option-for`` directives will conflict if used
+  within the same form item. It is therefore recommended to choose the one that will be 
+  most efficient and use it exclusively within each form item.
+
+.. _data-alias:
+
+Option Value Aliases
+....................
+
+Since the ``option-for`` and ``exclusive-option-for`` directives above require you to place
+the conditional value inside the directive itself, you can encounter issues if the value contains
+special characters and cannot easily be changed. ``data-alias`` fills this gap, allowing you to
+reference any incompatible value with a custom alias.
+
+For example, suppose you have to refer to the ``node_type`` value ``gpu:advanced`` in an ``option-for`` 
+directive. You can define the alias ``gpu-advanced`` using the directive ``data-alias-gpu-advanced: 'gpu:advanced'``,
+and refer to this value with the directive ``data-option-for-node-type-gpu-advanced: false``. 
+
+Aliases must be defined before they are used and can only be referenced within the form item 
+where they are defined. This form item scoping allows aliases to be freely used without 
+conflicting with aliases defined in global attributes. In the same way, global attributes 
+can use aliases without impacting existing user forms.
+
+For a larger example, suppose you have a custom ``account`` field, and by institutional convention all account names
+contain the ``@`` symbol. Using ``data-alias``, you can still selectively display ``node_type``
+options based on these accounts as follows:
+
+.. code-block:: yaml
+  :emphasize-lines: 13,14,18,19
+
+  attributes:
+    account:
+      widget: select
+      options:
+        - 'first_last@school.edu'
+        - 'first_last@organization.org'
+    node_type:
+      widget: select
+      options:
+        - 'standard'
+        - [ 
+            'academic',
+            data-alias-student: 'first_last@school.edu',
+            data-exclusive-option-for-account-student: true
+          ]
+        - [
+            'premium',
+            data-alias-professional: 'first_last@organization.org',
+            data-exclusive-option-for-account-professional: true
+          ]
+
+.. tip::
+  It is recommended to use an alias anytime the referenced value contains characters beyond
+  lowercase letters (a-z) and digits (0-9). Aliases you define should follow those same rules,
+  but can also use dashes.
+
+.. _dynamic-bc-apps-data-hide:
 
 Hiding entire elements
 **********************
@@ -99,7 +159,7 @@ Hiding entire elements
 The ``data-hide`` directive allows you to hide another element based on
 the current value of a select element.
 
-Let's continue examples involving GPUs. We'd like to provide users
+Let's continue with examples involving GPUs. We'd like to provide users
 with options for `CUDA`_ versions.
 
 But using Nvidia's `CUDA`_ libraries only makes sense when the user is requesting GPUs.
@@ -108,20 +168,6 @@ So, we want to hide the ``cuda_version`` element when a users chooses standard `
 Here's the example YAML for this app with two select widgets.  This
 instructs the web-page to hide the ``cuda_version`` when the ``standard``
 ``node_type`` is selected.
-
-.. warning::
-  In addition to hiding form fields like this example shows, one should
-  also use a ``data-set`` directive to set the value because the field
-  is no longer visible to the user. While it's hidden, it will still retain
-  the current value, if any has been supplied.
-
-  By forcing a value after hiding it you can ensure that the correct values
-  are being passed to the server.
-
-.. tip::
-
-  In addition to setting the value to ``true`` to hide the form item, in 4.0
-  you can also specify ``false`` to show the form item.
 
 .. code-block:: yaml
   :emphasize-lines: 7
@@ -137,8 +183,39 @@ instructs the web-page to hide the ``cuda_version`` when the ``standard``
           ]
         - 'gpu'
 
+.. warning::
+  In addition to hiding form fields like this example shows, one should
+  also use a ``data-set`` directive to set the value because the field
+  is no longer visible to the user. While it's hidden, it will still retain
+  the current value, if any has been supplied.
 
-Additionally, you can use ``check_box`` widgets to hide elements.
+  By forcing a value after hiding it you can ensure that the correct values
+  are being passed to the server.
+
+If you have an item that is hidden for most options, you can include the 
+``hide_by_default: true`` attribute in the item's definition and use
+``data-hide-item: false`` on options that should reveal that item. For example,
+if only the ``gpu`` node type has access to GPU resources, then you can easily
+hide it for any other node type with the following form
+
+.. code-block:: yaml
+  :emphasize-lines: 6, 10
+
+  attributes:
+    node_type:
+      widget: select
+      options:
+        - ['Standard', 'standard']
+        - ['Small', 'small']
+        - ['Large', 'large']
+        - ['Gpu', 'gpu', data-hide-cuda-version: false]
+
+    cuda_version:
+      widget: select
+      hide_by_default: true
+      options:
+      
+Finally, you can also use ``check_box`` widgets to hide elements.
 Here we have a checkbox ``enable_cuda_version`` that will show
 ``cuda_version`` when checked and hide it when it's not checked.
 
@@ -180,7 +257,40 @@ form element based on the selected option in a select widget.
       value: 1
 
 In this case, selecting Node Type 'small' will change the label of Cores to
-'Number of Cores (1-4)'.
+'Number of Cores (1-4)'. Note that you must define a ``data-label`` directive
+on each option of the select, as it does not keep a default value.
+
+.. _dynamic-bc-apps-data-help:
+
+Dynamic Help Text
+*****************
+
+The ``data-help-*`` directive allows you to change the help text of another
+form element based on the selected option in a select widget.
+
+.. code-block:: yaml
+
+  form:
+    - node_type
+  attributes:
+    node_type:
+      widget: select
+      label: Node Type
+      options:
+        - [ 'Small',  'small',  data-help-node-type: 'Small machines have 10 cores and 100 GB of RAM' ]
+        - [ 'Medium', 'medium', data-help-node-type: 'Medium machines have 50 cores and 500 GB of RAM' ]
+        - [ 'Large',  'large',  data-help-node-type: 'Large machines have 100 cores and 1 TB of RAM' ]
+
+In this case, the ``node_type`` form item begins with the help text 'Small machines ...', since this
+is the initial value of the select. As you select different options, the help text changes to provide
+details of the different choices. While we have the ``node-type`` select changing its own help text in 
+this example, you can modify the help text of any form item using the same ``data-help-attribute-name``
+syntax.
+
+Note that ``data-help`` directives will override the help text provided in the attribute definition, and 
+any options that do not have a ``data-help`` directive will not change the help text from it's last value. 
+This means that if we left out the data-help directive on the medium option, the help text will retain its 
+previous value (either 'Small machines...' or 'Large machines...') when medium is selected instead of clearing.
 
 Dynamic Min and Maxes
 *********************

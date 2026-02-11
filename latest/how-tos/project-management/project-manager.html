@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Manager &mdash; Open OnDemand 4.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Install Other Interactive Apps" href="../../install-ihpc-apps.html" />
+    <link rel="prev" title="App Sharing" href="../app-development/app-sharing.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faqs.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app-development.html">App Development</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#collaboration">Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#templates">Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launchers">Launchers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-passenger-apps.html">Install Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Project Manager</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/how-tos/project-management/project-manager.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-manager">
+<span id="id1"></span><h1>Project Manager<a class="headerlink" href="#project-manager" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#setup" id="id3">Setup</a></p>
+<ul>
+<li><p><a class="reference internal" href="#collaboration" id="id4">Collaboration</a></p></li>
+<li><p><a class="reference internal" href="#templates" id="id5">Templates</a></p></li>
+<li><p><a class="reference internal" href="#launchers" id="id6">Launchers</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>A new feature in version 4.1, the Project Manager provides a suite of tools to leverage
+the Open OnDemand features from batch connect apps for each user's own personal scripts,
+track and organize their job history, assemble individual jobs into large-scale workflows,
+and easily share and collaborate on these projects with their team.</p>
+<p>The basic element of a project is the <strong>launcher</strong>, which is a paired form and script
+that can submit jobs to the scheduler. By selecting different options in the form, a user
+can change both scheduler parameters (account, resources, etc.), or change the behavior
+of the script itself through environment variables.</p>
+<p>All of the scripts, input data, and output data for a project's launchers are stored in the
+<strong>project directory</strong>. This directory can be freely organized according to individual
+needs, allowing users to customize for anything from large one-time jobs to long-term
+projects with jobs that are repeated many times.</p>
+<p><strong>Workflows</strong> allow users to connect their launchers together with dependency relationships,
+enabling them to build self-contained systems that can be run with a single click. These
+systems can be as simple or intricate as needed, and are easily assembled through an
+intuitive graphical interface.</p>
+<p>The single most important theme of all these features is <strong>flexibility</strong>. As the examples
+demonstrate, there is no one way to structure scripts, organize directories, or
+manage complexity within a project. The Project Manager is designed to give users an
+efficient and intuitive way to leverage the most powerful features of Open OnDemand in
+whatever way works best for them and their needs.</p>
+</section>
+<section id="setup">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Setup</a><a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>For individual projects, there is no setup required. Anybody with the permissions
+to submit jobs to your scheduler will also be able to use all of the launcher and
+workflow tools of the Project Manager after updating to v4.1. In order for users
+to collaborate together they will need a properly configured shared directory,
+meeting the minimum permissions described below.</p>
+<section id="collaboration">
+<span id="project-manager-collaboration"></span><h3><a class="toc-backref" href="#id4" role="doc-backlink">Collaboration</a><a class="headerlink" href="#collaboration" title="Link to this heading"></a></h3>
+<p>Collaborative projects require properly configured directories to exist in, which may
+vary on the types of collaboration you would like to enable. Like other actions in
+Open OnDemand, it will operate as the logged in user and never exceed the UNIX
+permissions of the directories and files it operates on. This means there are several
+different approaches you may want to take depending on your file system's account and
+permission management approach.</p>
+<p id="project-manager-shared-project-root">The project manager provides the <code class="docutils literal notranslate"><span class="pre">OOD_SHARED_PROJECT_PATH</span></code> environment variable to
+help potential collaborators discover potential projects to import. While this is
+not necessary for collaboration, it is a recommended step to make it easier to locate.
+The <code class="docutils literal notranslate"><span class="pre">OOD_SHARED_PROJECT_PATH</span></code> is a list of base locations for shared projects, allowing
+you to add as many locations as you need for different types of users and projects.
+The Project Manager will only allow users to import projects from locations that they
+have access to, so there is no danger in adding paths that are not accessible to certain
+users.</p>
+<p>Because many centers use group-based permission schemes, the Project Manager expects that
+each directory in <code class="docutils literal notranslate"><span class="pre">OOD_SHARED_PROJECT_PATH</span></code> has a set of subdirectories with finer permissions,
+and will only look for projects in these subdirectories.</p>
+<p>For example, a center may have a shared project folder <code class="docutils literal notranslate"><span class="pre">/fs/shared/projects</span></code>, and a series of subdirectories
+<code class="docutils literal notranslate"><span class="pre">/fs/shared/projects/developers</span></code>, <code class="docutils literal notranslate"><span class="pre">/fs/shared/projects/staff</span></code>, <code class="docutils literal notranslate"><span class="pre">/fs/shared/projects/students</span></code>.</p>
+<p>In this example, they would set <code class="docutils literal notranslate"><span class="pre">OOD_SHARED_PROJECT_PATH=/fs/shared/projects</span></code>, allowing developers
+to create collaborative projects like <code class="docutils literal notranslate"><span class="pre">/fs/shared/projects/developers/project1</span></code>, which are then
+easily accessible to others in the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group (likewise for <code class="docutils literal notranslate"><span class="pre">staff</span></code> and <code class="docutils literal notranslate"><span class="pre">students</span></code>).</p>
+<p>While the Project Manager automates the permissions settings on project-specific folders, these can
+never exceed the permissions of the <code class="docutils literal notranslate"><span class="pre">SHARED_PROJECT_ROOT</span></code> or any group-level subdirectory, so it
+is important to ensure that your directory structure meets these minimum requirements.</p>
+<ol class="arabic simple">
+<li><p>Any directory in <code class="docutils literal notranslate"><span class="pre">OOD_SHARED_PROJECT_PATH</span></code> and above must have at minimum <code class="docutils literal notranslate"><span class="pre">r-x</span></code> permissions
+for all potential collaborators.</p></li>
+<li><p>Any group directory directly below <code class="docutils literal notranslate"><span class="pre">OOD_SHARED_PROJECT_PATH</span></code> should have <code class="docutils literal notranslate"><span class="pre">rwx</span></code> permissions
+for the group</p></li>
+</ol>
+</section>
+<section id="templates">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Templates</a><a class="headerlink" href="#templates" title="Link to this heading"></a></h3>
+<p>For specific applications, it can be helpful to create a project with basic scripts, launchers,
+and workflows customized to that application. For this use case, administrators can copy any
+valid project directory to the <code class="docutils literal notranslate"><span class="pre">OOD_PROJECT_TEMPLATE_DIR</span></code> directory, which defaults to
+<code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/projects</span></code>, or <code class="docutils literal notranslate"><span class="pre">OOD_APP_CONFIG_ROOT/projects</span></code>, if
+<code class="docutils literal notranslate"><span class="pre">OOD_APP_CONFIG_ROOT</span></code> is defined in your environment.</p>
+<p>Note that unlike <code class="docutils literal notranslate"><span class="pre">OOD_APP_CONFIG_ROOT</span></code>, the template directory can also be set within profiles
+to manage which templates a user can select by setting <code class="docutils literal notranslate"><span class="pre">project_template_dir</span></code> in the
+<a class="reference internal" href="../../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>. This allows you to organize your templates into directories for each
+profile, in addition to limiting template visibility by restricting read permissions on the
+individual template directories.</p>
+</section>
+<section id="launchers">
+<span id="launcher-default-items"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">Launchers</a><a class="headerlink" href="#launchers" title="Link to this heading"></a></h3>
+<p>All launchers are required to have a <code class="docutils literal notranslate"><span class="pre">cluster</span></code> and a <code class="docutils literal notranslate"><span class="pre">script</span></code> selection in their form by
+default. These fields cannot be removed by editing the launcher, as any launcher without these
+fields will be rejected by the scheduler. While these are sufficient for the general case,
+if your center requires additional parameters, these can be supplied with the <code class="docutils literal notranslate"><span class="pre">launcher_default_items</span></code>
+key in your <a class="reference internal" href="../../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>.</p>
+<p>For example, OSC does not allow jobs to be submitted without the <code class="docutils literal notranslate"><span class="pre">account</span></code> field. To prevent
+support tickets from users attempting to run launchers without this field, we add the following
+line to <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/ondemand.d/ondemand.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">launcher_default_items</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">auto_accounts</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Which ensures that all new launchers begin with <code class="docutils literal notranslate"><span class="pre">cluster</span></code>, <code class="docutils literal notranslate"><span class="pre">script</span></code>, and <code class="docutils literal notranslate"><span class="pre">account</span></code> fields.</p>
+<p>This can be used to add any <a class="reference internal" href="../app-development/interactive/form.html#app-development-interactive-form-predefined-attributes"><span class="std std-ref">predefined attribute</span></a>,
+<a class="reference internal" href="../app-development/interactive/form.html#auto-bc-form-options"><span class="std std-ref">automatic predefined attribute</span></a>, or <a class="reference internal" href="../app-development/interactive/form.html#global-bc-form-items"><span class="std std-ref">global attribute</span></a>
+and unlike <code class="docutils literal notranslate"><span class="pre">cluster</span></code> and <code class="docutils literal notranslate"><span class="pre">script</span></code>, these additional default fields _can_ be removed by the user.</p>
+<p>Note that if you have predefined attributes or custom global attributes that are not present as options
+in the launcher editor, adding them as default items is the only way to use them in launcher forms.</p>
+<p>For user-focused details of the Project Manager, see <a class="reference internal" href="../../tutorials/tutorials-project-manager.html#project-manager-tutorial"><span class="std std-ref">Tutorials: Project Manager</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../app-development/app-sharing.html" class="btn btn-neutral float-left" title="App Sharing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../install-ihpc-apps.html" class="btn btn-neutral float-right" title="Install Other Interactive Apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 4.1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/project-management/project-manager.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/how-tos/project-management/project-manager.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/how-tos/project-management/project-manager.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/how-tos/project-management/project-manager.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/how-tos/project-management/project-manager.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/how-tos/project-management/project-manager.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/how-tos/project-management/project-manager.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/how-tos/project-management/project-manager.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/how-tos/project-management/project-manager.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/how-tos/project-management/project-manager.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/how-tos/project-management/project-manager.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/how-tos/project-management/project-manager.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/how-tos/project-management/project-manager.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

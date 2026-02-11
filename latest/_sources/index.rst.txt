@@ -64,6 +64,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   how-tos/debug
   enable-desktops
   how-tos/app-development
+  how-tos/project-management/project-manager
 
 .. toctree::
   :maxdepth: 2
@@ -75,7 +76,8 @@ These are institutions who were early adopters or provided HPC resources for dev
   tutorials/tutorials-interactive-apps
   tutorials/tutorials-passenger-apps
   tutorials/tutorials-dashboard-apps
-
+  tutorials/tutorials-project-manager
+  
 .. toctree::
   :maxdepth: 2
   :caption: Reference

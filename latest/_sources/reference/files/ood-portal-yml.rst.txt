@@ -403,6 +403,13 @@ Configure General Options
       > string.match('ktrout@example.edu', '^([^@]+)@example.edu$')
       ktrout
 
+   In addition to lua patterns, you can append ``:lower`` to the pattern to
+   automatically lowercase the matched string. An example configuration may be
+   something like ``.*:lower`` to match anything then lowercase it or
+   ``^([^@]+)@example.edu$:lower`` to match the email address with the domain
+   ``example.edu`` then lowercase it.
+
+
    Default
       Match any characters 0 or more times.
 
@@ -781,6 +788,72 @@ assets and links supplied by the web server are relative and not absolute.
 
           rnode_uri: "/rnode"
 
+.. _ood-portal-generator-configuration-secure-proxy:
+
+.. describe:: secure_node_uri (String, null)
+
+  Introduced in 4.1. Similar to ``node_uri`` above, only in that
+  it will proxy to origin servers using the https protocol instead
+  of plain text http.
+
+  Default
+    This feature is disabled by default.
+
+    .. code-block:: yaml
+
+      secure_node_uri: null
+
+  Example
+    Enable this feature.
+
+    .. code-block:: yaml
+
+      secure_node_uri: "/secure-node"
+
+.. describe:: secure_rnode_uri (String, null)
+
+
+  Introduced in 4.1. Similar to ``rnode_uri`` above, only in that it will
+  proxy to origin  servers using the https protocol instead of plain text http.
+
+  Default
+    This feature is disabled by default.
+
+    .. code-block:: yaml
+
+      secure_rnode_uri: null
+
+  Example
+    Enable this feature.
+
+    .. code-block:: yaml
+
+      secure_rnode_uri: "/secure-rnode"
+
+.. describe:: ssl_proxy (Array, [])
+
+  When enabling SSL/TLS origins above, centers may need to provide
+  apache SSL directives to successfully communicate with the origin
+  servers. Centers can use this configuration to provide such directives.
+
+  Default
+    Do not supply any ``SSLProxy`` directives.
+
+    .. code-block:: yaml
+
+      ssl_proxy: []
+
+  Example
+    Do not check the origin server's certificate CN field or name when
+    proxying to origins over https.
+
+    .. code-block:: yaml
+
+      ssl_proxy:
+        - 'SSLProxyCheckPeerCN Off'
+        - 'SSLProxyCheckPeerName Off'
+
+
 Configure per-user NGINX
 ------------------------
 
@@ -946,6 +1019,24 @@ on mod_auth_openidc_.
 
           oidc_uri: "/oidc"
 
+.. describe:: oidc_redirect_uri (String, null)
+
+     Sub-URI used by mod_auth_openidc_ to populate OIDCRedirectURI
+
+     Default
+       This defaults to: 
+
+       .. code-block:: yaml
+
+          oidc_redirect_uri: /oidc
+
+     Example
+       Enable it on a recommended URI:
+
+       .. code-block:: yaml
+
+          oidc_redirect_uri: "https://rproxy-example-uri.com/oidc"
+
 .. describe:: oidc_discover_uri (String, null)
 
      the URI a user is redirected to if they are not authenticated by
@@ -986,6 +1077,8 @@ on mod_auth_openidc_.
           oidc_discover_root: "/var/www/ood/discover"
 
 .. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
+
+.. _ood-portal-generator-user-registration:
 
 Configure User Registration
 ---------------------------
@@ -1037,6 +1130,62 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           register_root: "/var/www/ood/register"
+
+.. describe:: register_path (String, register_root)
+
+  Added in 4.1. The file-system path that the ``register_uri`` can map to.
+
+  Default
+    Same value as ``register_root`` if it's been set.
+
+    .. code-block:: yaml
+
+      register_path: '< the same value as register_root >'
+
+  Example
+    Enable it to ``/var/www/ood_register``.
+
+    .. code-block:: yaml
+
+      register_root: "/var/www/ood_register"
+
+.. describe:: register_method (String, 'Alias')
+
+  Added in 4.1. The apache method to which ``register_uri`` will map to ``register_path``.
+
+  Default
+    Use the apache directive ``Alias`` to map ``register_uri`` to ``register_path``.
+
+    .. code-block:: yaml
+
+      register_method: 'Alias'
+
+  Example
+    Use the apache directive ``ScriptAlias`` to map ``register_uri`` to ``register_path``.
+
+    .. code-block:: yaml
+
+      register_root: 'ScriptAlias'
+
+.. describe:: register_method_options (Array, null)
+
+  Added in 4.1. Additional apache directives you may need to supply to register users.
+
+  Default
+    None provided.
+
+    .. code-block:: yaml
+
+      register_method_options: null
+
+  Example
+    Provide a ``WSGIDaemonProcess`` directive with some arguments to help register users.
+
+    .. code-block:: yaml
+
+      register_method_options:
+        - 'WSGIDaemonProcess register user=www-data group=www-data threads=5 home=/var/www/flask-apps/register'
+
 
 .. describe:: oidc_provider_metadata_url (String, null)
 

@@ -96,7 +96,7 @@ If the announcement file has the extension ``yml`` and is a YAML file it is firs
      - Description
    * - ``type``
      - The type of announcement. Values can be ``warning``, ``info``, ``success``, or ``danger``.
-   * - ``msg``
+   * - ``message``
      - The announcement's message.
    * - ``id``
      - Optional unique identifier for the announcement. This is useful for managing changes to announcements that are used as ToS or EULA that users need to agree to.
@@ -121,7 +121,7 @@ Because the announcement is rendered via ERB you can do some interesting things,
    .. code-block:: erb
 
       type: warning
-      msg: |
+      message: |
         <% if Time.now < Time.new(2018, 9, 24, 12, 0, 0) %>
         A **Ruby Partial Downtime** for 4 hours on Monday, September 24 from 8:00am to 12:00pm
         will prevent SSH login to Ruby nodes and Ruby VDI sessions.
@@ -463,20 +463,33 @@ If you want to disable file upload altogether, set ``FILE_UPLOAD_MAX`` to 0 and 
 the ``nginx_file_upload_max`` configuration alone (or comment it out so the default
 is used).
 
+.. _set_download_limits:
+
 Set Download Limits
 -------------------
 
-By default, the maximum file download size is 10.7 GB (10737418240 bytes). 
-If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` configuration environment 
-variable in the ``/etc/ood/config/apps/dashboard/env`` file to the desired value in bytes.
+By default, the maximum download size for files and directories is 10.7 GB (10737418240 bytes). 
+If you wish to change this, you can set the ``OOD_DOWNLOAD_DIR_MAX`` and/or ``OOD_DOWNLOAD_FILE_MAX`` 
+configuration environment variables in the ``/etc/ood/config/apps/dashboard/env`` file to the desired
+value for directories and files, respectively. Both variables can also be set in your :ref:`ondemand-d-ymls`
+file as ``download_dir_max`` and ``download_file_max``.
 
-For example, to set the limit to 5 GB, you can add the following line to the ``/etc/ood/config/apps/dashboard/env`` file:
+For example, to set the directory limit to 8 GiB and the file limit to 5 GiB, you can add the following 
+lines to the ``/etc/ood/config/apps/dashboard/env`` file:
 
 .. code-block:: 
 
-  OOD_DOWNLOAD_DIR_MAX=5368709120
+  OOD_DOWNLOAD_DIR_MAX=8589934592
+  OOD_DOWNLOAD_FILE_MAX=5368709120
 
-Note that this will limit the download size for all users of the Open OnDemand instance.
+Note that this will limit the download size for all users of the Open OnDemand instance. If you want 
+to set it as part of your :ref:`profiles_guide` to affect only a subset of users, you can add the
+the following lines to a specific profile in your :ref:`ondemand-d-ymls`.
+
+.. code-block::
+
+  download_dir_max:8589934592
+  download_file_max:5368709120
 
 .. warning::
    This configuration value is expected to be numbers only (no characters)
@@ -598,6 +611,11 @@ connection alive is not factored into this.
 ``OOD_SHELL_MAX_DURATION_MS`` controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
 regardless of activity. Its default is 3600000 milliseconds (1 hour).
+
+``OOD_SHELL_TERM`` allows the default ``TERM=xterm-16color`` to be overridden. Should only
+be set to ones whose escape codes are fully supported by the underlying
+`hterm library <https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ControlSequences.md>`__.
+Some other common ones that are include ``xterm``, ``xterm-256color``, and ``xterm-direct``.
 
 .. code:: shell
 
@@ -903,11 +921,18 @@ of 4.0.8 the existing widgets are:
 - ``pinned_apps`` - Pinned Apps described above
 - ``recently_used_apps`` - the four most recently used interactive applications.
   Launching these applications will start a new interactive session with the previously submitted parameters.
+  Hovering over the apps will show these parameters for attributes with the :ref:`display option <display_option>` set to true.
 - ``sessions`` - the three most recent active interactive sessions
 - ``motd`` - the Message of the Day
 - ``xdmod_widget_job_efficiency`` - the XDMoD widget for job efficiency
 - ``xdmod_widget_jobs`` - the XDMoD widget for job information
 - ``saved_settings`` - all of the batch connect saved settings displayed as cards
+- ``balances`` - Current users' balances if you've configured :ref:`balance warnings on the dashboard <balance-warnings-on-dashboard>`.
+  Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current balances.
+- ``file_quotas`` - Current users' file quotas if you've configure :ref:`disk quota warnings on the dashboard <disk_quota_warnings>`.
+  Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current file quotas.
+- ``nsf_access_events`` - A list of upcoming NSF ACCESS events with registration links.
+- ``system_status`` - The system status page as a dashboard widget instead of a dedicated page.
 
 This feature also allows for administrators to *add* custom widgets.
 Simply drop new files into ``/etc/ood/config/apps/dashboard/views/widgets`` and reference them
@@ -1032,6 +1057,8 @@ Customize Text in the Job Composer's options form
 The OSC default value for ``options_account_help`` says that the account field is optional unless a user is a member of multiple projects.
 
 Items of note include what to call Accounts which might also be Charge Codes, or Projects. At OSC entering an account is optional unless a user is a member of multiple projects which is reflected in the default value for the string ``options_account_help``.
+
+.. _disk_quota_warnings:
 
 Disk Quota Warnings on Dashboard
 --------------------------------

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customizations &mdash; Open OnDemand 4.0.0 documentation</title>
+  <title>Customizations &mdash; Open OnDemand 4.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c48163e2" />
@@ -18,7 +18,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=3304f9e4"></script>
+        <script src="_static/documentation_options.js?v=42d1b3bd"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -51,7 +51,7 @@
               <img src="_static/logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                4.0
+                4.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -159,8 +159,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#cancel-interactive-sessions">Cancel Interactive Sessions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#custom-pages">Custom Pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-tickets">Support Tickets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">Customizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-delivery-mechanisms">Supported Delivery Mechanisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-form-fields">Default Form Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#email">Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Customizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request-tracker-api">Request Tracker API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#servicenow-api">ServiceNow API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#profile-based-configuration">Profile-Based Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-templates">Custom Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delivery-mechanism-precedence">Delivery Mechanism Precedence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
 </ul>
 </li>
 </ul>
@@ -168,6 +177,7 @@
 <li class="toctree-l1"><a class="reference internal" href="how-tos/debug.html">Debugging and Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-tos/project-management/project-manager.html">Project Manager</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
@@ -176,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -276,15 +287,15 @@ OnDemand will be unavailable during this period. For details, please visit
 </div>
 </div></blockquote>
 <p>the user would see this message at the top of the dashboard:</p>
-<figure class="align-center" id="id24">
+<figure class="align-center" id="id25">
 <img alt="_images/dashboard-announcement.png" src="_images/dashboard-announcement.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of the Dashboard announcement.</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>If the announcement file has the extension <code class="docutils literal notranslate"><span class="pre">yml</span></code> and is a YAML file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:</p>
-<table class="docutils align-default" id="id25">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Announcement configuration keys.</span><a class="headerlink" href="#id25" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id26">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Announcement configuration keys.</span><a class="headerlink" href="#id26" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Key</p></th>
 <th class="head"><p>Description</p></th>
@@ -294,7 +305,7 @@ OnDemand will be unavailable during this period. For details, please visit
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
 <td><p>The type of announcement. Values can be <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code>, or <code class="docutils literal notranslate"><span class="pre">danger</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">msg</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">message</span></code></p></td>
 <td><p>The announcement's message.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
@@ -324,7 +335,7 @@ EULA (end user license agreement) or similar.</p>
 <p>Because the announcement is rendered via ERB you can do some interesting things, like stop showing the announcement past a specified date:</p>
 <blockquote>
 <div><div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">type: warning</span>
-<span class="x">msg: |</span>
+<span class="x">message: |</span>
 <span class="x">  </span><span class="cp">&lt;%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="cp">%&gt;</span>
 <span class="x">  A **Ruby Partial Downtime** for 4 hours on Monday, September 24 from 8:00am to 12:00pm</span>
 <span class="x">  will prevent SSH login to Ruby nodes and Ruby VDI sessions.</span>
@@ -359,10 +370,10 @@ HTML content. For your safety, by default, the Open OnDemand system will not ren
 HTML.  We provide <a class="reference internal" href="reference/files/ondemand-d-ymls.html#motd-render-html"><span class="std std-ref">a configuration to enable HTML rendering in MOTD</span></a>
 should you need to render HTML.</p>
 </div>
-<figure class="align-center" id="id26">
+<figure class="align-center" id="id27">
 <img alt="_images/dashboard_motd.png" src="_images/dashboard_motd.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Message of the Day appears in the body of the index page.</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
@@ -375,8 +386,8 @@ should you need to render HTML.</p>
 </figure>
 <p>We recommend setting these values using the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration properties</span></a>.
 Currently only the dashboard uses the colors in the navbar.</p>
-<table class="docutils align-default" id="id27">
-<caption><span class="caption-number">Table 3 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id27" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id28">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Branding</span><a class="headerlink" href="#id28" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head stub"><p>Feature</p></th>
 <th class="head"><p>Property</p></th>
@@ -423,10 +434,10 @@ Currently only the dashboard uses the colors in the navbar.</p>
 <p>It is possible to configure these settings using environment variables, although this is deprecated.
 For information about the properties and environment variables, see the <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">OnDemand configuration documentation</span></a>.</p>
 </div>
-<figure class="align-center" id="id28">
+<figure class="align-center" id="id29">
 <img alt="_images/dashboard_navbar_branding_bluered.png" src="_images/dashboard_navbar_branding_bluered.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Navigation bar when <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> is <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> is <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> is <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code>.</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Navigation bar when <code class="docutils literal notranslate"><span class="pre">brand_bg_color</span></code> is <code class="docutils literal notranslate"><span class="pre">#0000ff</span></code> and <code class="docutils literal notranslate"><span class="pre">brand_link_active_bg_color</span></code> is <code class="docutils literal notranslate"><span class="pre">#ff0000</span></code> and <code class="docutils literal notranslate"><span class="pre">dashboard_title</span></code> is <code class="docutils literal notranslate"><span class="pre">OSC</span> <span class="pre">OnDemand</span></code>.</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="custom-css-files">
@@ -475,8 +486,8 @@ distributed by the Open OnDemand package.</p>
 <section id="add-urls-to-help-menu">
 <h2>Add URLs to Help Menu<a class="headerlink" href="#add-urls-to-help-menu" title="Link to this heading"></a></h2>
 <p>These URLs can be specified, which will appear in the Help menu and on other locations of the Dashboard. We recommend setting this in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code>.</p>
-<table class="docutils align-default" id="id29">
-<caption><span class="caption-number">Table 4 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id29" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id30">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Dashboard URLs</span><a class="headerlink" href="#id30" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head stub"><p>Name</p></th>
 <th class="head"><p>Environment variable</p></th>
@@ -631,10 +642,10 @@ with in the drop-down with both the title and the path.</p></li>
 <span class="n">the</span><span class="w"> </span><span class="no">Home</span><span class="w"> </span><span class="no">Directory</span><span class="w"> </span><span class="n">link</span><span class="o">.</span>
 </pre></div>
 </div>
-<figure class="align-center" id="id30">
+<figure class="align-center" id="id31">
 <img alt="_images/files_menu_shortcuts_osc.png" src="_images/files_menu_shortcuts_osc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Shortcuts to scratch and project space directories in Files menu in OSC OnDemand.</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1110,15 +1121,25 @@ the <code class="docutils literal notranslate"><span class="pre">nginx_file_uplo
 is used).</p>
 </section>
 <section id="set-download-limits">
-<h2>Set Download Limits<a class="headerlink" href="#set-download-limits" title="Link to this heading"></a></h2>
-<p>By default, the maximum file download size is 10.7 GB (10737418240 bytes).
-If you wish to change this, you can set the <code class="docutils literal notranslate"><span class="pre">OOD_DOWNLOAD_DIR_MAX</span></code> configuration environment
-variable in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file to the desired value in bytes.</p>
-<p>For example, to set the limit to 5 GB, you can add the following line to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OOD_DOWNLOAD_DIR_MAX</span><span class="o">=</span><span class="mi">5368709120</span>
+<span id="id14"></span><h2>Set Download Limits<a class="headerlink" href="#set-download-limits" title="Link to this heading"></a></h2>
+<p>By default, the maximum download size for files and directories is 10.7 GB (10737418240 bytes).
+If you wish to change this, you can set the <code class="docutils literal notranslate"><span class="pre">OOD_DOWNLOAD_DIR_MAX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">OOD_DOWNLOAD_FILE_MAX</span></code>
+configuration environment variables in the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file to the desired
+value for directories and files, respectively. Both variables can also be set in your <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>
+file as <code class="docutils literal notranslate"><span class="pre">download_dir_max</span></code> and <code class="docutils literal notranslate"><span class="pre">download_file_max</span></code>.</p>
+<p>For example, to set the directory limit to 8 GiB and the file limit to 5 GiB, you can add the following
+lines to the <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/env</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OOD_DOWNLOAD_DIR_MAX</span><span class="o">=</span><span class="mi">8589934592</span>
+<span class="n">OOD_DOWNLOAD_FILE_MAX</span><span class="o">=</span><span class="mi">5368709120</span>
 </pre></div>
 </div>
-<p>Note that this will limit the download size for all users of the Open OnDemand instance.</p>
+<p>Note that this will limit the download size for all users of the Open OnDemand instance. If you want
+to set it as part of your <a class="reference internal" href="#profiles-guide"><span class="std std-ref">Configuration Profiles</span></a> to affect only a subset of users, you can add the
+the following lines to a specific profile in your <a class="reference internal" href="reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">download_dir_max</span><span class="p">:</span><span class="mi">8589934592</span>
+<span class="n">download_file_max</span><span class="p">:</span><span class="mi">5368709120</span>
+</pre></div>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This configuration value is expected to be numbers only (no characters)
@@ -1155,7 +1176,7 @@ to disable access to specific users based on the users' default <code class="doc
 default shell.</p>
 </section>
 <section id="set-default-ssh-host">
-<span id="id14"></span><h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Link to this heading"></a></h2>
+<span id="id15"></span><h2>Set Default SSH Host<a class="headerlink" href="#set-default-ssh-host" title="Link to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The shell app does not work out of the box because all SSH hosts have to be explicitly allowed
@@ -1179,7 +1200,7 @@ default=true attribute to the login section like the example below.</p>
 </div>
 </section>
 <section id="set-ssh-allowlist">
-<span id="id15"></span><h2>Set SSH Allowlist<a class="headerlink" href="#set-ssh-allowlist" title="Link to this heading"></a></h2>
+<span id="id16"></span><h2>Set SSH Allowlist<a class="headerlink" href="#set-ssh-allowlist" title="Link to this heading"></a></h2>
 <p>In 1.8 and above we stopped allowing ssh access by default.  Now you have explicitly set
 what hosts users will be allowed to connect to in the shell application.</p>
 <p>Every cluster configuration with <code class="docutils literal notranslate"><span class="pre">v2.login.host</span></code> that is not hidden (it has
@@ -1218,6 +1239,10 @@ connection alive is not factored into this.</p>
 <p><code class="docutils literal notranslate"><span class="pre">OOD_SHELL_MAX_DURATION_MS</span></code> controls how long a connection can exist regardless
 of activity (in milliseconds). After this duration, the connection will be closed
 regardless of activity. Its default is 3600000 milliseconds (1 hour).</p>
+<p><code class="docutils literal notranslate"><span class="pre">OOD_SHELL_TERM</span></code> allows the default <code class="docutils literal notranslate"><span class="pre">TERM=xterm-16color</span></code> to be overridden. Should only
+be set to ones whose escape codes are fully supported by the underlying
+<a class="reference external" href="https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ControlSequences.md">hterm library</a>.
+Some other common ones that are include <code class="docutils literal notranslate"><span class="pre">xterm</span></code>, <code class="docutils literal notranslate"><span class="pre">xterm-256color</span></code>, and <code class="docutils literal notranslate"><span class="pre">xterm-direct</span></code>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/apps/shell/env</span>
 
 <span class="nv">OOD_SHELL_INACTIVE_TIMEOUT_MS</span><span class="o">=</span><span class="m">300000</span>
@@ -1462,12 +1487,19 @@ of 4.0.8 the existing widgets are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pinned_apps</span></code> - Pinned Apps described above</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">recently_used_apps</span></code> - the four most recently used interactive applications.
-Launching these applications will start a new interactive session with the previously submitted parameters.</p></li>
+Launching these applications will start a new interactive session with the previously submitted parameters.
+Hovering over the apps will show these parameters for attributes with the <a class="reference internal" href="how-tos/app-development/interactive/form.html#display-option"><span class="std std-ref">display option</span></a> set to true.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sessions</span></code> - the three most recent active interactive sessions</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">motd</span></code> - the Message of the Day</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">xdmod_widget_job_efficiency</span></code> - the XDMoD widget for job efficiency</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">xdmod_widget_jobs</span></code> - the XDMoD widget for job information</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">saved_settings</span></code> - all of the batch connect saved settings displayed as cards</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">balances</span></code> - Current users' balances if you've configured <a class="reference internal" href="#balance-warnings-on-dashboard"><span class="std std-ref">balance warnings on the dashboard</span></a>.
+Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current balances.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file_quotas</span></code> - Current users' file quotas if you've configure <a class="reference internal" href="#disk-quota-warnings"><span class="std std-ref">disk quota warnings on the dashboard</span></a>.
+Warnings have a threshold to determine if it shows at all. This widget does not. It will show all current file quotas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nsf_access_events</span></code> - A list of upcoming NSF ACCESS events with registration links.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system_status</span></code> - The system status page as a dashboard widget instead of a dedicated page.</p></li>
 </ul>
 <p>This feature also allows for administrators to <em>add</em> custom widgets.
 Simply drop new files into <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/widgets</span></code> and reference them
@@ -1514,8 +1546,8 @@ is an array of existing or newly added widgets to render in that column.</p>
 <li><p>The default locale is &quot;en&quot;. You can use a custom locale. For example, if you want the locale to be French, you can create a <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/locales/fr.yml</span></code> and then configure the Dashboard to use this locale by setting the environment variable <code class="docutils literal notranslate"><span class="pre">OOD_LOCALE=fr</span></code> where the locale is just the name of the file without the extension. Do this in either the <code class="docutils literal notranslate"><span class="pre">nginx_stage</span></code> configuration or in the Dashboard and Job Composer environment configuration file.</p></li>
 </ol>
 <p>In each default translation dictionary file the values that are most site-specific (and thus relevant for change) appear at the top.</p>
-<table class="docutils align-default" id="id31">
-<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id31" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id32">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">OnDemand Locale Files</span><a class="headerlink" href="#id32" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head stub"><p>File path</p></th>
 <th class="head"><p>App</p></th>
@@ -1580,7 +1612,7 @@ logo, or the logo specified by the environment variable <code class="docutils li
 </section>
 </section>
 <section id="disk-quota-warnings-on-dashboard">
-<h2>Disk Quota Warnings on Dashboard<a class="headerlink" href="#disk-quota-warnings-on-dashboard" title="Link to this heading"></a></h2>
+<span id="disk-quota-warnings"></span><h2>Disk Quota Warnings on Dashboard<a class="headerlink" href="#disk-quota-warnings-on-dashboard" title="Link to this heading"></a></h2>
 <p>You can display warnings to users on the Dashboard if their
 disk quota is nearing its limit. This requires an auto-updated (it is
 recommended to update this file every <strong>5 minutes</strong> with a cronjob) JSON file
@@ -1666,7 +1698,7 @@ the specified user only.</p>
 </section>
 </section>
 <section id="balance-warnings-on-dashboard">
-<span id="id16"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Link to this heading"></a></h2>
+<span id="id17"></span><h2>Balance Warnings on Dashboard<a class="headerlink" href="#balance-warnings-on-dashboard" title="Link to this heading"></a></h2>
 <p>You can display warnings to users on the Dashboard if their
 resource balance is nearing its limit. This requires an auto-updated (it is
 recommended to update this file daily with a cronjob) JSON file
@@ -1731,7 +1763,7 @@ can be changed with the environment variable <code class="docutils literal notra
 </section>
 </section>
 <section id="maintenance-mode">
-<span id="id17"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Link to this heading"></a></h2>
+<span id="id18"></span><h2>Maintenance Mode<a class="headerlink" href="#maintenance-mode" title="Link to this heading"></a></h2>
 <p>As an administrator you may want to have some downtime of the Open OnDemand service for various reasons,
 while still telling your customers that the downtime is expected.</p>
 <p>You can do this by setting Open OnDemand in 'Maintenance Mode'.
@@ -1764,7 +1796,7 @@ mode, not it's content, so you will not need to restart apache or modify it's co
 take affect.</p>
 </section>
 <section id="grafana-support">
-<span id="id18"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Link to this heading"></a></h2>
+<span id="id19"></span><h2>Grafana support<a class="headerlink" href="#grafana-support" title="Link to this heading"></a></h2>
 <p>It's possible to display Grafana graphs within the ActiveJobs app when a user expands a given job.</p>
 <p>Grafana must be configured to support embedded panels and at this time it is also required to have an anonymous organization.  Below are configuration options are needed to support displaying Grafana panels in ActiveJobs. Adjust <cite>org_name</cite> to match whatever organization you wish to be anonymous.</p>
 <div class="admonition warning">
@@ -1835,7 +1867,7 @@ nodes.</p>
 </div>
 </section>
 <section id="set-illegal-job-name-characters">
-<span id="id19"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Link to this heading"></a></h2>
+<span id="id20"></span><h2>Set Illegal Job Name Characters<a class="headerlink" href="#set-illegal-job-name-characters" title="Link to this heading"></a></h2>
 <p>If you encounter an issue in running batch connect applications complaining about invalid
 job names like the error below.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">read</span> <span class="pre">script</span> <span class="pre">file</span> <span class="pre">because</span> <span class="pre">of</span> <span class="pre">error:</span> <span class="pre">ERROR!</span> <span class="pre">argument</span> <span class="pre">to</span> <span class="pre">-N</span> <span class="pre">option</span> <span class="pre">must</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">/</span></code></p>
@@ -1848,7 +1880,7 @@ job names like the error below.</p>
 </div>
 </section>
 <section id="customize-dex-theme">
-<span id="id20"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Link to this heading"></a></h2>
+<span id="id21"></span><h2>Customize Dex Theme<a class="headerlink" href="#customize-dex-theme" title="Link to this heading"></a></h2>
 <p>It's possible to use a customized theme when authenticating with Dex when using OnDemand's default authentication.
 Refer to the upstream <a class="reference external" href="https://dexidp.io/docs/templates/">Dex template docs</a> for additional information on templating Dex.</p>
 <p>The simplest approach is to copy the OnDemand theme and make changes.  This is idea if you wish to make the following changes:</p>
@@ -1890,12 +1922,12 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 </div>
 </section>
 <section id="xdmod-integration">
-<span id="id21"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Link to this heading"></a></h2>
+<span id="id22"></span><h2>XDMoD Integration<a class="headerlink" href="#xdmod-integration" title="Link to this heading"></a></h2>
 <p>XDMoD Integration requires XDMoD 9+, OnDemand 1.8+, and the ability to facilitate single sign on between the two services. Currently this has been demonstrated to work using OpenID Connect via Keycloak as well as a modified instance of Dex Identity Provider to support sessions.</p>
-<figure class="align-center" id="id32">
+<figure class="align-center" id="id33">
 <img alt="_images/customization_xdmod.png" src="_images/customization_xdmod.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of XDMoD Job Efficiency reports in the OnDemand Dashboard.</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Steps to enable the XDMoD reports in the OnDemand Dashboard:</p>
@@ -2015,50 +2047,110 @@ See <a class="reference internal" href="#menus-for-custom-pages"><span class="st
 </section>
 <section id="support-tickets">
 <span id="support-ticket-guide"></span><h2>Support Tickets<a class="headerlink" href="#support-tickets" title="Link to this heading"></a></h2>
-<p>The Dashboard now supports sending a support ticket to your institution Help Desk system.
-The feature uses email as the delivery mechanism, but it could be extended to support others.</p>
+<p>The Dashboard enables users to easily submit support requests directly to your institution's Help Desk system.
+This feature provides a customizable form that collects user input and sends the information to the designated support system.</p>
 <p>To enable this feature, define the settings needed using the configuration property <code class="docutils literal notranslate"><span class="pre">support_ticket</span></code>.
 Once this configuration object is defined, the <code class="docutils literal notranslate"><span class="pre">Submit</span> <span class="pre">Support</span> <span class="pre">Ticket</span></code> link will be shown in the <code class="docutils literal notranslate"><span class="pre">Help</span></code> navigation menu
 and in all interactive session cards.</p>
+<section id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h3>
+<p>The simplest configuration to get started with email-based support tickets:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/support_ticket.yml</span>
+<span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;support@example.edu&quot;</span>
+</pre></div>
+</div>
+<p>This minimal configuration will:</p>
+<ul class="simple">
+<li><p>Enable the support ticket feature</p></li>
+<li><p>Display the default form with all standard fields</p></li>
+<li><p>Send tickets via email to the specified address</p></li>
+<li><p>Use the default SMTP configuration from Rails</p></li>
+</ul>
+<p>For production use, you'll likely want to customize the form, add SMTP settings, and possibly use a different delivery mechanism. See the sections below for detailed configuration options.</p>
 <figure class="align-center">
 <img alt="_images/support_ticket_menu.png" src="_images/support_ticket_menu.png" />
 </figure>
-<p>The support ticket page has a simple form to gather information that will be submitted to the support system via email.
-If triggered from a session card, the system will automatically add information about the selected
-session to the body of the email to help troubleshoot the issue.</p>
+<p></p><p>The support ticket page has a simple form to gather information that will be submitted to the support system.
+The form can be pre-populated with contextual information in two ways:</p>
+<ol class="arabic simple">
+<li><p><strong>From Interactive Session Cards</strong>: When triggered from a BatchConnect session card, the system automatically includes session details (session ID, title, status, creation time) to help troubleshoot the issue.</p></li>
+<li><p><strong>From Job Information</strong>: When triggered with job context, the system can include job details (job ID, cluster, status, submission time).</p></li>
+</ol>
+<p>The support ticket URL accepts these optional query parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">session_id</span></code>: UUID of a BatchConnect session to include in the ticket</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">job_id</span></code>: Job ID to include in the ticket (requires <code class="docutils literal notranslate"><span class="pre">cluster</span></code> parameter)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cluster</span></code>: Cluster name where the job is running</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">queue</span></code>: Pre-select a specific queue for Request Tracker systems</p></li>
+</ul>
+<p>Example URLs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># With session context</span>
+https://ondemand.example.edu/support?session_id<span class="o">=</span>abc-123-def
+
+<span class="c1"># With job context</span>
+https://ondemand.example.edu/support?job_id<span class="o">=</span><span class="m">12345</span><span class="p">&amp;</span><span class="nv">cluster</span><span class="o">=</span>owens
+
+<span class="c1"># With queue selection</span>
+https://ondemand.example.edu/support?queue<span class="o">=</span>General
+</pre></div>
+</div>
 <figure class="align-center">
 <img alt="_images/support_ticket_form.png" src="_images/support_ticket_form.png" />
 </figure>
-<p>A brief description of the default form fields used in the support ticket form:</p>
+<div style="margin-top: 1rem;"></div></section>
+<section id="supported-delivery-mechanisms">
+<h3>Supported Delivery Mechanisms<a class="headerlink" href="#supported-delivery-mechanisms" title="Link to this heading"></a></h3>
+<p>Open OnDemand supports the following delivery mechanisms for support tickets:</p>
 <ul class="simple">
-<li><p><strong>Username:</strong> Logged in user. Username will be added to the support ticket body for reference.</p></li>
-<li><p><strong>Email:</strong> Email address to communicate regarding this support ticket. A single email address is supported.</p></li>
-<li><p><strong>CC:</strong> Additional email address to communicate regarding this ticket. A single email address is supported.</p></li>
-<li><p><strong>Subject:</strong> Brief description of the problem.</p></li>
-<li><p><strong>Attachments:</strong> Add screenshots of the problem to help with debugging and troubleshooting.</p></li>
-<li><p><strong>Description:</strong> Detail description of the problem.</p></li>
+<li><p><strong>Email</strong> - Uses SMTP to send tickets via email to your help desk system</p></li>
+<li><p><strong>Request Tracker API</strong> - Creates tickets directly in Request Tracker systems</p></li>
+<li><p><strong>ServiceNow API</strong> - Creates incidents directly in ServiceNow systems</p></li>
 </ul>
-<section id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
-<p>These are the most common configuration properties needed to enable and setup the support ticket feature:</p>
+</section>
+<section id="default-form-fields">
+<h3>Default Form Fields<a class="headerlink" href="#default-form-fields" title="Link to this heading"></a></h3>
+<p>The support ticket form includes these default fields:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Text to customize the support ticket header.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: Section to configure how the email is sent to the support system.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: The destination email address of your Help Desk.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: The address to set in the from field when sending the email. It defaults to the email submitted in the support ticket form.
-This is useful to prevent the incoming emails being considered spam.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">delivery_method</span></code>: Rails setting to set the transport mechanism to use. This is usually <code class="docutils literal notranslate"><span class="pre">smtp</span></code>.
-For more information see the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">delivery_settings</span></code>: Rails settings object to set the transport configuration properties.
-See example below or the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
+<li><p><strong>Username:</strong> The logged-in username (read-only). Added to the ticket body for reference.</p></li>
+<li><p><strong>Email:</strong> Required. Email address for communication about this ticket. A single email address is supported.</p></li>
+<li><p><strong>CC:</strong> Optional. Additional email address to copy on ticket communications. A single email address is supported.</p></li>
+<li><p><strong>Subject:</strong> Required. Brief description of the problem.</p></li>
+<li><p><strong>Attachments:</strong> Optional. Upload files (e.g., screenshots) to help with debugging and troubleshooting. Default limits: 4 files, 6MB per file.</p></li>
+<li><p><strong>Description:</strong> Required. Detailed description of the problem.</p></li>
+<li><p><strong>Session ID:</strong> Hidden field. Automatically populated when launched from a session card.</p></li>
+<li><p><strong>Session Description:</strong> Read-only field. Displays session information when a session ID is present.</p></li>
+<li><p><strong>Job ID:</strong> Hidden field. Automatically populated when job context is provided.</p></li>
+<li><p><strong>Cluster:</strong> Hidden field. Automatically populated when job context is provided.</p></li>
+<li><p><strong>Job Description:</strong> Read-only field. Displays job information when job context is present.</p></li>
+<li><p><strong>Queue:</strong> Hidden field. For Request Tracker systems to pre-select a queue.</p></li>
+</ul>
+</section>
+<section id="email">
+<h3>Email<a class="headerlink" href="#email" title="Link to this heading"></a></h3>
+<p>The Email delivery mechanism uses SMTP to send support tickets to your help desk system. This was the first implementation and requires email configuration.</p>
+<p>These are the configuration properties for email delivery:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Optional. Text to customize the support ticket header.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui_template</span></code>: Optional. Custom view template name. Defaults to <code class="docutils literal notranslate"><span class="pre">email_service_template</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: Required section to configure how the email is sent to the support system.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: Required. The destination email address of your Help Desk.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: Optional. The address to set in the from field when sending the email. Defaults to the email submitted in the support ticket form. This is useful to prevent the incoming emails being considered spam.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delivery_method</span></code>: Optional. Rails setting to set the transport mechanism to use. This is usually <code class="docutils literal notranslate"><span class="pre">smtp</span></code>. For more information see the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delivery_settings</span></code>: Optional. Rails settings object to set the transport configuration properties. See example below or the <a class="reference external" href="https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">Rails documentation on mailers</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success_message</span></code>: Optional. Custom message to display when ticket is successfully created. Defaults to a message showing the recipient address.</p></li>
+</ul>
+</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Use caution when supplying username and password in delivery_settings.  These files are readable by
+<p>Use caution when supplying username and password in delivery_settings. These files are readable by
 unprivileged users and as such this information can be found by a sophisticated user without privilege
 escalation.</p>
 </div>
-<p>Sample configuration:</p>
+<p>Sample email configuration:</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Optional.</span>
@@ -2107,15 +2199,26 @@ escalation.</p>
 </div>
 </div></blockquote>
 </section>
-<section id="id23">
-<h3>Customizations<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id24">
+<h3>Customizations<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
 <p>The support ticket form can be customized using the <code class="docutils literal notranslate"><span class="pre">form</span></code> and <code class="docutils literal notranslate"><span class="pre">attributes</span></code> configuration properties.
 In the same way that you can configure the <a class="reference internal" href="enable-desktops/modify-form-attributes.html#enable-desktops-modify-form-attributes"><span class="std std-ref">form for interactive applications</span></a>,
 the support ticket form fields can be arranged or changed as required.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please note that the <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">email</span></code> field must be present in the form for the support ticket feature to be functional, as it is used for communication with the user.</p>
 </div>
+<p>Available field attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">required</span></code>: Boolean. Mark field as required for validation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readonly</span></code>: Boolean. Display field value but prevent editing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disabled</span></code>: Boolean. Disable the field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hide_when_empty</span></code>: Boolean. Hide field when it has no value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">widget</span></code>: String. Specify the field type (<code class="docutils literal notranslate"><span class="pre">email_field</span></code>, <code class="docutils literal notranslate"><span class="pre">text_area</span></code>, <code class="docutils literal notranslate"><span class="pre">hidden_field</span></code>, <code class="docutils literal notranslate"><span class="pre">file_attachments</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: Set a default or fixed value for the field. Supports ERB templating (e.g., <code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">CurrentUser.name</span> <span class="pre">%&gt;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed</span></code>: Boolean. When combined with <code class="docutils literal notranslate"><span class="pre">value</span></code>, makes the value unchangeable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rows</span></code>: Integer. For text areas, specify the number of rows.</p></li>
+</ul>
 <p>Custom fields can be added, but they will require a custom email template to make use of the provided values in the email body.
 Override the default email template with your own by dropping a file named <code class="docutils literal notranslate"><span class="pre">_email.text.erb</span></code> into the folder
 <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/dashboard/views/support_ticket/email/</span></code></p>
@@ -2127,7 +2230,7 @@ place for removing and/or adding fields.</p>
 
 <span class="w">  </span><span class="nt">attributes</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">username</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;%=</span><span class="nv"> </span><span class="s">CurrentUser.name</span><span class="nv"> </span><span class="s">%&gt;&quot;</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">email</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">email_field</span>
@@ -2139,6 +2242,13 @@ place for removing and/or adding fields.</p>
 <span class="w">    </span><span class="nt">session_id</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hidden_field</span>
 <span class="w">    </span><span class="nt">session_description</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">hide_when_empty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">job_id</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hidden_field</span>
+<span class="w">    </span><span class="nt">cluster</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">widget</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hidden_field</span>
+<span class="w">    </span><span class="nt">job_description</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">hide_when_empty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">attachments</span><span class="p">:</span>
@@ -2157,6 +2267,9 @@ place for removing and/or adding fields.</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">session_id</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">session_description</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job_id</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job_description</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attachments</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue</span>
@@ -2195,6 +2308,288 @@ place for removing and/or adding fields.</p>
 <img alt="_images/support_ticket_custom_form.png" src="_images/support_ticket_custom_form.png" />
 </figure>
 </section>
+<section id="request-tracker-api">
+<h3>Request Tracker API<a class="headerlink" href="#request-tracker-api" title="Link to this heading"></a></h3>
+<p>The Request Tracker API delivery mechanism creates tickets directly in Request Tracker systems.</p>
+<p>These are the supported configuration options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Optional. Text to customize the support ticket header.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui_template</span></code>: Optional. Custom view template name. Defaults to <code class="docutils literal notranslate"><span class="pre">email_service_template</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rt_api</span></code>: Required section for Request Tracker configuration.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">server</span></code>: Required. The URL of the Request Tracker server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_token</span></code>: The value for the API authentication token. Required when <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Token</span> <span class="pre">&lt;value&gt;</span></code> is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass</span></code>: The password value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">priority</span></code>: Required. The priority value for all tickets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">queues</span></code>: Required. Array of allowed queues to submit tickets. By default, the first queue in the array will be used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template</span></code>: Optional. Custom ERB template for ticket content. Defaults to <code class="docutils literal notranslate"><span class="pre">rt_ticket_content.text.erb</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success_message</span></code>: Optional. Custom message to display when ticket is successfully created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Optional. The maximum time in seconds that the client should wait for responses from the server. Defaults to <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code>: Optional. Whether to verify SSL certificates.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rt_api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://rt:34000&quot;</span>
+<span class="w">    </span><span class="nt">auth_token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;auth_token&quot;</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="nt">pass</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;password&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">    </span><span class="nt">queues</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;General&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Support&quot;</span>
+<span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom_rt_template.text.erb&quot;</span>
+<span class="w">    </span><span class="nt">success_message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Your</span><span class="nv"> </span><span class="s">ticket</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">created</span><span class="nv"> </span><span class="s">successfully.&quot;</span>
+<span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="servicenow-api">
+<span id="servicenow-support-ticket"></span><h3>ServiceNow API<a class="headerlink" href="#servicenow-api" title="Link to this heading"></a></h3>
+<p>The ServiceNow API delivery mechanism creates incidents directly in ServiceNow systems.</p>
+<p>These are the supported configuration options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Optional. Text to customize the support ticket header.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui_template</span></code>: Optional. Custom view template name. Defaults to <code class="docutils literal notranslate"><span class="pre">email_service_template</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">servicenow_api</span></code>: Required section for ServiceNow configuration.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">server</span></code>: Required. The URL of the ServiceNow server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_header</span></code>: Optional. The name for the API authentication header. Defaults to <code class="docutils literal notranslate"><span class="pre">x-sn-apikey</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_token</span></code>: The value for the API authentication key. Required when API key authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth_token_env</span></code>: Optional. Environment variable name containing the API authentication key. Takes precedence over <code class="docutils literal notranslate"><span class="pre">auth_token</span></code> if set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass</span></code>: The password value when HTTP basic authentication is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass_env</span></code>: Optional. Environment variable name containing the password. Takes precedence over <code class="docutils literal notranslate"><span class="pre">pass</span></code> if set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Optional. The maximum time in seconds that the client should wait for responses from the server. Defaults to <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code>: Optional. Whether to verify SSL certificates. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">proxy</span></code>: Optional. Proxy server URL to use for the connection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code>: Optional. Map of ServiceNow incident fields to support ticket form field names. The value can be a single field name or an array of field names (values will be concatenated with commas).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">payload</span></code>: Optional. Map of ServiceNow incident fields to static values. Use <code class="docutils literal notranslate"><span class="pre">nil</span></code> as the value to dynamically pull from the form field with the same name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template</span></code>: Optional. Custom ERB template for incident description. Defaults to <code class="docutils literal notranslate"><span class="pre">servicenow_content.text.erb</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success_message</span></code>: Optional. Custom message to display when ticket is successfully created.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For security, use <code class="docutils literal notranslate"><span class="pre">auth_token_env</span></code> and <code class="docutils literal notranslate"><span class="pre">pass_env</span></code> to store credentials in environment variables rather than directly in configuration files.</p>
+</div>
+<p><strong>ServiceNow Field Mapping</strong></p>
+<p>The ServiceNow implementation builds the incident payload in three stages:</p>
+<ol class="arabic">
+<li><p><strong>Default mappings</strong> (always included):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code> → <code class="docutils literal notranslate"><span class="pre">caller_id</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cc</span></code> → <code class="docutils literal notranslate"><span class="pre">watch_list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subject</span></code> → <code class="docutils literal notranslate"><span class="pre">short_description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> → <code class="docutils literal notranslate"><span class="pre">description</span></code> (formatted using template)</p></li>
+</ul>
+</li>
+<li><p><strong>Custom mappings via</strong> <code class="docutils literal notranslate"><span class="pre">map</span></code> (adds to or overrides default mappings):</p>
+<p>Maps form field values to ServiceNow incident fields. The configuration key is the ServiceNow field name, and the value is either:</p>
+<ul class="simple">
+<li><p>A single form field name (string)</p></li>
+<li><p>An array of form field names (values will be joined with commas)</p></li>
+</ul>
+</li>
+<li><p><strong>Static/dynamic values via</strong> <code class="docutils literal notranslate"><span class="pre">payload</span></code> (final stage, highest precedence):</p>
+<p>Sets ServiceNow incident fields to specific values. For each key-value pair:</p>
+<ul class="simple">
+<li><p>If the value is NOT <code class="docutils literal notranslate"><span class="pre">nil</span></code>: uses the static value provided</p></li>
+<li><p>If the value IS <code class="docutils literal notranslate"><span class="pre">nil</span></code>: dynamically pulls the value from the form field matching the key name</p></li>
+</ul>
+</li>
+</ol>
+<p>Example showing all three stages:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servicenow_api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://servicenow.server.com&quot;</span>
+<span class="w">    </span><span class="nt">auth_header</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;x-sn-apikey&quot;</span>
+<span class="w">    </span><span class="nt">auth_token_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SERVICENOW_API_KEY&quot;</span>
+
+<span class="w">    </span><span class="c1"># Stage 2: Map form fields to ServiceNow incident fields</span>
+<span class="w">    </span><span class="c1"># These add to or override the default mappings</span>
+<span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Override default caller_id mapping (normally uses &#39;email&#39;)</span>
+<span class="w">      </span><span class="nt">caller_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;username&quot;</span>
+<span class="w">      </span><span class="c1"># Map a single form field</span>
+<span class="w">      </span><span class="nt">u_email_source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;email&quot;</span>
+<span class="w">      </span><span class="c1"># Map multiple form fields - values joined with commas</span>
+<span class="w">      </span><span class="nt">u_affected_users</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;username&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># Stage 3: Set static or dynamic values</span>
+<span class="w">    </span><span class="c1"># These have the highest precedence</span>
+<span class="w">    </span><span class="nt">payload</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Static values: always use these exact values</span>
+<span class="w">      </span><span class="nt">u_category</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;troubleshooting&quot;</span>
+<span class="w">      </span><span class="nt">contact_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;External</span><span class="nv"> </span><span class="s">System&quot;</span>
+<span class="w">      </span><span class="nt">assignment_group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IT</span><span class="nv"> </span><span class="s">Support</span><span class="nv"> </span><span class="s">Team&quot;</span>
+<span class="w">      </span><span class="nt">u_business_service</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Research</span><span class="nv"> </span><span class="s">Computing&quot;</span>
+
+<span class="w">      </span><span class="c1"># Dynamic values: use nil to pull from form field with same name</span>
+<span class="w">      </span><span class="c1"># This would use support_ticket.priority if that field exists</span>
+<span class="w">      </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span>
+
+<span class="w">      </span><span class="c1"># You can also override default mappings here with static values</span>
+<span class="w">      </span><span class="c1"># This would ignore the user&#39;s email and always use this value</span>
+<span class="w">      </span><span class="c1"># caller_id: &quot;system@example.edu&quot;</span>
+
+<span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;custom_servicenow_template.text.erb&quot;</span>
+<span class="w">    </span><span class="nt">success_message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Your</span><span class="nv"> </span><span class="s">ServiceNow</span><span class="nv"> </span><span class="s">incident</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">created.&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The resulting ServiceNow incident would have:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_id</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">username</span></code> form field (overridden by <code class="docutils literal notranslate"><span class="pre">map</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">watch_list</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">cc</span></code> form field (default mapping)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">short_description</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">subject</span></code> form field (default mapping)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: Formatted using template (default mapping)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_email_source</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">email</span></code> form field (added by <code class="docutils literal notranslate"><span class="pre">map</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_affected_users</span></code>: &quot;username,email&quot; (added by <code class="docutils literal notranslate"><span class="pre">map</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_category</span></code>: &quot;troubleshooting&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contact_type</span></code>: &quot;External System&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assignment_group</span></code>: &quot;IT Support Team&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_business_service</span></code>: &quot;Research Computing&quot; (static value from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">priority</span></code>: Value from <code class="docutils literal notranslate"><span class="pre">priority</span></code> form field if it exists (dynamic from <code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+</ul>
+</section>
+<section id="profile-based-configuration">
+<h3>Profile-Based Configuration<a class="headerlink" href="#profile-based-configuration" title="Link to this heading"></a></h3>
+<p>Support tickets can be configured differently based on user profiles. This is useful for multi-tenant environments where different groups need tickets routed to different support teams.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Global default configuration</span>
+<span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;general-support@example.edu&quot;</span>
+
+<span class="c1"># Profile-specific configurations</span>
+<span class="nt">profiles</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">research_team</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">email</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;research-support@example.edu&quot;</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Contact</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Research</span><span class="nv"> </span><span class="s">Computing</span><span class="nv"> </span><span class="s">support</span><span class="nv"> </span><span class="s">team&quot;</span>
+
+<span class="w">  </span><span class="nt">teaching_team</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">servicenow_api</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://teaching.service-now.com&quot;</span>
+<span class="w">        </span><span class="nt">auth_token_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TEACHING_SNOW_TOKEN&quot;</span>
+<span class="w">        </span><span class="nt">payload</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">assignment_group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Teaching</span><span class="nv"> </span><span class="s">Support&quot;</span>
+</pre></div>
+</div>
+<p>Users will use the profile-specific configuration if they have selected that profile or if hostname-based profile matching is enabled.</p>
+</section>
+<section id="custom-templates">
+<h3>Custom Templates<a class="headerlink" href="#custom-templates" title="Link to this heading"></a></h3>
+<p>All delivery mechanisms support custom ERB templates for formatting ticket content:</p>
+<p><strong>Email Templates</strong></p>
+<p>Override the default email template by creating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/ood/config/apps/dashboard/views/support_ticket/email/_email.text.erb
+</pre></div>
+</div>
+<p><strong>Request Tracker Templates</strong></p>
+<p>Customize RT ticket content by creating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/ood/config/apps/dashboard/views/support_ticket/rt/rt_ticket_content.text.erb
+</pre></div>
+</div>
+<p><strong>ServiceNow Templates</strong></p>
+<p>Customize ServiceNow incident description by creating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/ood/config/apps/dashboard/views/support_ticket/servicenow/servicenow_content.text.erb
+</pre></div>
+</div>
+<p>Templates have access to a <code class="docutils literal notranslate"><span class="pre">context</span></code> object containing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">context.support_ticket</span></code>: The support ticket form data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context.session</span></code>: BatchConnect session object (if applicable)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context.job</span></code>: Job information object (if applicable)</p></li>
+</ul>
+<p>Example custom template:</p>
+<div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="x">Problem Report from </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">username</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="x">Email: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">email</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">Subject: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">subject</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="x">Description:</span>
+<span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">support_ticket</span><span class="o">.</span><span class="n">description</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">Session Information:</span>
+<span class="x">- Title: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">title</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Job ID: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">job_id</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Status: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">%&gt;</span>
+
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">Job Information:</span>
+<span class="x">- Job ID: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Cluster: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">cluster</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="x">- Status: </span><span class="cp">&lt;%=</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">%&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="delivery-mechanism-precedence">
+<h3>Delivery Mechanism Precedence<a class="headerlink" href="#delivery-mechanism-precedence" title="Link to this heading"></a></h3>
+<p>When multiple delivery mechanisms are configured, Open OnDemand follows a specific precedence order:</p>
+<ol class="arabic simple">
+<li><p><strong>Email</strong> (highest precedence)</p></li>
+<li><p><strong>Request Tracker API</strong></p></li>
+<li><p><strong>ServiceNow API</strong> (lowest precedence)</p></li>
+</ol>
+<p>The system will use the first available mechanism in this order. For example, if both Email and ServiceNow are configured, Email will be used.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only configure one delivery mechanism per profile to avoid confusion. The precedence order exists for backward compatibility but is not recommended for production use.</p>
+</div>
+</section>
+<section id="security-considerations">
+<h3>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h3>
+<p>When configuring support tickets, keep these security best practices in mind:</p>
+<p><strong>Credential Management</strong></p>
+<ul class="simple">
+<li><p><strong>Use environment variables for secrets</strong>: Always use <code class="docutils literal notranslate"><span class="pre">auth_token_env</span></code> and <code class="docutils literal notranslate"><span class="pre">pass_env</span></code> instead of storing credentials directly in configuration files.</p></li>
+<li><p><strong>File permissions</strong>: Configuration files in <code class="docutils literal notranslate"><span class="pre">/etc/ood/config</span></code> are readable by all users. Never store sensitive credentials directly in these files.</p></li>
+<li><p><strong>Environment variables</strong>: Set sensitive credentials in <code class="docutils literal notranslate"><span class="pre">/etc/ood/profile</span></code> or Apache configuration where they are not accessible to users.</p></li>
+</ul>
+<p>Example secure configuration:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ondemand.d/support_ticket.yml</span>
+<span class="nt">support_ticket</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servicenow_api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://servicenow.example.edu&quot;</span>
+<span class="w">    </span><span class="nt">auth_token_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SERVICENOW_API_TOKEN&quot;</span><span class="w">  </span><span class="c1"># Secure</span>
+<span class="w">    </span><span class="c1"># auth_token: &quot;secret123&quot;                # INSECURE - Do not do this!</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/profile</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SERVICENOW_API_TOKEN</span><span class="o">=</span><span class="s2">&quot;actual-secret-token-here&quot;</span>
+</pre></div>
+</div>
+<p><strong>SSL/TLS Verification</strong></p>
+<ul class="simple">
+<li><p>Always use <code class="docutils literal notranslate"><span class="pre">verify_ssl:</span> <span class="pre">true</span></code> (the default) in production environments</p></li>
+<li><p>Only disable SSL verification for testing/development environments</p></li>
+<li><p>Use proper SSL certificates from trusted certificate authorities</p></li>
+</ul>
+<p><strong>Input Validation</strong></p>
+<ul class="simple">
+<li><p>The system automatically validates email addresses using standard RFC patterns</p></li>
+<li><p>File upload sizes are limited by default (6MB per file, 4 files maximum)</p></li>
+<li><p>Adjust <code class="docutils literal notranslate"><span class="pre">attachments.max_size</span></code> and <code class="docutils literal notranslate"><span class="pre">attachments.max_items</span></code> based on your environment's needs</p></li>
+</ul>
+<p><strong>Session Data Filtering</strong></p>
+<ul class="simple">
+<li><p>The system automatically filters sensitive session parameters (like <code class="docutils literal notranslate"><span class="pre">ood_connection_info</span></code>)</p></li>
+<li><p>Custom templates should avoid exposing sensitive information</p></li>
+<li><p>Review custom templates to ensure they don't inadvertently include passwords or tokens</p></li>
+</ul>
+<p>Community contributions for new delivery mechanisms are welcome!</p>
+</section>
 </section>
 </section>
 
@@ -2222,7 +2617,7 @@ place for removing and/or adding fields.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Documentation Versions</span>
-    v: 4.0.0
+    v: 4.1.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>nginx_stage.yml &mdash; Open OnDemand 4.0.0 documentation</title>
+  <title>nginx_stage.yml &mdash; Open OnDemand 4.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c48163e2" />
@@ -18,7 +18,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=3304f9e4"></script>
+        <script src="../../_static/documentation_options.js?v=42d1b3bd"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -51,7 +51,7 @@
               <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                4.0
+                4.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -75,6 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/project-management/project-manager.html">Project Manager</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
@@ -83,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -475,7 +477,7 @@ error to.</p>
 </dl>
 </dd></dl>
 
-<dl class="describe">
+<dl class="describe" id="passenger-options">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">passenger_options</span> <span class="pre">(Hash)</span></span></dt>
 <dd><p>A Hash of additional Passenger options
@@ -974,6 +976,47 @@ starting and stopping the NGINX process.</p>
 
 <dl class="describe">
 <dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">disabled_shell_message</span> <span class="pre">(String)</span></span></dt>
+<dd><p>Define an error message that is displayed to users when they have a disabled_shell.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>Tell the user they have a restricted shell.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disabled_shell_message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">disabled</span><span class="nv"> </span><span class="s">shell:</span><span class="nv"> </span><span class="s">%s&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Display a different message to the user.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">disabeled_shell_message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;This</span><span class="nv"> </span><span class="s">account</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">disabled</span><span class="nv"> </span><span class="s">shell.</span><span class="nv"> </span><span class="s">Contact</span><span class="nv"> </span><span class="s">support.&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">show_nginx_stage_help_message</span> <span class="pre">(Boolean)</span></span></dt>
+<dd><p>Hide the standard error <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">'nginx_stage</span> <span class="pre">--help'</span> <span class="pre">to</span> <span class="pre">see</span> <span class="pre">a</span> <span class="pre">full</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">available</span>
+<span class="pre">command</span> <span class="pre">line</span> <span class="pre">options.</span></code> message when calling <code class="docutils literal notranslate"><span class="pre">nginx_stage</span></code>.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><p>Show the help message.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">show_nginx_stage_help_message</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example</dt><dd><p>Hide the help message.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">show_nginx_stage_help_message</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="describe">
+<dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">disable_bundle_user_config</span> <span class="pre">(Integer)</span></span></dt>
 <dd><blockquote>
 <div><p>Set BUNDLE_USER_CONFIG to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code> in the PUN environment.
@@ -1022,7 +1065,7 @@ system deployed apps.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Documentation Versions</span>
-    v: 4.0.0
+    v: 4.1.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
