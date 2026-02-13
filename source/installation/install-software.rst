@@ -37,7 +37,7 @@ Open OnDemand uses these packages, among many others.
 
          sudo dnf config-manager --set-enabled powertools
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.3 nodejs:20
+         sudo dnf module enable ruby:3.3 nodejs:22
 
    .. tab:: RockyLinux/Alma Linux 9
 
@@ -45,7 +45,7 @@ Open OnDemand uses these packages, among many others.
 
          sudo dnf config-manager --set-enabled crb
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.3 nodejs:20
+         sudo dnf module enable ruby:3.3 nodejs:22
 
    .. tab:: RockyLinux/Alma Linux 10
 
@@ -59,7 +59,7 @@ Open OnDemand uses these packages, among many others.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.3 nodejs:20
+         sudo dnf module enable ruby:3.3 nodejs:22
          sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
 
 
@@ -68,7 +68,7 @@ Open OnDemand uses these packages, among many others.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo dnf module enable ruby:3.3 nodejs:20
+         sudo dnf module enable ruby:3.3 nodejs:22
          sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
    .. tab:: RHEL 10
