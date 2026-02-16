@@ -35,7 +35,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   feedback, and webinar participation.
 - `Texas A&M High Performance Research Computing <tamu_>`_ for early adoption and help with the LSF
   adapter, platform feedback.
-- `Tufts Technology Services HPC Research Computing <tufts_>`_ for early adoption and help
+- `Tufts Technology Services Research Computing <tufts_>`_ for early adoption and help
   with Slurm adapter development, platform feedback, and webinar participation.
 - `UCLA Institute for Digital Research and Education <ucla_>`_ for help with the SGE adapter.
 - `University of Arizona HPC <arizona_>`_ for early adoption and help with the
@@ -95,7 +95,7 @@ These are institutions who were early adopters or provided HPC resources for dev
 .. _oregonstate: https://oregonstate.edu/
 .. _psc: https://www.psc.edu/
 .. _tamu: https://hprc.tamu.edu/
-.. _tufts: https://it.tufts.edu/it-computing/technology-research/high-performance-computing-tufts-research-cluster
+.. _tufts: https://it.tufts.edu/high-performance-computing
 .. _ucla: https://idre.ucla.edu/resources/hpc
 .. _buffalo: http://www.buffalo.edu/ccr.html
 .. _utah: https://www.chpc.utah.edu/
