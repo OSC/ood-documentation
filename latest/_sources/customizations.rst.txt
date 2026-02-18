@@ -1335,7 +1335,7 @@ The time ranges and values for labels (e.g.: `var-cluster=`) will be auto-filled
 * ``orgId`` is the ``orgId`` query parameter
 * The dashboard ``name`` is the last segment of the URI before query parameters
 * The ``uid`` is the UID portion of URL that is unique to every dashboard
-* The ``panelId`` query parameter will be used as the value for either ``cpu`` or ``memory`` depending on the panel you have selected
+* The ``panelId`` query parameter will be used as the value for ``cpu``, ``memory``, ``gpu-util``, or ``gpu-memory`` depending on the panel you have selected
 * The values for ``labels`` are how OnDemand maps labels in Grafana to values expected in OnDemand. The ``jobid`` key is optional, the others are required.
 * The ``cluster_override`` can override the cluster name used to make requests to Grafana if the Grafana cluster name varies from OnDemand cluster name.
 
