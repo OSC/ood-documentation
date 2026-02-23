@@ -325,6 +325,46 @@ Configure General Options
 
           security_strict_transport: false
 
+.. _ood-portal-generator-strip-proxy-headers:
+
+.. describe:: strip_proxy_headers (Array)
+
+  Since 4.1 the Open OnDemand portal will strip these sensitive HTTP headers when proxying
+  requests to interactive applications for enhanced security.
+
+    Default
+      Strip many authentication related headers.
+
+      .. code-block:: yaml
+
+        strip_proxy_headers: ["Authorization", "OIDC_CLAIM_sub", "OIDC_CLAIM_preferred_username", "OIDC_CLAIM_given_name", "OIDC_CLAIM_zoneinfo", "OIDC_CLAIM_locale", "OIDC_CLAIM_email", "OIDC_CLAIM_email_verified", "OIDC_CLAIM_iss", "OIDC_CLAIM_nonce", "OIDC_CLAIM_aud", "OIDC_CLAIM_acr", "OIDC_CLAIM_azp", "OIDC_CLAIM_auth_time", "OIDC_CLAIM_exp", "OIDC_CLAIM_iat", "OIDC_CLAIM_jti", "OIDC_access_token", "OIDC_access_token_expires"]
+
+    Example
+      Strip no authentication related headers. 
+
+      .. code-block:: yaml
+
+        strip_proxy_headers: []
+
+.. describe:: strip_proxy_cookies (Array)
+
+  Since 4.1 the Open OnDemand portal will strip these sensitive HTTP cookies when proxying
+  requests to interactive applications for enhanced security.
+
+    Default
+      Strip ``mod_auth_openidc_session`` cookies.
+
+      .. code-block:: yaml
+
+        strip_proxy_cookies: ["mod_auth_openidc_session_\\d+", "mod_auth_openidc_session"]
+
+    Example
+      Do not strip any cookies.
+
+      .. code-block:: yaml
+
+        strip_proxy_cookies: []
+
 .. describe:: lua_root (String)
 
      the root directory where the Lua handler code resides
