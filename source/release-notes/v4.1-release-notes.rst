@@ -91,13 +91,27 @@ first time in this release. These contributions span the ``ondemand``, ``ood_cor
 Breaking Changes and Deprecations
 ---------------------------------
 
-The only breaking changes in version 4.1 are with the operating system support changes
+
+NodeJS breaking change
+......................
+
+4.1 has upgrade ``NodeJS`` dependency. See the operating system support changes
 and NodeJS dependency changes listed in the next two sections.
 
-.. warning:: 
-  The Job Composer is officially **deprecated** in 4.1, and will no longer receive new features or bug fixes
-  beyond critical maintenance. Although the :ref:`new Project Manager <project-manager-note>` covers and 
-  surpasses all Job Composer functionality, the Job Composer will remain enabled as a legacy feature until version 5.0.
+
+Stripping Sensitive Headers
+...........................
+
+For additional security, 4.1 will now strip certain sensitive headers when proxying
+to interactive applications. See the `Strip Sensitive Headers and Cookies`_ section below
+for more details.
+
+Job Composer is now Deprecated
+..............................
+
+The Job Composer is officially **deprecated** in 4.1, and will no longer receive new features or bug fixes
+beyond critical maintenance. Although the :ref:`new Project Manager <project-manager-note>` covers and 
+surpasses all Job Composer functionality, the Job Composer will remain enabled as a legacy feature until version 5.0.
 
 Operating System Support
 ------------------------
@@ -166,6 +180,16 @@ More ``ood_portal.yml`` options for registering users have been added in version
 They are ``register_path``, ``register_method``, and ``register_method_options``.
 
 See :ref:`ood-portal-generator-user-registration` for more details.
+
+Strip Sensitive Headers and Cookies
+...................................
+
+4.1 introduced two new configurations ``strip_proxy_headers`` and ``strip_proxy_cookies``
+to strip headers and cookies when proxying requests to interactive applications.  These
+were added as a security measure against possibly leaking sensitive data to interactive
+applications.
+
+See :ref:`the ood_portal.yml configuration for strip_proxy_headers and strip_proxy_cookies <ood-portal-generator-strip-proxy-headers>` for more details.
 
 Platform Configuration, Operations, and Observability
 -----------------------------------------------------
