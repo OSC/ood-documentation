@@ -76,7 +76,7 @@ Open OnDemand uses these packages, among many others.
       .. code-block:: sh
 
          sudo dnf install epel-release
-         sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+         sudo subscription-manager repos --enable codeready-builder-for-rhel-10-x86_64-rpms
 
 2. Add repository and install
 -----------------------------
