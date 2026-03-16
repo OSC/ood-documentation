@@ -10,7 +10,7 @@ means that it will need:
 - the resource manager (e.g., Torque, Slurm, or LSF) client binaries and
   libraries used by the batch servers installed
 - configuration on both OnDemand node **and batch servers** to be able to
-  submit, status, and delete jobs from command line
+  submit, delete and get status for jobs from the command line
 - signed SSL certificate with corresponding intermediate certificate for your
   advertised OnDemand host name (e.g., ``ondemand.my_center.edu``)
 
