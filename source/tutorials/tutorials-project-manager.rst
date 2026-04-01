@@ -251,11 +251,7 @@ running after their dependencies are completed. If we don't care to watch the wo
 'Back' from the workflows page to return to the project dashboard, where we can edit the launcher form defaults 
 and run other workflows as needed, keeping in mind that the COUNT variable must be consistent for each run.
 
-.. video:: /videos/workflow-gif.mp4
-   :width: 700
-   :autoplay:
-   :loop:
-   :muted:
+.. figure:: /videos/workflow.gif
    :alt: Demonstration of creating launcher, creating workflow, submitting workflow and using live job status
 
 The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
