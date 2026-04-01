@@ -50,6 +50,8 @@ clean:
 
 .PHONY: html
 html:
+# TODO: Remove this pip install by adding the dependency in ood-doc-build:v3.1.0 docker
+	pip install sphinxcontrib-video --break-system-packages
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -226,6 +228,8 @@ dummy:
 
 .PHONY: spellcheck
 spellcheck:
+# TODO: Remove this pip install by adding the dependency in ood-doc-build:v3.1.0 docker
+	pip install sphinxcontrib-video --break-system-packages
 	$(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

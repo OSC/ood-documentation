@@ -75,6 +75,9 @@ if errorlevel 9009 (
 
 
 if "%1" == "html" (
+	REM TODO: Remove this pip install by adding the dependency in ood-doc-build:v3.1.0 docker
+    pip install sphinxcontrib-video --break-system-packages
+
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html
 	if errorlevel 1 exit /b 1
 	echo.
