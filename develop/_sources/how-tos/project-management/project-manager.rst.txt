@@ -28,7 +28,9 @@ projects with jobs that are repeated many times.
 **Workflows** allow users to connect their launchers together with dependency relationships,
 enabling them to build self-contained systems that can be run with a single click. These
 systems can be as simple or intricate as needed, and are easily assembled through an 
-intuitive graphical interface.
+intuitive graphical interface. Error reporting has been simplified through an automated 
+poller that checks each launcher’s status (queued, running, failed, completed) at 30-second 
+intervals and intuitively represents it in the UI using color coding.
 
 The single most important theme of all these features is **flexibility**. As the examples 
 demonstrate, there is no one way to structure scripts, organize directories, or

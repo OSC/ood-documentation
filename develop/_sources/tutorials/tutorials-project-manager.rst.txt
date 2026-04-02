@@ -123,6 +123,10 @@ button to fill out this form. Since we have already made sure the ``account`` an
 correctly, the only thing we have to fill out is the cluster to run it on. Once we do that and press 'Launch' 
 at the bottom of the form, we will be redirected back to the project dashboard and see our job queued.
 
+.. figure:: /images/project-ui.png
+   :alt: The project ui, showing two launchers, submitted jobs and project directory.
+
+
 Leveraging Launcher Forms
 .........................
 
@@ -246,6 +250,9 @@ we can observe the launchers move between queued, running, and completed states,
 running after their dependencies are completed. If we don't care to watch the workflow execute, we can press 
 'Back' from the workflows page to return to the project dashboard, where we can edit the launcher form defaults 
 and run other workflows as needed, keeping in mind that the COUNT variable must be consistent for each run.
+
+.. figure:: /videos/workflow.gif
+   :alt: Demonstration of creating launcher, creating workflow, submitting workflow and using live job status
 
 The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
 you can always design your own systems and conventions that fit your specific situation.
