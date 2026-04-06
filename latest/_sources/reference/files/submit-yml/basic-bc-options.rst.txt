@@ -265,14 +265,14 @@ Basic Batch Connect Options
 
       .. code-block:: yaml
 
-        script_file: ""
+        timeout: ""
 
     Example
       all scripts timeout after 3600 seconds (1 hour)
 
       .. code-block:: yaml
 
-        script_file: "3600"
+        timeout: "3600"
 
 .. describe:: clean_script (String, "...")
 
