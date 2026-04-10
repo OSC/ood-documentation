@@ -29,8 +29,11 @@ the user would see this message at the top of the dashboard:
 If the announcement file has the extension ``yml`` and is a yaml file it is first rendered using ERB and then the resulting file is parsed as YAML. The valid keys are:
 
 .. list-table:: Config Files
-   :stub-columns: 1
+   :header-rows: 1
 
+   * - Key
+     - Values
+     - Description
    * - type
      - warning, info, success, or danger
      - this is the Bootstrap alert style
@@ -87,7 +90,6 @@ We recommend setting these environment variables in ``/etc/ood/config/nginx_stag
 
 .. list-table:: Branding
    :header-rows: 1
-   :stub-columns: 1
 
    * - Feature
      - Environment Variable
@@ -135,7 +137,6 @@ These URLs can be specified, which will appear in the Help menu and on other loc
 
 .. list-table:: Dashboard URLs
    :header-rows: 1
-   :stub-columns: 1
 
    * - Name
      - Environment variable
@@ -537,7 +538,6 @@ In each default translation dictionary file the values that are most site-specif
 
 .. list-table:: OnDemand Locale Files
   :header-rows: 1
-  :stub-columns: 1
 
   * - File path
     - App
