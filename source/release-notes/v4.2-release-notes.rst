@@ -34,7 +34,16 @@ Debian and Ubuntu repositories are now signed using a SHA512 key rather than the
 
 Using the OnDemand release packages will result in the correct key being used.
 
-They key is located at https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512
+If not using OnDemand's release packages,
+the `DEB-GPG-KEY-ondemand-SHA512 <https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512>`_
+should be downloaded and used by the OnDemand repo's **signed-by**.
+
+.. code-block:: sh
+
+   curl -fsSL https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512 | gpg --dearmor -o /etc/apt/keyrings/ondemand-web.gpg
+
+   source /etc/os-release
+   echo "deb [signed-by=/etc/apt/keyrings/ondemand-web.gpg] https://apt.osc.edu/ondemand/4.2/web/apt $VERSION_CODENAME main" > /etc/apt/sources.list.d/ondemand-web.list
 
 Upgrade Instructions
 --------------------
