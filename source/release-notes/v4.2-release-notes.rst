@@ -8,3 +8,161 @@ v4.2 Release Notes
 
 Acknowledgments
 ---------------
+
+Breaking Changes and Deprecations
+---------------------------------
+
+Operating System Support
+------------------------
+
+- Open OnDemand version 4.2 adds support for Debian 13.
+- Open OnDemand version 4.2 drops support for Ubuntu 22.04.
+
+Dependency Updates
+------------------
+
+This release updates the following dependencies:
+
+- Passenger 6.1.2
+- NGINX 1.28.0
+- ondemand-dex 2.45.1
+
+Ubuntu and Debian repo signing change
+-------------------------------------
+
+Debian and Ubuntu repos are now signed using a SHA512 key rather than the previous SHA1 key.
+
+Using the OnDemand release packages will result in the correct key being used.
+
+They key is located at https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512
+
+Upgrade Instructions
+--------------------
+
+.. warning::
+
+   Update the **development** and/or **test** instances of OnDemand installed at your center **before** you modify the **production** instance.
+
+.. warning::
+
+  We have tested the upgrade from version 4.0.8 to version 4.1.0 at OSC's Open OnDemand instance.
+
+#. Update Open OnDemand repository.
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.el9.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 10
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.2.0-noble_all.deb https://apt.osc.edu/ondemand/4.2/ondemand-release-web_4.2.0-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.2.0-noble_all.deb
+            sudo apt update
+
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.2.0-bookworm_all.deb https://apt.osc.edu/ondemand/4.2/ondemand-release-web_4.2.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.2.0-bookworm_all.deb
+            sudo apt update
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo dnf install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.amzn2023.noarch.rpm
+
+#. Update Open OnDemand.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (**Dex users only**) Update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9 & 10
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 24.04 & Debian 12
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+#. (**Dex users only**) Restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (**SELinux users only**) Update SELinux policies.
+
+   See :ref:`ood_selinux_updates`.
+
+#. Force all PUNs to restart.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
