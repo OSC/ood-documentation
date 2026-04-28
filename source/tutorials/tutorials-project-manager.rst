@@ -256,3 +256,51 @@ and run other workflows as needed, keeping in mind that the COUNT variable must 
 
 The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
 you can always design your own systems and conventions that fit your specific situation.
+
+Synchronizing Launchers with ``OOD_WORKFLOW_SYNC_KEY``
+------------------------------------------------------
+
+When you toggle **Enable OOD_WORKFLOW_SYNC_KEY** on the workflow edit form, every launcher submitted as part of that 
+workflow run is given the *same* random, 16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable.
+The token stays identical across launchers runs but unique to each workflow run. It can suppliment creating an output 
+directory that is private to that unique to current workflow execution. Inside any launcher script you can simply 
+``mkdir -p`` a folder whose name embeds the key and launchers write your job's results there:
+
+.. code-block:: bash
+
+   #!/usr/bin/env bash
+   # Create a per-run output directory under the project
+   OUTPUT_DIR="${HOME}/projects/my_project/runs/${OOD_WORKFLOW_SYNC_KEY}"
+   mkdir -p "${OUTPUT_DIR}"
+
+   # All downstream launchers write here
+   ./simulate --out "${OUTPUT_DIR}/results.csv"
+
+Every dependent launcher in the same workflow sees the same value of ``OOD_WORKFLOW_SYNC_KEY``, so a downstream 
+launcher can read and write to the same temporary directory.
+
+The same token can be used as a *file name* whenever you need launchers in a workflow to talk to each other through
+a shared sync file, lock file or checkpoint file.
+
+.. code-block:: bash
+
+   #!/usr/bin/env bash
+   # Stage 1 launcher: produce a checkpoint file when the data is ready
+   CKPT_FILE="${HOME}/projects/my_project/.checkpoint/${OOD_WORKFLOW_SYNC_KEY}.h5"
+   mkdir -p "$(dirname "${CKPT_FILE}")"
+   ./prepare_data
+   touch "${CKPT_FILE}"
+
+.. code-block:: bash
+
+   #!/usr/bin/env bash
+   # Stage 2 launcher: confirm the checkpoint file from Stage 1 exists before running
+   CKPT_FILE="${HOME}/projects/my_project/.checkpoint/${OOD_WORKFLOW_SYNC_KEY}.h5"
+   if [[ ! -f "${CKPT_FILE}" ]]; then
+     echo "Upstream stage did not finish cleanly — aborting." >&2
+     exit 1
+   fi
+   ./analyze
+
+The key is opaque to the scheduler i.e. just a string your scripts read out of the environment, so you are free to combine 
+it with any naming convention that already fits your project.
