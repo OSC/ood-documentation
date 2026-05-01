@@ -178,7 +178,6 @@ Currently only the dashboard uses the colors in the navbar.
 
 .. list-table:: Branding
    :header-rows: 1
-   :stub-columns: 1
 
    * - Feature
      - Property
@@ -244,7 +243,6 @@ These URLs can be specified, which will appear in the Help menu and on other loc
 
 .. list-table:: Dashboard URLs
    :header-rows: 1
-   :stub-columns: 1
 
    * - Name
      - Environment variable
@@ -993,7 +991,6 @@ In each default translation dictionary file the values that are most site-specif
 
 .. list-table:: OnDemand Locale Files
   :header-rows: 1
-  :stub-columns: 1
 
   * - File path
     - App

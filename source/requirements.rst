@@ -15,7 +15,6 @@ At this time OnDemand only supports the following operating systems and architec
 
 .. csv-table:: Operating System and Architecture Support
    :header: "","``x86_64``","``aarch64/arm64``","``ppc64le``"
-   :stub-columns: 1
 
    "RedHat/Rocky Linux/AlmaLinux 8",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
