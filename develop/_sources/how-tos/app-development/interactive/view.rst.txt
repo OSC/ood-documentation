@@ -32,6 +32,11 @@ This connection view will be retained for a week in 'My Interactive Sessions'
 for debugging purposes. The link to Session ID opens a files app directly to 
 the output of the batch connect app.
 
+.. tip::
+
+  :ref:`Sub apps <app-development-sub-apps>` can override this file from their parent
+  app.
+
 .. danger::
 
    If developing a VNC Interactive App, **DO NOT** include the
