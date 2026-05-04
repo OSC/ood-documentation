@@ -262,7 +262,7 @@ Synchronizing Launchers with ``OOD_WORKFLOW_SYNC_KEY``
 
 When you toggle **Enable OOD_WORKFLOW_SYNC_KEY** on the workflow edit form, every launcher submitted as part of that 
 workflow run is given the *same* random, 16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable.
-The token stays identical across launchers runs but unique to each workflow run. It can suppliment creating an output 
+The token stays identical across launchers runs but unique to each workflow run. It can supplement creating an output 
 directory that is private to that unique to current workflow execution. Inside any launcher script you can simply 
 ``mkdir -p`` a folder whose name embeds the key and launchers write your job's results there:
 
