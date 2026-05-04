@@ -1,3 +1,4 @@
+.. _app-development-sub-apps:
 
 Sub-Apps and Re-configuring existing apps
 =========================================
