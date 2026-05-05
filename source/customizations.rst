@@ -1026,6 +1026,8 @@ In each default translation dictionary file the values that are most site-specif
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
 
+.. _change_welcome_html:
+
 Change the Dashboard Tagline
 ............................
 
