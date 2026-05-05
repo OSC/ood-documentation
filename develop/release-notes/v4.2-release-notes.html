@@ -95,7 +95,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../release-notes.html">Release Notes</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">v4.2 Release Notes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#breaking-changes-and-deprecations">Breaking Changes and Deprecations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessibility-recommendations">Accessibility Recommendations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#operating-system-support">Operating System Support</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency-updates">Dependency Updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ubuntu-and-debian-repository-signing-change">Ubuntu and Debian repository signing change</a></li>
@@ -157,7 +157,7 @@
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#acknowledgments" id="id1">Acknowledgments</a></p></li>
-<li><p><a class="reference internal" href="#breaking-changes-and-deprecations" id="id2">Breaking Changes and Deprecations</a></p></li>
+<li><p><a class="reference internal" href="#accessibility-recommendations" id="id2">Accessibility Recommendations</a></p></li>
 <li><p><a class="reference internal" href="#operating-system-support" id="id3">Operating System Support</a></p></li>
 <li><p><a class="reference internal" href="#dependency-updates" id="id4">Dependency Updates</a></p></li>
 <li><p><a class="reference internal" href="#ubuntu-and-debian-repository-signing-change" id="id5">Ubuntu and Debian repository signing change</a></p></li>
@@ -172,8 +172,23 @@
 <section id="acknowledgments">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Acknowledgments</a><a class="headerlink" href="#acknowledgments" title="Link to this heading"></a></h2>
 </section>
-<section id="breaking-changes-and-deprecations">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Breaking Changes and Deprecations</a><a class="headerlink" href="#breaking-changes-and-deprecations" title="Link to this heading"></a></h2>
+<section id="accessibility-recommendations">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Accessibility Recommendations</a><a class="headerlink" href="#accessibility-recommendations" title="Link to this heading"></a></h2>
+<p>A VPAT has been created for version 4.2 and outlines the compliance of Open OnDemand with the WCAG AA standard.
+Changes in version 4.2 ensure that immutable aspects of OnDemand are accessible by default, but do not account for
+customizations configured on individual instances. An individual instance should be reviewed separately for compliance,
+but we recommend specifically checking the following configurations that are directly related to WCAG guidelines.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Ensure <code class="docutils literal notranslate"><span class="pre">show_all_apps_link</span></code> is set to true to satisfy <a class="reference external" href="http://www.w3.org/TR/WCAG20/#navigation-mechanisms-mult-loc">2.4.5 Multiple Ways</a></dt><dd><ul>
+<li><p>This page acts as a searchable site map to all the enabled apps on your system. In addition to enabling the link in the navbar, it may be helpful to call attention and link to it in your <a class="reference internal" href="../customizations.html#change-welcome-html"><span class="std std-ref">homepage welcome message</span></a>.</p></li>
+<li><p>The default value has been changed from false to true in v4.2. Ensure that your custom configuration does not override this default.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">show_all_apps_link</span></code> configuration can be set through the environment variable <code class="docutils literal notranslate"><span class="pre">SHOW_ALL_APPS_LINK</span></code> or in your <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </section>
 <section id="operating-system-support">
 <h2><a class="toc-backref" href="#id3" role="doc-backlink">Operating System Support</a><a class="headerlink" href="#operating-system-support" title="Link to this heading"></a></h2>
