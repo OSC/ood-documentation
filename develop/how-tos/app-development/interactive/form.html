@@ -452,6 +452,15 @@ the cluster module files that need to be read.</p>
 <p>If you have dynamic form widgets enabled, the option list will be cluster aware.
 Meaning only versions appropriate to a given cluster will be shown when that
 cluster is chosen.</p>
+<p>Sub-modules are also supported by using <code class="docutils literal notranslate"><span class="pre">/</span></code> characters.  For example if you have the <code class="docutils literal notranslate"><span class="pre">openmpi</span></code> module
+with two sub-modules <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">intel</span></code> you can add them to your form like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">form</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto_modules_openmpi/gcc</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto_modules_openmpi/intel</span>
+</pre></div>
+</div>
+<p>However, when referencing these in any ERB files you must use <code class="docutils literal notranslate"><span class="pre">_</span></code> separators like
+<code class="docutils literal notranslate"><span class="pre">&lt;%=</span> <span class="pre">context.auto_modules_openmpi_gcc</span> <span class="pre">%&gt;</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The form configuration is case sensitive. So there is a difference between
