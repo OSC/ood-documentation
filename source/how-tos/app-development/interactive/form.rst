@@ -294,6 +294,18 @@ EX:
   Meaning only versions appropriate to a given cluster will be shown when that
   cluster is chosen.
 
+  Sub-modules are also supported by using ``/`` characters.  For example if you have the ``openmpi`` module
+  with two sub-modules ``gcc`` and ``intel`` you can add them to your form like so:
+
+  .. code-block:: yaml
+
+    form:
+      - auto_modules_openmpi/gcc
+      - auto_modules_openmpi/intel
+
+  However, when referencing these in any ERB files you must use ``_`` separators like
+  ``<%= context.auto_modules_openmpi_gcc %>``.
+
   .. note::
 
     The form configuration is case sensitive. So there is a difference between
