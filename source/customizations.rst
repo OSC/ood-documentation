@@ -233,9 +233,9 @@ This will result in a CSS tag added to all dashboard pages with the path: ``/pub
 
   custom_css_files: ["/myfolder/custom-branding.css"]
 
-.. _help_menu_guide:
-
 .. include:: customizations/overriding-partials.inc
+
+.. _help_menu_guide:
 
 Add URLs to Help Menu
 ---------------------
