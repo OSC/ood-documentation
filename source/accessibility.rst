@@ -6,7 +6,7 @@ Accessibility
 Introduction
 ------------
 
-Open OnDemand has went through several reviews and updates to meet
+Open OnDemand has undergone several reviews and updates to meet
 `WCAG`_ 2.2 guidelines.  However, there are a few steps centers need to
 take to achieve complete complaince.  These steps are documented here along
 with areas or certian features that are not complaint.
