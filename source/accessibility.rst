@@ -8,15 +8,15 @@ Introduction
 
 Open OnDemand has undergone several reviews and updates to meet
 `WCAG`_ 2.2 guidelines.  However, there are a few steps centers need to
-take to achieve complete complaince.  These steps are documented here along
-with areas or certian features that are not complaint.
+take to achieve complete compliance.  These steps are documented here along
+with areas or certain features that are not complaint.
 
 
 Additional configurations needed.
 ---------------------------------
 
 Here is a list of additional configurations that are needed to acheive full
-complaince with the `WCAG`_ 2.2 guidelines.  Open OnDemand cannot ship with
+compliance with the `WCAG`_ 2.2 guidelines.  Open OnDemand cannot ship with
 as they may be site specific.
 
 
