@@ -290,6 +290,7 @@ Configuration Properties with profile support
 
         dashboard_title: "My Institution"
 
+.. _show_all_apps_link:
 .. describe:: show_all_apps_link (Bool, false)
 
   Whether to show the ``All Apps`` link in the navbar.
