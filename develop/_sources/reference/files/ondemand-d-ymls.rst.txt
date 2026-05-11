@@ -297,18 +297,18 @@ Configuration Properties with profile support
   This links to the Dashboard page showing all system installed applications.
 
   Default
-    ``false``, the ``All Apps`` link will not be shown in the navbar.
-
-    .. code-block:: yaml
-
-      show_all_apps_link: false
-
-  Example
-    Include the ``All Apps`` link in the navbar.
+    ``true``, the ``All Apps`` link will be shown in the navbar.
 
     .. code-block:: yaml
 
       show_all_apps_link: true
+
+  Example
+    Do not show the ``All Apps`` link in the navbar.
+
+    .. code-block:: yaml
+
+      show_all_apps_link: false
 
 .. describe:: nav_bar (Array<Object>, [])
 
