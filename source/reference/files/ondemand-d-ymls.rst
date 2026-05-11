@@ -303,7 +303,7 @@ Configuration Properties with profile support
       show_all_apps_link: true
 
   Example
-    Do now show the ``All Apps`` link in the navbar.
+    Do not show the ``All Apps`` link in the navbar.
 
     .. code-block:: yaml
 
