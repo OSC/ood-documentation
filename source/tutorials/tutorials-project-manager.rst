@@ -196,8 +196,8 @@ these steps into ``collect_data.sh`` and ``compute_results.sh`` as seen below.
 
     mkdir -p 'data'
 
-    GEOCODE_JSON="data/geocode-$COUNT.json"
-    WEATHER_JSON="data/weather-$COUNT.json"
+    GEOCODE_JSON="data/geocode-${OOD_WORKFLOW_SYNC_KEY}.json"
+    WEATHER_JSON="data/weather-${OOD_WORKFLOW_SYNC_KEY}.json"
 
     ./scripts/geocode.sh "$CITY_PARAM" > "$GEOCODE_JSON"
 
@@ -209,24 +209,26 @@ these steps into ``collect_data.sh`` and ``compute_results.sh`` as seen below.
     # Usage: ./compute_results.sh
     set -euo pipefail
 
-    JSON_FILE="data/weather-$COUNT.json"
+    JSON_FILE="data/weather-${OOD_WORKFLOW_SYNC_KEY}.json"
 
     ./scripts/compute_volume.sh "$JSON_FILE" "$DIAMETER_PARAM"
 
-Note how we split our parameters between the two scripts to only pass what each script needs. We also add a 
-``COUNT`` variable so that we can control when data is overwritten, an essential consideration if you plan 
-to have more than one instance of a workflow run simultaneously.
+Note how we split our parameters between the two scripts to only pass what each script needs. We also add a
+``OOD_WORKFLOW_SYNC_KEY`` variable so that we can control when data is overwritten, an essential consideration
+if you plan to have more than one instance of a workflow run simultaneously. You need to submit workflow with
+**Enable OOD_WORKFLOW_SYNC_KEY** turned on for above example. Thus every launcher in workflow run receives
+*same* random 16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable. The token stays
+identical across launchers and unique to each run, which helps launchers to share intermediate files in this example.
 
 The next step is to create the launchers for these scripts. Like above, we can copy the 'Variable Simulation'
 launcher into two new ones, 'Collect Data' and 'Compute Results'. We can then edit the form for each launcher 
 to include the appropriate environment variables. For the 'Collect Data' launcher, we will keep the 
-``CITY_PARAM`` variable and change the ``DIAMETER_PARAM`` variable name to ``COUNT``. We then do an analogous 
-change to the 'Compute Results' launcher, keeping ``DIAMETER_PARAM`` untouched and changing ``CITY_PARAM`` to 
-``COUNT``. There is no form to fill out for a workflow, so the default values provided here are the values the 
-launchers will use. Most importantly, we should ensure that the ``COUNT`` default is consistent between the 
-two. Finally, because we want these launchers to be used in workflows, we ensure every field has 'Fixed Value' 
-selected, which we can do by clicking 'Edit' and then selecting 'Fixed Value' on each item before saving. This
-will prevent the workflows from using any cached launcher parameters, which can be difficult to debug.
+``CITY_PARAM`` variable and remove the ``DIAMETER_PARAM`` variable. We then do an analogous change to the
+'Compute Results' launcher, keeping ``DIAMETER_PARAM`` untouched and removing ``CITY_PARAM``. There is no
+form to fill out for a workflow, so the default values provided here are the values the launchers will use.
+Finally, because we want these launchers to be used in workflows, we ensure every field has 'Fixed Value' 
+selected, which we can do by clicking 'Edit' and then selecting 'Fixed Value' on each item before saving.
+This will prevent the workflows from using any cached launcher parameters, which can be difficult to debug.
 
 With our launchers created, we can now create a new workflow. From the Project Manager, we click the 
 'New Workflow' button on the lower left of the project dashboard. We will give it the name 'Simulation 
@@ -249,22 +251,19 @@ We can now press 'Submit', and our workflow will save and begin scheduling. If w
 we can observe the launchers move between queued, running, and completed states, with dependent launchers only 
 running after their dependencies are completed. If we don't care to watch the workflow execute, we can press 
 'Back' from the workflows page to return to the project dashboard, where we can edit the launcher form defaults 
-and run other workflows as needed, keeping in mind that the COUNT variable must be consistent for each run.
+and run other workflows as needed. Each new workflow run produces a fresh ``OOD_WORKFLOW_SYNC_KEY``, so
+concurrent runs will not overwrite each other's intermediate files.
 
 .. figure:: /videos/workflow.gif
    :alt: Demonstration of creating launcher, creating workflow, submitting workflow and using live job status
-
-The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
-you can always design your own systems and conventions that fit your specific situation.
-
-Synchronizing Launchers with ``OOD_WORKFLOW_SYNC_KEY``
-------------------------------------------------------
-
-When you toggle **Enable OOD_WORKFLOW_SYNC_KEY** on the workflow edit form, every launcher submitted as part of that 
-workflow run is given the *same* random, 16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable.
-The token stays identical across launchers runs but unique to each workflow run. It can supplement creating an output 
-directory that is private to that unique to current workflow execution. Inside any launcher script you can simply 
-``mkdir -p`` a folder whose name embeds the key and launchers write your job's results there:
+ 
+Alternative synchronization approaches
+......................................
+ 
+The example above uses ``OOD_WORKFLOW_SYNC_KEY`` as part of a file name so that upstream launchers can hand off
+intermediate results. The same token can be used as temporary *directory* name when a stage produces several files.
+For example, an upstream launcher could ``mkdir -p`` a per-run output directory and every dependent launcher
+can read from and write to that directory because they all see the same value of ``OOD_WORKFLOW_SYNC_KEY``.
 
 .. code-block:: bash
 
@@ -276,31 +275,11 @@ directory that is private to that unique to current workflow execution. Inside a
    # All downstream launchers write here
    ./simulate --out "${OUTPUT_DIR}/results.csv"
 
-Every dependent launcher in the same workflow sees the same value of ``OOD_WORKFLOW_SYNC_KEY``, so a downstream 
-launcher can read and write to the same temporary directory.
-
-The same token can be used as a *file name* whenever you need launchers in a workflow to talk to each other through
-a shared sync file, lock file or checkpoint file.
-
-.. code-block:: bash
-
-   #!/usr/bin/env bash
-   # Stage 1 launcher: produce a checkpoint file when the data is ready
-   CKPT_FILE="${HOME}/projects/my_project/.checkpoint/${OOD_WORKFLOW_SYNC_KEY}.h5"
-   mkdir -p "$(dirname "${CKPT_FILE}")"
-   ./prepare_data
-   touch "${CKPT_FILE}"
-
-.. code-block:: bash
-
-   #!/usr/bin/env bash
-   # Stage 2 launcher: confirm the checkpoint file from Stage 1 exists before running
-   CKPT_FILE="${HOME}/projects/my_project/.checkpoint/${OOD_WORKFLOW_SYNC_KEY}.h5"
-   if [[ ! -f "${CKPT_FILE}" ]]; then
-     echo "Upstream stage did not finish cleanly — aborting." >&2
-     exit 1
-   fi
-   ./analyze
-
-The key is opaque to the scheduler i.e. just a string your scripts read out of the environment, so you are free to combine 
-it with any naming convention that already fits your project.
+``OOD_WORKFLOW_SYNC_KEY`` is just a string your scripts read out of the environment so you are free to combine 
+it with any naming convention that already fits your project. To debug, we also add ``OOD_WORKFLOW_SYNC_KEY``
+environment variable field to each launcher with a default value of ``test``. When you run either launcher
+on its own from the project dashboard, the scripts will use ``test`` but will get overridden by a random
+unique value in case of a workflow submit.
+ 
+The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
+you can always design your own systems and conventions that fit your specific situation.
