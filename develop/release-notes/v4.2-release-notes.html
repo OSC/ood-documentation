@@ -103,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#behavior-changes">Behavior Changes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#active-jobs-extended-details-panel-opens-to-the-side">Active Jobs Extended Details Panel Opens to the Side</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#interactive-app-popovers-persist-under-hover-and-focus">Interactive App Popovers Persist Under Hover and Focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflows-now-provide-ood-workflow-sync-key-to-launchers">Workflows Now Provide <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> to Launchers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#edit-links-no-longer-appear-when-downloads-are-disabled">Edit Links No Longer Appear when Downloads are Disabled</a></li>
 </ul>
 </li>
@@ -168,10 +169,11 @@
 <ul>
 <li><p><a class="reference internal" href="#active-jobs-extended-details-panel-opens-to-the-side" id="id7">Active Jobs Extended Details Panel Opens to the Side</a></p></li>
 <li><p><a class="reference internal" href="#interactive-app-popovers-persist-under-hover-and-focus" id="id8">Interactive App Popovers Persist Under Hover and Focus</a></p></li>
-<li><p><a class="reference internal" href="#edit-links-no-longer-appear-when-downloads-are-disabled" id="id9">Edit Links No Longer Appear when Downloads are Disabled</a></p></li>
+<li><p><a class="reference internal" href="#workflows-now-provide-ood-workflow-sync-key-to-launchers" id="id9">Workflows Now Provide <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> to Launchers</a></p></li>
+<li><p><a class="reference internal" href="#edit-links-no-longer-appear-when-downloads-are-disabled" id="id10">Edit Links No Longer Appear when Downloads are Disabled</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#upgrade-instructions" id="id10">Upgrade Instructions</a></p></li>
+<li><p><a class="reference internal" href="#upgrade-instructions" id="id11">Upgrade Instructions</a></p></li>
 </ul>
 </nav>
 <section id="acknowledgments">
@@ -251,8 +253,17 @@ navigation to proceed normally.</p>
 The popovers will remain open as long as hover or focus remains within the trigger or popover content, allowing
 users to click links inside the popover.</p>
 </section>
+<section id="workflows-now-provide-ood-workflow-sync-key-to-launchers">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Workflows Now Provide <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> to Launchers</a><a class="headerlink" href="#workflows-now-provide-ood-workflow-sync-key-to-launchers" title="Link to this heading"></a></h3>
+<p>It was previously difficult to synchronize launchers within a workflow and pass data between launchers
+without overwriting the data on each run. The introduction of the <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> environment
+variable fixes this by providing a unique alphanumeric value for each run of a workflow, which launchers
+can include in file and directory names when reading or writing data. The feature can be enabled for
+individual workflows upon creation or by editing an existing workflow. See the updated <a class="reference internal" href="../tutorials/tutorials-project-manager.html#project-manager-tutorial"><span class="std std-ref">Project Manager Tutorial</span></a>
+for additional details and strategies for using <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> in your workflows.</p>
+</section>
 <section id="edit-links-no-longer-appear-when-downloads-are-disabled">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Edit Links No Longer Appear when Downloads are Disabled</a><a class="headerlink" href="#edit-links-no-longer-appear-when-downloads-are-disabled" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Edit Links No Longer Appear when Downloads are Disabled</a><a class="headerlink" href="#edit-links-no-longer-appear-when-downloads-are-disabled" title="Link to this heading"></a></h3>
 <p>For users with the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#download-enabled"><span class="std std-ref">download_enabled</span></a> configuration set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the files app and
 project directory tables will no longer serve 'Edit' links to files. This prevents users from opening the file editor
 and copying the file contents, effectively downloading the file. With this change, disabling downloads will prevent
@@ -261,7 +272,7 @@ like batch connect apps or <a class="reference internal" href="../how-tos/projec
 </section>
 </section>
 <section id="upgrade-instructions">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Upgrade Instructions</a><a class="headerlink" href="#upgrade-instructions" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Upgrade Instructions</a><a class="headerlink" href="#upgrade-instructions" title="Link to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Update the <strong>development</strong> and/or <strong>test</strong> instances of OnDemand installed at your center <strong>before</strong> you modify the <strong>production</strong> instance.</p>
