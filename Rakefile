@@ -10,6 +10,11 @@ task :build do
   exec cmd
 end
 
+desc "Clean workspace"
+task :clean do
+  exec "#{run_cmd} make clean"
+end
+
 desc "Spellcheck"
 task :spellcheck do
   exec "#{run_cmd} make spellcheck"
