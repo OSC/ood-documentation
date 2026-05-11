@@ -43,6 +43,8 @@ the output of the batch connect app.
    ``view.html.erb`` file. The Dashboard has internal logic in place for
    displaying connection information of VNC sessions to the user.
 
+.. _view_session_info:
+
 Session Information
 -------------------
 
