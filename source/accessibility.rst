@@ -11,19 +11,4 @@ Open OnDemand has undergone several reviews and updates to meet
 take to achieve complete compliance.  These steps are documented here along
 with areas or certain features that are not complaint.
 
-
-Additional configurations needed.
----------------------------------
-
-Here is a list of additional configurations that are needed to achieve full
-compliance with the `WCAG`_ 2.2 guidelines.  Open OnDemand cannot ship with
-as they may be site specific.
-
-
-* `WCAG criterion 3.2.6 "Conistent Help"`_: Centers need to :ref:`extend the help menu <help_menu_guide>`
-  to complete this criteria.
-
-
-.. _WCAG: https://www.w3.org/WAI/standards-guidelines/wcag/
-.. _WCAG criterion 3.2.6 "Conistent Help": https://www.w3.org/TR/WCAG22/#consistent-help
-
+.. include:: accessibility_settings.inc
