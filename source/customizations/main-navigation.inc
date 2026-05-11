@@ -128,9 +128,7 @@ configuration would be (without showing any discovered apps).
       - clusters
       - interactive apps
       - my interactive sessions
-
-      # 'all apps' is disabled by default, but would be next if you set 'show_all_apps_link'.
-      # - all apps
+      - all apps
 
     # 'help_bar' is the right side of the navigation bar.
     help_bar:
