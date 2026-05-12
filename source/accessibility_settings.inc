@@ -7,7 +7,8 @@ as they may be site specific.
 
 
 * `WCAG criterion 2.4.5 "Multiple Ways"`_: Centers need to enable the :ref:`show_all_apps_link configuration <show_all_apps_link>`
-  to complete this criteria.
+  to complete this criteria. In addition to enabling the link in the navbar, it may be helpful to call attention and link to it
+  in your :ref:`homepage welcome message <change_welcome_html>`.
 * `WCAG criterion 3.2.6 "Consistent Help"`_: Centers need to :ref:`extend the help menu <help_menu_guide>`
   to complete this criteria.
 
