@@ -219,7 +219,7 @@ if you plan to have more than one instance of a workflow run simultaneously. To 
 **Enable OOD_WORKFLOW_SYNC_KEY** to ON for this workflow, which can be selected when the workflow is created or in the
 'Edit' form of an existing workflow. When enabled, every launcher in the workflow run receives the *same* random 
 16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable. The token stays identical across
-launchers and unique to each run, which in this example allows the launchers read and write data to intermediate files.
+launchers and unique to each run, which in this example allows the launchers to read and write data to intermediate files.
 
 The next step is to create the launchers for these scripts. Like above, we can copy the 'Variable Simulation'
 launcher into two new ones, 'Collect Data' and 'Compute Results'. We can then edit the form for each launcher 
