@@ -276,11 +276,13 @@ can read from and write to that directory because they all see the same value of
    # All downstream launchers write here
    ./simulate --out "${OUTPUT_DIR}/results.csv"
 
-``OOD_WORKFLOW_SYNC_KEY`` is just a string your scripts read out of the environment so you are free to combine 
-it with any naming convention that already fits your project. For debugging, we can define an ``OOD_WORKFLOW_SYNC_KEY``
-environment variable on each launcher with a default value of ``test``. You can then run either launcher independently
-from the project dashboard and verify that the launcher behaves as expected. When the launchers are run from the
-workflow, this ``test`` value will be replaced by the unique random key for that workflow run.
+``OOD_WORKFLOW_SYNC_KEY`` is just a string your scripts read out of the environment, so you are free to combine 
+it with any naming convention that already fits your project. 
+
+For debugging, we can also define an ``OOD_WORKFLOW_SYNC_KEY`` environment variable on each launcher with a default 
+value of ``test``. You can then run either launcher independently from the project dashboard and verify that the 
+launcher behaves as expected. When the launchers are run from the workflow, this ``test`` value will be replaced 
+by the unique random key for that workflow run.
  
 The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
 you can always design your own systems and conventions that fit your specific situation.
