@@ -214,11 +214,12 @@ these steps into ``collect_data.sh`` and ``compute_results.sh`` as seen below.
     ./scripts/compute_volume.sh "$JSON_FILE" "$DIAMETER_PARAM"
 
 Note how we split our parameters between the two scripts to only pass what each script needs. We also add a
-``OOD_WORKFLOW_SYNC_KEY`` variable so that we can control when data is overwritten, an essential consideration
-if you plan to have more than one instance of a workflow run simultaneously. You need to submit workflow with
-**Enable OOD_WORKFLOW_SYNC_KEY** turned on for above example. Thus every launcher in workflow run receives
-*same* random 16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable. The token stays
-identical across launchers and unique to each run, which helps launchers to share intermediate files in this example.
+``OOD_WORKFLOW_SYNC_KEY`` variable so that we can prevent when data from being overwritten, an essential consideration
+if you plan to have more than one instance of a workflow run simultaneously. To use this variable, we have to set
+**Enable OOD_WORKFLOW_SYNC_KEY** to ON for this workflow, which can be selected when the workflow is created or in the
+'Edit' form of an existing workflow. When enabled, every launcher in the workflow run receives the *same* random 
+16-character token through the ``OOD_WORKFLOW_SYNC_KEY`` environment variable. The token stays identical across
+launchers and unique to each run, which in this example allows the launchers read and write data to intermediate files.
 
 The next step is to create the launchers for these scripts. Like above, we can copy the 'Variable Simulation'
 launcher into two new ones, 'Collect Data' and 'Compute Results'. We can then edit the form for each launcher 
@@ -276,10 +277,10 @@ can read from and write to that directory because they all see the same value of
    ./simulate --out "${OUTPUT_DIR}/results.csv"
 
 ``OOD_WORKFLOW_SYNC_KEY`` is just a string your scripts read out of the environment so you are free to combine 
-it with any naming convention that already fits your project. To debug, we also add ``OOD_WORKFLOW_SYNC_KEY``
-environment variable field to each launcher with a default value of ``test``. When you run either launcher
-on its own from the project dashboard, the scripts will use ``test`` but will get overridden by a random
-unique value in case of a workflow submit.
+it with any naming convention that already fits your project. For debugging, we can define an ``OOD_WORKFLOW_SYNC_KEY``
+environment variable on each launcher with a default value of ``test``. You can then run either launcher independently
+from the project dashboard and verify that the launcher behaves as expected. When the launchers are run from the
+workflow, this ``test`` value will be replaced by the unique random key for that workflow run.
  
 The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs, 
 you can always design your own systems and conventions that fit your specific situation.
