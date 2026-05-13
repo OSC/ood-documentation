@@ -1,6 +1,3 @@
-Additional configurations needed.
----------------------------------
-
 Here is a list of additional configurations that are needed to achieve full
 compliance with the `WCAG`_ 2.2 guidelines.  Open OnDemand cannot ship with
 as they may be site specific.
