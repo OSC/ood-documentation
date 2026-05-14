@@ -14,7 +14,7 @@ with areas or certain features that are not complaint.
 Accessibility Conformance Report 
 --------------------------------
 
-Developers have uploaded the `Open OnDemand 4.2 VPAT`_ online which
+Developers have uploaded the online on `Open OnDemand's accessibility page`_ which
 you may retrieve and review. This document is from the voluntary product assessment
 template a registered service mark of the Information Technology Industry Council (ITI).
 
@@ -31,4 +31,4 @@ The developers of Open OnDemand can only manage and review the pages that
 are shipped in the packages, not any custom pages or Passenger applications
 that have been developed by any given center.
 
-.. _Open OnDemand 4.2 VPAT: https://www.openondemand.org/sites/default/files/documents/Open%20OnDemand%20v4.2%20ACR%20-%20VPAT2.5Rev_WCAG%20-%20issued%20May%202026.pdf
+.. _Open OnDemand's accessibility page: https://www.openondemand.org/accessibility
