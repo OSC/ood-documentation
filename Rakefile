@@ -24,6 +24,8 @@ desc "Open built documentation in browser"
 task :open do
   if windows?
     system 'start .\build\html\index.html'
+  elsif codespace?
+    exec 'python -m http.server 8000 --directory build/html'
   else
     exec '(command -v xdg-open >/dev/null 2>&1 && xdg-open build/html/index.html) || open build/html/index.html'
   end
@@ -53,6 +55,10 @@ end
 
 def windows?
   Gem.win_platform?
+end
+
+def codespace?
+  ENV['CODESPACES'] == 'true'
 end
 
 def run_cmd
