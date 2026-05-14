@@ -156,6 +156,7 @@ html_context = {
     'current_version': release,
     'versions' : [
         ['latest', '/latest/'],
+        ['4.1', '/release-4.1/'],
         ['4.0', '/release-4.0/'],
         ['3.1', '/release-3.1/'],
         ['3.0', '/release-3.0/'],
