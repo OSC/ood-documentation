@@ -21,6 +21,8 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 def is_windows() -> bool:
     return platform.system().lower().startswith("win")
 
+def is_codespace() -> bool:
+    return (os.getenv('CODESPACES') == 'true')
 
 def exists(program: str) -> bool:
     # Cross-platform check if a program exists in PATH
@@ -109,7 +111,8 @@ def cmd_open(_args) -> int:
         except OSError as e:
             print(f"Failed to open {index_path}: {e}", file=sys.stderr)
             return 1
-
+    if is_codespace():
+        return _print_and_exec(["python", "-m", "http.server", "8000", "--directory", "build/html"])
     if shutil.which("xdg-open"):
         return subprocess.call(["xdg-open", index_path])
     if shutil.which("open"):
