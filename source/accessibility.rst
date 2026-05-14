@@ -14,7 +14,7 @@ with areas or certain features that are not complaint.
 Accessibility Conformance Report 
 --------------------------------
 
-Developers have uploaded the online on `Open OnDemand's accessibility page`_ which
+Developers have uploaded a VPAT document online on `Open OnDemand's accessibility page`_ which
 you may retrieve and review. This document is from the voluntary product assessment
 template a registered service mark of the Information Technology Industry Council (ITI).
 
