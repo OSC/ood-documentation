@@ -110,17 +110,6 @@ Open OnDemand uses these packages, among many others.
 
             sudo dnf install ondemand
 
-      .. tab:: Ubuntu 22.04
-
-         .. code-block:: sh
-
-            sudo apt install apt-transport-https ca-certificates
-            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
-            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-jammy_all.deb
-            sudo apt update
-
-            sudo apt install ondemand
-
       .. tab:: Ubuntu 24.04
 
          .. code-block:: sh
@@ -132,6 +121,17 @@ Open OnDemand uses these packages, among many others.
 
             sudo apt install ondemand
 
+      .. tab:: Ubuntu 26.04
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-resolute_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-resolute_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-resolute_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
+
       .. tab:: Debian 12
 
          .. code-block:: sh
@@ -139,6 +139,17 @@ Open OnDemand uses these packages, among many others.
             sudo apt install apt-transport-https ca-certificates
             wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
+            sudo apt update
+
+            sudo apt install ondemand
+
+      .. tab:: Debian 13
+
+         .. code-block:: sh
+
+            sudo apt install apt-transport-https ca-certificates
+            wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-trixie_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-trixie_all.deb
+            sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-trixie_all.deb
             sudo apt update
 
             sudo apt install ondemand

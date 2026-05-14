@@ -83,6 +83,7 @@ These are institutions who were early adopters or provided HPC resources for dev
   :caption: Reference
 
   architecture
+  accessibility
   reference
   security
   release-notes

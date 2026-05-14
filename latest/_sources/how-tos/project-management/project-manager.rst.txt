@@ -93,6 +93,8 @@ is important to ensure that your directory structure meets these minimum require
 #. Any group directory directly below ``OOD_SHARED_PROJECT_PATH`` should have ``rwx`` permissions 
    for the group
 
+.. _project_templates:
+
 Templates
 .........
 

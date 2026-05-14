@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tutorials: Project Manager &mdash; Open OnDemand 4.1.0 documentation</title>
+  <title>Tutorials: Project Manager &mdash; Open OnDemand 4.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=6f7bdab3" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
 
   
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../_static/documentation_options.js?v=d0ae6d56"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -51,14 +51,24 @@
               <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                4.1
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+                4.2
+              </div><div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get" id="rtd-search-form" class="wy-form">
+      <input
+        type="text"
+        id="search-input"
+        name="q"
+        aria-label="Search docs"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Search docs"
+      />
+      <input type="submit" value="Go" class="sr-only" />
+    </form>
+  </div>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
@@ -89,12 +99,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#adding-a-launcher">Adding a Launcher</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#leveraging-launcher-forms">Leveraging Launcher Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-workflows">Using Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternative-synchronization-approaches">Alternative synchronization approaches</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../accessibility.html">Accessibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
@@ -135,6 +147,7 @@
 <li><p><a class="reference internal" href="#adding-a-launcher" id="id2">Adding a Launcher</a></p></li>
 <li><p><a class="reference internal" href="#leveraging-launcher-forms" id="id3">Leveraging Launcher Forms</a></p></li>
 <li><p><a class="reference internal" href="#using-workflows" id="id4">Using Workflows</a></p></li>
+<li><p><a class="reference internal" href="#alternative-synchronization-approaches" id="id5">Alternative synchronization approaches</a></p></li>
 </ul>
 </nav>
 <p>The project manager is designed to make it easy to submit scripts to your scheduler.
@@ -299,8 +312,8 @@ these steps into <code class="docutils literal notranslate"><span class="pre">co
 
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;data&#39;</span>
 
-<span class="nv">GEOCODE_JSON</span><span class="o">=</span><span class="s2">&quot;data/geocode-</span><span class="nv">$COUNT</span><span class="s2">.json&quot;</span>
-<span class="nv">WEATHER_JSON</span><span class="o">=</span><span class="s2">&quot;data/weather-</span><span class="nv">$COUNT</span><span class="s2">.json&quot;</span>
+<span class="nv">GEOCODE_JSON</span><span class="o">=</span><span class="s2">&quot;data/geocode-</span><span class="si">${</span><span class="nv">OOD_WORKFLOW_SYNC_KEY</span><span class="si">}</span><span class="s2">.json&quot;</span>
+<span class="nv">WEATHER_JSON</span><span class="o">=</span><span class="s2">&quot;data/weather-</span><span class="si">${</span><span class="nv">OOD_WORKFLOW_SYNC_KEY</span><span class="si">}</span><span class="s2">.json&quot;</span>
 
 ./scripts/geocode.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CITY_PARAM</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GEOCODE_JSON</span><span class="s2">&quot;</span>
 
@@ -311,24 +324,27 @@ mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;dat
 <span class="c1"># Usage: ./compute_results.sh</span>
 <span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
 
-<span class="nv">JSON_FILE</span><span class="o">=</span><span class="s2">&quot;data/weather-</span><span class="nv">$COUNT</span><span class="s2">.json&quot;</span>
+<span class="nv">JSON_FILE</span><span class="o">=</span><span class="s2">&quot;data/weather-</span><span class="si">${</span><span class="nv">OOD_WORKFLOW_SYNC_KEY</span><span class="si">}</span><span class="s2">.json&quot;</span>
 
 ./scripts/compute_volume.sh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JSON_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DIAMETER_PARAM</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>Note how we split our parameters between the two scripts to only pass what each script needs. We also add a
-<code class="docutils literal notranslate"><span class="pre">COUNT</span></code> variable so that we can control when data is overwritten, an essential consideration if you plan
-to have more than one instance of a workflow run simultaneously.</p>
+<code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> variable so that we can prevent when data from being overwritten, an essential consideration
+if you plan to have more than one instance of a workflow run simultaneously. To use this variable, we have to set
+<strong>Enable OOD_WORKFLOW_SYNC_KEY</strong> to ON for this workflow, which can be selected when the workflow is created or in the
+'Edit' form of an existing workflow. When enabled, every launcher in the workflow run receives the <em>same</em> random
+16-character token through the <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> environment variable. The token stays identical across
+launchers and unique to each run, which in this example allows the launchers to read and write data to intermediate files.</p>
 <p>The next step is to create the launchers for these scripts. Like above, we can copy the 'Variable Simulation'
 launcher into two new ones, 'Collect Data' and 'Compute Results'. We can then edit the form for each launcher
 to include the appropriate environment variables. For the 'Collect Data' launcher, we will keep the
-<code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code> variable and change the <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> variable name to <code class="docutils literal notranslate"><span class="pre">COUNT</span></code>. We then do an analogous
-change to the 'Compute Results' launcher, keeping <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> untouched and changing <code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code> to
-<code class="docutils literal notranslate"><span class="pre">COUNT</span></code>. There is no form to fill out for a workflow, so the default values provided here are the values the
-launchers will use. Most importantly, we should ensure that the <code class="docutils literal notranslate"><span class="pre">COUNT</span></code> default is consistent between the
-two. Finally, because we want these launchers to be used in workflows, we ensure every field has 'Fixed Value'
-selected, which we can do by clicking 'Edit' and then selecting 'Fixed Value' on each item before saving. This
-will prevent the workflows from using any cached launcher parameters, which can be difficult to debug.</p>
+<code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code> variable and remove the <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> variable. We then do an analogous change to the
+'Compute Results' launcher, keeping <code class="docutils literal notranslate"><span class="pre">DIAMETER_PARAM</span></code> untouched and removing <code class="docutils literal notranslate"><span class="pre">CITY_PARAM</span></code>. There is no
+form to fill out for a workflow, so the default values provided here are the values the launchers will use.
+Finally, because we want these launchers to be used in workflows, we ensure every field has 'Fixed Value'
+selected, which we can do by clicking 'Edit' and then selecting 'Fixed Value' on each item before saving.
+This will prevent the workflows from using any cached launcher parameters, which can be difficult to debug.</p>
 <p>With our launchers created, we can now create a new workflow. From the Project Manager, we click the
 'New Workflow' button on the lower left of the project dashboard. We will give it the name 'Simulation
 Workflow' and select the 'Collect Data' and 'Compute Results' launchers, before saving the form.</p>
@@ -348,10 +364,33 @@ the workflow should look something like</p>
 we can observe the launchers move between queued, running, and completed states, with dependent launchers only
 running after their dependencies are completed. If we don't care to watch the workflow execute, we can press
 'Back' from the workflows page to return to the project dashboard, where we can edit the launcher form defaults
-and run other workflows as needed, keeping in mind that the COUNT variable must be consistent for each run.</p>
+and run other workflows as needed. Each new workflow run produces a fresh <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code>, so
+concurrent runs will not overwrite each other's intermediate files.</p>
 <figure class="align-default">
 <img alt="Demonstration of creating launcher, creating workflow, submitting workflow and using live job status" src="../_images/workflow.gif" />
 </figure>
+</section>
+<section id="alternative-synchronization-approaches">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Alternative synchronization approaches</a><a class="headerlink" href="#alternative-synchronization-approaches" title="Link to this heading"></a></h2>
+<p>The example above uses <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> as part of a file name so that upstream launchers can hand off
+intermediate results. The same token can be used as temporary <em>directory</em> name when a stage produces several files.
+For example, an upstream launcher could <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span></code> a per-run output directory and every dependent launcher
+can read from and write to that directory because they all see the same value of <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Create a per-run output directory under the project</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/projects/my_project/runs/</span><span class="si">${</span><span class="nv">OOD_WORKFLOW_SYNC_KEY</span><span class="si">}</span><span class="s2">&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># All downstream launchers write here</span>
+./simulate<span class="w"> </span>--out<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="s2">/results.csv&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> is just a string your scripts read out of the environment, so you are free to combine
+it with any naming convention that already fits your project.</p>
+<p>For debugging, we can also define an <code class="docutils literal notranslate"><span class="pre">OOD_WORKFLOW_SYNC_KEY</span></code> environment variable on each launcher with a default
+value of <code class="docutils literal notranslate"><span class="pre">test</span></code>. You can then run either launcher independently from the project dashboard and verify that the
+launcher behaves as expected. When the launchers are run from the workflow, this <code class="docutils literal notranslate"><span class="pre">test</span></code> value will be replaced
+by the unique random key for that workflow run.</p>
 <p>The Project Manager is designed to be flexible, so if the examples above aren't applicable to your needs,
 you can always design your own systems and conventions that fit your specific situation.</p>
 </section>
@@ -381,7 +420,7 @@ you can always design your own systems and conventions that fit your specific si
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Documentation Versions</span>
-    v: 4.1.0
+    v: 4.2.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
@@ -389,6 +428,8 @@ you can always design your own systems and conventions that fit your specific si
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/latest/tutorials/tutorials-project-manager.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-4.1/tutorials/tutorials-project-manager.html">4.1</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-4.0/tutorials/tutorials-project-manager.html">4.0</a></dd>
       

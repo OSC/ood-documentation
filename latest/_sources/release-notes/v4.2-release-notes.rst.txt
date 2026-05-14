@@ -1,0 +1,312 @@
+v4.2 Release Notes
+==================
+
+.. contents:: Table of Contents
+  :depth: 3
+  :local:
+
+
+Acknowledgments
+---------------
+
+Thank you to all of the community members who contributed code, documentation, suggestions, 
+bug reports, and other assistance across the project! We would like to recognize the following 
+individuals for their contributions to the Open OnDemand version 4.2 release.
+ 
+**mrobbert** contributed the cluster_info API for the PBSPro job adapter in ``ood_core``, and ensured
+KDE desktops can correctly use ``startplasma-x11`` when available.
+ 
+**james-s-willis** fixed quota bar display, preventing bars from extending over 100%, and fixed the
+``file_quotas`` widget on custom pages.
+
+**andrejcermak** contributed adding an OpenStack helper and refactoring coder logs functionality 
+in ``ood_core``, as well as caching improvements for ``BatchConnect::App.from_token`` in ``ondemand``.
+ 
+**harshit-soora** contributed the ``OOD_WORKFLOW_SYNC_KEY`` feature, enabling synchronized launchers
+within a workflow, as well as updates to the Project Manager tutorial and documentation.
+ 
+**robinkar** fixed parsing of canceled ``sacct`` job states in ``ood_core`` and improved escaping of
+option values for CSS selectors.
+ 
+**karcaw** contributed ``mod_ood_proxy`` HSTS header support.
+
+**finchnSNPs** and **folkwest** reported accessibility gaps in the job status table, files app, and the
+Project Manager, which contribute to the community feedback that helps improve Open OnDemand.
+
+We'd also like to extend a big thank you to those listed below for contributing to Open OnDemand for the
+first time in this release. These contributions span the ``ondemand``, ``ood_core``, and
+``ood-documentation`` GitHub repositories and include **9** first-time contributors.
+ 
+* ``james-s-willis`` made their first contribution in `#5097 <https://github.com/OSC/ondemand/pull/5097>`_
+* ``mrobbert`` made their first contribution in `#5156 <https://github.com/OSC/ondemand/pull/5156>`_
+* ``clooty217`` made their first contribution in `#5246 <https://github.com/OSC/ondemand/pull/5246>`_
+* ``bstepanovski`` made their first contribution in `#5294 <https://github.com/OSC/ondemand/pull/5294>`_
+* ``andrejcermak`` made their first contribution in `#5299 <https://github.com/OSC/ondemand/pull/5299>`_
+* ``mrobbert`` made their first contribution in `ood_core#930 <https://github.com/OSC/ood_core/pull/930>`_
+* ``asubah`` made their first contribution in `ood-documentation#1332 <https://github.com/OSC/ood-documentation/pull/1332>`_
+* ``mcglow2`` made their first contribution in `ood-documentation#1315 <https://github.com/OSC/ood-documentation/pull/1315>`_
+* ``harshit-soora`` made their first contribution in `ood-documentation#1329 <https://github.com/OSC/ood-documentation/pull/1329>`_
+* ``iqlinuxadmin`` made their first contribution in `ood-documentation#1323 <https://github.com/OSC/ood-documentation/pull/1323>`_
+
+Authentication and Security
+---------------------------
+
+Software Bill of Materials
+..........................
+
+Version 4.2 includes a Software Bill of Materials (SBOM) that outlines the
+operating system-level software dependencies for Open OnDemand. Based on community
+feedback, the SBOM is moving to an industry-standard format and will be maintained
+in a dedicated OSC repository.
+
+The ``Open-OnDemand-SBOM`` repository is still being built out and these release notes
+will be updated after the Open OnDemand 4.2 release to help sites review dependency information
+for security and compliance workflows.
+
+Accessibility
+-------------
+
+Overview
+........
+
+Open OnDemand v4.2 includes many accessibility improvements across the dashboard and core applications. These include:
+
+ - Additional support for keyboard navigation
+ - Improved labeling for form items and icons
+ - Additional regions and landmarks
+ - Improved announcement and focus handling on automatically updating pages
+ - Contrast improvements for links and buttons
+ - Improved alerting experience with screen readers
+
+Accessibility Conformance Report 
+................................
+
+Developers have uploaded the `Open OnDemand 4.2 VPAT`_ online which
+you may retrieve and review. This document is from the voluntary product assessment
+template a registered service mark of the Information Technology Industry Council (ITI).
+
+Changes in version 4.2 ensure that immutable aspects of OnDemand are accessible by default, but do not account for
+customizations configured on individual instances. 
+
+Additional Accessibility Configurations
+.......................................
+
+.. include:: ../accessibility_settings.inc
+
+Operating System Support
+------------------------
+
+- Open OnDemand version 4.2 adds support for Debian 13 and Ubuntu 26.04.
+- Open OnDemand version 4.2 drops support for Ubuntu 22.04.
+
+Dependency Updates
+------------------
+
+This release updates the following dependencies:
+
+- Passenger 6.1.2
+- NGINX 1.28.0
+- ondemand-dex 2.45.1
+
+Ubuntu and Debian repository signing change
+-------------------------------------------
+
+Debian and Ubuntu repositories are now signed using a SHA512 key rather than the previous SHA1 key.
+
+Using the OnDemand release packages will result in the correct key being used.
+
+If not using OnDemand's release packages,
+the `DEB-GPG-KEY-ondemand-SHA512 <https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512>`_
+should be downloaded and used by the OnDemand repository's **signed-by**.
+
+.. code-block:: sh
+
+   curl -fsSL https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512 | gpg --dearmor -o /etc/apt/keyrings/ondemand-web.gpg
+
+   source /etc/os-release
+   echo "deb [signed-by=/etc/apt/keyrings/ondemand-web.gpg] https://apt.osc.edu/ondemand/4.2/web/apt $VERSION_CODENAME main" > /etc/apt/sources.list.d/ondemand-web.list
+
+Behavior Changes
+----------------
+
+Active Jobs Extended Details Panel Opens to the Side
+....................................................
+
+In order to make the Active Jobs table accessible to screen readers, the mechanism 
+for viewing the extended details of a job has been changed. Instead of opening the
+panel inside the table, it now opens either above or beside, allowing table
+navigation to proceed normally.
+
+Interactive App Popovers Persist Under Hover and Focus
+......................................................
+
+The app preview popovers shown in the 'Interactive Apps' list now open when focus lands on the trigger.
+The popovers will remain open as long as hover or focus remains within the trigger or popover content, allowing
+users to click links inside the popover.
+
+Workflows Now Provide ``OOD_WORKFLOW_SYNC_KEY`` to Launchers
+............................................................
+
+It was previously difficult to synchronize launchers within a workflow and pass data between launchers
+without overwriting the data on each run. The introduction of the ``OOD_WORKFLOW_SYNC_KEY`` environment 
+variable fixes this by providing a unique alphanumeric value for each run of a workflow, which launchers 
+can include in file and directory names when reading or writing data. The feature can be enabled for 
+individual workflows upon creation or by editing an existing workflow. See the updated :ref:`Project Manager Tutorial <project-manager-tutorial>`
+for additional details and strategies for using ``OOD_WORKFLOW_SYNC_KEY`` in your workflows.
+
+Session Object Now Available in ``view.html.erb``
+.................................................
+
+The full session object is now available for running job views, matching
+the behavior of completed session views. This does not in any way affect the
+``view`` and ``connect`` variables that were available before, but does allow
+access to previously unavailable session details, like the session id. For more details
+on using the session object in views, see :ref:`view_session_info`.
+
+Edit Links No Longer Appear when Downloads are Disabled
+.......................................................
+
+For users with the :ref:`download_enabled <download_enabled>` configuration set to ``false``, the files app and
+project directory tables will no longer serve 'Edit' links to files. This prevents users from opening the file editor
+and copying the file contents, effectively downloading the file. With this change, disabling downloads will prevent
+users from exporting the contents of any files, while still being able to execute certain files in predefined contexts,
+like batch connect apps or :ref:`templated projects <project_templates>`.
+
+Links open in current tab
+.........................
+
+All default links will now open in the current tab. This changes the default behavior of previous versions
+that opened some links in a new tab.
+
+Upgrade Instructions
+--------------------
+
+.. warning::
+
+   Update the **development** and/or **test** instances of OnDemand installed at your center **before** you modify the **production** instance.
+
+.. warning::
+
+  We have tested the upgrade from version 4.1.4 to version 4.2.0 at OSC's Open OnDemand instance.
+
+#. Update Open OnDemand repository.
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.el8.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 9
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.el9.noarch.rpm
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 10
+
+         .. code-block:: sh
+
+            sudo yum install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.el9.noarch.rpm
+
+      .. tab:: Ubuntu 24.04
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.2.0-noble_all.deb https://apt.osc.edu/ondemand/4.2/ondemand-release-web_4.2.0-noble_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.2.0-noble_all.deb
+            sudo apt update
+
+      .. tab:: Debian 12
+
+         .. code-block:: sh
+
+            wget -O /tmp/ondemand-release-web_4.2.0-bookworm_all.deb https://apt.osc.edu/ondemand/4.2/ondemand-release-web_4.2.0-bookworm_all.deb
+            sudo apt install /tmp/ondemand-release-web_4.2.0-bookworm_all.deb
+            sudo apt update
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo dnf install -y https://yum.osc.edu/ondemand/4.2/ondemand-release-web-4.2-1.amzn2023.noarch.rpm
+
+#. Update Open OnDemand.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum clean all
+            sudo yum update ondemand
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand
+
+#. (**Dex users only**) Update the ``ondemand-dex`` package.
+
+   .. tabs::
+
+      .. tab:: yum/dnf
+
+         .. code-block:: sh
+
+            sudo yum update ondemand-dex
+
+
+      .. tab:: apt
+
+         .. code-block:: sh
+
+            sudo apt-get --only-upgrade install ondemand-dex
+
+#. Update Apache configuration and restart Apache.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9 & 10
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+      .. tab:: Ubuntu 24.04 & Debian 12
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart apache2
+
+      .. tab:: Amazon Linux 2023
+
+         .. code-block:: sh
+
+            sudo systemctl try-restart httpd
+
+#. (**Dex users only**) Restart the ``ondemand-dex`` service.
+
+   .. code-block:: sh
+
+      sudo systemctl try-restart ondemand-dex.service
+
+#. (**SELinux users only**) Update SELinux policies.
+
+   See :ref:`ood_selinux_updates`.
+
+#. Force all PUNs to restart.
+
+   .. code-block:: sh
+
+      sudo /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean -f
+
+.. _Open OnDemand 4.2 VPAT: https://www.openondemand.org/sites/default/files/documents/Open%20OnDemand%20v4.2%20ACR%20-%20VPAT2.5Rev_WCAG%20-%20issued%20May%202026.pdf

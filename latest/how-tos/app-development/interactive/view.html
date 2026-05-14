@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connection View &mdash; Open OnDemand 4.1.0 documentation</title>
+  <title>Connection View &mdash; Open OnDemand 4.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=6f7bdab3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
 
   
@@ -18,7 +18,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../../../_static/documentation_options.js?v=d0ae6d56"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -51,14 +51,24 @@
               <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                4.1
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+                4.2
+              </div><div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get" id="rtd-search-form" class="wy-form">
+      <input
+        type="text"
+        id="search-input"
+        name="q"
+        aria-label="Search docs"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Search docs"
+      />
+      <input type="submit" value="Go" class="sr-only" />
+    </form>
+  </div>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
@@ -115,6 +125,7 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../accessibility.html">Accessibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../reference.html">Configuration Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release Notes</a></li>
@@ -187,17 +198,29 @@ app.</p>
 displaying connection information of VNC sessions to the user.</p>
 </div>
 <section id="session-information">
-<h2>Session Information<a class="headerlink" href="#session-information" title="Link to this heading"></a></h2>
+<span id="view-session-info"></span><h2>Session Information<a class="headerlink" href="#session-information" title="Link to this heading"></a></h2>
 <p>A <strong>running</strong> interactive session will generate a connection information file
 in the working directory of the corresponding batch job. This information is
-then made available to the HTML template <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code> when it is rendered.
-The possible connection information attributes are:</p>
+then made available to the HTML template <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code> when it is rendered
+with two variables, the <code class="docutils literal notranslate"><span class="pre">session</span></code> and <code class="docutils literal notranslate"><span class="pre">connect</span></code> objects.</p>
 <dl class="simple">
-<dt>host</dt><dd><p>the hostname of the compute node that the interactive session is running on</p>
+<dt><strong>session</strong></dt><dd><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code></dt><dd><p>the unique id assigned to the session</p>
 </dd>
-<dt>port</dt><dd><p>the port number that the running web server is listening on</p>
+<dt><code class="docutils literal notranslate"><span class="pre">job_id</span></code></dt><dd><p>the job id assigned by the scheduler</p>
 </dd>
-<dt>password</dt><dd><p>the password that the web server expects when authenticating the user</p>
+<dt><code class="docutils literal notranslate"><span class="pre">created_at</span></code></dt><dd><p>the time the job was submitted, in Unix epoch time</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>connect</strong></dt><dd><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">host</span></code></dt><dd><p>the hostname of the compute node that the interactive session is running on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">port</span></code></dt><dd><p>the port number that the running web server is listening on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">password</span></code></dt><dd><p>the password that the web server expects when authenticating the user</p>
+</dd>
+</dl>
 </dd>
 </dl>
 <p>Typically these attributes are used to construct links or forms within the
@@ -382,7 +405,7 @@ variables and objects you may need to create helpful instructions. You can also
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Documentation Versions</span>
-    v: 4.1.0
+    v: 4.2.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
@@ -390,6 +413,8 @@ variables and objects you may need to create helpful instructions. You can also
       <dt>Versions</dt>
       
         <dd><a href="https://OSC.github.io/ood-documentation/latest/how-tos/app-development/interactive/view.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-4.1/how-tos/app-development/interactive/view.html">4.1</a></dd>
       
         <dd><a href="https://OSC.github.io/ood-documentation/release-4.0/how-tos/app-development/interactive/view.html">4.0</a></dd>
       

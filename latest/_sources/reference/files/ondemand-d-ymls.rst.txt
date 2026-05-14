@@ -290,24 +290,25 @@ Configuration Properties with profile support
 
         dashboard_title: "My Institution"
 
+.. _show_all_apps_link:
 .. describe:: show_all_apps_link (Bool, false)
 
   Whether to show the ``All Apps`` link in the navbar.
   This links to the Dashboard page showing all system installed applications.
 
   Default
-    ``false``, the ``All Apps`` link will not be shown in the navbar.
-
-    .. code-block:: yaml
-
-      show_all_apps_link: false
-
-  Example
-    Include the ``All Apps`` link in the navbar.
+    ``true``, the ``All Apps`` link will be shown in the navbar.
 
     .. code-block:: yaml
 
       show_all_apps_link: true
+
+  Example
+    Do not show the ``All Apps`` link in the navbar.
+
+    .. code-block:: yaml
+
+      show_all_apps_link: false
 
 .. describe:: nav_bar (Array<Object>, [])
 
