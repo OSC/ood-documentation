@@ -188,17 +188,29 @@ app.</p>
 displaying connection information of VNC sessions to the user.</p>
 </div>
 <section id="session-information">
-<h2>Session Information<a class="headerlink" href="#session-information" title="Link to this heading"></a></h2>
+<span id="view-session-info"></span><h2>Session Information<a class="headerlink" href="#session-information" title="Link to this heading"></a></h2>
 <p>A <strong>running</strong> interactive session will generate a connection information file
 in the working directory of the corresponding batch job. This information is
-then made available to the HTML template <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code> when it is rendered.
-The possible connection information attributes are:</p>
+then made available to the HTML template <code class="docutils literal notranslate"><span class="pre">view.html.erb</span></code> when it is rendered
+with two variables, the <code class="docutils literal notranslate"><span class="pre">session</span></code> and <code class="docutils literal notranslate"><span class="pre">connect</span></code> objects.</p>
 <dl class="simple">
-<dt>host</dt><dd><p>the hostname of the compute node that the interactive session is running on</p>
+<dt><strong>session</strong></dt><dd><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code></dt><dd><p>the unique id assigned to the session</p>
 </dd>
-<dt>port</dt><dd><p>the port number that the running web server is listening on</p>
+<dt><code class="docutils literal notranslate"><span class="pre">job_id</span></code></dt><dd><p>the job id assigned by the scheduler</p>
 </dd>
-<dt>password</dt><dd><p>the password that the web server expects when authenticating the user</p>
+<dt><code class="docutils literal notranslate"><span class="pre">created_at</span></code></dt><dd><p>the time the job was submitted, in Unix epoch time</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>connect</strong></dt><dd><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">host</span></code></dt><dd><p>the hostname of the compute node that the interactive session is running on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">port</span></code></dt><dd><p>the port number that the running web server is listening on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">password</span></code></dt><dd><p>the password that the web server expects when authenticating the user</p>
+</dd>
+</dl>
 </dd>
 </dl>
 <p>Typically these attributes are used to construct links or forms within the
