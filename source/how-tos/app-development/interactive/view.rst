@@ -43,20 +43,31 @@ the output of the batch connect app.
    ``view.html.erb`` file. The Dashboard has internal logic in place for
    displaying connection information of VNC sessions to the user.
 
+.. _view_session_info:
+
 Session Information
 -------------------
 
 A **running** interactive session will generate a connection information file
 in the working directory of the corresponding batch job. This information is
-then made available to the HTML template ``view.html.erb`` when it is rendered.
-The possible connection information attributes are:
+then made available to the HTML template ``view.html.erb`` when it is rendered 
+with two variables, the ``session`` and ``connect`` objects.
 
-host
-  the hostname of the compute node that the interactive session is running on
-port
-  the port number that the running web server is listening on
-password
-  the password that the web server expects when authenticating the user
+**session**
+  ``id``
+    the unique id assigned to the session
+  ``job_id``
+    the job id assigned by the scheduler
+  ``created_at``
+    the time the job was submitted, in Unix epoch time
+
+**connect**
+  ``host``
+    the hostname of the compute node that the interactive session is running on
+  ``port``
+    the port number that the running web server is listening on
+  ``password``
+    the password that the web server expects when authenticating the user
 
 Typically these attributes are used to construct links or forms within the
 ``view.html.erb`` file. See the various
