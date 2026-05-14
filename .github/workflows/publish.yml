@@ -34,6 +34,11 @@ jobs:
 
       - name: Publish to the test repo
         run: GITHUB_TOKEN=${{ secrets.OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation-test"
+
+      - name: Scan for accessibility
+        if: github.event_name == 'pull_request'
+        run: |
+          rake scan
     
       - name: Publish to the main repo
         if: github.event_name == 'push'

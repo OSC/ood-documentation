@@ -20,6 +20,11 @@ task :spellcheck do
   exec "#{run_cmd} make spellcheck"
 end
 
+desc "scan for accessibility"
+task :scan do
+  exec "#{run_cmd} make scan"
+end
+
 desc "Open built documentation in browser"
 task :open do
   if windows?

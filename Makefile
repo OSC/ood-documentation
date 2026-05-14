@@ -229,3 +229,7 @@ spellcheck:
 	$(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+.PHONY: scan
+scan:
+	sh /doc/pa11y-scan.sh
