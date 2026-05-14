@@ -1,0 +1,32 @@
+name: Publish Html
+
+on:
+  pull_request:
+    branches: [latest, develop, release-*]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Make Html
+        run: |
+          rake build
+
+      - name: Scan for accessibility
+        if: github.event_name == 'pull_request'
+        run: |
+          rake scan
