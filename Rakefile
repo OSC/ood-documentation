@@ -22,7 +22,7 @@ end
 
 desc "scan for accessibility"
 task :scan do
-  exec "#{run_cmd} make scan"
+  exec "#{run_cmd} pa11y-ci /doc/build/html/**/*.html"
 end
 
 desc "Open built documentation in browser"
@@ -42,7 +42,7 @@ def user_group
 end
 
 def image
-  'ohiosupercomputer/ood-doc-build:v3.1.0'
+  'ohiosupercomputer/ood-doc-build:latest'
 end
 
 def docker?
