@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coder &mdash; Open OnDemand 4.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Systemd" href="systemd.html" />
+    <link rel="prev" title="Kubernetes" href="kubernetes.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../faqs.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../add-cluster-config.html">Cluster Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cluster-config-schema.html">Cluster Configuration Schema v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torque.html">Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm.html">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lsf.html">LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbspro.html">PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sge.html">Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxhost.html">LinuxHost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccq.html">Cloudy Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Kubernetes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Coder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-openstack">Authentication (OpenStack)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#openstack-hook">OpenStack hook</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-openstack-vm">Example OpenStack VM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-setup-a-coder-server">How to setup a Coder server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-publish-a-new-template-in-coder">How to publish a new template in Coder</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ht-condor.html">HT Condor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psi-j.html">PSI/J</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-configs.html">Advanced Resource Manager Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-tos/project-management/project-manager.html">Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-passenger-apps.html">Install Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../add-cluster-config.html">Cluster Configuration</a></li>
+      <li class="breadcrumb-item active">Coder</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/resource-manager/coder.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="coder">
+<span id="resource-manager-coder"></span><h1>Coder<a class="headerlink" href="#coder" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This resource manager is not actively maintained by the Open OnDemand developers,
+either because it was community-contributed or we no longer have access to a test
+system. As a result, bug fixes from the core team may be limited, but community
+patches are encouraged.</p>
+</div>
+<p>The Coder adapter enables launching virtual machines from Open OnDemand using Coder as a middleware solution. Coder is an open-source platform that allows users to create and manage developer workspaces by executing Terraform/OpenTofu code, serving as a bridge between Open OnDemand and cloud providers. Currently, OpenStack is the supported cloud provider.</p>
+<p>A YAML cluster configuration file for a Coder is defined by:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/clusters.d/coder_cluster.yml</span>
+<span class="nn">---</span>
+<span class="nt">v2</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;VMs</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">OOD&quot;</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;coder&quot;</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://&lt;YOUR_CODER_INSTANCE&gt;&quot;</span>
+<span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;coder_cluster&quot;</span><span class="w"> </span><span class="c1"># same as the filename</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;YOUR_CODER_API_TOKEN&gt;&quot;</span>
+<span class="w">    </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cloud</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openstack&quot;</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://identity.&lt;YOUR_OPENSTACK_DEPLOYMENT&gt;/v3&quot;</span>
+<span class="w">      </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;RegionOne&quot;</span>
+<span class="w">    </span><span class="nt">service_user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;service&quot;</span>
+<span class="w">    </span><span class="nt">credential_deletion_max_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">credential_deletion_timeout_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">  </span><span class="nt">batch_connect</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ssh_allow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">adapter</span></code></dt><dd><p>This is set to <code class="docutils literal notranslate"><span class="pre">coder</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cluster</span></code></dt><dd><p>The cluster name.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">token</span></code></dt><dd><p>The API token retrieved from Coder UI under <code class="docutils literal notranslate"><span class="pre">/settings/tokens</span></code> or by calling <code class="docutils literal notranslate"><span class="pre">coder</span> <span class="pre">tokens</span> <span class="pre">create</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">host</span></code></dt><dd><p>Path to your Coder instance. For testing, you can use default tunnel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">auth</span></code></dt><dd><p>Defines the Coder authentication method. Currently only OpenStack is supported.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">service_user</span></code></dt><dd><p>Service user on your Coder instance. All workspaces are created in this user's namespace.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">credential_deletion_max_attempts</span></code></dt><dd><p>Number of attempts to delete credentials after the VM is destroyed. Default is 5.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">credential_deletion_timeout_interval</span></code></dt><dd><p>Time in seconds between attempts to delete credentials after the VM is destroyed. Default is 10s.</p>
+</dd>
+</dl>
+<section id="authentication-openstack">
+<h2>Authentication (OpenStack)<a class="headerlink" href="#authentication-openstack" title="Link to this heading"></a></h2>
+<p>Similar to Kubernetes, the Coder adapter relies on hooks to handle authentication. Currently, only OpenStack application credentials are supported. In this case, the hook is responsible for issuing an OpenStack token and then storing it in the user's home directory as a JSON file. This is later used by the adapter to create application credentials. These credentials are then destroyed when the instance is terminated.
+The mechanism relies on OIDC token exchange and the ability of the access token to create unrestricted application credentials. Consult with your OIDC expert regarding this requirement.</p>
+<p><code class="docutils literal notranslate"><span class="pre">openstack_hook.sh</span></code> needs to be sourced from the main hook.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/etc/ood/config/openstack_hook.sh
+</pre></div>
+</div>
+<section id="openstack-hook">
+<h3>OpenStack hook<a class="headerlink" href="#openstack-hook" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/openstack_hook.sh</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_INTERFACE</span><span class="o">=</span><span class="s2">&quot;public&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_IDENTITY_API_VERSION</span><span class="o">=</span><span class="m">3</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_AUTH_TYPE</span><span class="o">=</span><span class="s2">&quot;v3oidcaccesstoken&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_AUTH_URL</span><span class="o">=</span>https://identity.&lt;YOUR_OPENSTACK_DEPLOYMENT&gt;/v3
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_IDENTITY_PROVIDER</span><span class="o">=</span>&lt;<span class="s2">&quot;YOUR_IDENTITY_PROVIDER&quot;</span>&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_PROTOCOL</span><span class="o">=</span><span class="s2">&quot;openid&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_PROJECT_DOMAIN_ID</span><span class="o">=</span>&lt;<span class="s2">&quot;YOUR_PROJECT_DOMAIN_ID&quot;</span>&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_ACCESS_TOKEN</span><span class="o">=</span><span class="nv">$OOD_OIDC_ACCESS_TOKEN</span>
+
+<span class="nv">start_time</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span>
+<span class="nv">OUTPUT</span><span class="o">=</span><span class="k">$(</span>timeout<span class="w"> </span>5s<span class="w"> </span>openstack<span class="w"> </span>token<span class="w"> </span>issue<span class="w"> </span>-f<span class="w"> </span>json<span class="k">)</span>
+<span class="nv">exit_code</span><span class="o">=</span><span class="nv">$?</span>
+<span class="nv">end_time</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span>
+<span class="nv">elapsed_time</span><span class="o">=</span><span class="k">$((</span><span class="nv">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">start_time</span><span class="k">))</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$exit_code</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/home/<span class="nv">$USER</span>/token.json
+<span class="w">  </span>chown<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>/home/<span class="nv">$USER</span>/token.json
+<span class="w">  </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/<span class="nv">$USER</span>/token.json
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;openstack token issued in </span><span class="nv">$elapsed_time</span><span class="s2"> seconds&quot;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$exit_code</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">124</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Command timed out - OpenStack might be unreachable&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Token issuance failed with error code </span><span class="nv">$exit_code</span><span class="s2"> in </span><span class="nv">$elapsed_time</span><span class="s2"> seconds&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In order to use different cloud provider, the hook needs to be modified accordingly and a credential class needs to be implemented. Use this [<a class="reference external" href="https://github.com/OSC/ood_core/pull/897](pull">https://github.com/OSC/ood_core/pull/897](pull</a> request) as a reference.</p>
+</div>
+</section>
+<section id="example-openstack-vm">
+<h3>Example OpenStack VM<a class="headerlink" href="#example-openstack-vm" title="Link to this heading"></a></h3>
+<p>An example interactive application that can be launched using this adapter can be found at this link: <a class="reference external" href="https://github.com/andrejcermak/bc_openstack_vm">https://github.com/andrejcermak/bc_openstack_vm</a> . Its Coder counterpart can be found here: <a class="reference external" href="https://github.com/andrejcermak/coder_template_os_vm">https://github.com/andrejcermak/coder_template_os_vm</a> .</p>
+</section>
+</section>
+<section id="how-to-setup-a-coder-server">
+<h2>How to setup a Coder server<a class="headerlink" href="#how-to-setup-a-coder-server" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Follow the official documentation <a class="reference external" href="https://coder.com/docs/install">https://coder.com/docs/install</a></p></li>
+<li><p>Create a service user</p></li>
+<li><p>Issue a token via UI or CLI <a class="reference external" href="https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens">https://coder.com/docs/admin/users/sessions-tokens#long-lived-tokens-api-tokens</a></p></li>
+</ol>
+</section>
+<section id="how-to-publish-a-new-template-in-coder">
+<h2>How to publish a new template in Coder<a class="headerlink" href="#how-to-publish-a-new-template-in-coder" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Have a Coder server (standalone, docker ...)</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;YOUR</span> <span class="pre">TEMPLATE</span> <span class="pre">REPO&gt;</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;YOUR</span> <span class="pre">TEMPLATE</span> <span class="pre">REPO&gt;</span></code></p></li>
+<li><p>Fill in the variables in <code class="docutils literal notranslate"><span class="pre">terraform.tfvars</span></code> (you might need to create credentials first, but they are only required for the <code class="docutils literal notranslate"><span class="pre">coder</span> <span class="pre">template</span> <span class="pre">push</span></code> command to work)</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">terraform</span> <span class="pre">init</span></code> or <code class="docutils literal notranslate"><span class="pre">tofu</span> <span class="pre">init</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">coder</span> <span class="pre">login</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">coder</span> <span class="pre">template</span> <span class="pre">push</span> <span class="pre">&lt;YOUR</span> <span class="pre">TEMPLATE</span> <span class="pre">NAME&gt;</span> <span class="pre">-y</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">coder</span> <span class="pre">template</span> <span class="pre">list</span> <span class="pre">-c</span> <span class="pre">name</span> <span class="pre">-c</span> <span class="pre">&quot;organization</span> <span class="pre">id&quot;</span> <span class="pre">-c</span> <span class="pre">&quot;active</span> <span class="pre">version</span> <span class="pre">id&quot;</span></code></p></li>
+<li><p>Fill in the organization and active template version ids in <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kubernetes.html" class="btn btn-neutral float-left" title="Kubernetes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="systemd.html" class="btn btn-neutral float-right" title="Systemd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 4.1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/resource-manager/coder.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-4.0/installation/resource-manager/coder.html">4.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.1/installation/resource-manager/coder.html">3.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/installation/resource-manager/coder.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/resource-manager/coder.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/resource-manager/coder.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/resource-manager/coder.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/resource-manager/coder.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/resource-manager/coder.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/resource-manager/coder.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/resource-manager/coder.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/resource-manager/coder.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/resource-manager/coder.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/resource-manager/coder.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/resource-manager/coder.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

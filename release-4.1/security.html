@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security &mdash; Open OnDemand 4.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Release Notes" href="release-notes.html" />
+    <link rel="prev" title="PUN environment" href="reference/pun-environment.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-tos/project-management/project-manager.html">Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-passenger-apps.html">Install Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Configuration Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#considerations">Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#advantages">Advantages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controls">Controls</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vulnerability-management">Vulnerability Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reporting-a-vulnerability">Reporting a Vulnerability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disclosure-policy">Disclosure Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comments-on-policy">Comments on Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-audits">Security Audits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#relevant-references">Relevant References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Security</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/security.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="security">
+<span id="id1"></span><h1>Security<a class="headerlink" href="#security" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This document details the security framework for Open OnDemand, providing essential information that administrators need to know for secure deployment and operation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you're here to report a vulnerability, you may refer to <a class="reference internal" href="#vulnerability-management"><span class="std std-ref">Vulnerability Management</span></a>.</p>
+</div>
+</section>
+<section id="considerations">
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading"></a></h2>
+<p>This section outlines key security advantages and areas for vigilance within the Open OnDemand environment.</p>
+<section id="advantages">
+<h3>Advantages<a class="headerlink" href="#advantages" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Per-user Nginx (PUN) Architecture</strong>: By running individual Nginx instances per user, Open OnDemand ensures that actions such as file access are conducted under user-specific non-root privileges, which isolates processes and enhances security.</p></li>
+<li><p><strong>Robust Authentication</strong>: Open OnDemand supports various authentication methods. It particularly emphasizes secure protocols over less secure options like Basic or LDAP authentication, reinforcing its commitment to high security standards.</p></li>
+</ul>
+</section>
+<section id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>HTTP Traffic to Origin Servers</strong>: Traffic to backend services, including computational resources like Jupyter servers, is currently over HTTP, which is unencrypted. Plans are underway to upgrade this to HTTPS to ensure encryption of data in transit, thereby bolstering security.</p></li>
+</ul>
+</section>
+<section id="controls">
+<h3>Controls<a class="headerlink" href="#controls" title="Link to this heading"></a></h3>
+<p>These are things the the out of the box OnDemand installation will provide
+that some centers may want to change or disable altogether.</p>
+<ul class="simple">
+<li><p><strong>File Access</strong>: OnDemand lets users navigate the file system. While file permissions
+limit what a user can view and navigate to, some centers may want to limit this even further.
+One option is to <a class="reference internal" href="customizations.html#set-file-allowlist"><span class="std std-ref">Block or Allow Directory Access</span></a> to limit what directories users may navigate to.
+Additionally, you may want to disable or limit access to the application. You can do this
+through <a class="reference internal" href="customizations.html#disabling-applications"><span class="std std-ref">Enabling and Disabling Applications</span></a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="vulnerability-management">
+<span id="id2"></span><h2>Vulnerability Management<a class="headerlink" href="#vulnerability-management" title="Link to this heading"></a></h2>
+<p>Vulnerability management is a critical component of the security strategy for Open OnDemand.
+This document outlines the procedures for reporting and managing vulnerabilities.</p>
+<section id="reporting-a-vulnerability">
+<h3>Reporting a Vulnerability<a class="headerlink" href="#reporting-a-vulnerability" title="Link to this heading"></a></h3>
+<p>If you have security concerns or think you have found a vulnerability, please submit a
+private report by visiting the 'Security' section of our GitHub located at
+<a class="reference external" href="https://github.com/OSC/ondemand/security/">GitHub Open OnDemand Security</a> and
+clicking 'Report a vulnerability'.</p>
+<p>For direct inquiries or issues in submitting a report, contact the core project team
+via email at <a class="reference external" href="mailto:security&#37;&#52;&#48;openondemand&#46;org">security<span>&#64;</span>openondemand<span>&#46;</span>org</a>.</p>
+</section>
+<section id="disclosure-policy">
+<h3>Disclosure Policy<a class="headerlink" href="#disclosure-policy" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Upon reporting, you will receive a response within hours, acknowledging the receipt of the report.</p></li>
+<li><p>A primary handler from the team will be assigned to coordinate the fix and release process:</p></li>
+<li><p>Confirm the problem and determine the affected versions (1-2 days).</p></li>
+<li><p>Audit code to find any potential similar problems.</p></li>
+<li><p>Prepare fixes for all releases still under maintenance and release as soon as possible.</p></li>
+</ul>
+</section>
+<section id="comments-on-policy">
+<h3>Comments on Policy<a class="headerlink" href="#comments-on-policy" title="Link to this heading"></a></h3>
+<p>Suggestions to improve this process can be made via submitting a ticket, opening a
+Discourse topic, or a pull request.</p>
+</section>
+<section id="security-audits">
+<h3>Security Audits<a class="headerlink" href="#security-audits" title="Link to this heading"></a></h3>
+<p>Open OnDemand has been audited several times by Trusted CI, the NSF Cybersecurity
+Center of Excellence. The latest engagement report is available
+<a class="reference external" href="https://openondemand.org/sites/default/files/documents/Trusted%20CI%20Open%20OnDemand%20Engagement%20Final%20Report%20-%20REDACTED%20FOR%20PUBLIC%20RELEASE%20210712_0.pdf">here</a>.
+These audits have helped shape the security landscape of the platform and contribute
+to its ongoing security enhancements.</p>
+<p>Maintaining a secure and robust operational environment is critical for the success of
+Open OnDemand. Administrators are encouraged to implement the security practices
+recommended in this guide and to regularly review security settings and updates.</p>
+</section>
+</section>
+<section id="relevant-references">
+<h2>Relevant References<a class="headerlink" href="#relevant-references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="authentication/overview/configure-authentication.html#authentication-overview-configure-authentication"><span class="std std-ref">Authentication Overview</span></a></p></li>
+<li><p><a class="reference internal" href="how-tos/monitoring/logging.html#logging"><span class="std std-ref">Logging</span></a></p></li>
+<li><p><a class="reference internal" href="customizations.html#customizations"><span class="std std-ref">Customizations</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reference/pun-environment.html" class="btn btn-neutral float-left" title="PUN environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="release-notes.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 4.1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/security.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-4.0/security.html">4.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.1/security.html">3.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/security.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/security.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/security.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/security.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/security.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/security.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/security.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/security.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/security.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/security.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/security.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/security.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

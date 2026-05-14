@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cluster Configuration Schema v2 &mdash; Open OnDemand 4.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Torque" href="resource-manager/torque.html" />
+    <link rel="prev" title="Cluster Configuration" href="add-cluster-config.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="add-cluster-config.html">Cluster Configuration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cluster Configuration Schema v2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#first-an-example">First an example:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-break-down">A Break Down</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#v2">v2:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#meta">meta:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#login">login:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#job">job:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acls"><code class="docutils literal notranslate"><span class="pre">acls</span></code>:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom">custom:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#batch-connect">batch_connect:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#login-cluster-only">Login Cluster Only</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/torque.html">Torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/slurm.html">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/lsf.html">LSF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/pbspro.html">PBS Professional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/sge.html">Grid Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/linuxhost.html">LinuxHost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/ccq.html">Cloudy Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/kubernetes.html">Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/coder.html">Coder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/systemd.html">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/ht-condor.html">HT Condor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/psi-j.html">PSI/J</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/bin-override-example.html">A Working Example of a <code class="docutils literal notranslate"><span class="pre">bin_overrides</span></code> Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/test.html">Test Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource-manager/advanced-configs.html">Advanced Resource Manager Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/project-management/project-manager.html">Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-passenger-apps.html">Install Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="add-cluster-config.html">Cluster Configuration</a></li>
+      <li class="breadcrumb-item active">Cluster Configuration Schema v2</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/cluster-config-schema.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cluster-configuration-schema-v2">
+<span id="cluster-config-schema"></span><h1>Cluster Configuration Schema v2<a class="headerlink" href="#cluster-configuration-schema-v2" title="Link to this heading"></a></h1>
+<p>The cluster configuration controls many OnDemand features including job submission, shell access, names in menus.</p>
+<section id="first-an-example">
+<h2>First an example:<a class="headerlink" href="#first-an-example" title="Link to this heading"></a></h2>
+<p>Below is the production configuration for OSC's Owens cluster.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">v2</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Owens&quot;</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span>
+<span class="w">    </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;torque&quot;</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+<span class="w">    </span><span class="nt">lib</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/torque/lib64&quot;</span>
+<span class="w">    </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/torque/bin&quot;</span>
+<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6.0.1&quot;</span>
+<span class="w">  </span><span class="nt">acls</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;group&quot;</span>
+<span class="w">    </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cluster_users&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;other_users_of_the_cluster&quot;</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;allowlist&quot;</span>
+<span class="w">  </span><span class="nt">custom</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">grafana</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://grafana.osc.edu&quot;</span>
+<span class="w">          </span><span class="nt">orgId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">          </span><span class="nt">dashboard</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ondemand-clusters&quot;</span>
+<span class="w">            </span><span class="nt">uid</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;aaba6Ahbauquag&quot;</span>
+<span class="w">            </span><span class="nt">panels</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24</span>
+<span class="w">          </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cluster&quot;</span>
+<span class="w">            </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;host&quot;</span>
+<span class="w">            </span><span class="nt">jobid</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jobid&quot;</span>
+<span class="w">  </span><span class="nt">batch_connect</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">basic</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">script_wrapper</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\n%s&quot;</span>
+<span class="w">      </span><span class="nt">vnc</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">script_wrapper</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\nmodule</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">ondemand-vnc\n%s&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Quick warning: be aware that YAML requires the use of spaces as indentation characters, tabs are not permitted by <a class="reference external" href="http://yaml.org/spec/1.2/spec.html#id2777534">the YAML spec</a>.</p>
+</div>
+</section>
+<section id="a-break-down">
+<h2>A Break Down<a class="headerlink" href="#a-break-down" title="Link to this heading"></a></h2>
+<section id="v2">
+<h3>v2:<a class="headerlink" href="#v2" title="Link to this heading"></a></h3>
+<p>Version 2 is the current schema, and is the top level mapping for the cluster configuration.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">v2</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+<section id="meta">
+<h3>meta:<a class="headerlink" href="#meta" title="Link to this heading"></a></h3>
+<p>Meta describes how the cluster will be displayed to the user</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># title: is the display label that will be used anywhere the cluster is referenced</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Owens&quot;</span>
+<span class="w">    </span><span class="c1"># url: provides the ability to show a link to information about the cluster</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://www.osc.edu/supercomputing/computing/owens&quot;</span>
+<span class="w">    </span><span class="c1"># hidden: setting this to true causes OnDemand to not show this cluster to the user, the cluster is still available for use by other applications</span>
+<span class="w">    </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</section>
+<section id="login">
+<h3>login:<a class="headerlink" href="#login" title="Link to this heading"></a></h3>
+<p>Login controls what hosts should be used when trying to SSH via the Shell app. Used by the Dashboard and the Job Composer (MyJobs).</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">login</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens.osc.edu&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="job">
+<h3>job:<a class="headerlink" href="#job" title="Link to this heading"></a></h3>
+<p>The job mapping is specific to a cluster's resource manager.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">job</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;torque&quot;</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;owens-batch.ten.osc.edu&quot;</span>
+<span class="w">  </span><span class="nt">lib</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/torque/lib64&quot;</span>
+<span class="w">  </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/torque/bin&quot;</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6.0.1&quot;</span>
+</pre></div>
+</div>
+<section id="bin-overrides">
+<h4>bin_overrides:<a class="headerlink" href="#bin-overrides" title="Link to this heading"></a></h4>
+<p><cite>bin_overrides</cite> adds the ability for a site to specify full paths to alternatives to the configured resource manager's client executables. This advanced feature allows a site considerable flexibility to write wrappers to handle logging, environment or default setting, or use 3rd party API compatible alternative clients without having to alter the resource manager installation.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><cite>bin_overrides</cite> is an advanced feature. OOD relies both on return codes from clients, and on parsing the standard output in order to get information about submitted jobs. Care and testing is recommended.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># An example in Slurm</span>
+<span class="nt">job</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span>
+<span class="w">  </span><span class="nt">bin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/slurm/bin&quot;</span>
+<span class="w">  </span><span class="nt">conf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/slurm/etc/slurm.conf&quot;</span>
+<span class="w">  </span><span class="nt">bin_overrides</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">squeue</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/slurm/bin/squeue_wrapper&quot;</span>
+<span class="w">      </span><span class="c1"># Override just want you want/need to</span>
+<span class="w">      </span><span class="c1"># scontrol: &quot;/usr/local/slurm/bin/scontrol_wrapper&quot;</span>
+<span class="w">      </span><span class="nt">sbatch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/slurm/bin/sbatch_wrapper&quot;</span>
+<span class="w">      </span><span class="c1"># Will be ignored because bsub is not a command used in the Slurm adapter</span>
+<span class="w">      </span><span class="nt">bsub</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/lsf/bin/bsub&quot;</span>
+</pre></div>
+</div>
+<p>Adapter support for this feature is mixed. For example for Slurm <cite>sbatch</cite>, <cite>scontrol</cite>, <cite>scancel</cite> and <cite>squeue</cite> are all supported. For Torque only <cite>qsub</cite> is supported. Unsupported options are ignored.</p>
+</section>
+</section>
+<section id="acls">
+<h3><code class="docutils literal notranslate"><span class="pre">acls</span></code>:<a class="headerlink" href="#acls" title="Link to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Sites should not use this OnDemand feature and instead just use Linux's base support for
+File Access Control lists. This provides the same basic functionality but since permissions
+are being handled in the Linux kernel, is much faster, simpler and frankly, safer.</p>
+</div>
+<p>Access control lists provide a method to limit cluster access by group membership.
+ACLs are implicitly allow-lists but may be set explicitly to either <cite>allowlist</cite> or <cite>blocklist</cite>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">acls</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;group&quot;</span>
+<span class="w">  </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cluster_users&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;other_users_of_the_cluster&quot;</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;allowlist&quot;</span><span class="w">  </span><span class="c1"># optional, one of &quot;allowlist&quot; or &quot;blocklist&quot;</span>
+</pre></div>
+</div>
+<p>Note that to look up group membership, ood_core uses the ood_support library which uses <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">-G</span> <span class="pre">USERNAME</span></code>
+to get the list of groups the user is in and <code class="docutils literal notranslate"><span class="pre">getgrgid</span></code> to look up the name of each group.</p>
+</section>
+<section id="custom">
+<h3>custom:<a class="headerlink" href="#custom" title="Link to this heading"></a></h3>
+<p>The custom mapping is a space that is available for extension, and does not have a schema. In OSC's usage the custom namespace has been used to provide more cluster-specific information for in-house custom applications.</p>
+<p>For details on configuring Grafana see the <a class="reference internal" href="../customizations.html#grafana-support"><span class="std std-ref">Grafana Support</span></a> documentation.</p>
+</section>
+<section id="batch-connect">
+<h3>batch_connect:<a class="headerlink" href="#batch-connect" title="Link to this heading"></a></h3>
+<p>Batch connect controls the defaults for interactive applications such as Jupyter or interactive desktops.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">batch_connect</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">basic</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">script_wrapper</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\n%s&quot;</span>
+<span class="w">    </span><span class="nt">vnc</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">script_wrapper</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;module</span><span class="nv"> </span><span class="s">restore\nmodule</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">ondemand-vnc\n%s&quot;</span>
+<span class="w">    </span><span class="nt">ssh_allow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>Script wrappers may contain Bash statements, and are useful for setting up a default environment, and or cleaning up after a script. The keys <cite>basic</cite> and <cite>vnc</cite> refer to the two types of batch connect application templates. <cite>script_wrapper's</cite> have the content of a batch connect script interpolated into them. String interpolation is performed using <cite>sprintf</cite>, with the script's content replacing the <cite>%s</cite>.</p>
+<p>Since 2.0, <code class="docutils literal notranslate"><span class="pre">ssh_allow</span></code> can be used to override the global value for <code class="docutils literal notranslate"><span class="pre">OOD_BC_SSH_TO_COMPUTE_NODE</span></code> which is used to determine
+whether batch connect apps will render a link to SSH into the worker node.
+See <a class="reference internal" href="../customizations.html#disable-host-link-batch-connect"><span class="std std-ref">Disable Host Link in Batch Connect Session Card</span></a> for more details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The user is responsible for providing the <cite>%s</cite> that is used to place the script content. If a <cite>script_wrapper</cite> is provided without <cite>%s</cite> then batch connect applications are unlikely to work properly.</p>
+</div>
+</section>
+</section>
+<section id="login-cluster-only">
+<h2>Login Cluster Only<a class="headerlink" href="#login-cluster-only" title="Link to this heading"></a></h2>
+<p>Suppose you need want to create a <em>login cluster that does not schedule or run jobs</em>. It is used purely as a login/shell cluster only.</p>
+<p>To accomplish this, you need to simply leave out the <code class="docutils literal notranslate"><span class="pre">v2.job</span></code> stanza that associates a scheduler with the cluster.</p>
+<p>An example configuration file in <code class="docutils literal notranslate"><span class="pre">clusters.d/pitzer_01_login.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">v2</span><span class="p">:</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Pitzer</span><span class="nv"> </span><span class="s">Login&quot;</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://www.osc.edu/supercomputing/computing/pitzer&quot;</span>
+<span class="w">    </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">login</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pitzer-login01.hpc.osu.edu&quot;</span>
+</pre></div>
+</div>
+<p>Again, the thing to note here is we've left off the <code class="docutils literal notranslate"><span class="pre">v2.job</span></code> which renders the cluster use-able only for logins, i.e.
+<em>no jobs will be scheduleable on this cluster.</em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="add-cluster-config.html" class="btn btn-neutral float-left" title="Cluster Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="resource-manager/torque.html" class="btn btn-neutral float-right" title="Torque" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 4.1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/cluster-config-schema.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-4.0/installation/cluster-config-schema.html">4.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.1/installation/cluster-config-schema.html">3.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/installation/cluster-config-schema.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/cluster-config-schema.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/cluster-config-schema.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/cluster-config-schema.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/cluster-config-schema.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/cluster-config-schema.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/cluster-config-schema.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/cluster-config-schema.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/cluster-config-schema.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/cluster-config-schema.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/cluster-config-schema.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/cluster-config-schema.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

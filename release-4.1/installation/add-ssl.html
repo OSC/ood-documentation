@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Secure Apache httpd &mdash; Open OnDemand 4.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c48163e2" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=42d1b3bd"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Add SELinux" href="modify-system-security.html" />
+    <link rel="prev" title="Insecure Options" href="../authentication/insecure.html" />
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34776817-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-34776817-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                4.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install-software.html">1. Install Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html">2. OOD Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrated-authentication-solutions.html">3. Authentication Solutions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Secure Apache httpd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#edit-the-open-ondemand-portal-ood-portal-generator-configuration-file">1. Edit the Open OnDemand Portal <span class="xref std std-ref">ood-portal-generator-configuration</span> file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-ca-dex-users-only">2. Update CA (Dex Users only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restart-the-apache-service-for-the-changes-take-effect">3. Restart the Apache service for the changes take effect.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modify-system-security.html">5. Add SELinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#building-from-source">Building From Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="add-cluster-config.html">Cluster Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development/interactive/setup.html">Setup Interactive Apps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-Tos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customizations.html">Customizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/debug.html">Debugging and Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enable-desktops.html">Enable Interactive Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/app-development.html">App Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/project-management/project-manager.html">Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install-ihpc-apps.html">Install Other Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-passenger-apps.html">Install Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-interactive-apps.html">Tutorials: Interactive Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-passenger-apps.html">Tutorials: Passenger Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-dashboard-apps.html">Developing The OOD Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials-project-manager.html">Tutorials: Project Manager</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version-policy.html">Versioning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open OnDemand</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../installation.html">Installation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>Secure Apache httpd</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/OSC/ood-documentation/blob/latest/source/installation/add-ssl.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="secure-apache-httpd">
+<span id="add-ssl"></span><h1><span class="section-number">4. </span>Secure Apache httpd<a class="headerlink" href="#secure-apache-httpd" title="Link to this heading"></a></h1>
+<p>The SSL protocol provides for a secure channel of communication between the
+user's browser and the Open OnDemand portal.  It is recommended that you secure
+your Apache server by adding these configurations.</p>
+<p>Requirements:</p>
+<ul class="simple">
+<li><p>A server name that points to the Open OnDemand server (<code class="docutils literal notranslate"><span class="pre">ondemand.my_center.edu</span></code>).
+I.e., <cite>nslookup ondemand.my_center.edu</cite> resolves to your instance.</p></li>
+<li><p>signed SSL certificates with possible intermediate certificates</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://letsencrypt.org/">Let's Encrypt</a> is a great option to obtain a free SSL certificate. You can read
+more about it in their <a class="reference external" href="https://letsencrypt.org/getting-started/">Getting Started</a> documentation.</p>
+</div>
+<p>In this example we assume the following certificates are provided:</p>
+<dl class="simple">
+<dt>Public certificate</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu.crt</span></code></p>
+</dd>
+<dt>Private key</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/private/ondemand.my_center.edu.key</span></code></p>
+</dd>
+<dt>Intermediate certificate</dt><dd><p><code class="file docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt</span></code></p>
+</dd>
+</dl>
+<section id="edit-the-open-ondemand-portal-ood-portal-generator-configuration-file">
+<h2>1. Edit the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file<a class="headerlink" href="#edit-the-open-ondemand-portal-ood-portal-generator-configuration-file" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code> as such:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
+<span class="nn">---</span>
+
+<span class="c1"># ...</span>
+
+<span class="hll"><span class="nt">servername</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ondemand.my_center.edu</span>
+</span><span class="hll"><span class="nt">ssl</span><span class="p">:</span>
+</span><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLCertificateFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu.crt&quot;&#39;</span>
+</span><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLCertificateKeyFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/private/ondemand.my_center.edu.key&quot;&#39;</span>
+</span><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;SSLCertificateChainFile</span><span class="nv"> </span><span class="s">&quot;/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt&quot;&#39;</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For documentation on SSL directives please see:
+<a class="reference external" href="https://httpd.apache.org/docs/2.4/mod/mod_ssl.html">https://httpd.apache.org/docs/2.4/mod/mod_ssl.html</a></p>
+</div>
+</div></blockquote>
+</section>
+<section id="update-ca-dex-users-only">
+<h2>2. Update CA (Dex Users only)<a class="headerlink" href="#update-ca-dex-users-only" title="Link to this heading"></a></h2>
+<p>Dex users may encounter issues with SSL certificates like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">remote</span> <span class="n">error</span><span class="p">:</span> <span class="n">tls</span><span class="p">:</span> <span class="n">unknown</span> <span class="n">certificate</span> <span class="n">authority</span>
+</pre></div>
+</div>
+<p>If this is the case, you need to ensure that their certificate authority (CA) is
+in the system trust store and that your CA certificates are up to date.</p>
+<p>First, try updating your CA certificates.  This could especially happen when
+you have a <a class="reference external" href="https://letsencrypt.org/">Let's Encrypt</a> and your machine does not know about that certificate
+authority.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">RHEL</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Ubuntu &amp; Debian</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </span>ca-certificates
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>ca-certificates
+</pre></div>
+</div>
+</div></div>
+<p>If you're still having issues, copy your certificate authority (examples could be <code class="docutils literal notranslate"><span class="pre">fullchain.pem</span></code>)
+to your trust store. replace <code class="docutils literal notranslate"><span class="pre">CA</span> <span class="pre">CERT</span> <span class="pre">location</span></code> with the actual certificate
+authority you're using and run these commands to copy it to the appropriate place.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">RHEL</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Ubuntu &amp; Debian</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cp<span class="w"> </span>&lt;CA<span class="w"> </span>CERT<span class="w"> </span>location&gt;<span class="w"> </span>/etc/pki/ca-trust/source/anchors/
+sudo<span class="w"> </span>update-ca-trust
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cp<span class="w"> </span>&lt;CA<span class="w"> </span>CERT<span class="w"> </span>location&gt;<span class="w"> </span>/usr/local/share/ca-certificates/
+sudo<span class="w"> </span>update-ca-certificates
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="restart-the-apache-service-for-the-changes-take-effect">
+<h2>3. Restart the Apache service for the changes take effect.<a class="headerlink" href="#restart-the-apache-service-for-the-changes-take-effect" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../how-tos/debug/debug-apache.html#restart-apache"><span class="std std-ref">Restart the Apache service</span></a> for the changes take effect.</p>
+<p>Now when you browse to your OnDemand portal at:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span>
+</pre></div>
+</div>
+<p>it should redirect you to the HTTP over SSL protocol deployment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ondemand</span><span class="o">.</span><span class="n">my_center</span><span class="o">.</span><span class="n">edu</span>
+</pre></div>
+</div>
+<p>where depending on your browser, should display a green lock of some kind to
+indicate that the site is secure.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../authentication/insecure.html" class="btn btn-neutral float-left" title="Insecure Options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modify-system-security.html" class="btn btn-neutral float-right" title="5. Add SELinux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026, Ohio Supercomputer Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Documentation Versions</span>
+    v: 4.1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/latest/installation/add-ssl.html">latest</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-4.0/installation/add-ssl.html">4.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.1/installation/add-ssl.html">3.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-3.0/installation/add-ssl.html">3.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-2.0/installation/add-ssl.html">2.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.8/installation/add-ssl.html">1.8</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.7/installation/add-ssl.html">1.7</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.6/installation/add-ssl.html">1.6</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.5/installation/add-ssl.html">1.5</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.4/installation/add-ssl.html">1.4</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.3/installation/add-ssl.html">1.3</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.2/installation/add-ssl.html">1.2</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.1/installation/add-ssl.html">1.1</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/release-1.0/installation/add-ssl.html">1.0</a></dd>
+      
+        <dd><a href="https://OSC.github.io/ood-documentation/develop/installation/add-ssl.html">develop</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>On GitHub</dt>
+        <dd>
+          <a href="http://openondemand.org/">Website</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/OSC/Open-OnDemand">Main Repo</a>
+        </dd>
+    </dl>
+    <hr/>
+    Theme provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
