@@ -178,7 +178,6 @@ Currently only the dashboard uses the colors in the navbar.
 
 .. list-table:: Branding
    :header-rows: 1
-   :stub-columns: 1
 
    * - Feature
      - Property
@@ -233,9 +232,9 @@ This will result in a CSS tag added to all dashboard pages with the path: ``/pub
 
   custom_css_files: ["/myfolder/custom-branding.css"]
 
-.. _help_menu_guide:
-
 .. include:: customizations/overriding-partials.inc
+
+.. _help_menu_guide:
 
 Add URLs to Help Menu
 ---------------------
@@ -244,7 +243,6 @@ These URLs can be specified, which will appear in the Help menu and on other loc
 
 .. list-table:: Dashboard URLs
    :header-rows: 1
-   :stub-columns: 1
 
    * - Name
      - Environment variable
@@ -993,7 +991,6 @@ In each default translation dictionary file the values that are most site-specif
 
 .. list-table:: OnDemand Locale Files
   :header-rows: 1
-  :stub-columns: 1
 
   * - File path
     - App
@@ -1025,6 +1022,8 @@ In each default translation dictionary file the values that are most site-specif
 .. _Job Composer: https://github.com/OSC/ondemand/blob/master/apps/myjobs/config/locales/en.yml
 
 .. _Yaml spec: https://yaml.org/spec/1.2/spec.html#id2777534
+
+.. _change_welcome_html:
 
 Change the Dashboard Tagline
 ............................

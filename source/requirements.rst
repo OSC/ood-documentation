@@ -15,14 +15,14 @@ At this time OnDemand only supports the following operating systems and architec
 
 .. csv-table:: Operating System and Architecture Support
    :header: "","``x86_64``","``aarch64/arm64``","``ppc64le``"
-   :stub-columns: 1
 
    "RedHat/Rocky Linux/AlmaLinux 8",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "RedHat/Rocky Linux/AlmaLinux 9",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#9989;`
    "RedHat/Rocky Linux/AlmaLinux 10",:raw-html:`&#9989;`,:raw-html:`&#10067;`,:raw-html:`&#9989;`
-   "Ubuntu 22.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Ubuntu 24.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Ubuntu 26.04",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Debian 12",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
+   "Debian 13",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#10067;`,:raw-html:`&#10060;`
 
 .. note::
@@ -148,52 +148,6 @@ The following is a list of OS level software dependencies for Open OnDemand. For
             systemd
             wget
             zlib
-
-    .. tab:: Ubuntu 20.04
-
-        .. code-block:: sh
-
-            libc6 (>= 2.29)
-            libgcc-s1 (>= 3.0)
-            libruby2.7 (>= 2.7.0)
-            libsqlite3-0 (>= 3.7.10)
-            libstdc++6 (>= 9)
-            ruby  
-            apache2  
-            sudo  
-            lsof  
-            lua-posix  
-            tzdata  
-            file  
-            nodejs (>= 20.0)
-            nodejs (<< 21.0)
-            ondemand-nginx (>= 1.26.1.p6.0.23.ood4.0.3)
-            ondemand-nginx (<< 1.27)
-            ondemand-passenger (>= 6.0.23.ood4.0.3)
-            ondemand-passenger (<< 6.0.24)
-
-    .. tab:: Ubuntu 22.04
-
-        .. code-block:: sh
-
-            libc6 (>= 2.34)
-            libgcc-s1 (>= 3.0)
-            libruby3.0 (>= 3.0.0~preview2)
-            libsqlite3-0 (>= 3.7.10)
-            libstdc++6 (>= 11)
-            ruby  
-            apache2  
-            sudo  
-            lsof  
-            lua-posix  
-            tzdata  
-            file  
-            nodejs (>= 20.0)
-            nodejs (<< 21.0)
-            ondemand-nginx (>= 1.26.1.p6.0.23.ood4.0.3)
-            ondemand-nginx (<< 1.27)
-            ondemand-passenger (>= 6.0.23.ood4.0.3)
-            ondemand-passenger (<< 6.0.24)
 
     .. tab:: Ubuntu 24.04
 
