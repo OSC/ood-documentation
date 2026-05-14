@@ -11,6 +11,12 @@ Open OnDemand has undergone several reviews and updates to meet
 take to achieve complete compliance.  These steps are documented here along
 with areas or certain features that are not complaint.
 
+Accessibility Conformance Report 
+--------------------------------
+
+Developers have uploaded a VPAT document online on `Open OnDemand's accessibility page`_ which
+you may retrieve and review. This document is from the voluntary product assessment
+template a registered service mark of the Information Technology Industry Council (ITI).
 
 Additional Configurations Needed
 --------------------------------
@@ -24,3 +30,5 @@ applications and so on should take care to meet the `WCAG`_ 2.2 guidelines.
 The developers of Open OnDemand can only manage and review the pages that
 are shipped in the packages, not any custom pages or Passenger applications
 that have been developed by any given center.
+
+.. _Open OnDemand's accessibility page: https://www.openondemand.org/accessibility
