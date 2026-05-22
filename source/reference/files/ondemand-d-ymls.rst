@@ -1053,3 +1053,27 @@ Configuration Properties
   Example
 
     See :ref:`global_bc_form_items` for more details.
+
+.. widget_partials_enabled
+
+.. describe:: widget_partials_enabled (Boolean, false)
+
+  Enable serving partial widgets. With this feature enabled,
+  javascript can request parital widgets through ``/widgets/<widget_name>``.
+
+  Added in 4.0.
+
+  Default
+    This feature is disabled by default.
+
+    .. code-block:: yaml
+
+      widget_partials_enabled: false
+
+  Example
+
+    Enable this feature.
+
+    .. code-block:: yaml
+
+      widget_partials_enabled: true
