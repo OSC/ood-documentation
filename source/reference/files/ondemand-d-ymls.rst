@@ -1054,8 +1054,6 @@ Configuration Properties
 
     See :ref:`global_bc_form_items` for more details.
 
-.. widget_partials_enabled
-
 .. describe:: widget_partials_enabled (Boolean, false)
 
   Enable serving partial widgets. With this feature enabled,
