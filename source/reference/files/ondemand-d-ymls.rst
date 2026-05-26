@@ -1057,7 +1057,7 @@ Configuration Properties
 .. describe:: widget_partials_enabled (Boolean, false)
 
   Enable serving partial widgets. With this feature enabled,
-  javascript can request parital widgets through ``/widgets/<widget_name>``.
+  JavaScript can request partial widgets through ``/widgets/<widget_name>``.
 
   Added in 4.0.
 
