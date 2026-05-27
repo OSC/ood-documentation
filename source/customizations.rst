@@ -415,6 +415,21 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
+Send File Data to Another Application
+-------------------------------------
+
+The file browser application in Open OnDemand may be configured to allow users
+to send file data to other applications. This may be convienient for application
+developers that don't want to write or maintain their own file browsing implementation
+and instead rely on the built in capabilites of Open OnDemand.
+
+The payload sent to other applications is file metadata like the owner, size, path
+and so on, not the file contents.
+
+Centers may enable this through the :ref:`files_select_target configuration <files_select_target>`.
+When enabled, the file browser will show a new button for users to press and send data
+to the desired URL.
+
 .. include:: customizations/profiles.inc
 
 .. include:: customizations/main-navigation.inc
