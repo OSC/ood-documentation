@@ -415,6 +415,8 @@ If you access the Dashboard, and it crashes, then you may have made a mistake
 in ``ood.rb`` file, whose code is run during the initialization of the Rails
 app.
 
+.. _files_select_target_extended:
+
 Send File Data to Another Application
 -------------------------------------
 
