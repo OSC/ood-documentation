@@ -419,9 +419,9 @@ Send File Data to Another Application
 -------------------------------------
 
 The file browser application in Open OnDemand may be configured to allow users
-to send file data to other applications. This may be convienient for application
+to send file data to other applications. This may be convenient for application
 developers that don't want to write or maintain their own file browsing implementation
-and instead rely on the built in capabilites of Open OnDemand.
+and instead rely on the built in capabilities of Open OnDemand.
 
 The payload sent to other applications is file metadata like the owner, size, path
 and so on, not the file contents.
