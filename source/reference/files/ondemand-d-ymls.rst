@@ -466,6 +466,31 @@ Configuration Properties with profile support
 
       nav_categories: ['Apps', 'Files', 'Jobs']
 
+.. _files_select_target:
+.. describe:: files_select_target (Object, null)
+
+  Default
+
+    This feature is disabled by default.
+
+    .. code-block:: yaml
+
+      files_select_target: null
+  
+  Example
+
+    Enable this feature to allow users to send file data payloads to ``/pun/sys/passenger_app``
+    with the title, label, icon and expiration (in seconds).
+
+    .. code-block:: yaml
+
+      files_select_target:
+        endpoint: '/pun/sys/passenger_app'
+        label: 'Send to App'
+        icon: 'fas://paper-plane'
+        title: 'Send selected files to the external application'
+        expiration: 10
+
 .. _configuration_properties:
 
 Configuration Properties
