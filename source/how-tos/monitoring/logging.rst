@@ -61,7 +61,7 @@ These logs are located at:
 
     These logs by default have ``ondemand-nginx:ondemand-nginx`` ownership. It may be beneficial 
     to provide a FACL for an appropriate staff group to have access to these files for troubleshooting.
-    The command to do so is ``setfacl -m g:groupname:rx /var/log/ondemand-nginx`` where "groupname"
+    The command to do so is ``setfacl -m g:groupname:rx /var/log/ondemand-nginx`` where ``groupname``
     needs to be replaced with the actual group.
 
 Session Data
