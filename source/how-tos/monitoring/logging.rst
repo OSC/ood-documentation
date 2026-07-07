@@ -41,7 +41,10 @@ There are two locations to check depending on what information is needed:
 
     There are no entries for failed logins.
 
-**NGINX Logs**
+.. _nginx-logs:
+
+NGINX Logs
+**********
 
 The NGINX logs are the output of the user :ref:`PUN <glossary>`. These logs will capture things relevant 
 to a *particular user* such as:
@@ -56,8 +59,10 @@ These logs are located at:
 
 .. note::
 
-    These logs by default have ``root:root`` ownership. It may be beneficial 
-    to ``chown`` an appropriate staff group on these files for troubleshooting down the road.
+    These logs by default have ``ondemand-nginx:ondemand-nginx`` ownership. It may be beneficial 
+    to provide a FACL for an appropriate staff group to have access to these files for troubleshooting.
+    The command to do so is ``setfacl -m g:groupname:rx /var/log/ondemand-nginx`` where "groupname"
+    needs to be replaced with the actual group.
 
 Session Data
 ------------
