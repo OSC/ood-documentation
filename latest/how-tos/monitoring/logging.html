@@ -86,7 +86,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../debug/debug-apache.html">Apache httpd tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../debug/debug-interactive-apps.html">Debugging Interactive Apps</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Logging</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#system-logs">System Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#system-logs">System Logs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nginx-logs">NGINX Logs</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#session-data">Session Data</a></li>
 </ul>
 </li>
@@ -178,7 +181,8 @@ when initially installing and configuring Open OnDemand.</p>
 <p class="admonition-title">Warning</p>
 <p>There are no entries for failed logins.</p>
 </div>
-<p><strong>NGINX Logs</strong></p>
+<section id="nginx-logs">
+<span id="id2"></span><h3>NGINX Logs<a class="headerlink" href="#nginx-logs" title="Link to this heading"></a></h3>
 <p>The NGINX logs are the output of the user <a class="reference internal" href="../../glossary.html#glossary"><span class="std std-ref">PUN</span></a>. These logs will capture things relevant
 to a <em>particular user</em> such as:</p>
 <ul class="simple">
@@ -190,9 +194,12 @@ to a <em>particular user</em> such as:</p>
 <p><code class="file docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx/&lt;user&gt;</span></code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These logs by default have <code class="docutils literal notranslate"><span class="pre">root:root</span></code> ownership. It may be beneficial
-to <code class="docutils literal notranslate"><span class="pre">chown</span></code> an appropriate staff group on these files for troubleshooting down the road.</p>
+<p>These logs by default have <code class="docutils literal notranslate"><span class="pre">ondemand-nginx:ondemand-nginx</span></code> ownership. It may be beneficial
+to provide a FACL for an appropriate staff group to have access to these files for troubleshooting.
+The command to do so is <code class="docutils literal notranslate"><span class="pre">setfacl</span> <span class="pre">-m</span> <span class="pre">g:groupname:rx</span> <span class="pre">/var/log/ondemand-nginx</span></code> where <code class="docutils literal notranslate"><span class="pre">groupname</span></code>
+needs to be replaced with the actual group.</p>
 </div>
+</section>
 </section>
 <section id="session-data">
 <h2>Session Data<a class="headerlink" href="#session-data" title="Link to this heading"></a></h2>

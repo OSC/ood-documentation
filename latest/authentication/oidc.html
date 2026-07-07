@@ -164,6 +164,14 @@
 <p class="admonition-title">Note</p>
 <p>The OnDemand repositories have the <code class="docutils literal notranslate"><span class="pre">mod_auth_openidc</span></code> RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.</p>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> program now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC
+authentication. Centers <strong>must</strong> provide this or the program will fail.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit for <code class="docutils literal notranslate"><span class="pre">httd</span></code> and <code class="docutils literal notranslate"><span class="pre">apache2</span></code> ignore this failure. When this program
+fails in a <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit, new configurations will not be applied until
+<code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> is set.</p>
+</div>
 <p>The following is an example <strong class="program">ood-portal-generator</strong> configuration file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/ood/config/ood_portal.yml</span>
 <span class="nn">---</span>

@@ -218,6 +218,14 @@ sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </
 </section>
 <section id="configuring-ondemand-dex">
 <h2>Configuring OnDemand Dex<a class="headerlink" href="#configuring-ondemand-dex" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> program now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC
+authentication. Centers <strong>must</strong> provide this or the program will fail.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit for <code class="docutils literal notranslate"><span class="pre">httd</span></code> and <code class="docutils literal notranslate"><span class="pre">apache2</span></code> ignore this failure. When this program
+fails in a <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit, new configurations will not be applied until
+<code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> is set.</p>
+</div>
 <p>OnDemand Dex is configured by modifying the Open OnDemand Portal <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-configuration"><span class="std std-ref">ood_portal.yml</span></a> file <code class="file docutils literal notranslate"><span class="pre">/etc/ood/config/ood_portal.yml</span></code>.</p>
 <p>The default location for Dex configurations is <code class="file docutils literal notranslate"><span class="pre">/etc/ood/dex/config.yaml</span></code>.</p>
 <p>When changes are needed for OnDemand Dex <a class="reference internal" href="../how-tos/debug/debug-apache.html#restart-apache"><span class="std std-ref">Restart services</span></a> and then restart Dex with:</p>
