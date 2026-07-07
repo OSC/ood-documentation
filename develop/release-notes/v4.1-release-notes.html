@@ -112,6 +112,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#breaking-changes-and-deprecations">Breaking Changes and Deprecations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#update-ood-portal-now-requires-oidc-crypto-passphrase-when-using-oidc"><code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nginx-logs-no-longer-widely-readable">NGINX logs no longer widely readable.</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nodejs-breaking-change">NodeJS breaking change</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#stripping-sensitive-headers">Stripping Sensitive Headers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#job-composer-is-now-deprecated">Job Composer is now Deprecated</a></li>
@@ -239,81 +241,83 @@
 </li>
 <li><p><a class="reference internal" href="#breaking-changes-and-deprecations" id="id33">Breaking Changes and Deprecations</a></p>
 <ul>
-<li><p><a class="reference internal" href="#nodejs-breaking-change" id="id34">NodeJS breaking change</a></p></li>
-<li><p><a class="reference internal" href="#stripping-sensitive-headers" id="id35">Stripping Sensitive Headers</a></p></li>
-<li><p><a class="reference internal" href="#job-composer-is-now-deprecated" id="id36">Job Composer is now Deprecated</a></p></li>
+<li><p><a class="reference internal" href="#update-ood-portal-now-requires-oidc-crypto-passphrase-when-using-oidc" id="id34"><code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC.</a></p></li>
+<li><p><a class="reference internal" href="#nginx-logs-no-longer-widely-readable" id="id35">NGINX logs no longer widely readable.</a></p></li>
+<li><p><a class="reference internal" href="#nodejs-breaking-change" id="id36">NodeJS breaking change</a></p></li>
+<li><p><a class="reference internal" href="#stripping-sensitive-headers" id="id37">Stripping Sensitive Headers</a></p></li>
+<li><p><a class="reference internal" href="#job-composer-is-now-deprecated" id="id38">Job Composer is now Deprecated</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operating-system-support" id="id37">Operating System Support</a></p></li>
-<li><p><a class="reference internal" href="#dependency-updates" id="id38">Dependency Updates</a></p></li>
-<li><p><a class="reference internal" href="#selinux-changes" id="id39">SELinux Changes</a></p></li>
-<li><p><a class="reference internal" href="#authentication-and-security" id="id40">Authentication and Security</a></p>
+<li><p><a class="reference internal" href="#operating-system-support" id="id39">Operating System Support</a></p></li>
+<li><p><a class="reference internal" href="#dependency-updates" id="id40">Dependency Updates</a></p></li>
+<li><p><a class="reference internal" href="#selinux-changes" id="id41">SELinux Changes</a></p></li>
+<li><p><a class="reference internal" href="#authentication-and-security" id="id42">Authentication and Security</a></p>
 <ul>
-<li><p><a class="reference internal" href="#software-bill-of-materials" id="id41">Software Bill of Materials</a></p></li>
-<li><p><a class="reference internal" href="#lower-casing-in-user-mapping" id="id42">Lower-casing in User Mapping</a></p></li>
-<li><p><a class="reference internal" href="#proxying-to-origins-over-https" id="id43">Proxying to Origins Over HTTPS</a></p></li>
-<li><p><a class="reference internal" href="#expanded-registration-options" id="id44">Expanded Registration Options</a></p></li>
-<li><p><a class="reference internal" href="#strip-sensitive-headers-and-cookies" id="id45">Strip Sensitive Headers and Cookies</a></p></li>
+<li><p><a class="reference internal" href="#software-bill-of-materials" id="id43">Software Bill of Materials</a></p></li>
+<li><p><a class="reference internal" href="#lower-casing-in-user-mapping" id="id44">Lower-casing in User Mapping</a></p></li>
+<li><p><a class="reference internal" href="#proxying-to-origins-over-https" id="id45">Proxying to Origins Over HTTPS</a></p></li>
+<li><p><a class="reference internal" href="#expanded-registration-options" id="id46">Expanded Registration Options</a></p></li>
+<li><p><a class="reference internal" href="#strip-sensitive-headers-and-cookies" id="id47">Strip Sensitive Headers and Cookies</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#platform-configuration-operations-and-observability" id="id46">Platform Configuration, Operations, and Observability</a></p>
+<li><p><a class="reference internal" href="#platform-configuration-operations-and-observability" id="id48">Platform Configuration, Operations, and Observability</a></p>
 <ul>
-<li><p><a class="reference internal" href="#passenger-telemetry-now-disabled-by-default" id="id47">Passenger Telemetry Now Disabled By Default</a></p></li>
-<li><p><a class="reference internal" href="#shell-terminal-is-now-configurable" id="id48">Shell Terminal is Now Configurable</a></p></li>
-<li><p><a class="reference internal" href="#shell-logs-have-added-prefixing" id="id49">Shell Logs Have Added Prefixing</a></p></li>
-<li><p><a class="reference internal" href="#grafana-integration-allows-gpu-panels" id="id50">Grafana Integration Allows GPU panels</a></p></li>
+<li><p><a class="reference internal" href="#passenger-telemetry-now-disabled-by-default" id="id49">Passenger Telemetry Now Disabled By Default</a></p></li>
+<li><p><a class="reference internal" href="#shell-terminal-is-now-configurable" id="id50">Shell Terminal is Now Configurable</a></p></li>
+<li><p><a class="reference internal" href="#shell-logs-have-added-prefixing" id="id51">Shell Logs Have Added Prefixing</a></p></li>
+<li><p><a class="reference internal" href="#grafana-integration-allows-gpu-panels" id="id52">Grafana Integration Allows GPU panels</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#accessibility-and-usability" id="id51">Accessibility and Usability</a></p>
+<li><p><a class="reference internal" href="#accessibility-and-usability" id="id53">Accessibility and Usability</a></p>
 <ul>
-<li><p><a class="reference internal" href="#accessibility-conformance-report-acr" id="id52">Accessibility Conformance Report (ACR)</a></p></li>
-<li><p><a class="reference internal" href="#dynamic-forms-and-session-cards-announce-to-screen-readers" id="id53">Dynamic Forms and Session Cards Announce to Screen Readers</a></p></li>
-<li><p><a class="reference internal" href="#new-skip-navigation-button" id="id54">New Skip Navigation Button</a></p></li>
-<li><p><a class="reference internal" href="#new-dashboard-widgets" id="id55">New Dashboard Widgets</a></p></li>
-<li><p><a class="reference internal" href="#new-canadian-internationalization-files" id="id56">New Canadian Internationalization Files</a></p></li>
-<li><p><a class="reference internal" href="#new-demo-container" id="id57">New Demo Container</a></p></li>
+<li><p><a class="reference internal" href="#accessibility-conformance-report-acr" id="id54">Accessibility Conformance Report (ACR)</a></p></li>
+<li><p><a class="reference internal" href="#dynamic-forms-and-session-cards-announce-to-screen-readers" id="id55">Dynamic Forms and Session Cards Announce to Screen Readers</a></p></li>
+<li><p><a class="reference internal" href="#new-skip-navigation-button" id="id56">New Skip Navigation Button</a></p></li>
+<li><p><a class="reference internal" href="#new-dashboard-widgets" id="id57">New Dashboard Widgets</a></p></li>
+<li><p><a class="reference internal" href="#new-canadian-internationalization-files" id="id58">New Canadian Internationalization Files</a></p></li>
+<li><p><a class="reference internal" href="#new-demo-container" id="id59">New Demo Container</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#interactive-jobs-and-applications" id="id58">Interactive Jobs and Applications</a></p>
+<li><p><a class="reference internal" href="#interactive-jobs-and-applications" id="id60">Interactive Jobs and Applications</a></p>
 <ul>
-<li><p><a class="reference internal" href="#batch-connect-apps-cache-erb-content" id="id59">Batch Connect Apps Cache ERB Content</a></p></li>
-<li><p><a class="reference internal" href="#session-cards-now-have-download-as-zip-button" id="id60">Session Cards Now Have 'Download as Zip' Button</a></p></li>
-<li><p><a class="reference internal" href="#sessions-cards-show-cores-and-gpus-requested" id="id61">Sessions Cards Show Cores and GPUs Requested</a></p></li>
-<li><p><a class="reference internal" href="#new-option-for-interactive-session-notifications" id="id62">New Option For Interactive Session Notifications</a></p></li>
-<li><p><a class="reference internal" href="#desktop-safe-clean-path" id="id63">Desktop safe clean PATH</a></p></li>
+<li><p><a class="reference internal" href="#batch-connect-apps-cache-erb-content" id="id61">Batch Connect Apps Cache ERB Content</a></p></li>
+<li><p><a class="reference internal" href="#session-cards-now-have-download-as-zip-button" id="id62">Session Cards Now Have 'Download as Zip' Button</a></p></li>
+<li><p><a class="reference internal" href="#sessions-cards-show-cores-and-gpus-requested" id="id63">Sessions Cards Show Cores and GPUs Requested</a></p></li>
+<li><p><a class="reference internal" href="#new-option-for-interactive-session-notifications" id="id64">New Option For Interactive Session Notifications</a></p></li>
+<li><p><a class="reference internal" href="#desktop-safe-clean-path" id="id65">Desktop safe clean PATH</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#forms-widgets-and-user-input" id="id64">Forms, Widgets, and User Input</a></p>
+<li><p><a class="reference internal" href="#forms-widgets-and-user-input" id="id66">Forms, Widgets, and User Input</a></p>
 <ul>
-<li><p><a class="reference internal" href="#new-bc-num-nodes-smart-attribute" id="id65">New <code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code> Smart Attribute</a></p></li>
-<li><p><a class="reference internal" href="#new-auto-cores-functionality" id="id66">New <code class="docutils literal notranslate"><span class="pre">auto_cores</span></code> Functionality</a></p></li>
-<li><p><a class="reference internal" href="#automatic-attributes-support-accounts-with-special-characters" id="id67">Automatic Attributes Support Accounts with Special Characters</a></p></li>
-<li><p><a class="reference internal" href="#global-batch-connect-items-can-override-predefined-attributes" id="id68">Global Batch Connect Items Can Override Predefined Attributes</a></p></li>
-<li><p><a class="reference internal" href="#new-data-alias-directive" id="id69">New <code class="docutils literal notranslate"><span class="pre">data-alias</span></code> Directive</a></p></li>
-<li><p><a class="reference internal" href="#new-data-help-directive" id="id70">New <code class="docutils literal notranslate"><span class="pre">data-help</span></code> Directive</a></p></li>
-<li><p><a class="reference internal" href="#form-items-can-be-hidden-by-default" id="id71">Form Items Can Be Hidden By Default</a></p></li>
-<li><p><a class="reference internal" href="#form-items-accept-markdown-headers" id="id72">Form Items Accept Markdown Headers</a></p></li>
-<li><p><a class="reference internal" href="#path-selectors-accept-custom-titles" id="id73">Path Selectors Accept Custom Titles</a></p></li>
-<li><p><a class="reference internal" href="#recently-used-apps-display-recent-settings" id="id74">Recently Used Apps Display Recent Settings</a></p></li>
+<li><p><a class="reference internal" href="#new-bc-num-nodes-smart-attribute" id="id67">New <code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code> Smart Attribute</a></p></li>
+<li><p><a class="reference internal" href="#new-auto-cores-functionality" id="id68">New <code class="docutils literal notranslate"><span class="pre">auto_cores</span></code> Functionality</a></p></li>
+<li><p><a class="reference internal" href="#automatic-attributes-support-accounts-with-special-characters" id="id69">Automatic Attributes Support Accounts with Special Characters</a></p></li>
+<li><p><a class="reference internal" href="#global-batch-connect-items-can-override-predefined-attributes" id="id70">Global Batch Connect Items Can Override Predefined Attributes</a></p></li>
+<li><p><a class="reference internal" href="#new-data-alias-directive" id="id71">New <code class="docutils literal notranslate"><span class="pre">data-alias</span></code> Directive</a></p></li>
+<li><p><a class="reference internal" href="#new-data-help-directive" id="id72">New <code class="docutils literal notranslate"><span class="pre">data-help</span></code> Directive</a></p></li>
+<li><p><a class="reference internal" href="#form-items-can-be-hidden-by-default" id="id73">Form Items Can Be Hidden By Default</a></p></li>
+<li><p><a class="reference internal" href="#form-items-accept-markdown-headers" id="id74">Form Items Accept Markdown Headers</a></p></li>
+<li><p><a class="reference internal" href="#path-selectors-accept-custom-titles" id="id75">Path Selectors Accept Custom Titles</a></p></li>
+<li><p><a class="reference internal" href="#recently-used-apps-display-recent-settings" id="id76">Recently Used Apps Display Recent Settings</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#files-projects-and-data-management" id="id75">Files, Projects, and Data Management</a></p>
+<li><p><a class="reference internal" href="#files-projects-and-data-management" id="id77">Files, Projects, and Data Management</a></p>
 <ul>
-<li><p><a class="reference internal" href="#file-browser-can-now-render-html-files" id="id76">File Browser Can Now Render HTML Files</a></p></li>
-<li><p><a class="reference internal" href="#file-downloads-have-a-maximum-size" id="id77">File Downloads Have a Maximum Size</a></p></li>
-<li><p><a class="reference internal" href="#file-editor-has-a-maximum-size" id="id78">File Editor Has a Maximum Size</a></p></li>
-<li><p><a class="reference internal" href="#file-editor-toggles-hard-and-soft-tabs" id="id79">File Editor Toggles Hard and Soft Tabs</a></p></li>
-<li><p><a class="reference internal" href="#file-integration-with-other-applications" id="id80">File Integration with Other Applications</a></p></li>
-<li><p><a class="reference internal" href="#the-project-manager" id="id81">The Project Manager</a></p></li>
+<li><p><a class="reference internal" href="#file-browser-can-now-render-html-files" id="id78">File Browser Can Now Render HTML Files</a></p></li>
+<li><p><a class="reference internal" href="#file-downloads-have-a-maximum-size" id="id79">File Downloads Have a Maximum Size</a></p></li>
+<li><p><a class="reference internal" href="#file-editor-has-a-maximum-size" id="id80">File Editor Has a Maximum Size</a></p></li>
+<li><p><a class="reference internal" href="#file-editor-toggles-hard-and-soft-tabs" id="id81">File Editor Toggles Hard and Soft Tabs</a></p></li>
+<li><p><a class="reference internal" href="#file-integration-with-other-applications" id="id82">File Integration with Other Applications</a></p></li>
+<li><p><a class="reference internal" href="#the-project-manager" id="id83">The Project Manager</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#help-support-and-institutional-integration" id="id82">Help, Support and Institutional Integration</a></p>
+<li><p><a class="reference internal" href="#help-support-and-institutional-integration" id="id84">Help, Support and Institutional Integration</a></p>
 <ul>
-<li><p><a class="reference internal" href="#servicenow-support-tickets" id="id83">ServiceNow support tickets</a></p></li>
-<li><p><a class="reference internal" href="#module-browser-page" id="id84">Module Browser Page</a></p></li>
+<li><p><a class="reference internal" href="#servicenow-support-tickets" id="id85">ServiceNow support tickets</a></p></li>
+<li><p><a class="reference internal" href="#module-browser-page" id="id86">Module Browser Page</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#upgrade-instructions" id="id85">Upgrade Instructions</a></p></li>
+<li><p><a class="reference internal" href="#upgrade-instructions" id="id87">Upgrade Instructions</a></p></li>
 </ul>
 </nav>
 <section id="acknowledgments">
@@ -419,33 +423,50 @@ to patch their systems.</p>
 </section>
 <section id="breaking-changes-and-deprecations">
 <h2><a class="toc-backref" href="#id33" role="doc-backlink">Breaking Changes and Deprecations</a><a class="headerlink" href="#breaking-changes-and-deprecations" title="Link to this heading"></a></h2>
+<section id="update-ood-portal-now-requires-oidc-crypto-passphrase-when-using-oidc">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC.</a><a class="headerlink" href="#update-ood-portal-now-requires-oidc-crypto-passphrase-when-using-oidc" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> program now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC
+authentication. Centers <strong>must</strong> provide this or the program will fail.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit for <code class="docutils literal notranslate"><span class="pre">httd</span></code> and <code class="docutils literal notranslate"><span class="pre">apache2</span></code> ignore this failure. When this program
+fails in a <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit, new configurations will not be applied until
+<code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> is set.</p>
+</div>
+</section>
+<section id="nginx-logs-no-longer-widely-readable">
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">NGINX logs no longer widely readable.</a><a class="headerlink" href="#nginx-logs-no-longer-widely-readable" title="Link to this heading"></a></h3>
+<p>RHEL systems now <code class="docutils literal notranslate"><span class="pre">chown</span></code> <code class="docutils literal notranslate"><span class="pre">/var/log/ondemand-nginx</span></code> to <code class="docutils literal notranslate"><span class="pre">ondemand-nginx:ondemand-nginx</span></code>
+ownership. You may view <a class="reference internal" href="../how-tos/monitoring/logging.html#nginx-logs"><span class="std std-ref">NGINX Logs</span></a> for details on how to apply a FACL for staff
+to get access to these logs.</p>
+</section>
 <section id="nodejs-breaking-change">
-<h3><a class="toc-backref" href="#id34" role="doc-backlink">NodeJS breaking change</a><a class="headerlink" href="#nodejs-breaking-change" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">NodeJS breaking change</a><a class="headerlink" href="#nodejs-breaking-change" title="Link to this heading"></a></h3>
 <p>4.1 has upgrade <code class="docutils literal notranslate"><span class="pre">NodeJS</span></code> dependency. See the operating system support changes
 and NodeJS dependency changes listed in the next two sections.</p>
 </section>
 <section id="stripping-sensitive-headers">
-<h3><a class="toc-backref" href="#id35" role="doc-backlink">Stripping Sensitive Headers</a><a class="headerlink" href="#stripping-sensitive-headers" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id37" role="doc-backlink">Stripping Sensitive Headers</a><a class="headerlink" href="#stripping-sensitive-headers" title="Link to this heading"></a></h3>
 <p>For additional security, 4.1 will now strip certain sensitive headers when proxying
 to interactive applications. See the <a class="reference internal" href="#strip-sensitive-headers-and-cookies">Strip Sensitive Headers and Cookies</a> section below
 for more details.</p>
 </section>
 <section id="job-composer-is-now-deprecated">
-<h3><a class="toc-backref" href="#id36" role="doc-backlink">Job Composer is now Deprecated</a><a class="headerlink" href="#job-composer-is-now-deprecated" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id38" role="doc-backlink">Job Composer is now Deprecated</a><a class="headerlink" href="#job-composer-is-now-deprecated" title="Link to this heading"></a></h3>
 <p>The Job Composer is officially <strong>deprecated</strong> in 4.1, and will no longer receive new features or bug fixes
 beyond critical maintenance. Although the <a class="reference internal" href="#project-manager-note"><span class="std std-ref">new Project Manager</span></a> covers and
 surpasses all Job Composer functionality, the Job Composer will remain enabled as a legacy feature until version 5.0.</p>
 </section>
 </section>
 <section id="operating-system-support">
-<h2><a class="toc-backref" href="#id37" role="doc-backlink">Operating System Support</a><a class="headerlink" href="#operating-system-support" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id39" role="doc-backlink">Operating System Support</a><a class="headerlink" href="#operating-system-support" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Open OnDemand version 4.1 adds support for RHEL/Rocky/AlmaLinux 10.</p></li>
 <li><p>Open OnDemand version 4.1 drops support for Ubuntu 20.04.</p></li>
 </ul>
 </section>
 <section id="dependency-updates">
-<h2><a class="toc-backref" href="#id38" role="doc-backlink">Dependency Updates</a><a class="headerlink" href="#dependency-updates" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id40" role="doc-backlink">Dependency Updates</a><a class="headerlink" href="#dependency-updates" title="Link to this heading"></a></h2>
 <p>This release updates the following dependencies:</p>
 <ul>
 <li><p>Passenger 6.1.0</p></li>
@@ -463,20 +484,20 @@ provided by the OnDemand RPM must be rebuilt or supply their own
 </ul>
 </section>
 <section id="selinux-changes">
-<h2><a class="toc-backref" href="#id39" role="doc-backlink">SELinux Changes</a><a class="headerlink" href="#selinux-changes" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id41" role="doc-backlink">SELinux Changes</a><a class="headerlink" href="#selinux-changes" title="Link to this heading"></a></h2>
 <p>Add the <code class="docutils literal notranslate"><span class="pre">ondemand_manage_config_dir</span></code> boolean to allow Open OnDemand to manage <code class="docutils literal notranslate"><span class="pre">.config</span></code> directories labeled with <code class="docutils literal notranslate"><span class="pre">config_home_t</span></code></p>
 </section>
 <section id="authentication-and-security">
-<h2><a class="toc-backref" href="#id40" role="doc-backlink">Authentication and Security</a><a class="headerlink" href="#authentication-and-security" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id42" role="doc-backlink">Authentication and Security</a><a class="headerlink" href="#authentication-and-security" title="Link to this heading"></a></h2>
 <section id="software-bill-of-materials">
-<h3><a class="toc-backref" href="#id41" role="doc-backlink">Software Bill of Materials</a><a class="headerlink" href="#software-bill-of-materials" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id43" role="doc-backlink">Software Bill of Materials</a><a class="headerlink" href="#software-bill-of-materials" title="Link to this heading"></a></h3>
 <p>Open OnDemand version 4.1 includes a Software Bill of Materials (SBOM) outlining the
 operating system-level software dependencies for Open OnDemand. For more information,
 please see the <a class="reference internal" href="../requirements.html#software-bom"><span class="std std-ref">Requirements section</span></a>
 of the documentation.</p>
 </section>
 <section id="lower-casing-in-user-mapping">
-<h3><a class="toc-backref" href="#id42" role="doc-backlink">Lower-casing in User Mapping</a><a class="headerlink" href="#lower-casing-in-user-mapping" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id44" role="doc-backlink">Lower-casing in User Mapping</a><a class="headerlink" href="#lower-casing-in-user-mapping" title="Link to this heading"></a></h3>
 <p>The <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-user-map-match"><span class="std std-ref">user_map_match</span></a> configuration now
 responds to <code class="docutils literal notranslate"><span class="pre">:lower</span></code> to automatically lowercase <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> when matching
 against it.</p>
@@ -484,7 +505,7 @@ against it.</p>
 for more details.</p>
 </section>
 <section id="proxying-to-origins-over-https">
-<h3><a class="toc-backref" href="#id43" role="doc-backlink">Proxying to Origins Over HTTPS</a><a class="headerlink" href="#proxying-to-origins-over-https" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id45" role="doc-backlink">Proxying to Origins Over HTTPS</a><a class="headerlink" href="#proxying-to-origins-over-https" title="Link to this heading"></a></h3>
 <p>Version 4.1 introduces the ability to proxy to origin servers over HTTPS protocol.
 While continuing to support plain-text origins through <code class="docutils literal notranslate"><span class="pre">node_uri</span></code> and
 <code class="docutils literal notranslate"><span class="pre">rnode_uri</span></code>, we've added <code class="docutils literal notranslate"><span class="pre">secure_node_uri</span></code> and <code class="docutils literal notranslate"><span class="pre">secure_rnode_uri</span></code>
@@ -493,13 +514,13 @@ configurations in <code class="docutils literal notranslate"><span class="pre">o
 for more information.</p>
 </section>
 <section id="expanded-registration-options">
-<h3><a class="toc-backref" href="#id44" role="doc-backlink">Expanded Registration Options</a><a class="headerlink" href="#expanded-registration-options" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id46" role="doc-backlink">Expanded Registration Options</a><a class="headerlink" href="#expanded-registration-options" title="Link to this heading"></a></h3>
 <p>More <code class="docutils literal notranslate"><span class="pre">ood_portal.yml</span></code> options for registering users have been added in version 4.1.
 They are <code class="docutils literal notranslate"><span class="pre">register_path</span></code>, <code class="docutils literal notranslate"><span class="pre">register_method</span></code>, and <code class="docutils literal notranslate"><span class="pre">register_method_options</span></code>.</p>
 <p>See <a class="reference internal" href="../reference/files/ood-portal-yml.html#ood-portal-generator-user-registration"><span class="std std-ref">Configure User Registration</span></a> for more details.</p>
 </section>
 <section id="strip-sensitive-headers-and-cookies">
-<h3><a class="toc-backref" href="#id45" role="doc-backlink">Strip Sensitive Headers and Cookies</a><a class="headerlink" href="#strip-sensitive-headers-and-cookies" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id47" role="doc-backlink">Strip Sensitive Headers and Cookies</a><a class="headerlink" href="#strip-sensitive-headers-and-cookies" title="Link to this heading"></a></h3>
 <p>4.1 introduced two new configurations <code class="docutils literal notranslate"><span class="pre">strip_proxy_headers</span></code> and <code class="docutils literal notranslate"><span class="pre">strip_proxy_cookies</span></code>
 to strip headers and cookies when proxying requests to interactive applications.  These
 were added as a security measure against possibly leaking sensitive data to interactive
@@ -508,9 +529,9 @@ applications.</p>
 </section>
 </section>
 <section id="platform-configuration-operations-and-observability">
-<h2><a class="toc-backref" href="#id46" role="doc-backlink">Platform Configuration, Operations, and Observability</a><a class="headerlink" href="#platform-configuration-operations-and-observability" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id48" role="doc-backlink">Platform Configuration, Operations, and Observability</a><a class="headerlink" href="#platform-configuration-operations-and-observability" title="Link to this heading"></a></h2>
 <section id="passenger-telemetry-now-disabled-by-default">
-<h3><a class="toc-backref" href="#id47" role="doc-backlink">Passenger Telemetry Now Disabled By Default</a><a class="headerlink" href="#passenger-telemetry-now-disabled-by-default" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id49" role="doc-backlink">Passenger Telemetry Now Disabled By Default</a><a class="headerlink" href="#passenger-telemetry-now-disabled-by-default" title="Link to this heading"></a></h3>
 <p><a class="reference external" href="https://www.phusionpassenger.com/docs/advanced_guides/in_depth/ruby/anonymous_telemetry_reporting.html">Passenger anonymous telemetry</a>
 is now disabled by default in version 4.1. If you would like to override this default
 and enable Passenger telemetry, you can add <code class="docutils literal notranslate"><span class="pre">passenger_disable_anonymous_telemetry:</span> <span class="pre">'off'</span></code>
@@ -518,7 +539,7 @@ to your <a class="reference internal" href="../reference/files/nginx-stage-yml.h
 backported in the 4.0.4 and 3.1.12 releases.</p>
 </section>
 <section id="shell-terminal-is-now-configurable">
-<h3><a class="toc-backref" href="#id48" role="doc-backlink">Shell Terminal is Now Configurable</a><a class="headerlink" href="#shell-terminal-is-now-configurable" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id50" role="doc-backlink">Shell Terminal is Now Configurable</a><a class="headerlink" href="#shell-terminal-is-now-configurable" title="Link to this heading"></a></h3>
 <p>The new <code class="docutils literal notranslate"><span class="pre">OOD_SHELL_TERM</span></code> environment variable allows the default <code class="docutils literal notranslate"><span class="pre">TERM=xterm-16color</span></code>
 to be overridden. This variable can be set to any other terminal type whose escape codes are
 fully supported by the underlying <a class="reference external" href="https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ControlSequences.md">hterm library</a>.
@@ -526,12 +547,12 @@ Some other common supported options include <code class="docutils literal notran
 This environment variable can only be set from <code class="docutils literal notranslate"><span class="pre">/etc/ood/config/apps/shell/env</span></code>.</p>
 </section>
 <section id="shell-logs-have-added-prefixing">
-<h3><a class="toc-backref" href="#id49" role="doc-backlink">Shell Logs Have Added Prefixing</a><a class="headerlink" href="#shell-logs-have-added-prefixing" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id51" role="doc-backlink">Shell Logs Have Added Prefixing</a><a class="headerlink" href="#shell-logs-have-added-prefixing" title="Link to this heading"></a></h3>
 <p>Each shell log entry is now prefixed with the user, host, and PID associated with the shell session,
 allowing users and administrators to differentiate between log entries produced by simultaneous sessions.</p>
 </section>
 <section id="grafana-integration-allows-gpu-panels">
-<h3><a class="toc-backref" href="#id50" role="doc-backlink">Grafana Integration Allows GPU panels</a><a class="headerlink" href="#grafana-integration-allows-gpu-panels" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id52" role="doc-backlink">Grafana Integration Allows GPU panels</a><a class="headerlink" href="#grafana-integration-allows-gpu-panels" title="Link to this heading"></a></h3>
 <p>The Grafana panels visible in Active Jobs now display <code class="docutils literal notranslate"><span class="pre">gpu-util</span></code> and <code class="docutils literal notranslate"><span class="pre">gpu-memory</span></code> data if configured.
 To enable these additional panels, add the <code class="docutils literal notranslate"><span class="pre">panelId</span></code> values in your cluster configuration in the same way
 as the pre-existing <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">memory</span></code> panels. For more details on integration with Grafana and how to
@@ -539,16 +560,16 @@ configure it, see <a class="reference internal" href="../customizations.html#gra
 </section>
 </section>
 <section id="accessibility-and-usability">
-<h2><a class="toc-backref" href="#id51" role="doc-backlink">Accessibility and Usability</a><a class="headerlink" href="#accessibility-and-usability" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id53" role="doc-backlink">Accessibility and Usability</a><a class="headerlink" href="#accessibility-and-usability" title="Link to this heading"></a></h2>
 <section id="accessibility-conformance-report-acr">
-<h3><a class="toc-backref" href="#id52" role="doc-backlink">Accessibility Conformance Report (ACR)</a><a class="headerlink" href="#accessibility-conformance-report-acr" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id54" role="doc-backlink">Accessibility Conformance Report (ACR)</a><a class="headerlink" href="#accessibility-conformance-report-acr" title="Link to this heading"></a></h3>
 <p>Open OnDemand version 4.1 includes an Accessibility Conformance Report (ACR) and the project
 plans to provide an updated report for each major and minor release. Findings from the version 4.1
 ACR will inform ongoing accessibility improvements in future releases. The ACR is available on our
 accessibility page at <a class="reference external" href="https://www.openondemand.org/accessibility">openondemand.org/accessibility</a>.</p>
 </section>
 <section id="dynamic-forms-and-session-cards-announce-to-screen-readers">
-<h3><a class="toc-backref" href="#id53" role="doc-backlink">Dynamic Forms and Session Cards Announce to Screen Readers</a><a class="headerlink" href="#dynamic-forms-and-session-cards-announce-to-screen-readers" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id55" role="doc-backlink">Dynamic Forms and Session Cards Announce to Screen Readers</a><a class="headerlink" href="#dynamic-forms-and-session-cards-announce-to-screen-readers" title="Link to this heading"></a></h3>
 <p>Dynamic batch connect forms now alert screen readers when form items are changed,
 allowing visually impaired users to better understand what is happening on the page.
 This is supported by all <a class="reference internal" href="../how-tos/app-development/interactive/dynamic-form-widgets.html#dynamic-bc-apps"><span class="std std-ref">dynamic form actions</span></a>. Similarly,
@@ -556,14 +577,14 @@ interactive session cards provide live announcements when job status changes bet
 queued, running, and completed.</p>
 </section>
 <section id="new-skip-navigation-button">
-<h3><a class="toc-backref" href="#id54" role="doc-backlink">New Skip Navigation Button</a><a class="headerlink" href="#new-skip-navigation-button" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id56" role="doc-backlink">New Skip Navigation Button</a><a class="headerlink" href="#new-skip-navigation-button" title="Link to this heading"></a></h3>
 <p>Version 4.1 adds a new skip navigation button to the dashboard, which can be accessed
 through keyboard navigation at the top of the page, and is read directly after the
 page title by screen readers. Clicking the button allows you to bypass all navigation
 bar items and reliably skip to the main content of the page.</p>
 </section>
 <section id="new-dashboard-widgets">
-<h3><a class="toc-backref" href="#id55" role="doc-backlink">New Dashboard Widgets</a><a class="headerlink" href="#new-dashboard-widgets" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id57" role="doc-backlink">New Dashboard Widgets</a><a class="headerlink" href="#new-dashboard-widgets" title="Link to this heading"></a></h3>
 <p>New dashboard widgets have been added in this release. They include <code class="docutils literal notranslate"><span class="pre">balances</span></code>, <code class="docutils literal notranslate"><span class="pre">file_quotas</span></code>,
 <code class="docutils literal notranslate"><span class="pre">nsf_access_events</span></code>, and <code class="docutils literal notranslate"><span class="pre">system_status</span></code>.</p>
 <p>For ACCESS Resource Providers (RPs), the <code class="docutils literal notranslate"><span class="pre">nsf_access_events</span></code> widget provides a centralized
@@ -572,7 +593,7 @@ Additional RP-focused widgets are planned for future releases.</p>
 <p>See <a class="reference internal" href="../customizations.html#dashboard-custom-layout"><span class="std std-ref">Custom layouts in the dashboard</span></a> for more details.</p>
 </section>
 <section id="new-canadian-internationalization-files">
-<h3><a class="toc-backref" href="#id56" role="doc-backlink">New Canadian Internationalization Files</a><a class="headerlink" href="#new-canadian-internationalization-files" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id58" role="doc-backlink">New Canadian Internationalization Files</a><a class="headerlink" href="#new-canadian-internationalization-files" title="Link to this heading"></a></h3>
 <p>Open OnDemand version 4.1 will be the first to include Canadian internationalization
 files for both English and French, thanks to Rahim Khoja of the University of
 Alberta. This adds to pre-existing internationalization files for American
@@ -583,7 +604,7 @@ to making it easier for others in your country or region to use Open OnDemand,
 contributed localization files will also be automatically updated with new releases.</p>
 </section>
 <section id="new-demo-container">
-<h3><a class="toc-backref" href="#id57" role="doc-backlink">New Demo Container</a><a class="headerlink" href="#new-demo-container" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id59" role="doc-backlink">New Demo Container</a><a class="headerlink" href="#new-demo-container" title="Link to this heading"></a></h3>
 <p>A new demo container has been made available, allowing you to spin up a lightweight and
 preconfigured OnDemand instance on your own machine. The container allows you to preview
 all of the basic file management, the shell, and batch connect features Open OnDemand has to offer,
@@ -592,9 +613,9 @@ to pull down and run the demo, see the <a class="reference external" href="https
 </section>
 </section>
 <section id="interactive-jobs-and-applications">
-<h2><a class="toc-backref" href="#id58" role="doc-backlink">Interactive Jobs and Applications</a><a class="headerlink" href="#interactive-jobs-and-applications" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id60" role="doc-backlink">Interactive Jobs and Applications</a><a class="headerlink" href="#interactive-jobs-and-applications" title="Link to this heading"></a></h2>
 <section id="batch-connect-apps-cache-erb-content">
-<h3><a class="toc-backref" href="#id59" role="doc-backlink">Batch Connect Apps Cache ERB Content</a><a class="headerlink" href="#batch-connect-apps-cache-erb-content" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id61" role="doc-backlink">Batch Connect Apps Cache ERB Content</a><a class="headerlink" href="#batch-connect-apps-cache-erb-content" title="Link to this heading"></a></h3>
 <p>All batch connect apps now cache ERB content, allowing expensive ERB operations to be
 done in <code class="docutils literal notranslate"><span class="pre">form.yml.erb</span></code> without burdening the web server on each page visit. For app
 development, this means that changes may not be picked up right away, and you may need
@@ -603,7 +624,7 @@ right of the navigation bar. For more details on using ERB in user forms, see
 <a class="reference internal" href="../how-tos/app-development/interactive/form.html#app-development-interactive-form"><span class="std std-ref">User Form (form.yml.erb)</span></a>.</p>
 </section>
 <section id="session-cards-now-have-download-as-zip-button">
-<h3><a class="toc-backref" href="#id60" role="doc-backlink">Session Cards Now Have 'Download as Zip' Button</a><a class="headerlink" href="#session-cards-now-have-download-as-zip-button" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id62" role="doc-backlink">Session Cards Now Have 'Download as Zip' Button</a><a class="headerlink" href="#session-cards-now-have-download-as-zip-button" title="Link to this heading"></a></h3>
 <p>Interactive session cards now have a 'Download as Zip' button. This allows users
 to collect session details like logs, scripts, and user-defined parameters in a
 single zip file so that this context can be easily included with support ticket requests.
@@ -612,13 +633,13 @@ available on completed sessions, and is hidden from users who do not have
 <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#download-enabled"><span class="std std-ref">downloads enabled</span></a>.</p>
 </section>
 <section id="sessions-cards-show-cores-and-gpus-requested">
-<h3><a class="toc-backref" href="#id61" role="doc-backlink">Sessions Cards Show Cores and GPUs Requested</a><a class="headerlink" href="#sessions-cards-show-cores-and-gpus-requested" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id63" role="doc-backlink">Sessions Cards Show Cores and GPUs Requested</a><a class="headerlink" href="#sessions-cards-show-cores-and-gpus-requested" title="Link to this heading"></a></h3>
 <p>Session cards now have widgets to display cores and GPUs available to the job, making it
 easier to view the parameters of current or past jobs when re-running for your next session.
 Please note that resource widgets will only appear when the quantity requested is greater than 0.</p>
 </section>
 <section id="new-option-for-interactive-session-notifications">
-<h3><a class="toc-backref" href="#id62" role="doc-backlink">New Option For Interactive Session Notifications</a><a class="headerlink" href="#new-option-for-interactive-session-notifications" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id64" role="doc-backlink">New Option For Interactive Session Notifications</a><a class="headerlink" href="#new-option-for-interactive-session-notifications" title="Link to this heading"></a></h3>
 <p>The 'My Interactive Sessions' page now has a switch to enable notifications. When turned on,
 the browser will present notifications to the user when their session changes state. This is
 most useful for centers with long queue times, as users no longer need to actively monitor
@@ -628,7 +649,7 @@ their jobs to know when they start running.</p>
 </figure>
 </section>
 <section id="desktop-safe-clean-path">
-<h3><a class="toc-backref" href="#id63" role="doc-backlink">Desktop safe clean PATH</a><a class="headerlink" href="#desktop-safe-clean-path" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id65" role="doc-backlink">Desktop safe clean PATH</a><a class="headerlink" href="#desktop-safe-clean-path" title="Link to this heading"></a></h3>
 <p>Previous versions of Open OnDemand have had issues with the <code class="docutils literal notranslate"><span class="pre">bc_desktop</span></code> application when users
 specify <code class="docutils literal notranslate"><span class="pre">PATH</span></code> in their <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> (generally through <code class="docutils literal notranslate"><span class="pre">conda</span></code> environments).
 Indeed, previous versions of Open OnDemand have even attempted to fix this by hard coding a basic <code class="docutils literal notranslate"><span class="pre">PATH</span></code>,
@@ -638,21 +659,21 @@ this specific issue is resolved because the desktops will strip anything from th
 </section>
 </section>
 <section id="forms-widgets-and-user-input">
-<h2><a class="toc-backref" href="#id64" role="doc-backlink">Forms, Widgets, and User Input</a><a class="headerlink" href="#forms-widgets-and-user-input" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id66" role="doc-backlink">Forms, Widgets, and User Input</a><a class="headerlink" href="#forms-widgets-and-user-input" title="Link to this heading"></a></h2>
 <section id="new-bc-num-nodes-smart-attribute">
-<h3><a class="toc-backref" href="#id65" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code> Smart Attribute</a><a class="headerlink" href="#new-bc-num-nodes-smart-attribute" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id67" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code> Smart Attribute</a><a class="headerlink" href="#new-bc-num-nodes-smart-attribute" title="Link to this heading"></a></h3>
 <p>Open OnDemand now offers the <code class="docutils literal notranslate"><span class="pre">bc_num_nodes</span></code> smart attribute, which allows you to request nodes
 consistently across schedulers. This replaces the <code class="docutils literal notranslate"><span class="pre">bc_num_slots</span></code> smart attribute, which selected
 either nodes or cores depending on the scheduler. For more details, see <a class="reference internal" href="../how-tos/app-development/interactive/form.html#bc-num-nodes"><span class="std std-ref">bc_num_nodes</span></a>.</p>
 </section>
 <section id="new-auto-cores-functionality">
-<h3><a class="toc-backref" href="#id66" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">auto_cores</span></code> Functionality</a><a class="headerlink" href="#new-auto-cores-functionality" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id68" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">auto_cores</span></code> Functionality</a><a class="headerlink" href="#new-auto-cores-functionality" title="Link to this heading"></a></h3>
 <p>Version 4.1 offers the <code class="docutils literal notranslate"><span class="pre">auto_cores</span></code> smart attribute, which allows you to request cores across schedulers.
 When used alongside the <code class="docutils literal notranslate"><span class="pre">auto_batch_cluster</span></code> attribute, this ensures that the number of cores selected is valid
 for the cluster you are submitting to. For more details, see <a class="reference internal" href="../how-tos/app-development/interactive/form.html#auto-batch-clusters"><span class="std std-ref">auto_batch_clusters</span></a> and <a class="reference internal" href="../how-tos/app-development/interactive/form.html#auto-cores"><span class="std std-ref">auto_cores</span></a>.</p>
 </section>
 <section id="automatic-attributes-support-accounts-with-special-characters">
-<h3><a class="toc-backref" href="#id67" role="doc-backlink">Automatic Attributes Support Accounts with Special Characters</a><a class="headerlink" href="#automatic-attributes-support-accounts-with-special-characters" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id69" role="doc-backlink">Automatic Attributes Support Accounts with Special Characters</a><a class="headerlink" href="#automatic-attributes-support-accounts-with-special-characters" title="Link to this heading"></a></h3>
 <p>The account-aware <code class="docutils literal notranslate"><span class="pre">auto_queues</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_qos</span></code> now support account names with special characters, widening their
 compatibility with more centers. This was prioritized for account names as these are among the hardest to modify, but
 the same special character support can be added to other automatic attributes like clusters or queues upon request.
@@ -660,20 +681,20 @@ Note that in order to get the account-aware features from these attributes, they
 <code class="docutils literal notranslate"><span class="pre">auto_accounts</span></code>.</p>
 </section>
 <section id="global-batch-connect-items-can-override-predefined-attributes">
-<h3><a class="toc-backref" href="#id68" role="doc-backlink">Global Batch Connect Items Can Override Predefined Attributes</a><a class="headerlink" href="#global-batch-connect-items-can-override-predefined-attributes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id70" role="doc-backlink">Global Batch Connect Items Can Override Predefined Attributes</a><a class="headerlink" href="#global-batch-connect-items-can-override-predefined-attributes" title="Link to this heading"></a></h3>
 <p>It is now possible to modify the <a class="reference internal" href="../how-tos/app-development/interactive/form.html#app-development-interactive-form-predefined-attributes"><span class="std std-ref">predefined attributes</span></a>
 using global definitions. This works similarly to other <a class="reference internal" href="../how-tos/app-development/interactive/form.html#global-bc-form-items"><span class="std std-ref">Global Batch Connect Form Items</span></a>, except that the attribute name
 must be the predefined attribute name prefixed with <code class="docutils literal notranslate"><span class="pre">global_</span></code>, and you only have to define attributes you want to change.
 See the full section on <a class="reference internal" href="../how-tos/app-development/interactive/form.html#global-bc-form-items"><span class="std std-ref">Global Batch Connect Form Items</span></a> for more details.</p>
 </section>
 <section id="new-data-alias-directive">
-<h3><a class="toc-backref" href="#id69" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">data-alias</span></code> Directive</a><a class="headerlink" href="#new-data-alias-directive" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id71" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">data-alias</span></code> Directive</a><a class="headerlink" href="#new-data-alias-directive" title="Link to this heading"></a></h3>
 <p>The new <code class="docutils literal notranslate"><span class="pre">data-alias</span></code> directive allows you to create conditional <code class="docutils literal notranslate"><span class="pre">option-for</span></code> and <code class="docutils literal notranslate"><span class="pre">exclusive-option-for</span></code> directives
 for values with special characters. It is recommended to use this for all conditional values that contain characters
 outside the lowercase alphabet and digits. For more details, see <a class="reference internal" href="../how-tos/app-development/interactive/dynamic-form-widgets.html#data-alias"><span class="std std-ref">Option Value Aliases</span></a>.</p>
 </section>
 <section id="new-data-help-directive">
-<h3><a class="toc-backref" href="#id70" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">data-help</span></code> Directive</a><a class="headerlink" href="#new-data-help-directive" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id72" role="doc-backlink">New <code class="docutils literal notranslate"><span class="pre">data-help</span></code> Directive</a><a class="headerlink" href="#new-data-help-directive" title="Link to this heading"></a></h3>
 <p>Version 4.1 adds the <code class="docutils literal notranslate"><span class="pre">data-help</span></code> directive, allowing you to dynamically change
 the help text below form items when certain select options are chosen. For example,
 you may have a <code class="docutils literal notranslate"><span class="pre">node_type</span></code> select widget, where type <code class="docutils literal notranslate"><span class="pre">basic</span></code> has older GPUs than
@@ -682,7 +703,7 @@ option for users who select <code class="docutils literal notranslate"><span cla
 when deciding how many GPUs to select. For full documentation, see <a class="reference internal" href="../how-tos/app-development/interactive/dynamic-form-widgets.html#dynamic-bc-apps-data-help"><span class="std std-ref">Dynamic Help Text</span></a>.</p>
 </section>
 <section id="form-items-can-be-hidden-by-default">
-<h3><a class="toc-backref" href="#id71" role="doc-backlink">Form Items Can Be Hidden By Default</a><a class="headerlink" href="#form-items-can-be-hidden-by-default" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id73" role="doc-backlink">Form Items Can Be Hidden By Default</a><a class="headerlink" href="#form-items-can-be-hidden-by-default" title="Link to this heading"></a></h3>
 <p>Form items now accept a <code class="docutils literal notranslate"><span class="pre">hide_by_default:</span> <span class="pre">true</span></code> attribute, which will hide the form item
 until an option with a <code class="docutils literal notranslate"><span class="pre">data-hide-item:</span> <span class="pre">false</span></code> is selected. This is especially useful when
 certain items are only needed for a few options, as you no longer have to include <code class="docutils literal notranslate"><span class="pre">data-hide-item:</span> <span class="pre">true</span></code>
@@ -690,20 +711,20 @@ on all of those options, but instead only supply directives to options that will
 For more details and examples, see the <a class="reference internal" href="../how-tos/app-development/interactive/dynamic-form-widgets.html#dynamic-bc-apps-data-hide"><span class="std std-ref">data-hide documentation</span></a>.</p>
 </section>
 <section id="form-items-accept-markdown-headers">
-<h3><a class="toc-backref" href="#id72" role="doc-backlink">Form Items Accept Markdown Headers</a><a class="headerlink" href="#form-items-accept-markdown-headers" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id74" role="doc-backlink">Form Items Accept Markdown Headers</a><a class="headerlink" href="#form-items-accept-markdown-headers" title="Link to this heading"></a></h3>
 <p>Batch connect form items accept a <code class="docutils literal notranslate"><span class="pre">header</span></code> attribute, which can be used to render
 markdown above the item's label. Headers can provide useful structure to forms, and
 are not affected when the item is hidden, or by any other dynamic form actions. For
 full documentation, see <a class="reference internal" href="../how-tos/app-development/interactive/form.html#item-header-option"><span class="std std-ref">Form Item Headers</span></a>.</p>
 </section>
 <section id="path-selectors-accept-custom-titles">
-<h3><a class="toc-backref" href="#id73" role="doc-backlink">Path Selectors Accept Custom Titles</a><a class="headerlink" href="#path-selectors-accept-custom-titles" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id75" role="doc-backlink">Path Selectors Accept Custom Titles</a><a class="headerlink" href="#path-selectors-accept-custom-titles" title="Link to this heading"></a></h3>
 <p>The title on the path selector modal is now customizable, allowing you to accurately
 represent what the selected path will be used for. For more details, see the
 <a class="reference internal" href="../how-tos/app-development/interactive/form-widgets.html#path-selector"><span class="std std-ref">full path selector documentation</span></a>.</p>
 </section>
 <section id="recently-used-apps-display-recent-settings">
-<h3><a class="toc-backref" href="#id74" role="doc-backlink">Recently Used Apps Display Recent Settings</a><a class="headerlink" href="#recently-used-apps-display-recent-settings" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id76" role="doc-backlink">Recently Used Apps Display Recent Settings</a><a class="headerlink" href="#recently-used-apps-display-recent-settings" title="Link to this heading"></a></h3>
 <p>A popup has been added to the <code class="docutils literal notranslate"><span class="pre">recently_used_apps</span></code> dashboard widget allowing you to
 preview the settings that will be submitted by hovering over the app icon.</p>
 <figure class="align-default">
@@ -717,16 +738,16 @@ attributes to display, see <a class="reference internal" href="../customizations
 </section>
 </section>
 <section id="files-projects-and-data-management">
-<h2><a class="toc-backref" href="#id75" role="doc-backlink">Files, Projects, and Data Management</a><a class="headerlink" href="#files-projects-and-data-management" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id77" role="doc-backlink">Files, Projects, and Data Management</a><a class="headerlink" href="#files-projects-and-data-management" title="Link to this heading"></a></h2>
 <section id="file-browser-can-now-render-html-files">
-<h3><a class="toc-backref" href="#id76" role="doc-backlink">File Browser Can Now Render HTML Files</a><a class="headerlink" href="#file-browser-can-now-render-html-files" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id78" role="doc-backlink">File Browser Can Now Render HTML Files</a><a class="headerlink" href="#file-browser-can-now-render-html-files" title="Link to this heading"></a></h3>
 <p>Open OnDemand version 4.1 brings back HTML rendering within the files app, allowing users
 to open and view HTML files directly. This is disabled by default, due to security
 concerns, but can be enabled by setting <code class="docutils literal notranslate"><span class="pre">OOD_UNSAFE_RENDER_HTML=true</span></code> in your
 environment or including <code class="docutils literal notranslate"><span class="pre">unsafe_render_html=true</span></code> in your <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>.</p>
 </section>
 <section id="file-downloads-have-a-maximum-size">
-<h3><a class="toc-backref" href="#id77" role="doc-backlink">File Downloads Have a Maximum Size</a><a class="headerlink" href="#file-downloads-have-a-maximum-size" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id79" role="doc-backlink">File Downloads Have a Maximum Size</a><a class="headerlink" href="#file-downloads-have-a-maximum-size" title="Link to this heading"></a></h3>
 <p>Version 4.1 adds a configurable maximum size for file downloads, which also applies to
 opening files in the file browser. This can be configured with the <code class="docutils literal notranslate"><span class="pre">OOD_DOWNLOAD_FILE_MAX</span></code>
 environment variable, or setting <code class="docutils literal notranslate"><span class="pre">download_file_max</span></code> in your <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>.
@@ -736,14 +757,14 @@ would be represented as <code class="docutils literal notranslate"><span class="
 as a similar one for directory downloads, see <a class="reference internal" href="../customizations.html#set-download-limits"><span class="std std-ref">Set Download Limits</span></a>.</p>
 </section>
 <section id="file-editor-has-a-maximum-size">
-<h3><a class="toc-backref" href="#id78" role="doc-backlink">File Editor Has a Maximum Size</a><a class="headerlink" href="#file-editor-has-a-maximum-size" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id80" role="doc-backlink">File Editor Has a Maximum Size</a><a class="headerlink" href="#file-editor-has-a-maximum-size" title="Link to this heading"></a></h3>
 <p>In version 4.1, the file editor will not open files above a configurable maximum size. The default is 12MiB,
 but this can be changed by setting the <code class="docutils literal notranslate"><span class="pre">OOD_FILE_EDITOR_MAX_SIZE</span></code> environment variable, or setting
 <code class="docutils literal notranslate"><span class="pre">file_editor_max_size</span></code> in your <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#ondemand-d-ymls"><span class="std std-ref">ondemand.d/*.yml files</span></a>. This uses the same binary byte format as
 <code class="docutils literal notranslate"><span class="pre">OOD_DOWNLOAD_FILE_MAX</span></code> above, so the 12MiB default would be represented as <code class="docutils literal notranslate"><span class="pre">12582912</span></code>.</p>
 </section>
 <section id="file-editor-toggles-hard-and-soft-tabs">
-<h3><a class="toc-backref" href="#id79" role="doc-backlink">File Editor Toggles Hard and Soft Tabs</a><a class="headerlink" href="#file-editor-toggles-hard-and-soft-tabs" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id81" role="doc-backlink">File Editor Toggles Hard and Soft Tabs</a><a class="headerlink" href="#file-editor-toggles-hard-and-soft-tabs" title="Link to this heading"></a></h3>
 <p>The file editor now supports toggling between hard and soft tabs with a switch on the left panel. While
 both use the tab key, hard tabs refer to tab characters, and soft tabs are space characters used for
 indentation.</p>
@@ -755,13 +776,13 @@ and YAML. For YAML files, only soft tabs are syntactically supported. Python rec
 projects, but will not allow mixing of hard and soft tabs within a project.</p>
 </section>
 <section id="file-integration-with-other-applications">
-<h3><a class="toc-backref" href="#id80" role="doc-backlink">File Integration with Other Applications</a><a class="headerlink" href="#file-integration-with-other-applications" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id82" role="doc-backlink">File Integration with Other Applications</a><a class="headerlink" href="#file-integration-with-other-applications" title="Link to this heading"></a></h3>
 <p>In version 4.1 we've added the ability to <a class="reference internal" href="../customizations.html#files-select-target-extended"><span class="std std-ref">Send File Data to Another Application</span></a>. This is enabled
 through the <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#files-select-target"><span class="std std-ref">files_select_target configuration</span></a>.  More information
 is provided in the links above.</p>
 </section>
 <section id="the-project-manager">
-<span id="project-manager-note"></span><h3><a class="toc-backref" href="#id81" role="doc-backlink">The Project Manager</a><a class="headerlink" href="#the-project-manager" title="Link to this heading"></a></h3>
+<span id="project-manager-note"></span><h3><a class="toc-backref" href="#id83" role="doc-backlink">The Project Manager</a><a class="headerlink" href="#the-project-manager" title="Link to this heading"></a></h3>
 <p>Version 4.1 enables the Project Manager by default, a new alternative to the Job Composer that brings the
 automatic scheduler interaction of batch connect forms to your personal job scripts. In addition to this core
 functionality, it also provides support for workflows that can submit multiple dependent jobs at once, and
@@ -775,14 +796,14 @@ and for an example-driven guide intended for users, see <a class="reference inte
 </section>
 </section>
 <section id="help-support-and-institutional-integration">
-<h2><a class="toc-backref" href="#id82" role="doc-backlink">Help, Support and Institutional Integration</a><a class="headerlink" href="#help-support-and-institutional-integration" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id84" role="doc-backlink">Help, Support and Institutional Integration</a><a class="headerlink" href="#help-support-and-institutional-integration" title="Link to this heading"></a></h2>
 <section id="servicenow-support-tickets">
-<h3><a class="toc-backref" href="#id83" role="doc-backlink">ServiceNow support tickets</a><a class="headerlink" href="#servicenow-support-tickets" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id85" role="doc-backlink">ServiceNow support tickets</a><a class="headerlink" href="#servicenow-support-tickets" title="Link to this heading"></a></h3>
 <p>Centers can now send support tickets to ServiceNow from Open OnDemand.
 See <a class="reference internal" href="../customizations.html#servicenow-support-ticket"><span class="std std-ref">ServiceNow API</span></a> for more details.</p>
 </section>
 <section id="module-browser-page">
-<h3><a class="toc-backref" href="#id84" role="doc-backlink">Module Browser Page</a><a class="headerlink" href="#module-browser-page" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id86" role="doc-backlink">Module Browser Page</a><a class="headerlink" href="#module-browser-page" title="Link to this heading"></a></h3>
 <p>Centers that have enabled <a class="reference internal" href="../reference/files/ondemand-d-ymls.html#module-file-dir"><span class="std std-ref">lmod module suppport</span></a> for
 OnDemand to read all the modules on clusters will now see a web page for
 searching and displaying these modules.</p>
@@ -793,7 +814,7 @@ searching and displaying these modules.</p>
 </section>
 </section>
 <section id="upgrade-instructions">
-<h2><a class="toc-backref" href="#id85" role="doc-backlink">Upgrade Instructions</a><a class="headerlink" href="#upgrade-instructions" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id87" role="doc-backlink">Upgrade Instructions</a><a class="headerlink" href="#upgrade-instructions" title="Link to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Update the <strong>development</strong> and/or <strong>test</strong> instances of OnDemand installed at your center <strong>before</strong> you modify the <strong>production</strong> instance.</p>

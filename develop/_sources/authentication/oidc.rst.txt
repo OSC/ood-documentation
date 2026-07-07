@@ -14,6 +14,8 @@ The following prerequisites need to be satisfied:
 
    The OnDemand repositories have the ``mod_auth_openidc`` RPM for RHEL 8 and Rocky 8 that are newer than what the OS provides to make use of some newer features.
 
+.. include:: oidc_crypto.inc
+
 The following is an example :program:`ood-portal-generator` configuration file:
 
 .. code-block:: yaml

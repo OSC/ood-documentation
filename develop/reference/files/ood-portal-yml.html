@@ -1156,6 +1156,39 @@ to the <code class="docutils literal notranslate"><span class="pre">pun_pre_hook
 <p>If using OpenID Connect for authentication, these are a few properties you will
 need to tweak. For a better understanding of these options you should read more
 on <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> program now requires <code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> when using OIDC
+authentication. Centers <strong>must</strong> provide this or the program will fail.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit for <code class="docutils literal notranslate"><span class="pre">httd</span></code> and <code class="docutils literal notranslate"><span class="pre">apache2</span></code> ignore this failure. When this program
+fails in a <code class="docutils literal notranslate"><span class="pre">systemd</span></code> unit, new configurations will not be applied until
+<code class="docutils literal notranslate"><span class="pre">oidc_crypto_passphrase</span></code> is set.</p>
+</div>
+<dl class="describe">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">oidc_crypto_passphrase</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
+<dd><p>The passphrase used by <a class="reference external" href="https://github.com/zmartzone/mod_auth_openidc">mod_auth_openidc</a> to populate OIDCCryptoPassphrase.</p>
+<blockquote>
+<div><dl>
+<dt>Default</dt><dd><blockquote>
+<div><p>No default is provided and <code class="docutils literal notranslate"><span class="pre">update_ood_portal</span></code> will fail when trying
+to use OIDC without it being set.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">oidc_crypto_passphrase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl>
+<dt>Example</dt><dd><p>Set to a UUID.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">oidc_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;97b85f06-7a23-11f1-9e51-00155def9328&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">oidc_uri</span> <span class="pre">(String,</span> <span class="pre">null)</span></span></dt>
