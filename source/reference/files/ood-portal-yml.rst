@@ -1041,6 +1041,27 @@ If using OpenID Connect for authentication, these are a few properties you will
 need to tweak. For a better understanding of these options you should read more
 on mod_auth_openidc_.
 
+.. include:: ../../authentication/oidc_crypto.inc
+
+.. describe:: oidc_crypto_passphrase (String, null)
+
+  The passphrase used by mod_auth_openidc_ to populate OIDCCryptoPassphrase.
+
+    Default
+      No default is provided and ``update_ood_portal`` will fail when trying
+      to use OIDC without it being set.
+
+      .. code-block:: yaml
+
+        oidc_crypto_passphrase: null
+
+     Example
+        Set to a UUID.
+
+        .. code-block:: yaml
+
+          oidc_uri: "97b85f06-7a23-11f1-9e51-00155def9328"
+
 .. describe:: oidc_uri (String, null)
 
      the redirect URI used by mod_auth_openidc_ for authentication
