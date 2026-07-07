@@ -66,6 +66,8 @@ Get the ``ondemand-dex`` repository and install web files and systemd unit file
 Configuring OnDemand Dex
 ------------------------
 
+.. include:: oidc_crypto.inc
+
 OnDemand Dex is configured by modifying the Open OnDemand Portal :ref:`ood-portal-generator-configuration` file :file:`/etc/ood/config/ood_portal.yml`.
 
 The default location for Dex configurations is :file:`/etc/ood/dex/config.yaml`.
