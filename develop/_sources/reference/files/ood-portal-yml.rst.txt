@@ -1060,7 +1060,7 @@ on mod_auth_openidc_.
 
         .. code-block:: yaml
 
-          oidc_uri: "97b85f06-7a23-11f1-9e51-00155def9328"
+          oidc_crypto_passphrase: "97b85f06-7a23-11f1-9e51-00155def9328"
 
 .. describe:: oidc_uri (String, null)
 
