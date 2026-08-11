@@ -132,6 +132,19 @@ RHEL systems now ``chown`` ``/var/log/ondemand-nginx`` to ``ondemand-nginx:ondem
 ownership. You may view :ref:`nginx-logs` for details on how to apply a FACL for staff
 to get access to these logs.
 
+Slurm clusters now specify cluster
+..................................
+
+Some Slurm commands like ``sacctmgr`` now pass the ``cluster`` argument
+to better isolate the information returned. The value passed is the configuration's
+filename.
+
+This means that the ``ClusterName`` configuration in Slurm should now match the
+OnDemand's cluster configuration filename.
+
+For example, if ``ClusterName=owens`` in the clusters' ``.conf`` file the
+Open OnDemand cluster configuration file should be ``owens.yml``.
+
 NodeJS breaking change
 ......................
 
