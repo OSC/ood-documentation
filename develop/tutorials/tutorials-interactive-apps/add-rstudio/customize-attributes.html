@@ -5,7 +5,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4. Customize Attributes &mdash; Open OnDemand 4.2.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=6f7bdab3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
@@ -177,11 +177,11 @@
 <div><p>If you are not using Lmod, then in the function <code class="docutils literal notranslate"><span class="pre">setup_env</span></code> replace the value for <code class="docutils literal notranslate"><span class="pre">RSTUDIO_SERVER_IMAGE</span></code> with the absolute path to the Singularity image, and <code class="docutils literal notranslate"><span class="pre">SINGULARITY_BINDPATH</span></code> with all the directories that contain dependencies for RStudio server and R. Discovering those paths may benefit from using <code class="docutils literal notranslate"><span class="pre">ptrace</span></code> or <code class="docutils literal notranslate"><span class="pre">lsof</span></code>. Finally ensure that <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">rserver</span></code> are in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
 <p>If you are using Lmod then create a module like the following:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="c1">-- $path/to/lmodfiles/rstudio_container/v0.0.1.lua</span>
-<span class="n">help</span><span class="p">(</span><span class="s">[[ rstudio - loads rstudio with singularity environment for ondemand apps ]]</span><span class="p">)</span>
-<span class="n">whatis</span><span class="p">(</span><span class="s2">&quot;loads rstudio with singularity environment for ondemand&quot;</span><span class="p">)</span>
-<span class="hll"><span class="n">setenv</span><span class="p">(</span><span class="s2">&quot;RSTUDIO_SERVER_IMAGE&quot;</span><span class="p">,</span><span class="s2">&quot;/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg&quot;</span><span class="p">)</span>
-</span><span class="hll"><span class="n">setenv</span><span class="p">(</span><span class="s2">&quot;SINGULARITY_BINDPATH&quot;</span><span class="p">,</span><span class="s2">&quot;/etc,/media,/mnt,/opt,/srv,/usr,/var&quot;</span><span class="p">)</span>
-</span><span class="hll"><span class="n">append_path</span><span class="p">(</span><span class="s2">&quot;PATH&quot;</span><span class="p">,</span> <span class="s2">&quot;/usr/lib/rstudio-server/bin&quot;</span><span class="p">)</span>
+<span class="nf">help</span><span class="p">([[</span><span class="w"> </span><span class="nv">rstudio</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">loads</span><span class="w"> </span><span class="nv">rstudio</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">singularity</span><span class="w"> </span><span class="nv">environment</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="nv">ondemand</span><span class="w"> </span><span class="nv">apps</span><span class="w"> </span><span class="p">]])</span>
+<span class="nf">whatis</span><span class="p">(</span><span class="s2">&quot;loads rstudio with singularity environment for ondemand&quot;</span><span class="p">)</span>
+<span class="hll"><span class="nf">setenv</span><span class="p">(</span><span class="s2">&quot;RSTUDIO_SERVER_IMAGE&quot;</span><span class="p">,</span><span class="s2">&quot;/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="nf">setenv</span><span class="p">(</span><span class="s2">&quot;SINGULARITY_BINDPATH&quot;</span><span class="p">,</span><span class="s2">&quot;/etc,/media,/mnt,/opt,/srv,/usr,/var&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="nf">append_path</span><span class="p">(</span><span class="s2">&quot;PATH&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/usr/lib/rstudio-server/bin&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
 <p>Then replace the exports in the function <code class="docutils literal notranslate"><span class="pre">setup_env</span></code> with the appropriate <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">$module_path</span></code> and <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">rstudio_container/v0.0.1</span></code>.</p>
