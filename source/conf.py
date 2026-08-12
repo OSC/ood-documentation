@@ -39,7 +39,8 @@ extensions = [
     'sphinxcontrib.httpdomain',
     'sphinxcontrib.plantuml',
     'sphinx_tabs.tabs',
-    'sphinxcontrib.spelling'
+    'sphinxcontrib.spelling',
+    'myst_parser'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
