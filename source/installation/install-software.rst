@@ -209,10 +209,10 @@ and likely :ref:`configure a servername <ood-portal-generator-servername>`.
 Building From Source
 --------------------
 
-Building from source is left as an exercise to the reader. 
-     
-It's not particularly difficult to build the code, but installing it with all the various files is. Should you be interested, 
-review the packaging specs and rules for what would be involved.
+Detailed instructions for building from source are not provided here.
+
+If you're interested in building from source, review the packaging specs and
+rules for more information about what is involved.
 
 - https://github.com/OSC/ondemand/tree/master/packaging
 
