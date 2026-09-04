@@ -623,6 +623,29 @@ are:
 
           step: 1
 
+.. describe:: html_options (Hash, null)
+
+    Supply HTML options to the element.
+
+    Default
+      No options given.
+
+      .. code-block:: yaml
+
+        html_options: null
+
+    Example
+      Add to the HTML classes of the element to change the color
+      of the text to red and add a data attribute for JavaScript
+      to read.
+
+      .. code-block:: yaml
+
+        html_options:
+          class: 'text-danger'
+          data-some-custom-data: 'my custom data'
+
+
 .. describe:: options (Array<Array<String>>, null)
 
     A list of options for a ``select`` widget.  In the simplest form
