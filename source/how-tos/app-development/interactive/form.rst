@@ -505,7 +505,8 @@ are:
 
 .. describe:: help (String, null)
 
-     help text that appears below the field (can be written in Markdown_)
+    Help text that appears below the field. This can be written in Markdown_,
+    but unsafe tags like ``script`` tags will be removed.
 
      Default
        No help text appears below input field
