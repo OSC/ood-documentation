@@ -163,7 +163,28 @@ Open OnDemand uses these packages, among many others.
 
             sudo dnf install ondemand
 
-3. Start services
+3. Install optional packages
+----------------------------
+
+   .. note::
+
+      In order to utilize rclone, the necessary package must be installed.
+
+   .. tabs::
+
+      .. tab:: RHEL/Rocky/AlmaLinux
+
+         .. code-block:: sh
+
+          sudo dnf install rclone
+
+      .. tab:: Ubuntu & Debian
+
+         .. code-block:: sh
+
+          sudo apt install rclone
+
+4. Start services
 -----------------
 
    .. tabs::
