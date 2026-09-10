@@ -1057,7 +1057,7 @@ items.
 For example, let's say you want to populate a global form item for accounts
 from a script.
 
-The easiset way to do that is to invoke the script in the ERB file itself.
+The easiest way to do that is to invoke the script in the ERB file itself.
 
 .. code-block:: erb
 
