@@ -1046,5 +1046,67 @@ have a maximum value of 100 using the following code in your ``ondemand.d`` file
     global_bc_num_hours:
       max: 100
 
+
+Using ruby code to populate global items
+````````````````````````````````````````
+
+All ``ondemand.d`` YAML files can be ERB templates, meaning you can
+use Ruby code to generate these more complicated dynamic global form
+items.
+
+The example below demonstrates how to populate a global attribute called
+``global_accounts`` that are a list of accounts the user has access to.
+However, this functionality is not limited to accounts or even option lists.
+You could generate global dynamic lists of queues, partitions, node types,
+GPU types or any option list you wish a user to choose from.
+
+The easiest way to do this is to invoke the script in the ERB file itself.
+
+.. code-block:: erb
+
+  # /etc/ood/config/ondemand.d/accounts.yml
+
+  global_bc_form_items:
+    global_accounts:
+      widget: select
+      options:
+      <%- `/usr/bin/ood_accounts`.each_line do |account| %>
+      - <%= account %>
+      <%- end %>
+
+If you need something more complicated you can write the logic in Ruby
+and call it from the ERB block in the configuration file.  Here's an
+example of that strategy using the same helper script above. Taking this
+further, you could interact with your scheduler directly by issuing
+commands like ``sacctmgr`` or using Ruby's ``Etc`` module to lookup
+Unix account information.
+
+.. code-block:: ruby
+
+  # /etc/ood/config/site_accounts.rb
+
+  class SiteAccounts
+    def self.accounts
+        # ood_accounts is a custom script returning a list of accounts, one per line.
+        cmd = "/usr/bin/ood_accounts"
+        o, e, s = Open3.capture3(cmd)
+        o.chomp.split
+    end
+  end
+
+.. code-block:: erb
+
+  # /etc/ood/config/ondemand.d/accounts.yml
+
+  global_bc_form_items:
+    global_accounts:
+      widget: select
+      options:
+      <%- require /etc/ood/config/site_accounts.rb -%>
+      <%- SiteAccounts.accounts.each do |account| %>
+      - <%= account %>
+      <%- end %>
+
+
 .. _markdown: https://en.wikipedia.org/wiki/Markdown
 .. _html form: https://en.wikipedia.org/wiki/Form_(HTML)
