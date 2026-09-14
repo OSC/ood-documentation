@@ -1058,7 +1058,7 @@ The example below demonstrates how to populate a global attribute called
 ``global_accounts`` that are a list of accounts the user has access to.
 However, this functionality is not limited to accounts or even option lists.
 You could generate global dynamic lists of queues, partitions, node types,
-gpu types or any option list you wish a user to choose from.
+GPU types or any option list you wish a user to choose from.
 
 The easiest way to do this is to invoke the script in the ERB file itself.
 
