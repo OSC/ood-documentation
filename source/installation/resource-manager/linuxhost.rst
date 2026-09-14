@@ -60,6 +60,27 @@ Launch specific application containers
         singularity_bindpath: /fs,/home
         singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif
 
+Override the submit host per application
+----------------------------------------
+
+The ``submit_host``, as documented below, is the host this adapter will submit
+jobs to.  This is a cluster wide configuration in that all applications that use
+this adapter will use this configuration.
+
+You can, however, override this value in an application's ``submit.yml``.
+Simply set the ``native`` attribute ``submit_host_override`` as shown
+in the example below.
+
+.. code-block:: yaml
+
+   ---
+   batch_connect:
+     template: vnc
+   script:
+     native:
+        submit_host_override: 'special.host.com'
+
+
 .. _resource-manager-linuxhost-cluster-configuration:
 
 Cluster Configuration
