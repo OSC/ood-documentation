@@ -1054,10 +1054,13 @@ All ``ondemand.d`` YAML files can be ERB templates, meaning you can
 use Ruby code to generate these more complicated dynamic global form
 items.
 
-For example, let's say you want to populate a global form item for accounts
-from a script.
+The example below demonstrates how to populate a global attribute called
+``global_accounts`` that are a list of accounts the user has access to.
+However, this functionality is not limited to accounts or even option lists.
+You could generate global dynamic lists of queues, partitions, node types,
+gpu types or any option list you wish a user to choose from.
 
-The easiest way to do that is to invoke the script in the ERB file itself.
+The easiest way to do this is to invoke the script in the ERB file itself.
 
 .. code-block:: erb
 
@@ -1073,7 +1076,10 @@ The easiest way to do that is to invoke the script in the ERB file itself.
 
 If you need something more complicated you can write the logic in Ruby
 and call it from the ERB block in the configuration file.  Here's an
-example of that strategy using the same helper script above.
+example of that strategy using the same helper script above. Taking this
+further, you could interact with your scheduler directly by issuing
+commands like ``sacctmgr`` or using Ruby's ``Etc`` module to lookup
+Unix account information.
 
 .. code-block:: ruby
 
