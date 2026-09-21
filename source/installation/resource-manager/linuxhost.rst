@@ -161,6 +161,10 @@ in the example below.
      native:
         submit_host_override: 'special.host.com'
 
+.. warning::
+  Using a ``submit_host_override`` that isn't in the configured ``ssh_hosts``
+  may put your job into an :ref:`lha-undetermined-state`.
+
 Enforce resource limits on the target host
 ------------------------------------------
 
@@ -252,6 +256,8 @@ Start the necessary services:
 
 Troubleshooting
 ---------------
+
+.. _lha-undetermined-state:
 
 Undetermined state
 ..................
