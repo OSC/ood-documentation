@@ -22,8 +22,8 @@ ever allowing you to connect to it, the application failed to start correctly.
 First, review the :ref:`output for that session <interactive-app-logs>`. You're likely
 to see some errors there.
 
-Empty Variables in submit.yml.erb
----------------------------------
+Empty Variables in ``submit.yml.erb``
+-------------------------------------
 
 Previous versions of Open OnDemand threw errors when attempting to use undefined
 variables in the ``submit.yml.erb``.  Undefined variables are evaluated as ``nil``.
