@@ -3,6 +3,10 @@
 LinuxHost
 =========
 
+.. contents:: Table of Contents
+  :depth: 2
+  :local:
+
 The LinuxHost adapter facilitates launching jobs immediately without using a batch scheduler or resource manager. Use cases for this non-traditional job adapter include:
 
 - Interactive work on login nodes, such as remote desktop or IDE
@@ -32,33 +36,6 @@ The adapter and target host can be configured to either:
 #. Enable launching a specific application container
 
 The cluster configuration can be shared between both strategies and each interactive app plugin individually configured to use the appropriate strategy.
-
-
-Launch any software on target host
-----------------------------------
-
-1. Install on the target host a Singularity base OS image matching the OS of the target host. In the cluster configuration example below we use ``/opt/ood/linuxhost_adapter/centos_7.6.sif`` as the target host is running CentOS7.
-2. See :ref:`resource-manager-linuxhost-cluster-configuration` below to add the cluster configuration file for the target host
-
-This base image is used to provide an unprivileged PID namespace when launching the app. To make the rest of the software installed on the host available to launch within the image, most/all of the host file system is bind-mounted into the running container. For this reason many existing interactive apps will just work when launched by the LinuxHost adapter.
-
-Launch specific application containers
---------------------------------------
-
-1. Install the specific application containers on the target host.
-2. See :ref:`resource-manager-linuxhost-cluster-configuration` below to add the cluster configuration file for the target host. Specify a default application container for ``singularity_image:`` and ``singularity_bindpath:`` even if you will override it.
-3. In each interactive app plugin, specify the image to launch and host directories to mount by setting the ``native`` attribute ``singularity_container`` and ``singularity_bindpath``. In interactive app plugins these attributes may be set in the file ``submit.yml``. For example:
-
-
-.. code-block:: yaml
-
-   ---
-   batch_connect:
-     template: vnc
-   script:
-     native:
-        singularity_bindpath: /fs,/home
-        singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif
 
 .. _resource-manager-linuxhost-cluster-configuration:
 
@@ -138,6 +115,55 @@ with the following configuration options:
   to its users.
 
 
+Launch any software on target host
+----------------------------------
+
+1. Install on the target host a Singularity base OS image matching the OS of the target host. In the cluster configuration example below we use ``/opt/ood/linuxhost_adapter/centos_7.6.sif`` as the target host is running CentOS7.
+2. See :ref:`resource-manager-linuxhost-cluster-configuration` below to add the cluster configuration file for the target host
+
+This base image is used to provide an unprivileged PID namespace when launching the app. To make the rest of the software installed on the host available to launch within the image, most/all of the host file system is bind-mounted into the running container. For this reason many existing interactive apps will just work when launched by the LinuxHost adapter.
+
+Launch specific application containers
+--------------------------------------
+
+1. Install the specific application containers on the target host.
+2. See :ref:`resource-manager-linuxhost-cluster-configuration` below to add the cluster configuration file for the target host. Specify a default application container for ``singularity_image:`` and ``singularity_bindpath:`` even if you will override it.
+3. In each interactive app plugin, specify the image to launch and host directories to mount by setting the ``native`` attribute ``singularity_container`` and ``singularity_bindpath``. In interactive app plugins these attributes may be set in the file ``submit.yml``. For example:
+
+
+.. code-block:: yaml
+
+   ---
+   batch_connect:
+     template: vnc
+   script:
+     native:
+        singularity_bindpath: /fs,/home
+        singularity_container: /usr/local/modules/netbeans/netbeans_2019.sif
+
+Override the submit host per application
+----------------------------------------
+
+The ``submit_host``, as documented below, is the host this adapter will submit
+jobs to.  This is a cluster wide configuration in that all applications that use
+this adapter will use this configuration.
+
+You can, however, override this value in an application's ``submit.yml``.
+Simply set the ``native`` attribute ``submit_host_override`` as shown
+in the example below.
+
+.. code-block:: yaml
+
+   ---
+   batch_connect:
+     template: vnc
+   script:
+     native:
+        submit_host_override: 'special.host.com'
+
+.. warning::
+  Using a ``submit_host_override`` that isn't in the configured ``ssh_hosts``
+  may put your job into an :ref:`lha-undetermined-state`.
 
 Enforce resource limits on the target host
 ------------------------------------------
@@ -230,6 +256,8 @@ Start the necessary services:
 
 Troubleshooting
 ---------------
+
+.. _lha-undetermined-state:
 
 Undetermined state
 ..................
