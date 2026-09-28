@@ -121,17 +121,18 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 Requirements
 ------------
 
-The compute node needs ``curl``, a desktop, and Xvfb for the X11 backend. The
-portal's ``host_regex`` has to admit the node, as for every interactive app.
+The compute node needs a Selkies release newer than 2.0.0, ``curl``, a desktop,
+and Xvfb for the X11 backend. The portal's ``host_regex`` has to admit the node,
+as for every interactive app.
 
 The master token reaches Selkies through the job's environment, never a command
 line. A container started with a clean environment still receives it through
 ``APPTAINERENV_SELKIES_MASTER_TOKEN``; a launcher that never does ends the job
 before it is reported running.
 
-The session token is part of the URL the launch button opens, so the portal's
-access log records it unless the site's log format leaves out query strings. It
-is valid only while the session runs.
+The session token rides in the fragment of the URL the launch button opens,
+which the browser never sends, so no access log records it. It is valid only
+while the session runs.
 
 Configuring the Cluster
 -----------------------
@@ -154,7 +155,7 @@ Dashboards before Selkies support show no launch button of their own; an app's
 
   .. code-block:: erb
 
-     <a class="btn btn-primary" href="/rnode/<%= host %>/<%= port %>/?token=<%= password %>" target="_blank">
+     <a class="btn btn-primary" href="/rnode/<%= host %>/<%= port %>/#token=<%= password %>" target="_blank">
        Launch Desktop
      </a>
 
