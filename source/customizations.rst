@@ -1168,8 +1168,12 @@ The format is given as:
      "file_limit": 10
    }
 
-Where ``block_usage`` and ``file_usage`` are the disk resource usages attributed to
-the specified user only.
+This object is for an individual, but still displays total usage for the path.
+In this example above ``block_usage`` and ``file_usage`` are the disk resource
+usages for the user ``user1`` specifically.  ``total_block_usage`` and
+``total_file_usage`` are the *total* disk resource usages for the path
+``/path/to/volume2``.
+
 
 .. note:: For each user with resources under this ``fileset``, the above object will be repeated with just ``user``, ``block_usage``, and ``file_usage`` changing.
 
