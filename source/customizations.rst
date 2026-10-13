@@ -503,8 +503,8 @@ the following lines to a specific profile in your :ref:`ondemand-d-ymls`.
 
 .. code-block::
 
-  download_dir_max:8589934592
-  download_file_max:5368709120
+  download_dir_max: 8589934592
+  download_file_max: 5368709120
 
 .. warning::
    This configuration value is expected to be numbers only (no characters)
