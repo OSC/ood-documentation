@@ -31,18 +31,23 @@ This being the case, you may be debugging an issue where a particular value that
 be there is missing or zero. Casting a ``nil`` to a string returns an empty string and
 casting ``nil`` to an integer returns zero.
 
+For example you may see an error like this if you're trying to use a variable
+to supply ``--ntasks-per-node`` to Slurm's ``sbatch`` command.
+
+.. figure:: /images/batch_connect_missing_item_error.png
+   :alt: An interactive application's failure stating sbatch: error: Invalid numeric value "" for --ntasks-per-node.
+
 In debugging a situation like this, it may be helpful to raise an error displaying
 all the variables that are available.
 
 .. code-block:: erb
 
+  <%# submit.yml.erb %>
   <%-
     # ... ruby code ...
 
     raise(StandardError, to_h.inspect)
   -%>
 
-You're likely to see that the variable in question is in fact missing.
-If it is missing, then it is not an actual option in your ``form.yml.erb``
-and thus never passed from the user to this file. It may be misspelled or
-missing from the ``form`` section of the ``form.yml.erb`` file altogether.
+It is most likely that the variable in question is in fact missing
+or misspelled in either the ``form.yml`` or ``submit.yml`` files.
