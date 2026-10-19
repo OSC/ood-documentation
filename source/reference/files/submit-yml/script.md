@@ -1,52 +1,53 @@
-.. _submit-script-options:
+(submit-script-options)=
 
-Batch Connect Script Options
-============================
+# Batch Connect Script Options
 
-The ``script`` section of the :ref:`submit-yml-erb` file defines
+The `script` section of the {ref}`submit-yml-erb` file defines
 the arguments you're passing to the scheduler when you submit the
 script.
 
-.. warning::
-  These options are documented here for completeness. Some may not
-  be available to override in batch connect applications.
-  
-  For example, ``workdir`` is set by the OnDemand system in batch
-  connect applications, and cannot be overridden.
+:::{warning}
+These options are documented here for completeness. Some may not
+be available to override in batch connect applications.
 
-.. tip::
-  If you're using the ``ood_core`` gem (where all these are defined and used)
-  you should refer to `ood_core gem Ruby docs`_.
+For example, `workdir` is set by the OnDemand system in batch
+connect applications, and cannot be overridden.
+:::
 
-.. code-block:: yaml
+:::{tip}
+If you're using the `ood_core` gem (where all these are defined and used)
+you should refer to [ood_core gem Ruby docs].
+:::
 
-    script:
-      content: nil
-      args: nil
-      submit_as_hold: nil
-      rerunnable: nil
-      job_environment: nil
-      workdir: nil
-      email: nil
-      email_on_started: nil
-      email_on_terminated: nil
-      job_name: nil
-      shell_path: nil
-      error_path: nil
-      input_path: nil
-      output_path: nil
-      reservation_id: nil
-      queue_name: nil
-      priority: nil
-      start_time: nil
-      wall_time: nil
-      accounting_id: nil
-      native: nil
-      copy_environment: nil
-
+```yaml
+script:
+  content: nil
+  args: nil
+  submit_as_hold: nil
+  rerunnable: nil
+  job_environment: nil
+  workdir: nil
+  email: nil
+  email_on_started: nil
+  email_on_terminated: nil
+  job_name: nil
+  shell_path: nil
+  error_path: nil
+  input_path: nil
+  output_path: nil
+  reservation_id: nil
+  queue_name: nil
+  priority: nil
+  start_time: nil
+  wall_time: nil
+  accounting_id: nil
+  native: nil
+  copy_environment: nil
+```
 
 Note the use of ERB templates throughout these examples.
 
+```{eval-rst}
 .. describe:: content (String, nil)
 
     The content of the script being submitted.
@@ -60,7 +61,9 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because users cannot specify this in batch connect applications.**
+```
 
+```{eval-rst}
 .. describe:: args (Array<String>, nil)
 
     Extra arguments to pass to the schedulers' submit command.
@@ -80,7 +83,9 @@ Note the use of ERB templates throughout these examples.
         args:
           - "--foo"
           - "--bar"
+```
 
+```{eval-rst}
 .. describe:: submit_as_hold (Boolean, nil)
 
     Hold the job after submitting.
@@ -98,7 +103,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         submit_as_hold: true
+```
 
+```{eval-rst}
 .. describe:: rerunnable (Boolean, nil)
 
     Indicate whether the job is re-runnable.
@@ -116,7 +123,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         rerunnable: true
+```
 
+```{eval-rst}
 .. describe:: job_environment (Hash<String, String>, nil)
 
     Extra environment variables to pass into the schedulers' submit command.
@@ -137,7 +146,9 @@ Note the use of ERB templates throughout these examples.
         job_environment:
           SINGULARTITY_BIND_PATH: "/etc,/tmp/home"
           MY_APP_IMG: "/opt/app.img"
+```
 
+```{eval-rst}
 .. describe:: workdir (String, nil)
 
     The working directory of the job.
@@ -151,8 +162,10 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because users cannot specify this in batch connect applications.**
-      
 
+```
+
+```{eval-rst}
 .. describe:: email (Array<String>, nil)
 
     Addresses to send emails to when the job starts or stops.
@@ -171,7 +184,9 @@ Note the use of ERB templates throughout these examples.
 
         email:
         - "<%= ENV['USER'] %>@the-real-domain-I-want.edu"
+```
 
+```{eval-rst}
 .. describe:: email_on_started (Boolean, nil)
 
     Have the scheduler send an email when the job has started.
@@ -186,7 +201,9 @@ Note the use of ERB templates throughout these examples.
     Example
       **None given because users should use :ref:`bc_email_on_started` instead
       of supplying it here**.
+```
 
+```{eval-rst}
 .. describe:: email_on_terminated (Boolean, nil)
 
     Have the scheduler send an email when the job has finished.
@@ -204,7 +221,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         email_on_terminated: "<%= email_on_terminated %>"
+```
 
+```{eval-rst}
 .. describe:: job_name (String, nil)
 
     The name of the job.
@@ -218,7 +237,9 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because users cannot specify this in batch connect applications.**
+```
 
+```{eval-rst}
 .. describe:: shell_path (String, nil)
 
     The login shell path of the script.
@@ -232,7 +253,9 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because users cannot specify this in batch connect applications.**
+```
 
+```{eval-rst}
 .. describe:: error_path (String, nil)
 
     The path for the standard error of the job.
@@ -246,7 +269,9 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because users cannot specify this in batch connect applications.**
+```
 
+```{eval-rst}
 .. describe:: input_path (String, nil)
 
     Use this file for standard input for the job's script.
@@ -262,7 +287,9 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because this is likely to break batch connect applications.**
+```
 
+```{eval-rst}
 .. describe:: output_path (String, nil)
 
     The path for the standard output of the job.
@@ -276,7 +303,9 @@ Note the use of ERB templates throughout these examples.
 
     Example
       **None given because users cannot specify this in batch connect applications.**
+```
 
+```{eval-rst}
 .. describe:: reservation_id (String, nil)
 
     The reservation id the job will submit to.
@@ -294,7 +323,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         reservation_id: "next.may.2020"
+```
 
+```{eval-rst}
 .. describe:: queue_name (String, nil)
 
     The queue the job will submit to.
@@ -318,7 +349,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         queue_name: "debug"
+```
 
+```{eval-rst}
 .. describe:: priority (String, nil)
 
     The priority the job has.
@@ -336,7 +369,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         priority: "TOP"
+```
 
+```{eval-rst}
 .. describe:: start_time (String, nil)
 
     The start time of the job.
@@ -354,7 +389,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         start_time: "00:00:00"
+```
 
+```{eval-rst}
 .. describe:: wall_time (Integer, nil)
 
     The wall time of the job in seconds.
@@ -377,7 +414,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
         wall_time: 3600
+```
 
+```{eval-rst}
 .. describe:: accounting_id (String, nil)
 
     The accounting id the job should be charged to.
@@ -385,8 +424,8 @@ Note the use of ERB templates throughout these examples.
     .. tip::
       Users can use :ref:`bc_account <bc_account>` for a text field and
       :ref:`auto_accounts <auto_accounts>` or :ref:`auto_accounts <auto_groups>`
-      for a select widget.  
-      
+      for a select widget.
+
       All of these form fields know how to submit to schedulers, removing
       the need to use this field in this file.
 
@@ -403,7 +442,9 @@ Note the use of ERB templates throughout these examples.
       .. code-block:: yaml
 
           accounting_id: 'rstudio-class-account'
+```
 
+```{eval-rst}
 .. describe:: native (Object, nil)
 
     Native arguments to pass to the schedulers' submit command.
@@ -432,7 +473,9 @@ Note the use of ERB templates throughout these examples.
             - "<%= num_cores %>"
             - "--mem"
             - "<%= memory %>"
+```
 
+```{eval-rst}
 .. describe:: copy_environment (Boolean, nil)
 
     Have the scheduler to copy the environment. SLURM uses
@@ -447,11 +490,12 @@ Note the use of ERB templates throughout these examples.
         native: nil
 
     Example
-      Copy the environment 
+      Copy the environment
 
       .. code-block:: yaml
 
           copy_environment: true
 
+```
 
-.. _ood_core gem Ruby docs: https://osc.github.io/ood_core/OodCore/Job/Script.html
+[ood_core gem ruby docs]: https://osc.github.io/ood_core/OodCore/Job/Script.html

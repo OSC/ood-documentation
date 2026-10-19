@@ -1,21 +1,20 @@
-.. _ood-portal-generator-configuration:
+(ood-portal-generator-configuration)=
 
-``ood_portal.yml``
-==================
+# `ood_portal.yml`
 
 Relying on the default build is fine for a demo deployment, but it is not
 recommended for a production environment. Options can be configured by default
-under the file :file:`/etc/ood/config/ood_portal.yml`.
+under the file {file}`/etc/ood/config/ood_portal.yml`.
 
-The RPMs copy this file from ``/opt/ood/ood-portal-generator/ood_portal_example.yml``
+The RPMs copy this file from `/opt/ood/ood-portal-generator/ood_portal_example.yml`
 during the installation.
 
 All the default options are listed in this configuration file. Feel free to
 read it through before continuing on.
 
-Configure General Options
--------------------------
+## Configure General Options
 
+```{eval-rst}
 .. describe:: listen_addr_port (String, Array<String>, null)
 
      the address and port server listens on for connections
@@ -34,8 +33,11 @@ Configure General Options
        .. code-block:: yaml
 
           listen_addr_port: "443"
+```
 
-.. _ood-portal-generator-servername:
+(ood-portal-generator-servername)=
+
+```{eval-rst}
 .. describe:: servername (String, null)
 
      the host name used to access the Open OnDemand portal
@@ -53,7 +55,9 @@ Configure General Options
        .. code-block:: yaml
 
           servername: "www.example.com"
+```
 
+```{eval-rst}
 .. describe:: server_aliases (Array<String>, [])
 
     Aliases for this server. These will result in the apache
@@ -73,9 +77,11 @@ Configure General Options
 
         .. code-block:: yaml
 
-          server_aliases: 
+          server_aliases:
              - "class.my-cool-site.example.edu"
+```
 
+```{eval-rst}
 .. describe:: proxy_server (String, null)
 
   The proxy server, if one exists. Used when you have a proxy
@@ -94,7 +100,9 @@ Configure General Options
     .. code-block:: yaml
 
       proxy_server: "www.example-proxy.com"
+```
 
+```{eval-rst}
 .. describe:: port (Integer, null)
 
      the port used to access the Open OnDemand portal (if different than ``80``
@@ -113,7 +121,9 @@ Configure General Options
        .. code-block:: yaml
 
           port: 8080
+```
 
+```{eval-rst}
 .. describe:: ssl (Array<String>, null)
 
      a list of Apache directives that enable SSL support
@@ -128,7 +138,7 @@ Configure General Options
 
      Example
       Supply ssl information.
-       
+
        .. code-block:: yaml
 
          ssl:
@@ -136,8 +146,11 @@ Configure General Options
             - SSLCertificateKeyFile /etc/letsencrypt/live/change-me/privkey.pem
             - SSLCertificateChainFile /etc/letsencrypt/live/change-me/chain.pem
 
+```
 
-.. _disable_logs:
+(disable-logs)=
+
+```{eval-rst}
 .. describe:: disable_logs (Boolean, false)
 
   Disable logs in favor of supplying log directives in some other
@@ -157,7 +170,9 @@ Configure General Options
     .. code-block:: yaml
 
       disable_logs: true
+```
 
+```{eval-rst}
 .. describe:: logroot (String)
 
      the root directory where log files are stored (can be relative to
@@ -176,7 +191,9 @@ Configure General Options
        .. code-block:: yaml
 
           logroot: "/path/to/my/logs"
+```
 
+```{eval-rst}
 .. describe:: errorlog (String, 'error.log')
 
   The Error log filename
@@ -194,7 +211,9 @@ Configure General Options
     .. code-block:: yaml
 
       errorlog: "my.site.error.log"
+```
 
+```{eval-rst}
 .. describe:: accesslog (String, 'access.log')
 
   The Access log filename
@@ -212,7 +231,9 @@ Configure General Options
     .. code-block:: yaml
 
       accesslog: "my.site.access.log"
+```
 
+```{eval-rst}
 .. describe:: logformat (String, apache conbined format)
 
   The log format.
@@ -230,7 +251,9 @@ Configure General Options
     .. code-block:: yaml
 
       logformat: '"%v %h \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" %{SSL_PROTOCOL}x %T"'
+```
 
+```{eval-rst}
 .. describe:: use_rewrites (Boolean)
 
      Should RewriteEngine be used
@@ -248,7 +271,9 @@ Configure General Options
        .. code-block:: yaml
 
           use_rewrites: false
+```
 
+```{eval-rst}
 .. describe:: use_maintenance (Boolean)
 
      Enable Rewrite rules for supporting maintenance mode of OnDemand
@@ -267,7 +292,9 @@ Configure General Options
        .. code-block:: yaml
 
           use_maintenance: false
+```
 
+```{eval-rst}
 .. describe:: maintenance_ip_allowlist (Array<String>)
 
      List of IP regular expressions to be allowed to access OnDemand
@@ -288,7 +315,9 @@ Configure General Options
           maintenance_ip_allowlist:
             - '192.168.1..*'
             - '10.0.0.1'
+```
 
+```{eval-rst}
 .. describe:: security_csp_frame_ancestors (Boolean)
 
      Set Header Content-Security-Policy frame-ancestors.
@@ -306,7 +335,9 @@ Configure General Options
        .. code-block:: yaml
 
           security_csp_frame_ancestors: false
+```
 
+```{eval-rst}
 .. describe:: security_strict_transport (Boolean)
 
      Set Header Strict-Transport-Security to help enforce SSL
@@ -324,9 +355,11 @@ Configure General Options
        .. code-block:: yaml
 
           security_strict_transport: false
+```
 
-.. _ood-portal-generator-strip-proxy-headers:
+(ood-portal-generator-strip-proxy-headers)=
 
+```{eval-rst}
 .. describe:: strip_proxy_headers (Array)
 
   Since 4.1 the Open OnDemand portal will strip these sensitive HTTP headers when proxying
@@ -340,12 +373,14 @@ Configure General Options
         strip_proxy_headers: ["Authorization", "OIDC_CLAIM_sub", "OIDC_CLAIM_preferred_username", "OIDC_CLAIM_given_name", "OIDC_CLAIM_zoneinfo", "OIDC_CLAIM_locale", "OIDC_CLAIM_email", "OIDC_CLAIM_email_verified", "OIDC_CLAIM_iss", "OIDC_CLAIM_nonce", "OIDC_CLAIM_aud", "OIDC_CLAIM_acr", "OIDC_CLAIM_azp", "OIDC_CLAIM_auth_time", "OIDC_CLAIM_exp", "OIDC_CLAIM_iat", "OIDC_CLAIM_jti", "OIDC_access_token", "OIDC_access_token_expires"]
 
     Example
-      Strip no authentication related headers. 
+      Strip no authentication related headers.
 
       .. code-block:: yaml
 
         strip_proxy_headers: []
+```
 
+```{eval-rst}
 .. describe:: strip_proxy_cookies (Array)
 
   Since 4.1 the Open OnDemand portal will strip these sensitive HTTP cookies when proxying
@@ -364,7 +399,9 @@ Configure General Options
       .. code-block:: yaml
 
         strip_proxy_cookies: []
+```
 
+```{eval-rst}
 .. describe:: lua_root (String)
 
      the root directory where the Lua handler code resides
@@ -382,8 +419,11 @@ Configure General Options
        .. code-block:: yaml
 
           lua_root: "/path/to/lua/handlers"
+```
 
-.. _ood-portal-generator-lua-log-level:
+(ood-portal-generator-lua-log-level)=
+
+```{eval-rst}
 .. describe:: lua_log_level (String, null)
 
      the verbosity of the Lua module in the logs
@@ -401,8 +441,11 @@ Configure General Options
        .. code-block:: yaml
 
           lua_log_level: "warn"
+```
 
-.. _ood-portal-generator-user-map-cmd:
+(ood-portal-generator-user-map-cmd)=
+
+```{eval-rst}
 .. describe:: user_map_cmd (String)
 
      the system command used to map authenticated user name to a system user
@@ -421,8 +464,11 @@ Configure General Options
        .. code-block:: yaml
 
           user_map_cmd: "/opt/site/site_mapper.sh"
+```
 
-.. _ood-portal-generator-user-map-match:
+(ood-portal-generator-user-map-match)=
+
+```{eval-rst}
 .. describe:: user_map_match (String)
 
    The lua pattern to map authenticated user name to a system user
@@ -463,8 +509,11 @@ Configure General Options
    .. code-block:: yaml
 
       user_map_match: '^([^@]+)@example.edu$'
+```
 
-.. _ood-portal-generator-user-env:
+(ood-portal-generator-user-env)=
+
+```{eval-rst}
 .. describe:: user_env (String, null)
 
      the CGI environment variable that holds the authenticated user name used
@@ -483,7 +532,9 @@ Configure General Options
        .. code-block:: yaml
 
           user_env: "OIDC_CLAIM_preferred_username"
+```
 
+```{eval-rst}
 .. describe:: map_fail_uri (String, null)
 
      the URI a user is redirected to if we fail to map the authenticated user
@@ -502,7 +553,9 @@ Configure General Options
        .. code-block:: yaml
 
           map_fail_uri: "/register"
+```
 
+```{eval-rst}
 .. describe:: pun_stage_cmd (String)
 
      the system command used to launch the :ref:`nginx stage <nginx-stage-usage>` command with
@@ -521,7 +574,9 @@ Configure General Options
        .. code-block:: yaml
 
           pun_stage_cmd: "sudo /path/to/nginx_stage"
+```
 
+```{eval-rst}
 .. describe:: auth (Array<String>)
 
     The list of Apache directives defining how authentication is handled for
@@ -544,8 +599,11 @@ Configure General Options
           auth:
             - "AuthType openid-connect"
             - "Require valid-user"
+```
 
-.. _custom_vhost_directives:
+(custom-vhost-directives)=
+
+```{eval-rst}
 .. describe:: custom_vhost_directives (Array<String>, [])
 
   Supply custom directives at the virtual host level.
@@ -565,8 +623,11 @@ Configure General Options
 
       custom_vhost_directives:
         - SetEnv FOO BAR
+```
 
-.. _custom_location_directives:
+(custom-location-directives)=
+
+```{eval-rst}
 .. describe:: custom_location_directives (Array<String>, [])
 
   Supply custom directives for every ``Location`` in the virtual host.
@@ -586,7 +647,9 @@ Configure General Options
 
       custom_location_directives:
         - SetEnv FOO BAR
+```
 
+```{eval-rst}
 .. describe:: root_uri (String)
 
      the URI a user is redirected to when they access the root of the website
@@ -605,7 +668,9 @@ Configure General Options
        .. code-block:: yaml
 
           root_uri: "/my_uri"
+```
 
+```{eval-rst}
 .. describe:: analytics (Hash, null)
 
      the object describing how to track server-side analytics with a Google
@@ -620,15 +685,16 @@ Configure General Options
 
      Example
        See :ref:`google-analytics`
+```
 
-Configure Public Assets
------------------------
+## Configure Public Assets
 
 This is a location where files can be served without a user being
 authenticated. Useful to serve favicon, images, or user documentation. If
-either of these properties are ``null`` then users won't be able to access
+either of these properties are `null` then users won't be able to access
 public assets through the website.
 
+```{eval-rst}
 .. describe:: public_uri (String, null)
 
      the URI used to access public assets (no authentication needed)
@@ -646,7 +712,9 @@ public assets through the website.
        .. code-block:: yaml
 
           public_uri: "/assets"
+```
 
+```{eval-rst}
 .. describe:: public_root (String, null)
 
      the root directory where the public assets are served from
@@ -664,16 +732,17 @@ public assets through the website.
        .. code-block:: yaml
 
           public_root: "/path/to/public/files"
+```
 
-Configure Logout Redirect
--------------------------
+## Configure Logout Redirect
 
 The dashboard will send the user to this URI when they click the Logout
 button. This URI will then redirect the user to the logout mechanism for your
 corresponding authentication mechanism. If either of these properties are
-``null`` then users will get an error when they try to logout from the
+`null` then users will get an error when they try to logout from the
 dashboard.
 
+```{eval-rst}
 .. describe:: logout_uri (String, null)
 
      the URI used to logout from an Apache session
@@ -691,7 +760,9 @@ dashboard.
        .. code-block:: yaml
 
           logout_uri: "/log_me_out"
+```
 
+```{eval-rst}
 .. describe:: logout_redirect (String, null)
 
      the URI the user is redirected to when accessing the logout URI above
@@ -708,63 +779,64 @@ dashboard.
 
        - :ref:`authentication-shibboleth`
        - :ref:`authentication-tutorial-oidc-keycloak-rhel7-configure-cilogon`
+```
 
-.. _ood-portal-generator-configuration-configure-reverse-proxy:
+(ood-portal-generator-configuration-configure-reverse-proxy)=
 
-Configure Reverse Proxy
------------------------
+## Configure Reverse Proxy
 
 The reverse proxy will proxy a request to any specified host and port through
 IP sockets. This is different than what is used for proxying to per-user NGINX
 processes through Unix domain sockets. This can be used to connect to Jupyter
 notebook servers, RStudio servers, VNC servers, and more... This is disabled by
 default as it can be security risk if not properly setup using a good
-``host_regex``.
+`host_regex`.
 
-A URL request to the ``node_uri`` will reverse proxy to the given ``host`` and
-``port`` using the **full** URI path. So a request to the frontend Apache
+A URL request to the `node_uri` will reverse proxy to the given `host` and
+`port` using the **full** URI path. So a request to the frontend Apache
 proxy that looks like:
 
-.. code-block:: http
-
-   GET /<node_uri>/<host>/<port>/... HTTP/1.1
-   Host: ondemand.example.edu
+```http
+GET /<node_uri>/<host>/<port>/... HTTP/1.1
+Host: ondemand.example.edu
+```
 
 will be reverse proxied to the backend server with the following request
 format:
 
-.. code-block:: http
+```http
+GET /<node_uri>/<host>/<port>/... HTTP/1.1
+Host: <host>:<port>
+```
 
-   GET /<node_uri>/<host>/<port>/... HTTP/1.1
-   Host: <host>:<port>
-
-A URL request to the ``rnode_uri`` will reverse proxy to the given ``host`` and
-``port`` using the **relative** URI path. So a request to the frontend Apache
+A URL request to the `rnode_uri` will reverse proxy to the given `host` and
+`port` using the **relative** URI path. So a request to the frontend Apache
 proxy that looks like:
 
-.. code-block:: http
-
-   GET /<rnode_uri>/<host>/<port>/... HTTP/1.1
-   Host: ondemand.example.edu
+```http
+GET /<rnode_uri>/<host>/<port>/... HTTP/1.1
+Host: ondemand.example.edu
+```
 
 will be reverse proxied to the backend server with the following request
 format:
 
-.. code-block:: http
-
-   GET /... HTTP/1.1
-   Host: <host>:<port>
+```http
+GET /... HTTP/1.1
+Host: <host>:<port>
+```
 
 Notice that we strip off the portion of the URI request path that is used to
 determine the backend web server.
 
 Both formats are provided to better support the varying capabilities for the
-multitude of web application servers. For the case of using ``node_uri`` the
+multitude of web application servers. For the case of using `node_uri` the
 developer will need to modify the web server to accommodate requests with a
-sub-URI that follows the dynamic formatting of ``/<node_uri>/<host>/<port>``.
-For the case of using ``rnode_uri`` the developer needs to confirm that all
+sub-URI that follows the dynamic formatting of `/<node_uri>/<host>/<port>`.
+For the case of using `rnode_uri` the developer needs to confirm that all
 assets and links supplied by the web server are relative and not absolute.
 
+```{eval-rst}
 .. describe:: host_regex (String)
 
     .. warning::
@@ -789,7 +861,9 @@ assets and links supplied by the web server are relative and not absolute.
        .. code-block:: yaml
 
           host_regex: "[\\w.-]+\\.example\\.com"
+```
 
+```{eval-rst}
 .. describe:: node_uri (String, null)
 
      the URI used to reverse proxy a user to a server running on a given host
@@ -808,7 +882,9 @@ assets and links supplied by the web server are relative and not absolute.
        .. code-block:: yaml
 
           node_uri: "/node"
+```
 
+```{eval-rst}
 .. describe:: rnode_uri (String, null)
 
      the URI used to reverse proxy a user to a server running on a given host
@@ -827,9 +903,11 @@ assets and links supplied by the web server are relative and not absolute.
        .. code-block:: yaml
 
           rnode_uri: "/rnode"
+```
 
-.. _ood-portal-generator-configuration-secure-proxy:
+(ood-portal-generator-configuration-secure-proxy)=
 
+```{eval-rst}
 .. describe:: secure_node_uri (String, null)
 
   Introduced in 4.1. Similar to ``node_uri`` above, only in that
@@ -849,7 +927,9 @@ assets and links supplied by the web server are relative and not absolute.
     .. code-block:: yaml
 
       secure_node_uri: "/secure-node"
+```
 
+```{eval-rst}
 .. describe:: secure_rnode_uri (String, null)
 
 
@@ -869,7 +949,9 @@ assets and links supplied by the web server are relative and not absolute.
     .. code-block:: yaml
 
       secure_rnode_uri: "/secure-rnode"
+```
 
+```{eval-rst}
 .. describe:: ssl_proxy (Array, [])
 
   When enabling SSL/TLS origins above, centers may need to provide
@@ -893,15 +975,16 @@ assets and links supplied by the web server are relative and not absolute.
         - 'SSLProxyCheckPeerCN Off'
         - 'SSLProxyCheckPeerName Off'
 
+```
 
-Configure per-user NGINX
-------------------------
+## Configure per-user NGINX
 
-The reverse proxy will proxy a request under the ``pun_uri`` URI to the user's
+The reverse proxy will proxy a request under the `pun_uri` URI to the user's
 per-user NGINX (PUN) process through Unix domain sockets. It will send process
-signals to the user's PUN through the ``nginx_uri`` URI. If either of these
-properties are ``null`` then PUN access will be disabled.
+signals to the user's PUN through the `nginx_uri` URI. If either of these
+properties are `null` then PUN access will be disabled.
 
+```{eval-rst}
 .. describe:: nginx_uri (String, null)
 
      the URI used to control the PUN process
@@ -919,7 +1002,9 @@ properties are ``null`` then PUN access will be disabled.
        .. code-block:: yaml
 
           node_uri: "/my_pun_controller"
+```
 
+```{eval-rst}
 .. describe:: pun_uri (String, null)
 
      the URI used to access the PUN process
@@ -937,7 +1022,9 @@ properties are ``null`` then PUN access will be disabled.
        .. code-block:: yaml
 
           pun_uri: "/my_pun_apps"
+```
 
+```{eval-rst}
 .. describe:: pun_socket_root (String)
 
      the root directory that contains the socket files for the running PUNs
@@ -955,7 +1042,9 @@ properties are ``null`` then PUN access will be disabled.
        .. code-block:: yaml
 
           pun_socket_root: "/path/to/pun/sockets"
+```
 
+```{eval-rst}
 .. describe:: pun_max_retries (Integer)
 
      the number of times the proxy attempt to connect to the PUN before giving
@@ -974,28 +1063,30 @@ properties are ``null`` then PUN access will be disabled.
        .. code-block:: yaml
 
           pun_max_retries: 25
+```
 
-.. _ood-portal-generator-pun-pre-hook:
+(ood-portal-generator-pun-pre-hook)=
 
 PUN pre hook command is functionality to initialize things as root before
 the PUN starts up.
 
 Authentication information like OIDC tokens are not passed to OnDemand apps like
-the dashboard.  This feature is useful when you need to use things like OIDC tokens
-in some initialization process before the PUN starts.  For example, you can
-configure your ``~/.kube/config`` with OIDC information with this feature.
+the dashboard. This feature is useful when you need to use things like OIDC tokens
+in some initialization process before the PUN starts. For example, you can
+configure your `~/.kube/config` with OIDC information with this feature.
 
 There is currently only one thing passed into this command and that is the
-username. It's passed as a named argument like so: ``--user USERNAME``.
+username. It's passed as a named argument like so: `--user USERNAME`.
 
 You may pass in environment variables from apache to this command, though they are
-prefixed with ``OOD_``. For example if you configure this to pass ``OIDC_ACCESS_TOKEN``
-to the pre hook command, you can read the variable as ``OOD_OIDC_ACCESS_TOKEN``.
+prefixed with `OOD_`. For example if you configure this to pass `OIDC_ACCESS_TOKEN`
+to the pre hook command, you can read the variable as `OOD_OIDC_ACCESS_TOKEN`.
 
-Additionally you may add entries to ``/etc/ood/config/hook.env`` and source this
+Additionally you may add entries to `/etc/ood/config/hook.env` and source this
 file for additional environment variables. For example environment specific information
 for your test and production environments.
 
+```{eval-rst}
 .. describe:: pun_pre_hook_root_cmd (String, null)
 
   Run a hook command as root before the the PUN starts up.
@@ -1013,7 +1104,9 @@ for your test and production environments.
     .. code-block:: yaml
 
       pun_pre_hook_root_cmd: "/path/to/my_site_hook.sh"
+```
 
+```{eval-rst}
 .. describe:: pun_pre_hook_exports (String, null)
 
   A comma separated list of environment variables to export to the
@@ -1033,16 +1126,19 @@ for your test and production environments.
     .. code-block:: yaml
 
       pun_pre_hook_exports: "OIDC_ACCESS_TOKEN,OIDC_CLAIM_EMAIL"
+```
 
-Configure OpenID Connect
-------------------------
+## Configure OpenID Connect
 
 If using OpenID Connect for authentication, these are a few properties you will
 need to tweak. For a better understanding of these options you should read more
-on mod_auth_openidc_.
+on [mod_auth_openidc].
 
+```{eval-rst}
 .. include:: ../../authentication/oidc_crypto.inc
+```
 
+```{eval-rst}
 .. describe:: oidc_crypto_passphrase (String, null)
 
   The passphrase used by mod_auth_openidc_ to populate OIDCCryptoPassphrase.
@@ -1061,7 +1157,9 @@ on mod_auth_openidc_.
         .. code-block:: yaml
 
           oidc_crypto_passphrase: "97b85f06-7a23-11f1-9e51-00155def9328"
+```
 
+```{eval-rst}
 .. describe:: oidc_uri (String, null)
 
      the redirect URI used by mod_auth_openidc_ for authentication
@@ -1079,13 +1177,15 @@ on mod_auth_openidc_.
        .. code-block:: yaml
 
           oidc_uri: "/oidc"
+```
 
+```{eval-rst}
 .. describe:: oidc_redirect_uri (String, null)
 
      Sub-URI used by mod_auth_openidc_ to populate OIDCRedirectURI
 
      Default
-       This defaults to: 
+       This defaults to:
 
        .. code-block:: yaml
 
@@ -1097,7 +1197,9 @@ on mod_auth_openidc_.
        .. code-block:: yaml
 
           oidc_redirect_uri: "https://rproxy-example-uri.com/oidc"
+```
 
+```{eval-rst}
 .. describe:: oidc_discover_uri (String, null)
 
      the URI a user is redirected to if they are not authenticated by
@@ -1117,7 +1219,9 @@ on mod_auth_openidc_.
        .. code-block:: yaml
 
           oidc_discover_uri: "/discover"
+```
 
+```{eval-rst}
 .. describe:: oidc_discover_root (String, null)
 
      the root directory on the file system that serves the HTML code used for
@@ -1136,24 +1240,23 @@ on mod_auth_openidc_.
        .. code-block:: yaml
 
           oidc_discover_root: "/var/www/ood/discover"
+```
 
-.. _mod_auth_openidc: https://github.com/zmartzone/mod_auth_openidc
+(ood-portal-generator-user-registration)=
 
-.. _ood-portal-generator-user-registration:
+## Configure User Registration
 
-Configure User Registration
----------------------------
-
-If you are using a :program:`grid-mapfile` to map the authenticated user name
+If you are using a {program}`grid-mapfile` to map the authenticated user name
 to a system user name, then this will be used to generate mappings in the file
 for a user's first time accessing your website. Setting either property below
-to ``null`` will disable this feature.
+to `null` will disable this feature.
 
-.. note::
+:::{note}
+This is unnecessary if you use regular expressions for mapping the
+authenticated user name to a system user name.
+:::
 
-   This is unnecessary if you use regular expressions for mapping the
-   authenticated user name to a system user name.
-
+```{eval-rst}
 .. describe:: register_uri (String, null)
 
      the URI a user is redirected to if no mapping exists between an
@@ -1172,7 +1275,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           register_uri: "/register"
+```
 
+```{eval-rst}
 .. describe:: register_root (String, null)
 
      the root directory on the file system that serves the HTML code used for
@@ -1191,7 +1296,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           register_root: "/var/www/ood/register"
+```
 
+```{eval-rst}
 .. describe:: register_path (String, register_root)
 
   Added in 4.1. The file-system path that the ``register_uri`` can map to.
@@ -1209,7 +1316,9 @@ to ``null`` will disable this feature.
     .. code-block:: yaml
 
       register_root: "/var/www/ood_register"
+```
 
+```{eval-rst}
 .. describe:: register_method (String, 'Alias')
 
   Added in 4.1. The apache method to which ``register_uri`` will map to ``register_path``.
@@ -1227,7 +1336,9 @@ to ``null`` will disable this feature.
     .. code-block:: yaml
 
       register_root: 'ScriptAlias'
+```
 
+```{eval-rst}
 .. describe:: register_method_options (Array, null)
 
   Added in 4.1. Additional apache directives you may need to supply to register users.
@@ -1247,7 +1358,9 @@ to ``null`` will disable this feature.
       register_method_options:
         - 'WSGIDaemonProcess register user=www-data group=www-data threads=5 home=/var/www/flask-apps/register'
 
+```
 
+```{eval-rst}
 .. describe:: oidc_provider_metadata_url (String, null)
 
      Refer to OIDCProviderMetadataURL in `auth_openidc.conf`_.
@@ -1265,7 +1378,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_provider_metadata_url: "https://example.com:5554/.well-known/openid-configuration"
+```
 
+```{eval-rst}
 .. describe:: oidc_client_id (String, null)
 
      Refer to OIDCClientID in `auth_openidc.conf`_.
@@ -1283,7 +1398,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_client_id: "ondemand.example.com"
+```
 
+```{eval-rst}
 .. describe:: oidc_client_secret (String, null)
 
      Refer to OIDCClientSecret in `auth_openidc.conf`_.
@@ -1301,8 +1418,11 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_client_secret: "ondemand.example.com"
+```
 
-.. _ood-portal-generator-oidc-remote-user-claim:
+(ood-portal-generator-oidc-remote-user-claim)=
+
+```{eval-rst}
 .. describe:: oidc_remote_user_claim (String)
 
      Refer to OIDCRemoteUserClaim in `auth_openidc.conf`_.
@@ -1321,7 +1441,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_remote_user_claim: "preferred_username"
+```
 
+```{eval-rst}
 .. describe:: oidc_scope (String)
 
      Refer to OIDCScope in `auth_openidc.conf`_.
@@ -1339,7 +1461,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_scope: "openid profile email groups"
+```
 
+```{eval-rst}
 .. describe:: oidc_session_inactivity_timeout (Integer)
 
      Refer to OIDCSessionInactivityTimeout in `auth_openidc.conf`_.
@@ -1357,7 +1481,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_session_inactivity_timeout: 57600
+```
 
+```{eval-rst}
 .. describe:: oidc_session_max_duration (Integer)
 
      Refer to OIDCSessionMaxDuration in `auth_openidc.conf`_.
@@ -1375,7 +1501,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_session_max_duration: 57600
+```
 
+```{eval-rst}
 .. describe:: oidc_state_max_number_of_cookies (String)
 
      Refer to OIDCStateMaxNumberOfCookies in `auth_openidc.conf`_.
@@ -1393,7 +1521,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_state_max_number_of_cookies: "20 true"
+```
 
+```{eval-rst}
 .. describe:: oidc_cookie_same_site (String)
 
      Refer to OIDCCookieSameSite in `auth_openidc.conf`_.
@@ -1411,7 +1541,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           oidc_cookie_same_site: "Off"
+```
 
+```{eval-rst}
 .. describe:: oidc_settings (Hash, {})
 
      A Hash to supply additional OIDC settings.
@@ -1431,7 +1563,9 @@ to ``null`` will disable this feature.
           oidc_settings:
             OIDCPassIDTokenAs: serialized
             OIDCPassRefreshToken: On
+```
 
+```{eval-rst}
 .. describe:: dex_uri (String, null, false)
 
      The Dex URI used behind the Apache reverse proxy.
@@ -1451,7 +1585,9 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           dex_uri: false
+```
 
+```{eval-rst}
 .. describe:: dex (Hash, null, false)
 
      The Hash to define Dex configurations.
@@ -1471,6 +1607,8 @@ to ``null`` will disable this feature.
        .. code-block:: yaml
 
           dex: false
+```
 
-.. _auth_openidc.conf: https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf
-.. _documentation on lua patterns: https://www.lua.org/manual/5.1/manual.html#5.4.1
+[auth_openidc.conf]: https://github.com/zmartzone/mod_auth_openidc/blob/master/auth_openidc.conf
+[documentation on lua patterns]: https://www.lua.org/manual/5.1/manual.html#5.4.1
+[mod_auth_openidc]: https://github.com/zmartzone/mod_auth_openidc

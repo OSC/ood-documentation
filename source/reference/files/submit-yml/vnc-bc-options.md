@@ -1,35 +1,33 @@
-.. _vnc-bc-options:
+(vnc-bc-options)=
 
-Batch Connect VNC Options
-=========================
+# Batch Connect VNC Options
 
+All the options in {ref}`basic-bc-options` apply in addition to what's listed below.
 
-All the options in :ref:`basic-bc-options` apply in addition to what's listed below.
+> ```yaml
+> batch_connect:
+>   template: "vnc"
+>   conn_params:
+>     - host
+>     - port
+>     - password
+>     - spassword
+>     - display
+>     - websocket
+>   websockify_cmd: "/opt/websockify/run"
+>   vnc_passwd: "vnc.passwd"
+>   vnc_args: nil
+>   name: ""
+>   geometry: ""
+>   dpi: ""
+>   fonts: ""
+>   idle: ""
+>   extra_args: ""
+>   vnc_clean: "..."
+>   websockify_heartbeat_seconds: 30
+> ```
 
-  .. code-block:: yaml
-  
-    batch_connect:
-      template: "vnc"
-      conn_params:
-        - host
-        - port
-        - password
-        - spassword
-        - display
-        - websocket
-      websockify_cmd: "/opt/websockify/run"
-      vnc_passwd: "vnc.passwd"
-      vnc_args: nil
-      name: ""
-      geometry: ""
-      dpi: ""
-      fonts: ""
-      idle: ""
-      extra_args: ""
-      vnc_clean: "..."
-      websockify_heartbeat_seconds: 30
-
-
+```{eval-rst}
 .. describe:: websockfiy_cmd (String, "/opt/websockify/run")
 
     the command to start ``websockify``.
@@ -47,7 +45,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         websockify_cmd: "/usr/bin/websockify"
+```
 
+```{eval-rst}
 .. describe:: vnc_passwd (String, "vnc.passwd")
 
     the file ``vncserver`` will read for a password
@@ -65,7 +65,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         vnc_passwd: "my-other-vnc.passwd"
+```
 
+```{eval-rst}
 .. describe:: vnc_args (String, "")
 
     VNC arguments to use instead of the specific options
@@ -85,7 +87,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         vnc_args: "-xstartup /opt/vnc/startup.sh"
+```
 
+```{eval-rst}
 .. describe:: name (String, "")
 
     the desktop name
@@ -103,7 +107,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         name: "ood-ood-$USER-$DISPLAY"
+```
 
+```{eval-rst}
 .. describe:: geometry (String, "")
 
     the geometry size of the VNC desktop
@@ -121,7 +127,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         geometry: "1920x1080"
+```
 
+```{eval-rst}
 .. describe:: dpi (String, "")
 
     the dots per inch setting of the VNC desktop
@@ -139,7 +147,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         dpi: "96"
+```
 
+```{eval-rst}
 .. describe:: fonts (String, "")
 
     the font path for X11 fonts
@@ -157,7 +167,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         fonts: "unix/:7100"
+```
 
+```{eval-rst}
 .. describe:: idle (String, "")
 
     the idle timeout setting for the ``vncserver``.
@@ -175,7 +187,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         idle: "3600"
+```
 
+```{eval-rst}
 .. describe:: extra_args (String, "")
 
     any extra arguments to pass into ``vncserver``.
@@ -194,13 +208,16 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       .. code-block:: yaml
 
         extra_args: "-depth 32"
+```
 
-.. warning::
-    These items below should not be set by users.  They are
-    given for completeness only.  It's likely they'll cause
-    errors if overridden.
+:::{warning}
+These items below should not be set by users. They are
+given for completeness only. It's likely they'll cause
+errors if overridden.
+:::
 
-.. describe:: conn_params (Array<String>, 
+```{eval-rst}
+.. describe:: conn_params (Array<String>,
       ['host','port','password','spassword','display','websocket'])
 
     the connection parameters that will be written to the ``conn_file``
@@ -224,10 +241,12 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
       environment variable in a module).
 
       .. code-block:: yaml
-        
+
         conn_params:
           - the_connect_api
+```
 
+```{eval-rst}
 .. describe:: websockify_heartbeat_seconds (Integer, 30)
 
   The duration in seconds ``websockify`` will wait to send heartbeats
@@ -246,3 +265,4 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
     .. code-block:: yaml
 
       websockify_heartbeat_seconds: 10
+```

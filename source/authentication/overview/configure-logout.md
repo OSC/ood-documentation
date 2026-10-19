@@ -1,13 +1,12 @@
-.. _authentication-overview-configure-logout:
+(authentication-overview-configure-logout)=
 
-Configure Logout
-================
+# Configure Logout
 
-The logout link on the dashboard is ``/logout``. OnDemand's Apache configuration has a separate directive to handle ``/logout``, which by default redirects the user to ``/pun/sys/dashboard/logout``, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.
+The logout link on the dashboard is `/logout`. OnDemand's Apache configuration has a separate directive to handle `/logout`, which by default redirects the user to `/pun/sys/dashboard/logout`, which is a default logout page displayed by the dashboard. Because authentication handled by Apache, this approach enables the logout URL to be changed based on the authentication strategy used.
 
-To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOUT/USER"`` in the ``ood-portal-generator`` configuration at ``/etc/ood/config/ood_portal.yml`` and regenerate the configuration.
+To change the logout_redirect URL, set `logout_redirect: "https:://URL/TO/LOGOUT/USER"` in the `ood-portal-generator` configuration at `/etc/ood/config/ood_portal.yml` and regenerate the configuration.
 
-
+```{eval-rst}
 .. describe:: logout_redirect (String, null)
 
      the URI the user is redirected to when accessing the logout URI above
@@ -34,3 +33,4 @@ To change the logout_redirect URL, set ``logout_redirect: "https:://URL/TO/LOGOU
           logout_redirect: "/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.my-center.edu%2Fidp%2Fprofile%2FLogout"
 
        See :ref:`authentication-shibboleth` for more details regarding setting up authentication with the Shibboleth Apache module.
+```

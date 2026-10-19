@@ -1,56 +1,60 @@
-.. _nginx-stage-nginx-clean:
+(nginx-stage-nginx-clean)=
 
-``nginx_stage nginx_clean``
-===========================
+# `nginx_stage nginx_clean`
 
 This command will kill all per-user NGINX (PUN) processes that do not have
 active connections.
 
-.. code-block:: sh
+```sh
+sudo nginx_stage nginx_clean [OPTIONS]
+```
 
-   sudo nginx_stage nginx_clean [OPTIONS]
-
+```{eval-rst}
 .. program:: nginx_stage nginx_clean
 
+```
 
-..  note::
-  Since 4.0 ``nginx_clean`` also cleans per-user NGINX (PUN) processes
-  for users that have been disabled (removed from LDAP).
+:::{note}
+Since 4.0 `nginx_clean` also cleans per-user NGINX (PUN) processes
+for users that have been disabled (removed from LDAP).
+:::
 
-General Options
----------------
+## General Options
 
+```{eval-rst}
 .. option:: -f, --force
 
    Force clean **all** of the per-user NGINX processes including ones with
    active connections.
+```
 
+```{eval-rst}
 .. option:: -N, --skip-nginx
 
    Skip the execution of the per-user NGINX process.
+```
 
-Examples
---------
+## Examples
 
 To kill all PUN processes with no active connections:
 
-.. code-block:: sh
-
-   sudo nginx_stage nginx_clean
+```sh
+sudo nginx_stage nginx_clean
+```
 
 This also displays the users who had their PUN processes killed.
 
 To kill **all** PUN processes irrespective of the number of active connections:
 
-.. code-block:: sh
-
-   sudo nginx_stage nginx_clean --force
+```sh
+sudo nginx_stage nginx_clean --force
+```
 
 To **only** display the users with PUN processes that have no active
 connections:
 
-.. code-block:: sh
-
-   sudo nginx_stage nginx_clean --skip-nginx
+```sh
+sudo nginx_stage nginx_clean --skip-nginx
+```
 
 This will not kill the PUN processes.

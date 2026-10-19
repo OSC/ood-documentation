@@ -1,18 +1,19 @@
-.. _requirements:
+(requirements)=
 
-Requirements
-============
+# Requirements
 
-Supported Operating Systems
----------------------------
+## Supported Operating Systems
 
-.. _os-support:
+(os-support)=
 
 At this time OnDemand only supports the following operating systems and architectures:
 
+```{eval-rst}
 .. role::  raw-html(raw)
     :format: html
+```
 
+```{eval-rst}
 .. csv-table:: Operating System and Architecture Support
    :header: "","``x86_64``","``aarch64/arm64``","``ppc64le``"
 
@@ -24,46 +25,39 @@ At this time OnDemand only supports the following operating systems and architec
    "Debian 12",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Debian 13",:raw-html:`&#9989;`,:raw-html:`&#9989;`,:raw-html:`&#10060;`
    "Amazon Linux 2023",:raw-html:`&#9989;`,:raw-html:`&#10067;`,:raw-html:`&#10060;`
+```
 
-.. note::
+:::{note}
+Items marked with {raw-html}`&#10067;` are available upon request.
+Open a [Github Issue](https://github.com/OSC/ondemand/issues) or post the request on [Discourse](https://discourse.openondemand.org/)
+:::
 
-    Items marked with :raw-html:`&#10067;` are available upon request.
-    Open a `Github Issue <https://github.com/OSC/ondemand/issues>`_ or post the request on `Discourse <https://discourse.openondemand.org/>`_
-
-Software Requirements
----------------------
+## Software Requirements
 
 On the Web node serving OnDemand itself:
 
-- `lsof`_
-- `sudo`_
-- `OnDemand repository`_:
-    - ``ondemand-{{ondemand_version}}-1.el9.x86_64.rpm``
-
-.. _lsof: https://en.wikipedia.org/wiki/Lsof
-.. _OnDemand repository: https://openondemand.org/
-.. _sudo: https://www.sudo.ws/
+- [lsof]
+- [sudo]
+- [OnDemand repository]:
+  : - `ondemand-{{ondemand_version}}-1.el9.x86_64.rpm`
 
 And on the Compute node(s):
 
-.. note::
+:::{note}
+The following are required for using OnDemand with interactive applications such as desktop environments, Jupyter Notebooks and RStudio. If you do not intend to install interactive applications then these are not necessary.
+:::
 
-    The following are required for using OnDemand with interactive applications such as desktop environments, Jupyter Notebooks and RStudio. If you do not intend to install interactive applications then these are not necessary.
+- [nmap-ncat]
+- [TurboVNC] 2.1+
+- [websockify] 0.8.0+
 
-- `nmap-ncat`_
-- `TurboVNC`_ 2.1+
-- `websockify`_ 0.8.0+
+(software-bom)=
 
-.. _nmap-ncat: https://nmap.org/ncat/
-.. _turbovnc: https://turbovnc.org/
-.. _websockify: https://github.com/novnc/websockify
+## Software Bill of Materials
 
-.. _software-bom:
+The following is a list of OS level software dependencies for Open OnDemand. For application dependencies please see paragraph below.
 
-Software Bill of Materials
---------------------------
-The following is a list of OS level software dependencies for Open OnDemand. For application dependencies please see paragraph below. 
-
+```{eval-rst}
 .. tabs::
 
     .. tab:: RockyLinux 8
@@ -158,58 +152,61 @@ The following is a list of OS level software dependencies for Open OnDemand. For
             libruby3.2 (>= 3.2.2)
             libsqlite3-0 (>= 3.7.10)
             libstdc++6 (>= 13.1)
-            ruby  
-            apache2  
-            sudo  
-            lsof  
-            lua-posix  
-            tzdata  
-            file  
+            ruby
+            apache2
+            sudo
+            lsof
+            lua-posix
+            tzdata
+            file
             nodejs (>= 20.0)
             nodejs (<< 21.0)
             ondemand-nginx (>= 1.26.1.p6.0.23.ood4.0.3)
             ondemand-nginx (<< 1.27)
             ondemand-passenger (>= 6.0.23.ood4.0.3)
             ondemand-passenger (<< 6.0.24)
+```
 
-Along with the listed operating system dependencies, Open OnDemand also requires various Ruby gems and Node.js packages for its application layer. 
-These application dependencies are managed by Bundler and Yarn respectively, and are installed automatically when Open OnDemand is built from source or 
-installed via the provided packages. For a complete list of application dependencies, please refer to the top-level `Gemfile`_, the dashboard `Gemfile.lock`_, 
-and `package.json`_ files in the Open OnDemand source repository.
+Along with the listed operating system dependencies, Open OnDemand also requires various Ruby gems and Node.js packages for its application layer.
+These application dependencies are managed by Bundler and Yarn respectively, and are installed automatically when Open OnDemand is built from source or
+installed via the provided packages. For a complete list of application dependencies, please refer to the top-level [Gemfile], the dashboard [Gemfile.lock],
+and [package.json] files in the Open OnDemand source repository.
 
-.. _Gemfile: https://github.com/OSC/ondemand/blob/master/Gemfile
-.. _Gemfile.lock: https://github.com/OSC/ondemand/blob/master/apps/dashboard/Gemfile.lock
-.. _package.json: https://github.com/OSC/ondemand/blob/master/apps/dashboard/package.json
+## Hardware Requirements
 
-Hardware Requirements
----------------------
-
-At `OSC`_ we have not quantified the minimum hardware requirements for OnDemand. The VMs that run OnDemand have 16 cores and 64GB RAM. According to our Ganglia metrics that is over powered for our normal utilization. We average 150MB memory per PUN and the average CPU percentage per Per User NGINX (PUN) is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time usually has 60-100 PUN processes running.
+At [OSC] we have not quantified the minimum hardware requirements for OnDemand. The VMs that run OnDemand have 16 cores and 64GB RAM. According to our Ganglia metrics that is over powered for our normal utilization. We average 150MB memory per PUN and the average CPU percentage per Per User NGINX (PUN) is 4%. Our OnDemand instance serves over 600 unique users each month and at any given time usually has 60-100 PUN processes running.
 
 The Passenger apps that make up the core of OnDemand (that NGINX is configured with), are each killed after a short period (5 minutes) of inactivity from the user, and when users are using NoVNC or connecting to Jupyter Notebook or RStudio on a compute node, Apache proxies these users, bypassing the PUN completely. So it can happen that 60 PUNs are running but twice the number of users are actually being served.
 
-Another sizing factor that has impacted us in the past is the size of the ``/tmp`` partition.  We have had incidents where ``/tmp`` is exhausted and so have increased the size from 20GB to 50GB.
+Another sizing factor that has impacted us in the past is the size of the `/tmp` partition. We have had incidents where `/tmp` is exhausted and so have increased the size from 20GB to 50GB.
 
-.. _OSC: https://osc.edu
+## Browser Requirements
 
-Browser Requirements
---------------------
+(browser-requirements-1)=
 
-.. _browser-requirements:
+:::{warning}
+No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.
+:::
 
-.. warning::
-
-    No IE 11 support. If you are a site that requires IE 11 support and are willing to contribute developer time to the project to support this, please reach out to us.
-
-To have the best experience using OnDemand, use the latest versions of `Google Chrome`_, `Mozilla Firefox`_ or `Microsoft Edge`_.
+To have the best experience using OnDemand, use the latest versions of [Google Chrome], [Mozilla Firefox] or [Microsoft Edge].
 Use any modern browser that supports ECMAScript 2016.
 
-Google Chrome has the widest range of support since the shell application uses ``hterm.js`` which is supported officially by Google.
-Chrome currently is the only web browser that natively supports the copy and paste functionality in ``noVNC``.
-Other browsers can do copy and pasting manually through the ``noVNC`` tool drawer.
+Google Chrome has the widest range of support since the shell application uses `hterm.js` which is supported officially by Google.
+Chrome currently is the only web browser that natively supports the copy and paste functionality in `noVNC`.
+Other browsers can do copy and pasting manually through the `noVNC` tool drawer.
 
-Sites have reported problems with Safari when using the shell application or ``noVNC``. Safari is also known to cause problems with WebSockets and Basic Auth.
+Sites have reported problems with Safari when using the shell application or `noVNC`. Safari is also known to cause problems with WebSockets and Basic Auth.
 
-.. _`Google Chrome`: https://www.google.com/chrome/
-.. _`Mozilla Firefox`: https://www.mozilla.org/en-US/firefox/new/
-.. _`Microsoft Edge`: https://www.microsoft.com/en-us/edge
+[gemfile]: https://github.com/OSC/ondemand/blob/master/Gemfile
+[gemfile.lock]: https://github.com/OSC/ondemand/blob/master/apps/dashboard/Gemfile.lock
+[google chrome]: https://www.google.com/chrome/
+[lsof]: https://en.wikipedia.org/wiki/Lsof
+[microsoft edge]: https://www.microsoft.com/en-us/edge
+[mozilla firefox]: https://www.mozilla.org/en-US/firefox/new/
+[nmap-ncat]: https://nmap.org/ncat/
+[ondemand repository]: https://openondemand.org/
+[osc]: https://osc.edu
+[package.json]: https://github.com/OSC/ondemand/blob/master/apps/dashboard/package.json
+[sudo]: https://www.sudo.ws/
+[turbovnc]: https://turbovnc.org/
+[websockify]: https://github.com/novnc/websockify

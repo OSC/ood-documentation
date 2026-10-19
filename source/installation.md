@@ -1,7 +1,6 @@
-.. _installation:
+(installation)=
 
-Installation
-============
+# Installation
 
 The OnDemand host machine needs to be setup *similarly* to a login node. This
 means that it will need:
@@ -12,19 +11,20 @@ means that it will need:
 - configuration on both OnDemand node **and batch servers** to be able to
   submit, delete and get status for jobs from the command line
 - signed SSL certificate with corresponding intermediate certificate for your
-  advertised OnDemand host name (e.g., ``ondemand.my_center.edu``)
+  advertised OnDemand host name (e.g., `ondemand.my_center.edu`)
 
-Adding :ref:`Open OnDemand SELinux policies <modify-system-security>` is optional for RHEL systems.
-Open OnDemand, by default, expects Apache to have SSL enabled by :ref:`securing your Apache <add-ssl>`.
+Adding {ref}`Open OnDemand SELinux policies <modify-system-security>` is optional for RHEL systems.
+Open OnDemand, by default, expects Apache to have SSL enabled by {ref}`securing your Apache <add-ssl>`.
 
-.. toctree::
-   :maxdepth: 2
-   :numbered: 1
+```{toctree}
+:maxdepth: 2
+:numbered: 1
 
-   installation/install-software
-   authentication
-   integrated-authentication-solutions
-   installation/add-ssl
-   installation/modify-system-security
+installation/install-software
+authentication
+integrated-authentication-solutions
+installation/add-ssl
+installation/modify-system-security
+```
 
-- https://github.com/OSC/ondemand/issues/new
+- <https://github.com/OSC/ondemand/issues/new>

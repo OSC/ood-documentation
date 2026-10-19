@@ -1,34 +1,34 @@
-.. _basic-bc-options:
+(basic-bc-options)=
 
-Basic Batch Connect Options
-===========================
+# Basic Batch Connect Options
 
-  .. code-block:: yaml
+> ```yaml
+> batch_connect:
+>   template: "basic"
+>   work_dir: nil
+>   conn_file: "connection.yml"
+>   conn_params:
+>     - host
+>     - port
+>     - password
+>   bash_helpers: "..."
+>   min_port: 2000
+>   max_port: 65535
+>   password_size: 8
+>   header: ""
+>   footer: ""
+>   script_wrapper: "%s"
+>   set_host: "host=$(hostname)"
+>   before_script: "..."
+>   before_file: "before.sh"
+>   run_script: "..."
+>   script_file: "./script.sh"
+>   timeout: ""
+>   clean_script: "..."
+>   clean_file: "clean.sh"
+> ```
 
-    batch_connect:
-      template: "basic"
-      work_dir: nil
-      conn_file: "connection.yml"
-      conn_params:
-        - host
-        - port
-        - password
-      bash_helpers: "..."
-      min_port: 2000
-      max_port: 65535
-      password_size: 8
-      header: ""
-      footer: ""
-      script_wrapper: "%s"
-      set_host: "host=$(hostname)"
-      before_script: "..."
-      before_file: "before.sh"
-      run_script: "..."
-      script_file: "./script.sh"
-      timeout: ""
-      clean_script: "..."
-      clean_file: "clean.sh"
-
+```{eval-rst}
 .. describe:: min_port (Integer, 2000)
 
     the smallest value to use when trying to open a port
@@ -46,7 +46,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         min_port: 3005
+```
 
+```{eval-rst}
 .. describe:: max_port (Integer, 65535)
 
     the largest value to use when trying to open a port
@@ -64,7 +66,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         max_port: 40000
+```
 
+```{eval-rst}
 .. describe:: password_size (Integer, 8)
 
     the number of characters in the passwords
@@ -82,7 +86,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         password_size: 32
+```
 
+```{eval-rst}
 .. describe:: header (String, "")
 
     the script header
@@ -100,7 +106,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         header: "#!/bin/bash"
+```
 
+```{eval-rst}
 .. describe:: footer (String, "")
 
     commands at the bottom of the script
@@ -118,9 +126,11 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         header: 'echo "all done at $(date)"'
+```
 
-.. _script_wrapper:
+(script-wrapper)=
 
+```{eval-rst}
 .. describe:: script_wrapper (String, "%s")
 
     Wrap the script (``%s`` being the script content) with commands before
@@ -143,7 +153,9 @@ Basic Batch Connect Options
           %s
           echo "all done now!"
 
+```
 
+```{eval-rst}
 .. describe:: set_host (String, "host=$(hostname)")
 
     set the host variable with this command
@@ -161,7 +173,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         set_host: "host=$(hostname -A | awk '{print $1}')"
+```
 
+```{eval-rst}
 .. describe:: before_script (String, "...")
 
     commands to execute the before file
@@ -188,7 +202,9 @@ Basic Batch Connect Options
           # careful now, we can't override before_file or we have to
           # change it here too!
           PATH=$PATH:/opt/ood-before/bin source before.sh
+```
 
+```{eval-rst}
 .. describe:: before_file (String, "before.sh")
 
     the script file to run before the main script
@@ -206,7 +222,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         before_file: "prepare.sh"
+```
 
+```{eval-rst}
 .. describe:: run_script (String, "...")
 
     commands to execute the main file
@@ -237,7 +255,9 @@ Basic Batch Connect Options
           # if it's provided.
           IMAGE=/opt/images/el9.sif
           singularity exec -p $IMAGE /bin/bash script.sh
+```
 
+```{eval-rst}
 .. describe:: script_file (String, "./script.sh")
 
     the main script file
@@ -255,7 +275,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         script_file: "./other_main.sh"
+```
 
+```{eval-rst}
 .. describe:: timeout (String, "")
 
     timeout (in seconds) of the main script
@@ -273,7 +295,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         timeout: "3600"
+```
 
+```{eval-rst}
 .. describe:: clean_script (String, "...")
 
     commands to execute the clean script file
@@ -300,7 +324,9 @@ Basic Batch Connect Options
           # careful now, we can't override clean_file or we have to
           # change it here too!
           PATH=$PATH:/opt/ood-clean/bin source clean.sh
+```
 
+```{eval-rst}
 .. describe:: clean_file (String, "clean.sh")
 
     the cleanup script file
@@ -318,7 +344,9 @@ Basic Batch Connect Options
       .. code-block:: yaml
 
         clean_file: "scrub.sh"
+```
 
+```{eval-rst}
 .. describe:: conn_params (Array<String>, ['host','port','password'])
 
     The connection parameters that will be written to the ``conn_file``.
@@ -340,18 +368,20 @@ Basic Batch Connect Options
       The API to connect to can change in the ``script.sh.erb`` based off of
       something that can only be determined during the job (for example an
       environment variable in a module).
-      
+
       .. code-block:: yaml
 
         conn_params:
           - the_connect_api
+```
 
-.. warning::
-    These items below should not be set by users.  They are
-    given for completeness only.  It's likely they'll cause
-    errors if overridden.
+:::{warning}
+These items below should not be set by users. They are
+given for completeness only. It's likely they'll cause
+errors if overridden.
+:::
 
-
+```{eval-rst}
 .. describe:: work_dir (String, null)
 
     the working directory of the job.  This is set by the dashboard
@@ -362,7 +392,9 @@ Basic Batch Connect Options
 
     Example
       no example given because users shouldn't set this value
+```
 
+```{eval-rst}
 .. describe:: conn_file (String, "connection.yml")
 
     the file all the connection data will be written to
@@ -376,7 +408,9 @@ Basic Batch Connect Options
 
     Example
       no example given because users shouldn't set this value
+```
 
+```{eval-rst}
 .. describe:: bash_helpers (String, "...")
 
     a library of bash utility functions called in all the other scripts
@@ -386,3 +420,4 @@ Basic Batch Connect Options
 
     Example
       no example given because users shouldn't set this value
+```

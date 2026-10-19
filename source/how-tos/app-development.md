@@ -1,7 +1,6 @@
-.. _app-development:
+(app-development)=
 
-App Development
-===============
+# App Development
 
 OnDemand is made up of the platform (Apache and NGINX), Passenger apps and
 plugins. Passenger apps are rack based Ruby apps, WSGI based Python web apps, or
@@ -14,11 +13,11 @@ OnDemand's Interactive Apps are plugins that contain configuration files and a j
 template for running a VNC Server or Web Server application (such as Jupyter or MATLAB)
 on a compute node.
 
+```{toctree}
+:caption: App Development Guide
+:maxdepth: 2
 
-.. toctree::
-   :maxdepth: 2
-   :caption: App Development Guide
-
-   app-development/enabling-development-mode
-   app-development/interactive
-   app-development/app-sharing
+app-development/enabling-development-mode
+app-development/interactive
+app-development/app-sharing
+```

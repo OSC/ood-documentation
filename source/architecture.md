@@ -1,115 +1,104 @@
-.. _architecture:
+(architecture)=
 
-Architecture
-============
+# Architecture
 
 Below are some diagrams of OnDemand's architecture:
 
-#. Overview is a high level visual generated from PowerPoint.
-#. System context and Container context diagrams below follow the `C4 <https://c4model.com/>`_
-   model for software diagrams, are more technically detailed and are built using ``draw.io``
-#. Request flow diagram is a sequence diagram built using plantuml.
+1. Overview is a high level visual generated from PowerPoint.
+2. System context and Container context diagrams below follow the [C4](https://c4model.com/)
+   model for software diagrams, are more technically detailed and are built using `draw.io`
+3. Request flow diagram is a sequence diagram built using plantuml.
 
-Overview
---------
+## Overview
 
+:::{figure} /architecture/ood_overview.png
+:::
 
-.. figure:: /architecture/ood_overview.png
+1. Apache is the server front end, running as the Apache user, and accepting all requests from users and serves four primary functions:
 
-#. Apache is the server front end, running as the Apache user, and accepting all requests from users and serves four primary functions:
+   1. Authenticates user.
+   2. Starts Per-User NGINX processes (PUNs).
+   3. Reverse proxies each user to her PUN via Unix domain sockets.
+   4. Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets.
 
-   #. Authenticates user.
-   #. Starts Per-User NGINX processes (PUNs).
-   #. Reverse proxies each user to her PUN via Unix domain sockets.
-   #. Reverse proxies to interactive apps running on compute nodes (RStudio, Jupyter, VNC desktop) via TCP sockets.
+2. The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps.
 
-#. The Per-User NGINX serves web apps in Ruby and NodeJS and is how users submit jobs and start interactive apps.
-
-
-System context
------------------------
+## System context
 
 Users use OnDemand to interact with their HPC resources through a web browser.
 
-.. figure:: /architecture/ood_system_view.png
+:::{figure} /architecture/ood_system_view.png
+:::
 
 All the gray components are specific to a given site and outside the OnDemand
 system.
 
-Container context
------------------------
+## Container context
 
-.. tip::
-
-   In the C4 nomenclature, 'containers' are one level below the system context. This is
-   not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or
-   Singularity or `OCI containers <https://www.opencontainers.org/>`_).
+:::{tip}
+In the C4 nomenclature, 'containers' are one level below the system context. This is
+not to be confused with Linux containers via cgroups and namespaces (i.e. Docker or
+Singularity or [OCI containers](https://www.opencontainers.org/)).
+:::
 
 The Front-end proxy is the only component that is shared with all clients.
 The Front-end proxy will create Per User Nginx (PUN) processes (light blue boxes labeled "Per User Instance").
 
-.. figure:: /architecture/ood_container_view.png
+:::{figure} /architecture/ood_container_view.png
+:::
 
-* Everything contained in the dotted line is a part of the OnDemand system (see blue box in System context diagram).
-* Everything outside of it in gray is site specific components.
-* The "Per User Instance" light blue boxes are replicated for every user accessing the system.
+- Everything contained in the dotted line is a part of the OnDemand system (see blue box in System context diagram).
+- Everything outside of it in gray is site specific components.
+- The "Per User Instance" light blue boxes are replicated for every user accessing the system.
 
-Request Flow
--------------
+## Request Flow
 
 This is the request flow through the OnDemand system. A user initiates a
 request through a browser and this illustrates how that request propagates
 through the system to a particular application (including the dashboard).
 
+```{eval-rst}
 .. uml:: architecture/request-flow.uml
+```
 
-Other Request Flow Diagrams
-----------------------------
+## Other Request Flow Diagrams
 
-================
-Dashboard Access
-================
+### Dashboard Access
 
-.. figure:: /app-flow-diagrams/flow_access_dashboard.png
+:::{figure} /app-flow-diagrams/flow_access_dashboard.png
+:::
 
-=============
-Passenger App
-=============
+### Passenger App
 
-.. figure:: /app-flow-diagrams/flow_access_passenger_app.png
+:::{figure} /app-flow-diagrams/flow_access_passenger_app.png
+:::
 
-================
-User App Sharing
-================
+### User App Sharing
 
-.. figure:: /app-flow-diagrams/flow_access_usr_app_via_app_sharing.png
+:::{figure} /app-flow-diagrams/flow_access_usr_app_via_app_sharing.png
+:::
 
-==============
-Authentication
-==============
+### Authentication
 
-.. figure:: /app-flow-diagrams/flow_authentication.png 
+:::{figure} /app-flow-diagrams/flow_authentication.png
+:::
 
-==================
-Linux Host Adapter
-==================
+### Linux Host Adapter
 
-.. figure:: /app-flow-diagrams/flow_linux_host_adapter.png
+:::{figure} /app-flow-diagrams/flow_linux_host_adapter.png
+:::
 
-===========
-RStudio Job
-===========
+### RStudio Job
 
-.. figure:: /app-flow-diagrams/flow_rstudio_job.png
+:::{figure} /app-flow-diagrams/flow_rstudio_job.png
+:::
 
-=============
-Shell Session
-=============
+### Shell Session
 
-.. figure:: /app-flow-diagrams/flow_start_shell_session.png
+:::{figure} /app-flow-diagrams/flow_start_shell_session.png
+:::
 
-===============
-VNC Desktop Job
-===============
+### VNC Desktop Job
 
-.. figure:: /app-flow-diagrams/flow_vnc_desktop_job.png
+:::{figure} /app-flow-diagrams/flow_vnc_desktop_job.png
+:::

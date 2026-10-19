@@ -1,70 +1,71 @@
-.. _authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui:
+(authentication-tutorial-oidc-keycloak-rhel7-configure-keycloak-webui)=
 
-Configure Keycloak
-==================
+# Configure Keycloak
 
 We will now use Keycloak's admin Web UI to setup LDAP and add OnDemand as an
 OIDC client that will authenticate with Keycloak.
 
-Add a new realm
-------------------------------------------
+## Add a new realm
 
-#. Log into ``https://ondemand-idpdev.hpc.osc.edu`` as the admin user
-#. Hover over "Master" on left and click "Add Realm"
-#. Type in name "ondemand" and click "Create". The new realm is loaded.
-#. Click Login tab, then adjust parameters:
+1. Log into `https://ondemand-idpdev.hpc.osc.edu` as the admin user
 
-   #. Remember Me: ON
-   #. Login with email: OFF
+2. Hover over "Master" on left and click "Add Realm"
 
-#. Click Save.
+3. Type in name "ondemand" and click "Create". The new realm is loaded.
 
-Configure LDAP
-------------------------------------------
+4. Click Login tab, then adjust parameters:
 
-#. Choose User Federation on the left (verify ondemand realm is current realm)
-#. Select ``ldap`` for provider
+   1. Remember Me: ON
+   2. Login with email: OFF
 
-   #. Import Users set to OFF
-   #. Edit Mode set to READ_ONLY
-   #. Vendor set to other – for OpenLDAP
-   #. User Object Classes set to ``posixAccount`` – OSC specific and odd
-   #. Connection URL: ``ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636`` – using multiple to demonstrate more than 1
-   #. User DN: ``ou=People,dc=osc,dc=edu``
-   #. Auth Type: none – OSC specific as we allow anonymous binds
-   #. Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no ``truststoreSpi`` defined in XML configurations.
+5. Click Save.
 
-#. Save
+## Configure LDAP
 
-.. warning::
+1. Choose User Federation on the left (verify ondemand realm is current realm)
 
-   These LDAP settings are what we set for OSC. Your configuration may vary from
-   this. If you run into any problems, please let us know so that once a
-   solution is reached we can document those problem areas here. Contact us on
-   the OnDemand Discourse at https://discourse.osc.edu/c/open-ondemand.
+2. Select `ldap` for provider
 
-Add OnDemand as a client
---------------------------------------------------
+   1. Import Users set to OFF
+   2. Edit Mode set to READ_ONLY
+   3. Vendor set to other – for OpenLDAP
+   4. User Object Classes set to `posixAccount` – OSC specific and odd
+   5. Connection URL: `ldaps://ldap1.infra.osc.edu:636 ldaps://ldap2.infra.osc.edu:636` – using multiple to demonstrate more than 1
+   6. User DN: `ou=People,dc=osc,dc=edu`
+   7. Auth Type: none – OSC specific as we allow anonymous binds
+   8. Use Truststore SPI: never – OSC specific since our LDAP certificates are already trusted since from InCommon, leaving default is probably acceptable if no `truststoreSpi` defined in XML configurations.
 
-#. Choose Clients, then click Create in top right corner
+3. Save
 
-   #. Client ID: ``ondemand-dev.hpc.osc.edu``
-   #. Client Protocol: ``openid-connect``
-   #. Save (leave Root URL blank)
+:::{warning}
+These LDAP settings are what we set for OSC. Your configuration may vary from
+this. If you run into any problems, please let us know so that once a
+solution is reached we can document those problem areas here. Contact us on
+the OnDemand Discourse at <https://discourse.osc.edu/c/open-ondemand>.
+:::
 
-#. Then edit Settings for the newly created client:
+## Add OnDemand as a client
 
-   #. Access Type: confidential
-   #. Direct Access Grants Enabled: off
-   #. Valid Redirect URIs: Press the ``+`` button to the right of the URI field so you can insert two URLs:
+1. Choose Clients, then click Create in top right corner
 
-      #. ``https://ondemand-dev.hpc.osc.edu/oidc``
-      #. ``https://ondemand-dev.hpc.osc.edu``
+   1. Client ID: `ondemand-dev.hpc.osc.edu`
+   2. Client Protocol: `openid-connect`
+   3. Save (leave Root URL blank)
 
-   #. Scroll to bottom and click "Save"
+2. Then edit Settings for the newly created client:
 
-#. Finally, get the client secret to use with OnDemand installation:
+   1. Access Type: confidential
 
-   #. Select the "Credentials" tab of the "Client" you are viewing i.e. ``Clients >> ondemand-dev.hpc.osc.edu``
-   #. Copy the value for "secret" for future use in this tutorial (and keep it secure).
+   2. Direct Access Grants Enabled: off
 
+   3. Valid Redirect URIs: Press the `+` button to the right of the URI field so you can insert two URLs:
+
+      1. `https://ondemand-dev.hpc.osc.edu/oidc`
+      2. `https://ondemand-dev.hpc.osc.edu`
+
+   4. Scroll to bottom and click "Save"
+
+3. Finally, get the client secret to use with OnDemand installation:
+
+   1. Select the "Credentials" tab of the "Client" you are viewing i.e. `Clients >> ondemand-dev.hpc.osc.edu`
+   2. Copy the value for "secret" for future use in this tutorial (and keep it secure).

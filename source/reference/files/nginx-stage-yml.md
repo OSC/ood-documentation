@@ -1,31 +1,34 @@
-.. _nginx-stage-configuration:
+(nginx-stage-configuration)=
 
-``nginx_stage.yml``
-===================
+# `nginx_stage.yml`
 
 Many of the options in the per-user NGINX staging and configuration can be
-configured within :program:`nginx_stage`. In a default installation this
-YAML configuration file is located at::
+configured within {program}`nginx_stage`. In a default installation this
+YAML configuration file is located at:
 
-  /etc/ood/config/nginx_stage.yml
+```
+/etc/ood/config/nginx_stage.yml
+```
 
 On a fresh installation you may need to create this file or copy the default
-file from::
+file from:
 
-  /opt/ood/nginx_stage/share/nginx_stage_example.yml
+```
+/opt/ood/nginx_stage/share/nginx_stage_example.yml
+```
 
 In most cases it is recommended that you don't edit this file as the chosen
 defaults should work out of the box for most scenarios.
 
-.. warning::
+:::{warning}
+Modifying application specific configuration options or URI options can have
+unintended consequences for some of the Open OnDemand applications, so be
+sure you know what you are doing.
+:::
 
-   Modifying application specific configuration options or URI options can have
-   unintended consequences for some of the Open OnDemand applications, so be
-   sure you know what you are doing.
+## Configuration Options
 
-Configuration Options
----------------------
-
+```{eval-rst}
 .. describe:: ondemand_version_path (String)
 
    path to the OnDemand version file
@@ -43,7 +46,9 @@ Configuration Options
      .. code-block:: yaml
 
         ondemand_version_path: "/path/to/VERSION"
+```
 
+```{eval-rst}
 .. describe:: ondemand_portal (String, null)
 
    unique name of this OnDemand portal used to namespace multiple hosted
@@ -67,7 +72,9 @@ Configuration Options
 
       If this is not set then most apps will use the default namespace
       ``ondemand``.
+```
 
+```{eval-rst}
 .. describe:: ondemand_title (String, null)
 
    title of this OnDemand portal that apps *should* display in their navbar
@@ -90,7 +97,9 @@ Configuration Options
 
       If this is not set then most apps will use the default title ``Open
       OnDemand``.
+```
 
+```{eval-rst}
 .. describe:: pun_custom_env (Object, null)
 
   Custom environment variables to set for the PUN environment.
@@ -111,7 +120,9 @@ Configuration Options
          OOD_DASHBOARD_TITLE: "Open OnDemand"
          OOD_BRAND_BG_COLOR: "#53565a"
          OOD_BRAND_LINK_ACTIVE_BG_COLOR: "#fff"
+```
 
+```{eval-rst}
 .. describe:: pun_custom_env_declarations (Array, null)
 
   List of environment variables to pass onto PUN environment
@@ -136,7 +147,9 @@ Configuration Options
         - MANPATH
         - SCLS
         - X_SCLS
+```
 
+```{eval-rst}
 .. describe:: template_root (String)
 
    the root directory containing the ERB templates used in generating the NGINX
@@ -155,7 +168,9 @@ Configuration Options
      .. code-block:: yaml
 
         template_root: "/path/to/my/templates"
+```
 
+```{eval-rst}
 .. describe:: proxy_user (String)
 
    the user name that the Apache proxy runs as so permissions can be added to
@@ -174,7 +189,9 @@ Configuration Options
      .. code-block:: yaml
 
         proxy_user: "proxy_user"
+```
 
+```{eval-rst}
 .. describe:: nginx_bin (String)
 
    the path to the NGINX binary
@@ -192,7 +209,9 @@ Configuration Options
      .. code-block:: yaml
 
         nginx_bin: "/path/to/sbin/nginx"
+```
 
+```{eval-rst}
 .. describe:: nginx_signals (Array<String>)
 
    valid signals that can be sent to the NGINX process
@@ -214,7 +233,9 @@ Configuration Options
    .. note::
 
       This option is sent as ``-s signal`` to the `NGINX command line`_.
+```
 
+```{eval-rst}
 .. describe:: mime_types_path (String)
 
    the path to the system-installed NGINX ``mime.types`` file
@@ -232,7 +253,9 @@ Configuration Options
      .. code-block:: yaml
 
         mime_types_path: "/path/to/custom/mime.types"
+```
 
+```{eval-rst}
 .. describe:: passenger_root (String)
 
    the ``locations.ini`` file that describes Passenger installation
@@ -250,7 +273,9 @@ Configuration Options
      .. code-block:: yaml
 
         passenger_root: "/path/to/custom/locations.ini"
+```
 
+```{eval-rst}
 .. describe:: passenger_ruby (String)
 
    the path to the Ruby binary that Passenger uses for itself and web apps
@@ -268,7 +293,9 @@ Configuration Options
      .. code-block:: yaml
 
         passenger_ruby: "/usr/bin/ruby"
+```
 
+```{eval-rst}
 .. describe:: passenger_nodejs (String, null)
 
    the path to the NodeJs binary that Passenger uses for web apps
@@ -286,7 +313,9 @@ Configuration Options
      .. code-block:: yaml
 
         passenger_nodejs: "/usr/bin/node"
+```
 
+```{eval-rst}
 .. describe:: passenger_python (String, null)
 
    the path to the Python binary that Passenger uses for web apps
@@ -304,7 +333,9 @@ Configuration Options
      .. code-block:: yaml
 
         passenger_python: "/usr/bin/python"
+```
 
+```{eval-rst}
 .. describe:: passenger_pool_idle_time (Integer)
 
    The maximum number of seconds that an application process may be idle.
@@ -323,7 +354,9 @@ Configuration Options
      .. code-block:: yaml
 
         passenger_pool_idle_time: 900
+```
 
+```{eval-rst}
 .. describe:: passenger_log_file (String)
 
   The log file that passenger will write standard out and standard
@@ -345,9 +378,11 @@ Configuration Options
     .. code-block:: yaml
 
       passenger_log_file: '/some/other/location/%{user}/error.log'
+```
 
-.. _passenger_options:
+(passenger-options)=
 
+```{eval-rst}
 .. describe:: passenger_options (Hash)
 
    A Hash of additional Passenger options
@@ -367,7 +402,9 @@ Configuration Options
 
         passenger_options:
           passenger_max_preloader_idle_time: 300
+```
 
+```{eval-rst}
 .. describe:: nginx_file_upload_max (Integer, 10737420000)
 
   Max file upload size in bytes (e.g., 10737420000)
@@ -385,7 +422,9 @@ Configuration Options
      .. code-block:: yaml
 
         nginx_file_upload_max: 21474840000
+```
 
+```{eval-rst}
 .. describe:: pun_config_path (String)
 
    the interpolated path to the user's PUN configuration file
@@ -403,7 +442,9 @@ Configuration Options
      .. code-block:: yaml
 
         pun_config_path: "/var/lib/ondemand-nginx/config/puns/%{user}/nginx.conf"
+```
 
+```{eval-rst}
 .. describe:: pun_tmp_root (String)
 
    the interpolated root directory used for NGINX temporary directories.
@@ -427,7 +468,9 @@ Configuration Options
       NGINX will store the full request body in this location before sending it
       to the Passenger app. The size of the disk partition this directory
       resides in will limit the maximum file upload size.
+```
 
+```{eval-rst}
 .. describe:: pun_access_log_path (String)
 
    the interpolated path to the NGINX access log
@@ -445,7 +488,9 @@ Configuration Options
      .. code-block:: yaml
 
         pun_access_log_path: "/custom/path/access-%{user}.log"
+```
 
+```{eval-rst}
 .. describe:: pun_error_log_path (String)
 
    the interpolated path to the NGINX error log
@@ -463,7 +508,9 @@ Configuration Options
      .. code-block:: yaml
 
         pun_error_log_path: "/custom/path/error-%{user}.log"
+```
 
+```{eval-rst}
 .. describe:: pun_secret_key_base_path (String)
 
   The secret key location. Note these are per user.
@@ -481,7 +528,9 @@ Configuration Options
       .. code-block:: yaml
 
         pun_secret_key_base_path: "/custom/secrets/%{user}.secret_key_base.txt"
+```
 
+```{eval-rst}
 .. describe:: pun_log_format (String)
 
   The format of the access and error logs.
@@ -500,7 +549,9 @@ Configuration Options
 
         pun_log_format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent'
 
+```
 
+```{eval-rst}
 .. describe:: pun_pid_path (String)
 
    the interpolated path to the NGINX PID file
@@ -518,7 +569,9 @@ Configuration Options
      .. code-block:: yaml
 
         pun_pid_path: "/custom/path/pid-%{user}.pid"
+```
 
+```{eval-rst}
 .. describe:: pun_socket_path (String)
 
    the interpolated path to the NGINX socket file
@@ -552,7 +605,9 @@ Configuration Options
 
       It is not recommended to alter ``pun_pid_path`` unless you know what you
       are doing.
+```
 
+```{eval-rst}
 .. describe:: pun_sendfile_root (String)
 
    the root directory that NGINX serves files from using sendfile_
@@ -576,7 +631,9 @@ Configuration Options
       All URL requests to sendfile_ will be relative to the
       ``pun_sendfile_root``. If you alter this configuration option you may
       break certain web applications that expect it under ``/``.
+```
 
+```{eval-rst}
 .. describe:: pun_sendfile_uri (String)
 
    the internal URL path used by NGINX to serve files from using sendfile_ (not
@@ -595,7 +652,9 @@ Configuration Options
      .. code-block:: yaml
 
         pun_sendfile_root: "/custom/files"
+```
 
+```{eval-rst}
 .. describe:: pun_app_configs (Array<Hash>)
 
    a list of interpolated hashes that define what wildcard app configuration file
@@ -631,7 +690,9 @@ Configuration Options
             env: dev
             name: "*"
             owner: "%{user}"
+```
 
+```{eval-rst}
 .. describe:: app_config_path (Hash)
 
    an interpolated hash detailing the path to the NGINX app configurations for each
@@ -646,7 +707,9 @@ Configuration Options
           dev: "/var/lib/ondemand-nginx/config/apps/dev/%{owner}/%{name}.conf"
           usr: "/var/lib/ondemand-nginx/config/apps/usr/%{owner}/%{name}.conf"
           sys: "/var/lib/ondemand-nginx/config/apps/sys/%{name}.conf"
+```
 
+```{eval-rst}
 .. describe:: app_root (Hash)
 
    an interpolated hash detailing the root directory where the app is installed
@@ -676,7 +739,9 @@ Configuration Options
 
       Modifying this configuration option may break how the Dashboard app
       searches for apps.
+```
 
+```{eval-rst}
 .. describe:: app_request_uri (Hash)
 
    an interpolated hash detailing the URL path used to access the given type of
@@ -700,7 +765,9 @@ Configuration Options
 
       Modifying this configuration option may break how the various apps link
       to each other.
+```
 
+```{eval-rst}
 .. describe:: app_request_regex (Hash)
 
    a hash detailing the regular expressions used to determine the type of app
@@ -722,7 +789,9 @@ Configuration Options
       Modifying anything in this configuration option other than the
       allowed characters will require you modify ``app_request_uri`` as
       well.
+```
 
+```{eval-rst}
 .. describe:: app_token (Hash)
 
    an interpolated hash detailing a uniquely identifiable string for each app
@@ -740,7 +809,9 @@ Configuration Options
    .. note::
 
       Not currently used and may be deprecated in the future.
+```
 
+```{eval-rst}
 .. describe:: app_passenger_env (Hash)
 
    a hash detailing the `Passenger environment`_ to run the type of app under
@@ -759,7 +830,9 @@ Configuration Options
 
       Modifying this configuration option can lead to unintended consequences
       for web apps such as issues with serving their assets.
+```
 
+```{eval-rst}
 .. describe:: user_regex (String)
 
    regular expression used to validate a given user name
@@ -777,7 +850,9 @@ Configuration Options
      .. code-block:: yaml
 
         user_regex: '\w+'
+```
 
+```{eval-rst}
 .. describe:: min_uid (Integer)
 
    the minimum user id required to start a per-user NGINX process as
@@ -795,9 +870,11 @@ Configuration Options
      .. code-block:: yaml
 
         min_uid: 500
+```
 
-.. _disabled_shell:
+(disabled-shell)=
 
+```{eval-rst}
 .. describe:: disabled_shell (String)
 
    Restrict starting a per-user NGINX process as a user with the given shell.
@@ -823,7 +900,9 @@ Configuration Options
       doesn't restrict the other administrative commands
       :ref:`nginx-stage-nginx` and :ref:`nginx-stage-nginx-clean` when manually
       starting and stopping the NGINX process.
+```
 
+```{eval-rst}
 .. describe:: disabled_shell_message (String)
 
    Define an error message that is displayed to users when they have a disabled_shell.
@@ -841,10 +920,12 @@ Configuration Options
       .. code-block:: yaml
 
         disabeled_shell_message: "This account has a disabled shell. Contact support."
+```
 
+```{eval-rst}
 .. describe:: show_nginx_stage_help_message (Boolean)
 
-   Hide the standard error ``Run 'nginx_stage --help' to see a full list of available 
+   Hide the standard error ``Run 'nginx_stage --help' to see a full list of available
    command line options.`` message when calling ``nginx_stage``.
 
     Default
@@ -860,7 +941,9 @@ Configuration Options
       .. code-block:: yaml
 
         show_nginx_stage_help_message: false
+```
 
+```{eval-rst}
 .. describe:: disable_bundle_user_config (Integer)
 
     Set BUNDLE_USER_CONFIG to ``/dev/null`` in the PUN environment.
@@ -881,7 +964,8 @@ Configuration Options
       .. code-block:: yaml
 
         disable_bundle_user_config: false
+```
 
-.. _nginx command line: https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline/
-.. _sendfile: http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile
-.. _passenger environment: https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_app_env
+[nginx command line]: https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline/
+[passenger environment]: https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_app_env
+[sendfile]: http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile

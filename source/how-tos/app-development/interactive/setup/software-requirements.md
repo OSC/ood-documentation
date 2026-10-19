@@ -1,7 +1,6 @@
-.. _app-development-interactive-setup-software-requirements:
+(app-development-interactive-setup-software-requirements)=
 
-Software Requirements
-=====================
+# Software Requirements
 
 Some interactive apps will need a VNC server on the compute node
 (e.g., the Desktop app). This requires the following software to be installed
@@ -10,16 +9,16 @@ run on, **NOT** the OnDemand node.
 
 For VNC server support:
 
-- `nmap-ncat`_
-- `TurboVNC`_ 2.1+
-- `websockify`_ 0.13.0+
+- [nmap-ncat]
+- [TurboVNC] 2.1+
+- [websockify] 0.13.0+
 
-.. warning::
+:::{warning}
+Do **NOT** install the above software on the **OnDemand node**. The above
+software requirements are **ONLY** for the **compute nodes** you intend on
+launching Desktops on within batch jobs.
+:::
 
-   Do **NOT** install the above software on the **OnDemand node**. The above
-   software requirements are **ONLY** for the **compute nodes** you intend on
-   launching Desktops on within batch jobs.
-
-.. _turbovnc: https://turbovnc.org/
-.. _websockify: https://github.com/novnc/websockify
-.. _nmap-ncat: https://nmap.org/ncat/
+[nmap-ncat]: https://nmap.org/ncat/
+[turbovnc]: https://turbovnc.org/
+[websockify]: https://github.com/novnc/websockify

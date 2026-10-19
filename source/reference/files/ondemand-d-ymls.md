@@ -1,43 +1,46 @@
-.. _ondemand-d-ymls:
+(ondemand-d-ymls)=
 
-``ondemand.d/*.yml files``
-==========================
+# `ondemand.d/*.yml files`
 
-Most of the configurations are now held within YAML files in the ``/etc/ood/config/ondemand.d/`` directory.
-Open OnDemand will read all the ``.yml`` and ``.yml.erb`` files within this directory for
+Most of the configurations are now held within YAML files in the `/etc/ood/config/ondemand.d/` directory.
+Open OnDemand will read all the `.yml` and `.yml.erb` files within this directory for
 configurations.
 
-To use a different directory other than this use the ``OOD_CONFIG_D_DIRECTORY`` environment variable
-in the ``/etc/ood/config/apps/dashboard/env`` file.
+To use a different directory other than this use the `OOD_CONFIG_D_DIRECTORY` environment variable
+in the `/etc/ood/config/apps/dashboard/env` file.
 
-These properties support profile based configuration, see the :ref:`profile configuration documentation. <profiles_guide>`
+These properties support profile based configuration, see the {ref}`profile configuration documentation. <profiles_guide>`
 
-.. note:: Simple properties (strings and booleans) can be configured using environment variables as well.
-          The name of the environment variable will be the property name in capitals prefixed with ``OOD_``.
-          e.g., property ``brand_bg_color`` will be ``OOD_BRAND_BG_COLOR`` environment variable.
+:::{note}
+Simple properties (strings and booleans) can be configured using environment variables as well.
+The name of the environment variable will be the property name in capitals prefixed with `OOD_`.
+e.g., property `brand_bg_color` will be `OOD_BRAND_BG_COLOR` environment variable.
 
-          We recommend setting environment variables in ``/etc/ood/config/nginx_stage.yml``
-          as YAML mappings (key value pairs) in the mapping (hash/dictionary) ``pun_custom_env``.
-          Alternatively you can set these in the ``env`` files of the dashboard and the apps.
+We recommend setting environment variables in `/etc/ood/config/nginx_stage.yml`
+as YAML mappings (key value pairs) in the mapping (hash/dictionary) `pun_custom_env`.
+Alternatively you can set these in the `env` files of the dashboard and the apps.
+:::
 
-.. warning:: When using environment variables with ``nginx_stage.yml`` file, be careful to set the value using quotes
-             i.e. ``OOD_BRAND_BG_COLOR: '#0000ff'``. If you omit the quotes, YAML will see ``#`` as a comment and the value of the ``OOD_BRAND_BG_COLOR`` will be ``nil``
+:::{warning}
+When using environment variables with `nginx_stage.yml` file, be careful to set the value using quotes
+i.e. `OOD_BRAND_BG_COLOR: '#0000ff'`. If you omit the quotes, YAML will see `#` as a comment and the value of the `OOD_BRAND_BG_COLOR` will be `nil`
+:::
 
+:::{warning}
+OnDemand will only respond to root owned files. Configuration files
+that are not owned by the root user (uid 0) will not be read.
+:::
 
-.. warning::
-  OnDemand will only respond to root owned files. Configuration files
-  that are not owned by the root user (uid 0) will not be read.
+(profile-properties)=
 
-.. _profile_properties:
+## Configuration Properties with profile support
 
-Configuration Properties with profile support
----------------------------------------------
-
+```{eval-rst}
 .. describe:: dashboard_header_img_logo (String, null)
 
     The URL to the logo image for the main navigation. If no logo is configured, the ``dashboard_title``
     property will be used as text.
-      
+
     Default
       No logo image will be shown, just the ``dashboard_title`` text.
 
@@ -51,7 +54,9 @@ Configuration Properties with profile support
       .. code-block:: yaml
 
         dashboard_header_img_logo: "/public/logo.png"
+```
 
+```{eval-rst}
 .. describe:: disable_dashboard_logo (Bool, false)
 
     Whether to show the ``dashboard_logo`` property in the homepage welcome message.
@@ -69,7 +74,9 @@ Configuration Properties with profile support
       .. code-block:: yaml
 
         disable_dashboard_logo: true
+```
 
+```{eval-rst}
 .. describe:: dashboard_logo (String, null)
 
   The URL to the logo image for the homepage welcome message. If no logo is configured, the ``dashboard_title``
@@ -88,7 +95,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       dashboard_logo: "/public/welcome.png"
+```
 
+```{eval-rst}
 .. describe:: dashboard_logo_height (Integer, null)
 
     HTML image override for the height of the welcome message logo image configured with ``dashboard_logo``
@@ -106,7 +115,9 @@ Configuration Properties with profile support
       .. code-block:: yaml
 
         dashboard_logo_height: "150px"
+```
 
+```{eval-rst}
 .. describe:: brand_bg_color (String, null)
 
   The CSS color override for the main navbar background. Any valid CSS color value can be used.
@@ -124,7 +135,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       brand_bg_color: "#007FFF"
+```
 
+```{eval-rst}
 .. describe:: brand_link_active_bg_color (String, null)
 
   The CSS color override for background of the active navigation link in the navbar.
@@ -143,11 +156,13 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       brand_link_active_bg_color: "#007FFF"
+```
 
+```{eval-rst}
 .. describe:: dashboard_layout (Object, null)
 
   Specify the dashboard layout.  Rearrange existing widgets
-  and add more custom widgets. See the 
+  and add more custom widgets. See the
   :ref:`documentation on custom dashboard layouts <dashboard_custom_layout>`
   for details and examples.
 
@@ -155,7 +170,9 @@ Configuration Properties with profile support
     Null, do not change the default dashboard layout.
   Example
     See the  :ref:`dashboard layout documentation <dashboard_custom_layout>`
-  
+```
+
+```{eval-rst}
 .. describe:: pinned_apps (Array<Object>, null)
 
   An array of pinned app objects specifying what apps to pin to the dashboard.
@@ -166,14 +183,16 @@ Configuration Properties with profile support
     Null, don't pin any apps to the dashboard.
   Example
     See the  :ref:`pinned apps documentation <dashboard_pinned_apps>`
+```
 
+```{eval-rst}
 .. describe:: pinned_apps_menu_length (Integer, 6)
 
     The maximum number of pinned apps in the 'Apps' menu bar.
 
     Default
       Show 6 items in the menu.
-      
+
       .. code-block:: yaml
 
         pinned_apps_menu_length: 6
@@ -184,7 +203,9 @@ Configuration Properties with profile support
       .. code-block:: yaml
 
         pinned_apps_menu_length: 10
+```
 
+```{eval-rst}
 .. describe:: pinned_apps_group_by (String, null)
 
   Group the pinned apps icons by this field in the dashboard.
@@ -202,7 +223,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       pinned_apps_group_by: "category"
+```
 
+```{eval-rst}
 .. describe:: profile_links (Array<Object>, [])
 
   List of profiles to display in the ``Help`` navigation menu. This will allow users to change profiles.
@@ -227,7 +250,9 @@ Configuration Properties with profile support
         - id: "ondemand"
           name: "OnDemand Profile"
           icon: "user"
+```
 
+```{eval-rst}
 .. describe:: custom_css_files (Array<String>, [])
 
   List of relative URLs to the CSS files to include in all Dashboard pages.
@@ -248,8 +273,11 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       custom_css_files: ["/myfolder/navigation.css", "/myfolder/pinned_apps.css"]
+```
 
-.. _custom_javascript_files:
+(custom-javascript-files)=
+
+```{eval-rst}
 .. describe:: custom_javascript_files (Array<String>, [])
 
   List of relative URLs to custom JavaScript files to include in all Dashboard pages.
@@ -270,7 +298,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       custom_javascript_files: ["/myfolder/navigation.js", "/myfolder/pinned_apps.js"]
+```
 
+```{eval-rst}
 .. describe:: dashboard_title (String, 'Open OnDemand')
 
     The text to use as the main navigation logo. If the ``dashboard_header_img_logo`` property is defined,
@@ -289,8 +319,11 @@ Configuration Properties with profile support
       .. code-block:: yaml
 
         dashboard_title: "My Institution"
+```
 
-.. _show_all_apps_link:
+(show-all-apps-link)=
+
+```{eval-rst}
 .. describe:: show_all_apps_link (Bool, true)
 
   Whether to show the ``All Apps`` link in the navbar.
@@ -309,7 +342,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       show_all_apps_link: false
+```
 
+```{eval-rst}
 .. describe:: nav_bar (Array<Object>, [])
 
   An array of navigation items to create a custom navbar.
@@ -321,7 +356,9 @@ Configuration Properties with profile support
     Empty array, show the default navbar.
   Example
     See the  :ref:`custom navigation documentation <navbar_guide>`
+```
 
+```{eval-rst}
 .. describe:: help_bar (Array<Object>, [])
 
   An array of navigation items to create a custom help navigation.
@@ -333,7 +370,9 @@ Configuration Properties with profile support
     Empty array, show the default help navigation.
   Example
      See the  :ref:`custom navigation documentation <navbar_guide>`
+```
 
+```{eval-rst}
 .. describe:: help_menu (Array<Object>, [])
 
   A single navigation item to add links to the Help drop-down menu.
@@ -345,7 +384,9 @@ Configuration Properties with profile support
    Empty array, no additional links will be added to the Help menu.
   Example
     See the  :ref:`documentation on adding urls to the Help menu <help_menu_guide>`
+```
 
+```{eval-rst}
 .. describe:: interactive_apps_menu (Object, {})
 
   A single navigation item to create a custom interactive apps menu.
@@ -358,7 +399,9 @@ Configuration Properties with profile support
     Empty object, No customizations, show the currently installed interactive applications.
   Example
     See the  :ref:`interactive apps menu documentation <interactive_apps_menu_guide>`
+```
 
+```{eval-rst}
 .. describe:: custom_pages (Hash<String, Object>, {})
 
   A hash with the definition of the layouts for the configured custom pages.
@@ -370,7 +413,9 @@ Configuration Properties with profile support
     Empty hash, No custom pages defined.
   Example
     See the  :ref:`custom pages documentation <custom_pages_guide>`
+```
 
+```{eval-rst}
 .. describe:: support_ticket (Object, {})
 
   Configuration settings to enable and configure the support ticket feature.
@@ -381,9 +426,11 @@ Configuration Properties with profile support
     Empty object, support ticket feature is disabled.
   Example
     See the  :ref:`Support Ticket documentation <support_ticket_guide>`
+```
 
+```{eval-rst}
 .. describe:: navbar_type (String, 'dark')
-  
+
   The navbar theme type. There are 2 themes, ``light`` and ``dark``.
   The selected theme will update the colors of the navbar.
 
@@ -400,7 +447,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       navbar_type: "light"
+```
 
+```{eval-rst}
 .. describe:: public_url (String, '/public')
 
   The prefix URL used to load the ``favicon.ico`` and custom CSS files configured with the ``custom_css_files`` property.
@@ -418,7 +467,9 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       public_url: "/public/resources"
+```
 
+```{eval-rst}
 .. describe:: announcement_path (Array<String>, ['/etc/ood/config/announcement.md', '/etc/ood/config/announcement.yml', '/etc/ood/config/announcements.d'])
 
   The file or directory path to load announcement messages from.
@@ -440,8 +491,11 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       announcement_path: "/etc/ood/config/announcement.team1.d/"
+```
 
-.. _nav_categories:
+(nav-categories)=
+
+```{eval-rst}
 .. describe:: nav_categories (Array<String>, ['Apps', 'Files', 'Jobs', 'Clusters', 'Interactive Apps'])
 
   By default Open OnDemand will create drop-down menus on the navigation bar for certain
@@ -465,8 +519,11 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       nav_categories: ['Apps', 'Files', 'Jobs']
+```
 
-.. _files_select_target:
+(files-select-target)=
+
+```{eval-rst}
 .. describe:: files_select_target (Object, null)
 
   Default
@@ -476,7 +533,7 @@ Configuration Properties with profile support
     .. code-block:: yaml
 
       files_select_target: null
-  
+
   Example
 
     Enable this feature to allow users to send file data payloads to ``/pun/sys/passenger_app``
@@ -490,12 +547,13 @@ Configuration Properties with profile support
         icon: 'fas://paper-plane'
         title: 'Send selected files to the external application'
         expiration: 10
+```
 
-.. _configuration_properties:
+(configuration-properties)=
 
-Configuration Properties
-------------------------
+## Configuration Properties
 
+```{eval-rst}
 .. describe:: files_enable_shell_button (Bool, true)
 
   While browsing files, by default, Open OnDemand will show a button to
@@ -516,8 +574,11 @@ Configuration Properties
 
       files_enable_shell_button: false
 
+```
 
-.. _bc_dynamic_js:
+(bc-dynamic-js)=
+
+```{eval-rst}
 .. describe:: bc_dynamic_js (Bool, false)
 
   Enable dynamic interactive app forms. See :ref:`dynamic-bc-apps` for more information
@@ -536,8 +597,11 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_dynamic_js: true
+```
 
-.. _bc_clean_old_dirs:
+(bc-clean-old-dirs)=
+
+```{eval-rst}
 .. describe:: bc_clean_old_dirs(Bool, false)
 
   Interactive Apps create a new directory ``~/ondemand/data/sys/dashboard/batch_connect/...`` every time
@@ -561,7 +625,9 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_clean_old_dirs: true
+```
 
+```{eval-rst}
 .. describe:: bc_clean_old_dirs_days(Integer, 30)
 
   If you have ``bc_clean_old_dirs`` above enabled, the system will clean every directory that
@@ -583,7 +649,9 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_clean_old_dirs_days: 15
+```
 
+```{eval-rst}
 .. describe:: host_based_profiles (Bool, false)
 
   Feature flag to enable automatic selection of configuration profiles based on the hostname of the request.
@@ -601,7 +669,9 @@ Configuration Properties
     .. code-block:: yaml
 
       host_based_profiles: true
+```
 
+```{eval-rst}
 .. describe:: disable_bc_shell (Bool, false)
 
   Some schedulers like :ref:`resource-manager-lsf` use the the ``-L`` flag to ``bsub``
@@ -621,7 +691,9 @@ Configuration Properties
     .. code-block:: yaml
 
       disable_bc_shell: true
+```
 
+```{eval-rst}
 .. describe:: cancel_session_enabled (Bool, false)
 
   Feature flag to enable the cancellation of active interactive sessions without deleting the session card.
@@ -639,15 +711,18 @@ Configuration Properties
     .. code-block:: yaml
 
       cancel_session_enabled: true
+```
 
-.. _module_file_dir:
+(module-file-dir)=
+
+```{eval-rst}
 .. describe:: module_file_dir (String, null)
 
   Specify a directory where **cluster specific module files** exist. It's important
   that there be a file for each cluster because the system can then tie those
   modules to that specific cluster.
-  
-  This directory should have ``module spider-json`` output **for each cluster** 
+
+  This directory should have ``module spider-json`` output **for each cluster**
   as indicated by the command below. Open OnDemand will read these files and
   potentially show them in a from for a cluster called **my_cluster**.
 
@@ -666,8 +741,11 @@ Configuration Properties
     .. code-block:: yaml
 
       module_file_dir: "/etc/reporting/modules"
+```
 
-.. _user_settings_file:
+(user-settings-file)=
+
+```{eval-rst}
 .. describe:: user_settings_file (String, '.ood')
 
   The full path of the file to store user settings. This file is used to store
@@ -687,7 +765,9 @@ Configuration Properties
     .. code-block:: yaml
 
       user_settings_file: "~/.config/local/open-ondemand/user_settings.txt"
+```
 
+```{eval-rst}
 .. describe:: facl_domain (String, null)
 
   The File Access Control List (FACL) domain to use when setting FACLs
@@ -706,8 +786,11 @@ Configuration Properties
     .. code-block:: yaml
 
       facl_domain: "osc.edu"
+```
 
-.. _auto_groups_filter:
+(auto-groups-filter)=
+
+```{eval-rst}
 .. describe:: auto_groups_filter (String, null)
 
   Specify a filter for the :ref:`automatic form option <auto-bc-form-options>` ``auto_groups``.
@@ -725,8 +808,11 @@ Configuration Properties
     .. code-block:: yaml
 
       auto_groups_filter: '^P.+'
+```
 
-.. _bc_simple_auto_accounts:
+(bc-simple-auto-accounts)=
+
+```{eval-rst}
 .. describe:: bc_simple_auto_accounts (Boolean, false)
 
   Use a simple accounting scheme that assumes all accounts are available on all
@@ -743,13 +829,16 @@ Configuration Properties
   Example
     Enable simple accounts. This will generate a list of accounts that should be
     available on all clusters.
-  
+
     .. code-block:: yaml
 
       bc_simple_auto_accounts: true
 
+```
 
-.. _remote_files_enabled:
+(remote-files-enabled)=
+
+```{eval-rst}
 .. describe:: remote_files_enabled (Boolean, false)
 
   Enable remote file browsing, editing and downloading.
@@ -768,7 +857,9 @@ Configuration Properties
 
       remote_files_enabled: true
 
+```
 
+```{eval-rst}
 .. describe:: remote_files_validation (Boolean, false)
 
   Enable validating remote files on startup.
@@ -786,8 +877,11 @@ Configuration Properties
     .. code-block:: yaml
 
       remote_files_validation: true
+```
 
-.. _upload_enabled:
+(upload-enabled)=
+
+```{eval-rst}
 .. describe:: upload_enabled (Boolean, true)
 
   .. versionadded:: 3.1
@@ -808,8 +902,11 @@ Configuration Properties
     .. code-block:: yaml
 
       upload_enabled: false
+```
 
-.. _download_enabled:
+(download-enabled)=
+
+```{eval-rst}
 .. describe:: download_enabled (Boolean, true)
 
   .. versionadded:: 3.1
@@ -830,7 +927,9 @@ Configuration Properties
     .. code-block:: yaml
 
       download_enabled: false
+```
 
+```{eval-rst}
 .. describe:: hide_app_version (Boolean, false)
 
   Hide the interactive application's version.
@@ -848,23 +947,26 @@ Configuration Properties
     .. code-block:: yaml
 
       hide_app_version: true
+```
 
-.. _globus_endpoints:
+(globus-endpoints)=
+
+```{eval-rst}
 .. describe:: globus_endpoints (Array<Object>, null)
 
   Add a Globus button to the file browser. The button opens the current directory
   in the Globus transfer web app.
 
-  In the example with multiple endpoints, suppose you use the local file browser to look at your local file system. 
-  If you were to navigate to your local ``/home`` and then click the Globus button, you would 
+  In the example with multiple endpoints, suppose you use the local file browser to look at your local file system.
+  If you were to navigate to your local ``/home`` and then click the Globus button, you would
   see a new tab open with the endpoint associated to that local path in the Globus interface.
 
-  If you then go back to the local file browser and navigate to ``/project`` and then click the Globus button, 
-  you would now see the endpoint associated with that local ``/project`` directory open in the Globus interface 
+  If you then go back to the local file browser and navigate to ``/project`` and then click the Globus button,
+  you would now see the endpoint associated with that local ``/project`` directory open in the Globus interface
   in a new tab.
 
-  The gist here is you *navigate to the desired directory using the local filebrowser* then 
-  click the Globus button to show the corresponding endpoint in the Globus interface 
+  The gist here is you *navigate to the desired directory using the local filebrowser* then
+  click the Globus button to show the corresponding endpoint in the Globus interface
   which opens in a new tab.
 
   Note that ``endpoint_path`` is the path that Globus will initialize to
@@ -916,9 +1018,11 @@ Configuration Properties
         - path: "<%=  Etc.getpwnam(Etc.getlogin).dir %>"
           endpoint: "9f1fe759-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
           endpoint_path: "/"
+```
 
-.. _google_analytics_tag_id:
+(google-analytics-tag-id)=
 
+```{eval-rst}
 .. describe:: google_analytics_tag_id (String, nil)
 
   Configure Google Analytics by supplying a tag id.
@@ -938,8 +1042,11 @@ Configuration Properties
 
       google_analytics_tag_id: 'abc123'
 
+```
 
-.. _motd_render_html:
+(motd-render-html)=
+
+```{eval-rst}
 .. describe:: motd_render_html (Boolean, false)
 
   Render HTML in the Message of the Day (MOTD).  This
@@ -959,8 +1066,11 @@ Configuration Properties
     .. code-block:: yaml
 
       motd_render_html: true
+```
 
-.. _novnc_default_compression:
+(novnc-default-compression)=
+
+```{eval-rst}
 .. describe:: novnc_default_compression (Integer, 6)
 
   The default compression value for noVNC batch connect
@@ -979,8 +1089,11 @@ Configuration Properties
     .. code-block:: yaml
 
       novnc_default_compression: 9
+```
 
-.. _novnc_default_quality:
+(novnc-default-quality)=
+
+```{eval-rst}
 .. describe:: novnc_default_quality (Integer, 2)
 
   The default quality value for noVNC batch connect
@@ -999,8 +1112,11 @@ Configuration Properties
     .. code-block:: yaml
 
       novnc_default_quality: 9
+```
 
-.. _bc_sessions_poll_delay:
+(bc-sessions-poll-delay)=
+
+```{eval-rst}
 .. describe:: bc_sessions_poll_delay (Integer, 10000)
 
   How long the client browser should wait, in milliseconds,
@@ -1019,9 +1135,11 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_sessions_poll_delay: 30000
+```
 
-.. _status_poll_delay:
+(status-poll-delay)=
 
+```{eval-rst}
 .. describe:: status_poll_delay (Integer, 10000)
 
   How long the client browser should wait, in milliseconds,
@@ -1040,9 +1158,11 @@ Configuration Properties
     .. code-block:: yaml
 
       status_poll_delay: 30000
+```
 
-.. _bc_saved_settings:
+(bc-saved-settings)=
 
+```{eval-rst}
 .. describe:: bc_saved_settings (Boolean, false)
 
   Enabled or disable saving batch connect settings.
@@ -1062,7 +1182,9 @@ Configuration Properties
     .. code-block:: yaml
 
       bc_saved_settings: true
+```
 
+```{eval-rst}
 .. describe:: global_bc_form_items (Hash<String, Object>, {})
 
   Define batch connect form items globally to be used in any
@@ -1078,7 +1200,9 @@ Configuration Properties
   Example
 
     See :ref:`global_bc_form_items` for more details.
+```
 
+```{eval-rst}
 .. describe:: widget_partials_enabled (Boolean, false)
 
   Enable serving partial widgets. With this feature enabled,
@@ -1100,3 +1224,4 @@ Configuration Properties
     .. code-block:: yaml
 
       widget_partials_enabled: true
+```

@@ -1,74 +1,83 @@
-.. _nginx-stage-app:
+(nginx-stage-app)=
 
-``nginx_stage app``
-===================
+# `nginx_stage app`
 
 This command will generate a web application NGINX configuration file
 and subsequently restart the NGINX process as the user.
 
-.. code-block:: sh
+```sh
+sudo nginx_stage app [OPTIONS]
+```
 
-   sudo nginx_stage app [OPTIONS]
-
+```{eval-rst}
 .. program:: nginx_stage app
+```
 
-Required Options
-----------------
+## Required Options
 
+```{eval-rst}
 .. option:: -u <user>, --user <user>
 
    The user of the per-user NGINX process.
+```
 
+```{eval-rst}
 .. option:: -r <sub_request>, --sub-request <sub_request>
 
    The request URI path beneath the sub-URI path.
+```
 
-General Options
----------------
+## General Options
 
+```{eval-rst}
 .. option:: -i <sub_uri>, --sub-uri <sub_uri>
 
   The sub-URI path in the request.
+```
 
+```{eval-rst}
 .. option:: -N, --skip-nginx
 
    Skip execution of the per-user NGINX process.
+```
 
-.. note::
+:::{note}
+The sub-URI corresponds to any reverse proxy namespace that denotes the
+request should be proxied to the per-user NGINX server (e.g., `/pun`)
+:::
 
-   The sub-URI corresponds to any reverse proxy namespace that denotes the
-   request should be proxied to the per-user NGINX server (e.g., ``/pun``)
+## Examples
 
-Examples
---------
+To generate an app configuration from the request:
 
-To generate an app configuration from the request::
-
-  http://ondemand.center.edu/pun/usr/jim/myapp/session/1
+```
+http://ondemand.center.edu/pun/usr/jim/myapp/session/1
+```
 
 and subsequently restart the per-user NGINX process:
 
-.. code-block:: sh
-
-   sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/usr/jim/myapp/session/1'
+```sh
+sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/usr/jim/myapp/session/1'
+```
 
 To generate **only** the app configuration:
 
-.. code-block:: sh
-
-   sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/sys/dashboard' --skip-nginx
+```sh
+sudo nginx_stage app --user 'bob' --sub-uri '/pun' --sub-request '/sys/dashboard' --skip-nginx
+```
 
 This will return the path to the app configuration and will not restart the
 NGINX process.
 
-Default Installation
-....................
+### Default Installation
 
-:numref:`app-mapping-table` details the mapping between the requested URL path
+{numref}`app-mapping-table` details the mapping between the requested URL path
 to the app root directory for in the NGINX app configuration under a default
 installation.
 
-.. _app-mapping-table:
+(app-mapping-table)=
+
+```{eval-rst}
 .. list-table:: Mapping of apps for a default installation
    :header-rows: 1
 
@@ -84,3 +93,4 @@ installation.
    * - ``sys``
      - :file:`/sys/{app_name}/\*`
      - :file:`/var/www/ood/apps/sys/{app_name}`
+```

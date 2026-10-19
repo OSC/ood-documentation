@@ -1,103 +1,101 @@
-.. Open OnDemand documentation master file, created by
-   sphinx-quickstart on Thu Mar  9 18:18:09 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+% Open OnDemand documentation master file, created by
+% sphinx-quickstart on Thu Mar  9 18:18:09 2017.
+% You can adapt this file completely to your liking, but it should at least
+% contain the root `toctree` directive.
 
-Open OnDemand
-=============
+# Open OnDemand
 
-Our `website`_ contains general information about the Open OnDemand project.
+Our [website] contains general information about the Open OnDemand project.
 
-Community contributions
------------------------
+## Community contributions
 
 Throughout this documentation we will start highlighting community
 contributions to the project, including linking to external useful projects or
-extensions such as `PSC's Jupyter Notebook extension
-<https://github.com/PSC-PublicHealth/pha-nbextensions>`_ for manipulating the
+extensions such as [PSC's Jupyter Notebook extension](https://github.com/PSC-PublicHealth/pha-nbextensions) for manipulating the
 environment post launch.
 
-.. note::
+:::{note}
+If you have an app or extension that may be useful to others in the
+OnDemand community please share on our [Discourse](https://discourse.osc.edu/c/open-ondemand) instance and we can then
+also add it to this documentation site.
+:::
 
-   If you have an app or extension that may be useful to others in the
-   OnDemand community please share on our `Discourse <https://discourse.osc.edu/c/open-ondemand>`_ instance and we can then
-   also add it to this documentation site.
-
-Special Thanks
---------------
+## Special Thanks
 
 These are institutions who were early adopters or provided HPC resources for development and testing of the resource manager adapters currently available. The success of this project would not be possible without their generous support (in alphabetical order):
 
-- `Bowdoin College <bowdoin_>`_ for help with the SGE adapter.
-- `George Louthan, formerly of Tandy Supercomputer Center <louthan_>`_, for early adoption and help with LSF adapter.
-- `Oregon State University <oregonstate_>`_ for help with the SGE adapter.
-- `Pittsburgh Supercomputer Center <psc_>`_ for early adoption and help with the Slurm adapter, platform
+- [Bowdoin College][bowdoin] for help with the SGE adapter.
+- [George Louthan, formerly of Tandy Supercomputer Center][louthan], for early adoption and help with LSF adapter.
+- [Oregon State University][oregonstate] for help with the SGE adapter.
+- [Pittsburgh Supercomputer Center][psc] for early adoption and help with the Slurm adapter, platform
   feedback, and webinar participation.
-- `Texas A&M High Performance Research Computing <tamu_>`_ for early adoption and help with the LSF
+- [Texas A&M High Performance Research Computing][tamu] for early adoption and help with the LSF
   adapter, platform feedback.
-- `Tufts Technology Services Research Computing <tufts_>`_ for early adoption and help
+- [Tufts Technology Services Research Computing][tufts] for early adoption and help
   with Slurm adapter development, platform feedback, and webinar participation.
-- `UCLA Institute for Digital Research and Education <ucla_>`_ for help with the SGE adapter.
-- `University of Arizona HPC <arizona_>`_ for early adoption and help with the
+- [UCLA Institute for Digital Research and Education][ucla] for help with the SGE adapter.
+- [University of Arizona HPC][arizona] for early adoption and help with the
   PBSPro adapter, platform feedback, and webinar participation.
-- `University at Buffalo Center for Computational Research <buffalo_>`_ for early adoption,
+- [University at Buffalo Center for Computational Research][buffalo] for early adoption,
   platform feedback, and collaboration on Open OnDemand 2.0.
-- `University of Utah <utah_>`_ for early adoption and help with the Slurm adapter, platform feedback,
+- [University of Utah][utah] for early adoption and help with the Slurm adapter, platform feedback,
   and webinar participation.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Getting Started
+```{toctree}
+:caption: Getting Started
+:maxdepth: 2
 
-   faqs
-   requirements
-   installation
-   installation/add-cluster-config
-   how-tos/app-development/interactive/setup
+faqs
+requirements
+installation
+installation/add-cluster-config
+how-tos/app-development/interactive/setup
+```
 
+```{toctree}
+:caption: How-Tos
+:maxdepth: 2
 
-.. toctree::
-  :maxdepth: 2
-  :caption: How-Tos
+customizations
+how-tos/debug
+enable-desktops
+how-tos/app-development
+how-tos/project-management/project-manager
+```
 
-  customizations
-  how-tos/debug
-  enable-desktops
-  how-tos/app-development
-  how-tos/project-management/project-manager
+```{toctree}
+:caption: Tutorials
+:maxdepth: 2
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Tutorials
+install-ihpc-apps
+install-passenger-apps
+tutorials/tutorials-interactive-apps
+tutorials/tutorials-passenger-apps
+tutorials/tutorials-dashboard-apps
+tutorials/tutorials-project-manager
+```
 
+```{toctree}
+:caption: Reference
+:maxdepth: 2
 
-  install-ihpc-apps
-  install-passenger-apps
-  tutorials/tutorials-interactive-apps
-  tutorials/tutorials-passenger-apps
-  tutorials/tutorials-dashboard-apps
-  tutorials/tutorials-project-manager
-  
-.. toctree::
-  :maxdepth: 2
-  :caption: Reference
+architecture
+accessibility
+reference
+security
+release-notes
+version-policy
+glossary
+```
 
-  architecture
-  accessibility
-  reference
-  security
-  release-notes
-  version-policy
-  glossary 
-
-.. _website: https://openondemand.org/
-.. _bowdoin: https://www.bowdoin.edu/it/resources/high-performance-computing.html
-.. _louthan: http://www.ou.edu/oscer/people
-.. _oregonstate: https://oregonstate.edu/
-.. _psc: https://www.psc.edu/
-.. _tamu: https://hprc.tamu.edu/
-.. _tufts: https://it.tufts.edu/high-performance-computing
-.. _ucla: https://idre.ucla.edu/resources/hpc
-.. _buffalo: http://www.buffalo.edu/ccr.html
-.. _utah: https://www.chpc.utah.edu/
-.. _arizona: https://docs.hpc.arizona.edu
+[arizona]: https://docs.hpc.arizona.edu
+[bowdoin]: https://www.bowdoin.edu/it/resources/high-performance-computing.html
+[buffalo]: http://www.buffalo.edu/ccr.html
+[louthan]: http://www.ou.edu/oscer/people
+[oregonstate]: https://oregonstate.edu/
+[psc]: https://www.psc.edu/
+[tamu]: https://hprc.tamu.edu/
+[tufts]: https://it.tufts.edu/high-performance-computing
+[ucla]: https://idre.ucla.edu/resources/hpc
+[utah]: https://www.chpc.utah.edu/
+[website]: https://openondemand.org/
