@@ -6,7 +6,7 @@ Batch Connect Selkies Options
 The ``selkies`` template streams a desktop to the browser with `Selkies`_, through
 the portal's reverse proxy like any web app, with audio, gamepads, and the node's
 GPU encoding the stream where it has one. The job runs Selkies' session launcher,
-``selkies-session``, which starts what the node lacks (a sound server, and an Xvfb
+``selkies session`` (Selkies 2.1.0 or later), which starts what the node lacks (a sound server, and an Xvfb
 on the X11 backend) and serves the desktop on the port the job chose.
 
 As on the ``vnc`` template, the app's ``script.sh`` is the desktop, and the session
@@ -22,24 +22,24 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
      batch_connect:
        template: "selkies"
-       selkies_cmd: "selkies-session"
+       selkies_cmd: "selkies session"
        selkies_session: null
        selkies_args: ""
        selkies_timeout_seconds: 120
        password_size: 32
 
-.. describe:: selkies_cmd (String, "selkies-session")
+.. describe:: selkies_cmd (String, "selkies session")
 
     The command that starts Selkies' session launcher on the compute node, with
     arguments. The job adds the port, the desktop, and the options that leave the
     login and TLS to the portal.
 
     Default
-      ``selkies-session`` from a native package or a module on ``PATH``.
+      ``selkies session`` from a native package or a module on ``PATH``.
 
       .. code-block:: yaml
 
-         selkies_cmd: "selkies-session"
+         selkies_cmd: "selkies session"
 
     Example
       Selkies' AppImage, on a node where nothing can be installed. Where users
@@ -48,14 +48,14 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
       .. code-block:: yaml
 
-         selkies_cmd: "/apps/selkies/selkies-x86_64.AppImage selkies-session"
+         selkies_cmd: "/apps/selkies/selkies-x86_64.AppImage session"
 
     Example
       A container image with Selkies and a desktop in it, on the node's GPU.
 
       .. code-block:: yaml
 
-         selkies_cmd: "apptainer exec --nv /apps/selkies/desktop.sif selkies-session"
+         selkies_cmd: "apptainer exec --nv /apps/selkies/desktop.sif selkies session"
 
 .. describe:: selkies_session (String, null)
 
@@ -121,7 +121,7 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 Requirements
 ------------
 
-The compute node needs a Selkies release newer than 2.0.0, ``curl``, a desktop,
+The compute node needs Selkies 2.1.0 or later, ``curl``, a desktop,
 and Xvfb for the X11 backend. The portal's ``host_regex`` has to admit the node,
 as for every interactive app.
 
