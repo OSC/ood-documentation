@@ -43,7 +43,9 @@ All the options in :ref:`basic-bc-options` apply in addition to what's listed be
 
     Example
       Selkies' AppImage, on a node where nothing can be installed. Where users
-      cannot mount FUSE, extract it once with ``--appimage-extract`` and use
+      cannot mount FUSE, extract it once with ``--appimage-extract``, open the
+      extracted tree to every user with ``chmod -R a+rX squashfs-root`` (the
+      extraction leaves its directories to the account that ran it), and use
       ``squashfs-root/AppRun`` in its place.
 
       .. code-block:: yaml
