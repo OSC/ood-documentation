@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
@@ -33,8 +33,12 @@ jobs:
           rake build
 
       - name: Publish to the test repo
-        run: GITHUB_TOKEN=${{ secrets.OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation-test"
+        env:
+          GITHUB_TOKEN: ${{ secrets.OSC_ROBOT_GH_PUB_REPO_TOKEN }}
+        run: /bin/bash push.sh "ood-documentation-test"
     
       - name: Publish to the main repo
         if: github.event_name == 'push'
-        run: GITHUB_TOKEN=${{ secrets.OSC_WIAG_PUB_REPO_TOKEN }} /bin/bash push.sh "ood-documentation"
+        env:
+          GITHUB_TOKEN: ${{ secrets.OSC_ROBOT_GH_PUB_REPO_TOKEN }}
+        run: /bin/bash push.sh "ood-documentation"
