@@ -35,10 +35,14 @@ jobs:
       - name: Publish to the test repo
         env:
           GITHUB_TOKEN: ${{ secrets.OSC_ROBOT_GH_PUB_REPO_TOKEN }}
+          NAME: ${{ secrets.OSC_ROBOT_GH_USER }}
+          USER: ${{ secrets.OSC_ROBOT_GH_USER_EMAIL }}
         run: /bin/bash push.sh "ood-documentation-test"
     
       - name: Publish to the main repo
         if: github.event_name == 'push'
         env:
+          NAME: ${{ secrets.OSC_ROBOT_GH_USER }}
+          USER: ${{ secrets.OSC_ROBOT_GH_USER_EMAIL }}
           GITHUB_TOKEN: ${{ secrets.OSC_ROBOT_GH_PUB_REPO_TOKEN }}
         run: /bin/bash push.sh "ood-documentation"
