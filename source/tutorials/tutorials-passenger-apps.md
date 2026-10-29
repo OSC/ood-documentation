@@ -1,0 +1,16 @@
+(app-development-tutorials-passenger-apps)=
+
+# Tutorials: Passenger Apps
+
+A Passenger App is any Rack-based Ruby app, WSGI-based Python app, or NodeJs app that has a “startup file” following [the convention](https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_startup_file) that Phusion Passenger Web Application Server instances use to start the process. OnDemand uses the [NGINX Integration mode](https://www.phusionpassenger.com/library/walkthroughs/basics/ruby/fundamental_concepts.html#multiple-integration-modes) for Passenger, where NGINX and Passenger and individual web app processes all communicate using UNIX domain sockets.
+
+At the bottom of the page is a list of tutorials for developing Passenger apps for OnDemand.
+
+```{toctree}
+:caption: Tutorials
+:maxdepth: 2
+
+tutorials-passenger-apps/ruby-starter-app
+tutorials-passenger-apps/nodejs-starter-app
+tutorials-passenger-apps/python-starter-app
+```

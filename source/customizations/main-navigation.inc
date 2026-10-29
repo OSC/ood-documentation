@@ -1,7 +1,6 @@
-.. _navbar_guide:
+(navbar-guide)=
 
-Changing the Navigation bar
----------------------------
+# Changing the Navigation bar
 
 There are a couple ways to change the navigation bar in Open OnDemand, some
 are simpler than others.
@@ -12,133 +11,135 @@ with, then details the various ways to modify it.
 Once you understand how the navigation bar is generated automatically,
 you can take steps to customize it as you see fit.
 
-.. _understanding-default-nav-bar:
+(understanding-default-nav-bar)=
 
-Understanding the default navigation bar
-........................................
+## Understanding the default navigation bar
 
 Some navigation menus and links are built-in to the system. The system
-will generate drop-down menus for ``Files``, ``Jobs``, ``Clusters`` and
-``Interactive Apps`` automatically. It will also generate the link for
-``My Interactive Sessions`` by default.
+will generate drop-down menus for `Files`, `Jobs`, `Clusters` and
+`Interactive Apps` automatically. It will also generate the link for
+`My Interactive Sessions` by default.
 
 Here's an image of you'd expect to see by default.
 
-.. figure:: /images/main-navigation-menu.png
-    :align: center
-    :alt: An image of the default navigation bar showing drop-down menus for files, jobs, clusters, interactive apps, and my interactive apps.
+:::{figure} /images/main-navigation-menu.png
+:align: center
+:alt: An image of the default navigation bar showing drop-down menus for files, jobs,
+:  clusters, interactive apps, and my interactive apps.
+:::
 
 Open OnDemand is a platform for other applications, like Jupyter & RStudio.
 As such, the default navigation bar builds itself based on what applications
-it has discovered.  The system will search ``/var/www/ood/apps/sys/`` for these
+it has discovered. The system will search `/var/www/ood/apps/sys/` for these
 applications.
 
-Every application should have :ref:`app-development-manifest`.  The system reads
+Every application should have {ref}`app-development-manifest`. The system reads
 these manifests files and builds additional drop-down menus (or adds to existing menus)
-based on the ``category`` field.
+based on the `category` field.
 
-By default, the system will generate a new drop-down menu for every ``category``
-it encounters.  Within each drop-down menu it will add separators for each
-``subcategory`` it encounters.
+By default, the system will generate a new drop-down menu for every `category`
+it encounters. Within each drop-down menu it will add separators for each
+`subcategory` it encounters.
 
-.. _limit-auto-generated-menu-bars:
+(limit-auto-generated-menu-bars)=
 
-Limit auto generated menu bars
-..............................
+## Limit auto generated menu bars
 
 As described in the previous section, the system will generate new drop-down
-menus for every ``category`` it discovers.
+menus for every `category` it discovers.
 
 If you wish to add or remove which categories create drop-down menus
-use the :ref:`nav_categories configuration property <nav_categories>`.
+use the {ref}`nav_categories configuration property <nav_categories>`.
 
-.. tip::
-    Should you need more granular control over the navigation bar,
-    read :ref:`fully-customizing-the-navbar` below.
+:::{tip}
+Should you need more granular control over the navigation bar,
+read {ref}`fully-customizing-the-navbar` below.
+:::
 
-.. warning::
+:::{warning}
+Prior to 3.0, controlling which categories appear in the navigation bar was controlled
+by a Ruby initializer that you needed to modify. While the 2.x series will still support
+this scheme, Open OnDemand 3.0 will not. 3.0 will only support the `nav_categories`
+property.
 
-  Prior to 3.0, controlling which categories appear in the navigation bar was controlled
-  by a Ruby initializer that you needed to modify. While the 2.x series will still support
-  this scheme, Open OnDemand 3.0 will not.  3.0 will only support the ``nav_categories``
-  property.
+Here is the [2.0 documentation for controlling the navbar].
+:::
 
-  Here is the `2.0 documentation for controlling the navbar`_.
+## Using manifests to create menu items
 
-Using manifests to create menu items
-....................................
-
-As described in :ref:`understanding-default-nav-bar`, the system automatically
+As described in {ref}`understanding-default-nav-bar`, the system automatically
 creates drop-down menus based on the applications it encounters.
 
 So, with that knowledge, one can create or add to drop-down menus by creating
-applications with the correct information in their `manifest.yml <app-development-manifest>`_.
+applications with the correct information in their [manifest.yml](app-development-manifest).
 
 It's fairly simple to make this application. Simply create the directory in the correct location
-and create a `manifest.yml <app-development-manifest>`_.
+and create a [manifest.yml](app-development-manifest).
 
-* ``sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>``
-* ``sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml``
+- `sudo mkdir /var/www/ood/apps/sys/<NEW MENU ITEM>`
 
-  .. code-block:: yaml
+- `sudo vi /var/www/ood/apps/sys/<NEW MENU ITEM>/manifest.yml`
 
-    ---
-    # This is the text that will show up in the drop-down menu.
-    name: Add Menu Items to the navbar
+  ```yaml
+  ---
+  # This is the text that will show up in the drop-down menu.
+  name: Add Menu Items to the navbar
 
-    # This will create the 'Links' drop-down menu if it doesn't already exist.
-    category: Links
-    description: |-
-      A description of what the menu item does.
-    icon: fa://clock-o   # icon for the link.
-    url: 'https://openondemand.org/'
+  # This will create the 'Links' drop-down menu if it doesn't already exist.
+  category: Links
+  description: |-
+    A description of what the menu item does.
+  icon: fa://clock-o   # icon for the link.
+  url: 'https://openondemand.org/'
 
-    # open link in new browser window or same browser window.
-    new_window: true
+  # open link in new browser window or same browser window.
+  new_window: true
+  ```
 
-.. tip::
-    This scheme may be fine with one or two additional links. Should you need
-    more granular control over the navigation bar, read :ref:`fully-customizing-the-navbar`
-    below.
+:::{tip}
+This scheme may be fine with one or two additional links. Should you need
+more granular control over the navigation bar, read {ref}`fully-customizing-the-navbar`
+below.
+:::
 
-.. _fully-customizing-the-navbar:
+(fully-customizing-the-navbar)=
 
-Fully customizing the navigation bar
-....................................
+## Fully customizing the navigation bar
 
 Since 3.0, Open OnDemand provides a way to completely control the navigation bar
-through the ``nav_bar`` and ``help_bar`` :ref:`ondemand-d-ymls` configuration properties.
+through the `nav_bar` and `help_bar` {ref}`ondemand-d-ymls` configuration properties.
 
-.. warning::
-  As described in :ref:`understanding-default-nav-bar`, the system auto-generates
-  drop-down menus based on the applications it discovers.  If the ``nav_bar`` or
-  ``help_bar`` configurations are set, the system will **only** show what you've defined.
+:::{warning}
+As described in {ref}`understanding-default-nav-bar`, the system auto-generates
+drop-down menus based on the applications it discovers. If the `nav_bar` or
+`help_bar` configurations are set, the system will **only** show what you've defined.
+:::
 
 Before we look at how to modify it in detail, let's look at what the default
 configuration would be (without showing any discovered apps).
 
-.. code-block:: yaml
+```yaml
+# 'nav_bar' is the left side of the navigation bar.
+nav_bar:
+  # 'apps' drop-down menu is shown if you've set 'pinned_apps'.
+  - apps
+  - files
+  - jobs
+  - clusters
+  - interactive apps
+  - my interactive sessions
+  - all apps
 
-    # 'nav_bar' is the left side of the navigation bar.
-    nav_bar:
-      # 'apps' drop-down menu is shown if you've set 'pinned_apps'.
-      - apps
-      - files
-      - jobs
-      - clusters
-      - interactive apps
-      - my interactive sessions
-      - all apps
-
-    # 'help_bar' is the right side of the navigation bar.
-    help_bar:
-      - develop
-      - help
-      - user
-      - logout
+# 'help_bar' is the right side of the navigation bar.
+help_bar:
+  - develop
+  - help
+  - user
+  - logout
+```
 
 The configuration above would be equivalent to the default navigation bar as described
-in :ref:`understanding-default-nav-bar`.
+in {ref}`understanding-default-nav-bar`.
 
 As menus are dynamically discovered *from your system*, this documentation can only cover
 how a fresh install - with no other applications - would behave.
@@ -149,225 +150,236 @@ A navigation menu contains a list of navigation links with optional link groups.
 
 There are several ways of creating a navigation menu.
 
-Menus by Application category
-*****************************
+### Menus by Application category
 
 One of the easiest ways to create menus is to create them based off of
 the applications categories.
 
-The title of the drop-down menu will be the ``category`` itself, and menu items
-(applications) will be grouped by their ``subcategory``. It is not possible to
-set an icon. The ``category`` matching is case insensitive.
+The title of the drop-down menu will be the `category` itself, and menu items
+(applications) will be grouped by their `subcategory`. It is not possible to
+set an icon. The `category` matching is case insensitive.
 
-Here's an example using the ``interactive apps`` ``category``. Just like the default
+Here's an example using the `interactive apps` `category`. Just like the default
 navigation bar, this will generate a drop-down menu of all the applications the system
-has discovered in that ``category``.
+has discovered in that `category`.
 
 As you can see from the image, the system has discovered eight applications in two
 subcategories.
 
-.. code-block:: yaml
+```yaml
+nav_bar:
+  - "interactive apps"
+```
 
-  nav_bar:
-    - "interactive apps"
+:::{figure} /images/def-category-menu.png
+:align: center
+:alt: An open drop-down menu titled "Interactive Apps". The first sub-menu is titled
+:  "Desktops" and has two list items. The second sub-menu is titled "Servers" and has
+:  six list items.
+:::
 
-.. figure:: /images/def-category-menu.png
-    :align: center
-    :alt: An open drop-down menu titled "Interactive Apps". The first sub-menu is titled "Desktops" and has two list items. The second sub-menu is titled "Servers" and has six list items.
+### Predefined templates
 
-Predefined templates
-*********************
-
-As you can see from the example default configuration in `fully-customizing-the-navbar`_, there
+As you can see from the example default configuration in [fully-customizing-the-navbar], there
 are several pre-defined navigation menus that you can use.
 
 A complete list of predefined templates is:
 
-* ``all_apps`` - The link to the all applications page.
-* ``apps`` - A drop down menu of ``pinned_apps``. Note that you need to set ``pinned_apps`` for this to show up.
-*  ``sessions`` - The link to "My Interactive Sessions" page.
-* ``develop`` - The drop-down menu for developers, titled "Develop".
-* ``help`` - The "Help" drop-down menu.
-* ``log_out`` - The link to logout, titled "Logout".
-* ``user`` - The "Logged in as <user>" text.
+- `all_apps` - The link to the all applications page.
+- `apps` - A drop down menu of `pinned_apps`. Note that you need to set `pinned_apps` for this to show up.
+- `sessions` - The link to "My Interactive Sessions" page.
+- `develop` - The drop-down menu for developers, titled "Develop".
+- `help` - The "Help" drop-down menu.
+- `log_out` - The link to logout, titled "Logout".
+- `user` - The "Logged in as \<user>" text.
 
 Here's an example of defining all of them and what that would look like.
 
-.. code-block:: yaml
+```yaml
+nav_bar:
+  - "all_apps"
+  - "apps"
+  - "sessions"
+  - "develop"
+  - "help"
+  - "log_out"
+  - "user"
+```
 
-  nav_bar:
-    - "all_apps"
-    - "apps"
-    - "sessions"
-    - "develop"
-    - "help"
-    - "log_out"
-    - "user"
+:::{figure} /images/def-templates-menu.png
+:align: center
+:alt: An image of the navigation bar. From left to right the items are "All Apps" link,
+:  "Apps" drop-down menu, "My Interactive Sessions" link, "Develop" drop down menu,
+:  "Help" drop down menu, "Logout" link and 'logged in as ood' text.
+:::
 
-.. figure:: /images/def-templates-menu.png
-    :align: center
-    :alt: An image of the navigation bar. From left to right the items are "All Apps" link, "Apps" drop-down menu, "My Interactive Sessions" link, "Develop" drop down menu, "Help" drop down menu, "Logout" link and 'logged in as ood' text.
+(menus-based-on-applications)=
 
-.. _menus-based-on-applications:
-
-Menus based on applications
-***************************
+### Menus based on applications
 
 You can create drop-down menus based on applications the system can discover.
 
-Menu items are automatically grouped based on the applications ``subcategory``.
-Use the ``apps`` array to define the app tokens for this navigation menu.
+Menu items are automatically grouped based on the applications `subcategory`.
+Use the `apps` array to define the app tokens for this navigation menu.
 
 The order of the menu items is based on the order you've defined.
 
-.. code-block:: yaml
+```yaml
+nav_bar:
+  - title: "My Apps"
+    icon: "fas://window-restore"
+    apps:
+      - "sys/Rstudio/*"
+      - "sys/bc_desktop"
+```
 
-  nav_bar:
-    - title: "My Apps"
-      icon: "fas://window-restore"
-      apps:
-        - "sys/Rstudio/*"
-        - "sys/bc_desktop"
+:::{figure} /images/def-apps-menu.png
+:align: center
+:alt: An open drop-down menu titled "My Apps". The menu shows two sub-menus. The first
+:  is titled "Servers" and has five list items for all the discovered through the "sys/Rstudio/*"
+:  configuration. The second sub-menu is titled "Desktops" and has one list item for
+:  the discovered through the "sys/bc_desktop" configuration.
+:::
 
-.. figure:: /images/def-apps-menu.png
-    :align: center
-    :alt: An open drop-down menu titled "My Apps". The menu shows two sub-menus. The first is titled "Servers" and has five list items for all the discovered through the "sys/Rstudio/*" configuration. The second sub-menu is titled "Desktops" and has one list item for the discovered through the "sys/bc_desktop" configuration.
+(menus-based-on-links)=
 
-
-.. _menus-based-on-links:
-
-Menus based on links
-********************
+### Menus based on links
 
 Menus based on links provide even more granular control on how the drop-down menu is generated.
 
-As seen in the previous sections, using an ``apps`` array will automatically generate
-sub-menus based on the ``subcategory`` of the applications that have been discovered.
+As seen in the previous sections, using an `apps` array will automatically generate
+sub-menus based on the `subcategory` of the applications that have been discovered.
 
 When using links, we can override this behavior to provide different titles to
 the sub-menus, or with no sub-menus and subtitles at all.
 
-Let's look at this example using the same application tokens, but using ``links`` instead
-of ``apps``. The system will discover and generate list items for the same eight applications,
-only without **any** sub-menus.  It is simply a list of all the discovered applications with
+Let's look at this example using the same application tokens, but using `links` instead
+of `apps`. The system will discover and generate list items for the same eight applications,
+only without **any** sub-menus. It is simply a list of all the discovered applications with
 no further grouping.
 
-.. code-block:: yaml
+```yaml
+nav_bar:
+  - title: "My Apps"
+    icon: "fa://code"
+    links:
+      - "sys/Rstudio/*"
+      - "sys/bc_desktop"
+```
 
-  nav_bar:
-    - title: "My Apps"
-      icon: "fa://code"
-      links:
-        - "sys/Rstudio/*"
-        - "sys/bc_desktop"
+:::{figure} /images/app-links-no-group.png
+:align: center
+:alt: An open drop-down menu titled "My Apps". The menu has no sub-menus. It simply
+:  lists all eight the apps.
+:::
 
-.. figure:: /images/app-links-no-group.png
-    :align: center
-    :alt: An open drop-down menu titled "My Apps". The menu has no sub-menus. It simply lists all eight the apps.
+To add sub-menus, simply use the `group` attribute.
 
-To add sub-menus, simply use the ``group`` attribute.
-
-When ``links`` are used with the ``group`` attribute, the discovered applications
+When `links` are used with the `group` attribute, the discovered applications
 will now be grouped and sub-menu titles created based on the configuration provided.
 
-This will look and feel similar to `menus-based-on-applications`_ with the exception
-being that sub-menus are defined by the ``group`` configuration instead of the ``subcategory``
+This will look and feel similar to [menus-based-on-applications] with the exception
+being that sub-menus are defined by the `group` configuration instead of the `subcategory`
 of the applications in the list.
 
-.. code-block:: yaml
+```yaml
+nav_bar:
+  - title: "My Apps"
+    icon: "fa://code"
+    links:
+      - group: "RStudio"
+      - "sys/Rstudio/*"
+      - group: "Remote"
+      - "sys/bc_desktop"
+```
 
-  nav_bar:
-    - title: "My Apps"
-      icon: "fa://code"
-      links:
-        - group: "RStudio"
-        - "sys/Rstudio/*"
-        - group: "Remote"
-        - "sys/bc_desktop"
+:::{figure} /images/def-full-menu.png
+:align: center
+:alt: An image showing one open drop down menu titled "My Apps". The first sub-menu,
+:  titled "Rstudio" has five list items that have been discovered through the "sys/Rstudio/*"
+:  configuration. The second sub-menu, titled "Remote" has one list item that has been
+:  discovered through the "sys/bc_desktop" configuration.
+:::
 
-.. figure:: /images/def-full-menu.png
-    :align: center
-    :alt: An image showing one open drop down menu titled "My Apps". The first sub-menu, titled "Rstudio" has five list items that have been discovered through the "sys/Rstudio/*" configuration. The second sub-menu, titled "Remote" has one list item that has been discovered through the "sys/bc_desktop" configuration.
+:::{tip}
+You can also used predefined links (described above) in the `links` section here.
+:::
 
-.. tip::
-  You can also used predefined links (described above) in the ``links`` section here.
+(menus-for-profile-links)=
 
+### Menus for profile links
 
-.. _menus-for-profile-links:
+If you've enabled {ref}`profiles_guide` you can create navigation bar menus and
+links to those profiles through the `profile` attribute.
 
-Menus for profile links
-***********************
+```yaml
+nav_bar:
+  # Single top level link
+  - title: "Title"
+    icon: "fa://desktop" # optional, defaults to fas://cog
+    profile: "team1"
+    new_tab: true # optional, defaults to false
 
-If you've enabled :ref:`profiles_guide` you can create navigation bar menus and
-links to those profiles through the ``profile`` attribute.
+  # Dropdown menu
+  - title: "Menu Item"
+    links:
+      - title: "Title"
+        icon: "fa://desktop" # optional, defaults to fas://cog
+        profile: "team1"
+        new_tab: true # optional, defaults to false
+```
 
-.. code-block:: yaml
+(menus-for-custom-pages)=
 
-  nav_bar:
-    # Single top level link
-    - title: "Title"
-      icon: "fa://desktop" # optional, defaults to fas://cog
-      profile: "team1"
-      new_tab: true # optional, defaults to false
+### Menus for custom pages
 
-    # Dropdown menu
-    - title: "Menu Item"
-      links:
-        - title: "Title"
-          icon: "fa://desktop" # optional, defaults to fas://cog
-          profile: "team1"
-          new_tab: true # optional, defaults to false
+If you've enabled [custom_pages_guide] you can create navigation menus
+or single links directly to those pages through the `page` attribute.
 
-.. _menus-for-custom-pages:
+```yaml
+nav_bar:
+  # Single top level link
+  - title: "Title"
+    icon: "fa://desktop" # optional, defaults to fas://cog
+    page: "documentation"
+    new_tab: true # optional, defaults to false
 
-Menus for custom pages
-**********************
+  # Dropdown menu
+  - title: "Menu Item"
+    links:
+      - title: "Title"
+        icon: "fa://desktop" # optional, defaults to fas://cog
+        page: "documentation"
+        new_tab: true # optional, defaults to false
+```
 
-If you've enabled `custom_pages_guide`_ you can create navigation menus
-or single links directly to those pages through the ``page`` attribute.
+(menus-for-urls)=
 
-.. code-block:: yaml
-
-  nav_bar:
-    # Single top level link
-    - title: "Title"
-      icon: "fa://desktop" # optional, defaults to fas://cog
-      page: "documentation"
-      new_tab: true # optional, defaults to false
-
-    # Dropdown menu
-    - title: "Menu Item"
-      links:
-        - title: "Title"
-          icon: "fa://desktop" # optional, defaults to fas://cog
-          page: "documentation"
-          new_tab: true # optional, defaults to false
-
-.. _menus-for-urls:
-
-Menus for URLs
-**************
+### Menus for URLs
 
 You can even create menu items for relative and absolute URLs to link anywhere
-through the ``url`` attribute.
+through the `url` attribute.
 
-.. code-block:: yaml
+```yaml
+nav_bar:
+  # Single top level link
+  - title: "Title"
+    icon: "fa://desktop" # optional, defaults to fas://cog
+    url: "/docs"
+    new_tab: true # optional, defaults to false
 
-  nav_bar:
-    # Single top level link
-    - title: "Title"
-      icon: "fa://desktop" # optional, defaults to fas://cog
-      url: "/docs"
-      new_tab: true # optional, defaults to false
+  # Dropdown menu
+  - title: "Menu Item"
+    links:
+      - title: "Title"
+        icon: "fa://desktop" # optional, defaults to fas://cog
+        url: "https://openondemand.org/"
+        new_tab: true # optional, defaults to false
+```
 
-    # Dropdown menu
-    - title: "Menu Item"
-      links:
-        - title: "Title"
-          icon: "fa://desktop" # optional, defaults to fas://cog
-          url: "https://openondemand.org/"
-          new_tab: true # optional, defaults to false
+:::{figure} /images/def-navigation-link.png
+:align: center
+:alt: An image of the navigation bar with a single link "Title" and an open drop-down
+:  menu titled "Menu Item". The drop-down menu has one list item titled "Title".
+:::
 
-.. figure:: /images/def-navigation-link.png
-    :align: center
-    :alt: An image of the navigation bar with a single link "Title" and an open drop-down menu titled "Menu Item". The drop-down menu has one list item titled "Title".
