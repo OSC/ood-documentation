@@ -3,8 +3,9 @@
 ``nginx_stage nginx_clean``
 ===========================
 
-This command attempts to stop per-user NGINX (PUN) processes without active
-connections and recover stale or disabled-user runtime state.
+Stop eligible per-user NGINX (PUN) processes and recover stale or disabled-user
+runtime state. For resolvable accounts, ordinary cleanup preserves PUNs with
+detected Passenger application sessions.
 
 .. code-block:: sh
 
@@ -13,18 +14,19 @@ connections and recover stale or disabled-user runtime state.
 .. program:: nginx_stage nginx_clean
 
 
-..  note::
-  Since 4.0 ``nginx_clean`` also cleans per-user NGINX (PUN) processes
-  for users that have been disabled (removed from LDAP).
+.. note::
+
+   Since 4.0, cleanup also handles accounts that no longer resolve, such as users
+   removed from LDAP. This differs from setting a disabled login shell.
 
 General Options
 ---------------
 
 .. option:: -f, --force
 
-   Ignore the active connection count when deciding which running PUNs to stop.
-   PID validation and stale-state safety checks still apply. This option does
-   not authorize unlinking a live orphaned listener or uncertain socket state.
+   Bypass session detection. Process identity, PID/socket safety checks and
+   lifecycle locking still apply. Live orphaned listeners and uncertain runtime
+   state are preserved.
 
 .. option:: -u <user>, --user <user>
 
@@ -33,13 +35,14 @@ General Options
 
 .. option:: -N, --skip-nginx
 
-   Report cleanup candidates without signaling, probing sockets or removing
-   files. Account lookup still occurs during enumeration.
+   Report a snapshot without signaling, probing sockets, deleting files, or
+   creating/acquiring lifecycle locks. Account lookup still occurs. Pending
+   records are retained, and the snapshot can become stale.
 
 Examples
 --------
 
-To kill all PUN processes with no active connections:
+To run ordinary cleanup:
 
 .. code-block:: sh
 
@@ -48,38 +51,47 @@ To kill all PUN processes with no active connections:
 This prints selected users. Inspect diagnostics: a printed name does not prove
 that shutdown or cleanup succeeded.
 
-To request cleanup regardless of active connection counts, subject to safety
-checks:
+To request cleanup regardless of detected sessions, subject to safety checks:
 
 .. code-block:: sh
 
    sudo nginx_stage nginx_clean --force
 
-To **only** display the users with PUN processes that have no active
-connections:
+To preview the ordinary cleanup selection:
 
 .. code-block:: sh
 
    sudo nginx_stage nginx_clean --skip-nginx
 
-This will not kill the PUN processes.
+To restrict either real cleanup or a preview to Bob, add ``--user bob``.
 
 
 Shutdown and stale-state recovery
 ---------------------------------
 
-Cleanup holds the user's lifecycle lock through shutdown, metadata deletion and
-per-user runtime-directory removal. After successful shutdown signaling, it
-waits up to 30 seconds for both socket and PID paths to disappear. A timeout
-reports an error without forcing termination. A live master whose socket has
-already disappeared is preserved, including with ``--force``.
+Cleanup tries each user's lifecycle lock without waiting. A busy user is
+preserved with a diagnostic while cleanup continues to later candidates. The
+lock remains held through shutdown, metadata deletion and per-user runtime
+directory removal. Successful shutdown signaling waits up to 30 seconds for both
+socket and PID paths to disappear; see :ref:`nginx-stage-nginx` for the deadline
+and replacement rules. A live master whose socket has disappeared is preserved,
+including with ``--force``.
 
-For a dead recorded master or malformed active-user PID, only an absent socket
-or a confirmed refused stale socket permits PID cleanup. Actual sockets are
+Session detection counts Passenger application processes only after a
+successful process listing or exit status 1 with only the ``CMD`` header and
+empty stderr. Timeouts, other unsuccessful results and execution failures
+preserve the PUN and report an error; cleanup continues to later candidates.
+``--force`` explicitly bypasses this detection.
+
+For dead or unrelated PID records or malformed active-user PIDs, PID cleanup
+requires an absent socket or a confirmed refused stale socket. Actual sockets are
 probed once with a nonblocking connection. Listening sockets, symlinks, ordinary
 files, full backlogs and inconclusive errors are preserved. A socket's type,
 device and inode are rechecked before unlinking it. Symlinked malformed PID
-files are preserved. This protects orphaned workers that still serve requests.
+files are preserved. Socket state is removed before the stale PID record.
+For resolvable users with socket-only state, cleanup removes only a confirmed
+stale socket. Active-user recovery retains configuration and secrets. These
+checks protect orphaned workers that still serve requests.
 
 The lock coordinates cooperating nginx_stage commands, not external writers.
 Configured runtime, lock and retry-record roots must exclude untrusted writers.
@@ -88,25 +100,30 @@ The identity recheck does not make unlink atomic against external replacement.
 Disabled-user cleanup and retries
 ---------------------------------
 
-Candidates come from PID files and explicit ``<pun-config>.cleanup_pending``
-records. Old configs, secrets and empty runtime directories alone are not
-candidates. Shared PID parent directories and lifecycle lock files are retained.
+Candidates come from PID paths, socket-only state and explicit
+``<pun-config>.cleanup_pending`` records. Old configs, secrets and empty runtime
+directories alone are not candidates. Shared PID parent directories and lifecycle lock files are retained.
 
-After taking the lock, cleanup rechecks account availability. It skips an
-account that has become resolvable. Otherwise it creates a private pending
-record beside the stable config lock before shutdown can remove the PID.
-Successful shutdown precedes secret/config deletion and runtime-directory
-removal. A partial failure retains the record so a fresh cleaner can finish
-after the PID is gone. Do not delete the record to hide a failed cleanup.
+After taking the lock, cleanup rechecks account availability. A still-resolving
+passwd record with failed full user/group lookup preserves PUN state and reports
+an error. For a restored account, cleanup validates and cancels its safe pending
+record instead of performing disabled-user deletion; normal active-user cleanup
+still applies.
+
+Cleanup creates a private pending record beside the stable config lock before
+shutdown can remove the PID. It rejects existing symlinks, non-regular files,
+another owner's files and group/other-writable records. It retains the record
+until verified shutdown
+or safe stale-state recovery, secret/config deletion and runtime-directory
+cleanup finish. A fresh cleaner can retry partial failures after the PID is gone.
+Do not delete the record to hide a failed cleanup.
 
 .. warning::
 
-   Disabled-user classification currently treats ``User.new`` raising
-   ``ArgumentError`` as a disabled account. Failed user or primary-group lookup
-   during LDAP/SSSD trouble can therefore trigger incorrect cleanup. Check
-   directory-service health before running cleanup, and stop scheduled cleanup
-   while investigating an outage. A dry run does not establish that lookup
-   results are reliable.
+   A complete NSS/LDAP/SSSD outage that makes passwd lookup report no account
+   remains indistinguishable from deletion. Check account-provider health and
+   stop scheduled cleanup while investigating an outage. A dry run does not
+   establish that lookup results are reliable.
 
 Operator recovery
 -----------------
@@ -126,3 +143,8 @@ Operator recovery
    If ownership remains uncertain, establish that no master, worker or competing
    startup owns the affected entries before repairing those specific paths.
    There is no safe general command to blindly delete ambiguous runtime state.
+
+For changes to configured paths or executables, follow the `nginx-stage migration
+guidance
+<https://github.com/OSC/ondemand/blob/master/nginx_stage/README.md#configuration-path-or-executable-changes>`_
+before running old and new lifecycle callers together.
