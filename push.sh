@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 GITHUB_ORG="OSC"
-NAME="oscwiag"
-EMAIL="oscwiag@gmail.com"
 
 # Update git configuration
 git config --global user.name "${NAME}"
