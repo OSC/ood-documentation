@@ -78,8 +78,8 @@ Open OnDemand uses these packages, among many others.
          sudo dnf install epel-release
          sudo subscription-manager repos --enable codeready-builder-for-rhel-10-x86_64-rpms
 
-2. Add repository and install
------------------------------
+2. Add repository
+-----------------
 
    .. tabs::
 
@@ -90,8 +90,6 @@ Open OnDemand uses these packages, among many others.
             sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el8.noarch.rpm
 
-            sudo dnf install ondemand
-
       .. tab:: RedHat/Rocky Linux/AlmaLinux 9
 
          .. code-block:: sh
@@ -99,16 +97,12 @@ Open OnDemand uses these packages, among many others.
             sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el9.noarch.rpm
 
-            sudo dnf install ondemand
-
       .. tab:: RedHat/Rocky Linux/AlmaLinux 10
 
          .. code-block:: sh
 
             sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.el10.noarch.rpm
-
-            sudo dnf install ondemand
 
       .. tab:: Ubuntu 24.04
 
@@ -119,8 +113,6 @@ Open OnDemand uses these packages, among many others.
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-noble_all.deb
             sudo apt update
 
-            sudo apt install ondemand
-
       .. tab:: Ubuntu 26.04
 
          .. code-block:: sh
@@ -129,8 +121,6 @@ Open OnDemand uses these packages, among many others.
             wget -O /tmp/ondemand-release-web_{{ ondemand_version }}.0-resolute_all.deb https://apt.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web_{{ ondemand_version }}.0-resolute_all.deb
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-resolute_all.deb
             sudo apt update
-
-            sudo apt install ondemand
 
       .. tab:: Debian 12
 
@@ -141,8 +131,6 @@ Open OnDemand uses these packages, among many others.
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-bookworm_all.deb
             sudo apt update
 
-            sudo apt install ondemand
-
       .. tab:: Debian 13
 
          .. code-block:: sh
@@ -152,8 +140,6 @@ Open OnDemand uses these packages, among many others.
             sudo apt install /tmp/ondemand-release-web_{{ ondemand_version }}.0-trixie_all.deb
             sudo apt update
 
-            sudo apt install ondemand
-
       .. tab:: Amazon Linux 2023
 
          .. code-block:: sh
@@ -161,35 +147,72 @@ Open OnDemand uses these packages, among many others.
             sudo rpm --import https://yum.osc.edu/ondemand/RPM-GPG-KEY-ondemand-SHA512
             sudo dnf install https://yum.osc.edu/ondemand/{{ ondemand_version }}/ondemand-release-web-{{ ondemand_version }}-1.amzn2023.noarch.rpm
 
+3. Enable early-access (Subscribers only)
+-----------------------------------------
+
+..  warning::
+
+   The ``username`` and ``password`` will be provided by the OnDemand team.
+
+.. tabs::
+
+   .. tab:: RedHat/Rocky Linux/AlmaLinux/Amazon Linux
+
+      .. code-block:: sh
+
+         sudo sed -i 's|/{{ ondemand_version }}/|/early-access/{{ ondemand_version }}/|g' /etc/yum.repos.d/ondemand-web.repo
+         sudo dnf config-manager --setopt=ondemand-web.username=<username> \
+               --setopt=ondemand-web.password=<password> --save
+
+   .. tab:: Ubuntu/Debian
+
+      .. code-block:: sh
+
+         sudo sed -i 's|/{{ ondemand_version }}/|/early-access/{{ ondemand_version }}/|g' /etc/apt/sources.list.d/ondemand-web.list
+         sudo tee /etc/apt/auth.conf.d/ondemand-web.conf <<EOF
+         machine apt.osc.edu
+         login <username>
+         password <password>
+         EOF
+         sudo apt update
+
+4. Install
+----------
+
+   .. tabs::
+
+      .. tab:: RedHat/Rocky Linux/AlmaLinux/Amazon Linux
+
+         .. code-block:: sh
+
             sudo dnf install ondemand
 
-3. Start services
+      .. tab:: Ubuntu/Debian
+
+         .. code-block:: sh
+
+            sudo apt install ondemand
+
+5. Start services
 -----------------
 
    .. tabs::
 
-      .. tab:: RHEL/Rocky/AlmaLinux
+      .. tab:: RHEL/Rocky/AlmaLinux/Amazon Linux
 
          .. code-block:: sh
 
           sudo systemctl start httpd
           sudo systemctl enable httpd
 
-      .. tab:: Ubuntu & Debian
+      .. tab:: Ubuntu/Debian
 
          .. code-block:: sh
 
           sudo systemctl start apache2
           sudo systemctl enable apache2
 
-      .. tab:: Amazon Linux 2023
-
-         .. code-block:: sh
-
-          sudo systemctl start httpd
-          sudo systemctl enable httpd
-
-4. Verify installation
+6. Verify installation
 ----------------------
 
 Now that Open OnDemand is installed and Apache is running, it should be serving
