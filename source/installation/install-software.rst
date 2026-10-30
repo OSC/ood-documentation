@@ -181,55 +181,36 @@ Open OnDemand uses these packages, among many others.
 
    .. tabs::
 
-      .. tab:: RedHat/Rocky Linux/AlmaLinux 8 & 9 & 10
+      .. tab:: RedHat/Rocky Linux/AlmaLinux/Amazon Linux
 
          .. code-block:: sh
 
             sudo dnf install ondemand
 
-      .. tab:: Ubuntu 24.04 & 26.04
+      .. tab:: Ubuntu/Debian
 
          .. code-block:: sh
 
             sudo apt install ondemand
-
-      .. tab:: Debian 12 & 13
-
-         .. code-block:: sh
-
-            sudo apt install ondemand
-
-      .. tab:: Amazon Linux 2023
-
-         .. code-block:: sh
-
-            sudo dnf install ondemand
 
 5. Start services
 -----------------
 
    .. tabs::
 
-      .. tab:: RHEL/Rocky/AlmaLinux
+      .. tab:: RHEL/Rocky/AlmaLinux/Amazon Linux
 
          .. code-block:: sh
 
           sudo systemctl start httpd
           sudo systemctl enable httpd
 
-      .. tab:: Ubuntu & Debian
+      .. tab:: Ubuntu/Debian
 
          .. code-block:: sh
 
           sudo systemctl start apache2
           sudo systemctl enable apache2
-
-      .. tab:: Amazon Linux 2023
-
-         .. code-block:: sh
-
-          sudo systemctl start httpd
-          sudo systemctl enable httpd
 
 6. Verify installation
 ----------------------
