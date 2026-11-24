@@ -87,6 +87,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Debugging Interactive Apps</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#log-location">Log location</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#app-completes-without-being-able-to-connect-to-it">App completes without being able to connect to it.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#empty-variables-in-submit-yml-erb">Empty Variables in <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../monitoring/logging.html">Logging</a></li>
@@ -145,16 +146,49 @@
              
   <section id="debugging-interactive-apps">
 <h1>Debugging Interactive Apps<a class="headerlink" href="#debugging-interactive-apps" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#log-location" id="id1">Log location</a></p></li>
+<li><p><a class="reference internal" href="#app-completes-without-being-able-to-connect-to-it" id="id2">App completes without being able to connect to it.</a></p></li>
+<li><p><a class="reference internal" href="#empty-variables-in-submit-yml-erb" id="id3">Empty Variables in <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code></a></p></li>
+</ul>
+</nav>
 <section id="log-location">
-<h2>Log location<a class="headerlink" href="#log-location" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Log location</a><a class="headerlink" href="#log-location" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="../monitoring/logging.html#interactive-app-logs"><span class="std std-ref">Information about interactive app log location.</span></a></p>
 </section>
 <section id="app-completes-without-being-able-to-connect-to-it">
-<h2>App completes without being able to connect to it.<a class="headerlink" href="#app-completes-without-being-able-to-connect-to-it" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">App completes without being able to connect to it.</a><a class="headerlink" href="#app-completes-without-being-able-to-connect-to-it" title="Link to this heading"></a></h2>
 <p>If your application goes from <code class="docutils literal notranslate"><span class="pre">queued</span></code> to <code class="docutils literal notranslate"><span class="pre">starting</span></code> to <code class="docutils literal notranslate"><span class="pre">completed</span></code> without
 ever allowing you to connect to it, the application failed to start correctly.</p>
 <p>First, review the <a class="reference internal" href="../monitoring/logging.html#interactive-app-logs"><span class="std std-ref">output for that session</span></a>. You're likely
 to see some errors there.</p>
+</section>
+<section id="empty-variables-in-submit-yml-erb">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Empty Variables in <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code></a><a class="headerlink" href="#empty-variables-in-submit-yml-erb" title="Link to this heading"></a></h2>
+<p>Previous versions of Open OnDemand threw errors when attempting to use undefined
+variables in the <code class="docutils literal notranslate"><span class="pre">submit.yml.erb</span></code>.  Undefined variables are evaluated as <code class="docutils literal notranslate"><span class="pre">nil</span></code>.
+This being the case, you may be debugging an issue where a particular value that should
+be there is missing or zero. Casting a <code class="docutils literal notranslate"><span class="pre">nil</span></code> to a string returns an empty string and
+casting <code class="docutils literal notranslate"><span class="pre">nil</span></code> to an integer returns zero.</p>
+<p>For example you may see an error like this if you're trying to use a variable
+to supply <code class="docutils literal notranslate"><span class="pre">--ntasks-per-node</span></code> to Slurm's <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command.</p>
+<figure class="align-default">
+<img alt="An interactive application's failure stating sbatch: error: Invalid numeric value &quot;&quot; for --ntasks-per-node." src="../../_images/batch_connect_missing_item_error.png" />
+</figure>
+<p>In debugging a situation like this, it may be helpful to raise an error displaying
+all the variables that are available.</p>
+<div class="highlight-erb notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;%#</span><span class="c"> submit.yml.erb </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%-</span>
+<span class="w">  </span><span class="c1"># ... ruby code ...</span>
+
+<span class="w">  </span><span class="k">raise</span><span class="p">(</span><span class="no">StandardError</span><span class="p">,</span><span class="w"> </span><span class="n">to_h</span><span class="o">.</span><span class="n">inspect</span><span class="p">)</span>
+<span class="cp">-%&gt;</span>
+</pre></div>
+</div>
+<p>It is most likely that the variable in question is in fact missing
+or misspelled in either the <code class="docutils literal notranslate"><span class="pre">form.yml</span></code> or <code class="docutils literal notranslate"><span class="pre">submit.yml</span></code> files.</p>
 </section>
 </section>
 
