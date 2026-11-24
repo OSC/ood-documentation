@@ -6,7 +6,8 @@
 This is the file that is submitted to a batch connect job. It is comprised
 of a ``script`` and a ``batch_connect`` attribute.  The ``batch_connect``
 attribute can either be a ``basic`` template if your app is already an
-http server or a ``vnc`` template if you need VNC capabilities.
+http server, a ``vnc`` template if you need VNC capabilities, or a ``selkies``
+template to stream a desktop with Selkies.
 
 These are reference pages, you can see 
 :ref:`app-development-interactive-submit` for a broader overview.
@@ -17,6 +18,7 @@ These are reference pages, you can see
    submit-yml/basic-bc-options
    submit-yml/vnc-bc-options
    submit-yml/vnc-container-bc-options
+   submit-yml/selkies-bc-options
    submit-yml/script
 
 Simple Example
